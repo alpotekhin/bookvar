@@ -9,9 +9,18 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol1/lab_09_data_selection.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol1/lab_09_data_selection.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL1 Lab — Data Selection
 
@@ -20,14 +29,14 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 The chapter defines information-compute ratio as:
 
 $$
-\\text`…` = \\frac{\\Delta I}{\\Delta \\text`…`}
+\text{ICR} = \frac{\Delta I}{\Delta \text{FLOPs}}
 $$
 
 For redundant data, marginal information decays while compute grows roughly
 linearly:
 
 $$
-\\text`…`(D) \\approx \\frac{1}{O_`…` \\cdot D}
+\text{ICR}(D) \approx \frac{1}{O_{sample} \cdot D}
 $$
 
 The lab instrument uses a saturating information proxy and the shared
@@ -42,7 +51,7 @@ retain the smallest cohort that preserves deployment-relevant slices.
 This lab scores each subgroup as:
 
 $$
-\\text`…` = \\max(0, \\text{coverage floor} - \\text`…`) \\cdot \\text{risk weight}
+\text{risk} = \max(0, \text{coverage floor} - \text{coverage}) \cdot \text{risk weight}
 $$
 
 The decision is not "largest dataset wins"; it is "which cohort leaves the
@@ -53,13 +62,13 @@ least important deployment gap under the budget?"
 The chapter's total data cost model is:
 
 $$
-C_`…` = C_`…` + C_`…` + C_`…` + C_`…`
+C_{total} = C_{acquire} + C_{label} + C_{store} + C_{process}
 $$
 
 The selection engineering gate is:
 
 $$
-T_`…` + T_`…`(D_`…`) < T_`…`(D_`…`)
+T_{selection} + T_{train}(D_{subset}) < T_{train}(D_{total})
 $$
 
 Part C turns that idea into a track-local label frontier: labels, review,
@@ -70,12 +79,63 @@ processing, storage, quality, coverage, and rare-event floors must all pass.
 The lab's release gate is deliberately conjunctive:
 
 $$
-release\\_ok = aggregate\\_ok \\land subgroup\\_risk\\_ok \\land rare\\_event\\_ok \\land evidence\\_ok
+release\_ok = aggregate\_ok \land subgroup\_risk\_ok \land rare\_event\_ok \land evidence\_ok
 $$
 
 This follows the chapter warning that PPD, DCR, and aggregate validation can
 look strong while deployment edge cases fail. Stratified risk evidence must
 travel with the selected data policy.
+
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+Commit to a Part A prediction to reveal the marginal-value instrument.
+
+---
+
+**Boundary found.** Marginal signal has dropped sharply. The next spend should be justified by coverage, quality, or risk reduction rather than volume alone.
+
+---
+
+The selected point remains inside the modeled marginal-value envelope, pending coverage and label-cost checks.
+
+---
+
+Commit to a Part B coverage prediction to reveal the cohort comparison.
+
+---
+
+All selected subgroups clear the coverage floor under this policy.
+
+---
+
+Commit to a Part C budget prediction to reveal the label frontier.
+
+---
+
+The selected policy is inside the current budgeted label frontier.
+
+---
+
+Commit to a Part D gate prediction to reveal the risk register.
+
+---
+
+The selected policy can be defended with a residual-risk memo and continued monitoring.
+
+---
+
+Use the synthesis memo below after completing Parts A-D.
+
+---
+
+## Download Report
+
+---
+
+This V1-09 data selection memo is generated locally from the selected track, your predictions, controls, computed evidence, and synthesis notes.
+
+</details>
 
 ## Complete original Marimo source
 

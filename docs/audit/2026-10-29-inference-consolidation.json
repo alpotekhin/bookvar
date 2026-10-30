@@ -1,0 +1,524 @@
+{
+  "schema": 1,
+  "date": "2026-10-29",
+  "scope": "All15 manifest-published reference pages in assigned inference/retrieval/agents/training subset, plus2 read unpublished legacy duplicates. Reference originals unchanged; parent owns aliasing/source moves.",
+  "status": "consolidation-map-prepared; final publication/render verification belongs to parent",
+  "entries": [
+    {
+      "source": "01 Справочник/Inference/KV-cache.md",
+      "canonicalSource": "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+      "decision": "alias",
+      "canonicalHeading": "Что именно сохраняет KV-cache",
+      "sourceSha256": "71affb78e77e41f8c1bc2fb7f3187f2b85586b12c35ab8b0cfe4366baef5e3a4",
+      "canonicalSha256": "42438233617da20ba81611806b40ed450beaf6506e90ec181e2d43ac92580832",
+      "sourceFigures": [
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/kv-cache/kv-cache-mechanism.png"
+      ],
+      "role": "canonical-topic-alias",
+      "comparisonComplete": true,
+      "uniqueContentMoved": [
+        "Сумма длин неодинаковых запросов; 1024+2048 positions =384MiB против512MiB padded buffer; оговорка о shared physical blocks. Перенесено в RU+EN canonical."
+      ],
+      "notes": [
+        "Полный контракт безопасного prefix reuse также находится в scheduling, §Корректность и изоляция; этот раздел был прочитан как дополнительное соответствие. Старый фрагмент заголовка 'Условия безопасного повторного использования префикса' нужно перенаправить туда."
+      ],
+      "verifiedExamples": [
+        {
+          "example": "131072 bytes/position; 3072 useful positions =402653184 bytes =384MiB; padded4096=512MiB",
+          "method": "executed JavaScript arithmetic assertions"
+        }
+      ],
+      "readSources": [
+        "01 Справочник/Inference/KV-cache.md",
+        "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+        "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md#Корректность и изоляция (section only)"
+      ],
+      "acceptanceScope": "content-consolidation correspondence; not a fresh whole-chapter source/visual acceptance",
+      "visualQa": "No new assets or figure geometry changed. Parent must inspect final built routes/redirects; this subtask did not perform browser QA."
+    },
+    {
+      "source": "01 Справочник/Inference/FlashAttention.md",
+      "canonicalSource": "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+      "decision": "alias",
+      "sourceSha256": "55c4e7904ac568f47db052649bbf531c3e1e7e399025bd67c390c3006ebdd9ee",
+      "canonicalSha256": "15ba654d059b1ccd35bd07c6b041e405bef2f99d74ee03f672c205263b7589a1",
+      "sourceFigures": [
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/flashattention-tiling.png"
+      ],
+      "role": "canonical-topic-alias",
+      "comparisonComplete": true,
+      "uniqueContentMoved": [],
+      "notes": [
+        "Canonical покрывает IO tiling, online softmax, backward/recompute/dropout, FA2/FA3 и pinned version support. Legacy universal memory-bound, 'each input once', unconditional speedups и bit-for-bit claims не переносить."
+      ],
+      "verifiedExamples": [
+        {
+          "example": "scores[0,ln2,ln4], values[10,20,40] ->30; rescale old block by1/2",
+          "method": "full mathematical trace read; arithmetic assertion executed"
+        }
+      ],
+      "readSources": [
+        "01 Справочник/Inference/FlashAttention.md",
+        "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md"
+      ],
+      "acceptanceScope": "content-consolidation correspondence; not a fresh whole-chapter source/visual acceptance",
+      "visualQa": "No new assets or figure geometry changed. Parent must inspect final built routes/redirects; this subtask did not perform browser QA."
+    },
+    {
+      "source": "01 Справочник/Inference/PagedAttention.md",
+      "canonicalSource": "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+      "decision": "alias",
+      "canonicalHeading": "PagedAttention: логическая последовательность, физические блоки",
+      "sourceSha256": "794f9383bae1f34488f14f677234efa389378995eeb4bff4277abf932a5988e5",
+      "canonicalSha256": "42438233617da20ba81611806b40ed450beaf6506e90ec181e2d43ac92580832",
+      "sourceFigures": [
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/paged-attention-fragmentation.png",
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/paged-attention-blocks.png",
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/paged-attention-logical.png"
+      ],
+      "role": "canonical-topic-alias",
+      "comparisonComplete": true,
+      "uniqueContentMoved": [],
+      "notes": [
+        "Все3 исходные иллюстрации reference уже присутствуют в canonical; разделы kernel addressing, block-size waste, prefix sharing, copy-on-write и scheduler покрыты. Legacy prose не добавляет нужного объяснения."
+      ],
+      "verifiedExamples": [
+        {
+          "example": "block table[7,1,3], B4, position8 ->physical slot12; global block-softmax gives2.5 rather than2",
+          "method": "manual mathematical trace review"
+        }
+      ],
+      "readSources": [
+        "01 Справочник/Inference/PagedAttention.md",
+        "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md"
+      ],
+      "acceptanceScope": "content-consolidation correspondence; not a fresh whole-chapter source/visual acceptance",
+      "visualQa": "No new assets or figure geometry changed. Parent must inspect final built routes/redirects; this subtask did not perform browser QA."
+    },
+    {
+      "source": "01 Справочник/Inference/vLLM — анатомия inference engine.md",
+      "canonicalSource": "01 Справочник/Inference/vLLM — анатомия inference engine.md",
+      "decision": "retain",
+      "sourceSha256": "b266c24285d2f32df73ef1895e937ca94966474bf8a1118cdb15d4da2ae775dc",
+      "canonicalSha256": "b266c24285d2f32df73ef1895e937ca94966474bf8a1118cdb15d4da2ae775dc",
+      "sourceFigures": [
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-engine_constructor.png",
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-engine_loop.png",
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-fwd_pass.png",
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-prefix_pt1.png",
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-prefix_pt2.png",
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-prefix_pt3.png",
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-multiprocexecutor.png",
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-server_setup.png",
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png",
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/vllm-roofline.png"
+      ],
+      "role": "source-case-study",
+      "comparisonComplete": true,
+      "uniqueContentMoved": [],
+      "notes": [
+        "Сохранить byte-preserving как versioned implementation case study: 10 исходных рисунков, исторический commit42172ad, engine loop, 3-шаговый пример и memory accounting. Не подменять оригинальной документацией v0.31: это разные объяснения/версии."
+      ],
+      "verifiedExamples": [
+        {
+          "example": "A/B/C: input budget4, KV block2, pool5; generated token is not yet cached",
+          "method": "manual state-transition review"
+        }
+      ],
+      "readSources": [
+        "01 Справочник/Inference/vLLM — анатомия inference engine.md",
+        "00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md"
+      ],
+      "acceptanceScope": "content-consolidation correspondence; not a fresh whole-chapter source/visual acceptance",
+      "visualQa": "No new assets or figure geometry changed. Parent must inspect final built routes/redirects; this subtask did not perform browser QA."
+    },
+    {
+      "source": "01 Справочник/Inference/SGLang и RadixAttention.md",
+      "canonicalSource": "01 Справочник/Inference/SGLang и RadixAttention.md",
+      "decision": "retain",
+      "sourceSha256": "3ce29e8fc7670c33f3345ac04688764b077f0abc3793c1c52ed3cfbdcb8f6f94",
+      "canonicalSha256": "3ce29e8fc7670c33f3345ac04688764b077f0abc3793c1c52ed3cfbdcb8f6f94",
+      "sourceFigures": [
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/sglang-program-figure2.png",
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/sglang-radixattention-figure3.png"
+      ],
+      "role": "source-case-study",
+      "comparisonComplete": true,
+      "uniqueContentMoved": [],
+      "notes": [
+        "Сохранить как implementation case study: program/fork/gen/select и compressed FSM не покрываются прочитанной главой Serving; дерево и источник рисунков сохранены. Основные prefix-cache механизмы остаются в главе scheduling."
+      ],
+      "verifiedExamples": [],
+      "readSources": [
+        "01 Справочник/Inference/SGLang и RadixAttention.md",
+        "00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md"
+      ],
+      "acceptanceScope": "content-consolidation correspondence; not a fresh whole-chapter source/visual acceptance",
+      "visualQa": "No new assets or figure geometry changed. Parent must inspect final built routes/redirects; this subtask did not perform browser QA."
+    },
+    {
+      "source": "01 Справочник/Inference/Triton и GPU kernels.md",
+      "canonicalSource": "01 Справочник/Inference/Triton и GPU kernels.md",
+      "decision": "retain",
+      "sourceSha256": "c4ac642d23b610cbf4f4232b6757bd51e3b67e38b632d4adebeea80fe8868628",
+      "canonicalSha256": "c4ac642d23b610cbf4f4232b6757bd51e3b67e38b632d4adebeea80fe8868628",
+      "sourceFigures": [
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/triton-fused-softmax-benchmark.png",
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/triton-grouped-vs-row-major.png",
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/triton-matmul-benchmark-fp16.png",
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/triton-matmul-benchmark-fp8.png"
+      ],
+      "role": "source-case-study",
+      "comparisonComplete": false,
+      "uniqueContentMoved": [],
+      "notes": [
+        "Сохранить отдельный case study официальных Triton tutorials с 4 исходными рисунками. Сам файл прочитан целиком. Canonical GPU-kernels chapter на2980 строк в этом проходе не прочитан целиком; это retain без заявления о завершённой дедупликации всей главы."
+      ],
+      "verifiedExamples": [],
+      "readSources": [
+        "01 Справочник/Inference/Triton и GPU kernels.md"
+      ],
+      "acceptanceScope": "content-consolidation correspondence; not a fresh whole-chapter source/visual acceptance",
+      "visualQa": "No new assets or figure geometry changed. Parent must inspect final built routes/redirects; this subtask did not perform browser QA."
+    },
+    {
+      "source": "01 Справочник/Retrieval/Embeddings.md",
+      "canonicalSource": "00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning.md",
+      "decision": "alias",
+      "sourceSha256": "7fe971c4dc422fd669a9c844cc28908f8e81f91d85fea721267856d1953fc1c3",
+      "canonicalSha256": "bc9d7e31337190371294760004dbb10b113fedfdb161aeda2a790631d699d1fd",
+      "sourceFigures": [
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-60-64/sbert-bi-vs-cross-encoder.png"
+      ],
+      "role": "canonical-topic-alias",
+      "comparisonComplete": true,
+      "uniqueContentMoved": [],
+      "notes": [
+        "Полностью прочитаны60 строк reference и930 строк canonical. Token/contextual/sequence distinction, pooling, normalization, bi/cross-encoder limits, negatives и evaluation покрыты; canonical использует исходную bi/cross-encoder figure и больше конкретных примеров."
+      ],
+      "verifiedExamples": [
+        {
+          "example": "q=(1,0), docs(1,0),(2,2): dot-product ranks second, cosine first; mean pooling masks100-valued padding",
+          "method": "manual mathematical trace review"
+        }
+      ],
+      "readSources": [
+        "01 Справочник/Retrieval/Embeddings.md",
+        "00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning.md"
+      ],
+      "acceptanceScope": "content-consolidation correspondence; not a fresh whole-chapter source/visual acceptance",
+      "visualQa": "No new assets or figure geometry changed. Parent must inspect final built routes/redirects; this subtask did not perform browser QA."
+    },
+    {
+      "source": "01 Справочник/Retrieval/Retrieval.md",
+      "canonicalSource": "00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid.md",
+      "decision": "alias",
+      "sourceSha256": "cdd633d1c376c1bf63391b2680d1c58fbe47d2a701043fe7a84b39466665791e",
+      "canonicalSha256": "c2f49438a49ecdf7aac70a44605763ebdcf3311781fb4b10c4514470ceab25bc",
+      "sourceFigures": [
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-60-64/dpr-dual-encoder-and-loss.png"
+      ],
+      "role": "canonical-topic-alias",
+      "comparisonComplete": true,
+      "uniqueContentMoved": [],
+      "notes": [
+        "Полностью прочитаны62 строки reference и1063 строки canonical. BM25/dense/ANN/hybrid, chunking и диагностика покрыты. Подробные MRR/nDCG находятся в canonical60 §7; cross-encoder/late interaction — в следующей главе62 (62 целиком заново не прочитана)."
+      ],
+      "verifiedExamples": [
+        {
+          "example": "RRF: [A,B,C] +[C,B,D], c60 ->C,B,A,D",
+          "method": "full trace read; C-vs-B arithmetic assertion executed"
+        }
+      ],
+      "readSources": [
+        "01 Справочник/Retrieval/Retrieval.md",
+        "00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid.md",
+        "00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning.md"
+      ],
+      "acceptanceScope": "content-consolidation correspondence; not a fresh whole-chapter source/visual acceptance",
+      "visualQa": "No new assets or figure geometry changed. Parent must inspect final built routes/redirects; this subtask did not perform browser QA."
+    },
+    {
+      "source": "01 Справочник/Retrieval/RAG.md",
+      "canonicalSource": "00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md",
+      "decision": "alias",
+      "sourceSha256": "a40a45100efe81980249980ac94795be831d8260910e617a59a8ba02b540cdd2",
+      "canonicalSha256": "b2407b3b34253edcb522a7ab550c506ef5c900c353162ce848b045d44e7a5183",
+      "sourceFigures": [
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-60-64/rag-original-architecture.png"
+      ],
+      "role": "canonical-topic-alias",
+      "comparisonComplete": true,
+      "uniqueContentMoved": [],
+      "notes": [
+        "Полностью прочитаны61 строка reference и1247 строк canonical. Original RAG-Sequence/Token, ingestion, metadata, chunking, retrieval, context, citation precision/recall, diagnosis, cost and access/version controls покрыты; исходная архитектура уже показана более читаемым crop."
+      ],
+      "verifiedExamples": [
+        {
+          "example": "weights.5,.5, rows(.9,.1),(.1,.9) ->RAG-Sequence.09 vsToken.25;30+7 days bounded by statedconditions",
+          "method": "full mathematical and evidence trace read; arithmetic assertions executed"
+        }
+      ],
+      "readSources": [
+        "01 Справочник/Retrieval/RAG.md",
+        "00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md"
+      ],
+      "acceptanceScope": "content-consolidation correspondence; not a fresh whole-chapter source/visual acceptance",
+      "visualQa": "No new assets or figure geometry changed. Parent must inspect final built routes/redirects; this subtask did not perform browser QA."
+    },
+    {
+      "source": "01 Справочник/Agents/Agent mechanisms.md",
+      "canonicalSource": "01 Справочник/Agents/Agent mechanisms.md",
+      "decision": "retain",
+      "sourceSha256": "5b8a8cd16793f3f811076a7c2ee28c9e6374e07cb22ea9ce7e84f6f701f16df6",
+      "canonicalSha256": "5b8a8cd16793f3f811076a7c2ee28c9e6374e07cb22ea9ce7e84f6f701f16df6",
+      "sourceFigures": [],
+      "role": "cross-topic-term-index",
+      "comparisonComplete": false,
+      "uniqueContentMoved": [],
+      "notes": [
+        "Полностью прочитан многотемный справочный указатель. Таблица различает ACI/reset/grader/log/search/planning/formalization/security и ведёт к конкретным разделам шести разных глав. Сохранять как указатель, не объявлять вторым основным объяснением. Все шесть глав заново целиком в этом проходе не прочитаны."
+      ],
+      "verifiedExamples": [],
+      "readSources": [
+        "01 Справочник/Agents/Agent mechanisms.md"
+      ],
+      "acceptanceScope": "content-consolidation correspondence; not a fresh whole-chapter source/visual acceptance",
+      "visualQa": "No new assets or figure geometry changed. Parent must inspect final built routes/redirects; this subtask did not perform browser QA."
+    },
+    {
+      "source": "Concepts/Training/Mixed Precision Training.md",
+      "canonicalSource": "00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md",
+      "decision": "alias",
+      "sourceSha256": "e1c8dae781f3052d2759a0636f126d4b659b089138337e890288257327968dd4",
+      "canonicalSha256": "9a72e3c171518af749c26271e183bf35c55d2f98f76a146cf93c8d8404efa02d",
+      "sourceFigures": [],
+      "role": "canonical-topic-alias",
+      "comparisonComplete": true,
+      "uniqueContentMoved": [],
+      "notes": [
+        "Вся корректная справочная информация покрыта421-строчной главой: FP16/BF16/TF32, autocast vs master weights, loss scaling before backward, unscale before clipping, accumulation,16/18-byte memory accounting, FP8/MXFP8. Заголовок canonical status остаётся draft; этот отчёт не меняет его на publication-ready."
+      ],
+      "verifiedExamples": [
+        {
+          "example": "1+2^-10 representable FP16 but not BF16; FP16 underflow rescued by pre-backward scaling; unequal microbatch means2&10 ->weighted8",
+          "method": "full numerical traces read"
+        }
+      ],
+      "readSources": [
+        "Concepts/Training/Mixed Precision Training.md",
+        "00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md"
+      ],
+      "acceptanceScope": "content-consolidation correspondence; not a fresh whole-chapter source/visual acceptance",
+      "visualQa": "No new assets or figure geometry changed. Parent must inspect final built routes/redirects; this subtask did not perform browser QA."
+    },
+    {
+      "source": "Concepts/Training/Distributed Training.md",
+      "canonicalSource": "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md",
+      "decision": "alias",
+      "sourceSha256": "00a8a4f7fbc0c751dbe2e1210856910d1094c2d61b3f952b7d7a12319cb63740",
+      "canonicalSha256": "7fc54afeb6889923cf35893e40f4b9f02964b734b7dc40b5eea0f10b41659e01",
+      "sourceFigures": [],
+      "role": "canonical-topic-alias",
+      "comparisonComplete": true,
+      "uniqueContentMoved": [],
+      "notes": [
+        "Полностью прочитаны166 строк legacy и1019 строк canonical overview. Отбрасываются неподтверждённые заявления про GPT-4, линейное scaling до100GPU, фиксированную экономию ZeRO1/2 и обязательный intra-node TP. Canonical содержит память112–126GB для7B, ZeRO/FSDP/TP/PP/EP/collectives и реальные pinned model-report examples."
+      ],
+      "verifiedExamples": [
+        {
+          "example": "weighted token loss(2+18)/8=2.5 vsmean2; rank grid32 devices but batch3*5*2=30, not480",
+          "method": "full trace read; arithmetic assertions executed"
+        }
+      ],
+      "readSources": [
+        "Concepts/Training/Distributed Training.md",
+        "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md"
+      ],
+      "acceptanceScope": "content-consolidation correspondence; not a fresh whole-chapter source/visual acceptance",
+      "visualQa": "No new assets or figure geometry changed. Parent must inspect final built routes/redirects; this subtask did not perform browser QA."
+    },
+    {
+      "source": "Concepts/Inference/Sampling.md",
+      "canonicalSource": "00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md",
+      "decision": "alias",
+      "sourceSha256": "1278fc44b776c23e7b4cc47cdc9f460b3eef19d7693ef49ae67e8d74c4609ad3",
+      "canonicalSha256": "cb53484debaf97e673ff30e804afc4d9941b94e6d87eebc8cae78bdda05685a0",
+      "sourceFigures": [],
+      "role": "canonical-topic-alias",
+      "comparisonComplete": true,
+      "uniqueContentMoved": [],
+      "notes": [
+        "Полностью прочитаны187 строк legacy и788 строк canonical. Greedy/beam/sampling, temperature/top-k/top-p, penalties, stop rules покрыты с оговорками. Не переносить универсальные рекомендации параметров, 'greedy самый плохой', quality ranking table или равенство sample strings при speculation; self-consistency belongs to reasoning route."
+      ],
+      "verifiedExamples": [
+        {
+          "example": "topk2 from(.4,.3,.2,.08,.02) ->(4/7,3/7); top_p.8 keepsA,B,C; orderk2 thenp.5 differs",
+          "method": "full numerical trace read"
+        }
+      ],
+      "readSources": [
+        "Concepts/Inference/Sampling.md",
+        "00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md"
+      ],
+      "acceptanceScope": "content-consolidation correspondence; not a fresh whole-chapter source/visual acceptance",
+      "visualQa": "No new assets or figure geometry changed. Parent must inspect final built routes/redirects; this subtask did not perform browser QA."
+    },
+    {
+      "source": "Concepts/Inference/Quantization.md",
+      "canonicalSource": "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+      "decision": "alias",
+      "sourceSha256": "45689a12649273d08b84307ba2de604e5db06a8494eeb87fb59066aeadb54dbb",
+      "canonicalSha256": "70bd3d2b286af4c5b04150e0a27bf527bd18de4ac6f829d2b7eaeb437f010d17",
+      "sourceFigures": [],
+      "role": "canonical-topic-alias",
+      "comparisonComplete": true,
+      "uniqueContentMoved": [
+        "GGUF container/per-tensor types; high-precisionGGUF thenquantization; Q4_K_M is mixed recipe, notexact4bits. Added RU+EN section with pinned ggml and llama.cpp documentation."
+      ],
+      "notes": [
+        "Полностью прочитаны176 строк legacy,952 строк canonicalRU,949 строк canonicalEN до дополнения. Не переносить универсальные degradation ranges, AWQ>GPTQ, 'pretraining нельзя квантизовать', 'QLoRA вместо QAT' или формулуNF4 normalizes to N(0,1)."
+      ],
+      "verifiedExamples": [
+        {
+          "example": "BF16GGUF ->Q4_K_M demonstrates separate container conversion and quantization; no actual quantization process executed",
+          "method": "primary documentation and tensor-type schema inspection"
+        }
+      ],
+      "readSources": [
+        "Concepts/Inference/Quantization.md",
+        "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+        "en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md",
+        "https://github.com/ggml-org/ggml/blob/facdc44a67da17df4433adcc468b424f48e9ded2/docs/gguf.md#specification",
+        "https://github.com/ggml-org/ggml/blob/facdc44a67da17df4433adcc468b424f48e9ded2/docs/gguf.md#file-structure",
+        "https://github.com/ggml-org/llama.cpp/blob/8ab29faec401829db0e617f40af2c942f4a9eaab/tools/quantize/README.md"
+      ],
+      "acceptanceScope": "content-consolidation correspondence; not a fresh whole-chapter source/visual acceptance",
+      "visualQa": "No new assets or figure geometry changed. Parent must inspect final built routes/redirects; this subtask did not perform browser QA."
+    },
+    {
+      "source": "Concepts/Inference/Speculative Decoding.md",
+      "canonicalSource": "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+      "decision": "alias",
+      "sourceSha256": "e87e4319f529d2195930b04c0331be53521c7b4dcae872c8bc79a261e8ba7a70",
+      "canonicalSha256": "32085af4415e2aa3904eded4a14c42e7ced65c81d4288c42af4a5d099ff597ad",
+      "sourceFigures": [],
+      "role": "canonical-topic-alias",
+      "comparisonComplete": true,
+      "uniqueContentMoved": [
+        "Checked and preserved FR-Spec, GRIFFIN, DDTree andRL-rollout original primary links in RU+EN canonical bibliography, with specific source titles and mechanisms. Added links are not claimed to be full derivations of these papers."
+      ],
+      "notes": [
+        "Полностью прочитаны160 строк legacy и928 строк canonicalRU. Classic rejection, cost, self/ngram/Medusa/EAGLE1-3, tree mask/rollback covered. Не переносить 'verification бесплатно', universal acceptance/speed table, 'samefamily/architecture necessary', text-onlyvLLM, batch32 threshold, oldCLI. Valid rare-method mentions survive as checked primary reading and the full legacy snapshot; their mechanisms are not exhaustively explained by adding bibliography."
+      ],
+      "verifiedExamples": [
+        {
+          "example": "proposal(.6,.3,.1), target(.2,.5,.3): accepted mass(.2,.3,.1), rejection.4,residual(0,.5,.5) restores target",
+          "method": "full derivation read; JavaScript mass-preservation assertions executed"
+        }
+      ],
+      "readSources": [
+        "Concepts/Inference/Speculative Decoding.md",
+        "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+        "https://arxiv.org/html/2502.14856v1",
+        "https://arxiv.org/html/2502.11018v3#S3",
+        "https://arxiv.org/html/2604.12989v1#S4.SS4",
+        "https://arxiv.org/html/2604.26779v1 (abstract and§2.1–2.3 only)"
+      ],
+      "acceptanceScope": "content-consolidation correspondence; not a fresh whole-chapter source/visual acceptance",
+      "visualQa": "No new assets or figure geometry changed. Parent must inspect final built routes/redirects; this subtask did not perform browser QA."
+    },
+    {
+      "source": "Concepts/Inference/KV-Cache.md",
+      "canonicalSource": "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+      "decision": "alias",
+      "sourceSha256": "a3500460bea81c7a4216c14179702c24e500418e214dcfdbc6f18f9e4c3bb633",
+      "canonicalSha256": "42438233617da20ba81611806b40ed450beaf6506e90ec181e2d43ac92580832",
+      "sourceFigures": [
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/kv-cache/kv-cache-mechanism.png",
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/kv-cache/gqa-comparison.png",
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/kv-cache/paged-attention.png"
+      ],
+      "role": "canonical-topic-alias",
+      "comparisonComplete": true,
+      "uniqueContentMoved": [],
+      "notes": [
+        "Полностью прочитан legacy. Canonical исправляет неверноеO(N) total attention, неверные MHA-only memory estimates forLlama270B GQA, invented throughput/degradation tables и 'infinitecontext'. Sliding-window/eviction/compression covered by linked follow-on chapter, but compression chapter was not re-read in this pass. Retain snapshot of legacy figures; canonical paging/causality figures explain same mechanisms without stale model values."
+      ],
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Inference/KV-Cache.md",
+        "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md"
+      ],
+      "acceptanceScope": "content-consolidation correspondence; not a fresh whole-chapter source/visual acceptance",
+      "visualQa": "No new assets or figure geometry changed. Parent must inspect final built routes/redirects; this subtask did not perform browser QA."
+    },
+    {
+      "source": "Concepts/Inference/Flash Attention.md",
+      "canonicalSource": "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+      "decision": "alias",
+      "sourceSha256": "f1542a3bc75402fee3b71bef1b2b796e8c07664bd88668ddbf7ad3e62e8fcbc4",
+      "canonicalSha256": "15ba654d059b1ccd35bd07c6b041e405bef2f99d74ee03f672c205263b7589a1",
+      "sourceFigures": [
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/flash-attention/fig1-tiling.jpg"
+      ],
+      "role": "canonical-topic-alias",
+      "comparisonComplete": true,
+      "uniqueContentMoved": [],
+      "notes": [
+        "Canonical покрывает IO tiling, online softmax, backward/recompute/dropout, FA2/FA3 и pinned version support. Legacy universal memory-bound, 'each input once', unconditional speedups и bit-for-bit claims не переносить."
+      ],
+      "verifiedExamples": [
+        {
+          "example": "scores[0,ln2,ln4], values[10,20,40] ->30; rescale old block by1/2",
+          "method": "full mathematical trace read; arithmetic assertion executed"
+        }
+      ],
+      "readSources": [
+        "Concepts/Inference/Flash Attention.md",
+        "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md"
+      ],
+      "acceptanceScope": "content-consolidation correspondence; not a fresh whole-chapter source/visual acceptance",
+      "visualQa": "No new assets or figure geometry changed. Parent must inspect final built routes/redirects; this subtask did not perform browser QA."
+    }
+  ],
+  "unpublishedArchiveNotConsolidated": [
+    "Concepts/Inference/Chain of Thought.md",
+    "Concepts/Inference/In-context Learning.md",
+    "Concepts/Inference/Zero-shot Learning.md",
+    "Concepts/Inference/Prompt Engineering.md",
+    "Concepts/Inference/Prompting.md"
+  ],
+  "legacyIndex": {
+    "source": "Concepts/Inference/_index.md",
+    "decision": "retain-outside-publication",
+    "readComplete": true,
+    "notes": "Not in manifest; no new reader route. Its unconditional2–3x speculation label remains historical archive text, not accepted teaching content."
+  },
+  "edits": [
+    "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+    "en/00 Textbook/14 Inference and optimization/55 KV cache batching and PagedAttention.md",
+    "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+    "en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md",
+    "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+    "en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md"
+  ],
+  "checks": [
+    {
+      "command": "pnpm --dir publishing exec vitest run tests/edls-kv-reference.test.ts tests/inference-practice.test.ts",
+      "result": "2 files,8 tests passed"
+    },
+    {
+      "command": "JavaScript arithmetic assertions over8 chapter examples",
+      "result": "passed; no GPU or end-to-end serving benchmark"
+    }
+  ],
+  "remaining": [
+    "Parent: apply alias mappings and preserve original snapshots",
+    "Parent: move3 implementation case studies byte-preserving, retain16 figures",
+    "Parent: refresh English parity ledger/hash evidence for3 edited chapter pairs",
+    "Parent: built links, redirect fragments and desktop/mobile rendering",
+    "Five unmanifested legacy prompting/CoT/ICL files are explicitly outside the completed correspondence audit; do not claim their ingestion complete"
+  ]
+}
+

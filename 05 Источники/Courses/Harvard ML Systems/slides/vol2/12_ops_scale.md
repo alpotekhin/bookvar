@@ -9,17 +9,43 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`slides/vol2/12_ops_scale/12_ops_scale.tex`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static slide archive
+> Text and equations retain the original language. Layout wrappers are simplified;
+> speaker notes are separate, and original SVGs are not redrawn or cropped.
+> Unsupported TeX remains visible and is listed beside the affected slide.
+> This archive is not a checked transcript or a finished Bookvar chapter.
 
 # VOL2 Slides — Ops Scale
 
 ## Readable slide sequence
 
+## ML Operations at Scale
+
+[Original slide 1](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L62)
+
+From Single-Model to Platform Engineering
+
 ## Learning Objectives
 
-{
+[Original slide 2](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L67)
+
+1. Calculate **platform ROI** to justify shared ML infrastructure
+2. Design **dependency-aware model registries** for multi-model portfolios
+3. Implement **CI/CD pipelines** tailored to model risk profiles
+4. Architect **hierarchical monitoring** that prevents alert fatigue
+5. Quantify **ML technical debt** using deployment velocity and toil metrics
+6. Compare **centralized**, **embedded**, and **hybrid** organizational patterns
+7. Evaluate **feature store architectures** for freshness SLOs and point-in-time correctness
+8. Apply the **TCO framework** to make infrastructure investment decisions
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: Connect to prior chapters
 Students built serving infrastructure in Part III. This chapter asks:
 what happens when you manage not one model, but a hundred?
@@ -42,19 +68,36 @@ Correct: dependencies grow as O(N^2), alerts as O(N*M).
 [CORE] Never skip --- objectives frame the entire lecture.
 IF AHEAD: Ask students to rank which objective they most want to master.
 IF SHORT: Read objectives without elaboration, move on.
-}
-- Calculate **platform ROI** to justify shared ML infrastructure
-- Design **dependency-aware model registries** for multi-model portfolios
-- Implement **CI/CD pipelines** tailored to model risk profiles
-- Architect **hierarchical monitoring** that prevents alert fatigue
-- Quantify **ML technical debt** using deployment velocity and toil metrics
-- Compare **centralized**, **embedded**, and **hybrid** organizational patterns
-- Evaluate **feature store architectures** for freshness SLOs and point-in-time correctness
-- Apply the **TCO framework** to make infrastructure investment decisions
+```
+
+</details>
 
 ## Visual Language
 
-{
+[Original slide 3](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L107)
+
+Throughout this course, colors carry meaning:
+
+**Blue** — Compute / Processing
+
+GPU ops, forward/backward pass, inference
+
+**Green** — Data / Memory
+
+Data flow, caches, healthy paths
+
+**Orange** — Routing / Scheduling
+
+Load balancers, batch windows
+
+**Red** — Error / Cost / Bottleneck
+
+Loss, decode phase, waste
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY
 Point to each card: ``Blue = compute, green = data, orange = routing,
 red = error. These are consistent across every diagram in this course.
@@ -63,37 +106,24 @@ When you see red in a pipeline diagram, something is bottlenecked.''
 % -- FLEX: [OPTIONAL]
 [OPTIONAL] Skip if students have seen this in a previous chapter deck.
 IF SHORT: Say ``same color system as last lecture'' and advance.
-}
+```
 
-Throughout this course, colors carry meaning:
-
-{0.3cm}
-[T]
-  
-    {mlsyscard}{computestroke}
-    **Blue** --- Compute / Processing\\
-    { GPU ops, forward/backward pass, inference}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{datastroke}
-    **Green** --- Data / Memory\\
-    { Data flow, caches, healthy paths}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{routingstroke}
-    **Orange** --- Routing / Scheduling\\
-    { Load balancers, batch windows}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{errorstroke}
-    **Red** --- Error / Cost / Bottleneck\\
-    { Loss, decode phase, waste}
-    {mlsyscard}
+</details>
 
 ## The N-Models Problem
 
-{
+[Original slide 4](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L155)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/12_ops_scale/images/n-models-complexity.svg]]
+
+Harvard Edge ML Systems Book contributors, [n-models-complexity.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/images/n-models-complexity.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Key:** Per-model practices collapse at $\sim$50 models. Dependencies grow as $O(N^2)$.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: Connect to prior concept
 Students just saw the learning objectives listing platform ROI and dependency
 management. This slide makes the problem visceral: why platforms exist.
@@ -116,18 +146,29 @@ the coordination complexity.
 [CORE] This motivates the entire chapter.
 IF AHEAD: Ask ``At what N does your dependency graph become unmanageable?''
 IF SHORT: Show diagram, state O(N^2), move on.
-}
+```
 
-% --- Full-width diagram ---
-
-{n-models-complexity.pdf}
-
-{0.1cm}
-{Key:}{Per-model practices collapse at $$50 models. Dependencies grow as $O(N^2)$.}
+</details>
 
 ## Operational Complexity Growth
 
-{
+[Original slide 5](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L190)
+
+| **Aspect** | **1 Model** | **10 Models** | **100 Models** |
+| --- | --- | --- | --- |
+| **Deployment** | None | Ad hoc | Critical path |
+| **Dependencies** | None | Some overlap | Dense graph |
+| **Monitoring** | 1 dashboard | 10 dashboards | Unmanageable |
+| **On-call** | Single team | Multi-team | Org-wide |
+| **Utilization** | Often idle | Moderate sharing | Efficiency critical |
+| **Debugging** | Local | Cross-team | Distributed tracing |
+
+**Consequence:** 100 models with independent failure modes create a constant stream of alerts that masks genuine emergencies.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: Connect to prior concept
 The N-models diagram showed the complexity curve. This table puts
 concrete operational labels on each step of that curve.
@@ -150,28 +191,34 @@ breaks first. Alert fatigue precedes deployment chaos.
 [OPTIONAL] This table reinforces the N-models diagram.
 IF SHORT: Point to the monitoring row, state the key insight, advance.
 IF AHEAD: Ask students to fill in a ``1000 models'' column mentally.
-}
+```
 
-{}{1.15}
-{tabular}{@{}llll@{}}
-  
-  **Aspect** & **1 Model** & **10 Models** & **100 Models** \\
-  
-  **Deployment**  & None             & Ad hoc            & Critical path \\
-  **Dependencies**& None             & Some overlap      & Dense graph \\
-  **Monitoring**  & 1 dashboard      & 10 dashboards     & Unmanageable \\
-  **On-call**     & Single team      & Multi-team        & Org-wide \\
-  **Utilization** & Often idle       & Moderate sharing  & Efficiency critical \\
-  **Debugging**   & Local            & Cross-team        & Distributed tracing \\
-  
-{tabular}
-
-{0.15cm}
-{Consequence:}{100 models with independent failure modes create a constant stream of alerts that masks genuine emergencies.}
+</details>
 
 ## Quantifying Platform ROI
 
-{
+[Original slide 6](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L236)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/12_ops_scale/images/platform-roi.svg]]
+
+Harvard Edge ML Systems Book contributors, [platform-roi.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/images/platform-roi.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+$$
+\text{ROI}_{\text{platform}} = \frac{N \times T_{saved} \times C_{eng}}{C_{platform}}
+$$
+
+**Worked example** (50 models):
+
+- Before: 50 $\times$ 40 hrs $\times$ &#36;150 = &#36;3.6M/yr
+- After: 50 $\times$ 10 hrs $\times$ &#36;150 + &#36;667K = &#36;1.6M/yr
+- **Savings: 56%** (&#36;2M/yr)
+
+**Threshold:** Break-even at 20–50 models.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: Connect to prior concept
 The complexity table showed operations becoming unmanageable. This slide
 answers: what is the economic case for investing in a platform?
@@ -180,7 +227,7 @@ answers: what is the economic case for investing in a platform?
 Point to the equation: ``N is model count, T-saved is hours per model,
 C-eng is engineer cost. The numerator grows linearly with N; the
 denominator is fixed.'' Walk through the worked example: ``50 models,
-40 hours each, \$150/hr = \$3.6M before, \$1.6M after. 56% savings.''
+40 hours each, \$150/hr = \$3.6M before, \$1.6M after. 56\% savings.''
 
 % -- ENGAGE: Specific question
 Ask: ``At what model count does your organization need a platform team?''
@@ -193,32 +240,27 @@ shared infrastructure amortizes over all models simultaneously.
 % -- FLEX: [CORE]
 [CORE] The ROI equation is the quantitative anchor for the chapter.
 IF AHEAD: Ask ``What if T-saved is only 10 hours instead of 30?''
-IF SHORT: Show equation, state the 56% number, skip the worked example detail.
-}
+IF SHORT: Show equation, state the 56\% number, skip the worked example detail.
+```
 
-[T]
-  
-    {platform-roi.pdf}
-  
-  
-    $${ROI}_{{platform}} = {N × T_{saved} × C_{eng}}{C_{platform}}$$
-
-    {0.15cm}
-    {
-    **Worked example** (50 models):
-    {0pt}
-- Before: 50 $×$ 40 hrs $×$ \$150 = \$3.6M/yr
-- After: 50 $×$ 10 hrs $×$ \$150 + \$667K = \$1.6M/yr
-- {datastroke}{**Savings: 56%**} (\$2M/yr)
-    
-    }
-
-    {0.1cm}
-    {Threshold:}{Break-even at 20--50 models.}
+</details>
 
 ## Quick Check
 
-{
+[Original slide 7](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L288)
+
+Quick Check
+
+At what model count does platform investment
+
+typically break even?
+
+15 seconds — then I will cold-call.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY
 Pause 15 seconds. Then cold-call. Answer: 20--50 models.
 Say: ``Most students guess 100+. The surprise is the threshold is
@@ -227,20 +269,38 @@ much lower because shared infrastructure amortizes across all models.''
 % -- FLEX: [OPTIONAL]
 [OPTIONAL] Micro-retrieval cue reinforcing the ROI slide.
 IF SHORT: Skip entirely --- the predict exercise covers this ground.
-}
+```
 
-{1.0cm}
-{ Quick Check}
-
-{0.6cm}
-{ At what model count does platform investment\ break even?}
-
-{0.5cm}
-{{midgray}{15 seconds --- then I will cold-call.}}
+</details>
 
 ## MLOps Maturity Hierarchy
 
-{
+[Original slide 8](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L314)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/12_ops_scale/images/mlops-maturity.svg]]
+
+Harvard Edge ML Systems Book contributors, [mlops-maturity.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/images/mlops-maturity.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**L0: Manual**
+
+Ad hoc, 1–2 models
+
+**L1: Per-Model**
+
+CI/CD per model
+
+**L2: Platform**
+
+Shared infra
+
+**L3: Enterprise**
+
+Org-wide governance
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: Connect to prior concept
 The ROI equation showed that platforms pay for themselves. This slide
 asks: what does the maturity journey look like?
@@ -263,55 +323,49 @@ organizational change --- shared infrastructure, common APIs, platform team.
 % -- FLEX: [OPTIONAL]
 [OPTIONAL] Reinforces the platform investment argument.
 IF SHORT: Show staircase, name the four levels, emphasize L1-to-L2, advance.
-}
+```
 
-% --- Full-width diagram ---
-
-{mlops-maturity.pdf}
-
-{0.1cm}
-
-[T]
-  
-    
-    {errorstroke}{**L0: Manual**}\\
-    { Ad hoc, 1--2 models}
-  
-  
-    
-    {routingstroke}{**L1: Per-Model**}\\
-    { CI/CD per model}
-  
-  
-    
-    {computestroke}{**L2: Platform**}\\
-    { Shared infra}
-  
-  
-    
-    {datastroke}{**L3: Enterprise**}\\
-    { Org-wide governance}
+</details>
 
 ## Predict: When Does Platform Investment Pay Off?
 
-{[2 min] Prediction exercise. Students write for 60 seconds.
+[Original slide 9](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L372)
+
+Think–Write–Share
+
+Your organization has 30 models, each costing
+
+40 engineer-hours/month in operational toil.
+
+**At what model count does a &#36;2M platform pay for itself?**
+
+Write your estimate. (60 seconds)
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Prediction exercise. Students write for 60 seconds.
 Do NOT reveal the answer yet. This primes the platform economics discussion.
-Ask 2--3 students to share.}
+Ask 2--3 students to share.
+```
 
-{1.0cm}
-{ Think--Write--Share}
-
-{0.6cm}
-{ Your organization has 30 models, each costing\\
-40 engineer-hours/month in operational toil.\\[0.3cm]
-**At what model count does a \$2M platform pay for itself?**}
-
-{0.6cm}
-{ Write your estimate. {midgray}{(60 seconds)}}
+</details>
 
 ## Dependency-Aware Model Registry
 
-{
+[Original slide 10](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L395)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/12_ops_scale/images/model-registry-deps.svg]]
+
+Harvard Edge ML Systems Book contributors, [model-registry-deps.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/images/model-registry-deps.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Without tracking:** Organizations discover dependencies through production failures.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The N-models problem showed dependencies grow as O(N-squared). This slide
 makes dependency cascades concrete: one silent upstream change poisons
@@ -336,18 +390,29 @@ eventually you must propagate updates through the entire graph.
 [CORE] Dependency management is the central multi-model challenge.
 IF AHEAD: Ask ``How would you test a model update against all its consumers?''
 IF SHORT: Show diagram, state the cascade failure mode, move on.
-}
+```
 
-% --- Full-width diagram ---
-
-{model-registry-deps.pdf}
-
-{0.1cm}
-{Without tracking:}{Organizations discover dependencies through production failures.}
+</details>
 
 ## Ensemble Management
 
-{
+[Original slide 11](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L432)
+
+**A single recommendation request invokes 10–50 models:**
+
+| **Deploy Stage** | **Actions** | **Duration** | **Rollback Trigger** |
+| --- | --- | --- | --- |
+| **Shadow** | Log only, not served | 24–48 h | Quality below threshold |
+| **Canary** | 1% traffic | 4–8 h | Statistical regression |
+| **Staged** | 5% $\to$ 25% $\to$ 100% | 24–72 h | Business metric drop |
+| **Soak** | Full traffic, extended watch | 7–14 d | Delayed effects |
+
+**Interaction effects:** A component change improving local metrics might degrade system-level performance through subtle interactions.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: Connect to prior concept
 The Dependency-Aware Model Registry showed that cascades happen when the
 embedding model updates silently. Ensemble management is the operational
@@ -356,13 +421,13 @@ answer: how do you safely update one component of a 10--50 model pipeline?
 % -- NARRATE: What to SAY
 [3 min] Walk through the deployment stages: ``Shadow logs but does not
 serve---this is where you verify the new component does not produce
-garbage outputs. Canary routes 1% of live traffic. Staged ramps from
-5% to 100% while monitoring business metrics. Soak watches for
-delayed effects: a personalization model may look fine at 100% traffic
+garbage outputs. Canary routes 1\% of live traffic. Staged ramps from
+5\% to 100\% while monitoring business metrics. Soak watches for
+delayed effects: a personalization model may look fine at 100\% traffic
 for three days but start degrading on day seven as feedback loops kick in.''
 Point to the interaction effects callout: ``A component update that
 improves its local metric---say, the retrieval model improves recall by
-5%---might degrade the full system because the ranking model was trained
+5\%---might degrade the full system because the ranking model was trained
 on the old retrieval distribution. The ranking model has never seen
 the new set of candidates.''
 
@@ -383,69 +448,76 @@ components were trained on the old joint. System-level metrics
 [OPTIONAL] Ensemble interaction effects are important for RecSys heavy courses.
 IF SHORT: Show staged deployment table; state the interaction-effects warning; advance.
 IF AHEAD: Ask ``How would you use shadow mode to safely test a new retrieval model?''
-}
+```
 
-**A single recommendation request invokes 10--50 models:**
-
-{0.1cm}
-{}{1.1}
-{tabular}{@{}llrl@{}}
-  
-  **Deploy Stage** & **Actions** & **Duration** & **Rollback Trigger** \\
-  
-  **Shadow**       & Log only, not served        & 24--48 h  & Quality below threshold \\
-  **Canary**       & 1% traffic                 & 4--8 h    & Statistical regression \\
-  **Staged**       & 5% $$ 25% $$ 100% & 24--72 h  & Business metric drop \\
-  **Soak**         & Full traffic, extended watch & 7--14 d   & Delayed effects \\
-  
-{tabular}
-
-{0.15cm}
-{mlsyscard}{routingstroke}
-{**Interaction effects:** A component change improving local metrics might degrade system-level performance through subtle interactions.}
-{mlsyscard}
+</details>
 
 ## Model-Type Operations Diversity
 
-{[2 min] Different model types need fundamentally different operational
+[Original slide 12](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L494)
+
+| **Model Type** | **Update Freq.** | **Deploy** | **Primary Risk** | **Rollback** |
+| --- | --- | --- | --- | --- |
+| **LLM** | Monthly | Staged, careful | Quality, safety | Hours–days |
+| **RecSys** | Daily–weekly | Shadow, A/B | Engagement drop | Minutes |
+| **Fraud** | Hourly–daily | Rapid + rollback | False negatives | Seconds |
+| **Vision** | Weekly–monthly | Canary | Accuracy regression | Minutes |
+
+**Principle:** Risk profile determines operational cadence.
+
+LLMs operate slowly because quality regressions are hard to detect. Fraud detection operates continuously because adversaries do not wait.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Different model types need fundamentally different operational
 patterns. Fraud detection needs hourly updates; LLMs need monthly staged
-rollouts. The principle: risk profile determines operational cadence.}
+rollouts. The principle: risk profile determines operational cadence.
+```
 
-{}{1.15}
-{tabular}{@{}lllll@{}}
-  
-  **Model Type** & **Update Freq.** & **Deploy** & **Primary Risk** & **Rollback** \\
-  
-  **LLM**   & Monthly     & Staged, careful  & Quality, safety     & Hours--days \\
-  **RecSys** & Daily--weekly & Shadow, A/B     & Engagement drop     & Minutes \\
-  **Fraud**  & Hourly--daily & Rapid + rollback & False negatives     & Seconds \\
-  **Vision** & Weekly--monthly & Canary         & Accuracy regression & Minutes \\
-  
-{tabular}
-
-{0.15cm}
-{Principle:}{Risk profile determines operational cadence.}
-
-{0.1cm}
-{ LLMs operate slowly because quality regressions are hard to detect. Fraud detection operates continuously because adversaries do not wait.}
+</details>
 
 ## ML CI/CD Pipeline
 
-{[3 min] Walk through the pipeline stages and gates. Key difference
+[Original slide 13](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L524)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/12_ops_scale/images/ml-cicd-pipeline.svg]]
+
+Harvard Edge ML Systems Book contributors, [ml-cicd-pipeline.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/images/ml-cicd-pipeline.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Key difference:** ML CI/CD validates **data + model + fairness**, not just code.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] Walk through the pipeline stages and gates. Key difference
 from software CI/CD: must validate data, model performance, and fairness ---
 not just code correctness. Each stage is idempotent. Ask: ``Which gate
-is most likely to catch a silent regression?''}
+is most likely to catch a silent regression?''
+```
 
-% --- Full-width diagram ---
-
-{ml-cicd-pipeline.pdf}
-
-{0.1cm}
-{Key difference:}{ML CI/CD validates **data + model + fairness**, not just code.}
+</details>
 
 ## Staged Rollout Strategy
 
-{
+[Original slide 14](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L539)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/12_ops_scale/images/staged-rollout.svg]]
+
+Harvard Edge ML Systems Book contributors, [staged-rollout.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/images/staged-rollout.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Canary duration:** $t_{stage} = \frac{n_{samples}}{r_{requests} \times p_{stage}}$
+
+At 1M req/hr with 1% canary: 10K samples needed $\to$ 1 hour minimum.
+
+Total confident rollout: $\sim$4 hours (vs. instant blue-green with no safety net).
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: Connect to prior concept
 The ML CI/CD pipeline showed the stages that gate a model before promotion.
 This slide shows what happens after the gate opens: how to release safely
@@ -453,18 +525,18 @@ when unit tests cannot guarantee real-world behavior.
 
 % -- NARRATE: What to SAY
 [3 min] Walk through the rollout diagram: ``Shadow logs but does not serve.
-Canary routes 1% of live traffic. Staged ramps from 5% to 25% to 100%.
+Canary routes 1\% of live traffic. Staged ramps from 5\% to 25\% to 100\%.
 Soak watches for delayed effects at full traffic over 7--14 days.''
-Point to the canary duration formula: ``At 1M req/hr with a 1% canary,
+Point to the canary duration formula: ``At 1M req/hr with a 1\% canary,
 you need 10,000 samples to detect a statistically significant regression,
 which takes a minimum of 1 hour. The total confident rollout is about
 4 hours. An instant blue-green deployment skips all of this.''
-State the 20$×$ risk reduction: ``A 5% canary limits blast radius
-by 20$×$ relative to full rollout. If the model is broken, only 5%
-of users see the failure, not 100%.''
+State the 20$\times$ risk reduction: ``A 5\% canary limits blast radius
+by 20$\times$ relative to full rollout. If the model is broken, only 5\%
+of users see the failure, not 100\%.''
 
 % -- ENGAGE: Specific question
-Ask: ``What does the 20$×$ risk reduction protect against?'' Give 10
+Ask: ``What does the 20$\times$ risk reduction protect against?'' Give 10
 seconds. Expected: it limits the blast radius of a regression -- it does
 NOT prevent the regression from occurring, it only controls how many users
 are affected before detection.
@@ -478,140 +550,176 @@ requires good monitoring (alert system from the previous section).
 
 % -- FLEX: [CORE]
 [CORE] Staged rollouts are a quantitative safety argument, not just best practice.
-IF SHORT: Show diagram, state 20$×$ blast radius reduction; skip formula.
-IF AHEAD: Ask ``What if your 1% canary is demographically unrepresentative of the full user base?''
-}
+IF SHORT: Show diagram, state 20$\times$ blast radius reduction; skip formula.
+IF AHEAD: Ask ``What if your 1\% canary is demographically unrepresentative of the full user base?''
+```
 
-% --- Full-width diagram ---
-
-{staged-rollout.pdf}
-
-{0.1cm}
-
-**Canary duration:** $t_{stage} = {n_{samples}}{r_{requests} × p_{stage}}$
-
-{0.1cm}
-{ At 1M req/hr with 1% canary: 10K samples needed $$ 1 hour minimum.\\
-Total confident rollout: $$4 hours (vs.\ instant blue-green with no safety net).}
+</details>
 
 ## Your Turn: Cost of a Delayed Alert
 
-{[3 min] Give students 90 seconds. Answer: 432M requests $×$ 0.005
-lost CTR $×$ \$0.50/click = \$1.08M. The insight: a ``minor'' 0.5%
-regression at scale is a million-dollar daily disaster.}
+[Original slide 15](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L592)
 
-[T]
-  
-    { Calculate the Loss}
+Calculate the Loss
 
-    {0.2cm}
-    A recommendation model has a silent bug reducing CTR by 0.5% (5.0% $$ 4.5%).
-- 5,000 QPS, each click worth \$0.50
+A recommendation model has a silent bug reducing CTR by 0.5% (5.0% $\to$ 4.5%).
+
+- 5,000 QPS, each click worth &#36;0.50
 - Detection takes 24 hours
-    
 
-    {0.15cm}
-    **How much revenue is lost?**
+**How much revenue is lost?**
 
-    {{midgray}{(90 seconds --- then compare with a neighbor)}}
-  
-  
-    
-    {mlsyscard}{errorstroke}
-    **Solution:**\\[0.1cm]
-    {
-    Requests: 5K $×$ 86,400 = 432M\\
-    Lost clicks: 432M $×$ 0.005 = 2.16M\\
-    Loss: 2.16M $×$ \$0.50\\[0.1cm]
-    $=$ {errorstroke}{**\$1,080,000**}\\[0.1cm]
-    Every hour of faster detection saves **\$45K**.
-    }
-    {mlsyscard}
+(90 seconds — then compare with a neighbor)
+
+**Solution:**
+
+Requests: 5K $\times$ 86,400 = 432M
+
+Lost clicks: 432M $\times$ 0.005 = 2.16M
+
+Loss: 2.16M $\times$ &#36;0.50
+
+$=$ **&#36;1,080,000**
+
+Every hour of faster detection saves **&#36;45K**.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] Give students 90 seconds. Answer: 432M requests $\times$ 0.005
+lost CTR $\times$ \$0.50/click = \$1.08M. The insight: a ``minor'' 0.5\%
+regression at scale is a million-dollar daily disaster.
+```
+
+</details>
 
 ## CI/CD Patterns by Model Type
 
-{[2 min] Connect back to model-type diversity. LLMs: quality-gated,
+[Original slide 16](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L631)
+
+| **Pattern** | **Model Type** | **Validation** | **Rollout** | **Rollback** |
+| --- | --- | --- | --- | --- |
+| **Quality-gated** | LLM | Human eval + safety | Days–weeks | Hours |
+| **Metric-driven** | RecSys | Engagement metrics | Hours–days | Minutes |
+| **Threshold-gated** | Fraud | Precision/recall | Hours | Seconds |
+| **Accuracy-focused** | Vision | Classification | Days | Minutes |
+
+**Rollout risk:** $R = P_{\text{regression}} \times I_{\text{regression}} \times E_{\text{exposure}}$. Reduce any factor to reduce total risk.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Connect back to model-type diversity. LLMs: quality-gated,
 days to weeks. Fraud: threshold-gated, hours with seconds rollback.
-The key: one-size-fits-all CI/CD fails at platform scale.}
+The key: one-size-fits-all CI/CD fails at platform scale.
+```
 
-{}{1.15}
-{tabular}{@{}lllll@{}}
-  
-  **Pattern** & **Model Type** & **Validation** & **Rollout** & **Rollback** \\
-  
-  **Quality-gated**   & LLM   & Human eval + safety  & Days--weeks & Hours \\
-  **Metric-driven**   & RecSys & Engagement metrics  & Hours--days & Minutes \\
-  **Threshold-gated** & Fraud  & Precision/recall    & Hours       & Seconds \\
-  **Accuracy-focused** & Vision & Classification     & Days        & Minutes \\
-  
-{tabular}
+</details>
 
-{0.15cm}
-{mlsyscard}{crimson}
-{ **Rollout risk:** $R = P_{{regression}} × I_{{regression}} × E_{{exposure}}$. Reduce any factor to reduce total risk.}
-{mlsyscard}
+## The False Alarm Tax
+
+[Original slide 17](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L660)
+
+$P(\text{false alert}) = 1 - (1-\alpha)^N$
+
+With $\alpha=0.05$, $N=1000$: $P \approx 1.0$
 
 ## Alert Fatigue: The Math
 
-{[3 min] This is the key quantitative insight. Even at 3-sigma
+[Original slide 18](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L665)
+
+**100 models $\times$ 10 metrics $\times$ 5-min checks:**
+
+| **Threshold** | **FPR** | **Daily False Alerts** | **Status** |
+| --- | --- | --- | --- |
+| 2-sigma (95%) | 5.0% | 14,400 | **Useless** |
+| 3-sigma (99.7%) | 0.3% | 864 | **Overwhelming** |
+| 4-sigma (99.99%) | 0.01% | 29 | **Manageable** |
+
+**Destructive dynamic:** Operators ignore alerts $\to$ genuine issues get lost $\to$ monitoring provides *negative* value.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] This is the key quantitative insight. Even at 3-sigma
 specificity, 100 models with 10 metrics generate 864 false alerts/day.
 At 2-sigma: 14,400/day. Operators learn to ignore everything.
-Ask: ``How many alerts per day before your on-call team gives up?''}
+Ask: ``How many alerts per day before your on-call team gives up?''
+```
 
-**100 models $×$ 10 metrics $×$ 5-min checks:**
-
-{0.15cm}
-{
-{}{1.2}
-{tabular}{@{}lrrr@{}}
-  
-  **Threshold** & **FPR** & **Daily False Alerts** & **Status** \\
-  
-  2-sigma (95%)   & 5.0%  & 14,400 & {errorstroke}{**Useless**} \\
-  3-sigma (99.7%) & 0.3%  & 864    & {routingstroke}{**Overwhelming**} \\
-  4-sigma (99.99%) & 0.01% & 29    & {datastroke}{**Manageable**} \\
-  
-{tabular}
-}
-
-{0.15cm}
-{Destructive dynamic:}{Operators ignore alerts $$ genuine issues get lost $$ monitoring provides *negative* value.}
+</details>
 
 ## Hierarchical Monitoring Architecture
 
-{[3 min] The solution to alert fatigue. Four levels: business,
+[Original slide 19](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L693)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/12_ops_scale/images/monitoring-pyramid.svg]]
+
+Harvard Edge ML Systems Book contributors, [monitoring-pyramid.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/images/monitoring-pyramid.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Four abstraction levels:**
+
+**L1 Business:** Revenue, engagement
+
+Few metrics, high signal, exec attention
+
+**L2 Portfolio:** RecSys lift, fraud rate
+
+Domain-level aggregation
+
+**L3 Model:** Accuracy, latency, drift
+
+Investigation on anomaly only
+
+**L4 Infra:** GPU util, feature store
+
+Platform team routing
+
+**Principle:** Alert upward, investigate downward.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] The solution to alert fatigue. Four levels: business,
 portfolio, model, infrastructure. High-level metrics trigger alarms;
-lower-level metrics serve investigation only. Walk through the pyramid.}
+lower-level metrics serve investigation only. Walk through the pyramid.
+```
 
-[T]
-  
-    {monitoring-pyramid.pdf}
-  
-  
-    **Four abstraction levels:**
-
-    {0.15cm}
-    {errorstroke}{**L1 Business:**} Revenue, engagement\\
-    { Few metrics, high signal, exec attention}
-
-    {0.1cm}
-    {routingstroke}{**L2 Portfolio:**} RecSys lift, fraud rate\\
-    { Domain-level aggregation}
-
-    {0.1cm}
-    {computestroke}{**L3 Model:**} Accuracy, latency, drift\\
-    { Investigation on anomaly only}
-
-    {0.1cm}
-    {datastroke}{**L4 Infra:**} GPU util, feature store\\
-    { Platform team routing}
-
-    {0.1cm}
-    {Principle:}{Alert upward, investigate downward.}
+</details>
 
 ## The Control Plane That Disappeared (2021)
 
-{
+[Original slide 20](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L729)
+
+**Context:** Meta's global services depended on a backbone network
+carrying internal control traffic for Facebook, Instagram, and WhatsApp.
+
+**Failure:** Oct 4, 2021 — a BGP command intended to assess
+backbone capacity unintentionally disconnected data centers from each
+other. The routing withdrawal also broke DNS and internal recovery tools.
+
+**Consequence:** Major services unavailable globally for hours;
+recovery required constrained out-of-band paths because standard
+management tools depended on the failed network plane.
+
+**Systems lesson:**
+
+The control plane is a dependency with its own blast radius. ML
+platforms expose the same trap: training schedulers, model registries,
+feature stores, and inference routers share the auth, DNS, and network
+plane that an incident can take down.
+
+**Required:** explicit isolation between the control plane and
+the ML systems that depend on it.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: Connect to prior concept
 The hierarchical monitoring pyramid showed how to detect problems. This war
 story shows what happens when the control plane that runs your monitoring
@@ -648,96 +756,107 @@ mode it is designed to fix.
 [CORE] War stories anchor abstract monitoring principles in real cost.
 IF SHORT: Read Context and Systems lesson only; skip Consequence details.
 IF AHEAD: Ask ``What would you isolate first to prevent this in your ML platform?''
-}
+```
 
-[T]
-  
-    **Context:** Meta's global services depended on a backbone network
-    carrying internal control traffic for Facebook, Instagram, and WhatsApp.
-
-    {0.15cm}
-    **Failure:** Oct 4, 2021 --- a BGP command intended to assess
-    backbone capacity unintentionally disconnected data centers from each
-    other. The routing withdrawal also broke DNS and internal recovery tools.
-
-    {0.15cm}
-    **Consequence:** Major services unavailable globally for hours;
-    recovery required constrained out-of-band paths because standard
-    management tools depended on the failed network plane.
-  
-  
-    {mlsyscard}{errorstroke}
-    {**Systems lesson:**\\[0.1cm]
-    The control plane is a dependency with its own blast radius. ML
-    platforms expose the same trap: training schedulers, model registries,
-    feature stores, and inference routers share the auth, DNS, and network
-    plane that an incident can take down.\\[0.1cm]
-    **Required:** explicit isolation between the control plane and
-    the ML systems that depend on it.}
-    {mlsyscard}
+</details>
 
 ## Drift Detection: PSI
 
-{[2 min] Two types of drift: covariate (input $P(X)$ changes) and
-concept ($P(Y|X)$ changes). PSI is cheap to compute and serves as a leading
-indicator. Thresholds: $<$0.1 stable, 0.1--0.25 investigate, $$0.25 act.
-Monitoring lag: 2% accuracy drop needs $$2,500 labeled samples.}
+[Original slide 21](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L800)
 
 **Population Stability Index** detects feature distribution shift:
 
-{0.05cm}
-$$PSI = _{i=1}^{n} (A_i - E_i) × ({A_i}{E_i})$$
+$$
+PSI = \sum_{i=1}^{n} (A_i - E_i) \times \ln\left(\frac{A_i}{E_i}\right)
+$$
 
-{0.05cm}
-{}{1.1}
-{tabular}{@{}lll@{}}
-  
-  **PSI Value** & **Interpretation** & **Action** \\
-  
-  $< 0.1$          & No significant shift   & Continue monitoring \\
-  $0.1$ -- $0.25$  & Moderate shift          & Investigate \\
-  $ 0.25$      & Significant shift       & {errorstroke}{**Immediate action**} \\
-  
-{tabular}
+| **PSI Value** | **Interpretation** | **Action** |
+| --- | --- | --- |
+| $< 0.1$ | No significant shift | Continue monitoring |
+| $0.1$ – $0.25$ | Moderate shift | Investigate |
+| $\geq 0.25$ | Significant shift | **Immediate action** |
 
-{0.1cm}
-{Monitoring lag:}{Detecting a 2% accuracy drop needs $$2,500 samples. At 1K labels/hr $$ **2.5 hrs** broken. PSI on inputs is faster.}
+**Monitoring lag:** Detecting a 2% accuracy drop needs $\sim$2,500 samples. At 1K labels/hr $\to$ **2.5 hrs** broken. PSI on inputs is faster.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Two types of drift: covariate (input $P(X)$ changes) and
+concept ($P(Y|X)$ changes). PSI is cheap to compute and serves as a leading
+indicator. Thresholds: $<$0.1 stable, 0.1--0.25 investigate, $\geq$0.25 act.
+Monitoring lag: 2\% accuracy drop needs $\sim$2,500 labeled samples.
+```
+
+</details>
 
 ## Discussion: Which Monitoring Level Fires First?
 
-{[3 min] Turn-and-talk. Students discuss in pairs for 90 seconds.
+[Original slide 22](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L830)
+
+Turn and Talk (90 seconds)
+
+An upstream feature pipeline silently starts
+
+returning null values for 3% of users.
+
+**Which monitoring level detects this first?
+
+How long until the business metric dashboard shows a dip?**
+
+L1
+
+Business
+
+L2
+
+Portfolio
+
+L3
+
+Model
+
+L4
+
+Infra
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] Turn-and-talk. Students discuss in pairs for 90 seconds.
 The answer depends on the failure mode: infrastructure failures show at L4 first,
-while data drift shows at L3 then propagates to L2/L1.}
+while data drift shows at L3 then propagates to L2/L1.
+```
 
-{0.5cm}
-{ Turn and Talk {midgray}{(90 seconds)}}
+</details>
 
-{0.45cm}
-{ An upstream feature pipeline silently starts\\
-returning null values for 3% of users.\\[0.25cm]
-**Which monitoring level detects this first?\\
-How long until the business metric dashboard shows a dip?**}
+## Feature Freshness: Batch vs. Streaming
 
-{0.45cm}
-[c]
-   L1\
-   L2\
-   L3\
-   L4\
+[Original slide 23](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L859)
 
-## Feature Freshness: Batch vs.\ Streaming
+![[Assets/Sources/Harvard ML Systems/slides/vol2/12_ops_scale/images/feature-freshness.svg]]
 
-{
+Harvard Edge ML Systems Book contributors, [feature-freshness.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/images/feature-freshness.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+$L_{\text{freshness}} = T_{\text{available}} - T_{\text{event}}$
+
+Streaming: **10–20% engagement lift**. For fraud detection, day-old features give adversaries a 24-hour exploitation window.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: Connect to prior concept
 The monitoring section showed how to detect when model behavior drifts.
 Feature freshness is one of the fastest ways to cause that drift without
 changing the model at all.
 
 % -- NARRATE: What to SAY
-[3 min] Point to the diagram: ``Freshness latency $L_{{freshness}}$
+[3 min] Point to the diagram: ``Freshness latency $L_{\text{freshness}}$
 is the gap between when an event happens and when the model can use a
 feature derived from it. Batch: 12--24 hours. Streaming: 1--5 seconds.
-That is a 10,000$×$ improvement, which translates to 10--20%
+That is a 10,000$\times$ improvement, which translates to 10--20\%
 engagement lift in recommendation systems because the model can react
 to what users just did rather than what they did yesterday.'' Then pivot
 to fraud: ``For fraud detection the same gap gives adversaries a 24-hour
@@ -759,23 +878,34 @@ in the batch category; streaming the wrong ones wastes engineering budget.
 
 % -- FLEX: [OPTIONAL]
 [OPTIONAL] Freshness motivates the dual-store architecture on the next slide.
-IF SHORT: State the $L_{{freshness}}$ formula and the 24-hour fraud window; advance.
-}
+IF SHORT: State the $L_{\text{freshness}}$ formula and the 24-hour fraud window; advance.
+```
 
-% --- Full-width diagram ---
-
-{feature-freshness.pdf}
-
-{0.05cm}
-
-$L_{{freshness}} = T_{{available}} - T_{{event}}$
-
-{0.05cm}
-{ Streaming: **10--20% engagement lift**. For fraud detection, day-old features give adversaries a 24-hour exploitation window.}
+</details>
 
 ## Feature Store: Dual-Store Architecture (1/2)
 
-{
+[Original slide 24](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L908)
+
+**The core conflict:**
+
+- Training: TB-scale sequential scans, hours latency OK
+- Serving: single-entity lookups, $<$10 ms p99
+- One DB cannot efficiently satisfy both
+
+**Dual-store pattern:**
+
+- **Offline store** (BigQuery/S3/Iceberg): training data, high throughput
+- **Online store** (Redis/DynamoDB): serving, low latency
+- **Materialization layer**: keeps both stores in sync
+
+**Invariant:** $f_{\text{train}}(x) \equiv f_{\text{serve}}(x)$ —
+training-serving skew silently destroys accuracy when this breaks.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: Connect to prior concept
 The Feature Freshness slide showed the latency gap between batch and
 streaming. This slide explains the architectural pattern that solves it:
@@ -803,30 +933,33 @@ mismatch -- either too slow for serving or too expensive for training.
 
 % -- FLEX: [CORE]
 [CORE] This slide covers LO 7 (feature store architectures). Do not skip.
-IF SHORT: Focus on the invariant $f_{{train}}(x)  f_{{serve}}(x)$.
+IF SHORT: Focus on the invariant $f_{\text{train}}(x) \equiv f_{\text{serve}}(x)$.
 IF AHEAD: Ask ``What is the role of the materialization layer?''
-}
+```
 
-**The core conflict:**
-{0pt}
-- Training: TB-scale sequential scans, hours latency OK
-- Serving: single-entity lookups, $<$10 ms p99
-- One DB cannot efficiently satisfy both
-
-{0.08cm}
-**Dual-store pattern:**
-{0pt}
-- {datastroke}{**Offline store**} (BigQuery/S3/Iceberg): training data, high throughput
-- {computestroke}{**Online store**} (Redis/DynamoDB): serving, low latency
-- **Materialization layer**: keeps both stores in sync
-
-{0.08cm}
-{Invariant:}{$f_{{train}}(x)  f_{{serve}}(x)$ ---
-{ training-serving skew silently destroys accuracy when this breaks.}}
+</details>
 
 ## Feature Store: Point-in-Time Correctness (2/2)
 
-{
+[Original slide 25](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L963)
+
+**Point-in-time correctness:**
+
+Training must join features as they existed *at the event timestamp*,
+not current values.
+
+**Example**: A user had 4 clicks at noon; a naive join supplies the
+end-of-day value of 10 — **2.5$\times$ inflation** and guaranteed
+production failure.
+
+At 10,000 models sharing the same feature platform, data leakage risk
+multiplies. Point-in-time joins are an **infrastructure guarantee**,
+not a per-team check.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: Connect to prior concept
 The dual-store architecture ensures training and serving use the same
 feature pipeline. This slide covers the subtlest correctness requirement:
@@ -835,9 +968,9 @@ causes data leakage.
 
 % -- NARRATE: What to SAY
 [1 min] Explain point-in-time correctness: ``Training must join features
-as they existed *at the event timestamp*, not current values. A user
+as they existed \emph{at the event timestamp}, not current values. A user
 had 4 clicks at noon; a naive join supplies the end-of-day value of 10 ---
-2.5$×$ inflation and guaranteed production failure. At 10,000 models
+2.5$\times$ inflation and guaranteed production failure. At 10,000 models
 sharing the same feature platform, data leakage risk multiplies. Point-in-time
 joins must be an infrastructure guarantee, not a per-team check.''
 
@@ -848,28 +981,28 @@ Expected: the model scores stale features --- adversaries exploit the window.
 
 % -- FLEX: [CORE]
 [CORE] Point-in-time correctness is the key correctness invariant for feature stores.
-IF SHORT: State the 2.5$×$ inflation example and advance.
-}
+IF SHORT: State the 2.5$\times$ inflation example and advance.
+```
 
-{mlsyscard}{routingstroke}
-{**Point-in-time correctness:**\\[0.1cm]
-Training must join features as they existed *at the event timestamp*,
-not current values.
-
-{0.1cm}
-**Example**: A user had 4 clicks at noon; a naive join supplies the
-end-of-day value of 10 --- **2.5$×$ inflation** and guaranteed
-production failure.
-
-{0.1cm}
-At 10,000 models sharing the same feature platform, data leakage risk
-multiplies. Point-in-time joins are an **infrastructure guarantee**,
-not a per-team check.}
-{mlsyscard}
+</details>
 
 ## Organizational Patterns for ML Platforms
 
-{
+[Original slide 26](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L1007)
+
+|  | **Centralized** | **Embedded** | **Hybrid** |
+| --- | --- | --- | --- |
+| **Structure** | Single platform team | ML eng in each team | Core + domain leads |
+| **Strength** | Consistency | Responsiveness | Balanced |
+| **Risk** | Bottleneck | Fragmentation | Coordination cost |
+| **Best for** | 100+ models | 10–20 models | 50–100 models |
+
+**Decision factors:** Model count, model similarity, org size, regulatory requirements, and infrastructure maturity determine the optimal pattern.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: Connect to prior concept
 The Feature Store architecture requires a shared platform team to maintain
 consistency guarantees. This slide asks: what organizational structure
@@ -902,28 +1035,32 @@ platform team is a constant bottleneck for 75 model teams trying to ship.
 IF SHORT: Show the table; state the 50--100 model hybrid threshold; advance.
 IF AHEAD: Discuss what happens to organizational patterns when a startup
 acquires a large ML platform --- how do embedded engineers integrate?
-}
+```
 
-{}{1.15}
-{tabular}{@{}lp{3.2cm}p{3.2cm}p{3.2cm}@{}}
-  
-  & **Centralized** & **Embedded** & **Hybrid** \\
-  
-  **Structure**  & Single platform team & ML eng in each team & Core + domain leads \\
-  **Strength**   & Consistency          & Responsiveness       & Balanced \\
-  **Risk**       & Bottleneck           & Fragmentation        & Coordination cost \\
-  **Best for**   & 100+ models          & 10--20 models        & 50--100 models \\
-  
-{tabular}
-
-{0.15cm}
-{mlsyscard}{computestroke}
-{ **Decision factors:** Model count, model similarity, org size, regulatory requirements, and infrastructure maturity determine the optimal pattern.}
-{mlsyscard}
+</details>
 
 ## Edge Fleet MLOps: Version Skew (1/2)
 
-{
+[Original slide 27](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L1063)
+
+**Challenge 1: Extreme version skew**
+
+- Data-center rollout: hours; edge fleet rollout: weeks to months
+- Up to **50 concurrent model versions** active simultaneously
+- Upstream data pipelines must stay backwards-compatible across all versions
+
+**Challenge 3: Federated monitoring**
+
+- Cannot stream raw predictions back (privacy + bandwidth constraints)
+- Devices compute local error rates; transmit only aggregated, anonymized metrics
+- Fleet health must be reconstructed from fragmented signals
+
+**Key difference:** Edge recovery is probabilistic, not deterministic — a bad model takes weeks to roll back, not seconds.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: Connect to prior concept
 The data-center MLOps patterns just covered assume controlled infrastructure.
 This slide extends the same framework to millions of heterogeneous edge devices
@@ -955,29 +1092,36 @@ is probabilistic, not deterministic.
 % -- FLEX: [CORE]
 [CORE] Covers Key Takeaways bullet on edge fleet management.
 IF SHORT: State the 50-version-skew number; advance to HIL CI/CD slide.
-IF AHEAD: Ask ``How would you design a canary rollout when 10% of devices
+IF AHEAD: Ask ``How would you design a canary rollout when 10\% of devices
 are always offline?''
-}
+```
 
-**Challenge 1: Extreme version skew**
-{0pt}
-- Data-center rollout: hours; edge fleet rollout: weeks to months
-- Up to **50 concurrent model versions** active simultaneously
-- Upstream data pipelines must stay backwards-compatible across all versions
-
-{0.12cm}
-**Challenge 3: Federated monitoring**
-{0pt}
-- Cannot stream raw predictions back (privacy + bandwidth constraints)
-- Devices compute local error rates; transmit only aggregated, anonymized metrics
-- Fleet health must be reconstructed from fragmented signals
-
-{0.1cm}
-{Key difference:}{Edge recovery is probabilistic, not deterministic --- a bad model takes weeks to roll back, not seconds.}
+</details>
 
 ## Edge Fleet MLOps: HIL CI/CD (2/2)
 
-{
+[Original slide 28](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L1121)
+
+**Challenge 2: Hardware-in-the-Loop (HIL) CI/CD**
+
+Accuracy gates are **necessary but not sufficient** for edge deployments.
+
+CI/CD must include a **HIL stage**: validate on physical or emulated fleet hardware
+*before* promotion.
+
+A model is **rejected** if it:
+
+- Exceeds 1 MB memory on a budget microcontroller
+- Triggers thermal throttling on a specific SoC
+- Exceeds latency budget on a target NPU/DSP
+
+Edge failures discovered in production cannot be rolled back in seconds —
+they take **weeks to propagate** through the fleet.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: Connect to prior concept
 Version skew showed that edge rollouts take weeks. This slide covers the
 quality gate that prevents bad models from entering that slow propagation path.
@@ -993,53 +1137,58 @@ in production cannot be rolled back in seconds --- they take weeks to propagate.
 % -- FLEX: [CORE]
 [CORE] HIL CI/CD is the key distinction between edge and data-center MLOps.
 IF SHORT: State the three rejection criteria and the weeks-to-rollback cost.
-}
+```
 
-{mlsyscard}{computestroke}
-{**Challenge 2: Hardware-in-the-Loop (HIL) CI/CD**\\[0.05cm]
-Accuracy gates are **necessary but not sufficient** for edge deployments.\\[0.05cm]
-CI/CD must include a **HIL stage**: validate on physical or emulated fleet hardware
-*before* promotion.\\[0.05cm]
-A model is **rejected** if it:
-{0pt}
-- Exceeds 1 MB memory on a budget microcontroller
-- Triggers thermal throttling on a specific SoC
-- Exceeds latency budget on a target NPU/DSP
-
-Edge failures discovered in production cannot be rolled back in seconds ---
-they take **weeks to propagate** through the fleet.}
-{mlsyscard}
+</details>
 
 ## TCO Framework for ML Systems
 
-{[3 min] The four-component cost structure evolves with scale. Early-stage:
+[Original slide 29](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L1157)
+
+$$
+\text{TCO}_{\text{ML}} = C_{\text{train}} + C_{\text{infer}} + C_{\text{data}} + C_{\text{iter}}
+$$
+
+| **Component** | **Early Stage** | **Production Scale** |
+| --- | --- | --- |
+| $C_{\text{train}}$ | Dominant (experimentation) | Fixed (scheduled retraining) |
+| $C_{\text{infer}}$ | Negligible (few users) | **Dominant** (70–80% of TCO) |
+| $C_{\text{data}}$ | Small (curated datasets) | Growing (storage + pipelines) |
+| $C_{\text{iter}}$ | **Dominant** (engineer time) | Reduced by automation |
+
+**Strategy:** Match optimization investment to current cost structure.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] The four-component cost structure evolves with scale. Early-stage:
 iteration-dominated (optimize velocity). Production: inference-dominated
 (optimize efficiency). Walk through the equation and the shift.
-Ask: ``Which cost component dominates at your organization?''}
+Ask: ``Which cost component dominates at your organization?''
+```
 
-$$ = C_{{train}} + C_{{infer}} + C_{{data}} + C_{{iter}}$$
-
-{0.15cm}
-{
-{}{1.2}
-{tabular}{@{}lll@{}}
-  
-  **Component** & **Early Stage** & **Production Scale** \\
-  
-  $C_{{train}}$  & Dominant (experimentation)     & Fixed (scheduled retraining) \\
-  $C_{{infer}}$  & Negligible (few users)         & {errorstroke}{**Dominant**} (70--80% of TCO) \\
-  $C_{{data}}$   & Small (curated datasets)       & Growing (storage + pipelines) \\
-  $C_{{iter}}$   & {routingstroke}{**Dominant**} (engineer time)  & Reduced by automation \\
-  
-{tabular}
-}
-
-{0.15cm}
-{Strategy:}{Match optimization investment to current cost structure.}
+</details>
 
 ## Quantifying ML Technical Debt
 
-{
+[Original slide 30](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L1186)
+
+**ML Technical Debt Categories** (Sculley et al., NeurIPS 2015):
+
+| **Debt Category** | **Symptom** | **Metric** | **Annual Cost** |
+| --- | --- | --- | --- |
+| **Configuration** | 3–5$\times$ more config than model code | Config LOC ratio | Eng. velocity |
+| **Data** | Unstable input features break silently | Feature staleness | Data quality |
+| **Pipeline** | Glue code nobody owns | Ownership gaps | Incident rate |
+| **Monitoring** | 15 incidents $\times$ &#36;50K each | MTTR, false alerts | **&#36;750K/yr** |
+
+**Debt audit metrics:** Deployment velocity (deploys/week), toil ratio (manual/total hrs), incident rate. Teams with unmanaged debt: **70–80% capacity on maintenance**.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The TCO framework showed cost structure. Technical debt is the hidden cost
 that erodes deployment velocity --- Sculley et al.\ called it ``the high-interest
@@ -1051,13 +1200,13 @@ code than model code. Data debt: unstable input features that break silently.
 Pipeline debt: glue code connecting systems nobody owns. Monitoring debt:
 \$750K/yr from 15 incidents at \$50K each.'' Point to the audit framework:
 ``Measure deployment velocity (deploys/week), toil ratio (manual/total hours),
-and incident rate. Teams with high debt see 70--80% capacity consumed by
+and incident rate. Teams with high debt see 70--80\% capacity consumed by
 maintenance.''
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
 Ask: ``What fraction of your team's time goes to maintaining existing models
-vs.\ building new ones?'' Give 10 seconds. [Expected: most say 50%+. The
-surprise is that 70--80% is common at mature organizations without debt management.]
+vs.\ building new ones?'' Give 10 seconds. [Expected: most say 50\%+. The
+surprise is that 70--80\% is common at mature organizations without debt management.]
 
 % -- WARN: What students will get wrong on THIS topic
 Common error: students think technical debt is inevitable and should wait.
@@ -1067,34 +1216,48 @@ Early investment in debt reduction has superlinear ROI.
 % -- FLEX: [CORE] + contingency
 [CORE] Technical debt quantification is a key learning objective.
 IF AHEAD: Ask ``Which debt category would you audit first?''
-IF SHORT: Show the table and state the 70--80% maintenance number.
-}
+IF SHORT: Show the table and state the 70--80\% maintenance number.
+```
 
-**ML Technical Debt Categories** (Sculley et al., NeurIPS 2015):
-
-{0.1cm}
-{}{1.1}
-{
-{tabular}{@{}lllr@{}}
-  
-  **Debt Category** & **Symptom** & **Metric** & **Annual Cost** \\
-  
-  **Configuration** & 3--5$×$ more config than model code & Config LOC ratio & Eng.\ velocity \\
-  **Data**          & Unstable input features break silently  & Feature staleness & Data quality \\
-  **Pipeline**      & Glue code nobody owns                  & Ownership gaps    & Incident rate \\
-  **Monitoring**    & 15 incidents $×$ \$50K each        & MTTR, false alerts & **\$750K/yr** \\
-  
-{tabular}
-}
-
-{0.1cm}
-{mlsyscard}{errorstroke}
-{ **Debt audit metrics:** Deployment velocity (deploys/week), toil ratio (manual/total hrs), incident rate. Teams with unmanaged debt: **70--80% capacity on maintenance**.}
-{mlsyscard}
+</details>
 
 ## Your Turn: Design an Alert System
 
-{
+[Original slide 31](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L1244)
+
+Design the Alert Thresholds
+
+**Portfolio**: 200 models, 8 metrics each.
+
+**Check interval**: 5 minutes (288/day).
+
+**Calculate daily false alerts at:**
+
+1. 3-sigma (FPR = 0.003)
+2. 4-sigma (FPR = 0.0001)
+
+(90 seconds — then compare with a neighbor)
+
+**Solution:**
+
+Checks/day: $200 \times 8 \times 288$
+
+= 460,800 checks
+
+3-sigma: $460{,}800 \times 0.003$
+
+= **1,382 false alerts/day**
+
+4-sigma: $460{,}800 \times 0.0001$
+
+= **46 false alerts/day**
+
+30$\times$ reduction!
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Alert fatigue showed 14,400 false alerts/day at 2-sigma. This exercise asks
 students to calculate false alert rates at different thresholds for a real
@@ -1117,222 +1280,243 @@ can use 4-sigma with investigation-only routing.
 % -- FLEX: [CORE] + contingency
 [CORE] Quantitative exercise for the monitoring section.
 IF SHORT: Reduce to 60 seconds; show the 3-sigma answer only.
-}
+```
 
-[T]
-  
-    { Design the Alert Thresholds}
-
-    {0.15cm}
-    **Portfolio**: 200 models, 8 metrics each.\\
-    **Check interval**: 5 minutes (288/day).
-
-    {0.1cm}
-    **Calculate daily false alerts at:**
-- 3-sigma (FPR = 0.003)
-- 4-sigma (FPR = 0.0001)
-    
-
-    {{midgray}{(90 seconds --- then compare with a neighbor)}}
-  
-  
-    
-    {mlsyscard}{computestroke}
-    **Solution:**\\[0.1cm]
-    {
-    Checks/day: $200 × 8 × 288$\\
-    = 460,800 checks\\[0.1cm]
-    3-sigma: $460{,}800 × 0.003$\\
-    = {errorstroke}{**1,382 false alerts/day**}\\[0.1cm]
-    4-sigma: $460{,}800 × 0.0001$\\
-    = {datastroke}{**46 false alerts/day**}\\[0.1cm]
-    30$×$ reduction!
-    }
-    {mlsyscard}
+</details>
 
 ## Fallacies
 
-{[2 min] Four common misconceptions with quantitative evidence.}
+[Original slide 32](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L1311)
 
-**Fallacy:** *Operational complexity grows linearly with model count.*\\
-100 models $×$ 10 metrics at 5% FPR $$ 14,400 false alerts/day. Dependencies grow as $O(N^2)$.
+**Fallacy:** *Operational complexity grows linearly with model count.*
 
-{0.08cm}
-**Fallacy:** *Platform investment only makes sense after 100+ models.*\\
-A \$2M platform breaks even at $$20 models. By 100, migration cost is 3--5$×$ the initial build.
+100 models $\times$ 10 metrics at 5% FPR $\to$ 14,400 false alerts/day. Dependencies grow as $O(N^2)$.
 
-{0.08cm}
-**Fallacy:** *Monitoring training metrics provides sufficient observability.*\\
-20 ms upstream slowdown $$ 30% latency degradation across 10--50 downstream models.
+**Fallacy:** *Platform investment only makes sense after 100+ models.*
 
-{0.08cm}
-**Fallacy:** *Technical debt is inevitable and should wait.*\\
-Monitoring debt: \$750K/yr (15 incidents $×$ \$50K). Teams see 70--80% capacity on maintenance.
+A &#36;2M platform breaks even at $\sim$20 models. By 100, migration cost is 3–5$\times$ the initial build.
+
+**Fallacy:** *Monitoring training metrics provides sufficient observability.*
+
+20 ms upstream slowdown $\to$ 30% latency degradation across 10–50 downstream models.
+
+**Fallacy:** *Technical debt is inevitable and should wait.*
+
+Monitoring debt: &#36;750K/yr (15 incidents $\times$ &#36;50K). Teams see 70–80% capacity on maintenance.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Four common misconceptions with quantitative evidence.
+```
+
+</details>
 
 ## Pitfalls
 
-{[2 min] Three operational pitfalls. If short: cover just the first two.}
+[Original slide 33](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L1332)
 
-**Pitfall:** *Applying independent alerting to every model and metric.*\\
-With $N=1000$ independent tests at $=0.05$: $P({false alert}) = 1 - 0.95^{1000}  1.0$. Operators ignore the noise; genuine incidents vanish. Use **hierarchical monitoring**.
+**Pitfall:** *Applying independent alerting to every model and metric.*
 
-{0.15cm}
-**Pitfall:** *Treating all deployments with uniform rollout procedures.*\\
+With $N=1000$ independent tests at $\alpha=0.05$: $P(\text{false alert}) = 1 - 0.95^{1000} \approx 1.0$. Operators ignore the noise; genuine incidents vanish. Use **hierarchical monitoring**.
+
+**Pitfall:** *Treating all deployments with uniform rollout procedures.*
+
 Fraud detection needs hourly updates with seconds-fast rollback. LLMs need multi-day shadow testing. **Risk-based policies** must match model type.
 
-{0.15cm}
-**Pitfall:** *Defaulting to batch feature computation for all features.*\\
-Daily batch yields $L_{{freshness}}  12$--24 hrs; streaming achieves 1--5 seconds. For recommendations, streaming yields **10--20% engagement lift**; for fraud, batch gives adversaries a 24-hour window.
+**Pitfall:** *Defaulting to batch feature computation for all features.*
+
+Daily batch yields $L_{\text{freshness}} \approx 12$–24 hrs; streaming achieves 1–5 seconds. For recommendations, streaming yields **10–20% engagement lift**; for fraud, batch gives adversaries a 24-hour window.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Three operational pitfalls. If short: cover just the first two.
+```
+
+</details>
 
 ## Muddiest Point
 
-{[2 min] Quick anonymous poll. Students write on a slip of paper or submit
+[Original slide 34](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L1352)
+
+What was the **muddiest point** today?
+
+Write down the concept you found **most confusing**.
+
+Anonymous. One sentence. Submit before you leave.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Quick anonymous poll. Students write on a slip of paper or submit
 digitally. Collect and scan for patterns. Address the top 2--3 confusions in the
-next lecture's opening. This closes the feedback loop.}
+next lecture's opening. This closes the feedback loop.
+```
 
-{1.0cm}
-{ What was the **muddiest point** today?}
-
-{0.8cm}
-{ Write down the concept you found **most confusing**.}
-
-{0.5cm}
-{{midgray}{Anonymous. One sentence. Submit before you leave.}}
+</details>
 
 ## What Were the Key Ideas?
 
-{[2 min] Retrieval practice. Students write 90 seconds, no notes.
-Do NOT show next slide yet. Walk around the room.}
+[Original slide 35](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L1369)
 
-{1.5cm}
-{ Close your notes.}
+Close your notes.
 
-{0.8cm}
-{ Write down the **4 most important concepts** from today.}
+Write down the **4 most important concepts** from today.
 
-{0.8cm}
-{{midgray}{90 seconds --- no peeking.}}
+90 seconds — no peeking.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Retrieval practice. Students write 90 seconds, no notes.
+Do NOT show next slide yet. Walk around the room.
+```
+
+</details>
 
 ## Key Takeaways
 
-{[2 min] Reveal. Walk through each bullet. Emphasize quantitative
-anchors: 56% savings, 14,400 alerts, 20$×$ risk reduction,
-\$1.08M daily loss.}
+[Original slide 36](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L1385)
 
-{0pt}
-- **Platform ROI is superlinear**: Break-even at 20--50 models. 50 models saves 56% (\$2M/yr).
-- **Dependencies grow as $O(N^2)$**: Per-model practices collapse at $$50 models.
+- **Platform ROI is superlinear**: Break-even at 20–50 models. 50 models saves 56% (&#36;2M/yr).
+- **Dependencies grow as $O(N^2)$**: Per-model practices collapse at $\sim$50 models.
 - **Risk profile determines cadence**: LLMs: months. Fraud: hours. One-size CI/CD fails.
-- **Alert fatigue is mathematical**: 100 models $×$ 10 metrics $$ 14,400 false alerts/day. Use hierarchical monitoring.
-- **Staged rollouts reduce risk 20$×$**: 5% canary limits blast radius.
-- **Feature stores enforce the invariant** $f_{{train}}(x)  f_{{serve}}(x)$: dual offline/online architecture prevents training-serving skew at platform scale.
-- **Edge fleet demands HIL CI/CD**: Up to 50 concurrent model versions; accuracy gates alone are insufficient --- validate on physical NPU/DSP before promotion.
+- **Alert fatigue is mathematical**: 100 models $\times$ 10 metrics $\to$ 14,400 false alerts/day. Use hierarchical monitoring.
+- **Staged rollouts reduce risk 20$\times$**: 5% canary limits blast radius.
+- **Feature stores enforce the invariant** $f_{\text{train}}(x) \equiv f_{\text{serve}}(x)$: dual offline/online architecture prevents training-serving skew at platform scale.
+- **Edge fleet demands HIL CI/CD**: Up to 50 concurrent model versions; accuracy gates alone are insufficient — validate on physical NPU/DSP before promotion.
 - **TCO shifts with scale**: Early = iteration-dominated; production = inference-dominated.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Reveal. Walk through each bullet. Emphasize quantitative
+anchors: 56\% savings, 14,400 alerts, 20$\times$ risk reduction,
+\$1.08M daily loss.
+```
+
+</details>
 
 ## References
 
-{[1 min] Point students to canonical papers.}
+[Original slide 37](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L1404)
 
-{Sculley+15}{Sculley et al. ``Hidden Technical Debt in ML Systems.'' NeurIPS 2015.}
-{Covington+16}{Covington et al. ``Deep Neural Networks for YouTube Recommendations.'' RecSys 2016.}
-{Chapelle+12}{Chapelle et al. ``Large-Scale Validation and Analysis of Interleaved Search Evaluation.'' TOIS 2012.}
-{Kohavi+09}{Kohavi et al. ``Controlled Experiments on the Web.'' KDD 2009.}
-{Hardt+16}{Hardt et al. ``Equality of Opportunity in Supervised Learning.'' NeurIPS 2016.}
-{Paleyes+22}{Paleyes et al. ``Challenges in Deploying ML.'' ACM Comp.\ Surveys, 2022.}
+**Sculley+15** Sculley et al. “Hidden Technical Debt in ML Systems.” NeurIPS 2015.
+
+**Covington+16** Covington et al. “Deep Neural Networks for YouTube Recommendations.” RecSys 2016.
+
+**Chapelle+12** Chapelle et al. “Large-Scale Validation and Analysis of Interleaved Search Evaluation.” TOIS 2012.
+
+**Kohavi+09** Kohavi et al. “Controlled Experiments on the Web.” KDD 2009.
+
+**Hardt+16** Hardt et al. “Equality of Opportunity in Supervised Learning.” NeurIPS 2016.
+
+**Paleyes+22** Paleyes et al. “Challenges in Deploying ML.” ACM Comp. Surveys, 2022.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[1 min] Point students to canonical papers.
+```
+
+</details>
 
 ## Next Lecture: Security and Privacy
 
-{[1 min] Forward hook. A globally distributed fleet that autonomously
+[Original slide 38](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L1417)
+
+A fleet that is globally distributed
+
+and autonomously adapting presents an
+
+**expansive attack surface.**
+
+Data Poisoning
+
+Corrupt training data
+
+Model Extraction
+
+Steal model via API
+
+Differential Privacy
+
+Protect training data
+
+**How do we defend the fleet?**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[1 min] Forward hook. A globally distributed fleet that autonomously
 adapts presents an expansive attack surface. Data poisoning, model extraction,
-and differential privacy are the next challenges.}
+and differential privacy are the next challenges.
+```
 
-{0.8cm}
-{ A fleet that is globally distributed\\
-and autonomously adapting presents an\\
-**expansive attack surface.**}
-
-{0.6cm}
-[c]
-  
-    
-    {mlsyscard}{errorstroke}
-    { Data Poisoning}\\[0.1cm]
-    { Corrupt training data}
-    {mlsyscard}
-  
-  
-    
-    {mlsyscard}{computestroke}
-    { Model Extraction}\\[0.1cm]
-    { Steal model via API}
-    {mlsyscard}
-  
-  
-    
-    {mlsyscard}{datastroke}
-    { Differential Privacy}\\[0.1cm]
-    { Protect training data}
-    {mlsyscard}
-  
-
-{0.4cm}
-{**How do we defend the fleet?**}
+</details>
 
 ## Backup: Platform ROI Sensitivity Analysis
 
-{
+[Original slide 39](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L1462)
+
+**Platform break-even varies with engineer cost and model count:**
+
+| **Engineer Cost** | **10 Models** | **30 Models** | **50 Models** |
+| --- | --- | --- | --- |
+| &#36;100/hr | ROI: 0.5$\times$ | ROI: 1.4$\times$ | ROI: 2.3$\times$ |
+| &#36;150/hr | ROI: 0.7$\times$ | ROI: **2.1$\times$** | ROI: **3.4$\times$** |
+| &#36;200/hr | ROI: 1.0$\times$ | ROI: 2.8$\times$ | ROI: 4.5$\times$ |
+
+At &#36;150/hr engineer cost, break-even is $\sim$15 models. The threshold is lower than most teams expect because shared infrastructure amortizes across all models simultaneously.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 Backup. Shows how ROI changes with engineer cost and model count. Use when
 students ask ``what if our engineers cost less?'' or ``we only have 15 models.''
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Only show if students question the 20--50 model break-even.
-}
+```
 
-**Platform break-even varies with engineer cost and model count:**
-
-{0.15cm}
-{}{1.15}
-{tabular}{@{}lrrr@{}}
-  
-  **Engineer Cost** & **10 Models** & **30 Models** & **50 Models** \\
-  
-  \$100/hr & ROI: 0.5$×$ & ROI: 1.4$×$ & ROI: 2.3$×$ \\
-  \$150/hr & ROI: 0.7$×$ & ROI: **2.1$×$** & ROI: **3.4$×$** \\
-  \$200/hr & ROI: 1.0$×$ & ROI: 2.8$×$ & ROI: 4.5$×$ \\
-  
-{tabular}
-
-{0.15cm}
-{mlsyscard}{crimson}
-{ At \$150/hr engineer cost, break-even is $$15 models. The threshold is lower than most teams expect because shared infrastructure amortizes across all models simultaneously.}
-{mlsyscard}
+</details>
 
 ## Backup: Monitoring Tier Design Patterns
 
-{
+[Original slide 40](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/12_ops_scale/12_ops_scale.tex#L1494)
+
+| **Tier** | **Metrics** | **Alert Target** | **Threshold** |
+| --- | --- | --- | --- |
+| **L1 Business** | Revenue, engagement | Executive + on-call | 4-sigma |
+| **L2 Portfolio** | Domain-level aggregation | Domain lead | 3.5-sigma |
+| **L3 Model** | Per-model accuracy, drift | Investigation only | 3-sigma |
+| **L4 Infra** | GPU util, feature store | Platform team | 3-sigma |
+
+**Key pattern:** L1/L2 alert humans. L3/L4 feed dashboards for investigation *after* higher-tier alerts fire. This prevents the 14,400 false alerts/day problem.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 Backup. Detailed monitoring tier configuration for production deployments.
 Use when students ask how to implement hierarchical monitoring.
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Implementation detail for students building monitoring systems.
-}
+```
 
-{}{1.15}
-{tabular}{@{}lllr@{}}
-  
-  **Tier** & **Metrics** & **Alert Target** & **Threshold** \\
-  
-  **L1 Business**    & Revenue, engagement      & Executive + on-call & 4-sigma \\
-  **L2 Portfolio**   & Domain-level aggregation  & Domain lead         & 3.5-sigma \\
-  **L3 Model**       & Per-model accuracy, drift & Investigation only  & 3-sigma \\
-  **L4 Infra**       & GPU util, feature store   & Platform team       & 3-sigma \\
-  
-{tabular}
-
-{0.15cm}
-**Key pattern:** L1/L2 alert humans. L3/L4 feed dashboards for investigation *after* higher-tier alerts fire. This prevents the 14,400 false alerts/day problem.
+</details>
 
 ## Complete original Beamer source
 

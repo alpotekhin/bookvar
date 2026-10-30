@@ -1,8 +1,12 @@
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import { resolve } from "node:path";
 import process from "node:process";
+import matter from "gray-matter";
+import { parse } from "yaml";
 
 const root = resolve(import.meta.dirname, "../..");
+const publishedSources = new Set(parse(readFileSync(resolve(root, "publishing/navigation.yml"), "utf8"))
+  .sections.flatMap(section => section.pages.map(page => page.source)));
 
 const matrices = [
   {
@@ -55,7 +59,19 @@ for (const matrix of matrices) {
       continue;
     }
 
-    const content = readFileSync(destinationPath, "utf8");
+    let content = readFileSync(destinationPath, "utf8");
+    const metadata = matter(content).data;
+    if (metadata.canonical_topic) {
+      if (metadata.status !== "redirect" || !publishedSources.has(metadata.canonical_topic)) {
+        failures.push(`${matrix.file}: invalid canonical topic: ${destination}`);
+        continue;
+      }
+      content = readFileSync(resolve(root, metadata.canonical_topic), "utf8");
+      if (matter(content).data.status === "redirect") {
+        failures.push(`${matrix.file}: canonical topic alias chain: ${destination}`);
+        continue;
+      }
+    }
     if (!matrix.sourceMarkers.some((marker) => content.includes(marker))) {
       failures.push(
         `${matrix.file}: destination has no direct source marker: ${destination}`,

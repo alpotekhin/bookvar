@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-30",
+  "scope": "After full RU and EN chapter reads, replace the obsolete synthetic-data prerequisite with the next-token objective in both frontmatters. Pin the English edition to the updated canonical revision and record the parity review. The entire explanatory bodies, code, mathematics, figures, source excerpts and next/previous reading links remain byte-identical.",
+  "files": [
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-25",
+          "new": "last_updated: 2026-10-30"
+        },
+        {
+          "old": "  - \"[[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы]]\"",
+          "new": "  - \"[[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/42 Next-token prediction|Целевая функция предобучения]]\""
+        }
+      ],
+      "before_sha256": "cb53484debaf97e673ff30e804afc4d9941b94e6d87eebc8cae78bdda05685a0",
+      "after_sha256": "c10fe3a763d44cf1f0e8d2e4103bcba7adae026fc7cf910e673515aaa51ab486"
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/54 Decoding and next-token selection.md",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-25",
+          "new": "last_updated: 2026-10-30"
+        },
+        {
+          "old": "  - \"[[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы]]\"",
+          "new": "  - \"[[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/42 Next-token prediction|Next-token objective]]\""
+        },
+        {
+          "old": "canonical_revision: \"cb53484debaf97e673ff30e804afc4d9941b94e6d87eebc8cae78bdda05685a0\"",
+          "new": "canonical_revision: \"c10fe3a763d44cf1f0e8d2e4103bcba7adae026fc7cf910e673515aaa51ab486\""
+        },
+        {
+          "old": "translation_reviewed: \"2026-10-29\"",
+          "new": "translation_reviewed: \"2026-10-30\""
+        }
+      ],
+      "before_sha256": "7b280782736d3f81e8d1eb6b31cc87a4541ca0e01df911efd25ea5f8779aab42",
+      "after_sha256": "0d7c5da19a434e037bcff27aff1721f1857573666788f23755197cd55eb02c80"
+    }
+  ]
+}

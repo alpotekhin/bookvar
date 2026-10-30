@@ -1,0 +1,77 @@
+{
+  "date": "2026-10-29",
+  "scope": "Exact additions of one masked-diffusion chapter to indexes and navigation; no pre-existing chapter prose modified.",
+  "files": [
+    {
+      "source": "00 Учебник/_index.md",
+      "changes": [
+        {
+          "old": "Нужны нейронные сети, аугментации и self-attention. SimCLR и MoCo учат представления через сравнение примеров, MAE — через восстановление скрытых патчей.",
+          "new": "Нужны нейронные сети, аугментации и self-attention. SimCLR и MoCo учат представления через сравнение примеров, MAE — через восстановление скрытых патчей. MDLM и LLaDA используют маскирование для обучения генеративной модели текста."
+        },
+        {
+          "old": "",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA|Диффузионные языковые модели: MDLM и LLaDA]]\n"
+        }
+      ],
+      "after_sha256": "db08c24b15c0ba7919d84e672d302858d66fe91db6b245129accb58822298b4f",
+      "before_sha256": "77c731156c8e87c5183cf3ac34232e60de047d08e222b14c92b9b7345fa76dfb"
+    },
+    {
+      "source": "en/00 Textbook/_index.md",
+      "changes": [
+        {
+          "old": "Prerequisites: neural networks, data augmentation, and self-attention. SimCLR and MoCo learn representations by contrasting examples; MAE learns by reconstructing masked patches.",
+          "new": "Prerequisites: neural networks, data augmentation, and self-attention. SimCLR and MoCo learn representations by contrasting examples; MAE learns by reconstructing masked patches. MDLM and LLaDA use masking to train a generative model of text."
+        },
+        {
+          "old": "",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA|Masked diffusion: MDLM and LLaDA]]\n"
+        },
+        {
+          "old": "canonical_revision: \"77c731156c8e87c5183cf3ac34232e60de047d08e222b14c92b9b7345fa76dfb\"",
+          "new": "canonical_revision: \"db08c24b15c0ba7919d84e672d302858d66fe91db6b245129accb58822298b4f\""
+        }
+      ],
+      "after_sha256": "c3b7904395699edcf2f217cfc6ca3e5d78c4a0c5407013cafaacea6083c6cdf2",
+      "before_sha256": "5c06b0a02d3de8f2ca0f936328a527bc4111b999531c335baba56ff0f7f1e048"
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "changes": [
+        {
+          "old": "",
+          "new": "      - source: 00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA.md\n        route: textbook/pretraining/masked-diffusion-language-models\n"
+        },
+        {
+          "old": "",
+          "new": "              - label: \"Диффузионные языковые модели: MDLM и LLaDA\"\n                label_en: \"Masked diffusion: MDLM and LLaDA\"\n                route: textbook/pretraining/masked-diffusion-language-models\n"
+        }
+      ],
+      "after_sha256": "7f2f82a8a5dfd1946b2ceca86cee28f20f837aa0630dad8dea9ef41005f1ee72",
+      "before_sha256": "2bae2aacac9ccbae3edcd188a10604ec13793be0f1621168e99f34536565d2cb"
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "changes": [
+        {
+          "old": "",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA|Masked diffusion — MDLM, LLaDA and block generation]]\n"
+        }
+      ],
+      "after_sha256": "9df3a1d877ea29904fa895dc390b2a8d818c82c74990f3585ed7c7e83ccab03f",
+      "before_sha256": "b07f987e1e59e8472c9d186c7749dcf5ed0de997da06d1321d8c2cac354b753f"
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "changes": [
+        {
+          "old": "",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA|Masked diffusion: MDLM and LLaDA]]\n"
+        }
+      ],
+      "after_sha256": "ca74126ae806ea03f1b52a13bdb44570b7c41437a76629a8d5d3300d36960a79",
+      "before_sha256": "9a55087492559bba61db8923f304a2b3d6979e057a3c8d837ac7b8e6238cc729"
+    }
+  ]
+}

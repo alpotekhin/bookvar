@@ -1,0 +1,31 @@
+[
+  {
+    "id": "curated-harvard-tensor-factorization-01e77b9b1e4e",
+    "asset": "00 Учебник/Assets/Figures/curated/tensor-factorization-2026-10-29/harvard-cp.svg",
+    "sha256": "01e77b9b1e4e3fb5a041dbfdae5822a4af04864548a6db1c75991187c91093c1",
+    "author": "Vijay Janapa Reddi and Harvard ML Systems contributors",
+    "source_url": "https://mlsysbook.ai/vol1/model_compression/model_compression.html#fig-tensor-decomposition",
+    "source_page_snapshot": "05 Источники/Originals/model-compression-2026-10-19/harvard-model-compression.qmd",
+    "source_page_sha256": "7c24e39e4b6a33f0ac578ebfbeb4d10a0f976bf3a15fac155fc1f45104798084",
+    "source_member": "fig-tensor-decomposition",
+    "license": "CC BY-NC-SA 4.0",
+    "license_evidence": "05 Источники/Originals/model-compression-2026-10-19/harvard-LICENSE.md",
+    "license_evidence_sha256": "b6f4689d6fccf48d82d0871a3b994a122427fcb0b278971f6ba008be44e2c926",
+    "license_url": "https://github.com/harvard-edge/cs249r_book/blob/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/LICENSE.md",
+    "derivation": "source-svg-copy",
+    "modifications": "None. Complete archived course SVG; K/T source inconsistency explained in caption.",
+    "rights_status": "source-license-verified",
+    "provenance_confirmation": "source-license-verified",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md"
+    ],
+    "dimensions_px": [
+      295.80533,
+      173.81467
+    ],
+    "source_asset": "Assets/Sources/Harvard ML Systems/vol1/model_compression/46faaa58f69df0c176f0fcdc34f06a318aadafb2.svg",
+    "source_asset_sha256": "01e77b9b1e4e3fb5a041dbfdae5822a4af04864548a6db1c75991187c91093c1"
+  }
+]

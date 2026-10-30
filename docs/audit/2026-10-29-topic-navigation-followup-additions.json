@@ -1,0 +1,15 @@
+{
+  "files": [
+    {
+      "source": "00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация.md",
+      "before_sha256": "c77a62281611a651c965c3cdd4640e5893bb1867ef47340cad336aea2ac84e14",
+      "after_sha256": "ddcb9f7feab72f812c048739963969aa7631ab92779c409a80062805d97f4c42",
+      "changes": [
+        {
+          "old": "← [[02 Areas/ML & DL/00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment|Edge и federated deployment]]",
+          "new": "← [[00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем|Устойчивость ML-систем]]"
+        }
+      ]
+    }
+  ]
+}

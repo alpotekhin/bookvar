@@ -1,0 +1,170 @@
+{
+  "date": "2026-10-29",
+  "scope": "One new English-language canonical chapter and exact navigation/index additions; local build, no commit, push or public deployment.",
+  "chapter": {
+    "source": "00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA.md",
+    "sha256": "f8877b751c12f83d4fbe6b8b281f3bc65045125e03244907ceab1e2c14672569",
+    "fullRead": true,
+    "noAiSlopReview": "Final full chapter read; concrete trajectory, causal derivations, numerical examples, terminology and source-specific limitations retained. Checklist is editorial guidance, not an authorship detector."
+  },
+  "counts": {
+    "subjectChapters": 151,
+    "textbookPagesIncludingIndexAndGuide": 153,
+    "separateEnglishCounterparts": 29,
+    "addedFigures": 4,
+    "pythonBlocks": 4
+  },
+  "checks": [
+    {
+      "log": "docs/audit/evidence/2026-10-29-masked-diffusion/publisher-unit.log",
+      "sha256": "5152164a8ae528c7793ecfc59d3ca328ce6cb31794036e1d14e8ad4a6ed6645e",
+      "status": "pass",
+      "result": "120 files, 776 tests"
+    },
+    {
+      "log": "docs/audit/evidence/2026-10-29-masked-diffusion/root-build.log",
+      "sha256": "0b9e3f9f80240c916b2836a66babef6b9013f41a80cbee0e3f15cfcb5aa28cea",
+      "status": "pass",
+      "result": "2003 pages"
+    },
+    {
+      "log": "docs/audit/evidence/2026-10-29-masked-diffusion/output-tests.log",
+      "sha256": "1122488c0eac108cb4da2f4b5b0fd326e8bed83fc5299ffbca7d3cb64db2c86b",
+      "status": "pass",
+      "result": "166 tests"
+    },
+    {
+      "log": "docs/audit/evidence/2026-10-29-masked-diffusion/final-targeted.log",
+      "sha256": "786e87133509958fe87ad7361627047f36dd91b9546c2fff3235015820c1317b",
+      "status": "pass",
+      "result": "17 tests after final mobile equation formatting"
+    },
+    {
+      "log": "docs/audit/evidence/2026-10-29-masked-diffusion/root-links.log",
+      "sha256": "f65af58172a1b10a58f8cb0c2d32dcf65f41b5e1100e42172d24765f77696a26",
+      "status": "pass",
+      "result": "0 broken internal links"
+    },
+    {
+      "log": "docs/audit/evidence/2026-10-29-masked-diffusion/topics.log",
+      "sha256": "8378e85d9928265591068deb75f9e397fe0c1485445c727571ff9224018c8d3e",
+      "status": "pass",
+      "result": "151 canonical subject chapters"
+    },
+    {
+      "log": "docs/audit/evidence/2026-10-29-masked-diffusion/course-ingestion.log",
+      "sha256": "f0dc3945cbbcb179104a96bdff0aa186763f03d30fe494e99195cd6dcc225d46",
+      "status": "pass",
+      "result": "CS336 and Berkeley ledgers valid"
+    },
+    {
+      "log": "docs/audit/evidence/2026-10-29-masked-diffusion/astro-types.log",
+      "sha256": "09f079853ac98da35d22ef7528528cf57e1b13d83c37ed3fba5ebff8a00d824f",
+      "status": "pass",
+      "result": "0 errors, 0 warnings, 5 hints"
+    }
+  ],
+  "followupScope": "The complete unit suite passed. After the final mobile notation-only changes, the chapter/index/English-reconciliation tests (17), CPU example receipt, output tests and built links were rerun on the final source. Unchanged site component test results remain in the preceding publication report and are not claimed rerun.",
+  "browser": {
+    "report": "docs/audit/2026-10-29-masked-diffusion-browser.json",
+    "routeViewportChecks": 16,
+    "pageOverflow": 0,
+    "mathErrors": 0,
+    "overflowingDisplayMath": 0,
+    "unloadedFigures": 0
+  },
+  "figures": [
+    {
+      "path": "00 Учебник/Assets/Figures/curated/masked-diffusion-2026-10-29/mdlm-overview.png",
+      "sha256": "40d0120cb7151f73e80890f3a2a0fa8128cc976b92d17aa45c07b63d4a871bda",
+      "matchesTrackedOriginal": true,
+      "license": "CC BY 4.0"
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/masked-diffusion-2026-10-29/block-diffusion-overview.svg",
+      "sha256": "01e1c42d288e5f9b9a2b4ee0ca119c989c0d966b1a4ff7a046e7d14c38d6dcf2",
+      "matchesTrackedOriginal": true,
+      "license": "CC BY 4.0"
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/masked-diffusion-2026-10-29/remasking-overview.svg",
+      "sha256": "6d87b746c6be7d004e76e342077a9a8a1a7ce45d765c580cea5cf899b7632b2c",
+      "matchesTrackedOriginal": true,
+      "license": "CC BY 4.0"
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/masked-diffusion-2026-10-29/remasking-loop.svg",
+      "sha256": "0ad3f6783bbd55e3bf1f8b0f70c3c50928d4d22b4be042ec77e5334ea0428a6f",
+      "matchesTrackedOriginal": true,
+      "license": "CC BY 4.0"
+    }
+  ],
+  "files": [
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA.md",
+      "sha256": "f8877b751c12f83d4fbe6b8b281f3bc65045125e03244907ceab1e2c14672569"
+    },
+    {
+      "path": "publishing/navigation.yml",
+      "sha256": "7f2f82a8a5dfd1946b2ceca86cee28f20f837aa0630dad8dea9ef41005f1ee72"
+    },
+    {
+      "path": "00 Учебник/_index.md",
+      "sha256": "db08c24b15c0ba7919d84e672d302858d66fe91db6b245129accb58822298b4f"
+    },
+    {
+      "path": "en/00 Textbook/_index.md",
+      "sha256": "c3b7904395699edcf2f217cfc6ca3e5d78c4a0c5407013cafaacea6083c6cdf2"
+    },
+    {
+      "path": "01 Справочник/_index.md",
+      "sha256": "9df3a1d877ea29904fa895dc390b2a8d818c82c74990f3585ed7c7e83ccab03f"
+    },
+    {
+      "path": "en/01 Reference/_index.md",
+      "sha256": "ca74126ae806ea03f1b52a13bdb44570b7c41437a76629a8d5d3300d36960a79"
+    },
+    {
+      "path": "05 Источники/asset-registry.yml",
+      "sha256": "34d8ad69fe13700ffc2164c81a077e3c0799a521821c500f5646eb165e98eb7e"
+    },
+    {
+      "path": "05 Источники/Courses/Stanford CS336 Spring 2026/coverage.yml",
+      "sha256": "6583d79b0bebed66f4d999b9df3a9a395b43bbdb3073b98f63840f95544d6a4a"
+    },
+    {
+      "path": "publishing/tools/check_masked_diffusion_examples.py",
+      "sha256": "873db26efc535bc345dc8d637146797e25ddbd513d6ee9b7bc7db42bb161c21b"
+    },
+    {
+      "path": "publishing/tests/masked-diffusion.test.ts",
+      "sha256": "5ef74419a76d55dc921a4401348ffb5dc2494995c98ceaaf31cc224cfd262bf9"
+    },
+    {
+      "path": "publishing/tests/site-output.test.ts",
+      "sha256": "9a55b706ddf274bf58ce1a3a91e2d525360718d9398d0c650828ef2f3d4654ac"
+    },
+    {
+      "path": "docs/audit/2026-10-29-masked-diffusion.md",
+      "sha256": "f1670aed87aa36b8050eeee36b6ba8b649fb069563112162b98b15b74d607317"
+    },
+    {
+      "path": "docs/audit/2026-10-29-masked-diffusion-examples.json",
+      "sha256": "cd86254772378178cd89888f81c9b18ca252aa34bad957533aa14d6018958202"
+    },
+    {
+      "path": "docs/audit/2026-10-29-masked-diffusion-browser.json",
+      "sha256": "562edfb2570fc9d473277c2eaaad16dea53245acba36d338b4b277fde5e0c801"
+    },
+    {
+      "path": "docs/audit/2026-10-29-masked-diffusion-additions.json",
+      "sha256": "529a3f465be4359095b128a25f1364ae529e7877dd9c8698d873f58823f0489f"
+    }
+  ],
+  "limits": [
+    "No new whole-book or whole-Berkeley source reread.",
+    "No neural training, language-quality evaluation or GPU benchmark.",
+    "EN shares the canonical English body; existing generic fallback notice remains.",
+    "No new /bookvar-base-path build or public deployment."
+  ]
+}

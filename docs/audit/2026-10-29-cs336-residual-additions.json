@@ -1,0 +1,30 @@
+{
+  "reviewed_at": "2026-10-29",
+  "scope": "Three complete chapters read; five bounded additions plus three exact DeepSeek metadata/summary changes. This ledger does not waive current-content or render checks.",
+  "files": [
+    {
+      "source": "02 Атлас моделей/Семейства/DeepSeek.md",
+      "before_sha256": "95202a2689db71dc698769dae63abe6028781ca5ae105df3ab5adcda7d910261",
+      "after_sha256": "38e826d52ccdd0211258915018b19f32d9d2a2b1abd5fe9dabeb0c462a8e459c",
+      "blocks": [{"scope": "CS336 V4 attention", "sha256": "73f4da57b018f9983545a217b468c71c3174670fc8be4f69c2c2bbb00e82ccbd"}]
+    },
+    {
+      "source": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "before_sha256": "0d8ef23274a1bb810bcda99140d872759cc4bbcfb09eacc4b98ffe4a359f343b",
+      "after_sha256": "a00a99d9e049b00cc053117b84e703ad0d5f5f88b06713c31f999e1dbcfa62d5",
+      "blocks": [
+        {"scope": "ARC static examples", "sha256": "9daa9786e1e74c3046230ce2b8a740ed2f79da74166a22e05a55b10826776afd"},
+        {"scope": "ARC original screen", "sha256": "283e602e910661fe08c50f725e753c72ea44309272bee4522f23a4e5fee06acf"}
+      ]
+    },
+    {
+      "source": "00 Учебник/18 Evaluation и методология/59a Responsible systems.md",
+      "before_sha256": "5e70d3ce66b8874cfc6b32928762cdea7d71b9f92b000aa6355d7cacf248cc5c",
+      "after_sha256": "6ba6e205b27037d40ae02ad0b43ca09d3c9e1e9dbcc4979809829ff5ffd7745d",
+      "blocks": [
+        {"scope": "AIR original taxonomy", "sha256": "e2a4112942ef8b39c02946a7a33f41332ea1d17f68b1edf3402d073b6d5a4e42"},
+        {"scope": "GCG historical montage", "sha256": "6d01aab81c1da5be61157763682de436ca4d88237c3604dd5cf1a2299f044922"}
+      ]
+    }
+  ]
+}

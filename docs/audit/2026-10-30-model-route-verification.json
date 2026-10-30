@@ -1,0 +1,406 @@
+{
+  "date": "2026-10-30",
+  "status": "locally-verified-not-published",
+  "branch": "editorial-route-alignment",
+  "head": "75e1870",
+  "scope": "Continue the chapter-by-chapter prerequisite route review; correct the post-training order in canonical Markdown, both contents and the published sidebar. No abridged chapter replacements, new translations or new image copies.",
+  "fullReads": [
+    {
+      "path": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md",
+      "route": "textbook/models/bert-roberta-deberta",
+      "sha256": "0cce42e115bc2a8c453047ce060f7a67dac104a9eae45ed1b899a49f4d921741",
+      "lines": 1322,
+      "read": "complete saved chapter including frontmatter, all explanations, programs, figures/captions, sources and navigation",
+      "findings": [
+        "The previous architecture-pattern chapter supplies MLM versus NTP. BERT then develops input assembly, the two heads, both losses and one actual update before task-specific use.",
+        "RoBERTa changes data/optimization; SpanBERT and SOP alter target construction; DeBERTa follows the earlier positional-information prerequisite. These are not presented as one unqualified improvement."
+      ]
+    },
+    {
+      "path": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md",
+      "route": "textbook/models/gpt-1",
+      "sha256": "318e040db226fabac04ba6576bf629775600e4626a03e2ac7ce0a4ec16967499",
+      "lines": 707,
+      "read": "complete saved chapter including frontmatter, all explanations, programs, figures/captions, sources and navigation",
+      "findings": [
+        "Supervised task heads and updates are separated from heuristic zero-shot scoring. Candidate loss and token-loss normalization have worked examples.",
+        "Post-norm and the historical combined embedding table are distinguished from GPT-2 pre-norm and the teaching model; no modern Llama components are retroactively attributed to GPT-1."
+      ]
+    },
+    {
+      "path": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md",
+      "route": "textbook/models/gpt-2",
+      "sha256": "a0417ae755c137144bbccc8f09b935b5b1abf1657d1411eacdec1585b7b7ab23",
+      "lines": 690,
+      "read": "complete saved chapter including frontmatter, all explanations, programs, figures/captions, sources and navigation",
+      "findings": [
+        "The GPT-1 transition changes task interface and normalization while retaining NTP. Input bytes, positions, logits, sampling and cache are developed in order.",
+        "Full-cache versus delta-cache contracts, P+G-1 and demonstration-based translation are explicit. The historical zero-shot label is distinguished from today's shot count."
+      ]
+    },
+    {
+      "path": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md",
+      "route": "textbook/models/gpt-3",
+      "sha256": "76ed87ea2ca9e9c2bc82b7926eb95de9313d0b11c8ce14ab95ab13313e19875a",
+      "lines": 835,
+      "read": "complete saved chapter including frontmatter, all explanations, programs, figures/captions, sources and navigation",
+      "findings": [
+        "GPT-2 supplies prompt continuation and cache; GPT-3 develops fixed-weight demonstrations, complete candidate scoring and its protocol-dependent normalization.",
+        "T5 follows as an architectural comparison, not a chronological claim. Two retained paper images explicitly lack confirmed reproduction permission; that remains a release issue."
+      ]
+    },
+    {
+      "path": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md",
+      "route": "textbook/models/t5",
+      "sha256": "1bced617c9985be26919d79c4d01a87e4d0a3087d59e65d2e200fd2f84608dfc",
+      "lines": 827,
+      "read": "complete saved chapter including frontmatter, all explanations, programs, figures/captions, sources and navigation",
+      "findings": [
+        "Source and target are separated before self/cross-attention, PAD-ID decoder start, label shifting and span corruption.",
+        "RMS-style normalization and relative buckets prepare the LLaMA comparison. Source reuse and decoder caches are distinguished from causal-prefix reuse. Fresh CPU execution was unavailable because SentencePiece was not cached."
+      ]
+    },
+    {
+      "path": "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md",
+      "route": "textbook/modern-llm/llama-architecture",
+      "sha256": "76213c88dc1a17d2ea09ca1c5b607f53e5d7e6210cb44dbb9d69f9809bcb9e4e",
+      "lines": 904,
+      "read": "complete saved chapter including frontmatter, all explanations, programs, figures/captions, sources and navigation",
+      "findings": [
+        "The chapter explicitly connects T5's pre-norm/RMS-style operation and GPT's causal decoder to RMSNorm, RoPE and SwiGLU.",
+        "A fully specified small block and cache example precede model-family differences. The modern decoder owner already read in the preceding pass is a deeper GQA/cache continuation, not a duplicate to delete."
+      ]
+    },
+    {
+      "path": "00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники.md",
+      "route": "textbook/post-training/module-map",
+      "sha256": "25d6cbe387dab1b111cab7f7024be13d28ccf1b96716b451efbcd388a30e4c02",
+      "lines": 131,
+      "read": "complete saved chapter including frontmatter, all explanations, programs, figures/captions, sources and navigation",
+      "findings": [
+        "The opening supplies the purpose of post-training before SFT without requiring the later CAI loss.",
+        "The local ten-item route now matches both contents and the sidebar; Tulu's concrete recipe is not called a mandatory universal chain."
+      ],
+      "readRevisionBeforeNavigation": "f9687ff3244da4519af4daa7912a3f36ebffcd612195b8349507bb82cb0ba9f4",
+      "finalDeltaReview": "Whole prior text read; only the exact journaled route/metadata changes were then reviewed. No claim of a second whole-text reread of unchanged paragraphs."
+    },
+    {
+      "path": "00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md",
+      "route": "textbook/post-training/alignment-goals",
+      "sha256": "961c2b618ae6c9539b12dca8171b945bdb34c30d751d82721989fbb564e0a9c1",
+      "lines": 266,
+      "read": "complete saved chapter including frontmatter, all explanations, programs, figures/captions, sources and navigation",
+      "findings": [
+        "Both CAI examples now follow SFT, preference data, reward modeling and PPO. The Bradley-Terry reference points to a preceding explanation.",
+        "The final saved chapter was reread in full. Only a prerequisite notice and navigation metadata changed; both original figures, numerical derivation and programs remain intact."
+      ]
+    },
+    {
+      "path": "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+      "route": "textbook/post-training/sft-instruction-data",
+      "sha256": "efecdcaba7edd624415ebc10cccb36bc2db67fa7d6b537dba20ae70088355780",
+      "lines": 857,
+      "read": "complete saved chapter including frontmatter, all explanations, programs, figures/captions, sources and navigation",
+      "findings": [
+        "The full 857-line chapter was read before its metadata-only navigation repair: task example, masking, shifted loss, token/answer weighting, one Llama update, packing, data construction and mixtures.",
+        "Its sole explicit learning prerequisite is NTP. It does not need the detailed CAI recipe as a preceding chapter; the next PEFT chapter remains unchanged."
+      ],
+      "readRevisionBeforeNavigation": "3afbb8b75a2866dc5d493a929e0354aa3d1fa141cbdbdd82f0c866a5f387d872",
+      "finalDeltaReview": "Whole prior text read; only the exact journaled route/metadata changes were then reviewed. No claim of a second whole-text reread of unchanged paragraphs."
+    }
+  ],
+  "reusedWholeRead": {
+    "source": "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md",
+    "readSha256": "29efb9a8c255c1b04abdcedc5c696f659a20ef45010572fe59093429698fcae5",
+    "priorEvidence": "docs/audit/2026-10-29-legacy-ppo-verification.json",
+    "currentSha256": "b9b058f5652597a9f408c1a908aedefb3d924bb0901fe9bf4274772cc2186a85",
+    "delta": "Date, next-chapter metadata and one immediate-next link label only. Six programs, formulas, figures and the rest of the explanation unchanged."
+  },
+  "prerequisiteCorrection": {
+    "before": "module → Constitutional AI → SFT → PEFT → preferences → reward model → PPO → DPO",
+    "after": "module → SFT → PEFT → preferences → reward model → PPO → Constitutional AI → DPO",
+    "rationale": "The CAI recipe uses revised SFT demonstrations, Bradley-Terry soft preference targets and the reward-model/RL pipeline. Its full derivation now follows those mechanisms; the module introduction already supplies the motivation before SFT.",
+    "journal": "docs/audit/2026-10-30-posttraining-order-additions.json",
+    "preserved": "Seven exactly reversible files. No formula, program, source excerpt or figure removed. English contents order and canonical-revision pin match the canonical contents.",
+    "notice": "The premature before-SFT callout was replaced by a normal reference to the earlier reward-model loss."
+  },
+  "tests": {
+    "expectedBefore": {
+      "passed": 0,
+      "failed": 2,
+      "scope": "New prerequisite-order and introduction-next tests failed on the old route."
+    },
+    "fullUnit": {
+      "files": 141,
+      "tests": 882,
+      "passed": 881,
+      "failed": 1,
+      "exitCode": 1,
+      "limitation": "The course-residuals test exceeded 5000 ms while the full suite and root build ran concurrently. No test timeout or assertion was relaxed."
+    },
+    "isolatedRetry": {
+      "test": "tests/course-residuals.test.ts",
+      "passed": 1,
+      "exitCode": 0,
+      "testMs": 776,
+      "totalMs": 914
+    },
+    "aggregate": "Every one of the 882 unit cases passed across the full run and the isolated retry. This is not represented as one clean full-suite command. A frozen clean full-suite run remains part of release acceptance.",
+    "html": {
+      "passed": 179,
+      "exitCode": 0,
+      "seconds": 7.94,
+      "scope": "Includes exact RU/EN neighbour buttons, both CAI programs and figures, and its reward-model anchor. Retains all 154 root/EN language-status checks."
+    },
+    "build": {
+      "pages": 2006,
+      "exitCode": 0,
+      "seconds": 41.62,
+      "base": "/",
+      "warnings": "Known route-shadowing, highlighting/math and source-PDF/locale diagnostics are not described as a warning-free run."
+    },
+    "builtLinks": {
+      "broken": 0,
+      "exitCode": 0
+    },
+    "subjectIndices": {
+      "topics": 152,
+      "indices": 2,
+      "exitCode": 0
+    },
+    "scopedDiffCheck": {
+      "exitCode": 0
+    },
+    "historicalGuardRepair": "Plan-Seq-Learn's original 15a26693... SHA is retained. Its test now reverses only the existing pinned navigation deltas before comparing the old chapter. A new negative test rejects unreviewed prose; the Plan-Seq-Learn chapter and assets were not edited.",
+    "pagesBase": "A fresh physical /bookvar build was not run in this pass."
+  },
+  "cpuChecks": [
+    {
+      "chapter": "BERT",
+      "exitCode": 0,
+      "observedOutput": "MLM 14.243288329544944 NSP 0.6851054223647548\ndog input MLM gradient norm 0.11868223670664312\nPAD input MLM gradient norm 0.0\nhidden/MLM/NSP (1, 12, 16) (1, 12) (1, 2)\nPASS published standalone block 1\nanswer: Paris loss: 2.369680643081665\nPASS published standalone block 2\nPASS published standalone block 3\nPASS published standalone block 4\nPASS published standalone block 5\nPASS published standalone block 6\nscores: tensor([2.4495, 2.0412, 3.6742], dtype=torch.float64)\nweights: tensor([0.1973, 0.1312, 0.6715], dtype=torch.float64) output: tensor([1.5403, 1.4742], dtype=torch.float64)\nPASS published standalone block 7\nfirst read tensor([[1.6698, 0.3302],\n        [1.5000, 1.5000]], dtype=torch.float64) second read tensor([[2.3903, 0.6097],\n        [2.0000, 2.0000]], dtype=torch.float64)\nPASS published standalone block 8\nPASS full TinyBert forward/backward/update, PAD isolation, right context and indirect MLM gradient\nPASS constrained span choice, invalid independent argmax and both CE gradients\nPASS DeBERTa three terms, reversed relative index, normalized output and gradients/gradcheck\nPASS numerical two-read example, independent logistic formulas and changed-memory negative control\nPASS unchanged MIT excerpt and real EMD routing: two calls/shared layer/fixed H/query update/selected rows\nPASS legacy notes: DeBERTa v6 ablations/reported Avg discrepancy and RoBERTa v1 masking/protocol\nPASS chapter SHA256 0cce42e115bc2a8c453047ce060f7a67dac104a9eae45ed1b899a49f4d921741\n{\n  \"chapter_sha256\": \"0cce42e115bc2a8c453047ce060f7a67dac104a9eae45ed1b899a49f4d921741\",\n  \"torch\": \"2.14.1\",\n  \"published_standalone_python_blocks\": 8,\n  \"original_wwm_target_positions\": [\n    4,\n    5\n  ],\n  \"selected_unchanged_piece\": \"##ing\",\n  \"sbo_direct_boundary_rows\": [\n    3,\n    8\n  ],\n  \"sbo_final_internal_state_gradient_nonzero\": false,\n  \"combined_mlm_sbo_internal_gradient_nonzero\": true,\n  \"truncated_geometric_mean\": 3.797097503983286,\n  \"clamped_geometric_mean\": 4.4631290880000005,\n  \"sop_mean_loss\": 0.28768207245178085,\n  \"negative_controls\": [\n    \"partial word selected despite group budget\",\n    \"all selected pieces assumed literal MASK\",\n    \"SBO head reads internal final states\",\n    \"same boundary input without relative offset\",\n    \"clamped versus truncated geometric\",\n    \"topic-only bag features distinguish swapped pair\"\n  ],\n  \"scope\": \"CPU computation and original preprocessing function, not BERT/SpanBERT/ALBERT pretraining\"\n}\n"
+    },
+    {
+      "chapter": "GPT-1",
+      "exitCode": 0,
+      "observedOutput": "0.407606 0.201413\nPASS standalone chapter block 1\nscores: (2, 2)\ntargets: [5, 6, 6, 5]\nmean LM loss per candidate: [2.666036367416382, 2.762150526046753, 2.767778158187866, 2.737765073776245]\nclassification / LM / total: 0.718351 2.733433 2.085067\nupdated: backbone and task head\nPASS standalone chapter block 2\nPASS NLI/choice CE, both NLI gradients and independent finite differences, symmetry and loss normalization\nPASS actual joint-loss gradients: both choice scores, 1/40 versus 1/48 per target, wrong candidates and PAD\nPASS two actual parameter updates; post-norm/causality/PAD/pooling/candidate isolation/tying; both backbone gradients\nPASS per-candidate normalization, all candidates included, PAD has zero loss gradient\nPASS unchanged MIT excerpt and executed original transform_roc: tokens/positions/PAD/truncation\nPASS corrected legacy note: chronology, SST-2, ablations, reproduction and zero-shot scope\nPASS chapter SHA256 318e040db226fabac04ba6576bf629775600e4626a03e2ac7ce0a4ec16967499\n"
+    },
+    {
+      "chapter": "GPT-2",
+      "exitCode": 0,
+      "observedOutput": "[0.644, 0.237, 0.087, 0.032]\n[0.865, 0.117, 0.016, 0.002]\nPASS standalone block 1\n(1, 5, 17) 2 (1, 4, 5, 4)\nsame logits; nonzero language-model gradients\nPASS standalone block 2\nPASS temperature, top-k and threshold ties\nPASS all 16 chunkings/full logits, causality, cache lengths, position offset/context bound\nPASS pre-norm output and input/all parameter gradients against independent PyTorch block\nPASS four released model counts, toy count, PPL units and candidate/suffix ranking\nPASS actual original tokenizer IDs/round trips, byte bijection and incomplete UTF-8\nPASS unchanged licensed excerpt; original mask/top-k via tensor-primitive shim, not a TensorFlow run\nPASS executed original sampling body: delta contract, source call lengths, P+G-1 and duplicated-prefix negative control\nPASS legacy note model sizes, actual evaluation rows, summary metrics, demonstrations and non-monotonic CBT-CN\nPASS chapter SHA256 a0417ae755c137144bbccc8f09b935b5b1abf1657d1411eacdec1585b7b7ab23\n"
+    },
+    {
+      "chapter": "GPT-3",
+      "exitCode": 0,
+      "observedOutput": "[0.75, 0.25]\n0.5 -0.5\n[-1.7147984280919268, -1.1394342831883648]\n[0.17999999999999997, 0.32]\n[0.35999999999999993, 0.64]\nPASS answer-only scoring, shifted positions and four prompt boundaries\nPASS length/frequency/terminator scoring, context/memory/masks and Pareto filtering\nPASS shared prefix invariant, two full/cached branches, immutable parameters and wrong-query negative control\nPASS full/local reachability and 72 versus 57 allowed attention pairs\nPASS source Table C.1 dirty/clean columns, corrected legacy protocols and dates\nPASS chapter SHA256 76ed87ea2ca9e9c2bc82b7926eb95de9313d0b11c8ce14ab95ab13313e19875a\nToy calculations only; no GPT-3 weights or benchmark reproduction.\n"
+    },
+    {
+      "chapter": "LLaMA",
+      "exitCode": 0,
+      "observedOutput": "tensor([[0.5774, 1.1547, 1.1547]])\ntensor([[0.7385, 1.1078, 1.1078]])\nattention: tensor([[[1.000000, 0.000000],\n         [0.068866, 0.931134]]], dtype=torch.float64)\nh: tensor([[[2.414214, 0.000000],\n         [0.097392, 2.316822]]], dtype=torch.float64)\nsecond norm: tensor([[[1.414214, 0.000000],\n         [0.059397, 1.412966]]], dtype=torch.float64)\nff: tensor([[[1.608859, 0.000000],\n         [0.001816, 1.605629]]], dtype=torch.float64)\ny: tensor([[[4.023073, 0.000000],\n         [0.099208, 3.922451]]], dtype=torch.float64)\nlogits: tensor([[[ 1.414214,  0.000000, -1.414214],\n         [ 0.035757,  1.413761, -1.449519]]], dtype=torch.float64)\nprobabilities: tensor([[[0.767918, 0.186694, 0.045388],\n         [0.192552, 0.763847, 0.043601]]], dtype=torch.float64)\nloss: 2.4054769191515373 -> 2.3664810981834323\n[[0, 1, 1, 1, 1]]\n4 4 5\nPASS published generation loop: four processed/cached positions, five token IDs\nPASS independent scalar states, NLL and all 46 parameter gradients; 3.3073313282939304e-10\nPASS original RMSNorm/RoPE bodies, dtypes, finite-epsilon limits and position shifts\nPASS three-projection SwiGLU, causal prefix and sequential cache\nPASS all cached chunk partitions, shared causal prefix and reset-RoPE negative control; 0.11423547169942272\nPASS actual pinned Attention.forward on CPU; rectangular-mask equivalence and historical-mask failure\nPASS paper columns: Table 3 ARC, Table 7 voting reversal, Table 12 gender bias direction\nPASS all sizes, parameter count, memory, mixture and training-budget arithmetic\nNo released-weight quality, GPU throughput or full pretraining reproduction claim.\nCHAPTER_SHA256 76213c88dc1a17d2ea09ca1c5b607f53e5d7e6210cb44dbb9d69f9809bcb9e4e\n"
+    },
+    {
+      "chapter": "Constitutional AI",
+      "exitCode": 0,
+      "observedOutput": "{\n  \"chapter_sha256\": \"961c2b618ae6c9539b12dca8171b945bdb34c30d751d82721989fbb564e0a9c1\",\n  \"published_python_fences\": 2,\n  \"sft_records\": 2,\n  \"probability_shift_swap_cases\": 5,\n  \"gradient_checks\": 45,\n  \"q_a\": 0.20000000000000004,\n  \"gradient\": 0.4224593312018545,\n  \"optimum\": -1.3862943611198904,\n  \"hard_raw_clamped_at_zero\": [\n    0.5,\n    0.49,\n    0.1\n  ],\n  \"device\": \"cpu\",\n  \"language_model_calls\": 0\n}\nPASS saved CAI examples; data construction and numerical loss only\n"
+    }
+  ],
+  "unrunFreshChecks": [
+    {
+      "chapter": "T5",
+      "attempt": "uv --offline with torch, numpy, transformers==4.57.6 and SentencePiece",
+      "result": "Resolver could not find SentencePiece in the local cache, including an explicit 0.2.1/CPython 3.13 probe. No checker was bypassed, no package downloaded and no source/answer was changed to obtain a pass.",
+      "effect": "No fresh T5 CPU acceptance is claimed; the current full-text prerequisite review is separate from numerical or released-model reproduction."
+    },
+    {
+      "chapters": [
+        "SFT",
+        "PPO"
+      ],
+      "result": "No fresh training-script rerun for their navigation-only edits. Previous whole-read/CPU evidence retains its historical scope."
+    }
+  ],
+  "browser": {
+    "base": "http://127.0.0.1:4330",
+    "observation": [
+      "Actual keyboard transitions root PPO → Constitutional AI → DPO reached the expected URLs; DPO's previous button is CAI.",
+      "Actual EN module-map → SFT and EN PPO → Constitutional AI stayed in EN. Each canonical-language page retained exactly one honest language notice.",
+      "CAI mobile at 390x844: document widths 375/375, zero KaTeX error nodes, the q_A/q_B normalization formula visible without clipping.",
+      "Both original CAI images loaded at 2025x844 and 1780x750. Mobile rendered aspect ratios match the full images; no cover crop.",
+      "Desktop source overview and the complete reordered module list were inspected. The viewport was reset and the agent-owned tab left on the root module list."
+    ],
+    "evidence": [
+      "docs/audit/evidence/2026-10-30-posttraining-order/en-module-order-desktop.png",
+      "docs/audit/evidence/2026-10-30-posttraining-order/en-soft-labels-mobile.png",
+      "docs/audit/evidence/2026-10-30-posttraining-order/constitutional-ai-overview-desktop.png",
+      "docs/audit/evidence/2026-10-30-posttraining-order/module-order-desktop.png"
+    ],
+    "limits": "Selected routes and the CAI figure/formula layout inspected, not every image in the nine read chapters and not a new universal figure-quality or primary-source audit."
+  },
+  "rightsFindings": [
+    {
+      "chapter": "textbook/models/gpt-3",
+      "asset": "00 Учебник/Assets/Figures/curated/gpt-3-paper/zero-one-few-shot-vs-finetuning.png",
+      "source": "Brown et al., Figure 2.1",
+      "status": "Retained pre-existing object, reproduction permission explicitly unverified in the chapter. Resolve before public release."
+    },
+    {
+      "chapter": "textbook/models/gpt-3",
+      "asset": "00 Учебник/Assets/Figures/curated/gpt-3-paper/model-sizes-table-2-1.png",
+      "source": "Brown et al., Table 2.1",
+      "status": "Retained pre-existing object, reproduction permission explicitly unverified in the chapter. Resolve before public release."
+    }
+  ],
+  "limits": [
+    "The reading-route audit now records 18 whole chapter reads. It is not a claim that all 152 topics passed a new factual, source-transfer or visual audit.",
+    "Modern sublayers/GQA/MLA/resources, remaining pretraining/inference continuity, distributed introduction, course/atlas consistency and retained image-permission gaps remain open.",
+    "No commit, push, dev update, main change or live Pages deployment."
+  ],
+  "artifactPins": [
+    {
+      "path": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md",
+      "sha256": "0cce42e115bc2a8c453047ce060f7a67dac104a9eae45ed1b899a49f4d921741",
+      "lines": 1322
+    },
+    {
+      "path": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md",
+      "sha256": "318e040db226fabac04ba6576bf629775600e4626a03e2ac7ce0a4ec16967499",
+      "lines": 707
+    },
+    {
+      "path": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md",
+      "sha256": "a0417ae755c137144bbccc8f09b935b5b1abf1657d1411eacdec1585b7b7ab23",
+      "lines": 690
+    },
+    {
+      "path": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md",
+      "sha256": "76ed87ea2ca9e9c2bc82b7926eb95de9313d0b11c8ce14ab95ab13313e19875a",
+      "lines": 835
+    },
+    {
+      "path": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md",
+      "sha256": "1bced617c9985be26919d79c4d01a87e4d0a3087d59e65d2e200fd2f84608dfc",
+      "lines": 827
+    },
+    {
+      "path": "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md",
+      "sha256": "76213c88dc1a17d2ea09ca1c5b607f53e5d7e6210cb44dbb9d69f9809bcb9e4e",
+      "lines": 904
+    },
+    {
+      "path": "00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники.md",
+      "sha256": "25d6cbe387dab1b111cab7f7024be13d28ccf1b96716b451efbcd388a30e4c02",
+      "lines": 131
+    },
+    {
+      "path": "00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md",
+      "sha256": "961c2b618ae6c9539b12dca8171b945bdb34c30d751d82721989fbb564e0a9c1",
+      "lines": 266
+    },
+    {
+      "path": "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+      "sha256": "efecdcaba7edd624415ebc10cccb36bc2db67fa7d6b537dba20ae70088355780",
+      "lines": 857
+    },
+    {
+      "path": "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md",
+      "sha256": "b9b058f5652597a9f408c1a908aedefb3d924bb0901fe9bf4274772cc2186a85",
+      "lines": 971
+    },
+    {
+      "path": "publishing/navigation.yml",
+      "sha256": "9added5cc57a5a2c1635853b82d7daef7e919011966dd5f9cf95052a223aa2fe",
+      "lines": 2529
+    },
+    {
+      "path": "publishing/tests/textbook-index.test.ts",
+      "sha256": "4da83bac0677edfaa3f94b9d1f1bcf0935bf2c84a6e34fbd74515cebe9e74dcf",
+      "lines": 116
+    },
+    {
+      "path": "publishing/tests/english-reconciliation.test.ts",
+      "sha256": "a25e1f37ecc080fb57ab34a69fec12c5062f529ef9df768afaa03585282a07d0",
+      "lines": 214
+    },
+    {
+      "path": "publishing/tests/planseqlearn.test.ts",
+      "sha256": "c09415dece861e69239a599280d63b5167441d232bf60334b861e7ab02197ba2",
+      "lines": 57
+    },
+    {
+      "path": "publishing/tests/site-output.test.ts",
+      "sha256": "8cc892087a061054643db79cd20d416073378235e2d144c4a4d32a4860aa0db0",
+      "lines": 3150
+    },
+    {
+      "path": "publishing/tools/topic-consolidation-baseline.mjs",
+      "sha256": "f1b6bbbc2b10a69205ffc417fd7dcd7ad1735e316a0498ba79a8f78d59bb6a57",
+      "lines": 64
+    },
+    {
+      "path": "publishing/tools/topic_consolidation_baseline.py",
+      "sha256": "f900d8392b6efa8ea3a18ac66a04143a986fc0d63bfb59a807fc672f4071e226",
+      "lines": 67
+    },
+    {
+      "path": "docs/audit/2026-10-30-posttraining-order-additions.json",
+      "sha256": "af22a84376589c1e454a1aa500e9d500c485a6d09669ac7385ad4368fefd11de",
+      "lines": 119
+    },
+    {
+      "path": "00 Учебник/_index.md",
+      "sha256": "94a06ce389fdf27af3290fdaa9447abaeb3aade37ef1ebfb7dcd9c259560557f",
+      "lines": 331
+    },
+    {
+      "path": "en/00 Textbook/_index.md",
+      "sha256": "ad1e16af608e8bd815a0b2fa01f79e91d4cb937d333f379783851261544a6816",
+      "lines": 339
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-posttraining-order/en-module-order-desktop.png",
+      "sha256": "d5c28effdfe37f3dc4396c6be00a92c64edd882d29d37c1965ee87c43a656fbd"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-posttraining-order/en-soft-labels-mobile.png",
+      "sha256": "fb4c726c7a821502b173bf3d509e9b318213330ed066e1030ba344147219e827"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-posttraining-order/constitutional-ai-overview-desktop.png",
+      "sha256": "60a48993b46e9e5f35970f757e45756d7a9d555abe2ae00ec26a65459422d6c6"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-posttraining-order/module-order-desktop.png",
+      "sha256": "c49b35887e52885ccd44723a451012d0873129929e304d46a44685abe3d19533"
+    },
+    {
+      "path": "publishing/tools/check_bert_family_examples.py",
+      "sha256": "b4eb6ad2f99f8e5ac819b5dcf9cceae9d9edc49b0c7a4b1c0272fd7f02552284"
+    },
+    {
+      "path": "publishing/tools/check_gpt1_examples.py",
+      "sha256": "a36942822cd456bfab72aac33f0372bba0c2693a1818480a6feb90eab6e94b58"
+    },
+    {
+      "path": "publishing/tools/check_gpt2_examples.py",
+      "sha256": "8f883c78222f99326d359769a89b59d77287c9b0c6684d464dd0c946129ed02e"
+    },
+    {
+      "path": "publishing/tools/check_gpt3_examples.py",
+      "sha256": "79ef6bf6bd52d675655b23773c2440447951446acd9810b5ded36814fb160229"
+    },
+    {
+      "path": "publishing/tools/check_llama_examples.py",
+      "sha256": "a90debf1524920aba3c0f34e607036c4ad145b55c7b19f3ef84e16e7f17d39e9"
+    },
+    {
+      "path": "publishing/tools/check_constitutional_ai_examples.py",
+      "sha256": "935bfceb6b55e74e0c59ea6ae357df0777365c96c8bc7b1a2a36297b7d82a279"
+    },
+    {
+      "path": "publishing/tools/check_t5_examples.py",
+      "sha256": "6b53d55305221ecbd8a34a05d519243cb6cc79f2fd774cf41cb5b81cbc23f736"
+    }
+  ]
+}

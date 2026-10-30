@@ -1,0 +1,84 @@
+[
+  {
+    "id": "curated-semi-extensions-tmix-2005dce46032",
+    "asset": "00 Учебник/Assets/Figures/curated/semi-supervised-extensions-2026-10-29/tmix-original.png",
+    "author": "Jiaao Chen, Zichao Yang, Diyi Yang",
+    "title": "MixText original Figure 1 with complete caption",
+    "source_url": "https://aclanthology.org/2020.acl-main.194/",
+    "source_image_url": "https://aclanthology.org/2020.acl-main.194.pdf#page=1",
+    "source_asset": "05 Источники/Originals/semi-supervised-extensions-2026-10-29/mixtext-acl-2020.pdf",
+    "source_asset_sha256": "843ce752f5612b25c255e49c286279bde7fecbe5be5d5986dd79615329991f37",
+    "source_page": 1,
+    "crop_box_points": [
+      303,
+      220,
+      532,
+      475
+    ],
+    "dimensions_px": [
+      764,
+      851
+    ],
+    "source_raster_dimensions_px": [
+      954,
+      880
+    ],
+    "sha256": "2005dce4603291c3db6148064def75188f9e60c0158faeb9fe9ddda68c8a699a",
+    "bytes": 107566,
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/consistency-training-2026-10-29/acl-copyright.html",
+    "license_evidence_sha256": "c0b0f339f5dc67c243944f2210eafb96447dae36710cdfdc4e2d9a62061894be",
+    "render_dpi": 240,
+    "derivation": "pdf-page-render-crop",
+    "modifications": "Complete original diagram and full caption retained. Crop removes only surrounding article body. No redrawing, translation or enlargement beyond the embedded diagram's native dimensions.",
+    "metadata_status": "verified",
+    "rights_status": "source-license-verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch.md"
+    ]
+  },
+  {
+    "id": "curated-semi-extensions-mixtext-e0203895b58f",
+    "asset": "00 Учебник/Assets/Figures/curated/semi-supervised-extensions-2026-10-29/mixtext-original.png",
+    "author": "Jiaao Chen, Zichao Yang, Diyi Yang",
+    "title": "MixText original Figure 2 with complete caption",
+    "source_url": "https://aclanthology.org/2020.acl-main.194/",
+    "source_image_url": "https://aclanthology.org/2020.acl-main.194.pdf#page=5",
+    "source_asset": "05 Источники/Originals/semi-supervised-extensions-2026-10-29/mixtext-acl-2020.pdf",
+    "source_asset_sha256": "843ce752f5612b25c255e49c286279bde7fecbe5be5d5986dd79615329991f37",
+    "source_page": 5,
+    "crop_box_points": [
+      68,
+      68,
+      532,
+      278
+    ],
+    "dimensions_px": [
+      1548,
+      701
+    ],
+    "source_raster_dimensions_px": [
+      1704,
+      628
+    ],
+    "sha256": "e0203895b58fa453cf067b28873afa85500d945e5e143694d23f28404006296e",
+    "bytes": 231896,
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/consistency-training-2026-10-29/acl-copyright.html",
+    "license_evidence_sha256": "c0b0f339f5dc67c243944f2210eafb96447dae36710cdfdc4e2d9a62061894be",
+    "render_dpi": 240,
+    "derivation": "pdf-page-render-crop",
+    "modifications": "Complete original diagram and full caption retained. Crop removes only surrounding article body. No redrawing, translation or enlargement beyond the embedded diagram's native dimensions.",
+    "metadata_status": "verified",
+    "rights_status": "source-license-verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch.md"
+    ]
+  }
+]

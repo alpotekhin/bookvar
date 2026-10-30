@@ -1,0 +1,182 @@
+[
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/vlm-evaluation-review-2026-10/mmvet-integrated-capabilities.png",
+    "sha256": "5b52e607bc17ab9a05b2b09f554705e27eeb86fc2a7f9c3fc6acf071b32df7aa",
+    "width": 1610,
+    "height": 1406,
+    "source_asset": "05 Источники/Originals/vlm-evaluation-serving-2026-10-20/mmvet-pmlr.pdf",
+    "source_asset_sha256": "1083a1e633c4eea90ef640026bf0afeffce25109322e7f07067b4da7d46287c0",
+    "source_page": 1,
+    "source_page_snapshot": "05 Источники/Originals/vlm-evaluation-serving-2026-10-20/mmvet-page1-hq.png",
+    "source_page_sha256": "8b9d5a6fd36cf21ccfc136eabfbebc6abf1d0bd088a8ca259fb469b9833f066b",
+    "render_page_size_px": [
+      3864,
+      5000
+    ],
+    "crop_box_px": [
+      1930,
+      1164,
+      3540,
+      2570
+    ],
+    "id": "curated-vlm-evaluation-mmvet-integrated-capabilities-5b52e607bc17",
+    "author": "Weihao Yu et al.",
+    "source_url": "https://proceedings.mlr.press/v235/yu24o.html",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/vlm-evaluation-serving-2026-10-20/pmlr-license-agreement.pdf",
+    "license_evidence_sha256": "3a3eac0ebdded57660c12c59028c5429b6d2b328be2c6fde534a104438444c31",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "MM-Vet Figure 1: full six-panel comparison, including every question, answer and capability label; surrounding page text excluded.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/vlm-evaluation-review-2026-10/pope-question-construction.png",
+    "sha256": "e3d377bcce9cc0fab763daddedec3cc9b457a56d63cab36ff6eb71ecb4d80b53",
+    "width": 2735,
+    "height": 985,
+    "source_asset": "05 Источники/Originals/vlm-evaluation-serving-2026-10-20/pope.pdf",
+    "source_asset_sha256": "537a27baf8d24048974c068deb29ff2d2bf5ac686529049ace21cecff7df06b3",
+    "source_page": 6,
+    "source_page_snapshot": "05 Источники/Originals/vlm-evaluation-serving-2026-10-20/pope-page6-hq.png",
+    "source_page_sha256": "081f3164205e79183a77b4a9f6721033adea76b1076952119237fb90ba932ba0",
+    "render_page_size_px": [
+      3536,
+      5000
+    ],
+    "crop_box_px": [
+      406,
+      406,
+      3141,
+      1391
+    ],
+    "id": "curated-vlm-evaluation-pope-question-construction-e3d377bcce9c",
+    "author": "Yifan Li et al.",
+    "source_url": "https://aclanthology.org/2023.emnlp-main.20/",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/vlm-evaluation-serving-2026-10-20/acl-copyright.html",
+    "license_evidence_sha256": "683a1dc65a78ec30927630124f4acfaecc728142dcca4e8a1f0a2bfc96f8158b",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "POPE Figure 3: complete image, annotations, three negative-sampling strategies and six questions; caption and surrounding text excluded.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/vlm-evaluation-review-2026-10/chair-caption-errors.png",
+    "sha256": "e667f8601e7a59e2464beea29cbfafa0099b9d25f2c7995ac0a5d858fd828245",
+    "width": 1305,
+    "height": 914,
+    "source_asset": "05 Источники/Originals/vlm-evaluation-serving-2026-10-20/chair.pdf",
+    "source_asset_sha256": "125be899ff3b86d0e08e7cd63b65a6a3969307efeed9a160413830620ff7f71d",
+    "source_page": 1,
+    "source_page_snapshot": "05 Источники/Originals/vlm-evaluation-serving-2026-10-20/chair-page1-hq.png",
+    "source_page_sha256": "55f017f068d4f7581a9d1f03efa77a8b4bcb15c63dca4f16a8f0eba7b827d360",
+    "render_page_size_px": [
+      3536,
+      5000
+    ],
+    "crop_box_px": [
+      1836,
+      1328,
+      3141,
+      2242
+    ],
+    "id": "curated-vlm-evaluation-chair-caption-errors-e667f8601e7a",
+    "author": "Anna Rohrbach et al.",
+    "source_url": "https://aclanthology.org/D18-1437/",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/vlm-evaluation-serving-2026-10-20/acl-copyright.html",
+    "license_evidence_sha256": "683a1dc65a78ec30927630124f4acfaecc728142dcca4e8a1f0a2bfc96f8158b",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "CHAIR Figure 1: complete image, both original captions and all reported metric values; caption and surrounding text excluded.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/vlm-evaluation-review-2026-10/epd-stage-interference.png",
+    "sha256": "68bb9c627766fa668b4a6abcf3322721228bb8186809eb94fd6e53e47746c2d3",
+    "width": 1515,
+    "height": 865,
+    "source_asset": "05 Источники/Originals/vlm-evaluation-serving-2026-10-20/epd-pmlr.pdf",
+    "source_asset_sha256": "865c1b533ff1f23efecc16a01675fb8c646a79a85b23dd29ebf4715cc19fdc45",
+    "source_page": 1,
+    "source_page_snapshot": "05 Источники/Originals/vlm-evaluation-serving-2026-10-20/epd-page1-hq.png",
+    "source_page_sha256": "7caebd53e91d3ede3b816dbc60f0f282f6fefaad4955b734339b0a9c2cfe549d",
+    "render_page_size_px": [
+      3864,
+      5000
+    ],
+    "crop_box_px": [
+      1930,
+      1160,
+      3445,
+      2025
+    ],
+    "id": "curated-vlm-evaluation-epd-stage-interference-68bb9c627766",
+    "author": "Gursimran Singh et al.",
+    "source_url": "https://proceedings.mlr.press/v267/singh25d.html",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/vlm-evaluation-serving-2026-10-20/pmlr-license-agreement.pdf",
+    "license_evidence_sha256": "3a3eac0ebdded57660c12c59028c5429b6d2b328be2c6fde534a104438444c31",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "EPD Figure 1: complete aggregated and disaggregated schedules, GPU labels and separators; title, author names and caption excluded.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/vlm-evaluation-review-2026-10/epd-system-architecture.png",
+    "sha256": "3827256146ba652ebc7685945f538b9843765ee64670e5d2d90fe30d9bfcbb20",
+    "width": 2820,
+    "height": 1305,
+    "source_asset": "05 Источники/Originals/vlm-evaluation-serving-2026-10-20/epd-pmlr.pdf",
+    "source_asset_sha256": "865c1b533ff1f23efecc16a01675fb8c646a79a85b23dd29ebf4715cc19fdc45",
+    "source_page": 4,
+    "source_page_snapshot": "05 Источники/Originals/vlm-evaluation-serving-2026-10-20/epd-page4-hq.png",
+    "source_page_sha256": "066a33d4e129388669a784088544f24860a64f6d5415388ab848bcb28d0001cd",
+    "render_page_size_px": [
+      3864,
+      5000
+    ],
+    "crop_box_px": [
+      469,
+      398,
+      3289,
+      1703
+    ],
+    "id": "curated-vlm-evaluation-epd-system-architecture-3827256146ba",
+    "author": "Gursimran Singh et al.",
+    "source_url": "https://proceedings.mlr.press/v267/singh25d.html",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/vlm-evaluation-serving-2026-10-20/pmlr-license-agreement.pdf",
+    "license_evidence_sha256": "3a3eac0ebdded57660c12c59028c5429b6d2b328be2c6fde534a104438444c31",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "EPD Figure 4: complete E/P/D system, MM and KV caches, weights, transfer queues, DP/TP/PP/IRP labels and role-switching block; running header and caption excluded.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md"
+    ]
+  }
+]

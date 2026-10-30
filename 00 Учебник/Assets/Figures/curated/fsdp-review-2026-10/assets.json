@@ -1,0 +1,159 @@
+{
+  "new_assets": [
+    {
+      "author": "Yanli Zhao, Andrew Gu, Rohan Varma, Liang Luo, Chien-Chin Huang, Min Xu, Less Wright, Hamid Shojanazeri, Myle Ott, Sam Shleifer, Alban Desmaison, Can Balioglu, Pritam Damania, Bernard Nguyen, Geeta Chauhan, Yuchen Hao, Ajit Mathews, Shen Li",
+      "source_url": "https://arxiv.org/abs/2304.11277v2",
+      "source_download_url": "https://arxiv.org/pdf/2304.11277v2",
+      "source_asset": "05 Источники/Papers/Source PDFs/pytorch-fsdp-2304.11277v2.pdf",
+      "source_asset_sha256": "7ee0f202b567627d668deae8b786e2a7a48920fbed22cc125a060f4c6da27cab",
+      "license": "CC BY-NC-ND 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+      "license_evidence": "The retained arXiv v2 PDF, page 1, explicitly names CC BY-NC-ND 4.0 and states copyright held by owner/authors, publication rights licensed to VLDB Endowment.",
+      "license_copy": "00 Учебник/Assets/Figures/curated/fsdp-review-2026-10/LICENSE-CC-BY-NC-ND-4.0.txt",
+      "license_sha256": "38762e3777f4ec00a6f769062a7c3f704fb78ce08303ecff88558da4c49cf9ea",
+      "derivation": "pdf-page-render-crop",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "metadata_status": "verified",
+      "last_verified": "2026-10-14",
+      "used_in": [
+        "00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md"
+      ],
+      "id": "curated-fsdp-overview-1944e36c2196",
+      "asset": "00 Учебник/Assets/Figures/curated/fsdp-review-2026-10/pytorch-fsdp-figure1-overview.png",
+      "source_page": 3,
+      "source_figure": "Figure 1",
+      "sha256": "1944e36c2196172ae200bfad3a25932c488b5cf0660307f398a498fd8bad55fc",
+      "dimensions": [
+        1722,
+        1057
+      ],
+      "crop_box_pdf_points": [
+        315,
+        82,
+        561,
+        233
+      ],
+      "render_scale": 7,
+      "modifications": "Original Figure 1 and its original caption reproduced in full from PDF page 3 using PyMuPDF clip (315,82,561,233), Matrix(7,7), alpha=False. Surrounding article content excluded; no internal cropping, redraw, recoloring, translation or relabeling. This is an unchanged excerpt with technical rasterization, not a shared adaptation. Noncommercial use and source license retained.",
+      "review_note": "Personally viewed final 1722x1057 PNG: layer labels, group boundaries, forward/backward steps and full original caption legible. Chapter distinguishes historical FSDP1 representation from FSDP2."
+    },
+    {
+      "author": "Yanli Zhao, Andrew Gu, Rohan Varma, Liang Luo, Chien-Chin Huang, Min Xu, Less Wright, Hamid Shojanazeri, Myle Ott, Sam Shleifer, Alban Desmaison, Can Balioglu, Pritam Damania, Bernard Nguyen, Geeta Chauhan, Yuchen Hao, Ajit Mathews, Shen Li",
+      "source_url": "https://arxiv.org/abs/2304.11277v2",
+      "source_download_url": "https://arxiv.org/pdf/2304.11277v2",
+      "source_asset": "05 Источники/Papers/Source PDFs/pytorch-fsdp-2304.11277v2.pdf",
+      "source_asset_sha256": "7ee0f202b567627d668deae8b786e2a7a48920fbed22cc125a060f4c6da27cab",
+      "license": "CC BY-NC-ND 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+      "license_evidence": "The retained arXiv v2 PDF, page 1, explicitly names CC BY-NC-ND 4.0 and states copyright held by owner/authors, publication rights licensed to VLDB Endowment.",
+      "license_copy": "00 Учебник/Assets/Figures/curated/fsdp-review-2026-10/LICENSE-CC-BY-NC-ND-4.0.txt",
+      "license_sha256": "38762e3777f4ec00a6f769062a7c3f704fb78ce08303ecff88558da4c49cf9ea",
+      "derivation": "pdf-page-render-crop",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "metadata_status": "verified",
+      "last_verified": "2026-10-14",
+      "used_in": [
+        "00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md"
+      ],
+      "id": "curated-fsdp-hybrid-groups-020f1f62d5c0",
+      "asset": "00 Учебник/Assets/Figures/curated/fsdp-review-2026-10/pytorch-fsdp-figure4-hybrid-groups.png",
+      "source_page": 5,
+      "source_figure": "Figure 4",
+      "sha256": "020f1f62d5c013edfa97e6b2e2d1dc1125cb6ef3fdb297df68cea7432828c124",
+      "dimensions": [
+        1722,
+        1099
+      ],
+      "crop_box_pdf_points": [
+        315,
+        84,
+        561,
+        241
+      ],
+      "render_scale": 7,
+      "modifications": "Original Figure 4 and its complete two-line original caption reproduced from PDF page 5 using PyMuPDF clip (315,84,561,241), Matrix(7,7), alpha=False. Surrounding article content excluded; no internal cropping, redraw, recoloring, translation or relabeling. Unchanged excerpt with technical rasterization. Noncommercial use and source license retained.",
+      "review_note": "Personally viewed final 1722x1099 PNG: two sharding groups, corresponding replication columns, rank numbers, legend and full caption retained. FlatParameter explicitly identified as historical FSDP1."
+    },
+    {
+      "id": "curated-fsdp-edls-dtensor-layouts-1799545cb33e",
+      "asset": "00 Учебник/Assets/Figures/curated/fsdp-review-2026-10/edls-dtensor-layouts.png",
+      "author": "Efficient Deep Learning Systems course authors",
+      "source_url": "https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week05_fsdp/seminar.pdf",
+      "source_download_url": "https://raw.githubusercontent.com/mryab/efficient-dl-systems/e632aa89ca9e6638d52e1b686095e7442faffbb0/week05_fsdp/seminar.pdf",
+      "commit": "e632aa89ca9e6638d52e1b686095e7442faffbb0",
+      "source_asset": "05 Источники/Papers/Source PDFs/edls-week05-seminar-e632aa89.pdf",
+      "source_asset_sha256": "76e3d309d5c2279a95783a8d04930f4cf0e6d1b8c3f31ca6fe580f1b0c020b97",
+      "source_page": 10,
+      "sha256": "1799545cb33e70ff5befe244c4c3774ed85d75aedce6832e5c6f7a32ab230c32",
+      "dimensions": [
+        1980,
+        924
+      ],
+      "crop_box_pdf_points": [
+        45,
+        72,
+        705,
+        380
+      ],
+      "render_scale": 3,
+      "license": "MIT",
+      "license_url": "https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/LICENSE",
+      "license_copy": "00 Учебник/Assets/Figures/curated/fsdp-review-2026-10/LICENSE-EDLS-MIT.txt",
+      "license_sha256": "01908feead9275d5043e082e9fa37e415a2972dca45fd62b8489e1fd2a058a13",
+      "derivation": "pdf-page-render-crop",
+      "provenance_confirmation": "source-license-verified",
+      "rights_status": "source-license-verified",
+      "metadata_status": "verified",
+      "last_verified": "2026-10-14",
+      "modifications": "Rendered original PDF page 10 with PyMuPDF clip (45,72,705,380), Matrix(3,3), alpha=False. Slide title and outer margin excluded; complete original vector values, three layouts and both mesh descriptions retained. No redraw, recoloring or translation. Complete upstream MIT license retained.",
+      "review_note": "Personally viewed final 1980x924 PNG. Actual four-process DTensor example in chapter and checker reproduces right-hand layout; axis names explicitly distinguished from placements.",
+      "used_in": [
+        "00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md"
+      ]
+    }
+  ],
+  "used_in_changes": [
+    {
+      "id": "curated-stanford-cs336-systems-l08-p17-19b28f4694a2",
+      "remove": [
+        "00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md"
+      ],
+      "add": [
+        "docs/audit/2026-10-14-fsdp.md"
+      ],
+      "review_note": "Text-heavy screenshot replaced with accurate prose/table. Slide explicitly includes FP32 master weights and totals 16 B/parameter, correcting former chapter's wrong 12-B attribution. Original file retained."
+    },
+    {
+      "id": "curated-stanford-cs336-systems-l08-p22-b8900d567816",
+      "remove": [
+        "00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md"
+      ],
+      "add": [
+        "docs/audit/2026-10-14-fsdp.md"
+      ],
+      "review_note": "Full-slide ZeRO stage screenshot removed from reader chapter. Meaning preserved in explicit P/G/O byte table and numerical example; original file retained."
+    },
+    {
+      "id": "curated-stanford-cs336-systems-l08-p25-ba0dbba21cbb",
+      "remove": [
+        "00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md"
+      ],
+      "add": [
+        "docs/audit/2026-10-14-fsdp.md"
+      ],
+      "review_note": "Replaced screenshot workflow by complete original Figure1 from FSDP paper, with full attribution/licensing; original course screenshot retained."
+    },
+    {
+      "id": "curated-harvard-harvard-distributed-zero-memory-partitioning-svg-a8e4a48164b4",
+      "remove": [
+        "00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md"
+      ],
+      "add": [
+        "docs/audit/2026-10-14-fsdp.md"
+      ],
+      "review_note": "Rejected after personal visual review: displayed bar heights do not agree with their GB labels/axis. Existing file retained for provenance, not used as a quantitative plot in 44e."
+    }
+  ]
+}

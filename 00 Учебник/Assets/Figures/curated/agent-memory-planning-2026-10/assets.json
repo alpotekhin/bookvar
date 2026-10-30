@@ -1,0 +1,76 @@
+[
+  {
+    "id": "curated-agent-memory-planning-tot-game24-search-bbe01dc65258",
+    "asset": "00 Учебник/Assets/Figures/curated/agent-memory-planning-2026-10/tot-game24-search.png",
+    "source_asset": "05 Источники/Originals/agent-memory-planning-2026-10-20/tree-of-thoughts.pdf",
+    "source_page": 5,
+    "source_page_snapshot": "05 Источники/Originals/agent-memory-planning-2026-10-20/tree-of-thoughts-page-05.png",
+    "crop_box_px": [
+      535,
+      1635,
+      2560,
+      2255
+    ],
+    "render_page_size_px": [
+      3091,
+      4000
+    ],
+    "label": "Figure 2",
+    "author": "Shunyu Yao et al.",
+    "source_url": "https://arxiv.org/abs/2305.10601v2",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/agent-memory-planning-2026-10-20/tree-of-thoughts.html",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Complete original numbered figure and English caption retained; surrounding prose excluded. No redraw or edits inside the figure.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md"
+    ],
+    "sha256": "bbe01dc652581866c1687070057cbb551924063a90925efcfe8b89dd1d6400ee",
+    "source_asset_sha256": "79c5237e3f63953a73f2b0d6894327702ee1f7e981450c251bb1b5cb4f8d7b8f",
+    "source_page_sha256": "4122d47337ede2190ef85e32770a5fc52d827b7ee051b78c6a35f26aa1cf6ffc",
+    "license_evidence_sha256": "38cb72f55b77c9c3ffe1074bccbd964cd66288d581799196ce9acf03b7e66cdb",
+    "width": 2025,
+    "height": 620
+  },
+  {
+    "id": "curated-agent-memory-planning-reflexion-loop-c6c750f59e8d",
+    "asset": "00 Учебник/Assets/Figures/curated/agent-memory-planning-2026-10/reflexion-loop.png",
+    "source_asset": "05 Источники/Originals/agent-memory-planning-2026-10-20/reflexion.pdf",
+    "source_page": 4,
+    "source_page_snapshot": "05 Источники/Originals/agent-memory-planning-2026-10-20/reflexion-page-04.png",
+    "crop_box_px": [
+      540,
+      410,
+      2560,
+      1505
+    ],
+    "render_page_size_px": [
+      3091,
+      4000
+    ],
+    "label": "Figure 2",
+    "author": "Noah Shinn et al.",
+    "source_url": "https://arxiv.org/abs/2303.11366v4",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/agent-memory-planning-2026-10-20/reflexion.html",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Complete original numbered figure and English caption retained; surrounding prose excluded. No redraw or edits inside the figure.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md"
+    ],
+    "sha256": "c6c750f59e8dfd5acc087e6edb11b10d0e94845d7d873f5350f3f9828a1fa03f",
+    "source_asset_sha256": "6059b6f89fea9959bd3dab553fbb97756a3dfb1b15e3cbab2fbf3ab6664333bd",
+    "source_page_sha256": "b13511b1839878d8a26f438e4f07b05d263f6746b0252233c6973a04dfbd0243",
+    "license_evidence_sha256": "c96741a6170d6a8a1ec17f3780d561f813078190404f47792178080c4118f002",
+    "width": 2020,
+    "height": 1095
+  }
+]

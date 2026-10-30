@@ -1,0 +1,101 @@
+{
+  "schema": 1,
+  "purpose": "Reversible topic consolidation deltas; original prose and source excerpts preserved.",
+  "entries": [
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+      "before_sha256": "bbd791d15c4b4f2254b81fd575442aa3d16ad45ca395720676ce3a156409038e",
+      "after_sha256": "42438233617da20ba81611806b40ed450beaf6506e90ec181e2d43ac92580832",
+      "changes": [
+        {
+          "old": "",
+          "new": "У запросов разной длины полезный объём нужно складывать, а не умножать\nразмер пакета на одну произвольно выбранную длину. Для $B$ независимых\nпоследовательностей при тех же одинаковых слоях\n\n$$\nM_{KV}=2LH_{kv}d_hb\\sum_{i=1}^{B}S_i.\n$$\n\nНапример, запросы длиной 1024 и 2048 токенов содержат 3072 полезные позиции.\nПри прежних 128 KiB на позицию это 384 MiB. Прямоугольный буфер,\nдополняющий оба запроса до 2048 позиций, занял бы 512 MiB: ещё 128 MiB\nпришлись бы на padding короткого запроса. В страничном пуле вместо такого\nдополнения остаётся округление каждой длины до размера блока. При совместном\nхранении префиксов одинаковые физические блоки, напротив, нельзя считать\nзаново для каждой ссылки на них.\n\n"
+        },
+        {
+          "old": "last_updated: 2026-10-25",
+          "new": "last_updated: 2026-10-29"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/55 KV cache batching and PagedAttention.md",
+      "before_sha256": "d047e0427087b06e98e92811923d5a19d23179c7593fd5b059b178ed8e392509",
+      "after_sha256": "9a9325ba453932424faf0f55ccf07f6e05658ad40ca3c14bc7c14797877710f8",
+      "changes": [
+        {
+          "old": "",
+          "new": "For requests of different lengths, add their useful storage rather than\nmultiply batch size by an arbitrarily chosen length. For $B$ independent\nsequences with the same homogeneous layers,\n\n$$\nM_{KV}=2LH_{kv}d_hb\\sum_{i=1}^{B}S_i.\n$$\n\nFor example, requests of 1,024 and 2,048 tokens contain 3,072 useful\npositions. At the preceding 128 KiB per position, they require 384 MiB.\nA rectangular buffer padding both to 2,048 positions would take 512 MiB:\nthe shorter request's padding accounts for another 128 MiB. A paged\npool instead rounds each length to its block size. With shared prefixes,\nthe same physical blocks must not be counted again for every reference.\n\n"
+        },
+        {
+          "old": "last_updated: 2026-10-25",
+          "new": "last_updated: 2026-10-29"
+        },
+        {
+          "old": "canonical_revision: \"bbd791d15c4b4f2254b81fd575442aa3d16ad45ca395720676ce3a156409038e\"",
+          "new": "canonical_revision: \"42438233617da20ba81611806b40ed450beaf6506e90ec181e2d43ac92580832\""
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+      "before_sha256": "d6054dd0ad83840c6328be92241f51454cc2dc9911321140b8705be7920452bd",
+      "after_sha256": "70bd3d2b286af4c5b04150e0a27bf527bd18de4ac6f829d2b7eaeb437f010d17",
+      "changes": [
+        {
+          "old": "",
+          "new": "### GGUF: контейнер и типы отдельных тензоров\n\n[GGUF](https://github.com/ggml-org/ggml/blob/facdc44a67da17df4433adcc468b424f48e9ded2/docs/gguf.md)\nхранит метаданные модели, описания тензоров и их байты. Описание каждого\nтензора задаёт форму, тип и смещение данных. Поэтому расширение `.gguf`\nне означает «четыре бита»: контейнер допускает и F16/F32, и разные\nквантизованные представления. Нужный вычислительный путь выбирает\nисполняющая библиотека с учётом этих типов и устройства.\n\nВ [llama.cpp](https://github.com/ggml-org/llama.cpp/blob/8ab29faec401829db0e617f40af2c942f4a9eaab/tools/quantize/README.md)\nпреобразование модели в GGUF и её квантизация — два отдельных этапа.\nНапример, входной BF16 GGUF затем преобразуют в `Q4_K_M`.\nТакое имя обозначает рецепт, допускающий смесь типов тензоров;\nоно не обещает ровно четыре бита на каждый параметр. Утилита позволяет\nотдельно задать тип выходной матрицы и эмбеддингов. Размер файла,\nскорость и качество проверяют для полученного артефакта, а не выводят\nиз суффикса имени.\n\n"
+        },
+        {
+          "old": "last_updated: 2026-10-19",
+          "new": "last_updated: 2026-10-29"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md",
+      "before_sha256": "b5f15380d0673e04036b240169923ea5ca8de7eee487cb4565fd374579014774",
+      "after_sha256": "f68e67a364332742b98b7edc36265178d74361bafa8d03a08fd41f4935161ff9",
+      "changes": [
+        {
+          "old": "",
+          "new": "<a id=\"gguf-контейнер-и-типы-отдельных-тензоров\"></a>\n\n### GGUF: a container with per-tensor types\n\n[GGUF](https://github.com/ggml-org/ggml/blob/facdc44a67da17df4433adcc468b424f48e9ded2/docs/gguf.md)\nstores model metadata, tensor descriptions and tensor bytes. Each tensor\ndescription specifies its shape, type and data offset. The `.gguf`\nextension therefore does not mean four-bit: the container supports F16/F32\nand different quantized representations. The executor selects its compute\npath from those types and the device.\n\nIn [llama.cpp](https://github.com/ggml-org/llama.cpp/blob/8ab29faec401829db0e617f40af2c942f4a9eaab/tools/quantize/README.md),\nconverting a model to GGUF and quantizing it are separate stages.\nA BF16 GGUF can, for example, become a `Q4_K_M` artifact. That name\nidentifies a recipe that can mix tensor types, not exactly four bits for\nevery parameter. The tool permits separate output-matrix and embedding\ntypes. Measure the resulting file's size, speed and quality rather than\ninfer them from its filename suffix.\n\n"
+        },
+        {
+          "old": "last_updated: 2026-10-19",
+          "new": "last_updated: 2026-10-29"
+        },
+        {
+          "old": "canonical_revision: \"d6054dd0ad83840c6328be92241f51454cc2dc9911321140b8705be7920452bd\"",
+          "new": "canonical_revision: \"70bd3d2b286af4c5b04150e0a27bf527bd18de4ac6f829d2b7eaeb437f010d17\""
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+      "before_sha256": "4f60e570288e3dd4ec403f160a396f683f7a69e5db95433a73e0a1b4b8c73097",
+      "after_sha256": "32085af4415e2aa3904eded4a14c42e7ced65c81d4288c42af4a5d099ff597ad",
+      "changes": [
+        {
+          "old": "",
+          "new": "- Zhao et al., [FR-Spec: Accelerating Large-Vocabulary Language Models via Frequency-Ranked Speculative Sampling](https://aclanthology.org/2025.acl-long.198/): сокращение словаря черновой LM head; [авторская реализация](https://github.com/thunlp/FR-Spec).\n- Hu et al., [GRIFFIN: Effective Token Alignment for Faster Speculative Decoding](https://arxiv.org/abs/2502.11018v3): согласование токенов и признаков при обучении черновой модели; [авторская реализация](https://github.com/hsj576/GRIFFIN).\n- Ringel, Romano, [Accelerating Speculative Decoding with Block Diffusion Draft Trees](https://arxiv.org/abs/2604.12989v1): DDTree строит дерево по распределениям блочного диффузионного черновика.\n- Iso et al., [Accelerating RL Post-Training Rollouts via System-Integrated Speculative Decoding](https://arxiv.org/abs/2604.26779v1): применение проверки черновика внутри генерации траекторий RL.\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md",
+      "before_sha256": "e1e621c0b87a693931e6796f7eb10b5e9617c620946381249bd985031e0e47bd",
+      "after_sha256": "5551a7a64f565703434ffcfa8fe57b06cbd78448de7791921dc06b0460821f55",
+      "changes": [
+        {
+          "old": "",
+          "new": "- Zhao et al., [FR-Spec: Accelerating Large-Vocabulary Language Models via Frequency-Ranked Speculative Sampling](https://aclanthology.org/2025.acl-long.198/): reducing the draft LM head's vocabulary; [authors' implementation](https://github.com/thunlp/FR-Spec).\n- Hu et al., [GRIFFIN: Effective Token Alignment for Faster Speculative Decoding](https://arxiv.org/abs/2502.11018v3): token and feature alignment when training the drafter; [authors' implementation](https://github.com/hsj576/GRIFFIN).\n- Ringel and Romano, [Accelerating Speculative Decoding with Block Diffusion Draft Trees](https://arxiv.org/abs/2604.12989v1): DDTree builds a tree from block-diffusion draft distributions.\n- Iso et al., [Accelerating RL Post-Training Rollouts via System-Integrated Speculative Decoding](https://arxiv.org/abs/2604.26779v1): draft verification within RL rollout generation.\n"
+        },
+        {
+          "old": "canonical_revision: \"4f60e570288e3dd4ec403f160a396f683f7a69e5db95433a73e0a1b4b8c73097\"",
+          "new": "canonical_revision: \"32085af4415e2aa3904eded4a14c42e7ced65c81d4288c42af4a5d099ff597ad\""
+        }
+      ]
+    }
+  ]
+}
+

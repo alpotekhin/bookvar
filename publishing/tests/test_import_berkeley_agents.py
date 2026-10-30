@@ -349,11 +349,11 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
         self.assertNotIn("baseline_status", self.manifest)
         self.assertEqual(
             Counter(row["disposition"] for row in self.coverage["rows"]),
-            Counter({"integrated": 140, "covered-existing": 6, "source-only": 38, "excluded": 28}),
+            Counter({"integrated": 143, "covered-existing": 6, "source-only": 35, "excluded": 28}),
         )
         self.assertEqual(
             Counter(row["disposition"] for row in self.visuals["rows"]),
-            Counter({"integrated": 47, "source-only": 87, "excluded": 27}),
+            Counter({"integrated": 49, "source-only": 85, "excluded": 27}),
         )
         course_objects = [
             row for row in self.manifest["objects"] if row["source_authority"] == "official-course"
@@ -376,11 +376,11 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
         self.assertEqual(set(self.editorial["visuals"]), visual_ids)
         self.assertEqual(
             Counter(row["disposition"] for row in self.editorial["coverage"].values()),
-            Counter({"integrated": 140, "covered-existing": 6, "source-only": 38, "excluded": 28}),
+            Counter({"integrated": 143, "covered-existing": 6, "source-only": 35, "excluded": 28}),
         )
         self.assertEqual(
             Counter(row["disposition"] for row in self.editorial["visuals"].values()),
-            Counter({"integrated": 47, "source-only": 87, "excluded": 27}),
+            Counter({"integrated": 49, "source-only": 85, "excluded": 27}),
         )
 
     def test_active_overlay_hash_and_counts_are_locked(self) -> None:
@@ -429,6 +429,7 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
             "meeting-04-slides-visual-rlvr-results",
             "meeting-04-slides-visual-s1k-data",
             "meeting-04-slides-visual-test-time-scaling",
+            "meeting-04-slides-visual-olmo-pretraining",
             "meeting-05-slides-visual-swe-agent-loop",
             "meeting-05-slides-visual-coding-agent-design-comparisons",
             "meeting-05-slides-visual-charles-sutton-vulnerability-discovery-loop",
@@ -438,16 +439,17 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
             "meeting-06-slides-visual-web-agent-tree-search-results",
             "meeting-06-slides-visual-insta-setup",
             "meeting-06-slides-visual-insta-verification-scaling",
+            "meeting-06-slides-visual-plan-sequence-learn",
             "meeting-07-slides-visual-osworld",
             "meeting-07-slides-visual-aguvis",
             "meeting-08-slides-visual-rl-and-alphazero",
             "meeting-08-slides-visual-alphaproof-methods",
             "meeting-08-slides-visual-test-time-rl",
+            "meeting-08-slides-visual-riemann-zeta-demo",
             "meeting-09-slides-visual-kaiyu-yang-lean-theorem-proving-pipeline",
             "meeting-09-slides-visual-formalizing-inequalities",
             "meeting-09-slides-visual-leaneuclid",
             "meeting-09-slides-visual-euclid-logical-gap",
-            "meeting-09-slides-visual-equivalence-and-diagrams",
             "meeting-10-slides-visual-lean-star",
             "meeting-10-slides-visual-draft-sketch-prove",
             "meeting-10-slides-visual-leanhammer",
@@ -491,15 +493,12 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
             "meeting-02-slides-learning-to-reason-synthesis",
             "meeting-03-slides-memory-planning-orientation",
             "meeting-04-slides-open-posttraining-overview",
-            "meeting-04-slides-olmo-pretraining",
             "meeting-04-slides-open-recipe-synthesis",
             "meeting-06-slides-web-agent-overview",
-            "meeting-06-slides-plan-sequence-learn",
             "meeting-06-slides-proprietary-adjacent-demo",
             "meeting-07-slides-gui-agent-landscape",
             "meeting-07-slides-gui-agent-summary",
             "meeting-08-slides-alphaproof-orientation",
-            "meeting-08-slides-riemann-zeta-demo",
             "meeting-08-slides-formal-reasoning-future",
             "meeting-08-reading-03-catalogue-record",
             "meeting-08-reading-04-catalogue-record",
@@ -565,14 +564,14 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
         )
         self.assertRegex(overlay_sha, r"^[a-f0-9]{64}$")
         self.assertEqual(Counter(row["disposition"] for row in coverage["rows"]), Counter({
-            "integrated": 140,
+            "integrated": 143,
             "covered-existing": 6,
-            "source-only": 38,
+            "source-only": 35,
             "excluded": 28,
         }))
         self.assertEqual(Counter(row["disposition"] for row in visuals["rows"]), Counter({
-            "integrated": 47,
-            "source-only": 87,
+            "integrated": 49,
+            "source-only": 85,
             "excluded": 27,
         }))
         generated = importer.build_documents()
@@ -620,17 +619,47 @@ class BerkeleyAgentsSourceAuditTest(unittest.TestCase):
             .relative_to(REPOSITORY_ROOT).as_posix()
             for name in retired_frames
         }
+        retired_replaced_frames = {
+            "formal-math/m09-p84.png", "formal-math/m09-p105.png",
+            "formal-math/m10-p39.png", "formal-math/m10-p42.png",
+            "formal-math/m10-p79.png", "formal-math/m11-p34.png",
+            "discovery/m11-p61.png", "discovery/m11-p63-lasr-hypothesis-evolution.png",
+            "discovery/m11-p67.png", "discovery/m11-p68.png",
+            "discovery/m11-p80-scaling-curves.png", "discovery/m11-p81-scaling-traits.png",
+            "12-dawn-song-agentic-threat-model-sequence.png",
+            "12-prompt-injection-agentpoison.png", "12-agent-monitoring-and-verification.png",
+        }
+        expected_files -= {
+            (BERKELEY_ASSET_ROOT / name).relative_to(REPOSITORY_ROOT).as_posix()
+            for name in retired_replaced_frames
+        }
         primary_figures = {
             "preference-reward-review-2026-09/self-rewarding-loop.png",
             "preference-reward-review-2026-09/evalplanner-plan-execution-loop.png",
             "rlvr-review-2026-09/tulu-rlvr-loop.png",
-            "rlvr-review-2026-09/tulu-rlvr-training-curves.png",
+            "rlvr-2026-10-24/tulu-rlvr-full-figure19.png",
             "rlvr-review-2026-09/tulu-ifeval-kl-and-generalization.png",
             "rlvr-review-2026-09/tulu-value-initialization.png",
             "ttc-review-2026-09/self-consistency.png",
             "ttc-review-2026-09/tot-search.png",
             "ttc-review-2026-09/tot-game24.png",
             "ttc-review-2026-09/s1-budget-forcing.png",
+            "formal-math-2026-10-21/leaneuclid-autoformalization.png",
+            "formal-math-2026-10-21/leaneuclid-construction-rules.png",
+            "formal-math-2026-10-21/leanstar-pipeline.png",
+            "formal-math-2026-10-21/leanstar-search-sampling.png",
+            "formal-zeta-2026-10-26/prime-factorization.jpg",
+            "formal-zeta-2026-10-26/prime-geometric-factors.jpg",
+            "scientific-discovery-2026-10-21/lasr-overview.svg",
+            "scientific-discovery-2026-10-21/lasr-evolution.svg",
+            "scientific-discovery-2026-10-21/lasr-ablations.svg",
+            "agent-security-2026-10-21/m12-p13.png",
+            "agent-security-2026-10-21/agentpoison-overview.png",
+            "agent-security-2026-10-21/datasentinel-detection.png",
+            "agent-security-2026-10-21/datasentinel-training.svg",
+            "planseqlearn-2026-10-26/method.png",
+            "planseqlearn-2026-10-26/sequencing.png",
+            "planseqlearn-2026-10-26/nut-assembly.png",
         }
         expected_files |= {
             f"00 Учебник/Assets/Figures/curated/{name}"

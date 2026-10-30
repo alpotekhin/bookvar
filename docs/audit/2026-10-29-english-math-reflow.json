@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-29",
+  "scope": "Eight display formulas reflowed after 360px browser inspection; prose, code, quoted source and mathematical values unchanged.",
+  "files": [
+    {
+      "source": "en/00 Textbook/05 Attention and Transformer/02 Self-Attention — Q, K, V.md",
+      "changes": [
+        {
+          "old": "z_3=0.248255[1,0]+0.248255[0,2]+0.503490[3,1]\n\\approx[1.758725,1].",
+          "new": "\\begin{aligned}\nz_3={}&0.248255[1,0]+0.248255[0,2]\\\\\n&+0.503490[3,1]\\\\\n\\approx{}&[1.758725,1].\n\\end{aligned}"
+        },
+        {
+          "old": "b_i=\\sum_\\ell a_{i\\ell}(D_A)_{i\\ell},\\qquad\n(D_S)_{ij}=a_{ij}\\big((D_A)_{ij}-b_i\\big).",
+          "new": "\\begin{gathered}\nb_i=\\sum_\\ell a_{i\\ell}(D_A)_{i\\ell},\\\\\n(D_S)_{ij}=a_{ij}\\big((D_A)_{ij}-b_i\\big).\n\\end{gathered}"
+        },
+        {
+          "old": "\\begin{gathered}\n\\nabla_{W_Q}L=X^\\top D_Q,\\quad\n\\nabla_{W_K}L=X^\\top D_K,\\quad\n\\nabla_{W_V}L=X^\\top D_V,\\\\\n\\nabla_XL=D_QW_Q^\\top+D_KW_K^\\top+D_VW_V^\\top .\n\\end{gathered}",
+          "new": "\\begin{gathered}\n\\nabla_{W_Q}L=X^\\top D_Q,\\\\\n\\nabla_{W_K}L=X^\\top D_K,\\\\\n\\nabla_{W_V}L=X^\\top D_V,\\\\\n\\nabla_XL=D_QW_Q^\\top+D_KW_K^\\top+D_VW_V^\\top .\n\\end{gathered}"
+        },
+        {
+          "old": "A(PX)=PA(X)P^\\top,\\qquad Z(PX)=PZ(X).",
+          "new": "\\begin{gathered}\nA(PX)=PA(X)P^\\top,\\\\\nZ(PX)=PZ(X).\n\\end{gathered}"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/56 FlashAttention.md",
+      "changes": [
+        {
+          "old": "S=\\frac{QK^\\top}{\\sqrt d},\\qquad P=\\operatorname{softmax}(S),\\qquad O=PV.",
+          "new": "\\begin{gathered}\nS=\\frac{QK^\\top}{\\sqrt d},\\\\\nP=\\operatorname{softmax}(S),\\qquad O=PV.\n\\end{gathered}"
+        },
+        {
+          "old": "dV=P^\\top G,\\qquad dP=GV^\\top,\\qquad\ndS_{ij}=P_{ij}(dP_{ij}-D_i),",
+          "new": "\\begin{gathered}\ndV=P^\\top G,\\qquad dP=GV^\\top,\\\\\ndS_{ij}=P_{ij}(dP_{ij}-D_i),\n\\end{gathered}"
+        },
+        {
+          "old": "D_i=\\sum_j P_{ij}dP_{ij}\n=\\sum_j P_{ij}\\sum_aG_{ia}V_{ja}\n=\\sum_a O_{ia}G_{ia}.",
+          "new": "\\begin{aligned}\nD_i&=\\sum_j P_{ij}dP_{ij}\\\\\n&=\\sum_j P_{ij}\\sum_aG_{ia}V_{ja}\\\\\n&=\\sum_a O_{ia}G_{ia}.\n\\end{aligned}"
+        },
+        {
+          "old": "dV_j\\mathrel{+}=P_{ij}^\\top G_i,\\quad\ndK_j\\mathrel{+}=dS_{ij}^\\top Q_i/\\sqrt d,\\quad\ndQ_i\\mathrel{+}=dS_{ij}K_j/\\sqrt d.",
+          "new": "\\begin{gathered}\ndV_j\\mathrel{+}=P_{ij}^\\top G_i,\\\\\ndK_j\\mathrel{+}=dS_{ij}^\\top Q_i/\\sqrt d,\\\\\ndQ_i\\mathrel{+}=dS_{ij}K_j/\\sqrt d.\n\\end{gathered}"
+        }
+      ]
+    }
+  ]
+}

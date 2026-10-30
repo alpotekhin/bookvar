@@ -1,0 +1,27 @@
+Finite products and the Berkeley zeta demonstration
+
+Source-code documentation:
+Copyright (c) 2023 Michael Stoll. All rights reserved.
+Mathlib/NumberTheory/EulerProduct/Basic.lean.
+https://github.com/leanprover-community/mathlib4/blob/c44e0c8ee63ca166450922a373c7409c5d26b00b/Mathlib/NumberTheory/EulerProduct/Basic.lean
+Mathlib v4.19.0, pinned commit c44e0c8ee63ca166450922a373c7409c5d26b00b.
+Released under Apache 2.0; see mathlib-c44e0c8-Apache-2.0.txt in this directory.
+The entire introductory explanation is retained in the original English.
+Only blockquote markup and line wrapping change. The archived .lean source
+is unchanged. Worked finite examples and surrounding explanations are
+editorial additions, not claimed to be AlphaProof's original execution.
+
+Lecture images:
+Thomas Hubert, AlphaProof: when reinforcement learning meets formal mathematics.
+Berkeley Advanced LLM Agents, 31 March 2025.
+https://rdi.berkeley.edu/adv-llm-agents/slides/alphaproof.pdf
+Page 99: PDF object 638, native JPEG 2048 x 1046.
+Page 100 (also page 104): PDF object 645, native JPEG 2048 x 1037.
+Full embedded JPEGs copied without changing the encoded image bytes.
+No crop, resampling, recompression, redraw or translation. The fade at the
+bottom is present in the source image and has not been painted over.
+The lecture references the zetamath channel on page 97; the precise source
+video for each image has not been independently identified.
+Rights: the existing user permission record for educational course reuse,
+dated 2026-09-04; not an independently verified named image license.
+The Mathlib Apache license does not apply to these separate lecture images.

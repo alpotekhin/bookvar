@@ -5,6 +5,7 @@ organization: Technology Innovation Institute
 first_release: 2023
 latest_verified_release: Falcon-H1 Arabic and Falcon Perception
 last_verified: 2026-09-15
+last_updated: 2026-10-30
 architecture_base: decoder Transformer then parallel Mamba-attention hybrid
 modalities: [text, image]
 status: active
@@ -20,7 +21,8 @@ Falcon прошёл две архитектурные эпохи. Falcon 7B/40B/
 |---|---|
 | Falcon 7B/40B (2023) | 7B: 71Q/1KV (MQA); 40B: 128Q/8KV (группировка KV); parallel attention/MLP, RefinedWeb. |
 | Falcon 180B (2023) | Масштабирование dense линии на 3.5T RefinedWeb tokens. |
-| Falcon 2 / Falcon 3 (2024) | Малые эффективные модели 1B–10B; Falcon 3 получил 14T токенов и 32K. |
+| Falcon 2 (2024) | [Falcon2-11B](https://huggingface.co/tiiuae/falcon-11B): 11B параметров, более 5T обучающих токенов. |
+| Falcon 3 (2024) | Семейство 1B–10B с контекстом 32K; [7B обучена на 14T токенов](https://huggingface.co/tiiuae/Falcon3-7B-Base), а [10B получена увеличением глубины 7B и продолжением обучения на 2T токенов](https://huggingface.co/tiiuae/Falcon3-10B-Base). |
 | Falcon-H1 (2025) | Параллельный hybrid-head: Mamba-2 SSM и attention в каждом mixer. |
 | Falcon-H1 Arabic (05.01.2026) | Арабская специализированная линия на H1. |
 | Falcon Perception (31.03.2026) | 600M vision-language модель; отдельная мультимодальная ветка. |

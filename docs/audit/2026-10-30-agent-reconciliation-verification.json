@@ -1,0 +1,271 @@
+{
+  "date": "2026-10-30",
+  "status": "comparison-verified-locally-not-published",
+  "previousGoalTurnClassification": "progress: nanoGPT was reconciled and verified, with the archive ledger advancing from 25 to 26 accepted notes.",
+  "currentGoalTurnClassification": "progress: reconciled ReAct, Toolformer and Tool Use; integrated missing explanations and two original source graphs; ledger advances from 26 to 29 accepted notes.",
+  "scope": "Three archive comparisons, one substantial existing chapter extension and two evaluation bibliography entries. The overall textbook route/release objective remains incomplete.",
+  "chapters": [
+    {
+      "path": "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md",
+      "sha256": "00eb6118373a4992444bc27376567cd10a83209d090c2a82b2c6425ca65dc01e",
+      "lines": 1057,
+      "wholeRead": "All content read completely in ranges 1–220, 221–440, 441–660, 661–880, 881–EOF of the 1052-line main addition, followed by a complete reread of the final 1015–1057 footer after adding two crosslinks. Lines 1–1014 were unchanged by the final bridge."
+    },
+    {
+      "path": "00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md",
+      "sha256": "27435c20a65d7883cf34b5c1afa93041af49ce7e8f6a37ee0c8bfb280cf72791",
+      "lines": 795,
+      "wholeRead": "Complete preceding 793-line chapter read in ranges 1–205, 206–410, 411–610, 611–EOF. Only metadata and two bibliography entries then changed; final bibliography/tail 766–EOF and the exact journaled date change reviewed. Existing mechanisms, examples and figures unchanged."
+    }
+  ],
+  "explanationReview": {
+    "toolformer": "Position and candidate budgets; per-API thresholds; three explicit loss controls and a numerical counterexample; lookahead versus causal inference; calendar/document-date and arithmetic/translation heuristics; Atlas annotation/evaluation variants; counts versus caps; the top-k intervention and one-call evaluation cap; disabled-call perplexity and stronger-base-model effects.",
+    "react": "Thought context updates versus real observations; dense/sparse prompts; prompt demonstrations versus parameter updates; exact fallback/voting examples and failure cases; task metrics, error-analysis denominator, best/mean prompt selection and task-specific fine-tuning evidence.",
+    "toolUse": "Retained full schema, semantic validation, observations, authorization, retry/idempotency and outcome examples. Linked full training/evaluation owners rather than making duplicate summaries. Current full RLVR/GRPO hashes equal their previously whole-read/accepted revisions.",
+    "style": "no-ai-slop and eval.md applied with local academic/technical qualifications; no definition-only replacement, no new translation, no generated diagrams.",
+    "remainingIllustrationGap": "Toolformer Figure 2 stays an external source link. Reproduction permission was not established by the arXiv or NeurIPS publication metadata. ReAct's CC BY 4.0 evidence was not applied to Toolformer."
+  },
+  "sources": {
+    "packet": "05 Источники/Originals/agent-reconciliation-2026-10-30",
+    "readScopes": "Exact selected main and supplement sections are recorded in manifest.json. No complete repository, course, BFCL/ToolBench paper or live leaderboard review is claimed.",
+    "newDownload": "One 328,446-byte Toolformer supplement PDF. ReAct PDF and license evidence reused unchanged from the retained original packet. No models, videos or external corpora.",
+    "newFigures": "Two complete original ReAct numbered figures, all panels/axes/legends and full English captions; 300-dpi PDF render crops at 960×598 and 1680×600. No redraw, translation, retouching or upscale."
+  },
+  "checks": {
+    "toolUseCPU": {
+      "status": "passed",
+      "programs": 5,
+      "standaloneAndSharedExecutions": 10,
+      "jsonExamples": 5,
+      "exactOriginalCrops": 4,
+      "log": "/var/tmp/bookvar-agent-reconciliation-cpu-final-20261030.log",
+      "scope": "Displayed loss filter, insertion/rank trigger, voting, idempotency and deterministic executor; schema/policy/missing-data and final-observation negative cases. No LLM/agent-quality benchmark."
+    },
+    "evaluationCPU": {
+      "status": "passed",
+      "programs": 4,
+      "standaloneAndSharedExecutions": 8,
+      "finiteMetricCases": 728,
+      "pairedResamples": 256,
+      "exactOriginalCrops": 5,
+      "log": "/var/tmp/bookvar-agent-reconciliation-evaluation-cpu-20261030.log",
+      "scope": "Displayed booking, original unchanged pass@k function, paired bootstrap and hierarchical rubric; judge/risk arithmetic and source crop preservation. No live agent benchmark."
+    },
+    "finalTargeted": {
+      "status": "passed",
+      "tests": 4,
+      "files": 1,
+      "log": "/var/tmp/bookvar-agent-reconciliation-final-20261030.log"
+    },
+    "precedingTargeted": {
+      "status": "passed",
+      "tests": 8,
+      "files": 2,
+      "log": "/var/tmp/bookvar-agent-reconciliation-targeted-final-20261030.log",
+      "scope": "Final chapter/journal and unchanged nanoGPT execution checks, before adding only verifiedWebReferences metadata to the packet."
+    },
+    "earlierFullUnit": {
+      "status": "passed",
+      "tests": 861,
+      "files": 138,
+      "log": "/var/tmp/bookvar-agent-reconciliation-unit-20261030.log",
+      "scopeLimit": "Run on the substantial 91f679f5 tool-use revision before the final crosslinks and two bibliography entries, not asserted as a fresh full-unit run at 00eb6118/27435c20. Final relevant tests, both CPU checkers, output and link checks were rerun."
+    },
+    "rootBuild": {
+      "status": "passed",
+      "pages": 2006,
+      "log": "/var/tmp/bookvar-agent-reconciliation-root-final-20261030.log"
+    },
+    "output": {
+      "status": "passed",
+      "tests": 175,
+      "log": "/var/tmp/bookvar-agent-reconciliation-output-final-20261030.log"
+    },
+    "internalLinks": {
+      "status": "passed",
+      "broken": 0,
+      "log": "/var/tmp/bookvar-agent-reconciliation-links-final-20261030.log"
+    },
+    "preservation": "Three exact journal reversals and unknown-edit negative controls; all 31 immutable archive hashes match. Old source packets, code excerpts and audit receipts were not rebaselined.",
+    "pagesBase": {
+      "status": "deferred",
+      "reason": "Fresh /bookvar build and actual Pages deployment remain part of the final release."
+    }
+  },
+  "visual": {
+    "desktop": {
+      "viewport": [
+        1280,
+        900
+      ],
+      "clientWidth": 1265,
+      "scrollWidth": 1265,
+      "sourceImagesLoaded": 6,
+      "katexErrors": 0
+    },
+    "mobile": {
+      "viewport": [
+        360,
+        800
+      ],
+      "clientWidth": 345,
+      "scrollWidth": 345,
+      "allSixSourceImagesLoaded": true,
+      "katexErrors": 0,
+      "displayMathClient": 313,
+      "displayMathScroll": 313
+    },
+    "originals": "Both new complete graphs inspected in desktop viewer. Mobile 2× zoom and native left/right panning inspected the prompting/fine-tuning panels and CoT-SC legend; inline thumbnails do not by themselves establish tiny-label readability.",
+    "locales": "Root desktop/mobile and explicit /en mobile fallback inspected. Same English additions and both native graph files present; the Russian remainder is not a new English edition.",
+    "navigation": "Final bridge to RLVR #agent-reward-design and the evaluation chapter activated by Enter and observed at their actual destinations. A first mouse-click attempt left the page unchanged and is not claimed as successful. New BFCL/ToolBench bibliography visibly present.",
+    "revisionScope": "Substantial body/graph inspection at 91f679f5; final 00eb6118 changes only add footer crosslinks, inspected after the final build. Evaluation bibliography inspected at final 27435c20. Figure bytes and layout code unchanged across this last delta.",
+    "evidenceDirectory": "docs/audit/evidence/2026-10-30-agent-reconciliation",
+    "screenshots": [
+      "desktop-benchmark-references.png",
+      "desktop-finetune-original.png",
+      "desktop-react-entry.png",
+      "desktop-rlvr-bridge.png",
+      "desktop-sampling-original.png",
+      "mobile-en-react.png",
+      "mobile-finetune-context.png",
+      "mobile-finetune-zoom-left.png",
+      "mobile-finetune-zoom-right.png",
+      "mobile-sampling-zoom.png",
+      "mobile-toolformer-entry.png"
+    ]
+  },
+  "ledger": {
+    "total": 31,
+    "sourceFullRead": 31,
+    "reconciled": 29,
+    "readInProgress": 2,
+    "unread": 0,
+    "canonicalWholeReads": 34
+  },
+  "remaining": [
+    "Complete Tree of Thoughts and BLEU comparisons; their source notes are fully read but not reconciled.",
+    "Check the full conceptual reading route and reference/atlas/course-library dependencies, and retained EN/UI and source-specific illustration gaps.",
+    "Freeze the final release revision, run required checks, scoped commit/push to dev under Alexander Potekhin <al_potechin@mail.ru>, and verify actual Pages deployment."
+  ],
+  "publication": {
+    "commit": false,
+    "push": false,
+    "deploy": false,
+    "newTranslation": false,
+    "mainChanged": false
+  },
+  "artifactHashes": [
+    {
+      "path": "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md",
+      "sha256": "00eb6118373a4992444bc27376567cd10a83209d090c2a82b2c6425ca65dc01e"
+    },
+    {
+      "path": "00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md",
+      "sha256": "27435c20a65d7883cf34b5c1afa93041af49ce7e8f6a37ee0c8bfb280cf72791"
+    },
+    {
+      "path": "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
+      "sha256": "e47cc4f42c05c58f9ff84aaba765cf21e6ad80f8c658efa159ea510ff5ff5828"
+    },
+    {
+      "path": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "sha256": "7173f3bbdb587d32f8d2f04c5663164c132563b6966ce7543ccc613f4e007e1a"
+    },
+    {
+      "path": "05 Источники/asset-registry.yml",
+      "sha256": "49518f5833c84f41895ec9c8ed85c2d794a0936b383f45779296d2bcc8e34795"
+    },
+    {
+      "path": "05 Источники/Originals/agent-reconciliation-2026-10-30/manifest.json",
+      "sha256": "e61bfc6fda3ce5ef09e08f4b45bb032774be2d628e54e39035b2b3140138e518"
+    },
+    {
+      "path": "05 Источники/Originals/agent-reconciliation-2026-10-30/README.md",
+      "sha256": "d18c364181b6bd8e5f71d46249fed4bea5075150f7dded8de7f4062542c858e6"
+    },
+    {
+      "path": "05 Источники/Originals/agent-reconciliation-2026-10-30/extract_react_figures.py",
+      "sha256": "5828df477d920ebdcfa9649bb7954fbb79983f507a5ee8ad302a4cac77a082c8"
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/agent-reconciliation-2026-10-30/assets.json",
+      "sha256": "2fecbf826e491f785008dfaa8047ee0c8eda1c3e9ff7eb4884db06e3b53e2225"
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/agent-reconciliation-2026-10-30/NOTICE.md",
+      "sha256": "e6da43e0cc7787c546717a86a2fba2dbd8852949ba444103500d859d14b83a27"
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/agent-reconciliation-2026-10-30/react-cot-sampling.png",
+      "sha256": "23c9dbf17b79eca8bd8f3cfcb34d623bd70ca02fb025c7ab3135df6bae246989"
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/agent-reconciliation-2026-10-30/react-prompt-vs-finetune.png",
+      "sha256": "4be61fc97b54ecf9a2bf56ef80fa069bddbe3071c82cce0fa300c642e6791706"
+    },
+    {
+      "path": "publishing/tools/check_tool_use_examples.py",
+      "sha256": "f4ba41d90eeb10658f76dce53b6f12f6a94cc5b49dbdb315fbbaaf8437e1dc37"
+    },
+    {
+      "path": "publishing/tools/check_agent_evaluation_examples.py",
+      "sha256": "88791809b49362664733495f4662836e1cea37bf691a0d546eaf36195fc4e9da"
+    },
+    {
+      "path": "publishing/tools/topic-consolidation-baseline.mjs",
+      "sha256": "53ab2998470b1a2b06eafde47e025ccbeebadb141f02aa6ccdb47acb8565abf1"
+    },
+    {
+      "path": "publishing/tools/topic_consolidation_baseline.py",
+      "sha256": "2e1886b214044ab8c7396435d1c935f9578c12726b13a5b199b0ff3da078fa36"
+    },
+    {
+      "path": "publishing/tests/agent-reconciliation.test.ts",
+      "sha256": "a1809a31cedf0161f337e8e836defff2d49eeab49d5f8c1296ec8e3adc05399a"
+    },
+    {
+      "path": "publishing/tests/nanogpt-reference.test.ts",
+      "sha256": "79fd37395a986917cb9d5926b56fc2478e9463fa6b5cb98209747c03c44dc385"
+    },
+    {
+      "path": "publishing/tests/asset-registry.test.ts",
+      "sha256": "76dfbfbb9dbc507f78cb0ba6e55314432ae747665418f50b607bad91438d86e6"
+    },
+    {
+      "path": "publishing/tests/site-output.test.ts",
+      "sha256": "b150a63f5fd6694fac7c0cf88e32f0073cf651fdc06ff6c71f0f445ae490d334"
+    },
+    {
+      "path": "docs/audit/2026-10-30-agent-reconciliation-additions.json",
+      "sha256": "4e666bee75be4ddac4c9cfcda89eccb0fce48729d14ed08cd27b6a10e193d140"
+    },
+    {
+      "path": "docs/audit/2026-10-29-legacy-notes-review.json",
+      "sha256": "effe5ddb9b6561c99e9febba5c4dd0fd65713ee327be3255de117952f3bea73d"
+    },
+    {
+      "path": "docs/audit/2026-10-29-release-completion-plan.md",
+      "sha256": "51dfe66659ca2cb4001baa6c6b80b29afc768c23cf12d220da31ea8563b238aa"
+    },
+    {
+      "path": "Concepts/Reasoning/ReAct.md",
+      "sha256": "db772fc7834f840df36b2386a72790ba3d6e7e142780d11956d2829fae81b883"
+    },
+    {
+      "path": "Concepts/Reasoning/Tool Use.md",
+      "sha256": "7fcc266613ab789abadfd800e3ecdb5d578fde1b48f29e2d96c64b889a566db7"
+    },
+    {
+      "path": "Concepts/Reasoning/Toolformer.md",
+      "sha256": "c22dab7ecf6adb342f4b95453045d2f808ab8e60c90beba1ab7f8f5f65006d88"
+    },
+    {
+      "path": "Concepts/Reasoning/Tree of Thoughts.md",
+      "sha256": "6ef781048ed0cc9a8856e3da0e7fa26d56c2288ea1f974483d3cdb88c8359626"
+    },
+    {
+      "path": "Concepts/Evaluation/BLEU Score.md",
+      "sha256": "d432707ef676024e1f9b8f639f9d1df3b2d327e1207fd8cf14cb40b2d9a67988"
+    }
+  ]
+}

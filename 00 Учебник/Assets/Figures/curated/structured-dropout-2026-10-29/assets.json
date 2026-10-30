@@ -1,0 +1,46 @@
+[
+  {
+    "id": "curated-structured-dropout-6378eb8d7bf1",
+    "asset": "00 Учебник/Assets/Figures/curated/structured-dropout-2026-10-29/dropconnect-original.png",
+    "author": "Albert Senen-Cerda and Jaron Sanders",
+    "title": "Original Figure 1: full network, DropConnect sample and arborescence",
+    "source_url": "https://jmlr.org/papers/v26/20-1396.html",
+    "source_image_url": "https://jmlr.org/papers/volume26/20-1396/20-1396.pdf#page=2",
+    "source_asset": "05 Источники/Originals/structured-dropout-2026-10-29/senen-cerda-sanders-2025.pdf",
+    "source_asset_sha256": "1296d2ee001235816ebe59c3f17420c39e65538fea0af69ddc2c3f400705f9af",
+    "source_page": 2,
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/structured-dropout-2026-10-29/senen-cerda-sanders-2025.pdf",
+    "license_evidence_sha256": "1296d2ee001235816ebe59c3f17420c39e65538fea0af69ddc2c3f400705f9af",
+    "license_evidence_location": "PDF page 1, copyright and license footer",
+    "copyright": "Copyright 2025 Albert Senen-Cerda and Jaron Sanders",
+    "derivation": "pdf-page-render-crop",
+    "render_dpi": 288,
+    "render_page_size_px": [
+      2448,
+      3168
+    ],
+    "crop_box_px": [
+      340,
+      890,
+      2110,
+      1685
+    ],
+    "modifications": "All three panels and complete original caption cropped from PDF page 2. No redraw, relabeling or translation. The caption's remove/keep probability inconsistency is explained adjacent to the figure.",
+    "last_verified": "2026-10-29",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация.md"
+    ],
+    "dimensions_px": [
+      1770,
+      795
+    ],
+    "width": 1770,
+    "height": 795,
+    "sha256": "6378eb8d7bf1291a87eef8c6cfa199ed09c5c2b77cf46afc84ecea65e9219eed",
+    "bytes": 181934
+  }
+]

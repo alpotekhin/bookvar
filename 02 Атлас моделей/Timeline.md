@@ -1,7 +1,7 @@
 ---
 title: Хронология моделей и технологий LLM
 type: concept
-last_updated: 2026-09-07
+last_updated: 2026-10-29
 last_verified: 2026-09-07
 status: active
 ---
@@ -54,7 +54,7 @@ Flamingo важен не просто как «модель с картинка�
 | 2023-01 (статья) | BLIP-2 | Q-Former как обучаемый bottleneck между замороженными vision encoder и LLM | [Li et al., 30 января 2023](https://arxiv.org/abs/2301.12597) |
 | 2023-02 (статья) | LLaMA | компактная открытая decoder-only база с RMSNorm, SwiGLU и RoPE | [Touvron et al.](https://arxiv.org/abs/2302.13971) |
 | 2023-04 (анонс/карточка) | LLaVA | проекция CLIP-признаков в пространство токенов LLM и visual instruction tuning | [Microsoft Research, LLaVA](https://www.microsoft.com/en-us/research/project/llava-large-language-and-vision-assistant/overview/) |
-| 2023 (статья) | Falcon | MQA и RefinedWeb как совместный акцент на архитектуре вывода и открытом веб-корпусе | [Falcon report](https://arxiv.org/abs/2311.16867), [RefinedWeb](https://arxiv.org/abs/2306.01116) |
+| 2023 (статья) | Falcon | MQA у 7B, групповые K/V у 40B и RefinedWeb как открытый веб-корпус | [Falcon report](https://arxiv.org/abs/2311.16867), [RefinedWeb](https://arxiv.org/abs/2306.01116) |
 | 2023-07 (статья) | Llama 2 | открытая pre-trained/chat ветка; GQA в модели 70B | [Llama 2](https://arxiv.org/abs/2307.09288) |
 | 2023-07 (статья) | RetNet | parallel, recurrent и chunkwise-recurrent формы одного retention-оператора | [Retentive Network](https://arxiv.org/abs/2307.08621) |
 | 2023-09 (статья) | Qwen, Baichuan 2 | многоязычные открытые decoder-only экосистемы | [Qwen report](https://arxiv.org/abs/2309.16609), [Baichuan 2](https://arxiv.org/abs/2309.10305) |
@@ -70,7 +70,7 @@ Flamingo важен не просто как «модель с картинка�
 | 2024-01 (статья; веса — 2023-12) | Mixtral 8×7B | открытый sparse MoE с top-2 маршрутизацией | [Mixtral of Experts](https://arxiv.org/abs/2401.04088), [анонс 11 декабря](https://mistral.ai/news/mixtral-of-experts/) |
 | 2024-03 (статья; релиз — 2024-02) | Gemma | компактная открытая decoder-only ветка Google | [Gemma technical report](https://arxiv.org/abs/2403.08295), [релиз 21 февраля](https://blog.google/innovation-and-ai/technology/developers-tools/gemma-open-models/) |
 | 2024-03 (статья) | Jamba | чередование Attention и Mamba внутри sparse-MoE модели | [Jamba](https://arxiv.org/abs/2403.19887) |
-| 2024-03 (анонс/карточка) | DBRX | fine-grained top-4 MoE и dropless serving stack | [Databricks release](https://www.databricks.com/blog/introducing-dbrx-new-state-art-open-llm) |
+| 2024-03 (анонс/карточка) | DBRX | fine-grained top-4 MoE; MegaBlocks входит в опубликованный стек обучения | [Databricks release](https://www.databricks.com/blog/introducing-dbrx-new-state-art-open-llm) |
 | 2024-03 (анонс/карточка) | Command R | модель, постобучение которой ориентировано на retrieval, citations и tool use | [официальный model card](https://huggingface.co/CohereForAI/c4ai-command-r-v01) |
 | 2024-05 (статья) | DeepSeek-V2 | MLA с латентным KV-кэшем и fine-grained DeepSeekMoE | [DeepSeek-V2](https://arxiv.org/abs/2405.04434) |
 | 2024-07 (статья) | Llama 3.1 | плотная 405B модель, GQA и опубликованный контекст 128K | [Llama 3 report](https://arxiv.org/abs/2407.21783) |
@@ -78,7 +78,7 @@ Flamingo важен не просто как «модель с картинка�
 | 2024-07-31 (arXiv; релиз — 2024-06) | Gemma 2 | чередование локального и глобального внимания, logit soft-capping и distillation recipe | [статья Gemma 2](https://arxiv.org/abs/2408.00118), [релиз 27 июня](https://blog.google/innovation-and-ai/technology/developers-tools/google-gemma-2/) |
 | 2024-09 (статья) | Qwen2-VL | dynamic resolution и multimodal RoPE | [Qwen2-VL](https://arxiv.org/abs/2409.12191) |
 | 2024-12 (статья) | Phi-4 | data-centric малая модель с большим объёмом синтетических данных | [Phi-4 technical report](https://arxiv.org/abs/2412.08905) |
-| 2024-12 (статья) | DeepSeek-V3 | MLA+MoE, multi-token prediction, FP8 и балансировка без вспомогательной функции потерь | [DeepSeek-V3](https://arxiv.org/abs/2412.19437) |
+| 2024-12 (статья) | DeepSeek-V3 | MLA+MoE, multi-token prediction, FP8; основная балансировка меняет routing biases, небольшой sequence-wise auxiliary loss сохраняется | [DeepSeek-V3, §2.1.2](https://arxiv.org/html/2412.19437v2#S2.SS1.SSS2) |
 
 ## 2025–2026: рассуждение, нативная мультимодальность и гибридное внимание
 
@@ -93,7 +93,7 @@ Flamingo важен не просто как «модель с картинка�
 | 2025 (статья) | Kimi Linear | гибрид Kimi Delta Attention и полного attention как отдельная исследовательская линия | [Kimi Linear](https://arxiv.org/abs/2510.26692) |
 | 2025-12 (статья) | DeepSeek-V3.2 | DeepSeek Sparse Attention поверх MLA | [DeepSeek-V3.2](https://arxiv.org/abs/2512.02556) |
 | 2025-12 (статья о семействе; Nano — 15.12.2025) | Nemotron 3 | гибрид Mamba-2 и attention с MoE; последующий Super развивает LatentMoE, MTP и низкоточное предобучение | [Nemotron 3 overview](https://arxiv.org/abs/2512.20856), [[02 Атлас моделей/Семейства/Nemotron|карточка семейства]] |
-| 2026 (линия репозитория) | Qwen3.5/3.6 | гибрид Gated Delta Networks и attention, sparse MoE и мультимодальность | [официальный Qwen3.6 repository](https://github.com/QwenLM/Qwen3.6) |
+| 2026 (линия репозитория) | Qwen3.5/3.6 | гибрид Gated DeltaNet и attention; у 3.5 есть плотные и MoE-варианты, мультимодальный вход | [официальный Qwen3.6 repository](https://github.com/QwenLM/Qwen3.6), [[02 Атлас моделей/Семейства/Qwen|конфигурации в карточке семейства]] |
 | 2026 (линия репозитория) | Kimi K2.5 | нативная мультимодальная agentic-ветка K2 | [официальный Kimi K2.5 repository](https://github.com/MoonshotAI/Kimi-K2.5) |
 | 2026-02 (линия репозитория) | GLM-5 | 744B/40B-active, DSA и 28.5T training tokens; последующие 5.1-релизы не следует автоматически считать новым backbone | [GLM-5 report/repository](https://github.com/zai-org/GLM-5) |
 | 2026-03 (статья) | Mamba-3 | следующее поколение state-space архитектуры | [Mamba-3](https://arxiv.org/abs/2603.15569) |
@@ -111,16 +111,16 @@ LLM может находиться по разные стороны этих п
 | Дата | Работа или система | Что изменилось | Подробный разбор и первичный источник |
 |---|---|---|---|
 | 2023-06 | LeanDojo | закреплённая версия Lean-библиотеки, retrieval доступных посылок и проверка каждого доказательства ядром | [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты#Нейросетевой prover: от поиска посылок до проверки ядром|разбор]], [Yang et al.](https://arxiv.org/abs/2306.15626) |
-| 2023-10 | COPRA | proof-state feedback, история неудачных шагов и backtracking превратили одиночную генерацию tactic в управляемый поиск | [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты#COPRA: поиск с состоянием, возвратом и обратной связью prover|разбор]], [Thakur et al.](https://arxiv.org/abs/2310.04353) |
+| 2023-10 | COPRA | proof-state feedback, история неудачных шагов и backtracking превратили одиночную генерацию tactic в управляемый поиск | [[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты#COPRA: поиск с состоянием, возвратом и формальной обратной связью|разбор]], [Thakur et al.](https://arxiv.org/abs/2310.04353) |
 | 2024-04 | OSWorld | benchmark computer-use agent стал контрактом из начального состояния, action space, reset и execution-based evaluator | [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents#OSWorld: восстанавливаемая VM, исполняемые действия и проверка результата|разбор]], [Xie et al.](https://arxiv.org/abs/2404.07972) |
-| 2024-07 | AgentPoison | retrieval-триггер связал малую долю отравленных записей с целевым вредоносным поведением агента | [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем#Прямые и косвенные инъекции, отравление retrieval и памяти|разбор]], [Chen et al.](https://arxiv.org/abs/2407.12784) |
+| 2024-07 | AgentPoison | retrieval-триггер связал малую долю отравленных записей с целевым вредоносным поведением агента | [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем#AgentPoison: как запись оказывается в нужном контексте|разбор]], [Chen et al.](https://arxiv.org/abs/2407.12784) |
 | 2024-09 | LaSR | найденные формулы обновляют библиотеку понятий, а библиотека направляет mutation и crossover следующего поколения | [[00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery#LaSR: совместная эволюция формул и библиотеки понятий|разбор]], [Grayeli et al.](https://arxiv.org/abs/2409.09359) |
 | 2024-12 | AgentTrek | руководства из web превращаются в задачи и подсказки, которые заново исполняются и проверяются в актуальной GUI-среде | [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents#AgentTrek: от руководств к траекториям через управляемое воспроизведение|разбор]], [Xu et al.](https://arxiv.org/abs/2412.09605) |
 | 2024-12 | TACO | мультимодальные обучающие траектории чередуют reasoning tokens и исполняемые actions; action-useless примеры отфильтровываются | [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents#TACO: совместное обучение токенов рассуждения и действий|разбор]], [TACO v1](https://arxiv.org/abs/2412.05479v1) |
 | 2024-12 | Aguvis | единое визуальное пространство действий связало web, desktop и mobile, а обучение разделило grounding и длинные траектории | [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents#Aguvis: единое визуальное пространство наблюдений и действий|разбор]], [Xu et al.](https://arxiv.org/abs/2412.04454) |
 | 2025-02 | InSTA | pipeline формулирует задачи на работающих сайтах, исполняет их и оставляет только траектории, прошедшие автоматическую проверку | [[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents#InSTA: синтетические задачи из работающего web|разбор]], [Liu et al.](https://arxiv.org/abs/2502.06776) |
-| 2025-04 | Progent | права на tool calls задаются исполнимой политикой с детерминированным enforcement и явным fallback | [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем#Progent: наименьшие привилегии как исполнимая политика вызова|разбор]], [Progent](https://arxiv.org/abs/2504.11703) |
-| 2025-04 | DataSentinel | detector prompt injection обучается против адаптивного атакующего в minimax-постановке | [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем#Наблюдение за выполнением, потоки данных и формальная проверка политики|разбор]], [DataSentinel](https://arxiv.org/abs/2504.11358) |
+| 2025-04 | Progent | права на tool calls задаются исполнимой политикой с детерминированным enforcement и явным fallback | [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем#Progent: проверка вызова вне модели|разбор]], [Progent](https://arxiv.org/abs/2504.11703) |
+| 2025-04 | DataSentinel | detector prompt injection обучается против адаптивного атакующего в minimax-постановке | [[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем#DataSentinel: детектор, который должен поддаваться инъекции|разбор]], [DataSentinel](https://arxiv.org/abs/2504.11358) |
 
 ## Inference и serving: от GPU-ядер к разделению prefill и decode
 

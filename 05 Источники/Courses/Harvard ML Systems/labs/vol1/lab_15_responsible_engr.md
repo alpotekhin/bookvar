@@ -9,9 +9,18 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol1/lab_15_responsible_engr.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol1/lab_15_responsible_engr.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL1 Lab — Responsible Engr
 
@@ -19,95 +28,8 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 **Recommended Reading** - Complete before this lab:
 
-    - **The Responsible Engineering chapter** - metric conflict, fairness trade-offs,
-      explainability overhead, privacy constraints, robustness, and sustainability.
-
----
-
-## Part A: Thresholds Encode Values
-
-**Scenario.** You are the **{v1_15_resp.stakeholder}**. The release board asks
-whether one shared threshold is acceptable for **{v1_15_resp.subgroup_a}** and
-**{v1_15_resp.subgroup_b}**.
-
-**Concept.** Thresholds encode values. Moving the threshold changes who absorbs
-false-positive and false-negative harm; the aggregate score does not decide that
-for you.
-
----
-
-**Evidence Table - Live Values**
-
-| Metric | {v1_15_resp.subgroup_a} | {v1_15_resp.subgroup_b} |
-|---|---:|---:|
-| Base/context rate | {_conflict.base_rate_a_pct:.1f}% | {_conflict.base_rate_b_pct:.1f}% |
-| Approval/action rate | `…`% | `…`% |
-| Accuracy | {_conflict.accuracy_a_pct:.1f}% | {_conflict.accuracy_b_pct:.1f}% |
-| False positive rate | {_conflict.fpr_a_pct:.1f}% | {_conflict.fpr_b_pct:.1f}% |
-| False negative rate | {_conflict.fnr_a_pct:.1f}% | {_conflict.fnr_b_pct:.1f}% |
-| Positive predictive value | {_conflict.ppv_a_pct:.1f}% | {_conflict.ppv_b_pct:.1f}% |
-| Shared threshold | {partA_threshold.value:.2f} | {partA_threshold.value:.2f} |
-
-*Source: `mlsysbook_labs.metric_conflict`, track `{v1_15_profile.track_id}`.*
-
----
-
-For each group, the notebook computes:
-
-`TPR = TP / (TP + FN)`, `FPR = FP / (FP + TN)`, and
-`PPV = TP / (TP + FP)`.
-
-The chapter's fairness section shows why demographic parity, equal opportunity,
-equalized odds, and calibration can conflict when base/context rates differ. In
-this lab, a release fails the Part A gate when
-`abs(FPR_A - FPR_B) > {v1_15_resp.target_gap_pp:.1f} pp`.
-
----
-
-## Part B: Privacy Budget Changes Evidence
-
-**Scenario.** The release needs **{v1_15_policy['evidence_label']}**. Privacy,
-consent, retention, and local processing decide whether that evidence is lawful
-and strong enough to use.
-
-**Concept.** Privacy budgets and data minimization change model evidence. Strong
-privacy can reduce deployability risk, but it can also make the audit too weak
-to support the release decision.
-
----
-
-**Privacy Evidence Table - Live Values**
-
-| Quantity | Value |
-|---|---:|
-| Epsilon budget used | {_privacy['epsilon']:.1f} / {_privacy['epsilon_limit']:.1f} |
-| Retention days | {_privacy['retention_days']} / {_privacy['max_retention_days']} |
-| Raw or sensitive evidence retained | {_privacy['raw_pct']:.0f}% |
-| Local/federated processing | {_privacy['local_pct']:.0f}% |
-| Raw retained evidence records | {_privacy['raw_records']:,.0f} |
-| Effective audit evidence records | {_privacy['effective_records']:,.0f} |
-| Evidence confidence | {_privacy['evidence_confidence']:.1f}% |
-| Model-evidence delta | {_privacy['model_evidence_delta']:+.2f} pp |
-| Membership-inference risk index | {_privacy['membership_risk']:.1f} / {_privacy['privacy_risk_cap']:.0f} |
-| Deployability | {"PASS" if _privacy['deployable'] else "FAIL"} |
-
-*Source model: notebook-local `v1_15_privacy_result`; chapter anchors: differential privacy, data minimization, retention, and membership-inference validation.*
-
----
-
-Differential privacy bounds each record's influence:
-
-`Pr[M(D)=o] <= exp(epsilon) * Pr[M(D')=o]`.
-
-The teaching model treats deployability as a conjunction:
-
-`epsilon <= {v1_15_policy['epsilon_limit']:.1f}`,
-`retention <= {v1_15_policy['max_retention_days']} days`,
-`evidence_confidence >= {v1_15_policy['min_evidence_confidence']:.0f}%`,
-and `membership_risk <= {v1_15_policy['privacy_risk_cap']:.0f}`.
-
-Data minimization reduces privacy risk, but it also changes how much evidence
-the model audit can use.
+- **The Responsible Engineering chapter** - metric conflict, fairness trade-offs,
+  explainability overhead, privacy constraints, robustness, and sustainability.
 
 ---
 
@@ -120,24 +42,6 @@ cannot harm more than the track's blast-radius cap.
 **Concept.** Safety is not the average model score. It is a release gate that
 combines rare-event evidence, exposure size, fallback coverage, and rollback
 time.
-
----
-
-**Safety And Blast-Radius Table - Live Values**
-
-| Quantity | Value |
-|---|---:|
-| Selected safety threshold | {_safety['threshold_pct']:.1f}% |
-| Track safety floor | {_safety['track_floor_pct']:.1f}% |
-| Rare-event evidence score | {_safety['rare_event_score']:.1f}% |
-| Initial canary exposure | {_safety['canary_pct']:.0f}% |
-| Estimated blast radius | {_safety['affected_units']:,.0f} {v1_15_policy['blast_unit']} |
-| Blast-radius cap | {_safety['blast_cap_units']:,.0f} {v1_15_policy['blast_unit']} |
-| Rollback or mitigation time | {_safety['rollback_minutes']:.0f} minutes |
-| Fallback / human-review coverage | {_safety['human_review_pct']:.0f}% |
-| Release status | {"PASS" if _safety['release_ok'] else "FAIL"} |
-
-*Source model: notebook-local `v1_15_safety_result`; chapter anchors: silent failures, predeployment assessment, rollback, kill switches, and incident response.*
 
 ---
 
@@ -159,35 +63,6 @@ exposure are part of the release gate.
 
 ---
 
-## Part D: Audit Trail Makes Evidence Accountable
-
-**Scenario.** The release board has technical evidence from Parts A-C. Now it
-needs an accountable trail: lineage, immutable logs, prediction context, access
-review, and an owner.
-
-**Concept.** Governance converts evidence into a decision someone can audit,
-contest, repair, or roll back. The track owner is **{v1_15_policy['audit_owner']}**.
-
----
-
-**Governance Evidence Table - Live Values**
-
-| Quantity | Value |
-|---|---:|
-| Lineage coverage | {_governance['lineage_pct']:.0f}% |
-| Prediction decision-context logging | {_governance['context_pct']:.0f}% |
-| Immutable audit retention | {_governance['retention_days']:,} days |
-| Required audit retention | {_governance['required_retention_days']:,} days |
-| Access review cadence | every {_governance['access_review_days']} days |
-| Owner score | {_governance['owner_score']:.0f}% |
-| Audit readiness | {_governance['readiness']:.1f}% |
-| Audit events/year | {_governance['audit_events_per_year']:,.0f} |
-| Accountable release | {"PASS" if _governance['release_accountable'] else "FAIL"} |
-
-*Source model: notebook-local `v1_15_governance_result`; chapter anchors: lineage, audit infrastructure, decision-time logging, and regulatory contestability.*
-
----
-
 Audit infrastructure must make a release decision reconstructable:
 
 `audit_events_per_year = decisions_per_day * 365 * context_logging_share`.
@@ -197,19 +72,350 @@ review, and owner sign-off. The chapter's audit section emphasizes that
 prediction-time logs need feature values, model version, threshold, and output;
 lineage alone cannot answer why a particular decision happened.
 
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+## Part A: Thresholds Encode Values
+
+**Scenario.** You are the **⟨value 1⟩**. The release board asks
+whether one shared threshold is acceptable for **⟨value 2⟩** and
+**⟨value 3⟩**.
+
+**Concept.** Thresholds encode values. Moving the threshold changes who absorbs
+false-positive and false-negative harm; the aggregate score does not decide that
+for you.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_15_resp.stakeholder}' `
+- value_2: ` f'{v1_15_resp.subgroup_a}' `
+- value_3: ` f'{v1_15_resp.subgroup_b}' `
+
+---
+
+Select your prediction to unlock the threshold audit.
+
+---
+
+**Evidence Table - Live Values**
+
+| Metric | ⟨value 1⟩ | ⟨value 2⟩ |
+|---|---:|---:|
+| Base/context rate | ⟨value 3⟩% | ⟨value 4⟩% |
+| Approval/action rate | ⟨value 5⟩% | ⟨value 6⟩% |
+| Accuracy | ⟨value 7⟩% | ⟨value 8⟩% |
+| False positive rate | ⟨value 9⟩% | ⟨value 10⟩% |
+| False negative rate | ⟨value 11⟩% | ⟨value 12⟩% |
+| Positive predictive value | ⟨value 13⟩% | ⟨value 14⟩% |
+| Shared threshold | ⟨value 15⟩ | ⟨value 16⟩ |
+
+*Source: `mlsysbook_labs.metric_conflict`, track `⟨value 17⟩`.*
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_15_resp.subgroup_a}' `
+- value_2: ` f'{v1_15_resp.subgroup_b}' `
+- value_3: ` f'{_conflict.base_rate_a_pct:.1f}' `
+- value_4: ` f'{_conflict.base_rate_b_pct:.1f}' `
+- value_5: ` f'{_approval_a:.1f}' `
+- value_6: ` f'{_approval_b:.1f}' `
+- value_7: ` f'{_conflict.accuracy_a_pct:.1f}' `
+- value_8: ` f'{_conflict.accuracy_b_pct:.1f}' `
+- value_9: ` f'{_conflict.fpr_a_pct:.1f}' `
+- value_10: ` f'{_conflict.fpr_b_pct:.1f}' `
+- value_11: ` f'{_conflict.fnr_a_pct:.1f}' `
+- value_12: ` f'{_conflict.fnr_b_pct:.1f}' `
+- value_13: ` f'{_conflict.ppv_a_pct:.1f}' `
+- value_14: ` f'{_conflict.ppv_b_pct:.1f}' `
+- value_15: ` f'{partA_threshold.value:.2f}' `
+- value_16: ` f'{partA_threshold.value:.2f}' `
+- value_17: ` f'{v1_15_profile.track_id}' `
+
+---
+
+**Gap above target.** ⟨value 1⟩ A responsible design needs mitigation and audit evidence.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_conflict.conflict_summary}' `
+
+---
+
+**Gap within target.** ⟨value 1⟩ The audit still belongs in the report.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_conflict.conflict_summary}' `
+
+---
+
+For each group, the notebook computes:
+
+`TPR = TP / (TP + FN)`, `FPR = FP / (FP + TN)`, and
+`PPV = TP / (TP + FP)`.
+
+The chapter's fairness section shows why demographic parity, equal opportunity,
+equalized odds, and calibration can conflict when base/context rates differ. In
+this lab, a release fails the Part A gate when
+`abs(FPR_A - FPR_B) > ⟨value 1⟩ pp`.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_15_resp.target_gap_pp:.1f}' `
+
+---
+
+**Correct.** The threshold is a policy choice expressed as a number.
+
+---
+
+**Aggregate quality is insufficient.** The report must name which threshold policy protects the harmed stakeholder and which residual error remains.
+
+---
+
+Choose a threshold policy so the release memo records a decision, not only a metric.
+
+---
+
+## Part B: Privacy Budget Changes Evidence
+
+**Scenario.** The release needs **⟨value 1⟩**. Privacy,
+consent, retention, and local processing decide whether that evidence is lawful
+and strong enough to use.
+
+**Concept.** Privacy budgets and data minimization change model evidence. Strong
+privacy can reduce deployability risk, but it can also make the audit too weak
+to support the release decision.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v1_15_policy['evidence_label']}" `
+
+---
+
+Select your prediction to unlock the privacy evidence budget.
+
+---
+
+**Privacy Evidence Table - Live Values**
+
+| Quantity | Value |
+|---|---:|
+| Epsilon budget used | ⟨value 1⟩ / ⟨value 2⟩ |
+| Retention days | ⟨value 3⟩ / ⟨value 4⟩ |
+| Raw or sensitive evidence retained | ⟨value 5⟩% |
+| Local/federated processing | ⟨value 6⟩% |
+| Raw retained evidence records | ⟨value 7⟩ |
+| Effective audit evidence records | ⟨value 8⟩ |
+| Evidence confidence | ⟨value 9⟩% |
+| Model-evidence delta | ⟨value 10⟩ pp |
+| Membership-inference risk index | ⟨value 11⟩ / ⟨value 12⟩ |
+| Deployability | ⟨value 13⟩ |
+
+*Source model: notebook-local `v1_15_privacy_result`; chapter anchors: differential privacy, data minimization, retention, and membership-inference validation.*
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_privacy['epsilon']:.1f}" `
+- value_2: ` f"{_privacy['epsilon_limit']:.1f}" `
+- value_3: ` f"{_privacy['retention_days']}" `
+- value_4: ` f"{_privacy['max_retention_days']}" `
+- value_5: ` f"{_privacy['raw_pct']:.0f}" `
+- value_6: ` f"{_privacy['local_pct']:.0f}" `
+- value_7: ` f"{_privacy['raw_records']:,.0f}" `
+- value_8: ` f"{_privacy['effective_records']:,.0f}" `
+- value_9: ` f"{_privacy['evidence_confidence']:.1f}" `
+- value_10: ` f"{_privacy['model_evidence_delta']:+.2f}" `
+- value_11: ` f"{_privacy['membership_risk']:.1f}" `
+- value_12: ` f"{_privacy['privacy_risk_cap']:.0f}" `
+- value_13: ` f"{('PASS' if _privacy['deployable'] else 'FAIL')}" `
+
+---
+
+Differential privacy bounds each record's influence:
+
+`Pr[M(D)=o] <= exp(epsilon) * Pr[M(D')=o]`.
+
+The teaching model treats deployability as a conjunction:
+
+`epsilon <= ⟨value 1⟩`,
+`retention <= ⟨value 2⟩ days`,
+`evidence_confidence >= ⟨value 3⟩%`,
+and `membership_risk <= ⟨value 4⟩`.
+
+Data minimization reduces privacy risk, but it also changes how much evidence
+the model audit can use.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v1_15_policy['epsilon_limit']:.1f}" `
+- value_2: ` f"{v1_15_policy['max_retention_days']}" `
+- value_3: ` f"{v1_15_policy['min_evidence_confidence']:.0f}" `
+- value_4: ` f"{v1_15_policy['privacy_risk_cap']:.0f}" `
+
+---
+
+**Correct.** Privacy is a deployability gate because it changes both risk and usable evidence.
+
+---
+
+**More raw data is not automatically more responsible.** The defensible point minimizes retained data while preserving enough audit evidence to justify release.
+
+---
+
+Choose a privacy evidence decision for the memo.
+
+---
+
+Select your prediction to unlock the safety release gate.
+
+---
+
+**Safety And Blast-Radius Table - Live Values**
+
+| Quantity | Value |
+|---|---:|
+| Selected safety threshold | ⟨value 1⟩% |
+| Track safety floor | ⟨value 2⟩% |
+| Rare-event evidence score | ⟨value 3⟩% |
+| Initial canary exposure | ⟨value 4⟩% |
+| Estimated blast radius | ⟨value 5⟩ ⟨value 6⟩ |
+| Blast-radius cap | ⟨value 7⟩ ⟨value 8⟩ |
+| Rollback or mitigation time | ⟨value 9⟩ minutes |
+| Fallback / human-review coverage | ⟨value 10⟩% |
+| Release status | ⟨value 11⟩ |
+
+*Source model: notebook-local `v1_15_safety_result`; chapter anchors: silent failures, predeployment assessment, rollback, kill switches, and incident response.*
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_safety['threshold_pct']:.1f}" `
+- value_2: ` f"{_safety['track_floor_pct']:.1f}" `
+- value_3: ` f"{_safety['rare_event_score']:.1f}" `
+- value_4: ` f"{_safety['canary_pct']:.0f}" `
+- value_5: ` f"{_safety['affected_units']:,.0f}" `
+- value_6: ` f"{v1_15_policy['blast_unit']}" `
+- value_7: ` f"{_safety['blast_cap_units']:,.0f}" `
+- value_8: ` f"{v1_15_policy['blast_unit']}" `
+- value_9: ` f"{_safety['rollback_minutes']:.0f}" `
+- value_10: ` f"{_safety['human_review_pct']:.0f}" `
+- value_11: ` f"{('PASS' if _safety['release_ok'] else 'FAIL')}" `
+
+---
+
+**Correct.** A safe release is bounded by threshold, exposure, fallback, and rollback.
+
+---
+
+**Average quality is not enough.** The release memo must show the rare-event threshold and how far harm can spread before mitigation.
+
+---
+
+Choose the safety release decision for the memo.
+
+---
+
+## Part D: Audit Trail Makes Evidence Accountable
+
+**Scenario.** The release board has technical evidence from Parts A-C. Now it
+needs an accountable trail: lineage, immutable logs, prediction context, access
+review, and an owner.
+
+**Concept.** Governance converts evidence into a decision someone can audit,
+contest, repair, or roll back. The track owner is **⟨value 1⟩**.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v1_15_policy['audit_owner']}" `
+
+---
+
+Select your prediction to unlock the audit readiness gate.
+
+---
+
+**Governance Evidence Table - Live Values**
+
+| Quantity | Value |
+|---|---:|
+| Lineage coverage | ⟨value 1⟩% |
+| Prediction decision-context logging | ⟨value 2⟩% |
+| Immutable audit retention | ⟨value 3⟩ days |
+| Required audit retention | ⟨value 4⟩ days |
+| Access review cadence | every ⟨value 5⟩ days |
+| Owner score | ⟨value 6⟩% |
+| Audit readiness | ⟨value 7⟩% |
+| Audit events/year | ⟨value 8⟩ |
+| Accountable release | ⟨value 9⟩ |
+
+*Source model: notebook-local `v1_15_governance_result`; chapter anchors: lineage, audit infrastructure, decision-time logging, and regulatory contestability.*
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_governance['lineage_pct']:.0f}" `
+- value_2: ` f"{_governance['context_pct']:.0f}" `
+- value_3: ` f"{_governance['retention_days']:,}" `
+- value_4: ` f"{_governance['required_retention_days']:,}" `
+- value_5: ` f"{_governance['access_review_days']}" `
+- value_6: ` f"{_governance['owner_score']:.0f}" `
+- value_7: ` f"{_governance['readiness']:.1f}" `
+- value_8: ` f"{_governance['audit_events_per_year']:,.0f}" `
+- value_9: ` f"{('PASS' if _governance['release_accountable'] else 'FAIL')}" `
+
+---
+
+**Correct.** Accountability requires reconstructable evidence and a named owner.
+
+---
+
+**Documentation alone is not accountability.** A memo needs lineage, immutable logs, prediction context, and a decision owner.
+
+---
+
+Choose the governance decision for the memo.
+
+---
+
+## Synthesis: Responsible Release Memo
+
+---
+
+**Chapter invariant.** Responsible ML constraints include people and policy. For ⟨value 1⟩, the release decision is governed by threshold harm, privacy evidence, safety blast radius, and audit accountability.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_15_resp.label}' `
+
 ---
 
 **Report decisions selected**
 
 | Module | Checkpoint decision |
 |---|---|
-| Threshold policy | `{partA_policy.value}` |
-| Privacy evidence | `{partB_decision.value}` |
-| Safety release | `{partC_decision.value}` |
-| Governance | `{partD_decision.value}` |
+| Threshold policy | `⟨value 1⟩` |
+| Privacy evidence | `⟨value 2⟩` |
+| Safety release | `⟨value 3⟩` |
+| Governance | `⟨value 4⟩` |
 
 The memo should name the harmed stakeholder, the residual risk owner, and the
 specific threshold or policy that will carry forward into the capstone audit.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{partA_policy.value}' `
+- value_2: ` f'{partB_decision.value}' `
+- value_3: ` f'{partC_decision.value}' `
+- value_4: ` f'{partD_decision.value}' `
+
+---
+
+## Download Report
+
+---
+
+This V1-15 report is generated locally from the selected track, MLSysIM hardware/model refs, shared `mlsysbook_labs.metric_conflict`, and notebook-local `v1_15_` release-gate calculations.
+
+</details>
 
 ## Complete original Marimo source
 

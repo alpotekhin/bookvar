@@ -2,8 +2,8 @@
 title: DPO — непосредственная оптимизация предпочтений
 type: textbook-chapter
 status: canonical
-last_updated: 2026-09-21
-last_verified: 2026-09-21
+last_updated: 2026-10-24
+last_verified: 2026-10-24
 aliases:
   - DPO
 prerequisites:
@@ -31,7 +31,7 @@ source_unit_id:
 
 На вопрос «Гарантирует ли UDP доставку пакетов?» модель ответила двумя способами:
 «Нет, потерянные пакеты должно обрабатывать приложение» и «Да, UDP повторно
-передаёт потерянные пакеты». Для обучения по первому ответу достаточно SFT.
+передаёт потерянные пакеты». Первый ответ можно использовать как демонстрацию для SFT.
 Но у нас есть дополнительная информация: второй ответ содержит конкретную
 ошибку, и при сравнении следует предпочесть первый. DPO использует именно
 такую разметку — запрос и два ответа с известным предпочтением.
@@ -64,8 +64,8 @@ DPO объединяет обучение по предпочтениям и и�
 
 *Слева показан обычный RLHF с отдельной моделью
 награды, справа — обучение языковой модели непосредственно на предпочтениях.
-Процесс становится проще, однако качество данных и предположение о скрытой
-численной полезности ответов остаются столь же важными. Rafailov et al.,
+Справа используются готовые пары: новые ответы внутри шага обучения
+не генерируются. Rafailov et al.,
 [Direct Preference Optimization, Figure 1, с. 2](https://arxiv.org/pdf/2305.18290#page=2).*
 
 На рисунке справа нет отдельной модели награды, но это не означает отсутствия
@@ -139,43 +139,48 @@ $$
 
 <a id="dpo-rhf-objective"></a>
 
-Для каждого запроса рассмотрим следующую задачу оптимизации стратегии:
+Для фиксированного запроса рассмотрим следующую задачу оптимизации стратегии.
+В записи KL ниже для краткости опущено условие $x$:
 
 $$
-\max_\pi
-\mathbb E_{y\sim\pi(\cdot\mid x)}[r(x,y)]
--\beta D_{KL}(\pi(\cdot\mid x)\Vert\pi_{ref}(\cdot\mid x)).
+\begin{gathered}
+\max_\pi J(\pi),\\
+J(\pi)=\mathbb E_{y\sim\pi(\cdot\mid x)}[r(x,y)]\\
+-\beta D_{KL}(\pi\Vert\pi_{ref}).
+\end{gathered}
 $$
 
 $\pi_{ref}$ — обычно модель после SFT, а $\beta>0$ определяет цену отклонения от
 неё. Рассматриваются ответы с положительной вероятностью у опорной модели;
 предполагается, что определённая ниже нормировочная сумма $Z(x)$ конечна.
-Раскроем математическое ожидание:
+Раскроем математическое ожидание при ограничении $\sum_y\pi(y\mid x)=1$:
 
 $$
-J(\pi)=\sum_y\pi(y\mid x)
-\left[r(x,y)-\beta\log\frac{\pi(y\mid x)}{\pi_{ref}(y\mid x)}\right]
+\begin{aligned}
+J(\pi)&=\sum_y\pi(y\mid x)r(x,y)\\
+&\quad-\beta\sum_y\pi(y\mid x)
+\log\frac{\pi(y\mid x)}{\pi_{ref}(y\mid x)}.
+\end{aligned}
 $$
 
-при ограничении $\sum_y\pi(y\mid x)=1$. Добавим множитель Лагранжа $\lambda$:
+Добавим множитель Лагранжа $\lambda$:
 
 $$
 \mathcal F=J(\pi)+\lambda\left(\sum_y\pi(y\mid x)-1\right).
 $$
 
-Производная по $\pi(y\mid x)$:
+Условие стационарности по $\pi(y\mid x)$:
 
 $$
-r(x,y)-\beta\left(
-\log\frac{\pi(y\mid x)}{\pi_{ref}(y\mid x)}+1
-\right)+\lambda=0.
+r(x,y)+\lambda=\beta\left(
+\log\frac{\pi(y\mid x)}{\pi_{ref}(y\mid x)}+1\right).
 $$
 
 После перегруппировки и нормировки получаем распределение Больцмана:
 
 $$
 \pi_r(y\mid x)=
-\frac{1}{Z(x)}\pi_{ref}(y\mid x)
+\frac{\pi_{ref}(y\mid x)}{Z(x)}
 \exp\left(\frac{r(x,y)}{\beta}\right),
 $$
 
@@ -190,7 +195,7 @@ $$
 над всеми распределениями: мы не утверждаем, что конечный Transformer можно
 обучить до этого решения без ошибки.
 
-Особенно наглядно переписать целевую функцию как
+Целевую функцию также можно записать как
 
 $$
 J(\pi)=\beta\log Z(x)-\beta D_{KL}(\pi\Vert\pi_r).
@@ -210,8 +215,10 @@ $$
 Берём логарифм:
 
 $$
-\log\pi_r(y\mid x)
-=\log\pi_{ref}(y\mid x)+\frac{r(x,y)}{\beta}-\log Z(x).
+\begin{aligned}
+\log\pi_r(y\mid x)&=\log\pi_{ref}(y\mid x)\\
+&\quad+\frac{r(x,y)}{\beta}-\log Z(x).
+\end{aligned}
 $$
 
 Отсюда
@@ -222,15 +229,49 @@ r(x,y)=
 +\beta\log Z(x).
 $$
 
-Для двух ответов на один запрос:
+### Два ответа: нормировка и восстановление награды
+
+Возьмём опорное распределение $(0.5,0.5)$, награды $(1,0)$ и $\beta=0.5$.
+До нормировки веса ответов равны $0.5e^2$ и $0.5$; их сумма
+$Z=4.194528$. После деления на неё получаем $(0.880797,0.119203)$.
+Первый ответ стал вероятнее, но второй сохранил ненулевую вероятность.
+Если теперь подставить это распределение обратно в выражение для награды,
+то $\beta\log(\pi_r/\pi_{ref})$ даст $(0.283110,-0.716890)$.
+Разность по-прежнему равна 1; добавление общей константы
+$\beta\log Z=0.716890$ восстановит исходные $(1,0)$.
+
+```python
+import math
+import torch
+
+reference_probability = torch.tensor([0.5, 0.5], dtype=torch.float64)
+explicit_reward = torch.tensor([1.0, 0.0], dtype=torch.float64)
+reward_beta = 0.5
+log_weight = reference_probability.log() + explicit_reward / reward_beta
+log_partition = torch.logsumexp(log_weight, dim=0)
+optimal_probability = (log_weight - log_partition).exp()
+implicit_reward = reward_beta * (
+    optimal_probability.log() - reference_probability.log()
+)
+recovered_reward = implicit_reward + reward_beta * log_partition
+torch.testing.assert_close(recovered_reward, explicit_reward)
+print(optimal_probability.tolist())
+print(implicit_reward.tolist())
+```
+
+В этом маленьком примере сумма по всем ответам доступна. Для языковой модели
+суммировать по всем возможным текстам практически невозможно. При обучении
+по сравнениям эту сумму вычислять не понадобится.
+
+### Почему нормировка сокращается
+
+Для двух ответов на один запрос обозначим $r_w=r(x,y_w)$ и $r_l=r(x,y_l)$:
 
 $$
 \begin{aligned}
-r(x,y_w)-r(x,y_l)
-=\beta\bigg[
-&\log\frac{\pi_r(y_w\mid x)}{\pi_{ref}(y_w\mid x)}\\
--&\log\frac{\pi_r(y_l\mid x)}{\pi_{ref}(y_l\mid x)}
-\bigg].
+r_w-r_l&=\beta\biggl[
+\log\frac{\pi_r(y_w\mid x)}{\pi_{ref}(y_w\mid x)}\\
+&\qquad-\log\frac{\pi_r(y_l\mid x)}{\pi_{ref}(y_l\mid x)}\biggr].
 \end{aligned}
 $$
 
@@ -240,22 +281,21 @@ $\beta\log Z(x)$ одинаков для обоих ответов и **сокр
 
 Теперь меняется способ параметризации. Вместо отдельной сети $r_\phi$ вводим
 языковую модель $\pi_\theta$ и определяем через неё награду
-$\hat r_\theta=\beta\log(\pi_\theta/\pi_{ref})$. Для любой нормированной
-$\pi_\theta$ это допустимая награда, оптимальной стратегией для которой является
+$\hat r_\theta=\beta\log(\pi_\theta/\pi_{ref})$. Для нормированной
+$\pi_\theta$ с положительными вероятностями на том же носителе это допустимая
+награда, оптимальной стратегией для которой является
 сама $\pi_\theta$. Её можно обучать по тем же сравнениям Брэдли — Терри:
 
 $$
-\boxed{
-\mathcal L_{DPO}
-=-\mathbb E_{(x,y_w,y_l)}
-\log\sigma\left(
-\beta\left[
-\log\frac{\pi_\theta(y_w\mid x)}{\pi_{ref}(y_w\mid x)}
--\log\frac{\pi_\theta(y_l\mid x)}{\pi_{ref}(y_l\mid x)}
-\right]
-\right)}.
+\boxed{\begin{aligned}
+\mathcal L_{DPO}&=-\mathbb E_{\mathcal D}\log\sigma(z_\theta),\\
+z_\theta&=\beta\biggl[
+\log\frac{\pi_\theta(y_w\mid x)}{\pi_{ref}(y_w\mid x)}\\
+&\qquad-\log\frac{\pi_\theta(y_l\mid x)}{\pi_{ref}(y_l\mid x)}\biggr].
+\end{aligned}}
 $$
 
+Ожидание здесь берётся по записям $(x,y_w,y_l)$ набора $\mathcal D$.
 Так исчезают отдельное обучение модели награды и последующее приближение
 оптимальной стратегии с помощью PPO. Не исчезают предположения: предпочтения
 должны достаточно хорошо описываться выбранной моделью сравнения, а обучающие
@@ -267,8 +307,10 @@ $$
 Введём изменение логарифма вероятности относительно опорной модели:
 
 $$
-\Delta_\theta(x,y)=
-\log\pi_\theta(y\mid x)-\log\pi_{ref}(y\mid x).
+\begin{aligned}
+\Delta_\theta(x,y)&=\log\pi_\theta(y\mid x)\\
+&\quad-\log\pi_{ref}(y\mid x).
+\end{aligned}
 $$
 
 Тогда аргумент сигмоиды в DPO равен
@@ -284,17 +326,18 @@ $$
 
 Пусть логарифмы вероятностей полных ответов равны:
 
-| | выбранный $y_w$ | отвергнутый $y_l$ |
+| Модель | $y_w$ | $y_l$ |
 |---|---:|---:|
-| текущая модель $\log\pi_\theta$ | −3.0 | −4.0 |
-| опорная модель $\log\pi_{ref}$ | −3.4 | −3.6 |
+| текущая | −3.0 | −4.0 |
+| опорная | −3.4 | −3.6 |
 
 Тогда
 
 $$
-\Delta_w=-3.0-(-3.4)=0.4,
-\qquad
-\Delta_l=-4.0-(-3.6)=-0.4.
+\begin{aligned}
+\Delta_w&=-3.0-(-3.4)=0.4,\\
+\Delta_l&=-4.0-(-3.6)=-0.4.
+\end{aligned}
 $$
 
 При $\beta=0.5$:
@@ -328,17 +371,15 @@ $$
 \beta\log\frac{\pi_\theta(y\mid x)}{\pi_{ref}(y\mid x)}.
 $$
 
-Градиент функции потерь DPO:
+Обозначим градиенты логарифмов вероятностей как
+$g_w=\nabla_\theta\log\pi_\theta(y_w\mid x)$ и
+$g_l=\nabla_\theta\log\pi_\theta(y_l\mid x)$. Градиент функции потерь DPO равен
 
 $$
-\nabla_\theta L_{DPO}
-=-\beta\,\mathbb E\left[
-\sigma(\hat r_l-\hat r_w)
-\left(
-\nabla\log\pi_\theta(y_w\mid x)
--\nabla\log\pi_\theta(y_l\mid x)
-\right)
-\right].
+\begin{aligned}
+w&=\sigma(\hat r_l-\hat r_w),\\
+\nabla_\theta L_{DPO}&=-\beta\mathbb E[w(g_w-g_l)].
+\end{aligned}
 $$
 
 Если временно считать $\ell_w=\log\pi_\theta(y_w\mid x)$ и
@@ -367,10 +408,10 @@ $z=0$, $P_\theta(y_w\succ y_l)=1/2$, $L=\log2$. При этом производ
 
 В исходной задаче $\beta$ — цена отклонения от опорного распределения.
 Рассмотрим модель с двумя возможными ответами и вероятностями $0.5$ и $0.5$.
-Пусть награды равны $1$ и $0$. Тогда в аналитическом оптимуме вероятность
+Пусть ответы $y_1$ и $y_2$ имеют награды $1$ и $0$. В аналитическом оптимуме вероятность
 первого ответа равна $\sigma(1/\beta)$:
 
-| $\beta$ | Вероятность ответа с наградой 1 | Вероятность второго ответа |
+| $\beta$ | $\pi_r(y_1)$ | $\pi_r(y_2)$ |
 |---:|---:|---:|
 | 0.5 | 0.881 | 0.119 |
 | 1 | 0.731 | 0.269 |
@@ -460,28 +501,42 @@ loss           = -logsigmoid(logit)
 из модели с правильной маской внимания.
 
 ```python
+import math
 import torch
 import torch.nn.functional as F
 
 
 def sequence_logp(logits, labels):
-    if logits.shape[:2] != labels.shape:
+    if logits.ndim != 3 or labels.ndim != 2 or logits.shape[:2] != labels.shape:
         raise ValueError("logits and labels must share batch and time axes")
+    if logits.size(0) == 0 or logits.size(1) < 2 or logits.size(2) == 0:
+        raise ValueError("empty batch, missing prediction position or empty vocabulary")
+    if labels.dtype != torch.long:
+        raise ValueError("labels must contain integer token ids")
     targets = labels[:, 1:]
     mask = targets.ne(-100)
     if not mask.any(dim=-1).all():
         raise ValueError("each response must contain at least one target token")
     safe_targets = targets.masked_fill(~mask, 0)
+    if torch.any((safe_targets < 0) | (safe_targets >= logits.size(-1))):
+        raise ValueError("target token outside vocabulary")
     # Position t predicts target token t + 1.
-    token_logp = logits[:, :-1].float().log_softmax(-1).gather(
+    prediction_logits = logits[:, :-1]
+    if prediction_logits.dtype in (torch.float16, torch.bfloat16):
+        prediction_logits = prediction_logits.float()
+    token_logp = prediction_logits.log_softmax(-1).gather(
         -1, safe_targets.unsqueeze(-1)
     ).squeeze(-1)
     return token_logp.masked_fill(~mask, 0.0).sum(-1)
 
 
 def dpo_loss(pi_w, pi_l, ref_w, ref_l, beta=0.5):
-    if beta <= 0:
+    if not math.isfinite(beta) or beta <= 0:
         raise ValueError("beta must be positive")
+    if pi_w.ndim != 1 or pi_w.numel() == 0 or any(
+        x.shape != pi_w.shape for x in (pi_l, ref_w, ref_l)
+    ):
+        raise ValueError("four log-probability vectors must have the same nonempty shape")
     margin = (pi_w - pi_l) - (ref_w.detach() - ref_l.detach())
     return -F.logsigmoid(beta * margin).mean()
 ```
@@ -507,9 +562,103 @@ def dpo_loss(pi_w, pi_l, ref_w, ref_l, beta=0.5):
 кэш пригоден только при неизменных весах, токенизации и обрезке.
 
 Эта реализация следует порядку операций в
-[официальном коде DPO, `preference_loss` и `_get_batch_logps`](https://github.com/eric-mitchell/direct-preference-optimization/blob/main/trainers.py).
+[официальном коде DPO, `preference_loss` и `_get_batch_logps`](https://github.com/eric-mitchell/direct-preference-optimization/blob/f8b8c0f49dc92a430bae41585f9d467d3618fe2f/trainers.py).
 Дополнительно она отвергает записи, где после сдвига не осталось ни одного
 целевого токена: такой пример обычно означает ошибку маски или обрезки.
+
+### От токенов до одного шага обучения
+
+Ниже два запроса и по два ответа к каждому. Числа — условные ID, а не
+токенизация фраз об UDP. Первая пара имеет общий запрос `[1,3,4]`, вторая —
+`[1,6]`. ID 2 обозначает и настоящий конец ответа, и заполнитель.
+Во второй выбранной последовательности два последних ID 2 — заполнение;
+предыдущий ID 2 — EOS, и он остаётся целевым токеном.
+
+Маска внимания указывает действительные позиции контекста. В `labels`
+дополнительно закрыт запрос: на нём DPO не суммирует логарифмы вероятностей,
+хотя последующие предсказания от него зависят.
+
+```python
+import copy
+from transformers import LlamaConfig, LlamaForCausalLM
+
+torch.manual_seed(23)
+torch.set_num_threads(1)
+dpo_config = LlamaConfig(
+    vocab_size=32, hidden_size=16, intermediate_size=32,
+    num_hidden_layers=1, num_attention_heads=2, num_key_value_heads=2,
+    max_position_embeddings=32, attention_dropout=0.0,
+    bos_token_id=1, eos_token_id=2, pad_token_id=2,
+)
+dpo_config._attn_implementation = "eager"
+dpo_policy = LlamaForCausalLM(dpo_config)
+dpo_reference = copy.deepcopy(dpo_policy).eval().requires_grad_(False)
+dpo_optimizer = torch.optim.AdamW(dpo_policy.parameters(), lr=1e-4)
+
+# Сначала chosen для обоих запросов, затем rejected в том же порядке.
+pair_ids = torch.tensor([
+    [1, 3, 4,  8,  9, 2], [1, 6, 10,  2,  2, 2],
+    [1, 3, 4, 11,  2, 2], [1, 6, 12, 13, 14, 2],
+])
+pair_attention = torch.tensor([
+    [1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 0, 0],
+    [1, 1, 1, 1, 1, 0], [1, 1, 1, 1, 1, 1],
+])
+pair_labels = torch.tensor([
+    [-100, -100, -100,  8,    9,    2],
+    [-100, -100,   10,  2, -100, -100],
+    [-100, -100, -100, 11,    2, -100],
+    [-100, -100,   12, 13,   14,    2],
+])
+
+def model_response_logp(model, ids, attention, labels):
+    # Логические номера позиций сохраняют результат и при левом padding.
+    positions = attention.cumsum(-1) - 1
+    positions = positions.masked_fill(attention == 0, 0)
+    logits = model(input_ids=ids, attention_mask=attention,
+                   position_ids=positions, use_cache=False).logits
+    return sequence_logp(logits, labels)
+```
+
+Опорные суммы считаются один раз и остаются константами. Обучаемая модель
+обрабатывает тот же пакет, после чего первая половина вектора сравнивается
+со второй. Поскольку исходные веса совпадают, потеря до первого шага равна
+$\log2$. Градиент при этом ненулевой.
+
+```python
+with torch.no_grad():
+    reference_pair_logp = model_response_logp(
+        dpo_reference, pair_ids, pair_attention, pair_labels
+    )
+policy_pair_logp = model_response_logp(
+    dpo_policy, pair_ids, pair_attention, pair_labels
+)
+batch_chosen, batch_rejected = policy_pair_logp.chunk(2)
+reference_chosen, reference_rejected = reference_pair_logp.chunk(2)
+batch_dpo_loss = dpo_loss(batch_chosen, batch_rejected,
+                         reference_chosen, reference_rejected, beta=0.5)
+torch.testing.assert_close(batch_dpo_loss.detach(), torch.tensor(math.log(2)))
+dpo_optimizer.zero_grad(set_to_none=True)
+batch_dpo_loss.backward()
+dpo_optimizer.step()
+with torch.no_grad():
+    updated_pair_logp = model_response_logp(
+        dpo_policy, pair_ids, pair_attention, pair_labels
+    )
+    updated_loss = dpo_loss(*updated_pair_logp.chunk(2),
+                            reference_chosen, reference_rejected, beta=0.5)
+print("response token counts:", pair_labels[:, 1:].ne(-100).sum(-1).tolist())
+print(f"DPO loss: {batch_dpo_loss.item():.6f} -> {updated_loss.item():.6f}")
+```
+
+Это исполняемый пример с PyTorch и Transformers, а не вызов условного
+тренера. Веса инициализируются случайно, поэтому пример проверяет сдвиг,
+маски и обновление параметров, но не обучает полезную модель диалога.
+Ни предобученные веса, ни набор данных из сети не нужны.
+В проверке главы каждый ответ также вычисляется отдельно без padding,
+с заполнением справа и слева. EOS остаётся в сумме во всех трёх случаях.
+Все Python-блоки выполняются последовательно; проверенная CPU-среда —
+PyTorch 2.14.1 и Transformers 4.57.1.
 
 ## 9. Откуда берётся опорная модель
 
@@ -547,7 +696,16 @@ def dpo_loss(pi_w, pi_l, ref_w, ref_l, beta=0.5):
 
 Stanford отделяет этот опыт от основного задания по обучению рассуждений
 с подкреплением. Сначала студент загружает пары Helpful–Harmless (HH) и вручную
-проверяет, согласен ли с метками. Затем одна и та же последовательность
+проверяет, согласен ли с метками. В §6.2 дополнения объединяются четыре
+обучающих раздела: `harmless-base`, `helpful-base`, `helpful-online`
+и `helpful-rejection-sampled`. Источник каждой строки сохраняют для анализа.
+Многоходовые диалоги, где пользователь писал больше одного сообщения,
+в этом задании исключаются: после первого ответа дальнейшие сообщения
+в выбранной и отвергнутой беседах могут различаться. Это уже не два ответа
+при одном и том же условии $x$. Правило относится к выбранной подготовке HH;
+DPO в принципе допускает общий многоходовый контекст, если он совпадает.
+
+Затем одна и та же последовательность
 `prompt + response` проходит через обучаемую и замороженную опорную модели.
 Для каждого ответа суммируются логарифмы вероятностей
 **только его токенов**:
@@ -572,15 +730,29 @@ $$
 использует заранее собранные данные: в ходе оптимизации новые ответы не
 генерируются. Она не заменяет RLVR с ответами текущей обучаемой модели.
 
+В учебной реализации §6.4 обе модели помещают на разные GPU и используют
+накопление градиентов вместо большого физического пакета. Начальные настройки
+задания: эффективный пакет 64, $\beta=0.1$, скорость обучения $10^{-6}$,
+одна эпоха и небольшой validation-набор примерно из 200 записей.
+Из-за памяти состояний оптимизатора предлагается RMSprop, а не AdamW.
+Эти настройки описывают конкретное задание с большой моделью; CPU-пример
+выше проверяет ту же потерю на случайной маленькой сети и не воспроизводит
+его бюджет или результаты.
+
+В формулировке задания точность описана через сравнение сырых вероятностей
+выбранного и отвергнутого ответов. Для точности именно **неявной модели награды**
+нужно сравнивать $\Delta_w$ и $\Delta_l$, то есть учитывать и опорные
+вероятности. Это разные метрики: при совпадающих моделях неявные награды
+равны нулю, хотя сырые вероятности двух разных текстов обычно не равны.
+
 | | PPO RLHF | DPO |
 |---|---|---|
-| входной сигнал | награда за сгенерированный ответ | готовые пары выбранных и отвергнутых ответов |
-| генерация во время обучения | да | нет |
-| отдельная модель награды | да | нет |
-| опорная модель | да | да |
-| функция ценности | обычно да | нет |
-| исследование новых ответов | да | нет |
-| основной риск | использование слабостей награды и нестабильность | неполнота, шум и переобучение на парах |
+| Данные | ответы с наградой | пары ответов |
+| Генерация | да | нет |
+| Отдельный оценщик | да | нет |
+| Опорная модель | да | да |
+| Критик | обычно да | нет |
+| Новые ответы | исследует | не видит |
 
 Функция потерь DPO выводится из той же задачи максимизации награды с ограничением
 по KL-дивергенции. Однако практические алгоритмы не становятся полностью
@@ -602,7 +774,7 @@ $$
 
 Наибольший вклад в этом эксперименте дал выбор данных предпочтений. Особенно
 менялись следование инструкциям и правдивость ответов; в проверках фактических
-знаний эффект был заметно слабее. Например, в Table 2 при обучении на
+знаний эффект был заметно слабее. Например, в Table 2 для Tülu 2 13B при обучении на
 UltraFeedback (fine-grained) общий показатель вырос с 61,0 у DPO до 62,2
 у PPO — на 1,2 пункта. При этом различия зависели от набора пар, а не только
 от алгоритма.
@@ -654,9 +826,11 @@ Preference Optimization](https://arxiv.org/abs/2404.19733) обучает DPO н
    весами и обучается по сумме DPO и NLL на выбранном рассуждении:
 
 $$
+\begin{aligned}
 \mathcal L_{\mathrm{IRPO}}
-=\mathcal L_{\mathrm{DPO}}(c_w,a_w,c_l,a_l\mid x)
--\alpha\frac{\log M_\theta(c_w,a_w\mid x)}{|c_w|+|a_w|}.
+&=\mathcal L_{\mathrm{DPO}}(c_w,a_w,c_l,a_l\mid x)\\
+&\quad-\alpha\frac{\log M_\theta(c_w,a_w\mid x)}{|c_w|+|a_w|}.
+\end{aligned}
 $$
 
 5. Полученная $M_{t+1}$ снова генерирует рассуждения для тех же обучающих
@@ -688,6 +862,50 @@ rejected: 3x=24, x=8. FINAL: 8
 результат с ошибочной цепочкой всё ещё может попасть в выбранные примеры,
 если не проверять рассуждения отдельно.
 
+В следующем фрагменте заданные четыре текста только размечаются и превращаются
+в пары; модель здесь ничего не генерирует. Парсер принимает целое число после
+`FINAL:`. Это ограниченный формат примера, не универсальная проверка математики.
+Пары строятся одновременным обходом двух списков; короткий список начинается
+заново, как описано в §2 статьи. Получаются две пары, а не все четыре
+элемента декартова произведения.
+
+```python
+import re
+
+def reasoning_pairs(candidates, expected_answer, count):
+    if count < 0:
+        raise ValueError("count must be nonnegative")
+    chosen, rejected = [], []
+    for text in candidates:
+        match = re.search(r"FINAL:\s*(-?\d+)\s*$", text)
+        correct = match is not None and int(match.group(1)) == expected_answer
+        (chosen if correct else rejected).append(text)
+    if not chosen or not rejected:
+        return []
+    return [(chosen[i % len(chosen)], rejected[i % len(rejected)])
+            for i in range(count)]
+
+reasoning_candidates = [
+    "3x=12, x=4. FINAL: 4", "x=(18-6)/3=4. FINAL: 4",
+    "3x=24, x=8. FINAL: 8", "Не удалось вычислить ответ.",
+]
+irpo_pairs = reasoning_pairs(reasoning_candidates, expected_answer=4, count=2)
+assert len(irpo_pairs) == 2
+assert reasoning_pairs(reasoning_candidates[2:], 4, 2) == []
+
+# Отдельный числовой расчёт DPO+NLL для одной пары, не обучение IRPO.
+irpo_pi_w, irpo_pi_l = torch.tensor([-3.0]), torch.tensor([-4.0])
+irpo_ref_w, irpo_ref_l = torch.tensor([-3.4]), torch.tensor([-3.6])
+irpo_nll = -irpo_pi_w.mean() / 3  # три целевых токена выбранного ответа
+irpo_pair_loss = dpo_loss(irpo_pi_w, irpo_pi_l, irpo_ref_w, irpo_ref_l) + 0.2 * irpo_nll
+print(f"DPO+NLL={irpo_pair_loss.item():.6f}")  # 0.713015
+```
+
+Пустой результат при всех ошибочных генерациях означает отсутствие сигнала
+для попарной потери. Добавление эталонной цепочки в выбранный список —
+отдельное решение о данных, а не свойство DPO. Сам цикл повторной генерации
+из $M_{t+1}$ этим фрагментом не заменяется.
+
 Полный цикл `generate → verify → pair → DPO+NLL → regenerate` показан на
 [слайдах 74–78](https://rdi.berkeley.edu/adv-llm-agents/slides/Jason-Weston-Reasoning-Alignment-Berkeley-Talk.pdf#page=74).
 В версии v3 первичной статьи (26 июня 2024 года) результаты ограничены Llama-2-70B-Chat и
@@ -700,6 +918,17 @@ rejected: 3x=24, x=8. FINAL: 8
 <!-- source_unit_id: meeting-04-slides-tulu3-preference-recipe -->
 
 В Tülu 3 состав данных предпочтений выбирали в отдельных экспериментах.
+Три стадии построения пары показаны на исходном рисунке отчёта:
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dpo-2026-10-24/tulu-preference-pipeline.png]]
+
+*Выбор запросов, получение альтернативных ответов и разметка предпочтений.
+Включение Tülu SFT в пул генераторов позволяет получить сравнения с её
+собственными ответами. Nathan Lambert et al.,
+[Tülu 3 v5, Figure 7, с. 22](https://arxiv.org/pdf/2411.15124v5#page=22).
+Полная фигура и английская подпись из PDF; CC BY 4.0. Выполнено только
+кадрирование вокруг фигуры, без перерисовки и перевода.*
+
 Для одного запроса авторы случайно выбирали четыре модели из набора генераторов
 и получали по одному ответу от каждой. Отдельную часть сравнений строили так,
 чтобы один ответ принадлежал текущей Tülu-3-SFT, а другой — внешней модели.
@@ -728,14 +957,25 @@ GPT-4o-2024-08-06 оценивал полезность, следование и
 для следования инструкциям: варианты для математики и кода не улучшили
 соответствующие показатели.
 
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dpo-2026-10-24/tulu-prompt-policy-ablations.png]]
+
+*Слева сравниваются повторно использованные и новые запросы; справа —
+происхождение ответов. Ось ординат начинается с 55, а не с нуля.
+Комбинированная смесь содержит 120 тысяч пар, две соседние — по 100 тысяч:
+разность столбцов нельзя целиком приписать одному только происхождению ответов.
+Это показатели конкретного 8B-эксперимента, не прирост в процентах.
+Nathan Lambert et al., [Tülu 3 v5, Figures 10–11, с. 25](https://arxiv.org/pdf/2411.15124v5#page=25).
+Обе полные панели с английскими подписями; CC BY 4.0. Только crop из PDF.*
+
 Для оптимизации выбрали DPO с нормировкой по длине ответа:
 
 $$
-\mathcal L_{\mathrm{LN\text{-}DPO}}
-=-\mathbb E\,\log\sigma\!\left(
-\frac{\beta}{|y_w|}\log\frac{\pi_\theta(y_w|x)}{\pi_{ref}(y_w|x)}-
-\frac{\beta}{|y_l|}\log\frac{\pi_\theta(y_l|x)}{\pi_{ref}(y_l|x)}
-\right).
+\begin{aligned}
+\mathcal L_{\mathrm{LN\text{-}DPO}}&=-\mathbb E\log\sigma(z_{\mathrm{LN}}),\\
+z_{\mathrm{LN}}&=\beta\left[
+\frac{\Delta_\theta(x,y_w)}{|y_w|}
+-\frac{\Delta_\theta(x,y_l)}{|y_l|}\right].
+\end{aligned}
 $$
 
 Деление каждого логарифмического отношения на длину ответа устраняет прямое
@@ -848,12 +1088,12 @@ B, B точнее C, а C безопаснее A. Одно число не об�
 лучше. Первый проверяется численными примерами, второй — отложенными парами,
 третий — отдельным набором запросов с генерацией.
 
-| Наблюдение | Что оно показывает | Чего оно не доказывает |
-|---|---|---|
-| DPO loss уменьшается | модель увеличивает разрыв на обучающих парах | новые ответы стали полезнее |
-| Точность на отложенных парах растёт | предпочтение переносится на другие готовые ответы | модель сама сгенерирует такие ответы |
-| $\hat r_w$ и $\hat r_l$ оба падают | оба ответа теряют вероятность относительно опорной модели | это обязательно ухудшение или улучшение |
-| Доля побед на новых генерациях растёт | ответы лучше по критерию выбранного оценщика | оценщик не реагирует лишь на длину и стиль |
+| Наблюдение | Что можно заключить |
+|---|---|
+| DPO loss уменьшается | Разрыв на обучающих парах растёт. Это не проверка новых ответов. |
+| Точность на отложенных парах растёт | Предпочтение переносится на готовые ответы. Их самостоятельная генерация не проверена. |
+| Обе неявные награды падают | Оба ответа теряют вероятность относительно опорной модели. Качество остальных ответов пока неизвестно. |
+| Доля побед на новых генерациях растёт | Ответы лучше по критерию оценщика. Его реакцию на длину и стиль проверяют отдельно. |
 
 KL оценивают на ответах, сгенерированных именно текущей моделью. Среднее
 $\log\pi_\theta(y\mid x)-\log\pi_{ref}(y\mid x)$ на таких выборках оценивает
@@ -886,6 +1126,11 @@ KL-дивергенцией. Поэтому метрику `rewards/chosen` не
 дополнительно проверяют, как определён $m$: сумма и нормировка по длине
 не взаимозаменяемы.
 
+Например, при $\tau=0.5$ целевой разрыв IPO равен 1. Для $m=0,1,2$
+квадратичные потери равны 1, 0, 1, а производные — −2, 0, 2.
+При $m=2$ IPO уже уменьшает разрыв. Логистическая потеря DPO для той же
+уверенной метки всё ещё поощряла бы его рост, хотя и со всё меньшим весом.
+
 **SimPO: сравнение без опорной модели.** Вместо изменения относительно
 $\pi_{ref}$ метод использует оценку
 $s_\theta(x,y)=\beta\log\pi_\theta(y\mid x)/|y|$ и потерю
@@ -896,6 +1141,14 @@ $-\log\sigma(s_w-s_l-\gamma)$, где $\gamma>0$ — требуемый отст
 не требует опорных проходов; это преимущество в вычислениях не является
 эквивалентностью KL-регуляризованной задаче исходного DPO.
 
+Если средние логарифмы вероятностей двух ответов равны −1 и −1.2,
+$\beta=2$, а $\gamma=0.5$, то их оценки равны −2 и −2.4.
+Порядок выбран верно, но логит SimPO равен $0.4-0.5=-0.1$:
+предпочтение ещё не достигло заданного отступа, и потеря равна 0.744397.
+Без отступа она составила бы 0.513015. Поэтому перенос прежнего $\beta$
+из суммирующего DPO не сохраняет ни масштаб, ни смысл целевой функции
+([SimPO v2, §2.2–2.3](https://arxiv.org/html/2405.14734v2#S2)).
+
 **ORPO: совместное обучение содержанию и предпочтению.** В отличие от отдельной
 стадии DPO после SFT, [ORPO](https://arxiv.org/abs/2403.07691) добавляет
 к отрицательному логарифму правдоподобия выбранного ответа попарный штраф.
@@ -905,6 +1158,24 @@ $-\log\sigma(s_w-s_l-\gamma)$, где $\gamma>0$ — требуемый отст
 нет. Здесь также важно не путать геометрическое среднее вероятностей токенов
 с вероятностью полной последовательности.
 
+Обозначим эту среднюю вероятность как $p_y$ и введём $o_y=p_y/(1-p_y)$.
+Тогда попарная часть и вся потеря имеют вид
+
+$$
+\begin{aligned}
+L_{OR}&=-\log\sigma(\log o_w-\log o_l),\\
+L_{ORPO}&=-\log p_w+\lambda L_{OR}.
+\end{aligned}
+$$
+
+Для $p_w=0.2$, $p_l=0.1$ получаем шансы $1/4$ и $1/9$.
+Их отношение равно $9/4$; после сигмоиды логарифма отношения получается
+$9/13$. Попарная потеря равна $-\log(9/13)=0.367725$, а NLL выбранного
+ответа — $-\log0.2=1.609438$. При $\lambda=0.1$ общая потеря равна
+1.646210. Две части дают разные сигналы: NLL зависит только от выбранного
+ответа, вторая — от их сопоставления.
+Точная постановка дана в [ORPO v2, §4.1–4.2](https://arxiv.org/html/2403.07691v2#S4).
+
 **KTO: обратная связь без пары.** Кнопка «ответ полезен» даёт метку для одного
 ответа, но не предоставляет альтернативу. [KTO](https://arxiv.org/abs/2402.01306)
 может обучаться на таких положительных и отрицательных примерах. Он оценивает
@@ -912,6 +1183,30 @@ $-\log\sigma(s_w-s_l-\gamma)$, где $\gamma>0$ — требуемый отст
 уровнем, связанным с KL-расхождением; для желательных и нежелательных ответов
 используются разные стороны функции ценности. Пары для одного запроса не нужны,
 но остаются важными баланс меток и процедура оценки базового уровня.
+
+В записи [KTO v5, §4.1](https://arxiv.org/html/2402.01306v5#S4.SS1)
+$r=\log(\pi_\theta(y\mid x)/\pi_{ref}(y\mid x))$, а $z_0$ — опорный уровень,
+связанный с KL. Для одного примера положим $s=\beta(r-z_0)$.
+Обозначим желательную метку как D, нежелательную — как U. Тогда
+
+$$
+L_{KTO}=\begin{cases}
+\lambda_D[1-\sigma(s)],&D,\\
+\lambda_U[1-\sigma(-s)],&U.
+\end{cases}
+$$
+
+При $r=0.4$, $z_0=0.1$, $\beta=1$ и единичных весах желательная метка
+даёт потерю 0.425557, нежелательная — 0.574443. Речь идёт о двух возможных
+метках одного примера, а не о паре альтернатив для одного запроса.
+Через $z_0$ градиент не проводят. В практической оценке авторы циклически
+переставляют ответы между запросами мини-пакета, считают среднее логарифмическое
+отношение для несовпадающих пар и ограничивают его снизу нулём.
+Это смещённая замена KL, а не точное вычисление расхождения по всем текстам.
+Веса $\lambda_D$ и $\lambda_U$ позволяют отдельно учитывать частоту и цену
+двух типов меток. В отличие от отрицательного log-sigmoid, потеря
+$1-\sigma$ ограничена и насыщается с обеих сторон: у очень сильно неверного
+примера градиент тоже может быть мал.
 
 **Online DPO: обновление данных.** Здесь можно сохранить исходную функцию
 потерь и изменить лишь источник пар: периодически генерировать ответы текущей
@@ -944,8 +1239,7 @@ print(round(pi_w.grad.item(), 6), round(pi_l.grad.item(), 6))
 при добавлении позиций с меткой `-100`, но менять её при исключении настоящего
 EOS. Это проверки разных ошибок: формулы сравнения, сдвига токенов и маски.
 
-### Проверка понимания
-
+<a id="проверка-понимания"></a>
 Вопросы к этой главе вынесены в
 [[02 Areas/ML & DL/04 Вопросы/Вопросы по LLM#Post-training и alignment|«Вопросы по LLM»]].
 
@@ -960,17 +1254,13 @@ EOS. Это проверки разных ошибок: формулы срав�
 #### Объяснения и код
 
 - Stanford CS336, [лекция 15 — Midtraining and posttraining](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_15.pdf): связь награды и стратегии, вывод DPO, нормировка по длине.
-- Nathan Lambert, [Direct-Alignment Algorithms](https://rlhfbook.com/c/08-direct-alignment): градиент, опорная модель и различия методов. Онлайн-издание проверено 21 сентября 2026 года.
+- Nathan Lambert, [Direct-Alignment Algorithms](https://rlhfbook.com/c/08-direct-alignment): градиент, опорная модель и различия методов.
 - Rafailov, Sharma, Mitchell et al., [официальная реализация DPO](https://github.com/eric-mitchell/direct-preference-optimization): `trainers.py` и правила построения масок в `preference_datasets.py`.
 - Berkeley Advanced LLM Agents, [Jason Weston, meeting 2](https://rdi.berkeley.edu/adv-llm-agents/slides/Jason-Weston-Reasoning-Alignment-Berkeley-Talk.pdf#page=74) и [Hanna Hajishirzi, meeting 4](https://rdi.berkeley.edu/adv-llm-agents/slides/OLMo-Tulu-Reasoning-Hanna.pdf#page=79): IRPO, контролируемые сравнения PPO/DPO и Tülu 3.
 - Hugging Face, [TRL DPO Trainer](https://huggingface.co/docs/trl/dpo_trainer).
 - Hugging Face, [Alignment Handbook](https://github.com/huggingface/alignment-handbook) — воспроизводимые SFT/DPO recipes.
 
-> [!summary] Главное
-> DPO исключает отдельное обучение модели награды и цикл PPO: стратегия сразу
-> обучается на парах выбранных и отклонённых ответов. Такой переход возможен
-> благодаря аналитической связи между наградой и оптимальной стратегией в
-> задаче с ограничением по KL-дивергенции. Нормировочная константа сокращается
-> только при сравнении ответов на один и тот же запрос. Метод проще в запуске,
-> но по-прежнему зависит от опорной модели, предпосылок модели Брэдли—Терри и
-> полноты заранее собранных данных предпочтений.
+В следующей главе разбирается
+[[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers|обучение с проверяемой наградой]]:
+как формулируют критерий правильности и что произойдёт, если проверяющая
+программа принимает ошибочные решения.

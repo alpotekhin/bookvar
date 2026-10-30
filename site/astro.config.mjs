@@ -7,19 +7,25 @@ import sidebar from './generated-sidebar.mjs';
 import { normalizeArchiveMath } from '../publishing/adapter/math.ts';
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { rehypeMathSearch, archiveCodeDisplay } from './src/lib/markdown-publication.ts';
 
 const processor = unified({
   remarkPlugins: [remarkMath],
-  rehypePlugins: [rehypeKatex]
+  rehypePlugins: [rehypeKatex, rehypeMathSearch]
 });
 // Astro's content digest serializes processor options, not imported function
 // dependencies. Invalidate cached HTML whenever render normalization changes.
 Object.assign(processor.options, {
   bookvarMathSourceSha256: createHash('sha256')
     .update(readFileSync(new URL('../publishing/adapter/math.ts', import.meta.url)))
+    .digest('hex'),
+  bookvarPublicationPresentationSha256: createHash('sha256')
+    .update(readFileSync(new URL('./src/lib/markdown-publication.ts', import.meta.url)))
     .digest('hex')
 });
 const createRenderer = processor.createRenderer.bind(processor);
+const publicationBase = process.env.PUBLICATION_BASE_PATH || '/';
+const causalSelfAttentionHref = `${publicationBase.replace(/\/+$/, '')}/practice/causal-self-attention`;
 processor.createRenderer = async (shared) => {
   const renderer = await createRenderer(shared);
   return {
@@ -33,10 +39,12 @@ processor.createRenderer = async (shared) => {
 
 export default defineConfig({
   site: 'https://alpotekhin.github.io',
-  base: process.env.PUBLICATION_BASE_PATH || '/',
+  base: publicationBase,
   output: 'static',
   redirects: {
-    '/en/practice/causal-self-attention': '/practice/causal-self-attention'
+    '/en/practice/causal-self-attention': causalSelfAttentionHref,
+    '/practice/causal-self-attention-notes': causalSelfAttentionHref,
+    '/en/practice/causal-self-attention-notes': causalSelfAttentionHref
   },
   markdown: {
     processor
@@ -50,6 +58,12 @@ export default defineConfig({
         en: { label: 'English', lang: 'en' }
       },
       customCss: ['./src/styles/custom.css'],
+      expressiveCode: { plugins: [archiveCodeDisplay] },
+      components: {
+        Footer: './src/components/BookFooter.astro',
+        PageTitle: './src/components/BookPageTitle.astro',
+        FallbackContentNotice: './src/components/BookFallbackContentNotice.astro'
+      },
       sidebar
     })
   ]

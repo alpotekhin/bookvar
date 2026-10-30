@@ -1,0 +1,695 @@
+[
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/data-power-law-chart.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/data-power-law.png",
+    "source_asset_sha256": "d4515652703275098497e920db7e5e172419e23d6323a4fbccd99cdb0e0bb45a",
+    "source_page": 15,
+    "source_url": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf#page=15",
+    "source_parent_sha256": "92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa",
+    "author": "Tatsunori Hashimoto and Stanford CS336 course staff; underlying chart authors listed in NOTICE.md",
+    "sha256": "f1deb03b93052b6cbf0ca4ab2807ef8c97737992f672962e71fe1e9431d7c19a",
+    "dimensions": [
+      888,
+      696
+    ],
+    "crop_pixels": [
+      636,
+      473,
+      1524,
+      1169
+    ],
+    "source_render_dimensions": [
+      2400,
+      1352
+    ],
+    "modifications": "Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.",
+    "derivation": "pdf-chart-crop",
+    "license": "User permission record (not a named license)",
+    "license_url": "https://cs336.stanford.edu/",
+    "rights_status": "existing-local-reformat; third-party-rights-unverified",
+    "provenance_confirmation": "pinned-upstream-pdf; original page and final crop visually reviewed",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/distribution-shift-offset-chart.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/distribution-shift-offset.png",
+    "source_asset_sha256": "82302094c43ab0c73f5d332d97b23476496218849cc5ed21827bd721cbb9f465",
+    "source_page": 22,
+    "source_url": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf#page=22",
+    "source_parent_sha256": "92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa",
+    "author": "Tatsunori Hashimoto and Stanford CS336 course staff; underlying chart authors listed in NOTICE.md",
+    "sha256": "f42535169371c55efef876c2b0c2d0f7cf184ea32c4811dd08b9879d56622fcc",
+    "dimensions": [
+      1980,
+      460
+    ],
+    "crop_pixels": [
+      276,
+      723,
+      2256,
+      1183
+    ],
+    "source_render_dimensions": [
+      2400,
+      1352
+    ],
+    "modifications": "Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.",
+    "derivation": "pdf-chart-crop",
+    "license": "User permission record (not a named license)",
+    "license_url": "https://cs336.stanford.edu/",
+    "rights_status": "existing-local-reformat; third-party-rights-unverified",
+    "provenance_confirmation": "pinned-upstream-pdf; original page and final crop visually reviewed",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/repeated-data-effective-tokens-chart.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/repeated-data-effective-tokens.png",
+    "source_asset_sha256": "44ad0bb434b30ab631df757f3713453a6f0c6d1489d1905373f31f70b8267133",
+    "source_page": 24,
+    "source_url": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf#page=24",
+    "source_parent_sha256": "92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa",
+    "author": "Tatsunori Hashimoto and Stanford CS336 course staff; underlying chart authors listed in NOTICE.md",
+    "sha256": "7865d1d22654c41304f524cd0b5cf5238c3dc5a6cd5f5da3b7941a29653e8a81",
+    "dimensions": [
+      2040,
+      750
+    ],
+    "crop_pixels": [
+      276,
+      379,
+      2316,
+      1129
+    ],
+    "source_render_dimensions": [
+      2400,
+      1352
+    ],
+    "modifications": "Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.",
+    "derivation": "pdf-chart-crop",
+    "license": "User permission record (not a named license)",
+    "license_url": "https://cs336.stanford.edu/",
+    "rights_status": "existing-local-reformat; third-party-rights-unverified",
+    "provenance_confirmation": "pinned-upstream-pdf; original page and final crop visually reviewed",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/finite-data-breakdown-chart.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/finite-data-breakdown.png",
+    "source_asset_sha256": "0ba07f9ca8ef8b228e08d09d2b71ce38a7f48965e583ec8215ea33856f25ffd1",
+    "source_page": 25,
+    "source_url": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf#page=25",
+    "source_parent_sha256": "92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa",
+    "author": "Tatsunori Hashimoto and Stanford CS336 course staff; underlying chart authors listed in NOTICE.md",
+    "sha256": "809739c21bcdcf7c71f8bb169852ff5f2142e68fd69df722dbfed7d9e3015f57",
+    "dimensions": [
+      2256,
+      717
+    ],
+    "crop_pixels": [
+      108,
+      500,
+      2364,
+      1217
+    ],
+    "source_render_dimensions": [
+      2400,
+      1352
+    ],
+    "modifications": "Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.",
+    "derivation": "pdf-chart-crop",
+    "license": "User permission record (not a named license)",
+    "license_url": "https://cs336.stanford.edu/",
+    "rights_status": "existing-local-reformat; third-party-rights-unverified",
+    "provenance_confirmation": "pinned-upstream-pdf; original page and final crop visually reviewed",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/parameter-count-convention-chart.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/parameter-count-convention.png",
+    "source_asset_sha256": "c7f34296b102311c5ee302f85a5c2fc50496c237af834b126fdaec9443b59046",
+    "source_page": 35,
+    "source_url": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf#page=35",
+    "source_parent_sha256": "92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa",
+    "author": "Tatsunori Hashimoto and Stanford CS336 course staff; underlying chart authors listed in NOTICE.md",
+    "sha256": "3fe9a90fa7bb2ff302f99a16a3351d2db7da6cb9439980f8baf028728637129d",
+    "dimensions": [
+      2052,
+      629
+    ],
+    "crop_pixels": [
+      300,
+      426,
+      2352,
+      1055
+    ],
+    "source_render_dimensions": [
+      2400,
+      1352
+    ],
+    "modifications": "Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.",
+    "derivation": "pdf-chart-crop",
+    "license": "User permission record (not a named license)",
+    "license_url": "https://cs336.stanford.edu/",
+    "rights_status": "existing-local-reformat; third-party-rights-unverified",
+    "provenance_confirmation": "pinned-upstream-pdf; original page and final crop visually reviewed",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/chinchilla-lower-envelope-chart.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/chinchilla-lower-envelope.png",
+    "source_asset_sha256": "8798fef20bcac347a5f84ce7efd897bf056f7f4624df68430dcd99e93af70a6e",
+    "source_page": 47,
+    "source_url": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf#page=47",
+    "source_parent_sha256": "92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa",
+    "author": "Tatsunori Hashimoto and Stanford CS336 course staff; underlying chart authors listed in NOTICE.md",
+    "sha256": "3a727fbd7b1e6954385f18062082d4570dac1352117c37bb4dc58a2a87039285",
+    "dimensions": [
+      1836,
+      486
+    ],
+    "crop_pixels": [
+      348,
+      460,
+      2184,
+      946
+    ],
+    "source_render_dimensions": [
+      2400,
+      1352
+    ],
+    "modifications": "Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.",
+    "derivation": "pdf-chart-crop",
+    "license": "User permission record (not a named license)",
+    "license_url": "https://cs336.stanford.edu/",
+    "rights_status": "existing-local-reformat; third-party-rights-unverified",
+    "provenance_confirmation": "pinned-upstream-pdf; original page and final crop visually reviewed",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/chinchilla-isoflops-chart.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/chinchilla-isoflops.png",
+    "source_asset_sha256": "b837288ec485dde7854af73aa67e919a8531d26a81cca03724786fee50f401ce",
+    "source_page": 48,
+    "source_url": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf#page=48",
+    "source_parent_sha256": "92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa",
+    "author": "Tatsunori Hashimoto and Stanford CS336 course staff; underlying chart authors listed in NOTICE.md",
+    "sha256": "d1d3c4ea710ff85545450f6230dbc24f9c0dce418b3f5c3f440541c1df974367",
+    "dimensions": [
+      2040,
+      595
+    ],
+    "crop_pixels": [
+      180,
+      399,
+      2220,
+      994
+    ],
+    "source_render_dimensions": [
+      2400,
+      1352
+    ],
+    "modifications": "Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.",
+    "derivation": "pdf-chart-crop",
+    "license": "User permission record (not a named license)",
+    "license_url": "https://cs336.stanford.edu/",
+    "rights_status": "existing-local-reformat; third-party-rights-unverified",
+    "provenance_confirmation": "pinned-upstream-pdf; original page and final crop visually reviewed",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/chinchilla-joint-fit-chart.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/chinchilla-joint-fit.png",
+    "source_asset_sha256": "1efa8ecb52c5e9dc061aa8e9cc26ce3bafae9abb7ac63c583f654f2851299573",
+    "source_page": 49,
+    "source_url": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf#page=49",
+    "source_parent_sha256": "92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa",
+    "author": "Tatsunori Hashimoto and Stanford CS336 course staff; underlying chart authors listed in NOTICE.md",
+    "sha256": "6e848739c66ce799a81a29a12084db9bc9b84527b2baf09ad4337eedd5b7ef28",
+    "dimensions": [
+      1992,
+      655
+    ],
+    "crop_pixels": [
+      312,
+      433,
+      2304,
+      1088
+    ],
+    "source_render_dimensions": [
+      2400,
+      1352
+    ],
+    "modifications": "Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.",
+    "derivation": "pdf-chart-crop",
+    "license": "User permission record (not a named license)",
+    "license_url": "https://cs336.stanford.edu/",
+    "rights_status": "existing-local-reformat; third-party-rights-unverified",
+    "provenance_confirmation": "pinned-upstream-pdf; original page and final crop visually reviewed",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/chinchilla-residuals-chart.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/chinchilla-residuals.png",
+    "source_asset_sha256": "683db68ba57128fce4066c707fde55de3d15d8424b715076d8fc93a794ee4a84",
+    "source_page": 53,
+    "source_url": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf#page=53",
+    "source_parent_sha256": "92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa",
+    "author": "Tatsunori Hashimoto and Stanford CS336 course staff; underlying chart authors listed in NOTICE.md",
+    "sha256": "82bec92ccc8efa37be469093ba6c6e92996f3d352650967ef234a2e78bf1aa8d",
+    "dimensions": [
+      2040,
+      710
+    ],
+    "crop_pixels": [
+      216,
+      487,
+      2256,
+      1197
+    ],
+    "source_render_dimensions": [
+      2400,
+      1352
+    ],
+    "modifications": "Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.",
+    "derivation": "pdf-chart-crop",
+    "license": "User permission record (not a named license)",
+    "license_url": "https://cs336.stanford.edu/",
+    "rights_status": "existing-local-reformat; third-party-rights-unverified",
+    "provenance_confirmation": "pinned-upstream-pdf; original page and final crop visually reviewed",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/critical-batch-vs-loss-chart.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/critical-batch-vs-loss.png",
+    "source_asset_sha256": "1da75dbae07f566d5c8c61ae651115500d84f12703dc8c0452ae0dd603885bb4",
+    "source_page": 39,
+    "source_url": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf#page=39",
+    "source_parent_sha256": "92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa",
+    "author": "Tatsunori Hashimoto and Stanford CS336 course staff; underlying chart authors listed in NOTICE.md",
+    "sha256": "696e5e1e4756e7fe214b4094ba30619d31f9fcea1b17b200b883f92f14bb501c",
+    "dimensions": [
+      1452,
+      852
+    ],
+    "crop_pixels": [
+      444,
+      223,
+      1896,
+      1075
+    ],
+    "source_render_dimensions": [
+      2400,
+      1352
+    ],
+    "modifications": "Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.",
+    "derivation": "pdf-chart-crop",
+    "license": "User permission record (not a named license)",
+    "license_url": "https://cs336.stanford.edu/",
+    "rights_status": "existing-local-reformat; third-party-rights-unverified",
+    "provenance_confirmation": "pinned-upstream-pdf; original page and final crop visually reviewed",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/learning-rate-scaling-chart.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/learning-rate-scaling.png",
+    "source_asset_sha256": "55a2f945d6b5b038442a872546cfd11f0bf0eeb5b8852d39ec9dbca5041cfe18",
+    "source_page": 40,
+    "source_url": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_09.pdf#page=40",
+    "source_parent_sha256": "92a5d9e26e65bb0a9d8c79b12ed7ea26d14530bf960dcf44f9ed5fd372f519fa",
+    "author": "Tatsunori Hashimoto and Stanford CS336 course staff; underlying chart authors listed in NOTICE.md",
+    "sha256": "93cdc081f261fd46168acb4ef2a7ea239d41a060be03eae9756fa8f38fd8f853",
+    "dimensions": [
+      1267,
+      608
+    ],
+    "crop_pixels": [
+      29,
+      311,
+      1296,
+      919
+    ],
+    "source_render_dimensions": [
+      2400,
+      1352
+    ],
+    "modifications": "Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.",
+    "derivation": "pdf-chart-crop",
+    "license": "User permission record (not a named license)",
+    "license_url": "https://cs336.stanford.edu/",
+    "rights_status": "existing-local-reformat; third-party-rights-unverified",
+    "provenance_confirmation": "pinned-upstream-pdf; original page and final crop visually reviewed",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/minicpm-cosine-campaign-cost-chart.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/minicpm-cosine-campaign-cost.png",
+    "source_asset_sha256": "7129ddfa6d4003ce10901a1f71a97d5ad66ca5efe617c44cd45335d65a457f6e",
+    "source_page": 13,
+    "source_url": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=13",
+    "source_parent_sha256": "b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890",
+    "author": "Tatsunori Hashimoto and Stanford CS336 course staff; underlying chart authors listed in NOTICE.md",
+    "sha256": "65868ec00a2ecfa32ba3036decbb99c2973f887dc2f16de9994ae5ad8e0041af",
+    "dimensions": [
+      1452,
+      872
+    ],
+    "crop_pixels": [
+      468,
+      331,
+      1920,
+      1203
+    ],
+    "source_render_dimensions": [
+      2400,
+      1352
+    ],
+    "modifications": "Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.",
+    "derivation": "pdf-chart-crop",
+    "license": "User permission record (not a named license)",
+    "license_url": "https://cs336.stanford.edu/",
+    "rights_status": "existing-local-reformat; third-party-rights-unverified",
+    "provenance_confirmation": "pinned-upstream-pdf; original page and final crop visually reviewed",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/minicpm-wsd-branching-chart.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/minicpm-wsd-branching.png",
+    "source_asset_sha256": "e0aa4e72e32d82d1acc7e9563d5b6d7b3f8f04eb3c502c815019c5a3799a9886",
+    "source_page": 14,
+    "source_url": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=14",
+    "source_parent_sha256": "b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890",
+    "author": "Shengding Hu et al.; slide presentation by Tatsunori Hashimoto and Stanford CS336 staff",
+    "sha256": "ec3c96ffef95d1f99ce26784aac7e6a9b666aefb69ce5f538b7b5d252ca59eee",
+    "dimensions": [
+      792,
+      521
+    ],
+    "crop_pixels": [
+      240,
+      365,
+      1032,
+      886
+    ],
+    "source_render_dimensions": [
+      2400,
+      1352
+    ],
+    "modifications": "Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.",
+    "derivation": "pdf-chart-crop",
+    "license": "CC BY 4.0 (underlying MiniCPM figure)",
+    "license_url": "https://arxiv.org/html/2404.06395v1",
+    "rights_status": "underlying-paper-license-verified",
+    "provenance_confirmation": "pinned-upstream-pdf; original page and final crop visually reviewed",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/minicpm-wsd-loss-dynamics-chart.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/minicpm-wsd-loss-dynamics.png",
+    "source_asset_sha256": "3e4dd201c96504811ea7439ba0dd7d2e5265859359d83f7f0dac54b7432cb96b",
+    "source_page": 15,
+    "source_url": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=15",
+    "source_parent_sha256": "b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890",
+    "author": "Shengding Hu et al.; slide presentation by Tatsunori Hashimoto and Stanford CS336 staff",
+    "sha256": "053a3e2550767ad8ca53ff33b55044775f78423972f7eda16828ba2aeb8be0d7",
+    "dimensions": [
+      1512,
+      1013
+    ],
+    "crop_pixels": [
+      564,
+      338,
+      2076,
+      1351
+    ],
+    "source_render_dimensions": [
+      2400,
+      1352
+    ],
+    "modifications": "Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.",
+    "derivation": "pdf-chart-crop",
+    "license": "CC BY 4.0 (underlying MiniCPM figure)",
+    "license_url": "https://arxiv.org/html/2404.06395v1",
+    "rights_status": "underlying-paper-license-verified",
+    "provenance_confirmation": "pinned-upstream-pdf; original page and final crop visually reviewed",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/minicpm-joint-scaling-fit-chart.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/minicpm-joint-scaling-fit.png",
+    "source_asset_sha256": "8a7649be35b64fd1ae27925441f1fb372035d758706fd9a89b01b2853bc330d4",
+    "source_page": 18,
+    "source_url": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=18",
+    "source_parent_sha256": "b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890",
+    "author": "Shengding Hu et al.; slide presentation by Tatsunori Hashimoto and Stanford CS336 staff",
+    "sha256": "fe24af9ea7d1643f7273dc149766efd7693b28f41907b92985a0b7101072c149",
+    "dimensions": [
+      1500,
+      974
+    ],
+    "crop_pixels": [
+      588,
+      358,
+      2088,
+      1332
+    ],
+    "source_render_dimensions": [
+      2400,
+      1352
+    ],
+    "modifications": "Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.",
+    "derivation": "pdf-chart-crop",
+    "license": "CC BY 4.0 (underlying MiniCPM figure)",
+    "license_url": "https://arxiv.org/html/2404.06395v1",
+    "rights_status": "underlying-paper-license-verified",
+    "provenance_confirmation": "pinned-upstream-pdf; original page and final crop visually reviewed",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/deepseek-lr-batch-grid-chart.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/deepseek-lr-batch-grid.png",
+    "source_asset_sha256": "fa9aca0ea51c2ae0a757a97b6cf7a55b3ce55e065237fe45604c1ff5f8bcc487",
+    "source_page": 20,
+    "source_url": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=20",
+    "source_parent_sha256": "b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890",
+    "author": "Tatsunori Hashimoto and Stanford CS336 course staff; underlying chart authors listed in NOTICE.md",
+    "sha256": "d824366c0f34e6b3137ce3d3fd2fc9e0a9a833d574d40a4476b8138cefc880f2",
+    "dimensions": [
+      1452,
+      541
+    ],
+    "crop_pixels": [
+      552,
+      608,
+      2004,
+      1149
+    ],
+    "source_render_dimensions": [
+      2400,
+      1352
+    ],
+    "modifications": "Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.",
+    "derivation": "pdf-chart-crop",
+    "license": "User permission record (not a named license)",
+    "license_url": "https://cs336.stanford.edu/",
+    "rights_status": "existing-local-reformat; third-party-rights-unverified",
+    "provenance_confirmation": "pinned-upstream-pdf; original page and final crop visually reviewed",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/deepseek-isoflop-curves-chart.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/deepseek-isoflop-curves.png",
+    "source_asset_sha256": "8f2ea271d568cc614b26e356c6e01e38f0fb4b308464a2103a603aa491d45367",
+    "source_page": 23,
+    "source_url": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=23",
+    "source_parent_sha256": "b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890",
+    "author": "Tatsunori Hashimoto and Stanford CS336 course staff; underlying chart authors listed in NOTICE.md",
+    "sha256": "01eab0c997dfb130b249b4a7a613dc77eaea77836557ae0a4e9a821974d4a880",
+    "dimensions": [
+      2112,
+      831
+    ],
+    "crop_pixels": [
+      204,
+      372,
+      2316,
+      1203
+    ],
+    "source_render_dimensions": [
+      2400,
+      1352
+    ],
+    "modifications": "Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.",
+    "derivation": "pdf-chart-crop",
+    "license": "User permission record (not a named license)",
+    "license_url": "https://cs336.stanford.edu/",
+    "rights_status": "existing-local-reformat; third-party-rights-unverified",
+    "provenance_confirmation": "pinned-upstream-pdf; original page and final crop visually reviewed",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/deepseek-loss-prediction-chart.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/deepseek-loss-prediction.png",
+    "source_asset_sha256": "ef68934fd2d66e7acb37ceb937318fea620ec85ad33804684e69431a1f676325",
+    "source_page": 24,
+    "source_url": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=24",
+    "source_parent_sha256": "b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890",
+    "author": "Tatsunori Hashimoto and Stanford CS336 course staff; underlying chart authors listed in NOTICE.md",
+    "sha256": "77433ad6b7027c88ce7ab5f164073fd8f609866583eebd2ad7fec5097fdad7ba",
+    "dimensions": [
+      924,
+      554
+    ],
+    "crop_pixels": [
+      840,
+      588,
+      1764,
+      1142
+    ],
+    "source_render_dimensions": [
+      2400,
+      1352
+    ],
+    "modifications": "Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.",
+    "derivation": "pdf-chart-crop",
+    "license": "User permission record (not a named license)",
+    "license_url": "https://cs336.stanford.edu/",
+    "rights_status": "existing-local-reformat; third-party-rights-unverified",
+    "provenance_confirmation": "pinned-upstream-pdf; original page and final crop visually reviewed",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/optimizer-search-surface-chart.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/optimizer-search-surface.png",
+    "source_asset_sha256": "0b0fbaecc546b2534d3b954adbd96b4fbb9fd0a2f4e5e24efb72312ca5f954ce",
+    "source_page": 34,
+    "source_url": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=34",
+    "source_parent_sha256": "b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890",
+    "author": "Tatsunori Hashimoto and Stanford CS336 course staff; underlying chart authors listed in NOTICE.md",
+    "sha256": "ba95f5c732ce8ce02aad6f428f474adc073846854fc204bc1fea7d060976980c",
+    "dimensions": [
+      1152,
+      960
+    ],
+    "crop_pixels": [
+      360,
+      324,
+      1512,
+      1284
+    ],
+    "source_render_dimensions": [
+      2400,
+      1352
+    ],
+    "modifications": "Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.",
+    "derivation": "pdf-chart-crop",
+    "license": "User permission record (not a named license)",
+    "license_url": "https://cs336.stanford.edu/",
+    "rights_status": "existing-local-reformat; third-party-rights-unverified",
+    "provenance_confirmation": "pinned-upstream-pdf; original page and final crop visually reviewed",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/optimizer-unfair-tuning-chart.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/optimizer-unfair-tuning.png",
+    "source_asset_sha256": "ff2af57ebf4cc5b0ebbc28733bbf7db65a4b95b703ffb50fb1d3fd402f9f098c",
+    "source_page": 39,
+    "source_url": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=39",
+    "source_parent_sha256": "b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890",
+    "author": "Tatsunori Hashimoto and Stanford CS336 course staff; underlying chart authors listed in NOTICE.md",
+    "sha256": "45554ed617ff9e2d280899c775e07249e51bf40965ab0a9d69f6fffb9b5bbcfa",
+    "dimensions": [
+      2136,
+      777
+    ],
+    "crop_pixels": [
+      216,
+      291,
+      2352,
+      1068
+    ],
+    "source_render_dimensions": [
+      2400,
+      1352
+    ],
+    "modifications": "Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.",
+    "derivation": "pdf-chart-crop",
+    "license": "User permission record (not a named license)",
+    "license_url": "https://cs336.stanford.edu/",
+    "rights_status": "existing-local-reformat; third-party-rights-unverified",
+    "provenance_confirmation": "pinned-upstream-pdf; original page and final crop visually reviewed",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/scaling-review-2026-10/optimizer-compute-ratio-confound-chart.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/scaling/optimizer-compute-ratio-confound.png",
+    "source_asset_sha256": "b391e6bb500d05a2c83f79d7cf32f4e443060a1a940fb7287857279e16b3deca",
+    "source_page": 40,
+    "source_url": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_11.pdf#page=40",
+    "source_parent_sha256": "b2148e683b4020f3fa95f5c95f37be55ebf6b2f57382f4c148517e84bf1df890",
+    "author": "Tatsunori Hashimoto and Stanford CS336 course staff; underlying chart authors listed in NOTICE.md",
+    "sha256": "b1627cc8a50a31f283a0652e388114d256cf399a623bc75134c864c603dff446",
+    "dimensions": [
+      2268,
+      750
+    ],
+    "crop_pixels": [
+      96,
+      250,
+      2364,
+      1000
+    ],
+    "source_render_dimensions": [
+      2400,
+      1352
+    ],
+    "modifications": "Pinned original PDF page rendered at 2400 pixels long edge, cropped to existing chart(s). No redraw, recoloring, resampling of source screenshot, or data changes. Slide prose moved into chapter; chart axes and legends retained.",
+    "derivation": "pdf-chart-crop",
+    "license": "User permission record (not a named license)",
+    "license_url": "https://cs336.stanford.edu/",
+    "rights_status": "existing-local-reformat; third-party-rights-unverified",
+    "provenance_confirmation": "pinned-upstream-pdf; original page and final crop visually reviewed",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md"
+    ]
+  }
+]

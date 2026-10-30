@@ -1,56 +1,21 @@
 ---
 title: Supervised Fine-Tuning
-aliases: [SFT, Instruction Tuning]
+aliases:
+  - SFT
+  - Instruction Tuning
 type: concept
-status: canonical
-last_updated: 2026-07-16
+status: redirect
+last_updated: '2026-10-29'
 primary_sources:
-  - https://arxiv.org/abs/2109.01652
-  - https://arxiv.org/abs/2203.02155
+  - 'https://arxiv.org/abs/2109.01652'
+  - 'https://arxiv.org/abs/2203.02155'
+canonical_topic: 00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md
 ---
+# Supervised Fine-Tuning
 
-# Supervised Fine-Tuning (SFT)
+Полное объяснение: [[00 Учебник/12 Post-training и Alignment/01 SFT и instruction data|SFT и инструктивные данные]].
 
-**SFT** дообучает предобученную модель на парах «вход → желаемый ответ», максимизируя правдоподобие целевых ответов:
-
-$$\mathcal L_{SFT}=-\sum_t \log\pi_\theta(y_t\mid x,y_{<t}).$$
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/post-training-courses/sft-prompt-masking.png]]
-
-*Токены системного сообщения и пользователя участвуют в прямом проходе как
-контекст; в показанном режиме потери считаются только по ответам ассистента.
-Значение `-100` в метках исключается функцией потерь с `ignore_index=-100`.
-Источник: Hugging Face,
-[TRL SFTTrainer documentation](https://huggingface.co/docs/trl/sft_trainer).*
-
-Здесь $x$ — входной контекст, $y_t$ — целевой токен ответа, а $y_{<t}$ —
-предшествующие токены ответа. Модель видит весь **предшествующий** диалог:
-будущие токены скрыты причинной маской. Потеря суммируется только по выбранным
-целевым позициям, но градиент может проходить через представления контекста.
-
-При вычислении next-token loss логиты позиции $i$ сравнивают с меткой токена
-$i+1$: например, `logits[:, :-1]` с `labels[:, 1:]`. Для входа
-`[BOS, Q, A, EOS]` и несдвинутых меток `[-100, -100, A, EOS]`
-учатся два предсказания: после `Q` — `A`, после `A` — `EOS`.
-Во входных идентификаторах остаются настоящие токены, не `-100`.
-Сдвиг выполняют ровно один раз: внутри модели/тренера либо явно в своей
-функции потерь. Это соглашение
-[реализации SFT](https://huggingface.co/docs/trl/sft_trainer#label-shifting-and-masking),
-а исключение меток задаётся параметром
-[CrossEntropyLoss](https://docs.pytorch.org/docs/2.14/generated/torch.nn.CrossEntropyLoss.html).
-
-Метки входного запроса часто исключают, чтобы оптимизировать именно ответ ассистента; конкретный рецепт может обучать и другие части последовательности.
-
-SFT учит формат, стиль, следование инструкциям, протокол вызова инструментов и новые типы задач. Он не гарантирует фактическую правильность или предпочтительность ответа и ограничен качеством демонстраций. Повторное обучение на узком наборе может вызвать забывание прежних навыков или потерю разнообразия.
-
-SFT часто предшествует оптимизации предпочтений или RL, создавая исходную политику для дальнейшего обучения. Это распространённый порядок стадий, а не обязательный закон: существуют и методы, начинающие напрямую с базовой модели.
-
-## Подробнее
-
-Подготовка данных инструкций, шаблоны диалога, маскирование потерь и ошибки датасета
-разобраны в главе [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/01 SFT и instruction data|SFT и instruction data]].
-
-## Источники
-
-- [FLAN](https://arxiv.org/abs/2109.01652)
-- [InstructGPT](https://arxiv.org/abs/2203.02155)
+<!-- Compatibility anchors for existing Obsidian and web links. -->
+<span id="supervised-fine-tuning-sft" aria-hidden="true"></span>
+<span id="подробнее" aria-hidden="true"></span>
+<span id="источники" aria-hidden="true"></span>

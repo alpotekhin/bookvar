@@ -1,0 +1,41 @@
+bash: warning: setlocale: LC_ALL: cannot change locale (C.UTF-8): Bad file descriptor
+$ pnpm content:build
+bash: warning: setlocale: LC_ALL: cannot change locale (C.UTF-8): Bad file descriptor
+$ pnpm --dir ../publishing build
+bash: warning: setlocale: LC_ALL: cannot change locale (C.UTF-8): Bad file descriptor
+$ tsx adapter/build.ts
+$ astro check
+15:35:55 [content] Syncing content
+15:35:57 [content] Synced content
+15:35:57 [types] Generated 4.03s
+15:35:57 [check] Getting diagnostics for Astro files in /Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/site...
+[96msrc/content.config.ts[0m:[93m10[0m:[93m26[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m10[0m     translationReviewed: z.string().optional(),
+[7m  [0m [93m                         ~[0m
+[96msrc/content.config.ts[0m:[93m9[0m:[93m20[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m9[0m     canonicalHref: z.string().optional(),
+[7m [0m [93m                   ~[0m
+[96msrc/content.config.ts[0m:[93m8[0m:[93m24[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m8[0m     translationStatus: z.enum(['current', 'partial']).optional(),
+[7m [0m [93m                       ~[0m
+[96msrc/content.config.ts[0m:[93m7[0m:[93m21[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m7[0m     sourceLanguage: z.enum(['en', 'ru', 'mixed']).optional(),
+[7m [0m [93m                    ~[0m
+[96msrc/content.config.ts[0m:[93m6[0m:[93m78[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m6[0m   docs: defineCollection({ loader: docsLoader(), schema: docsSchema({extend: z.object({
+[7m [0m [93m                                                                             ~[0m
+[96msrc/content.config.ts[0m:[93m1[0m:[93m28[0m - [93mwarning[0m[90m ts(6385): [0m'z' is deprecated.
+
+[7m1[0m import { defineCollection, z } from 'astro:content';
+[7m [0m [93m                           ~[0m
+
+Result (16 files): 
+- 0 errors
+- 0 warnings
+- 6 hints
+

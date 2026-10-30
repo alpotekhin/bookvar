@@ -14,7 +14,7 @@ function configuredProcessor() {
 }
 
 const cases = [
-  ['harvard-ml-systems/labs/vol1/lab-10-model-compress', 'Harvard ML Systems/labs/vol1/lab_10_model_compress.md', 1],
+  ['harvard-ml-systems/labs/vol1/lab-10-model-compress', 'Harvard ML Systems/labs/vol1/lab_10_model_compress.md', 0],
   ['lf-recommenders/diversity-metrics', 'Linux Foundation Recommenders/examples/03_evaluate/als_movielens_diversity_metrics.ipynb.md', 3],
   ['hse-ml-course/ml1-2026-spring/seminars/sem09-trees-ipynb', 'HSE ML course/ml1-2026-spring/seminars/sem09-trees.ipynb.md', 2],
   ['hse-ml-course/ml1-2026-spring/homework-practice/homework-practice-05-trees/homework-practice-05-trees-ipynb', 'HSE ML course/ml1-2026-spring/homework-practice/homework-practice-05-trees/homework-practice-05-trees.ipynb.md', 1],
@@ -47,11 +47,13 @@ describe('source archive math compatibility', () => {
   });
   const slidesRoot = new URL('../../05 Источники/Courses/Harvard ML Systems/slides/', import.meta.url);
   const decks = ['vol1', 'vol2'].flatMap(volume => readdirSync(new URL(volume, slidesRoot)).filter(name => name.endsWith('.md')).map(name => [volume, name]));
-  test.each(decks)('restores exact retained TeX in %s/%s', async (volume, name) => {
+  test.each(decks)('renders the repaired slide archive and preserves retained TeX in %s/%s', async (volume, name) => {
     const body = readFileSync(new URL(`${volume}/${name}`, slidesRoot), 'utf8').replace(/^---\n[\s\S]*?\n---\n/, '');
     const url = new URL(`../src/content/docs/generated/sources/courses/harvard-ml-systems/slides/${volume}/${name.replaceAll('_', '-')}`, import.meta.url);
     const normalized = normalizeArchiveMath(body, url);
-    expect(normalized === body).toBe(false);
+    // The importer now preserves math itself. The legacy render-only repair
+    // must not rewrite this newer projection or the retained original payload.
+    expect(normalized).toBe(body);
     expect(normalized.slice(normalized.indexOf('## Complete original Beamer source')) === body.slice(body.indexOf('## Complete original Beamer source'))).toBe(true);
     expect(normalizeArchiveMath(normalized, url) === normalized).toBe(true);
     const canonicalUrl = new URL('../src/content/docs/generated/textbook/control.md', import.meta.url);

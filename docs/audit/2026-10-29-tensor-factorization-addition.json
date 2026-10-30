@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-29",
+  "source": "00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md",
+  "before_sha256": "e818fccc317a2025b020f453a2e578e43ea1a2ba39ae893a86c6ee0a89bed5d3",
+  "after_sha256": "9fb33a98e8ece36cfabefe9e589c1ed9a5d7a08f4f686358f4ed2c0769aad4f3",
+  "block_sha256": "fb0825ee51a6f71635482b515d831375d24ea041d3c1ecef9ea4557195049bb4",
+  "frontmatter_changes": [
+    {
+      "old": "last_updated: 2026-10-19",
+      "new": "last_updated: 2026-10-29"
+    },
+    {
+      "old": "last_verified: 2026-10-19",
+      "new": "last_verified: 2026-10-29"
+    }
+  ],
+  "lines": 1092,
+  "added_lines": 333,
+  "new_programs": 5,
+  "new_figures": 1,
+  "review": "docs/audit/2026-10-29-tensor-factorization.md"
+}

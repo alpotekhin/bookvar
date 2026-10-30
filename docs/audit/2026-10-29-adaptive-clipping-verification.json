@@ -1,0 +1,202 @@
+{
+  "date": "2026-10-29",
+  "status": "verified-locally-not-published",
+  "scope": "Reconcile the Gradient Clipping legacy note into the existing canonical optimization narrative. This is not acceptance of the remaining textbook or its release.",
+  "chapter": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+  "chapterSha256": "449c86d3567e8a21e72e76c16e4fde9cc96bc16bd63c6c40d11d507d869f4616",
+  "publicationRoute": "textbook/neural-networks/optimizers-schedules",
+  "chapterInventory": {
+    "lines": 1559,
+    "pythonFences": 9,
+    "figures": 13,
+    "addedPythonFences": 2,
+    "addedOriginalFigures": 2
+  },
+  "artifactHashes": {
+    "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md": "449c86d3567e8a21e72e76c16e4fde9cc96bc16bd63c6c40d11d507d869f4616",
+    "01 Справочник/_index.md": "b93c405c55bb641ef38478506c94c1d6bf1f461d42d50b52bddeab4948a0225d",
+    "en/01 Reference/_index.md": "a0614bee19080805cdd3abdbdc01ee2f64b7326f2a375d09d89e6ad1a86501d6",
+    "05 Источники/asset-registry.yml": "5017ec06164209d76396c0ea937c539e1ec42c42a5423a35adc682e6a6240b85",
+    "docs/audit/2026-10-29-adaptive-clipping-additions.json": "6afbab9c37749123237f97e5aa2e306c0e5a43f37d469b59ad65570abbf5c652",
+    "publishing/tools/check_adaptive_clipping_examples.py": "574e60be97160b37baa71ae8d6fb714a1d16cbe90e8aef10963abf482b2a7091",
+    "publishing/tools/check_optimization_examples.py": "69c6e9ad4c2276590bfa7deff806446abfb4f69d5bf73f8a8f612ba1b8777a3c",
+    "publishing/tools/check_optimizer_memory_examples.py": "ef0c2d460216ecf672caa1660e50d4d320303eea0f18b9735f7344d061291991",
+    "publishing/tools/prepare_adaptive_clipping_figures.py": "ccefc1b6dcb948358678ba22c4ff76fc3860c7554a21bb206f98242ad65a6137",
+    "publishing/tools/topic-consolidation-baseline.mjs": "3d59d7c19c66abc890f93232d5a91daa03cb1cd934cb9bda333a4e759d423ca3",
+    "publishing/tools/topic_consolidation_baseline.py": "e11137461a0dd0ecbf96dd714abed84ff5fdf4903353600c60521cb46457c49a",
+    "publishing/tests/adaptive-clipping.test.ts": "94937d100c9a5559521ad7197bee961fe4b29fa9c4cd2baf1604dd1aa32ba481",
+    "publishing/tests/asset-registry.test.ts": "f03daa44b736ba5cb0053b34fc483699c015d6af2e60e505edeb555b4b882d75",
+    "publishing/tests/optimizer-memory.test.ts": "f18244295b08bf1fb1377123873bc9fe352a28139a3a3ea1a429e0f7d7c91695",
+    "publishing/tests/retention-finetuning.test.ts": "37adcc6e7a4df14f84c98310b6c93f580cba4ce4944872ecf917d675518c1d93",
+    "publishing/tests/bert-objectives.test.ts": "e0a000548dbbe57b3a28e858c0c45b2ccfa6c5cdbd26d0502ff48eb72097ade0",
+    "publishing/tests/site-output.test.ts": "a6f3bae87d53307f2633025e138bb71a1bc91841bcfdd577713e013f94bd28f8",
+    "05 Источники/Originals/gradient-clipping-2026-10-29/autoclip-MIT.txt": "3391e95d6d3cc339dd66a12af61511fbe637abac4fa18254a8c667f794a8fc33",
+    "05 Источники/Originals/gradient-clipping-2026-10-29/autoclip-README.md": "f1719fbbd196ebdd9be10c19803567beb4410a9f6a583feb2b31642ad0f6e870",
+    "05 Источники/Originals/gradient-clipping-2026-10-29/autoclip-mi.gif": "57cdb8d1dd158320347f4a1017a4554dd0405c40cbaf311e1107c2ec38367397",
+    "05 Источники/Originals/gradient-clipping-2026-10-29/autoclip.py": "1b7f1021a9d761fb3a3a7b59be84e28a87d06de7f244fe5a7f491a2785e5d37d",
+    "05 Источники/Originals/gradient-clipping-2026-10-29/brock21a.pdf": "4fed88ab128f2c3e4fc9fa2c50d0aba2520ef16015e211e1b6f444c328dba3a2",
+    "05 Источники/Originals/gradient-clipping-2026-10-29/nfnets-Apache-2.0.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "05 Источники/Originals/gradient-clipping-2026-10-29/nfnets-optim-f5de0ede.py": "2d724d65cb7fbbc116fa0a5131e3008a47fe231db1e3751c2c40182dba64c264",
+    "00 Учебник/Assets/Figures/curated/gradient-clipping-2026-10-29/assets.json": "cf3a4b41e14c6170f94f0e54beebd67e2af338b78f8975631597fa0952174d24",
+    "00 Учебник/Assets/Figures/curated/gradient-clipping-2026-10-29/autoclip-mi.gif": "57cdb8d1dd158320347f4a1017a4554dd0405c40cbaf311e1107c2ec38367397",
+    "00 Учебник/Assets/Figures/curated/gradient-clipping-2026-10-29/nfnet-agc-ablation.png": "083f5af777621f5e5d1e759360cffc650c12e5254d75ca56e1bdc7fbd17b94a9",
+    "docs/audit/evidence/2026-10-29-adaptive-clipping/desktop-agc.png": "8ebf02d49d75988136d5b26e60086a2b513da71067212f83fd12d4abaef22f22",
+    "docs/audit/evidence/2026-10-29-adaptive-clipping/desktop-nfnet-original.png": "1555c5883e027884d32097c2c4fee7b1279ea515b570700a48d883ccf1b05c16",
+    "docs/audit/evidence/2026-10-29-adaptive-clipping/mobile-animation-zoom-en.png": "6138165a9a612b7de2a309e7454f0211b87a1adc4e1e04653a13202923df2683",
+    "docs/audit/evidence/2026-10-29-adaptive-clipping/mobile-autoclip-en.png": "f5b929b6dba91708175262f2fbf286906b1eafeaa005c0f8f1519061664b86cb",
+    "docs/audit/evidence/2026-10-29-adaptive-clipping/pages-desktop-animation-en.png": "34b9e79e085d4c2a173de5da262abf44f779046702ed8d8fd65b4416db9f8f2f",
+    "docs/audit/evidence/2026-10-29-adaptive-clipping/pages-mobile-agc-formula.png": "9a3012b4df61235193e1e4af99a531ec5eeef3bfe26926b14fbd2efabe7823de",
+    "docs/audit/evidence/2026-10-29-adaptive-clipping/pages-mobile-agc.png": "b9d8d4eb80b2fb7157ebee862fee8148e1673d9fd4926554af639c7b3f09b98a",
+    "site/public/licenses/autoclip-dfb622c3-MIT.txt": "3391e95d6d3cc339dd66a12af61511fbe637abac4fa18254a8c667f794a8fc33",
+    "site/dist/textbook/neural-networks/optimizers-schedules/index.html": "26915c99740c7a13a779e51292b50423254c9dd38e55ace6cc2a0db26cbb86e3",
+    "site/dist/en/textbook/neural-networks/optimizers-schedules/index.html": "6dbf56dea3dba6ed0cd11b11e1be3de25883d619eed696ef8848bdccde1d6c0c"
+  },
+  "explanationReview": {
+    "wholeChapterReadBeforeAndAfter": true,
+    "sourceComparison": [
+      {
+        "source": "Brock et al., PMLR 139, brock21a.pdf",
+        "read": "Complete sections 4 and 4.1, Eq. 3 and original Figure 2. PDF page 4 rendered and visually inspected; section 4.1 continuation read as PDF text.",
+        "retained": "Relative plain-SGD displacement, unit-wise rather than layer-wise norms, zero-weight floor, hyperparameter dependence and experimental layer exclusions."
+      },
+      {
+        "source": "Pinned NFNet optim.py f5de0ede",
+        "read": "compute_norm, unitwise_norm, SGD_AGC and SGD.update_param",
+        "retained": "IO/HWIO axis convention and clipping before the delegated momentum/weight-decay update; compared the actual extracted original clipping code on CPU."
+      },
+      {
+        "source": "AutoClip 2007.14469v1",
+        "read": "Complete sections 2 and 3, Algorithm 1, section 5; original author README, license and PyTorch handler read completely.",
+        "retained": "Current raw norm enters history before the percentile, global clipping precedes Adam moments, p=0/100 cases and speech-experiment scope."
+      }
+    ],
+    "workedExamples": [
+      "Two equal gradient rows with weight norms 5 and 0.05; relative SGD displacement changes from 0.01/1 to 0.01/0.02 after unit-wise clipping.",
+      "Raw norms 10,2,4,100 give median thresholds 10,6,4,7 and outgoing norms 10,2,4,7."
+    ],
+    "style": "no-ai-slop checklist applied to new editorial prose; original English quotations left unchanged. English source explanations remain in English. No synthetic schematic was added.",
+    "provenance": "Original NFNet Figure 2 under PMLR CC BY 4.0; complete forty-frame AutoClip GIF and original README panel paragraph from the MIT-licensed author repository. Both panels/captions of the PDF figure retained; only surrounding page text cropped.",
+    "remainingExplanatoryGapsInEditedScope": [],
+    "limits": "Existing optimizer explanations and eleven figures were preserved by exact reversible changes. Earlier full-source acceptance is not recast as newly reproduced GPU training or fresh visual inspection of every unchanged figure."
+  },
+  "executedChecks": [
+    {
+      "command": "uv run --offline --with torch==2.14.1 --with numpy==2.3.5 python publishing/tools/check_adaptive_clipping_examples.py",
+      "result": "PASS: two actual current chapter fences, 144 NFNet code comparisons, original HWIO filter-norm check, original AutoClip handler, 36 independent percentile/scaling cases and nonfinite-history guard.",
+      "log": "/var/tmp/bookvar-clipping-cpu-20261029.log"
+    },
+    {
+      "command": "uv run --offline --with torch==2.14.1 --with numpy==2.3.5 python publishing/tools/check_optimization_examples.py",
+      "result": "PASS: four unchanged actual fences restored exactly to preceding revision; independent clipping and Adam counterexample.",
+      "log": "/var/tmp/bookvar-clipping-optimization-cpu-20261029.log"
+    },
+    {
+      "command": "uv run --offline --with torch==2.14.1 --with numpy==2.3.5 python publishing/tools/check_optimizer_memory_examples.py",
+      "result": "PASS: three unchanged actual fences; 26 marginal/projection/state cases. Together the three checkers execute all nine current code blocks.",
+      "log": "/var/tmp/bookvar-clipping-memory-cpu-20261029.log"
+    },
+    {
+      "command": "pnpm --dir publishing test",
+      "result": "129 files, 831 tests passed",
+      "log": "/var/tmp/bookvar-clipping-unit-20261029.log"
+    },
+    {
+      "command": "pnpm --dir publishing test:output",
+      "result": "172 tests passed. An initial run timed out in the unchanged five-second all-page scan during concurrent build; the final run passed after the heavy build ended.",
+      "log": "/var/tmp/bookvar-clipping-output-20261029.log"
+    },
+    {
+      "command": "pnpm --dir site test",
+      "result": "6 files, 89 tests passed",
+      "log": "/var/tmp/bookvar-clipping-site-20261029.log"
+    },
+    {
+      "command": "BOOKVAR_LINK_ASSETS=1 pnpm --dir site build",
+      "result": "2006 pages built; root preview HTTP 200",
+      "log": "/var/tmp/bookvar-clipping-root-20261029.log"
+    },
+    {
+      "command": "pnpm --dir publishing check:links",
+      "result": "0 broken internal routes, fragments or files",
+      "log": "/var/tmp/bookvar-clipping-links-20261029.log"
+    },
+    {
+      "command": "PUBLICATION_BASE_PATH=/bookvar BOOKVAR_LINK_ASSETS=1 pnpm --dir site build --outDir /var/tmp/bookvar-clipping-pages-20261029",
+      "result": "2006 pages built; browser checked RU and EN prefixed routes.",
+      "log": "/var/tmp/bookvar-clipping-pages-20261029.log"
+    },
+    {
+      "command": "findBrokenBuiltLinks('/var/tmp/bookvar-clipping-pages-20261029','/bookvar')",
+      "result": "errors: []",
+      "log": "/var/tmp/bookvar-clipping-pages-links-20261029.log"
+    },
+    {
+      "command": "BOOKVAR_LINK_ASSETS=1 pnpm --dir publishing build",
+      "result": "Derived Markdown restored to root paths after Pages QA.",
+      "log": "/var/tmp/bookvar-clipping-root-restore-20261029.log"
+    }
+  ],
+  "visualReview": {
+    "screenshots": "docs/audit/evidence/2026-10-29-adaptive-clipping",
+    "inspected": [
+      "desktop-agc.png",
+      "desktop-nfnet-original.png",
+      "mobile-autoclip-en.png",
+      "mobile-animation-zoom-en.png",
+      "pages-mobile-agc.png",
+      "pages-mobile-agc-formula.png",
+      "pages-desktop-animation-en.png"
+    ],
+    "desktop": {
+      "viewport": [
+        1280,
+        900
+      ],
+      "clientWidth": 1265,
+      "scrollWidth": 1265,
+      "brokenChapterImages": 0,
+      "loadedChapterImages": 13,
+      "katexErrors": 0
+    },
+    "mobile": {
+      "viewport": [
+        360,
+        800
+      ],
+      "clientWidth": 345,
+      "scrollWidth": 345,
+      "katexErrors": 0,
+      "agcPiecewiseFormula": "visible without page overflow",
+      "autoclipFormula": "visible without page overflow",
+      "animationViewerZoom": "1x to 2x; horizontal image-area scrolling available; Close returns to chapter"
+    },
+    "pages": {
+      "base": "/bookvar",
+      "newImageSources": "both begin /bookvar/assets/",
+      "originalFileAndLicenseLinks": "retain Pages prefix",
+      "ruAndEn": "both checked"
+    },
+    "locales": "No separate EN translation was created. Existing EN route explicitly labels its canonical-language fallback; new English explanations are identical source content on both routes.",
+    "viewportReset": true,
+    "retainedTab": "16, root optimization route, #agc-unitwise"
+  },
+  "preservation": {
+    "journal": "docs/audit/2026-10-29-adaptive-clipping-additions.json",
+    "exactPrecedingRevisionsRestored": 4,
+    "historicalReceiptsRebaselined": false,
+    "legacySourcesChanged": false
+  },
+  "warnings": "Existing unknown promql/toc highlighters and display-newline warnings occur elsewhere in the build; existing Poppler/locale warnings occur in the broad suite. No KaTeX error was observed on the edited page.",
+  "notTested": [
+    "Full NFNet/ImageNet training",
+    "Speech-separation benchmark reproduction",
+    "GPU throughput, memory or optimizer kernels",
+    "Live GitHub Pages publication",
+    "Final whole-book route acceptance"
+  ],
+  "pagesTemporaryArtifact": {
+    "path": "/var/tmp/bookvar-clipping-pages-20261029/en/textbook/neural-networks/optimizers-schedules/index.html",
+    "sha256": "17fc3900e454cad6f3ac3718bcf2ccbffada299d3eb7e60fdb22dcfbfba67fad",
+    "cleanup": "Verified original temporary HTML hash, stopped only own port-62841 preview (PIDs 41369/41359), then removed own Pages build and four temporary source renders. Source archives, curated figures, screenshots and root preview retained."
+  }
+}

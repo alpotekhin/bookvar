@@ -1,0 +1,98 @@
+[
+  {
+    "id": "curated-pd-serving-splitwise-architecture-71c207de7f6f",
+    "asset": "00 Учебник/Assets/Figures/curated/pd-serving-review-2026-10/splitwise-architecture.png",
+    "source_page": 6,
+    "sha256": "71c207de7f6f38b8eab72537f1fc9d3ef8f85e0fe7b57b13378234a968082263",
+    "crop_box_px": [
+      460,
+      320,
+      2240,
+      2200
+    ],
+    "author": "Pratyush Patel, Esha Choukse, Chaojie Zhang, Aashaka Shah, Inigo Goiri, Saeed Maleki, Ricardo Bianchini",
+    "source_url": "https://arxiv.org/abs/2311.18677v2",
+    "source_download_url": "https://arxiv.org/pdf/2311.18677v2",
+    "source_asset": "05 Источники/Papers/Source PDFs/splitwise-2311.18677v2.pdf",
+    "source_asset_sha256": "c7baf19039f7b760c5d83fb61324ec4ffdf384e8a047bd46f2c4e2ad85e3531d",
+    "render_page_size_px": [
+      4637,
+      6000
+    ],
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "modifications": "Complete original figure and source caption rendered from the versioned paper; neighboring article text and page margins excluded. No diagram labels, panels, paths or colors changed.",
+    "used_in": [
+      "00 Учебник/14 Inference и оптимизация/58a2 Раздельное обслуживание prefill и decode.md"
+    ],
+    "render_scale_to": 6000
+  },
+  {
+    "id": "curated-pd-serving-splitwise-layer-transfer-f62d5792a647",
+    "asset": "00 Учебник/Assets/Figures/curated/pd-serving-review-2026-10/splitwise-layer-transfer.png",
+    "source_page": 6,
+    "sha256": "f62d5792a6479ddc0356baef714f4313e0562999f5f69c23e7a10dffc405ff59",
+    "crop_box_px": [
+      2280,
+      320,
+      4370,
+      1250
+    ],
+    "author": "Pratyush Patel, Esha Choukse, Chaojie Zhang, Aashaka Shah, Inigo Goiri, Saeed Maleki, Ricardo Bianchini",
+    "source_url": "https://arxiv.org/abs/2311.18677v2",
+    "source_download_url": "https://arxiv.org/pdf/2311.18677v2",
+    "source_asset": "05 Источники/Papers/Source PDFs/splitwise-2311.18677v2.pdf",
+    "source_asset_sha256": "c7baf19039f7b760c5d83fb61324ec4ffdf384e8a047bd46f2c4e2ad85e3531d",
+    "render_page_size_px": [
+      4637,
+      6000
+    ],
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "modifications": "Complete original figure and source caption rendered from the versioned paper; neighboring article text and page margins excluded. No diagram labels, panels, paths or colors changed.",
+    "used_in": [
+      "00 Учебник/14 Inference и оптимизация/58a2 Раздельное обслуживание prefill и decode.md"
+    ],
+    "render_scale_to": 6000
+  },
+  {
+    "id": "curated-pd-serving-splitwise-provisioning-25f036d362f2",
+    "asset": "00 Учебник/Assets/Figures/curated/pd-serving-review-2026-10/splitwise-provisioning.png",
+    "source_page": 7,
+    "sha256": "25f036d362f2d3656b8c94c07b0edea9bd996c2d31ec1f0b104c9034fb167c5b",
+    "crop_box_px": [
+      2280,
+      320,
+      4370,
+      2270
+    ],
+    "author": "Pratyush Patel, Esha Choukse, Chaojie Zhang, Aashaka Shah, Inigo Goiri, Saeed Maleki, Ricardo Bianchini",
+    "source_url": "https://arxiv.org/abs/2311.18677v2",
+    "source_download_url": "https://arxiv.org/pdf/2311.18677v2",
+    "source_asset": "05 Источники/Papers/Source PDFs/splitwise-2311.18677v2.pdf",
+    "source_asset_sha256": "c7baf19039f7b760c5d83fb61324ec4ffdf384e8a047bd46f2c4e2ad85e3531d",
+    "render_page_size_px": [
+      4637,
+      6000
+    ],
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "modifications": "Complete original figure and source caption rendered from the versioned paper; neighboring article text and page margins excluded. No diagram labels, panels, paths or colors changed.",
+    "used_in": [
+      "00 Учебник/14 Inference и оптимизация/58a2 Раздельное обслуживание prefill и decode.md"
+    ],
+    "render_scale_to": 6000
+  }
+]

@@ -9,15 +9,39 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol1/lab_08_model_train.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol1/lab_08_model_train.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL1 Lab — Model Train
 
 ## Readable lab narrative
 
 This lab is primarily executable code; use the complete source below.
+
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+Use the synthesis memo below after completing Parts A-D.
+
+---
+
+## Download Report
+
+---
+
+This V1-08 training feasibility plan is generated locally from the selected track, your inputs, and the computed evidence.
+
+</details>
 
 ## Complete original Marimo source
 

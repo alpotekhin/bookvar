@@ -1,51 +1,21 @@
 ---
 title: Reward Model
-aliases: [RM, Preference Model]
+aliases:
+  - RM
+  - Preference Model
 type: concept
-status: canonical
-last_updated: 2026-07-16
+status: redirect
+last_updated: '2026-10-29'
 primary_sources:
-  - https://arxiv.org/abs/1706.03741
-  - https://arxiv.org/abs/2203.02155
+  - 'https://arxiv.org/abs/1706.03741'
+  - 'https://arxiv.org/abs/2203.02155'
+canonical_topic: 00 Учебник/12 Post-training и Alignment/03 Reward modeling.md
 ---
-
 # Reward Model
 
-**Модель награды (reward model, RM)** присваивает числовую оценку ответу в контексте запроса. Обычно её учат на предпочтениях `chosen ≻ rejected`:
+Полное объяснение: [[00 Учебник/12 Post-training и Alignment/03 Reward modeling|Модель награды]].
 
-$$\mathcal L_{RM}=-\log\sigma(r_\phi(x,y^+)-r_\phi(x,y^-)).$$
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/post-training-courses/reward-model-training.png]]
-
-*Одна модель награды вычисляет оценку в позиции EOS для предпочитаемого и
-отвергнутого ответов; парная потеря зависит от разности оценок. Источник: Hugging Face,
-[TRL RewardTrainer documentation](https://huggingface.co/docs/trl/reward_trainer).*
-
-Для запроса $x$ модель с параметрами $\phi$ выдаёт оценки $r_\phi$ двух
-ответов; $y^+$ предпочитается $y^-$. В модели Bradley–Terry вероятность этого
-сравнения равна $\sigma(\Delta)$, где $\Delta=r_\phi(x,y^+)-r_\phi(x,y^-)$
-и $\sigma(z)=1/(1+e^{-z})$. При $\Delta=1$ она составляет $0.731$,
-а потеря $-\log\sigma(1)\approx0.313$; при $\Delta=3$ —
-$0.953$ и $0.049$. Порядок в обоих случаях правильный, но логистическая
-потеря различает уверенность. Поэтому точность ранжирования и значение
-потери — разные показатели.
-
-Общий сдвиг оценок пары, в том числе зависящий от запроса, не меняет
-разность и потерю; абсолютная шкала не определяется этими сравнениями.
-Однако умножение оценок на константу меняет разрыв и уверенность.
-Это свойство [парной модели предпочтений](https://arxiv.org/html/2305.18290#S3),
-а не гарантия калибровки на новых запросах.
-
-RM приближает предпочтения разметчиков, а не объективную «полезность». Она наследует смещения разметки и может ошибаться на данных, отличающихся от обучающих. При чрезмерной оптимизации политика находит способы увеличить эту суррогатную награду без реального улучшения — эффект называют reward hacking или overoptimization.
-
-Награда может быть итоговой, outcome-level (за весь ответ) или пошаговой, process-level (за промежуточные шаги). [[02 Areas/ML & DL/01 Справочник/Post-training/Verifiable Reward|Verifiable reward]] отличается тем, что оценку вычисляет проверяющее правило или среда, а не обязательно обученная модель.
-
-## Подробнее
-
-От сбора сравнений до парной потери, калибровки и чрезмерной оптимизации путь
-прослеживается в главе [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/03 Reward modeling|Reward modeling]].
-
-## Источники
-
-- [Deep RL from Human Preferences](https://arxiv.org/abs/1706.03741)
-- [InstructGPT](https://arxiv.org/abs/2203.02155)
+<!-- Compatibility anchors for existing Obsidian and web links. -->
+<span id="reward-model" aria-hidden="true"></span>
+<span id="подробнее" aria-hidden="true"></span>
+<span id="источники" aria-hidden="true"></span>

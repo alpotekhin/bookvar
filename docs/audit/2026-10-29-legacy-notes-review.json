@@ -1,0 +1,1697 @@
+{
+  "date": "2026-10-29",
+  "scope": "Full reconciliation of the 31 unpublished legacy notes. Source-read and accepted comparison are separate statuses; unreviewed content is not declared complete.",
+  "canonicalReadRevisions": {
+    "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md": "50fc2e140ed82af09da1b935d37c27f90bc48998cf2a0c5628e703eac70a582c",
+    "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md": "c25a11e993cbcd37387d64003c575b2448c4979b828a7819b4f59a8cd4f5b99d",
+    "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md": "a56e872d7bc7c103d498d71df5f640c64b484acbd817f0ce0a217dc691aec2c4",
+    "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md": "1e5a7e921ff537a4625021e77a68bfe79790ee18f0b120ddb10f400f95d7767f",
+    "00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md": "8795146abe1f9c7a8de8a232c958aae472e3788d963f99aba557b90690fee2c0",
+    "00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md": "f30129bff3dad6c9888f2be2af5809e58aab0d532deb2675d0d0b6aa3af5cf96",
+    "00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация.md": "1222738b2a9031a13e03c913e51a4d92f5e9ee0ca97f4211f776401fd08bb1de",
+    "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md": "226ab215d706e0af02b48c2d5631887e62614ac89a61be12054175a0edda09b7",
+    "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md": "5102f8b7db11f1ce749c7263d75bb124cbeb6ed217e5d6762e10b6f9d96d24b0",
+    "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md": "0cce42e115bc2a8c453047ce060f7a67dac104a9eae45ed1b899a49f4d921741",
+    "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md": "1bced617c9985be26919d79c4d01a87e4d0a3087d59e65d2e200fd2f84608dfc",
+    "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md": "41629ce92425dc01f122181499ddc21b186f0902d18450b140f1a4d91e281abd",
+    "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md": "29efb9a8c255c1b04abdcedc5c696f659a20ef45010572fe59093429698fcae5",
+    "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md": "449c86d3567e8a21e72e76c16e4fde9cc96bc16bd63c6c40d11d507d869f4616",
+    "00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md": "9a72e3c171518af749c26271e183bf35c55d2f98f76a146cf93c8d8404efa02d",
+    "00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload.md": "3fe01a82c9a8f60a417d7e3eacce59dac608cd767944af5d85db5ab549be1f5e",
+    "00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md": "c0afc59f36af36d3616792c6dc8873cdee8ce419fa8cf0db000698f2393283f4",
+    "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md": "cfbac98aa756dd964e8e7a30f11c9d5c108bc5b87c6f63d4fa446bf15cc5dba7",
+    "00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT.md": "9e7990cd4670623c0f8b4cc78fc233d30dfca3696143dee5ad01f87f2fa136b4",
+    "00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md": "019c8f6a0270bcdb4f282ade039108c289f5d7d391dde779e664fd046fa61435",
+    "00 Учебник/01 Основы нейронных сетей/02 Функции активации.md": "467efffdbfaad2a74bb9e31ff86fed9553cc0478664407efd34d2c678e4b7696",
+    "00 Учебник/12 Post-training и Alignment/02 Preference data.md": "e24409a09129f2b7ba6f01d6a85f45879f1cbab2dec4c099267c5e11d934dffa",
+    "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md": "ae8ad7536eb7463667bbe8a5983fc54008e92079e775ea49ca481a12d3bb570e",
+    "00 Учебник/12 Post-training и Alignment/05 DPO.md": "fd7a08d5813a5427b74a943d8a57f00978877b8edce13ac1027ccc04cf172c06",
+    "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md": "e47cc4f42c05c58f9ff84aaba765cf21e6ad80f8c658efa159ea510ff5ff5828",
+    "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md": "7173f3bbdb587d32f8d2f04c5663164c132563b6966ce7543ccc613f4e007e1a",
+    "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md": "aa2789b8788eda6efa42c4a31100734867554b63e02d32484996ad9dbb6f5e5f",
+    "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md": "472401f6f3bf906cc8b23f29a5ff206cb8c083da3f20ac5654249eaee61aef69",
+    "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md": "8b00b47bb39ec6d03b8942ae092e6399cc730e98e903bfdab33b5d8890cf99c2",
+    "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md": "aca814c431df4b4d489ac98e4f147b85ba6f600eb41463c1b3ae4b6f7d9f3f3f",
+    "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md": "7fc54afeb6889923cf35893e40f4b9f02964b734b7dc40b5eea0f10b41659e01",
+    "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md": "76213c88dc1a17d2ea09ca1c5b607f53e5d7e6210cb44dbb9d69f9809bcb9e4e",
+    "00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch.md": "03a273d68cd2f560cdb13f08b74c090afa792076a460cc39ec04090ac6870935",
+    "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md": "ce717410045dd566b798820440ef49db532c1204d6d0bed6b54cfec1247f6c8d",
+    "06 Практика/20 Собрать языковую модель с нуля.md": "4def1208324566dce45443f6cbdf0588e4577537c4e18942d7cbe365048ed85e",
+    "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md": "00eb6118373a4992444bc27376567cd10a83209d090c2a82b2c6425ca65dc01e",
+    "00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md": "27435c20a65d7883cf34b5c1afa93041af49ce7e8f6a37ee0c8bfb280cf72791"
+  },
+  "records": [
+    {
+      "source": "Concepts/Training/Adversarial Training.md",
+      "sourceSha256": "d7ea9937a19ba3021531457b10000592cc97f2d627b04d3af14e10a608d1b7a4",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch.md"
+      ],
+      "findings": [
+        "The robustness owner now derives the embedding-space loss-ascent sign, vocabulary-frequency normalization, detached inner search, sequence-wide norm and FreeLB accumulation at all ascent points. SMART local smoothing and prediction-space proximal updates are worked through separately.",
+        "VAT has one full owner in the semi-supervised chapter: zero first derivative, Hessian direction, finite-difference power iteration and a complete masked embedding update. The robustness chapter links to that derivation instead of maintaining a second overview.",
+        "Both final owners were read completely. All 13 published Python fences executed on CPU; original figures, source-specific permissions, root/Pages routes and desktop/mobile rendering were checked. The exact addition journal restores all previous text, examples, figures and registry bytes."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-29-consistency-training-verification.json",
+        "canonicalTargets": [
+          {"source": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md", "anchors": ["embedding-adversarial-training", "freelb", "smart"]},
+          {"source": "00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch.md", "anchors": ["virtual-adversarial-training"]}
+        ],
+        "excludedClaims": [
+          "Negating a cross-entropy gradient creates an untargeted loss-maximizing perturbation. The negative sign belongs to the log-likelihood convention, not the loss gradient.",
+          "FreeLB has no extra compute cost or requires one clean pass: the original algorithm still uses K forward/backward passes, with one accumulated parameter update.",
+          "Embedding-space regularization certifies resistance to arbitrary word substitutions or malicious text, or SMART preserves every pretrained capability.",
+          "One power iteration exactly solves the nonlinear VAT maximum, or the resulting consistency establishes correctness of the clean target."
+        ],
+        "scopeLimits": "Archive reconciliation and small CPU computations, not reproduced LSTM/IMDb training, TensorFlow-1 runtime, GPU performance or a semantic-attack benchmark. The rest of the Semi-supervised Learning archive is still open. No commit, push or deployment."
+      }
+    },
+    {
+      "source": "Concepts/Training/Backpropagation.md",
+      "sourceSha256": "1db38521de2dde688470b54af2a92c4711e78f692654ebd6f1ca8a69d522a42e",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md",
+        "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+        "00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md",
+        "00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md",
+        "00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload.md"
+      ],
+      "findings": [
+        "The complete canonical chapter already develops branching sums, matrix gradients, accumulation, VJP/JVP, detach, custom backward, numerical checks and saved state with worked examples and original figures.",
+        "Do not transfer the claim that every requires_grad tensor has grad_fn: leaf tensors do not.",
+        "The remaining owners have now been read completely. LSTM distinguishes the direct cell path from the full recurrent Jacobian; the precision chapter separates normal/subnormal range, resolution and AMP state; checkpointing derives its memory assumptions, recomputation and RNG contract. These existing explanations were preserved instead of duplicating the legacy overview."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "Current whole-read hashes above and the executed CPU checks recorded in this decision; no chapter content changed in this reconciliation.",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md",
+            "headings": [
+              "4. Правило цепочки и разветвлённый граф",
+              "5. Обратный проход нейрона и матричного слоя",
+              "8. Почему градиенты нужно обнулять",
+              "9. Автоматическое дифференцирование в обратном режиме",
+              "10. Ошибки и нестабильность обратного прохода"
+            ]
+          },
+          {
+            "source": "00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md",
+            "headings": ["Как далеко проходит производная", "Полная ячейка и порядок весов"]
+          },
+          {
+            "source": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+            "mechanism": "Global norm clipping, raw-gradient versus Adam-update semantics, accumulation and unscale order."
+          },
+          {
+            "source": "00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md",
+            "mechanism": "Representable range versus resolution, master weights, loss scaling and weighted accumulated gradients."
+          },
+          {
+            "source": "00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload.md",
+            "mechanism": "Saved tensors, segment memory model, recomputation, RNG preservation and checkpoint/offload distinctions."
+          }
+        ],
+        "retainedExplanation": [
+          "The canonical graph chapter supplies the chain rule with sums over branches, tied parameters, matrix/broadcast derivatives, accumulation, stop-gradient, reverse/forward AD and numerical checks, not just the archive's definitions.",
+          "The LSTM owner works through all gate derivatives, incoming h/c adjoints, direct-path retention over 100 steps, a full-Jacobian counterexample and a complete cell matched to PyTorch.",
+          "The precision and checkpointing owners already contain the missing intermediate arithmetic and API limitations; no new explanation or original figure from this legacy overview needed transfer."
+        ],
+        "excludedClaims": [
+          "Every requires_grad tensor has grad_fn; leaf tensors are a counterexample.",
+          "One product along a path suffices for an arbitrary branched graph; path contributions must be summed.",
+          "Backward always costs exactly twice forward independently of operation and requested derivatives; no fixed FlashAttention speedup is established by this note.",
+          "The LSTM formula dc_t/dc_{t-1}=f_t is the entire recurrent Jacobian, or gates close to one guarantee no vanishing gradient.",
+          "max_norm=1 is a universal LLM standard or a bound on every adaptive optimizer's parameter displacement.",
+          "FP16's smallest representable positive value is its normal minimum, BF16 guarantees numerical stability, or mixed precision universally halves memory and accelerates execution by 2–4 times.",
+          "Checkpointing universally gives square-root memory and 1.33 runtime, or is universally necessary for every 70B/H100 configuration.",
+          "LoRA always reduces backward computation; frozen base weights can still be needed for activation gradients."
+        ],
+        "executedChecks": [
+          {"tool": "publishing/tools/check_backprop_examples.py", "result": "exit 0; five baseline runnable blocks and nine additional AD blocks; 81 adjoint identities; gradcheck/gradgradcheck and negative controls"},
+          {"tool": "publishing/tools/check_lstm_gru_examples.py", "result": "exit 0; five standalone blocks; independent full batched LSTM BPTT; direct-path/full-Jacobian distinction; all eleven original image copies unchanged"},
+          {"tool": "publishing/tools/check_optimization_examples.py", "result": "exit 0; four chapter blocks and independent clipping/Adam/scaling checks"},
+          {"tool": "publishing/tools/check_precision_examples.py", "result": "exit 0; CPU range/rounding/scaling checks; CUDA AMP block parsed, not executed"},
+          {"tool": "publishing/tools/check_checkpoint_offload_examples.py", "result": "exit 0; RNG preservation, selective recomputation, finite-difference error 4.434184130985841e-10; actual GPU transfers and performance not tested"}
+        ],
+        "checkEnvironment": "uv run --offline --with torch==2.14.1 --with numpy==2.3.5 python <tool>; CPU only. Backprop checker emitted the existing torch.jit.script/Python 3.14 future warning.",
+        "scopeLimits": "Acceptance covers reconciliation of this archival overview, not fresh visual acceptance of every unchanged owner or GPU performance. No prose, figures, routes or locale pages changed in the Backpropagation increment. Named application catalogues are not treated as full explanations of BYOL/DINO or REINFORCE.",
+        "currentCanonicalEvidence": "docs/audit/2026-10-29-adaptive-clipping-verification.json",
+        "unchangedMechanismEvidence": "The later adaptive-clipping journal restores the exact b9a3d638 optimization revision checked for Backpropagation. Existing explanations are unchanged; AGC and AutoClip are additions, and the whole current chapter was reread."
+      }
+    },
+    {
+      "source": "Concepts/Training/Constitutional AI.md",
+      "sourceSha256": "3b35e33f34fee062c071568abdebd21f157be268a83f7d1c169854d14b293b5c",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md"
+      ],
+      "findings": [
+        "After full comparison with the paper, the canonical chapter now includes a concrete critique/revision-to-SFT trace, pretrained student/all-pass training and the distinct plain/CoT feedback roles.",
+        "Soft option-label normalization, the BT gradient/optimum and clamping are worked through numerically. Both published examples passed; no actual feedback-model call or training-quality result is claimed.",
+        "Original overview retained and complete Figure 5 added, including all panels/scale/caption. Desktop/mobile, root/Pages and explicit EN fallback checked; unsupported archival guarantees excluded."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-29-constitutional-ai-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md",
+            "anchors": [
+              "constitutional-data-example",
+              "cai-soft-labels"
+            ]
+          }
+        ],
+        "excludedClaims": [
+          "CAI solves all scaling, evasiveness and transparency problems or removes all human supervision. Human helpfulness labels and human-written principles/few-shot examples remain in the original method.",
+          "Each individual critique/revision is correct or necessarily improves every objective; model-scored harmlessness/helpfulness axes are not interchangeable with independent human measurements.",
+          "Only the final revision is used for SL-CAI. The primary method includes revisions from all passes and a helpfulness mixture.",
+          "Plain-feedback and CoT-feedback conditions use identical feedback models; the original CoT setup uses a helpful RLHF feedback model rather than the pretrained feedback model used without CoT.",
+          "Soft labels or CoT are universally calibrated/better than hard labels; conditioning on generated rationales can yield extreme self-conditioned labels.",
+          "Clamping recovers a true probability, guarantees safety or is a universal 40–60 percent recipe for all CAI training.",
+          "Reported non-evasiveness or 52B trends prove universal non-evasiveness, inevitable superiority beyond 52B, or Pareto dominance over every RLHF configuration.",
+          "Rewriting a principle alone updates the deployed model's weights, or transparency of a critique proves the critique is faithful/correct."
+        ],
+        "currentCanonicalRevision": "f30129bff3dad6c9888f2be2af5809e58aab0d532deb2675d0d0b6aa3af5cf96",
+        "scopeLimits": "Original 2022 method and archival-note migration. No general safety/evasiveness/scaling guarantee, new translation or live publication."
+      }
+    },
+    {
+      "source": "Concepts/Training/DPO.md",
+      "sourceSha256": "8ddf8990c301a7e07014e53b934685f92706230c2b9736e25fb1c3cf47bf09c5",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/12 Post-training и Alignment/05 DPO.md"
+      ],
+      "findings": [
+        "The complete current 1266-line chapter already contains the ideal-policy derivation, finite-data/support qualifications, full token-level implementation and worked variants.",
+        "All 6 actual DPO fences passed, including a real tiny-Transformer step. A separate normalized-policy counterexample confirms that lower DPO loss need not increase the chosen response's probability.",
+        "Five canonical original figures and complete explanations retained; old pipeline/plot files preserved. Incorrect removal-of-data, universal stability and exact-practical-equivalence claims were not imported."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-29-legacy-dpo-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/05 DPO.md",
+            "anchors": [
+              "dpo-rhf-objective",
+              "dpo-derivation",
+              "dpo-dataflow",
+              "dpo-offline-boundary",
+              "dpo-failures"
+            ]
+          }
+        ],
+        "excludedClaims": [
+          "DPO removes preference collection as well as separate RM fitting and PPO.",
+          "An exact ideal reward reparameterization implies exact equivalence of finite-data, parameterized DPO training to an actual PPO run, without assumptions on the preference model, support or normalization.",
+          "The adaptive logistic weight guarantees prevention of degeneration or monotonically raises every chosen response's actual probability.",
+          "Beta is a learning rate, fixes a hard KL bound, or induces one universal monotone relation to per-step gradient size.",
+          "Two/four functional roles imply two/four equally sized live GPU replicas; fixed-reference log probabilities cannot be cached.",
+          "Unscoped historical win rates or IMDb sentiment frontiers establish universal DPO superiority, OOD generalization or model-family adoption.",
+          "IPO/SimPO/ORPO/KTO and online variants are only hyperparameter changes preserving standard DPO's exact objective."
+        ],
+        "currentCanonicalRevision": "fd7a08d5813a5427b74a943d8a57f00978877b8edce13ac1027ccc04cf172c06",
+        "scopeLimits": "Six CPU examples and source comparison; no language-quality benchmark, GPU performance result, universal algorithm ranking, new translation or live publication."
+      }
+    },
+    {
+      "source": "Concepts/Training/Disentangled Attention.md",
+      "sourceSha256": "2d179865004ed4cfce784a79d0339727555680bf0d6b6800039d3595776149e0",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md"
+      ],
+      "findings": [
+        "The BERT comparison omits the learned Q/K projections and overstates the inability of ordinary attention to distinguish content and position. Check the original DeBERTa derivation before transferring it.",
+        "The claimed 512-element interval [-256,256] is inconsistent. Distinguish DeBERTaV3's November 2021 preprint from its ICLR 2023 publication; the archive's 2023 date is not automatically wrong. The current canonical owner supplies the relative-index and EMD derivations."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-29-small-data-finetuning-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md",
+            "headings": [
+              "DeBERTa: разделить содержание и относительное положение",
+              "Три слагаемых одной оценки",
+              "Enhanced Mask Decoder",
+              "Дообучение, результаты и версии"
+            ]
+          }
+        ],
+        "retainedExplanation": [
+          "The complete existing BERT owner already explains learned content/relative Q/K projections, all three score terms, reversed relative offsets, clipped indexing and scale, a numerical attention example and the actual two-pass enhanced mask decoder with code and version boundaries."
+        ],
+        "excludedClaims": [
+          "Ordinary attention's expanded content/position score does not establish an inability to distinguish them.",
+          "The closed integer interval [-256,256] contains 513 indices, not 512; clipped relative-index conventions must match the implementation.",
+          "EMD cannot be described as one independent extra decoder layer when the reference repeatedly uses the shared top layer with its specified query/key contract.",
+          "Unverified position-position ablations, automatic longer-context generalization, universal DeBERTa-versus-RoPE quality rankings and broad high-stakes production advice are not transferred."
+        ],
+        "primarySources": [
+          "He et al., DeBERTa, original disentangled-attention/EMD derivation and the reference implementation already cited and worked through by the canonical BERT chapter.",
+          "DeBERTaV3 arXiv 2111.09543: first preprint in 2021, ICLR publication in 2023."
+        ],
+        "scopeLimits": "The canonical BERT chapter was read completely at the recorded hash but not edited or freshly visually reaccepted in this increment. No additional source figure from this archive note required transfer. A 2023 conference date is not itself an error.",
+        "currentCanonicalEvidence": "docs/audit/2026-10-29-bert-objectives-verification.json",
+        "currentCanonicalRevision": "0cce42e115bc2a8c453047ce060f7a67dac104a9eae45ed1b899a49f4d921741",
+        "unchangedMechanismEvidence": "The exact new BERT objectives journal restores the preceding fa3595e chapter; the disentangled-attention/EMD section was preserved. Both current locale chapters were reread; original current examples still pass."
+      }
+    },
+    {
+      "source": "Concepts/Training/Dropout.md",
+      "sourceSha256": "e50c3e6655f7a04ab9627eeacbecf0a1cd4ace06e97215a688f367f876190a71",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация.md",
+        "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md"
+      ],
+      "findings": [
+        "The canonical chapter retains its full inverted-dropout, variance, backward, nonlinear averaging, train/eval, channel-mask, decay and early-stopping explanations.",
+        "Independent connection masks and branch gates are now developed with exact mask enumerations, a complete original CC BY figure, the original Apache timm function, mask granularity and different train/test conventions.",
+        "The Transformer owner explains attention dropout, unnormalized row sums, fully dropped rows, structural masking, residual dropout and embedding order. The identical new English section is present in the existing English owner.",
+        "Archival claims about uniform attention, all contemporary LLMs, parallelism requirements and universal dropout rates are unsupported or false and were not transferred."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-29-structured-dropout-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация.md",
+            "anchors": [
+              "dropconnect",
+              "stochastic-depth"
+            ]
+          },
+          {
+            "source": "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md",
+            "anchors": [
+              "transformer-dropout"
+            ]
+          }
+        ],
+        "retainedExplanation": [
+          "The existing eight-block regularization explanation remains unchanged outside the recorded additions and references.",
+          "DropConnect includes the common mean but different covariance, a fixed-mask backward pass and the distinction between exact Bernoulli averaging and Gaussian approximate inference.",
+          "Stochastic depth includes original versus inverted scaling, per-mini-batch versus per-example masks, expected active depth and when branch execution is actually skipped.",
+          "Attention dropout includes four explicit masks, allowed-edge preservation, non-unit row sums, the all-zero case, branch shape and embedding order."
+        ],
+        "excludedClaims": [
+          "Dropout guarantees more uniform attention or exact ensemble predictions after nonlinear layers.",
+          "All current LLMs omit dropout, single-epoch training excludes memorization, or Chinchilla establishes a universal dropout rule.",
+          "Tensor and pipeline parallelism require dropout-free deterministic models; coordinating random numbers is not an impossibility result.",
+          "A universal dropout-rate range or universal benefit from LoRA dropout; a zeroed residual branch automatically saves its forward computation."
+        ],
+        "primarySources": [
+          {
+            "url": "https://proceedings.mlr.press/v28/wan13.pdf",
+            "read": "Sections 2, 2.1, 2.2, 3, 3.1 and 3.2; Algorithms 1 and 2."
+          },
+          {
+            "url": "https://arxiv.org/pdf/1603.09382v3",
+            "read": "Sections 2 and 3 in full, including the inference rule after Table 1."
+          },
+          {
+            "url": "https://jmlr.org/papers/volume26/20-1396/20-1396.pdf",
+            "read": "Introduction through the explanation following Figure 1; license footer on PDF page 1."
+          },
+          {
+            "url": "https://raw.githubusercontent.com/huggingface/pytorch-image-models/beabdc3a6833d39814c895b2bc84cbc61a05834d/timm/layers/drop.py",
+            "read": "Complete drop_path function and DropPath class; root Apache 2.0 license."
+          },
+          {
+            "url": "https://nlp.seas.harvard.edu/annotated-transformer/#attention",
+            "read": "Complete Attention section and attention function through the multi-head introduction."
+          }
+        ],
+        "scopeLimits": "CPU arithmetic and source-code comparisons only; no training-quality or GPU-speed benchmark. Existing EN Transformer is aligned; regularization EN remains a marked canonical-language fallback, not a new translation.",
+        "currentCanonicalRevisions": {
+          "00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация.md": "1222738b2a9031a13e03c913e51a4d92f5e9ee0ca97f4211f776401fd08bb1de",
+          "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md": "cfbac98aa756dd964e8e7a30f11c9d5c108bc5b87c6f63d4fa446bf15cc5dba7",
+          "en/00 Textbook/05 Attention and Transformer/05 The complete Transformer.md": "8de30b0b1870b46b6b80f7c650efc14dd91aca4791fd655fae9220d11511b63b"
+        }
+      }
+    },
+    {
+      "source": "Concepts/Training/Few-shot Fine-tuning.md",
+      "sourceSha256": "444191fbbeaa3cf330fc7cf305963ce82b666621fc24c1327eec34a77ad9233a",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+        "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md"
+      ],
+      "findings": [
+        "The RTE example is arithmetically inconsistent: 2400 examples, batch 32 and three epochs require about 225 updates, not 96.",
+        "Discarding degenerate runs before reporting mean/std introduces selection bias. Retain and report failures; verify the primary papers on small-data instability, reinitialization and intermediate-task transfer before importing recipes.",
+        "The full SFT chapter covers causal-LM supervision and data mixtures, not small-data encoder classification, head/layer reinitialization or intermediate-task transfer. These are distinct missing explanations, not synonyms for instruction tuning.",
+        "The previously missing small-data explanation is integrated into the current PEFT owner. Table 2 is kept distinct from the source's differing CoLA Table 1 entry and from Mosbach development-set results."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-29-small-data-finetuning-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md",
+            "anchors": [
+              "small-data-fine-tuning",
+              "fine-tuning-bias-correction",
+              "fine-tuning-reinitialization",
+              "fine-tuning-update-budget",
+              "intermediate-task-transfer"
+            ]
+          }
+        ],
+        "retainedExplanation": [
+          "Optimization failure versus generalization, layerwise gradient path, historical Adam correction, upper-block/pooler reset, optimizer-update and selection budgets, intermediate-task transfer and full-run reporting are now explained with six added CPU examples and two complete original licensed figures."
+        ],
+        "excludedClaims": [
+          "2400 examples / batch 32 / three epochs gives 225 updates, not 96; the latter belongs to 1000 examples with a partial batch.",
+          "Adam correction is a deterministic function of the step count, not an unpredictable learning-rate jump. Its early shape is not monotone linear warmup.",
+          "Do not discard failed runs and report survivor-only mean/std as run reliability.",
+          "No universal 10000-example failure threshold, mandatory reset of 1–3 layers, exclusive MLM role of the pooler, fixed layer/linguistic-function map, guaranteed LoRA stability or universal BERT-versus-GPT-4 ranking."
+        ],
+        "primarySources": [
+          "Zhang et al., Revisiting Few-sample BERT Fine-tuning, sections 3–7, Algorithm 1, Tables 1/2 and original BERT reset implementation.",
+          "Mosbach et al., On the Stability of Fine-tuning BERT, sections 4–6 and original repository Figure 1."
+        ],
+        "scopeLimits": "Reported GLUE results remain historical and protocol-specific; tiny executable examples do not reproduce full BERT training.",
+        "currentCanonicalEvidence": "docs/audit/2026-10-29-retention-verification.json",
+        "currentCanonicalRevision": "5102f8b7db11f1ce749c7263d75bb124cbeb6ed217e5d6762e10b6f9d96d24b0",
+        "unchangedMechanismEvidence": "The retention journal restores the exact previously accepted a80d648c PEFT chapter. Old mechanisms/figures/excerpts are unchanged; the whole current chapter was reread and all 18 current CPU blocks passed."
+      }
+    },
+    {
+      "source": "Concepts/Training/Fine-tuning.md",
+      "sourceSha256": "d601527debe697c89ea5a098fcfd56f21073dc0883d014572c21bfdc228bb594",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+        "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md",
+        "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md",
+        "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md",
+        "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md"
+      ],
+      "findings": [
+        "Preserve useful Raschka/LoRA figure candidates, but do not import unsourced universal PEFT-quality/VRAM tables or the nonexistent standard A100 48GB SKU.",
+        "Frozen base weights do not guarantee absence of forgetting in the adapter-augmented model.",
+        "After full reading, the canonical SFT chapter explains the training objective/data but contains no full/partial/adaptor parameter-update comparison. Fine-tuning and PEFT require an explicit canonical owner; a source-paper link alone does not fill that gap.",
+        "The full/partial/adaptor comparison and small-data encoder optimization gaps are now filled by the PEFT owner; the complete BERT owner covers token-classification and extractive-QA heads. Replay, EWC and pretrained-anchored regularization still require full-owner comparison and a source-backed explanation or explicit disposition, so this broader note remains in progress.",
+        "The remaining retention gap is now explained inside the existing PEFT owner: replay, L2-SP, EWC, per-example Fisher estimation, base-versus-adapter behaviour and separate old/new evaluation. The complete synthetic-data and PPO owners were read; token mixture/repetition and PPO-ptx already have canonical explanations and were not duplicated."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-29-retention-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md",
+            "anchors": [
+              "choosing-trainable-parameters",
+              "bottleneck-adapters",
+              "lora-update",
+              "qlora-training",
+              "small-data-fine-tuning",
+              "retaining-capabilities",
+              "fine-tuning-replay",
+              "l2-sp",
+              "elastic-weight-consolidation",
+              "fisher-for-ewc"
+            ]
+          },
+          {
+            "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md",
+            "headings": [
+              "Дообучение на размеченной задаче",
+              "Извлечение ответа: две проекции и допустимый фрагмент",
+              "Фиксированные признаки или полный fine-tuning"
+            ]
+          },
+          {
+            "source": "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md",
+            "anchors": [
+              "curricula-replay"
+            ],
+            "headings": [
+              "Replay и контроль забывания"
+            ]
+          },
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md",
+            "anchors": [
+              "ppo-reward-shaping"
+            ],
+            "headings": [
+              "7. Полная целевая функция"
+            ]
+          }
+        ],
+        "retainedExplanation": [
+          "Full/partial/head/adapter choices, LoRA/QLoRA/prompts and small-data optimization remain in their accepted PEFT owner; the existing BERT owner covers classification, token classification and extractive QA.",
+          "Replay receives a weighted-gradient and conflicting-target example; L2-SP distinguishes the saved checkpoint from the zero origin and handles new heads; EWC has per-coordinate gradients, an exactly solved two-parameter case, Fisher/empirical-Fisher distinctions and a frozen-base counterexample.",
+          "Li et al.'s original Figure 2 and Table 3 are reproduced with full captions and source-task evaluation protocol. The unchanged synthetic-data chapter supplies token-share/repetition arithmetic; the unchanged PPO chapter supplies PPO-ptx and the limits of KL-only protection."
+        ],
+        "excludedClaims": [
+          "Pretraining does not guarantee universal grammar, factual knowledge or reasoning abilities; no universal post-2018 two-stage training rule is transferred.",
+          "No universal PEFT parameter fraction, quality/latency/VRAM table, mandatory rank/data-size decision tree or categorical full-fine-tuning-versus-prompting ranking is transferred.",
+          "The archival standard A100 48GB SKU is not real; parameter-memory estimates must state dtype, optimizer state, activations and sharding.",
+          "Frozen base weights permit restoration by disabling an adapter but do not guarantee retention while the adapter is enabled.",
+          "IA3 and DoRA are name/link-only entries in this source, not developed mechanisms accepted as explained here; the original bibliography is preserved. Repeated Raschka/LoRA image candidates are not copied again in place of the chapter's original mechanism figures."
+        ],
+        "primarySources": [
+          "Li, Grandvalet and Davoine (ICML 2018), sections 1, 3 and 4.2–4.3.2, original Figure 2/Table 3, PMLR CC BY 4.0.",
+          "Kirkpatrick et al. (arXiv 1612.00796v2), Introduction and section 2.",
+          "Kunstner, Balles and Hennig (1905.12558v3), sections 1 and 4; Huszar (1712.03847v1), two-task and recursive Laplace derivations.",
+          "Existing accepted BERT, PEFT, small-data and PPO source sections are retained at their recorded revisions."
+        ],
+        "scopeLimits": "A reconciliation of this legacy overview, not a catalogue of every named PEFT variant or a full-model continual-learning benchmark. Newly added explanations stay in English on both locale routes. No new translation or live publication."
+      }
+    },
+    {
+      "source": "Concepts/Training/GRPO.md",
+      "sourceSha256": "d9ef78345403abaac74b315dee091199a2c750e70652936b455aa9db2dc1bc55",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+        "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md"
+      ],
+      "findings": [
+        "Do not transfer the fixed four-equal-size-model or 25-percent-memory-saving rule: critic size, optimizer state, reward implementation and placement change the accounting.",
+        "The archival objective uses a sequence likelihood ratio where the original token-level GRPO needs token indices and response-length normalization. Equal group rewards remove the centered reward advantage, not necessarily the KL gradient.",
+        "Reasoning self-correction examples and fixed-benchmark results must not become guarantees of stability, exploration, or universal superiority over PPO. The full canonical GRPO owner still needs comparison.",
+        "Complete 1344-line GRPO owner read; all 11 actual fences passed. Original explanation retained; missing tool-reward accounting now lives in the RLVR owner.",
+        "Existing DeepSeekMath PPO/GRPO figure permission remains a separate release-rights item."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-29-legacy-grpo-rlvr-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+            "anchors": [
+              "grpo-estimator",
+              "grpo-normalizations",
+              "offpolicy-ratios",
+              "gspo",
+              "reasoning-case-studies"
+            ]
+          },
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
+            "anchors": [
+              "agent-reward-design"
+            ]
+          }
+        ],
+        "excludedClaims": [
+          "Universal 25-percent memory/compute saving from four equal-sized live models.",
+          "The archive sequence ratio equals original token GRPO; GRPO always uses one update.",
+          "Zero reward variance always removes auxiliary gradients; universal PPO superiority/stability.",
+          "Self-correction phrases prove a new internal algorithm; fixed benchmark captions establish general gains.",
+          "Kimi is only original GRPO plus generic mirror descent; named variants establish full mechanisms.",
+          "Adaptive filling drops a supported fixed 15–25 percent refusal share."
+        ],
+        "currentCanonicalRevision": "7173f3bbdb587d32f8d2f04c5663164c132563b6966ce7543ccc613f4e007e1a",
+        "scopeLimits": "Content reconciliation and CPU/root/Pages checks. No model benchmark, new translation, full course reproduction or live release. Existing GRPO figure permission remains separately open."
+      }
+    },
+    {
+      "source": "Concepts/Training/Gradient Clipping.md",
+      "sourceSha256": "ca01c38ddab5e31ad0b06f51cef94e4725810adfaa4d13e8f2e7c0fa9505cef7",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+        "00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md"
+      ],
+      "findings": [
+        "Norm clipping preserves the raw gradient direction, not an Adam parameter-update direction or a universal bound on parameter displacement.",
+        "Transformer context length does not create a recurrent chain of one Jacobian per token as in RNN BPTT. Spectral-norm upper bounds do not by themselves prove that every product explodes.",
+        "The complete optimization and precision owners already explain global norm versus value clipping, Adam update limitations and unscale-before-clipping after accumulation. Universal max_norm and healthy-gradient ranges are unsupported.",
+        "The missing unit-wise AGC and historical-percentile mechanisms are now explained in the existing optimization owner, in English. The addition includes two worked CPU examples, the complete original NFNet Figure 2, the unchanged 40-frame AutoClip GIF and the authors' original panel explanation."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-29-adaptive-clipping-verification.json",
+        "canonicalTargets": [
+          {"source": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md", "headings": ["Ограничение нормы градиента"], "anchors": ["agc-unitwise", "autoclip"]},
+          {"source": "00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md", "mechanism": "AMP unscale, accumulation weighting and nonfinite-step handling."}
+        ],
+        "retainedExplanation": [
+          "Global norm versus value clipping, a shared versus unit-wise factor, raw gradient versus optimizer displacement and the accumulation/unscale/clip/step order remain in the canonical owners.",
+          "AGC now develops relative SGD displacement, output-unit granularity, a zero-weight floor, IO/HWIO versus OI/OIHW axes, and the limits of the step bound after momentum or Adam.",
+          "AutoClip now develops append-before-percentile history, a four-step median example, raw versus clipped observations, p=0/100 endpoints, finite-history scale equivariance, resume state and different rolling-window estimators."
+        ],
+        "excludedClaims": [
+          "A norm above a universal number necessarily causes irreversible failure; recovery from a valid checkpoint is possible and gradient units depend on loss scaling/reduction.",
+          "Spectral norms above one prove that every Jacobian product grows; Transformer context length is not a recurrent BPTT path with one state transition per token.",
+          "max_norm=1 works in 90 percent of cases, all public LLMs use it, or fixed healthy gradient ranges diagnose every model.",
+          "Raw norm clipping bounds an Adam parameter update, per-tensor clipping is universally less stable, or a clipped step repairs an invalid backward graph.",
+          "Z-loss is a gradient-clipping algorithm or necessarily removes the need for attention clipping; an objective penalty and a gradient transformation are different operations.",
+          "A single NFNet lambda, excluded layer set or AutoClip percentile is a universal Transformer recipe."
+        ],
+        "primarySources": [
+          "Brock, De, Smith and Simonyan, ICML 2021, PMLR 139, sections 4 and 4.1, Eq. 3 and original Figure 2; reference unitwise_norm, SGD_AGC.update_param and SGD.update_param at commit f5de0ede8430809180254ee957abf36ed62579ef.",
+          "Seetharaman, Wichern, Pardo and Le Roux, AutoClip 2007.14469v1, sections 2, 3 and 5; complete README training-dynamics explanation, MIT license and original handler at commit dfb622c3caca9dc0ecc8bf0afeb773e190256d6e."
+        ],
+        "scopeLimits": "The two examples and independent comparisons run on CPU; original NFNet/ImageNet and speech-separation results are not reproduced training benchmarks. Existing EN route remains an explicitly labelled canonical-language fallback, with the same new English sections. No new translation or live publication.",
+        "currentCanonicalRevision": "449c86d3567e8a21e72e76c16e4fde9cc96bc16bd63c6c40d11d507d869f4616"
+      }
+    },
+    {
+      "source": "Concepts/Training/LoRA.md",
+      "sourceSha256": "00a58dd2d1968b406e55646ec9d515bd8d5165dfb8dc485eca763f31750239f2",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+        "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md"
+      ],
+      "findings": [
+        "The full SFT chapter has no LoRA derivation, initialization gradients, parameter/memory accounting, merging or QLoRA explanation. Preserve the original figure candidates and create a coherent canonical treatment rather than copying unsupported summary tables.",
+        "Low intrinsic dimension is not a proof that every full fine-tuning update matrix has low rank. Zero inference overhead applies after a compatible merge; unmerged and quantized multi-adapter serving require separate accounting.",
+        "The reported 99.3-percent comparison is not a guarantee across all benchmarks; rank 256 is not generally almost full fine-tuning. Verify every original experiment's model, task and trainable matrices.",
+        "The new PEFT chapter fills the derivation, gradient, merging and memory gaps. Historical quality comparisons now carry the original task/model/budget and seed-variation qualifications."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-29-small-data-finetuning-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md",
+            "anchors": [
+              "choosing-trainable-parameters",
+              "lora-update",
+              "merging-and-serving",
+              "qlora-training"
+            ]
+          }
+        ],
+        "retainedExplanation": [
+          "Factor shapes/scaling, first-step initialization and both gradients, gradient through a frozen upper layer, rank and trainable/memory budgets, compatible merging, checkpoint contracts, multi-adapter costs and QLoRA are developed with worked calculations, CPU checks and original figures.",
+          "Original §5.5/Table 4 GPT-3 task results are distinguished from the separate 18M-parameter projection experiment. A 4.7M FP16 adapter is about 9.4 MB, not the roughly 35–36 MB of an 18M adapter."
+        ],
+        "excludedClaims": [
+          "Low intrinsic dimension does not prove every full update matrix is low rank.",
+          "No universal rank-8 quality/VRAM/speed recipe, universal 99.3-percent claim, guaranteed smartphone deployment from a 5GB weight estimate, or configuration-free ecosystem speed ranking.",
+          "Rank 256 on a 4096-square projection gives one-eighth of full projection parameters, not almost full fine-tuning.",
+          "Merge removes the compatible floating-point branch at deterministic inference; unmerged, quantized and multi-adapter serving do not have free switching or zero additional costs."
+        ],
+        "primarySources": [
+          "Hu et al., LoRA, sections 4, 5.5 and 7, Tables 4/5.",
+          "Dettmers et al., QLoRA, sections 2–4.",
+          "Pinned Hugging Face PEFT documentation and licensed original images."
+        ],
+        "scopeLimits": "Legacy unverified figure candidates remain archived. Licensed original figures in the canonical chapter explain the mechanisms; no generic performance guarantee is inferred.",
+        "currentCanonicalEvidence": "docs/audit/2026-10-29-retention-verification.json",
+        "currentCanonicalRevision": "5102f8b7db11f1ce749c7263d75bb124cbeb6ed217e5d6762e10b6f9d96d24b0",
+        "unchangedMechanismEvidence": "The retention journal restores the exact previously accepted a80d648c PEFT chapter. Old mechanisms/figures/excerpts are unchanged; the whole current chapter was reread and all 18 current CPU blocks passed."
+      }
+    },
+    {
+      "source": "Concepts/Training/Masked Language Modeling.md",
+      "sourceSha256": "30bc3ced843ec381b120407280e196f5b216c5b80d0a34f380fce73b6720103e",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md",
+        "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md"
+      ],
+      "findings": [
+        "The worked corruption selects four of nine words while calling that realization 15 percent, then moves jumps to another position in the actual input. Rebuild a position-preserving example; selected loss positions must include unchanged and randomly replaced targets, not only literal MASK tokens.",
+        "The EMD paragraph attributes relative-only positions to standard BERT, contradicting the note's architectural comparison. Verify the full BERT/DeBERTa owners and primary derivation before transferring it.",
+        "The SpanBERT/SBO, whole-word masking, static/dynamic masking and historical ablation numbers need comparison with their complete canonical owners. Universal MLM-versus-CLM quality and convergence claims are not established by the percentage of supervised positions.",
+        "The complete BERT owner already explains 80/10/10 replacement, labels for selected-but-unchanged positions, gradient through context and controlled static/dynamic comparisons. Whole-word masking and SpanBERT/SBO remain candidate explanatory gaps; the full T5/span-corruption owner must still be compared before accepting this note.",
+        "The WWM, SpanBERT/SBO and T5 comparison gaps are now resolved at the recorded canonical revisions. Grouped target selection is distinguished from per-piece corruption; truncated geometric sampling is distinguished from clamping."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-29-bert-objectives-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md",
+            "anchors": [
+              "whole-word-masking",
+              "spanbert-boundary-objective",
+              "spanbert-span-sampling"
+            ],
+            "headings": [
+              "MLM: как получить двунаправленный обучающий сигнал",
+              "Статические и динамические маски",
+              "Enhanced Mask Decoder"
+            ]
+          },
+          {
+            "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md",
+            "headings": [
+              "Предобучение: восстановить удалённые фрагменты",
+              "Преобразование маски в две последовательности",
+              "Независимые удаления baseline и случайные фрагменты финальной T5",
+              "Как сравнивали цели предобучения"
+            ]
+          }
+        ],
+        "retainedExplanation": [
+          "The existing complete BERT explanation retains selected-position labels, 80/10/10, the contextual gradient path, original static/dynamic measurements and the actual shared-layer two-pass EMD.",
+          "Whole-word grouping and budget skipping, per-piece replacement, SpanBERT boundary inputs/offsets/two losses, direct versus encoder-mediated gradients, length sampling and scoped ablations are now developed in the same chapter with four new CPU examples across the grouped-masking/SBO/SOP additions and two complete original licensed figures.",
+          "The full unchanged T5 owner already develops sentinels, source/target construction, baseline versus final span masks, causal decoder inputs, one training step, target lengths and controlled objective comparisons; it is linked rather than duplicated."
+        ],
+        "excludedClaims": [
+          "The archival four-of-nine corruption is not a 15-percent realization and incorrectly moves the unchanged token; it is not transferred. Selected unchanged/randomly replaced positions still have original target labels.",
+          "A low fraction of direct MLM targets alone does not establish universally slower convergence, worse/better task quality, a twofold NER advantage or an architecture ranking.",
+          "No universal improvement for all WWM models or globally optimal T5 corruption recipe follows from the named experiments.",
+          "Standard BERT does not use relative-only attention, and EMD is not one independent extra layer.",
+          "Unsourced timeline labels, benchmark numbers and broad application decision trees are not copied as established facts."
+        ],
+        "primarySources": [
+          "Official BERT README WWM release and create_masked_lm_predictions at eedf5716ce1268e56f0a50264a88cafad334ac61, Apache-2.0.",
+          "Joshi et al., SpanBERT, sections 3, 4.2–4.3 and 6, original Figures 1–2 and Tables 6–7; pinned sampling code.",
+          "Complete canonical T5 owner at its recorded revision and its existing Raffel/official-code explanation."
+        ],
+        "scopeLimits": "This accepts the archival MLM explanation and its missing WWM/SpanBERT/T5 connections, not every model named in its timeline or a universal MLM-versus-CLM recommendation. T5 was fully read but not edited or freshly GPU/CPU reproduced in this increment."
+      }
+    },
+    {
+      "source": "Concepts/Training/Multi-head Latent Attention.md",
+      "sourceSha256": "922ce19c86524433ecdca8308a0b5e4450f3a6031dd85a8420fd26cf2deb8c59",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md"
+      ],
+      "findings": [
+        "The complete canonical owner already derives key/value projection absorption, the RoPE obstruction, decoupled positional keys, full versus latent cache execution, temperature and shifted masking. Its numerical examples and five source figures are retained rather than replaced by the legacy overview.",
+        "The archive's own dimensions imply 12,582,912,000,000 BF16 cache bytes for B=32 and S=100000, not tens of gigabytes. The chapter instead states its dimensions, dtype, layers and common comparison conditions.",
+        "Fresh DeepSeek-V2 v5 sections 2.1.1–2.1.4 and Appendices C/D confirm both cached components and the ablation scope. The current chapter distinguishes architecture-level cache accounting from whole-system throughput."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-29-legacy-mla-scaling-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md",
+            "headings": [
+              "2. Поглощение повышающей проекции ключей",
+              "3. Поглощение повышающей проекции значений",
+              "4. Почему обычный RoPE ломает перенос матриц",
+              "5. Decoupled RoPE: содержание сжимается, позиция хранится отдельно",
+              "Что именно лежит в кэше MHA, GQA и MLA",
+              "Меньше памяти не означает меньше арифметики",
+              "Наивный и поглощённый режимы реализации"
+            ]
+          }
+        ],
+        "retainedExplanation": [
+          "Factorization is not reconstruction against a fixed pre-existing MHA cache. Associativity moves key projection to the query and value projection after attention aggregation; the original attention temperature stays fixed.",
+          "The equal-latent/different-position counterexample explains why position-dependent RoPE prevents naive absorption; the separately cached positional key comes directly from the hidden state.",
+          "Two implementations agree on outputs and gradients for every partition of a five-token sequence. Memory, MACs and TP replication are separately accounted for; 576 cached elements can exceed MQA's 256."
+        ],
+        "excludedClaims": [
+          "The archival cache example is only tens of GB; its stated dimensions imply about 12.58 decimal TB in BF16.",
+          "GQA/MQA necessarily lose quality in every setting, or MLA has universal lossless quality superiority; the small-model C-Eval ablation is already a counterexample to the latter claim.",
+          "MLA caches only the latent and must reconstruct all K/V every step; the positional key and absorbed execution contradict that description.",
+          "MLA always has less cache than MQA, always reduces arithmetic or always accelerates execution; query compression chiefly reduces training activation memory in the cited report.",
+          "Reported 93.3% cache reduction and 5.76x throughput are controlled identical-architecture effects, or all training costs equal the reported final pretraining expense."
+        ],
+        "primarySources": [
+          "DeepSeek-V2, arXiv 2405.04434v5, sections 2.1.1–2.1.4, Appendix C and Appendix D.1–D.2, including Tables 8/9.",
+          "Pinned original DeepSeek-V3 model.py, commit 9b4e9788e4a3a731f7567338ed15d3ec549ce03b: naive and absorbed MLA bodies executed by the existing CPU checker."
+        ],
+        "scopeLimits": "Existing chapter and figures unchanged. No released checkpoint, GPU timing, distributed execution or model-quality reproduction. Existing unconfirmed figure permissions remain a release item, not an explanatory omission."
+      }
+    },
+    {
+      "source": "Concepts/Training/Next Sentence Prediction.md",
+      "sourceSha256": "765ede2a9c128136870264e001f6bd723d09cca7ab1f8cf6055ef985d7c16c12",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md"
+      ],
+      "findings": [
+        "The note changes both the NSP objective and document packing in its RoBERTa comparison. Those rows cannot isolate a universal causal effect of removing NSP.",
+        "High binary accuracy alone does not determine gradient size or downstream usefulness. The proposed harm from segment embeddings is an unsupported hypothesis in this note, not an established mechanism.",
+        "SOP's same-document reversed pairs and the actual BERT pooler/classifier need comparison with complete canonical chapters and primary sections. The universal claim that no successful post-BERT model uses NSP must not be imported from this historical list.",
+        "The complete BERT owner already explains pooler/two-logit classification, joint mean losses and document-packing confounding in RoBERTa. ALBERT SOP's same-document ordered/reversed-pair mechanism still needs comparison and, if absent, a full worked explanation; this note is not yet reconciled.",
+        "The missing SOP explanation is now integrated after RoBERTa/SpanBERT with source-native code, a worked pair/loss example and corrected v6 Table 5. Generic model-name taxonomy is retained as source context, not counted as another complete mechanism."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-29-bert-objectives-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md",
+            "anchors": [
+              "sentence-order-prediction"
+            ],
+            "headings": [
+              "Вторая цель BERT: отношения между сегментами",
+              "NSP и способ сборки текста"
+            ]
+          }
+        ],
+        "retainedExplanation": [
+          "The existing BERT chapter develops pair construction, shared bidirectional input, pooler/two logits, mean MLM plus mean sentence loss, one encoder update and the RoBERTa packing confound.",
+          "SOP now has an explicit same-pair reversal, original pinned swap excerpt, token/type assembly, a bag-of-words counterexample, supplied-logit CE and gradient, legacy label-field mapping, the one-segment fallback and source-version-specific Table 5."
+        ],
+        "excludedClaims": [
+          "High NSP accuracy alone does not quantify gradient size or downstream utility, and a topic-mismatch shortcut is not proof that every NSP implementation learns only topic.",
+          "RoBERTa's packing/objective comparison does not isolate a universal harm from NSP; segment embeddings do not block cross-segment attention or inherently harm downstream tasks.",
+          "The old SOP benchmark table does not match ALBERT v6 Table 5; the new chapter retains the actual source values and configuration.",
+          "SOP does not guarantee general discourse understanding; the exact released generator includes a random-document fallback for a one-segment chunk.",
+          "No universal claim that no successful post-BERT model uses NSP, or a fixed base-model recommendation solely from the absence of NSP, is transferred."
+        ],
+        "primarySources": [
+          "Complete current BERT/RoBERTa/DeBERTa owner and its existing BERT/RoBERTa source derivations.",
+          "Lan et al., ALBERT v6, sections 3.1 and 4.6, Table 5.",
+          "Official ALBERT create_pretraining_data.py at b772393d3dae115b493258ce8e37c17b2cc62100, Apache-2.0."
+        ],
+        "scopeLimits": "The archive's brief XLNet/permutation-LM and model-name list remains preserved with its primary bibliography in the immutable source note. This accepts the actual NSP/SOP explanation, not a complete derivation of XLNet, ELECTRA or every encoder variant; no separate source-course route or name-only tutorial was created."
+      }
+    },
+    {
+      "source": "Concepts/Training/PEFT.md",
+      "sourceSha256": "06b2c3ecbdf0aa8f87324e3abd1c4b77c3a0091f3a8314ff3c3a86a9dc27ed2f",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+        "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md"
+      ],
+      "findings": [
+        "The SFT owner does not explain additive adapters, soft prompts, prefix K/V, selective tuning or their gradient paths. Preserve their original visual candidates; these mechanisms need a canonical explanation.",
+        "Selective methods such as BitFit do update a subset of base parameters, so freezing the entire base is not the definition of all PEFT.",
+        "Do not copy the table placing 175B QLoRA below 48GB: even raw 4-bit base weights require 87.5 decimal GB. The 99.3-percent claim refers to a particular Vicuna comparison, not parity with full fine-tuning on all benchmarks. Prefix/adapter latency figures also require their original configuration.",
+        "The missing canonical owner now exists after SFT and before preferences. Its scope is the explained mechanisms, not a promise that every variant named in the legacy bibliography is taught."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-29-small-data-finetuning-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md",
+            "anchors": [
+              "choosing-trainable-parameters",
+              "bottleneck-adapters",
+              "lora-update",
+              "qlora-training",
+              "soft-prompts",
+              "prefix-keys-values",
+              "merging-and-serving"
+            ]
+          }
+        ],
+        "retainedExplanation": [
+          "Full/partial/selective tuning, bottleneck adapters, LoRA/QLoRA, input soft prompts and independent per-layer prefix K/V are compared through parameter locations, actual gradient paths, examples, checkpoints and serving constraints.",
+          "Original adapter, LoRA, prompt/prefix and QLoRA visuals and licensed source excerpts retain attribution and source language."
+        ],
+        "excludedClaims": [
+          "Freezing the entire base is not the definition of all PEFT; selective methods can update existing base parameters.",
+          "175B raw four-bit weights alone need 87.5 decimal GB, so the archive's below-48GB table is invalid.",
+          "Quality, latency and VRAM ranges without their model, task, tensor targeting and implementation do not establish a general comparison.",
+          "Prompt/prefix parity with full fine-tuning and universal rank/configuration recipes are not guaranteed."
+        ],
+        "primarySources": [
+          "Houlsby et al., Introduction and section 2.1.",
+          "Hu et al., sections 4/5.5/7; Dettmers et al., sections 2–4.",
+          "Lester et al., sections 2–3; Li and Liang, sections 3–4.3; pinned HF PEFT documentation."
+        ],
+        "scopeLimits": "Name-only taxonomy/timeline and bibliography entries such as KronA, FishMask, DoRA and LoRA+ remain in the immutable source archive. They are not counted as new complete algorithm explanations or as evidence of a comprehensive PEFT catalogue.",
+        "currentCanonicalEvidence": "docs/audit/2026-10-29-retention-verification.json",
+        "currentCanonicalRevision": "5102f8b7db11f1ce749c7263d75bb124cbeb6ed217e5d6762e10b6f9d96d24b0",
+        "unchangedMechanismEvidence": "The retention journal restores the exact previously accepted a80d648c PEFT chapter. Old mechanisms/figures/excerpts are unchanged; the whole current chapter was reread and all 18 current CPU blocks passed."
+      }
+    },
+    {
+      "source": "Concepts/Training/PPO.md",
+      "sourceSha256": "f9754c4089a6b70022f65ce8e85b231b5646f000a82a66792a630bf51982cbb7",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md"
+      ],
+      "findings": [
+        "The full current PPO owner already explains policy gradients, variance-reducing baselines, GAE, token shaping, distinct model roles, sign-dependent clipping, PPO-ptx and an actual tiny-Transformer step.",
+        "All six current executable blocks passed. Canonical PPO-ptx signs agree with InstructGPT; the archival 10% rule, hard clipping bound and universal memory/stability claims were rejected.",
+        "Existing four source illustrations and full explanations are retained; the archival HF pipeline file is not deleted or duplicated."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-29-legacy-ppo-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md",
+            "anchors": [
+              "reinforce",
+              "baseline-advantage",
+              "ppo-roles",
+              "ppo-clip",
+              "ppo-reward-shaping",
+              "ppo-stale-rollouts"
+            ]
+          }
+        ],
+        "excludedClaims": [
+          "PPO clipping is a hard trust-region or a guarantee on every probability ratio/KL, or a clipped individual term freezes the entire model update.",
+          "TRPO must form and store its full Hessian; the reference implementation uses Hessian-vector products and conjugate gradients.",
+          "GAE is required by the PPO-Clip definition, a critic must have the policy's size, or four functional roles imply four equally sized models resident on one GPU.",
+          "Maximizing the displayed clipped surrogate plus positive cross-entropy is the PPO-ptx objective; the correct pretraining contribution is maximized log likelihood, or positive CE in a consistently minimized loss.",
+          "A universal 10%-of-total-loss rule or one universal set of eps/lambda/beta/epochs follows from InstructGPT.",
+          "GRPO is always more stable/better than PPO, DeepSeek-R1 establishes an equal-condition PPO comparison, or all production alignment follows a claimed historical trend."
+        ],
+        "currentCanonicalRevision": "29efb9a8c255c1b04abdcedc5c696f659a20ef45010572fe59093429698fcae5",
+        "scopeLimits": "All six current examples verified on CPU; no quality benchmark, new translation or new live publication. Full TRPO and universal PPO/GRPO comparisons are not claimed."
+      }
+    },
+    {
+      "source": "Concepts/Training/Pre-training.md",
+      "sourceSha256": "5cad623efa6ae23c3659d28c99b7cd1373c82562f87c9fafa94744eba190ccbe",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+        "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+        "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md",
+        "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md",
+        "00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md",
+        "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md",
+        "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md",
+        "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md"
+      ],
+      "findings": [
+        "The complete 291-line source and the complete collection, NTP, distributed and LLaMA owners have been read. Existing whole reads of scaling, BERT, T5 and numerical precision are retained at their recorded revisions.",
+        "The collection owner now distinguishes RedPajama V1's seven-source reproduction recipe from V2's raw, annotated and deduplicated pools. ROOTS is 1.6 TB of text, not 1.6 trillion tokens; the full original five-panel filter figure is explained with overlapping document-removal rates.",
+        "NTP already develops shifted targets, masks, likelihood/perplexity, tokenization-dependent comparison and document boundaries. Distributed training already derives DP/TP/PP/EP placement, collectives, weighted gradients, sharding and AMP. LLaMA supplies the historical mixture, parameter/cache arithmetic and the limits of its original training recipe.",
+        "Unsupported universal history, objective/model-size ceilings, speedups, hyperparameter recipes and unreleased GPT-4 estimates are excluded rather than transferred."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-29-legacy-pretraining-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+            "anchors": [
+              "redpajama-releases",
+              "roots-multilingual-corpus",
+              "mixtures"
+            ],
+            "mechanism": "Raw archives, extraction, language/quality selection, corpus release stages, token/document weights, repetitions and mixture search."
+          },
+          {
+            "source": "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md",
+            "mechanism": "Teacher forcing and shifted targets; masks, perplexity and evaluation windows; objective and architecture are not equivalent."
+          },
+          {
+            "source": "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md",
+            "mechanism": "Collectives and DP/TP/PP/EP placement, weighted gradient reduction, FSDP/TP memory, AMP and checkpoint state."
+          },
+          {
+            "source": "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md",
+            "mechanism": "Original LLaMA architecture, parameter/KV arithmetic, seven-source historical mixture and model-specific training budget."
+          },
+          {
+            "source": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+            "mechanism": "Joint model/data optimum, repetitions, schedule confounds and training-plus-inference budgets."
+          }
+        ],
+        "added": "A 78-line English corpus-release addition in the existing collection chapter, three primary-source references and one byte-identical original ROOTS figure. No parallel course route or translation.",
+        "rejectedClaims": [
+          "All NLP before 2018 trained from scratch; objectives uniquely determine model architectures; ELECTRA is ordinary MLM; fixed MLM/span model-size ceilings and universal decoder superiority.",
+          "Dataset bytes, unique token estimates and sampled training tokens are interchangeable. The source's ROOTS 1.6T and RedPajama V2 raw/deduplicated counts are not retained.",
+          "LLaMA's 1.4T mixture-pass column applies to every model; fixed warmup, clipping, RoPE generalization or RMSNorm/SwiGLU gains are universal guarantees.",
+          "BF16 or AMP always halves all training memory or prevents instability; FSDP, SP and context parallelism are interchangeable.",
+          "Unverified GPT-4 parameter/data/compute estimates and GPU speedup tables."
+        ],
+        "workedExamples": "Eleven displayed CPU fences across collection, NTP, distributed and LLaMA owners passed. The ROOTS example independently sums seven overlapping Chinese rates to 47.0%, versus 23.1% removed by the union; it does not add the bars as sequential stages.",
+        "visual": "Current collection chapter checked at root and /bookvar, desktop/mobile and EN fallback; original ROOTS five-panel PNG inspected complete and at 3x with panning. Other unchanged owners retain their prior visual evidence; no fresh full visual audit of all their figures is claimed.",
+        "remaining": "This note is reconciled, not a declaration that the whole textbook is complete. The existing NTP MTP-figure permission gap and final route/UI/release work remain."
+      }
+    },
+    {
+      "source": "Concepts/Training/RLHF.md",
+      "sourceSha256": "0780e7493e215c01d98a1bf0674432c8b0fdf9f4f07309c8fda0f13f9155710e",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/12 Post-training и Alignment/02 Preference data.md",
+        "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
+        "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md",
+        "00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md"
+      ],
+      "findings": [
+        "The complete SFT/preference/RM/PPO route already contains the three-stage mechanism and iterative data collection. Complete preference-data and RM owners were read in this pass; prior SFT/alignment/PPO readings are retained at verified revisions.",
+        "Unscoped historical percentages, pair totals, hard KL/PPO guarantees and the PPO/DPO/RLAIF axis conflation were not transferred as textbook facts. The original note and its source figures remain intact.",
+        "Eleven current source figures and full explanations remain. All eleven Python fences across the two newly read chapters passed; desktop/mobile/fallback surfaces were inspected."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-29-legacy-rlhf-reward-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/02 Preference data.md",
+            "anchors": [
+              "ранжирование-kkk-ответов"
+            ]
+          },
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
+            "anchors": [
+              "bradley-terry",
+              "rm-validation",
+              "reward-overoptimization"
+            ]
+          },
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md",
+            "anchors": [
+              "ppo-roles",
+              "ppo-clip",
+              "ppo-reward-shaping"
+            ]
+          },
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md"
+          }
+        ],
+        "excludedClaims": [
+          "Next-token pretraining always produces the most probable continuation, and RLHF fully closes an alignment gap or guarantees helpful, truthful and harmless behavior.",
+          "The two archival comparison totals are interchangeable facts. InstructGPT Table 6 counts prompts, not independent pairs; K and dropped ties are needed to recover the number of comparisons.",
+          "SFT is always the best RM initialization. InstructGPT Appendix C.2 reports a public-NLP-finetuned GPT-3 initialization and similar results from GPT-3/SFT initializations.",
+          "Reward models are necessarily trained once for an entire project, or frozen evaluation within one optimization round precludes collecting new comparisons and retraining between rounds.",
+          "A KL penalty or PPO clipping guarantees protection against reward hacking, or PPO-ptx universally eliminates regressions.",
+          "Functional roles imply four equally sized, simultaneously resident models; RM size ratios prove a universal policy-to-RM sizing rule or better quality.",
+          "RLAIF is a competing optimizer in the same category as PPO/DPO, Constitutional AI removes learned reward models, or GRPO inherently requires or excludes a learned reward model.",
+          "DPO is unconditionally mathematically equivalent to an actual PPO training run; an implicit reward expression has a unique absolute prompt-independent origin.",
+          "RLVR always uses a binary, infallible correctness reward; arbitrary factual QA has a deterministic complete verifier.",
+          "An archive trend list establishes universal superiority, stability, adoption or a complete description of all later commercial model training recipes.",
+          "Unscoped toxicity/hallucination percentages or parameter-size comparisons establish general capability dominance. Historical comparisons require their prompt distribution, baselines and evaluation protocol."
+        ],
+        "currentCanonicalRevisions": {
+          "00 Учебник/12 Post-training и Alignment/02 Preference data.md": "e24409a09129f2b7ba6f01d6a85f45879f1cbab2dec4c099267c5e11d934dffa",
+          "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md": "ae8ad7536eb7463667bbe8a5983fc54008e92079e775ea49ca481a12d3bb570e"
+        },
+        "scopeLimits": "Archival conceptual-note migration, not a new translation, model-quality benchmark or acceptance of every historical metric/named family. DPO/GRPO/RLVR/Constitutional AI have their own remaining records."
+      }
+    },
+    {
+      "source": "Concepts/Training/RLVR.md",
+      "sourceSha256": "16e44366ba81a677e062875451c4c71254568f958f6af938ba582581ff1046b4",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
+        "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md"
+      ],
+      "findings": [
+        "Full archive and complete 1205-line RLVR owner read, together with the full GRPO owner.",
+        "Added English worked explanations of decomposed ToolRL matching, binary Tool-N1 checking, completion/call-count reward, refusal and filtering, with the complete original licensed ToolRL figure.",
+        "All six actual RLVR fences passed; new checks include 72 comparisons to actual scoring code and 408 F1 calculations. Paper optimal matching differs from the greedy pinned code.",
+        "Tool-N1 segments multi-turn source data into single-step prediction records; its results do not prove full online multi-turn trajectory optimization."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-29-legacy-grpo-rlvr-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
+            "anchors": [
+              "rlvr-contract",
+              "parser-vs-verifier",
+              "verifier-audit",
+              "agent-reward-design"
+            ]
+          },
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+            "anchors": [
+              "grpo-estimator"
+            ]
+          }
+        ],
+        "excludedClaims": [
+          "Deterministic verifiers eliminate hacking/error; one unique answer is required; refusals cannot be rewarded.",
+          "No reward model implies KL can be dropped; uniform rewards force zero total gradient for every optimizer.",
+          "ToolRL uses only discrete component scores or the released greedy matching is optimal.",
+          "Cold start means no previous instruction tuning; Tool-N1 proves online multi-turn RL; SFT is universally harmful.",
+          "Unsupported fixed 15–25 percent refusal rate; complete synthetic coverage of production; DPO cannot use verified pairs."
+        ],
+        "currentCanonicalRevision": "e47cc4f42c05c58f9ff84aaba765cf21e6ad80f8c658efa159ea510ff5ff5828",
+        "scopeLimits": "Content reconciliation and CPU/root/Pages checks. No model benchmark, new translation, full course reproduction or live release. Existing GRPO figure permission remains separately open."
+      }
+    },
+    {
+      "source": "Concepts/Training/Reward Model.md",
+      "sourceSha256": "46d1436267820cb06d546ef66346a8e665449989eef03f1e30fb6c9506e0bc5b",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/12 Post-training и Alignment/02 Preference data.md",
+        "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
+        "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md",
+        "00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md"
+      ],
+      "findings": [
+        "The complete current RM owner already derives Bradley-Terry loss, shift/scale, soft labels, EOS/PAD scoring, grouped and listwise comparisons, ORM/PRM/judge/value distinctions and overoptimization.",
+        "All six published RM Python blocks passed, including actual tiny-Transformer training and 24 padding comparisons. The preference chapter's five blocks and data-source transcription also passed.",
+        "Fixed-round versus iterative RM training, non-universal initialization/size and fallible verification are retained in their full explanations; unsupported archival universals and trend claims were excluded."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-29-legacy-rlhf-reward-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/02 Preference data.md",
+            "anchors": [
+              "ранжирование-kkk-ответов"
+            ]
+          },
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
+            "anchors": [
+              "bradley-terry",
+              "rm-validation",
+              "reward-overoptimization"
+            ]
+          },
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md",
+            "anchors": [
+              "ppo-roles",
+              "ppo-clip",
+              "ppo-reward-shaping"
+            ]
+          },
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md"
+          }
+        ],
+        "excludedClaims": [
+          "Next-token pretraining always produces the most probable continuation, and RLHF fully closes an alignment gap or guarantees helpful, truthful and harmless behavior.",
+          "The two archival comparison totals are interchangeable facts. InstructGPT Table 6 counts prompts, not independent pairs; K and dropped ties are needed to recover the number of comparisons.",
+          "SFT is always the best RM initialization. InstructGPT Appendix C.2 reports a public-NLP-finetuned GPT-3 initialization and similar results from GPT-3/SFT initializations.",
+          "Reward models are necessarily trained once for an entire project, or frozen evaluation within one optimization round precludes collecting new comparisons and retraining between rounds.",
+          "A KL penalty or PPO clipping guarantees protection against reward hacking, or PPO-ptx universally eliminates regressions.",
+          "Functional roles imply four equally sized, simultaneously resident models; RM size ratios prove a universal policy-to-RM sizing rule or better quality.",
+          "RLAIF is a competing optimizer in the same category as PPO/DPO, Constitutional AI removes learned reward models, or GRPO inherently requires or excludes a learned reward model.",
+          "DPO is unconditionally mathematically equivalent to an actual PPO training run; an implicit reward expression has a unique absolute prompt-independent origin.",
+          "RLVR always uses a binary, infallible correctness reward; arbitrary factual QA has a deterministic complete verifier.",
+          "An archive trend list establishes universal superiority, stability, adoption or a complete description of all later commercial model training recipes.",
+          "Unscoped toxicity/hallucination percentages or parameter-size comparisons establish general capability dominance. Historical comparisons require their prompt distribution, baselines and evaluation protocol."
+        ],
+        "currentCanonicalRevisions": {
+          "00 Учебник/12 Post-training и Alignment/02 Preference data.md": "e24409a09129f2b7ba6f01d6a85f45879f1cbab2dec4c099267c5e11d934dffa",
+          "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md": "ae8ad7536eb7463667bbe8a5983fc54008e92079e775ea49ca481a12d3bb570e"
+        },
+        "scopeLimits": "Archival conceptual-note migration, not a new translation, model-quality benchmark or acceptance of every historical metric/named family. DPO/GRPO/RLVR/Constitutional AI have their own remaining records."
+      }
+    },
+    {
+      "source": "Concepts/Training/SFT.md",
+      "sourceSha256": "9199a8d4349dadff2534c3f84fe8fa005aa2462db770918f7d050750df08725c",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+        "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md"
+      ],
+      "findings": [
+        "The complete canonical SFT chapter retains template serialization, shifted labels, response versus attention masks, EOS/padding collisions, a concrete loss calculation, CPU training and packing isolation, data construction and mixture weighting with original course figures.",
+        "It correctly distinguishes a zero direct loss on prompt targets from the gradient through prompt representations. The archive's fixed data/epoch/quality recipes and claim that all role markers are newly added special tokens must not be imported.",
+        "The archival LoRA subsection is not covered by this chapter; it belongs with the missing full fine-tuning/PEFT explanation. Source-paper links do not count as that integration.",
+        "The archival LoRA gap is now resolved by the PEFT owner. The SFT explanation itself was preserved; the new owner is linked as the next parameterization chapter."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-29-small-data-finetuning-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+            "anchors": [
+              "sft-object",
+              "response-mask",
+              "sft-data",
+              "sft-evaluation"
+            ]
+          },
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md",
+            "anchors": [
+              "lora-update",
+              "choosing-trainable-parameters"
+            ]
+          }
+        ],
+        "retainedExplanation": [
+          "The complete SFT owner covers serialization/chat templates, shifted targets, response versus attention masks, EOS/padding, explicit cross-entropy, an executable tiny-model update, isolated packing, data construction, mixture weighting and generation evaluation.",
+          "The archive's useful parameter-update discussion is integrated in the separate PEFT owner rather than duplicated as another SFT definition."
+        ],
+        "excludedClaims": [
+          "Not every role marker is a newly added special token.",
+          "Ignoring a direct prompt-target loss does not stop backpropagation through prompt representations.",
+          "Completion-only masking is a training choice, not the definition of every SFT dataset.",
+          "Fixed epoch/learning-rate/data-quality recipes, format-only knowledge claims and study-specific agent/benchmark pipelines are not universal guarantees."
+        ],
+        "primarySources": [
+          "Complete canonical SFT chapter and its source-specific template, packing, instruction-data and mixture explanations.",
+          "New PEFT chapter, compared to Houlsby, LoRA, QLoRA and pinned PEFT sources."
+        ],
+        "scopeLimits": "SFT's full read is recorded at its earlier exact revision; only the precise journaled navigation/PEFT bridge was changed afterward and separately reviewed. No new translation was made."
+      }
+    },
+    {
+      "source": "Concepts/Training/Scaling Laws.md",
+      "sourceSha256": "5ae6209008f95e8dac63994929600c4948e64a1b7aed2ec9bfc5468bdf4f1cca",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md"
+      ],
+      "findings": [
+        "The complete current owner already explains controlled-run comparability, three Chinchilla fitting approaches, the model/data optimum, toy interpolation, WSD, optimizer confounds, mup, task-specific prediction and training-plus-inference accounting. Its 26 original figures are preserved.",
+        "The current SHA differs from the 2026-10-23 accepted chapter only by the exact recorded next-chapter link; reversing that one navigation change restores the old full SHA. The explanation, examples and figures were not silently re-baselined.",
+        "Both actual Python fences and the existing arithmetic/source-asset checker pass at the current revision. Twenty tokens per parameter is a historical approximation under a training-only objective, not a universal bound or an inference-optimal recipe."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-29-legacy-mla-scaling-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+            "headings": [
+              "Почему при фиксированном бюджете появляется минимум",
+              "Метод 1: нижняя огибающая всех запусков",
+              "Метод 2: IsoFLOP-кривые",
+              "Метод 3: совместная поверхность",
+              "Причины расхождений между оценками оптимума",
+              "Разобранный пример: что можно и чего нельзя заключить",
+              "От потерь к точности: двухэтапный прогноз Llama 3",
+              "Стоимость обучения и последующего инференса"
+            ]
+          }
+        ],
+        "retainedExplanation": [
+          "The chapter derives the constrained optimum from marginal model/data contributions, distinguishes three empirical fitting methods and works through a three-point toy fit and a projected budget with uncertainty.",
+          "Porian's original five-panel figure and the full discussion expose vocabulary projection, warmup, schedule and tuning confounds; the discrepancy is not reduced to an unsubstantiated convergence story.",
+          "Repeated data, task-specific loss-to-accuracy fitting and an explicitly assumed equal-quality inference break-even are already developed; original GPT-4 references remain in the unchanged archive rather than being promoted to universal capability/cost forecasts."
+        ],
+        "excludedClaims": [
+          "D must always be at least 20N, or 50–100N is a universal inference optimum.",
+          "At fixed C=6ND one can increase data without reducing N, or one historical fitted exponent is invariant across tokenizer, data, architecture, optimizer and regime.",
+          "Kaplan and Chinchilla differ solely because one trained to convergence; the canonical source comparison gives measured accounting/schedule/tuning confounds.",
+          "Parameter-count ratios establish universal serving speed/cost ratios, or pretraining-loss scaling guarantees every downstream capability, alignment outcome and dollar budget.",
+          "Unsourced GPT-4/Llama cost estimates or a single PaLM-2 comparison establish a causal universal ranking of data quality versus scale."
+        ],
+        "primarySources": [
+          "Unchanged source comparison retained from docs/audit/2026-10-23-scaling.md: complete selected CS336 lectures 9/11 and Assignment 3; Chinchilla section 3.3/Appendix D.2; Porian selected sections; MiniCPM 4.2–4.5; DeepSeek LLM 3.1; Llama 3 3.2.1; pinned mup coordinate-check README.",
+          "This continuation does not claim a fresh reread of every primary source. Exact restoration confirms that their previously reviewed explanation is unchanged apart from navigation."
+        ],
+        "scopeLimits": "No chapter rewrite, new translation, model training, real scaling fit or GPU benchmark. Current local rendering checked separately from the older complete figure review; publication remains pending."
+      }
+    },
+    {
+      "source": "Concepts/Training/Semi-supervised Learning.md",
+      "sourceSha256": "17fc6e2ba4319aea871a27ac89b9cad0c3281bbf28448a649e87a889fde77144",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch.md"
+      ],
+      "findings": [
+        "The complete 203-line archive and the whole final 1596-line semi-supervised owner have been read; the robustness owner was also read completely for their shared AT/VAT boundary.",
+        "The canonical owner already explains pseudo-label selection, weak/strong views, consistency loss, class imbalance and confirmation bias with worked examples and original figures. Preserve these explanations.",
+        "VAT and UDA gaps are now filled from the pinned primary sources: Hessian search and gradient stops, back-translation, TF-IDF replacement, unsharpened confidence gating, target sharpening, full-batch reduction and labelled Training Signal Annealing. Thirteen CPU fences across the two owners and three original source visuals were verified; see 2026-10-29-consistency-training-verification.json.",
+        "The remaining unique mechanisms are now integrated: Noisy Student's clean teacher and noisy learner, soft-target derivative and reduction; MixText hidden-state/target mixing, label guessing, margin and pinned-code differences; Dai–Le shared recurrent reconstruction and parameter transfer. Smoothness, cluster/low-density and manifold assumptions are distinguished with the existing graph example.",
+        "Four new CPU programs bring this owner to 14; all executed. Two complete original MixText figures and captions were transferred from the final ACL PDF. Noisy Student and Dai–Le originals were inspected and remain linked, not falsely relicensed. Root desktop/mobile and the source-native English route were checked.",
+        "Unsupported claims about universally best theory, fixed dataset-size recipes, universal gains, noised teacher targets and pretraining as a guaranteed manifold solution were excluded. Benchmark protocols and paper/code differences are explicit."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-29-semi-extensions-verification.json",
+        "canonicalTargets": [
+          {"source": "00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch.md", "anchors": ["pseudo-labels", "noisy-student", "consistency", "virtual-adversarial-training", "uda", "mixtext", "fixmatch", "ssl-structural-assumptions", "label-propagation", "dai-le-sequence-pretraining"]}
+        ],
+        "excludedClaims": [
+          "Noisy Student generates noisy teacher targets: its teacher generates targets in clean inference mode; noise is used in student training.",
+          "A soft-target cross-entropy must be zero when the student matches the teacher; the value is target entropy, while its logit gradient is zero.",
+          "MixText's original results use fewer than 100 labels in total for every dataset, or its current default code implements every paper expression identically.",
+          "LM-LSTM and sequence autoencoding have identical conditioning, only word embeddings are transferred, or the method is BERT with an LSTM.",
+          "Unlabelled inputs necessarily improve classification, one low-dimensional manifold uniquely determines labels, or each class must be one cluster.",
+          "Universal dataset-size routing thresholds, universally best theoretical justification, or an unspecified modern NLP accuracy/compute gain follow from this archival overview.",
+          "UDA's 4.20% IMDb result can be compared to any supervised BERT baseline without controlling initialization and supervision, or VAT has only one hyperparameter."
+        ],
+        "scopeLimits": "Reconciliation of this archival overview, not exhaustive coverage of every semi-supervised algorithm. No new translation, full model training or benchmark reproduction. Local root build/UI verified; a fresh Pages-prefix build is deferred to the final release gate. No commit, push or deployment."
+      }
+    },
+    {
+      "source": "Concepts/Training/Synthetic Data.md",
+      "sourceSha256": "c5cf6ead4cde20b9eafddf99a7fb9ac84b5555dc39ce4b4d3fc7d084404b4a3c",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md"
+      ],
+      "findings": [
+        "The complete 164-line archive and final 1243-line owner have been read. The complete Phi and Nemotron family entries were also read; only thematic backlinks were added there.",
+        "The existing Self-Instruct, Nemotron-CC transformation, teacher selection, coding-environment, mixture/curriculum and model-collapse explanations are retained without replacement by a short overview.",
+        "English additions develop Phi-1 filtering/textbooks/exercises, Phi-4 seed curation, instruction reversal, repetitions and Nemotron-4 prompt/dialogue/preference generation. Three original CC BY 4.0 PNGs were transferred byte-for-byte with source-specific license evidence.",
+        "The Nemotron-CC 5.6-point MMLU result is retained with the actual HQ comparison, 8B model, 1T budget and fixed 27% non-Crawl blend. It is not attributed to rewriting alone or the full corpus.",
+        "Both displayed Python programs, the upstream parser cases and numerical examples passed at the final chapter SHA. All three new originals were inspected on desktop and in the viewer; mobile zoom/panning, seven formulas and the EN fallback were checked."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-30-synthetic-recipes-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md",
+            "anchors": [
+              "synthetic-transformations",
+              "teacher-data",
+              "phi-synthetic-recipes",
+              "nemotron4-synthetic-alignment",
+              "curricula-replay",
+              "synthetic-evidence"
+            ],
+            "mechanism": "Separate generated components and checks; three Phi-1 datasets and two stages; Phi-4 seed/rewrite/reversal and sampled-token weights; Nemotron-4 prompt/dialogue/preference generation; controlled dataset comparison; recursive replacement versus accumulation."
+          }
+        ],
+        "familyLinks": [
+          "02 Атлас моделей/Семейства/Phi.md",
+          "02 Атлас моделей/Семейства/Nemotron.md"
+        ],
+        "excludedClaims": [
+          "Phi-1 was trained on 6B entirely synthetic tokens or all early Phi training documents were generated by GPT-4. Phi-1 separates about 6B filtered real tokens, less than 1B GPT-3.5 textbooks, and later exercises; GPT-4 supplies filter annotations.",
+          "One rounded HumanEval score or a larger-model comparison establishes general chatbot superiority or that data universally replaces parameter count.",
+          "All Nemotron-4 examples descend from 20K human seed prompts. The report describes 10K human SFT and 10K HelpSteer2 records; its over-98% share concerns alignment, not base pretraining.",
+          "Self-Instruct necessarily performs online self-play or updates generator parameters after each newly accepted instruction.",
+          "Any synthetic use inevitably collapses, or retaining a fixed share of human text universally prevents collapse.",
+          "The unsourced Quality proportional to DataQuality times log(DataQuantity) times sqrt(ModelSize) formula is an empirical law.",
+          "A dated prediction of web-data exhaustion, an unqualified current service-terms assertion, an unspecified Qwen recipe, or a timeless synthetic/real benchmark ranking is established by this archive.",
+          "All 800K DeepSeek-R1 post-training examples are reasoning traces. Their stage-specific composition remains in the already accepted GRPO/RLVR chapters rather than copied as this inaccurate table row."
+        ],
+        "scopeLimits": "Reconciliation of this archive, not an exhaustive Phi/Nemotron release census or a new English translation. Nine older figures retain prior visual evidence; fresh complete visual inspection here covers the three added originals. Root build/UI verified. Fresh Pages-prefix build, route-wide coherence review and actual publication remain outstanding."
+      }
+    },
+    {
+      "source": "Concepts/Training/Vanishing Gradient.md",
+      "sourceSha256": "00d64033654378d0e3d5b2d955ec1dbd25873bcba14fa00f1d668dd7eee0a853",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md",
+        "00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md",
+        "00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md",
+        "00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT.md",
+        "00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md",
+        "00 Учебник/01 Основы нейронных сетей/02 Функции активации.md"
+      ],
+      "findings": [
+        "2^-50 is representable in FP32. Small-gradient underflow and an update too small relative to the current weight are different numerical effects.",
+        "I+J_F does not guarantee a gradient of magnitude at least one: J_F=-I cancels the identity. Full normalization/residual and RNN owners still require comparison before accepting the note.",
+        "The complete LSTM owner already explains the direct cell path, f^100, gate saturation and other Jacobian paths. A gate merely close to one does not guarantee constant sensitivity at arbitrary length.",
+        "Do not import universal 10–20-step RNN or six-layer Transformer limits, nonzero GELU/SiLU derivatives everywhere, permanent inactivity from a single negative ReLU input, or guaranteed variance preservation by initialization.",
+        "The complete RNN owner compared: manual backward, ordered Jacobian products, exact w^100 examples, norm-bound limits and detach versus reset are already present.",
+        "The complete normalization and activation owners compared: residual cancellation, pre/post Jacobians, initialization assumptions, saturation and isolated GELU/SiLU zero derivatives are explained with original figures and executable examples."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-29-vanishing-gradient-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT.md",
+            "headings": [
+              "Обратный проход на тех же трёх шагах",
+              "Общая формула для языковой модели",
+              "Почему далёкие зависимости трудно обучать",
+              "Передать состояние, отсоединить историю"
+            ],
+            "workedCases": [
+              "Manual dL/dw=.2533642027283495 and dL/dv=.5389161748923231 checked against autograd and finite differences.",
+              "At zero states, derivative w^100 for w=.8,1,1.1; ordered noncommuting matrix Jacobians and an upper norm bound that is not a lower bound.",
+              "Detach keeps h3=.654413 but changes recurrent-weight gradient to .13234801386407055; reset changes the forward state."
+            ]
+          },
+          {
+            "source": "00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md",
+            "headings": [
+              "Xavier: согласование прямого и обратного проходов",
+              "He: поправка на ReLU",
+              "Почему backward нормализации связывает признаки",
+              "Как складываются градиенты",
+              "Pre-norm и post-norm"
+            ],
+            "workedCases": [
+              "Xavier 4->16 scales forward second moment by .4 and backward by 1.6; exact preservation is not guaranteed.",
+              "F(x)=-x cancels the identity; a projection skip contributes J_P, not I.",
+              "With zero branch and x=(1,2,3), pre-norm passes incoming gradient directly; post-norm LayerNorm returns approximately (.2041,-.4082,.2041)."
+            ]
+          },
+          {
+            "source": "00 Учебник/01 Основы нейронных сетей/02 Функции активации.md",
+            "headings": [
+              "Sigmoid",
+              "ReLU",
+              "GELU",
+              "SiLU / Swish"
+            ],
+            "workedCases": [
+              "Ten sigmoid derivatives at zero multiply to (1/4)^10.",
+              "A negative ReLU on one example is not a proof of permanent inactivity.",
+              "GELU/SiLU have negative slopes and isolated zero derivatives at their minima."
+            ]
+          },
+          {
+            "source": "00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md",
+            "coverage": "Direct LSTM cell-state path, products of forget gates, saturation and other Jacobian paths; no arbitrary-length constant-gradient guarantee."
+          },
+          {
+            "source": "00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md",
+            "coverage": "Representability, arithmetic rounding, master weights, loss scaling and FP16/BF16 ranges; analytic sensitivity is a separate issue."
+          }
+        ],
+        "retainedExplanation": "Canonical explanations already contain the useful mechanisms, examples, caveats and original figures. No parallel chapter or synthetic overview was added.",
+        "excludedClaims": [
+          "2^-50 is below FP32 representability; it is exactly representable. An update may nevertheless be rounded away when subtracted from a much larger parameter.",
+          "I+J_F guarantees a gradient norm of at least one, or residual connections universally prevent vanishing.",
+          "The recurrent weight's spectral radius alone characterizes every trajectory of a nonlinear tanh RNN, or universal 10–20-step / six-layer limits hold.",
+          "A forget gate approximately one preserves a constant signal over any length; normalization prevents saturation or ensures well-conditioned derivatives for every input.",
+          "One negative ReLU input permanently kills a neuron; GELU/SiLU have nonzero derivatives everywhere; initialization exactly preserves all finite-network activation and gradient variances.",
+          "BF16 solves analytic vanishing, the issue is architecturally solved, or a long RL horizon / many diffusion sampling steps automatically create BPTT through those steps."
+        ],
+        "scopeLimits": "Five CPU checkers and independent counterexamples passed. Three owners newly read in full; earlier LSTM, precision and backpropagation reads reused after revision verification. CUDA AMP execution, new translation and live publication not claimed.",
+        "currentCanonicalRevisions": {
+          "00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT.md": "9e7990cd4670623c0f8b4cc78fc233d30dfca3696143dee5ad01f87f2fa136b4",
+          "00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md": "019c8f6a0270bcdb4f282ade039108c289f5d7d391dde779e664fd046fa61435",
+          "00 Учебник/01 Основы нейронных сетей/02 Функции активации.md": "467efffdbfaad2a74bb9e31ff86fed9553cc0478664407efd34d2c678e4b7696",
+          "00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md": "c0afc59f36af36d3616792c6dc8873cdee8ce419fa8cf0db000698f2393283f4",
+          "00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md": "9a72e3c171518af749c26271e183bf35c55d2f98f76a146cf93c8d8404efa02d",
+          "00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md": "8795146abe1f9c7a8de8a232c958aae472e3788d963f99aba557b90690fee2c0"
+        }
+      }
+    },
+    {
+      "source": "Concepts/Training/nanoGPT.md",
+      "sourceSha256": "5f1bd4fa83967b9d0478d95601a505a8e8d80e1fc97980e25261db769ac30d4d",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md",
+        "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md",
+        "06 Практика/20 Собрать языковую модель с нуля.md"
+      ],
+      "findings": [
+        "The complete NTP and GPT-2 owners already develop the autoregressive objective, target alignment, Transformer architecture and distinct original GPT-2 cache interface. They are preserved; only links to the worked reference were added.",
+        "The existing practice 20 now traces the pinned original nanoGPT preparer, trainer and sampler: shifted windows, accumulation, unscale/clip/update order, last-microbatch logging, evaluation/checkpoint boundaries, non-identical resume and uncached cropped-context generation.",
+        "A complete CPU runner executes unchanged upstream programs with a local four-character fixture and no model/corpus download. The original loss PNG and MIT notice are retained unchanged. The whole final practice chapter, desktop/mobile, source-image viewer and explicit EN fallback were inspected."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-30-nanogpt-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "06 Практика/20 Собрать языковую модель с нуля.md",
+            "anchors": ["nanogpt-worked-reference"],
+            "currentCanonicalRevision": "4def1208324566dce45443f6cbdf0588e4577537c4e18942d7cbe365048ed85e"
+          }
+        ],
+        "excludedClaims": [
+          "The archive's unsupported per-step grammar/style interpretation and ten-commit teaching history are not transferred as source-established facts.",
+          "Historical A100, compile and MPS timings are portable performance guarantees or measurements reproduced by this CPU fixture.",
+          "The member called flash proves which SDPA kernel executed, or native nanoGPT generation uses a KV cache.",
+          "A successfully loaded checkpoint with the same iteration label exactly reproduces the stochastic continuation; the native fixture demonstrates otherwise.",
+          "The nanoGPT worked reference is a solution of CS336's 48-test assignment, reproduces GPT-2 language quality, or establishes nanochat cost/speed."
+        ],
+        "retainedSourceFacts": [
+          "The pinned README really contains the November 2025 deprecation notice, author-reported timing examples, and generated Shakespeare sample. These are not labeled fabricated.",
+          "The original curve's selected point is 2.905 at 399; the README separately reports about 2.85 on OpenWebText and discusses the private-WebText domain difference."
+        ],
+        "scopeLimits": "One archive reconciliation and a small CPU execution. No CUDA/DDP/compile/real-corpus benchmark, new translation, commit, push or deployment."
+      }
+    },
+    {
+      "source": "Concepts/Reasoning/ReAct.md",
+      "sourceSha256": "db772fc7834f840df36b2386a72790ba3d6e7e142780d11956d2829fae81b883",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md"
+      ],
+      "findings": [
+        "Existing complete HotpotQA and ALFWorld trajectories are preserved. Added dense/sparse thought placement, both fallback heuristics with a five-answer worked example, benchmark protocols and prompting versus 3,000-trajectory fine-tuning.",
+        "Both original Figures 2–3 retain all panels, axes, legend and English captions. Error-analysis denominators, 71% best versus 57% mean, and empty 540B fine-tuning position are explained."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-30-agent-reconciliation-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md",
+            "anchors": [
+              "react-prompting-learning"
+            ]
+          }
+        ],
+        "excludedClaims": [
+          "Reasoning and acting were logically mutually exclusive, or Act-only can never plan or track state.",
+          "The selected failure group's 0% hallucination category proves zero hallucination, even though the same table labels 6% of selected successes as hallucinated false positives.",
+          "Voting agreement is a calibrated truth probability; fewer CoT samples prove the same multiple of total cost savings; 71% is the six-prompt mean; visible reasoning guarantees faithful internal computation.",
+          "Fine-tuning the tested small PaLM variants on HotpotQA proves superiority to every larger model on arbitrary agent tasks."
+        ],
+        "scopeLimits": "Archive reconciliation and deterministic CPU fixtures, not a reproduced PaLM/GPT-J training run, live agent benchmark, complete BFCL/ToolBench review, new translation or publication. Toolformer Figure 2 copying permission remains a separate illustration gap; its direct source link is retained."
+      }
+    },
+    {
+      "source": "Concepts/Reasoning/Tool Use.md",
+      "sourceSha256": "7fcc266613ab789abadfd800e3ecdb5d578fde1b48f29e2d96c64b889a566db7",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md",
+        "00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md",
+        "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md"
+      ],
+      "findings": [
+        "Read the complete tool-use and agent-evaluation owners; existing full RLVR/GRPO source reads remain valid at their unchanged accepted hashes.",
+        "Preserved schema/semantic checks, actual execution observations, retries/idempotency, bounded episodes, authorization and outcome verification. Added bridges to full training/evaluation owners and BFCL/ToolBench primary bibliography references instead of a second overview."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-30-agent-reconciliation-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md",
+            "headings": [
+              "2. Интерфейс инструмента является частью задачи",
+              "5. Ошибка — часть протокола",
+              "6. Права нельзя задать одной инструкцией модели",
+              "8. Как проверять tool use"
+            ]
+          },
+          {
+            "source": "00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md",
+            "headings": [
+              "5. Интерактивный пользователь меняет задачу",
+              "7. Несколько запусков вместо одной траектории"
+            ]
+          },
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
+            "anchors": [
+              "agent-reward-design"
+            ]
+          }
+        ],
+        "excludedClaims": [
+          "A pretrained model cannot use new facts supplied in context; all vendors use an identical tool-call wire format; every JSON Schema is handled by one finite-state grammar.",
+          "MCP removes authorization or guarantees every client/server combination; a historical transport list or industry-adoption claim is timeless.",
+          "RLVR must always be deterministic, a successful API response proves task completion, GRPO is the only standard algorithm, or SFT necessarily prevents exploration.",
+          "The archive's unsourced contemporary model/SOTA percentages, >50-tool failure threshold, fixed benchmark headcounts and universal cold-start superiority are source-established constants."
+        ],
+        "scopeLimits": "Archive reconciliation and deterministic CPU fixtures, not a reproduced PaLM/GPT-J training run, live agent benchmark, complete BFCL/ToolBench review, new translation or publication. Toolformer Figure 2 copying permission remains a separate illustration gap; its direct source link is retained."
+      }
+    },
+    {
+      "source": "Concepts/Reasoning/Toolformer.md",
+      "sourceSha256": "c22dab7ecf6adb342f4b95453045d2f808ab8e60c90beba1ab7f8f5f65006d88",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md"
+      ],
+      "findings": [
+        "Preserved the full existing weighted continuation-loss derivation, two-control minimum, numerical filter and three-stage data pipeline.",
+        "Added candidate budgets and thresholds, annotation lookahead, tool-specific preprocessing, retained counts versus training caps, API-start rank intervention, the one-call evaluation cap, disabled-call perplexity controls and the stronger-model LLaMA appendix."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-30-agent-reconciliation-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md",
+            "anchors": [
+              "toolformer-curation-evaluation"
+            ],
+            "headings": [
+              "Как Toolformer получает обучающие примеры"
+            ]
+          }
+        ],
+        "excludedClaims": [
+          "No human-written API demonstrations are used, or a calculator's success rate equals GPT-3's arithmetic benchmark score.",
+          "Keeping the original text guarantees every language capability is preserved; the disabled-call perplexity comparison evaluates marginal likelihood with live API calls.",
+          "775M is a universal minimum size for useful tool use, or gains over GPT-3 apply to every task.",
+          "At most one API call is a training-document restriction rather than the published evaluation rule; independent annotations teach arbitrary chained actions, write permissions or payment safety."
+        ],
+        "scopeLimits": "Archive reconciliation and deterministic CPU fixtures, not a reproduced PaLM/GPT-J training run, live agent benchmark, complete BFCL/ToolBench review, new translation or publication. Toolformer Figure 2 copying permission remains a separate illustration gap; its direct source link is retained."
+      }
+    },
+    {
+      "source": "Concepts/Reasoning/Tree of Thoughts.md",
+      "sourceSha256": "6ef781048ed0cc9a8856e3da0e7fa26d56c2288ea1f974483d3cdb88c8359626",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
+        "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md"
+      ],
+      "findings": [
+        "Both complete preceding owners read. Existing Game of 24, native BFS details, original figures and the contextual LATS bridge preserved.",
+        "Added full creative-writing plan/passage selection, comparison votes, evaluation protocol, refinement results and original Figures 4–5.",
+        "Added crossword crossing constraints, confidence sums, DFS pruning/backtracking, snapshot restoration, paper-versus-code budgets and child-cap exit caveat; complete original Figure 6.",
+        "One canonical ToT explanation linked from agent planning and both subject indices; no second course or new translation."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-30-tot-reconciliation-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
+            "anchors": ["tree-of-thoughts", "tot-creative-writing", "tot-crossword-dfs"]
+          },
+          {
+            "source": "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
+            "headings": ["Tree of Thoughts: выбор между промежуточными решениями"]
+          }
+        ],
+        "excludedClaims": [
+          "Width-one 45% exceeds the best-of-100 CoT oracle's 49%.",
+          "Creative writing has only one transition, or searches each paragraph separately.",
+          "ToT universally costs roughly 100 LLM calls; crossword log entries count network requests.",
+          "Left-to-right generation prevents textual revision; System 1/System 2 analogies establish a psychological mechanism.",
+          "The released notebook exactly implements all paper settings or restores state on every early exit."
+        ],
+        "scopeLimits": "Deterministic native-code replay and local visual acceptance, not GPT-4 inference, human evaluation, a reproduced crossword benchmark, a new translation or publication. BLEU, overall route review and release remain open."
+      }
+    },
+    {
+      "source": "Concepts/Evaluation/BLEU Score.md",
+      "sourceSha256": "d432707ef676024e1f9b8f639f9d1df3b2d327e1207fd8cf14cb40b2d9a67988",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md"
+      ],
+      "findings": [
+        "The prior complete 1113-line evaluation owner was read, then the reference-based scoring explanation was integrated in the existing verification section. No separate BLEU chapter or parallel course was created. The exact addition journal restores all earlier text, nine Python examples and figures.",
+        "BLEU now covers clipped segment counts, closest reference length, corpus aggregation, brevity penalty, missing orders versus zero matches, exponential smoothing, effective order and protocol signatures with worked examples. chrF and contextual BERTScore are explained separately.",
+        "The full original BERTScore repository figure and MIT notice are pinned and copied byte-identically. Twelve chapter programs and 7688 already-tokenized cases passed native-core comparison. Root desktop/mobile and the explicitly marked EN fallback were inspected; no translation, public API or encoder run is claimed."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-30-bleu-reconciliation-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+            "anchors": [
+              "reference-based-text-evaluation",
+              "bleu-reference-overlap",
+              "chrf-character-overlap",
+              "bertscore-token-alignment"
+            ]
+          }
+        ],
+        "excludedClaims": [
+          "Before BLEU, text generation was evaluated only by humans.",
+          "Unclipped naïve n-gram counts, pooling references across segments or averaging sentence BLEU reproduce corpus BLEU.",
+          "Fixed BLEU score bands define quality, all human translations score 60–70, or a one-point gain is universally significant.",
+          "One +1 smoothing rule solves every short-sentence case; effective order removes observed unmatched n-grams.",
+          "SacreBLEU uses one universal 13a tokenizer or its signature identifies the exact data, model and complete protocol.",
+          "Adding references can never reduce BLEU; BERTScore proves semantic equivalence, factual correctness or preserved negation.",
+          "Every T5 WMT result or any current COMET configuration is universally state of the art."
+        ],
+        "scopeLimits": "Archive comparison, complete prior-owner reading plus reviewed journaled additions, CPU arithmetic and local root visual acceptance. No second full reading of every unchanged final paragraph, no machine-translation benchmark, installed sacreBLEU public API/tokenizer, BERT encoder, current leaderboard, fresh Pages-base build, commit, push or deployment. Full METEOR/BLEURT/COMET treatments are not claimed."
+      }
+    }
+  ],
+  "reviewedCanonicalDeltas": [
+    {
+      "source": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "fullReadSha256": "50fc2e140ed82af09da1b935d37c27f90bc48998cf2a0c5628e703eac70a582c",
+      "currentSha256": "910967cba1670d0c65864123b958547b420ca059eb38b7302ad0968436e0f952",
+      "journal": "docs/audit/2026-10-30-bleu-reconciliation-additions.json",
+      "scope": "The complete prior 1113-line owner was read before editing. All added mechanisms and integration passages were reviewed at the current revision. Exact reversal preserves the prior text. This is not a second whole-final-chapter reading."
+    },
+    {
+      "source": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
+      "fullReadSha256": "c25a11e993cbcd37387d64003c575b2448c4979b828a7819b4f59a8cd4f5b99d",
+      "currentSha256": "0828f31f6c72d7d7f37692d171e1a9214f72865e9d0e8bb02420cf399687af03",
+      "journal": "docs/audit/2026-10-30-tot-reconciliation-additions.json",
+      "scope": "Full preceding 1640-line chapter read; all new sections, code, figures and adjacent integration passages then read. Exact journal restores all preceding bytes. This does not claim a second fresh reading of every unchanged paragraph."
+    },
+    {
+      "source": "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
+      "fullReadSha256": "a56e872d7bc7c103d498d71df5f640c64b484acbd817f0ce0a217dc691aec2c4",
+      "currentSha256": "718e68fb6cf58e941e10d76e02acc0761e06a19d8c4bb8496ac6dd3353bcd628",
+      "journal": "docs/audit/2026-10-30-tot-reconciliation-additions.json",
+      "scope": "Full preceding 1396-line chapter read. Only metadata and a crosslink paragraph changed; ToT recap and adjacent bridges reread. Existing explanations, examples and figures unchanged."
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+      "fullReadSha256": "226ab215d706e0af02b48c2d5631887e62614ac89a61be12054175a0edda09b7",
+      "currentSha256": "3afbb8b75a2866dc5d493a929e0354aa3d1fa141cbdbdd82f0c866a5f387d872",
+      "journal": "docs/audit/2026-10-29-peft-additions.json",
+      "scope": "Only the journaled previous/next navigation and bridge to the new PEFT owner changed after the complete SFT read. The SFT explanation was not rewritten. This is a reviewed delta, not a claim of another whole-chapter read."
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md",
+      "fullReadSha256": "aca814c431df4b4d489ac98e4f147b85ba6f600eb41463c1b3ae4b6f7d9f3f3f",
+      "currentSha256": "769b26049eb04c2ca10a5e951dcc8efc6c6fb30dc1c3536e7f32feb3c9d9f5ee",
+      "journal": "docs/audit/2026-10-30-nanogpt-additions.json",
+      "scope": "Only the English bridge to the nanoGPT worked reference changed after the complete NTP read; its derivations, examples and illustrations are unchanged."
+    },
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md",
+      "fullReadSha256": "ce717410045dd566b798820440ef49db532c1204d6d0bed6b54cfec1247f6c8d",
+      "currentSha256": "a0417ae755c137144bbccc8f09b935b5b1abf1657d1411eacdec1585b7b7ab23",
+      "journal": "docs/audit/2026-10-30-nanogpt-additions.json",
+      "scope": "Only the English bridge distinguishing uncached nanoGPT generation from the original GPT-2 cache interface changed after the full GPT-2 read."
+    }
+  ],
+  "counts": {
+    "total": 31,
+    "sourceFullRead": 31,
+    "reconciled": 31,
+    "readInProgress": 0,
+    "unread": 0,
+    "canonicalWholeReads": 37
+  },
+  "englishReadRevisions": {
+    "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md": "b7a4f3f2d0755a7b495e98fe29a85132bb3285dd9aae43bc6ba3ac85831fe7f1",
+    "en/00 Textbook/05 Attention and Transformer/05 The complete Transformer.md": "8de30b0b1870b46b6b80f7c650efc14dd91aca4791fd655fae9220d11511b63b"
+  }
+}

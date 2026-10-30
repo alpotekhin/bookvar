@@ -1,0 +1,47 @@
+[
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/long-context-2026-10-23/mistral-chunk-mask.png",
+    "source_asset": "05 Источники/Originals/long-context-2026-10-23/mistral-v1.pdf",
+    "source_asset_sha256": "dfbac4e7035344b305c947481f2e7e8a02f7a24a563917eb6e47f6591d14c5ae",
+    "source_page": 3,
+    "render_dpi": 300,
+    "render_page_size_px": [2550,3300],
+    "crop_box_px": [435,1110,2115,1830],
+    "source_url": "https://arxiv.org/pdf/2310.06825v1#page=3",
+    "author": "Albert Q. Jiang et al. / Mistral AI",
+    "license": "CC BY 4.0",
+    "license_evidence": "05 Источники/Originals/long-context-2026-10-23/mistral-v1.html",
+    "sha256": "c8a46ec808ada9448b72ee0679cb464dac5bc13a7f1cafe9cc8eeede5886be69",
+    "license_evidence_sha256": "02a703f9e1ac602aae8d031138860144cadc8c96b8e441fecf65cedc92fb6c33"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/long-context-2026-10-23/cla-cache-groups.png",
+    "source_asset": "05 Источники/Originals/long-context-2026-10-23/cla-v1.pdf",
+    "source_asset_sha256": "1ecbd39c150d725a216d9e9409af7999a6a81e43938f4e03924a688b29fa67c4",
+    "source_page": 4,
+    "render_dpi": 300,
+    "render_page_size_px": [2550,3300],
+    "crop_box_px": [435,294,2115,1530],
+    "source_url": "https://arxiv.org/pdf/2405.12981v1#page=4",
+    "author": "William Brandon, Mayank Mishra, Aniruddha Nrusimha, Rameswar Panda, Jonathan Ragan-Kelley",
+    "license": "CC BY 4.0",
+    "license_evidence": "05 Источники/Originals/long-context-2026-10-23/cla-v1-abs.html",
+    "sha256": "3cace99519ba85a43c2fb4444c77351032b27a78854552e16dbadd2810ccb9a3",
+    "license_evidence_sha256": "e39e0e6851b21d4e12623c637b2f9c59b1edb6b57e44335f32552d988f0851c6"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/long-context-2026-10-23/ruler-aggregation.png",
+    "source_asset": "05 Источники/Originals/long-context-2026-10-23/ruler-v3.pdf",
+    "source_asset_sha256": "8a4bc6ca28d84570eec7f42652400c2121f4c8bc361701634e596772e396fc22",
+    "source_page": 5,
+    "render_dpi": 300,
+    "render_page_size_px": [2550,3300],
+    "crop_box_px": [435,330,2115,909],
+    "source_url": "https://arxiv.org/pdf/2404.06654v3#page=5",
+    "author": "Cheng-Ping Hsieh, Simeng Sun, Samuel Kriman, Shantanu Acharya, Dima Rekesh, Fei Jia, Yang Zhang, Boris Ginsburg",
+    "license": "CC BY 4.0",
+    "license_evidence": "05 Источники/Originals/long-context-2026-10-23/ruler-v3-abs.html",
+    "sha256": "ce5eae1b909a6484d22820c0a1f661b0fc8a1735fc99293bd6b9c4ad274c2de1",
+    "license_evidence_sha256": "763ca6648f980c24b3ae7d8937a0b8cd95e65b7fef55066dbcc4f18e37937ae3"
+  }
+]

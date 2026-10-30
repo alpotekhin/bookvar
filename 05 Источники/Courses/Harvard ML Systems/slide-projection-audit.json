@@ -1,0 +1,522 @@
+[
+  {
+    "source": "slides/vol1/00_course_overview/00_course_overview.tex",
+    "explicit_frames": 35,
+    "title_slides": 1,
+    "focus_slides": 1,
+    "speaker_notes": 35,
+    "source_issues": [],
+    "projection_limits": []
+  },
+  {
+    "source": "slides/vol1/01_introduction/01_introduction.tex",
+    "explicit_frames": 41,
+    "title_slides": 1,
+    "focus_slides": 1,
+    "speaker_notes": 41,
+    "source_issues": [],
+    "projection_limits": [
+      {
+        "slide": 4,
+        "line": 157,
+        "title": "The AI Moment",
+        "items": [
+          "Unresolved image: data-center.jpg"
+        ]
+      },
+      {
+        "slide": 16,
+        "line": 776,
+        "title": "D$\\bullet$A$\\bullet$M Interdependence",
+        "items": [
+          "Unresolved image: nvidia-h100.png"
+        ]
+      },
+      {
+        "slide": 32,
+        "line": 1605,
+        "title": "The Five Pillars of ML Systems",
+        "items": [
+          "Unresolved image: book_pillars.png"
+        ]
+      },
+      {
+        "slide": 40,
+        "line": 1896,
+        "title": "Next Lecture: ML Systems in the Wild",
+        "items": [
+          "Unresolved image: arduino-nicla-vision.jpg",
+          "Unresolved image: jetson-orin-nx.jpg",
+          "Unresolved image: nvidia-h100.png"
+        ]
+      }
+    ]
+  },
+  {
+    "source": "slides/vol1/02_ml_systems/02_ml_systems.tex",
+    "explicit_frames": 37,
+    "title_slides": 1,
+    "focus_slides": 0,
+    "speaker_notes": 37,
+    "source_issues": [],
+    "projection_limits": []
+  },
+  {
+    "source": "slides/vol1/03_ml_workflow/03_ml_workflow.tex",
+    "explicit_frames": 42,
+    "title_slides": 1,
+    "focus_slides": 1,
+    "speaker_notes": 42,
+    "source_issues": [],
+    "projection_limits": []
+  },
+  {
+    "source": "slides/vol1/04_data_engineering/04_data_engineering.tex",
+    "explicit_frames": 36,
+    "title_slides": 1,
+    "focus_slides": 1,
+    "speaker_notes": 36,
+    "source_issues": [],
+    "projection_limits": []
+  },
+  {
+    "source": "slides/vol1/05_nn_computation/05_nn_computation.tex",
+    "explicit_frames": 40,
+    "title_slides": 1,
+    "focus_slides": 1,
+    "speaker_notes": 40,
+    "source_issues": [],
+    "projection_limits": [
+      {
+        "slide": 4,
+        "line": 155,
+        "title": "Why Hardware Matters for Neural Computation",
+        "items": [
+          "Unresolved image: nvidia-gpu-die.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "source": "slides/vol1/06_nn_architectures/06_nn_architectures.tex",
+    "explicit_frames": 36,
+    "title_slides": 1,
+    "focus_slides": 1,
+    "speaker_notes": 36,
+    "source_issues": [
+      "Transformer Compute Cost"
+    ],
+    "projection_limits": [
+      {
+        "slide": 19,
+        "line": 964,
+        "title": "Transformer Compute Cost",
+        "items": [
+          "Column spans are labelled and expanded into separate Markdown cells"
+        ]
+      }
+    ]
+  },
+  {
+    "source": "slides/vol1/07_frameworks/07_frameworks.tex",
+    "explicit_frames": 39,
+    "title_slides": 1,
+    "focus_slides": 0,
+    "speaker_notes": 39,
+    "source_issues": [],
+    "projection_limits": [
+      {
+        "slide": 4,
+        "line": 145,
+        "title": "The Invisible Layer",
+        "items": [
+          "Environment preserved as original TeX: mlsyscode"
+        ]
+      },
+      {
+        "slide": 16,
+        "line": 799,
+        "title": "Autograd: Worked Example $y = x^2 + 3x$",
+        "items": [
+          "Environment preserved as original TeX: mlsyscode"
+        ]
+      },
+      {
+        "slide": 22,
+        "line": 1166,
+        "title": "Tensors and Hardware Abstraction",
+        "items": [
+          "Environment preserved as original TeX: mlsyscode"
+        ]
+      },
+      {
+        "slide": 23,
+        "line": 1243,
+        "title": "The nn.Module Pattern",
+        "items": [
+          "Environment preserved as original TeX: mlsyscode"
+        ]
+      },
+      {
+        "slide": 24,
+        "line": 1323,
+        "title": "nn.Module Tree: ResNet-18",
+        "items": [
+          "Environment preserved as original TeX: mlsyscode"
+        ]
+      },
+      {
+        "slide": 25,
+        "line": 1400,
+        "title": "Anatomy of a Training Step",
+        "items": [
+          "Environment preserved as original TeX: mlsyscode"
+        ]
+      }
+    ]
+  },
+  {
+    "source": "slides/vol1/08_training/08_training.tex",
+    "explicit_frames": 42,
+    "title_slides": 1,
+    "focus_slides": 1,
+    "speaker_notes": 42,
+    "source_issues": [],
+    "projection_limits": [
+      {
+        "slide": 5,
+        "line": 230,
+        "title": "The Scale of Training Infrastructure",
+        "items": [
+          "Unresolved image: google-datacenter-exterior.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "source": "slides/vol1/09_data_selection/09_data_selection.tex",
+    "explicit_frames": 39,
+    "title_slides": 1,
+    "focus_slides": 0,
+    "speaker_notes": 39,
+    "source_issues": [],
+    "projection_limits": []
+  },
+  {
+    "source": "slides/vol1/10_model_compression/10_model_compression.tex",
+    "explicit_frames": 38,
+    "title_slides": 1,
+    "focus_slides": 1,
+    "speaker_notes": 38,
+    "source_issues": [],
+    "projection_limits": []
+  },
+  {
+    "source": "slides/vol1/11_hw_acceleration/11_hw_acceleration.tex",
+    "explicit_frames": 40,
+    "title_slides": 1,
+    "focus_slides": 1,
+    "speaker_notes": 40,
+    "source_issues": [],
+    "projection_limits": [
+      {
+        "slide": 5,
+        "line": 229,
+        "title": "CPU vs GPU: The Silicon Area Trade-off",
+        "items": [
+          "Unresolved image: gpu-die-stacked.jpg",
+          "Unresolved image: intel-cpu-die.jpg",
+          "Unresolved image: xilinx-fpga.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "source": "slides/vol1/12_benchmarking/12_benchmarking.tex",
+    "explicit_frames": 42,
+    "title_slides": 1,
+    "focus_slides": 1,
+    "speaker_notes": 42,
+    "source_issues": [],
+    "projection_limits": []
+  },
+  {
+    "source": "slides/vol1/13_model_serving/13_model_serving.tex",
+    "explicit_frames": 44,
+    "title_slides": 1,
+    "focus_slides": 1,
+    "speaker_notes": 44,
+    "source_issues": [],
+    "projection_limits": [
+      {
+        "slide": 29,
+        "line": 1010,
+        "title": "Cold Start and Model Loading",
+        "items": [
+          "Unresolved image: server-rack-datacenter.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "source": "slides/vol1/14_ml_ops/14_ml_ops.tex",
+    "explicit_frames": 39,
+    "title_slides": 1,
+    "focus_slides": 1,
+    "speaker_notes": 39,
+    "source_issues": [],
+    "projection_limits": []
+  },
+  {
+    "source": "slides/vol1/15_responsible_engr/15_responsible_engr.tex",
+    "explicit_frames": 37,
+    "title_slides": 1,
+    "focus_slides": 1,
+    "speaker_notes": 37,
+    "source_issues": [],
+    "projection_limits": [
+      {
+        "slide": 5,
+        "line": 220,
+        "title": "COMPAS: A Different Failure Axis",
+        "items": [
+          "Unresolved image: contemplation-of-justice.jpg"
+        ]
+      },
+      {
+        "slide": 21,
+        "line": 997,
+        "title": "Total Cost of Ownership",
+        "items": [
+          "Unresolved image: datacenter-cooling.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "source": "slides/vol1/16_conclusion/16_conclusion.tex",
+    "explicit_frames": 31,
+    "title_slides": 1,
+    "focus_slides": 1,
+    "speaker_notes": 31,
+    "source_issues": [],
+    "projection_limits": []
+  },
+  {
+    "source": "slides/vol2/00_course_overview/00_course_overview.tex",
+    "explicit_frames": 30,
+    "title_slides": 1,
+    "focus_slides": 0,
+    "speaker_notes": 30,
+    "source_issues": [],
+    "projection_limits": [
+      {
+        "slide": 13,
+        "line": 691,
+        "title": "The Warehouse-Scale Computer",
+        "items": [
+          "Unresolved image: ../02_compute_infrastructure/images/gpu-cluster-datacenter.jpg"
+        ]
+      }
+    ]
+  },
+  {
+    "source": "slides/vol2/01_introduction/01_introduction.tex",
+    "explicit_frames": 40,
+    "title_slides": 1,
+    "focus_slides": 1,
+    "speaker_notes": 40,
+    "source_issues": [],
+    "projection_limits": []
+  },
+  {
+    "source": "slides/vol2/02_compute_infrastructure/02_compute_infrastructure.tex",
+    "explicit_frames": 36,
+    "title_slides": 1,
+    "focus_slides": 1,
+    "speaker_notes": 36,
+    "source_issues": [],
+    "projection_limits": [
+      {
+        "slide": 28,
+        "line": 1314,
+        "title": "TCO: The Numbers",
+        "items": [
+          "Column spans are labelled and expanded into separate Markdown cells"
+        ]
+      }
+    ]
+  },
+  {
+    "source": "slides/vol2/03_network_fabrics/03_network_fabrics.tex",
+    "explicit_frames": 39,
+    "title_slides": 1,
+    "focus_slides": 2,
+    "speaker_notes": 39,
+    "source_issues": [],
+    "projection_limits": [
+      {
+        "slide": 17,
+        "line": 682,
+        "title": "$\\alpha$-$\\beta$ Model: Worked Example",
+        "items": [
+          "Column spans are labelled and expanded into separate Markdown cells"
+        ]
+      }
+    ]
+  },
+  {
+    "source": "slides/vol2/04_data_storage/04_data_storage.tex",
+    "explicit_frames": 37,
+    "title_slides": 1,
+    "focus_slides": 2,
+    "speaker_notes": 37,
+    "source_issues": [],
+    "projection_limits": []
+  },
+  {
+    "source": "slides/vol2/05_distributed_training/05_distributed_training.tex",
+    "explicit_frames": 37,
+    "title_slides": 1,
+    "focus_slides": 1,
+    "speaker_notes": 37,
+    "source_issues": [],
+    "projection_limits": []
+  },
+  {
+    "source": "slides/vol2/06_collective_communication/06_collective_communication.tex",
+    "explicit_frames": 34,
+    "title_slides": 1,
+    "focus_slides": 1,
+    "speaker_notes": 34,
+    "source_issues": [],
+    "projection_limits": []
+  },
+  {
+    "source": "slides/vol2/07_fault_tolerance/07_fault_tolerance.tex",
+    "explicit_frames": 41,
+    "title_slides": 1,
+    "focus_slides": 1,
+    "speaker_notes": 41,
+    "source_issues": [],
+    "projection_limits": []
+  },
+  {
+    "source": "slides/vol2/08_fleet_orchestration/08_fleet_orchestration.tex",
+    "explicit_frames": 37,
+    "title_slides": 1,
+    "focus_slides": 0,
+    "speaker_notes": 37,
+    "source_issues": [],
+    "projection_limits": [
+      {
+        "slide": 13,
+        "line": 587,
+        "title": "Slurm: The HPC Heritage",
+        "items": [
+          "Environment preserved as original TeX: mlsyscode"
+        ]
+      },
+      {
+        "slide": 14,
+        "line": 655,
+        "title": "Kubernetes: The Cloud Native Standard",
+        "items": [
+          "Environment preserved as original TeX: mlsyscode"
+        ]
+      }
+    ]
+  },
+  {
+    "source": "slides/vol2/09_performance_engineering/09_performance_engineering.tex",
+    "explicit_frames": 37,
+    "title_slides": 1,
+    "focus_slides": 1,
+    "speaker_notes": 37,
+    "source_issues": [],
+    "projection_limits": []
+  },
+  {
+    "source": "slides/vol2/10_inference/10_inference.tex",
+    "explicit_frames": 39,
+    "title_slides": 1,
+    "focus_slides": 1,
+    "speaker_notes": 39,
+    "source_issues": [],
+    "projection_limits": []
+  },
+  {
+    "source": "slides/vol2/11_edge_intelligence/11_edge_intelligence.tex",
+    "explicit_frames": 35,
+    "title_slides": 1,
+    "focus_slides": 1,
+    "speaker_notes": 35,
+    "source_issues": [
+      "The Training Memory Amplifier"
+    ],
+    "projection_limits": [
+      {
+        "slide": 16,
+        "line": 751,
+        "title": "Weight Freezing: Bias-Only Adaptation",
+        "items": [
+          "Typeset code retained as a TeX fragment, not executable code"
+        ]
+      }
+    ]
+  },
+  {
+    "source": "slides/vol2/12_ops_scale/12_ops_scale.tex",
+    "explicit_frames": 38,
+    "title_slides": 1,
+    "focus_slides": 1,
+    "speaker_notes": 38,
+    "source_issues": [],
+    "projection_limits": []
+  },
+  {
+    "source": "slides/vol2/13_security_privacy/13_security_privacy.tex",
+    "explicit_frames": 38,
+    "title_slides": 1,
+    "focus_slides": 1,
+    "speaker_notes": 38,
+    "source_issues": [],
+    "projection_limits": []
+  },
+  {
+    "source": "slides/vol2/14_robust_ai/14_robust_ai.tex",
+    "explicit_frames": 37,
+    "title_slides": 1,
+    "focus_slides": 2,
+    "speaker_notes": 37,
+    "source_issues": [],
+    "projection_limits": []
+  },
+  {
+    "source": "slides/vol2/15_sustainable_ai/15_sustainable_ai.tex",
+    "explicit_frames": 33,
+    "title_slides": 1,
+    "focus_slides": 2,
+    "speaker_notes": 33,
+    "source_issues": [],
+    "projection_limits": []
+  },
+  {
+    "source": "slides/vol2/16_responsible_ai/16_responsible_ai.tex",
+    "explicit_frames": 36,
+    "title_slides": 1,
+    "focus_slides": 1,
+    "speaker_notes": 36,
+    "source_issues": [],
+    "projection_limits": []
+  },
+  {
+    "source": "slides/vol2/17_conclusion/17_conclusion.tex",
+    "explicit_frames": 29,
+    "title_slides": 1,
+    "focus_slides": 2,
+    "speaker_notes": 29,
+    "source_issues": [],
+    "projection_limits": []
+  }
+]

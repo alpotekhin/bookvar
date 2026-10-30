@@ -9,68 +9,88 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol1/lab_05_nn_compute.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol1/lab_05_nn_compute.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL1 Lab — Nn Compute
 
 ## Readable lab narrative
 
 A forward layer transforms `A_prev` through `Z = A_prev W + b` and
-            `A = f(Z)`. The tensor dimensions set both activation elements and
-            operation count. In this lab the shared helper computes:
+`A = f(Z)`. The tensor dimensions set both activation elements and
+operation count. In this lab the shared helper computes:
 
-            `activation_MB = tensor_elements x bytes_per_value / 1e6`
+`activation_MB = tensor_elements x bytes_per_value / 1e6`
 
-            `arithmetic_intensity = operation_count / bytes_moved`
+`arithmetic_intensity = operation_count / bytes_moved`
 
 ---
 
 The boundary is not a single FLOP number. Feasibility is a conjunction:
 
-            `activation_ok and bandwidth_ok and latency_ok and power_ok`
+`activation_ok and bandwidth_ok and latency_ok and power_ok`
 
-            The binding amount is the largest normalized ratio:
+The binding amount is the largest normalized ratio:
 
-            `max(actual_amount / budget_amount)`
+`max(actual_amount / budget_amount)`
 
 ---
 
 Batch/window policy changes the number of activation elements held at
-            once. Precision changes bytes per activation and bytes per weight.
+once. Precision changes bytes per activation and bytes per weight.
 
-            `activation_MB = batch x tensor_shape x bytes_per_value / 1e6`
+`activation_MB = batch x tensor_shape x bytes_per_value / 1e6`
 
-            `energy = estimated_power x latency`
+`energy = estimated_power x latency`
 
-            Larger batches can improve useful work per launch, but they also
-            increase activation residency and can move the p99 or wake-time wall.
+Larger batches can improve useful work per launch, but they also
+increase activation residency and can move the p99 or wake-time wall.
 
 ---
 
 Arithmetic intensity asks how much arithmetic is done for each byte
-            moved. The roofline crossover is the point where memory bandwidth and
-            peak compute can both be used:
+moved. The roofline crossover is the point where memory bandwidth and
+peak compute can both be used:
 
-            `crossover = peak_ops_per_second / memory_bytes_per_second`
+`crossover = peak_ops_per_second / memory_bytes_per_second`
 
-            Below the crossover, reducing bytes moved is usually more valuable
-            than adding compute. Above it, reducing operations or improving the
-            kernel is more likely to help.
+Below the crossover, reducing bytes moved is usually more valuable
+than adding compute. Above it, reducing operations or improving the
+kernel is more likely to help.
 
 ---
 
 A complete operator budget note has five fields:
 
-            1. decision
-            2. binding amount
-            3. evidence number
-            4. residual risk
-            5. architecture implication
+1. decision
+2. binding amount
+3. evidence number
+4. residual risk
+5. architecture implication
 
-            That record is what later labs can reuse when architecture, training,
-            compression, acceleration, and serving decisions change the envelope.
+That record is what later labs can reuse when architecture, training,
+compression, acceleration, and serving decisions change the envelope.
+
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+## Download Report
+
+---
+
+This V1-05 operator budget note is generated locally from the selected track, your predictions, controls, and computed evidence.
+
+</details>
 
 ## Complete original Marimo source
 

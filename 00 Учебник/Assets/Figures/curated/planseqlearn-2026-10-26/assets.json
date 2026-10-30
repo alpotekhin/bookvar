@@ -1,0 +1,89 @@
+[
+  {
+    "id": "curated-planseqlearn-method-b54934dba901",
+    "asset": "00 Учебник/Assets/Figures/curated/planseqlearn-2026-10-26/method.png",
+    "author": "Murtaza Dalal, Tarun Chiruvolu, Devendra Singh Chaplot, Ruslan Salakhutdinov",
+    "source_url": "https://arxiv.org/html/2405.01534v1#S3.F2",
+    "source_image_url": "https://arxiv.org/html/2405.01534v1/PSL_method.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/planseqlearn-2026-10-26/method.png",
+    "source_asset_sha256": "b54934dba901db0f5ab0170873a4f63150266db17049061bc91db57665b016b8",
+    "sha256": "b54934dba901db0f5ab0170873a4f63150266db17049061bc91db57665b016b8",
+    "source_page_snapshot": "05 Источники/Originals/planseqlearn-2026-10-26/article.html",
+    "source_page_sha256": "a057b0dd9ba773f4b0594795428e2d0bcb57898bdbcde3ae0acd8146112bae13",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/planseqlearn-2026-10-26/license-page.html",
+    "license_evidence_sha256": "29dae3bfff2f9df8ca5c68c178d1dc2f717f372abe30ed0964e0796bb961b8d0",
+    "public_license_copy": "site/public/licenses/planseqlearn-NOTICE.txt",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original PNG downloaded byte-for-byte from arXiv v1. No crop, redraw, relabeling, translation or recompression.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-26",
+    "dimensions_px": [
+      1320,
+      669
+    ],
+    "used_in": [
+      "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md"
+    ]
+  },
+  {
+    "id": "curated-planseqlearn-sequencing-22c591d868c7",
+    "asset": "00 Учебник/Assets/Figures/curated/planseqlearn-2026-10-26/sequencing.png",
+    "author": "Murtaza Dalal, Tarun Chiruvolu, Devendra Singh Chaplot, Ruslan Salakhutdinov",
+    "source_url": "https://arxiv.org/html/2405.01534v1#A4.F1",
+    "source_image_url": "https://arxiv.org/html/2405.01534v1/Sequence_Module.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/planseqlearn-2026-10-26/sequencing.png",
+    "source_asset_sha256": "22c591d868c77a5f48dabde0fa1c11d45f8b18a5468cb2a60b63096bd7ce0e57",
+    "sha256": "22c591d868c77a5f48dabde0fa1c11d45f8b18a5468cb2a60b63096bd7ce0e57",
+    "source_page_snapshot": "05 Источники/Originals/planseqlearn-2026-10-26/article.html",
+    "source_page_sha256": "a057b0dd9ba773f4b0594795428e2d0bcb57898bdbcde3ae0acd8146112bae13",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/planseqlearn-2026-10-26/license-page.html",
+    "license_evidence_sha256": "29dae3bfff2f9df8ca5c68c178d1dc2f717f372abe30ed0964e0796bb961b8d0",
+    "public_license_copy": "site/public/licenses/planseqlearn-NOTICE.txt",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original PNG downloaded byte-for-byte from arXiv v1. No crop, redraw, relabeling, translation or recompression.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-26",
+    "dimensions_px": [
+      1320,
+      463
+    ],
+    "used_in": [
+      "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md"
+    ]
+  },
+  {
+    "id": "curated-planseqlearn-nut-assembly-dea2df880184",
+    "asset": "00 Учебник/Assets/Figures/curated/planseqlearn-2026-10-26/nut-assembly.png",
+    "author": "Murtaza Dalal, Tarun Chiruvolu, Devendra Singh Chaplot, Ruslan Salakhutdinov",
+    "source_url": "https://arxiv.org/html/2405.01534v1#S1.F1",
+    "source_image_url": "https://arxiv.org/html/2405.01534v1/PSL_fig_1.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/planseqlearn-2026-10-26/nut-assembly.png",
+    "source_asset_sha256": "dea2df88018452e3010b263d366ff2dfe551dda95472a327a7dd946cc5bd0e70",
+    "sha256": "dea2df88018452e3010b263d366ff2dfe551dda95472a327a7dd946cc5bd0e70",
+    "source_page_snapshot": "05 Источники/Originals/planseqlearn-2026-10-26/article.html",
+    "source_page_sha256": "a057b0dd9ba773f4b0594795428e2d0bcb57898bdbcde3ae0acd8146112bae13",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/planseqlearn-2026-10-26/license-page.html",
+    "license_evidence_sha256": "29dae3bfff2f9df8ca5c68c178d1dc2f717f372abe30ed0964e0796bb961b8d0",
+    "public_license_copy": "site/public/licenses/planseqlearn-NOTICE.txt",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original PNG downloaded byte-for-byte from arXiv v1. No crop, redraw, relabeling, translation or recompression.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-26",
+    "dimensions_px": [
+      1315,
+      501
+    ],
+    "used_in": [
+      "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md"
+    ]
+  }
+]

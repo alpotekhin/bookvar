@@ -1,0 +1,130 @@
+[
+  {
+    "id": "curated-numpy-tensors-broadcasting-2-b62ad124bb88",
+    "asset": "00 Учебник/Assets/Figures/curated/tensor-foundations-2026-10-23/broadcasting_2.svg",
+    "author": "NumPy Developers",
+    "source_url": "https://numpy.org/doc/2.3/user/basics.broadcasting.html#broadcasting-figure-2",
+    "source_image_url": "https://raw.githubusercontent.com/numpy/numpy/0532af47d6a815298b7841de00bdbc547104b237/doc/source/user/broadcasting_2.svg",
+    "source_asset": "00 Учебник/Assets/Figures/curated/tensor-foundations-2026-10-23/broadcasting_2.svg",
+    "source_asset_sha256": "b62ad124bb88d03c99f0a0329744cf97a6cc23cb9343392c91f63d7e1d93f8ac",
+    "sha256": "b62ad124bb88d03c99f0a0329744cf97a6cc23cb9343392c91f63d7e1d93f8ac",
+    "commit": "0532af47d6a815298b7841de00bdbc547104b237",
+    "license": "BSD-3-Clause",
+    "license_url": "https://numpy.org/doc/2.3/license.html",
+    "license_evidence": "05 Источники/Originals/numpy-tensors-2.3/LICENSE.txt",
+    "license_evidence_sha256": "1be1df33863f97a7bc1c4d67980bd6c69c9a6fef0a5ee76e6ad6cb91e56e8491",
+    "source_code": "05 Источники/Originals/numpy-tensors-2.3/basics.broadcasting.rst",
+    "source_code_sha256": "d1379801e96ec350b320d2929687d35b045e24bea962a29efb2259d080427048",
+    "modifications": "None; complete upstream image copied byte-for-byte. The asset itself is the retained original; no duplicate archive.",
+    "used_in": [
+      "00 Учебник/00 Математические и ML-основания/01 Векторы, матрицы и тензоры.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "source-svg-copy"
+  },
+  {
+    "id": "curated-numpy-tensors-broadcasting-3-9826340a2cd5",
+    "asset": "00 Учебник/Assets/Figures/curated/tensor-foundations-2026-10-23/broadcasting_3.svg",
+    "author": "NumPy Developers",
+    "source_url": "https://numpy.org/doc/2.3/user/basics.broadcasting.html#broadcasting-figure-3",
+    "source_image_url": "https://raw.githubusercontent.com/numpy/numpy/0532af47d6a815298b7841de00bdbc547104b237/doc/source/user/broadcasting_3.svg",
+    "source_asset": "00 Учебник/Assets/Figures/curated/tensor-foundations-2026-10-23/broadcasting_3.svg",
+    "source_asset_sha256": "9826340a2cd566eaa337970b73f8a514e3a79f165490ddc9eef27d4df3a4f1ff",
+    "sha256": "9826340a2cd566eaa337970b73f8a514e3a79f165490ddc9eef27d4df3a4f1ff",
+    "commit": "0532af47d6a815298b7841de00bdbc547104b237",
+    "license": "BSD-3-Clause",
+    "license_url": "https://numpy.org/doc/2.3/license.html",
+    "license_evidence": "05 Источники/Originals/numpy-tensors-2.3/LICENSE.txt",
+    "license_evidence_sha256": "1be1df33863f97a7bc1c4d67980bd6c69c9a6fef0a5ee76e6ad6cb91e56e8491",
+    "source_code": "05 Источники/Originals/numpy-tensors-2.3/basics.broadcasting.rst",
+    "source_code_sha256": "d1379801e96ec350b320d2929687d35b045e24bea962a29efb2259d080427048",
+    "modifications": "None; complete upstream image copied byte-for-byte. The asset itself is the retained original; no duplicate archive.",
+    "used_in": [
+      "00 Учебник/00 Математические и ML-основания/01 Векторы, матрицы и тензоры.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "source-svg-copy"
+  },
+  {
+    "id": "curated-numpy-tensors-broadcasting-4-6b27d7e55d39",
+    "asset": "00 Учебник/Assets/Figures/curated/tensor-foundations-2026-10-23/broadcasting_4.svg",
+    "author": "NumPy Developers",
+    "source_url": "https://numpy.org/doc/2.3/user/basics.broadcasting.html#broadcasting-figure-4",
+    "source_image_url": "https://raw.githubusercontent.com/numpy/numpy/0532af47d6a815298b7841de00bdbc547104b237/doc/source/user/broadcasting_4.svg",
+    "source_asset": "00 Учебник/Assets/Figures/curated/tensor-foundations-2026-10-23/broadcasting_4.svg",
+    "source_asset_sha256": "6b27d7e55d39cd4eebde429b734300992bc0c3bdb6392aa4110167dc3ad5df74",
+    "sha256": "6b27d7e55d39cd4eebde429b734300992bc0c3bdb6392aa4110167dc3ad5df74",
+    "commit": "0532af47d6a815298b7841de00bdbc547104b237",
+    "license": "BSD-3-Clause",
+    "license_url": "https://numpy.org/doc/2.3/license.html",
+    "license_evidence": "05 Источники/Originals/numpy-tensors-2.3/LICENSE.txt",
+    "license_evidence_sha256": "1be1df33863f97a7bc1c4d67980bd6c69c9a6fef0a5ee76e6ad6cb91e56e8491",
+    "source_code": "05 Источники/Originals/numpy-tensors-2.3/basics.broadcasting.rst",
+    "source_code_sha256": "d1379801e96ec350b320d2929687d35b045e24bea962a29efb2259d080427048",
+    "modifications": "None; complete upstream image copied byte-for-byte. The asset itself is the retained original; no duplicate archive.",
+    "used_in": [
+      "00 Учебник/00 Математические и ML-основания/01 Векторы, матрицы и тензоры.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "source-svg-copy"
+  },
+  {
+    "id": "curated-numpy-tensors-np-transposing-reshaping-c2169d1ee042",
+    "asset": "00 Учебник/Assets/Figures/curated/tensor-foundations-2026-10-23/np_transposing_reshaping.png",
+    "author": "Jay Alammar / NumPy Developers",
+    "source_url": "https://numpy.org/doc/2.3/user/absolute_beginners.html#transposing-and-reshaping-a-matrix",
+    "source_image_url": "https://raw.githubusercontent.com/numpy/numpy/0532af47d6a815298b7841de00bdbc547104b237/doc/source/user/images/np_transposing_reshaping.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/tensor-foundations-2026-10-23/np_transposing_reshaping.png",
+    "source_asset_sha256": "c2169d1ee04275bd7c359d6c04878badbe219daccf2e94fc6e42e58a4e81edca",
+    "sha256": "c2169d1ee04275bd7c359d6c04878badbe219daccf2e94fc6e42e58a4e81edca",
+    "commit": "0532af47d6a815298b7841de00bdbc547104b237",
+    "dimensions_px": [
+      3266,
+      914
+    ],
+    "license": "BSD-3-Clause",
+    "license_url": "https://numpy.org/doc/2.3/license.html",
+    "license_evidence": "05 Источники/Originals/numpy-tensors-2.3/LICENSE.txt",
+    "license_evidence_sha256": "1be1df33863f97a7bc1c4d67980bd6c69c9a6fef0a5ee76e6ad6cb91e56e8491",
+    "source_code": "05 Источники/Originals/numpy-tensors-2.3/absolute_beginners.rst",
+    "source_code_sha256": "08d45023216f800e9a62dda8254537f55da35801ad45908ab8318007365d27fc",
+    "modifications": "None; complete upstream image copied byte-for-byte. The asset itself is the retained original; no duplicate archive.",
+    "used_in": [
+      "00 Учебник/00 Математические и ML-основания/01 Векторы, матрицы и тензоры.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "source-raster-copy"
+  },
+  {
+    "id": "curated-numpy-tensors-np-reshape-6051dbf9fb13",
+    "asset": "00 Учебник/Assets/Figures/curated/tensor-foundations-2026-10-23/np_reshape.png",
+    "author": "Jay Alammar / NumPy Developers",
+    "source_url": "https://numpy.org/doc/2.3/user/absolute_beginners.html#transposing-and-reshaping-a-matrix",
+    "source_image_url": "https://raw.githubusercontent.com/numpy/numpy/0532af47d6a815298b7841de00bdbc547104b237/doc/source/user/images/np_reshape.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/tensor-foundations-2026-10-23/np_reshape.png",
+    "source_asset_sha256": "6051dbf9fb13d87f507e30024e1a51fa67cf0c81d3e8e5fba0357c8bc1b155d6",
+    "sha256": "6051dbf9fb13d87f507e30024e1a51fa67cf0c81d3e8e5fba0357c8bc1b155d6",
+    "commit": "0532af47d6a815298b7841de00bdbc547104b237",
+    "dimensions_px": [
+      3234,
+      1129
+    ],
+    "license": "BSD-3-Clause",
+    "license_url": "https://numpy.org/doc/2.3/license.html",
+    "license_evidence": "05 Источники/Originals/numpy-tensors-2.3/LICENSE.txt",
+    "license_evidence_sha256": "1be1df33863f97a7bc1c4d67980bd6c69c9a6fef0a5ee76e6ad6cb91e56e8491",
+    "source_code": "05 Источники/Originals/numpy-tensors-2.3/absolute_beginners.rst",
+    "source_code_sha256": "08d45023216f800e9a62dda8254537f55da35801ad45908ab8318007365d27fc",
+    "modifications": "None; complete upstream image copied byte-for-byte. The asset itself is the retained original; no duplicate archive.",
+    "used_in": [
+      "00 Учебник/00 Математические и ML-основания/01 Векторы, матрицы и тензоры.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "source-raster-copy"
+  }
+]

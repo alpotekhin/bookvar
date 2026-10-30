@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "review_method": "Per-source review of every executable lecture edtrace and source file, every PDF lecture page, and every assignment handout, adapter, and test tree. Every reviewed PDF page is closed by a semantic unit or an evidence-backed administrative exclusion; page and pdfimages detections are evidence only, never standalone teaching visuals.",
-  "semantic_review_sha256": "831a84f95b2a72bfc6eb4749092e7d6c0181c8988b46d794072a5deece0de53e",
+  "semantic_review_sha256": "250bd1d1a7f73d26ce805846d506b4cf6c87aeef045d5c373699f199d958ccc1",
   "units": [
     {
       "id": "lecture-01-section-4-cs336-language-models-from-scratch-spring-2026",
@@ -1117,9 +1117,52 @@
       "source_line_end": 287
     },
     {
-      "id": "lecture-02-figure-step-125-rendering-1",
+      "id": "lecture-02-fp4-block-scaling",
       "source_object": "lecture-02",
       "order": 10,
+      "source_location": "Lectures/repository/var/traces/lecture_02.json#steps=111-117:lines=174-183:semantic=fp4-block-scaling",
+      "kind": "mechanism",
+      "title": "FP4 E2M1 values, block scales, and NVFP4 pretraining",
+      "semantic_id": "fp4-block-scaling",
+      "event_start": 111,
+      "event_end": 117,
+      "source_line_start": 174,
+      "source_line_end": 183,
+      "evidence_locations": [
+        "Lectures/repository/var/traces/lecture_02.json#step=111:rendering=1",
+        "Lectures/repository/var/traces/lecture_02.json#step=112:rendering=1",
+        "Lectures/repository/var/traces/lecture_02.json#step=113:rendering=1",
+        "Lectures/repository/var/traces/lecture_02.json#step=114:rendering=1",
+        "Lectures/repository/var/traces/lecture_02.json#step=115:rendering=1",
+        "Lectures/repository/var/traces/lecture_02.json#step=116:rendering=1",
+        "Lectures/repository/var/traces/lecture_02.json#step=116:rendering=2",
+        "Lectures/repository/var/traces/lecture_02.json#step=117:rendering=1"
+      ]
+    },
+    {
+      "id": "lecture-02-tensor-device-placement",
+      "source_object": "lecture-02",
+      "order": 11,
+      "source_location": "Lectures/repository/var/traces/lecture_02.json#steps=121-129:lines=184-201:semantic=tensor-device-placement",
+      "kind": "worked-example",
+      "title": "CPU tensors, device transfer, and direct device allocation",
+      "semantic_id": "tensor-device-placement",
+      "event_start": 121,
+      "event_end": 129,
+      "source_line_start": 184,
+      "source_line_end": 201,
+      "evidence_locations": [
+        "Lectures/repository/var/traces/lecture_02.json#step=121:rendering=1",
+        "Lectures/repository/var/traces/lecture_02.json#step=124:rendering=1",
+        "Lectures/repository/var/traces/lecture_02.json#step=125:rendering=1",
+        "Lectures/repository/var/traces/lecture_02.json#step=127:rendering=1",
+        "Lectures/repository/var/traces/lecture_02.json#step=129:rendering=1"
+      ]
+    },
+    {
+      "id": "lecture-02-figure-step-125-rendering-1",
+      "source_object": "lecture-02",
+      "order": 12,
       "source_location": "Lectures/repository/var/traces/lecture_02.json#step=125:rendering=1",
       "kind": "figure",
       "title": "cpu gpu",
@@ -1131,9 +1174,57 @@
       "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/cpu-gpu.png"
     },
     {
+      "id": "lecture-02-einops-named-axes",
+      "source_object": "lecture-02",
+      "order": 13,
+      "source_location": "Lectures/repository/var/traces/lecture_02.json#steps=139-175:lines=202-278:semantic=einops-named-axes",
+      "kind": "worked-example",
+      "title": "Named-axis contraction, reduction, and head split/merge",
+      "semantic_id": "einops-named-axes",
+      "event_start": 139,
+      "event_end": 175,
+      "source_line_start": 202,
+      "source_line_end": 278,
+      "evidence_locations": [
+        "Lectures/repository/var/traces/lecture_02.json#step=139:rendering=1",
+        "Lectures/repository/var/traces/lecture_02.json#step=143:rendering=1",
+        "Lectures/repository/var/traces/lecture_02.json#step=145:rendering=1",
+        "Lectures/repository/var/traces/lecture_02.json#step=146:rendering=1",
+        "Lectures/repository/var/traces/lecture_02.json#step=147:rendering=1",
+        "Lectures/repository/var/traces/lecture_02.json#step=150:rendering=1",
+        "Lectures/repository/var/traces/lecture_02.json#step=155:rendering=1",
+        "Lectures/repository/var/traces/lecture_02.json#step=160:rendering=1",
+        "Lectures/repository/var/traces/lecture_02.json#step=165:rendering=1",
+        "Lectures/repository/var/traces/lecture_02.json#step=172:rendering=1",
+        "Lectures/repository/var/traces/lecture_02.json#step=173:rendering=1",
+        "Lectures/repository/var/traces/lecture_02.json#step=175:rendering=1"
+      ]
+    },
+    {
+      "id": "lecture-02-flop-units",
+      "source_object": "lecture-02",
+      "order": 14,
+      "source_location": "Lectures/repository/var/traces/lecture_02.json#steps=184-189:lines=279-288:semantic=flop-units",
+      "kind": "mechanism",
+      "title": "Floating-point operation counts versus operations per second",
+      "semantic_id": "flop-units",
+      "event_start": 184,
+      "event_end": 189,
+      "source_line_start": 279,
+      "source_line_end": 288,
+      "evidence_locations": [
+        "Lectures/repository/var/traces/lecture_02.json#step=184:rendering=1",
+        "Lectures/repository/var/traces/lecture_02.json#step=185:rendering=1",
+        "Lectures/repository/var/traces/lecture_02.json#step=186:rendering=1",
+        "Lectures/repository/var/traces/lecture_02.json#step=187:rendering=1",
+        "Lectures/repository/var/traces/lecture_02.json#step=188:rendering=1",
+        "Lectures/repository/var/traces/lecture_02.json#step=189:rendering=1"
+      ]
+    },
+    {
       "id": "lecture-02-section-189-intuitions",
       "source_object": "lecture-02",
-      "order": 11,
+      "order": 15,
       "source_location": "Lectures/repository/var/traces/lecture_02.json#steps=189-195:semantic=section-189-intuitions",
       "kind": "section",
       "title": "Intuitions",
@@ -1147,7 +1238,7 @@
     {
       "id": "lecture-02-section-196-linear-model",
       "source_object": "lecture-02",
-      "order": 12,
+      "order": 16,
       "source_location": "Lectures/repository/var/traces/lecture_02.json#steps=196-250:semantic=section-196-linear-model",
       "kind": "section",
       "title": "Linear model",
@@ -1161,7 +1252,7 @@
     {
       "id": "lecture-02-section-251-model-flops-utilization-mfu",
       "source_object": "lecture-02",
-      "order": 13,
+      "order": 17,
       "source_location": "Lectures/repository/var/traces/lecture_02.json#steps=251-439:semantic=section-251-model-flops-utilization-mfu",
       "kind": "section",
       "title": "Model FLOPs utilization (MFU)",
@@ -1175,7 +1266,7 @@
     {
       "id": "lecture-02-arithmetic-intensity-derivation",
       "source_object": "lecture-02",
-      "order": 14,
+      "order": 18,
       "source_location": "Lectures/repository/var/traces/lecture_02.json#steps=260-353:lines=338-470:semantic=arithmetic-intensity-derivation",
       "kind": "derivation",
       "title": "Arithmetic-intensity derivation from ReLU to matrix multiplication",
@@ -1222,7 +1313,7 @@
     {
       "id": "lecture-02-figure-step-358-rendering-1",
       "source_object": "lecture-02",
-      "order": 15,
+      "order": 19,
       "source_location": "Lectures/repository/var/traces/lecture_02.json#step=358:rendering=1",
       "kind": "figure",
       "title": "image 42d32b9c87939fe9a4b0a268d6d02ea7 https jax ml github io scaling book assets img roofline improved 1400 webp",
@@ -1236,7 +1327,7 @@
     {
       "id": "lecture-02-figure-step-369-rendering-1",
       "source_object": "lecture-02",
-      "order": 16,
+      "order": 20,
       "source_location": "Lectures/repository/var/traces/lecture_02.json#step=369:rendering=1",
       "kind": "figure",
       "title": "deep network",
@@ -1250,7 +1341,7 @@
     {
       "id": "lecture-02-figure-step-427-rendering-1",
       "source_object": "lecture-02",
-      "order": 17,
+      "order": 21,
       "source_location": "Lectures/repository/var/traces/lecture_02.json#step=427:rendering=1",
       "kind": "figure",
       "title": "deep network",
@@ -1264,7 +1355,7 @@
     {
       "id": "lecture-02-section-440-zoom-in-on-one-layer",
       "source_object": "lecture-02",
-      "order": 18,
+      "order": 22,
       "source_location": "Lectures/repository/var/traces/lecture_02.json#steps=440-453:semantic=section-440-zoom-in-on-one-layer",
       "kind": "section",
       "title": "Zoom in on one layer",
@@ -1278,7 +1369,7 @@
     {
       "id": "lecture-02-section-454-consider-all-layers",
       "source_object": "lecture-02",
-      "order": 19,
+      "order": 23,
       "source_location": "Lectures/repository/var/traces/lecture_02.json#steps=454-514:semantic=section-454-consider-all-layers",
       "kind": "section",
       "title": "Consider all layers",
@@ -1292,7 +1383,7 @@
     {
       "id": "lecture-02-section-515-memory",
       "source_object": "lecture-02",
-      "order": 20,
+      "order": 24,
       "source_location": "Lectures/repository/var/traces/lecture_02.json#steps=515-525:semantic=section-515-memory",
       "kind": "section",
       "title": "Memory",
@@ -1306,7 +1397,7 @@
     {
       "id": "lecture-02-section-526-compute-for-one-training-step",
       "source_object": "lecture-02",
-      "order": 21,
+      "order": 25,
       "source_location": "Lectures/repository/var/traces/lecture_02.json#steps=526-528:semantic=section-526-compute-for-one-training-step",
       "kind": "section",
       "title": "Compute (for one training step)",
@@ -1320,7 +1411,7 @@
     {
       "id": "lecture-02-section-529-transformers",
       "source_object": "lecture-02",
-      "order": 22,
+      "order": 26,
       "source_location": "Lectures/repository/var/traces/lecture_02.json#steps=529-955:semantic=section-529-transformers",
       "kind": "section",
       "title": "Transformers",
@@ -1334,7 +1425,7 @@
     {
       "id": "lecture-02-gradient-accumulation-example",
       "source_object": "lecture-02",
-      "order": 23,
+      "order": 27,
       "source_location": "Lectures/repository/var/traces/lecture_02.json#steps=909-947:lines=683-790:semantic=gradient-accumulation-example",
       "kind": "worked-example",
       "title": "Gradient accumulation and activation-checkpointing example",
@@ -1370,7 +1461,7 @@
     {
       "id": "lecture-02-figure-step-926-rendering-1",
       "source_object": "lecture-02",
-      "order": 24,
+      "order": 28,
       "source_location": "Lectures/repository/var/traces/lecture_02.json#step=926:rendering=1",
       "kind": "figure",
       "title": "deep network",

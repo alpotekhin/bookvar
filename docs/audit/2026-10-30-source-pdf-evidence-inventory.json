@@ -1,0 +1,2732 @@
+{
+  "date": "2026-10-30",
+  "scope": "Metadata for retained local verification PDFs, not an authorization to redistribute them or a completed clean-checkout hydration contract.",
+  "status": "in-progress",
+  "total": 223,
+  "with_versioned_arxiv_candidate": 124,
+  "referenced_in_asset_registry": 90,
+  "bytes": 907831788,
+  "rows": [
+    {
+      "file": "05 Источники/Originals/activation-functions-2026-10-21/gelu-1606.08415v5.pdf",
+      "bytes": 2767669,
+      "sha256": "ef59863c8e36d4b64c43ced6b399a95412b4f232ff1ce83e84cf10b8a786b6a8",
+      "versioned_arxiv_id": "1606.08415v5",
+      "url_candidate": "https://arxiv.org/pdf/1606.08415v5",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/activation-functions-2026-10-21/gelus-author.pdf",
+      "bytes": 3228160,
+      "sha256": "cebe02ef59174a386761849c09d66814332b9befb7dde28fdbdfdb72942427ec",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-gelu-figure1-0000000000d2",
+          "license": "MIT"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/activation-functions-2026-10-21/glu-2002.05202v1.pdf",
+      "bytes": 109135,
+      "sha256": "7398ae8b163722a6b5410fb975722adbe6b5f6f9c7f1efa584f1c6b79eaa93e2",
+      "versioned_arxiv_id": "2002.05202v1",
+      "url_candidate": "https://arxiv.org/pdf/2002.05202v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/activation-functions-2026-10-21/swish-1710.05941v2.pdf",
+      "bytes": 447185,
+      "sha256": "72192de79c92f577c13996ffc7da1d28670161569b7b51842f075244ce5dcb84",
+      "versioned_arxiv_id": "1710.05941v2",
+      "url_candidate": "https://arxiv.org/pdf/1710.05941v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/active-learning-2026-10-28/papers/coreset-1708.00489v4.pdf",
+      "bytes": 5033708,
+      "sha256": "93562d0894759407c0ed795fbc58e9d270967e789be787e2ef85f777ee008482",
+      "versioned_arxiv_id": "1708.00489v4",
+      "url_candidate": "https://arxiv.org/pdf/1708.00489v4",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/active-learning-2026-10-28/papers/settles-survey-2010.pdf",
+      "bytes": 1939936,
+      "sha256": "4ad9785751a840f794ac4c81996d3cf45a61c7326a5545a6625a1be912b170bf",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/agent-evaluation-2026-10-20/agentbench.pdf",
+      "bytes": 23176585,
+      "sha256": "6d599fcccc36b9bbe3f7700da916fac547d14b9d94a676bc677d1851d52bf7c8",
+      "versioned_arxiv_id": "2308.03688v2",
+      "url_candidate": "https://arxiv.org/pdf/2308.03688v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-agent-evaluation-agentbench-environments-results-6f70198e73b9",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/agent-evaluation-2026-10-20/paperbench.pdf",
+      "bytes": 1703363,
+      "sha256": "2f58f1a6581af9d99432422dccf3cf61f5c263377c1e4550e7333c4a22d7184d",
+      "versioned_arxiv_id": "2504.01848v3",
+      "url_candidate": "https://arxiv.org/pdf/2504.01848v3",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-agent-evaluation-paperbench-rubric-tree-bfe692d98bba",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/agent-evaluation-2026-10-20/swe-bench.pdf",
+      "bytes": 4533722,
+      "sha256": "f7e8e1df64129742b8199a21a042734519a823a1dafd6f48f8f3ddcfb48ee296",
+      "versioned_arxiv_id": "2310.06770v3",
+      "url_candidate": "https://arxiv.org/pdf/2310.06770v3",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-agent-evaluation-swe-bench-construction-f885d76a5787",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-agent-evaluation-swe-bench-evaluation-27bb09843902",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/agent-evaluation-2026-10-20/tau-bench.pdf",
+      "bytes": 663224,
+      "sha256": "0ce66a1763d698c61bb311c3c874bf593d1e9a5bfff11bb35f6f72b981f6da56",
+      "versioned_arxiv_id": "2406.12045v1",
+      "url_candidate": "https://arxiv.org/pdf/2406.12045v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-agent-evaluation-tau-bench-task-components-82d0883f6be8",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/agent-harness-2026-10-20/swe-agent.pdf",
+      "bytes": 4963538,
+      "sha256": "d171e0693060b910ceb2cddd0fd4bc7cae302005d42d0d8059bfdbe056c3adba",
+      "versioned_arxiv_id": "2405.15793v3",
+      "url_candidate": "https://arxiv.org/pdf/2405.15793v3",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-agent-harness-swe-agent-prompt-workflow-207fb97a7778",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/agent-memory-planning-2026-10-20/reflexion.pdf",
+      "bytes": 591097,
+      "sha256": "6059b6f89fea9959bd3dab553fbb97756a3dfb1b15e3cbab2fbf3ab6664333bd",
+      "versioned_arxiv_id": "2303.11366v4",
+      "url_candidate": "https://arxiv.org/pdf/2303.11366v4",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-agent-memory-planning-reflexion-loop-c6c750f59e8d",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/agent-memory-planning-2026-10-20/tree-of-thoughts.pdf",
+      "bytes": 799685,
+      "sha256": "79c5237e3f63953a73f2b0d6894327702ee1f7e981450c251bb1b5cb4f8d7b8f",
+      "versioned_arxiv_id": "2305.10601v2",
+      "url_candidate": "https://arxiv.org/pdf/2305.10601v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-tot-reconciliation-tot-creative-search-61bea3f4f86b",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-tot-reconciliation-tot-creative-results-da6f37a5e39f",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-tot-reconciliation-tot-crossword-dfs-2c692a2260ac",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-agent-memory-planning-tot-game24-search-bbe01dc65258",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/agent-reconciliation-2026-10-30/toolformer-supplement.pdf",
+      "bytes": 328446,
+      "sha256": "a54b40a9e52cfe260fdab898f5f59afc8a571c59ee5f479152af4eced46d0502",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/agent-security-2026-10-21/prompt-injection-usenix24.pdf",
+      "bytes": 2751929,
+      "sha256": "9adb2f4e55bf9bfd171f7ddfc2c5f46c168f1cd28326101552b81fd2ebd2aaec",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/architecture-patterns-2026-10-21/bert-naacl.pdf",
+      "bytes": 786279,
+      "sha256": "987545ffb087f1ece898142c403a516baeabeb70ce19089397fac6f7db12c3d4",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-bert-training-51701ce575d3",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-bert-input-4149c1e46212",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-architecture-6e3eb49a71f6",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/architecture-patterns-2026-10-21/llava.pdf",
+      "bytes": 5906135,
+      "sha256": "dc8bace378a282ea78caa9b5959306202fbfa3b8cedaf8a66541a9af18f4d3bf",
+      "versioned_arxiv_id": "2304.08485v2",
+      "url_candidate": "https://arxiv.org/pdf/2304.08485v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/architecture-patterns-2026-10-21/unilm.pdf",
+      "bytes": 421696,
+      "sha256": "b77a1513c9051c3175df83ec4fa0ab0e33d5e5fc145761656d0b725d99ddff12",
+      "versioned_arxiv_id": "1905.03197v3",
+      "url_candidate": "https://arxiv.org/pdf/1905.03197v3",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/attention-translation-2026-10-21/bahdanau-1409.0473v7.pdf",
+      "bytes": 444482,
+      "sha256": "84801c8410da51b449d379d2fa4939a416123f2c93991077a680f863026022a7",
+      "versioned_arxiv_id": "1409.0473v7",
+      "url_candidate": "https://arxiv.org/pdf/1409.0473v7",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/attention-translation-2026-10-21/luong-1508.04025v5.pdf",
+      "bytes": 249825,
+      "sha256": "a5c2cad84e769520e7c66f3193fdd206505e322a2ca801a411581375d2c4b5e2",
+      "versioned_arxiv_id": "1508.04025v5",
+      "url_candidate": "https://arxiv.org/pdf/1508.04025v5",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/attention-translation-2026-10-21/luong-D15-1166.pdf",
+      "bytes": 266713,
+      "sha256": "e8aca09523b8807edcafb48b8ee9fa60478e9be3a3682f9ffa61fd00de40e79a",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-attention-translation-luong-input-feeding-png-23119692a647",
+          "license": "CC BY-NC-SA 3.0"
+        },
+        {
+          "id": "curated-attention-translation-luong-global-png-324515ce7fbc",
+          "license": "CC BY-NC-SA 3.0"
+        },
+        {
+          "id": "curated-attention-translation-luong-local-png-340def2c29c9",
+          "license": "CC BY-NC-SA 3.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/bert-family-2026-10-22/deberta-iclr-slides.pdf",
+      "bytes": 475345,
+      "sha256": "8d23f8cccbb7b3fb39b16670938fcae73ebc543cd0c9bea0d5311e783babfd48",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/bert-family-2026-10-22/deberta-v6.pdf",
+      "bytes": 953834,
+      "sha256": "3d3d9c91ee5c9bb5795cbbd39479ff8f34e092a5d15ae899436f94a5be0df5ca",
+      "versioned_arxiv_id": "2006.03654v6",
+      "url_candidate": "https://arxiv.org/pdf/2006.03654v6",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/bert-family-2026-10-22/roberta-v1.pdf",
+      "bytes": 209675,
+      "sha256": "76a3872d244793563a5b000b818cbaf0ca8972ab1145d32be474c05b2a8f3070",
+      "versioned_arxiv_id": "1907.11692v1",
+      "url_candidate": "https://arxiv.org/pdf/1907.11692v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/bert-objectives-2026-10-29/spanbert-author.pdf",
+      "bytes": 274319,
+      "sha256": "86bad382bd3ba3bb1cae16636da6867a5846e10f7d881516af0e1ccd67a5925b",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-bert-objectives-1add71c0a3c2",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-bert-objectives-be2494e1a024",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/chameleon-2026-10-20/chameleon.pdf",
+      "bytes": 25245551,
+      "sha256": "a937480c856ba915e93de1419b37c5572cf8e52f6490ce6a05d8aeff389b0d18",
+      "versioned_arxiv_id": "2405.09818v2",
+      "url_candidate": "https://arxiv.org/pdf/2405.09818v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-chameleon-chameleon-architecture-2e62974803d7",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-chameleon-chameleon-mixed-document-9624b12d4930",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-chameleon-chameleon-norm-qk-dropout-1ebbfd43c4c5",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-chameleon-chameleon-training-ablations-f17dedc9727d",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-chameleon-chameleon-human-evaluation-1e7db16242ec",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/chameleon-2026-10-20/make-a-scene.pdf",
+      "bytes": 10037907,
+      "sha256": "9ba61f3e502cf4538d5440e480a7636d19ed6838e8b35f0e1475bd5f423ba8e5",
+      "versioned_arxiv_id": "2203.13131v1",
+      "url_candidate": "https://arxiv.org/pdf/2203.13131v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/chameleon-2026-10-20/vq-vae.pdf",
+      "bytes": 3174661,
+      "sha256": "d62036803c190a82718b718f59a87adb2be8b586e4887a394ad0cef15c56301e",
+      "versioned_arxiv_id": "1711.00937v2",
+      "url_candidate": "https://arxiv.org/pdf/1711.00937v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/coding-web-computer-use-2026-10-21/agenttrek.pdf",
+      "bytes": 4439073,
+      "sha256": "7bdb3828c245ef1ad1cf60ead2140e1bd5f6ff01f8a189f50914cb07f49ef603",
+      "versioned_arxiv_id": "2412.09605v2",
+      "url_candidate": "https://arxiv.org/pdf/2412.09605v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/coding-web-computer-use-2026-10-21/enigma.pdf",
+      "bytes": 3064954,
+      "sha256": "b22d73ab5e6dd721a89caaaa40c8165be437f6e0b5383a57dc189644d80821e1",
+      "versioned_arxiv_id": "2409.16165v1",
+      "url_candidate": "https://arxiv.org/pdf/2409.16165v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/coding-web-computer-use-2026-10-21/taco.pdf",
+      "bytes": 15856294,
+      "sha256": "e732186434506740dfb75727d487bb861024bdf0a2a7d68e7c4ba093508571b4",
+      "versioned_arxiv_id": "2412.05479v1",
+      "url_candidate": "https://arxiv.org/pdf/2412.05479v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-coding-web-computer-use-taco-cota-examples-418c7a4cf75f",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/confident-learning-2026-10-28/paper-jair-2021.pdf",
+      "bytes": 7271592,
+      "sha256": "cd662df7dd659bc5dedd9bbef31b1eeea4c06333ae36310e2647b3e7c894f9e9",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-confident-learning-figure1-df292eec9dac",
+          "license": "JAIR License Version 1.0"
+        },
+        {
+          "id": "curated-confident-learning-figure2-a768fb12330e",
+          "license": "JAIR License Version 1.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/connectors-2026-10-20/blip2.pdf",
+      "bytes": 6663910,
+      "sha256": "d59913d16edf1dc7e661ca3510c6efaa2b001146840d2e464a7fde980d088dd2",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-connectors-blip2-qformer-6cbba67268cf",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-connectors-blip2-attention-masks-10dd65158c54",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-connectors-blip2-llm-connection-a854dcf8f7d9",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/connectors-2026-10-20/flamingo.pdf",
+      "bytes": 31579390,
+      "sha256": "27af622bf50987fd98a03451a27a670adfaeefd5218a3e990b37abc326ba63f0",
+      "versioned_arxiv_id": "2204.14198v2",
+      "url_candidate": "https://arxiv.org/pdf/2204.14198v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/connectors-2026-10-20/llava.pdf",
+      "bytes": 5906135,
+      "sha256": "dc8bace378a282ea78caa9b5959306202fbfa3b8cedaf8a66541a9af18f4d3bf",
+      "versioned_arxiv_id": "2304.08485v2",
+      "url_candidate": "https://arxiv.org/pdf/2304.08485v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/connectors-2026-10-20/llava15.pdf",
+      "bytes": 2215588,
+      "sha256": "b7074a6dad218e0dd109f2a80311548d447e1cf4b9e31c002696985784cc05b9",
+      "versioned_arxiv_id": "2310.03744v2",
+      "url_candidate": "https://arxiv.org/pdf/2310.03744v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/connectors-2026-10-20/onevision.pdf",
+      "bytes": 14944329,
+      "sha256": "ed637be954772e38f7abd78492a8a8551d8219e346efdb6ba38f4f51a11be41a",
+      "versioned_arxiv_id": "2408.03326v1",
+      "url_candidate": "https://arxiv.org/pdf/2408.03326v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/connectors-2026-10-20/qwen3vl.pdf",
+      "bytes": 4385544,
+      "sha256": "bc09ce99cface4dae5deaeb5327b936195d162f4df719ab2e86ee3807a0db865",
+      "versioned_arxiv_id": "2511.21631v1",
+      "url_candidate": "https://arxiv.org/pdf/2511.21631v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/connectors-2026-10-20/vila.pdf",
+      "bytes": 8373114,
+      "sha256": "74b8b5053b5b60478a8374e292bbd44d21c5a51d63571b2569f9202ecc6a1067",
+      "versioned_arxiv_id": "2312.07533v2",
+      "url_candidate": "https://arxiv.org/pdf/2312.07533v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/consistency-training-2026-10-29/huang-2022-lightweight.pdf",
+      "bytes": 939434,
+      "sha256": "7c803d203a04eaefc94bc3ed6d4cc9704a12741cdf6dff084e6f7f5909c36327",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-consistency-uda-fixmatch-29b0d5927bde",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/consistency-training-2026-10-29/smart-acl-2020.pdf",
+      "bytes": 476924,
+      "sha256": "ac5db36b575f8cba4d95e5187d1f65dfd8c8fed2967f2fe9b6777d2dc7a5c25b",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-consistency-smart-e8a71d69e4c9",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/constitutional-ai-2026-10-29/bai-v1.pdf",
+      "bytes": 2088111,
+      "sha256": "9a456a07ad346e3372f9867d346f69f5b0f68b4c65f060aca0b8a13fa9d98e83",
+      "versioned_arxiv_id": "2212.08073v1",
+      "url_candidate": "https://arxiv.org/pdf/2212.08073v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-cai-revisions-a5cd3aae0031",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/cs231n-provenance-2026-10-29/lecture_2.pdf",
+      "bytes": 2091514,
+      "sha256": "191488d0a96f85574e8e2ebb8246865d3aac6d84da88fe0962aa1651f814565e",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-cs231n-softmax-ce-0000000000a6",
+          "license": "open-course-material; reuse confirmed by repository owner"
+        },
+        {
+          "id": "curated-cs231n-boundaries-0000000000a7",
+          "license": "open-course-material; reuse confirmed by repository owner"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/data-selection-2026-10-28/data-diet-2107.07075v2.pdf",
+      "bytes": 2241745,
+      "sha256": "842b7d259d98e6c900d87f730d08b689f347df70d764bf72e4a503daca213058",
+      "versioned_arxiv_id": "2107.07075v2",
+      "url_candidate": "https://arxiv.org/pdf/2107.07075v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/data-selection-2026-10-28/data-diet-reproduction-2303.14753v1.pdf",
+      "bytes": 2218698,
+      "sha256": "4327a29b97b6ed02162e186603ae03a099860fed136f5003413b0d65d78de2f4",
+      "versioned_arxiv_id": "2303.14753v1",
+      "url_candidate": "https://arxiv.org/pdf/2303.14753v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/ddp-2026-10-23/edls-week03.pdf",
+      "bytes": 1033784,
+      "sha256": "d81b47f8eb116db698a9d9262c7c86ed9dbf4f8bf602fe958a6eaec104c6ef01",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-ddp-edls-error-feedback-bf4bb0c300d6",
+          "license": "MIT"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/decoder-block-2026-10-22/kaplan-v1.pdf",
+      "bytes": 2493004,
+      "sha256": "a41bd7877fd1a6bcbba096b2619618bd2f90e02488f2365644903eb2f7c6a494",
+      "versioned_arxiv_id": "2001.08361v1",
+      "url_candidate": "https://arxiv.org/pdf/2001.08361v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/decoder-block-2026-10-22/scale-efficiently-v2.pdf",
+      "bytes": 5784642,
+      "sha256": "5ebba12ee7e7b804456cc539b1dda04acb0381dcb84721d97e7eb966322b2f59",
+      "versioned_arxiv_id": "2109.10686v2",
+      "url_candidate": "https://arxiv.org/pdf/2109.10686v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/decoder-block-2026-10-22/weight-decay-v2.pdf",
+      "bytes": 3968544,
+      "sha256": "bb5eea043681e425dfec449ef469371ada5350837dbeed046ddeb7a5a31f7389",
+      "versioned_arxiv_id": "2310.04415v2",
+      "url_candidate": "https://arxiv.org/pdf/2310.04415v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/diffusion-flow-2026-10-20/cfg.pdf",
+      "bytes": 3773509,
+      "sha256": "ccbdf2da65903ed579d35240165aba2d0e9ad6f015ade81af6e30823eb0a7f24",
+      "versioned_arxiv_id": "2207.12598v1",
+      "url_candidate": "https://arxiv.org/pdf/2207.12598v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/diffusion-flow-2026-10-20/ddim.pdf",
+      "bytes": 10857218,
+      "sha256": "07cb8796d7c100bf7c02bc575f16aab72c32630a8f85abd54ad45dc4f63e80fb",
+      "versioned_arxiv_id": "2010.02502v4",
+      "url_candidate": "https://arxiv.org/pdf/2010.02502v4",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/diffusion-flow-2026-10-20/ddpm.pdf",
+      "bytes": 10267274,
+      "sha256": "aee5e07a802e8dfd2a386374c94fd61d1d056cb7e1e0fec4f28e8120ff5d8505",
+      "versioned_arxiv_id": "2006.11239v2",
+      "url_candidate": "https://arxiv.org/pdf/2006.11239v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/diffusion-flow-2026-10-20/dit.pdf",
+      "bytes": 43824062,
+      "sha256": "5fbb0ec35e3ae76826240171ca63ed4c27de6cb43180367453019e9d28a8b076",
+      "versioned_arxiv_id": "2212.09748v2",
+      "url_candidate": "https://arxiv.org/pdf/2212.09748v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-diffusion-flow-dit-architecture-f2213dfba523",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/diffusion-flow-2026-10-20/fm-guide.pdf",
+      "bytes": 18573090,
+      "sha256": "520d9cd0f62856033b5f61c6920b3447c4f33ba349eae718113abb3c5b6d096d",
+      "versioned_arxiv_id": "2412.06264v1",
+      "url_candidate": "https://arxiv.org/pdf/2412.06264v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/diffusion-flow-2026-10-20/fm-original.pdf",
+      "bytes": 25147129,
+      "sha256": "5eeb39ba516396924aba4787452f9d0abdee88467a4d0c264d9f66cad0c5ee14",
+      "versioned_arxiv_id": "2210.02747v2",
+      "url_candidate": "https://arxiv.org/pdf/2210.02747v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/diffusion-flow-2026-10-20/ldm.pdf",
+      "bytes": 40842586,
+      "sha256": "46ede043a8dc07ca1f0f445620523fe1ad8b2436bd83856a3835612a47e9f79e",
+      "versioned_arxiv_id": "2112.10752v2",
+      "url_candidate": "https://arxiv.org/pdf/2112.10752v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/diffusion-flow-2026-10-20/mit-notes-v3.pdf",
+      "bytes": 12996255,
+      "sha256": "22bc442a20981bd7a8d68f66176a70463df1f744d9d3d5c72992abc39eb9349a",
+      "versioned_arxiv_id": "2506.02070v3",
+      "url_candidate": "https://arxiv.org/pdf/2506.02070v3",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-diffusion-flow-mit-conditional-marginal-85fc23696050",
+          "license": "CC BY-NC-ND 4.0"
+        },
+        {
+          "id": "curated-diffusion-flow-mit-conditional-marginal-trajectories-5693dedb9ae2",
+          "license": "CC BY-NC-ND 4.0"
+        },
+        {
+          "id": "curated-diffusion-flow-mit-flow-training-result-1ca1ed5f5f9d",
+          "license": "CC BY-NC-ND 4.0"
+        },
+        {
+          "id": "curated-diffusion-flow-mit-cfg-mnist-355c66c34a32",
+          "license": "CC BY-NC-ND 4.0"
+        },
+        {
+          "id": "curated-diffusion-flow-mit-unet-75da24f7fa32",
+          "license": "CC BY-NC-ND 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/diffusion-flow-2026-10-20/mit-notes.pdf",
+      "bytes": 12990436,
+      "sha256": "d61ddac4329c49043c633c47fadd5293204bce4c9ab28e994a04c79e7251e622",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/diffusion-flow-2026-10-20/sd3-pmlr.pdf",
+      "bytes": 9828401,
+      "sha256": "e3db32f3c0630f6d137f0867802b7ae13b1508e329ae89f11e401010a6021ffe",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-diffusion-flow-sd3-mmdit-2c2ac6fe8c5d",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/diffusion-flow-2026-10-20/sd3.pdf",
+      "bytes": 33973124,
+      "sha256": "7ba352b6ded12859cda4d47df203d5fe38ee884c45f3b67ff227549d82db1487",
+      "versioned_arxiv_id": "2403.03206v1",
+      "url_candidate": "https://arxiv.org/pdf/2403.03206v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/diffusion-flow-2026-10-20/stanford-ee367-diffusion.pdf",
+      "bytes": 19312854,
+      "sha256": "d626f228bdf00466c25b318fcd298d41bca01db2afecd86c16f6a06fee8540d8",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/documents-2026-10-20/donut.pdf",
+      "bytes": 7105978,
+      "sha256": "ad9c20523c37f53fc6d31ccb4c63dcc7b916c7340d6bb16033c9924ce70c7668",
+      "versioned_arxiv_id": "2111.15664v5",
+      "url_candidate": "https://arxiv.org/pdf/2111.15664v5",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/documents-2026-10-20/layoutlm.pdf",
+      "bytes": 1245765,
+      "sha256": "bd5395610755a49e6419c406e651906e688e7a0cfe155b3c43566469dfd641fe",
+      "versioned_arxiv_id": "2204.08387v3",
+      "url_candidate": "https://arxiv.org/pdf/2204.08387v3",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-documents-layoutlmv3-objectives-10089eeea409",
+          "license": "CC BY-NC-SA 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/documents-2026-10-20/pix2struct.pdf",
+      "bytes": 5151860,
+      "sha256": "b899b3beba7723f60cf55f9715e9e02cf409b7ecd3a648156c238bf09f0b58a4",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-documents-pix2struct-variable-resolution-e8802a312313",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-documents-pix2struct-screenshot-parsing-004e9526c790",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/documents-2026-10-20/stvqa.pdf",
+      "bytes": 2014838,
+      "sha256": "ff25911d71ae93500576d2788af2e30234954ffccea05a30767ac27d8e50ea95",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/edge-2026-10-20/fedavg.pdf",
+      "bytes": 763853,
+      "sha256": "a7a8e2e3e437855c1efb53fe8f35f645eae7735fe9b6ac1f656a62004dbf5146",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-edge-fedavg-initialization-figure1-45cdb0eb7d46",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/edge-2026-10-20/privacybook.pdf",
+      "bytes": 2130940,
+      "sha256": "599bb0add9a0ec7bf85a6561dbc7619f45403892a19084eb1fe622352ef91ef7",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/edge-2026-10-20/tinytl.pdf",
+      "bytes": 4780863,
+      "sha256": "90104d87f15f56a199e47503283954e9c6b7b56d3aa11d1689e764e0ed3477a0",
+      "versioned_arxiv_id": "2007.11622v5",
+      "url_candidate": "https://arxiv.org/pdf/2007.11622v5",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-edge-tinytl-memory-figure1-41adadc7703e",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-edge-tinytl-activation-figure2-f24eb4c4c48a",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/Effdl26-07.pdf",
+      "bytes": 202135,
+      "sha256": "2c038c7ce21a9bc5d224b439f0526c9fe35fa68b11ee5c724535f3f0fed463b0",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/embeddings-2026-10-20/dpr.pdf",
+      "bytes": 383508,
+      "sha256": "3e67fc1a9977715acf722d85f0b7d124b03715e975f6310a4d6c12094190912f",
+      "versioned_arxiv_id": "2004.04906v3",
+      "url_candidate": "https://arxiv.org/pdf/2004.04906v3",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/embeddings-2026-10-20/openqa-part5.pdf",
+      "bytes": 5923321,
+      "sha256": "33a177754a9a14cd942509dd8289ef14c0f3b300cd0b6fd609b1fad2fd213abe",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-dpr-dual-000000000062",
+          "license": "open educational material; reuse confirmed by repository owner"
+        },
+        {
+          "id": "curated-dpr-positive-000000000063",
+          "license": "open educational material; reuse confirmed by repository owner"
+        },
+        {
+          "id": "curated-dpr-inbatch-000000000064",
+          "license": "open educational material; reuse confirmed by repository owner"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/embeddings-2026-10-20/sbert.pdf",
+      "bytes": 548961,
+      "sha256": "92366d22fc0521350d6cbe0ad72bcee754f90e88181d7b4a8e2adb1e7e594fec",
+      "versioned_arxiv_id": "1908.10084v1",
+      "url_candidate": "https://arxiv.org/pdf/1908.10084v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/evaluation-2026-10-20/arc-agi3.pdf",
+      "bytes": 1184316,
+      "sha256": "33a19ce7973afb5c15a91566a340e3745f8c9fd6f041f601c0f544cbe982799f",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/evaluation-2026-10-20/arena.pdf",
+      "bytes": 1081950,
+      "sha256": "039bccd60a7d49bfda80ce17ea627654736928eee9a7ee75767a38d04a01562f",
+      "versioned_arxiv_id": "2403.04132v1",
+      "url_candidate": "https://arxiv.org/pdf/2403.04132v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/evaluation-2026-10-20/gpqa.pdf",
+      "bytes": 617128,
+      "sha256": "58a85a21b653a01d5794f84952936f58e6a5218d781588f44ae183bb749bf023",
+      "versioned_arxiv_id": "2311.12022v1",
+      "url_candidate": "https://arxiv.org/pdf/2311.12022v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/evaluation-2026-10-20/hle.pdf",
+      "bytes": 1980574,
+      "sha256": "7a91dd3ee597fd64f44053675bc87dfa308b8da538e5e8e48ea115db9db22d8f",
+      "versioned_arxiv_id": "2501.14249v1",
+      "url_candidate": "https://arxiv.org/pdf/2501.14249v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/evaluation-2026-10-20/humaneval.pdf",
+      "bytes": 1885177,
+      "sha256": "ebae72ea0e8a5eb2ecbccdb985aec6cc1254a7c4d29e6d4de7866db1e66c4855",
+      "versioned_arxiv_id": "2107.03374v2",
+      "url_candidate": "https://arxiv.org/pdf/2107.03374v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/evaluation-2026-10-20/ifeval.pdf",
+      "bytes": 464152,
+      "sha256": "5d7cedfd762af6d9ad13d8768de64fa65895b8ebc3f5e454454c5ffbd48124f2",
+      "versioned_arxiv_id": "2311.07911v1",
+      "url_candidate": "https://arxiv.org/pdf/2311.07911v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-evaluation-ifeval-instructions-table1-8425c374ed26",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/evaluation-2026-10-20/judge.pdf",
+      "bytes": 1521050,
+      "sha256": "7f798ed891c080bab68553b3da6dfc4b4e13bae931e2140976b463b32fc6992b",
+      "versioned_arxiv_id": "2306.05685v1",
+      "url_candidate": "https://arxiv.org/pdf/2306.05685v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/evaluation-2026-10-20/medhelm.pdf",
+      "bytes": 2779524,
+      "sha256": "6e49ad9b3f43f416be0466375b8e4b4c8dac9a641ee8afcc14d625ed814f5610",
+      "versioned_arxiv_id": "2505.23802v1",
+      "url_candidate": "https://arxiv.org/pdf/2505.23802v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/evaluation-2026-10-20/oren.pdf",
+      "bytes": 6710868,
+      "sha256": "e2cdde8d5aeadeae140997ecfe7cace02750a465bf860e1f6c0f5efe66cca57c",
+      "versioned_arxiv_id": "2310.17623v2",
+      "url_candidate": "https://arxiv.org/pdf/2310.17623v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-evaluation-oren-full-figure1-fb95d1b9ddd7",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/formal-math-2026-10-21/leaneuclid-pmlr.pdf",
+      "bytes": 2034256,
+      "sha256": "70eaf379c001577389bf6c58862f97e64877ea881ccef4ead492fdeafaf6156b",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-formal-math-leaneuclid-construction-rules-65920c024871",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-formal-math-leaneuclid-autoformalization-c417f783ae75",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/frameworks-2026-10-27/baydin-jmlr-17-468.pdf",
+      "bytes": 605819,
+      "sha256": "93eb2f7025ea098c18a65b428ac991dfacec2de56618c4e25c6a22b9cf443c59",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-autodiff-baydin-figure4-ac0e98f651cb",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-autodiff-baydin-table2-a0a58069cbab",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-autodiff-baydin-table3-f482aa473381",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/full-transformer-2026-10-21/bert-v2.pdf",
+      "bytes": 775166,
+      "sha256": "5692a5514787a8c6727b4ff3b726a3385798bc68e12138d1d4af83947e2acf6e",
+      "versioned_arxiv_id": "1810.04805v2",
+      "url_candidate": "https://arxiv.org/pdf/1810.04805v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/full-transformer-2026-10-21/gpt1.pdf",
+      "bytes": 541036,
+      "sha256": "eb81a65e0856bd38e855e1f1de6ee12e7c3eb92ae05c8270d345a475beb631d0",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-gpt1-figure1-0000000000c9",
+          "license": "unverified; inherited paper figure, source verified separately"
+        },
+        {
+          "id": "curated-gpt1-source-panel-block-a6d995e45713",
+          "license": "unverified; inherited paper figure, source verified separately"
+        },
+        {
+          "id": "curated-gpt1-source-panel-transfer-7101483f5146",
+          "license": "unverified; inherited paper figure, source verified separately"
+        },
+        {
+          "id": "curated-gpt1-source-panel-zero-shot-8e17d3e06bcd",
+          "license": "unverified; inherited paper figure, source verified separately"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/full-transformer-2026-10-21/gpt2.pdf",
+      "bytes": 582775,
+      "sha256": "d9d852e2894556e73f53cb22b7c605a9643d6f0b19bf604b429ed6192fa24f4e",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/full-transformer-2026-10-21/llama1-v1.pdf",
+      "bytes": 726566,
+      "sha256": "2e663675ae36ad12adb2f5a05281bac2747ecf8d23d92bedd9f937a89fee7136",
+      "versioned_arxiv_id": "2302.13971v1",
+      "url_candidate": "https://arxiv.org/pdf/2302.13971v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-llama-downstream-9bef2893d15c",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-llama-bc8c87fb2b8e",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/galore-2026-10-28/adafactor-1804.04235v1.pdf",
+      "bytes": 380566,
+      "sha256": "893ccde9ab41deba45282caa1007847d2bd586811e1f0aaa421fc8b3d3f13085",
+      "versioned_arxiv_id": "1804.04235v1",
+      "url_candidate": "https://arxiv.org/pdf/1804.04235v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/geometric-coresets-2026-10-28/erickson-approx.pdf",
+      "bytes": 532978,
+      "sha256": "ea9e8c5c0d4a5ea885d84e713760be45ba6c65fbee5de830404cd8da11c873a1",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-geometric-coresets-erickson-3b573c802a0f",
+          "license": "CC BY-NC-SA 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/geometric-coresets-2026-10-28/har-peled-coreset-cluster.pdf",
+      "bytes": 298252,
+      "sha256": "4be897ca9b72892bd8945f1b5cbe2bbc5ef3c8dbc78452c8a4d9d904de345e2e",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/geometric-coresets-2026-10-28/welling-herding-2009.pdf",
+      "bytes": 371857,
+      "sha256": "b3d4dd3f0c5052c2b0093725d10ecd3a0d56c3abbf575f15b0238ccadf99c468",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/gpt1-2026-10-22/cs224n-spr2024-lecture09-pretraining.pdf",
+      "bytes": 5958667,
+      "sha256": "89cd6f484f80d3b71ca104116e8606926b8ffd1d384c78e0903b103b01a0a605",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/gpt2-2026-10-22/trinh-le-2018.pdf",
+      "bytes": 1762180,
+      "sha256": "937880183f9244f9729b80b493727cabc25395687fd7237f6239f782cf962aee",
+      "versioned_arxiv_id": "1806.02847v2",
+      "url_candidate": "https://arxiv.org/pdf/1806.02847v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/gpt3-2026-10-22/gpt3-v4.pdf",
+      "bytes": 6768044,
+      "sha256": "97fd272f1fdfc18677462d0292f5fbf26ca86b4d1b485c2dba03269b643a0e83",
+      "versioned_arxiv_id": "2005.14165v4",
+      "url_candidate": "https://arxiv.org/pdf/2005.14165v4",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-gpt-3-paper-416b4bb6d87b",
+          "license": "unverified; inherited paper figure, source verified separately"
+        },
+        {
+          "id": "curated-gpt-3-paper-table-12ca47fd68d1",
+          "license": "unverified; inherited paper figure, source verified separately"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/gradient-clipping-2026-10-29/brock21a.pdf",
+      "bytes": 336056,
+      "sha256": "4fed88ab128f2c3e4fc9fa2c50d0aba2520ef16015e211e1b6f444c328dba3a2",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-adaptive-clipping-083f5af77762",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/initialization-normalization-2026-10-21/he-init-v1.pdf",
+      "bytes": 2290070,
+      "sha256": "738cb88db1250d9bdbf51569c5ec3a87303c7e946167d58381003d2f93d4127d",
+      "versioned_arxiv_id": "1502.01852v1",
+      "url_candidate": "https://arxiv.org/pdf/1502.01852v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/initialization-normalization-2026-10-21/layernorm.pdf",
+      "bytes": 612446,
+      "sha256": "c464f839fb8d59f7fde92f9b4caa67c2d1f2f196b88f93fb60502249df0aaef7",
+      "versioned_arxiv_id": "1607.06450v1",
+      "url_candidate": "https://arxiv.org/pdf/1607.06450v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/initialization-normalization-2026-10-21/rmsnorm.pdf",
+      "bytes": 555031,
+      "sha256": "a38ab771022fc10525d2b6b23de40307b2ca7b2bf463f5219da6a0ba1c41225f",
+      "versioned_arxiv_id": "1910.07467v1",
+      "url_candidate": "https://arxiv.org/pdf/1910.07467v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/llama-2026-10-22/gqa-emnlp.pdf",
+      "bytes": 221556,
+      "sha256": "c52de1d3339174fbf93b588aa4cc9bf36092c865f2358ece3999de152f57455c",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-gqa-review-b0da31de9938",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-gqa-review-a3d60a2aa617",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-gqa-review-bebb96e28b3b",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-gqa-review-69b9738c88e8",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/llama-2026-10-22/llama2-v1.pdf",
+      "bytes": 13658713,
+      "sha256": "03c022db7d7ff846e0a1ada4c8be936416f7f7f9c680c64d9494d7b30ebfdd80",
+      "versioned_arxiv_id": "2307.09288v1",
+      "url_candidate": "https://arxiv.org/pdf/2307.09288v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/llama-2026-10-22/llama3-herd-v1.pdf",
+      "bytes": 9832414,
+      "sha256": "d7df3d6f537f025037f32ebe13198e3ea5500ea3e0967abdcceb80e31262d386",
+      "versioned_arxiv_id": "2407.21783v1",
+      "url_candidate": "https://arxiv.org/pdf/2407.21783v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/long-context-2026-10-23/cla-v1.pdf",
+      "bytes": 438798,
+      "sha256": "1ecbd39c150d725a216d9e9409af7999a6a81e43938f4e03924a688b29fa67c4",
+      "versioned_arxiv_id": "2405.12981v1",
+      "url_candidate": "https://arxiv.org/pdf/2405.12981v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-long-context-cla-cache-groups-3cace99519ba",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/long-context-2026-10-23/mistral-v1.pdf",
+      "bytes": 3749788,
+      "sha256": "dfbac4e7035344b305c947481f2e7e8a02f7a24a563917eb6e47f6591d14c5ae",
+      "versioned_arxiv_id": "2310.06825v1",
+      "url_candidate": "https://arxiv.org/pdf/2310.06825v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-long-context-mistral-chunk-mask-c8a46ec808ad",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/long-context-2026-10-23/ruler-v3.pdf",
+      "bytes": 682955,
+      "sha256": "8a4bc6ca28d84570eec7f42652400c2121f4c8bc361701634e596772e396fc22",
+      "versioned_arxiv_id": "2404.06654v3",
+      "url_candidate": "https://arxiv.org/pdf/2404.06654v3",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-long-context-ruler-aggregation-ce5eae1b909a",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/lstm-gru-2026-10-21/cho-2014.pdf",
+      "bytes": 620380,
+      "sha256": "c948d89ccd33da2a48421b45445f1c30f5fe677a829af9e5e1b6f9ff75a14a81",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/mae-2026-10-28/mae-cvpr2022.pdf",
+      "bytes": 1737112,
+      "sha256": "81bbc64bc197a64362927010470e46601a0f0311aa4c2014a355dfff0e5b3b6c",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/masked-diffusion-2026-10-29/block-diffusion-v3.pdf",
+      "bytes": 862037,
+      "sha256": "d57ae21f556a9c1d5d5a95b2067d3232933be2d421b484bea7cc2b39b980ce92",
+      "versioned_arxiv_id": "2503.09573v3",
+      "url_candidate": "https://arxiv.org/pdf/2503.09573v3",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/masked-diffusion-2026-10-29/mdlm-v2.pdf",
+      "bytes": 1034628,
+      "sha256": "d3f6e01211777db2145d55fb51826eff0f9c1bfe315b142540973f35b626be35",
+      "versioned_arxiv_id": "2406.07524v2",
+      "url_candidate": "https://arxiv.org/pdf/2406.07524v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/masked-diffusion-2026-10-29/remdm-v4.pdf",
+      "bytes": 2473995,
+      "sha256": "223ef9b62734af98a7261e6632ed1057d125f1a0864ac2cc9eadac98ae823a4e",
+      "versioned_arxiv_id": "2503.00307v4",
+      "url_candidate": "https://arxiv.org/pdf/2503.00307v4",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/mig-2026-10-26/figures/bkgd1_mps_vs_mig.pdf",
+      "bytes": 21584,
+      "sha256": "9381b01db2161d34439ea79b4d53bdb3f388ca224ce36f10749823115060a54a",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-mig-miso-sharing-cb9c6ff13f78",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/mig-2026-10-26/figures/motiv2_MPSvsMIG.pdf",
+      "bytes": 14196,
+      "sha256": "3909436d4c8c967feb6841c3a6ab180500ca7386704b2a7152d437e2253eb65f",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-mig-miso-job-mix-8f1314e7f379",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/mig-2026-10-26/miso-2207.11428v3.pdf",
+      "bytes": 1355305,
+      "sha256": "cfae4fd8988d73c67dce53e20737675a2b677afebf61a4f60ce0524778fee175",
+      "versioned_arxiv_id": "2207.11428v3",
+      "url_candidate": "https://arxiv.org/pdf/2207.11428v3",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/mla-2026-10-22/deepseek-v2-v5.pdf",
+      "bytes": 1586880,
+      "sha256": "f149f9c09aa8b46ce6a740a255a99b7cc2317ac5b065989339919b7e6c329c9b",
+      "versioned_arxiv_id": "2405.04434v5",
+      "url_candidate": "https://arxiv.org/pdf/2405.04434v5",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/mlops-2026-10-20/sculley-2015.pdf",
+      "bytes": 165614,
+      "sha256": "1a67da09a8bd5ba9a3577176e30aa2fbd88534e6baf0bc31522b4999f643d2a1",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/moco-2026-10-28/moco-1911.05722v3.pdf",
+      "bytes": 593470,
+      "sha256": "ad31ea26ed2d9ba3e2f767a2dcb0961a5b70ff505b1c3fb18d07201140e4e1fe",
+      "versioned_arxiv_id": "1911.05722v3",
+      "url_candidate": "https://arxiv.org/pdf/1911.05722v3",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-moco-dictionary-39c88cfbe882",
+          "license": "CC BY-NC 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/moco-2026-10-28/mocov2-2003.04297.pdf",
+      "bytes": 262792,
+      "sha256": "12279a05ec386febacea77313d12fdb63eb8fde8250cd6d6fb39d88ae6ae80d9",
+      "versioned_arxiv_id": "2003.04297v1",
+      "url_candidate": "https://arxiv.org/pdf/2003.04297v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/moe-2026-10-23/olmoe-granularity.pdf",
+      "bytes": 230762,
+      "sha256": "f28b7b9a3d0f63ebbdec93de6c23d8cd3904e68576be3f9080fd62947266a6a7",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-moe-olmoe-granularity-524720dacf0c",
+          "license": "Apache-2.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/moe-2026-10-23/olmoe-lbl.pdf",
+      "bytes": 259751,
+      "sha256": "c1b7675721cb579800f1581af5a938a008221e706984ad7bcf4a01e43d41ed11",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-moe-olmoe-lbl-f2c2971536ca",
+          "license": "Apache-2.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/moe-2026-10-23/olmoe-lbltoks.pdf",
+      "bytes": 644607,
+      "sha256": "0a2acfeb61e049cda3b70cb3796a464235df6629308a368a0c803dbd355ae044",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-moe-olmoe-lbltoks-91ab3320ba50",
+          "license": "Apache-2.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/moe-2026-10-23/olmoe-shared.pdf",
+      "bytes": 190775,
+      "sha256": "0842577d406a5a9551d976aabb6241840cfdd881c612e5eaf3b0d281cc9bd698",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-moe-olmoe-shared-1151868abb07",
+          "license": "Apache-2.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/moe-2026-10-23/olmoe-zloss.pdf",
+      "bytes": 160037,
+      "sha256": "d067fc92fa3bebf8fa55d50e1a4b987548f65e7837406be1e043fa56b754338c",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-moe-olmoe-zloss-8bee50bde79a",
+          "license": "Apache-2.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/moe-2026-10-23/switch-jmlr.pdf",
+      "bytes": 1082151,
+      "sha256": "8831edca732dd939854957b4b1a493fa553e7b43dd431a5d4fee15493bba6e3e",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-moe-switch-scaling-c617f3379f81",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-moe-switch-capacity-7476e726fad2",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-moe-switch-parallelism-5f5f719b7874",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/ngram-2026-10-21/brants-stupid-backoff.pdf",
+      "bytes": 296720,
+      "sha256": "25ca49066ae490a82844a906946651d3043a991245b7062b8ee40cf7d3c9082c",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/ngram-2026-10-21/cs224n-lm-rnn.pdf",
+      "bytes": 1491300,
+      "sha256": "0cefa88acccdfb592c2aca4d6a7f0ce2d56d886bf9556745b9ce37330606f78e",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/ngram-2026-10-21/heafield-modified-kn.pdf",
+      "bytes": 231383,
+      "sha256": "9e43e417c929dd8c6a0923ee69b4a6379fe06dbcdb0a32b7c97bee447a9d9a9d",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/ngram-2026-10-21/slp3-kneser-ney.pdf",
+      "bytes": 115508,
+      "sha256": "3a6f3c26b02baab97b6f6ae4bbdeba09fd0dac01153e9fa763858ab79efd7227",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/ngram-2026-10-21/slp3-ngram.pdf",
+      "bytes": 221933,
+      "sha256": "4c49ef5fd5ee99cd4e01d8c755662756daf701bbe3db4da5abf693a64485e60f",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/norm-gating-2026-10-22/xiong20b.pdf",
+      "bytes": 389563,
+      "sha256": "93dbef3adbd54e01a03a81b9876f22a8c823562e0e578b2176d488c16db8ad45",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-norm-gating-pre-post-fb882ba9d546",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-norm-gating-gradients-0b409086dc5b",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/omni-2026-10-20/encodec.pdf",
+      "bytes": 1217926,
+      "sha256": "f307ade111fdaad081ac8092f4ab7543b9c925192159de5a1816dcf26a5129f7",
+      "versioned_arxiv_id": "2210.13438v1",
+      "url_candidate": "https://arxiv.org/pdf/2210.13438v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/omni-2026-10-20/gens-acl.pdf",
+      "bytes": 3408122,
+      "sha256": "a1a071b4a6501b459b01dc2594107fa2c8f813813b991384f5d40b68157aeb8a",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-omni-202610-gens-frame-selection-85ff65455c31",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/omni-2026-10-20/gens.pdf",
+      "bytes": 2253014,
+      "sha256": "c25c5ab462b0516e7950571e726d13442eb624956e181a81723551b5181485ff",
+      "versioned_arxiv_id": "2503.09146v1",
+      "url_candidate": "https://arxiv.org/pdf/2503.09146v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/omni-2026-10-20/imagebind.pdf",
+      "bytes": 5478404,
+      "sha256": "ace5b9ffd3adb5069325cebb4ae0fd69fbba856fb41e7a08f1f71d5308d24c0f",
+      "versioned_arxiv_id": "2305.05665v1",
+      "url_candidate": "https://arxiv.org/pdf/2305.05665v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/omni-2026-10-20/moshi.pdf",
+      "bytes": 4770870,
+      "sha256": "ea702589e103f8d02b4fbec733c556b08d136c2ccaa013eb48a91a7366c7e390",
+      "versioned_arxiv_id": "2410.00037v2",
+      "url_candidate": "https://arxiv.org/pdf/2410.00037v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-omni-202610-mimi-split-rvq-222bd4c27dcc",
+          "license": "CC BY-NC-SA 4.0"
+        },
+        {
+          "id": "curated-omni-202610-moshi-rq-transformer-4a6c2371fe17",
+          "license": "CC BY-NC-SA 4.0"
+        },
+        {
+          "id": "curated-omni-202610-moshi-duplex-streams-1c677e22934d",
+          "license": "CC BY-NC-SA 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/omni-2026-10-20/qwen25omni.pdf",
+      "bytes": 3261756,
+      "sha256": "95906505512440a3a32c37b10a6aeeef092c44d60fcfaebfb309950685b7cbf1",
+      "versioned_arxiv_id": "2503.20215v1",
+      "url_candidate": "https://arxiv.org/pdf/2503.20215v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-omni-202610-qwen25omni-block-attention-5e8f0f0410e4",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/omni-2026-10-20/qwen3omni.pdf",
+      "bytes": 4036466,
+      "sha256": "4608d7f5d0694dd09a66144dac921797e161331d92b5eef133615bec392ec928",
+      "versioned_arxiv_id": "2509.17765v1",
+      "url_candidate": "https://arxiv.org/pdf/2509.17765v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-omni-202610-qwen3omni-architecture-988f50b0b613",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/omni-2026-10-20/whisper.pdf",
+      "bytes": 1008644,
+      "sha256": "6337bde031b2f237547a977b022f831169a7e05b4d9047f29501166d83594566",
+      "versioned_arxiv_id": "2212.04356v1",
+      "url_candidate": "https://arxiv.org/pdf/2212.04356v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/omni-2026-10-20/xgen.pdf",
+      "bytes": 10675511,
+      "sha256": "4f7f1626c7255a2b8418f637e840ca04a6846590caddf390412436e856d46fe6",
+      "versioned_arxiv_id": "2410.16267v2",
+      "url_candidate": "https://arxiv.org/pdf/2410.16267v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/optimization-2026-10-21/adam-v9.pdf",
+      "bytes": 584641,
+      "sha256": "eab9c73ae2ceda884b94830bda99312254bac4806f6c9f045cbab90721ecda31",
+      "versioned_arxiv_id": "1412.6980v9",
+      "url_candidate": "https://arxiv.org/pdf/1412.6980v9",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/optimization-2026-10-21/adamw-v3.pdf",
+      "bytes": 6063896,
+      "sha256": "9d5af48931e773d6983d167e15c06ef594475b751c1f263827f5ed3c7a00d0d8",
+      "versioned_arxiv_id": "1711.05101v3",
+      "url_candidate": "https://arxiv.org/pdf/1711.05101v3",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/optimization-2026-10-21/fp8-v1.pdf",
+      "bytes": 281197,
+      "sha256": "e54d874bc87f55d1846a3bfb49956ff10ca61162db630b5670203ce6d8fb332c",
+      "versioned_arxiv_id": "2209.05433v1",
+      "url_candidate": "https://arxiv.org/pdf/2209.05433v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/optimization-2026-10-21/large-batch-v1.pdf",
+      "bytes": 4061840,
+      "sha256": "599208f2c34252d458ca9785b0929b922234da29e04d72ae95e8b606172e9b68",
+      "versioned_arxiv_id": "1812.06162v1",
+      "url_candidate": "https://arxiv.org/pdf/1812.06162v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/optimization-2026-10-21/minicpm-v1.pdf",
+      "bytes": 16483866,
+      "sha256": "46bd6d935ba60d5dec6ab4a1bfe9fbce6a8b81a03be9dd91c4502f4aabe5b880",
+      "versioned_arxiv_id": "2404.06395v1",
+      "url_candidate": "https://arxiv.org/pdf/2404.06395v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-minicpm-two-stage-700ff000c199",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/optimization-2026-10-21/soap-v1.pdf",
+      "bytes": 1281512,
+      "sha256": "876ce97862b4a0cc83eb93f90043367905c594f60675982fe9fe37b186eebdfd",
+      "versioned_arxiv_id": "2409.11321v1",
+      "url_candidate": "https://arxiv.org/pdf/2409.11321v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/peft-2026-10-29/houlsby19a.pdf",
+      "bytes": 724447,
+      "sha256": "fc1e0f0d643dd116049b6d42d562b7c7203121db89cc2110e79714d57dda8021",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-peft-20261029-6ffea276f84b",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/peft-2026-10-29/pmlr-license-agreement.pdf",
+      "bytes": 125997,
+      "sha256": "3a3eac0ebdded57660c12c59028c5429b6d2b328be2c6fde534a104438444c31",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/positional-information-2026-10-21/alibi-paper.pdf",
+      "bytes": 579198,
+      "sha256": "23a1030cbe499cbf619454b93f178c2bc40d3e755776621de8bcd0e5aebdcd31",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/positional-information-2026-10-21/roformer-v5.pdf",
+      "bytes": 599289,
+      "sha256": "e9a481fbe1c8a20b7b1fa566b13102a1896c7829fa9a8b4c80528452a5ddaf79",
+      "versioned_arxiv_id": "2104.09864v5",
+      "url_candidate": "https://arxiv.org/pdf/2104.09864v5",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-rope-decay-5f51f86a9e04",
+          "license": "CC BY-NC-ND 4.0"
+        },
+        {
+          "id": "curated-positional-roformer-b1a65eb5e30f",
+          "license": "CC BY-NC-ND 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/positional-information-2026-10-21/shaw-N18-2074.pdf",
+      "bytes": 208746,
+      "sha256": "f10b5d840c34d69e3d145dc20de8f668535dca23a95e0025200797956f268587",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-positional-shaw-5c73df1712d9",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/positional-information-2026-10-21/t5-jmlr.pdf",
+      "bytes": 873534,
+      "sha256": "66cf9f77e46691853703eb6982dea337a53361d509fb99be719b5410c5467e41",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-architecture-19124bf6d52d",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-architecture-e1de839a24bd",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-t5-spans-dab81832b013",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-architecture-3a331a66ab73",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-architecture-4cbd29f25173",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-t5-repeated-data-bd9b04b6dc10",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-t5-objectives-c0ba886d49d9",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/preference-2026-10-23/bai-v1.pdf",
+      "bytes": 9503688,
+      "sha256": "26e390d4f76938d2e2591225603637c643cc108e94afb756c65f5d2e0fc9037b",
+      "versioned_arxiv_id": "2204.05862v1",
+      "url_candidate": "https://arxiv.org/pdf/2204.05862v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-hh-workflow-f1b6b64ba26f",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-hh-interface-1e05a370a1ce",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-hh-data-distributions-54e1c75340ea",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-hh-calibration-74e8528aedab",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/rag-2026-10-20/alce.pdf",
+      "bytes": 481920,
+      "sha256": "ae9868f07f0f7ffaae5346778f79b7827d9ec6b13b1e6aae4dff6b2ffc37a2e1",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-rag-review-2026-10-alce-citation-evaluation-bb97e426fb07",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/rag-2026-10-20/hipporag.pdf",
+      "bytes": 3404698,
+      "sha256": "14671c78fc7de99d83bb9e52e2d5b335d4756066925e67df1a25c0e272133aad",
+      "versioned_arxiv_id": "2405.14831v3",
+      "url_candidate": "https://arxiv.org/pdf/2405.14831v3",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/rag-2026-10-20/lost-middle.pdf",
+      "bytes": 2609413,
+      "sha256": "f37f6fabe0fe0d8c73b67579cd115dbf14e282cfb7b7af655ae8109638402c9b",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-rag-review-2026-10-lost-middle-position-0406eefdf360",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/rag-2026-10-20/openscholar.pdf",
+      "bytes": 3888524,
+      "sha256": "26a976b9ec342c2b52f940dca68cc017a9bbbf5bef7b436e97233ab72f1a0989",
+      "versioned_arxiv_id": "2411.14199v1",
+      "url_candidate": "https://arxiv.org/pdf/2411.14199v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-rag-review-2026-10-openscholar-inference-1972cfcb6cd4",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-rag-review-2026-10-openscholar-training-e357e44f1d9e",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/rag-2026-10-20/rag.pdf",
+      "bytes": 885323,
+      "sha256": "23e3249e9a1e75418d82efecab0ea8c4d033b89c93742f63208d47ce01f21233",
+      "versioned_arxiv_id": "2005.11401v4",
+      "url_candidate": "https://arxiv.org/pdf/2005.11401v4",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-rag-review-2026-10-rag-sequence-token-b8c3061c2244",
+          "license": "open educational material; reuse confirmed by repository owner"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/reranking-2026-10-20/calibration.pdf",
+      "bytes": 828420,
+      "sha256": "df7c93f97204f8a3c2b10f6d5bf5265baac25f00c1ae3b473a3e1dbc102dacb2",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-reranking-calibration-reliability-eb5592838649",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/reranking-2026-10-20/colbert-qa.pdf",
+      "bytes": 477010,
+      "sha256": "b145a0b17ba8a86fbda0ae75ffa400761fafed81b477ffd344848bd015a5f6df",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-reranking-colbert-maxsim-0882abad6102",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-reranking-colbert-supervision-872fa803a0ac",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/reranking-2026-10-20/colbert-v1.pdf",
+      "bytes": 4918165,
+      "sha256": "2e487d9b96e3c2e5e286d843e98a066adc0442faa3a6e8ddbd1771221bf9ae14",
+      "versioned_arxiv_id": "2004.12832v2",
+      "url_candidate": "https://arxiv.org/pdf/2004.12832v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-reranking-colbert-paradigms-dcacdc714914",
+          "license": "open educational material; reuse confirmed by repository owner"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/reranking-2026-10-20/colbert-v2.pdf",
+      "bytes": 916038,
+      "sha256": "62d6558f515ef6a62dfb3047f8d79262613c7f13503cdf74d048804e17a6de93",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/reranking-2026-10-20/rankgpt.pdf",
+      "bytes": 806256,
+      "sha256": "8e571de7732285e9adc195da08966ada335d669f94fc2f6c9acb53024278426c",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-reranking-rankgpt-instructions-578dabf395a7",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-reranking-rankgpt-windows-31bc2699b2fc",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/resolution-2026-10-20/internvl25.pdf",
+      "bytes": 2740850,
+      "sha256": "2880c45a397a893d5519df37e6a6c0df8b3a7733e03fba036818b3dd9e4f690c",
+      "versioned_arxiv_id": "2412.05271v1",
+      "url_candidate": "https://arxiv.org/pdf/2412.05271v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/resolution-2026-10-20/molmo-v2.pdf",
+      "bytes": 6576158,
+      "sha256": "54c5e78b4066eef960af1c108d758311b479879b6ba4215570e1c23f5f55510d",
+      "versioned_arxiv_id": "2409.17146v2",
+      "url_candidate": "https://arxiv.org/pdf/2409.17146v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/resolution-2026-10-20/molmo.pdf",
+      "bytes": 1058898,
+      "sha256": "d3a9650763523cc200b40ceca50722940c42741c6c2efcae3c7ebb17ed2d4839",
+      "versioned_arxiv_id": "2409.17146v1",
+      "url_candidate": "https://arxiv.org/pdf/2409.17146v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/resolution-2026-10-20/pixtral.pdf",
+      "bytes": 12640802,
+      "sha256": "c3396fb26605d41cd15588974cd0197d22a2325042f9812a77ee6caf3e88b797",
+      "versioned_arxiv_id": "2410.07073v1",
+      "url_candidate": "https://arxiv.org/pdf/2410.07073v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-resolution-pixtral-vision-packing-078136d174cf",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/resolution-2026-10-20/qwen25vl.pdf",
+      "bytes": 2219929,
+      "sha256": "399a28f6ed79f4ece29cca93993fceb56fc304b1d779e49392aec05aff45aba5",
+      "versioned_arxiv_id": "2502.13923v1",
+      "url_candidate": "https://arxiv.org/pdf/2502.13923v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/resolution-2026-10-20/qwen2vl.pdf",
+      "bytes": 35932117,
+      "sha256": "df31f2fb46b6237ec6f26c418dcc34e59816102f5d1618d564b258ce437fd543",
+      "versioned_arxiv_id": "2409.12191v1",
+      "url_candidate": "https://arxiv.org/pdf/2409.12191v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/responsible-2026-10-20/miap-datacard.pdf",
+      "bytes": 204971,
+      "sha256": "e06afa7a3dd652e293046a664c8c79a30e23b49fe7c989a13adf8ae3c48d5ad0",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/retention-2026-10-29/li18a.pdf",
+      "bytes": 310633,
+      "sha256": "da898e24defa977a5d38eeaab61da0e08b7cdbc358476b23ff1a28b5de666db0",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-retention-37ee7a43639c",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-retention-e344b0d6cb6c",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/retrieval-2026-10-20/faiss.pdf",
+      "bytes": 1519889,
+      "sha256": "05ba27c5898d7f882f6e021d18623bd4a670bc525c3370f80ef5ae303b11bc3b",
+      "versioned_arxiv_id": "2401.08281v4",
+      "url_candidate": "https://arxiv.org/pdf/2401.08281v4",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/retrieval-2026-10-20/hyde-acl.pdf",
+      "bytes": 609521,
+      "sha256": "cfc80c2ae284e1a3f36b4cec65122cc06707ac8088f107e43b328906305f609d",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-retrieval-hyde-pipeline-1284d434d242",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/retrieval-2026-10-20/hyde.pdf",
+      "bytes": 424964,
+      "sha256": "dc0ae3c5584ed146beee122e6a9ad9c48547dde048d53e9be8435d8f1d354531",
+      "versioned_arxiv_id": "2212.10496v1",
+      "url_candidate": "https://arxiv.org/pdf/2212.10496v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/retrieval-2026-10-20/openqa-part4.pdf",
+      "bytes": 7788557,
+      "sha256": "86ee5ff3cec86dd301dfb3d0e2e5aa477efae9f32d2c7122af6be0c4b04e60c2",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-openqa-tfidf-000000000065",
+          "license": "open educational material; reuse confirmed by repository owner"
+        },
+        {
+          "id": "curated-openqa-reader-000000000066",
+          "license": "open educational material; reuse confirmed by repository owner"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/retrieval-2026-10-20/slp3-11.pdf",
+      "bytes": 569080,
+      "sha256": "c7d23a1ebda397cfe1135195b686d6c81a2cdae9c9c9e623487c715befbd7054",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/rnn-bptt-2026-10-21/cs224n-notes05-2019.pdf",
+      "bytes": 1491300,
+      "sha256": "0cefa88acccdfb592c2aca4d6a7f0ce2d56d886bf9556745b9ce37330606f78e",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/rnn-bptt-2026-10-21/slp3-rnn-lstm.pdf",
+      "bytes": 1056388,
+      "sha256": "f1c55203ac8de36d4d2670101d7571bf98789deecd076ffdbce50a090d8cc112",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/rope-2026-10-22/position-interpolation-v2.pdf",
+      "bytes": 751217,
+      "sha256": "890702e3170e5b8e2fb55552bd86cd99b0aa4ddbb3670ae8c351faa575cfaf09",
+      "versioned_arxiv_id": "2306.15595v2",
+      "url_candidate": "https://arxiv.org/pdf/2306.15595v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-rope-pi-1d942ecfe17a",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/rope-2026-10-22/yarn-v2.pdf",
+      "bytes": 721866,
+      "sha256": "ce1933b7d00eed2c6f146a73bb437930f6b66f3f69b19bc3ed6acfca42e5a744",
+      "versioned_arxiv_id": "2309.00071v2",
+      "url_candidate": "https://arxiv.org/pdf/2309.00071v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/rope-2026-10-22/yarn-v3.pdf",
+      "bytes": 838521,
+      "sha256": "e7c0268a796138460c6ba2f67a7cba5bd922c401aea94c1fcd09c4b76b883c85",
+      "versioned_arxiv_id": "2309.00071v3",
+      "url_candidate": "https://arxiv.org/pdf/2309.00071v3",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/self-attention-2026-10-21/attention-is-all-you-need.pdf",
+      "bytes": 2215244,
+      "sha256": "bdfaa68d8984f0dc02beaca527b76f207d99b666d31d1da728ee0728182df697",
+      "versioned_arxiv_id": "1706.03762v7",
+      "url_candidate": "https://arxiv.org/pdf/1706.03762v7",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/semi-supervised-2026-10-28/fixmatch-2001.07685v2.pdf",
+      "bytes": 770166,
+      "sha256": "6cd643401271c6f4946a9b982c670c2b65b486842eb974abd1dedcca704dcb88",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-semi-supervised-fixmatch-6f9c4668372f",
+          "license": "Apache-2.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/semi-supervised-extensions-2026-10-29/mixtext-acl-2020.pdf",
+      "bytes": 1070395,
+      "sha256": "843ce752f5612b25c255e49c286279bde7fecbe5be5d5986dd79615329991f37",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-semi-extensions-tmix-2005dce46032",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-semi-extensions-mixtext-e0203895b58f",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/seq2seq-2026-10-21/cho-properties-2014.pdf",
+      "bytes": 364541,
+      "sha256": "0a947ddd0fa96198d776f6a9f5e59f37b0965e9658eea41e4b574c25f2842528",
+      "versioned_arxiv_id": "1409.1259v2",
+      "url_candidate": "https://arxiv.org/pdf/1409.1259v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/seq2seq-2026-10-21/cs224n-notes06-2019.pdf",
+      "bytes": 594322,
+      "sha256": "7ea823e6750f1dd38b3eb5f22ccc6d17e5aedf7fa98abf3b7d054afb10b463ed",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/seq2seq-2026-10-21/sutskever-2014.pdf",
+      "bytes": 112084,
+      "sha256": "5c74e1db863e2d61b869c9b0603494b34c41fb05db1a4fa7f9a83d5a42b7350f",
+      "versioned_arxiv_id": "1409.3215v3",
+      "url_candidate": "https://arxiv.org/pdf/1409.3215v3",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/sequence-alternatives-2026-10-23/mamba2-v1.pdf",
+      "bytes": 3209170,
+      "sha256": "6fe16414fa471a5ab150cddcba5840d3a94e347e96992c50c12c1fb8b919479f",
+      "versioned_arxiv_id": "2405.21060v1",
+      "url_candidate": "https://arxiv.org/pdf/2405.21060v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-mamba2-ssd-9271d97f8ece",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-mamba2-block-9eb97bb3f717",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/sim-to-real-2026-10-28/dann-15-239.pdf",
+      "bytes": 5670840,
+      "sha256": "801be7cae7acf3ec0df604d40e6129cb9f594e09e6891370b3f7bd2ebef40403",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-sim-to-real-dann-architecture-da9796841e2d",
+          "license": "CC BY (version unspecified in JMLR publication policy)"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/sim-to-real-2026-10-28/heusel-1706.08500v6.pdf",
+      "bytes": 6317602,
+      "sha256": "4abcb2e018d07ae53cfc41e02b48d6158730cfe55523bd38e875e9a19a5178ff",
+      "versioned_arxiv_id": "1706.08500v6",
+      "url_candidate": "https://arxiv.org/pdf/1706.08500v6",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/sim-to-real-2026-10-28/sugiyama07a.pdf",
+      "bytes": 273836,
+      "sha256": "a4f70f827e9326fa76363c28c493407e75f64de25bc61061b72d9c299464697a",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/sim-to-real-2026-10-28/tobin-1703.06907v1.pdf",
+      "bytes": 4066798,
+      "sha256": "3fc98c5f4cea050686d45858e647e1b704492121fdae80f8fcd5d560c107f11f",
+      "versioned_arxiv_id": "1703.06907v1",
+      "url_candidate": "https://arxiv.org/pdf/1703.06907v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/simclr-2026-10-28/chen20j.pdf",
+      "bytes": 3328680,
+      "sha256": "cc620e511bafe8b4b11ca3415f6d7bcf127a05818087bfa49905de3a2e50bc2d",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-simclr-framework-73cf008f0647",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-simclr-crop-views-b38e24483dea",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-simclr-augmentations-fcca5e8050e7",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-simclr-projection-head-1143afd57070",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/spectral-2026-10-25/wiskott-laplacian.pdf",
+      "bytes": 825376,
+      "sha256": "cb2ff89dff43e1bdcd9d3f77dea73b2b8a926a805665b28ef07fa6f6f84933fc",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-spectral-wiskott-heat-8ba2e63a603f",
+          "license": "CC BY-SA 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/speculative-2026-10-19/pmlr-license-agreement.pdf",
+      "bytes": 125997,
+      "sha256": "3a3eac0ebdded57660c12c59028c5429b6d2b328be2c6fde534a104438444c31",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/structured-dropout-2026-10-29/senen-cerda-sanders-2025.pdf",
+      "bytes": 1061617,
+      "sha256": "1296d2ee001235816ebe59c3f17420c39e65538fea0af69ddc2c3f400705f9af",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-structured-dropout-6378eb8d7bf1",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/structured-dropout-2026-10-29/stochastic-depth-v3.pdf",
+      "bytes": 989025,
+      "sha256": "f8c7313da059499280b24bd6cc30b95c83cf4886f2610ae1390026d40299782a",
+      "versioned_arxiv_id": "1603.09382v3",
+      "url_candidate": "https://arxiv.org/pdf/1603.09382v3",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/structured-dropout-2026-10-29/wan13.pdf",
+      "bytes": 737968,
+      "sha256": "6b079db3d7a1971cf18b1f8fc9f7873728f187e724ff4f41c7c72e03edc82c08",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/t5-2026-10-22/cs224n-2023-pretraining.pdf",
+      "bytes": 1786346,
+      "sha256": "e29d1700e74468e811000a2ae2d8aadc63b1b0638d553dbc08102d0e3ff0e771",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/text-representation-2026-10-21/slp3-embeddings.pdf",
+      "bytes": 1325956,
+      "sha256": "6798e04e407798ab1256fd34bfaca2da5227b3b723ec3f32d7820f425f573068",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/text-representation-2026-10-21/slp3-words-tokens.pdf",
+      "bytes": 825830,
+      "sha256": "f50f7fb905c01813c6b3bf688418dc60a2be8d904de604f298e43b9e27cbe931",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/tokenization-2026-10-21/kudo-subword-regularization.pdf",
+      "bytes": 166682,
+      "sha256": "865dc7461d2e3980c29270ad903637c660e1ee2146d93d23cdef17fedb4db633",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/tokenization-2026-10-21/tokenizer-choice-naacl2024.pdf",
+      "bytes": 380169,
+      "sha256": "c6ec782a86741952e0be94713f67263dd7ec80760d473795615effd30e389bb3",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/tool-use-2026-10-20/react.pdf",
+      "bytes": 633805,
+      "sha256": "f285b0971ae4a790e402fb93966bed3adde2cf0a04977d08b2b40d6ab0cace69",
+      "versioned_arxiv_id": "2210.03629v3",
+      "url_candidate": "https://arxiv.org/pdf/2210.03629v3",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-agent-reconciliation-react-cot-sampling-23c9dbf17b79",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-agent-reconciliation-react-prompt-vs-finetune-4be61fc97b54",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-tool-use-react-hotpotqa-primary-8c5057223d4c",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-tool-use-react-alfworld-primary-74967d232e38",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/tool-use-2026-10-20/toolformer-neurips.pdf",
+      "bytes": 471033,
+      "sha256": "391845b5f4f7f5e7c04a34e5280f031c17a5fbf868f53e1c5af3e25b0179fb1c",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/tool-use-2026-10-20/toolformer.pdf",
+      "bytes": 657966,
+      "sha256": "6d7483d94653008e40c2058a1c22441c92e3713dae278b6361e8efc447c99522",
+      "versioned_arxiv_id": "2302.04761v1",
+      "url_candidate": "https://arxiv.org/pdf/2302.04761v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/training-consolidation-2026-10-29/helm-v2.pdf",
+      "bytes": 6045688,
+      "sha256": "30970bda8958a1a8adf6a0a82feef9728331840288b7d2b49368bac87fd25f18",
+      "versioned_arxiv_id": "2211.09110v2",
+      "url_candidate": "https://arxiv.org/pdf/2211.09110v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": [
+        {
+          "id": "curated-helm-taxonomy-0000000000c6",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/vision-encoders-2026-10-20/clip-full.pdf",
+      "bytes": 6813639,
+      "sha256": "6478b6e571a7d6fcd846d8ef77bfd60c285f1986abb8f475eedc43de403074f5",
+      "versioned_arxiv_id": "2103.00020v1",
+      "url_candidate": "https://arxiv.org/pdf/2103.00020v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/vision-encoders-2026-10-20/clip.pdf",
+      "bytes": 3526772,
+      "sha256": "2a4952960f350e50a3a4a847371b80b8aaa09ba82d1c2a8f6b30450e392a1fe4",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-vision-encoders-clip-objectives-a37a9e3e59e0",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-vision-encoders-clip-zero-shot-linear-probe-0436ca002107",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/vision-encoders-2026-10-20/cs231n-16.pdf",
+      "bytes": 41393884,
+      "sha256": "447fe87ad8a0f5389d4f04920def5304faf843c261d26fa228772f42433972ad",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/vision-encoders-2026-10-20/siglip.pdf",
+      "bytes": 614960,
+      "sha256": "2efade8de3baeffe9eba759aab9f510ea8f8ac3c365f02f0da75d9baf9ffa2db",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-vision-encoders-siglip-batch-size-0b00fc131461",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/vision-encoders-2026-10-20/vit.pdf",
+      "bytes": 3743814,
+      "sha256": "8ce7b83971a14508ca711a27c875c9b6914c4f6767cf3150fb1ca6c07aa056d6",
+      "versioned_arxiv_id": "2010.11929v2",
+      "url_candidate": "https://arxiv.org/pdf/2010.11929v2",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/vision-encoders-2026-10-20/winoground.pdf",
+      "bytes": 6333157,
+      "sha256": "c20277b7a00d7e23ba1ada39def9609b5ac5552f74c4d7dc3e326be342c780ed",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/vlm-evaluation-serving-2026-10-20/chair.pdf",
+      "bytes": 1176350,
+      "sha256": "125be899ff3b86d0e08e7cd63b65a6a3969307efeed9a160413830620ff7f71d",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-vlm-evaluation-chair-caption-errors-e667f8601e7a",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/vlm-evaluation-serving-2026-10-20/epd-pmlr.pdf",
+      "bytes": 2050443,
+      "sha256": "865c1b533ff1f23efecc16a01675fb8c646a79a85b23dd29ebf4715cc19fdc45",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-vlm-evaluation-epd-stage-interference-68bb9c627766",
+          "license": "CC BY 4.0"
+        },
+        {
+          "id": "curated-vlm-evaluation-epd-system-architecture-3827256146ba",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/vlm-evaluation-serving-2026-10-20/epd.pdf",
+      "bytes": 2025968,
+      "sha256": "2df95032d49b811343b193f75f903c46fe2aa804603454e5c20ac2432ce0f00d",
+      "versioned_arxiv_id": "2501.05460v4",
+      "url_candidate": "https://arxiv.org/pdf/2501.05460v4",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/vlm-evaluation-serving-2026-10-20/mmstar.pdf",
+      "bytes": 3692576,
+      "sha256": "fc9861cb56d1c3b268713d205563275181359ca259e8df3d2d18acd44ea38446",
+      "versioned_arxiv_id": "2403.20330v1",
+      "url_candidate": "https://arxiv.org/pdf/2403.20330v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/vlm-evaluation-serving-2026-10-20/mmvet-pmlr.pdf",
+      "bytes": 9396532,
+      "sha256": "1083a1e633c4eea90ef640026bf0afeffce25109322e7f07067b4da7d46287c0",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-vlm-evaluation-mmvet-integrated-capabilities-5b52e607bc17",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/vlm-evaluation-serving-2026-10-20/mmvet.pdf",
+      "bytes": 5694591,
+      "sha256": "e71187b826984fe2db3b2d7da3f0681e8db954645778c76740d3cf8ad49805b0",
+      "versioned_arxiv_id": "2308.02490v1",
+      "url_candidate": "https://arxiv.org/pdf/2308.02490v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/vlm-evaluation-serving-2026-10-20/pmlr-license-agreement.pdf",
+      "bytes": 125997,
+      "sha256": "3a3eac0ebdded57660c12c59028c5429b6d2b328be2c6fde534a104438444c31",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/vlm-evaluation-serving-2026-10-20/pope.pdf",
+      "bytes": 820261,
+      "sha256": "537a27baf8d24048974c068deb29ff2d2bf5ac686529049ace21cecff7df06b3",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-vlm-evaluation-pope-question-construction-e3d377bcce9c",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/vlm-training-2026-10-20/qwen-vl.pdf",
+      "bytes": 5910363,
+      "sha256": "80ae72f19bce30a625044c9f4020aa95ac314997d8ccbabb6e5ca59462758bfa",
+      "versioned_arxiv_id": "2308.12966v1",
+      "url_candidate": "https://arxiv.org/pdf/2308.12966v1",
+      "url_status": "version identified in the retained PDF; remote bytes not yet checked",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/winograd-2026-10-27/dolz-2023.pdf",
+      "bytes": 2876931,
+      "sha256": "c71022d1c7bdfef9e423974f82c6ea407e45a304c83e5d45f6b7992a68841536",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": [
+        {
+          "id": "curated-winograd-dolz-workflow-02aac832003e",
+          "license": "CC BY 4.0"
+        }
+      ]
+    },
+    {
+      "file": "05 Источники/Originals/word-embeddings-2026-10-21/cs224n-word-vectors.pdf",
+      "bytes": 362472,
+      "sha256": "7cf21c136cb01b6099b46749e4ee41962a2d10321bc897423513407bd23a001b",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/word-embeddings-2026-10-21/glove.pdf",
+      "bytes": 2661778,
+      "sha256": "6631a1719122a89b3941d851a55ecf38c55971c36b30ae9c0cec617124056adf",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    },
+    {
+      "file": "05 Источники/Originals/word-embeddings-2026-10-21/levy-goldberg.pdf",
+      "bytes": 288874,
+      "sha256": "71876d3258544322cb3a8beb9b922a2095890c9953fe8b7bf7d062c4b2f82fd0",
+      "versioned_arxiv_id": null,
+      "url_candidate": null,
+      "url_status": "needs an official source URL",
+      "asset_registry_references": []
+    }
+  ]
+}

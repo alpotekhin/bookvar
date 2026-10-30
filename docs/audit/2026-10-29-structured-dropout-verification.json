@@ -1,0 +1,310 @@
+{
+  "date": "2026-10-29",
+  "status": "verified-locally-not-published",
+  "scope": "Complete the Dropout archival reconciliation by integrating missing structured masks into existing topic owners, without replacing the existing examples or creating a parallel course.",
+  "chapters": [
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация.md",
+      "sha256": "1222738b2a9031a13e03c913e51a4d92f5e9ee0ca97f4211f776401fd08bb1de",
+      "wholeTextReadBeforeAndAfter": true
+    },
+    {
+      "source": "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md",
+      "sha256": "cfbac98aa756dd964e8e7a30f11c9d5c108bc5b87c6f63d4fa446bf15cc5dba7",
+      "wholeTextReadBeforeAndAfter": true
+    },
+    {
+      "source": "en/00 Textbook/05 Attention and Transformer/05 The complete Transformer.md",
+      "sha256": "8de30b0b1870b46b6b80f7c650efc14dd91aca4791fd655fae9220d11511b63b",
+      "wholeTextReadBeforeAndAfter": true
+    }
+  ],
+  "chapterInventory": {
+    "regularization": {
+      "pythonBlocks": 11,
+      "originalFigures": 5,
+      "newPythonBlocks": 3,
+      "newOriginalFigures": 1
+    },
+    "completeTransformer": {
+      "pythonBlocks": 6,
+      "allCodeBlocks": 8,
+      "originalFigures": 7,
+      "newPythonBlocks": 1
+    },
+    "englishTransformer": "All six Python blocks match the canonical owner; the new English section is identical in both locales. Broken token/math punctuation near sleeps was corrected."
+  },
+  "artifactHashes": {
+    "00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация.md": "1222738b2a9031a13e03c913e51a4d92f5e9ee0ca97f4211f776401fd08bb1de",
+    "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md": "cfbac98aa756dd964e8e7a30f11c9d5c108bc5b87c6f63d4fa446bf15cc5dba7",
+    "en/00 Textbook/05 Attention and Transformer/05 The complete Transformer.md": "8de30b0b1870b46b6b80f7c650efc14dd91aca4791fd655fae9220d11511b63b",
+    "01 Справочник/_index.md": "25aefffd5467498d5ac6897e5017bc33b6d3bcc77e9fef03584b0571200741c7",
+    "en/01 Reference/_index.md": "36a2e526fe0fcaedd157e6b2aac953882af88eb93ae35d7815295c366f5dc68f",
+    "05 Источники/asset-registry.yml": "ba5681169c5b687c6931d6a9e482451143d071ddfa33ecda4ff8be78fb3ed93c",
+    "docs/audit/2026-10-29-structured-dropout-additions.json": "914eb678b02c58f799bcbc5d711f6e03df62d9ed774d129255cf8593e400d540",
+    "publishing/tools/prepare_structured_dropout_figures.py": "ac83e8671e8c9ff6feb7a14617cc784b33e99507c01562ded77d490a2ddd1a76",
+    "publishing/tools/check_structured_dropout_examples.py": "915e6bd8d6acfe76abb1e3eeea60e869d44a4bb5aa614d32255b651bb9560263",
+    "publishing/tools/check_dropout_examples.py": "386acd888cdee3fd9242a7438134ccc14b8db17156265ff6309ba8a27be3f4bb",
+    "publishing/tools/check_full_transformer_examples.py": "eef0d1f31bbba88dc0bceabe7e4be09104b1e324f82e285b7ec1cc0bd45ad44d",
+    "publishing/tools/topic-consolidation-baseline.mjs": "94361fd4c3b29d69b8de625b1cac4d30fc59c17e7549d5850edf7fc4786e9922",
+    "publishing/tools/topic_consolidation_baseline.py": "5f10f643164dd4df59abae32c7f25767b2d6e7099acf280395c1c7a48cfe3a54",
+    "publishing/tests/structured-dropout.test.ts": "cc92b39e57feb2ab5b9c97445e2c2abb0a0d10b8a39d3115eb0ef81515deac30",
+    "publishing/tests/full-transformer.test.ts": "e91dd347a76ddb88aaeb76d3cb8b72061470044a03e2b5e7a29b1bf54961a7fa",
+    "publishing/tests/links.test.ts": "3d804106cc6a4db8b8930f724cae0a53c3722a1538b0aca7f248c33714a43200",
+    "publishing/tests/adaptive-clipping.test.ts": "d474dc9c0e0e54175a36c955e7db2ccab768c3d3afb9f3a3b7f1a8c766fc98aa",
+    "publishing/tests/data-augmentation.test.ts": "d45fea87f5c6792da038074207a95dad84f430a4dfb39edc692093659228ca5f",
+    "publishing/tests/site-output.test.ts": "4ab19485eecdd9d9760b6d2964e3a19588544bf4e2c334f406b8cb2f074cd82a",
+    "00 Учебник/Assets/Figures/curated/structured-dropout-2026-10-29/assets.json": "8a990e8011f86b1727372b8d03054795ad5fa12c7cc110988ff1d55c399f7220",
+    "00 Учебник/Assets/Figures/curated/structured-dropout-2026-10-29/dropconnect-original.png": "6378eb8d7bf1291a87eef8c6cfa199ed09c5c2b77cf46afc84ecea65e9219eed",
+    "site/public/licenses/timm-beabdc3a-Apache-2.0.txt": "71b111620fa32c17a80ccd6db2da759d31a591e497d8b5f382174f59d1b59d49",
+    "05 Источники/Originals/structured-dropout-2026-10-29/jmlr-license-page.html": "f8d5df0184ca6009400705125e99dfbbb018362a68b9c58d9ef8e2c0fcd512f3",
+    "05 Источники/Originals/structured-dropout-2026-10-29/senen-cerda-sanders-2025.pdf": "1296d2ee001235816ebe59c3f17420c39e65538fea0af69ddc2c3f400705f9af",
+    "05 Источники/Originals/structured-dropout-2026-10-29/stochastic-depth-v3.pdf": "f8c7313da059499280b24bd6cc30b95c83cf4886f2610ae1390026d40299782a",
+    "05 Источники/Originals/structured-dropout-2026-10-29/timm-LICENSE": "71b111620fa32c17a80ccd6db2da759d31a591e497d8b5f382174f59d1b59d49",
+    "05 Источники/Originals/structured-dropout-2026-10-29/timm-drop-beabdc3a.py": "2047ce241398537d6e502716f1f3bb7a285b006554f2e27e9a68618d68376ac2",
+    "05 Источники/Originals/structured-dropout-2026-10-29/wan13.pdf": "6b079db3d7a1971cf18b1f8fc9f7873728f187e724ff4f41c7c72e03edc82c08",
+    "05 Источники/Originals/structured-dropout-2026-10-29/manifest.json": "6927dee19a9620cf13a5cebc825cb254de0cc7c6598af749cffbf67235c7d61c"
+  },
+  "sourceComparison": {
+    "packet": "05 Источники/Originals/structured-dropout-2026-10-29/manifest.json",
+    "selectedSources": [
+      {
+        "file": "wan13.pdf",
+        "url": "https://proceedings.mlr.press/v28/wan13.pdf",
+        "read": "Sections 2, 2.1, 2.2, 3, 3.1 and 3.2; Algorithms 1 and 2.",
+        "use": "Mechanism, unscaled-mask moments and approximate inference. No figure or long prose reproduced; reproduction permission not established."
+      },
+      {
+        "file": "stochastic-depth-v3.pdf",
+        "url": "https://arxiv.org/pdf/1603.09382v3",
+        "read": "Sections 2 and 3 in full, including the inference rule after Table 1.",
+        "use": "Mini-batch gate, depth schedule and train/test conventions. No paper figure or long prose reproduced; arXiv nonexclusive license is not a reproduction grant."
+      },
+      {
+        "file": "senen-cerda-sanders-2025.pdf",
+        "url": "https://jmlr.org/papers/volume26/20-1396/20-1396.pdf",
+        "read": "Introduction through the explanation following Figure 1; license footer on PDF page 1.",
+        "use": "Complete original Figure 1 and caption, CC BY 4.0. Caption probability inconsistency preserved and explained."
+      },
+      {
+        "file": "timm-drop-beabdc3a.py",
+        "url": "https://raw.githubusercontent.com/huggingface/pytorch-image-models/beabdc3a6833d39814c895b2bc84cbc61a05834d/timm/layers/drop.py",
+        "read": "Complete drop_path function and DropPath class; root Apache 2.0 license.",
+        "use": "Original drop_path function reproduced unchanged, with author attribution, pinned source link and public license copy."
+      },
+      {
+        "file": "../masking-heads-2026-10-21/annotated-transformer.html",
+        "url": "https://nlp.seas.harvard.edu/annotated-transformer/#attention",
+        "read": "Complete Attention section and attention function through the multi-head introduction.",
+        "use": "Ordering of score masking, softmax, attention dropout and value multiplication; no long excerpt reproduced."
+      }
+    ],
+    "mechanisms": [
+      {
+        "topic": "DropConnect",
+        "example": "W=[[1,2],[3,4]], x=[1,1], q=.5: equal means [3,7], input-mask covariance [[5,11],[11,25]], connection-mask covariance diag(5,25); masked backward diag(2,2).",
+        "limits": "Original paper uses unscaled masks and per-example connection masks. Gaussian moment matching gives .2820948 versus exact Bernoulli ReLU average .25, not an exact ensemble."
+      },
+      {
+        "topic": "Stochastic depth",
+        "example": "x=[1,2], F=[3,4], q=.5: original mean [2.5,4], inverted mean [4,6]; coordinate dropout [7,2] cannot come from a single branch gate. Four-block mean active depth 2.75.",
+        "limits": "Original mini-batch gate differs from per-example timm [B,1,1]. scale_by_keep=False alone does not supply the paper's evaluation factor. Zeroing an already-computed branch saves no branch forward computation."
+      },
+      {
+        "topic": "Transformer dropout",
+        "example": "A=[.8,.2,0], V=[2,6,99], q=.5: row sums 0,.4,1.6,2; value mixtures 0,2.4,3.2,5.6; mean 2.8.",
+        "limits": "No renormalization; forbidden zero stays zero. A fully dropped row is not an all-minus-infinity softmax row. Fixed-A,V expectation does not imply a nonlinear loss expectation. Residual and embedding masks act at their own locations."
+      }
+    ]
+  },
+  "explanationReview": {
+    "facts": "Selected primary sections and the original implementation compared with each mechanism.",
+    "examples": "All current chapter Python examples executed on CPU, with independent moment checks and original-function comparisons.",
+    "style": "no-ai-slop SKILL.md and eval.md read; full final texts reread. Necessary contrasts, mathematical derivations, caveats, original code, citations and original figures retained. New material remains English; no translation pass.",
+    "linearity": "Elementwise/channel masks precede connection and branch masks in the regularization owner. Attention-specific treatment remains in the Transformer owner after the prerequisite mask/head chapters.",
+    "outstandingWithinEditedMechanisms": []
+  },
+  "executedChecks": [
+    {
+      "command": "uv run --offline --with torch==2.14.1 --with numpy==2.3.5 python publishing/tools/check_structured_dropout_examples.py",
+      "result": "PASS: 4 new standalone blocks, 720 original timm comparisons, 3 nonuniform 64-mask moment checks, identical new RU/EN section.",
+      "log": "/var/tmp/bookvar-structured-dropout-cpu-20261029.log"
+    },
+    {
+      "command": "... python publishing/tools/check_dropout_examples.py",
+      "result": "PASS: all 11 current blocks; 900 pinned D2L comparisons, 300 exact analytical cases and 30 backward/mode/decay/checkpoint cases.",
+      "log": "/var/tmp/bookvar-structured-dropout-all-20261029.log"
+    },
+    {
+      "command": "... python publishing/tools/check_full_transformer_examples.py",
+      "result": "PASS: all five unchanged model examples; attention outputs, gradients, causality, PAD treatment, complete translation update and modern LM checks. The sixth current block is executed by the structured checker.",
+      "log": "/var/tmp/bookvar-structured-dropout-transformer-20261029.log"
+    },
+    {
+      "command": "pnpm --dir publishing test",
+      "result": "PASS: 130 files, 834 tests.",
+      "log": "/var/tmp/bookvar-structured-dropout-unit-20261029.log"
+    },
+    {
+      "command": "pnpm --dir publishing exec vitest run tests/structured-dropout.test.ts",
+      "result": "PASS: 3 tests after adding explicit equality of all six RU/EN Python blocks.",
+      "log": "/var/tmp/bookvar-structured-dropout-final-20261029.log"
+    },
+    {
+      "command": "pnpm --dir publishing test:output",
+      "result": "PASS: 172 tests.",
+      "log": "/var/tmp/bookvar-structured-dropout-output-20261029.log"
+    },
+    {
+      "command": "pnpm --dir site test",
+      "result": "PASS: 6 files, 89 tests.",
+      "log": "/var/tmp/bookvar-structured-dropout-site-20261029.log"
+    },
+    {
+      "command": "BOOKVAR_LINK_ASSETS=1 pnpm --dir site build",
+      "result": "PASS: 2006 pages.",
+      "log": "/var/tmp/bookvar-structured-dropout-root-20261029.log"
+    },
+    {
+      "command": "pnpm --dir publishing check:links",
+      "result": "PASS: zero broken internal routes, fragments or files.",
+      "log": "/var/tmp/bookvar-structured-dropout-links-20261029.log"
+    },
+    {
+      "command": "PUBLICATION_BASE_PATH=/bookvar BOOKVAR_LINK_ASSETS=1 pnpm --dir site build --outDir /var/tmp/bookvar-structured-dropout-pages-20261029",
+      "result": "PASS: 2006 pages.",
+      "log": "/var/tmp/bookvar-structured-dropout-pages-20261029.log"
+    },
+    {
+      "command": "findBrokenBuiltLinks(ownPagesOutDir, '/bookvar')",
+      "result": "PASS: errors=[].",
+      "log": "/var/tmp/bookvar-structured-dropout-pages-links-20261029.log"
+    },
+    {
+      "command": "BOOKVAR_LINK_ASSETS=1 pnpm --dir publishing build",
+      "result": "PASS: restored root-base derived Markdown after Pages QA.",
+      "log": "/var/tmp/bookvar-structured-dropout-root-restore-20261029.log"
+    }
+  ],
+  "visualReview": {
+    "desktop": {
+      "viewport": [
+        1280,
+        900
+      ],
+      "documentClientWidth": 1265,
+      "documentScrollWidth": 1265,
+      "observed": "Root Dropout inline image and complete original in viewer; root and /bookvar canonical Transformer dropout.",
+      "katexErrors": 0
+    },
+    "mobile": {
+      "viewport": [
+        360,
+        800
+      ],
+      "documentClientWidth": 345,
+      "documentScrollWidth": 345,
+      "observed": "Root EN Transformer formula and attention table, including horizontal pan to the final output column; /bookvar EN regularization and original-figure viewer at 2x.",
+      "katexErrors": 0
+    },
+    "images": "All five regularization images and all seven Transformer images loaded; hidden empty viewer placeholder excluded from load checks.",
+    "evidence": [
+      {
+        "path": "docs/audit/evidence/2026-10-29-structured-dropout/desktop-inline-original.png",
+        "dimensions": [
+          65536,
+          4292542531
+        ],
+        "sha256": "bd480e03850a1432c6e6d1b57caf0e6e3d3c9e76afcb473f7911eaafc20accdc"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-structured-dropout/desktop-original-viewer.png",
+        "dimensions": [
+          65536,
+          4292542531
+        ],
+        "sha256": "6398a47547802c55ee424dd9bea0bf6b93f90ef3372d5945586111ef4a5b9ab3"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-structured-dropout/desktop-transformer-dropout.png",
+        "dimensions": [
+          65536,
+          4292542531
+        ],
+        "sha256": "86172982eff14d3566e3c6e8b6a0f80bcc37a7d8b8b1543c3b52a5aa7ccdc1e2"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-structured-dropout/mobile-attention-en.png",
+        "dimensions": [
+          65536,
+          4292542531
+        ],
+        "sha256": "9d65d5a1319c1f3c4b1841efbf620eaffea597dab7fff6777fb8dca745e1112d"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-structured-dropout/mobile-attention-table-en.png",
+        "dimensions": [
+          65536,
+          4292542531
+        ],
+        "sha256": "f1ee5230cac9ca92b35b937361737ce18d471ab99fe049d8689a9c180606f39d"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-structured-dropout/mobile-attention-table-panned-en.png",
+        "dimensions": [
+          65536,
+          4292542531
+        ],
+        "sha256": "25bdfd023465959e446125680b29f0cdc131651fb4ea4d779de2d3e7d613512e"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-structured-dropout/pages-desktop-transformer.png",
+        "dimensions": [
+          65536,
+          4292542531
+        ],
+        "sha256": "86172982eff14d3566e3c6e8b6a0f80bcc37a7d8b8b1543c3b52a5aa7ccdc1e2"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-structured-dropout/pages-mobile-original-zoom-en.png",
+        "dimensions": [
+          65536,
+          4292542531
+        ],
+        "sha256": "80899c19a068739b4e59fd421f5aeaffecb6a06ab8c1cd8efd0e48b492995202"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-structured-dropout/pages-mobile-stochastic-depth-en.png",
+        "dimensions": [
+          65536,
+          4292542531
+        ],
+        "sha256": "1d4ea87f35e7ff42d65ee18373110637bdedeb7bdf3f08aa5ed9bb598cf5d77f"
+      }
+    ]
+  },
+  "preservation": {
+    "journal": "docs/audit/2026-10-29-structured-dropout-additions.json",
+    "result": "All six preceding files restored exactly by the journal, all original Python examples and figure embeds retained; 31 archival source hashes unchanged. Historical verification receipts and prior expected hashes were not rebaselined."
+  },
+  "warnings": [
+    "The original JMLR Figure 1 caption conflicts with its panels/body on keep versus removal probability; the complete caption is retained and this inconsistency is explained beside it.",
+    "An initial output sweep exceeded its 5-second per-test limit during concurrent I/O; the final quiet run passed all 172 tests without changing the timeout.",
+    "Existing promql/toc highlighting fallbacks and old PDF parsing warnings are not presented as new content failures."
+  ],
+  "notTested": [
+    "GPU kernels or training-quality/speed benchmarks.",
+    "Full textbook route audit, remaining 20 legacy notes, complete release diff and live GitHub Pages deployment."
+  ],
+  "pagesTemporaryArtifact": {
+    "path": "/var/tmp/bookvar-structured-dropout-pages-20261029",
+    "outputHashes": {
+      "textbook/neural-networks/dropout-regularization/index.html": "142bccd0c99474ec3e0d15faa3b80b8a573765ab08c1fec9fd68ddd40f6e994b",
+      "en/textbook/neural-networks/dropout-regularization/index.html": "707f6fda41f4c9d14db0687c9ac3a0a5a2a8e0d2671ec395235ead50d055a86a",
+      "textbook/transformer/full-transformer/index.html": "41a1aee1604e9f1c77e42030b80766c845ee7850a003e69ecbb1138ba67dc489",
+      "en/textbook/transformer/full-transformer/index.html": "a496d7d8ed77b6cc6a2735af19b13bce47981e11fd6c581f462a5358eaf57f1d"
+    },
+    "cleanup": "Executed: exact own preview processes 50148 and 50138 verified and stopped, own build removed. Main preview processes 16951/16932 preserved; root chapter returned HTTP 200."
+  },
+  "publication": "No commit, push or deployment in this increment; dev/Pages release remains in the active full-goal plan."
+}

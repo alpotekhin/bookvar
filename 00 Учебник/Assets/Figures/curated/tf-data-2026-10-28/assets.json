@@ -1,0 +1,37 @@
+[
+  {
+    "id": "curated-tf-data-cache-e2bb98742e0f",
+    "asset": "00 Учебник/Assets/Figures/curated/tf-data-2026-10-28/cached-dataset.svg",
+    "author": "The TensorFlow Authors",
+    "source_url": "https://github.com/tensorflow/docs/blob/e4210b940833a4e4e7c5d35a19ca46cafc27c7c5/site/en/guide/data_performance.ipynb",
+    "source_image_url": "https://raw.githubusercontent.com/tensorflow/docs/e4210b940833a4e4e7c5d35a19ca46cafc27c7c5/site/en/guide/images/data_performance/cached_dataset.svg",
+    "commit": "e4210b940833a4e4e7c5d35a19ca46cafc27c7c5",
+    "source_asset": "05 Источники/Originals/tf-data-2026-10-28/cached-dataset.svg",
+    "source_asset_sha256": "e2bb98742e0f946db1c53b7464c8aa114611055fc57b37a63a1b9f956904cdb7",
+    "sha256": "e2bb98742e0f946db1c53b7464c8aa114611055fc57b37a63a1b9f956904cdb7",
+    "source_page_snapshot": "05 Источники/Originals/tf-data-2026-10-28/performance.ipynb",
+    "source_page_sha256": "024c6e72b5cfb56d04b18d7b8bd9d0afef7eeb48451af6fd85d9e09e07bcc747",
+    "source_code": "05 Источники/Originals/tf-data-2026-10-28/performance.ipynb",
+    "source_code_sha256": "024c6e72b5cfb56d04b18d7b8bd9d0afef7eeb48451af6fd85d9e09e07bcc747",
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/tensorflow/docs/blob/e4210b940833a4e4e7c5d35a19ca46cafc27c7c5/LICENSE",
+    "license_evidence": "05 Источники/Originals/tf-data-2026-10-28/LICENSE-docs.txt",
+    "license_evidence_sha256": "9dc6ae3884ee868d517aa040c43b68cf08a9481cb8540a672b4703dccd592747",
+    "public_license_copy": "site/public/licenses/tensorflow-docs-e4210b94-Apache-2.0.txt",
+    "source_viewbox": [
+      0,
+      0,
+      1224,
+      360
+    ],
+    "derivation": "source-svg-copy",
+    "modifications": "Complete pinned original SVG copied byte-for-byte. No crop, redraw, label translation or timing-data replacement. Adjacent explanation distinguishes the notebook's sleep-based simulated pipeline from measured GPU training; the five chapter examples verify cache semantics separately. CSS-only fixed reading width inside a horizontally scrollable link; original SVG bytes and full viewer image remain unchanged.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/10 ML Systems/06 Data pipeline, padding и packing.md"
+    ]
+  }
+]

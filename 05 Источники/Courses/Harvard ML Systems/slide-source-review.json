@@ -1,0 +1,20 @@
+[
+  {
+    "source": "slides/vol2/11_edge_intelligence/11_edge_intelligence.tex",
+    "title": "The Training Memory Amplifier",
+    "source_commit": "45ecc8d82fcae70c149cdce550d3b3d3411df913",
+    "slide_sha256": "af0eab1baa9f55b5aea190a11d062cd28d54c6eebf8c0856abbd001c2820aabf",
+    "status": "source-issue",
+    "heading": "Source figure limitation",
+    "text": "The original drawing places 100, 200, 400 and 800 MB at equal vertical intervals without declaring a nonlinear scale. Its stacked segment heights therefore cannot be read as additive memory amounts or component shares. The caption's claim that activations dominate is not established by this chart. The 9× labels describe the source's chosen examples, not a general bound for training memory. The original is retained for source fidelity; this figure is not accepted as quantitative evidence in the Bookvar chapter."
+  },
+  {
+    "source": "slides/vol1/06_nn_architectures/06_nn_architectures.tex",
+    "title": "Transformer Compute Cost",
+    "source_commit": "45ecc8d82fcae70c149cdce550d3b3d3411df913",
+    "slide_sha256": "7f4b1784ce61e24f54ab360c513da46e859675dc025fb1970d5ff6048b142e25",
+    "status": "source-issue",
+    "heading": "Source arithmetic mismatch",
+    "text": "Substituting the listed dimensions into the printed estimate, 12 × L × H² × S, gives 86,973,087,744 FLOPs (86.973 GFLOPs) for L=12, H=768, S=1024, and 356,241,767,399,424 FLOPs (356.242 TFLOPs) for L=96, H=12288, S=2048. Their ratio is 4096. The table's 7G, 314T and 45,000× do not follow from that calculation. The original table is retained unchanged. These calculations check the source's own approximation; they are not measured hardware results or a complete Transformer cost model."
+  }
+]

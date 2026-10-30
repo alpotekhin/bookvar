@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
+import { readFileSync } from 'node:fs';
 import type { RouteRegistry } from '../adapter/types.js';
 import { convertWikiSyntax } from '../adapter/links.js';
 
@@ -9,6 +10,19 @@ const registry: RouteRegistry = {
 };
 
 describe('convertWikiSyntax', () => {
+  it('preserves every code block in the complete Transformer chapter', () => {
+    const source = readFileSync(new URL('../../en/00 Textbook/05 Attention and Transformer/05 The complete Transformer.md', import.meta.url), 'utf8');
+    const output = convertWikiSyntax(source, registry).markdown;
+    const blocks = (text: string) => [...text.matchAll(/^```[^\n]*\n[\s\S]*?^```[ \t]*$/gm)].map(match => match[0]);
+    expect(blocks(source)).toHaveLength(8);
+    expect(blocks(output)).toEqual(blocks(source));
+    expect(output).not.toContain('BOOKVARPROTECTEDCODE');
+  });
+
+  it('does not interpret a literal internal-looking marker as a replacement', () => {
+    const source = 'BOOKVARPROTECTEDCODE0TOKEN and `literal [[Missing]]`.';
+    expect(convertWikiSyntax(source, registry).markdown).toBe(source);
+  });
   it('converts links, aliases, headings, and supported image embeds', () => {
     const source = [
       '[[Path/Page]]',

@@ -1,0 +1,66 @@
+[
+  {
+    "id": "curated-deployment-docker-7b1702be0b42",
+    "asset": "00 Учебник/Assets/Figures/curated/deployment-2026-10-26/docker-cache-invalidated.png",
+    "author": "Docker, Inc.",
+    "source_url": "https://github.com/docker/docs/blob/419ecb47185bf05c83f3cfb7e995b82266046c03/content/manuals/build/cache/_index.md",
+    "source_image_url": "https://raw.githubusercontent.com/docker/docs/419ecb47185bf05c83f3cfb7e995b82266046c03/content/manuals/build/images/cache-stack-invalidated.png",
+    "commit": "419ecb47185bf05c83f3cfb7e995b82266046c03",
+    "source_asset": "05 Источники/Originals/edls-deployment-2026-10-26/docker/cache-stack-invalidated.png",
+    "source_asset_sha256": "7b1702be0b426d6cf2e7e4435ef9a8e65da6a80123044a6bcc273017980e7e07",
+    "sha256": "7b1702be0b426d6cf2e7e4435ef9a8e65da6a80123044a6bcc273017980e7e07",
+    "dimensions_px": [
+      2742,
+      855
+    ],
+    "source_page_snapshot": "05 Источники/Originals/edls-deployment-2026-10-26/docker/cache.md",
+    "source_page_sha256": "11ca5f09336021cd8fbc15e840169b0c548e130dec5dc32408f255c83c09f381",
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/docker/docs/blob/419ecb47185bf05c83f3cfb7e995b82266046c03/LICENSE",
+    "license_evidence": "05 Источники/Originals/edls-deployment-2026-10-26/docker/LICENSE",
+    "license_evidence_sha256": "089009c932d3cc296355e429fa9d6faf80ac89597da866e2424b4ea09add64b1",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original; no crop, redraw, translation, relabeling or recompression.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-26",
+    "used_in": [
+      "06 Практика/17 Развернуть наблюдаемый ML сервис.md"
+    ]
+  },
+  {
+    "id": "curated-deployment-prometheus-c67cdad4edc7",
+    "asset": "00 Учебник/Assets/Figures/curated/deployment-2026-10-26/prometheus-architecture.svg",
+    "author": "The Prometheus Authors",
+    "source_url": "https://github.com/prometheus/docs/blob/3576591af32864770ad6ff73a14fc485f70afb73/docs/introduction/overview.md",
+    "source_image_url": "https://raw.githubusercontent.com/prometheus/docs/3576591af32864770ad6ff73a14fc485f70afb73/public/assets/docs/architecture.svg",
+    "commit": "3576591af32864770ad6ff73a14fc485f70afb73",
+    "source_asset": "05 Источники/Originals/edls-deployment-2026-10-26/prometheus/architecture.svg",
+    "source_asset_sha256": "c67cdad4edc76999d415a5321d1f8909ec9e8378b26a71e3f185e47c765a4a73",
+    "sha256": "c67cdad4edc76999d415a5321d1f8909ec9e8378b26a71e3f185e47c765a4a73",
+    "dimensions_px": [
+      1351,
+      811
+    ],
+    "source_page_snapshot": "05 Источники/Originals/edls-deployment-2026-10-26/prometheus/overview.md",
+    "source_page_sha256": "3a81c52cf33aaa4a2a92fe6c436a260dd29c1261700ea9e7d0fb68614c0be648",
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/prometheus/docs/blob/3576591af32864770ad6ff73a14fc485f70afb73/LICENSE",
+    "license_evidence": "05 Источники/Originals/edls-deployment-2026-10-26/prometheus/LICENSE",
+    "license_evidence_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "derivation": "source-svg-copy",
+    "modifications": "Complete original; no crop, redraw, translation, relabeling or recompression.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-26",
+    "used_in": [
+      "06 Практика/17 Развернуть наблюдаемый ML сервис.md",
+      "00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md"
+    ],
+    "notice_evidence": "05 Источники/Originals/edls-deployment-2026-10-26/prometheus/NOTICE",
+    "notice_sha256": "6fa92bb37cbf5fb7b09e08c5f60e652ed52df750b3cdcf4d64cdde51fb788633",
+    "public_notice_copy": "site/public/licenses/prometheus-3576591-NOTICE.txt"
+  }
+]

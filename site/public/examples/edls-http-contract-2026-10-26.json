@@ -1,0 +1,318 @@
+{
+  "scope": "real loopback HTTP and NDJSON, random neural CPU; controlled protocol delay, not a benchmark",
+  "versions": {
+    "fastapi": "0.121.3",
+    "starlette": "0.50.0",
+    "uvicorn": "0.38.0",
+    "httpx": "0.28.1",
+    "torch": "2.14.1",
+    "transformers": "4.57.1"
+  },
+  "source_hashes": {
+    "edls_http_reference.py": "c972e65c271b826d130813a169baadda59886d62144f72f3c13eb9927e19786b",
+    "edls_admission_reference.py": "f2808f08819ed700edb0b2a70847cea5898ce1b9614cda32b08d3237bbf5f58c",
+    "edls_kv_reference.py": "ae4c58df80457d2f0f335dca5ebac4744b10d04dca2277059c146559db01cd09",
+    "check_edls_http_reference.py": "1c42f10d21c01a080cf416b764a94573641c3074df2eaf1fc4714810e88ee22b"
+  },
+  "records": {
+    "stream": {
+      "events": [
+        {
+          "event": "accepted",
+          "request_id": "external-947",
+          "server_time": 104893.362382875
+        },
+        {
+          "event": "token",
+          "request_id": "external-947",
+          "index": 0,
+          "token_id": 32,
+          "server_time": 104893.376959
+        },
+        {
+          "event": "token",
+          "request_id": "external-947",
+          "index": 1,
+          "token_id": 27,
+          "server_time": 104893.3910215
+        },
+        {
+          "event": "token",
+          "request_id": "external-947",
+          "index": 2,
+          "token_id": 34,
+          "server_time": 104893.405218375
+        },
+        {
+          "event": "token",
+          "request_id": "external-947",
+          "index": 3,
+          "token_id": 28,
+          "server_time": 104893.417123875
+        },
+        {
+          "event": "token",
+          "request_id": "external-947",
+          "index": 4,
+          "token_id": 63,
+          "server_time": 104893.431317625
+        },
+        {
+          "event": "token",
+          "request_id": "external-947",
+          "index": 5,
+          "token_id": 62,
+          "server_time": 104893.4452205
+        },
+        {
+          "event": "token",
+          "request_id": "external-947",
+          "index": 6,
+          "token_id": 39,
+          "server_time": 104893.459102875
+        },
+        {
+          "event": "token",
+          "request_id": "external-947",
+          "index": 7,
+          "token_id": 61,
+          "server_time": 104893.473429333
+        },
+        {
+          "event": "token",
+          "request_id": "external-947",
+          "index": 8,
+          "token_id": 61,
+          "server_time": 104893.487863416
+        },
+        {
+          "event": "token",
+          "request_id": "external-947",
+          "index": 9,
+          "token_id": 61,
+          "server_time": 104893.502126666
+        },
+        {
+          "event": "token",
+          "request_id": "external-947",
+          "index": 10,
+          "token_id": 61,
+          "server_time": 104893.516372083
+        },
+        {
+          "event": "token",
+          "request_id": "external-947",
+          "index": 11,
+          "token_id": 61,
+          "server_time": 104893.530582458
+        },
+        {
+          "event": "token",
+          "request_id": "external-947",
+          "index": 12,
+          "token_id": 61,
+          "server_time": 104893.546488875
+        },
+        {
+          "event": "token",
+          "request_id": "external-947",
+          "index": 13,
+          "token_id": 61,
+          "server_time": 104893.561454875
+        },
+        {
+          "event": "token",
+          "request_id": "external-947",
+          "index": 14,
+          "token_id": 61,
+          "server_time": 104893.575344166
+        },
+        {
+          "event": "token",
+          "request_id": "external-947",
+          "index": 15,
+          "token_id": 61,
+          "server_time": 104893.591481291
+        },
+        {
+          "event": "terminal",
+          "request_id": "external-947",
+          "status": "completed",
+          "reason": "length",
+          "engine_reason": "length",
+          "server_time": 104893.591481291
+        }
+      ],
+      "client_received": [
+        104893.362814208,
+        104893.377129916,
+        104893.391184333,
+        104893.405413875,
+        104893.41728575,
+        104893.431492875,
+        104893.445411541,
+        104893.459262125,
+        104893.473641541,
+        104893.488012708,
+        104893.50230975,
+        104893.516533208,
+        104893.530739625,
+        104893.546718375,
+        104893.561628291,
+        104893.575588333,
+        104893.591795083,
+        104893.591917666
+      ],
+      "first_token_before_engine_terminal": true
+    },
+    "concurrent_outputs_match": true,
+    "final_json": {
+      "request_id": "final-json",
+      "generated_tokens": [
+        32,
+        27,
+        34
+      ],
+      "outcome": {
+        "event": "terminal",
+        "request_id": "final-json",
+        "status": "completed",
+        "reason": "length",
+        "engine_reason": "length",
+        "server_time": 104893.753194458
+      }
+    },
+    "cancel": [
+      {
+        "event": "terminal",
+        "request_id": "cancel-live",
+        "status": "cancelled",
+        "reason": "explicit",
+        "engine_reason": "cancelled",
+        "server_time": 104893.790567
+      }
+    ],
+    "cancel_json": {
+      "request_id": "cancel-json",
+      "generated_tokens": [
+        32
+      ],
+      "outcome": {
+        "event": "terminal",
+        "request_id": "cancel-json",
+        "status": "cancelled",
+        "reason": "explicit",
+        "engine_reason": "cancelled",
+        "server_time": 104893.820884875
+      }
+    },
+    "deadline": [
+      {
+        "event": "accepted",
+        "request_id": "deadline",
+        "server_time": 104893.822182333
+      },
+      {
+        "event": "terminal",
+        "request_id": "deadline",
+        "status": "cancelled",
+        "reason": "timeout",
+        "engine_reason": "cancelled",
+        "server_time": 104893.850471125
+      }
+    ],
+    "completion_after_client_deadline": [
+      {
+        "event": "accepted",
+        "request_id": "deadline-one-token",
+        "server_time": 104893.884112666
+      },
+      {
+        "event": "terminal",
+        "request_id": "deadline-one-token",
+        "status": "cancelled",
+        "reason": "timeout",
+        "engine_reason": "length",
+        "server_time": 104893.899108375
+      }
+    ],
+    "stream_http_200_can_end_in_error": [
+      {
+        "event": "accepted",
+        "request_id": "model-failure",
+        "server_time": 104893.900340166
+      },
+      {
+        "event": "terminal",
+        "request_id": "model-failure",
+        "status": "error",
+        "reason": "RuntimeError",
+        "engine_reason": "RuntimeError",
+        "server_time": 104893.913069375
+      }
+    ],
+    "disconnect_model_calls": 2,
+    "nonstream_disconnect_cleanup": {
+      "live": 0,
+      "active": 0,
+      "waiting": 0,
+      "receipts": 0,
+      "requests": 0,
+      "reservations": 0
+    },
+    "response_start_failure_statuses": [
+      200
+    ],
+    "response_start_failure_cleanup": {
+      "live": 0,
+      "active": 0,
+      "waiting": 0,
+      "receipts": 0,
+      "requests": 0,
+      "reservations": 0
+    },
+    "shutdown_cleanup": {
+      "live": 0,
+      "active": 0,
+      "waiting": 0,
+      "receipts": 0,
+      "requests": 0,
+      "reservations": 0
+    },
+    "limit_cleanup": {
+      "live": 0,
+      "active": 0,
+      "waiting": 0,
+      "receipts": 0,
+      "requests": 0,
+      "reservations": 0
+    },
+    "fatal_loop": {
+      "events": [
+        {
+          "event": "accepted",
+          "request_id": "fatal-loop",
+          "server_time": 104894.554431166
+        },
+        {
+          "event": "terminal",
+          "request_id": "fatal-loop",
+          "status": "error",
+          "reason": "model loop failed",
+          "engine_reason": null,
+          "server_time": 104894.554807958
+        }
+      ],
+      "cleanup": {
+        "live": 0,
+        "active": 0,
+        "waiting": 0,
+        "receipts": 0,
+        "requests": 0,
+        "reservations": 0
+      }
+    },
+    "failed_start_served_ready": false,
+    "timed_out_start_served_ready": false
+  }
+}

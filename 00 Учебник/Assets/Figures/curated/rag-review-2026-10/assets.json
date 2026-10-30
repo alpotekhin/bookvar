@@ -1,0 +1,167 @@
+[
+  {
+    "id": "curated-rag-review-2026-10-rag-sequence-token-b8c3061c2244",
+    "asset": "00 Учебник/Assets/Figures/curated/rag-review-2026-10/rag-sequence-token.png",
+    "author": "Patrick Lewis et al.",
+    "source_url": "https://arxiv.org/abs/2005.11401v4",
+    "source_asset": "05 Источники/Originals/rag-2026-10-20/rag.pdf",
+    "source_asset_sha256": "23e3249e9a1e75418d82efecab0ea8c4d033b89c93742f63208d47ce01f21233",
+    "source_page": 2,
+    "source_page_snapshot": "05 Источники/Originals/rag-2026-10-20/rag-page2.png",
+    "source_page_sha256": "a768da3c40fc450dd96a965646439294b3ad0e36c0c7aae03ac3c1080a2b005e",
+    "render_page_size_px": [
+      2473,
+      3200
+    ],
+    "crop_box_px": [
+      425,
+      280,
+      2040,
+      765
+    ],
+    "sha256": "b8c3061c22442de04c39b6f7f6aa9cf143d64c2da83c231ada99472b3a5b3161",
+    "license": "open educational material; reuse confirmed by repository owner",
+    "license_url": "https://arxiv.org/abs/2005.11401v4",
+    "license_evidence": "05 Источники/Originals/rag-2026-10-20/legacy-figure-record.json",
+    "license_evidence_sha256": "2ac91da277e665532d8bcd1c8d0e5de2d0afb2725ca99074b01f89df1ac3873c",
+    "modifications": "Original PDF panel rendered with Poppler at 3200 pixels on the longest page side and cropped; no redraw, translation or semantic edit",
+    "used_in": [
+      "00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "user-confirmed-open-materials",
+    "derivation": "pdf-page-render-crop"
+  },
+  {
+    "id": "curated-rag-review-2026-10-openscholar-inference-1972cfcb6cd4",
+    "asset": "00 Учебник/Assets/Figures/curated/rag-review-2026-10/openscholar-inference.png",
+    "author": "Akari Asai et al.",
+    "source_url": "https://arxiv.org/abs/2411.14199v1",
+    "source_asset": "05 Источники/Originals/rag-2026-10-20/openscholar.pdf",
+    "source_asset_sha256": "26a976b9ec342c2b52f940dca68cc017a9bbbf5bef7b436e97233ab72f1a0989",
+    "source_page": 4,
+    "source_page_snapshot": "05 Источники/Originals/rag-2026-10-20/openscholar-page4.png",
+    "source_page_sha256": "129bac204968cb4da5ec9ccb692130238edc7ee19811deb96c37a7e519732f20",
+    "render_page_size_px": [
+      3091,
+      4000
+    ],
+    "crop_box_px": [
+      542,
+      425,
+      2567,
+      929
+    ],
+    "sha256": "1972cfcb6cd406dbc94724925a859212911161e65ae2e8f5a74963586d6a83a2",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/rag-2026-10-20/openscholar-abstract.html",
+    "license_evidence_sha256": "0bae738f1187e55a72d3a72ff5c9467caedad120eed680d053bd5d9790eb9df3",
+    "modifications": "Original PDF panel rendered with Poppler at 4000 pixels on the longest page side and cropped; no redraw, translation or semantic edit",
+    "used_in": [
+      "00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "pdf-page-render-crop"
+  },
+  {
+    "id": "curated-rag-review-2026-10-openscholar-training-e357e44f1d9e",
+    "asset": "00 Учебник/Assets/Figures/curated/rag-review-2026-10/openscholar-training.png",
+    "author": "Akari Asai et al.",
+    "source_url": "https://arxiv.org/abs/2411.14199v1",
+    "source_asset": "05 Источники/Originals/rag-2026-10-20/openscholar.pdf",
+    "source_asset_sha256": "26a976b9ec342c2b52f940dca68cc017a9bbbf5bef7b436e97233ab72f1a0989",
+    "source_page": 4,
+    "source_page_snapshot": "05 Источники/Originals/rag-2026-10-20/openscholar-page4.png",
+    "source_page_sha256": "129bac204968cb4da5ec9ccb692130238edc7ee19811deb96c37a7e519732f20",
+    "render_page_size_px": [
+      3091,
+      4000
+    ],
+    "crop_box_px": [
+      542,
+      942,
+      2567,
+      1339
+    ],
+    "sha256": "e357e44f1d9ed6acae3b7da968b295c00b4abd0800d50d7b356eeadbd6f3ab24",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/rag-2026-10-20/openscholar-abstract.html",
+    "license_evidence_sha256": "0bae738f1187e55a72d3a72ff5c9467caedad120eed680d053bd5d9790eb9df3",
+    "modifications": "Original PDF panel rendered with Poppler at 4000 pixels on the longest page side and cropped; no redraw, translation or semantic edit",
+    "used_in": [
+      "00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "pdf-page-render-crop"
+  },
+  {
+    "id": "curated-rag-review-2026-10-alce-citation-evaluation-bb97e426fb07",
+    "asset": "00 Учебник/Assets/Figures/curated/rag-review-2026-10/alce-citation-evaluation.png",
+    "author": "Tianyu Gao, Howard Yen, Jiatong Yu and Danqi Chen",
+    "source_url": "https://aclanthology.org/2023.emnlp-main.398/",
+    "source_asset": "05 Источники/Originals/rag-2026-10-20/alce.pdf",
+    "source_asset_sha256": "ae9868f07f0f7ffaae5346778f79b7827d9ec6b13b1e6aae4dff6b2ffc37a2e1",
+    "source_page": 4,
+    "source_page_snapshot": "05 Источники/Originals/rag-2026-10-20/alce-page4.png",
+    "source_page_sha256": "415842d3125ac06b45b7ea799be95151277a8c638def86060a0824e137ae42e6",
+    "render_page_size_px": [
+      2829,
+      4000
+    ],
+    "crop_box_px": [
+      1447,
+      325,
+      2542,
+      1530
+    ],
+    "sha256": "bb97e426fb07d64f86ec2e90a1c5d02d94f4ee5d46ad3a18c73b21e49cbc32d8",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/retrieval-2026-10-20/acl-copyright.html",
+    "license_evidence_sha256": "683a1dc65a78ec30927630124f4acfaecc728142dcca4e8a1f0a2bfc96f8158b",
+    "modifications": "Original PDF panel rendered with Poppler at 4000 pixels on the longest page side and cropped; no redraw, translation or semantic edit",
+    "used_in": [
+      "00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "pdf-page-render-crop"
+  },
+  {
+    "id": "curated-rag-review-2026-10-lost-middle-position-0406eefdf360",
+    "asset": "00 Учебник/Assets/Figures/curated/rag-review-2026-10/lost-middle-position.png",
+    "author": "Nelson F. Liu et al.",
+    "source_url": "https://aclanthology.org/2024.tacl-1.9/",
+    "source_asset": "05 Источники/Originals/rag-2026-10-20/lost-middle.pdf",
+    "source_asset_sha256": "f37f6fabe0fe0d8c73b67579cd115dbf14e282cfb7b7af655ae8109638402c9b",
+    "source_page": 2,
+    "source_page_snapshot": "05 Источники/Originals/rag-2026-10-20/lost-middle-page2.png",
+    "source_page_sha256": "21cd6a1e5a592c2f8f14e310693092722df76e680b528dc83c3accfbb0586211",
+    "render_page_size_px": [
+      2829,
+      4000
+    ],
+    "crop_box_px": [
+      342,
+      263,
+      1375,
+      1279
+    ],
+    "sha256": "0406eefdf36083002bec8c29f74b0744fc5dc4b5fa53eead924f8014abb0fefe",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/retrieval-2026-10-20/acl-copyright.html",
+    "license_evidence_sha256": "683a1dc65a78ec30927630124f4acfaecc728142dcca4e8a1f0a2bfc96f8158b",
+    "modifications": "Original PDF panel rendered with Poppler at 4000 pixels on the longest page side and cropped; no redraw, translation or semantic edit",
+    "used_in": [
+      "00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "pdf-page-render-crop"
+  }
+]

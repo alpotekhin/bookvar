@@ -1,0 +1,52 @@
+[
+  {
+    "id": "curated-fault-harvard-checkpoint-tradeoff-301fbccf3fa8",
+    "asset": "00 Учебник/Assets/Figures/curated/fault-tolerance-2026-10-23/harvard-checkpoint-tradeoff.png",
+    "author": "Harvard Edge ML Systems Book contributors",
+    "source_url": "https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/fault_tolerance/fault_tolerance.qmd#fig-checkpoint-tradeoff",
+    "source_image_url": "https://mlsysbook.ai/vol2/fault_tolerance/fault_tolerance_files/figure-html/cell-15-output-1.png",
+    "commit": "45ecc8d82fcae70c149cdce550d3b3d3411df913",
+    "source_asset": "Assets/Sources/Harvard ML Systems/vol2/fault_tolerance/cell-15-output-1.png",
+    "source_asset_sha256": "301fbccf3fa8902baef08bdb449dda820c8bcd589522da18634d116b2a7cbe80",
+    "sha256": "301fbccf3fa8902baef08bdb449dda820c8bcd589522da18634d116b2a7cbe80",
+    "source_page_snapshot": "05 Источники/Originals/fault-tolerance-2026-10-23/harvard-fault-tolerance.qmd",
+    "source_page_sha256": "066d72a06f7949ad51244432ee9ad6be3c2a14dfb503e2a82552ce0c4581f848",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md",
+    "license_evidence": "05 Источники/Originals/fault-tolerance-2026-10-23/harvard-LICENSE.md",
+    "license_evidence_sha256": "b6f4689d6fccf48d82d0871a3b994a122427fcb0b278971f6ba008be44e2c926",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "rendered-source-snapshot-and-pinned-figure-code",
+    "metadata_status": "verified",
+    "modifications": "None. Full original rendered PNG, live source verified byte-for-byte on 2026-10-23 against the imported source asset; no redraw, crop, resampling or translation. Commit pins the QMD generating code, not the rendered image URL.",
+    "last_verified": "2026-10-23",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration.md"
+    ]
+  },
+  {
+    "id": "curated-fault-harvard-cluster-fragmentation-e5b8dbf23492",
+    "asset": "00 Учебник/Assets/Figures/curated/fault-tolerance-2026-10-23/harvard-cluster-fragmentation.png",
+    "author": "Harvard Edge ML Systems Book contributors",
+    "source_url": "https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/fleet_orchestration/fleet_orchestration.qmd#fig-fragmentation-problem",
+    "source_image_url": "https://mlsysbook.ai/vol2/fleet_orchestration/fleet_orchestration_files/figure-html/cell-7-output-1.png",
+    "commit": "45ecc8d82fcae70c149cdce550d3b3d3411df913",
+    "source_asset": "Assets/Sources/Harvard ML Systems/vol2/fleet_orchestration/cell-7-output-1.png",
+    "source_asset_sha256": "e5b8dbf23492b08aa30c679cd0e2bbfddb3093a35aed391e694f9b3186cb1945",
+    "sha256": "e5b8dbf23492b08aa30c679cd0e2bbfddb3093a35aed391e694f9b3186cb1945",
+    "source_page_snapshot": "05 Источники/Originals/fault-tolerance-2026-10-23/harvard-fleet-orchestration.qmd",
+    "source_page_sha256": "b81f81a31117ded9302b6d11c24351ab20a56893a399d27bebf38674469a1a2f",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md",
+    "license_evidence": "05 Источники/Originals/fault-tolerance-2026-10-23/harvard-LICENSE.md",
+    "license_evidence_sha256": "b6f4689d6fccf48d82d0871a3b994a122427fcb0b278971f6ba008be44e2c926",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "rendered-source-snapshot-and-pinned-figure-code",
+    "metadata_status": "verified",
+    "modifications": "None. Full original rendered PNG, live source verified byte-for-byte on 2026-10-23 against the imported source asset; no redraw, crop, resampling or translation. Commit pins the QMD generating code, not the rendered image URL.",
+    "last_verified": "2026-10-23",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration.md"
+    ]
+  }
+]

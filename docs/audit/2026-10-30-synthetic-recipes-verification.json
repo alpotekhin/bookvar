@@ -1,0 +1,309 @@
+{
+  "date": "2026-10-30",
+  "status": "comparison-verified-locally-not-published",
+  "previousGoalTurnClassification": "no-progress: status-only response; the actual worktree was revalidated and source reconciliation resumed.",
+  "currentGoalTurnClassification": "progress: reconciled Synthetic Data, added source-faithful mechanisms and three original figures, and updated the live review ledger from 24 to 25 accepted notes.",
+  "scope": "One archive comparison and its missing explanations in the existing owner. The whole textbook and the release goal are not complete.",
+  "chapter": {
+    "path": "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md",
+    "sha256": "41629ce92425dc01f122181499ddc21b186f0902d18450b140f1a4d91e281abd",
+    "lines": 1243,
+    "wholeRead": "Complete final content covered in non-truncated chunks 1–250, 251–500, 501–750, 751–1000, 1001–1260/EOF. The 251–500 range was reread after the final paragraph-separator correction; other content ranges were unchanged."
+  },
+  "explanationReview": {
+    "phi1": "Separate classifier annotations, filtered real data, synthetic textbooks and later exercises; concrete repeated-letter example; source pool versus sampled tokens; read all three groups of the original graph with their budget confounds; task-specific benchmark limits.",
+    "phi4": "Selected seeds, left-to-right ordering motivation, consistency-based question selection and its failure case, self-revision, instruction reversal and verifier limits; four/twelve repetitions under fixed horizon; table weights versus unique pools; synthetic-only knowledge loss.",
+    "nemotron4": "Four prompt-generation paths; disjoint SFT/preference prompts and unsafe-prompt treatment; dialogue role generation; objective verifier versus swapped-position judge; reward regression attributes; changing base checkpoint in weak-to-strong iteration; correct 98%/20K denominator.",
+    "nemotronCC": "Retain the valid 5.6-point result for the HQ comparison with full Table 5 conditions, and distinguish full-corpus and long-horizon claims.",
+    "retained": "Existing Self-Instruct, OpenThoughts, SWE environments, mixtures/curricula and collapse explanations and all nine previous figures are preserved. Exact reversal restores the complete preceding chapter at 2e465a3a4ccb11a00417f80da1f910b2b691d946a90281410d6f61c6d398abd7.",
+    "style": "no-ai-slop SKILL.md and eval.md applied with local technical/academic qualifications. New explanatory content is English; no translation or replacement definition-only overview."
+  },
+  "sources": {
+    "packet": "05 Источники/Originals/synthetic-recipes-2026-10-29",
+    "readScopes": "Exact selected article sections and image/license origins are recorded in packet/manifest.json. No fresh whole-paper or whole-repository read is claimed.",
+    "existingNemotronCC": {
+      "path": "05 Источники/Papers/Source PDFs/nemotron-cc-acl2025.pdf",
+      "sha256": "e69a36de5eb327d7c7dac5662f7cc9ae415b87910d345b3eab3021af17030c39",
+      "readScope": "Current complete physical pages 3 and 6; page 6 supplies Data Blend, Evaluation Setup, main results and Table 5. Existing transformation/source discussion retains the prior accepted selected-source evidence."
+    },
+    "figures": "Three complete original PNGs copied byte-for-byte, not crops, upscales or generated replacements. Retained article HTML explicitly states CC BY 4.0. Total retained packet is about 2 MB; no weights, datasets or videos."
+  },
+  "checks": {
+    "cpu": {
+      "status": "passed",
+      "programs": 2,
+      "log": "/var/tmp/bookvar-synthetic-recipes-cpu-final-seam-20261030.log",
+      "scope": "Actual displayed Python fences, pinned upstream CLI tests for four parser variants, displayed bash command, mixture/epoch arithmetic, Nemotron-CC difference and swapped-position identity cases; no model training."
+    },
+    "targeted": {
+      "status": "passed",
+      "tests": 13,
+      "files": 4,
+      "log": "/var/tmp/bookvar-synthetic-recipes-targeted-final-seam-20261030.log"
+    },
+    "output": {
+      "status": "passed",
+      "tests": 174,
+      "log": "/var/tmp/bookvar-synthetic-recipes-output-final-20261030.log"
+    },
+    "rootBuild": {
+      "status": "passed",
+      "pages": 2006,
+      "log": "/var/tmp/bookvar-synthetic-recipes-root-final-seam-20261030.log"
+    },
+    "internalLinks": {
+      "status": "passed",
+      "broken": 0,
+      "log": "/var/tmp/bookvar-synthetic-recipes-links-final-20261030.log"
+    },
+    "earlierFullUnit": {
+      "status": "passed",
+      "tests": 853,
+      "files": 136,
+      "log": "/var/tmp/bookvar-synthetic-recipes-unit-accepted-20261030.log",
+      "scopeLimit": "This run preceded the final metadata/Nemotron-CC prose changes. It is not asserted as a full-unit run at the final chapter SHA; the 13 relevant tests and CPU/output/link checks were rerun on that revision."
+    },
+    "initialFailures": "The first full-unit run exposed a missing scoped provenance branch for the new source-image copies and an old consistency test rewinding an already intermediate registry. Both were fixed with the old hash/unknown-edit negative controls retained. The subsequent full suite passed.",
+    "pagesBase": {
+      "status": "deferred",
+      "reason": "Fresh /bookvar build and live Pages deployment belong to the remaining release gate."
+    }
+  },
+  "visual": {
+    "artifactRevision": "41629ce92425dc01f122181499ddc21b186f0902d18450b140f1a4d91e281abd",
+    "desktop": {
+      "viewport": [
+        1280,
+        900
+      ],
+      "clientWidth": 1265,
+      "scrollWidth": 1265,
+      "newOriginalsInspected": 3
+    },
+    "mobile": {
+      "viewport": [
+        360,
+        800
+      ],
+      "clientWidth": 345,
+      "scrollWidth": 345,
+      "displayMath": 7,
+      "katexErrors": 0,
+      "mathWidth": 313,
+      "mathScrollWidth": 313,
+      "sourceImagesLoaded": 12
+    },
+    "viewer": "Complete desktop originals and source labels inspected. Mobile 2x zoom and actual horizontal panning show the original left/right Nemotron branches and readable Phi labels; deliberate viewer scrolling is not document overflow.",
+    "locales": "Root and /en checked. The new English sections are identical in the explicit EN fallback; the existing Russian body is not declared an English translation.",
+    "navigation": "Phi atlas/chapter round trip verified through the link. Nemotron href and destination rendered, and its backlink returned to the exact chapter anchor; an initial click failed to navigate in the browser tool and was not misreported as a successful click.",
+    "transientFailure": "An image viewer was opened while a build was still replacing dist. After the same confirmed build completed, the asset returned HTTP 200 and reload/viewer inspection succeeded; no viewer code was changed."
+  },
+  "ledger": {
+    "total": 31,
+    "sourceFullRead": 26,
+    "reconciled": 25,
+    "readInProgress": 1,
+    "unread": 5,
+    "canonicalWholeReads": 30
+  },
+  "remaining": [
+    "Reconcile nanoGPT, ReAct, Tool Use, Toolformer, Tree of Thoughts and BLEU.",
+    "Read the complete conceptual route and correct reference/atlas/course-library dependencies and repetitions.",
+    "Finish the existing EN-fallback/UI observations and source-specific rights gaps before release.",
+    "Run final required checks on a frozen revision, commit/push dev under Alexander Potekhin <al_potechin@mail.ru>, and verify the actual Pages deployment."
+  ],
+  "publication": {
+    "commit": false,
+    "push": false,
+    "deploy": false,
+    "newTranslation": false,
+    "mainChanged": false
+  },
+  "artifactHashes": [
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md",
+      "sha256": "41629ce92425dc01f122181499ddc21b186f0902d18450b140f1a4d91e281abd"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Phi.md",
+      "sha256": "4d3c9ed77a7625651d4b39d87cb24fe8efbd28d9b2d5f24f1e8a5ea8ed953e57"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Nemotron.md",
+      "sha256": "4974a082b255198dfaeb03d8fbb40ad44fc2b0fca1a8693c2ead5ad306576409"
+    },
+    {
+      "path": "Concepts/Training/Synthetic Data.md",
+      "sha256": "c5cf6ead4cde20b9eafddf99a7fb9ac84b5555dc39ce4b4d3fc7d084404b4a3c"
+    },
+    {
+      "path": "Concepts/Training/nanoGPT.md",
+      "sha256": "5f1bd4fa83967b9d0478d95601a505a8e8d80e1fc97980e25261db769ac30d4d"
+    },
+    {
+      "path": "05 Источники/asset-registry.yml",
+      "sha256": "86b99838cd758950a0991a517bf4e73fdbee4cfeed3d6d46c8d9725d1f574ced"
+    },
+    {
+      "path": "docs/audit/2026-10-29-synthetic-recipes-additions.json",
+      "sha256": "8512070a0742f88070642160ed61f39878a1a34a15225b501cf69fdac8a90e4c"
+    },
+    {
+      "path": "docs/audit/2026-10-29-legacy-notes-review.json",
+      "sha256": "d46206845c339bdc12c654f13aeae30e852114956914bc366be8382905aeae44"
+    },
+    {
+      "path": "docs/audit/2026-10-29-release-completion-plan.md",
+      "sha256": "1a292a1c9f82195675d9cead89a0be240018b7b37a1cdf5d481601e782e220e9"
+    },
+    {
+      "path": "publishing/tools/topic-consolidation-baseline.mjs",
+      "sha256": "45d40bcedb9f899a90150c970c5a0fa5ea8b2aae5b32486837849c552ccbc1aa"
+    },
+    {
+      "path": "publishing/tools/topic_consolidation_baseline.py",
+      "sha256": "322ebe3e2789bb626558186c426cfd70fcb57f3ce4c44c9f64e2610ae1af515c"
+    },
+    {
+      "path": "publishing/tools/check_synthetic_data_examples.py",
+      "sha256": "3cf3a2ad4f18689801af00d8c9bd24a9bbb015227a319d827235eb925c1e838b"
+    },
+    {
+      "path": "publishing/tests/synthetic-recipes.test.ts",
+      "sha256": "0e1011b69cb93a481ed87f4401f53797a9cbbb6287981c5ee524df3bcb3dbd70"
+    },
+    {
+      "path": "publishing/tests/asset-registry.test.ts",
+      "sha256": "ef0aa767cf2ad4feaa36beb81be454b24e1825165db1238313736fa0d630e3fc"
+    },
+    {
+      "path": "publishing/tests/consistency-training.test.ts",
+      "sha256": "b1be8ace1195068df2f14b88d709567b3396a4afbaa6de57d111347cff61ab1a"
+    },
+    {
+      "path": "publishing/tests/semi-extensions.test.ts",
+      "sha256": "a97963e3b9d3b9382000dddeeef1eabacc8b66efc87766744ae9d11721db9da9"
+    },
+    {
+      "path": "publishing/tests/site-output.test.ts",
+      "sha256": "75d3805ce1fdb7676cb9370151952d7d82fddd109ed9f4a40dac05329286523b"
+    },
+    {
+      "path": "05 Источники/Originals/synthetic-recipes-2026-10-29/README.md",
+      "sha256": "661a83bfdc3b32e24cea6298db589b8709ad054fd0dfb91b011ea9589abb0356"
+    },
+    {
+      "path": "05 Источники/Originals/synthetic-recipes-2026-10-29/manifest.json",
+      "sha256": "1dda1cd3f6d5307a73e7e994dd3bbc85f6c9ea0afcd8408105103895f04b4f8f"
+    },
+    {
+      "path": "05 Источники/Originals/synthetic-recipes-2026-10-29/nemotron-4-v1.html",
+      "sha256": "44500cdb5e49f7bea7ce51e86b29adda9a599f9f94977e3b39d65f0ab5864a9c"
+    },
+    {
+      "path": "05 Источники/Originals/synthetic-recipes-2026-10-29/nemotron4-prompts.png",
+      "sha256": "8968b4ef405eb573b5311536471aedb72e9d3c433c368d013ac04009d1afe08f"
+    },
+    {
+      "path": "05 Источники/Originals/synthetic-recipes-2026-10-29/phi-1-v2.html",
+      "sha256": "5428fe2e6928760db818367ce88a68436ad256afcebda7e30e81746477e3497b"
+    },
+    {
+      "path": "05 Источники/Originals/synthetic-recipes-2026-10-29/phi-4-v1.html",
+      "sha256": "8ab641978c7e1b90ecabf88630f32042dff71a8a3dd67de2f0a07ce8d1276b88"
+    },
+    {
+      "path": "05 Источники/Originals/synthetic-recipes-2026-10-29/phi1-data-ablation.png",
+      "sha256": "5df53a2c72ca91ec748abac7fb2ea6a0e2eb1040f11946bdc76f4bb1f01675cb"
+    },
+    {
+      "path": "05 Источники/Originals/synthetic-recipes-2026-10-29/phi4-repetitions.png",
+      "sha256": "4e293aabffad4e503e56fbaa24aea90cf0972dd215ea8ac97e6f65ac4f4063b2"
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/synthetic-recipes-2026-10-29/NOTICE.md",
+      "sha256": "14c6e3cbf5db6f435c6ffa0a1267f210caa09efa771b8eca06eba47a64a8a878"
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/synthetic-recipes-2026-10-29/assets.json",
+      "sha256": "d110d2cce0cca69f915ea5f2e777290e4452c24225422200f03788d73d550802"
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/synthetic-recipes-2026-10-29/nemotron4-prompts.png",
+      "sha256": "8968b4ef405eb573b5311536471aedb72e9d3c433c368d013ac04009d1afe08f"
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/synthetic-recipes-2026-10-29/phi1-data-ablation.png",
+      "sha256": "5df53a2c72ca91ec748abac7fb2ea6a0e2eb1040f11946bdc76f4bb1f01675cb"
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/synthetic-recipes-2026-10-29/phi4-repetitions.png",
+      "sha256": "4e293aabffad4e503e56fbaa24aea90cf0972dd215ea8ac97e6f65ac4f4063b2"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-synthetic-recipes/desktop-en-nemotron4.png",
+      "sha256": "b6ee8df43ece25c6ba4c05ed634d24d67337606edfa0687139954c8ffbc88f4b"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-synthetic-recipes/desktop-nemotron-roundtrip.png",
+      "sha256": "3de7452f8a109fc00fe1790b089e928b3b9d2d0e877ac142b8933d9f9e7e8b47"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-synthetic-recipes/desktop-nemotron4-original-viewer.png",
+      "sha256": "7a0c5a5cdb184b0b56030e3fc497595a740a8c5eb80c393faf8a9a4619e51c60"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-synthetic-recipes/desktop-phi1-original-viewer.png",
+      "sha256": "0ab12f0e6090371e92401b732f3f441be069e1c9e03df3821cb53313ddc33d78"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-synthetic-recipes/desktop-phi1-page.png",
+      "sha256": "20e050be7328de95c375d572e7862b5dce1ce3cdadd47664ef4ffd7cd75892c2"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-synthetic-recipes/desktop-phi4-original-viewer.png",
+      "sha256": "871cf4c705972b2ee75593b6788c0b86fef5d96fff9e41667a814b960f620068"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-synthetic-recipes/desktop-phi4-page.png",
+      "sha256": "992756c7def8a1a4f294bf9776270a50051a98bdc15eaa9818839611380e73e8"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-synthetic-recipes/mobile-en-phi-section.png",
+      "sha256": "1fe12ab526c43664e5ef8e14d77961fa59eec77e9c552554ef2197dce0a45db7"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-synthetic-recipes/mobile-nemotron4-page.png",
+      "sha256": "dbe0248dc268588ce48c21380925a94d7763235bb025902f5f533e43738fee67"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-synthetic-recipes/mobile-nemotron4-zoom-left.png",
+      "sha256": "162f0216628ab9032387bb5bfc41bc6d41f01369f51a153ef9d9b1878cfae894"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-synthetic-recipes/mobile-nemotron4-zoom-right.png",
+      "sha256": "46c8ac7af6642676cfef3ddb3634a5b8cf388c4fb03e7c6b979da877430bcff0"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-synthetic-recipes/mobile-nemotron4-zoom.png",
+      "sha256": "47c104ccba5da25457bd0790a48bd99499c6de9874976fee0062c04eb2f93b40"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-synthetic-recipes/mobile-phi1-zoom.png",
+      "sha256": "e9833e52c35e285d771fc746ea2a1a462884df98433ac1c83fa71667578229d1"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-synthetic-recipes/mobile-phi4-zoom.png",
+      "sha256": "2c8f86fe3484baa07a49dc37c8f6d4d0a5b2e9a156fa047ff8cc270483b99a9e"
+    }
+  ],
+  "archiveHashesVerified": 31,
+  "observedCounts": {
+    "total": 31,
+    "sourceFullRead": 26,
+    "reconciled": 25,
+    "readInProgress": 1,
+    "unread": 5,
+    "canonicalWholeReads": 30
+  }
+}

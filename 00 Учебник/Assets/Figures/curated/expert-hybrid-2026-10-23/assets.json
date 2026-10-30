@@ -1,0 +1,27 @@
+[
+  {
+    "id": "curated-expert-hybrid-hf-ep-layer-bca083eab840",
+    "asset": "00 Учебник/Assets/Figures/curated/expert-hybrid-2026-10-23/hf-ep-layer.svg",
+    "author": "Nouamane Tazi et al., Hugging Face",
+    "source_url": "https://huggingface.co/spaces/nanotron/ultrascale-playbook/blob/c93890dd4b22356ee18ed9b863e6f2d0909729bc/assets/images/5d_nutshell_ep.svg",
+    "source_image_url": "https://huggingface.co/spaces/nanotron/ultrascale-playbook/resolve/c93890dd4b22356ee18ed9b863e6f2d0909729bc/assets/images/5d_nutshell_ep.svg",
+    "source_asset": "05 Источники/Originals/expert-hybrid-2026-10-23/5d_nutshell_ep.svg",
+    "source_asset_sha256": "bca083eab840eaa8e8c0ccfe0306b50a6bb38ebf42c85d67f4d80593f800c293",
+    "sha256": "bca083eab840eaa8e8c0ccfe0306b50a6bb38ebf42c85d67f4d80593f800c293",
+    "commit": "c93890dd4b22356ee18ed9b863e6f2d0909729bc",
+    "source_page_snapshot": "05 Источники/Originals/tensor-sequence-2026-10-23/hf-index.html",
+    "source_page_sha256": "bb018234c65bb0de02d451319df3049fda2398ab9cdcad7a1290fd00afcee567",
+    "license": "Apache-2.0",
+    "license_url": "https://huggingface.co/spaces/nanotron/ultrascale-playbook/blob/c93890dd4b22356ee18ed9b863e6f2d0909729bc/README.md",
+    "license_evidence": "05 Источники/Originals/tensor-sequence-2026-10-23/hf-README.md",
+    "license_evidence_sha256": "973209127acd43db26172be9130198447c7404e3206629487a0f42e3994aae58",
+    "derivation": "source-svg-copy",
+    "provenance_confirmation": "source-license-verified",
+    "metadata_status": "verified",
+    "modifications": "none; byte-for-byte complete original SVG, no crop, redraw, rasterization or translation. Full Apache-2.0 license retained at site/public/licenses/ultrascale-Apache-2.0.txt.",
+    "last_verified": "2026-10-23",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism.md"
+    ]
+  }
+]

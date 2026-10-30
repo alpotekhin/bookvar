@@ -4,87 +4,56 @@ description: Открытый русскоязычный учебник по м�
 template: splash
 hero:
   title: Машинное обучение и языковые модели
-  tagline: "Последовательный учебник: от линейной алгебры и нейронных сетей до Transformer, обучения по предпочтениям, RAG и агентных систем. Объяснения опираются на университетские курсы и первичные статьи."
+  tagline: "Основной курс от линейной алгебры до обучения и оценивания языковых моделей. Отдельные модули по ML-системам, инференсу, RAG, мультимодальности, агентам и рекомендациям."
   actions:
     - text: Начать с учебника
       link: ./textbook/
       icon: right-arrow
       variant: primary
-    - text: Открыть практику
-      link: ./practice/causal-self-attention/
+    - text: Найти тему
+      link: ./reference/
       icon: open-book
       variant: minimal
 ---
 
 <div class="landing-intro">
-  <p class="eyebrow">Карта знаний</p>
-  <h2 id="choose-a-route">Выберите маршрут</h2>
-  <p>Материал организован по задаче: последовательно изучать, быстро уточнять механизм, сравнивать модели или воспроизводить результат.</p>
+  <h2 id="choose-a-route">Чтение, поиск и первоисточники</h2>
+  <p>Учебник задаёт порядок изучения. Справочник ведёт к тем же объяснениям по названию темы. В библиотеке находятся оригинальные курсы, книги и статьи.</p>
 </div>
 
 <nav class="entry-grid" aria-labelledby="choose-a-route">
   <a class="entry-card" href="./textbook/">
     <span class="entry-index" aria-hidden="true">01</span>
     <strong>Учебник</strong>
-    <span>Последовательный путь от основ нейросетей к архитектуре и обучению LLM.</span>
+    <span>Основной курс ML и LLM, затем углублённые модули с указанными предпосылками.</span>
   </a>
   <a class="entry-card" href="./reference/">
     <span class="entry-index" aria-hidden="true">02</span>
     <strong>Справочник</strong>
-    <span>Короткий путь к механизму, модели, обзору направления или хронологии развития технологий.</span>
-  </a>
-  <a class="entry-card" href="./models/">
-    <span class="entry-index" aria-hidden="true">03</span>
-    <strong>Атлас моделей</strong>
-    <span>Атлас моделей: что наследуется, что меняется и чем приходится за это платить.</span>
+    <span>Темы ML и DL, механизмы LLM, модели, сравнения и хронология. Ссылки ведут к полным объяснениям.</span>
   </a>
   <a class="entry-card" href="./sources/">
-    <span class="entry-index" aria-hidden="true">04</span>
-    <strong>Источники</strong>
+    <span class="entry-index" aria-hidden="true">03</span>
+    <strong>Библиотека источников</strong>
     <span>Курсы, книги, статьи и реализации, на которых построены объяснения и иллюстрации.</span>
   </a>
-  <a class="entry-card" href="./practice/causal-self-attention/">
-    <span class="entry-index" aria-hidden="true">05</span>
-    <strong>Практика</strong>
-    <span>Небольшие реализации и эксперименты, которые проверяют понимание кодом.</span>
-  </a>
-  <a class="entry-card" href="./questions/llm/">
-    <span class="entry-index" aria-hidden="true">06</span>
-    <strong>Вопросы</strong>
-    <span>Короткий вход через конкретный вопрос со ссылкой на развёрнутый ответ.</span>
-  </a>
 </nav>
 
-<div class="landing-intro">
-  <p class="eyebrow">Университетские курсы</p>
-  <h2 id="university-courses">Stanford CS336 и Berkeley Advanced LLM Agents</h2>
-  <p>Лекции в оригинале, слайды, задания и ссылки на соответствующие темы учебника.</p>
-</div>
-
-<nav class="entry-grid" aria-labelledby="university-courses">
-  <a class="entry-card" href="./sources/courses/stanford-cs336-spring-2026/">
-    <strong>Stanford CS336 — Language Modeling from Scratch</strong>
-    <span>Токенизация, архитектура Transformer, обучение на GPU, данные, масштабирование и post-training. Лекции и пять заданий Spring 2026.</span>
-  </a>
-  <a class="entry-card" href="./sources/courses/berkeley-advanced-llm-agents-spring-2025/">
-    <strong>Berkeley Advanced LLM Agents</strong>
-    <span>Рассуждение, память и планирование, программирование, работа в браузере, доказательство теорем и безопасность. Слайды и записи 12 лекций Spring 2025.</span>
-  </a>
-</nav>
+<p><a href="./practice/">Практика и интерактивные примеры</a> · <a href="./questions/">Вопросы со ссылками на ответы</a></p>
 
 <section class="curriculum" aria-labelledby="curriculum-title">
   <div class="curriculum-copy">
     <p class="eyebrow">Учебный маршрут</p>
     <h2 id="curriculum-title">От механизма к системе</h2>
-    <p>Основной маршрут проходит от математического аппарата к работающей системе. Ответвления для рекомендательных систем, ML-инфраструктуры и углублённых тем явно помечены в оглавлении.</p>
+    <p>Основной курс заканчивается генерацией и оцениванием языковой модели. Для дальнейшего чтения выберите модуль в оглавлении: каждый имеет свой порядок глав и необходимые предпосылки.</p>
   </div>
   <ol class="curriculum-steps">
     <li><span>01 · Основания</span><strong>Линейная алгебра, вероятность и обучение моделей</strong></li>
     <li><span>02 · Язык</span><strong>Токены, языковое моделирование, RNN и Seq2Seq</strong></li>
     <li><span>03 · Transformer</span><strong>Attention, BERT, GPT и три архитектурных паттерна</strong></li>
-    <li><span>04 · Современная LLM</span><strong>LLaMA-подобный блок, длинный контекст и MoE</strong></li>
+    <li><span>04 · Современная LLM</span><strong>Декодер, RoPE, FFN, формы тензоров и параметры</strong></li>
     <li><span>05 · Обучение</span><strong>Данные, масштабирование, SFT, предпочтения и RLVR</strong></li>
-    <li><span>06 · Система</span><strong>Инференс, поиск, мультимодальность и агенты</strong></li>
+    <li><span>06 · Проверка модели</span><strong>Генерация ответов, оценивание и контаминация</strong></li>
   </ol>
 </section>
 

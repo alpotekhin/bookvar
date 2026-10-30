@@ -1,0 +1,13 @@
+{
+  "scope": "Two formatting-only equation reflows found during 360px UI inspection; inverse restores accepted math bytes.",
+  "reflows": [
+    {
+      "before": "W_2=\\begin{bmatrix}\n0{,}2&-0{,}2\\\\\n0{,}1&0{,}1\\\\\n-0{,}25&0{,}25\n\\end{bmatrix},\n\\qquad b_2=(0,0).",
+      "after": "\\begin{aligned}\nW_2&=\\begin{bmatrix}\n0{,}2&-0{,}2\\\\\n0{,}1&0{,}1\\\\\n-0{,}25&0{,}25\n\\end{bmatrix},\\\\\nb_2&=(0,0).\n\\end{aligned}"
+    },
+    {
+      "before": "\\frac{\\partial L}{\\partial (W_2)_{11}}\n=5\\frac{0{,}880797-1}{2}\n\\approx-0{,}298007.",
+      "after": "\\begin{aligned}\n\\frac{\\partial L}{\\partial (W_2)_{11}}\n&=5\\frac{0{,}880797-1}{2}\\\\\n&\\approx-0{,}298007.\n\\end{aligned}"
+    }
+  ]
+}

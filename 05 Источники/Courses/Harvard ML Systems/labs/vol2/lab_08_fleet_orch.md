@@ -9,9 +9,18 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol2/lab_08_fleet_orch.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol2/lab_08_fleet_orch.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL2 Lab — Fleet Orch
 
@@ -33,43 +42,11 @@ until the queue crosses the track guardrail.
 
 ---
 
-```
-rho              = lambda_effective / mu_capacity
-Wq / E[S]        = rho/(1-rho) * (1 + Cs^2)/2
-p95_guardrail_ok = p95_wait_or_latency <= track_guardrail
-```
-
-Current values: rho `{v2_08_queue['rho']:.3f}`, Cs `{v2_08_queue['cs']:.2f}`,
-wait multiplier `{v2_08_queue['wait_multiplier']:.2f}x`, p95
-`{v2_08_queue['p95_latency']:.1f} {v2_08_packet['latency_unit']}`.
-
-Chapter anchor: the M/G/1 queueing callout in Fleet Orchestration. Local
-scenario constants encode the selected track's arrival unit, service amount,
-and guardrail.
-
----
-
 ## Concept: Priority Moves Pain, It Does Not Remove It
 
 Preemption can make urgent work fast, but every eviction pays lost work,
 reload, warmup, and queue churn. The policy question is whether that tax is
 bounded.
-
----
-
-```
-recovery_min = checkpoint_interval/2 + reload_min + warmup_min
-tax          = preemption_events_per_hour * recovery_min * preempted_slots
-starvation_ok = waiting_time_h <= starvation_guard_h
-```
-
-Current values: recovery `{v2_08_priority['recovery_min']:.1f}` min/event,
-tax `{v2_08_priority['preemption_tax_slot_min_h']:.0f}` slot-min/h,
-starvation wait `{v2_08_fmt_hours(v2_08_priority['starvation_wait_h'])}`.
-
-Chapter anchor: Priority preemption cascades and preemption-tax discussion.
-The local model exposes the chapter consequence without claiming a production
-scheduler simulator.
 
 ---
 
@@ -81,25 +58,226 @@ resulting job pays a communication or migration penalty.
 
 ---
 
-```
-fragmentation_index = (free_slots - largest_contiguous_block) / free_slots
-Cost_locality       = sum_{{i<j}} w(d(g_i, g_j))
-topology_ok         = feasible and topology_penalty <= limit
-```
-
-Current values: free slots `{v2_08_placement['free_slots']}`, largest
-contiguous block `{v2_08_placement['max_contiguous']}`, locality cost
-`{v2_08_placement['locality_cost']:.1f}`, topology penalty
-`{v2_08_placement['topology_penalty_pct']:.1f}%`.
-
-Chapter anchor: bin packing, fragmentation, and topology-aware placement.
-
----
-
 ## Concept: Feasibility Is A Conjunction
 
 No single metric launches an orchestration policy. Utilization, fairness, SLO,
 starvation, and topology must all pass under the same workload.
+
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+You predicted `⟨value 1⟩`; actual result is `⟨value 2⟩`. ⟨value 3⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{selected}' `
+- value_2: ` f'{correct_key}' `
+- value_3: ` f'{correct}' `
+
+---
+
+You predicted `⟨value 1⟩`; actual result is `⟨value 2⟩`. ⟨value 3⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{selected}' `
+- value_2: ` f'{correct_key}' `
+- value_3: ` f'{miss}' `
+
+---
+
+**Scenario:** ⟨value 1⟩ must choose an orchestration policy for ⟨value 2⟩. The amount system is ⟨value 3⟩, ⟨value 4⟩, p95 wait/latency in ⟨value 5⟩, fair-share percent, and starvation time.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_08_packet['stakeholder']}" `
+- value_2: ` f"{v2_08_packet['label']}" `
+- value_3: ` f"{v2_08_packet['arrival_unit']}" `
+- value_4: ` f"{v2_08_packet['resource_unit']}" `
+- value_5: ` f"{v2_08_packet['latency_unit']}" `
+
+---
+
+Commit to the queueing prediction before opening the instrument.
+
+---
+
+**Boundary crossed:** ⟨value 1⟩. P95 is ⟨value 2⟩ ⟨value 3⟩ against a ⟨value 4⟩ ⟨value 5⟩ guardrail. Recover by lowering admitted arrivals, reducing long-job mix, or reserving headroom.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_08_packet['queue_failure']}" `
+- value_2: ` f"{v2_08_queue['p95_latency']:.1f}" `
+- value_3: ` f"{v2_08_packet['latency_unit']}" `
+- value_4: ` f"{v2_08_packet['queue_slo']:g}" `
+- value_5: ` f"{v2_08_packet['latency_unit']}" `
+
+---
+
+**Boundary holds:** the selected queue has ⟨value 1⟩% utilization and p95 ⟨value 2⟩ ⟨value 3⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_08_queue['rho'] * 100:.1f}" `
+- value_2: ` f"{v2_08_queue['p95_latency']:.1f}" `
+- value_3: ` f"{v2_08_packet['latency_unit']}" `
+
+---
+
+```
+rho              = lambda_effective / mu_capacity
+Wq / E[S]        = rho/(1-rho) * (1 + Cs^2)/2
+p95_guardrail_ok = p95_wait_or_latency <= track_guardrail
+```
+
+Current values: rho `⟨value 1⟩`, Cs `⟨value 2⟩`,
+wait multiplier `⟨value 3⟩x`, p95
+`⟨value 4⟩ ⟨value 5⟩`.
+
+Chapter anchor: the M/G/1 queueing callout in Fleet Orchestration. Local
+scenario constants encode the selected track's arrival unit, service amount,
+and guardrail.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_08_queue['rho']:.3f}" `
+- value_2: ` f"{v2_08_queue['cs']:.2f}" `
+- value_3: ` f"{v2_08_queue['wait_multiplier']:.2f}" `
+- value_4: ` f"{v2_08_queue['p95_latency']:.1f}" `
+- value_5: ` f"{v2_08_packet['latency_unit']}" `
+
+---
+
+Checkpoint: choose the admission rule that should constrain priority decisions.
+
+---
+
+Commit to the preemption prediction before opening the trade-off chart.
+
+---
+
+**Preemption boundary crossed:** ⟨value 1⟩. Binding guardrail: ⟨value 2⟩. Recovery tax is ⟨value 3⟩ slot-min/h.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_08_packet['preemption_failure']}" `
+- value_2: ` f"{v2_08_priority['binding']}" `
+- value_3: ` f"{v2_08_priority['preemption_tax_slot_min_h']:.0f}" `
+
+---
+
+**Priority rule is bounded:** urgent latency is ⟨value 1⟩ ⟨value 2⟩ and starvation wait is ⟨value 3⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_08_priority['urgent_latency']:.1f}" `
+- value_2: ` f"{v2_08_packet['latency_unit']}" `
+- value_3: ` f"{v2_08_fmt_hours(v2_08_priority['starvation_wait_h'])}" `
+
+---
+
+```
+recovery_min = checkpoint_interval/2 + reload_min + warmup_min
+tax          = preemption_events_per_hour * recovery_min * preempted_slots
+starvation_ok = waiting_time_h <= starvation_guard_h
+```
+
+Current values: recovery `⟨value 1⟩` min/event,
+tax `⟨value 2⟩` slot-min/h,
+starvation wait `⟨value 3⟩`.
+
+Chapter anchor: Priority preemption cascades and preemption-tax discussion.
+The local model exposes the chapter consequence without claiming a production
+scheduler simulator.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_08_priority['recovery_min']:.1f}" `
+- value_2: ` f"{v2_08_priority['preemption_tax_slot_min_h']:.0f}" `
+- value_3: ` f"{v2_08_fmt_hours(v2_08_priority['starvation_wait_h'])}" `
+
+---
+
+Checkpoint: choose the priority rule that should constrain placement.
+
+---
+
+Commit to the placement prediction before opening the topology heatmap.
+
+---
+
+**Placement failure:** ⟨value 1⟩. There are ⟨value 2⟩ free slots, but the largest contiguous ⟨value 3⟩ has only ⟨value 4⟩ slots.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_08_packet['placement_failure']}" `
+- value_2: ` f"{v2_08_placement['free_slots']}" `
+- value_3: ` f"{v2_08_packet['domain_label']}" `
+- value_4: ` f"{v2_08_placement['max_contiguous']}" `
+
+---
+
+**Topology boundary crossed:** placement is feasible, but the topology penalty is ⟨value 1⟩% against a ⟨value 2⟩% guardrail.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_08_placement['topology_penalty_pct']:.1f}" `
+- value_2: ` f"{v2_08_packet['topology_limit_pct']:.0f}" `
+
+---
+
+**Placement passes:** the selected policy places the job with locality cost ⟨value 1⟩ and topology penalty ⟨value 2⟩%.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_08_placement['locality_cost']:.1f}" `
+- value_2: ` f"{v2_08_placement['topology_penalty_pct']:.1f}" `
+
+---
+
+```
+fragmentation_index = (free_slots - largest_contiguous_block) / free_slots
+Cost_locality       = sum_{i<j} w(d(g_i, g_j))
+topology_ok         = feasible and topology_penalty <= limit
+```
+
+Current values: free slots `⟨value 1⟩`, largest
+contiguous block `⟨value 2⟩`, locality cost
+`⟨value 3⟩`, topology penalty
+`⟨value 4⟩%`.
+
+Chapter anchor: bin packing, fragmentation, and topology-aware placement.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_08_placement['free_slots']}" `
+- value_2: ` f"{v2_08_placement['max_contiguous']}" `
+- value_3: ` f"{v2_08_placement['locality_cost']:.1f}" `
+- value_4: ` f"{v2_08_placement['topology_penalty_pct']:.1f}" `
+
+---
+
+Checkpoint: choose how placement should be framed in the policy memo.
+
+---
+
+Commit to the policy-gate prediction before opening the candidate table.
+
+---
+
+**Policy gate passes.** ⟨value 1⟩ satisfies utilization, fairness, SLO, starvation, and topology guardrails together.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{selected['candidate']['label']}" `
+
+---
+
+**Policy gate fails.** Binding guardrail: ⟨value 1⟩. Revise the selected scheduler policy or loosen a justified operating threshold.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{selected['binding']}" `
 
 ---
 
@@ -112,9 +290,33 @@ starvation_ok  = starvation_h <= starvation_guard_h
 topology_ok    = placement_feasible and topology_penalty <= topology_limit
 ```
 
-Selected policy: `{selected['candidate']['label']}`. Binding guardrail:
-`{selected['binding']}`. Rejected alternative:
-`{rejected['candidate']['label']}`.
+Selected policy: `⟨value 1⟩`. Binding guardrail:
+`⟨value 2⟩`. Rejected alternative:
+`⟨value 3⟩`.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{selected['candidate']['label']}" `
+- value_2: ` f"{selected['binding']}" `
+- value_3: ` f"{rejected['candidate']['label']}" `
+
+---
+
+## Synthesis - Orchestration Policy Memo
+
+---
+
+**Memo frame for ⟨value 1⟩:** select `⟨value 2⟩`, name `⟨value 3⟩` as the binding guardrail, reject `⟨value 4⟩`, and carry forward: ⟨value 5⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_08_packet['label']}" `
+- value_2: ` f"{selected['candidate']['label']}" `
+- value_3: ` f"{selected['binding']}" `
+- value_4: ` f"{rejected['candidate']['label']}" `
+- value_5: ` f'{implication_text}' `
+
+</details>
 
 ## Complete original Marimo source
 

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "curated-rnn-execution-d2l-deep-518484464a1f",
+    "asset": "00 Учебник/Assets/Figures/curated/rnn-execution-2026-10-26/d2l-deep-rnn.svg",
+    "author": "Aston Zhang, Zachary C. Lipton, Mu Li, Alexander J. Smola",
+    "source_url": "https://d2l.ai/chapter_recurrent-modern/deep-rnn.html",
+    "source_image_url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/deep-rnn.svg",
+    "commit": "23d7a5aecceee57d1292c56e90cce307f183bb0a",
+    "source_asset": "05 Источники/Originals/rnn-execution-2026-10-26/d2l-deep-rnn.svg",
+    "source_asset_sha256": "518484464a1fd5fce1bde4fefdbbf68402fde18f62c460ee1ab680fe3965d8e0",
+    "sha256": "518484464a1fd5fce1bde4fefdbbf68402fde18f62c460ee1ab680fe3965d8e0",
+    "source_page_snapshot": "05 Источники/Originals/rnn-execution-2026-10-26/d2l-deep-rnn.md",
+    "source_page_sha256": "eac7791ce4773f0d822a5ab254bf1edf527143dc4b3bd88f2566d5b8c92a525e",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/rnn-execution-2026-10-26/d2l-LICENSE.txt",
+    "license_evidence_sha256": "a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c",
+    "derivation": "source-svg-copy",
+    "modifications": "Complete original copied byte-for-byte. No crop, redraw, relabeling or translation.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-26",
+    "used_in": ["00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT.md"]
+  }
+]

@@ -1,0 +1,24 @@
+[
+  {
+    "name": "xiong-pre-post-norm.png",
+    "sha256": "fb882ba9d546192eafc0ee81f51244043faa986a1641138e20b50e998e0efdaf",
+    "asset": "00 Учебник/Assets/Figures/curated/norm-gating-2026-10-22/xiong-pre-post-norm.png",
+    "source_asset": "05 Источники/Originals/norm-gating-2026-10-22/xiong20b.pdf",
+    "source_asset_sha256": "93dbef3adbd54e01a03a81b9876f22a8c823562e0e578b2176d488c16db8ad45",
+    "source_page": 2,
+    "render_dpi": 360,
+    "render_page_size_px": [3060,3960],
+    "crop_box_px": [270,330,1490,1420]
+  },
+  {
+    "name": "xiong-gradient-norms.png",
+    "sha256": "0b409086dc5bbd27807a32cda09b64ec3eee44ad0263746b6e05568ba243a3c4",
+    "asset": "00 Учебник/Assets/Figures/curated/norm-gating-2026-10-22/xiong-gradient-norms.png",
+    "source_asset": "05 Источники/Originals/norm-gating-2026-10-22/xiong20b.pdf",
+    "source_asset_sha256": "93dbef3adbd54e01a03a81b9876f22a8c823562e0e578b2176d488c16db8ad45",
+    "source_page": 7,
+    "render_dpi": 360,
+    "render_page_size_px": [3060,3960],
+    "crop_box_px": [270,350,2730,945]
+  }
+]

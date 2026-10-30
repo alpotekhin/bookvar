@@ -1,0 +1,76 @@
+[
+  {
+    "id": "curated-dpo-tulu-4d272a5aa3e2",
+    "asset": "00 Учебник/Assets/Figures/curated/dpo-2026-10-24/tulu-preference-pipeline.png",
+    "author": "Nathan Lambert et al.",
+    "source_url": "https://arxiv.org/pdf/2411.15124v5#page=22",
+    "source_asset": "05 Источники/Papers/Source PDFs/tulu3-rlvr-arxiv-v5.pdf",
+    "source_asset_sha256": "79bed1ef4ce4bb332f43bdc87d60709e644560f8f3bb6d14913a473cc82c251f",
+    "source_page": 22,
+    "render_dpi": 400,
+    "render_page_size_px": [
+      3400,
+      4400
+    ],
+    "crop_box_px": [
+      333,
+      306,
+      3056,
+      1278
+    ],
+    "dimensions_px": [
+      2723,
+      972
+    ],
+    "sha256": "4d272a5aa3e2e5d7ac1eb34e59539e4b0f8c648d4f47ca320a26de835c1b8f50",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/sft-2026-10-23/tulu3-v5.html",
+    "license_evidence_sha256": "0a437403a0fce0cab42931983f67753c1260df36df66dbd34abfe4603e9ef0ef",
+    "modifications": "Poppler 400 dpi rendering and crop around complete Figure 7, including full English captions; no redraw, translation, relabeling, or upsampling. Reuses the existing source PDF.",
+    "derivation": "pdf-page-render-crop",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-24",
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/05 DPO.md"
+    ]
+  },
+  {
+    "id": "curated-dpo-tulu-a8756c745e77",
+    "asset": "00 Учебник/Assets/Figures/curated/dpo-2026-10-24/tulu-prompt-policy-ablations.png",
+    "author": "Nathan Lambert et al.",
+    "source_url": "https://arxiv.org/pdf/2411.15124v5#page=25",
+    "source_asset": "05 Источники/Papers/Source PDFs/tulu3-rlvr-arxiv-v5.pdf",
+    "source_asset_sha256": "79bed1ef4ce4bb332f43bdc87d60709e644560f8f3bb6d14913a473cc82c251f",
+    "source_page": 25,
+    "render_dpi": 400,
+    "render_page_size_px": [
+      3400,
+      4400
+    ],
+    "crop_box_px": [
+      361,
+      1083,
+      3055,
+      2317
+    ],
+    "dimensions_px": [
+      2694,
+      1234
+    ],
+    "sha256": "a8756c745e770eee2e1a5094171644ec9c84e8d8342dd36dc91b8a02a5058361",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/sft-2026-10-23/tulu3-v5.html",
+    "license_evidence_sha256": "0a437403a0fce0cab42931983f67753c1260df36df66dbd34abfe4603e9ef0ef",
+    "modifications": "Poppler 400 dpi rendering and crop around complete Figures 10 and 11, including full English captions; no redraw, translation, relabeling, or upsampling. Reuses the existing source PDF.",
+    "derivation": "pdf-page-render-crop",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-24",
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/05 DPO.md"
+    ]
+  }
+]

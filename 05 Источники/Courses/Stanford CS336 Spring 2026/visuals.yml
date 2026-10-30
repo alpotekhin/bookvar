@@ -8,7 +8,7 @@
     "pdfimages": "26.04.0",
     "extractor_revision": "stanford-cs336-semantic-audit-v3",
     "extractor_sha256": "1e8d049b33e599e0e23c7edd26601f70120aff2899e13258b4dd3b852092c48f",
-    "semantic_review_sha256": "831a84f95b2a72bfc6eb4749092e7d6c0181c8988b46d794072a5deece0de53e"
+    "semantic_review_sha256": "250bd1d1a7f73d26ce805846d506b4cf6c87aeef045d5c373699f199d958ccc1"
   },
   "raster_evidence_summary": [
     {
@@ -15865,14 +15865,14 @@
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "edtrace 0.1.15 archived image rendering",
       "rendered_route": "/textbook/multimodal/unified-sequence-chameleon/",
-      "desktop_evidence": "The architecture labels and mixed-token path were inspected at native resolution and remain complete in the desktop article column.",
-      "narrow_evidence": "The figure remains contained on narrow screens and opens at its native resolution.",
-      "reviewer": "Codex Task 8 multimodal integration",
-      "checked_at": "2026-09-07",
+      "desktop_evidence": "Complete primary-paper replacement inspected at 1365x900 in the article; no clipping.",
+      "narrow_evidence": "Replacement inspected at 390x844 and in the 4x image viewer; labels readable after enlargement.",
+      "reviewer": "Bookvar chapter 64h source review",
+      "checked_at": "2026-10-20",
       "source_parent_sha256": "d8c3054ecce42fda3d92b4f21677a83d65cb525e8b3fbd4361c079f3cd20da52",
       "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/chameleon.png",
-      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/chameleon.png",
-      "transformation": "Byte-for-byte copy of the pinned Stanford course asset reproducing the Chameleon architecture figure.",
+      "local_file": "00 Учебник/Assets/Figures/curated/chameleon-2026-10/chameleon-architecture.png",
+      "transformation": "Same original paper figure used in CS336, replaced with a high-resolution complete PDF figure crop and English caption.",
       "caption": "Trace alternating text tokens and image-code tokens through one causal Transformer and back through the image decoder."
     },
     {
@@ -15909,14 +15909,14 @@
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "edtrace 0.1.15 archived image rendering",
       "rendered_route": "/textbook/multimodal/unified-sequence-chameleon/",
-      "desktop_evidence": "The complete qualitative sample was inspected at native resolution and is presented without cropping.",
-      "narrow_evidence": "The figure stays within the article column and opens at native resolution so its text can be read.",
-      "reviewer": "Codex Task 8 multimodal integration",
-      "checked_at": "2026-09-07",
+      "desktop_evidence": "Complete primary-paper replacement inspected at 1365x900 in the article; no clipping.",
+      "narrow_evidence": "Replacement inspected at 390x844 and in the 4x image viewer; labels readable after enlargement.",
+      "reviewer": "Bookvar chapter 64h source review",
+      "checked_at": "2026-10-20",
       "source_parent_sha256": "d8c3054ecce42fda3d92b4f21677a83d65cb525e8b3fbd4361c079f3cd20da52",
       "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/chameleon-example.png",
-      "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/chameleon-example.png",
-      "transformation": "Byte-for-byte copy of the pinned Stanford course qualitative sample; no crop or redraw.",
+      "local_file": "00 Учебник/Assets/Figures/curated/chameleon-2026-10/chameleon-mixed-document.png",
+      "transformation": "Same original paper figure used in CS336, replaced with a high-resolution complete PDF figure crop and English caption.",
       "caption": "Inspect entity and reference continuity across alternating generated text and image blocks without treating one qualitative sample as a benchmark."
     },
     {
@@ -15938,9 +15938,7 @@
           "source_location": "Lectures/repository/var/traces/lecture_17.json#step=216:rendering=1"
         }
       ],
-      "disposition": "integrated",
-      "destination": "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md",
-      "destination_anchor": "3-как-изображение-становится-дискретными-кодами",
+      "disposition": "excluded",
       "attribution": "Stanford CS336 staff, Language Modeling from Scratch, Spring 2026",
       "rights_status": "permission-recorded",
       "rights_holder": "Stanford CS336 source authors and identified upstream asset owners",
@@ -15953,15 +15951,17 @@
       "extractor_revision": "stanford-cs336-semantic-audit-v3",
       "extraction_tool": "edtrace 0.1.15 archived image rendering",
       "rendered_route": "/textbook/multimodal/unified-sequence-chameleon/",
-      "desktop_evidence": "The encoder, codebook lookup, and decoder path were inspected at native resolution and remain legible without clipping.",
-      "narrow_evidence": "The figure remains contained in the article column and opens at native resolution for its smaller labels.",
-      "reviewer": "Codex Task 8 multimodal integration",
-      "checked_at": "2026-09-07",
+      "desktop_evidence": "Course raster withdrawn from canonical chapter; original primary-paper figure used instead.",
+      "narrow_evidence": "Original primary-paper replacement inspected at 390x844 and 4x in the viewer. Archived course-only VQ raster remains excluded.",
+      "reviewer": "Bookvar chapter 64h source review",
+      "checked_at": "2026-10-20",
       "source_parent_sha256": "d8c3054ecce42fda3d92b4f21677a83d65cb525e8b3fbd4361c079f3cd20da52",
       "asset_url": "https://raw.githubusercontent.com/stanford-cs336/lectures/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/vq-vae.png",
       "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/vq-vae.png",
       "transformation": "Byte-for-byte copy of the pinned Stanford CS336 Lecture 17 course diagram; it is not represented as a primary-paper figure.",
-      "caption": "Follow a continuous latent vector through nearest-code selection and then through the decoder back to pixels."
+      "caption": "Follow a continuous latent vector through nearest-code selection and then through the decoder back to pixels.",
+      "reason": "Course-only VQ overview replaced in chapter 64h by original VQ-VAE Figure 1 linked from primary-paper HTML; archived course diagram is not claimed to be a primary-paper figure.",
+      "evidence": "Lectures/repository/lecture_17.py#L283"
     },
     {
       "id": "assignment-01-visual-transformer-construction-sequence",
@@ -16442,5 +16442,5 @@
       "evidence": "Assignments/assignment5-alignment/cs336_spring2026_assignment5_supplement_safety_rlhf.pdf#pages=15-18"
     }
   ],
-  "editorial_overlay_sha256": "680b401c418b4be5375a046726670c7bc77c8d97de5dcfb3ecaa4e5c938a3dce"
+  "editorial_overlay_sha256": "c84c0d698fec824fe5e216488b5ae2612200c4b417cb90709c693d5771b405c3"
 }

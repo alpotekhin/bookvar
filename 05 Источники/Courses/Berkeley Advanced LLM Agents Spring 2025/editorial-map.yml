@@ -438,9 +438,9 @@
       "destination_anchor": "budget-forcing-заставить-траекторию-продолжиться"
     },
     "meeting-04-slides-olmo-pretraining": {
-      "disposition": "source-only",
-      "reason": "Stanford and the pre-training route own this topic; the OLMo material remains discoverable here.",
-      "evidence": "Lectures/meeting-04-slides.pages.txt#physical-pages=143-152"
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+      "destination_anchor": "olmo-two-stage-recipe"
     },
     "meeting-04-slides-open-recipe-synthesis": {
       "disposition": "source-only",
@@ -573,9 +573,10 @@
       "destination_anchor": "верификатор-как-фильтр-синтетической-траектории"
     },
     "meeting-06-slides-plan-sequence-learn": {
-      "disposition": "source-only",
-      "reason": "Robotics is outside the current canonical route.",
-      "evidence": "Lectures/meeting-06-slides.pages.txt#physical-pages=107-116"
+      "disposition": "integrated",
+      "destination": "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
+      "destination_anchor": "plan-seq-learn",
+      "evidence": "Lectures/meeting-06-slides.pages.txt#physical-pages=107-116; complete original paper prose in sections 3.3-3.5, D.3.1, B.3 and the overview paragraph of 3.2. Source v1 is CC BY 4.0; quotations are preserved in English."
     },
     "meeting-06-slides-nvidia-confidential-page": {
       "disposition": "excluded",
@@ -743,9 +744,9 @@
       "evidence": "Lectures/meeting-08-slides.pages.txt#physical-pages=93-93"
     },
     "meeting-08-slides-riemann-zeta-demo": {
-      "disposition": "source-only",
-      "reason": "The long lecture demonstration is linked by exact pages rather than reproduced as a brittle sequence.",
-      "evidence": "Lectures/meeting-08-slides.pages.txt#physical-pages=94-107"
+      "disposition": "integrated",
+      "destination": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
+      "destination_anchor": "finite-products-and-missing-assumptions"
     },
     "meeting-08-slides-formal-reasoning-future": {
       "disposition": "source-only",
@@ -1537,15 +1538,15 @@
       "disposition": "integrated",
       "destination": "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
       "destination_anchor": "что-показывает-кривая-rlvr-а-чего-она-не-доказывает",
-      "transformation": "Replaced lecture screenshots with primary Tulu 3 v5 figures: the upper nine training panels and shared legend of Figure 19, plus unchanged original rasters for IFEval/generalization and value-model initialization. PDF crop coordinates and source hashes are recorded in asset-registry.yml.",
-      "caption": "The text separately explains training reward, KL, response length, held-out IFEval and average benchmark scores, then distinguishes value-model initialization from the source of the reward.",
+      "transformation": "Complete original Tulu 3 v5 Figure 19 (all 12 panels and caption) replaces the earlier incomplete nine-panel crop. The IFEval/generalization and value-initialization originals remain. Figure 22 is separate chapter evidence and is not claimed as part of this lecture sequence.",
+      "caption": "Individual adjacent captions identify the actual original figures, source versions and changes. Reconciled to the unchanged accepted chapter; see docs/audit/2026-10-24-rlvr.md",
       "rendered_route": "/textbook/post-training/rlvr-verifiers/",
-      "desktop_evidence": "Source figures inspected directly; browser checks at 1360px confirm decoded images, preserved aspect ratios, no horizontal page overflow and full-size links.",
-      "narrow_evidence": "390px browser screenshot reviewed: the nine-panel figure remains complete, explanatory prose carries the comparisons, and the full-resolution original is accessible. All three images pass fit and aspect-ratio checks.",
-      "reviewer": "Bookvar editorial review",
-      "checked_at": "2026-09-21",
+      "desktop_evidence": "Historical figure QA: docs/audit/2026-10-24-rlvr.md. Current chapter SHA matches the accepted report; this 2026-10-26 mapping repair is not a new visual or chapter acceptance.",
+      "narrow_evidence": "Historical mobile/viewer QA and its limitations are retained in docs/audit/2026-10-24-rlvr.md. Only file references are reconciled here; no new blanket readability claim.",
+      "reviewer": "Bookvar source-to-destination mapping reconciliation",
+      "checked_at": "2026-10-26",
       "local_files": [
-        "00 Учебник/Assets/Figures/curated/rlvr-review-2026-09/tulu-rlvr-training-curves.png",
+        "00 Учебник/Assets/Figures/curated/rlvr-2026-10-24/tulu-rlvr-full-figure19.png",
         "00 Учебник/Assets/Figures/curated/rlvr-review-2026-09/tulu-ifeval-kl-and-generalization.png",
         "00 Учебник/Assets/Figures/curated/rlvr-review-2026-09/tulu-value-initialization.png"
       ]
@@ -1586,9 +1587,19 @@
       ]
     },
     "meeting-04-slides-visual-olmo-pretraining": {
-      "disposition": "source-only",
-      "reason": "Not selected by the full visual audit: redundant orientation, broad synthesis, result-only evidence, or a weaker visual than the chosen mechanism sequence.",
-      "evidence": "Lectures/meeting-04-slides.pages.txt#physical-pages=143-152"
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+      "destination_anchor": "olmo-two-stage-recipe",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/pretraining/m04-p147-two-stage-training.png"
+      ],
+      "transformation": "Complete physical page 147 rendered at 2400x1350, no crop or redraw. It subsumes the progressive schedule frames on pages 144-146. Source tables on 149-150 are explained with the existing OLMo/Dolmino inventories; every score on 151 is retained in split text tables from the CC-BY primary report. Page 148's schematic 99/1 and page 152's unplotted Qwen headline are explicitly qualified, not adopted as measured claims.",
+      "caption": "Hanna Hajishirzi, lecture title/date, direct PDF page link, full-frame notice and schematic-value caveat. Slide permission record is kept separate from the paper's CC BY 4.0.",
+      "rendered_route": "/textbook/pretraining/data-and-pretraining/#olmo-two-stage-recipe",
+      "desktop_evidence": "Inspected at 1280x900: complete 2400x1350 source frame, readable schedule labels in the full-image viewer, correct attribution and three original English paragraphs. Both result tables render; the eight-column development table fits the desktop article.",
+      "narrow_evidence": "Inspected at 360x800: page width 360/360, image fits 328px, three display formulas have scrollWidth=clientWidth=328, no KaTeX errors. At 3x the viewer exposes both left warmup axis and right linear-decay labels via horizontal pan. Development results scroll within the table; the final DROP column was visibly reached.",
+      "reviewer": "Codex source-to-chapter review",
+      "checked_at": "2026-10-26"
     },
     "meeting-04-slides-visual-open-recipe-synthesis": {
       "disposition": "source-only",
@@ -1779,9 +1790,21 @@
       "checked_at": "2026-09-07"
     },
     "meeting-06-slides-visual-plan-sequence-learn": {
-      "disposition": "source-only",
-      "reason": "Retained with its robotics mechanism outside the current canonical route; coherent teaching requires motion-planning, perception and low-level-control context not supplied by the current web/GUI agent chapters.",
-      "evidence": "Lectures/meeting-06-slides.pages.txt#physical-pages=107-116; https://planseqlearn.github.io/"
+      "disposition": "integrated",
+      "destination": "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
+      "destination_anchor": "plan-seq-learn",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/planseqlearn-2026-10-26/method.png",
+        "00 Учебник/Assets/Figures/curated/planseqlearn-2026-10-26/sequencing.png",
+        "00 Учебник/Assets/Figures/curated/planseqlearn-2026-10-26/nut-assembly.png"
+      ],
+      "transformation": "Replaced slide-sized reproductions with byte-identical original PNG Figures 2, D.1 and 1 from arXiv:2405.01534v1 (CC BY 4.0). No slide page or confidential content copied. Original diagrams and NutAssembly sequence retained; text explains the gold-first versus silver-first order difference.",
+      "caption": "Named authors, pinned article, figure identifiers, CC BY 4.0, unchanged-original notice and adjacent explanation for each image.",
+      "rendered_route": "/textbook/agents/memory-planning-orchestration/#plan-seq-learn",
+      "desktop_evidence": "All three originals inspected in the reader viewer at 1280x900: planning/sequence/local-control modules, segmentation/IK/AIT*, four-stage NutAssembly. Source dimensions 1320x669, 1320x463 and 1315x501 retained.",
+      "narrow_evidence": "At 360x800 the page has no horizontal overflow and each inline image fits within 328px. Dense labels require the viewer; NutAssembly labels inspected at 3x, with local horizontal scrolling available. Fit reset and viewer closed.",
+      "reviewer": "Codex source-to-chapter review",
+      "checked_at": "2026-10-26"
     },
     "meeting-06-slides-visual-nvidia-confidential-page": {
       "disposition": "excluded",
@@ -1964,9 +1987,20 @@
       "evidence": "The page is a navigation divider."
     },
     "meeting-08-slides-visual-riemann-zeta-demo": {
-      "disposition": "source-only",
-      "reason": "Not selected by the full visual audit: redundant orientation, broad synthesis, result-only evidence, or a weaker visual than the chosen mechanism sequence.",
-      "evidence": "Lectures/meeting-08-slides.pages.txt#physical-pages=94-107"
+      "disposition": "integrated",
+      "destination": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
+      "destination_anchor": "finite-products-and-missing-assumptions",
+      "transformation": "Complete native JPEG streams from physical pages 99 and 100, PDF objects 638 and 645; the latter is repeated on page 104. Encoded bytes, original dimensions and lower fade retained; no page render, crop, redraw, resampling or translation.",
+      "caption": "Thomas Hubert, AlphaProof lecture, pages 99-100; zetamath channel referenced on page 97, precise original video not established. Harmonic-series illustrations are followed by a finite rational example, an infinitude-of-primes argument and explicit convergence conditions. Mathlib's separate Apache license is not assigned to these images.",
+      "rendered_route": "/textbook/agents/formal-math/",
+      "desktop_evidence": "docs/audit/2026-10-26-berkeley-finite-products.md",
+      "narrow_evidence": "docs/audit/2026-10-26-berkeley-finite-products.md",
+      "reviewer": "Bookvar source-to-destination editorial review",
+      "checked_at": "2026-10-26",
+      "local_files": [
+        "00 Учебник/Assets/Figures/curated/formal-zeta-2026-10-26/prime-factorization.jpg",
+        "00 Учебник/Assets/Figures/curated/formal-zeta-2026-10-26/prime-geometric-factors.jpg"
+      ]
     },
     "meeting-08-slides-visual-formal-reasoning-future": {
       "disposition": "source-only",
@@ -2037,15 +2071,16 @@
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
       "destination_anchor": "leaneuclid-текст-диаграмма-domain-system-and-smt",
-      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
-      "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about LeanEuclid representation?",
+      "transformation": "Original PMLR Figures 1-2 and English captions replace the obscured lecture page 84. Crop provenance and CC BY 4.0 are recorded in formal-math-2026-10-21/assets.json.",
+      "caption": "Individual adjacent captions identify the actual original figures, source versions and changes. Reconciled to the unchanged accepted chapter; see docs/audit/2026-10-21-formal-math.md",
       "rendered_route": "/textbook/agents/formal-math/",
-      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
-      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
-      "reviewer": "Codex source-to-destination visual audit",
-      "checked_at": "2026-09-07",
+      "desktop_evidence": "Historical figure QA: docs/audit/2026-10-21-formal-math.md. Current chapter SHA matches the accepted report; this 2026-10-26 mapping repair is not a new visual or chapter acceptance.",
+      "narrow_evidence": "Historical mobile/viewer QA and its limitations are retained in docs/audit/2026-10-21-formal-math.md. Only file references are reconciled here; no new blanket readability claim.",
+      "reviewer": "Bookvar source-to-destination mapping reconciliation",
+      "checked_at": "2026-10-26",
       "local_files": [
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m09-p84.png"
+        "00 Учебник/Assets/Figures/curated/formal-math-2026-10-21/leaneuclid-autoformalization.png",
+        "00 Учебник/Assets/Figures/curated/formal-math-2026-10-21/leaneuclid-construction-rules.png"
       ]
     },
     "meeting-09-slides-visual-euclid-logical-gap": {
@@ -2065,19 +2100,9 @@
       ]
     },
     "meeting-09-slides-visual-equivalence-and-diagrams": {
-      "disposition": "integrated",
-      "destination": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
-      "destination_anchor": "семантическая-эквивалентность-и-диаграммные-следствия",
-      "local_files": [
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m09-p105.png"
-      ],
-      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
-      "caption": "What does the reviewed sequence establish about Equivalence and diagram understanding?",
-      "rendered_route": "/textbook/agents/formal-math/",
-      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
-      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
-      "reviewer": "Codex source-to-destination visual audit",
-      "checked_at": "2026-09-07"
+      "disposition": "source-only",
+      "reason": "Lecture page 105 was removed during the accepted formal-math review. Semantic-equivalence reasoning remains in the chapter, but there is no separate replacement of this diagram; a text-only explanation is not recorded as visual transfer.",
+      "evidence": "Lectures/meeting-09-slides.pages.txt#physical-pages=98-105; docs/audit/2026-10-21-formal-math.md"
     },
     "meeting-09-slides-visual-end-to-end-autoformalization": {
       "disposition": "source-only",
@@ -2113,16 +2138,16 @@
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
       "destination_anchor": "lean-star-thought-before-tactic-and-expert-iteration",
-      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
-      "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Lean-STaR self-training?",
+      "transformation": "Original Lean-STaR Figures 4-5 replace smaller slide reproductions on pages 39 and 42. Original PNGs and the source error in the Figure 5 log-probability labels are retained; the chapter explains that error.",
+      "caption": "Individual adjacent captions identify the actual original figures, source versions and changes. Reconciled to the unchanged accepted chapter; see docs/audit/2026-10-21-formal-math.md",
       "rendered_route": "/textbook/agents/formal-math/",
-      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
-      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
-      "reviewer": "Codex source-to-destination visual audit",
-      "checked_at": "2026-09-07",
+      "desktop_evidence": "Historical figure QA: docs/audit/2026-10-21-formal-math.md. Current chapter SHA matches the accepted report; this 2026-10-26 mapping repair is not a new visual or chapter acceptance.",
+      "narrow_evidence": "Historical mobile/viewer QA and its limitations are retained in docs/audit/2026-10-21-formal-math.md. Only file references are reconciled here; no new blanket readability claim.",
+      "reviewer": "Bookvar source-to-destination mapping reconciliation",
+      "checked_at": "2026-10-26",
       "local_files": [
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p39.png",
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p42.png"
+        "00 Учебник/Assets/Figures/curated/formal-math-2026-10-21/leanstar-pipeline.png",
+        "00 Учебник/Assets/Figures/curated/formal-math-2026-10-21/leanstar-search-sampling.png"
       ]
     },
     "meeting-10-slides-visual-meeting-10-outline": {
@@ -2155,15 +2180,15 @@
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
       "destination_anchor": "leanhammer-premise-selector-atp-aesop-and-reconstruction",
-      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
-      "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about LeanHammer premise selection and proof search?",
+      "transformation": "The unobscured physical page 78 replaces page 79 of the same pinned deck. Pages 82 and 85 remain unchanged; no redraw.",
+      "caption": "Individual adjacent captions identify the actual original figures, source versions and changes. Reconciled to the unchanged accepted chapter; see docs/audit/2026-10-21-formal-math.md",
       "rendered_route": "/textbook/agents/formal-math/",
-      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
-      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
-      "reviewer": "Codex source-to-destination visual audit",
-      "checked_at": "2026-09-07",
+      "desktop_evidence": "Historical figure QA: docs/audit/2026-10-21-formal-math.md. Current chapter SHA matches the accepted report; this 2026-10-26 mapping repair is not a new visual or chapter acceptance.",
+      "narrow_evidence": "Historical mobile/viewer QA and its limitations are retained in docs/audit/2026-10-21-formal-math.md. Only file references are reconciled here; no new blanket readability claim.",
+      "reviewer": "Bookvar source-to-destination mapping reconciliation",
+      "checked_at": "2026-10-26",
       "local_files": [
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p79.png",
+        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p78.png",
         "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p82.png",
         "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m10-p85.png"
       ]
@@ -2237,19 +2262,18 @@
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
       "destination_anchor": "сквозной-пример-корректность-компилятора",
-      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
-      "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Compiler verification with language models?",
+      "transformation": "Full source pages 27,30,32,33,37,38,39 retain the compiler, failed induction and strengthened statement. Page 34 with only Failure is omitted; no code trace is attributed to it.",
+      "caption": "Individual adjacent captions identify the actual original figures, source versions and changes. Reconciled to the unchanged accepted chapter; see docs/audit/2026-10-21-formal-math.md",
       "rendered_route": "/textbook/agents/formal-math/",
-      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
-      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
-      "reviewer": "Codex source-to-destination visual audit",
-      "checked_at": "2026-09-07",
+      "desktop_evidence": "Historical figure QA: docs/audit/2026-10-21-formal-math.md. Current chapter SHA matches the accepted report; this 2026-10-26 mapping repair is not a new visual or chapter acceptance.",
+      "narrow_evidence": "Historical mobile/viewer QA and its limitations are retained in docs/audit/2026-10-21-formal-math.md. Only file references are reconciled here; no new blanket readability claim.",
+      "reviewer": "Bookvar source-to-destination mapping reconciliation",
+      "checked_at": "2026-10-26",
       "local_files": [
         "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p27.png",
         "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p30.png",
         "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p32.png",
         "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p33.png",
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p34.png",
         "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p37.png",
         "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p38.png",
         "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/formal-math/m11-p39.png"
@@ -2274,18 +2298,16 @@
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md",
       "destination_anchor": "lasr-совместная-эволюция-формул-и-библиотеки-понятий",
-      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
-      "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about LaSR concept-library discovery loop?",
+      "transformation": "Byte-identical original LaSR SVGs replace the lower-resolution lecture screenshots on 61,63,67,68. English original diagrams and source attribution are retained.",
+      "caption": "Individual adjacent captions identify the actual original figures, source versions and changes. Reconciled to the unchanged accepted chapter; see docs/audit/2026-10-21-scientific-discovery.md",
       "rendered_route": "/textbook/agents/scientific-discovery/",
-      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
-      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
-      "reviewer": "Codex source-to-destination visual audit",
-      "checked_at": "2026-09-07",
+      "desktop_evidence": "Historical figure QA: docs/audit/2026-10-21-scientific-discovery.md. Current chapter SHA matches the accepted report; this 2026-10-26 mapping repair is not a new visual or chapter acceptance.",
+      "narrow_evidence": "Historical mobile/viewer QA and its limitations are retained in docs/audit/2026-10-21-scientific-discovery.md. Only file references are reconciled here; no new blanket readability claim.",
+      "reviewer": "Bookvar source-to-destination mapping reconciliation",
+      "checked_at": "2026-10-26",
       "local_files": [
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/discovery/m11-p61.png",
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/discovery/m11-p63-lasr-hypothesis-evolution.png",
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/discovery/m11-p67.png",
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/discovery/m11-p68.png"
+        "00 Учебник/Assets/Figures/curated/scientific-discovery-2026-10-21/lasr-overview.svg",
+        "00 Учебник/Assets/Figures/curated/scientific-discovery-2026-10-21/lasr-evolution.svg"
       ]
     },
     "meeting-11-slides-visual-lasr-examples-and-scaling": {
@@ -2295,16 +2317,15 @@
       "local_files": [
         "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/discovery/m11-p75-pysr-coulomb.png",
         "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/discovery/m11-p76-lasr-coulomb.png",
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/discovery/m11-p80-scaling-curves.png",
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/discovery/m11-p81-scaling-traits.png"
+        "00 Учебник/Assets/Figures/curated/scientific-discovery-2026-10-21/lasr-ablations.svg"
       ],
-      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
-      "caption": "What does the reviewed sequence establish about LaSR examples and scaling?",
+      "transformation": "Two full original Coulomb-example slides are retained, with original LaSR v3 ablation SVG. Old v1 scaling screenshots on 80-81 are intentionally not reproduced: the chapter separates v1/v3 formulas and explains v3 results in text.",
+      "caption": "Individual adjacent captions identify the actual original figures, source versions and changes. Reconciled to the unchanged accepted chapter; see docs/audit/2026-10-21-scientific-discovery.md",
       "rendered_route": "/textbook/agents/scientific-discovery/",
-      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
-      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
-      "reviewer": "Codex source-to-destination visual audit",
-      "checked_at": "2026-09-07"
+      "desktop_evidence": "Historical figure QA: docs/audit/2026-10-21-scientific-discovery.md. Current chapter SHA matches the accepted report; this 2026-10-26 mapping repair is not a new visual or chapter acceptance.",
+      "narrow_evidence": "Historical mobile/viewer QA and its limitations are retained in docs/audit/2026-10-21-scientific-discovery.md. Only file references are reconciled here; no new blanket readability claim.",
+      "reviewer": "Bookvar source-to-destination mapping reconciliation",
+      "checked_at": "2026-10-26"
     },
     "meeting-11-slides-visual-visual-concept-discovery": {
       "disposition": "source-only",
@@ -2340,15 +2361,15 @@
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md",
       "destination_anchor": "threat-model-before-defenses",
-      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
-      "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Agentic threat model?",
+      "transformation": "Full source page 13 replaces the earlier dimmed frame; original page 27 remains. No redrawing or confidential material.",
+      "caption": "Individual adjacent captions identify the actual original figures, source versions and changes. Reconciled to the unchanged accepted chapter; see docs/audit/2026-10-21-agent-security.md",
       "rendered_route": "/textbook/agents/security/",
-      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
-      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
-      "reviewer": "Codex source-to-destination visual audit",
-      "checked_at": "2026-09-07",
+      "desktop_evidence": "Historical figure QA: docs/audit/2026-10-21-agent-security.md. Current chapter SHA matches the accepted report; this 2026-10-26 mapping repair is not a new visual or chapter acceptance.",
+      "narrow_evidence": "Historical mobile/viewer QA and its limitations are retained in docs/audit/2026-10-21-agent-security.md. Only file references are reconciled here; no new blanket readability claim.",
+      "reviewer": "Bookvar source-to-destination mapping reconciliation",
+      "checked_at": "2026-10-26",
       "local_files": [
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/12-dawn-song-agentic-threat-model-sequence.png",
+        "00 Учебник/Assets/Figures/curated/agent-security-2026-10-21/m12-p13.png",
         "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/security/m12-p27.png"
       ]
     },
@@ -2361,15 +2382,15 @@
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md",
       "destination_anchor": "direct-indirect-and-retrieval-memory-poisoning",
-      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
-      "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Prompt injection and AgentPoison?",
+      "transformation": "The original AgentPoison Figure 1 replaces the blurred slide-sized reproduction; page 48 retains the direct/indirect comparison. Existing rights status is preserved, not reclassified as CC.",
+      "caption": "Individual adjacent captions identify the actual original figures, source versions and changes. Reconciled to the unchanged accepted chapter; see docs/audit/2026-10-21-agent-security.md",
       "rendered_route": "/textbook/agents/security/",
-      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
-      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
-      "reviewer": "Codex source-to-destination visual audit",
-      "checked_at": "2026-09-07",
+      "desktop_evidence": "Historical figure QA: docs/audit/2026-10-21-agent-security.md. Current chapter SHA matches the accepted report; this 2026-10-26 mapping repair is not a new visual or chapter acceptance.",
+      "narrow_evidence": "Historical mobile/viewer QA and its limitations are retained in docs/audit/2026-10-21-agent-security.md. Only file references are reconciled here; no new blanket readability claim.",
+      "reviewer": "Bookvar source-to-destination mapping reconciliation",
+      "checked_at": "2026-10-26",
       "local_files": [
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/12-prompt-injection-agentpoison.png",
+        "00 Учебник/Assets/Figures/curated/agent-security-2026-10-21/agentpoison-overview.png",
         "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/security/m12-p48.png"
       ]
     },
@@ -2423,15 +2444,16 @@
       "disposition": "integrated",
       "destination": "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md",
       "destination_anchor": "monitoring-information-flow-datasentinel-and-formal-policy-verification",
-      "transformation": "Exact full physical PDF page render(s) from the tracked Berkeley course deck; no crop, redraw, or semantic modification.",
-      "caption": "Attributed Berkeley course visual for: What does the reviewed sequence establish about Monitoring, DataSentinel, and formal verification?",
+      "transformation": "Original DataSentinel Figures 1-2 (PNG and SVG, CC BY 4.0) replace the crowded lecture reproduction. Detecting and training are explained separately in the chapter.",
+      "caption": "Individual adjacent captions identify the actual original figures, source versions and changes. Reconciled to the unchanged accepted chapter; see docs/audit/2026-10-21-agent-security.md",
       "rendered_route": "/textbook/agents/security/",
-      "desktop_evidence": "Full-resolution course frame and adjacent explanatory caption reviewed at desktop content width.",
-      "narrow_evidence": "Responsive image preserves the complete frame without cropping; adjacent searchable text carries dense labels and claims.",
-      "reviewer": "Codex source-to-destination visual audit",
-      "checked_at": "2026-09-07",
+      "desktop_evidence": "Historical figure QA: docs/audit/2026-10-21-agent-security.md. Current chapter SHA matches the accepted report; this 2026-10-26 mapping repair is not a new visual or chapter acceptance.",
+      "narrow_evidence": "Historical mobile/viewer QA and its limitations are retained in docs/audit/2026-10-21-agent-security.md. Only file references are reconciled here; no new blanket readability claim.",
+      "reviewer": "Bookvar source-to-destination mapping reconciliation",
+      "checked_at": "2026-10-26",
       "local_files": [
-        "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/12-agent-monitoring-and-verification.png"
+        "00 Учебник/Assets/Figures/curated/agent-security-2026-10-21/datasentinel-detection.png",
+        "00 Учебник/Assets/Figures/curated/agent-security-2026-10-21/datasentinel-training.svg"
       ]
     },
     "meeting-12-slides-visual-agent-safety-conclusion": {

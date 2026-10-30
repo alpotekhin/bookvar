@@ -9,17 +9,43 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`slides/vol1/14_ml_ops/14_ml_ops.tex`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static slide archive
+> Text and equations retain the original language. Layout wrappers are simplified;
+> speaker notes are separate, and original SVGs are not redrawn or cropped.
+> Unsupported TeX remains visible and is listed beside the affected slide.
+> This archive is not a checked transcript or a finished Bookvar chapter.
 
 # VOL1 Slides — Ml Ops
 
 ## Readable slide sequence
 
+## ML Operations
+
+[Original slide 1](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L60)
+
+Keeping Models Correct in Production
+
 ## Learning Objectives
 
-{
+[Original slide 2](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L65)
+
+1. Explain why **silent failures** distinguish ML from traditional software
+2. Analyze **technical debt** patterns: boundary erosion, correction cascades, data dependencies
+3. Design **feature stores** and **CI/CD pipelines** for training-serving consistency
+4. Apply the **retraining staleness model** to optimize retraining intervals
+5. Quantify **data drift** using **PSI** and **KL divergence**
+6. Compare **canary**, **blue-green**, and **shadow** deployment strategies
+7. Implement structured **incident response** for ML-specific failure modes
+8. Evaluate organizational **MLOps maturity levels**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min]
 % -- LINK: Connects to deployment from Ch13
 Students deployed models in the previous chapter. This slide reframes
@@ -44,21 +70,36 @@ data changes, users change, the world changes.
 [CORE] Do not skip --- these objectives structure every section.
 IF AHEAD: Ask students to rank which objective seems hardest.
 IF SHORT: Read objectives without discussion, move to next slide.
-}
+```
 
-{0pt}
-- Explain why **silent failures** distinguish ML from traditional software
-- Analyze **technical debt** patterns: boundary erosion, correction cascades, data dependencies
-- Design **feature stores** and **CI/CD pipelines** for training-serving consistency
-- Apply the **retraining staleness model** to optimize retraining intervals
-- Quantify **data drift** using **PSI** and **KL divergence**
-- Compare **canary**, **blue-green**, and **shadow** deployment strategies
-- Implement structured **incident response** for ML-specific failure modes
-- Evaluate organizational **MLOps maturity levels**
+</details>
 
 ## Visual Language
 
-{
+[Original slide 3](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L107)
+
+Throughout this course, colors carry meaning:
+
+**Blue** — Compute / Processing
+
+GPU ops, forward/backward pass, inference
+
+**Green** — Data / Memory
+
+Data flow, caches, healthy paths
+
+**Orange** — Routing / Scheduling
+
+Load balancers, batch windows
+
+**Red** — Error / Cost / Bottleneck
+
+Loss, decode phase, waste
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [0.5 min]
 % -- NARRATE: Orient students to the color system for this deck
 Point to each card: ``Blue for compute, green for data flow, orange for
@@ -69,45 +110,43 @@ silent failures).''
 % -- FLEX: [OPTIONAL] Returning students already know this
 [OPTIONAL] If students have seen previous decks, spend 30 seconds max.
 IF SHORT: Skip entirely --- students already internalized the palette.
-}
+```
 
-Throughout this course, colors carry meaning:
-
-{0.3cm}
-[T]
-  
-    {mlsyscard}{computestroke}
-    **Blue** --- Compute / Processing\\
-    { GPU ops, forward/backward pass, inference}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{datastroke}
-    **Green** --- Data / Memory\\
-    { Data flow, caches, healthy paths}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{routingstroke}
-    **Orange** --- Routing / Scheduling\\
-    { Load balancers, batch windows}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{errorstroke}
-    **Red** --- Error / Cost / Bottleneck\\
-    { Loss, decode phase, waste}
-    {mlsyscard}
+</details>
 
 ## The Operational Mismatch
 
-{
+[Original slide 4](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L156)
+
+A ridesharing demand model: 94% accuracy at deploy.
+
+- **Week 1**: Excellent performance
+- **Week 4**: Accuracy drops to 88%
+- **Week 8**: Driver dispatch is inefficient
+- **All infrastructure metrics**: **Green**
+
+A competitor launched a promotion that shifted user behavior.
+The model needed retraining **6 weeks ago**.
+
+|  | **DevOps** | **MLOps** |
+| --- | --- | --- |
+| Monitors | Uptime | Accuracy |
+| Failure | Crash | Drift |
+| Signal | Error log | Statistics |
+| Fix | Patch code | Retrain |
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: From learning objectives to the first concrete failure
 The objectives promised ``silent failures.'' This slide delivers the first
 one: a real production system degrading while every dashboard stayed green.
 
 % -- NARRATE: Tell the ridesharing story as a narrative
-``A ridesharing company deploys a demand model. 94% accuracy at launch.
-Week 4: 88%. Week 8: drivers dispatched to wrong areas. The entire time,
+``A ridesharing company deploys a demand model. 94\% accuracy at launch.
+Week 4: 88\%. Week 8: drivers dispatched to wrong areas. The entire time,
 every infrastructure metric --- CPU, memory, uptime --- was green.''
 Point to the DevOps vs MLOps table: ``DevOps monitors crashes. MLOps
 monitors drift. Different disease, different diagnostics.''
@@ -125,44 +164,30 @@ a perfectly available system can be perfectly wrong.
 [CORE] The ridesharing story is the anchor for every subsequent concept.
 IF AHEAD: ``What was the root cause?'' (Competitor promotion shifted demand.)
 IF SHORT: Skip the table, keep the narrative and the punchline.
-}
+```
 
-[T]
-  
-    A ridesharing demand model: 94% accuracy at deploy.
-
-    {0.1cm}
-    {0pt}
-- **Week 1**: Excellent performance
-- **Week 4**: Accuracy drops to 88%
-- **Week 8**: Driver dispatch is inefficient
-- **All infrastructure metrics**: {datastroke}{**Green**}
-    
-
-    {0.1cm}
-    {mlsyscard}{errorstroke}
-    A competitor launched a promotion that shifted user behavior.
-    The model needed retraining **6 weeks ago**.
-    {mlsyscard}
-  
-  
-    {}{1.15}
-    {
-    {tabular}{@{}lll@{}}
-      
-      & **DevOps** & **MLOps** \\
-      
-      Monitors & Uptime & Accuracy \\
-      Failure & Crash & Drift \\
-      Signal  & Error log & Statistics \\
-      Fix     & Patch code & Retrain \\
-      
-    {tabular}
-    }
+</details>
 
 ## Why MLOps Exists
 
-{
+[Original slide 5](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L223)
+
+**MLOps:** The engineering discipline that closes the feedback loop between
+model behavior and data reality by automating retraining, validation, and
+deployment in response to measurable production drift.
+
+**Three Critical Interfaces:**
+
+| **Interface** | **Challenge** | **Solution** |
+| --- | --- | --- |
+| **Data-Model** | Feature consistency | Feature stores |
+| **Model-Infra** | Environment parity | Registries + containers |
+| **Prod-Monitor** | Retraining cadence | Drift detection |
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: From the ridesharing failure to the formal definition
 The ridesharing model failed because nobody closed the feedback loop
@@ -189,34 +214,30 @@ tools implement it, but the discipline is about closing feedback loops.
 in every subsequent section.
 IF AHEAD: ``Which interface failed in the ridesharing example?'' (Prod-Monitor.)
 IF SHORT: Skip the engage question, keep the definition and table.
-}
+```
 
-{mlsyscard}{crimson}
-**MLOps:** The engineering discipline that closes the feedback loop between
-model behavior and data reality by automating retraining, validation, and
-deployment in response to measurable production drift.
-{mlsyscard}
-
-{0.15cm}
-**Three Critical Interfaces:**
-
-{0.1cm}
-{
-{}{1.15}
-{tabular}{@{}lll@{}}
-  
-  **Interface** & **Challenge** & **Solution** \\
-  
-  {datastroke}{**Data-Model**}       & Feature consistency     & Feature stores \\
-  {computestroke}{**Model-Infra**}   & Environment parity      & Registries + containers \\
-  {routingstroke}{**Prod-Monitor**}   & Retraining cadence      & Drift detection \\
-  
-{tabular}
-}
+</details>
 
 ## Predict: What Breaks First?
 
-{
+[Original slide 6](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L280)
+
+Think–Write–Share
+
+You deploy a model with 94% accuracy.
+
+Six months later, no code has changed.
+
+**What are the three most likely failure modes?**
+
+Write down 3 failure modes. (60 seconds)
+
+Turn to a neighbor and compare.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: From the operational mismatch to predicting failure modes
 Students just saw one failure (competitor promotion). Now they must
@@ -234,32 +255,50 @@ the technical debt section will formalize their intuitions.
 % -- FLEX: [CORE] Primes the entire technical debt section
 [CORE] This prediction activates prior knowledge and creates curiosity.
 IF SHORT: Reduce to 30-second think, skip the neighbor comparison.
-}
+```
 
-{0.8cm}
-{ Think--Write--Share}
-
-{0.4cm}
-{ You deploy a model with 94% accuracy.\\
-Six months later, no code has changed.\\[0.2cm]
-**What are the three most likely failure modes?**}
-
-{0.4cm}
-{ Write down 3 failure modes. {midgray}{(60 seconds)}}
-
-{0.3cm}
-{{lightgray}{Turn to a neighbor and compare.}}
+</details>
 
 ## The 5% Problem in Production
 
-{
+[Original slide 7](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L322)
+
+**Six ML Debt Patterns:**
+
+| **Pattern** | **Mechanism** |
+| --- | --- |
+| Boundary erosion | CACHE principle |
+| Correction cascades | Fix $\to$ break |
+| Feedback loops | Self-reinforcing |
+| Data debt | Quality drift |
+| Config debt | Parameter sprawl |
+| Pipeline debt | Fragile workflows |
+
+**CACHE:** Change Anything Changes Everything.
+
+Manual: 4 hrs/week
+
+Pipeline: 80 hrs (one-time)
+
+Break-even: **20 weeks**
+
+After 1 yr: **100%** maintenance
+
+Automation is about **capacity**.
+
+Source on slide: Sculley et al., NeurIPS 2015
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: Students predicted failure modes; now we formalize them
 The failure modes students generated map directly onto Sculley et al.'s
 six debt patterns.
 
-% -- NARRATE: The 5% framing is the hook
-``ML code is 5% of the system. The other 95% --- data validation,
+% -- NARRATE: The 5\% framing is the hook
+``ML code is 5\% of the system. The other 95\% --- data validation,
 feature engineering, configuration, monitoring --- is where technical
 debt accumulates.'' Point to the CACHE principle: ``Change Anything
 Changes Everything.'' Point to the break-even card: ``80 hours to
@@ -278,51 +317,27 @@ because data has no compiler.
 [CORE] CACHE principle and break-even calculation recur in later sections.
 IF AHEAD: ``Which pattern is hardest to detect? Why?'' (Feedback loops.)
 IF SHORT: Skip the break-even card, keep CACHE and the six patterns.
-}
+```
 
-[T]
-  
-    **Six ML Debt Patterns:**
-
-    {0.15cm}
-    {
-    {}{1.1}
-    {tabular}{@{}ll@{}}
-      
-      **Pattern** & **Mechanism** \\
-      
-      Boundary erosion & CACHE principle \\
-      Correction cascades & Fix $$ break \\
-      Feedback loops & Self-reinforcing \\
-      Data debt & Quality drift \\
-      Config debt & Parameter sprawl \\
-      Pipeline debt & Fragile workflows \\
-      
-    {tabular}
-    }
-
-    {0.15cm}
-    {CACHE:}{Change Anything Changes Everything.}
-  
-  
-    {mlsyscard}{errorstroke}
-    {
-    Manual: 4 hrs/week\\
-    Pipeline: 80 hrs (one-time)\\
-    Break-even: **20 weeks**\\
-    After 1 yr: **100%** maintenance
-    }
-    {mlsyscard}
-
-    {0.05cm}
-    { Automation is about **capacity**.}
-  
-
-{Sculley et al., NeurIPS 2015}
+</details>
 
 ## Real-World Debt: Case Studies
 
-{
+[Original slide 8](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L394)
+
+| **Company** | **Debt Type** | **What Happened** | **Cost** |
+| --- | --- | --- | --- |
+| **Zillow** | Correction cascade | Overvalued homes; errors fed training | &#36;500M+ |
+| **YouTube** | Feedback loop | Recs shaped clicks $\to$ training data | Content harm |
+| **Tesla** | Undeclared consumer | OTA updates changed subsystems | Safety risk |
+| **Facebook** | Config debt | Opaque settings drove ranking | Misalignment |
+
+**Lesson:** Predictable consequences of probabilistic systems without operational infrastructure.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: From abstract debt patterns to real-world consequences
 The previous slide named six patterns. This slide shows four companies
@@ -347,27 +362,24 @@ can have correction cascades in a Jupyter notebook pipeline.
 % -- FLEX: [OPTIONAL] Case studies reinforce but are not structurally required
 [OPTIONAL] These are motivational, not foundational.
 IF SHORT: Cover only Zillow and YouTube, skip Tesla and Facebook.
-}
+```
 
-{}{1.0}
-{tabular}{@{}llp{4.0cm}l@{}}
-  
-  **Company** & **Debt Type** & **What Happened** & **Cost** \\
-  
-  **Zillow** & Correction cascade & Overvalued homes; errors fed training & {errorstroke}{\$500M+} \\
-  **YouTube** & Feedback loop & Recs shaped clicks $$ training data & Content harm \\
-  **Tesla** & Undeclared consumer & OTA updates changed subsystems & Safety risk \\
-  **Facebook** & Config debt & Opaque settings drove ranking & Misalignment \\
-  
-{tabular}
-
-{0.1cm}
-
-{Lesson:}{Predictable consequences of probabilistic systems without operational infrastructure.}
+</details>
 
 ## Quick Check
 
-{
+[Original slide 9](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L441)
+
+Quick check — no peeking.
+
+ What are the three critical interfaces that MLOps must manage?
+
+30 seconds — then we continue.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min]
 % -- NARRATE: Cue the retrieval exercise
 ``Close your notes. 30 seconds. What are the three critical interfaces?''
@@ -376,15 +388,30 @@ Pause silently. After 30 seconds: ``Data-Model, Model-Infra, Prod-Monitor.''
 % -- FLEX: [CORE] Distributed retrieval cements the three-interface model
 [CORE] Reinforces the framework before Dev Infrastructure builds on it.
 IF SHORT: Reduce to 15 seconds, give the answer verbally.
-}
+```
 
- Quick check --- no peeking.\\[0.5cm]
- What are the three critical interfaces that MLOps must manage?\\[0.3cm]
-{ 30 seconds --- then we continue.}
+</details>
 
 ## Five Foundational Principles
 
-{
+[Original slide 10](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L465)
+
+| **Principle** | **Core Insight** | **Key Metric** |
+| --- | --- | --- |
+| **1. Reproducibility** | Version all artifacts (code, data, config, env) | Artifact hash |
+| **2. Separation** | Independent layer evolution | Coupling score |
+| **3. Consistency** | Training $=$ Serving | Feature skew rate |
+| **4. Observable Degrad.** | Make silent failures visible | Time to detection |
+| **5. Cost-Aware Auto.** | Optimize total cost | Net retrain value |
+
+**Model Output =** $f(\text{Code}_v, \text{Data}_v, \text{Config}_v, \text{Environment}_v)$
+
+Missing **any** version makes the model **unreproducible**.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: From technical debt to the principles that prevent it
 Technical debt accumulates when principles are missing. These five
@@ -392,12 +419,12 @@ principles are the antidote --- each maps to infrastructure.
 
 % -- NARRATE: Walk through the table row by row
 ``Reproducibility: version everything --- code, data, config, environment.''
-Point to the equation: ``Model Output = f(Code_v, Data_v, Config_v,
-Environment_v). Missing any version makes the model unreproducible.''
+Point to the equation: ``Model Output = f(Code\_v, Data\_v, Config\_v,
+Environment\_v). Missing any version makes the model unreproducible.''
 
 % -- ENGAGE: Test the reproducibility equation
 Ask: ``Which of these four versions is most commonly forgotten?''
-[Expected: Data_v or Environment_v --- students rarely version datasets]
+[Expected: Data\_v or Environment\_v --- students rarely version datasets]
 
 % -- WARN: Students think git covers reproducibility
 Common error: students version code and assume the model is reproducible.
@@ -408,39 +435,52 @@ produces different models. All four inputs must be versioned.
 [CORE] Every subsequent infrastructure slide maps back to one of these.
 IF AHEAD: ``Which principle does a feature store implement?'' (Consistency.)
 IF SHORT: Read the table without row-by-row narration.
-}
+```
 
-{}{1.2}
-{tabular}{@{}lp{4.2cm}l@{}}
-  
-  **Principle** & **Core Insight** & **Key Metric** \\
-  
-  **1. Reproducibility**     & Version all artifacts (code, data, config, env) & Artifact hash \\
-  **2. Separation**          & Independent layer evolution & Coupling score \\
-  **3. Consistency**         & Training $=$ Serving & Feature skew rate \\
-  **4. Observable Degrad.**  & Make silent failures visible & Time to detection \\
-  **5. Cost-Aware Auto.**    & Optimize total cost & Net retrain value \\
-  
-{tabular}
-
-{0.2cm}
-{Model Output =}{$f({Code}_v, {Data}_v, {Config}_v, {Environment}_v)$}
-
-{0.1cm}
-{ Missing **any** version makes the model **unreproducible**.}
+</details>
 
 ## Feature Stores: Eliminating Training-Serving Skew
 
-{
+[Original slide 11](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L514)
+
+**The Problem:**
+
+Training computes ` session_length ` with wall-clock time.
+
+Serving uses processing time. 8% accuracy drop.
+
+**The Solution:**
+
+Compute features **once**, serve to both pipelines.
+
+**Skew Cost** $=$ Error Rate $\times$ Query Vol $\times$ Impact
+
+1% skew on 1M queries/day $\times$ &#36;0.10 each
+
+$=$ **&#36;365,000/year** in silent losses
+
+| **Skew Type** | **Detection** |
+| --- | --- |
+| Preprocessing | Stats comparison |
+| Missing data | Schema validation |
+| Time features | Timestamp checks |
+| Library drift | Env hash compare |
+
+**Result:** Feature stores eliminate 5–15% accuracy loss.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: From Principle 3 (Consistency) to its implementation
 The five principles named Consistency as training = serving. The feature
 store is the infrastructure that enforces it.
 
-% -- NARRATE: The session_length story makes skew visceral
-``A data scientist computes session_length using wall-clock time in Python.
-An engineer reimplements it in Java using processing time. 8% accuracy
-drop nobody can explain.'' Point to the Skew Cost card: ``1% skew on 1M
+% -- NARRATE: The session\_length story makes skew visceral
+``A data scientist computes session\_length using wall-clock time in Python.
+An engineer reimplements it in Java using processing time. 8\% accuracy
+drop nobody can explain.'' Point to the Skew Cost card: ``1\% skew on 1M
 queries/day at \$0.10 each = \$365,000/year in silent losses.''
 
 % -- ENGAGE: Detection challenge
@@ -457,48 +497,44 @@ schema --- same column name, different computation logic.
 [CORE] The \$365K/year number recurs in Key Takeaways.
 IF AHEAD: ``What about feature freshness --- how stale can features be?''
 IF SHORT: Skip the skew type table, keep the story and the cost card.
-}
+```
 
-[T]
-  
-    **The Problem:**\\
-    { Training computes {session_length} with wall-clock time.\\
-    Serving uses processing time. 8% accuracy drop.}
-
-    {0.15cm}
-    **The Solution:**\\
-    { Compute features **once**, serve to both pipelines.}
-
-    {0.15cm}
-    {mlsyscard}{datastroke}
-    {
-    **Skew Cost** $=$ Error Rate $×$ Query Vol $×$ Impact\\[0.05cm]
-    1% skew on 1M queries/day $×$ \$0.10 each\\
-    $=$ **\$365,000/year** in silent losses
-    }
-    {mlsyscard}
-  
-  
-    {
-    {}{1.1}
-    {tabular}{@{}ll@{}}
-      
-      **Skew Type** & **Detection** \\
-      
-      Preprocessing & Stats comparison \\
-      Missing data  & Schema validation \\
-      Time features & Timestamp checks \\
-      Library drift & Env hash compare \\
-      
-    {tabular}
-    }
-
-    {0.15cm}
-    {Result:}{Feature stores eliminate 5--15% accuracy loss.}
+</details>
 
 ## Feature Store Architecture
 
-{
+[Original slide 12](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L585)
+
+**Three-Layer Architecture:**
+
+| **Layer** | **Purpose** |
+| --- | --- |
+| **Offline Store** | Batch feature computation (daily/hourly) |
+| **Online Store** | Low-latency serving ($<$5 ms reads) |
+| **Feature Registry** | Catalog: definitions, owners, lineage |
+
+**Invariant:** Training and serving read from the **same store**. One computation, two consumers.
+
+**Tools**
+
+**Feast:** Open-source, Kubernetes-native
+
+**Tecton:** Managed, streaming support
+
+**Hopsworks:** Full platform
+
+**Vertex AI FS:** GCP-native
+
+**Without a feature store:**
+
+2 code paths, 2 languages,
+
+2 bug surfaces = **skew**.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: From the skew problem to the infrastructure that solves it
 The previous slide showed why skew costs \$365K/year. This slide shows
@@ -541,57 +577,42 @@ implementation; the contract is the value.
 [CORE] The architecture explains WHY consistency is achievable.
 IF AHEAD: ``What happens when a feature definition changes?''
 IF SHORT: Show the three layers and the consistency invariant.
-}
+```
 
-[T]
-  
-    **Three-Layer Architecture:**
-
-    {0.1cm}
-    {
-    {}{1.15}
-    {tabular}{@{}lp{3.8cm}@{}}
-      
-      **Layer** & **Purpose** \\
-      
-      {datastroke}{**Offline Store**} & Batch feature computation (daily/hourly) \\
-      {computestroke}{**Online Store**} & Low-latency serving ($<$5 ms reads) \\
-      {routingstroke}{**Feature Registry**} & Catalog: definitions, owners, lineage \\
-      
-    {tabular}
-    }
-
-    {0.15cm}
-    {Invariant:}{Training and serving read from the **same store**. One computation, two consumers.}
-  
-  
-    {mlsyscard}{datastroke}
-    **Tools**\\[0.05cm]
-    {
-    **Feast:** Open-source, Kubernetes-native\\
-    **Tecton:** Managed, streaming support\\
-    **Hopsworks:** Full platform\\
-    **Vertex AI FS:** GCP-native}
-    {mlsyscard}
-
-    {0.1cm}
-    {mlsyscard}{errorstroke}
-    {**Without a feature store:**\\
-    2 code paths, 2 languages,\\
-    2 bug surfaces = **skew**.}
-    {mlsyscard}
+</details>
 
 ## ML CI/CD Pipelines
 
-{
+[Original slide 13](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L674)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/14_ml_ops/images/cicd-pipeline-ml.svg]]
+
+Harvard Edge ML Systems Book contributors, [cicd-pipeline-ml.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/images/cicd-pipeline-ml.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Data Validation**
+
+20–30% of pipeline time
+
+**Model Training**
+
+40–60% of pipeline time
+
+**Canary Deploy**
+
+Graduated rollout
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: From feature stores (one component) to the full pipeline
 Feature stores solve consistency. CI/CD pipelines orchestrate the entire
 flow: data validation, training, evaluation, deploy.
 
 % -- NARRATE: Walk through the three phases in the diagram
-Point to each phase: ``Data validation takes 20--30% of pipeline time.
-Training is 40--60%. Then canary deployment with graduated rollout.''
+Point to each phase: ``Data validation takes 20--30\% of pipeline time.
+Training is 40--60\%. Then canary deployment with graduated rollout.''
 Emphasize the fail loop: ``If model evaluation fails, reject and go back
 to data validation. This loop is the pipeline's immune system.''
 
@@ -607,33 +628,32 @@ then spend weeks debugging silent accuracy drops.
 [CORE] Canary deployment in this diagram connects to the Deployment section.
 IF AHEAD: ``What happens if data validation has a false negative?''
 IF SHORT: Show the image, narrate the three phases briefly.
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
+</details>
 
-{cicd-pipeline-ml.pdf}
+## The Degradation Equation
 
-{0.1cm}
+[Original slide 14](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L731)
 
-[T]
-  
-    
-    {datastroke}{**Data Validation**}\\
-    { 20--30% of pipeline time}
-  
-  
-    
-    {computestroke}{**Model Training**}\\
-    { 40--60% of pipeline time}
-  
-  
-    
-    {routingstroke}{**Canary Deploy**}\\
-    { Graduated rollout}
+$\text{Acc}(t) \approx \text{Acc}_0 - \lambda \cdot D(P_t \| P_0)$
 
 ## The Rotting Asset Curve
 
-{
+[Original slide 15](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L735)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/14_ml_ops/images/degradation-equation.svg]]
+
+Harvard Edge ML Systems Book contributors, [degradation-equation.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/images/degradation-equation.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Scheduled**: Fixed interval, may violate SLA
+
+**Trigger-based**: Adaptive, higher avg accuracy
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: From the Degradation Equation to its visual consequences
 The equation was just shown on the focus slide. This chart shows what
@@ -659,24 +679,24 @@ or holiday season can shift distributions at any time.
 [CORE] The next active learning slide uses the $T^*$ formula from this.
 IF AHEAD: ``What if retraining is cheap? Does scheduled ever win?''
 IF SHORT: Show both curves, state the punchline, skip the question.
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
+</details>
 
-{degradation-equation.pdf}
+## Data Drift vs. Concept Drift
 
-{0.1cm}
+[Original slide 16](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L781)
 
-[T]
-  
-    {routingstroke}{**Scheduled**}: Fixed interval, may violate SLA
-  
-  
-    {datastroke}{**Trigger-based**}: Adaptive, higher avg accuracy
+![[Assets/Sources/Harvard ML Systems/slides/vol1/14_ml_ops/images/drift-detection-flow.svg]]
 
-## Data Drift vs.\ Concept Drift
+Harvard Edge ML Systems Book contributors, [drift-detection-flow.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/images/drift-detection-flow.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
 
-{
+**Key:** Diagnose *which* distribution changed before retraining. Retraining on shifted data entrenches the shift.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: From the Degradation Equation to diagnosing the cause
 The equation tells us accuracy is dropping. This slide asks: why?
@@ -703,18 +723,32 @@ shift --- the model learns the wrong labels.
 [CORE] This distinction drives monitoring strategy in the next slides.
 IF AHEAD: ``Can both types occur simultaneously?''
 IF SHORT: Skip the engage question, keep the definitions and alert box.
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
-
-{drift-detection-flow.pdf}
-
-{0.15cm}
-{Key:}{Diagnose *which* distribution changed before retraining. Retraining on shifted data entrenches the shift.}
+</details>
 
 ## Quantifying Drift: PSI
 
-{
+[Original slide 17](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L820)
+
+**Population Stability Index (PSI):**
+
+$$
+\text{PSI} = \sum_{i=1}^{n} (\text{actual}_i - \text{expected}_i) \times \ln\!\left(\frac{\text{actual}_i}{\text{expected}_i}\right)
+$$
+
+| **Metric** | **Threshold** | **Use Case** |
+| --- | --- | --- |
+| **PSI** | $> 0.2$ significant | Categorical / binned |
+| **KS statistic** | $> 0.1$ divergent | Continuous features |
+| **KL divergence** | $> 0.1$ significant | Distribution comparison |
+
+**Key:** Monitor **input** features — input shift precedes output shift by the ground-truth feedback loop length.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: From diagnosing drift type to measuring drift magnitude
 We know data drift and concept drift exist. PSI answers: how much?
@@ -740,31 +774,42 @@ of the ground-truth feedback loop. Monitor inputs for early warning.
 [CORE] The PSI threshold appears again in the P2 severity classification.
 IF AHEAD: ``What if your bins are too coarse? Too fine?''
 IF SHORT: Show the formula and threshold table, skip the question.
-}
+```
 
-**Population Stability Index (PSI):**
-$${PSI} = _{i=1}^{n} ({actual}_i - {expected}_i) × \!({{actual}_i}{{expected}_i})$$
-
-{-0.1cm}
-{
-{}{1.0}
-{tabular}{@{}lll@{}}
-  
-  **Metric** & **Threshold** & **Use Case** \\
-  
-  **PSI**             & $> 0.2$ significant & Categorical / binned \\
-  **KS statistic**    & $> 0.1$ divergent   & Continuous features \\
-  **KL divergence**   & $> 0.1$ significant & Distribution comparison \\
-  
-{tabular}
-}
-
-{0.1cm}
-{Key:}{Monitor **input** features --- input shift precedes output shift by the ground-truth feedback loop length.}
+</details>
 
 ## Your Turn: Optimal Retraining Interval
 
-{
+[Original slide 18](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L873)
+
+Calculate $T^*$
+
+A fraud detection model:
+
+- $C$ = &#36;500,   $Q$ = 10,000/day
+- $V$ = &#36;0.50,   $A_0$ = 0.92
+- $\lambda$ = 0.003/day
+
+$$
+T^* \approx \sqrt{\frac{2C}{Q \cdot V \cdot A_0 \cdot \lambda}}
+$$
+
+(90 seconds — compare with a neighbor)
+
+**Solution:**
+
+$T^* = \sqrt{\frac{1{,}000}{13.8}} = \sqrt{72.5}$
+
+$\approx$ **8.5 days**
+
+**Retrain weekly!**
+
+Daily: wasteful. Monthly: SLA violation.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min]
 % -- LINK: From drift metrics to the economics of retraining
 PSI tells you drift exists. The $T^*$ formula tells you when to act ---
@@ -776,24 +821,24 @@ times \$0.50 times 0.92 times 0.003 = 13.8. Square root of 1000/13.8
 = square root of 72.5 = 8.5 days. Retrain weekly. Daily would be
 wasteful. Monthly would violate SLA.''
 
-VARIABLE NAMING NOTE: In this exercise, $$ (lambda) is the
-*temporal decay rate* from the exponential accuracy model
-$A(t) = A_0  e^{- t}$ (where the chapter uses $$).
-It is **not** the same as the sensitivity coefficient $$
-in the Degradation Equation ${Acc}(t)  {Acc}_0 -
-  D(P_t \| P_0)$ shown on the focus frame --- those are
+VARIABLE NAMING NOTE: In this exercise, $\lambda$ (lambda) is the
+\emph{temporal decay rate} from the exponential accuracy model
+$A(t) = A_0 \cdot e^{-\gamma t}$ (where the chapter uses $\gamma$).
+It is \textbf{not} the same as the sensitivity coefficient $\lambda$
+in the Degradation Equation $\text{Acc}(t) \approx \text{Acc}_0 -
+\lambda \cdot D(P_t \| P_0)$ shown on the focus frame --- those are
 conceptually distinct parameters. The $T^*$ formula derives from the
 exponential decay model: integrate staleness cost, add retraining cost,
-minimize over $T$ to get the square-root law. The chapter uses $$
-for this rate; the slide reuses $$ for notational brevity.
-If students ask why the symbols differ, explain: $$ in the
-focus frame is a sensitivity coefficient; $$ here is a decay
-rate --- the square-root law comes from assuming $A(t) = A_0 e^{- t}$
+minimize over $T$ to get the square-root law. The chapter uses $\gamma$
+for this rate; the slide reuses $\lambda$ for notational brevity.
+If students ask why the symbols differ, explain: $\lambda$ in the
+focus frame is a sensitivity coefficient; $\lambda$ here is a decay
+rate --- the square-root law comes from assuming $A(t) = A_0 e^{-\lambda t}$
 and minimizing Staleness Cost + Retraining Cost.
 
 % -- ENGAGE: Peer Instruction Protocol
 Present the problem (30s). Individual calculation (60s).
-If 30--70% get 8.5 days: pair discussion (90s), then re-vote.
+If 30--70\% get 8.5 days: pair discussion (90s), then re-vote.
 [Expected errors: forgetting to multiply all denominator terms]
 
 % -- WARN: Students plug in numbers without understanding the trade-off
@@ -805,54 +850,62 @@ vs accuracy decay. If retraining cost drops, $T^*$ shrinks.
 [CORE] The 8.5-day result anchors the Key Takeaways.
 IF AHEAD: ``What if lambda doubles?'' ($T^*$ drops to about 6 days.)
 IF SHORT: Show the formula and answer directly, skip peer discussion.
-}
+```
 
-[T]
-  
-    { Calculate $T^*$}
-
-    {0.1cm}
-    A fraud detection model:
-    {0pt}
-- $C$ = \$500, \; $Q$ = 10,000/day
-- $V$ = \$0.50, \; $A_0$ = 0.92
-- $$ = 0.003/day
-    
-
-    {0.05cm}
-    $$T^*  {{2C}{Q  V  A_0  }}$$
-
-    {{midgray}{(90 seconds --- compare with a neighbor)}}
-  
-  
-    
-    {mlsyscard}{datastroke}
-    **Solution:**\\[0.05cm]
-    {
-    $T^* = {{1{,}000}{13.8}} = {72.5}$\\[0.05cm]
-    $$ **8.5 days**\\[0.05cm]
-    {datastroke}{**Retrain weekly!**}\\
-    Daily: wasteful. Monthly: SLA violation.
-    }
-    {mlsyscard}
+</details>
 
 ## Your Turn: PSI Drift Cost Analysis
 
-{
+[Original slide 19](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L952)
+
+PSI Drift Cost Analysis
+
+A recommendation model:
+
+- Accuracy drops: 92% $\to$ 88% over 3 months
+- PSI of key feature: **0.25** (major shift)
+- Query volume: 1M predictions/day
+- Impact per error: &#36;0.50
+- Retraining cost: &#36;5,000
+
+**Calculate:** (1) daily error cost, (2) 3-month cumulative cost, (3) ROI of immediate retraining
+
+(90 seconds — compare with a neighbor)
+
+**Solution:**
+
+4% more errors $\times$ 1M/day
+
+$=$ 40,000 errors/day
+
+$\times$ &#36;0.50 $=$ **&#36;20,000/day**
+
+3 months: $90 \times \textdollar{}20K$
+
+$=$ **&#36;1.8M** cumulative loss
+
+ROI: &#36;1.8M / &#36;5K $=$ **360:1**
+
+PSI 0.25 should trigger immediately.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min]
 % -- LINK: From retraining interval to the economic impact of drift
 The $T^*$ formula balanced retraining cost. This exercise adds the
 PSI dimension: when drift is detected, what is the cost of NOT acting?
 
 % -- NARRATE: Walk through the solution after the reveal
-``Accuracy drops from 92% to 88% = 4pp loss. At 1M predictions/day,
-4% more errors = 40,000 additional errors/day. At \$0.50 per error
+``Accuracy drops from 92\% to 88\% = 4pp loss. At 1M predictions/day,
+4\% more errors = 40,000 additional errors/day. At \$0.50 per error
 impact, that is \$20,000/day in lost value. Over 3 months (90 days)
 = \$1.8M. Retraining costs \$5,000. ROI of retraining: 360:1.
 The PSI of 0.25 should have triggered retraining immediately.''
 
 % -- ENGAGE: Peer Instruction Protocol
-Present problem (30s). Individual calculation (60s). If 30--70%
+Present problem (30s). Individual calculation (60s). If 30--70\%
 correct: pair discussion (90s), re-vote.
 [Expected errors: students forget to multiply by days, or compute
 per-day cost but not cumulative cost.]
@@ -866,53 +919,32 @@ detection time --- the PSI threshold determines how quickly you act.
 [CORE] The 360:1 ROI anchors the ``monitor inputs'' takeaway.
 IF AHEAD: ``What PSI threshold would you set to trigger retraining?''
 IF SHORT: Show the solution directly, skip peer discussion.
-}
+```
 
-[T]
-  
-    { PSI Drift Cost Analysis}
-
-    {0.1cm}
-    A recommendation model:
-    {0pt}
-- Accuracy drops: 92% $$ 88% over 3 months
-- PSI of key feature: **0.25** (major shift)
-- Query volume: 1M predictions/day
-- Impact per error: \$0.50
-- Retraining cost: \$5,000
-    
-
-    {0.05cm}
-    **Calculate:** (1) daily error cost, (2) 3-month cumulative cost, (3) ROI of immediate retraining
-
-    {{midgray}{(90 seconds --- compare with a neighbor)}}
-  
-  
-    
-    {mlsyscard}{datastroke}
-    **Solution:**\\[0.05cm]
-    {
-    4% more errors $×$ 1M/day\\
-    $=$ 40,000 errors/day\\
-    $×$ \$0.50 $=$ **\$20,000/day**\\[0.08cm]
-    3 months: $90 × \$20K$\\
-    $=$ **\$1.8M** cumulative loss\\[0.08cm]
-    ROI: \$1.8M / \$5K $=$ **360:1**\\
-    {errorstroke}{PSI 0.25 should trigger immediately.}
-    }
-    {mlsyscard}
+</details>
 
 ## The Uptime Iceberg
 
-{
+[Original slide 20](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L1022)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/14_ml_ops/images/monitoring-dashboard-ml.svg]]
+
+Harvard Edge ML Systems Book contributors, [monitoring-dashboard-ml.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/images/monitoring-dashboard-ml.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Key:** 99.97% uptime. Model accuracy at 87%. **Perfectly available, perfectly wrong.**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min]
 % -- LINK: From retraining intervals to why monitoring must be layered
 The $T^*$ formula assumes you detect drift. This slide shows what happens
 when monitoring is shallow.
 
 % -- NARRATE: Walk through the three dashboard panels
-Point to each panel: ``Service health: 99.97% uptime --- green. Model
-health: accuracy at 87%, below the 90% SLA --- red. Data drift: PSI
+Point to each panel: ``Service health: 99.97\% uptime --- green. Model
+health: accuracy at 87\%, below the 90\% SLA --- red. Data drift: PSI
 approaching 0.2 --- yellow. Traditional monitoring sees only the first
 panel. The iceberg is underwater.''
 
@@ -922,34 +954,40 @@ Ask: ``Which panel would have caught the ridesharing failure?''
 
 % -- WARN: Students equate uptime with correctness
 Common error: students set up infrastructure monitoring and declare the
-system monitored. Correct framing: 99.97% available and perfectly wrong
+system monitored. Correct framing: 99.97\% available and perfectly wrong
 is worse than a crash --- crashes trigger alerts.
 
 % -- FLEX: [OPTIONAL] Reinforces monitoring theme; not structurally new
 [OPTIONAL] The point was made in the opening slide; this visualizes it.
 IF SHORT: Show the image and read the alert box. Move on.
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
+</details>
 
-{monitoring-dashboard-ml.pdf}
+## Deployment Patterns: Risk vs. Cost
 
-{0.1cm}
-{Key:}{99.97% uptime. Model accuracy at 87%. **Perfectly available, perfectly wrong.**}
+[Original slide 21](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L1062)
 
-## Deployment Patterns: Risk vs.\ Cost
+![[Assets/Sources/Harvard ML Systems/slides/vol1/14_ml_ops/images/canary-deployment.svg]]
 
-{
+Harvard Edge ML Systems Book contributors, [canary-deployment.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/images/canary-deployment.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**ML-specific:** Canary needs **thousands of inferences** for statistical significance, not just uptime checks.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: From monitoring (detecting problems) to deployment (preventing them)
 Monitoring catches drift after deployment. Deployment strategies control
 how much damage a bad model can do before monitoring catches it.
 
 % -- NARRATE: Walk through each strategy with cost/risk trade-offs
-``Canary: route 5% of traffic to the new model. Cheapest, but you need
+``Canary: route 5\% of traffic to the new model. Cheapest, but you need
 thousands of inferences for statistical confidence. Blue-green: run both,
 instant switch. Safe but 2x cost. Shadow: new model runs in parallel but
-does not serve users. Safest but 10--20% overhead.''
+does not serve users. Safest but 10--20\% overhead.''
 
 % -- ENGAGE: Domain-specific deployment choice
 Ask: ``Which strategy for a medical diagnosis model?'' [Expected: shadow,
@@ -958,25 +996,45 @@ because the cost of a bad rollout is patient harm.]
 % -- WARN: Students default to canary without computing sample size
 Common error: students run canary with 100 requests and declare it safe.
 Correct framing: ML canary needs statistical significance on model metrics.
-With 5% traffic, reaching significance can take hours or days.
+With 5\% traffic, reaching significance can take hours or days.
 
 % -- FLEX: [CORE] Deployment strategies connect to rollback and A/B testing
 [CORE] The canary pattern recurs in rollback tiers and A/B testing.
 IF AHEAD: ``Can you combine strategies? Canary then blue-green?''
 IF SHORT: Focus on the diagram and the statistical confidence insight.
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
-
-{canary-deployment.pdf}
-
-{0.1cm}
-
-{ML-specific:}{Canary needs **thousands of inferences** for statistical significance, not just uptime checks.}
+</details>
 
 ## War Story: Knight Capital (2012)
 
-{
+[Original slide 22](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L1100)
+
+**Context:** Knight Capital, August 1, 2012.
+
+Deployed new software to **7 of 8 servers**. Server 8 missed.
+
+- **Failure:** Dormant “Power Peg” flag triggered on server 8
+- **Consequence:** Millions of erroneous orders in 45 min
+- **Cost:** **>&#36;460 million**. Emergency financing within days.
+
+**ML analogy:** Registry pointing at wrong model version
++ feature schema drift + partial canary = same failure shape.
+
+**Systems Lesson**
+
+Partial rollout + configuration drift is catastrophic in
+any automated system. Canary, blue-green, and shadow deployments exist
+precisely to prevent this. A deployment process that cannot detect
+partial-state divergence *before* traffic reaches the defective
+path is not a deployment process — it is an incident waiting to happen.
+
+Source on slide: SEC Report on Knight Capital Group, 2013
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: From deployment strategies to a real production disaster that motivates them
 The previous slide covered canary, blue-green, and shadow deployments
@@ -989,7 +1047,7 @@ trading software to seven of eight production servers. The eighth server
 is missed. The new code repurposed a dormant flag called `SMARS'. On
 the seven updated servers it worked correctly. On the eighth, `SMARS'
 triggered a buried test function `Power Peg' designed years earlier to
-buy stock aggressively.'' Pause. ``In **forty-five minutes**, the
+buy stock aggressively.'' Pause. ``In \textbf{forty-five minutes}, the
 defective router generated millions of erroneous orders and accumulated
 an unintended multi-billion-dollar portfolio. Knight lost more than
 \$460 million. The company needed emergency financing within days.''
@@ -1003,9 +1061,9 @@ shape. Different system, same catastrophic outcome.''
 % -- ENGAGE: Force students to connect the failure mode to deployments
 Ask: ``Which deployment strategy from the previous slide would have
 prevented this?'' [Expected: all three would have helped --- canary
-would have caught the divergence at 1% traffic; blue-green would have
+would have caught the divergence at 1\% traffic; blue-green would have
 required both versions to be tested before switching; shadow would have
-caught the `Power Peg' behavior in parallel. The real answer: *any*
+caught the `Power Peg' behavior in parallel. The real answer: \emph{any}
 systematic rollout process catches partial-state problems that ad hoc
 deployments miss.]
 
@@ -1022,44 +1080,30 @@ IF AHEAD: ``What is the ML equivalent of `Power Peg'?'' (A deprecated
 code path in a model serving container, triggered by a stale registry
 pointer or a feature schema version mismatch.)
 IF SHORT: State the 45 min / \$460M figures and the ML analogy in one sentence.
-}
+```
 
-[T]
-  
-    **Context:** Knight Capital, August 1, 2012.\\
-    Deployed new software to **7 of 8 servers**. Server 8 missed.
-
-    {0.1cm}
-    {
-    {0pt}
-- **Failure:** Dormant ``Power Peg'' flag triggered on server 8
-- **Consequence:** Millions of erroneous orders in 45 min
-- **Cost:** **\$460 million**. Emergency financing within days.
-    
-    }
-
-    {0.1cm}
-    {mlsyscard}{errorstroke}
-    {**ML analogy:** Registry pointing at wrong model version
-    + feature schema drift + partial canary = same failure shape.}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{routingstroke}
-    **Systems Lesson**\\[0.05cm]
-    { Partial rollout + configuration drift is catastrophic in
-    any automated system. Canary, blue-green, and shadow deployments exist
-    precisely to prevent this. A deployment process that cannot detect
-    partial-state divergence *before* traffic reaches the defective
-    path is not a deployment process --- it is an incident waiting to happen.}
-    {mlsyscard}
-  
-
-{SEC Report on Knight Capital Group, 2013}
+</details>
 
 ## Rollback Strategies
 
-{
+[Original slide 23](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L1185)
+
+| **Tier** | **Time** | **Trigger** | **Implementation** |
+| --- | --- | --- | --- |
+| **Immediate** | $<$ 1 min | Serving errors, crashes | Hot standby, instant switch |
+| **Rapid** | $<$ 15 min | Canary metric degradation | Registry-based redeploy |
+| **Delayed** | $<$ 4 hrs | Business metric decline | Full redeploy + state migrate |
+
+**The Fire Drill Rule**
+
+Rollback procedures that have never been tested **will fail when needed**.
+Monthly fire drills expose configuration gaps, stale caches, and documentation holes
+**before** the 3:00 AM incident.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: From deployment to what happens when deployment fails
 Canary, blue-green, and shadow reduce risk. Rollback is the safety net
@@ -1084,43 +1128,56 @@ and sometimes data pipeline changes.
 % -- FLEX: [OPTIONAL] Table is self-explanatory; fire drill is the insight
 [OPTIONAL] The fire drill card is the key takeaway.
 IF SHORT: Show the table, read the fire drill card, move on.
-}
+```
 
-{}{1.2}
-{tabular}{@{}llll@{}}
-  
-  **Tier** & **Time** & **Trigger** & **Implementation** \\
-  
-  **Immediate** & $<$ 1 min  & Serving errors, crashes & Hot standby, instant switch \\
-  **Rapid**     & $<$ 15 min & Canary metric degradation & Registry-based redeploy \\
-  **Delayed**   & $<$ 4 hrs  & Business metric decline & Full redeploy + state migrate \\
-  
-{tabular}
-
-{0.2cm}
-{mlsyscard}{errorstroke}
-**The Fire Drill Rule**\\
-{ Rollback procedures that have never been tested **will fail when needed**.
-Monthly fire drills expose configuration gaps, stale caches, and documentation holes
-**before** the 3:00 AM incident.}
-{mlsyscard}
+</details>
 
 ## A/B Testing for ML
 
-{
+[Original slide 24](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L1235)
+
+**Sample Size:**
+
+$$
+n = \frac{2(z_{\alpha/2} + z_\beta)^2 \sigma^2}{\delta^2}
+$$
+
+For 2% lift detection, 5% baseline:
+
+$\approx$ **25,000 users per variant**
+
+**ML-Specific Challenges:**
+
+- Delayed feedback (days, not seconds)
+- Novelty effects inflate initial results
+- Interference in ranking systems
+
+| **Primary** | **Guards** | **Decision** |
+| --- | --- | --- |
+| Improved | Pass | Ship |
+| Improved | Fail | Investigate |
+| Neutral | Pass | Keep current |
+| Degraded | Any | Do not ship |
+
+**Guardrail metrics** must not degrade even if primary metric improves.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: From canary (validates stability) to A/B testing (measures impact)
 Canary asks ``is the new model safe?'' A/B testing asks ``is it better
 for the business?'' Different questions, different methods.
 
 % -- NARRATE: Walk through sample size and decision matrix
-``To detect a 2% lift on a 5% baseline, you need about 25,000 users
+``To detect a 2\% lift on a 5\% baseline, you need about 25,000 users
 per variant.'' Point to ML challenges: ``Delayed feedback, novelty effects,
 interference.'' Point to the decision matrix: ``Improved + guards pass =
 ship. Improved + guards fail = investigate.''
 
 % -- ENGAGE: Decision matrix application
-Ask: ``Primary metric improved 3%, but guardrail latency increased 20%.
+Ask: ``Primary metric improved 3\%, but guardrail latency increased 20\%.
 Ship or investigate?'' [Expected: investigate --- guardrail failure blocks
 shipping even with primary improvement.]
 
@@ -1132,51 +1189,31 @@ primary metrics are soft objectives.
 % -- FLEX: [OPTIONAL] A/B testing details are supplementary
 [OPTIONAL] The decision matrix is the key contribution.
 IF SHORT: Skip the sample size equation, cover only the decision matrix.
-}
+```
 
-[T]
-  
-    **Sample Size:**
-    $$n = {2(z_{/2} + z_)^2 ^2}{^2}$$
-
-    {
-    For 2% lift detection, 5% baseline:\\
-    $$ **25,000 users per variant**
-    }
-
-    {0.1cm}
-    **ML-Specific Challenges:**
-    {0pt}
-- { Delayed feedback (days, not seconds)}
-- { Novelty effects inflate initial results}
-- { Interference in ranking systems}
-    
-  
-  
-    {
-    {}{1.1}
-    {tabular}{@{}lll@{}}
-      
-      **Primary** & **Guards** & **Decision** \\
-      
-      Improved & Pass & Ship \\
-      Improved & Fail & Investigate \\
-      Neutral  & Pass & Keep current \\
-      Degraded & Any  & Do not ship \\
-      
-    {tabular}
-    }
-
-    {0.1cm}
-    {mlsyscard}{routingstroke}
-    {
-    **Guardrail metrics** must not degrade even if primary metric improves.
-    }
-    {mlsyscard}
+</details>
 
 ## ML Incident Response
 
-{
+[Original slide 25](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L1312)
+
+**The ML Debugging Tree:**
+
+1. **Is it data?** Check input distributions (PSI, KS). Shifted $\to$ data drift.
+2. **Is it skew?** Compare train vs. serve distributions. Diverged $\to$ feature store.
+3. **Is it config?** Audit recent changes. Found $\to$ config debt.
+4. **Is it feedback?** Analyze temporal patterns. Self-reinforcing $\to$ loop.
+
+| **Severity** | **Criteria** | **Response** | **Example** |
+| --- | --- | --- | --- |
+| **P1** | Accuracy drop $>$ 10% | 30 min | Stale feature data |
+| **P2** | Localized drift, PSI $>$ 0.3 | 4 hrs | One feature shifted |
+| **P3** | Latency/throughput degrad. | 24 hrs | Batch misconfigured |
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min]
 % -- LINK: From deployment to what happens when things go wrong
 Deployment strategies and monitoring reduce risk. Incident response is
@@ -1187,11 +1224,11 @@ the structured process for when failures still occur.
 Is it skew? Compare training vs serving distributions. Step 3: Is it
 config? Audit recent changes. Step 4: Is it feedback? Check for
 self-reinforcing temporal patterns.'' Point to severity table: ``P1:
-accuracy drop over 10%, 30-minute response. P2: localized drift, 4 hours.
+accuracy drop over 10\%, 30-minute response. P2: localized drift, 4 hours.
 P3: latency degradation, 24 hours.''
 
 % -- ENGAGE: Apply the debugging tree
-Ask: ``Your model's accuracy dropped 5% over two weeks. No code changed.
+Ask: ``Your model's accuracy dropped 5\% over two weeks. No code changed.
 Where do you start?'' [Expected: Step 1 --- check input distributions.]
 
 % -- WARN: Students skip the tree and go straight to retraining
@@ -1203,41 +1240,45 @@ If the cause is a feedback loop, fresh data includes the corrupted signal.
 [CORE] This structured approach prevents panic-driven retraining.
 IF AHEAD: ``What if steps 1--4 all come back negative?''
 IF SHORT: Cover the four steps verbally, skip the severity table.
-}
+```
 
-**The ML Debugging Tree:**
-
-{0.05cm}
-{0pt}
-- **Is it data?** Check input distributions (PSI, KS). Shifted $$ data drift.
-- **Is it skew?** Compare train vs.\ serve distributions. Diverged $$ feature store.
-- **Is it config?** Audit recent changes. Found $$ config debt.
-- **Is it feedback?** Analyze temporal patterns. Self-reinforcing $$ loop.
-
-{0.05cm}
-{
-{}{1.0}
-{tabular}{@{}llll@{}}
-  
-  **Severity** & **Criteria** & **Response** & **Example** \\
-  
-  **P1** & Accuracy drop $>$ 10% & 30 min & Stale feature data \\
-  **P2** & Localized drift, PSI $>$ 0.3 & 4 hrs & One feature shifted \\
-  **P3** & Latency/throughput degrad. & 24 hrs & Batch misconfigured \\
-  
-{tabular}
-}
+</details>
 
 ## Discussion: Which Interface Failed?
 
-{
+[Original slide 26](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L1370)
+
+Turn and Talk (90 seconds)
+
+A recommendation model's accuracy dropped from 94% to 81%
+
+over six months. No code changed. Infrastructure metrics were green.
+
+**Which of the three MLOps interfaces failed?**
+
+**Data-Model**
+
+Feature consistency
+
+**Model-Infra**
+
+Environment parity
+
+**Prod-Monitor**
+
+Retraining cadence
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: From the debugging tree to the three-interface framework
 The debugging tree diagnoses technical causes. This discussion maps
 those causes onto the MLOps interface framework.
 
 % -- NARRATE: Frame the discussion clearly
-``A recommendation model dropped from 94% to 81% over six months.
+``A recommendation model dropped from 94\% to 81\% over six months.
 No code changed. Infrastructure was green. Which of the three MLOps
 interfaces failed?'' Pause. ``No single right answer. All three are
 connected. That is the point.''
@@ -1250,25 +1291,32 @@ trigger), or both. Validate all answers and show connections.
 % -- FLEX: [CORE] Synthesizes the chapter's three-interface framework
 [CORE] The three-interface model is a central organizing principle.
 IF SHORT: Do a show-of-hands poll instead of pair discussion.
-}
+```
 
-{0.6cm}
-{ Turn and Talk {midgray}{(90 seconds)}}
-
-{0.5cm}
-{ A recommendation model's accuracy dropped from 94% to 81%\\
-over six months. No code changed. Infrastructure metrics were green.\\[0.3cm]
-**Which of the three MLOps interfaces failed?**}
-
-{0.5cm}
-[c]
-  {datastroke}{**Data-Model**}\ consistency
-  {computestroke}{**Model-Infra**}\ parity
-  {routingstroke}{**Prod-Monitor**}\ cadence
+</details>
 
 ## Layered Monitoring Budget
 
-{
+[Original slide 27](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L1411)
+
+| **Layer** | **SLA** | **Metric Type** | **Catches** |
+| --- | --- | --- | --- |
+| **Data freshness** | 15 min | Staleness, completeness | Stale features |
+| **Schema** | 1 hr | Type/range/null checks | Pipeline breaks |
+| **Feature distrib.** | 4 hrs | PSI, KS, KL divergence | Data drift |
+| **Model outputs** | 1 hr | Accuracy, confidence | Model degradation |
+| **Business metrics** | 24 hrs | Revenue, engagement | Downstream impact |
+
+**Budget**: 1 model $\times$ 3 variants $\times$ 15 metrics $\times$ 12 checks/hr
+
+$=$ **540 data points/hr** per metric layer
+
+Total: $\approx$**1,800 data points/hr** across all layers
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: From incident response to prevention through layered monitoring
 Incident response is reactive. Layered monitoring makes degradation
@@ -1281,8 +1329,8 @@ Business metrics: daily.'' Point to the budget card: ``1 model, 3
 variants, 15 metrics, 12 checks/hr = 1,800 data points/hr.''
 
 % -- ENGAGE: Layer selection challenge
-Ask: ``Which layer would have caught the session_length skew?''
-[Expected: Feature distribution layer --- PSI on session_length.]
+Ask: ``Which layer would have caught the session\_length skew?''
+[Expected: Feature distribution layer --- PSI on session\_length.]
 
 % -- WARN: Students monitor at the wrong granularity
 Common error: students monitor only business metrics (daily) and miss
@@ -1293,33 +1341,24 @@ failure modes propagate at different speeds.
 [OPTIONAL] Students can read the table independently.
 IF SHORT: Point to the budget card, make the cost-of-monitoring point.
 IF AHEAD: ``How would you prioritize with only 3 layers?''
-}
+```
 
-{}{1.15}
-{tabular}{@{}llll@{}}
-  
-  **Layer** & **SLA** & **Metric Type** & **Catches** \\
-  
-  **Data freshness**   & 15 min & Staleness, completeness & Stale features \\
-  **Schema**           & 1 hr   & Type/range/null checks  & Pipeline breaks \\
-  **Feature distrib.** & 4 hrs  & PSI, KS, KL divergence  & Data drift \\
-  **Model outputs**    & 1 hr   & Accuracy, confidence     & Model degradation \\
-  **Business metrics**  & 24 hrs & Revenue, engagement     & Downstream impact \\
-  
-{tabular}
-
-{0.15cm}
-{mlsyscard}{computestroke}
-{
-**Budget**: 1 model $×$ 3 variants $×$ 15 metrics $×$ 12 checks/hr\\
-$=$ **540 data points/hr** per metric layer\\
-Total: $$**1,800 data points/hr** across all layers
-}
-{mlsyscard}
+</details>
 
 ## MLOps Maturity Levels
 
-{
+[Original slide 28](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L1468)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/14_ml_ops/images/maturity-model.svg]]
+
+Harvard Edge ML Systems Book contributors, [maturity-model.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/images/maturity-model.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Key insight:** Each transition takes 3–6 months. The gap is **integration**, not tools.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: From individual practices to organizational maturity
 We have covered the components. Maturity is about integrating them.
@@ -1343,19 +1382,43 @@ to the CI/CD pipeline to the drift detector to the deployment strategy.
 [CORE] This synthesizes every infrastructure concept into a progression.
 IF AHEAD: ``What is the ROI for moving from Level 1 to Level 2?''
 IF SHORT: Show the image, state 3--6 months per transition, move on.
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
-
-{maturity-model.pdf}
-
-{0.1cm}
-
-{Key insight:}{Each transition takes 3--6 months. The gap is **integration**, not tools.}
+</details>
 
 ## ML Test Score
 
-{
+[Original slide 29](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L1505)
+
+| **Category** | **Tests** | **Example Checks** |
+| --- | --- | --- |
+| **Data Tests** | Feature expectations, schema validation | Distributions verified; no training-serving skew |
+| **Model Tests** | Staleness, fairness, performance bounds | Accuracy within bounds; no subgroup degradation |
+| **Infra Tests** | Reproducibility, pipeline reliability | Training is deterministic; rollback works |
+| **Monitor Tests** | Alerts, dashboards, incident response | Drift alerts fire; on-call rotation documented |
+
+**0–5**
+
+Ad hoc
+
+**5–10**
+
+Developing
+
+**10–15**
+
+Mature
+
+**15+**
+
+Production-grade
+
+Source on slide: Breck et al., ICSE 2020
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: From qualitative maturity to a concrete scoring rubric
 The ML Test Score from Breck et al.\ quantifies maturity: four
@@ -1378,45 +1441,38 @@ The test score requires verified, automated checks actually running.
 [OPTIONAL] Students can study the rubric independently.
 IF SHORT: Show table and score bands, skip self-scoring.
 IF AHEAD: ``Pick one category and design a test suite for it.''
-}
+```
 
-{}{1.05}
-{tabular}{@{}llp{5cm}@{}}
-  
-  **Category** & **Tests** & **Example Checks** \\
-  
-  **Data Tests**    & Feature expectations, schema validation  & Distributions verified; no training-serving skew \\
-  **Model Tests**   & Staleness, fairness, performance bounds  & Accuracy within bounds; no subgroup degradation \\
-  **Infra Tests**   & Reproducibility, pipeline reliability    & Training is deterministic; rollback works \\
-  **Monitor Tests** & Alerts, dashboards, incident response    & Drift alerts fire; on-call rotation documented \\
-  
-{tabular}
+</details>
 
-{0.15cm}
+## War Story: Oura Ring — MLOps on the Wrist
 
-[T]
-  
-    
-    {errorstroke}{**0--5**}\\{ Ad hoc}
-  
-  
-    
-    {routingstroke}{**5--10**}\\{ Developing}
-  
-  
-    
-    {computestroke}{**10--15**}\\{ Mature}
-  
-  
-    
-    {datastroke}{**15+**}\\{ Production-grade}
-  
+[Original slide 30](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L1572)
 
-{Breck et al., ICSE 2020}
+**Oura Ring: Edge MLOps at Scale**
 
-## War Story: Oura Ring --- MLOps on the Wrist
+- **Device:** 32 MB RAM, Cortex-M4, battery-powered
+- **Models:** Sleep staging, readiness, activity (3 models)
+- **Retrain:** Monthly, validated on 50K users
+- **Deploy:** OTA to millions of rings
+- **Rollback:** 2-week shadow on 1% of fleet
 
-{
+**Validation gate:** PSI $>$ 0.15 on sleep score distribution $\to$ automatic rollback. No bad model reaches the full fleet.
+
+**Edge MLOps Constraints**
+
+**No instant rollback:** Users wear the device 24/7.
+
+**No A/B on-device:** Cannot run 2 models simultaneously.
+
+**No real-time monitoring:** Data syncs when phone connects.
+
+**Battery budget:** Model update must not drain battery.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: From maturity framework to a real-world MLOps success story
 The maturity levels are abstract. Oura Ring shows what Level 2 looks
@@ -1427,7 +1483,7 @@ like in practice for a constrained wearable device.
 a Cortex-M4 processor. The MLOps challenge: models must update OTA to
 millions of rings, but a bad update cannot be rolled back easily ---
 users are literally wearing the device. Their solution: shadow
-deployment on 1% of fleet, 2-week validation window, automatic
+deployment on 1\% of fleet, 2-week validation window, automatic
 rollback if sleep score distribution shifts (PSI $>$ 0.15).''
 Key numbers: ``3 models (sleep, readiness, activity), retrained monthly,
 validated on 50K users before fleet-wide push.''
@@ -1447,96 +1503,97 @@ update, and the inability to monitor in real-time.
 [OPTIONAL] Grounds the maturity framework in a real product.
 IF SHORT: State the key constraint (no instant rollback) and the PSI
 threshold approach.
-}
+```
 
-[T]
-  
-    **Oura Ring: Edge MLOps at Scale**
-
-    {0.1cm}
-    {
-    {0pt}
-- **Device:** 32 MB RAM, Cortex-M4, battery-powered
-- **Models:** Sleep staging, readiness, activity (3 models)
-- **Retrain:** Monthly, validated on 50K users
-- **Deploy:** OTA to millions of rings
-- **Rollback:** 2-week shadow on 1% of fleet
-    
-    }
-
-    {0.1cm}
-    {mlsyscard}{routingstroke}
-    {**Validation gate:** PSI $>$ 0.15 on sleep score distribution $$ automatic rollback. No bad model reaches the full fleet.}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{errorstroke}
-    **Edge MLOps Constraints**\\[0.05cm]
-    {
-    **No instant rollback:** Users wear the device 24/7.\\[0.05cm]
-    **No A/B on-device:** Cannot run 2 models simultaneously.\\[0.05cm]
-    **No real-time monitoring:** Data syncs when phone connects.\\[0.05cm]
-    **Battery budget:** Model update must not drain battery.}
-    {mlsyscard}
+</details>
 
 ## Fallacies
 
-{
+[Original slide 31](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L1645)
+
+**Fallacy:** *MLOps is just applying DevOps to ML models.*
+
+ML pipelines take 15–45 min vs. 2–5 min for traditional software. They require data validation, model evaluation, and drift detection stages absent from standard CI/CD.
+
+**Fallacy:** *Automated retraining ensures optimal performance without oversight.*
+
+Automated pipelines propagate corrupted training data. A news model retrained on weekend data showed lower engagement because user behavior differs sharply weekday vs. weekend.
+
+**Fallacy:** *Training-serving consistency is automatic once pipelines are established.*
+
+Skew causes 5–15% accuracy degradation even with established pipelines. An e-commerce model lost 12% accuracy for 6 weeks from a ` session_length ` computation mismatch.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- NARRATE: Read each fallacy with its quantitative rebuttal
 ``Fallacy 1: MLOps is just DevOps for ML. Reality: ML pipelines take
 15--45 min vs 2--5 for traditional CI/CD.'' ``Fallacy 2: Automated
 retraining ensures performance. Reality: automation propagates corrupted
-data.'' ``Fallacy 3: Consistency is automatic. Reality: 5--15% accuracy
+data.'' ``Fallacy 3: Consistency is automatic. Reality: 5--15\% accuracy
 loss even with established pipelines.''
 
 % -- FLEX: [CORE] Fallacies crystallize the chapter's key warnings
 [CORE] Each fallacy maps to a concept from the lecture.
 IF SHORT: Cover fallacies 1 and 3, skip fallacy 2.
-}
+```
 
-**Fallacy:** *MLOps is just applying DevOps to ML models.*\\
-{ ML pipelines take 15--45 min vs.\ 2--5 min for traditional software. They require data validation, model evaluation, and drift detection stages absent from standard CI/CD.}
-
-{0.15cm}
-**Fallacy:** *Automated retraining ensures optimal performance without oversight.*\\
-{ Automated pipelines propagate corrupted training data. A news model retrained on weekend data showed lower engagement because user behavior differs sharply weekday vs.\ weekend.}
-
-{0.15cm}
-**Fallacy:** *Training-serving consistency is automatic once pipelines are established.*\\
-{ Skew causes 5--15% accuracy degradation even with established pipelines. An e-commerce model lost 12% accuracy for 6 weeks from a {session_length} computation mismatch.}
+</details>
 
 ## Pitfalls
 
-{
+[Original slide 32](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L1674)
+
+**Pitfall:** *Treating deployment as a one-time event.*
+
+A fraud model with PSI = 0.18 at deployment reached PSI = 0.31 within 3 months, dropping from 94% to 87% accuracy. Without automated retraining, MTTR averages 5–14 days; with automation, 4–24 hours.
+
+**Pitfall:** *Monitoring outputs without validating inputs.*
+
+A recommendation system tracked CTR but ignored feature staleness. User embeddings were 18 hrs stale, causing 9% degradation for 3 days before accuracy alerts triggered.
+
+**Pitfall:** *Investing in infrastructure while neglecting organizational alignment.*
+
+A retail company with feature stores and registries still deployed quarterly because data scientists and engineers operated in isolation. Unified teams deploy weekly.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- NARRATE: Read each pitfall with quantitative evidence
 ``Pitfall 1: Treating deployment as one-time. Fraud model PSI went from
-0.18 to 0.31 in 3 months, accuracy 94% to 87%. MTTR: 5--14 days
+0.18 to 0.31 in 3 months, accuracy 94\% to 87\%. MTTR: 5--14 days
 without automation, 4--24 hours with it.'' ``Pitfall 2: Monitoring outputs
-without inputs. 18-hour stale embeddings caused 9% degradation for 3 days
+without inputs. 18-hour stale embeddings caused 9\% degradation for 3 days
 before alerts fired.'' ``Pitfall 3: Infrastructure without organizational
 alignment. Siloed teams deploy quarterly; unified teams deploy weekly.''
 
 % -- FLEX: [CORE] Pitfalls provide concrete operational warnings
 [CORE] Each pitfall reinforces a chapter theme.
 IF SHORT: Cover pitfalls 1 and 2, skip pitfall 3.
-}
+```
 
-**Pitfall:** *Treating deployment as a one-time event.*\\
-{ A fraud model with PSI = 0.18 at deployment reached PSI = 0.31 within 3 months, dropping from 94% to 87% accuracy. Without automated retraining, MTTR averages 5--14 days; with automation, 4--24 hours.}
-
-{0.15cm}
-**Pitfall:** *Monitoring outputs without validating inputs.*\\
-{ A recommendation system tracked CTR but ignored feature staleness. User embeddings were 18 hrs stale, causing 9% degradation for 3 days before accuracy alerts triggered.}
-
-{0.15cm}
-**Pitfall:** *Investing in infrastructure while neglecting organizational alignment.*\\
-{ A retail company with feature stores and registries still deployed quarterly because data scientists and engineers operated in isolation. Unified teams deploy weekly.}
+</details>
 
 ## Muddiest Point
 
-{
+[Original slide 33](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L1705)
+
+One-minute paper
+
+ Write down the **muddiest point** from today's lecture.
+
+What concept was most confusing or unclear?
+
+(Hand in on your way out — or submit digitally)
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min]
 % -- NARRATE: Cue the one-minute paper
 % -- LINK: Connects all chapter concepts --- students flag what was unclear from today's full arc
@@ -1555,16 +1612,24 @@ most confusing. Hand it in on your way out.''
 % -- FLEX: [CORE] Drives next lecture's opening clarification
 [CORE] Collect responses. Open Ch15 with the top 2--3 muddiest points.
 IF SHORT: Allow 30 seconds instead of 60.
-}
+```
 
- One-minute paper\\[0.5cm]
- Write down the **muddiest point** from today's lecture.\\[0.2cm]
-{ What concept was most confusing or unclear?}\\[0.5cm]
-{{midgray}{(Hand in on your way out --- or submit digitally)}}
+</details>
 
 ## What Were the Key Ideas?
 
-{
+[Original slide 34](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L1735)
+
+Close your notes.
+
+Write down the **4 most important concepts** from today.
+
+90 seconds — no peeking.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- NARRATE: Cue retrieval practice with silence
 ``Close your notes. 90 seconds. Write the 4 most important concepts.
@@ -1573,20 +1638,26 @@ No peeking.'' Walk around the room. Do NOT show Key Takeaways yet.
 % -- FLEX: [CORE] Retrieval practice is the highest-impact activity
 [CORE] Forces active recall before the reveal.
 IF SHORT: Reduce to 60 seconds.
-}
+```
 
-{1.5cm}
-{ Close your notes.}
-
-{0.8cm}
-{ Write down the **4 most important concepts** from today.}
-
-{0.8cm}
-{{midgray}{90 seconds --- no peeking.}}
+</details>
 
 ## Key Takeaways
 
-{
+[Original slide 35](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L1759)
+
+- **ML systems fail silently**: Degradation Equation $\text{Acc}(t) \approx \text{Acc}_0 - \lambda \cdot D(P_t \| P_0)$ quantifies decay.
+- **Training-serving skew**: Feature stores eliminate 5–15% accuracy loss by computing features once.
+- **Retraining is an optimization**: $T^* \approx \sqrt{2C/(QVA_0\lambda)}$ — from intuition to economics.
+- **Graduated rollout**: Canary, blue-green, shadow with tiered rollback ($<$1 min, $<$15 min, $<$4 hrs).
+- **Monitor inputs, not just outputs**: Input drift precedes output degradation.
+- **Five Principles**: Reproducibility, Separation, Consistency, Observable Degradation, Cost-Aware Automation.
+- **Maturity is integration, not tools**: Each level transition takes 3–6 months.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: From retrieval practice to the official summary
 Students just wrote their own summaries. Now compare with the canonical list.
@@ -1599,20 +1670,28 @@ Maturity: 3--6 months per transition.''
 % -- FLEX: [CORE] Key Takeaways are the exam-relevant summary
 [CORE] Students photograph this slide. Read each bullet clearly.
 IF SHORT: Read bullets without elaboration.
-}
+```
 
-{0pt}
-- **ML systems fail silently**: Degradation Equation ${Acc}(t)  {Acc}_0 -   D(P_t \| P_0)$ quantifies decay.
-- **Training-serving skew**: Feature stores eliminate 5--15% accuracy loss by computing features once.
-- **Retraining is an optimization**: $T^*  {2C/(QVA_0)}$ --- from intuition to economics.
-- **Graduated rollout**: Canary, blue-green, shadow with tiered rollback ($<$1 min, $<$15 min, $<$4 hrs).
-- **Monitor inputs, not just outputs**: Input drift precedes output degradation.
-- **Five Principles**: Reproducibility, Separation, Consistency, Observable Degradation, Cost-Aware Automation.
-- **Maturity is integration, not tools**: Each level transition takes 3--6 months.
+</details>
 
 ## References
 
-{
+[Original slide 36](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L1788)
+
+**Sculley+15** Sculley et al. “Hidden Technical Debt in ML Systems.” NeurIPS 2015.
+
+**Breck+20** Breck et al. “The ML Test Score: A Rubric for Production Readiness.” ICSE 2020.
+
+**Amershi+19** Amershi et al. “Software Engineering for ML: A Case Study.” ICSE 2019.
+
+**Hermann+17** Hermann & Del Balso. “Meet Michelangelo: Uber's ML Platform.” 2017.
+
+**Paleyes+22** Paleyes et al. “Challenges in Deploying ML.” ACM Comp. Surveys, 2022.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [0.5 min]
 % -- NARRATE: Highlight the two must-read papers
 ``Sculley et al.\ 2015 on ML technical debt. Breck et al.\ 2020 for the
@@ -1621,17 +1700,36 @@ ML Test Score rubric.''
 % -- FLEX: [OPTIONAL] Reference slides are for student self-study
 [OPTIONAL] Do not read every reference aloud.
 IF SHORT: Name two key papers and move to Next Lecture.
-}
+```
 
-{Sculley+15}{Sculley et al. ``Hidden Technical Debt in ML Systems.'' NeurIPS 2015.}
-{Breck+20}{Breck et al. ``The ML Test Score: A Rubric for Production Readiness.'' ICSE 2020.}
-{Amershi+19}{Amershi et al. ``Software Engineering for ML: A Case Study.'' ICSE 2019.}
-{Hermann+17}{Hermann & Del Balso. ``Meet Michelangelo: Uber's ML Platform.'' 2017.}
-{Paleyes+22}{Paleyes et al. ``Challenges in Deploying ML.'' ACM Comp.\ Surveys, 2022.}
+</details>
 
 ## Next Lecture: Responsible Engineering
 
-{
+[Original slide 37](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L1809)
+
+We built a system that is **efficient**, **scalable**, and **reliable**.
+
+Can it still cause harm?
+
+Bias
+
+Amplifying inequality
+
+Privacy
+
+Leaking data
+
+Trust
+
+Explainability gap
+
+**The final constraint: aligning optimization with human values.**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min]
 % -- LINK: From operational correctness to ethical correctness
 
@@ -1639,7 +1737,7 @@ IF SHORT: Name two key papers and move to Next Lecture.
 problem, not an MLOps problem. Correct framing: fairness metrics are
 just another monitoring dimension --- you can monitor for disparate
 error rates across subgroups using the same PSI/KL infrastructure used
-for data drift. MLOps *is* the implementation layer for responsible AI.
+for data drift. MLOps \emph{is} the implementation layer for responsible AI.
 This chapter ensured systems stay correct. The next asks: correct for whom?
 
 % -- NARRATE: Deliver the forward hook with the three pillars
@@ -1654,38 +1752,30 @@ Ask: ``Can a system be perfectly correct and still unfair?''
 % -- FLEX: [CORE] The forward hook creates anticipation for Ch15
 [CORE] End on this question. Do not answer it --- let it simmer.
 IF SHORT: Read the slide text and close.
-}
+```
 
-{0.5cm}
-{ We built a system that is **efficient**, **scalable**, and **reliable**.}
-
-{0.5cm}
-{ Can it still cause harm?}
-
-{0.4cm}
-[c]
-  
-    
-    {datastroke}{ Bias}\\[0.1cm]
-    { Amplifying inequality}
-  
-  
-    
-    {errorstroke}{ Privacy}\\[0.1cm]
-    { Leaking data}
-  
-  
-    
-    {routingstroke}{ Trust}\\[0.1cm]
-    { Explainability gap}
-  
-
-{0.4cm}
-{**The final constraint: aligning optimization with human values.**}
+</details>
 
 ## Backup: PSI Threshold Decision Guide
 
-{
+[Original slide 38](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L1872)
+
+Use if students need a practical drift detection reference.
+
+small PSI $< 0.1$: No action. Normal variation.
+
+ PSI $0.1$–$0.2$: Investigate. Check if specific features shifted.
+
+ PSI $> 0.2$: Significant drift. Trigger retraining pipeline.
+
+ PSI $> 0.5$: Critical. Likely data pipeline failure, not organic drift.
+
+ Monitor input features, not just output accuracy.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min]
 % -- NARRATE: Walk through each PSI band with the action
 % -- LINK: This extends the main PSI slide (Quantifying Drift) with a
@@ -1696,13 +1786,34 @@ pipeline failure, not organic drift.
 
 % -- FLEX: [OPTIONAL] Use if students struggled with PSI thresholds
 [OPTIONAL] Pull if the main PSI slide generated many questions.
-}
+```
 
-Use if students need a practical drift detection reference.\ PSI $< 0.1$: No action. Normal variation.\\ PSI $0.1$--$0.2$: Investigate. Check if specific features shifted.\\ PSI $> 0.2$: Significant drift. Trigger retraining pipeline.\\ PSI $> 0.5$: Critical. Likely data pipeline failure, not organic drift.\\ Monitor input features, not just output accuracy.
+</details>
 
 ## Backup: Retraining Interval Optimization
 
-{
+[Original slide 39](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L1889)
+
+Use if students want more practice with the $T^*$ formula.
+
+small 
+
+$$
+T^* \approx \sqrt{\frac{2C}{Q \cdot V \cdot A_0 \cdot \lambda}}
+$$
+
+ High retraining cost ($C$ large): retrain less often.
+
+ High query volume ($Q$ large): retrain more often.
+
+ Fast drift ($\lambda$ large): retrain more often.
+
+ The formula balances retraining cost against accuracy loss cost.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min]
 % -- NARRATE: Explain $T^*$ sensitivity to each parameter
 High C: retrain less often. High Q: retrain more often. High lambda:
@@ -1712,13 +1823,30 @@ accuracy loss cost.
 % -- FLEX: [OPTIONAL] Use if students want more practice with $T^*$
 [OPTIONAL] Pull for additional worked examples or if the exercise
 generated confusion about parameter sensitivity.
-}
+```
 
-Use if students want more practice with the $T^*$ formula.\ $$T^*  {{2C}{Q  V  A_0  }}$$\\ High retraining cost ($C$ large): retrain less often.\\ High query volume ($Q$ large): retrain more often.\\ Fast drift ($$ large): retrain more often.\\ The formula balances retraining cost against accuracy loss cost.
+</details>
 
 ## Backup: ML Test Score Self-Assessment
 
-{
+[Original slide 40](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L1905)
+
+**Breck et al. 28-Point ML Test Score (abbreviated):**
+
+| **Category** | **Sample Checks** | **Points** |
+| --- | --- | --- |
+| **Data Tests** | Feature expectations documented? Schema enforced? No training-serving skew? | 0–7 |
+| **Model Tests** | Accuracy bounds per subgroup? Staleness check? Fairness metrics? | 0–7 |
+| **Infra Tests** | Training reproducible? Pipeline idempotent? Rollback tested? | 0–7 |
+| **Monitor Tests** | Drift alerts configured? On-call rotation? Incident playbook? | 0–7 |
+| **Total** |  | **0–28** |
+
+**Scoring:** 0–5 ad hoc $|$ 5–10 developing $|$ 10–15 mature $|$ 15+ production-grade. Most teams score $<$5.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min]
 % -- NARRATE: Walk through the 28-point rubric as a self-assessment
 The ML Test Score (Breck et al., 2020) has 28 specific checks across
@@ -1726,32 +1854,29 @@ four categories. Use this as a team self-assessment tool.
 
 % -- FLEX: [OPTIONAL] Pull for project work or exam review
 [OPTIONAL] Use if students want to score their own projects.
-}
+```
 
-**Breck et al.\ 28-Point ML Test Score (abbreviated):**
-
-{0.1cm}
-
-{}{1.0}
-{tabular}{@{}lp{5.5cm}r@{}}
-  
-  **Category** & **Sample Checks** & **Points** \\
-  
-  **Data Tests** & Feature expectations documented? Schema enforced? No training-serving skew? & 0--7 \\
-  **Model Tests** & Accuracy bounds per subgroup? Staleness check? Fairness metrics? & 0--7 \\
-  **Infra Tests** & Training reproducible? Pipeline idempotent? Rollback tested? & 0--7 \\
-  **Monitor Tests** & Drift alerts configured? On-call rotation? Incident playbook? & 0--7 \\
-  
-  **Total** & & **0--28** \\
-  
-{tabular}
-
-{0.1cm}
-{Scoring:}{0--5 ad hoc $|$ 5--10 developing $|$ 10--15 mature $|$ 15+ production-grade. Most teams score $<$5.}
+</details>
 
 ## Backup: Feature Store Comparison
 
-{
+[Original slide 41](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/14_ml_ops/14_ml_ops.tex#L1938)
+
+Use if students want to evaluate feature store options.
+
+| **Tool** | **Type** | **Streaming** | **Online Latency** | **Best For** |
+| --- | --- | --- | --- | --- |
+| Feast | Open-source | Limited | $<$10 ms | Kubernetes teams |
+| Tecton | Managed | Yes | $<$5 ms | Real-time ML |
+| Vertex AI FS | Managed | Yes | $<$10 ms | GCP-native |
+| Hopsworks | Platform | Yes | $<$5 ms | Full MLOps stack |
+
+**Key:** The feature store choice matters less than the discipline of using one. Any store eliminates training-serving skew.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min]
 % -- NARRATE: Compare feature store options for different contexts
 Feast for open-source Kubernetes environments. Tecton for managed
@@ -1759,26 +1884,9 @@ streaming. Vertex AI for GCP-native. Hopsworks for full platform.
 
 % -- FLEX: [OPTIONAL] Pull if students ask about specific tools
 [OPTIONAL] Practical reference for project work.
-}
+```
 
-Use if students want to evaluate feature store options.
-
-{0.1cm}
-
-{}{1.1}
-{tabular}{@{}lllll@{}}
-  
-  **Tool** & **Type** & **Streaming** & **Online Latency** & **Best For** \\
-  
-  Feast & Open-source & Limited & $<$10 ms & Kubernetes teams \\
-  Tecton & Managed & Yes & $<$5 ms & Real-time ML \\
-  Vertex AI FS & Managed & Yes & $<$10 ms & GCP-native \\
-  Hopsworks & Platform & Yes & $<$5 ms & Full MLOps stack \\
-  
-{tabular}
-
-{0.1cm}
-{Key:}{The feature store choice matters less than the discipline of using one. Any store eliminates training-serving skew.}
+</details>
 
 ## Complete original Beamer source
 

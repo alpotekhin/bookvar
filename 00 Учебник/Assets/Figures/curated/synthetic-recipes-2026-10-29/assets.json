@@ -1,0 +1,95 @@
+[
+  {
+    "id": "curated-synthetic-recipes-phi1-data-ablation-5df53a2c72ca",
+    "asset": "00 Учебник/Assets/Figures/curated/synthetic-recipes-2026-10-29/phi1-data-ablation.png",
+    "author": "Suriya Gunasekar et al.",
+    "title": "Phi-1 data and fine-tuning ablation, original Figure 2.1",
+    "source_url": "https://arxiv.org/html/2306.11644v2#S2.F1",
+    "source_image_url": "https://arxiv.org/html/2306.11644v2/figures/new_data_results.png",
+    "source_asset": "05 Источники/Originals/synthetic-recipes-2026-10-29/phi1-data-ablation.png",
+    "source_asset_sha256": "5df53a2c72ca91ec748abac7fb2ea6a0e2eb1040f11946bdc76f4bb1f01675cb",
+    "source_page_snapshot": "05 Источники/Originals/synthetic-recipes-2026-10-29/phi-1-v2.html",
+    "source_page_sha256": "5428fe2e6928760db818367ce88a68436ad256afcebda7e30e81746477e3497b",
+    "sha256": "5df53a2c72ca91ec748abac7fb2ea6a0e2eb1040f11946bdc76f4bb1f01675cb",
+    "bytes": 34067,
+    "dimensions_px": [
+      1730,
+      956
+    ],
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/synthetic-recipes-2026-10-29/phi-1-v2.html",
+    "license_evidence_sha256": "5428fe2e6928760db818367ce88a68436ad256afcebda7e30e81746477e3497b",
+    "derivation": "source-image-copy",
+    "modifications": "Complete original PNG copied byte-for-byte. No crop, redrawing, recoloring, translation or resampling. Attribution and explanatory caption are separate in the chapter.",
+    "metadata_status": "verified",
+    "rights_status": "source-license-verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md"
+    ]
+  },
+  {
+    "id": "curated-synthetic-recipes-phi4-repetitions-4e293aabffad",
+    "asset": "00 Учебник/Assets/Figures/curated/synthetic-recipes-2026-10-29/phi4-repetitions.png",
+    "author": "Marah Abdin et al.",
+    "title": "Phi-4 phase-two synthetic repetition experiment, original Figure 2",
+    "source_url": "https://arxiv.org/html/2412.08905v1#S3.F2",
+    "source_image_url": "https://arxiv.org/html/2412.08905v1/figures/mmlu_synth_epochs.png",
+    "source_asset": "05 Источники/Originals/synthetic-recipes-2026-10-29/phi4-repetitions.png",
+    "source_asset_sha256": "4e293aabffad4e503e56fbaa24aea90cf0972dd215ea8ac97e6f65ac4f4063b2",
+    "source_page_snapshot": "05 Источники/Originals/synthetic-recipes-2026-10-29/phi-4-v1.html",
+    "source_page_sha256": "8ab641978c7e1b90ecabf88630f32042dff71a8a3dd67de2f0a07ce8d1276b88",
+    "sha256": "4e293aabffad4e503e56fbaa24aea90cf0972dd215ea8ac97e6f65ac4f4063b2",
+    "bytes": 301572,
+    "dimensions_px": [
+      1814,
+      900
+    ],
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/synthetic-recipes-2026-10-29/phi-4-v1.html",
+    "license_evidence_sha256": "8ab641978c7e1b90ecabf88630f32042dff71a8a3dd67de2f0a07ce8d1276b88",
+    "derivation": "source-image-copy",
+    "modifications": "Complete original PNG copied byte-for-byte. No crop, redrawing, recoloring, translation or resampling. Attribution and explanatory caption are separate in the chapter.",
+    "metadata_status": "verified",
+    "rights_status": "source-license-verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md"
+    ]
+  },
+  {
+    "id": "curated-synthetic-recipes-nemotron4-prompts-8968b4ef405e",
+    "asset": "00 Учебник/Assets/Figures/curated/synthetic-recipes-2026-10-29/nemotron4-prompts.png",
+    "author": "NVIDIA",
+    "title": "Nemotron-4 four synthetic-prompt generation procedures, original Figure 2",
+    "source_url": "https://arxiv.org/html/2406.11704v1#S3.F2",
+    "source_image_url": "https://arxiv.org/html/2406.11704v1/image/synthetic-prompts.png",
+    "source_asset": "05 Источники/Originals/synthetic-recipes-2026-10-29/nemotron4-prompts.png",
+    "source_asset_sha256": "8968b4ef405eb573b5311536471aedb72e9d3c433c368d013ac04009d1afe08f",
+    "source_page_snapshot": "05 Источники/Originals/synthetic-recipes-2026-10-29/nemotron-4-v1.html",
+    "source_page_sha256": "44500cdb5e49f7bea7ce51e86b29adda9a599f9f94977e3b39d65f0ab5864a9c",
+    "sha256": "8968b4ef405eb573b5311536471aedb72e9d3c433c368d013ac04009d1afe08f",
+    "bytes": 47250,
+    "dimensions_px": [
+      1178,
+      311
+    ],
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/synthetic-recipes-2026-10-29/nemotron-4-v1.html",
+    "license_evidence_sha256": "44500cdb5e49f7bea7ce51e86b29adda9a599f9f94977e3b39d65f0ab5864a9c",
+    "derivation": "source-image-copy",
+    "modifications": "Complete original PNG copied byte-for-byte. No crop, redrawing, recoloring, translation or resampling. Attribution and explanatory caption are separate in the chapter.",
+    "metadata_status": "verified",
+    "rights_status": "source-license-verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md"
+    ]
+  }
+]

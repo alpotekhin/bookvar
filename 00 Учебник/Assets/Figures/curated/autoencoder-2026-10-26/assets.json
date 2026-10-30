@@ -1,0 +1,60 @@
+[
+  {
+    "id": "curated-ae-uva-autoencoder-19f02e477d2c",
+    "asset": "00 Учебник/Assets/Figures/curated/autoencoder-2026-10-26/uva-autoencoder.svg",
+    "author": "Phillip Lippe",
+    "source_url": "https://uvadlc-notebooks.readthedocs.io/en/latest/tutorial_notebooks/tutorial9/AE_CIFAR10.html#Building-the-autoencoder",
+    "source_image_url": "https://raw.githubusercontent.com/phlippe/uvadlc_notebooks/c7d9e18f42fee53bc8925f08ec2358371b1e9200/docs/tutorial_notebooks/tutorial9/autoencoder_visualization.svg",
+    "commit": "c7d9e18f42fee53bc8925f08ec2358371b1e9200",
+    "source_asset": "00 Учебник/Assets/Figures/curated/autoencoder-2026-10-26/uva-autoencoder.svg",
+    "source_asset_sha256": "19f02e477d2cb875ecb7705730fbe896f33497353bd6d68f15ef99296c859c97",
+    "sha256": "19f02e477d2cb875ecb7705730fbe896f33497353bd6d68f15ef99296c859c97",
+    "source_page_snapshot": "05 Источники/Originals/autoencoder-2026-10-26/uva-ae.ipynb",
+    "source_page_sha256": "ae9cb1d0c65d447744eadca5aeccec52597b9e9191692d7873344e215439a6be",
+    "license": "MIT",
+    "license_url": "https://github.com/phlippe/uvadlc_notebooks/blob/c7d9e18f42fee53bc8925f08ec2358371b1e9200/LICENSE.md",
+    "license_evidence": "05 Источники/Originals/autoencoder-2026-10-26/uva-MIT.txt",
+    "license_evidence_sha256": "bc760ea73079016ab58ddb9ade0ea6e822dc1ba801b8e26c9d0eadb68e564735",
+    "public_license_copy": "site/public/licenses/uva-c7d9e18f-MIT.txt",
+    "derivation": "source-svg-copy",
+    "modifications": "Complete original SVG copied byte-for-byte from the pinned author repository. No crop, translation, relabeling, redraw or rasterization.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-26",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE.md"
+    ]
+  },
+  {
+    "id": "curated-ae-transpose-convolution-9b41abceb5b1",
+    "asset": "00 Учебник/Assets/Figures/curated/autoencoder-2026-10-26/transpose-convolution.gif",
+    "author": "Vincent Dumoulin, Francesco Visin",
+    "source_url": "https://github.com/vdumoulin/conv_arithmetic/tree/af6f818b0bb396c26da79899554682a8a499101d#transposed-convolution-animations",
+    "source_image_url": "https://raw.githubusercontent.com/vdumoulin/conv_arithmetic/af6f818b0bb396c26da79899554682a8a499101d/gif/padding_strides_transposed.gif",
+    "commit": "af6f818b0bb396c26da79899554682a8a499101d",
+    "source_asset": "00 Учебник/Assets/Figures/curated/autoencoder-2026-10-26/transpose-convolution.gif",
+    "source_asset_sha256": "9b41abceb5b1d151d1f9cf1902eca8aebfbe6bfac5638f4526c5b5328088a7d5",
+    "sha256": "9b41abceb5b1d151d1f9cf1902eca8aebfbe6bfac5638f4526c5b5328088a7d5",
+    "source_page_snapshot": "05 Источники/Originals/autoencoder-2026-10-26/conv-arithmetic-README.md",
+    "source_page_sha256": "3850f9a43e09f6b115ad545aaee59286430570241bfd7fdc57321d172a36efe6",
+    "license": "MIT",
+    "license_url": "https://github.com/vdumoulin/conv_arithmetic/blob/af6f818b0bb396c26da79899554682a8a499101d/LICENSE",
+    "license_evidence": "05 Источники/Originals/autoencoder-2026-10-26/conv-arithmetic-MIT.txt",
+    "license_evidence_sha256": "852bcc033a46c62f99fb5ffd43b3241ba2c0c440c6034aa2114505f2c4f03c4a",
+    "public_license_copy": "site/public/licenses/conv-arithmetic-af6f818b-MIT.txt",
+    "derivation": "source-gif-copy",
+    "modifications": "Complete original 25-frame animated GIF copied byte-for-byte from the pinned author repository. No crop, translation, relabeling, redraw or rasterization.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-26",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE.md",
+      "00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор.md"
+    ],
+    "dimensions_px": [
+      395,
+      449
+    ],
+    "frames": 25
+  }
+]

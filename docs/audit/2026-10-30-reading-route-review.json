@@ -1,0 +1,869 @@
+{
+  "date": "2026-10-30",
+  "status": "in-progress",
+  "scope": "Conceptual and editorial reading-route review, separate from the completed 31-note archive reconciliation.",
+  "goalTurnClassification": "progress: 34 complete canonical-owner reads in this route pass; 14 earlier whole-owner reads reused at exact revisions or with strict reviewed deltas. All 28 atlas documents read for the model/mechanism route. Two factual label errors fixed. Figure-permission gaps and scoped dev/Pages release remain active.",
+  "fullReads": [
+    {
+      "path": "00 Учебник/02 Представление текста и токенизация/01 Представление текста числами.md",
+      "route": "textbook/text-representation/numerical-representation",
+      "sha256": "a61f0506c18437b6e580e01f3d547f477b91c09eefea52b1695e580aca119a1f",
+      "lines": 804,
+      "read": "complete saved chapter, frontmatter through sources and final navigation",
+      "findings": [
+        "Unicode/bytes/token IDs → lookup → shared-row gradient → padded batch → bag of words/TF–IDF → contextual states",
+        "B,T,d and vocabulary axes are introduced through concrete tensors. The move to n-gram likelihood is stated explicitly at the end."
+      ]
+    },
+    {
+      "path": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "route": "textbook/text-representation/tokenization",
+      "sha256": "fa5261a3994721e92f48c82dae8992e55c0ccc805dc795648ce61b7407d29ebe",
+      "lines": 814,
+      "read": "complete saved chapter, frontmatter through sources and final navigation",
+      "findings": [
+        "Separate training, encoding and decoding; ordered BPE merges, greedy WordPiece, Unigram paths/EM and normalization are developed with numerical examples.",
+        "The cost section defines vocabulary logits and pairwise attention counts locally, then links to the later full architecture and FlashAttention. These are explicit previews, not prerequisites for the tokenization derivations."
+      ]
+    },
+    {
+      "path": "00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer.md",
+      "route": "textbook/transformer/from-seq2seq-to-transformer",
+      "sha256": "b3cf9833d7001011b01a49ab0f310ad9f65e5cfdc82b771510e11bed6ade1b62",
+      "lines": 867,
+      "read": "complete saved chapter, frontmatter through sources and final navigation",
+      "findings": [
+        "Fixed recurrent state → stored annotations → query scores/softmax/read → query gradient → Bahdanau/Luong scheduling → self-attention.",
+        "The recurrent model retains encoder initialization and states. The chapter does not falsely claim that attention alone removes recurrence or proves token-level causal importance."
+      ]
+    },
+    {
+      "path": "00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md",
+      "route": "textbook/transformer/self-attention",
+      "sha256": "270146832ba9d5f349939f802663643786563c05fd88bb0271633fcfce0baba7",
+      "lines": 746,
+      "read": "complete saved chapter, frontmatter through sources and final navigation",
+      "findings": [
+        "Causal uniform average → learned Q/K → separate V → matrix shapes → full three-position forward/backward → permutation and multiple-weight ambiguity.",
+        "The preceding chapter supplies query/memory/softmax; the next supplies masking, heads and output projection. Attention weights over positions are explicitly distinguished from output probabilities over the vocabulary."
+      ]
+    },
+    {
+      "path": "00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md",
+      "route": "textbook/transformer/masking-heads-shapes",
+      "sha256": "9306be89c604c905489000ffcebffb32e16161f66e07540005d0f394097c0fd5",
+      "lines": 782,
+      "read": "complete saved chapter, frontmatter through sources and final navigation",
+      "findings": [
+        "Mask-before-softmax → target shift → padding → projected heads → split/merge/named axes → output projection → empty rows and absolute cached positions.",
+        "Unintroduced KV-cache is limited to a worked mask preview with explicit key/query positions and a later inference link. Position encoding and RoPE are the stated next step."
+      ]
+    },
+    {
+      "path": "00 Учебник/05 Attention и Transformer/04 Позиционная информация.md",
+      "route": "textbook/transformer/positional-information",
+      "sha256": "897a19c428e9ef20a6c651e981eb32d905d6f72a616907c2ea2e20fa1842451a",
+      "lines": 1047,
+      "read": "complete saved chapter, frontmatter through sources and final navigation",
+      "findings": [
+        "Position methods are classified by the changed operation: input sum, score bias, relative key/value or Q/K rotation. Mask asymmetry is distinguished from explicit metric position.",
+        "The ending specifies which signals enter once at the stack input and which enter each attention layer. It supplies the complete-Transformer chapter's prerequisites."
+      ]
+    },
+    {
+      "path": "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md",
+      "route": "textbook/transformer/full-transformer",
+      "sha256": "1ffb968f9bc3b562b3065f1b059c12e9e9c0b41f78176f2e6d6e5c303f6e52b5",
+      "lines": 1195,
+      "read": "complete saved chapter, frontmatter through sources and final navigation",
+      "findings": [
+        "A source/target translation example connects attention, FFN, residual/norm, embeddings/positions, encoder memory, causal decoder, cross-attention, vocabulary logits, masks, loss and generation.",
+        "The modern-LM code is explicitly a comparison, not a reproduction of Transformer Base or a released Llama. Its modern-block follow-up adds GQA, state/cache equivalence and parameter-choice evidence; retain both rather than remove distinct worked examples."
+      ]
+    },
+    {
+      "path": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md",
+      "route": "textbook/transformer/encoder-decoder-patterns",
+      "sha256": "a99819704bcdd1ff795c39a2240b8c32331fded5b1372c302f69e381d123d6e8",
+      "lines": 870,
+      "read": "complete saved chapter, frontmatter through sources and final navigation",
+      "findings": [
+        "Given the preceding block construction, this chapter varies visibility, output heads and training targets independently through MLM, NTP, T5 and UniLM.",
+        "The two-layer indirect-leakage example explains why prefix rows must not read answers. T5 distinguishes a valid PAD-ID decoder start from padded targets. The next specific-model chapter is BERT."
+      ]
+    },
+    {
+      "path": "00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md",
+      "route": "textbook/modern-llm/decoder-block",
+      "sha256": "fd2e197230ab5e39e1cb7c678415801ea510b1025dbe2a03f60b58021bcea703",
+      "lines": 940,
+      "read": "complete saved chapter, frontmatter through sources and final navigation",
+      "findings": [
+        "A fully specified 128-parameter block traces GQA, RoPE, two residual branches and SwiGLU through intermediate values; cached and full passes are compared across two layers.",
+        "This owner substantially extends the complete-Transformer modern preview: separate layer caches, detached-cache gradient counterexample, windows and hyperparameter/config evidence. Its LLaMA prerequisite remains to be checked in sequence."
+      ]
+    },
+    {
+      "path": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md",
+      "route": "textbook/models/bert-roberta-deberta",
+      "sha256": "0cce42e115bc2a8c453047ce060f7a67dac104a9eae45ed1b899a49f4d921741",
+      "lines": 1322,
+      "read": "complete saved chapter including frontmatter, all explanations, programs, figures/captions, sources and navigation",
+      "findings": [
+        "The previous architecture-pattern chapter supplies MLM versus NTP. BERT then develops input assembly, the two heads, both losses and one actual update before task-specific use.",
+        "RoBERTa changes data/optimization; SpanBERT and SOP alter target construction; DeBERTa follows the earlier positional-information prerequisite. These are not presented as one unqualified improvement."
+      ]
+    },
+    {
+      "path": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md",
+      "route": "textbook/models/gpt-1",
+      "sha256": "318e040db226fabac04ba6576bf629775600e4626a03e2ac7ce0a4ec16967499",
+      "lines": 707,
+      "read": "complete saved chapter including frontmatter, all explanations, programs, figures/captions, sources and navigation",
+      "findings": [
+        "Supervised task heads and updates are separated from heuristic zero-shot scoring. Candidate loss and token-loss normalization have worked examples.",
+        "Post-norm and the historical combined embedding table are distinguished from GPT-2 pre-norm and the teaching model; no modern Llama components are retroactively attributed to GPT-1."
+      ]
+    },
+    {
+      "path": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md",
+      "route": "textbook/models/gpt-2",
+      "sha256": "a0417ae755c137144bbccc8f09b935b5b1abf1657d1411eacdec1585b7b7ab23",
+      "lines": 690,
+      "read": "complete saved chapter including frontmatter, all explanations, programs, figures/captions, sources and navigation",
+      "findings": [
+        "The GPT-1 transition changes task interface and normalization while retaining NTP. Input bytes, positions, logits, sampling and cache are developed in order.",
+        "Full-cache versus delta-cache contracts, P+G-1 and demonstration-based translation are explicit. The historical zero-shot label is distinguished from today's shot count."
+      ]
+    },
+    {
+      "path": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md",
+      "route": "textbook/models/gpt-3",
+      "sha256": "76ed87ea2ca9e9c2bc82b7926eb95de9313d0b11c8ce14ab95ab13313e19875a",
+      "lines": 835,
+      "read": "complete saved chapter including frontmatter, all explanations, programs, figures/captions, sources and navigation",
+      "findings": [
+        "GPT-2 supplies prompt continuation and cache; GPT-3 develops fixed-weight demonstrations, complete candidate scoring and its protocol-dependent normalization.",
+        "T5 follows as an architectural comparison, not a chronological claim. Two retained paper images explicitly lack confirmed reproduction permission; that remains a release issue."
+      ]
+    },
+    {
+      "path": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md",
+      "route": "textbook/models/t5",
+      "sha256": "1bced617c9985be26919d79c4d01a87e4d0a3087d59e65d2e200fd2f84608dfc",
+      "lines": 827,
+      "read": "complete saved chapter including frontmatter, all explanations, programs, figures/captions, sources and navigation",
+      "findings": [
+        "Source and target are separated before self/cross-attention, PAD-ID decoder start, label shifting and span corruption.",
+        "RMS-style normalization and relative buckets prepare the LLaMA comparison. Source reuse and decoder caches are distinguished from causal-prefix reuse. Fresh CPU execution was unavailable because SentencePiece was not cached."
+      ],
+      "subsequentVerification": {
+        "evidence": "docs/audit/2026-10-30-pretraining-reader-verification.json",
+        "sha256": "1bced617c9985be26919d79c4d01a87e4d0a3087d59e65d2e200fd2f84608dfc",
+        "status": "Fresh CPU checker passed after installing SentencePiece; the earlier offline failure remains documented historically."
+      }
+    },
+    {
+      "path": "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md",
+      "route": "textbook/modern-llm/llama-architecture",
+      "sha256": "76213c88dc1a17d2ea09ca1c5b607f53e5d7e6210cb44dbb9d69f9809bcb9e4e",
+      "lines": 904,
+      "read": "complete saved chapter including frontmatter, all explanations, programs, figures/captions, sources and navigation",
+      "findings": [
+        "The chapter explicitly connects T5's pre-norm/RMS-style operation and GPT's causal decoder to RMSNorm, RoPE and SwiGLU.",
+        "A fully specified small block and cache example precede model-family differences. The modern decoder owner already read in the preceding pass is a deeper GQA/cache continuation, not a duplicate to delete."
+      ]
+    },
+    {
+      "path": "00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники.md",
+      "route": "textbook/post-training/module-map",
+      "sha256": "25d6cbe387dab1b111cab7f7024be13d28ccf1b96716b451efbcd388a30e4c02",
+      "lines": 131,
+      "read": "complete saved chapter including frontmatter, all explanations, programs, figures/captions, sources and navigation",
+      "findings": [
+        "The opening supplies the purpose of post-training before SFT without requiring the later CAI loss.",
+        "The local ten-item route now matches both contents and the sidebar; Tulu's concrete recipe is not called a mandatory universal chain."
+      ],
+      "readRevisionBeforeNavigation": "f9687ff3244da4519af4daa7912a3f36ebffcd612195b8349507bb82cb0ba9f4",
+      "finalDeltaReview": "Whole prior text read; only the exact journaled route/metadata changes were then reviewed. No claim of a second whole-text reread of unchanged paragraphs."
+    },
+    {
+      "path": "00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md",
+      "route": "textbook/post-training/alignment-goals",
+      "sha256": "961c2b618ae6c9539b12dca8171b945bdb34c30d751d82721989fbb564e0a9c1",
+      "lines": 266,
+      "read": "complete saved chapter including frontmatter, all explanations, programs, figures/captions, sources and navigation",
+      "findings": [
+        "Both CAI examples now follow SFT, preference data, reward modeling and PPO. The Bradley-Terry reference points to a preceding explanation.",
+        "The final saved chapter was reread in full. Only a prerequisite notice and navigation metadata changed; both original figures, numerical derivation and programs remain intact."
+      ]
+    },
+    {
+      "path": "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+      "route": "textbook/post-training/sft-instruction-data",
+      "sha256": "efecdcaba7edd624415ebc10cccb36bc2db67fa7d6b537dba20ae70088355780",
+      "lines": 857,
+      "read": "complete saved chapter including frontmatter, all explanations, programs, figures/captions, sources and navigation",
+      "findings": [
+        "The full 857-line chapter was read before its metadata-only navigation repair: task example, masking, shifted loss, token/answer weighting, one Llama update, packing, data construction and mixtures.",
+        "Its sole explicit learning prerequisite is NTP. It does not need the detailed CAI recipe as a preceding chapter; the next PEFT chapter remains unchanged."
+      ],
+      "readRevisionBeforeNavigation": "3afbb8b75a2866dc5d493a929e0354aa3d1fa141cbdbdd82f0c866a5f387d872",
+      "finalDeltaReview": "Whole prior text read; only the exact journaled route/metadata changes were then reviewed. No claim of a second whole-text reread of unchanged paragraphs."
+    },
+    {
+      "path": "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md",
+      "route": "textbook/modern-llm/norm-gating-residual",
+      "sha256": "ba4dde89572fa4c17be5addc0bde7ea24bbffb300120d15467c2282fb120ced6",
+      "lines": 718,
+      "read": "Complete saved chapter, frontmatter through all examples, figures/captions, sources and final navigation.",
+      "findings": [
+        "Residual/Jacobian and pre/post-norm examples precede RMS axes, epsilon and gradients. Numerical failure cases and all four published blocks were retained.",
+        "The chapter deepens the already-read modern decoder block; no extra whole-model implementation or missing normalization prerequisite was found."
+      ]
+    },
+    {
+      "path": "00 Учебник/07 Анатомия современной LLM/04 RoPE.md",
+      "route": "textbook/modern-llm/rope",
+      "sha256": "6de4b7919032e51d0ce74e0c4b39ae7ce08982ba3ee9dad4dd0009d440254bde",
+      "lines": 786,
+      "read": "Complete saved chapter, frontmatter through all examples, figures/captions, sources and final navigation.",
+      "findings": [
+        "Absolute Q/K rotations produce relative dot products with an explicit sign check, then pair layouts and absolute cached positions are developed.",
+        "PI, NTK and YaRN are separated. The dynamic-grid example explains why reusing old upper-layer states is not equivalent to recomputation."
+      ]
+    },
+    {
+      "path": "00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md",
+      "route": "textbook/modern-llm/dense-ffn",
+      "sha256": "ab9b6430788c2f530bfa1cfc991db50aa488c9d2a11fe6b0d0fd7e3fb2bf9496",
+      "lines": 844,
+      "read": "Complete preceding chapter revision, including examples, figures/captions, sources and navigation; final changes reviewed as the exact editorial delta.",
+      "findings": [
+        "Position-wise computation starts from a contextual token vector, then derives expansion, SwiGLU, gradients, budgets and TP sums.",
+        "Removed only the false promise of a separate formula reference. The old reference is still a direct compatibility redirect; the detailed FFN/MoE distinction remains."
+      ],
+      "readRevisionBeforeEditorialDelta": "50f2528d8a0cba6231692f81353c6817f2626aa54945aa51a0b6e14aeccbffc3",
+      "linesAtWholeRead": 847,
+      "finalDeltaReview": "The journal restores the precise whole-read revision. Code blocks, mathematical displays, figures and approved source excerpts are byte-identical; no claim of a second complete reread after these small prose/date edits."
+    },
+    {
+      "path": "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md",
+      "route": "textbook/modern-llm/mha-mqa-gqa",
+      "sha256": "c442a81b9e09fe55aedc225cb3e5d3d7fa91b3db13eb80a9fdefed28a5c5c571",
+      "lines": 651,
+      "read": "Complete saved chapter, frontmatter through all examples, figures/captions, sources and final navigation.",
+      "findings": [
+        "The module introduces causal cached attention and group mapping before resource estimates. Shared KV does not imply identical head outputs.",
+        "Logical cache size, physical TP replication and the scope of T5 uptraining experiments are stated; the following MLA chapter has the required group/cache vocabulary."
+      ]
+    },
+    {
+      "path": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "route": "textbook/modern-llm/transformer-shapes-resources",
+      "sha256": "867688bdeef1319da44e68875af62f33338eb304336829ee1c2990655547b50e",
+      "lines": 923,
+      "read": "Complete saved chapter, frontmatter through all examples, figures/captions, sources and final navigation.",
+      "findings": [
+        "Layer shapes lead to unique parameter counts, tied weights, forward/backward FLOPs and the lifetime of training states.",
+        "Accumulation weighting, roofline and MFU/HFU are worked through. The optional ten-page CS336 appendix is retained as an appendix, not another main reading route."
+      ]
+    },
+    {
+      "path": "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md",
+      "route": "textbook/modern-llm/mla-kv-compression",
+      "sha256": "aa2789b8788eda6efa42c4a31100734867554b63e02d32484996ad9dbb6f5e5f",
+      "lines": 768,
+      "read": "Complete saved chapter, frontmatter through all examples, figures/captions, sources and final navigation.",
+      "findings": [
+        "The text derives normalized latent storage and both absorption steps, preserving the original attention scale.",
+        "A counterexample motivates decoupled RoPE. Full/cache operators, gradients, physical replication and the difference between arithmetic and kernel performance are explicit."
+      ]
+    },
+    {
+      "path": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+      "route": "textbook/modern-llm/long-context",
+      "sha256": "258d15855652ecacc9321b3d15651531e7c5776656e3548510977fe4572c7507",
+      "lines": 1215,
+      "read": "Complete preceding chapter revision, including examples, figures/captions, sources and navigation; final changes reviewed as the exact editorial delta.",
+      "findings": [
+        "The problem example precedes context capacity, position generalization, sparse masks/cache and evaluation. Windowed chunking and multi-layer leakage have executable counterexamples.",
+        "CLA, DSA and CSA/HCA are distinguished from a bounded sliding cache. All five NumPy blocks remain; removed the obsolete four-block count."
+      ],
+      "readRevisionBeforeEditorialDelta": "c15d27a0f6565299948cf7c3aa0005428743735058ff8d9998707bced97c1b85",
+      "linesAtWholeRead": 1215,
+      "finalDeltaReview": "The journal restores the precise whole-read revision. Code blocks, mathematical displays, figures and approved source excerpts are byte-identical; no claim of a second complete reread after these small prose/date edits."
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md",
+      "route": "textbook/pretraining/distributed-systems",
+      "sha256": "bdf9e94e3e46118e48fa55e7998a8a6b33a11f8593777796919e85befd6ce566",
+      "lines": 1023,
+      "read": "Complete preceding chapter revision, including examples, figures/captions, sources and navigation; final changes reviewed as the exact editorial delta.",
+      "findings": [
+        "A complete training step introduces the state being replicated or sharded before DDP, collectives, ZeRO/FSDP, TP, PP and EP.",
+        "The TP example computes outputs and all gradients. The FSDP/TP capacity calculation states its assumptions; AMP is a mocked fragment, not a distributed GPU test. Replaced only the stale previous-scaling framing with the actual specialist prerequisites."
+      ],
+      "readRevisionBeforeEditorialDelta": "7fc54afeb6889923cf35893e40f4b9f02964b734b7dc40b5eea0f10b41659e01",
+      "linesAtWholeRead": 1019,
+      "finalDeltaReview": "The journal restores the precise whole-read revision. Code blocks, mathematical displays, figures and approved source excerpts are byte-identical; no claim of a second complete reread after these small prose/date edits."
+    },
+    {
+      "path": "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
+      "route": "textbook/agents/memory-planning-orchestration",
+      "sha256": "63b05db50c38724b585562df56d1389ec1ed0ad1561917dc54ef76e00c0ac2a7",
+      "lines": 1403,
+      "read": "Complete preceding chapter, including all programs, original excerpts, figures/captions and navigation; exact final editorial delta reviewed separately.",
+      "findings": [
+        "The full owner distinguishes external memory, retrieval, symbolic planning, ToT/LATS search, imagined transitions, robotic control and orchestration with worked examples.",
+        "Only the PSL transfer preamble is a closed native disclosure. Seventeen original English paragraphs, three original figures, numerical explanations and programs remain in the main flow unchanged; visible captions retain attribution."
+      ],
+      "readRevisionBeforeEditorialDelta": "718e68fb6cf58e941e10d76e02acc0761e06a19d8c4bb8496ac6dd3353bcd628",
+      "linesAtWholeRead": 1398,
+      "finalDeltaReview": "Five disclosure-markup lines only; all substantive text, quotations, equations, programs and figures preserved."
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+      "route": "textbook/pretraining/data-and-pretraining",
+      "sha256": "b76bc6bdfbfcd06494c87accc8bc380eb9b019bd73d1d23c710653d251c8759f",
+      "lines": 514,
+      "read": "Complete saved chapter, frontmatter through all examples, sources and navigation.",
+      "findings": [
+        "The introduction explains corpus weights before separating stored documents, sampled tokens and training stages.",
+        "The full OLMo/Dolmino recipe covers independent continuations, checkpoint averaging, microanneals and held-out evaluation. It prepares the collection/filtering owner rather than replacing it with another overview."
+      ]
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+      "route": "textbook/pretraining/dedup-pii-corpus-quality",
+      "sha256": "b614c77415a2209e0ec017b94fa11ea7a22aca3de0532c9f21d7f76f1609425f",
+      "lines": 1207,
+      "read": "Complete saved chapter, frontmatter through all examples, sources and navigation.",
+      "findings": [
+        "The full text separates detection from masking policy, exact document/line/substring matching from MinHash/LSH candidates, verification and grouping.",
+        "Calculations cover recall limits, non-transitivity, image hashes/embeddings and contamination. The next NTP owner supplies the full likelihood/perplexity derivation; the paper plot here is a contextual comparison of data variants."
+      ]
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md",
+      "route": "textbook/inference/decoding",
+      "sha256": "c10fe3a763d44cf1f0e8d2e4103bcba7adae026fc7cf910e673515aaa51ab486",
+      "lines": 788,
+      "read": "Complete preceding chapter, including all programs, original excerpts, figures/captions and navigation; exact final editorial delta reviewed separately.",
+      "findings": [
+        "Complete RU and EN explanations develop transformed versus model distributions, greedy/beam failure cases, temperature, truncation, penalties, grammar constraints, stopping and real tiny-model generation.",
+        "The actual technical prerequisite is next-token probabilities, not synthetic-data preparation. Only frontmatter and EN revision/review metadata changed."
+      ],
+      "readRevisionBeforeEditorialDelta": "cb53484debaf97e673ff30e804afc4d9941b94e6d87eebc8cae78bdda05685a0",
+      "linesAtWholeRead": 788,
+      "finalDeltaReview": "Frontmatter only; the entire teaching body is byte-identical in both languages."
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+      "route": "textbook/inference/llm-inference-physics",
+      "sha256": "dcdc7f9712614b5342b15d03cba1beb7f641ea72b27fe6ee04730ad70fd66bdc",
+      "lines": 950,
+      "read": "Complete owner read for the conceptual reading-route review, including all programs, formulas, original excerpts and figure captions. This is not fresh visual acceptance of every figure or a new source-completeness audit.",
+      "findings": [
+        "Prefill/decode dependence is introduced before allocation and scheduling. The owner separates FLOPs, stored bytes and HBM traffic, then works through MLP fusion, MHA/GQA, roofline, MBU and client token intervals.",
+        "No explanatory body changed. Five actual CPU programs checked; source figures and original JAX Appendix A retained, with source-granularity limitations stated."
+      ]
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+      "route": "textbook/inference/kv-cache-batching-pagedattention",
+      "sha256": "42438233617da20ba81611806b40ed450beaf6506e90ec181e2d43ac92580832",
+      "lines": 710,
+      "read": "Complete owner read for the conceptual reading-route review, including all programs, formulas, original excerpts and figure captions. This is not fresh visual acceptance of every figure or a new source-completeness audit.",
+      "findings": [
+        "The owner explains why causal hidden states permit per-layer K/V reuse, then derives offset masks, GQA/RoPE cache shape, left padding, paged addressing, global softmax and copy-on-write.",
+        "The next owner is scheduling rather than a second independent paging reference. Five CPU programs checked, including a real random two-layer decoder and negative controls. No text or figure changed."
+      ]
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md",
+      "route": "textbook/inference/scheduling",
+      "sha256": "53a8c18595f4e2f2205a0d43c009e443e948720dc199e50f966449a838e8e0ec",
+      "lines": 1037,
+      "read": "Complete owner read for the conceptual reading-route review, including all programs, formulas, original excerpts and figure captions. This is not fresh visual acceptance of every figure or a new source-completeness audit.",
+      "findings": [
+        "The complete owner distinguishes known/generated tokens, computed KV positions, token budget and allocated blocks. It develops admission, chunked prefill, cache hashes, full-hit recomputation, RadixAttention and fairness through examples.",
+        "The missing link to the existing interactive scheduler is added to both fully read editions. An actual EN click then exposed a separate static redirect, now replaced by a canonical-language EN wrapper without translating the original exercise."
+      ],
+      "readRevisionBeforeEditorialDelta": "3256c046c7c117b55a8532fdf20a713eb575723327fa9c75839c55b24b582847",
+      "linesAtWholeRead": 1035,
+      "finalDeltaReview": "One practice-list entry, a blank separator and last_updated only; every existing teaching paragraph, code fence, mathematical block and figure preserved."
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md",
+      "route": "textbook/inference/serving-engines",
+      "sha256": "fee6d97ff4f17a23b48f6b3a73e7311d7699f1da456c414094d4ba934062f255",
+      "lines": 791,
+      "read": "Complete 791-line owner read, including original source excerpts, runtime snippets, worked CPU examples, captions and next/prerequisite links.",
+      "findings": [
+        "Scheduling → serving engines → FlashAttention is coherent. The owner distinguishes process orchestration, cache ownership, request scheduling and attention-kernel interfaces.",
+        "Original vLLM/SGLang/TensorRT/FlashInfer text, all figures and programs remain unchanged. Runtime/GPU-only snippets are not claimed as executed."
+      ]
+    }
+  ],
+  "reviewLimits": "34 complete canonical-owner reads in this selected route pass and 14 reused earlier whole-owner reads with exact current hashes or separately reviewed bounded deltas. Also 28 complete atlas documents and two English editions read. Not a fresh whole-book reread or explanation/source-completeness acceptance of all 152 owners. CPU/source checks, prose review, factual corrections and selected visual checks remain distinct; no GPU benchmark or deployment inferred.",
+  "acceptedRouteObservations": [
+    "Lookup, sequence axes, shared parameter gradients and masked pooling are established before attention.",
+    "Tokenization explains train/apply/decode and algorithm-specific choices rather than assuming BPE is longest-match search.",
+    "Recurrent attention introduces the query, memory, scores, normalizer and weighted values before self-attention uses Q/K/V.",
+    "Self-attention derives the output and gradient before multi-head introduces axis rearrangement and output projection.",
+    "Masking distinguishes future-token leakage, padding keys, query rows and loss targets; positional information is the next explicit prerequisite.",
+    "Position methods specify whether they modify the input once or attention at every layer before the complete Transformer combines these components.",
+    "The full Transformer links a source/target example to masks, vocabulary logits, target shifting, loss and generation before the architecture-pattern comparison.",
+    "The architecture-pattern chapter varies visibility, heads and targets independently; T5 PAD-ID starts and UniLM indirect leakage receive worked explanations.",
+    "The modern decoder owner adds GQA, layer-specific cache/state and gradient counterexamples beyond the full-Transformer preview; these are distinct worked examples, not duplicate chapters to remove.",
+    "BERT → GPT-1 → GPT-2 → GPT-3 distinguishes encoder objectives, supervised task heads, language-model scoring and fixed-weight demonstrations.",
+    "T5 follows GPT-3 as an architecture comparison, with the chronology explicitly stated. Its source/target/cross-attention discussion prepares the return to LLaMA.",
+    "LLaMA introduces the normalization, rotary positions and gated FFN used by the previously read modern decoder owner.",
+    "The post-training introduction supplies motivation before SFT. Constitutional AI's full recipe now follows SFT, preferences, reward modeling and PPO.",
+    "Modern norm/gating, RoPE and dense FFN deepen the previously constructed decoder block; tensor/resource accounting then uses those operations without requiring distributed execution.",
+    "The GQA→MLA→long-context specialist route derives group mapping and cache representations before discussing latent absorption, sparse masks and context evaluation.",
+    "Distributed training introduces the single-device step before process groups and placement. Scaling laws is a separate core-course topic, not its immediate preceding specialist chapter.",
+    "CS336/Berkeley hubs are source-note pages under sources. Seventeen thematic rows point through 27 links to 25 canonical chapter owners and existing headings; the original course orders stay in the library.",
+    "Pretraining proceeds through corpus/token-stream/stage distinctions, extraction/filtering/mixtures, deduplication and verification, likelihood/perplexity, then budget allocation. Detailed existing owners remain intact.",
+    "Decoding derives probability transformations, search and stopping from the next-token distribution. Both locale frontmatters now name that prerequisite; synthetic data remains an optional module.",
+    "PSL transfer commentary is optional; original explanations and figures stay in the main flow with visible figure attribution.",
+    "Inference physics → KV-cache/PagedAttention → scheduling develops computation, stored history and admission in that order. Prefix-hit examples keep the chosen-token versus computed-KV distinction consistent across owners.",
+    "The interactive scheduler is reachable from both scheduling editions. The EN interface keeps the canonical Russian lab text and controls with an explicit notice; it is not advertised as a completed English translation.",
+    "All 23 family cards, the three comparisons, atlas index and timeline were read. Cards describe generation-specific changes and point to canonical mechanism explanations; this pass did not turn them into a second textbook or claim that each card covers the newest market release."
+  ],
+  "fixedIssues": [
+    {
+      "id": "reference-index-drift",
+      "evidence": "docs/audit/2026-10-30-reference-edition-verification.json",
+      "finding": "Six manually maintained terms were missing from canonical chapter metadata. Transformer dropout was also nested under the regularization owner.",
+      "resolution": "Six terms now belong to three canonical chapters. Both indices reproduce exactly from all 152 topic pages; the Transformer term is nested under its owner. A stable gradient-norm-clipping anchor retains the old heading anchor."
+    },
+    {
+      "id": "duplicate-textbook-language-notices",
+      "evidence": "docs/audit/2026-10-30-reference-edition-verification.json",
+      "finding": "BookPageTitle and Starlight both warned on the same fallback page.",
+      "resolution": "BookPageTitle remains the single owner of textbook edition status. The Starlight fallback notice is retained outside English textbook routes. No translation body changed."
+    },
+    {
+      "id": "fallback-locale-links",
+      "evidence": "docs/audit/2026-10-30-canonical-en-navigation-verification.json",
+      "finding": "Fallback EN textbook bodies were reused from root-converted Markdown and switched ordinary reading links back to root.",
+      "resolution": "All 154 textbook pages now have explicit EN-interface navigation. The 112 untranslated canonical copies remain honestly labeled. All 308 HTML pages were scanned: zero unexpected root switches or KaTeX error pages. Desktop/mobile and actual selected transitions verified; no translation body created."
+    },
+    {
+      "id": "alignment-goals-prerequisites",
+      "evidence": "docs/audit/2026-10-30-model-route-verification.json",
+      "finding": "The CAI soft-label loss and complete SFT/reward/RL recipe preceded their prerequisites.",
+      "resolution": "Moved the intact chapter after PPO and before DPO. Both contents, module route, sidebar, adjacent metadata and buttons agree; removed the old before-SFT notice and stale immediate-next wording in PPO."
+    },
+    {
+      "id": "ffn-false-separate-reference",
+      "finding": "The FFN ending promised separate short formulas, while that reference already redirected to this same chapter.",
+      "resolution": "Removed only the false promise; retained the old reference route, direct canonical redirect, compatibility anchors and all teaching material.",
+      "evidence": "docs/audit/2026-10-30-modern-route-verification.json"
+    },
+    {
+      "id": "long-context-stale-example-count",
+      "finding": "Prose described four NumPy blocks after a fifth CSA/HCA block had been added.",
+      "resolution": "Removed the fragile count from prose; all five published blocks remain and pass their CPU checker.",
+      "evidence": "docs/audit/2026-10-30-modern-route-verification.json"
+    },
+    {
+      "id": "distributed-intro-previous-link",
+      "finding": "The distributed specialist overview referred to scaling laws as the immediately previous chapter.",
+      "resolution": "The prerequisite note now points to tensor/resource accounting and Transformer/MoE arithmetic. Scaling laws remains a separate linked core-course topic.",
+      "evidence": "docs/audit/2026-10-30-modern-route-verification.json"
+    },
+    {
+      "id": "course-library-placement",
+      "finding": "Needed to verify that CS336/Berkeley were source catalogs rather than independent textbook reading paths.",
+      "resolution": "Read both complete hubs, the course catalog and library index. Tested all 17 thematic rows and selected UI transitions. Both hubs remain outside every textbook reading path; full course integration is not inferred.",
+      "evidence": "docs/audit/2026-10-30-modern-route-verification.json"
+    },
+    {
+      "id": "agent-source-provenance-in-flow",
+      "finding": "Long PSL transfer commentary preceded the substantive original text and schema.",
+      "resolution": "After a complete 1398-line owner read, only this preamble was placed in a closed native disclosure. Opening/closing, full images, mobile zoom/panning and unchanged original paragraphs verified.",
+      "evidence": "docs/audit/2026-10-30-pretraining-reader-verification.json"
+    },
+    {
+      "id": "decoding-prerequisites",
+      "finding": "Both decoding frontmatters required the optional synthetic-data module.",
+      "resolution": "Both now link to the next-token objective. Entire RU/EN bodies and reading neighbours remain unchanged; EN revision/review metadata agrees.",
+      "evidence": "docs/audit/2026-10-30-pretraining-reader-verification.json"
+    },
+    {
+      "id": "scheduling-interactive-practice-discoverability",
+      "finding": "The scheduling owner did not link to the already published interactive scheduler.",
+      "resolution": "Both editions now include the same practice entry and explicit simulation limits. Existing code, math, source excerpts, figures and chapter order are unchanged.",
+      "evidence": "docs/audit/2026-10-30-inference-route-verification.json"
+    },
+    {
+      "id": "english-scheduler-redirect",
+      "finding": "The new EN chapter link correctly targeted /en/practice/inference-scheduler/, but the static site redirected that route to RU.",
+      "resolution": "Removed only that redirect. The EN custom route reuses canonical Russian Markdown and the shared lab component with an exercise-status notice. A desktop/root run and mobile EN completion plus real EN return transition verified.",
+      "evidence": "docs/audit/2026-10-30-inference-route-verification.json"
+    },
+    {
+      "id": "atlas-generation-specific-labels",
+      "finding": "Architecture-map GQA label generalized across Llama 2 sizes; Falcon 2 and 3 were combined under one 1B–10B/training-budget description.",
+      "resolution": "Named released Llama 2 70B; split Falcon 2/3 and attached their exact historical primary model cards. All original figures preserved, no translation added.",
+      "evidence": "docs/audit/2026-10-30-inference-atlas-verification.json"
+    },
+    {
+      "id": "selected-inference-evaluation-atlas-route",
+      "finding": "The selected reading route still required serving, optimization/distributed-inference, evaluation and atlas reconciliation.",
+      "resolution": "Selected inference/evaluation/model route review is reconciled in 2026-10-30-inference-atlas-verification.json. This is not whole-book source-completeness acceptance. Remaining concrete figure-permission gaps, full scoped diff and frozen Pages-base/release checks stay open.",
+      "evidence": "docs/audit/2026-10-30-inference-atlas-verification.json"
+    }
+  ],
+  "openIssues": [
+    {
+      "id": "figure-rights",
+      "next": "Current arXiv licenses for GPT-3, DeepSeekMath and DeepSeek-V3 are non-exclusive arXiv distribution grants, not third-party reproduction grants. Seek explicit author-repository rights or strong licensed source visuals. Sequential DeepSeek MTP remains linked, not copied; three prior GPT-3/GRPO copied objects remain unresolved. Existing Gloeckle MTP CC BY 4.0 confirmed."
+    },
+    {
+      "id": "release",
+      "next": "After content/navigation closure, inspect the full scoped diff, rerun frozen required unit/root/Pages-base checks, verify current origin/dev and author, then commit/push dev and verify Pages. No publication in this turn."
+    }
+  ],
+  "navigationDocumentReads": [
+    {
+      "path": "00 Учебник/_index.md",
+      "sha256": "c6b73441468617524d453765d73be44bb66c4c68015269af0bb455df65040183",
+      "scope": "Full current body read across the two route-review passes."
+    },
+    {
+      "path": "en/00 Textbook/_index.md",
+      "sha256": "19affe803286bac7fe7d22d69604b87297efb70cdf25eeae656fd8fb62594f11",
+      "scope": "Full body read. Topic routes/order and core/specialist division match the root contents; no translation prose edited."
+    }
+  ],
+  "reusedWholeReads": [
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md",
+      "readSha256": "29efb9a8c255c1b04abdcedc5c696f659a20ef45010572fe59093429698fcae5",
+      "priorEvidence": "docs/audit/2026-10-29-legacy-ppo-verification.json",
+      "currentSha256": "b9b058f5652597a9f408c1a908aedefb3d924bb0901fe9bf4274772cc2186a85",
+      "delta": "Date, next-chapter metadata and one immediate-next link label only. Six programs, formulas, figures and the rest of the explanation unchanged."
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+      "readSha256": "8b00b47bb39ec6d03b8942ae092e6399cc730e98e903bfdab33b5d8890cf99c2",
+      "priorEvidence": "docs/audit/2026-10-29-legacy-pretraining-verification.json",
+      "currentSha256": "8b00b47bb39ec6d03b8942ae092e6399cc730e98e903bfdab33b5d8890cf99c2",
+      "delta": "None. Reuse the prior whole read; current beginning/ending reviewed for the introduction→collection→deduplication transition, not a new whole reread."
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md",
+      "readSha256": "aca814c431df4b4d489ac98e4f147b85ba6f600eb41463c1b3ae4b6f7d9f3f3f",
+      "priorEvidence": "docs/audit/2026-10-29-legacy-pretraining-verification.json",
+      "currentSha256": "769b26049eb04c2ca10a5e951dcc8efc6c6fb30dc1c3536e7f32feb3c9d9f5ee",
+      "delta": "Only the exact nanoGPT practice paragraph from 2026-10-30-nanogpt-additions.json. Reversal restores the previous whole-read hash; current beginning/ending and the added paragraph reviewed, not a fresh whole reread."
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "readSha256": "472401f6f3bf906cc8b23f29a5ff206cb8c083da3f20ac5654249eaee61aef69",
+      "priorEvidence": "docs/audit/2026-10-29-legacy-mla-scaling-verification.json",
+      "currentSha256": "472401f6f3bf906cc8b23f29a5ff206cb8c083da3f20ac5654249eaee61aef69",
+      "delta": "None. Reuse the exact earlier whole read and explicit NTP→budget→post-training bridge. Fresh CPU arithmetic/source checks passed."
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+      "currentSha256": "15ba654d059b1ccd35bd07c6b041e405bef2f99d74ee03f672c205263b7589a1",
+      "readSha256": "15ba654d059b1ccd35bd07c6b041e405bef2f99d74ee03f672c205263b7589a1",
+      "priorEvidence": "docs/audit/2026-10-29-en-inference-parity.json",
+      "delta": "None. Exact current canonical source hash in the later whole-read receipt; beginning/ending checked again for this route."
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+      "currentSha256": "70bd3d2b286af4c5b04150e0a27bf527bd18de4ac6f829d2b7eaeb437f010d17",
+      "readSha256": "70bd3d2b286af4c5b04150e0a27bf527bd18de4ac6f829d2b7eaeb437f010d17",
+      "priorEvidence": "docs/audit/2026-10-29-en-inference-parity.json",
+      "delta": "None. Exact current canonical source hash in the later whole-read receipt; beginning/ending checked again for this route."
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md",
+      "currentSha256": "bfd74b11578aa6caa0782a30e9456000e853e41fcca697f395dddea055eba218",
+      "readSha256": "bfd74b11578aa6caa0782a30e9456000e853e41fcca697f395dddea055eba218",
+      "priorEvidence": "docs/audit/2026-10-19-kv-compression.md",
+      "delta": "None. Exact current canonical source hash in the later whole-read receipt; beginning/ending checked again for this route."
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md",
+      "currentSha256": "abfc32486bfbccb7475c316da89c0dd235c3628572db0121d7b6165aca4ec886",
+      "readSha256": "9fb33a98e8ece36cfabefe9e589c1ed9a5d7a08f4f686358f4ed2c0769aad4f3",
+      "priorEvidence": "docs/audit/2026-10-29-tensor-factorization.md",
+      "delta": "Prior full 1092-line read. All three systems-completion additions and final integration context read afresh; exact reversal restores the recorded prior full-read hash. Not a fresh whole 1522-line reread."
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+      "currentSha256": "32085af4415e2aa3904eded4a14c42e7ced65c81d4288c42af4a5d099ff597ad",
+      "readSha256": "32085af4415e2aa3904eded4a14c42e7ced65c81d4288c42af4a5d099ff597ad",
+      "priorEvidence": "docs/audit/2026-10-29-en-inference-parity.json",
+      "delta": "None. Exact current canonical source hash in the later whole-read receipt; beginning/ending checked again for this route."
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md",
+      "currentSha256": "7219c5e6fdef1ca9cd3fa92c50097cfe77a6ad664afa3ac43e9e6d8c117d7625",
+      "readSha256": "7219c5e6fdef1ca9cd3fa92c50097cfe77a6ad664afa3ac43e9e6d8c117d7625",
+      "priorEvidence": "docs/audit/2026-10-29-en-distributed-parity.json",
+      "delta": "None. Exact current canonical source hash in the later whole-read receipt; beginning/ending checked again for this route."
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/58a2 Раздельное обслуживание prefill и decode.md",
+      "currentSha256": "7973703ca7ec77248f0fdc77321e7c5f9805164d182508234fb5c49c3e86a13d",
+      "readSha256": "7973703ca7ec77248f0fdc77321e7c5f9805164d182508234fb5c49c3e86a13d",
+      "priorEvidence": "docs/audit/2026-10-29-en-distributed-parity.json",
+      "delta": "None. Exact current canonical source hash in the later whole-read receipt; beginning/ending checked again for this route."
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md",
+      "currentSha256": "1d453c6e9f77e4aee10c81305bc406fe0bf3a50e69fc4edd22748a555e5a0b9c",
+      "readSha256": "1d453c6e9f77e4aee10c81305bc406fe0bf3a50e69fc4edd22748a555e5a0b9c",
+      "priorEvidence": "docs/audit/2026-10-29-en-benchmark-parity.json",
+      "delta": "None. Exact current canonical source hash in the later whole-read receipt; beginning/ending checked again for this route."
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning.md",
+      "currentSha256": "8a34dd525150ef3b95896e969444ff40456aefd0e897522cbeb5ca446f4a7ea1",
+      "readSha256": "bbfb1d67720cfe7b264c57c8d754fa0ebb147925cfd25e9ba4e66a63f3603c74",
+      "priorEvidence": "docs/audit/2026-10-20-queueing-capacity.md",
+      "delta": "Prior full 827-line owner. Fresh complete 148-line fanout/hedging addition, current opening and ending read; exact bounded navigation/addition reversal restores the prior owner. Not a new whole-final-owner read."
+    },
+    {
+      "source": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "currentSha256": "910967cba1670d0c65864123b958547b420ca059eb38b7302ad0968436e0f952",
+      "readSha256": "50fc2e140ed82af09da1b935d37c27f90bc48998cf2a0c5628e703eac70a582c",
+      "priorEvidence": "docs/audit/2026-10-30-bleu-reconciliation-verification.json",
+      "delta": "Previous complete 1113-line owner plus all reviewed, strictly journaled BLEU/chrF/BERTScore additions. Exact current owner, checker, source packet and figures verified unchanged; current first 180 lines and final 110 read for the decoding→evaluation→specialist-module transition. No second full 1565-line read claimed."
+    }
+  ],
+  "additionalEditionReads": [
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/54 Decoding and next-token selection.md",
+      "lines": 829,
+      "wholeReadRevision": "7b280782736d3f81e8d1eb6b31cc87a4541ca0e01df911efd25ea5f8779aab42",
+      "currentSha256": "0d7c5da19a434e037bcff27aff1721f1857573666788f23755197cd55eb02c80",
+      "review": "Complete existing English body read and compared with the complete RU owner. Final delta frontmatter-only; no translation authored or body replaced."
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/55b Scheduling — continuous batching, chunked prefill, and prefix caching.md",
+      "linesAtWholeRead": 1037,
+      "wholeReadRevision": "aa4debaa5cc7f8c5f99a3cac50073270d8e1613a8a75a4178e60f881f04aab96",
+      "currentSha256": "055803b8783e0c643f02a6928e375ea9a007a41f3076479f59473e5e96c13206",
+      "lines": 1039,
+      "review": "Complete English scheduling edition read. The exact shared practice-list entry and current canonical-revision metadata were reviewed separately; no translation or replacement of the explanatory body."
+    }
+  ],
+  "additionalDocumentReads": [
+    {
+      "path": "06 Практика/14b Планировщик запросов и KV-память.md",
+      "route": "practice/inference-scheduler",
+      "sha256": "08206ae7089e1b496d90523ca7f8cf8a62994957b49c27596dde3f2df8d811ac",
+      "lines": 151,
+      "figures": 1,
+      "pythonFences": 0,
+      "review": "Entire 151-line canonical practice read to verify the proposed link's description, its four-request trace and stated simulation limits."
+    },
+    {
+      "path": "02 Атлас моделей/Timeline.md",
+      "route": "models/timeline",
+      "sha256": "5a8daa46227b3599523b721bf4e17dd7e2f12ff052eb25bef3f1b2e71054fd15",
+      "lines": 167,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure."
+    },
+    {
+      "path": "02 Атлас моделей/_index.md",
+      "route": "models/index",
+      "sha256": "1a08660ffc2fdada88d6f0f77bbcba14658e4c55919710e6d1777f264d68f189",
+      "lines": 110,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure."
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/BERT.md",
+      "route": "models/families/bert",
+      "sha256": "086f4557ce4896c8545713fd0558fcf81a38a8eea268a135a7a4375fbc45dc0a",
+      "lines": 67,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure."
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Baichuan.md",
+      "route": "models/semeystva/baichuan",
+      "sha256": "99af86120004adbef9736b25cf8b6bb581a355affbe9a281d7656069fe2e5ad8",
+      "lines": 60,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure."
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Command R.md",
+      "route": "models/semeystva/command-r",
+      "sha256": "123c11470430ad02d5a3d630514e9874fbeeec73512aebfb0b2b32fc4d343af1",
+      "lines": 63,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure."
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/DBRX.md",
+      "route": "models/semeystva/dbrx",
+      "sha256": "4cd03c25e2a63992d5d231d71bdd462f68a42227fbdaf0b088408eeb6fc7c391",
+      "lines": 60,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure."
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/DeepSeek.md",
+      "route": "models/families/deepseek",
+      "sha256": "ec05306c5d3d3aa5e61b59b2fc31e52863c6a169fbc57a5eb1998ef5d1886b92",
+      "lines": 190,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure."
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Falcon.md",
+      "route": "models/semeystva/falcon",
+      "sha256": "b1fe97f3c79c38e4994e8a31247ea04d3b9273fad35bd6c8d019ba666e9a7c65",
+      "lines": 57,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure.",
+      "finding": "Falcon 2 was incorrectly included in a 1B–10B row. Historical primary model cards now distinguish 11B Falcon 2, 14T-token Falcon 3 7B and 2T continued training for the depth-upscaled 10B."
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/GLM.md",
+      "route": "models/semeystva/glm",
+      "sha256": "4ca018ae5dea8caf5bbb5e45de151cc88593d693049663b665839a9e9583ca30",
+      "lines": 102,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure."
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/GPT.md",
+      "route": "models/families/gpt",
+      "sha256": "c8d4bf29c6e5178eec5330010554e531263d08b1f8f1d9e1fcc62e3be7e8211e",
+      "lines": 72,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure."
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Gemma.md",
+      "route": "models/semeystva/gemma",
+      "sha256": "d34c185e00448f4c1a1a5d671226c8f4543b293f2c0637d539c3def02745af1b",
+      "lines": 77,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure."
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/InternLM.md",
+      "route": "models/semeystva/internlm",
+      "sha256": "a8cb615eee8afa6ebb4bc5884ab64cd87dbcf4c0276b096a534ffb5971a6a862",
+      "lines": 59,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure."
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Jamba.md",
+      "route": "models/semeystva/jamba",
+      "sha256": "07b7e26d28d8079ec03a0f27d3f469923716b53a9058269f62cd03db5cd6b734",
+      "lines": 54,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure."
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Kimi.md",
+      "route": "models/semeystva/kimi",
+      "sha256": "31c59fab9bc2bcf51f75aa3e9dc7c66fe0ad0b8b426dacb3ec95ca0fd0aab807",
+      "lines": 112,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure."
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Llama.md",
+      "route": "models/semeystva/llama",
+      "sha256": "0a44e132213ba0ff7c9dde6e4515a3abbfdb43aa0fc562cc293bdba3d7916802",
+      "lines": 88,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure."
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Mamba.md",
+      "route": "models/semeystva/mamba",
+      "sha256": "04048691661f1e749cd20e39dee3fa3348c9bf19f04b208f6b7e2b5d7d3d1828",
+      "lines": 56,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure."
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Mistral и Mixtral.md",
+      "route": "models/semeystva/mistral-i-mixtral",
+      "sha256": "2bac58066e1784bcdb23fbeffdb42e100ad462fd352f085c62f1701c61c044f6",
+      "lines": 82,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure."
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Nemotron.md",
+      "route": "models/semeystva/nemotron",
+      "sha256": "4974a082b255198dfaeb03d8fbb40ad44fc2b0fca1a8693c2ead5ad306576409",
+      "lines": 71,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure."
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Phi.md",
+      "route": "models/semeystva/phi",
+      "sha256": "4d3c9ed77a7625651d4b39d87cb24fe8efbd28d9b2d5f24f1e8a5ea8ed953e57",
+      "lines": 77,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure."
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Qwen.md",
+      "route": "models/semeystva/qwen",
+      "sha256": "d69f26dc7cf69300ff7310e69e958a9954326b7cae834eef739615e3a02d4c84",
+      "lines": 162,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure."
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/RWKV.md",
+      "route": "models/semeystva/rwkv",
+      "sha256": "79ed28daea561a203296fd2f19e7c9d6e80008e3d62b8079c52d4b0936966dbe",
+      "lines": 63,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure."
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/RetNet.md",
+      "route": "models/semeystva/retnet",
+      "sha256": "80b91e5e9feb38b27cefb98038be2188c44d3fa0bdb7a5cba16510d5ca2e54fb",
+      "lines": 58,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure."
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/T5.md",
+      "route": "models/families/t5",
+      "sha256": "b580dc9d2110c6f542b44b868332b243a3db8ce05752e7c59ecddf6035507378",
+      "lines": 72,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure."
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Yi.md",
+      "route": "models/semeystva/yi",
+      "sha256": "5e2932bc6e485aeabe0e9c46a7ffd9af99305a54f96fe50fa7b623737dad3a3e",
+      "lines": 51,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure."
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Мультимодальные семейства.md",
+      "route": "models/families/multimodal",
+      "sha256": "58c0ad07918bef4e5d00ccbd7b3a93962585cde3b2f62ddf91f1b96b98f2086e",
+      "lines": 123,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure."
+    },
+    {
+      "path": "02 Атлас моделей/Сравнения/Карта архитектурных линий.md",
+      "route": "models/sravneniya/karta-arhitekturnyh-liniy",
+      "sha256": "954574f99992b9640b7e3daf55686eeca2253008e35779795500c2e344b99443",
+      "lines": 73,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure.",
+      "finding": "GQA example now names released Llama 2 70B rather than implying all Llama 2 sizes. Full comparison and four original figures unchanged."
+    },
+    {
+      "path": "02 Атлас моделей/Сравнения/Перенос vision encoder между VLM.md",
+      "route": "models/sravneniya/perenos-vision-encoder-mezhdu-vlm",
+      "sha256": "0e1bacdc9a5c466e73b5396db928f5e006fa3db60a3ae002bb840ec87d6e4f33",
+      "lines": 42,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure."
+    },
+    {
+      "path": "02 Атлас моделей/Сравнения/Сравнение семейств.md",
+      "route": "models/sravneniya/sravnenie-semeystv",
+      "sha256": "49bb690cfd70b1a7883ee9f80d47005a316a608ac380562a0bb3c0f0af1eaebd",
+      "lines": 57,
+      "review": "Entire current atlas document read for navigation, generation-specific properties and connection to the canonical mechanism owner. Not a fresh primary-source audit or fresh visual acceptance of every inherited figure."
+    }
+  ]
+}

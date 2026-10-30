@@ -1,0 +1,336 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-29",
+  "scope": "Exact reversible record for the 22 atlas pages edited in 2026-10-29-atlas-consolidation.json, before subsequent mechanism moves.",
+  "application": "Apply changes in array order, requiring one exact old occurrence per step. To restore before_sha256, reverse array order and replace each new with old. Both directions verified against complete content SHA-256.",
+  "files": [
+    {
+      "source": "02 Атлас моделей/Семейства/BERT.md",
+      "before_sha256": "3c53320e77f4287e2057aa90db04e0ed80c39b6a678247ff130a7bd8c750f6b5",
+      "after_sha256": "086f4557ce4896c8545713fd0558fcf81a38a8eea268a135a7a4375fbc45dc0a",
+      "changes": [
+        {
+          "old": "Архитектура, код, веса и корпуса исходного BERT опубликованы. Важно не приписывать BERT современный chat, tool use или long context: эти свойства принадлежат другим моделям и training recipes. WordPiece также создаёт отдельную проблему согласования субтокенов с метками слов.",
+          "new": "Опубликованы архитектура, веса и код для предобучения и дообучения. Однако [официальный репозиторий, раздел Pre-training data](https://github.com/google-research/bert#pre-training-data), прямо предупреждает: обработанные наборы из статьи не распространяются, а исходный BooksCorpus больше не доступен для публичной загрузки у его собирателей. Описание корпуса не равно возможности повторить исходное обучение. BERT также не обучался современному chat или вызовам инструментов; WordPiece требует отдельного согласования субтокенов с метками слов."
+        },
+        {
+          "old": "Оригинальный BERT обучался на BooksCorpus и английской Wikipedia с WordPiece-словарём 30,522.",
+          "new": "Оригинальный BERT обучался на BooksCorpus и английской Wikipedia. У [английского uncased checkpoint](https://huggingface.co/google-bert/bert-base-uncased/raw/main/config.json) WordPiece-словарь содержит 30,522 токена; это не общий размер словаря всех вариантов BERT."
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Llama.md",
+      "before_sha256": "acd40be4c8b39949149d996a6c1e41283e1f9dc3fbaa549df8e9cdeafaa7f80d",
+      "after_sha256": "0a44e132213ba0ff7c9dde6e4515a3abbfdb43aa0fc562cc293bdba3d7916802",
+      "changes": [
+        {
+          "old": "- **MoE.** У Llama 4 активные параметры определяют FLOPs на токен, но serving должен разместить все experts. Поэтому «17B active» не означает память как у dense 17B.",
+          "new": "- **MoE.** У Llama 4 выбор экспертов уменьшает число вычисляемых FFN-матриц. Active parameters помогают оценить эту часть работы, но не учитывают отдельно длину внимания, маршрутизацию и обмен между GPU. Хранить всё равно нужно все экспертные веса: «17B active» не означает память как у dense 17B.\n\nРазмеры проекций и KV-кэша разобраны в [[00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA|главе о MHA, MQA и GQA]], а различие общего и активного числа параметров — в [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving|главе о MoE]]. Здесь эти механизмы сопоставляются по поколениям Llama."
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/DeepSeek.md",
+      "before_sha256": "38e826d52ccdd0211258915018b19f32d9d2a2b1abd5fe9dabeb0c462a8e459c",
+      "after_sha256": "a90e01407a465aa43b8ceb8af17cd2f739197cc33aaad9dc53aaf804233f051f",
+      "changes": [
+        {
+          "old": "Для такого вычисления нужны соответствующие ядра. В отличие от GQA,\n",
+          "new": "Для эффективного исполнения этой формы нужны поддерживающие её ядра;\nсам механизм можно проверить и обычными тензорными операциями. В отличие от GQA,\n"
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Kimi.md",
+      "before_sha256": "879122f28efb1195d116a7803669a145197cd99da1178673f03ebd7288d0addd",
+      "after_sha256": "31c59fab9bc2bcf51f75aa3e9dc7c66fe0ad0b8b426dacb3ec95ca0fd0aab807",
+      "changes": [
+        {
+          "old": "и TensorRT-LLM; веса публикуются в block-FP8. MLA сокращает KV-кэш,\nно требует соответствующих ядер. Окно 256K не отменяет роста кэша\n",
+          "new": "и TensorRT-LLM; веса публикуются в block-FP8. [[00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache|MLA сокращает KV-кэш]],\nа скорость исполнения зависит от поддерживающих его ядер. Окно 256K не отменяет роста кэша\n"
+        },
+        {
+          "old": "#Почему гибриды возвращают attention|гибридных слоях",
+          "new": "#Зачем гибридным моделям слои внимания|гибридных слоях"
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Jamba.md",
+      "before_sha256": "26ba768152a94987208b53eeb06e1e01a4d6c0edfe54e88dc0cee01af44b4ac3",
+      "after_sha256": "07b7e26d28d8079ec03a0f27d3f469923716b53a9058269f62cd03db5cd6b734",
+      "changes": [
+        {
+          "old": "Редкие attention-слои уменьшают KV-cache относительно чистого Transformer, а Mamba-слои несут состояние фиксированного размера. MoE, напротив, требует разместить все экспертные веса и организовать маршрутизацию. Следовательно, «12B active» описывает вычисление токена, но не память для 52B весов. Движку одновременно нужны kernels для Mamba, attention и expert parallelism; поддержка гибрида уже, чем Llama.",
+          "new": "Редкие attention-слои уменьшают KV-cache относительно чистого Transformer, а Mamba-слои несут состояние фиксированного размера. MoE, напротив, требует разместить все экспертные веса и организовать маршрутизацию. Следовательно, «12B active» описывает вычисление токена, но не память для 52B весов. Движок должен исполнять Mamba, attention и экспертные FFN, а при распределении экспертов между устройствами — ещё и их обмен. Поддержку рекуррентного состояния, квантизации и выбранной схемы параллелизма проверяют для конкретной версии движка, а не по одному названию Jamba."
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Timeline.md",
+      "before_sha256": "486e1d79c182c2679109774d4a7e8cbce38c33e776b8e725b426fc973babbed0",
+      "after_sha256": "5a8daa46227b3599523b721bf4e17dd7e2f12ff052eb25bef3f1b2e71054fd15",
+      "changes": [
+        {
+          "old": "| 2024-12 (статья) | DeepSeek-V3 | MLA+MoE, multi-token prediction, FP8 и балансировка без вспомогательной функции потерь | [DeepSeek-V3](https://arxiv.org/abs/2412.19437) |",
+          "new": "| 2024-12 (статья) | DeepSeek-V3 | MLA+MoE, multi-token prediction, FP8; основная балансировка меняет routing biases, небольшой sequence-wise auxiliary loss сохраняется | [DeepSeek-V3, §2.1.2](https://arxiv.org/html/2412.19437v2#S2.SS1.SSS2) |"
+        },
+        {
+          "old": "#COPRA: поиск с состоянием, возвратом и обратной связью prover|разбор",
+          "new": "#COPRA: поиск с состоянием, возвратом и формальной обратной связью|разбор"
+        },
+        {
+          "old": "#Прямые и косвенные инъекции, отравление retrieval и памяти|разбор",
+          "new": "#AgentPoison: как запись оказывается в нужном контексте|разбор"
+        },
+        {
+          "old": "#Progent: наименьшие привилегии как исполнимая политика вызова|разбор",
+          "new": "#Progent: проверка вызова вне модели|разбор"
+        },
+        {
+          "old": "#Наблюдение за выполнением, потоки данных и формальная проверка политики|разбор",
+          "new": "#DataSentinel: детектор, который должен поддаваться инъекции|разбор"
+        },
+        {
+          "old": "| 2023 (статья) | Falcon | MQA и RefinedWeb как совместный акцент на архитектуре вывода и открытом веб-корпусе | [Falcon report](https://arxiv.org/abs/2311.16867), [RefinedWeb](https://arxiv.org/abs/2306.01116) |",
+          "new": "| 2023 (статья) | Falcon | MQA у 7B, групповые K/V у 40B и RefinedWeb как открытый веб-корпус | [Falcon report](https://arxiv.org/abs/2311.16867), [RefinedWeb](https://arxiv.org/abs/2306.01116) |"
+        },
+        {
+          "old": "| 2024-03 (анонс/карточка) | DBRX | fine-grained top-4 MoE и dropless serving stack | [Databricks release](https://www.databricks.com/blog/introducing-dbrx-new-state-art-open-llm) |",
+          "new": "| 2024-03 (анонс/карточка) | DBRX | fine-grained top-4 MoE; MegaBlocks входит в опубликованный стек обучения | [Databricks release](https://www.databricks.com/blog/introducing-dbrx-new-state-art-open-llm) |"
+        },
+        {
+          "old": "| 2026 (линия репозитория) | Qwen3.5/3.6 | гибрид Gated Delta Networks и attention, sparse MoE и мультимодальность | [официальный Qwen3.6 repository](https://github.com/QwenLM/Qwen3.6) |",
+          "new": "| 2026 (линия репозитория) | Qwen3.5/3.6 | гибрид Gated DeltaNet и attention; у 3.5 есть плотные и MoE-варианты, мультимодальный вход | [официальный Qwen3.6 repository](https://github.com/QwenLM/Qwen3.6), [[02 Атлас моделей/Семейства/Qwen|конфигурации в карточке семейства]] |"
+        },
+        {
+          "old": "last_updated: 2026-09-07",
+          "new": "last_updated: 2026-10-29"
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Сравнения/Карта архитектурных линий.md",
+      "before_sha256": "4017955fe3ddcff8febc21efbab1a214d7649f57b0d5bfb4fb58b3bdd9a507b4",
+      "after_sha256": "df0a7a22b4329129d19bae0f01b2c317d1a95dbc307db8e79f5bb1fca50430d7",
+      "changes": [
+        {
+          "old": "*Линия conditional computation: router выбирает малую часть expert FFN для\nкаждого токена. Источник: Hugging Face,\n[Mixture of Experts Explained](https://huggingface.co/blog/moe).*",
+          "new": "*Экспертная FFN Mixtral: router выбирает два из восьми экспертов для\nкаждого токена. Источник: Albert Q. Jiang et al.,\n[Mixtral of Experts, Figure 1](https://arxiv.org/html/2401.04088v1#S2.F1),\n[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Это схема конкретного\ntop-2 слоя, а не универсальная конфигурация всех MoE.*"
+        },
+        {
+          "old": "#Почему гибриды возвращают attention|Почему гибриды возвращают attention",
+          "new": "#Зачем гибридным моделям слои внимания|Зачем гибридным моделям слои внимания"
+        },
+        {
+          "old": "last_updated: 2026-07-20",
+          "new": "last_updated: 2026-10-29"
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Baichuan.md",
+      "before_sha256": "c1c184737eca4a8c7c5f5cd6fa29cb31e5f4e1617478f25c004649acd3f7c6f3",
+      "after_sha256": "99af86120004adbef9736b25cf8b6bb581a355affbe9a281d7656069fe2e5ad8",
+      "changes": [
+        {
+          "old": "Baichuan 2 использует pre-norm decoder Transformer, SwiGLU",
+          "new": "Baichuan 2 использует pre-norm decoder Transformer и [[00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual|SwiGLU]]"
+        },
+        {
+          "old": "Baichuan 2 использует pre-norm decoder Transformer и [[00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual|SwiGLU]] и memory-efficient attention.",
+          "new": "Baichuan 2 использует pre-norm decoder Transformer с [[00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual|SwiGLU]] и memory-efficient attention."
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Command R.md",
+      "before_sha256": "e963b3040c0a538829c98045ec0d18b13ba5543e2a47f9c535fe24491b95f68c",
+      "after_sha256": "123c11470430ad02d5a3d630514e9874fbeeec73512aebfb0b2b32fc4d343af1",
+      "changes": [
+        {
+          "old": "Для RAG модель получает документы",
+          "new": "В [[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер|RAG-конвейере]] модель получает документы"
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/DBRX.md",
+      "before_sha256": "3cfcc8012019fd2398ef6de662c8966f449f012da0b799cdae9054a53783ccbf",
+      "after_sha256": "4cd03c25e2a63992d5d231d71bdd462f68a42227fbdaf0b088408eeb6fc7c391",
+      "changes": [
+        {
+          "old": "Router обучается вместе с LM и требует балансировки нагрузки.",
+          "new": "Обучение маршрутизатора и [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#Балансировка: статистическая и системная задачи|балансировка нагрузки]] разобраны в главе о MoE."
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Gemma.md",
+      "before_sha256": "6838dc8dfcde2d53186754551ab9bd3cbf8e0d231690900fbcdc24595125f411",
+      "after_sha256": "d34c185e00448f4c1a1a5d671226c8f4543b293f2c0637d539c3def02745af1b",
+      "changes": [
+        {
+          "old": "В Gemma 2 локальные слои читают ограниченное окно",
+          "new": "В Gemma 2 [[00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание|локальные слои читают ограниченное окно]]"
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/GLM.md",
+      "before_sha256": "c448f92cf70a722a122b035e3d1c129641b29c17d87ae2b03dafac384c6c9cfe",
+      "after_sha256": "4ca018ae5dea8caf5bbb5e45de151cc88593d693049663b665839a9e9583ca30",
+      "changes": [
+        {
+          "old": "DeepSeek Sparse Attention. GLM-5.1",
+          "new": "[[00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание#dsa-content-adaptive-selection|DeepSeek Sparse Attention]]. GLM-5.1"
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/InternLM.md",
+      "before_sha256": "ca848ea21c14cf463618be77731358bbaa8339c363f38d8747c6a3f889771b4f",
+      "after_sha256": "a8cb615eee8afa6ebb4bc5884ab64cd87dbcf4c0276b096a534ffb5971a6a862",
+      "changes": [
+        {
+          "old": "InternLM2 — pre-norm decoder Transformer с RoPE, SwiGLU и GQA.",
+          "new": "InternLM2 — pre-norm decoder Transformer с RoPE, SwiGLU и [[00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA|GQA]]."
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Mistral и Mixtral.md",
+      "before_sha256": "5f9c8f7c0c9d6926bf7602a5fdc53d93272a24aab6214ad77d50da052b103c42",
+      "after_sha256": "2bac58066e1784bcdb23fbeffdb42e100ad462fd352f085c62f1701c61c044f6",
+      "changes": [
+        {
+          "old": "GQA уменьшает KV-кэш.",
+          "new": "[[00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA|GQA уменьшает KV-кэш]]."
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Nemotron.md",
+      "before_sha256": "4cfce5e2e7d1415bce7e4f52a434d7a6b50766a76d3f2c1d8da6a908d4909a23",
+      "after_sha256": "fa8be6b0486bb2778fb0c2af872ebdb7c65c518af1fa6f7f88bdb96c5ee76888",
+      "changes": [
+        {
+          "old": "LatentMoE сначала проецирует представление токена",
+          "new": "[[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#LatentMoE: обмен в меньшей размерности|LatentMoE]] сначала проецирует представление токена"
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Yi.md",
+      "before_sha256": "caa2a2df7f4437905e4728fe87e701258faeb5e3e99351e698959f57fadd5a8f",
+      "after_sha256": "5e2932bc6e485aeabe0e9c46a7ffd9af99305a54f96fe50fa7b623737dad3a3e",
+      "changes": [
+        {
+          "old": "а RoPE масштабируют.",
+          "new": "а [[00 Учебник/07 Анатомия современной LLM/04 RoPE|RoPE масштабируют]]."
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Mamba.md",
+      "before_sha256": "d34a328da0e2be6629db1cb955e5341300d0c8845cc1af920db0737426fac9d2",
+      "after_sha256": "04048691661f1e749cd20e39dee3fa3348c9bf19f04b208f6b7e2b5d7d3d1828",
+      "changes": [
+        {
+          "old": "#Train–inference mismatch и состояние|состояние при обучении и выводе",
+          "new": "#Prefix caching и ветвление|сохранение префикса и независимые продолжения"
+        },
+        {
+          "old": "Mamba-3 расширяет динамику и число каналов состояния, улучшая качество при той же идее линейного прохода.",
+          "new": "Mamba-3 расширяет динамику и число каналов состояния; улучшения качества в статье относятся к её экспериментам, а не устанавливают преимущество при любых данных и масштабе."
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Qwen.md",
+      "before_sha256": "778e833fa721071f46af5ae4734112d62d481f6c4a59d1373e5444773ea257bf",
+      "after_sha256": "d69f26dc7cf69300ff7310e69e958a9954326b7cae834eef739615e3a02d4c84",
+      "changes": [
+        {
+          "old": "#Три современных варианта чередования слоёв|сравнении гибридов",
+          "new": "#Qwen3-Next: большинство слоёв — Gated DeltaNet|расположении слоёв Qwen3-Next"
+        },
+        {
+          "old": "| Qwen3-Next / 3.5 (2025–26) | hybrid Gated DeltaNet + periodic GQA; ultra-sparse MoE; multimodal early fusion у 3.5 | long context; text+image/video variants | scaling и agentic/tool post-training | **B/A для опубликованного report/code** |",
+          "new": "| Qwen3-Next / 3.5 (2025–26) | hybrid Gated DeltaNet + periodic GQA; MoE у Next, dense и MoE у 3.5; multimodal early fusion у 3.5 | long context; text+image/video variants | scaling и agentic/tool post-training | **B/A для опубликованного report/code** |"
+        },
+        {
+          "old": "Упрощённая запись обновления одной головы поясняет два вида забывания:",
+          "new": "Внутри Qwen3.5 наличие MoE зависит от размера: [конфигурация 9B](https://huggingface.co/Qwen/Qwen3.5-9B/blob/main/config.json) задаёт плотный MLP (`intermediate_size`), а [конфигурация 397B-A17B](https://huggingface.co/Qwen/Qwen3.5-397B-A17B/blob/main/config.json) — экспертный (`num_experts`, `num_experts_per_tok`). Рекуррентное внимание и экспертная FFN — независимые решения; формулу одного нельзя использовать как спецификацию другого.\n\nУпрощённая запись обновления одной головы поясняет два вида забывания:"
+        },
+        {
+          "old": "MoE отдельно сокращает число экспертных вычислений на токен; все экспертные",
+          "new": "В MoE-вариантах сокращается число экспертных вычислений на токен; все экспертные"
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/RWKV.md",
+      "before_sha256": "d1a64bd5641c184a01ecaa12cf3f7dd55f496519e16d19f90ff30e9fa3c958b6",
+      "after_sha256": "79ed28daea561a203296fd2f19e7c9d6e80008e3d62b8079c52d4b0936966dbe",
+      "changes": [
+        {
+          "old": "#RWKV: attention-подобное смешивание как recurrence|локальный вывод RWKV-4",
+          "new": "#RWKV: взвешенное чтение рекуррентной памяти|локальный вывод RWKV-4"
+        },
+        {
+          "old": "Обратная сторона — состояние нужно переносить между запросами и правильно батчировать; экосистема оптимизированных Transformer-kernels шире.",
+          "new": "При обслуживании нескольких запросов нужно независимо хранить и правильно батчировать их состояния. Поддержка Transformer-внимания в движке ещё не подтверждает поддержку переходов состояния RWKV."
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/GPT.md",
+      "before_sha256": "0da72ec958607b4bf8318ce8cbc9001655a7a15ec6b8dc6dd9ef5fe1938e1eeb",
+      "after_sha256": "c8d4bf29c6e5178eec5330010554e531263d08b1f8f1d9e1fcc62e3be7e8211e",
+      "changes": [
+        {
+          "old": "## Токенизация, данные и обучение",
+          "new": "Полные объяснения обучения и применения вынесены в последовательные главы: [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1: предобучение и дообучение на задаче]], [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2: zero-shot через продолжение текста]] и [[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3: примеры внутри контекста]]. Таблица выше фиксирует различия поколений, не заменяя эти разборы.\n\n## Токенизация, данные и обучение"
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Сравнения/Сравнение семейств.md",
+      "before_sha256": "12b98bbc8aa4248db540b8eaa78ba70da2689b23da50cc99fa250468ebfe3482",
+      "after_sha256": "49bb690cfd70b1a7883ee9f80d47005a316a608ac380562a0bb3c0f0af1eaebd",
+      "changes": [
+        {
+          "old": "## Быстрый выбор страницы",
+          "new": "Полные объяснения общих механизмов находятся в главах о [[00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA|головах внимания и KV-кэше]], [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving|маршрутизации MoE]] и [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры|рекуррентной памяти и гибридных слоях]]. Карточки ниже показывают, как конкретное поколение сочетает эти решения.\n\n## Быстрый выбор страницы"
+        },
+        {
+          "old": "last_updated: 2026-09-15",
+          "new": "last_updated: 2026-10-29"
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/RetNet.md",
+      "before_sha256": "2f7e17d735fc28ef937b725e26340994173c48834302bb35ad5fb331929acf76",
+      "after_sha256": "4d62cc4b8ada6e8c7b5f6cad54734a9caa082c04beb253a534a87d5ede73e87e",
+      "changes": [
+        {
+          "old": "*Рисунок: Sun et al., [Retentive Network](https://arxiv.org/abs/2307.08621), Figure 2; локальная копия. Слева показано параллельное вычисление последовательности, справа — то же накопление как рекуррентное состояние.*",
+          "new": "*Рисунок: Sun et al., [Retentive Network](https://arxiv.org/abs/2307.08621), Figure 3; локальная копия. Слева показано параллельное вычисление последовательности, справа — то же накопление как рекуррентное состояние.*"
+        },
+        {
+          "old": "Практическая скорость зависит и от реализации. FlashAttention, paged KV-cache и экосистема Transformer-инференса получили существенно больше оптимизаций. RetNet показывает, что рекуррентная форма возможна, но не доказывает, что любая система будет быстрее оптимизированного Transformer.",
+          "new": "Практическую скорость сравнивают при одинаковых аппаратуре, длинах входа и выхода, размере пакета и точности; для Transformer фиксируют также реализацию внимания и управление KV-кэшем. Наличие рекуррентной формы не доказывает, что любой сервис RetNet окажется быстрее оптимизированного Transformer."
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "files": 22,
+    "operations": 42,
+    "allReverseHashesMatchBaseline": true
+  },
+  "note": "No source content is omitted by the record. This report predates later DeepSeek/RetNet integration and must be chained before architecture-integration-additions.json."
+}

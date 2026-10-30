@@ -1,0 +1,47 @@
+[
+  {
+    "id": "curated-moco-dictionary-39c88cfbe882",
+    "asset": "00 Учебник/Assets/Figures/curated/moco-2026-10-28/moco-dictionary.png",
+    "author": "Kaiming He, Haoqi Fan, Yuxin Wu, Saining Xie and Ross Girshick",
+    "source_url": "https://arxiv.org/pdf/1911.05722v3#page=1",
+    "source_image_url": "https://arxiv.org/pdf/1911.05722v3",
+    "source_asset": "05 Источники/Originals/moco-2026-10-28/moco-1911.05722v3.pdf",
+    "source_asset_sha256": "ad31ea26ed2d9ba3e2f767a2dcb0961a5b70ff505b1c3fb18d07201140e4e1fe",
+    "sha256": "39c88cfbe882e6d4b7a751a77898574d93b3c1f382d7060c8e694883c17ea247",
+    "source_page_snapshot": "05 Источники/Originals/moco-2026-10-28/diagram-release/README.md",
+    "source_page_sha256": "80b8be385e481d4b691bc7986be343058c049956d719fc9b6a9d1b44914d2048",
+    "permission_asset": "05 Источники/Originals/moco-2026-10-28/moco-diagram.png",
+    "permission_asset_sha256": "720c29e985b87fbd10e55b854365587ef232467c20203f7aedd3109f666961bd",
+    "commit": "aea97d4b6eb091846590506784f6809f4f4d79bd",
+    "license": "CC BY-NC 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
+    "license_evidence": "05 Источники/Originals/moco-2026-10-28/diagram-release/LICENSE",
+    "license_evidence_sha256": "82656a050544ab820c9aa7b61433f5181f8e80cacd042377140962a3e3eb5721",
+    "public_license_copy": "site/public/licenses/moco-aea97d4-CC-BY-NC-4.0.txt",
+    "derivation": "pdf-page-render-crop",
+    "source_page": 1,
+    "render_dpi": 400,
+    "crop_box_px": [
+      1940,
+      1190,
+      2840,
+      1900
+    ],
+    "render_page_size_px": [
+      3400,
+      4400
+    ],
+    "dimensions_px": [
+      900,
+      710
+    ],
+    "modifications": "Complete native-PDF Figure 1 at 400 dpi. The identical diagram is explicitly embedded in the authors' project README under its archived CC BY-NC 4.0 license. The two versions were visually compared. No redraw, relabeling, translation or enlargement of the repository bitmap. Permission applies to this released diagram, not other paper figures or paper text.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder.md"
+    ]
+  }
+]

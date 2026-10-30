@@ -1,0 +1,251 @@
+[
+  {
+    "id": "curated-reranking-retrieve-rerank-36aa9b103383",
+    "asset": "00 Учебник/Assets/Figures/curated/reranking-review-2026-10/retrieve-rerank.png",
+    "author": "Sentence Transformers contributors / Nils Reimers",
+    "source_url": "https://sbert.net/examples/sentence_transformer/applications/retrieve_rerank/README.html",
+    "source_asset": "05 Источники/Originals/reranking-2026-10-20/retrieve-rerank.png",
+    "source_asset_sha256": "36aa9b1033831db51882f81831f1f2b757c3f6308b5b2928730283e0df3709b0",
+    "sha256": "36aa9b1033831db51882f81831f1f2b757c3f6308b5b2928730283e0df3709b0",
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/huggingface/sentence-transformers/blob/8a880ec7f1524640619fe382940ee319144f74ca/LICENSE",
+    "license_evidence": "05 Источники/Originals/embeddings-2026-10-20/sbert-LICENSE",
+    "license_evidence_sha256": "624b030fd62b8b989dd502d5bb6322cbc0dbb524ab9c9708f32efe33d7275735",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "source-license-verified",
+    "metadata_status": "verified",
+    "modifications": "Pinned upstream PNG copied byte-for-byte.",
+    "used_in": [
+      "00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction.md"
+    ],
+    "last_verified": "2026-10-20",
+    "width": 945,
+    "height": 279,
+    "commit": "8a880ec7f1524640619fe382940ee319144f74ca",
+    "source_image_url": "https://raw.githubusercontent.com/huggingface/sentence-transformers/8a880ec7f1524640619fe382940ee319144f74ca/docs/img/InformationRetrieval.png",
+    "source_code": "05 Источники/Originals/reranking-2026-10-20/st-retrieve-rerank.md",
+    "source_code_sha256": "09b06f45ace03283345462a5a317f988b28d4cf95990ac61d4e51612eca4be9a"
+  },
+  {
+    "id": "curated-reranking-colbert-paradigms-dcacdc714914",
+    "asset": "00 Учебник/Assets/Figures/curated/reranking-review-2026-10/colbert-paradigms.png",
+    "author": "Omar Khattab and Matei Zaharia",
+    "source_url": "https://arxiv.org/abs/2004.12832v2",
+    "source_asset": "05 Источники/Originals/reranking-2026-10-20/colbert-v1.pdf",
+    "source_asset_sha256": "2e487d9b96e3c2e5e286d843e98a066adc0442faa3a6e8ddbd1771221bf9ae14",
+    "sha256": "dcacdc714914605b9a8006fd3daba669c7ae4dd3599f4f5c6d52b1ed24380bed",
+    "license": "open educational material; reuse confirmed by repository owner",
+    "license_url": "https://arxiv.org/abs/2004.12832v2",
+    "license_evidence": "05 Источники/Originals/reranking-2026-10-20/legacy-figure-record.json",
+    "license_evidence_sha256": "f8281bdeb6e60620d6425a4d2358230c54ec7c33a3ad4b304eb8519532b20a26",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "user-confirmed-open-materials",
+    "metadata_status": "verified",
+    "modifications": "Original figure panel(s) extracted from the recorded PDF page render; no labels, arrows, data or colors changed.",
+    "used_in": [
+      "00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction.md"
+    ],
+    "last_verified": "2026-10-20",
+    "width": 2130,
+    "height": 620,
+    "source_page": 2,
+    "source_page_snapshot": "05 Источники/Originals/reranking-2026-10-20/colbert-v1-page-02.png",
+    "source_page_sha256": "96e0a3ef2fd71ec543f2f5acf73b91b222104df783a5f0efe902c3071273749c",
+    "render_page_size_px": [
+      2560,
+      3313
+    ],
+    "crop_box_px": [
+      215,
+      320,
+      2345,
+      940
+    ],
+    "render_scale_to_width_px": 2560
+  },
+  {
+    "id": "curated-reranking-colbert-maxsim-0882abad6102",
+    "asset": "00 Учебник/Assets/Figures/curated/reranking-review-2026-10/colbert-maxsim.png",
+    "author": "Omar Khattab, Christopher Potts, Matei Zaharia",
+    "source_url": "https://aclanthology.org/2021.tacl-1.55/",
+    "source_asset": "05 Источники/Originals/reranking-2026-10-20/colbert-qa.pdf",
+    "source_asset_sha256": "b145a0b17ba8a86fbda0ae75ffa400761fafed81b477ffd344848bd015a5f6df",
+    "sha256": "0882abad6102c7d0bab3753a26e76cd4981891af9550460b94ca429ea2813ed7",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/reranking-2026-10-20/colbert-qa.pdf",
+    "license_evidence_sha256": "b145a0b17ba8a86fbda0ae75ffa400761fafed81b477ffd344848bd015a5f6df",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "metadata_status": "verified",
+    "modifications": "Original figure panel(s) extracted from the recorded PDF page render; no labels, arrows, data or colors changed.",
+    "used_in": [
+      "00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction.md"
+    ],
+    "last_verified": "2026-10-20",
+    "width": 830,
+    "height": 355,
+    "source_page": 2,
+    "source_page_snapshot": "05 Источники/Originals/reranking-2026-10-20/colbert-qa-page-02.png",
+    "source_page_sha256": "0895a5871e2521d5930c333e415037884aee7098a302ddd1036c300a8695b356",
+    "render_page_size_px": [
+      2200,
+      3112
+    ],
+    "crop_box_px": [
+      255,
+      205,
+      1085,
+      560
+    ],
+    "render_scale_to_width_px": 2200
+  },
+  {
+    "id": "curated-reranking-colbert-supervision-872fa803a0ac",
+    "asset": "00 Учебник/Assets/Figures/curated/reranking-review-2026-10/colbert-supervision.png",
+    "author": "Omar Khattab, Christopher Potts, Matei Zaharia",
+    "source_url": "https://aclanthology.org/2021.tacl-1.55/",
+    "source_asset": "05 Источники/Originals/reranking-2026-10-20/colbert-qa.pdf",
+    "source_asset_sha256": "b145a0b17ba8a86fbda0ae75ffa400761fafed81b477ffd344848bd015a5f6df",
+    "sha256": "872fa803a0ace7556b7da4039a518205fe92095e856a58b8006e1fd78eb36bfb",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/reranking-2026-10-20/colbert-qa.pdf",
+    "license_evidence_sha256": "b145a0b17ba8a86fbda0ae75ffa400761fafed81b477ffd344848bd015a5f6df",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "metadata_status": "verified",
+    "modifications": "Original figure panel(s) extracted from the recorded PDF page render; no labels, arrows, data or colors changed.",
+    "used_in": [
+      "00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction.md"
+    ],
+    "last_verified": "2026-10-20",
+    "width": 830,
+    "height": 293,
+    "source_page": 2,
+    "source_page_snapshot": "05 Источники/Originals/reranking-2026-10-20/colbert-qa-page-02.png",
+    "source_page_sha256": "0895a5871e2521d5930c333e415037884aee7098a302ddd1036c300a8695b356",
+    "render_page_size_px": [
+      2200,
+      3112
+    ],
+    "crop_box_px": [
+      255,
+      560,
+      1085,
+      853
+    ],
+    "render_scale_to_width_px": 2200
+  },
+  {
+    "id": "curated-reranking-rankgpt-instructions-578dabf395a7",
+    "asset": "00 Учебник/Assets/Figures/curated/reranking-review-2026-10/rankgpt-instructions.png",
+    "author": "Weiwei Sun, Lingyong Yan, Xinyu Ma, Shuaiqiang Wang, Pengjie Ren, Zhumin Chen, Dawei Yin, Zhaochun Ren",
+    "source_url": "https://aclanthology.org/2023.emnlp-main.923/",
+    "source_asset": "05 Источники/Originals/reranking-2026-10-20/rankgpt.pdf",
+    "source_asset_sha256": "8e571de7732285e9adc195da08966ada335d669f94fc2f6c9acb53024278426c",
+    "sha256": "578dabf395a784a29c4059debf8039fb31326c5cc25de20cefdc09c09d31719a",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/retrieval-2026-10-20/acl-copyright.html",
+    "license_evidence_sha256": "683a1dc65a78ec30927630124f4acfaecc728142dcca4e8a1f0a2bfc96f8158b",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "metadata_status": "verified",
+    "modifications": "Original figure panel(s) extracted from the recorded PDF page render; no labels, arrows, data or colors changed.",
+    "used_in": [
+      "00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction.md"
+    ],
+    "last_verified": "2026-10-20",
+    "width": 955,
+    "height": 755,
+    "source_page": 3,
+    "source_page_snapshot": "05 Источники/Originals/reranking-2026-10-20/rankgpt-page-03.png",
+    "source_page_sha256": "5914402037de579f8489f029f3cbcffa0b93f0da2298e84ad5f3c777531e6e9d",
+    "render_page_size_px": [
+      2560,
+      3621
+    ],
+    "crop_box_px": [
+      295,
+      290,
+      1250,
+      1045
+    ],
+    "render_scale_to_width_px": 2560
+  },
+  {
+    "id": "curated-reranking-rankgpt-windows-31bc2699b2fc",
+    "asset": "00 Учебник/Assets/Figures/curated/reranking-review-2026-10/rankgpt-windows.png",
+    "author": "Weiwei Sun, Lingyong Yan, Xinyu Ma, Shuaiqiang Wang, Pengjie Ren, Zhumin Chen, Dawei Yin, Zhaochun Ren",
+    "source_url": "https://aclanthology.org/2023.emnlp-main.923/",
+    "source_asset": "05 Источники/Originals/reranking-2026-10-20/rankgpt.pdf",
+    "source_asset_sha256": "8e571de7732285e9adc195da08966ada335d669f94fc2f6c9acb53024278426c",
+    "sha256": "31bc2699b2fca4905fca594c4df4913b7a85918e196559b649038768c0763e7d",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/retrieval-2026-10-20/acl-copyright.html",
+    "license_evidence_sha256": "683a1dc65a78ec30927630124f4acfaecc728142dcca4e8a1f0a2bfc96f8158b",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "metadata_status": "verified",
+    "modifications": "Original figure panel(s) extracted from the recorded PDF page render; no labels, arrows, data or colors changed.",
+    "used_in": [
+      "00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction.md"
+    ],
+    "last_verified": "2026-10-20",
+    "width": 990,
+    "height": 360,
+    "source_page": 3,
+    "source_page_snapshot": "05 Источники/Originals/reranking-2026-10-20/rankgpt-page-03.png",
+    "source_page_sha256": "5914402037de579f8489f029f3cbcffa0b93f0da2298e84ad5f3c777531e6e9d",
+    "render_page_size_px": [
+      2560,
+      3621
+    ],
+    "crop_box_px": [
+      1300,
+      295,
+      2290,
+      655
+    ],
+    "render_scale_to_width_px": 2560
+  },
+  {
+    "id": "curated-reranking-calibration-reliability-eb5592838649",
+    "asset": "00 Учебник/Assets/Figures/curated/reranking-review-2026-10/calibration-reliability.png",
+    "author": "Chuan Guo, Geoff Pleiss, Yu Sun, Kilian Q. Weinberger",
+    "source_url": "https://proceedings.mlr.press/v70/guo17a.html",
+    "source_asset": "05 Источники/Originals/reranking-2026-10-20/calibration.pdf",
+    "source_asset_sha256": "df7c93f97204f8a3c2b10f6d5bf5265baac25f00c1ae3b473a3e1dbc102dacb2",
+    "sha256": "eb5592838649e3bb537d10379201cdd0cb548ed24411e26f77ab354b66cab3ae",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/reranking-2026-10-20/pmlr-license-agreement.html",
+    "license_evidence_sha256": "1c8123a6c840ca2752e383f0924fa23ba38552140a2cc54f69ea9df5acfcdd3d",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "metadata_status": "verified",
+    "modifications": "Original figure panel(s) extracted from the recorded PDF page render; no labels, arrows, data or colors changed.",
+    "used_in": [
+      "00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction.md"
+    ],
+    "last_verified": "2026-10-20",
+    "width": 865,
+    "height": 903,
+    "source_page": 1,
+    "source_page_snapshot": "05 Источники/Originals/reranking-2026-10-20/calibration-page-01.png",
+    "source_page_sha256": "d4c0a3a3e9fc8e0f455563e51105fd838e34836d48b4a8f15fde51dd4779e8af",
+    "render_page_size_px": [
+      2200,
+      2848
+    ],
+    "crop_box_px": [
+      1090,
+      602,
+      1955,
+      1505
+    ],
+    "render_scale_to_width_px": 2200
+  }
+]

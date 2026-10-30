@@ -1,0 +1,33 @@
+[
+  {
+    "id": "curated-tflm-model-arena-692475fcb060",
+    "asset": "00 Учебник/Assets/Figures/curated/micro-runtime-2026-10-27/model-buffer-and-arena.png",
+    "sha256": "692475fcb0609be2a97f30078c3b9e84ac90130e14e2c705df483e922723ca6b",
+    "author": "The TensorFlow Authors — TensorFlow Lite Micro",
+    "source_url": "https://github.com/tensorflow/tflite-micro/blob/1cc91a97b40e1dddcecd3b0fbb30b6643e52f164/tensorflow/lite/micro/docs/rfc/001_preallocated_tensors.md#background",
+    "source_image_url": "https://raw.githubusercontent.com/tensorflow/tflite-micro/1cc91a97b40e1dddcecd3b0fbb30b6643e52f164/tensorflow/lite/micro/docs/images/preallocated_tensors/preallocated_tensors_bg_1.png",
+    "commit": "1cc91a97b40e1dddcecd3b0fbb30b6643e52f164",
+    "source_asset": "05 Источники/Originals/micro-runtime-2026-10-27/preallocated_tensors_bg_1.png",
+    "source_asset_sha256": "692475fcb0609be2a97f30078c3b9e84ac90130e14e2c705df483e922723ca6b",
+    "source_page_snapshot": "05 Источники/Originals/micro-runtime-2026-10-27/001_preallocated_tensors.md",
+    "source_page_sha256": "ecc942fd51e3d90850fe4603d02b870d5205e1ecbc9fcafa2cd82fba431daa7c",
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/tensorflow/tflite-micro/blob/1cc91a97b40e1dddcecd3b0fbb30b6643e52f164/LICENSE",
+    "license_evidence": "05 Источники/Originals/micro-runtime-2026-10-27/tflm-LICENSE.txt",
+    "license_evidence_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "public_license_copy": "site/public/licenses/tflm-Apache-2.0.txt",
+    "dimensions_px": [
+      271,
+      229
+    ],
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original Background diagram, byte-for-byte PNG; no crop, redraw, translation, relabeling or recompression. Native-size CSS avoids raster upscaling. The image shows model storage versus arena, not the rejected RFC's proposed external-buffer API.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-27",
+    "used_in": [
+      "00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment.md"
+    ]
+  }
+]

@@ -1,0 +1,46 @@
+[
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/sequence-alternatives-2026-10-23/mamba2-ssd-algorithm.png",
+    "page": 20,
+    "figure": 5,
+    "source": "05 Источники/Originals/sequence-alternatives-2026-10-23/mamba2-v1.pdf",
+    "source_sha256": "6fe16414fa471a5ab150cddcba5840d3a94e347e96992c50c12c1fb8b919479f",
+    "source_url": "https://arxiv.org/pdf/2405.21060v1#page=20",
+    "license": "CC BY 4.0",
+    "license_url": "https://arxiv.org/html/2405.21060v1",
+    "dpi": 300,
+    "crop_pixels": [
+      283,
+      267,
+      2367,
+      1417
+    ],
+    "dimensions": [
+      2084,
+      1150
+    ],
+    "sha256": "9271d97f8ece497861590f808ab254d9508839decc9118a6f32850d823f7627c"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/sequence-alternatives-2026-10-23/mamba2-block-complete.png",
+    "page": 23,
+    "figure": 6,
+    "source": "05 Источники/Originals/sequence-alternatives-2026-10-23/mamba2-v1.pdf",
+    "source_sha256": "6fe16414fa471a5ab150cddcba5840d3a94e347e96992c50c12c1fb8b919479f",
+    "source_url": "https://arxiv.org/pdf/2405.21060v1#page=23",
+    "license": "CC BY 4.0",
+    "license_url": "https://arxiv.org/html/2405.21060v1",
+    "dpi": 300,
+    "crop_pixels": [
+      283,
+      267,
+      2367,
+      1417
+    ],
+    "dimensions": [
+      2084,
+      1150
+    ],
+    "sha256": "9eb97bb3f717751d75639ad3fa089a5c2a08f430cbbc013e9cbaa840a536c40a"
+  }
+]

@@ -1,0 +1,37 @@
+[
+  {
+    "id": "curated-toolrl-3b079ec73e49",
+    "asset": "00 Учебник/Assets/Figures/curated/toolrl/reward-design.png",
+    "author": "Cheng Qian et al.",
+    "title": "ToolRL: rollout, format reward and decomposed tool-call correctness",
+    "source_url": "https://github.com/qiancheng0/ToolRL/blob/8cee13ec0ca72f0461da372a93a6fd8140dbb840/assets/reward.png",
+    "source_image_url": "https://raw.githubusercontent.com/qiancheng0/ToolRL/8cee13ec0ca72f0461da372a93a6fd8140dbb840/assets/reward.png",
+    "source_page_snapshot": "05 Источники/Originals/tool-rewards-2026-10-29/README.md",
+    "source_page_sha256": "55a78db8ac20f8116d1bb7b88acf1d5307ec9fc47fa7f035bf250ed1443a2648",
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/qiancheng0/ToolRL/blob/8cee13ec0ca72f0461da372a93a6fd8140dbb840/LICENSE",
+    "license_evidence": "05 Источники/Originals/tool-rewards-2026-10-29/LICENSE",
+    "license_evidence_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "license_public_copy": "site/public/licenses/toolrl-8cee13ec-Apache-2.0.txt",
+    "modifications": "None. Existing complete PNG verified byte-for-byte against the pinned author's repository; no crop, redraw, translation or resampling.",
+    "used_in": [
+      "Papers/ToolRL.md",
+      "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "pinned-upstream-repository",
+    "last_verified": "2026-10-29",
+    "dimensions_px": [
+      6696,
+      2365
+    ],
+    "width": 6696,
+    "height": 2365,
+    "bytes": 1871403,
+    "sha256": "3b079ec73e494f9a3475539be37fd716bdb91e94b970054716b806c096421ad7",
+    "commit": "8cee13ec0ca72f0461da372a93a6fd8140dbb840",
+    "source_asset": "05 Источники/Originals/tool-rewards-2026-10-29/ToolRL-reward.png",
+    "source_asset_sha256": "3b079ec73e494f9a3475539be37fd716bdb91e94b970054716b806c096421ad7",
+    "derivation": "source-raster-copy"
+  }
+]

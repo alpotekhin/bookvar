@@ -1,0 +1,98 @@
+[
+  {
+    "author": "Yuntao Bai et al.",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/preference-2026-10-23/bai-v1.html",
+    "license_evidence_sha256": "9f30f8807321128513e1aeef97a7d52e0daf874802c15d8b7d54feadfef10d02",
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/02 Preference data.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "id": "curated-hh-workflow-f1b6b64ba26f",
+    "asset": "00 Учебник/Assets/Figures/curated/preference-2026-10-23/hh-workflow.png",
+    "source_url": "https://arxiv.org/pdf/2204.05862v1#page=5",
+    "source_asset": "05 Источники/Originals/preference-2026-10-23/bai-v1.pdf",
+    "source_asset_sha256": "26e390d4f76938d2e2591225603637c643cc108e94afb756c65f5d2e0fc9037b",
+    "source_page": 5,
+    "render_dpi": 300,
+    "render_page_size_px": [
+      2550,
+      3300
+    ],
+    "crop_box_px": [
+      350,
+      300,
+      2200,
+      1230
+    ],
+    "sha256": "f1b6b64ba26f7ec28cd54d80013c7e769153324705b409c7ff6acb74930d16fe",
+    "modifications": "Poppler 300 dpi render; only surroundings removed; full Figure 2 and English caption retained, no redraw or translation.",
+    "derivation": "pdf-page-render-crop"
+  },
+  {
+    "author": "Yuntao Bai et al.",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/preference-2026-10-23/bai-v1.html",
+    "license_evidence_sha256": "9f30f8807321128513e1aeef97a7d52e0daf874802c15d8b7d54feadfef10d02",
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/02 Preference data.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "id": "curated-hh-interface-1e05a370a1ce",
+    "asset": "00 Учебник/Assets/Figures/curated/preference-2026-10-23/hh-feedback-interface.png",
+    "source_url": "https://arxiv.org/pdf/2204.05862v1#page=10",
+    "source_asset": "05 Источники/Originals/preference-2026-10-23/bai-v1.pdf",
+    "source_asset_sha256": "26e390d4f76938d2e2591225603637c643cc108e94afb756c65f5d2e0fc9037b",
+    "sha256": "1e05a370a1ce3f1e1b9a742fcb406a790b6d0a61856ef02147e4d15605febca1",
+    "modifications": "Poppler 300 dpi render; only surroundings removed; full Figure 6 and English caption retained, no redraw or translation.",
+    "derivation": "pdf-page-render-crop",
+    "source_page": 10,
+    "render_dpi": 300,
+    "render_page_size_px": [
+      2550,
+      3300
+    ],
+    "crop_box_px": [
+      350,
+      270,
+      2200,
+      1770
+    ]
+  },
+  {
+    "author": "Yuntao Bai et al.",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/preference-2026-10-23/bai-v1.html",
+    "license_evidence_sha256": "9f30f8807321128513e1aeef97a7d52e0daf874802c15d8b7d54feadfef10d02",
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/02 Preference data.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "id": "curated-hh-data-distributions-54e1c75340ea",
+    "asset": "00 Учебник/Assets/Figures/curated/preference-2026-10-23/hh-data-distributions.png",
+    "source_url": "https://arxiv.org/pdf/2204.05862v1#page=21",
+    "source_asset": "05 Источники/Originals/preference-2026-10-23/bai-v1.pdf",
+    "source_asset_sha256": "26e390d4f76938d2e2591225603637c643cc108e94afb756c65f5d2e0fc9037b",
+    "source_page": 21,
+    "render_dpi": 300,
+    "render_page_size_px": [
+      2550,
+      3300
+    ],
+    "crop_box_px": [
+      350,
+      270,
+      2200,
+      1350
+    ],
+    "sha256": "54e1c75340ea96895d8b0810fbf6fc82edd0036c0ba8a003d607c4ec389f0eb5",
+    "modifications": "Poppler 300 dpi render; both complete panels, all axes and legends and full English caption retained. Only surrounding page material removed; no redraw or translation.",
+    "derivation": "pdf-page-render-crop"
+  }
+]

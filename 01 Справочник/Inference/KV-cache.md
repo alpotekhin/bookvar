@@ -1,85 +1,22 @@
 ---
 title: KV-cache
 type: concept
-status: canonical
-last_updated: 2026-07-16
+status: redirect
+last_updated: '2026-10-29'
 primary_sources:
-  - https://arxiv.org/abs/1911.02150
+  - 'https://arxiv.org/abs/1911.02150'
+canonical_topic: >-
+  00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и
+  PagedAttention.md
+canonical_heading: Что именно сохраняет KV-cache
 ---
-
 # KV-cache
 
-При autoregressive generation новые queries должны взаимодействовать со всеми прошлыми keys и values. **KV-cache** сохраняет K/V предыдущих токенов, чтобы не пересчитывать весь префикс на каждом decode step.
+Полное объяснение: [[00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention#Что именно сохраняет KV-cache|KV-cache, пакетирование и PagedAttention]].
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/kv-cache/kv-cache-mechanism.png]]
-
-*При каждом шаге декодирования новые Q сравниваются с сохранёнными K/V
-префикса; в cache дописывается только пара текущего токена. Источник: Sebastian
-Raschka, [Understanding and Coding the KV Cache in LLMs from
-Scratch](https://magazine.sebastianraschka.com/p/coding-the-kv-cache-in-llms).*
-
-Рисунок отделяет две операции, которые часто смешивают: прошлые hidden states не
-прогоняются через модель заново, но их K/V читаются на каждом шаге attention.
-Поэтому cache экономит вычисления и одновременно создаёт растущую нагрузку на
-память и её пропускную способность.
-
-Для MHA/MQA/GQA с одинаковыми размерами K и V и одинаковой структурой $L$
-слоёв логический объём cache нескольких запросов равен
-
-$$
-M_{KV}=2Lh_{kv}d_{head}s\sum_{b=1}^{B}T_b.
-$$
-
-Здесь $B$ — число последовательностей, $T_b$ — число уже сохранённых токенов
-последовательности $b$, $h_{kv}$ — число голов ключей/значений,
-$d_{head}$ — число элементов в одной такой голове, $s$ — байт на элемент.
-Множитель 2 учитывает K и V. Только при одинаковых длинах $T_b=T$ сумма
-превращается в $BT$.
-
-Например, при $L=32$, $h_{kv}=8$, $d_{head}=128$, $s=2$ и длинах
-1024 и 2048 токенов получаем 402 653 184 байта, то есть 384 MiB.
-Плотный буфер с дополнением обеих последовательностей до 2048 позиций занял бы
-512 MiB. Реально выделенная память зависит также от размера блоков, резервов,
-метаданных, разделения префикса и размещения по устройствам: это не обязательно
-логическая сумма. Для [[02 Areas/ML & DL/01 Справочник/Attention/MLA|MLA]]
-используется другая формула — латентный вектор плюс RoPE-ключ.
-
-## Prefill и decode
-
-- **Prefill:** prompt обрабатывается параллельно; обычно compute-intensive.
-- **Decode:** добавляется по одному токену; чтение большого cache часто memory-bandwidth-bound.
-
-Именно поэтому [[02 Areas/ML & DL/01 Справочник/Attention/MQA|MQA]], [[02 Areas/ML & DL/01 Справочник/Attention/GQA|GQA]] и [[02 Areas/ML & DL/01 Справочник/Attention/MLA|MLA]] важны для serving.
-
-Paged KV-cache управляет cache блоками и уменьшает fragmentation; prefix caching повторно использует общий prompt; quantized KV снижает память ценой возможной ошибки. Это inference techniques, не изменение уже обученных attention weights.
-
-## Условия безопасного повторного использования префикса
-
-Совпадения текста или token IDs недостаточно вне фиксированной модели.
-Повторно используемые состояния должны относиться к одному вычислению:
-
-- совпадают версия весов, адаптер и все входные представления, включая
-  изображение/аудио или непосредственно переданные embeddings;
-- совпадают токены всего предшествующего префикса, позиции и маска внимания;
-- совместимы режим вычисления и формат cache; смена весов или несовместимого
-  позиционного режима требует нового пространства cache либо его очистки;
-- политика изоляции разрешает разделение: одинаковый контент не даёт права
-  раскрывать наличие префикса другого пользователя через общий cache.
-
-Не каждое условие обязано храниться отдельным полем каждого блока: часть
-фиксируется конфигурацией engine, часть входит в ключ. Например,
-[Automatic Prefix Caching в vLLM](https://docs.vllm.ai/en/latest/design/prefix_caching/)
-использует хэш предыдущих блоков, токены текущего блока и дополнительные
-значения, включая LoRA ID, хэши мультимодальных входов и cache salt.
-Хэширование не исправляет неполный ключ; корректность построения ключа и
-границы пользовательских пространств проверяются отдельно.
-
-## Подробнее
-
-Расчёт памяти, различие prefill/decode, batching и PagedAttention собраны в
-главе [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention|KV-cache, пакетирование и PagedAttention]].
-
-## Источники
-
-- [Fast Transformer Decoding / MQA](https://arxiv.org/abs/1911.02150)
-- [vLLM / PagedAttention](https://arxiv.org/abs/2309.06180)
+<!-- Compatibility anchors for existing Obsidian and web links. -->
+<span id="kv-cache" aria-hidden="true"></span>
+<span id="prefill-и-decode" aria-hidden="true"></span>
+<span id="условия-безопасного-повторного-использования-префикса" aria-hidden="true"></span>
+<span id="подробнее" aria-hidden="true"></span>
+<span id="источники" aria-hidden="true"></span>

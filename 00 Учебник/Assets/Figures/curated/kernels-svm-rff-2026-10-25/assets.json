@@ -1,0 +1,198 @@
+[
+  {
+    "id": "curated-kernels-jake-separators-ad92ac56e5c6",
+    "asset": "00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-separators.png",
+    "author": "Jake VanderPlas",
+    "source_url": "https://github.com/jakevdp/PythonDataScienceHandbook/blob/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.07-Support-Vector-Machines.ipynb",
+    "source_image_url": "https://raw.githubusercontent.com/jakevdp/PythonDataScienceHandbook/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.07-Support-Vector-Machines.ipynb",
+    "source_asset": "05 Источники/Originals/kernels-svm-rff-2026-10-25/jake-svm.ipynb",
+    "source_asset_sha256": "8f01bffbe7f86c160fcbe89f4549b1650d262adc0e76b354719c41eec15af0a6",
+    "source_member": "/cells/7/outputs/0/data/image~1png",
+    "sha256": "ad92ac56e5c63ff9882ca47ff0b15afda601579b30789e673e7bde9a7778512b",
+    "dimensions_px": [
+      366,
+      244
+    ],
+    "commit": "d66231454ef753818dc9213c9b5942e067266966",
+    "license": "CC BY-NC-ND 3.0 Unported",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/3.0/",
+    "license_evidence": "05 Источники/Originals/pca-tsne-umap-2026-10-25/jake-LICENSE-TEXT",
+    "license_evidence_sha256": "d74e67958cad1ae4cb585402ef66ae41958ba546e6c5e80a93920013cb81bc2a",
+    "derivation": "notebook-output-extraction",
+    "modifications": "Unmodified PNG decoded from the pinned notebook saved output; notebook not executed to generate a replacement.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features.md"
+    ]
+  },
+  {
+    "id": "curated-kernels-jake-support-vectors-f2c0e3b83a9e",
+    "asset": "00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-support-vectors.png",
+    "author": "Jake VanderPlas",
+    "source_url": "https://github.com/jakevdp/PythonDataScienceHandbook/blob/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.07-Support-Vector-Machines.ipynb",
+    "source_image_url": "https://raw.githubusercontent.com/jakevdp/PythonDataScienceHandbook/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.07-Support-Vector-Machines.ipynb",
+    "source_asset": "05 Источники/Originals/kernels-svm-rff-2026-10-25/jake-svm.ipynb",
+    "source_asset_sha256": "8f01bffbe7f86c160fcbe89f4549b1650d262adc0e76b354719c41eec15af0a6",
+    "source_member": "/cells/16/outputs/0/data/image~1png",
+    "sha256": "f2c0e3b83a9eabc96fbc0d6941f36b26f433ed03c84a382ef1be0f6705e82fae",
+    "dimensions_px": [
+      358,
+      244
+    ],
+    "commit": "d66231454ef753818dc9213c9b5942e067266966",
+    "license": "CC BY-NC-ND 3.0 Unported",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/3.0/",
+    "license_evidence": "05 Источники/Originals/pca-tsne-umap-2026-10-25/jake-LICENSE-TEXT",
+    "license_evidence_sha256": "d74e67958cad1ae4cb585402ef66ae41958ba546e6c5e80a93920013cb81bc2a",
+    "derivation": "notebook-output-extraction",
+    "modifications": "Unmodified PNG decoded from the pinned notebook saved output; notebook not executed to generate a replacement.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features.md"
+    ]
+  },
+  {
+    "id": "curated-kernels-jake-support-invariance-49d339755fb3",
+    "asset": "00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-support-invariance.png",
+    "author": "Jake VanderPlas",
+    "source_url": "https://github.com/jakevdp/PythonDataScienceHandbook/blob/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.07-Support-Vector-Machines.ipynb",
+    "source_image_url": "https://raw.githubusercontent.com/jakevdp/PythonDataScienceHandbook/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.07-Support-Vector-Machines.ipynb",
+    "source_asset": "05 Источники/Originals/kernels-svm-rff-2026-10-25/jake-svm.ipynb",
+    "source_asset_sha256": "8f01bffbe7f86c160fcbe89f4549b1650d262adc0e76b354719c41eec15af0a6",
+    "source_member": "/cells/20/outputs/0/data/image~1png",
+    "sha256": "49d339755fb385a939840d369f908c9d85245d89d13d37ab57612d6ee57efc12",
+    "dimensions_px": [
+      1054,
+      367
+    ],
+    "commit": "d66231454ef753818dc9213c9b5942e067266966",
+    "license": "CC BY-NC-ND 3.0 Unported",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/3.0/",
+    "license_evidence": "05 Источники/Originals/pca-tsne-umap-2026-10-25/jake-LICENSE-TEXT",
+    "license_evidence_sha256": "d74e67958cad1ae4cb585402ef66ae41958ba546e6c5e80a93920013cb81bc2a",
+    "derivation": "notebook-output-extraction",
+    "modifications": "Unmodified PNG decoded from the pinned notebook saved output; notebook not executed to generate a replacement.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features.md"
+    ]
+  },
+  {
+    "id": "curated-kernels-jake-circles-linear-515465b2768e",
+    "asset": "00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-circles-linear.png",
+    "author": "Jake VanderPlas",
+    "source_url": "https://github.com/jakevdp/PythonDataScienceHandbook/blob/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.07-Support-Vector-Machines.ipynb",
+    "source_image_url": "https://raw.githubusercontent.com/jakevdp/PythonDataScienceHandbook/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.07-Support-Vector-Machines.ipynb",
+    "source_asset": "05 Источники/Originals/kernels-svm-rff-2026-10-25/jake-svm.ipynb",
+    "source_asset_sha256": "8f01bffbe7f86c160fcbe89f4549b1650d262adc0e76b354719c41eec15af0a6",
+    "source_member": "/cells/25/outputs/0/data/image~1png",
+    "sha256": "515465b2768e048d454bcc3b59c5fce2ad1394ed706c4f7ef938d230d0be63e6",
+    "dimensions_px": [
+      372,
+      244
+    ],
+    "commit": "d66231454ef753818dc9213c9b5942e067266966",
+    "license": "CC BY-NC-ND 3.0 Unported",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/3.0/",
+    "license_evidence": "05 Источники/Originals/pca-tsne-umap-2026-10-25/jake-LICENSE-TEXT",
+    "license_evidence_sha256": "d74e67958cad1ae4cb585402ef66ae41958ba546e6c5e80a93920013cb81bc2a",
+    "derivation": "notebook-output-extraction",
+    "modifications": "Unmodified PNG decoded from the pinned notebook saved output; notebook not executed to generate a replacement.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features.md"
+    ]
+  },
+  {
+    "id": "curated-kernels-jake-radial-lift-caa84634bd61",
+    "asset": "00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-radial-lift.png",
+    "author": "Jake VanderPlas",
+    "source_url": "https://github.com/jakevdp/PythonDataScienceHandbook/blob/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.07-Support-Vector-Machines.ipynb",
+    "source_image_url": "https://raw.githubusercontent.com/jakevdp/PythonDataScienceHandbook/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.07-Support-Vector-Machines.ipynb",
+    "source_asset": "05 Источники/Originals/kernels-svm-rff-2026-10-25/jake-svm.ipynb",
+    "source_asset_sha256": "8f01bffbe7f86c160fcbe89f4549b1650d262adc0e76b354719c41eec15af0a6",
+    "source_member": "/cells/29/outputs/0/data/image~1png",
+    "sha256": "caa84634bd61dc8f282efd90f28a8917a1c9e0c99e197d578a249e8522dd330b",
+    "dimensions_px": [
+      263,
+      231
+    ],
+    "commit": "d66231454ef753818dc9213c9b5942e067266966",
+    "license": "CC BY-NC-ND 3.0 Unported",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/3.0/",
+    "license_evidence": "05 Источники/Originals/pca-tsne-umap-2026-10-25/jake-LICENSE-TEXT",
+    "license_evidence_sha256": "d74e67958cad1ae4cb585402ef66ae41958ba546e6c5e80a93920013cb81bc2a",
+    "derivation": "notebook-output-extraction",
+    "modifications": "Unmodified PNG decoded from the pinned notebook saved output; notebook not executed to generate a replacement.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features.md"
+    ]
+  },
+  {
+    "id": "curated-kernels-jake-circles-rbf-599d45c8b4fd",
+    "asset": "00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-circles-rbf.png",
+    "author": "Jake VanderPlas",
+    "source_url": "https://github.com/jakevdp/PythonDataScienceHandbook/blob/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.07-Support-Vector-Machines.ipynb",
+    "source_image_url": "https://raw.githubusercontent.com/jakevdp/PythonDataScienceHandbook/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.07-Support-Vector-Machines.ipynb",
+    "source_asset": "05 Источники/Originals/kernels-svm-rff-2026-10-25/jake-svm.ipynb",
+    "source_asset_sha256": "8f01bffbe7f86c160fcbe89f4549b1650d262adc0e76b354719c41eec15af0a6",
+    "source_member": "/cells/33/outputs/0/data/image~1png",
+    "sha256": "599d45c8b4fd10b852697243fac9825ce3bedde97dfbc53f0d987c90a1d3c8cb",
+    "dimensions_px": [
+      372,
+      244
+    ],
+    "commit": "d66231454ef753818dc9213c9b5942e067266966",
+    "license": "CC BY-NC-ND 3.0 Unported",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/3.0/",
+    "license_evidence": "05 Источники/Originals/pca-tsne-umap-2026-10-25/jake-LICENSE-TEXT",
+    "license_evidence_sha256": "d74e67958cad1ae4cb585402ef66ae41958ba546e6c5e80a93920013cb81bc2a",
+    "derivation": "notebook-output-extraction",
+    "modifications": "Unmodified PNG decoded from the pinned notebook saved output; notebook not executed to generate a replacement.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features.md"
+    ]
+  },
+  {
+    "id": "curated-kernels-jake-soft-margin-061db8c3c848",
+    "asset": "00 Учебник/Assets/Figures/curated/kernels-svm-rff-2026-10-25/jake-soft-margin.png",
+    "author": "Jake VanderPlas",
+    "source_url": "https://github.com/jakevdp/PythonDataScienceHandbook/blob/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.07-Support-Vector-Machines.ipynb",
+    "source_image_url": "https://raw.githubusercontent.com/jakevdp/PythonDataScienceHandbook/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.07-Support-Vector-Machines.ipynb",
+    "source_asset": "05 Источники/Originals/kernels-svm-rff-2026-10-25/jake-svm.ipynb",
+    "source_asset_sha256": "8f01bffbe7f86c160fcbe89f4549b1650d262adc0e76b354719c41eec15af0a6",
+    "source_member": "/cells/38/outputs/0/data/image~1png",
+    "sha256": "061db8c3c848d551e828efb17fff702fcf1aa2be21cde3e1be658b6d4ca29730",
+    "dimensions_px": [
+      1051,
+      370
+    ],
+    "commit": "d66231454ef753818dc9213c9b5942e067266966",
+    "license": "CC BY-NC-ND 3.0 Unported",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/3.0/",
+    "license_evidence": "05 Источники/Originals/pca-tsne-umap-2026-10-25/jake-LICENSE-TEXT",
+    "license_evidence_sha256": "d74e67958cad1ae4cb585402ef66ae41958ba546e6c5e80a93920013cb81bc2a",
+    "derivation": "notebook-output-extraction",
+    "modifications": "Unmodified PNG decoded from the pinned notebook saved output; notebook not executed to generate a replacement.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features.md"
+    ]
+  }
+]

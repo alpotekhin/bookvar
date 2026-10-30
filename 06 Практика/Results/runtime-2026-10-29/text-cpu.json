@@ -1,0 +1,116 @@
+{
+  "device": "cpu",
+  "scope": "random checkpoint and text/KV correctness; no language-quality or performance claim",
+  "parameters": 19776,
+  "vocabulary": 18,
+  "checkpoint_files": {
+    "model.safetensors": {
+      "bytes": 81592,
+      "sha256": "a10cc4b0ca089b2257fd90de57c979a20219f362c4b61d6f1a4f13f4b2ab1fa0"
+    },
+    "tokenizer_config.json": {
+      "bytes": 973,
+      "sha256": "657ac885cfb2215e09bcc83fc2c5a8b52d48e9c105f35dd7741b1bd63115830b"
+    },
+    "special_tokens_map.json": {
+      "bytes": 99,
+      "sha256": "fdd1575e8bd811652f3708f5d70495fd581ca5b59111e6edaa903e43783ce944"
+    },
+    "config.json": {
+      "bytes": 785,
+      "sha256": "3cd81fb5a838c2a831fba7f93ae827fa358a2e0d4cdb74843cd585e268bde36c"
+    },
+    "tokenizer.json": {
+      "bytes": 1363,
+      "sha256": "1309034085be6345bcc9a5266f08855c67cdd5b1eab736a26e3deff0d2840024"
+    },
+    "generation_config.json": {
+      "bytes": 132,
+      "sha256": "b7a2e93e9c100f3b18d6b2c5a99cfc92116ba0ad03f05fd56af0bee797cd67e7"
+    }
+  },
+  "checkpoint_bytes": 84944,
+  "tokenizer_roundtrip": true,
+  "checkpoint_logits_exact": true,
+  "oracle_matches": 4,
+  "rows": [
+    {
+      "text": "the cat reads a book",
+      "input_ids": [
+        4,
+        8,
+        13,
+        5,
+        6
+      ],
+      "output_ids": [
+        0,
+        0,
+        0,
+        6,
+        0
+      ],
+      "decoded": "[PAD] [PAD] [PAD] book [PAD]",
+      "cache_positions": 9
+    },
+    {
+      "text": "the model predicts the next token",
+      "input_ids": [
+        4,
+        10,
+        12,
+        4,
+        11,
+        14
+      ],
+      "output_ids": [
+        4,
+        10,
+        1,
+        5,
+        7
+      ],
+      "decoded": "the model [UNK] a attention",
+      "cache_positions": 10
+    },
+    {
+      "text": "книга объясняет внимание",
+      "input_ids": [
+        16,
+        17,
+        15
+      ],
+      "output_ids": [
+        4,
+        10,
+        1,
+        5,
+        7
+      ],
+      "decoded": "the model [UNK] a attention",
+      "cache_positions": 7
+    },
+    {
+      "text": "a book explains attention",
+      "input_ids": [
+        5,
+        6,
+        9,
+        7
+      ],
+      "output_ids": [
+        17,
+        1,
+        16,
+        2,
+        15
+      ],
+      "decoded": "объясняет [UNK] книга [BOS] внимание",
+      "cache_positions": 8
+    }
+  ],
+  "cuda_available": false,
+  "mps_available": true,
+  "torch": "2.14.1",
+  "physical_peak_memory": "not measured"
+}

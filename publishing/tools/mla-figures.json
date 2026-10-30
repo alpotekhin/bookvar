@@ -1,0 +1,59 @@
+[
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/source-first-35-36/cs336-mha-gqa-mqa-mla.png",
+    "source_asset": "05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/images/mla-schema.png",
+    "source_asset_sha256": "e493b2a3c3d054d43611d033198c404328ab65045296a3bd16b8844b608a9748",
+    "sha256": "e493b2a3c3d054d43611d033198c404328ab65045296a3bd16b8844b608a9748",
+    "author": "DeepSeek-AI; reproduced in Stanford CS336",
+    "source_url": "https://arxiv.org/abs/2405.04434v5",
+    "rights_status": "paper-figure-license-unverified",
+    "metadata_status": "needs-confirmation"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/attention-review-2026-09/mha-mla-projections.svg",
+    "source_asset": "05 Источники/Originals/mla-2026-10-22/mha-mla-projections.svg",
+    "source_asset_sha256": "6dadfbfa4e80c3ab7232e8f341f158d5bf07dcc0302f7e5cbd5b50e8db78ec2e",
+    "sha256": "6dadfbfa4e80c3ab7232e8f341f158d5bf07dcc0302f7e5cbd5b50e8db78ec2e",
+    "author": "Robin Geens, Marian Verhelst",
+    "source_url": "https://arxiv.org/abs/2506.02523v1",
+    "license": "CC BY 4.0",
+    "rights_status": "source-license-verified",
+    "metadata_status": "verified"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/mla-2026-10-22/deepseek-mla-panel.png",
+    "source_asset": "05 Источники/Originals/mla-2026-10-22/deepseek-v2-architecture.png",
+    "source_asset_sha256": "69910543d2248eb7d201a3aa164278fc24f886f86e5acd0273dc70fa5e9a728c",
+    "crop_box_px": [427, 403, 1139, 918],
+    "sha256": "78f876dfca8e9c303c2380b0ffc616adbd08344b4251e60d72b136d788ef5914",
+    "author": "DeepSeek-AI",
+    "source_url": "https://github.com/deepseek-ai/DeepSeek-V2/blob/ec98ee3cbffc32104cd55dba8af884b3d772602a/figures/architecture.png",
+    "license": "MIT",
+    "license_evidence": "05 Источники/Originals/mla-2026-10-22/deepseek-v2-LICENSE-CODE",
+    "license_evidence_sha256": "6e4c38e1172f42fdbff13edf9a7a017679fb82b0fde415a3e8b3c31c6ed4a4e4",
+    "source_page_snapshot": "05 Источники/Originals/mla-2026-10-22/deepseek-v2-README.md",
+    "source_page_sha256": "03d59c7d02d2d19af8a83f588c2eebaed20b7014179cc0e9370d078f2d702ad4",
+    "rights_status": "source-license-verified",
+    "metadata_status": "verified"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/source-first-35-36/deepseek-v2-mha-gqa-mqa-ablation.png",
+    "source_asset": "05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/images/mla-accuracy.png",
+    "source_asset_sha256": "ecd0a40f46ec479f98f40856823d35db0bd2fa2a9141a547e86538396ea878f7",
+    "sha256": "ecd0a40f46ec479f98f40856823d35db0bd2fa2a9141a547e86538396ea878f7",
+    "author": "DeepSeek-AI",
+    "source_url": "https://arxiv.org/abs/2405.04434",
+    "rights_status": "paper-figure-license-unverified",
+    "metadata_status": "needs-confirmation"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/source-first-35-36/deepseek-v2-mla-ablation.png",
+    "source_asset": "05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/images/mla-accuracy2.png",
+    "source_asset_sha256": "28ab52326c2bbcf500624e60be105b6facf1074062e19fb04ae1549f3cf5d311",
+    "sha256": "28ab52326c2bbcf500624e60be105b6facf1074062e19fb04ae1549f3cf5d311",
+    "author": "DeepSeek-AI",
+    "source_url": "https://arxiv.org/abs/2405.04434",
+    "rights_status": "paper-figure-license-unverified",
+    "metadata_status": "needs-confirmation"
+  }
+]

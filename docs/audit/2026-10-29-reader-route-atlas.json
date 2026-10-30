@@ -1,0 +1,263 @@
+{
+  "scope": "Editorial and reader-route review, not current-release verification or acceptance of all mechanisms",
+  "date": "2026-10-29",
+  "cards_read": 23,
+  "cards_edited": 17,
+  "original_figures": 32,
+  "current_figures": 33,
+  "files": [
+    {
+      "source": "02 Атлас моделей/Семейства/BERT.md",
+      "before": "fd48361e66b15d397ae913532826bc371e3211f8c57aeaa19ed56f189ded7ee9",
+      "after": "3c53320e77f4287e2057aa90db04e0ed80c39b6a678247ff130a7bd8c750f6b5",
+      "edited": true,
+      "original_figures": 1,
+      "current_figures": 1,
+      "original_figures_preserved": true,
+      "original_links_preserved": true,
+      "last_verified_preserved": true
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Baichuan.md",
+      "before": "a0b2e20ce5c1dbe4da8d3107be295b79ac1a279bdf665d7a5874b2e0a40ae06f",
+      "after": "c1c184737eca4a8c7c5f5cd6fa29cb31e5f4e1617478f25c004649acd3f7c6f3",
+      "edited": true,
+      "original_figures": 1,
+      "current_figures": 1,
+      "original_figures_preserved": true,
+      "original_links_preserved": true,
+      "last_verified_preserved": true
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Command R.md",
+      "before": "9f1b8422be29e84b8a7e89887c6911d0dbc5cfcc61720fad556f90f868361eeb",
+      "after": "e963b3040c0a538829c98045ec0d18b13ba5543e2a47f9c535fe24491b95f68c",
+      "edited": true,
+      "original_figures": 1,
+      "current_figures": 1,
+      "original_figures_preserved": true,
+      "original_links_preserved": true,
+      "last_verified_preserved": true
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/DBRX.md",
+      "before": "8411fd99a021db39c1636ef793742ad0fa10491f1d12df43e8101f9e577bcdfd",
+      "after": "3cfcc8012019fd2398ef6de662c8966f449f012da0b799cdae9054a53783ccbf",
+      "edited": true,
+      "original_figures": 1,
+      "current_figures": 1,
+      "original_figures_preserved": true,
+      "original_links_preserved": true,
+      "last_verified_preserved": true
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/DeepSeek.md",
+      "before": "922432e4f44a0ec5360475bb561bcc15df5438ef78be2c0651cb08e7a1d42206",
+      "after": "95202a2689db71dc698769dae63abe6028781ca5ae105df3ab5adcda7d910261",
+      "edited": true,
+      "original_figures": 2,
+      "current_figures": 2,
+      "original_figures_preserved": true,
+      "original_links_preserved": true,
+      "last_verified_preserved": true
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Falcon.md",
+      "before": "4558710667de04eb5d12a963e6d507774be92ba46c285ddf3611be39151a1128",
+      "after": "4558710667de04eb5d12a963e6d507774be92ba46c285ddf3611be39151a1128",
+      "edited": false,
+      "original_figures": 1,
+      "current_figures": 1,
+      "original_figures_preserved": true,
+      "original_links_preserved": true,
+      "last_verified_preserved": true
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/GLM.md",
+      "before": "153c71b1ddd2d4f23578ee6550c9d246c48691cc362b6320d83fdc63b17ac8f9",
+      "after": "c448f92cf70a722a122b035e3d1c129641b29c17d87ae2b03dafac384c6c9cfe",
+      "edited": true,
+      "original_figures": 1,
+      "current_figures": 1,
+      "original_figures_preserved": true,
+      "original_links_preserved": true,
+      "last_verified_preserved": true
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/GPT.md",
+      "before": "8a800269739b1010b48f43373e8106edb05d1fbdcc6aa84cf8814c585f50e63e",
+      "after": "0da72ec958607b4bf8318ce8cbc9001655a7a15ec6b8dc6dd9ef5fe1938e1eeb",
+      "edited": true,
+      "original_figures": 1,
+      "current_figures": 1,
+      "original_figures_preserved": true,
+      "original_links_preserved": true,
+      "last_verified_preserved": true
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Gemma.md",
+      "before": "5e3bbedfc74ab90acfee105a010dad6be8eb87a545259c56a6dc0c194b188bf2",
+      "after": "6838dc8dfcde2d53186754551ab9bd3cbf8e0d231690900fbcdc24595125f411",
+      "edited": true,
+      "original_figures": 1,
+      "current_figures": 1,
+      "original_figures_preserved": true,
+      "original_links_preserved": true,
+      "last_verified_preserved": true
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/InternLM.md",
+      "before": "ca848ea21c14cf463618be77731358bbaa8339c363f38d8747c6a3f889771b4f",
+      "after": "ca848ea21c14cf463618be77731358bbaa8339c363f38d8747c6a3f889771b4f",
+      "edited": false,
+      "original_figures": 1,
+      "current_figures": 1,
+      "original_figures_preserved": true,
+      "original_links_preserved": true,
+      "last_verified_preserved": true
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Jamba.md",
+      "before": "26ba768152a94987208b53eeb06e1e01a4d6c0edfe54e88dc0cee01af44b4ac3",
+      "after": "26ba768152a94987208b53eeb06e1e01a4d6c0edfe54e88dc0cee01af44b4ac3",
+      "edited": false,
+      "original_figures": 1,
+      "current_figures": 1,
+      "original_figures_preserved": true,
+      "original_links_preserved": true,
+      "last_verified_preserved": true
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Kimi.md",
+      "before": "df641246623d8079e327145c37dc799cff5a4025c64c0019c457d1bcb215b951",
+      "after": "879122f28efb1195d116a7803669a145197cd99da1178673f03ebd7288d0addd",
+      "edited": true,
+      "original_figures": 2,
+      "current_figures": 2,
+      "original_figures_preserved": true,
+      "original_links_preserved": true,
+      "last_verified_preserved": true
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Llama.md",
+      "before": "8d5ae02e6f5b818e4a6eb6507458edaa30d97fcfb54614ef6ec3c84d7a8069b0",
+      "after": "acd40be4c8b39949149d996a6c1e41283e1f9dc3fbaa549df8e9cdeafaa7f80d",
+      "edited": true,
+      "original_figures": 1,
+      "current_figures": 1,
+      "original_figures_preserved": true,
+      "original_links_preserved": true,
+      "last_verified_preserved": true
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Mamba.md",
+      "before": "117146c73d4572c087c392f543428a55c87b7aa0c07f12f0a80d609ce16ec0f3",
+      "after": "d34a328da0e2be6629db1cb955e5341300d0c8845cc1af920db0737426fac9d2",
+      "edited": true,
+      "original_figures": 1,
+      "current_figures": 1,
+      "original_figures_preserved": true,
+      "original_links_preserved": true,
+      "last_verified_preserved": true
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Mistral и Mixtral.md",
+      "before": "5930e31a119d674c0a696cd8b86f05d0e946255ea3fbaf5a85f34b4311fafb2d",
+      "after": "5f9c8f7c0c9d6926bf7602a5fdc53d93272a24aab6214ad77d50da052b103c42",
+      "edited": true,
+      "original_figures": 2,
+      "current_figures": 2,
+      "original_figures_preserved": true,
+      "original_links_preserved": true,
+      "last_verified_preserved": true
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Nemotron.md",
+      "before": "ace74bd899a8dd12b979d3fe78ac1223f0bc296f356a50330f63364e99527c35",
+      "after": "4cfce5e2e7d1415bce7e4f52a434d7a6b50766a76d3f2c1d8da6a908d4909a23",
+      "edited": true,
+      "original_figures": 2,
+      "current_figures": 2,
+      "original_figures_preserved": true,
+      "original_links_preserved": true,
+      "last_verified_preserved": true
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Phi.md",
+      "before": "3b4e7d346e25778e30af0afc1ca7a0d036787f63c6e9157aa07d8e516d329c19",
+      "after": "6fa68bf8655ac51edb124bc80779df107534b0425c863f37c1552e7c571adf28",
+      "edited": true,
+      "original_figures": 1,
+      "current_figures": 1,
+      "original_figures_preserved": true,
+      "original_links_preserved": true,
+      "last_verified_preserved": true
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Qwen.md",
+      "before": "f2d18cb7da6a131c84d4925f6f559561c78a6323b575e8a9eeff2f77203c2204",
+      "after": "778e833fa721071f46af5ae4734112d62d481f6c4a59d1373e5444773ea257bf",
+      "edited": true,
+      "original_figures": 3,
+      "current_figures": 4,
+      "original_figures_preserved": true,
+      "original_links_preserved": true,
+      "last_verified_preserved": true
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/RWKV.md",
+      "before": "d1a64bd5641c184a01ecaa12cf3f7dd55f496519e16d19f90ff30e9fa3c958b6",
+      "after": "d1a64bd5641c184a01ecaa12cf3f7dd55f496519e16d19f90ff30e9fa3c958b6",
+      "edited": false,
+      "original_figures": 1,
+      "current_figures": 1,
+      "original_figures_preserved": true,
+      "original_links_preserved": true,
+      "last_verified_preserved": true
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/RetNet.md",
+      "before": "2f7e17d735fc28ef937b725e26340994173c48834302bb35ad5fb331929acf76",
+      "after": "2f7e17d735fc28ef937b725e26340994173c48834302bb35ad5fb331929acf76",
+      "edited": false,
+      "original_figures": 1,
+      "current_figures": 1,
+      "original_figures_preserved": true,
+      "original_links_preserved": true,
+      "last_verified_preserved": true
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/T5.md",
+      "before": "85ef055551fc8a65df6552e5bffa8d3492f8f5f16aa1c64437f1bd22a6d24bf0",
+      "after": "b580dc9d2110c6f542b44b868332b243a3db8ce05752e7c59ecddf6035507378",
+      "edited": true,
+      "original_figures": 1,
+      "current_figures": 1,
+      "original_figures_preserved": true,
+      "original_links_preserved": true,
+      "last_verified_preserved": true
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Yi.md",
+      "before": "caa2a2df7f4437905e4728fe87e701258faeb5e3e99351e698959f57fadd5a8f",
+      "after": "caa2a2df7f4437905e4728fe87e701258faeb5e3e99351e698959f57fadd5a8f",
+      "edited": false,
+      "original_figures": 1,
+      "current_figures": 1,
+      "original_figures_preserved": true,
+      "original_links_preserved": true,
+      "last_verified_preserved": true
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Мультимодальные семейства.md",
+      "before": "fc9420308d6dcc9d9d7dfbef3b6bae6c62946107c046f3eb12ec79f964b79e3c",
+      "after": "58c0ad07918bef4e5d00ccbd7b3a93962585cde3b2f62ddf91f1b96b98f2086e",
+      "edited": true,
+      "original_figures": 4,
+      "current_figures": 4,
+      "original_figures_preserved": true,
+      "original_links_preserved": true,
+      "last_verified_preserved": true
+    }
+  ]
+}

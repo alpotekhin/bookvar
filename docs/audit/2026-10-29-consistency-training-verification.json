@@ -1,0 +1,540 @@
+{
+  "date": "2026-10-29",
+  "status": "comparison-verified-locally-not-published",
+  "scope": "Reconcile the Adversarial Training archive in the existing robustness and semi-supervised owners. VAT/UDA additions do not complete the separate Semi-supervised Learning archive.",
+  "goal": "доделай всё",
+  "branch": "editorial-route-alignment",
+  "head": "75e1870",
+  "publication": {
+    "commit": false,
+    "push": false,
+    "deploy": false,
+    "rootDemo": "http://127.0.0.1:4330/textbook/pretraining/semi-supervised-fixmatch/#uda",
+    "pages": "Local /bookvar build and browser QA only; no GitHub Pages deployment."
+  },
+  "wholeChapterReads": [
+    {
+      "path": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+      "lines": 833,
+      "sha256": "1e5a7e921ff537a4625021e77a68bfe79790ee18f0b120ddb10f400f95d7767f",
+      "read": "Entire final chapter read after the final notation edits; no truncated output counted as a completed read."
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch.md",
+      "lines": 1061,
+      "sha256": "112219e24960ebb33376fdfa363c0f2f5e11602e9156fb6c34ff14e5fc10a324",
+      "read": "Entire final chapter read after the final notation edits; no truncated output counted as a completed read."
+    }
+  ],
+  "explanationReview": {
+    "embeddingAT": "Continuous embedding perturbation versus discrete text; CE/log-likelihood sign; Cauchy–Schwarz; frequency-weighted coordinate normalization with all vocabulary entries; fixed inner parameters, detached perturbation and trainable outer embedding graph; sequence-wide budget and padding/EOS conventions. Original IMDb Table 2 and neighbour Table 3 read with their initialization/protocol limits.",
+    "freeLB": "Fixed weights during K ascent points, averaged parameter gradients and one outer update; worked scalar trace changes the sign relative to final-point training; dropout masks held within the search. K passes are not cost-free.",
+    "smart": "Both directions of the classification divergence; local smoothing distinct from the prediction-space proximal penalty; previous/EMA reference; one-input numerical optimum and explicit omission of the local term in that isolated program.",
+    "vat": "Fixed clean distribution; D(0)=0 and zero first derivative; PSD Hessian, leading eigendirection and finite-difference power iteration; degenerate/zero directions and nonlinear limits. Complete masked embedding update separates inner probe derivatives from the outer parameter gradient.",
+    "uda": "Back-translation and TF-IDF position/insertion distributions; augmentation invariance failure; strict confidence gate on unsharpened probabilities; sharpened detached target; full-unlabelled-batch reduction; CE versus KL; TSA correct-class ceiling, kept-labelled denominator and empty batch. Published IMDb numbers separated by initialization and label budget.",
+    "preservation": "Exact journal reversal restores both previous owners and the complete prior asset registry. Existing prose, 5 semi-supervised programs and all 12 old figures are preserved, not replaced by short summaries.",
+    "style": "Both whole owners read; no-ai-slop and eval applied to authored additions. Necessary mathematical contrasts, qualifications, citations, examples and source captions retained. Existing Russian remains; new explanations are English, not a new translation."
+  },
+  "sourcePacket": {
+    "path": "05 Источники/Originals/consistency-training-2026-10-29",
+    "files": 16,
+    "sourceReads": [
+      {
+        "file": "text-at-v4.html",
+        "url": "https://arxiv.org/html/1605.07725v4",
+        "bytes": 164829,
+        "sha256": "2d98860bef5ce989181d6c33f7e5cf0e100bc5721494dd07467e92faf8f1777d",
+        "readScope": "Complete sections 2 and 3, including normalization and full AT/VAT objectives; complete sections 4.2 and 5.1, Tables 2 and 3, historical protocol and neighbour-analysis limits."
+      },
+      {
+        "file": "vat-v2.html",
+        "url": "https://arxiv.org/html/1704.03976v2",
+        "bytes": 373387,
+        "sha256": "5b9ba8ef3013d812f46b74e9870984f123fd3e7a21fcb9d44e74e623664c321a",
+        "readScope": "Complete section III (A–D), Figure 1 caption and Algorithm 1; selected implementation vat.py is read completely. No full experimental review or reproduced benchmark claimed."
+      },
+      {
+        "file": "uda-v6.html",
+        "url": "https://arxiv.org/html/1904.12848v6",
+        "bytes": 340947,
+        "sha256": "983929c43ff7ea8d5c95c9693964bd4f5e686766b587f8318ab195dd40307d1c",
+        "readScope": "Complete section 2 and Appendix A; complete section 4.3 and Table 4. Other experimental/theoretical sections are not claimed read."
+      },
+      {
+        "file": "freelb-v2.html",
+        "url": "https://arxiv.org/html/1909.11764v2",
+        "bytes": 226748,
+        "sha256": "d984dacaa57d471b9171a7bc2d4a8be10bd3e77fdb67d68d64d445a3d012d4ca",
+        "readScope": "Complete section 3 (3.1–3.3) and Algorithm 1; this is the pinned 2019 v2 method, not a claim to have reviewed every later revision."
+      },
+      {
+        "file": "smart-v5.html",
+        "url": "https://arxiv.org/html/1911.03437v5",
+        "bytes": 298426,
+        "sha256": "f5a4f8760c3feb7676a3a95968cd6fa9530ec65fdf10b2ec3860746ec4608a5d",
+        "readScope": "Complete section 3 (3.1–3.2), Figure 1 and Algorithm 1; method compared with the final ACL PDF."
+      },
+      {
+        "file": "vat.gif",
+        "url": "https://raw.githubusercontent.com/takerum/vat_tf/c5125d267531ce0f10b2238cf95604d287de63c8/vat.gif",
+        "bytes": 176301,
+        "sha256": "0285fec32fd671d0427ab2342cbe6810a6c4bd8befa85b914a78e302ed7daffb",
+        "readScope": "All original bytes and 14 frames retained; first and later frames inspected separately."
+      },
+      {
+        "file": "vat_tf-LICENSE.md",
+        "url": "https://raw.githubusercontent.com/takerum/vat_tf/c5125d267531ce0f10b2238cf95604d287de63c8/LICENSE.md",
+        "bytes": 1070,
+        "sha256": "8563d1383cd57b6185c56e951bf08c716d0a8b957550f9594137cb15b8b2c9aa",
+        "readScope": "Complete MIT license."
+      },
+      {
+        "file": "vat_tf-vat.py",
+        "url": "https://raw.githubusercontent.com/takerum/vat_tf/c5125d267531ce0f10b2238cf95604d287de63c8/vat.py",
+        "bytes": 2681,
+        "sha256": "2d7e42b5afcfa9a7efdf5b9f9328a4cb72dcff1359f71304d26e900674e5cd16",
+        "readScope": "Complete file, including normalization, power iteration, gradient stops and final regularizer."
+      },
+      {
+        "file": "uda-LICENSE",
+        "url": "https://raw.githubusercontent.com/google-research/uda/960684e363251772a5938451d4d2bc0f1da9e24b/LICENSE",
+        "bytes": 11358,
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+        "readScope": "Complete unmodified Apache-2.0 license archived; code attribution retained."
+      },
+      {
+        "file": "uda-text.py",
+        "url": "https://raw.githubusercontent.com/google-research/uda/960684e363251772a5938451d4d2bc0f1da9e24b/text/uda.py",
+        "bytes": 12296,
+        "sha256": "f34e4a9d36542bc73a6f5decb66d2f48a41d4b46efc88f25976b21151c089d83",
+        "readScope": "Complete get_tsa_threshold and create_model; model_fn loss assembly and input concatenation read. No full TensorFlow-1 training run."
+      },
+      {
+        "file": "uda-README.md",
+        "url": "https://raw.githubusercontent.com/google-research/uda/960684e363251772a5938451d4d2bc0f1da9e24b/README.md",
+        "bytes": 8015,
+        "sha256": "76c54c91ab30c7063d05a285e80483d2a39b991bfbfad433fe0bf627ad07c47f",
+        "readScope": "Complete README, including protocol/initialization and no-download command context. No checkpoint/dataset command executed."
+      },
+      {
+        "file": "acl-copyright.html",
+        "url": "https://aclanthology.org/faq/copyright/",
+        "bytes": 9625,
+        "sha256": "c0b0f339f5dc67c243944f2210eafb96447dae36710cdfdc4e2d9a62061894be",
+        "readScope": "Complete main copyright-policy article; applies to these ACL publications, not all arXiv papers."
+      },
+      {
+        "file": "huang-2022-lightweight.pdf",
+        "url": "https://aclanthology.org/2022.sdp-1.5.pdf",
+        "bytes": 939434,
+        "sha256": "7c803d203a04eaefc94bc3ed6d4cc9704a12741cdf6dff084e6f7f5909c36327",
+        "readScope": "Complete relevant pages 4–5, sections 4.1–4.3.1 and full Figure 2. Diagram used as the authors' text-domain adaptation; KL/gate semantics are taken from original UDA/FixMatch rather than the secondary equations."
+      },
+      {
+        "file": "smart-acl-2020.pdf",
+        "url": "https://aclanthology.org/2020.acl-main.197.pdf",
+        "bytes": 476924,
+        "sha256": "ac5db36b575f8cba4d95e5187d1f65dfd8c8fed2967f2fe9b6777d2dc7a5c25b",
+        "readScope": "Complete relevant method pages 3–4, sections 3.1–3.2, original Figure 1 and Algorithm 1."
+      },
+      {
+        "file": "tf-adversarial_losses.py",
+        "url": "https://raw.githubusercontent.com/tensorflow/models/feec308b23edb6a3c5745a2d11890db3601cc0b5/research/adversarial_text/adversarial_losses.py",
+        "bytes": 9185,
+        "sha256": "c8b63447b6ae97e288b27bb63f1ee2ffd38a0081013d24b3311df30ae6bb204e",
+        "readScope": "Complete file; sequence-wide normalization, length/EOS mask, labelled AT and VAT gradient paths."
+      },
+      {
+        "file": "tf-layers.py",
+        "url": "https://raw.githubusercontent.com/tensorflow/models/feec308b23edb6a3c5745a2d11890db3601cc0b5/research/adversarial_text/layers.py",
+        "bytes": 13373,
+        "sha256": "c0fc7d21683332890d5f5d633e156f9cddb36ce2c60ce7208e59de09692e461e",
+        "readScope": "Complete Embedding class, including weighted mean/variance and stabilizer; remainder of the LSTM file not claimed read."
+      }
+    ],
+    "scope": "Only selected complete sections/functions identified by readScope were read. No claim of full-paper/full-repository review or reproduced training.",
+    "networkRecovery": "Two stalled ACL downloads recovered using server-supported, length-checked HTTP ranges and consistent ETags; assembled originals parsed as 12/14 pages. No datasets, checkpoints or clones downloaded."
+  },
+  "checks": [
+    {
+      "kind": "CPU",
+      "tool": "publishing/tools/check_consistency_training_examples.py",
+      "result": "exit 0 on the final chapter hashes; 13 actual published fences, 18 analytic-Hessian comparisons, 81 UDA gradient cases, 45 original TSA-function cases, all 16 source hashes, 3 figure hashes, decoded PDF-render equality and all 14 GIF frames",
+      "log": "/var/tmp/bookvar-consistency-cpu-layout-20261029.log",
+      "limits": "Original TSA function executed with a numeric TF-operation shim, not TensorFlow-1 graph runtime. No GPU timing, translation generation, model training or semantic-attack benchmark."
+    },
+    {
+      "kind": "Regression CPU",
+      "tool": "publishing/tools/check_semi_supervised_examples.py",
+      "result": "exit 0; 10 current fences plus retained independent FixMatch and graph checks",
+      "log": "/var/tmp/bookvar-consistency-semi-cpu-20261029.log",
+      "scope": "Final notation-only revision left all executed Python fences unchanged; final all-13 checker reran them."
+    },
+    {
+      "kind": "Unit",
+      "result": "134 files and 847 tests passed; exit 0",
+      "log": "/var/tmp/bookvar-consistency-unit-layout-20261029.log"
+    },
+    {
+      "kind": "Built HTML",
+      "result": "174 tests passed; exit 0 on final root build",
+      "log": "/var/tmp/bookvar-consistency-output-current-20261029.log"
+    },
+    {
+      "kind": "Root build",
+      "result": "exit 0; 2006 pages",
+      "log": "/var/tmp/bookvar-consistency-root-current-20261029.log"
+    },
+    {
+      "kind": "Root internal links",
+      "result": "exit 0; 0 broken",
+      "log": "/var/tmp/bookvar-consistency-root-links-current-20261029.log"
+    },
+    {
+      "kind": "Pages build",
+      "result": "exit 0; 2006 pages; PUBLICATION_BASE_PATH=/bookvar",
+      "log": "/var/tmp/bookvar-consistency-pages-build-20261029.log"
+    },
+    {
+      "kind": "Pages internal links",
+      "result": "exit 0; 0 broken",
+      "log": "/var/tmp/bookvar-consistency-pages-links-20261029.log"
+    },
+    {
+      "kind": "Ledger integrity",
+      "result": "All 31 immutable archive hashes match. Current whole-read revisions match except the explicitly recorded, previously reviewed SFT navigation delta. Counts recomputed and match.",
+      "log": "/var/tmp/bookvar-consistency-ledger-20261029.log"
+    },
+    {
+      "kind": "Preservation",
+      "result": "Current hashes match addition journal; exact unique reversal restores every recorded previous hash.",
+      "log": "/var/tmp/bookvar-consistency-preservation-20261029.log"
+    }
+  ],
+  "visualQA": {
+    "root": {
+      "desktop": "1280×900; document client/scroll widths 1265/1265. Full originals UDA and SMART inspected at 1×, complete panels and captions. Native VAT animation opened in viewer.",
+      "mobile": "360×800; document client/scroll widths 345/345 for both owners. All actual chapter images load. 17/12 display formulas and zero KaTeX errors. New shortened VAT/UDA and FreeLB/local-SMART math inspected.",
+      "en": "Semi-supervised English body shown directly without a missing-language notice. Robustness retains existing Russian with explicit EN fallback; new English block is present. Fallback is not counted as a completed English translation."
+    },
+    "pages": {
+      "desktop": "Actual /bookvar robustness and EN semi-supervised pages inspected at 1280×900; 1265/1265 document width; 9/6 actual images loaded with /bookvar assets; 12/17 formulas and zero KaTeX errors. Full SMART and UDA originals opened and inspected.",
+      "mobile": "Actual /bookvar robustness and EN TSA pages inspected at 360×800; 345/345 document width; formula rendering and all images loaded."
+    },
+    "scrollingLimits": "At mobile content width 313px, the robustness Taylor expression uses 375px and the Bregman subproblem 332px, both inside overflow-x:auto. The old FixMatch objective uses 406px in its own horizontal scroll. This is not zero internal math overflow; there is no document overflow.",
+    "figureQuality": "UDA/FixMatch 2562×1045 and SMART 1240×1090 are 400dpi renders of original vector-PDF figures, with both panels and complete captions. VAT remains its intrinsically lower-resolution 320×180, 14-frame author GIF; no claim that it is high-resolution.",
+    "screenshots": [
+      "docs/audit/evidence/2026-10-29-consistency-training/pages-desktop-en-uda-original.png",
+      "docs/audit/evidence/2026-10-29-consistency-training/pages-desktop-en-uda.png",
+      "docs/audit/evidence/2026-10-29-consistency-training/pages-desktop-smart-original.png",
+      "docs/audit/evidence/2026-10-29-consistency-training/pages-mobile-en-tsa.png",
+      "docs/audit/evidence/2026-10-29-consistency-training/pages-mobile-smart.png",
+      "docs/audit/evidence/2026-10-29-consistency-training/root-desktop-smart-original.png",
+      "docs/audit/evidence/2026-10-29-consistency-training/root-desktop-uda-original.png",
+      "docs/audit/evidence/2026-10-29-consistency-training/root-desktop-uda.png",
+      "docs/audit/evidence/2026-10-29-consistency-training/root-desktop-vat-original.png",
+      "docs/audit/evidence/2026-10-29-consistency-training/root-en-adversarial-context.png",
+      "docs/audit/evidence/2026-10-29-consistency-training/root-mobile-smart-context.png",
+      "docs/audit/evidence/2026-10-29-consistency-training/root-mobile-smart-formulas.png",
+      "docs/audit/evidence/2026-10-29-consistency-training/root-mobile-uda-left.png",
+      "docs/audit/evidence/2026-10-29-consistency-training/root-mobile-uda-right.png"
+    ],
+    "scopeLimit": "Current additions and their math/source visuals inspected. This is not a fresh visual acceptance of every unchanged figure in the entire textbook."
+  },
+  "rights": {
+    "newOriginals": "Two actual ACL publications use the ACL CC BY 4.0 policy; original VAT GIF is covered by its pinned author-repository MIT notice. Evidence and unmodified license copies retained. No unrelated arXiv figure inferred to be open from access alone.",
+    "remainingReleaseGate": "Previously recorded DeepSeekMath PPO/GRPO figure permission and sequential-MTP illustration issues remain; this packet does not resolve them."
+  },
+  "archiveCounts": {
+    "total": 31,
+    "sourceFullRead": 24,
+    "reconciled": 23,
+    "readInProgress": 1,
+    "unread": 7,
+    "canonicalWholeReads": 30
+  },
+  "remaining": [
+    "Semi-supervised Learning: MixText, Noisy Student and Dai–Le 2015 sequence pretraining remain unreviewed.",
+    "Seven unread archive notes: Synthetic Data, nanoGPT, ReAct, Tool Use, Toolformer, Tree of Thoughts, BLEU.",
+    "Whole conceptual-route review and fixes: tokenization → attention → Transformer → GPT/BERT → modern models → training → inference.",
+    "Recorded distributed-chapter prerequisite bridge, duplicate EN fallback notices and unresolved source-visual issues.",
+    "Fresh complete-diff, remote, identity, rights and required-CI release checks, then authorized dev push and actual Pages deployment."
+  ],
+  "artifacts": [
+    {
+      "path": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+      "sha256": "1e5a7e921ff537a4625021e77a68bfe79790ee18f0b120ddb10f400f95d7767f",
+      "bytes": 57901
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch.md",
+      "sha256": "112219e24960ebb33376fdfa363c0f2f5e11602e9156fb6c34ff14e5fc10a324",
+      "bytes": 49917
+    },
+    {
+      "path": "05 Источники/asset-registry.yml",
+      "sha256": "a87e6074da98157164b991bbbc3ba58213a5cc1420594a1b0f4ecb70ab667997",
+      "bytes": 1861298
+    },
+    {
+      "path": "05 Источники/Originals/consistency-training-2026-10-29/manifest.json",
+      "sha256": "cae33a8a438b2c38b40170d11114fb5112178bb537d8b6a52ed861f49e9982fd",
+      "bytes": 7691
+    },
+    {
+      "path": "05 Источники/Originals/consistency-training-2026-10-29/README.md",
+      "sha256": "c5f8575295b137d592c38f8f4ce147ece819f180373f3381f84c78ed603801d1",
+      "bytes": 401
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/consistency-training-2026-10-29/assets.json",
+      "sha256": "9cc10567efd0a1287d96b3fd7e4c572401354dc8c4ae830a71aab5232e519e84",
+      "bytes": 5634
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/consistency-training-2026-10-29/NOTICE.md",
+      "sha256": "27494697e70bd931bbdb5c2a19df39c1daf42d5a25ee430f6c9326848db4be72",
+      "bytes": 786
+    },
+    {
+      "path": "site/public/licenses/vat-tf-c5125d2-MIT.txt",
+      "sha256": "8563d1383cd57b6185c56e951bf08c716d0a8b957550f9594137cb15b8b2c9aa",
+      "bytes": 1070
+    },
+    {
+      "path": "site/public/licenses/uda-960684e-Apache-2.0.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358
+    },
+    {
+      "path": "publishing/tools/prepare_consistency_source_figures.py",
+      "sha256": "d80ee3ed1527bc96111af394d92861cd750727be025244877da6d0c530081969",
+      "bytes": 1761
+    },
+    {
+      "path": "publishing/tools/check_consistency_training_examples.py",
+      "sha256": "913245e1bb6ceb8d160ac3564105d7b40b73a5c5f89357f646b87a1f83a05b46",
+      "bytes": 9175
+    },
+    {
+      "path": "publishing/tools/check_semi_supervised_examples.py",
+      "sha256": "d8f33ed2792bcac49914e6876712c29f4b731fa950495f60d7f4aedc83a27e7a",
+      "bytes": 6351
+    },
+    {
+      "path": "publishing/tools/topic-consolidation-baseline.mjs",
+      "sha256": "611e301a384687a098591eae02904a8888f8d99d7341f6f838e5555ec9872a3f",
+      "bytes": 2703
+    },
+    {
+      "path": "publishing/tools/topic_consolidation_baseline.py",
+      "sha256": "60b99291a28dfe93ffceba936049a3afeb9bfbede1b68ed299be38bb7772e42a",
+      "bytes": 2812
+    },
+    {
+      "path": "publishing/tests/consistency-training.test.ts",
+      "sha256": "7ee27d8d1b9978e5044374c6e07de6796802f0e5c1b26a9621238a729d0bcc56",
+      "bytes": 4418
+    },
+    {
+      "path": "publishing/tests/semi-supervised.test.ts",
+      "sha256": "e20d06da60a8c153b504167d656728b062068f38e23d5958d160ed7697ce2292",
+      "bytes": 4406
+    },
+    {
+      "path": "publishing/tests/corpus-releases.test.ts",
+      "sha256": "d59cd941a5fd308bb06b6ff173a70a916a36d14d6797d04ed2728cd8c794a695",
+      "bytes": 3455
+    },
+    {
+      "path": "publishing/tests/asset-registry.test.ts",
+      "sha256": "7aef1f93630064da9b87dffe5df11ce762bfcfe459c6d3103b050ab46a707bc0",
+      "bytes": 570086
+    },
+    {
+      "path": "publishing/tests/site-output.test.ts",
+      "sha256": "9045ffa2a180dac78c5b5008c2acfcf7cca9520dd2b4dbc83e2d17747532d03a",
+      "bytes": 223183
+    },
+    {
+      "path": "docs/audit/2026-10-29-consistency-training-additions.json",
+      "sha256": "c4c999d0bac33d94dcef851897ea886213afa1b304acc6f5505e883b29f42793",
+      "bytes": 46174
+    },
+    {
+      "path": "docs/audit/2026-10-29-legacy-notes-review.json",
+      "sha256": "881c71f1fe0418bd932ff0bcb9a59d60f91d714b33224dc631ada4eddf0d0334",
+      "bytes": 113430
+    },
+    {
+      "path": "docs/audit/2026-10-29-release-completion-plan.md",
+      "sha256": "99ded216830e2572a598caffb52dc62077d9a75d1cfbf58525501101db57327c",
+      "bytes": 26605
+    },
+    {
+      "path": "05 Источники/Originals/consistency-training-2026-10-29/text-at-v4.html",
+      "sha256": "2d98860bef5ce989181d6c33f7e5cf0e100bc5721494dd07467e92faf8f1777d",
+      "bytes": 164829
+    },
+    {
+      "path": "05 Источники/Originals/consistency-training-2026-10-29/vat-v2.html",
+      "sha256": "5b9ba8ef3013d812f46b74e9870984f123fd3e7a21fcb9d44e74e623664c321a",
+      "bytes": 373387
+    },
+    {
+      "path": "05 Источники/Originals/consistency-training-2026-10-29/uda-v6.html",
+      "sha256": "983929c43ff7ea8d5c95c9693964bd4f5e686766b587f8318ab195dd40307d1c",
+      "bytes": 340947
+    },
+    {
+      "path": "05 Источники/Originals/consistency-training-2026-10-29/freelb-v2.html",
+      "sha256": "d984dacaa57d471b9171a7bc2d4a8be10bd3e77fdb67d68d64d445a3d012d4ca",
+      "bytes": 226748
+    },
+    {
+      "path": "05 Источники/Originals/consistency-training-2026-10-29/smart-v5.html",
+      "sha256": "f5a4f8760c3feb7676a3a95968cd6fa9530ec65fdf10b2ec3860746ec4608a5d",
+      "bytes": 298426
+    },
+    {
+      "path": "05 Источники/Originals/consistency-training-2026-10-29/vat.gif",
+      "sha256": "0285fec32fd671d0427ab2342cbe6810a6c4bd8befa85b914a78e302ed7daffb",
+      "bytes": 176301
+    },
+    {
+      "path": "05 Источники/Originals/consistency-training-2026-10-29/vat_tf-LICENSE.md",
+      "sha256": "8563d1383cd57b6185c56e951bf08c716d0a8b957550f9594137cb15b8b2c9aa",
+      "bytes": 1070
+    },
+    {
+      "path": "05 Источники/Originals/consistency-training-2026-10-29/vat_tf-vat.py",
+      "sha256": "2d7e42b5afcfa9a7efdf5b9f9328a4cb72dcff1359f71304d26e900674e5cd16",
+      "bytes": 2681
+    },
+    {
+      "path": "05 Источники/Originals/consistency-training-2026-10-29/uda-LICENSE",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358
+    },
+    {
+      "path": "05 Источники/Originals/consistency-training-2026-10-29/uda-text.py",
+      "sha256": "f34e4a9d36542bc73a6f5decb66d2f48a41d4b46efc88f25976b21151c089d83",
+      "bytes": 12296
+    },
+    {
+      "path": "05 Источники/Originals/consistency-training-2026-10-29/uda-README.md",
+      "sha256": "76c54c91ab30c7063d05a285e80483d2a39b991bfbfad433fe0bf627ad07c47f",
+      "bytes": 8015
+    },
+    {
+      "path": "05 Источники/Originals/consistency-training-2026-10-29/acl-copyright.html",
+      "sha256": "c0b0f339f5dc67c243944f2210eafb96447dae36710cdfdc4e2d9a62061894be",
+      "bytes": 9625
+    },
+    {
+      "path": "05 Источники/Originals/consistency-training-2026-10-29/huang-2022-lightweight.pdf",
+      "sha256": "7c803d203a04eaefc94bc3ed6d4cc9704a12741cdf6dff084e6f7f5909c36327",
+      "bytes": 939434
+    },
+    {
+      "path": "05 Источники/Originals/consistency-training-2026-10-29/smart-acl-2020.pdf",
+      "sha256": "ac5db36b575f8cba4d95e5187d1f65dfd8c8fed2967f2fe9b6777d2dc7a5c25b",
+      "bytes": 476924
+    },
+    {
+      "path": "05 Источники/Originals/consistency-training-2026-10-29/tf-adversarial_losses.py",
+      "sha256": "c8b63447b6ae97e288b27bb63f1ee2ffd38a0081013d24b3311df30ae6bb204e",
+      "bytes": 9185
+    },
+    {
+      "path": "05 Источники/Originals/consistency-training-2026-10-29/tf-layers.py",
+      "sha256": "c0fc7d21683332890d5f5d633e156f9cddb36ce2c60ce7208e59de09692e461e",
+      "bytes": 13373
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/consistency-training-2026-10-29/uda-fixmatch.png",
+      "sha256": "29b0d5927bde30edaef56c8837abcae5546378e2199c608e0546a61fdec5091e",
+      "bytes": 295739
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/consistency-training-2026-10-29/smart-boundaries.png",
+      "sha256": "e8a71d69e4c96ca209a4a898393180a814ed0570dbbc264b31a071ef0399b6b7",
+      "bytes": 116179
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/consistency-training-2026-10-29/vat.gif",
+      "sha256": "0285fec32fd671d0427ab2342cbe6810a6c4bd8befa85b914a78e302ed7daffb",
+      "bytes": 176301
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-consistency-training/pages-desktop-en-uda-original.png",
+      "sha256": "c4a6da65e2ee07444919c89c5a70aeb420698be6ae9f265b975ce0ea603a8386",
+      "bytes": 108928
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-consistency-training/pages-desktop-en-uda.png",
+      "sha256": "d30094911c2dbbe69762cb26fbe845a51190ade13c3d14a588657d861c7185ef",
+      "bytes": 148905
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-consistency-training/pages-desktop-smart-original.png",
+      "sha256": "1f03511a296c8027cafd49b78a30c79314f18138848ce8423f9e524dad54fb8e",
+      "bytes": 111674
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-consistency-training/pages-mobile-en-tsa.png",
+      "sha256": "f4f1e8d56ba641b93b7b0e95d6b6a0316c1538cee9c9ddf825e58b6502af50fb",
+      "bytes": 46954
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-consistency-training/pages-mobile-smart.png",
+      "sha256": "95c2c8a7cf14261e7c5779fea03b633488e1a15f33df40161d197d27f269d7f8",
+      "bytes": 48813
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-consistency-training/root-desktop-smart-original.png",
+      "sha256": "1f03511a296c8027cafd49b78a30c79314f18138848ce8423f9e524dad54fb8e",
+      "bytes": 111674
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-consistency-training/root-desktop-uda-original.png",
+      "sha256": "b01e9ed1d024cfed1da914a4be7becf348ccd2341d7282485e9507e7e6e12431",
+      "bytes": 109899
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-consistency-training/root-desktop-uda.png",
+      "sha256": "6e64272fb5378d87a75ba3bcd4ea776f964cf2ac252e431af6bb3f56ac5ab3a8",
+      "bytes": 151198
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-consistency-training/root-desktop-vat-original.png",
+      "sha256": "40f3f656d7f4fec34ae83ab8b0d21337ac929911095873e63cf89121f118fb6b",
+      "bytes": 52344
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-consistency-training/root-en-adversarial-context.png",
+      "sha256": "ebe5f7d368bd9b383f6d40b9c84a19b8fa94f38f7d141a1ad5987ac3d6b9d24f",
+      "bytes": 137267
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-consistency-training/root-mobile-smart-context.png",
+      "sha256": "dcfd36ecddcce82f6751d30cbfb8d7cadfc4c6b1c1e948c02a8202894922ebd5",
+      "bytes": 52457
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-consistency-training/root-mobile-smart-formulas.png",
+      "sha256": "e11e623d87d485145b7fa2e4a5823f31849bc720cf86374a1519ecd1185520d3",
+      "bytes": 43500
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-consistency-training/root-mobile-uda-left.png",
+      "sha256": "8e56db806385cd4451a9839f29f9ba7c9a9e6ceefee8f74e6be2889d100fe6dd",
+      "bytes": 34657
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-consistency-training/root-mobile-uda-right.png",
+      "sha256": "93fd6b122453d2102eee8a81a36b373fbb07c9eb4d5f5cf59d50a84488bf3014",
+      "bytes": 34860
+    }
+  ]
+}

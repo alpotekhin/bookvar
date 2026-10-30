@@ -9,9 +9,18 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol2/lab_07_fault_tolerance.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol2/lab_07_fault_tolerance.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL2 Lab — Fault Tolerance
 
@@ -19,9 +28,95 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 **Recommended Reading** - Complete before this lab:
 
-    - **Volume II, Chapter 7: Fault Tolerance and Reliability** - failure analysis
-      at scale, MTBF composition, Young-Daly checkpointing, recovery procedures,
-      serving redundancy, and graceful degradation.
+- **Volume II, Chapter 7: Fault Tolerance and Reliability** - failure analysis
+  at scale, MTBF composition, Young-Daly checkpointing, recovery procedures,
+  serving redundancy, and graceful degradation.
+
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+Select a prediction to unlock the instrument.
+
+---
+
+## Part A - Aggregate MTBF Falls as Fleet Size Grows
+
+---
+
+⟨value 1⟩: decide whether ⟨value 2⟩ ⟨value 3⟩ can finish the window without treating ⟨value 4⟩ as routine.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v2_07_profile.stakeholder}' `
+- value_2: ` f"{v2_07_lens['fleet_default']:,}" `
+- value_3: ` f"{v2_07_lens['unit_label']}" `
+- value_4: ` f"{v2_07_lens['failure_mode']}" `
+
+---
+
+## Part B - Checkpoint Interval Has an Optimum
+
+---
+
+The ⟨value 1⟩ plan must choose how often to save recoverable state. The goal is not maximum checkpointing or minimum checkpointing; it is minimum wasted capacity.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v2_07_profile.label}' `
+
+---
+
+## Part C - Lost Work and Recovery Policy Trade Amounts
+
+---
+
+A ⟨value 1⟩ incident has arrived. Choose the recovery policy that meets a ⟨value 2⟩-minute objective without exceeding storage or write-bandwidth budgets.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_07_lens['failure_mode']}" `
+- value_2: ` f"{v2_07_lens['recovery_objective_min']}" `
+
+---
+
+Selected policy: **⟨value 1⟩**. Recovery = **⟨value 2⟩ min** against **⟨value 3⟩ min**; storage = **⟨value 4⟩ GB** against **⟨value 5⟩ GB**; required write bandwidth = **⟨value 6⟩ GB/s**. Uncovered: ⟨value 7⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_selected['label']}" `
+- value_2: ` f"{v2_07_fmt(_selected['recovery_min'])}" `
+- value_3: ` f"{v2_07_lens['recovery_objective_min']}" `
+- value_4: ` f"{v2_07_fmt(_selected['storage_gb'])}" `
+- value_5: ` f"{v2_07_fmt(v2_07_lens['storage_budget_gb'])}" `
+- value_6: ` f"{v2_07_fmt(_selected['required_write_gbs'], 3)}" `
+- value_7: ` f"{_selected['uncovered']}" `
+
+---
+
+Validation drill: **⟨value 1⟩**.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_selected['validation']}" `
+
+---
+
+## Part D - Recovery Plan Must Pass Guardrails
+
+---
+
+The ⟨value 1⟩ design review asks for one plan that meets recovery, cost, latency, quality, and ⟨value 2⟩ guardrails.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v2_07_profile.label}' `
+- value_2: ` f'{v2_07_variant.guardrail_metric}' `
+
+---
+
+## Synthesis - Reliability Memo
+
+</details>
 
 ## Complete original Marimo source
 

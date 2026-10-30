@@ -1,0 +1,3089 @@
+{
+  "schema": 1,
+  "date": "2026-10-29",
+  "scope": "Full content parity for nine existing English Transformer and model-family chapters. Canonical source texts are not changed.",
+  "verification_scope": "Translation and preservation of accepted canonical explanations; source quotations retain their language. CPU checks are recorded separately from rendering and accelerator performance.",
+  "entries": [
+    {
+      "path": "en/00 Textbook/05 Attention and Transformer/03 Masking, multi-head attention, and tensor shapes.md",
+      "canonical": "00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md",
+      "route": "textbook/transformer/masking-heads-shapes",
+      "before_sha256": "9e9c18a705a9c4614551034c22f4654a68408b76d20fd0471602cfb885df62ec",
+      "canonical_sha256": "9306be89c604c905489000ffcebffb32e16161f66e07540005d0f394097c0fd5",
+      "full_en_before_read": true,
+      "full_canonical_read": true,
+      "full_en_after_read": true,
+      "complete": true,
+      "code_groups": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ],
+        [
+          5
+        ]
+      ],
+      "not_executed": [],
+      "render_status": "pending-parent",
+      "figures": [
+        "00 Учебник/Assets/Figures/curated/source-audit-15-24/causal-mask-detailed.png",
+        "00 Учебник/Assets/Figures/curated/source-audit-15-24/qkv-for-heads.png",
+        "00 Учебник/Assets/Figures/curated/source-audit-15-24/transformer_attention_heads_qkv.png",
+        "00 Учебник/Assets/Figures/curated/source-audit-15-24/transformer_attention_heads_z.png",
+        "00 Учебник/Assets/Figures/curated/source-audit-15-24/transformer_attention_heads_weight_matrix_o.png"
+      ],
+      "display_math_count": 9,
+      "code_block_count": 6,
+      "read_ranges": {
+        "canonical": [
+          [
+            1,
+            783
+          ]
+        ],
+        "english_before": [
+          [
+            1,
+            288
+          ]
+        ],
+        "english_after": [
+          [
+            1,
+            780
+          ]
+        ]
+      },
+      "after_sha256": "64bbbd9085a4c30083a2f77df49316bc13087083d43f720ec7937ae781154e9d",
+      "status": "current",
+      "before_lines": 287,
+      "after_lines": 779,
+      "canonical_lines": 782,
+      "before_words": 1811,
+      "after_words": 4449,
+      "canonical_source_sha256": "9306be89c604c905489000ffcebffb32e16161f66e07540005d0f394097c0fd5",
+      "figure_inventory": [
+        {
+          "path": "00 Учебник/Assets/Figures/curated/source-audit-15-24/causal-mask-detailed.png",
+          "sha256": "8774ac0e35806218e665d433fcf82a5c0dcf69ade2c52ed6f656e2c57d42600d"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/source-audit-15-24/qkv-for-heads.png",
+          "sha256": "aa8c7d8d37b41a40eb4463ad904dcead83470c901fc2bfdc7eda64d2f38776f8"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/source-audit-15-24/transformer_attention_heads_qkv.png",
+          "sha256": "d360b9199193a6db44e8608c80f0987a5bc824a2d1061d425d22b49f71981aca"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/source-audit-15-24/transformer_attention_heads_z.png",
+          "sha256": "d198af28a747da599f9f79c202a98cebbe4b69304cdcc7ef2fe33bca18e7f36c"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/source-audit-15-24/transformer_attention_heads_weight_matrix_o.png",
+          "sha256": "606c0e2a4d2c4dba858496226a1040dcd374122d2a2a3568390a06915edfaba7"
+        }
+      ],
+      "before_figure_count": 5,
+      "figure_count": 5,
+      "python_blocks": 6,
+      "code_inventory": [
+        {
+          "language": "python",
+          "sha256": "fbb52b2ca8967eaa8819ad7345f5dd053ab22c52c35f37bb43794a2789f2c17a",
+          "index": 0,
+          "canonical_sha256": "e2e38810c6c39a7fc1553d4d4c4eb211481849cd9de4496ecfc42842526d77c9",
+          "byte_exact": false,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "python",
+          "sha256": "599239f45d3ae6de541b4046eb4801f022a5750ce04353cf86c16f0fdab32334",
+          "index": 1,
+          "canonical_sha256": "599239f45d3ae6de541b4046eb4801f022a5750ce04353cf86c16f0fdab32334",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "python",
+          "sha256": "3d2f2bf154ea2535b7eaf09ccebc6341c1d7719cfe74a53990eb96e8678d5c77",
+          "index": 2,
+          "canonical_sha256": "3d2f2bf154ea2535b7eaf09ccebc6341c1d7719cfe74a53990eb96e8678d5c77",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "python",
+          "sha256": "50469c04e67295d9bdd38a40db7f641963d2e793e6d7f6da8ecc85814b2f56b2",
+          "index": 3,
+          "canonical_sha256": "50469c04e67295d9bdd38a40db7f641963d2e793e6d7f6da8ecc85814b2f56b2",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "python",
+          "sha256": "5821e5740f131e2242f605b8abc6ffe8b9b52b836c51759f3cab719746e8b591",
+          "index": 4,
+          "canonical_sha256": "5821e5740f131e2242f605b8abc6ffe8b9b52b836c51759f3cab719746e8b591",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "python",
+          "sha256": "3a20d0b70498e10ae3661a228dd5596d7f788adb2d200c9d525b6fd49930d801",
+          "index": 5,
+          "canonical_sha256": "a874fad204265d9a19389e05bb37fc368501846c21e7aaa9048126d5ffc00c18",
+          "byte_exact": false,
+          "execution": "cpu-passed"
+        }
+      ],
+      "canonical_python_ast_equal": true,
+      "execution_evidence": {
+        "command": "LC_ALL=C LANG=C uv run --offline --with torch==2.14.1 --with numpy==2.3.5 --with einops==0.8.1 --with transformers==4.57.6 python publishing/tools/en-transformer-models-check.py",
+        "returncode": 0,
+        "executed_standalone_python_blocks": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "artifact_sha256": "64bbbd9085a4c30083a2f77df49316bc13087083d43f720ec7937ae781154e9d"
+      },
+      "all_canonical_source_urls_retained": true,
+      "all_canonical_explicit_anchors_retained": true,
+      "canonical_explicit_anchors": [],
+      "source_native_quotations": [],
+      "sections": [
+        {
+          "canonical": "# Маски, несколько голов и формы тензоров",
+          "english": "# Masks, multiple heads, and tensor shapes",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Маска меняет множество доступных ключей",
+          "english": "## A mask changes the set of accessible keys",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Причинная маска: не подсматривать ответ",
+          "english": "### Causal masking and shifted targets",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Padding mask: не читать заполнители",
+          "english": "### Padding masks: exclude filler keys",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Зачем одной позиции несколько голов",
+          "english": "## Why one position needs multiple heads",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Split и merge: одна операция, две записи",
+          "english": "## Split and merge: one operation, two notations",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Именованные оси: rearrange, einsum и reduce",
+          "english": "### Named axes: rearrange, einsum, and reduce",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Две головы на числовом примере",
+          "english": "### A numerical example with two heads",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Полная трассировка форм",
+          "english": "## Complete shape trace",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Broadcasting масок",
+          "english": "## Broadcasting masks",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Пустые строки и направление булевой маски",
+          "english": "### Empty rows and Boolean-mask polarity",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Прямоугольная маска и позиции в KV-cache",
+          "english": "### Rectangular masks and KV-cache positions",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Ошибки, которые выглядят правдоподобно",
+          "english": "## Plausible-looking implementation errors",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Минимальная проверка реализации",
+          "english": "## A complete implementation check",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Источники и визуальные продолжения",
+          "english": "## Sources and visual continuations",
+          "status": "full-explanation-reconciled"
+        }
+      ],
+      "substantive_topics_reconciled": [
+        "Mask before softmax and its normalization effect",
+        "Causal masking versus shifted targets",
+        "Padding keys, empty query rows, Boolean API polarity",
+        "Multi-head projections, split/merge order, output projection",
+        "Tensor axes, broadcasting, einsum and einops",
+        "Rectangular cached attention with absolute positions",
+        "Complete implementation checks, gradient and cache behavior"
+      ],
+      "outstanding_substantive_omissions": [],
+      "full_read_evidence": {
+        "before_en": [
+          1,
+          287
+        ],
+        "canonical": [
+          1,
+          782
+        ],
+        "after_en": [
+          1,
+          779
+        ],
+        "method": "Sequential full-body reading and passage-level reconciliation; automated inventories are regression guards, not semantic evidence."
+      },
+      "executions": [
+        {
+          "block": 0,
+          "stdout": "after softmax: [0.6652409557748218, 0.2447284710547976, 0.0] sum: 0.9099694268296195\nbefore softmax: [0.7310585786300049, 0.26894142136999516, 0.0] sum: 1.0\noutputs: 11.54697897884417 12.689414213699951\n",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 1,
+          "stdout": "head 0: [[0, 1], [4, 5], [8, 9]]\nwrong head 0: [[0, 1], [2, 3], [4, 5]]\n",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 2,
+          "stdout": "head 0: [[0.0, 1.0], [4.0, 5.0], [8.0, 9.0]]\nscores of first query: [9.0, 5.0, 1.0]\nsquared row norms: [1.0, 41.0, 145.0]\n",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 3,
+          "stdout": "absolute-position mask: 2.5\nupper-left causal mask: 1.0\n",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 4,
+          "stdout": "two-query absolute mask: [[1, 1, 1, 1, 0], [1, 1, 1, 1, 1]]\ntwo-query outputs: [2.5, 3.0]\n",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 5,
+          "stdout": "two head rows: [[0.75, 0.25], [0.25, 0.75]]\nprojected output: [32.0, -6.0]\nleft-padding row sums: [0.0, 0.0, 1.0, 1.0]\n",
+          "status": "passed",
+          "returncode": 0
+        }
+      ],
+      "figure_changes": {
+        "added": [],
+        "replaced_or_removed": [],
+        "explanation": "Existing figures retained; added figures match canonical chapter."
+      }
+    },
+    {
+      "path": "en/00 Textbook/05 Attention and Transformer/04 Positional information.md",
+      "canonical": "00 Учебник/05 Attention и Transformer/04 Позиционная информация.md",
+      "route": "textbook/transformer/positional-information",
+      "before_sha256": "b44b50da949d9f488cab9fe7304a37636f6b6858474fee3a69d10034f71b0962",
+      "canonical_sha256": "897a19c428e9ef20a6c651e981eb32d905d6f72a616907c2ea2e20fa1842451a",
+      "full_en_before_read": true,
+      "full_canonical_read": true,
+      "full_en_after_read": true,
+      "complete": true,
+      "code_groups": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ],
+        [
+          5
+        ]
+      ],
+      "not_executed": [],
+      "render_status": "pending-parent",
+      "figures": [
+        "00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_positional_encoding_vectors.png",
+        "00 Учебник/Assets/Figures/curated/source-audit-25-31/d2l-sinusoidal-curves.svg",
+        "00 Учебник/Assets/Figures/curated/source-audit-25-31/d2l-positional-heatmap.svg",
+        "00 Учебник/Assets/Figures/curated/positions-2026-10-21/shaw-relative-figure1.png",
+        "00 Учебник/Assets/Figures/curated/positions-2026-10-21/roformer-figure1.png",
+        "00 Учебник/Assets/Figures/curated/positions-2026-10-21/alibi-original.jpeg"
+      ],
+      "display_math_count": 19,
+      "code_block_count": 6,
+      "read_ranges": {
+        "canonical": [
+          [
+            1,
+            1048
+          ]
+        ],
+        "english_before": [
+          [
+            1,
+            398
+          ]
+        ],
+        "english_after": [
+          [
+            1,
+            1002
+          ]
+        ]
+      },
+      "after_sha256": "8e2fa5500c85ba4d850b91a22bb404b7dffcbed02c595bf87c8e875a36917090",
+      "status": "current",
+      "before_lines": 397,
+      "after_lines": 1001,
+      "canonical_lines": 1047,
+      "before_words": 2411,
+      "after_words": 5692,
+      "canonical_source_sha256": "897a19c428e9ef20a6c651e981eb32d905d6f72a616907c2ea2e20fa1842451a",
+      "figure_inventory": [
+        {
+          "path": "00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_positional_encoding_vectors.png",
+          "sha256": "1447f2a6561e5aef3ca9ab3792490d744b81c34c873d19b1396ed770ca19b669"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/source-audit-25-31/d2l-sinusoidal-curves.svg",
+          "sha256": "f4d1aeebd58a4444284fd4d8e87a95e8dcb53efe3ad3d7d7bb41cd5fbb08b40a"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/source-audit-25-31/d2l-positional-heatmap.svg",
+          "sha256": "c10d8e03aab02bbe6f24f9851e64674231c2211f34df154705e3f882031ea26d"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/positions-2026-10-21/shaw-relative-figure1.png",
+          "sha256": "5c73df1712d9b4c44e017c8de539ba0726720c3692c2c70047dd43e69e3dd16c"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/positions-2026-10-21/roformer-figure1.png",
+          "sha256": "b1a65eb5e30f1510dce571cedb548b98c1db5c5e57ca04112b856f931a0d2591"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/positions-2026-10-21/alibi-original.jpeg",
+          "sha256": "ade378177ac2b32c4a7319c3bee16ee61da4ec9aaf7d1f109bd0933d900b6cc7"
+        }
+      ],
+      "before_figure_count": 4,
+      "figure_count": 6,
+      "python_blocks": 6,
+      "code_inventory": [
+        {
+          "language": "python",
+          "sha256": "7e4a92c5a65150ee405c02661d5dbfba84d417aea25fde36d5903ef539d9865e",
+          "index": 0,
+          "canonical_sha256": "7e4a92c5a65150ee405c02661d5dbfba84d417aea25fde36d5903ef539d9865e",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "python",
+          "sha256": "1157a44fa6211fc9b67ed6104382aee8ef3ebf4e5c598bc3eee06bddf8ef0d27",
+          "index": 1,
+          "canonical_sha256": "1157a44fa6211fc9b67ed6104382aee8ef3ebf4e5c598bc3eee06bddf8ef0d27",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "python",
+          "sha256": "53325d65d69823c2be63caa97ced61ffeea34b492577dbed30e46b360e79965d",
+          "index": 2,
+          "canonical_sha256": "53325d65d69823c2be63caa97ced61ffeea34b492577dbed30e46b360e79965d",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "python",
+          "sha256": "08c5bc0a72ddb13045fea9db64578b9a75ddcd6a5e01571743fa83841a57edb0",
+          "index": 3,
+          "canonical_sha256": "08c5bc0a72ddb13045fea9db64578b9a75ddcd6a5e01571743fa83841a57edb0",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "python",
+          "sha256": "30d4eb1809b0b930810d4125774a2490d347b8a66287bea40705dfa21d540dcf",
+          "index": 4,
+          "canonical_sha256": "30d4eb1809b0b930810d4125774a2490d347b8a66287bea40705dfa21d540dcf",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "python",
+          "sha256": "036ffe793c115fc74bbe0e47d5d73ca06c3e4f362311c151669eb621b3ff14b6",
+          "index": 5,
+          "canonical_sha256": "036ffe793c115fc74bbe0e47d5d73ca06c3e4f362311c151669eb621b3ff14b6",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        }
+      ],
+      "canonical_python_ast_equal": true,
+      "execution_evidence": {
+        "command": "LC_ALL=C LANG=C uv run --offline --with torch==2.14.1 --with numpy==2.3.5 --with einops==0.8.1 --with transformers==4.57.6 python publishing/tools/en-transformer-models-check.py",
+        "returncode": 0,
+        "executed_standalone_python_blocks": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "artifact_sha256": "8e2fa5500c85ba4d850b91a22bb404b7dffcbed02c595bf87c8e875a36917090"
+      },
+      "all_canonical_source_urls_retained": true,
+      "all_canonical_explicit_anchors_retained": true,
+      "canonical_explicit_anchors": [],
+      "source_native_quotations": [],
+      "sections": [
+        {
+          "canonical": "# Позиционная информация в Transformer",
+          "english": "# Positional information in Transformers",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Отправная точка: где position входит в attention",
+          "english": "## Starting point: where position enters attention",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Абсолютные позиции: адрес каждой строки",
+          "english": "## Absolute positions: an address for each row",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Обучаемая таблица",
+          "english": "### A learned table",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Синусоидальное кодирование",
+          "english": "### Sinusoidal encoding",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Относительные представления Shaw: расстояние становится частью связи",
+          "english": "## Shaw relative representations: distance becomes part of an edge",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## T5 relative position bias: один скаляр на bucket и голову",
+          "english": "## T5 relative position bias: one scalar per bucket and head",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## RoPE: позиция как поворот query и key",
+          "english": "## RoPE: position as a rotation of query and key",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Маленький численный пример RoPE",
+          "english": "### A numerical RoPE example",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### RoPE и KV-cache: позиция сохраняется вместе с ключом",
+          "english": "### RoPE and KV-cache: a key retains its position",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## ALiBi: линейный штраф за дальность",
+          "english": "## ALiBi: a linear distance penalty",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Один пример, шесть разных вмешательств",
+          "english": "## One example, six interventions",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Сравнение методов",
+          "english": "## Comparing the methods",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Экстраполяция: что именно следует проверять",
+          "english": "## Extrapolation: what needs to be evaluated",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Практические ошибки, которые не видны по shapes",
+          "english": "## Practical errors that shapes do not reveal",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Краткие итоги",
+          "english": "## Where the operations sit in a complete block",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Источники и дальнейшее чтение",
+          "english": "## Sources and further reading",
+          "status": "full-explanation-reconciled"
+        }
+      ],
+      "substantive_topics_reconciled": [
+        "Learned and sinusoidal absolute positions",
+        "Shaw key/value relative representations",
+        "T5 relative bias buckets and bidirectional/causal differences",
+        "RoPE derivation and numerical rotation example",
+        "RoPE KV positions and double-rotation failure",
+        "ALiBi slopes and equivalent row-constant removal",
+        "Method comparison, extrapolation limits and shape-invisible errors"
+      ],
+      "outstanding_substantive_omissions": [],
+      "full_read_evidence": {
+        "before_en": [
+          1,
+          397
+        ],
+        "canonical": [
+          1,
+          1047
+        ],
+        "after_en": [
+          1,
+          1001
+        ],
+        "method": "Sequential full-body reading and passage-level reconciliation; automated inventories are regression guards, not semantic evidence."
+      },
+      "executions": [
+        {
+          "block": 0,
+          "stdout": "positioned inputs: [[2.0, 1.0], [1.0, 1.0]]\nscaled scores: [[3.5355339059327373, 2.1213203435596424], [2.1213203435596424, 1.414213562373095]]\nfirst output: [1.804429682506957, 1.0]\n",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 1,
+          "stdout": "sinusoidal rows: [[0.0, 1.0, 0.0, 1.0], [0.8414709848078965, 0.5403023058681398, 0.009999833334166664, 0.9999500004166653], [0.9092974268256817, -0.4161468365471424, 0.01999866669333308, 0.9998000066665778]]\none-position PE dot product: 1.540252306284805\n",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 2,
+          "stdout": "clipped offsets: [-1, 0, 1]\nShaw weights: [0.2447284710547976, 0.6652409557748218, 0.09003057317038045]\nShaw messages: [11.0, 20.0, 28.0] output: 18.517688345869864\n",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 3,
+          "stdout": "causal buckets: [0, 1, 7, 8, 15, 16, 21, 26, 31, 31]\nencoder past: [0, 1, 7, 8, 9, 10, 12, 14, 15, 15]\nencoder future: [0, 17, 23, 24, 25, 26, 28, 30, 31, 31]\nT5 two-head weights: [[0.5761168847658291, 0.21194155761708547, 0.21194155761708547], [0.15536240349696362, 0.4223187982515182, 0.4223187982515182]]\nT5 two-head outputs: [31.194155761708547, 52.23187982515182]\n",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 4,
+          "stdout": "full-versus-cache error: 0.0\nreset-position error: 0.6366945724144637\nincremental RoPE outputs: [1.0, 1.5805557848615206, 2.3027101501815075, 3.06122252101854]\ndouble-rotated cache output: 2.5\n",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 5,
+          "stdout": "eight ALiBi slopes: [0.5, 0.25, 0.125, 0.0625, 0.03125, 0.015625, 0.0078125, 0.00390625]\nALiBi weights: [0.4442139791616654, 0.3459541948223697, 0.2098318260159648] output: 32.344406289660526\nrelative-bias and column-bias attention agree\n",
+          "status": "passed",
+          "returncode": 0
+        }
+      ],
+      "figure_changes": {
+        "added": [
+          "00 Учебник/Assets/Figures/curated/positions-2026-10-21/shaw-relative-figure1.png",
+          "00 Учебник/Assets/Figures/curated/positions-2026-10-21/roformer-figure1.png",
+          "00 Учебник/Assets/Figures/curated/positions-2026-10-21/alibi-original.jpeg"
+        ],
+        "replaced_or_removed": [
+          "00 Учебник/Assets/Figures/curated/source-first-32-34/roformer-rope-figure1.png"
+        ],
+        "explanation": "The former RoFormer crop is replaced by the canonical RoFormer figure; Shaw and ALiBi figures are added."
+      }
+    },
+    {
+      "path": "en/00 Textbook/05 Attention and Transformer/05 The complete Transformer.md",
+      "canonical": "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md",
+      "route": "textbook/transformer/full-transformer",
+      "before_sha256": "7c95420ddda31bc7134ec3994a58a96f974fe8f5925cd61b5bb761e1ab9a1723",
+      "canonical_sha256": "8bda8af63d82960da7d5849e132be647542b90d4a9a9daca05ff5a0f2e66d356",
+      "full_en_before_read": true,
+      "full_canonical_read": true,
+      "full_en_after_read": true,
+      "complete": true,
+      "code_groups": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          4
+        ]
+      ],
+      "not_executed": [],
+      "render_status": "pending-parent",
+      "figures": [
+        "00 Учебник/Assets/Figures/curated/attention-is-all-you-need/Transformer_encoder.png",
+        "00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_resideual_layer_norm_2.png",
+        "00 Учебник/Assets/Figures/curated/attention-is-all-you-need/The_transformer_encoder_decoder_stack.png",
+        "00 Учебник/Assets/Figures/curated/full-transformer-2026-10-21/transformer_resideual_layer_norm_3.png",
+        "00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_decoder_output_softmax.png",
+        "00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_decoding_2.gif",
+        "00 Учебник/Assets/Figures/curated/gpt-30/gpt-2-transformer-xl-bert-3.png"
+      ],
+      "display_math_count": 12,
+      "code_block_count": 7,
+      "read_ranges": {
+        "before_en": [
+          [
+            1,
+            210
+          ],
+          [
+            211,
+            397
+          ]
+        ],
+        "canonical": [
+          [
+            1,
+            280
+          ],
+          [
+            281,
+            560
+          ],
+          [
+            561,
+            840
+          ],
+          [
+            841,
+            1095
+          ]
+        ],
+        "after_en": [
+          [
+            1,
+            1092
+          ]
+        ]
+      },
+      "after_sha256": "64ee4c1d8984515c3baca3f9ccfd2086cc3a9a53364ebc07204eb23a87e16106",
+      "status": "current",
+      "before_lines": 396,
+      "after_lines": 1091,
+      "canonical_lines": 1094,
+      "before_words": 2087,
+      "after_words": 6152,
+      "canonical_source_sha256": "8bda8af63d82960da7d5849e132be647542b90d4a9a9daca05ff5a0f2e66d356",
+      "figure_inventory": [
+        {
+          "path": "00 Учебник/Assets/Figures/curated/attention-is-all-you-need/Transformer_encoder.png",
+          "sha256": "c6d3360f8c0a4701b73348186ef0ac01e635a297a99cec1c59451b4f7cdce691"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_resideual_layer_norm_2.png",
+          "sha256": "3ae6698b615563cec67ebe3699f113ff80223fd75909f944fcbab3fe834621d6"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/attention-is-all-you-need/The_transformer_encoder_decoder_stack.png",
+          "sha256": "bdc0fd6444dd03385e53f0789b370c3ffab9045d221949a180d5a0a317f44708"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/full-transformer-2026-10-21/transformer_resideual_layer_norm_3.png",
+          "sha256": "bead3dcd79bbdb7db4c5eaf1c4e297d52db87b8d65e508d6322768291bd9ddbf"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_decoder_output_softmax.png",
+          "sha256": "ccfb7799c490f36f4046fd8b9c6ede89e4729d0071770a37780028606f9adabd"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_decoding_2.gif",
+          "sha256": "c89d9449ead25a6ba0820d5aa5553b8f73a74d224c0e3b5575cd505777e2d6c2"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/gpt-30/gpt-2-transformer-xl-bert-3.png",
+          "sha256": "7128f23d2a59a507b29961b493b90b8437dcc494143574ae119fef57cc597fdf"
+        }
+      ],
+      "before_figure_count": 3,
+      "figure_count": 7,
+      "python_blocks": 5,
+      "code_inventory": [
+        {
+          "language": "python",
+          "sha256": "03eec8e0995e40db7473ecec6aa453c7bee3f67450f5878205c85a5ab24e3565",
+          "index": 0,
+          "canonical_sha256": "03eec8e0995e40db7473ecec6aa453c7bee3f67450f5878205c85a5ab24e3565",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "python",
+          "sha256": "6c071b9ac2967e96c888a23aab0c648163605fd1fdd16a7e3d28c3510167745a",
+          "index": 1,
+          "canonical_sha256": "6c071b9ac2967e96c888a23aab0c648163605fd1fdd16a7e3d28c3510167745a",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "text",
+          "sha256": "35cbf5386b4db21d49965a8ae5f2476baf90d2701c5fb333d987a8b11383c636",
+          "index": 2,
+          "canonical_sha256": "bb721337c183a0e956b3ad78a83497446265b413c61bf63b427877f7ee96a522",
+          "byte_exact": false,
+          "execution": "literal-text-not-executable"
+        },
+        {
+          "language": "python",
+          "sha256": "23923c05f84cbcfd07f94b802b929b38cbcd8a62a7de77dbfa5f0e6564352e16",
+          "index": 3,
+          "canonical_sha256": "23923c05f84cbcfd07f94b802b929b38cbcd8a62a7de77dbfa5f0e6564352e16",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "python",
+          "sha256": "42d968af46edc5718cfbf98651a3d80fe0ff71f1344c14e276fe748fa91e6b94",
+          "index": 4,
+          "canonical_sha256": "42d968af46edc5718cfbf98651a3d80fe0ff71f1344c14e276fe748fa91e6b94",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "python",
+          "sha256": "60d61c8cf7c70b8682c976b23e34a62a090994368082db88e8cf9aae384bef65",
+          "index": 5,
+          "canonical_sha256": "60d61c8cf7c70b8682c976b23e34a62a090994368082db88e8cf9aae384bef65",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "text",
+          "sha256": "3601a71fe2a7f8c79de5e0075996d92e3ca216d0cf83b643904f2f647fc50024",
+          "index": 6,
+          "canonical_sha256": "3601a71fe2a7f8c79de5e0075996d92e3ca216d0cf83b643904f2f647fc50024",
+          "byte_exact": true,
+          "execution": "literal-text-not-executable"
+        }
+      ],
+      "canonical_python_ast_equal": true,
+      "execution_evidence": {
+        "command": "LC_ALL=C LANG=C uv run --offline --with torch==2.14.1 --with numpy==2.3.5 --with einops==0.8.1 --with transformers==4.57.6 python publishing/tools/en-transformer-models-check.py",
+        "returncode": 0,
+        "executed_standalone_python_blocks": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "artifact_sha256": "64ee4c1d8984515c3baca3f9ccfd2086cc3a9a53364ebc07204eb23a87e16106"
+      },
+      "all_canonical_source_urls_retained": true,
+      "all_canonical_explicit_anchors_retained": true,
+      "canonical_explicit_anchors": [],
+      "source_native_quotations": [
+        {
+          "text": "> A Transformer block contains two ‘sub-layers’, one for the multihead self attention,\n> and another for the SwiGLU feed-forward network. In each sub-layer, we first\n> perform RMSNorm, then the main operation (MHA/FF), finally adding in the residual connection.",
+          "preserved_verbatim": true
+        }
+      ],
+      "sections": [
+        {
+          "canonical": "# Собираем Transformer: от блока к BERT, GPT и LLaMA",
+          "english": "# Building the Transformer: from the original block to BERT, GPT, and LLaMA",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## 1. Главная декомпозиция",
+          "english": "## 1. The central decomposition",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## 2. Остаточный поток",
+          "english": "## 2. The residual stream",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## 3. Feed-Forward Network",
+          "english": "## 3. Feed-forward network",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## 4. Информация о позиции",
+          "english": "## 4. Positional information",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## 5. Оригинальный encoder block",
+          "english": "## 5. The original encoder block",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## 6. Оригинальный decoder block",
+          "english": "## 6. The original decoder block",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## 7. Обучение и генерация",
+          "english": "## 7. Training and generation",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### От состояния декодера к распределению",
+          "english": "### From a decoder state to a distribution",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Сдвиг целевой последовательности и маски",
+          "english": "### Shifting the target sequence and applying masks",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Полный проход и один шаг обучения",
+          "english": "### A complete forward pass and one training step",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Авторегрессионный вывод",
+          "english": "### Autoregressive inference",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## 8. Три архитектурные ветви",
+          "english": "## 8. Three architectural branches",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Encoder-only: BERT",
+          "english": "### Encoder-only: BERT",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Decoder-only: GPT",
+          "english": "### Decoder-only: GPT",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Modern decoder-only: LLaMA",
+          "english": "### Modern decoder-only: LLaMA",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## 9. Архитектурный diff",
+          "english": "## 9. Architectural diff",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## 10. Архитектурное решение и эмпирический рецепт — не одно и то же",
+          "english": "## 10. An architectural choice is not an empirical recipe",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## 11. Почему Transformer вытеснил рекуррентную основу",
+          "english": "## 11. Why the Transformer displaced the recurrent backbone",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## 12. Минимальный современный causal block",
+          "english": "## 12. A minimal modern causal block",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## 13. Как читать реальный код",
+          "english": "## 13. How to read real code",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## 14. Проверка форм тензоров",
+          "english": "## 14. Tensor-shape check",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Краткие итоги",
+          "english": "## Summary",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Источники и интерактивы",
+          "english": "## Sources and interactive explanations",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Первичные",
+          "english": "### Primary sources",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Код и объяснения",
+          "english": "### Code and explanations",
+          "status": "full-explanation-reconciled"
+        }
+      ],
+      "substantive_topics_reconciled": [
+        "Residual path, FFN, positional input and encoder block",
+        "Decoder causal/cross-attention and tensor trace",
+        "Teacher forcing, masks, vocabulary probabilities and smoothing",
+        "Complete small translator and one training step",
+        "BERT/GPT/LLaMA structural differences",
+        "Modern causal model with RMSNorm, RoPE and SwiGLU",
+        "Architecture versus empirical recipe and scaling limitations"
+      ],
+      "outstanding_substantive_omissions": [],
+      "full_read_evidence": {
+        "before_en": [
+          1,
+          396
+        ],
+        "canonical": [
+          1,
+          1094
+        ],
+        "after_en": [
+          1,
+          1091
+        ],
+        "method": "Sequential full-body reading and passage-level reconciliation; automated inventories are regression guards, not semantic evidence."
+      },
+      "executions": [
+        {
+          "block": 0,
+          "stdout": "tensor([[ 1., -2., -2.],\n        [-1.,  4.,  2.]]) tensor([[ 1.,  2.],\n        [22., 28.]]) tensor([[3., 0.],\n        [0., 0.]])\n",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 1,
+          "stdout": "tensor([[0.6667, 0.3333, 0.0000],\n        [0.2500, 0.7500, 0.0000]], dtype=torch.float64) tensor([[1.3333, 1.0000],\n        [0.5000, 2.2500]], dtype=torch.float64)\n",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 2,
+          "stdout": "tensor([0.2595, 0.7054, 0.0351], dtype=torch.float64) 0.3490122167681865 0.5490122167681866\nKL 0.1546145253207438 gradient tensor([ 0.2595, -0.2946,  0.0351], dtype=torch.float64)\n",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 3,
+          "stdout": "per-target loss: [9.786661926179915, 4.6317245489217065, 10.881613312063578, 12.110339920979285, 0.0]\ntarget probabilities: [[5.619617149893091e-05, 0.009737951040379715, 1.8800759085342424e-05, 5.50232448717143e-06, 0.006973468644400185]]\nshared PAD row gradient norm: 0.01103369267943304\nbefore/after 9.352584927036121 8.497538101285013\ncross-attention (1, 2, 5, 4)\n",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 4,
+          "stdout": "logits (1, 4, 10) loss 2.727783915754131\n",
+          "status": "passed",
+          "returncode": 0
+        }
+      ],
+      "figure_changes": {
+        "added": [
+          "00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_resideual_layer_norm_2.png",
+          "00 Учебник/Assets/Figures/curated/full-transformer-2026-10-21/transformer_resideual_layer_norm_3.png",
+          "00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_decoder_output_softmax.png",
+          "00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_decoding_2.gif"
+        ],
+        "replaced_or_removed": [],
+        "explanation": "Existing figures retained; added figures match canonical chapter."
+      }
+    },
+    {
+      "path": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/01 Three architectural patterns.md",
+      "canonical": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md",
+      "route": "textbook/transformer/encoder-decoder-patterns",
+      "before_sha256": "967da02f188cf49752845634e168f1a0cf3664ac6f6d2093c6331b6737a81adf",
+      "canonical_sha256": "a99819704bcdd1ff795c39a2240b8c32331fded5b1372c302f69e381d123d6e8",
+      "full_en_before_read": true,
+      "full_canonical_read": true,
+      "full_en_after_read": true,
+      "complete": true,
+      "code_groups": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "not_executed": [],
+      "render_status": "pending-parent",
+      "figures": [
+        "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure3.png",
+        "00 Учебник/Assets/Figures/curated/bert/BERT-language-modeling-masked-lm.png",
+        "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/bert-figure4.png",
+        "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure4.png",
+        "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure1.png",
+        "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure2.png"
+      ],
+      "display_math_count": 6,
+      "code_block_count": 8,
+      "read_ranges": {
+        "before_en": [
+          [
+            1,
+            230
+          ],
+          [
+            231,
+            431
+          ]
+        ],
+        "canonical": [
+          [
+            1,
+            300
+          ],
+          [
+            301,
+            590
+          ],
+          [
+            591,
+            871
+          ]
+        ],
+        "after_en": [
+          [
+            1,
+            861
+          ]
+        ]
+      },
+      "after_sha256": "d2104d394673c898c019becd49fa2337f01ae82abf694ac03ea3fabdbb4212a2",
+      "status": "current",
+      "before_lines": 430,
+      "after_lines": 860,
+      "canonical_lines": 870,
+      "before_words": 2243,
+      "after_words": 5284,
+      "canonical_source_sha256": "a99819704bcdd1ff795c39a2240b8c32331fded5b1372c302f69e381d123d6e8",
+      "figure_inventory": [
+        {
+          "path": "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure3.png",
+          "sha256": "3a331a66ab7332cc337df3af9db456733baa8742e86c87f7ebabe889501675d4"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/bert/BERT-language-modeling-masked-lm.png",
+          "sha256": "b81329241b1300797c06559c1e67466c043d2d1b16ea810e91d32eab3387054b"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/bert-figure4.png",
+          "sha256": "6e3eb49a71f6a256f2f25c6b638c085b26fb4c5bbb199bb5d660a34a2107fcc3"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure4.png",
+          "sha256": "4cbd29f251732e2522cc831d5f625bc017227925c15ea00992f0c2e171db5f99"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure1.png",
+          "sha256": "19124bf6d52dbf0380a26c9ce1590792333479b641774f709cdea3a231b8c76f"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure2.png",
+          "sha256": "e1de839a24bd6fed80e2a95cd0b07ffc4ce9d00c5d71d65ff5034a9c86e72a6d"
+        }
+      ],
+      "before_figure_count": 5,
+      "figure_count": 6,
+      "python_blocks": 4,
+      "code_inventory": [
+        {
+          "language": "text",
+          "sha256": "3193cfc9203b2555af2bbb49c42ec2db8bd34c5cba7ff5e7fc9014c57e59caaa",
+          "index": 0,
+          "canonical_sha256": "3193cfc9203b2555af2bbb49c42ec2db8bd34c5cba7ff5e7fc9014c57e59caaa",
+          "byte_exact": true,
+          "execution": "literal-text-not-executable"
+        },
+        {
+          "language": "text",
+          "sha256": "5293606bff79a3bca25df03949622695a9cc93f9e146a4a26bec195a46c2a181",
+          "index": 1,
+          "canonical_sha256": "df4cbbf11e73a8ecba8a26e4c6f8698811daab9e781edb3c1fc41faed0f7f32f",
+          "byte_exact": false,
+          "execution": "literal-text-not-executable"
+        },
+        {
+          "language": "python",
+          "sha256": "55f1b212e566d777360143a215fdc825ca5d15d0d0e083ed482e970c65d1f689",
+          "index": 2,
+          "canonical_sha256": "55f1b212e566d777360143a215fdc825ca5d15d0d0e083ed482e970c65d1f689",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "python",
+          "sha256": "a1e916a8aef0ce3566d4595b18dee87c23737bb0c34026dd5f893b411458634c",
+          "index": 3,
+          "canonical_sha256": "a1e916a8aef0ce3566d4595b18dee87c23737bb0c34026dd5f893b411458634c",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "text",
+          "sha256": "6136e35d0c84129c19ec386afaeeb7098e219c8d841309bcbd40b4fd710b1d47",
+          "index": 4,
+          "canonical_sha256": "cdd3c96ce420d1196eac9383a5b2f6d03ae85ecf98e43025b19ad7464269ac94",
+          "byte_exact": false,
+          "execution": "literal-text-not-executable"
+        },
+        {
+          "language": "python",
+          "sha256": "e1019eaab33cef77667181ae3bb928990f97407983233b09b76f5490dbdd959a",
+          "index": 5,
+          "canonical_sha256": "e1019eaab33cef77667181ae3bb928990f97407983233b09b76f5490dbdd959a",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "python",
+          "sha256": "2e19abd6bff325675fa4eec7ac057dd3ff2cf65c70a881c7d45486fa58c8e4d4",
+          "index": 6,
+          "canonical_sha256": "2e19abd6bff325675fa4eec7ac057dd3ff2cf65c70a881c7d45486fa58c8e4d4",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "text",
+          "sha256": "70e51ba18c4350d7d53acdee04916471b1274dbbb26829a740d8ed419f0e3ba3",
+          "index": 7,
+          "canonical_sha256": "70e51ba18c4350d7d53acdee04916471b1274dbbb26829a740d8ed419f0e3ba3",
+          "byte_exact": true,
+          "execution": "literal-text-not-executable"
+        }
+      ],
+      "canonical_python_ast_equal": true,
+      "execution_evidence": {
+        "command": "LC_ALL=C LANG=C uv run --offline --with torch==2.14.1 --with numpy==2.3.5 --with einops==0.8.1 --with transformers==4.57.6 python publishing/tools/en-transformer-models-check.py",
+        "returncode": 0,
+        "executed_standalone_python_blocks": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "artifact_sha256": "d2104d394673c898c019becd49fa2337f01ae82abf694ac03ea3fabdbb4212a2"
+      },
+      "all_canonical_source_urls_retained": true,
+      "all_canonical_explicit_anchors_retained": true,
+      "canonical_explicit_anchors": [],
+      "source_native_quotations": [],
+      "sections": [
+        {
+          "canonical": "# Encoder-only, Decoder-only и Encoder–Decoder",
+          "english": "# Encoder-only, decoder-only, and encoder–decoder",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Один пример на всю главу",
+          "english": "## One example for the whole chapter",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Матрица видимости",
+          "english": "## The visibility matrix",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Encoder-only: построить контекстное представление",
+          "english": "## Encoder-only: build a contextual representation",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Как BERT учится без готовой разметки",
+          "english": "### How BERT learns without task labels",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Что выходит из encoder",
+          "english": "### What comes out of an encoder",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Почему encoder неудобен для обычной генерации",
+          "english": "### Why ordinary generation is awkward for an encoder",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Decoder-only: предсказать следующий токен",
+          "english": "## Decoder-only: predict the next token",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Разные задачи в одном текстовом формате",
+          "english": "### Different tasks in one textual format",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Вычисление с явной маской",
+          "english": "### Computing with an explicit mask",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Какие состояния можно использовать повторно",
+          "english": "### Which states can be reused?",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Encoder–Decoder: прочитать один текст, написать другой",
+          "english": "## Encoder–decoder: read one text, write another",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Один шаг перевода",
+          "english": "### One translation step",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Teacher forcing",
+          "english": "### Teacher forcing",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### T5: все задачи как text-to-text",
+          "english": "### T5: every task as text-to-text",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Предобучение T5: восстановление фрагментов",
+          "english": "### T5 pre-training: reconstructing spans",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Почему слово «decoder» сбивает с толку",
+          "english": "## Why the word “decoder” is confusing",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Три маски можно объединить в одной модели",
+          "english": "## One model can combine three masks",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Что выбрать на практике",
+          "english": "## What to choose in practice",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Сопоставление трёх вариантов",
+          "english": "## Comparing the three variants",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Границы этих различий",
+          "english": "## What these distinctions do and do not establish",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Практика без большого GPU",
+          "english": "## Practice without a large GPU",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### 1. Матрицы видимости",
+          "english": "### 1. Visibility matrices",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### 2. Сравнить представления",
+          "english": "### 2. Compare representations",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### 3. Прочитать настоящий код",
+          "english": "### 3. Read real code",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Три независимых выбора",
+          "english": "## Three independent choices",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Литература и дополнительные материалы",
+          "english": "## Literature and additional material",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Основные papers",
+          "english": "### Primary papers",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Материалы и код",
+          "english": "### Materials and code",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Связанные заметки базы",
+          "english": "### Related Bookvar notes",
+          "status": "full-explanation-reconciled"
+        }
+      ],
+      "substantive_topics_reconciled": [
+        "Encoder/decoder/encoder-decoder information access",
+        "MLM versus NTP label alignment and loss positions",
+        "Full versus causal dependencies and prefix cache invalidation",
+        "Span corruption, sentinels and T5 target shift",
+        "Prefix-LM direct and indirect two-layer leakage",
+        "Complete shape, parameter-sharing and training/inference distinctions"
+      ],
+      "outstanding_substantive_omissions": [],
+      "full_read_evidence": {
+        "before_en": [
+          1,
+          430
+        ],
+        "canonical": [
+          1,
+          870
+        ],
+        "after_en": [
+          1,
+          860
+        ],
+        "method": "Sequential full-body reading and passage-level reconciliation; automated inventories are regression guards, not semantic evidence."
+      },
+      "executions": [
+        {
+          "block": 0,
+          "stdout": "MLM labels [-100, -100, -100, 6, 7] sum loss 1.8325814637483098\nNTP input/targets [1, 3, 4, 5, 6, 7] [3, 4, 5, 6, 7, 2]\nNTP supervised positions 6\n",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 1,
+          "stdout": "full tensor([[1.7500, 0.7500],\n        [1.7500, 0.7500],\n        [1.7500, 0.7500],\n        [1.7500, 0.7500]], dtype=torch.float64) causal tensor([[1.0000, 0.0000],\n        [0.5000, 0.5000],\n        [1.0000, 1.0000],\n        [1.7500, 0.7500]], dtype=torch.float64)\nfull after append tensor([1.4000, 1.4000], dtype=torch.float64) new causal query tensor([1.4000, 1.4000], dtype=torch.float64)\n",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 2,
+          "stdout": "encoder input Thank you <extra_id_0> me to your party <extra_id_1> week.\ntarget <extra_id_0> for inviting <extra_id_1> last <extra_id_2>\nsupervised targets 7 decoder IDs [0, 12, 4, 5, 13, 10, 14, 1, 0]\n",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 3,
+          "stdout": "correct first target tensor([11.1250], dtype=torch.float64) leaking first target tensor([12.2500], dtype=torch.float64)\n",
+          "status": "passed",
+          "returncode": 0
+        }
+      ],
+      "figure_changes": {
+        "added": [
+          "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure3.png",
+          "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/bert-figure4.png",
+          "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure4.png",
+          "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure1.png",
+          "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure2.png"
+        ],
+        "replaced_or_removed": [
+          "00 Учебник/Assets/Figures/curated/gpt-30/gpt-2-transformer-xl-bert-3.png",
+          "00 Учебник/Assets/Figures/curated/bert/bert-tasks.png",
+          "00 Учебник/Assets/Figures/curated/t5/encoder-decoder-architecture.png",
+          "00 Учебник/Assets/Figures/curated/t5/text-to-text-framework.png"
+        ],
+        "explanation": "Generic architecture/task embeds are replaced by the canonical paper figures for attention visibility, BERT tasks, encoder-decoder architecture, task formatting and span corruption."
+      }
+    },
+    {
+      "path": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md",
+      "canonical": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md",
+      "route": "textbook/models/bert-roberta-deberta",
+      "before_sha256": "d3f4a8b520b2dedf910d2c53e044a1f7cadb74b72fa7d6f4ec26bceba06e2cc9",
+      "canonical_sha256": "fa3595eca44cec1269db1425337a04773d132d2dd685432d1b12518a15ae19b4",
+      "full_en_before_read": true,
+      "full_canonical_read": true,
+      "full_en_after_read": true,
+      "complete": true,
+      "code_groups": [
+        [
+          0
+        ],
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ]
+      ],
+      "not_executed": [
+        {
+          "kind": "source-excerpt",
+          "label": "Original implementation — MIT",
+          "reason": "Context-dependent EMD method excerpt; preserved byte-exact, not standalone executable."
+        }
+      ],
+      "render_status": "pending-parent",
+      "figures": [
+        "00 Учебник/Assets/Figures/curated/bert/bert-base-bert-large-encoders.png",
+        "00 Учебник/Assets/Figures/curated/bert-family-2026-10-22/bert-figure2.png",
+        "00 Учебник/Assets/Figures/curated/bert/BERT-language-modeling-masked-lm.png",
+        "00 Учебник/Assets/Figures/curated/bert/bert-next-sentence-prediction.png",
+        "00 Учебник/Assets/Figures/curated/bert-family-2026-10-22/bert-figure1.png",
+        "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/bert-figure4.png",
+        "00 Учебник/Assets/Figures/curated/bert/bert-feature-extraction-contextualized-embeddings.png"
+      ],
+      "display_math_count": 11,
+      "code_block_count": 6,
+      "read_ranges": {
+        "before_en": [
+          [
+            1,
+            301
+          ]
+        ],
+        "canonical": [
+          [
+            1,
+            310
+          ],
+          [
+            311,
+            610
+          ],
+          [
+            611,
+            894
+          ]
+        ],
+        "after_en": [
+          [
+            1,
+            887
+          ]
+        ]
+      },
+      "after_sha256": "888b25e8db26b37c2d2fcecc366d21744b88ba8ba229df0365c18794529847c5",
+      "status": "current",
+      "before_lines": 300,
+      "after_lines": 890,
+      "canonical_lines": 893,
+      "before_words": 2210,
+      "after_words": 5233,
+      "canonical_source_sha256": "fa3595eca44cec1269db1425337a04773d132d2dd685432d1b12518a15ae19b4",
+      "figure_inventory": [
+        {
+          "path": "00 Учебник/Assets/Figures/curated/bert/bert-base-bert-large-encoders.png",
+          "sha256": "d11ce7f28a154a5720ae3594b0392e522bf03d5667c71689466946099ed67168"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/bert-family-2026-10-22/bert-figure2.png",
+          "sha256": "4149c1e462122866d4364bfeb51b48fe6f4c3a74315a2e3f9cbabb3e9a3a2399"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/bert/BERT-language-modeling-masked-lm.png",
+          "sha256": "b81329241b1300797c06559c1e67466c043d2d1b16ea810e91d32eab3387054b"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/bert/bert-next-sentence-prediction.png",
+          "sha256": "893524971850fd7ba6a7ed4a32a196c6e4d1a7af388b8b112c25cac24f4e2269"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/bert-family-2026-10-22/bert-figure1.png",
+          "sha256": "51701ce575d355fdd4a5f1cf5e509e8e176502c8e4ef46202a5a805a2495e3e1"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/bert-figure4.png",
+          "sha256": "6e3eb49a71f6a256f2f25c6b638c085b26fb4c5bbb199bb5d660a34a2107fcc3"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/bert/bert-feature-extraction-contextualized-embeddings.png",
+          "sha256": "ab1792bd6e14283e015f2bc60647de48df1e11c6fe7b270382800c0ca5865ebc"
+        }
+      ],
+      "before_figure_count": 8,
+      "figure_count": 7,
+      "python_blocks": 4,
+      "code_inventory": [
+        {
+          "language": "text",
+          "sha256": "adfd862c69756ffe3d9bb661bdf8c26fc39c9439859480711b81708c0714df11",
+          "index": 0,
+          "canonical_sha256": "adfd862c69756ffe3d9bb661bdf8c26fc39c9439859480711b81708c0714df11",
+          "byte_exact": true,
+          "execution": "literal-text-not-executable"
+        },
+        {
+          "language": "python",
+          "sha256": "23f0074a76f053aafecbaf184fcda8c0550010be7d42e245f1d2e3f26ba56fbb",
+          "index": 1,
+          "canonical_sha256": "23f0074a76f053aafecbaf184fcda8c0550010be7d42e245f1d2e3f26ba56fbb",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "python",
+          "sha256": "2991b2705f7b57f955b558c18c1545fdf3b23a5cd3a331c54d60122fb3ca8684",
+          "index": 2,
+          "canonical_sha256": "2991b2705f7b57f955b558c18c1545fdf3b23a5cd3a331c54d60122fb3ca8684",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "python",
+          "sha256": "db1ce699183e2ee617db90e654ed2e2ee85ca6bb8ea12c7b18485f9b602fc8b6",
+          "index": 3,
+          "canonical_sha256": "db1ce699183e2ee617db90e654ed2e2ee85ca6bb8ea12c7b18485f9b602fc8b6",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "python title=\"Original implementation — MIT\"",
+          "sha256": "f14737eb26211f49c501e91e39cf6306e61f1e5df7ad3cee1923b69eade4aca8",
+          "index": 4,
+          "canonical_sha256": "f14737eb26211f49c501e91e39cf6306e61f1e5df7ad3cee1923b69eade4aca8",
+          "byte_exact": true,
+          "execution": "not-run-context-dependent-original-source"
+        },
+        {
+          "language": "python",
+          "sha256": "0762dd81c7c7363f1ee68c7fe5e83ffead008b23530a3b4364be72eb64337897",
+          "index": 5,
+          "canonical_sha256": "0762dd81c7c7363f1ee68c7fe5e83ffead008b23530a3b4364be72eb64337897",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        }
+      ],
+      "canonical_python_ast_equal": true,
+      "execution_evidence": {
+        "command": "LC_ALL=C LANG=C uv run --offline --with torch==2.14.1 --with numpy==2.3.5 --with einops==0.8.1 --with transformers==4.57.6 python publishing/tools/en-transformer-models-check.py",
+        "returncode": 0,
+        "executed_standalone_python_blocks": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "artifact_sha256": "888b25e8db26b37c2d2fcecc366d21744b88ba8ba229df0365c18794529847c5"
+      },
+      "all_canonical_source_urls_retained": true,
+      "all_canonical_explicit_anchors_retained": true,
+      "canonical_explicit_anchors": [],
+      "source_native_quotations": [],
+      "sections": [
+        {
+          "canonical": "# BERT, RoBERTa и DeBERTa",
+          "english": "# BERT, RoBERTa, and DeBERTa",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Архитектура и формы тензоров",
+          "english": "## Architecture and tensor shapes",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Как из двух фрагментов получается один вход",
+          "english": "### Turning two segments into one input",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## MLM: как получить двунаправленный обучающий сигнал",
+          "english": "## MLM: obtaining a bidirectional training signal",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Вторая цель BERT: отношения между сегментами",
+          "english": "## BERT's second objective: segment relationships",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Один исполняемый шаг предобучения",
+          "english": "### One executable pre-training step",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Данные и рецепт BERT",
+          "english": "## BERT data and recipe",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Дообучение на размеченной задаче",
+          "english": "## Fine-tuning on a labeled task",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Извлечение ответа: две проекции и допустимый фрагмент",
+          "english": "### Extractive QA: two projections and a valid span",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Фиксированные признаки или полный fine-tuning",
+          "english": "### Frozen features or full fine-tuning",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Как читать результаты BERT",
+          "english": "## Reading BERT's results",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## RoBERTa: изменения в обучении",
+          "english": "## RoBERTa: changes to training",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Статические и динамические маски",
+          "english": "### Static and dynamic masking",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### NSP и способ сборки текста",
+          "english": "### NSP and text assembly",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Пакет, число шагов и словарь",
+          "english": "### Batch size, update count, and vocabulary",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Итоговый рецепт и результаты",
+          "english": "### The final recipe and results",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## DeBERTa: разделить содержание и относительное положение",
+          "english": "## DeBERTa: separate content from relative position",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Три слагаемых одной оценки",
+          "english": "### Three terms in one score",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Enhanced Mask Decoder",
+          "english": "### Enhanced Mask Decoder",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Дообучение, результаты и версии",
+          "english": "### Fine-tuning, results, and versions",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Ограничения и наследие",
+          "english": "## Limitations and legacy",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Источники и дальнейшее чтение",
+          "english": "## Sources and further reading",
+          "status": "full-explanation-reconciled"
+        }
+      ],
+      "substantive_topics_reconciled": [
+        "BERT input, MLM/NSP, 80/10/10 corruption and loss positions",
+        "Small complete BERT forward/backward with padding and tied output effects",
+        "Fine-tuning heads and extractive QA span calculation",
+        "RoBERTa controlled comparisons, data/training changes and aggregate caveats",
+        "DeBERTa disentangled content/position attention and numerical example",
+        "Enhanced mask decoder source implementation and repeated fixed-memory reads",
+        "Paper-version boundaries and reported-versus-recomputed result distinctions"
+      ],
+      "outstanding_substantive_omissions": [],
+      "full_read_evidence": {
+        "before_en": [
+          1,
+          300
+        ],
+        "canonical": [
+          1,
+          893
+        ],
+        "after_en": [
+          1,
+          890
+        ],
+        "method": "Sequential full-body reading and passage-level reconciliation; automated inventories are regression guards, not semantic evidence."
+      },
+      "math_reflow": {
+        "reason": "Parent browser QA: 320px display overflow in a 313px mobile column.",
+        "old": "Q^c=HW_{q,c},\\quad K^c=HW_{k,c},\\quad V^c=HW_{v,c},",
+        "new": "\\begin{aligned}\nQ^c&=HW_{q,c},\\\\\nK^c&=HW_{k,c},\\\\\nV^c&=HW_{v,c}.\n\\end{aligned}",
+        "semantic_change": false,
+        "render_recheck": "pending-parent"
+      },
+      "executions": [
+        {
+          "block": 0,
+          "stdout": "MLM 14.243288329544944 NSP 0.6851054223647548\ndog input MLM gradient norm 0.11868223670664312\nPAD input MLM gradient norm 0.0\nhidden/MLM/NSP (1, 12, 16) (1, 12) (1, 2)\n",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 1,
+          "stdout": "answer: Paris loss: 2.369680643081665\n",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 2,
+          "stdout": "scores: tensor([2.4495, 2.0412, 3.6742], dtype=torch.float64)\nweights: tensor([0.1973, 0.1312, 0.6715], dtype=torch.float64) output: tensor([1.5403, 1.4742], dtype=torch.float64)\n",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 3,
+          "stdout": "first read tensor([[1.6698, 0.3302],\n        [1.5000, 1.5000]], dtype=torch.float64) second read tensor([[2.3903, 0.6097],\n        [2.0000, 2.0000]], dtype=torch.float64)\n",
+          "status": "passed",
+          "returncode": 0
+        }
+      ],
+      "figure_changes": {
+        "added": [
+          "00 Учебник/Assets/Figures/curated/bert-family-2026-10-22/bert-figure2.png",
+          "00 Учебник/Assets/Figures/curated/bert-family-2026-10-22/bert-figure1.png",
+          "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/bert-figure4.png"
+        ],
+        "replaced_or_removed": [
+          "00 Учебник/Assets/Figures/curated/bert/bert-input-output.png",
+          "00 Учебник/Assets/Figures/curated/bert/bert-tasks.png",
+          "00 Учебник/Assets/Figures/curated/source-audit-25-31/roberta-dynamic-masking-table1.png",
+          "00 Учебник/Assets/Figures/curated/source-audit-25-31/deberta-disentangled-attention-equation4.png"
+        ],
+        "explanation": "Input and task graphics are replaced by canonical BERT paper figures. The former RoBERTa table screenshot is covered by the full numeric Markdown comparison; DeBERTa Eq. 4 is rendered as equations with a worked numerical example."
+      }
+    },
+    {
+      "path": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training.md",
+      "canonical": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md",
+      "route": "textbook/models/gpt-1",
+      "before_sha256": "1705dce2150e38f2d240437cc92318866589d0e8ab0eebbc10501e760d1e389d",
+      "canonical_sha256": "318e040db226fabac04ba6576bf629775600e4626a03e2ac7ce0a4ec16967499",
+      "full_en_before_read": true,
+      "full_canonical_read": true,
+      "full_en_after_read": true,
+      "complete": true,
+      "code_groups": [
+        [
+          0
+        ],
+        [
+          1
+        ]
+      ],
+      "not_executed": [
+        {
+          "kind": "source-excerpt",
+          "label": "Original implementation — MIT",
+          "reason": "Original TensorFlow model excerpt requires full source runtime, preserved byte-exact, not executed."
+        }
+      ],
+      "render_status": "pending-parent",
+      "figures": [
+        "00 Учебник/Assets/Figures/curated/source-audit-25-31/gpt1-figure1-block.png",
+        "00 Учебник/Assets/Figures/curated/source-audit-25-31/gpt1-figure1.png",
+        "00 Учебник/Assets/Figures/curated/source-audit-25-31/gpt1-figure2-transfer.png",
+        "00 Учебник/Assets/Figures/curated/source-audit-25-31/gpt1-figure2-zero-shot.png"
+      ],
+      "display_math_count": 8,
+      "code_block_count": 5,
+      "read_ranges": {
+        "before_en": [
+          [
+            1,
+            187
+          ]
+        ],
+        "canonical": [
+          [
+            1,
+            260
+          ],
+          [
+            261,
+            520
+          ],
+          [
+            521,
+            708
+          ]
+        ],
+        "after_en": [
+          [
+            1,
+            691
+          ]
+        ]
+      },
+      "after_sha256": "4aff198f47b6d6e13167d8394d82a25a887b41b51977121a17acf29dda51a5ef",
+      "status": "current",
+      "before_lines": 186,
+      "after_lines": 690,
+      "canonical_lines": 707,
+      "before_words": 1454,
+      "after_words": 4058,
+      "canonical_source_sha256": "318e040db226fabac04ba6576bf629775600e4626a03e2ac7ce0a4ec16967499",
+      "figure_inventory": [
+        {
+          "path": "00 Учебник/Assets/Figures/curated/source-audit-25-31/gpt1-figure1-block.png",
+          "sha256": "a6d995e45713f76cec87c12e82733766ad33526a4268a59fa91aeddeb43eb1ce"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/source-audit-25-31/gpt1-figure1.png",
+          "sha256": "0d3480a98ca4f38b69a93bb750c3a70396f333e200bafe2fec7b5deb42327e8c"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/source-audit-25-31/gpt1-figure2-transfer.png",
+          "sha256": "7101483f51465dc8503b01094e5aa4f5d522033f00bdb4d5ece784cb03eb6876"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/source-audit-25-31/gpt1-figure2-zero-shot.png",
+          "sha256": "8e17d3e06bcd21fd7d3b4340d5a072f456f1c0f670ef86bce10febf59623ee26"
+        }
+      ],
+      "before_figure_count": 1,
+      "figure_count": 4,
+      "python_blocks": 2,
+      "code_inventory": [
+        {
+          "language": "text",
+          "sha256": "1d539bc1eb544a9b74f4c9a93ce454caf7a137f1680d8702ce698887a3672b4c",
+          "index": 0,
+          "canonical_sha256": "1d539bc1eb544a9b74f4c9a93ce454caf7a137f1680d8702ce698887a3672b4c",
+          "byte_exact": true,
+          "execution": "literal-text-not-executable"
+        },
+        {
+          "language": "text",
+          "sha256": "a41ca3afc9938885951e9e79b0af5fb175de6eaea8cd5af6fdc6a2ee41a305bb",
+          "index": 1,
+          "canonical_sha256": "a41ca3afc9938885951e9e79b0af5fb175de6eaea8cd5af6fdc6a2ee41a305bb",
+          "byte_exact": true,
+          "execution": "literal-text-not-executable"
+        },
+        {
+          "language": "python",
+          "sha256": "71a2274a373ab5042fa005afdeb4156e87dbd9b8613e79aff3062df3d9f75c5b",
+          "index": 2,
+          "canonical_sha256": "71a2274a373ab5042fa005afdeb4156e87dbd9b8613e79aff3062df3d9f75c5b",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "python title=\"Original implementation — MIT\"",
+          "sha256": "123b1ef11aac8937eb7fc31d4f437a5ad06fd807489bbb90a999db82875b41fc",
+          "index": 3,
+          "canonical_sha256": "123b1ef11aac8937eb7fc31d4f437a5ad06fd807489bbb90a999db82875b41fc",
+          "byte_exact": true,
+          "execution": "not-run-context-dependent-original-source"
+        },
+        {
+          "language": "python",
+          "sha256": "0a63abd5d9be5d5be89e8be500103359a277cd6d14143631cbdca864b156ef68",
+          "index": 4,
+          "canonical_sha256": "0a63abd5d9be5d5be89e8be500103359a277cd6d14143631cbdca864b156ef68",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        }
+      ],
+      "canonical_python_ast_equal": true,
+      "execution_evidence": {
+        "command": "LC_ALL=C LANG=C uv run --offline --with torch==2.14.1 --with numpy==2.3.5 --with einops==0.8.1 --with transformers==4.57.6 python publishing/tools/en-transformer-models-check.py",
+        "returncode": 0,
+        "executed_standalone_python_blocks": [
+          0,
+          1
+        ],
+        "artifact_sha256": "4aff198f47b6d6e13167d8394d82a25a887b41b51977121a17acf29dda51a5ef"
+      },
+      "all_canonical_source_urls_retained": true,
+      "all_canonical_explicit_anchors_retained": true,
+      "canonical_explicit_anchors": [],
+      "source_native_quotations": [],
+      "sections": [
+        {
+          "canonical": "# GPT-1: генеративное предобучение",
+          "english": "# GPT-1: generative pre-training",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Одна архитектура для двух этапов",
+          "english": "## One architecture for both stages",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Первый этап: чему учит BooksCorpus",
+          "english": "## Stage one: what BooksCorpus teaches",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Второй этап: задача становится последовательностью",
+          "english": "## Stage two: express each task as a sequence",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Классификация одного текста",
+          "english": "### Single-text classification",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Логическое следование",
+          "english": "### Textual entailment",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Семантическая близость",
+          "english": "### Semantic similarity",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Выбор ответа или окончания рассказа",
+          "english": "### Choosing an answer or story ending",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Две цели и их нормировка",
+          "english": "### Two objectives and their normalization",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Полный учебный проход: предобучение и дообучение",
+          "english": "### Complete teaching example: pre-training and fine-tuning",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Как читать ключевые эксперименты",
+          "english": "## Reading the key experiments",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Что означало zero-shot в этой работе",
+          "english": "### What zero-shot meant in this work",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Что GPT-1 не решила",
+          "english": "## What GPT-1 did not solve",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Наследие и переход к GPT-2",
+          "english": "## Legacy and the transition to GPT-2",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Источники и дальнейшее чтение",
+          "english": "## Sources and further reading",
+          "status": "full-explanation-reconciled"
+        }
+      ],
+      "substantive_topics_reconciled": [
+        "Generative pre-training and supervised transfer objectives",
+        "Original GPT-1 block and combined token/position table",
+        "All four task formats, pooling positions and shared backbone",
+        "Candidate-wise versus token-wise auxiliary LM normalization",
+        "Complete toy pre-training/fine-tuning and optimizer update",
+        "Reported task/ablation results and negative mean auxiliary-loss effect",
+        "Scope of original GPT-1 versus later prompting models"
+      ],
+      "outstanding_substantive_omissions": [],
+      "full_read_evidence": {
+        "before_en": [
+          1,
+          186
+        ],
+        "canonical": [
+          1,
+          707
+        ],
+        "after_en": [
+          1,
+          690
+        ],
+        "method": "Sequential full-body reading and passage-level reconciliation; automated inventories are regression guards, not semantic evidence."
+      },
+      "executions": [
+        {
+          "block": 0,
+          "stdout": "0.407606 0.201413\n",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 1,
+          "stdout": "scores: (2, 2)\ntargets: [5, 6, 6, 5]\nmean LM loss per candidate: [2.666036367416382, 2.762150526046753, 2.767778158187866, 2.737765073776245]\nclassification / LM / total: 0.718351 2.733433 2.085067\nupdated: backbone and task head\n",
+          "status": "passed",
+          "returncode": 0
+        }
+      ],
+      "figure_changes": {
+        "added": [
+          "00 Учебник/Assets/Figures/curated/source-audit-25-31/gpt1-figure1-block.png",
+          "00 Учебник/Assets/Figures/curated/source-audit-25-31/gpt1-figure2-transfer.png",
+          "00 Учебник/Assets/Figures/curated/source-audit-25-31/gpt1-figure2-zero-shot.png"
+        ],
+        "replaced_or_removed": [],
+        "explanation": "Existing figures retained; added figures match canonical chapter."
+      }
+    },
+    {
+      "path": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language.md",
+      "canonical": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md",
+      "route": "textbook/models/gpt-2",
+      "before_sha256": "4b889ce727279d4f209de68306da37770d7a4fbf0da53f049d8a538f8447ae3a",
+      "canonical_sha256": "ce717410045dd566b798820440ef49db532c1204d6d0bed6b54cfec1247f6c8d",
+      "full_en_before_read": true,
+      "full_canonical_read": true,
+      "full_en_after_read": true,
+      "complete": true,
+      "code_groups": [
+        [
+          0
+        ],
+        [
+          1
+        ]
+      ],
+      "not_executed": [
+        {
+          "kind": "source-excerpt",
+          "label": "Original implementation — Modified MIT",
+          "reason": "Original TensorFlow block requires full source runtime; preserved byte-exact, not executed."
+        }
+      ],
+      "render_status": "pending-parent",
+      "figures": [
+        "00 Учебник/Assets/Figures/curated/gpt-30/gpt2-sizes-hyperparameters-3.png",
+        "00 Учебник/Assets/Figures/curated/gpt2-2026-10-22/gpt2-input-embedding-positional-encoding-3.png",
+        "00 Учебник/Assets/Figures/curated/gpt-30/gpt2-transformer-block-vectors-2.png",
+        "00 Учебник/Assets/Figures/curated/gpt2-2026-10-22/gpt2-output-projection-2.png",
+        "00 Учебник/Assets/Figures/curated/gpt-30/gpt2-autoregression-2.gif",
+        "00 Учебник/Assets/Figures/curated/gpt2-2026-10-22/gpt2-self-attention-qkv-3-2.png"
+      ],
+      "display_math_count": 5,
+      "code_block_count": 5,
+      "read_ranges": {
+        "before_en": [
+          [
+            1,
+            183
+          ]
+        ],
+        "canonical": [
+          [
+            1,
+            255
+          ],
+          [
+            256,
+            515
+          ],
+          [
+            516,
+            686
+          ]
+        ],
+        "after_en": [
+          [
+            1,
+            678
+          ]
+        ]
+      },
+      "after_sha256": "6b248051dd87cc3c58521cdcba0021fe3630ffe8aa0125c728dd821bf6cefbb8",
+      "status": "current",
+      "before_lines": 182,
+      "after_lines": 677,
+      "canonical_lines": 685,
+      "before_words": 1488,
+      "after_words": 4052,
+      "canonical_source_sha256": "ce717410045dd566b798820440ef49db532c1204d6d0bed6b54cfec1247f6c8d",
+      "figure_inventory": [
+        {
+          "path": "00 Учебник/Assets/Figures/curated/gpt-30/gpt2-sizes-hyperparameters-3.png",
+          "sha256": "fd6d84995b9eb0efd8cc3931e8301bacd20dfb2dd02334fdc624c823d4d3d5c3"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/gpt2-2026-10-22/gpt2-input-embedding-positional-encoding-3.png",
+          "sha256": "27b23275c29af7b0d56e564ffe54174733f331518445a5edaaafe9c36e0ed3a6"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/gpt-30/gpt2-transformer-block-vectors-2.png",
+          "sha256": "94d7c51658e7feffd01c66e61acd8897cb17e93989725f0a523a95ab8b771047"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/gpt2-2026-10-22/gpt2-output-projection-2.png",
+          "sha256": "61a9cc4b3dedaa4924de383f45572679280e43cde0f0d4ef810da59bb6846309"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/gpt-30/gpt2-autoregression-2.gif",
+          "sha256": "58430f275e37cfd7e988338b2afa9616af74ff5355e1dd421da2b2a89671b3dc"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/gpt2-2026-10-22/gpt2-self-attention-qkv-3-2.png",
+          "sha256": "6c608bc2633dd7ce6a4c3469fc63d0e900632ee0caf3c99298f5a666e300888b"
+        }
+      ],
+      "before_figure_count": 3,
+      "figure_count": 6,
+      "python_blocks": 2,
+      "code_inventory": [
+        {
+          "language": "python title=\"Original implementation — Modified MIT\"",
+          "sha256": "72b29ab1beef568f35283f67470343d5e0ae55c663786710e57db1593a30438c",
+          "index": 0,
+          "canonical_sha256": "72b29ab1beef568f35283f67470343d5e0ae55c663786710e57db1593a30438c",
+          "byte_exact": true,
+          "execution": "not-run-context-dependent-original-source"
+        },
+        {
+          "language": "python",
+          "sha256": "b2d3c353a4451afb09d5bdb22603bb0da43571db1202a3567f79c02c45c056e2",
+          "index": 1,
+          "canonical_sha256": "b2d3c353a4451afb09d5bdb22603bb0da43571db1202a3567f79c02c45c056e2",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "text",
+          "sha256": "417583893b94bcce3a0335309062833968f2aa02037dc312625f5b38bd7129e3",
+          "index": 2,
+          "canonical_sha256": "61baad1e5ef187f57ad275db8717c64baddbab52a532228dd052e64bb5ff5f22",
+          "byte_exact": false,
+          "execution": "literal-text-not-executable"
+        },
+        {
+          "language": "python",
+          "sha256": "161e1e7fee12d1129fa9405574b7f79f0707ee940fcb0189551655d08a52aa9d",
+          "index": 3,
+          "canonical_sha256": "161e1e7fee12d1129fa9405574b7f79f0707ee940fcb0189551655d08a52aa9d",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "text",
+          "sha256": "0a92a76be0028df74387c7405388a1bac8c95f6f5556b71e1463d28482611911",
+          "index": 4,
+          "canonical_sha256": "0a92a76be0028df74387c7405388a1bac8c95f6f5556b71e1463d28482611911",
+          "byte_exact": true,
+          "execution": "literal-text-not-executable"
+        }
+      ],
+      "canonical_python_ast_equal": true,
+      "execution_evidence": {
+        "command": "LC_ALL=C LANG=C uv run --offline --with torch==2.14.1 --with numpy==2.3.5 --with einops==0.8.1 --with transformers==4.57.6 python publishing/tools/en-transformer-models-check.py",
+        "returncode": 0,
+        "executed_standalone_python_blocks": [
+          0,
+          1
+        ],
+        "artifact_sha256": "6b248051dd87cc3c58521cdcba0021fe3630ffe8aa0125c728dd821bf6cefbb8"
+      },
+      "all_canonical_source_urls_retained": true,
+      "all_canonical_explicit_anchors_retained": true,
+      "canonical_explicit_anchors": [],
+      "source_native_quotations": [],
+      "sections": [
+        {
+          "canonical": "# GPT-2: zero-shot через язык",
+          "english": "# GPT-2: zero-shot through language",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Что изменилось относительно GPT-1",
+          "english": "## What changed from GPT-1",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Pre-norm и остаточные пути",
+          "english": "### Pre-norm and residual paths",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## WebText и байтовый BPE",
+          "english": "## WebText and byte-level BPE",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### От байтов к токенам",
+          "english": "### From bytes to tokens",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Как один и тот же цикл становится разными задачами",
+          "english": "## How one loop becomes several tasks",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### От входной строки к распределению",
+          "english": "### From an input string to a distribution",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Выбор токена, температура и top-k",
+          "english": "### Token selection, temperature, and top-k",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Сохранение ключей и значений",
+          "english": "### Retaining keys and values",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Полная малая модель: один проход и кэш дают один результат",
+          "english": "### A complete small model: full and cached passes agree",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Перевод и ответ через префикс",
+          "english": "### Translation and answers through prefixes",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Выбор кандидата по вероятности текста",
+          "english": "### Selecting a candidate by text probability",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Что показали эксперименты",
+          "english": "## What the experiments showed",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Генерация, запоминание и публикация модели",
+          "english": "## Generation, memorization, and model release",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Ограничения и переход к GPT-3",
+          "english": "## Limitations and the transition to GPT-3",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Источники и дальнейшее чтение",
+          "english": "## Sources and further reading",
+          "status": "full-explanation-reconciled"
+        }
+      ],
+      "substantive_topics_reconciled": [
+        "GPT-2 pre-norm, configuration and corrected released parameter counts",
+        "WebText, filtering and byte-level BPE with exact example IDs",
+        "Token generation, temperature and top-k",
+        "Present-only delta versus full-past cache and P+G-1 accounting",
+        "Complete toy GPT-2 cache/full-forward agreement and gradient check",
+        "Task-specific likelihood scoring, normalization and experiment protocols",
+        "Memorization, contamination, release stages and interpretation limits"
+      ],
+      "outstanding_substantive_omissions": [],
+      "full_read_evidence": {
+        "before_en": [
+          1,
+          182
+        ],
+        "canonical": [
+          1,
+          685
+        ],
+        "after_en": [
+          1,
+          677
+        ],
+        "method": "Sequential full-body reading and passage-level reconciliation; automated inventories are regression guards, not semantic evidence."
+      },
+      "executions": [
+        {
+          "block": 0,
+          "stdout": "[0.644, 0.237, 0.087, 0.032]\n[0.865, 0.117, 0.016, 0.002]\n",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 1,
+          "stdout": "(1, 5, 17) 2 (1, 4, 5, 4)\nsame logits; nonzero language-model gradients\n",
+          "status": "passed",
+          "returncode": 0
+        }
+      ],
+      "figure_changes": {
+        "added": [
+          "00 Учебник/Assets/Figures/curated/gpt2-2026-10-22/gpt2-input-embedding-positional-encoding-3.png",
+          "00 Учебник/Assets/Figures/curated/gpt2-2026-10-22/gpt2-output-projection-2.png",
+          "00 Учебник/Assets/Figures/curated/gpt2-2026-10-22/gpt2-self-attention-qkv-3-2.png"
+        ],
+        "replaced_or_removed": [],
+        "explanation": "Existing figures retained; added figures match canonical chapter."
+      }
+    },
+    {
+      "path": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning.md",
+      "canonical": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md",
+      "route": "textbook/models/gpt-3",
+      "before_sha256": "25cfe59f394629e001fc431f255d122c383ad9e13b3e1e4e4c85a16a2f5004b6",
+      "canonical_sha256": "76ed87ea2ca9e9c2bc82b7926eb95de9313d0b11c8ce14ab95ab13313e19875a",
+      "full_en_before_read": true,
+      "full_canonical_read": true,
+      "full_en_after_read": true,
+      "complete": true,
+      "code_groups": [
+        [
+          0
+        ],
+        [
+          1
+        ]
+      ],
+      "not_executed": [],
+      "render_status": "pending-parent",
+      "figures": [
+        "00 Учебник/Assets/Figures/curated/gpt-3-paper/zero-one-few-shot-vs-finetuning.png",
+        "00 Учебник/Assets/Figures/curated/gpt3-2026-10-22/10-gpt3-fine-tuning.gif",
+        "00 Учебник/Assets/Figures/curated/gpt3-2026-10-22/tokens-through-stack-frame-385.png",
+        "00 Учебник/Assets/Figures/curated/gpt3-2026-10-22/07-gpt3-processing-transformer-blocks.gif",
+        "00 Учебник/Assets/Figures/curated/gpt3-2026-10-22/context-window-frame-229.png",
+        "00 Учебник/Assets/Figures/curated/gpt-3-paper/model-sizes-table-2-1.png"
+      ],
+      "display_math_count": 3,
+      "code_block_count": 5,
+      "read_ranges": {
+        "before_en": [
+          [
+            1,
+            233
+          ]
+        ],
+        "canonical": [
+          [
+            1,
+            290
+          ],
+          [
+            291,
+            580
+          ],
+          [
+            581,
+            836
+          ]
+        ],
+        "after_en": [
+          [
+            1,
+            807
+          ]
+        ]
+      },
+      "after_sha256": "48ccbfcdfa89f81c1da3aadf80bff4c8e2ba716b67089f28269bfcd3f362e609",
+      "status": "current",
+      "before_lines": 232,
+      "after_lines": 806,
+      "canonical_lines": 835,
+      "before_words": 1784,
+      "after_words": 5531,
+      "canonical_source_sha256": "76ed87ea2ca9e9c2bc82b7926eb95de9313d0b11c8ce14ab95ab13313e19875a",
+      "figure_inventory": [
+        {
+          "path": "00 Учебник/Assets/Figures/curated/gpt-3-paper/zero-one-few-shot-vs-finetuning.png",
+          "sha256": "416b4bb6d87b540ade8bf7642554f11a6b94a401c15d3e1bdd6745e38d5c12b2"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/gpt3-2026-10-22/10-gpt3-fine-tuning.gif",
+          "sha256": "f859ff33101f53efae50b5ad3faaad4d3defc1e1d231ede4202315f4ae0c114c"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/gpt3-2026-10-22/tokens-through-stack-frame-385.png",
+          "sha256": "97c56078cce4f8263342668b8c80c5cda06bac757e833e7e9ab68a1298c52798"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/gpt3-2026-10-22/07-gpt3-processing-transformer-blocks.gif",
+          "sha256": "e60a02788846c69e196571c50657f6ce29def3862f429224c6739a931f832243"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/gpt3-2026-10-22/context-window-frame-229.png",
+          "sha256": "3d9dae79f02e914100b78300e9dd62f43beca310009dc8da16a34de2ce6608ff"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/gpt-3-paper/model-sizes-table-2-1.png",
+          "sha256": "12ca47fd68d130de65794b0bc7562dfb028f835403639c623dd4dd0126495cc0"
+        }
+      ],
+      "before_figure_count": 3,
+      "figure_count": 6,
+      "python_blocks": 2,
+      "code_inventory": [
+        {
+          "language": "text",
+          "sha256": "19df521f6508ed52db1ee95eca24fda83904dc2a81c298555571b9131614a688",
+          "index": 0,
+          "canonical_sha256": "19df521f6508ed52db1ee95eca24fda83904dc2a81c298555571b9131614a688",
+          "byte_exact": true,
+          "execution": "literal-text-not-executable"
+        },
+        {
+          "language": "python",
+          "sha256": "ec481ecc21c73670e27f83baea6cf296745b7a98f5dd24f0b21a222938c2fe54",
+          "index": 1,
+          "canonical_sha256": "ec481ecc21c73670e27f83baea6cf296745b7a98f5dd24f0b21a222938c2fe54",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "python",
+          "sha256": "2b66d353a78d3e6c7a6cf17dd8e89a0a071ec162f836579d2b0ddd36dd460cfa",
+          "index": 2,
+          "canonical_sha256": "b2991aa0deb4b3cf575568ad3ef302101f0847b124e3a07141fc2ff0782cf280",
+          "byte_exact": false,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "text",
+          "sha256": "0c73dd151e437df4242abdf2720ef8a351c4241b730833aeb8ddb8713d2f6381",
+          "index": 3,
+          "canonical_sha256": "0c73dd151e437df4242abdf2720ef8a351c4241b730833aeb8ddb8713d2f6381",
+          "byte_exact": true,
+          "execution": "literal-text-not-executable"
+        },
+        {
+          "language": "text",
+          "sha256": "6d54777d36bbc3c57108eec7b679ce01dd3245308dd5b1da06f0c588d18f9a58",
+          "index": 4,
+          "canonical_sha256": "6d54777d36bbc3c57108eec7b679ce01dd3245308dd5b1da06f0c588d18f9a58",
+          "byte_exact": true,
+          "execution": "literal-text-not-executable"
+        }
+      ],
+      "canonical_python_ast_equal": true,
+      "execution_evidence": {
+        "command": "LC_ALL=C LANG=C uv run --offline --with torch==2.14.1 --with numpy==2.3.5 --with einops==0.8.1 --with transformers==4.57.6 python publishing/tools/en-transformer-models-check.py",
+        "returncode": 0,
+        "executed_standalone_python_blocks": [
+          0,
+          1
+        ],
+        "artifact_sha256": "48ccbfcdfa89f81c1da3aadf80bff4c8e2ba716b67089f28269bfcd3f362e609"
+      },
+      "all_canonical_source_urls_retained": true,
+      "all_canonical_explicit_anchors_retained": true,
+      "canonical_explicit_anchors": [
+        "архитектура-знакомый-блок-в-новом-масштабе",
+        "ключевые-результаты-без-упрощения",
+        "наследие-и-следующий-переход"
+      ],
+      "source_native_quotations": [],
+      "sections": [
+        {
+          "canonical": "# GPT-3: масштабирование и обучение в контексте",
+          "english": "# GPT-3: scaling and in-context learning",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Где находится «обучение»",
+          "english": "## Where the “learning” happens",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Пошаговая механика few-shot запроса",
+          "english": "## Mechanics of a few-shot prompt",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Повторное использование демонстраций",
+          "english": "### Reusing demonstrations",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Что меняется в attention при неизменных весах",
+          "english": "### What changes in attention when weights stay fixed?",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Генерация метки и оценка готовых кандидатов",
+          "english": "### Generating a label versus scoring supplied candidates",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Как в статье сравнивают ответы разной длины",
+          "english": "### How the paper compares different answer lengths",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Архитектура GPT-3",
+          "english": "## GPT-3 architecture",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Полное и локальное внимание",
+          "english": "### Full and local attention",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Сколько места остаётся для демонстраций и ответа",
+          "english": "### Space for demonstrations and the answer",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Масштабный эксперимент",
+          "english": "## The scaling experiment",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Данные и режим семплирования",
+          "english": "## Data and sampling",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Фильтр качества и близкие дубликаты",
+          "english": "### Quality filtering and near duplicates",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Как упакованы документы",
+          "english": "### Document packing",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Результаты: задача, формат и метрика",
+          "english": "## Results: task, format, and metric",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### LAMBADA: указать, что нужен ровно один ответ",
+          "english": "### LAMBADA: specifying exactly one answer",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Ответы на вопросы без поиска",
+          "english": "### Question answering without retrieval",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Перевод: направление и параллельные примеры",
+          "english": "### Translation: direction and parallel examples",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Арифметика и границы обобщения",
+          "english": "### Arithmetic and limits of generalization",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Преобразования слов и новое значение",
+          "english": "### Word transformations and new meanings",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Генерация новостей и оценка человеком",
+          "english": "### News generation and human evaluation",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Где масштаб не решил задачу",
+          "english": "### Where scale did not solve the task",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Загрязнение тестов и честная оценка",
+          "english": "## Benchmark contamination and honest evaluation",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Ограничения базовой GPT-3",
+          "english": "## Limitations of base GPT-3",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Переход к T5",
+          "english": "## Transition to T5",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Источники и дальнейшее чтение",
+          "english": "## Sources and further reading",
+          "status": "full-explanation-reconciled"
+        }
+      ],
+      "substantive_topics_reconciled": [
+        "In-context learning without parameter updates",
+        "Few-shot prompt mechanics, cache reuse and conditional label scoring",
+        "Full/local attention and context budget",
+        "Model size, data sources, weighted sampling and packing",
+        "Quality filtering and duplicate removal",
+        "Per-task metrics and protocols, arithmetic/word transformations and news judgments",
+        "Negative task results, contamination analysis and limits of scale"
+      ],
+      "outstanding_substantive_omissions": [],
+      "full_read_evidence": {
+        "before_en": [
+          1,
+          232
+        ],
+        "canonical": [
+          1,
+          835
+        ],
+        "after_en": [
+          1,
+          806
+        ],
+        "method": "Sequential full-body reading and passage-level reconciliation; automated inventories are regression guards, not semantic evidence."
+      },
+      "executions": [
+        {
+          "block": 0,
+          "stdout": "[0.75, 0.25]\n0.5 -0.5\n",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 1,
+          "stdout": "[-1.7147984280919268, -1.1394342831883648]\n[0.17999999999999997, 0.32]\n[0.35999999999999993, 0.64]\n",
+          "status": "passed",
+          "returncode": 0
+        }
+      ],
+      "figure_changes": {
+        "added": [
+          "00 Учебник/Assets/Figures/curated/gpt3-2026-10-22/10-gpt3-fine-tuning.gif",
+          "00 Учебник/Assets/Figures/curated/gpt3-2026-10-22/tokens-through-stack-frame-385.png",
+          "00 Учебник/Assets/Figures/curated/gpt3-2026-10-22/07-gpt3-processing-transformer-blocks.gif",
+          "00 Учебник/Assets/Figures/curated/gpt3-2026-10-22/context-window-frame-229.png"
+        ],
+        "replaced_or_removed": [
+          "00 Учебник/Assets/Figures/curated/gpt-30/gpt-2-transformer-xl-bert-3.png"
+        ],
+        "explanation": "The generic BERT/GPT architecture comparison is replaced here by GPT-3-specific execution/context diagrams; it remains in the complete Transformer chapter."
+      }
+    },
+    {
+      "path": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md",
+      "canonical": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md",
+      "route": "textbook/models/t5",
+      "before_sha256": "4f08155e8f879953d5b11ffab393133e73c7975e9cd0cdbf2a93355076305a70",
+      "canonical_sha256": "1bced617c9985be26919d79c4d01a87e4d0a3087d59e65d2e200fd2f84608dfc",
+      "full_en_before_read": true,
+      "full_canonical_read": true,
+      "full_en_after_read": true,
+      "complete": true,
+      "code_groups": [
+        [
+          0
+        ],
+        [
+          1
+        ]
+      ],
+      "not_executed": [],
+      "render_status": "pending-parent",
+      "figures": [
+        "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure1.png",
+        "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure4.png",
+        "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure3.png",
+        "00 Учебник/Assets/Figures/curated/t5-2026-10-22/t5-figure2-spans.png",
+        "00 Учебник/Assets/Figures/curated/t5-2026-10-22/t5-figure5-objectives.png",
+        "00 Учебник/Assets/Figures/curated/t5-2026-10-22/t5-figure6-repeated-data.png"
+      ],
+      "display_math_count": 6,
+      "code_block_count": 5,
+      "read_ranges": {
+        "before_en": [
+          [
+            1,
+            276
+          ]
+        ],
+        "canonical": [
+          [
+            1,
+            285
+          ],
+          [
+            286,
+            565
+          ],
+          [
+            566,
+            828
+          ]
+        ],
+        "after_en": [
+          [
+            1,
+            240
+          ],
+          [
+            241,
+            520
+          ],
+          [
+            521,
+            790
+          ]
+        ]
+      },
+      "after_sha256": "0e5c05aa03151e24da5ef6735bcd5525a0c4ea5029b4e9414993b190d7395192",
+      "status": "current",
+      "before_lines": 275,
+      "after_lines": 790,
+      "canonical_lines": 827,
+      "before_words": 2323,
+      "after_words": 4958,
+      "canonical_source_sha256": "1bced617c9985be26919d79c4d01a87e4d0a3087d59e65d2e200fd2f84608dfc",
+      "figure_inventory": [
+        {
+          "path": "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure1.png",
+          "sha256": "19124bf6d52dbf0380a26c9ce1590792333479b641774f709cdea3a231b8c76f"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure4.png",
+          "sha256": "4cbd29f251732e2522cc831d5f625bc017227925c15ea00992f0c2e171db5f99"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure3.png",
+          "sha256": "3a331a66ab7332cc337df3af9db456733baa8742e86c87f7ebabe889501675d4"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/t5-2026-10-22/t5-figure2-spans.png",
+          "sha256": "dab81832b013aa9a51b9fdaa5153d4312e975f7f2567abf00ba98f52626aa98e"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/t5-2026-10-22/t5-figure5-objectives.png",
+          "sha256": "c0ba886d49d9acd8115fc2cc72330730d367257ae2622153ed224e4110fdd202"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/t5-2026-10-22/t5-figure6-repeated-data.png",
+          "sha256": "bd9b04b6dc10e44d86d2eab6725550fc31c5b26222ee37400bc449dfbb62683b"
+        }
+      ],
+      "before_figure_count": 3,
+      "figure_count": 6,
+      "python_blocks": 2,
+      "code_inventory": [
+        {
+          "language": "text",
+          "sha256": "e0730c150d9d1efdef1b5a62687a7be29ffd8ad2843dfa810fa069126c48f497",
+          "index": 0,
+          "canonical_sha256": "e0730c150d9d1efdef1b5a62687a7be29ffd8ad2843dfa810fa069126c48f497",
+          "byte_exact": true,
+          "execution": "literal-text-not-executable"
+        },
+        {
+          "language": "text",
+          "sha256": "7ab877cee369eb8869f3e1ecdc6709348817cf3afb0b9c95aaf5f20c3382fe7a",
+          "index": 1,
+          "canonical_sha256": "7ab877cee369eb8869f3e1ecdc6709348817cf3afb0b9c95aaf5f20c3382fe7a",
+          "byte_exact": true,
+          "execution": "literal-text-not-executable"
+        },
+        {
+          "language": "text",
+          "sha256": "376eb6bf25c1c25b79afb0af3b992502b1e2b811fe0308d854818cb32de3fa40",
+          "index": 2,
+          "canonical_sha256": "376eb6bf25c1c25b79afb0af3b992502b1e2b811fe0308d854818cb32de3fa40",
+          "byte_exact": true,
+          "execution": "literal-text-not-executable"
+        },
+        {
+          "language": "python",
+          "sha256": "5819a725dfd01b5b5dbfbf220f030ac7415cb1c34457e281af485df3e9ae8437",
+          "index": 3,
+          "canonical_sha256": "5819a725dfd01b5b5dbfbf220f030ac7415cb1c34457e281af485df3e9ae8437",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        },
+        {
+          "language": "python",
+          "sha256": "c6f768850f001ef9d7fff76f24b65b529596b818dc005938b48c3096dda81387",
+          "index": 4,
+          "canonical_sha256": "c6f768850f001ef9d7fff76f24b65b529596b818dc005938b48c3096dda81387",
+          "byte_exact": true,
+          "execution": "cpu-passed"
+        }
+      ],
+      "canonical_python_ast_equal": true,
+      "execution_evidence": {
+        "command": "LC_ALL=C LANG=C uv run --offline --with torch==2.14.1 --with numpy==2.3.5 --with einops==0.8.1 --with transformers==4.57.6 python publishing/tools/en-transformer-models-check.py",
+        "returncode": 0,
+        "executed_standalone_python_blocks": [
+          0,
+          1
+        ],
+        "artifact_sha256": "0e5c05aa03151e24da5ef6735bcd5525a0c4ea5029b4e9414993b190d7395192"
+      },
+      "all_canonical_source_urls_retained": true,
+      "all_canonical_explicit_anchors_retained": true,
+      "canonical_explicit_anchors": [
+        "почему-авторы-выбрали-именно-эту-цель",
+        "c4-масштаб-начинается-с-отбора-данных",
+        "перенос-задача-становится-данными-а-не-новой-головой",
+        "как-читать-ключевые-эксперименты"
+      ],
+      "source_native_quotations": [
+        {
+          "text": "> Schematic of the objective we use in our baseline model. In this example, we\n> process the sentence “Thank you for inviting me to your party last week.” The\n> words “for”, “inviting” and “last” (marked with an ×) are randomly chosen for\n> corruption. Each consecutive span of corrupted tokens is replaced by a sentinel\n> token (shown as `<X>` and `<Y>`) that is unique over the example. Since “for” and\n> “inviting” occur consecutively, they are replaced by a single sentinel `<X>`. The\n> output sequence then consists of the dropped-out spans, delimited by the sentinel\n> tokens used to replace them in the input plus a final sentinel token `<Z>`.",
+          "preserved_verbatim": true
+        },
+        {
+          "text": "> A flow chart of our exploration of unsupervised objectives. We first consider a\n> few disparate approaches in Section 3.3.1 and find that a BERT-style denoising\n> objective performs best. Then, we consider various methods for simplifying the\n> BERT objective so that it produces shorter target sequences in Section 3.3.2.\n> Given that replacing dropped-out spans with sentinel tokens performs well and\n> results in short target sequences, in Section 3.3.3 we experiment with different\n> corruption rates. Finally, we evaluate an objective that intentionally corrupts\n> contiguous spans of tokens in Section 3.3.4.",
+          "preserved_verbatim": true
+        }
+      ],
+      "sections": [
+        {
+          "canonical": "# T5: text-to-text Transformer",
+          "english": "# T5: the text-to-text Transformer",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Архитектура: источник и ответ имеют разные роли",
+          "english": "## Architecture: source and answer have different roles",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Видимость входа и ответа",
+          "english": "### Input and answer visibility",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Вход decoder сдвигается, правильные ответы остаются на месте",
+          "english": "### Shift decoder input, not the original targets",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Чем блок T5 отличается от исходного Transformer",
+          "english": "## How a T5 block differs from the original Transformer",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Относительные позиции: расстояние меняет score, а не токенный вектор",
+          "english": "### Relative positions change scores, not token vectors",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Размер головы не всегда равен ширине модели, делённой на число голов",
+          "english": "### Head width need not be model width divided by head count",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Предобучение: восстановить удалённые фрагменты",
+          "english": "## Pre-training: reconstruct deleted spans",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Преобразование маски в две последовательности",
+          "english": "### Converting a mask into two sequences",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Независимые удаления baseline и случайные фрагменты финальной T5",
+          "english": "### Independent baseline deletions versus final T5's sampled spans",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Почему decoder получает короткую цель",
+          "english": "### Why the decoder gets a short target",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Учебный шаг обучения: от пакета до обновления весов",
+          "english": "## A teaching training step: from batch to weight update",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Как сравнивали цели предобучения",
+          "english": "## How pre-training objectives were compared",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## C4 и режим обучения",
+          "english": "## C4 and the training regime",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Контрольный baseline и финальная линейка",
+          "english": "### The controlled baseline and final series",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Дообучение, смеси задач и проверка ответа",
+          "english": "## Fine-tuning, task mixtures, and answer evaluation",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Обновление всех весов, adapters и постепенное размораживание",
+          "english": "### Full updates, adapters, and gradual unfreezing",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Масштабирование и результаты",
+          "english": "## Scaling and results",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Стоимость вывода и практические компромиссы",
+          "english": "## Inference cost and practical trade-offs",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Что можно сохранить между запросами",
+          "english": "### What can be reused across requests?",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "### Память и вычисления",
+          "english": "### Memory and computation",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Ограничения и наследие",
+          "english": "## Limitations and legacy",
+          "status": "full-explanation-reconciled"
+        },
+        {
+          "canonical": "## Источники и дальнейшее чтение",
+          "english": "## Sources and further reading",
+          "status": "full-explanation-reconciled"
+        }
+      ],
+      "substantive_topics_reconciled": [
+        "Text-to-text task formatting and separate encoder/decoder visibility",
+        "Decoder shift, PAD start, ignored targets and token likelihood",
+        "T5 norms, projection scaling, shared tables and relative buckets",
+        "Head dimensions, exact parameter count and vocabulary padding",
+        "Span replacement, baseline versus final sampler and sequence lengths",
+        "Complete artificial-batch training step with tied weights",
+        "C4 filters, baseline versus final training regimes and repeated data",
+        "Mixtures, adapters, unfreezing, scaling and result protocols",
+        "Encoder/cross/self-cache invalidation and memory accounting",
+        "Original T5 versus T5.1.1 and later family variants"
+      ],
+      "outstanding_substantive_omissions": [],
+      "full_read_evidence": {
+        "before_en": [
+          1,
+          275
+        ],
+        "canonical": [
+          1,
+          827
+        ],
+        "after_en": [
+          1,
+          790
+        ],
+        "method": "Sequential full-body reading and passage-level reconciliation; automated inventories are regression guards, not semantic evidence."
+      },
+      "executions": [
+        {
+          "block": 0,
+          "stdout": "[2, 14, 5, 6, 13, 8, 1]\n[14, 3, 4, 13, 7, 12, 1]\n",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 1,
+          "stdout": "[[0, 14, 3, 4, 13, 7, 12], [0, 14, 9, 13, 1, 0, 0]]\n(2, 7, 16) 11\n3.22853946685791 2.9341156482696533\n",
+          "status": "passed",
+          "returncode": 0
+        }
+      ],
+      "figure_changes": {
+        "added": [
+          "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure1.png",
+          "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure4.png",
+          "00 Учебник/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure3.png",
+          "00 Учебник/Assets/Figures/curated/t5-2026-10-22/t5-figure2-spans.png",
+          "00 Учебник/Assets/Figures/curated/t5-2026-10-22/t5-figure5-objectives.png",
+          "00 Учебник/Assets/Figures/curated/t5-2026-10-22/t5-figure6-repeated-data.png"
+        ],
+        "replaced_or_removed": [
+          "00 Учебник/Assets/Figures/curated/t5/text-to-text-framework.png",
+          "00 Учебник/Assets/Figures/curated/t5/encoder-decoder-architecture.png",
+          "00 Учебник/Assets/Figures/curated/source-audit-25-31/t5-span-corruption-figure2.png"
+        ],
+        "explanation": "Older T5 crops are replaced by the canonical full paper figures; objective comparison and repeated-data curves are added."
+      }
+    }
+  ],
+  "verification": {
+    "standalone_python_blocks_executed": 33,
+    "python_ast_matches_canonical": true,
+    "context_dependent_source_python_excerpts_not_executed": 3,
+    "source_native_blockquotes_preserved": 3,
+    "source_runtime_or_accelerator_benchmarks": "not run; source code excerpts retained without execution claims",
+    "build_and_visual_qa": "parent-owned; no complete rendered acceptance claimed in this report",
+    "all_nine_chapters_full_body_reconciled": true,
+    "targeted_regression_tests": {
+      "command": "npx vitest run tests/en-transformer-models-parity.test.ts",
+      "working_directory": "publishing",
+      "tests": 48,
+      "passed": 48,
+      "returncode": 0
+    },
+    "final_cpu_runner_returncode": 0
+  },
+  "totals": {
+    "chapters": 9,
+    "before_lines": 2685,
+    "after_lines": 7584,
+    "before_figures": 35,
+    "after_figures": 53,
+    "display_equations": 79,
+    "fenced_blocks": 53,
+    "standalone_python_blocks": 33,
+    "added_figure_embeds": 31,
+    "replaced_or_removed_figure_embeds": 13
+  }
+}

@@ -9,17 +9,42 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`slides/vol2/09_performance_engineering/09_performance_engineering.tex`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static slide archive
+> Text and equations retain the original language. Layout wrappers are simplified;
+> speaker notes are separate, and original SVGs are not redrawn or cropped.
+> Unsupported TeX remains visible and is listed beside the affected slide.
+> This archive is not a checked transcript or a finished Bookvar chapter.
 
 # VOL2 Slides — Performance Engineering
 
 ## Readable slide sequence
 
+## Performance Engineering
+
+[Original slide 1](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L64)
+
+Match the Software to the Silicon
+
 ## Learning Objectives
 
-{
+[Original slide 2](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L69)
+
+1. Analyze the **Memory Wall** using the **Roofline Model** and diagnose compute-bound vs. memory-bound workloads
+2. Explain how **Operator Fusion** and **Tiling** (FlashAttention) overcome HBM bandwidth limits
+3. Apply **Precision Engineering** (FP8, INT4, block-wise quantization) to double effective bandwidth
+4. Compare **Graph Compilation** frameworks (torch.compile, XLA, TensorRT)
+5. Evaluate **Speculative Decoding** and **MoE** as algorithmic innovations
+6. Design an **optimization sequence** using the profile-optimize-reprofile loop
+7. Use **System Profiling** tools to identify the dominant bottleneck
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 Ch 8 orchestrated the fleet --- the right jobs on the right GPUs.
@@ -27,13 +52,13 @@ This chapter makes each job use its assigned hardware efficiently,
 closing the gap between theoretical hardware peak and achieved throughput.
 
 % -- NARRATE: What to SAY while showing this slide
-Walk through objectives. Emphasize: ``Most GPUs run at 2--5% of peak
+Walk through objectives. Emphasize: ``Most GPUs run at 2--5\% of peak
 during LLM inference. This chapter teaches you to diagnose why and
 fix it systematically.''
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
 Ask: ``Has anyone profiled a GPU workload and found it was only using
-5% of compute?'' The audience reaction reveals whether they have
+5\% of compute?'' The audience reaction reveals whether they have
 encountered the memory wall.
 
 % -- WARN: What students will get wrong on THIS topic
@@ -43,20 +68,36 @@ the workload is memory-bound, doubling FLOPS yields zero improvement.
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Sets the diagnostic mindset for the chapter.
 IF SHORT: Read objectives quickly.
-}
+```
 
-{0pt}
-- Analyze the **Memory Wall** using the **Roofline Model** and diagnose compute-bound vs.\ memory-bound workloads
-- Explain how **Operator Fusion** and **Tiling** (FlashAttention) overcome HBM bandwidth limits
-- Apply **Precision Engineering** (FP8, INT4, block-wise quantization) to double effective bandwidth
-- Compare **Graph Compilation** frameworks (torch.compile, XLA, TensorRT)
-- Evaluate **Speculative Decoding** and **MoE** as algorithmic innovations
-- Design an **optimization sequence** using the profile-optimize-reprofile loop
-- Use **System Profiling** tools to identify the dominant bottleneck
+</details>
 
 ## Visual Language
 
-{
+[Original slide 3](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L109)
+
+Throughout this course, colors carry meaning:
+
+**Blue** — Compute / Processing
+
+GPU ops, forward/backward pass, inference
+
+**Green** — Data / Memory
+
+Data flow, caches, healthy paths
+
+**Orange** — Routing / Scheduling
+
+Load balancers, batch windows
+
+**Red** — Error / Cost / Bottleneck
+
+Loss, decode phase, waste
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [0.5 min]
 % -- LINK: What prior concept connects to this slide
 Students have seen this color palette in chapters 7--9.
@@ -72,37 +113,54 @@ Expected: blue (computestroke). Primes attention before the roofline.
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Skip if students are familiar.
-}
+```
 
-Throughout this course, colors carry meaning:
+</details>
 
-{0.3cm}
-[T]
-  
-    {mlsyscard}{computestroke}
-    **Blue** --- Compute / Processing\\
-    { GPU ops, forward/backward pass, inference}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{datastroke}
-    **Green** --- Data / Memory\\
-    { Data flow, caches, healthy paths}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{routingstroke}
-    **Orange** --- Routing / Scheduling\\
-    { Load balancers, batch windows}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{errorstroke}
-    **Red** --- Error / Cost / Bottleneck\\
-    { Loss, decode phase, waste}
-    {mlsyscard}
+## The Iron Law of ML Performance
+
+[Original slide 4](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L166)
+
+$\displaystyle T = \underbrace{\dfrac{D_{\text{vol}}}{\text{BW}}}_{\text{Data}} + \underbrace{\dfrac{O}{R_{\text{peak}} \cdot \eta}}_{\text{Compute}} + \underbrace{L_{\text{lat}}}_{\text{Overhead}}$
 
 ## Iron Law: Technique-to-Term Mapping
 
-{
+[Original slide 5](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L172)
+
+| **Technique** | **Targets** |
+| --- | --- |
+| Fusion, FlashAttention | $\downarrow D_{\text{vol}}$ (Data term) |
+| Precision (FP8, INT4) | $\downarrow D_{\text{vol}}$ (Data term) |
+| Compilation, CUDA Graphs | $\downarrow L_{\text{lat}}$ (Overhead) |
+| Comm. overlap (distributed) | $\downarrow L_{\text{lat}}$ (Overhead) |
+| Spec. decoding, MoE | $\downarrow O$ (Compute term) |
+
+$D_{\text{vol}}$: bytes moved  BW: bandwidth
+
+$O$: FLOPs  $R_{\text{peak}}$: peak FLOPS  $\eta$: efficiency
+
+$L_{\text{lat}}$: launch, sync, communication overhead
+
+**Roofline identifies which term dominates.**
+
+Memory-bound $\Rightarrow$ Data term dominates.
+
+Optimize: quantization, fusion, FlashAttention.
+
+Compute-bound $\Rightarrow$ Compute term dominates.
+
+Optimize: FP8, larger batch, Tensor Cores.
+
+Overhead-bound $\Rightarrow$ $L_{\text{lat}}$ dominates.
+
+Optimize: CUDA Graphs, compiler, overlap.
+
+**Key:** Targeting the non-dominant term yields zero improvement.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 The equation just displayed decomposes execution time into three terms.
@@ -122,8 +180,8 @@ that term --- targeting the non-dominant term is wasted engineering
 effort.''
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
-Ask: ``If LLM decode at batch=1 has AI $$ 2 FLOP/byte, which term
-dominates?'' Expected: the Data term $(D_{{vol}}/{BW})$
+Ask: ``If LLM decode at batch=1 has AI $\approx$ 2 FLOP/byte, which term
+dominates?'' Expected: the Data term $(D_{\text{vol}}/\text{BW})$
 dominates. Therefore applying FP8 Tensor Cores (targeting Compute) will
 yield zero improvement --- you must target Data (quantization, fusion).
 
@@ -134,51 +192,24 @@ makes this mistake visible and costly to ignore.
 
 % -- FLEX: [CORE] Makes the chapter's organizational logic visible.
 IF SHORT: Show the table; state ``Diagnose the dominant term first.''
-}
+```
 
-[T]
-  
-    {
-    {}{1.3}
-    {tabular}{@{}ll@{}}
-      
-      **Technique** & **Targets** \\
-      
-      Fusion, FlashAttention & $ D_{{vol}}$ (Data term) \\
-      Precision (FP8, INT4)  & $ D_{{vol}}$ (Data term) \\
-      Compilation, CUDA Graphs & $ L_{{lat}}$ (Overhead) \\
-      Comm.\ overlap (distributed) & $ L_{{lat}}$ (Overhead) \\
-      Spec.\ decoding, MoE   & $ O$ (Compute term) \\
-      
-    {tabular}
-    }
-
-    {0.15cm}
-    {
-    $D_{{vol}}$: bytes moved  BW: bandwidth\\
-    $O$: FLOPs  $R_{{peak}}$: peak FLOPS  $$: efficiency\\
-    $L_{{lat}}$: launch, sync, communication overhead}
-  
-  
-    {mlsyscard}{computestroke}
-    {**Roofline identifies which term dominates.**}
-
-    {0.1cm}
-    {
-    Memory-bound $$ Data term dominates.\\
-    Optimize: quantization, fusion, FlashAttention.\\[0.2em]
-    Compute-bound $$ Compute term dominates.\\
-    Optimize: FP8, larger batch, Tensor Cores.\\[0.2em]
-    Overhead-bound $$ $L_{{lat}}$ dominates.\\
-    Optimize: CUDA Graphs, compiler, overlap.}
-    {mlsyscard}
-
-    {0.1cm}
-    {Key:}{Targeting the non-dominant term yields zero improvement.}
+</details>
 
 ## The Memory Wall
 
-{
+[Original slide 6](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L256)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/09_performance_engineering/images/memory-wall.svg]]
+
+Harvard Edge ML Systems Book contributors, [memory-wall.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/images/memory-wall.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Key:** Moving data costs 1,280$\times$ more energy from HBM than from SRAM. This is physics, not engineering.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 Ch 9 showed that LLM decode is memory-bandwidth-bound. This slide
@@ -189,12 +220,12 @@ Point to the diagram: ``An H100 has 989 TFLOPS of compute but only
 3.35 TB/s of memory bandwidth. During LLM decode, the GPU loads the
 full weight matrix from HBM for each token --- one matrix-vector
 multiply. The arithmetic intensity is about 2 FLOP/byte. The GPU
-sits 95% idle waiting for data.''
+sits 95\% idle waiting for data.''
 ANALOGY: ``A factory with 1000 workers but only one loading dock.
 The workers stand idle waiting for materials.''
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
-Ask: ``If the GPU has 989 TFLOPS, why does LLM decode use only 2%?''
+Ask: ``If the GPU has 989 TFLOPS, why does LLM decode use only 2\%?''
 Expected: because each weight byte produces only 2 FLOPs. The
 bottleneck is getting weights from HBM, not computing with them.
 
@@ -206,18 +237,31 @@ than from SRAM. Every GPU generation makes it worse.
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] The memory wall is the central insight of the chapter.
 IF SHORT: Show diagram and the 1,280x energy number.
-}
+```
 
-% --- Full-width diagram ---
-
-{memory-wall.pdf}
-
-{0.15cm}
-{Key:}{Moving data costs 1,280$×$ more energy from HBM than from SRAM. This is physics, not engineering.}
+</details>
 
 ## The Widening Gap
 
-{
+[Original slide 7](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L296)
+
+| **GPU** | **Year** | **Tensor Peak** | **HBM BW (TB/s)** | **Ridge (FLOP/B)** |
+| --- | --- | --- | --- | --- |
+| V100 | 2017 | 125 | 0.9 | 139 |
+| A100 | 2020 | 312 | 2.0 | 156 |
+| H100 | 2022 | 989 | 3.35 | 295 |
+| B200 (FP16) | 2024 | 2,250 | 8.0 | 281 |
+
+All values use FP16/BF16 precision for a consistent cross-generation comparison. B200 reaches 4,500 TFLOPS at FP4, but changing precision changes the teaching fact.
+
+**18$\times$ compute growth** vs. **8.9$\times$ bandwidth growth** in 7 years (FP16/BF16 basis).
+
+Ridge point grew 2$\times$ (139$\to$281 FLOP/byte). More workloads become memory-bound with each generation.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 The memory wall showed the bottleneck. This slide quantifies how it
@@ -248,34 +292,24 @@ precision basis and teaches a different fact than the chapter argues.
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Motivates why every technique in this chapter matters more over time.
 IF SHORT: Show only the table; skip the card.
-}
+```
 
-{}{1.15}
-{
-{tabular}{@{}lrrrr@{}}
-  
-  **GPU** & **Year** & **Tensor Peak** & **HBM BW (TB/s)** & **Ridge (FLOP/B)** \\
-  
-  V100 & 2017 & 125  & 0.9  & 139 \\
-  A100 & 2020 & 312  & 2.0  & 156 \\
-  H100 & 2022 & 989  & 3.35 & 295 \\
-  B200 (FP16) & 2024 & 2,250 & 8.0  & 281 \\
-  
-{tabular}
-}
-
-{0.1cm}
-{{midgray}{All values use FP16/BF16 precision for a consistent cross-generation comparison. B200 reaches 4,500 TFLOPS at FP4, but changing precision changes the teaching fact.}}
-
-{0.1cm}
-{mlsyscard}{errorstroke}
-**18$×$ compute growth** vs.\ **8.9$×$ bandwidth growth** in 7 years (FP16/BF16 basis).\\
-{ Ridge point grew 2$×$ (139$$281 FLOP/byte). More workloads become memory-bound with each generation.}
-{mlsyscard}
+</details>
 
 ## The Roofline Model
 
-{
+[Original slide 8](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L360)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/09_performance_engineering/images/roofline-model.svg]]
+
+Harvard Edge ML Systems Book contributors, [roofline-model.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/images/roofline-model.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Diagnosis:** If $\ensuremath{I} < \ensuremath{I_{\text{ridge}}}$, you are memory-bound. Faster compute yields zero improvement.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 The memory wall showed the problem qualitatively. The roofline model
@@ -301,18 +335,28 @@ are wasted money.
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] The roofline is the diagnostic tool used throughout the chapter.
 IF SHORT: Show diagram and state the diagnosis rule.
-}
+```
 
-% --- Full-width diagram ---
-
-{roofline-model.pdf}
-
-{0.1cm}
-{Diagnosis:}{If $ < $, you are memory-bound. Faster compute yields zero improvement.}
+</details>
 
 ## Where ML Workloads Fall
 
-{
+[Original slide 9](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L398)
+
+| **Operation** | **AI (FLOP/B)** | **Regime** | **Optimization** |
+| --- | --- | --- | --- |
+| LLM Decode (batch=1) | $\approx$2 | Deeply mem-bound | Precision, fusion |
+| LayerNorm / GELU | $\approx$5 | Memory-bound | Element-wise fusion |
+| Attention (naive) | $\approx$10 | Memory-bound | FlashAttention |
+| GEMM $4096^2$ FP16 | $\approx$1,365 | Compute-bound | Tensor Cores |
+| Batched GEMM | $>$500 | Compute-bound | FP8 compute |
+
+**Most transformer inference is memory-bound.** The H100 ridge point is 295 FLOP/byte at FP16. Only large GEMMs exceed it.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 The roofline showed the framework. This slide places actual ML
@@ -333,45 +377,68 @@ must target different techniques for different operations.
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Maps real operations to the roofline framework.
 IF SHORT: Show only the table; skip the card.
-}
+```
 
-{}{1.15}
-{tabular}{@{}lrll@{}}
-  
-  **Operation** & **AI (FLOP/B)** & **Regime** & **Optimization** \\
-  
-  LLM Decode (batch=1) & $$2 & {computestroke}{Deeply mem-bound} & Precision, fusion \\
-  LayerNorm / GELU & $$5 & {computestroke}{Memory-bound} & Element-wise fusion \\
-  Attention (naive) & $$10 & {computestroke}{Memory-bound} & FlashAttention \\
-  GEMM $4096^2$ FP16 & $$1,365 & {errorstroke}{Compute-bound} & Tensor Cores \\
-  Batched GEMM & $>$500 & {errorstroke}{Compute-bound} & FP8 compute \\
-  
-{tabular}
-
-{0.15cm}
-{mlsyscard}{crimson}
-**Most transformer inference is memory-bound.** The H100 ridge point is 295 FLOP/byte at FP16. Only large GEMMs exceed it.
-{mlsyscard}
+</details>
 
 ## Batch Size: The Universal Control Knob
 
-{
+[Original slide 10](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L443)
+
+**AI scales linearly with batch size:**
+
+$$
+I_{\text{decode}}(B) \approx \frac{2B}{b_{\text{param}}}
+$$
+
+($B$ = batch size, $b_{\text{param}}$ = bytes per parameter)
+
+| **Batch** | **AI** | **Regime** | **Util.** |
+| --- | --- | --- | --- |
+| 1 | $\sim$2 | Deeply mem-bound | 2% |
+| 64 | $\sim$128 | Mem-bound | 40% |
+| 256 | $\sim$256 | Near ridge | 60% |
+
+**Cost/token drops 30$\times$** from batch=1 to batch=256.
+
+**Prefill vs. Decode:**
+
+**Prefill** (all $S$ tokens at once):
+
+AI $\approx 2S/b_{\text{param}}$.
+
+At $S=1024$: $\sim$1024 FLOP/byte.
+
+**Compute-bound.** Tensor Cores limited.
+
+**Decode** (one token, small batch):
+
+AI $\approx$ 1–2 FLOP/byte.
+
+**Memory-bound.** BW limited.
+
+FlashAttention, quantization, spec. decoding all target this.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
-The workload placement slide showed LLM decode at AI $$ 2 (deeply
+The workload placement slide showed LLM decode at AI $\approx$ 2 (deeply
 memory-bound). This slide explains WHY batch size changes that, and why
 prefill and decode live in different regimes.
 
 % -- NARRATE: What to SAY while showing this slide
 Point to the AI formula: ``Arithmetic intensity for a decode step scales
-linearly with batch size B. At batch=1, AI $$ 1--2 FLOP/byte
+linearly with batch size B. At batch=1, AI $\approx$ 1--2 FLOP/byte
 (deeply memory-bound). At batch=256, the same weight bytes are amortized
-over 256 requests, so AI rises to $$256 FLOP/byte, approaching the
+over 256 requests, so AI rises to $\sim$256 FLOP/byte, approaching the
 ridge point.'' Then the economic consequence: ``A single H100 at batch=1
 runs at 2 percent utilization. At batch=256, it reaches 60 percent.
-Cost per token drops 30$×$.''
+Cost per token drops 30$\times$.''
 Then point to the prefill/decode split: ``Prefill processes all S tokens
-simultaneously --- arithmetic intensity $ 2S/b_{{param}}$,
+simultaneously --- arithmetic intensity $\approx 2S/b_{\text{param}}$,
 well into compute-bound at $S=1024$. Decode generates one token at a
 time, deeply memory-bound at small batch. Different regimes, different
 bottlenecks, different optimization techniques.''
@@ -390,80 +457,57 @@ maximum batch size. Quantization frees memory precisely to enable the
 larger batches that change the economics.
 
 % -- FLEX: [CORE] Grounds the speculative decoding caveat and the A100 prediction exercise.
-IF SHORT: State the 30$×$ cost reduction and the prefill/decode regime split.
-}
+IF SHORT: State the 30$\times$ cost reduction and the prefill/decode regime split.
+```
 
-[T]
-  
-    **AI scales linearly with batch size:**
-    {0.05cm}
-    \[
-      I_{{decode}}(B)  {2B}{b_{{param}}}
-    \]
-    {($B$ = batch size, $b_{{param}}$ = bytes per parameter)}
-
-    {0.05cm}
-    
-    {}{1.05}
-    {tabular}{@{}lrll@{}}
-      
-      **Batch** & **AI** & **Regime** & **Util.** \\
-      
-      1   & $$2   & Deeply mem-bound & 2% \\
-      64  & $$128 & Mem-bound        & 40% \\
-      256 & $$256 & Near ridge       & 60% \\
-      
-    {tabular}
-
-    {0.05cm}
-    {mlsyscard}{crimson}
-    {**Cost/token drops 30$×$** from batch=1 to batch=256.}
-    {mlsyscard}
-  
-  
-    **Prefill vs.\ Decode:**
-
-    {0.05cm}
-    {mlsyscard}{computestroke}
-    {**Prefill** (all $S$ tokens at once):\\
-    AI $ 2S/b_{{param}}$.\\
-    At $S=1024$: $$1024 FLOP/byte.\\
-    {computestroke}{**Compute-bound.**} Tensor Cores limited.}
-    {mlsyscard}
-
-    {0.1cm}
-    {mlsyscard}{errorstroke}
-    {**Decode** (one token, small batch):\\
-    AI $$ 1--2 FLOP/byte.\\
-    {errorstroke}{**Memory-bound.**} BW limited.\\
-    FlashAttention, quantization, spec.\ decoding all target this.}
-    {mlsyscard}
+</details>
 
 ## Quick Check
 
-{
+[Original slide 11](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L534)
+
+Quick Check
+
+What is the H100 ridge point,
+
+and what does it tell you about LLM decode?
+
+15 seconds — then I will cold-call.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min]
 % -- NARRATE: What to SAY while showing this slide
 Read the question. Wait 15 seconds. Cold-call.
-Expected: 295 FLOP/byte. LLM decode at AI 2 is 150x below the ridge,
+Expected: 295 FLOP/byte. LLM decode at AI~2 is 150x below the ridge,
 deeply memory-bound.
 
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Reinforces the roofline diagnosis before the prediction exercise.
-}
+```
 
-{1.0cm}
-{ Quick Check}
-
-{0.6cm}
-{ What is the H100 ridge point,\ what does it tell you about LLM decode?}
-
-{0.5cm}
-{{midgray}{15 seconds --- then I will cold-call.}}
+</details>
 
 ## Predict: Which Bottleneck Dominates?
 
-{
+[Original slide 12](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L561)
+
+Think–Write–Share
+
+A team upgrades from A100 to H100, expecting 3$\times$ faster
+
+LLM inference at batch size 1. They see only 15% improvement.
+
+Why? Which Iron Law term dominates?
+
+(60 seconds — write your diagnosis before I reveal)
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 The roofline and ML workload placement set up the diagnosis. This
@@ -472,13 +516,13 @@ improvement.
 
 % -- NARRATE: What to SAY while showing this slide
 ``A team upgrades from A100 to H100, expecting 3x faster LLM inference
-at batch 1. They see only 15% improvement. Why?'' Give 60 seconds.
+at batch 1. They see only 15\% improvement. Why?'' Give 60 seconds.
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
 Expected answer: memory-bound. Batch-1 decode has AI of 2, far below
 the ridge of 295. The A100-to-H100 upgrade provides 3x more FLOPS
 but only 1.7x more bandwidth. A memory-bound workload improves by
-the bandwidth ratio (1.7x), not the FLOPS ratio (3x). The 15%
+the bandwidth ratio (1.7x), not the FLOPS ratio (3x). The 15\%
 observed is less because software overhead limits bandwidth utilization.
 
 % -- WARN: What students will get wrong on THIS topic
@@ -490,24 +534,24 @@ fuse), not ``increase compute efficiency.''
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Prediction that motivates all subsequent optimization techniques.
 IF SHORT: Reduce to 30 seconds.
-}
+```
 
-{1.0cm}
-{ Think--Write--Share}
-
-{0.5cm}
-{ A team upgrades from A100 to H100, expecting 3$×$ faster\\
-LLM inference at batch size 1. They see only 15% improvement.}
-
-{0.4cm}
-{ Why? Which Iron Law term dominates?}
-
-{0.4cm}
-{{midgray}{(60 seconds --- write your diagnosis before I reveal)}}
+</details>
 
 ## Operator Fusion: Before and After
 
-{
+[Original slide 13](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L611)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/09_performance_engineering/images/operator-fusion.svg]]
+
+Harvard Edge ML Systems Book contributors, [operator-fusion.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/images/operator-fusion.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Impact:** Fusion reduces HBM transfers from 5 to 2 per layer, saving 32 MB of redundant traffic.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 The roofline showed most operations are memory-bound. Operator fusion
@@ -529,18 +573,30 @@ eliminated per forward pass.
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Fusion is the most broadly applicable optimization technique.
 IF SHORT: Show the diagram and state the 5-to-2 reduction.
-}
+```
 
-% --- Full-width diagram ---
-
-{operator-fusion.pdf}
-
-{0.1cm}
-{Impact:}{Fusion reduces HBM transfers from 5 to 2 per layer, saving 32 MB of redundant traffic.}
+</details>
 
 ## Fusion Categories
 
-{
+[Original slide 14](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L645)
+
+| **Category** | **Example** | **Savings** | **Difficulty** |
+| --- | --- | --- | --- |
+| **Element-wise** | Bias + GELU + Dropout | 64 MB/layer | Automatic |
+| **Reduction** | LayerNorm (mean + var) | 48 MB/layer | Moderate |
+| **Operator-specific** | FlashAttention | 4 GB/layer | Custom kernel |
+
+**CUDA Graphs** eliminate launch overhead:
+
+30+ kernels $\times$ 70 layers = 15 ms tax $\to$ $<$0.1 ms.
+
+**Combined:** Fusion + CUDA Graphs reduce HBM traffic 60–80% and eliminate non-compute overhead.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 The before/after showed one example. This slide categorizes the three
@@ -552,7 +608,7 @@ compilers handle it. Reduction fusion (LayerNorm combining mean and
 variance) is moderate effort. Operator-specific fusion (FlashAttention)
 is the big win but requires custom kernel engineering.'' Point to
 the cards: ``CUDA Graphs eliminate kernel launch overhead: 30+ kernels
-times 70 layers = 15 ms tax reduced to under 0.1 ms. Combined: 60--80%
+times 70 layers = 15 ms tax reduced to under 0.1 ms. Combined: 60--80\%
 less HBM traffic.''
 
 % -- WARN: What students will get wrong on THIS topic
@@ -562,36 +618,25 @@ softmax) that no compiler can discover.
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Categorization details supplement the fusion concept.
-IF SHORT: State the 60--80% combined reduction; skip individual categories.
-}
+IF SHORT: State the 60--80\% combined reduction; skip individual categories.
+```
 
-{}{1.1}
-{tabular}{@{}llrl@{}}
-  
-  **Category** & **Example** & **Savings** & **Difficulty** \\
-  
-  **Element-wise** & Bias + GELU + Dropout & 64 MB/layer & Automatic \\
-  **Reduction** & LayerNorm (mean + var) & 48 MB/layer & Moderate \\
-  **Operator-specific** & FlashAttention & 4 GB/layer & Custom kernel \\
-  
-{tabular}
-
-{0.1cm}
-[T]
-  
-    {mlsyscard}{computestroke}
-    {**CUDA Graphs** eliminate launch overhead:\\
-    30+ kernels $×$ 70 layers = 15 ms tax $$ $<$0.1 ms.}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{datastroke}
-    {**Combined:** Fusion + CUDA Graphs reduce HBM traffic 60--80% and eliminate non-compute overhead.}
-    {mlsyscard}
+</details>
 
 ## FlashAttention: Tiled Attention
 
-{
+[Original slide 15](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L700)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/09_performance_engineering/images/flashattention.svg]]
+
+Harvard Edge ML Systems Book contributors, [flashattention.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/images/flashattention.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Key Innovation:** Online softmax computes the *exact* result tile-by-tile, never materializing $N \times N$.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 Fusion categories showed FlashAttention as the highest-impact fusion.
@@ -617,18 +662,30 @@ algorithmic (tiling with running statistics), not approximation.
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] FlashAttention is the most important kernel optimization in modern ML.
 IF SHORT: State ``exact, 65x HBM reduction via tiling + online softmax.''
-}
+```
 
-% --- Full-width diagram ---
-
-{flashattention.pdf}
-
-{0.05cm}
-{**Key Innovation:** Online softmax computes the *exact* result tile-by-tile, never materializing $N × N$.}
+</details>
 
 ## CUDA Graphs: Eliminating Launch Overhead
 
-{
+[Original slide 16](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L738)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/09_performance_engineering/images/cuda-graphs.svg]]
+
+Harvard Edge ML Systems Book contributors, [cuda-graphs.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/images/cuda-graphs.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Without CUDA Graphs:**
+
+30–100 launches $\times$ 10 $\mu$s = 300–1000 $\mu$s overhead per decode step.
+
+**With CUDA Graphs:**
+
+Single graph replay: $<$10 $\mu$s total. **30–100$\times$** launch overhead reduction.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1.5 min]
 % -- LINK: What prior concept connects to this slide
 FlashAttention eliminates memory round-trips. But even with fused kernels, each kernel launch costs 5--15 microseconds of CPU-side overhead. For small decode batches, launch overhead can exceed kernel execution time.
@@ -644,28 +701,24 @@ Students think CUDA Graphs speed up the kernels themselves. They do not --- they
 
 % -- FLEX: [OPTIONAL] Complements FlashAttention with a different optimization target.
 IF SHORT: State the 30--100 kernel launches and the 10 microsecond replay result.
-}
+```
 
-{cuda-graphs.pdf}
-
-{0.1cm}
-
-[T]
-  
-    {mlsyscard}{errorstroke}
-    {**Without CUDA Graphs:**\\
-    30--100 launches $×$ 10 $$s = 300--1000 $$s overhead per decode step.}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{datastroke}
-    {**With CUDA Graphs:**\\
-    Single graph replay: $<$10 $$s total. **30--100$×$** launch overhead reduction.}
-    {mlsyscard}
+</details>
 
 ## Precision Engineering
 
-{
+[Original slide 17](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L783)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/09_performance_engineering/images/precision-engineering.svg]]
+
+Harvard Edge ML Systems Book contributors, [precision-engineering.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/images/precision-engineering.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Principle:** Fewer bytes per weight = more weights per HBM trip = higher effective bandwidth.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 Fusion reduces the number of HBM trips. Precision engineering reduces
@@ -684,23 +737,46 @@ workload get?'' Expected: 2x, because you load half the bytes.
 % -- WARN: What students will get wrong on THIS topic
 Students think quantization always degrades quality. With proper
 techniques (AWQ, block-wise scaling), INT4 on 70B models shows
-under 1% quality loss.
+under 1\% quality loss.
 
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Precision is the highest-leverage single optimization.
 IF SHORT: State the principle and show only the diagram.
-}
+```
 
-% --- Full-width diagram ---
-
-{precision-engineering.pdf}
-
-{0.1cm}
-{Principle:}{Fewer bytes per weight = more weights per HBM trip = higher effective bandwidth.}
+</details>
 
 ## Quantization Techniques for LLMs
 
-{
+[Original slide 18](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L819)
+
+| **Method** | **Precision** | **Approach** | **Calibration** | **Use Case** |
+| --- | --- | --- | --- | --- |
+| LLM.int8() | W8A-FP16 | Mixed-precision decomp. | Runtime | Safe default |
+| GPTQ | W4A-FP16 | Hessian-based | Hours | Max compression |
+| **AWQ** | W4A-FP16 | Activation-aware | **Minutes** | **Production default** |
+| SmoothQuant | W8A8 | Smooth activations | Offline | Compute-bound |
+
+**PTQ vs. QAT:**
+
+PTQ first (4 GPU-hours for 70B).
+
+QAT only if quality fails (3 days on 8$\times$H100).
+
+QLoRA bridges the gap.
+
+**Weight-only vs. W+A:**
+
+INT4 weight-only at small batch (latency).
+
+FP8 W+A at large batch (throughput).
+
+Many systems use both.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 Precision showed the principle. This slide surveys the four main
@@ -723,41 +799,27 @@ mixed-precision decomposition.
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Quantization is used in every production serving system.
 IF SHORT: Focus on AWQ as production default; skip the PTQ/QAT card.
-}
+```
 
-{}{1.1}
-{tabular}{@{}lllll@{}}
-  
-  **Method** & **Precision** & **Approach** & **Calibration** & **Use Case** \\
-  
-  LLM.int8() & W8A-FP16 & Mixed-precision decomp. & Runtime & Safe default \\
-  GPTQ & W4A-FP16 & Hessian-based & Hours & Max compression \\
-  **AWQ** & W4A-FP16 & Activation-aware & **Minutes** & **Production default** \\
-  SmoothQuant & W8A8 & Smooth activations & Offline & Compute-bound \\
-  
-{tabular}
+</details>
 
-{0.15cm}
-[T]
-  
-    {mlsyscard}{routingstroke}
-    **PTQ vs.\ QAT:**\\
-    { PTQ first (4 GPU-hours for 70B).\\
-    QAT only if quality fails (3 days on 8$×$H100).\\
-    QLoRA bridges the gap.}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{errorstroke}
-    **Weight-only vs.\ W+A:**\\
-    { INT4 weight-only at small batch (latency).\\
-    FP8 W+A at large batch (throughput).\\
-    Many systems use both.}
-    {mlsyscard}
+## KV Cache Compression vs. Weight-Only Quantization
 
-## KV Cache Compression vs.\ Weight-Only Quantization
+[Original slide 19](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L880)
 
-{
+| **Target** | **What It Saves** | **Reduction** | **Throughput Impact** |
+| --- | --- | --- | --- |
+| **Weight-Only** (INT4) | Static model memory | 4$\times$ | Enables fitting on fewer GPUs |
+| **KV Cache** (INT8) | Per-request memory | 2$\times$ | 2$\times$ batch $\to$ 2$\times$ throughput |
+| **KV Cache** (INT4) | Per-request memory | 4$\times$ | 4$\times$ batch (with quality risk) |
+| **W+A** (FP8) | Both weights + activations | 2$\times$ | Compute-bound speedup |
+
+**For long-context serving:** KV cache is the variable bottleneck. At seq=32K, KV cache can be 3$\times$ the model weights. Quantize KV first.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 Weight quantization reduces model memory. But for long-context serving, the KV cache can exceed the model weights. This slide distinguishes the two quantization targets.
@@ -773,28 +835,24 @@ Students apply the same quantization precision everywhere. KV cache tolerates mo
 
 % -- FLEX: [OPTIONAL] Distinguishes two quantization targets with different impacts.
 IF SHORT: State ``KV INT8 = 2x batch size = 2x throughput'' and move on.
-}
+```
 
-{}{1.15}
-{tabular}{@{}lp{2.3cm}rl@{}}
-  
-  **Target** & **What It Saves** & **Reduction** & **Throughput Impact** \\
-  
-  **Weight-Only** (INT4) & Static model memory   & 4$×$   & Enables fitting on fewer GPUs \\
-  **KV Cache** (INT8)    & Per-request memory    & 2$×$   & 2$×$ batch $$ 2$×$ throughput \\
-  **KV Cache** (INT4)    & Per-request memory    & 4$×$   & 4$×$ batch (with quality risk) \\
-  **W+A** (FP8)          & Both weights + activations & 2$×$ & Compute-bound speedup \\
-  
-{tabular}
-
-{0.1cm}
-{mlsyscard}{datastroke}
-{**For long-context serving:** KV cache is the variable bottleneck. At seq=32K, KV cache can be 3$×$ the model weights. Quantize KV first.}
-{mlsyscard}
+</details>
 
 ## Graph Compilation Pipeline
 
-{
+[Original slide 20](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L923)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/09_performance_engineering/images/graph-compilation.svg]]
+
+Harvard Edge ML Systems Book contributors, [graph-compilation.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/images/graph-compilation.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Limitation:** Compilers automate *known* optimizations; human engineers discover *new* ones.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 Fusion and precision are manual optimizations. Graph compilers
@@ -815,18 +873,28 @@ online softmax was a mathematical insight no compiler could generate.
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Compilation is part of every production ML stack.
 IF SHORT: Show the diagram and state the limitation.
-}
+```
 
-% --- Full-width diagram ---
-
-{graph-compilation.pdf}
-
-{0.1cm}
-{Limitation:}{Compilers automate *known* optimizations; human engineers discover *new* ones.}
+</details>
 
 ## Three Compilers, Three Contexts
 
-{
+[Original slide 21](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L956)
+
+|  | **torch.compile** | **XLA** | **TensorRT** |
+| --- | --- | --- | --- |
+| **Ecosystem** | PyTorch + GPU | JAX + TPU | NVIDIA inference |
+| **Compile time** | Seconds | Minutes | 30–60 min |
+| **Speedup** | 10–40% | 55–65% MFU | 1.3–1.8$\times$ |
+| **Flexibility** | Graph breaks OK | Static graph only | Static shapes |
+| **Best for** | Dev & research | Training at scale | Prod serving |
+
+**Trade-off:** Flexibility $\leftrightarrow$ Performance. More constraints $=$ more optimization opportunity.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 The pipeline showed what compilers do. This slide compares the three
@@ -834,8 +902,8 @@ production compilers and when to use each.
 
 % -- NARRATE: What to SAY while showing this slide
 Walk through the table: ``torch.compile: one line of code, seconds to
-compile, 10--40% speedup, handles graph breaks. Best for research.
-XLA: minutes to compile, 55--65% MFU, requires static graphs. Best
+compile, 10--40\% speedup, handles graph breaks. Best for research.
+XLA: minutes to compile, 55--65\% MFU, requires static graphs. Best
 for TPU training at scale. TensorRT: 30--60 min compile, 1.3--1.8x
 throughput, static shapes only. Best for production inference.'' The
 trade-off: more constraints give the compiler more optimization
@@ -849,27 +917,47 @@ the compiler to the deployment context.
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Compiler comparison is useful but secondary to the principle.
 IF SHORT: State the flexibility-vs-performance trade-off; skip the table.
-}
+```
 
-{}{1.15}
-{tabular}{@{}llll@{}}
-  
-  & **torch.compile** & **XLA** & **TensorRT** \\
-  
-  **Ecosystem** & PyTorch + GPU & JAX + TPU & NVIDIA inference \\
-  **Compile time** & Seconds & Minutes & 30--60 min \\
-  **Speedup** & 10--40% & 55--65% MFU & 1.3--1.8$×$ \\
-  **Flexibility** & Graph breaks OK & Static graph only & Static shapes \\
-  **Best for** & Dev & research & Training at scale & Prod serving \\
-  
-{tabular}
-
-{0.15cm}
-{Trade-off:}{Flexibility $$ Performance. More constraints $=$ more optimization opportunity.}
+</details>
 
 ## Your Turn: Diagnose and Optimize
 
-{
+[Original slide 22](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L1002)
+
+Diagnose the Bottleneck
+
+A 70B LLM serves batch-1 decode on an H100:
+
+- Arithmetic Intensity $\approx$ 2 FLOP/byte
+- H100 ridge point = 295 FLOP/byte
+- Achieved BW = 2.8 TB/s (84% of peak)
+- MFU = 2%
+
+**1.** Is this compute-bound or memory-bound?
+
+**2.** Name the top 3 optimizations *in order*.
+
+**3.** Would upgrading compute alone help?
+
+(90 seconds — compare with a neighbor)
+
+**Solution:**
+
+1. **Memory-bound** (AI $\ll$ ridge)
+
+2. a) INT4 quant (4$\times$ BW)
+
+  b) FlashAttention (65$\times$)
+
+  c) torch.compile (10–40%)
+
+3. No. The workload is BW-limited, so extra FLOPS sit idle.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min]
 % -- LINK: What prior concept connects to this slide
 Students have seen the memory wall, roofline, fusion, precision, and
@@ -877,14 +965,14 @@ compilation. This exercise integrates them into a diagnostic workflow.
 
 % -- NARRATE: What to SAY while showing this slide
 ``A 70B LLM serves batch-1 decode on H100. AI = 2, ridge = 295.
-Achieved BW = 2.8 TB/s (84% of peak). MFU = 2%. Three questions:
+Achieved BW = 2.8 TB/s (84\% of peak). MFU = 2\%. Three questions:
 is it compute or memory bound? Name the top 3 optimizations in order.
 Would upgrading only compute help?'' Give 90 seconds.
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
 Solution: Memory-bound (AI << ridge). Top 3: (1) INT4 quantization
 for 4x effective bandwidth, (2) FlashAttention for 65x attention
-HBM reduction, (3) torch.compile for 10--40% from automated fusion.
+HBM reduction, (3) torch.compile for 10--40\% from automated fusion.
 More compute alone does not help because the workload is BW-limited.
 
 % -- WARN: What students will get wrong on THIS topic
@@ -895,43 +983,33 @@ answer must address the given constraint.
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Integrative exercise applying all chapter concepts.
 IF SHORT: Give 45 seconds and reveal quickly.
-}
+```
 
-[T]
-  
-    { Diagnose the Bottleneck}
-
-    {0.1cm}
-    A 70B LLM serves batch-1 decode on an H100:
-    {0pt}
-- Arithmetic Intensity $$ 2 FLOP/byte
-- H100 ridge point = 295 FLOP/byte
-- Achieved BW = 2.8 TB/s (84% of peak)
-- MFU = 2%
-    
-
-    {0.05cm}
-    **1.** Is this compute-bound or memory-bound?\\
-    **2.** Name the top 3 optimizations *in order*.\\
-    **3.** Would upgrading compute alone help?
-
-    {{midgray}{(90 seconds --- compare with a neighbor)}}
-  
-  
-    
-    {mlsyscard}{datastroke}
-    {**Solution:**\\[0.05cm]
-    1. {computestroke}{**Memory-bound**} (AI $$ ridge)\\[0.05cm]
-    2. a) INT4 quant (4$×$ BW)\\
-     b) FlashAttention (65$×$)\\
-     c) torch.compile (10--40%)\\[0.05cm]
-    3. No. The workload is BW-limited, so extra FLOPS sit idle.
-    }
-    {mlsyscard}
+</details>
 
 ## Speculative Decoding
 
-{
+[Original slide 23](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L1072)
+
+**Problem:** Each decode step loads full weights from HBM for *one* token. AI $\approx$ 2 FLOP/byte.
+
+**Speculative Decoding:**
+
+1. Draft model generates $k$ candidates (fast)
+2. Target model verifies all $k$ in **one** pass
+3. Accepted tokens: mathematically identical output
+4. Rejected tokens: “wasted” compute (but compute is free!)
+
+**Trade:** Abundant compute for scarce bandwidth.
+
+**Why it works:** Target loads weights **once** for $k$ tokens instead of once per token. Effective AI increases by $k\times$. Speedup: **1.5–3$\times$** typical.
+
+**Caveat:** Best at batch=1 (memory-bound). At large batches, speculation adds overhead.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 Fusion and precision reduce bytes moved. Speculative decoding increases
@@ -958,37 +1036,41 @@ The insight: at batch=1, compute is abundant and bandwidth is scarce.
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Speculative decoding is deployed in production systems.
 IF SHORT: State the insight and the 1.5--3x result.
-}
+```
 
-[T]
-  
-    **Problem:** Each decode step loads full weights from HBM for *one* token. AI $$ 2 FLOP/byte.
-
-    {0.1cm}
-    **Speculative Decoding:**
-    {0pt}
-- {datastroke}{Draft model} generates $k$ candidates (fast)
-- {computestroke}{Target model} verifies all $k$ in **one** pass
-- Accepted tokens: mathematically identical output
-- Rejected tokens: ``wasted'' compute (but compute is free!)
-    
-
-    {0.05cm}
-    {Trade:}{Abundant compute for scarce bandwidth.}
-  
-  
-    {mlsyscard}{computestroke}
-    {**Why it works:** Target loads weights **once** for $k$ tokens instead of once per token. Effective AI increases by $k×$. Speedup: **1.5--3$×$** typical.}
-    {mlsyscard}
-
-    {0.1cm}
-    {mlsyscard}{errorstroke}
-    {**Caveat:** Best at batch=1 (memory-bound). At large batches, speculation adds overhead.}
-    {mlsyscard}
+</details>
 
 ## Mixture of Experts (MoE)
 
-{
+[Original slide 24](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L1133)
+
+**Break the capacity-cost link:**
+
+- Replace FFN with $N$ parallel “expert” FFNs
+- Lightweight **router** selects top-$k$ experts/token
+- Only $k/N$ of parameters activate per token
+
+|  | **Dense 1T** | **MoE 370B/37B** |
+| --- | --- | --- |
+| Total params | 1,000B | 370B |
+| Active/token | 1,000B | 37B |
+| Memory (FP16) | 2,000 GB | 740 GB |
+| Compute ratio | 1$\times$ | 27$\times$ less |
+
+**DeepSeek-V3:** 671B total, 37B active. 256 experts, top-8 routing. Near GPT-4 quality at fraction of cost.
+
+**System Challenges:**
+
+$\bullet$ AllToAll communication
+
+$\bullet$ Load balancing across experts
+
+$\bullet$ Training instability ($>$64 experts)
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 Speculative decoding increases useful work per weight load. MoE
@@ -1012,49 +1094,39 @@ between experts can become the new bottleneck.
 [OPTIONAL] MoE is an emerging architecture; the systems challenges
 are more important than the algorithm.
 IF SHORT: State the capacity-cost decoupling and the 27x compute reduction.
-}
+```
 
-[T]
-  
-    **Break the capacity-cost link:**
-    {0pt}
-- Replace FFN with $N$ parallel ``expert'' FFNs
-- Lightweight **router** selects top-$k$ experts/token
-- Only $k/N$ of parameters activate per token
-    
-
-    {0.05cm}
-    {
-    {}{1.05}
-    {tabular}{@{}lrr@{}}
-      
-      & **Dense 1T** & **MoE 370B/37B** \\
-      
-      Total params  & 1,000B & 370B \\
-      Active/token  & 1,000B & 37B \\
-      Memory (FP16) & 2,000 GB & 740 GB \\
-      Compute ratio & 1$×$ & 27$×$ less \\
-      
-    {tabular}
-    }
-  
-  
-    {mlsyscard}{datastroke}
-    {**DeepSeek-V3:** 671B total, 37B active. 256 experts, top-8 routing. Near GPT-4 quality at fraction of cost.}
-    {mlsyscard}
-
-    {0.08cm}
-    {mlsyscard}{errorstroke}
-    {**System Challenges:**\\
-    $$ AllToAll communication\\
-    $$ Load balancing across experts\\
-    $$ Training instability ($>$64 experts)
-    }
-    {mlsyscard}
+</details>
 
 ## System Profiling: Measure First
 
-{
+[Original slide 25](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L1207)
+
+**Four-Level Profiling Hierarchy**
+
+| **Level** | **Tool** | **What It Reveals** |
+| --- | --- | --- |
+| Application | Custom metrics | Tokens/s, TTFT, P99 latency |
+| Distributed | Nsight Systems | Comm patterns, load imbalance |
+| Trace | PyTorch Profiler | Kernel timeline, GPU idle gaps |
+| Kernel | Nsight Compute | Achieved BW, occupancy, cache misses |
+
+**Key Metrics:**
+
+$\bullet$ **MFU**: training (40–60% typical)
+
+$\bullet$ **MBU**: inference (85% = near-optimal)
+
+$\bullet$ **TTFT**: time-to-first-token ($<$500 ms)
+
+$\bullet$ **ITL**: inter-token latency ($<$50 ms)
+
+**MFU misleads for inference.** Decode may show 2% MFU but 85% MBU — the system is near-optimal. Use MBU for inference, MFU for training.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 All optimization techniques have been presented. Profiling determines
@@ -1066,13 +1138,13 @@ zero improvement because the system was I/O bound. Profile first.
 Four levels: application metrics (tokens/s, TTFT), distributed traces
 (communication patterns), kernel timeline (GPU idle gaps), and kernel
 internals (achieved bandwidth, occupancy).'' Point to the cards:
-``MFU misleads for inference. Decode at 2% MFU but 85% MBU means
+``MFU misleads for inference. Decode at 2\% MFU but 85\% MBU means
 the system is near-optimal for bandwidth. Use MBU for inference, MFU
 for training.''
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
-Ask: ``If MFU is 2%, is the system performing poorly?'' Expected: not
-necessarily --- for memory-bound decode, 2% MFU with 85% MBU is
+Ask: ``If MFU is 2\%, is the system performing poorly?'' Expected: not
+necessarily --- for memory-bound decode, 2\% MFU with 85\% MBU is
 near-optimal. MFU is the wrong metric for inference.
 
 % -- WARN: What students will get wrong on THIS topic
@@ -1083,44 +1155,24 @@ For memory-bound workloads, MBU is the correct diagnostic.
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] The profiling hierarchy prevents wasted optimization effort.
 IF SHORT: Focus on the MFU-vs-MBU distinction; skip the tool table.
-}
+```
 
-**Four-Level Profiling Hierarchy**
-
-{0.05cm}
-
-{}{1.05}
-{tabular}{@{}llp{5cm}@{}}
-  
-  **Level** & **Tool** & **What It Reveals** \\
-  
-  Application & Custom metrics & Tokens/s, TTFT, P99 latency \\
-  Distributed & Nsight Systems & Comm patterns, load imbalance \\
-  Trace & PyTorch Profiler & Kernel timeline, GPU idle gaps \\
-  Kernel & Nsight Compute & Achieved BW, occupancy, cache misses \\
-  
-{tabular}
-
-{0.05cm}
-
-[T]
-  
-    {mlsyscard}{crimson}
-    {**Key Metrics:**\\
-    $$ **MFU**: training (40--60% typical)\\
-    $$ **MBU**: inference (85% = near-optimal)\\
-    $$ **TTFT**: time-to-first-token ($<$500 ms)\\
-    $$ **ITL**: inter-token latency ($<$50 ms)}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{errorstroke}
-    {**MFU misleads for inference.** Decode may show 2% MFU but 85% MBU --- the system is near-optimal. Use MBU for inference, MFU for training.}
-    {mlsyscard}
+</details>
 
 ## Iron Law Diagnostic Flowchart
 
-{
+[Original slide 26](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L1277)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/09_performance_engineering/images/diagnostic-flow.svg]]
+
+Harvard Edge ML Systems Book contributors, [diagnostic-flow.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/images/diagnostic-flow.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Key:** Every optimization shifts the bottleneck. The profile-optimize-reprofile loop never ends.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 Profiling tells you where you are. The flowchart tells you what to do
@@ -1140,18 +1192,30 @@ optimization useless or even harmful.
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] The diagnostic loop is the chapter's central methodology.
 IF SHORT: State ``profile, classify, optimize, reprofile'' and move on.
-}
+```
 
-% --- Full-width diagram ---
-
-{diagnostic-flow.pdf}
-
-{0.1cm}
-{Key:}{Every optimization shifts the bottleneck. The profile-optimize-reprofile loop never ends.}
+</details>
 
 ## Discussion: The Optimization Trap
 
-{
+[Original slide 27](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L1310)
+
+Turn and Talk (90 seconds)
+
+A team applies INT4 quantization (4$\times$ bandwidth savings)
+
+to their memory-bound serving system.
+
+Throughput improves by only 2$\times$, not 4$\times$.
+
+**What happened? What should they do next?**
+
+Hint: think about what the bottleneck became *after* quantization.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min]
 % -- LINK: What prior concept connects to this slide
 The flowchart showed that bottlenecks shift. This discussion makes
@@ -1176,25 +1240,24 @@ gains are wasted.
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Synthesizes the profile-optimize-reprofile methodology.
 IF SHORT: Do show-of-hands for ``bottleneck shifted to compute.''
-}
+```
 
-{0.8cm}
-{ Turn and Talk {midgray}{(90 seconds)}}
-
-{0.5cm}
-{ A team applies INT4 quantization (4$×$ bandwidth savings)\\
-to their memory-bound serving system.\\[0.2cm]
-Throughput improves by only 2$×$, not 4$×$.}
-
-{0.4cm}
-**What happened? What should they do next?**
-
-{0.3cm}
-{{midgray}{Hint: think about what the bottleneck became *after* quantization.}}
+</details>
 
 ## The Optimization Playbook
 
-{
+[Original slide 28](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L1359)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/09_performance_engineering/images/optimization-playbook.svg]]
+
+Harvard Edge ML Systems Book contributors, [optimization-playbook.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/images/optimization-playbook.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Principle:** Passive optimizations first $\to$ active changes last. Reprofile after every step.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 Individual techniques have been covered. The playbook orders them into
@@ -1211,24 +1274,37 @@ active ones last (algorithm changes). Each step validated by reprofiling.
 
 % -- WARN: What students will get wrong on THIS topic
 Students jump to the hardest optimization (speculative decoding) first
-because it sounds exciting. The playbook shows that 80% of gains
+because it sounds exciting. The playbook shows that 80\% of gains
 come from steps 1--3, which require minimal engineering effort.
 
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] The playbook is the operational takeaway of the chapter.
 IF SHORT: Show diagram and state the passive-first principle.
-}
+```
 
-% --- Full-width diagram ---
-
-{optimization-playbook.pdf}
-
-{0.1cm}
-{Principle:}{Passive optimizations first $$ active changes last. Reprofile after every step.}
+</details>
 
 ## Case Study: 70B LLM Optimization
 
-{
+[Original slide 29](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L1394)
+
+| **Step** | **Throughput** | **Latency** | **Gain** | **Mechanism** |
+| --- | --- | --- | --- | --- |
+| Baseline (FP16) | 80 tok/s | 50 ms ITL | — | Unoptimized |
+| + torch.compile | 100 tok/s | 42 ms | 1.25$\times$ | Fusion + kernel select |
+| + AWQ INT4 | 280 tok/s | 35 ms | 2.8$\times$ | 4$\times$ less weight BW |
+| + FlashAttention | 350 tok/s | 30 ms | 1.25$\times$ | O(N) attention HBM |
+| + KV INT8 cache | 600 tok/s | 45 ms | 1.7$\times$ | 2$\times$ batch size |
+| + Spec. decoding | 600 tok/s | 22 ms | lat. 2$\times$ | Draft model parallel |
+
+**7.5$\times$ total throughput**, **2.3$\times$ latency reduction** from the same hardware.
+
+Each optimization shifted the bottleneck. INT4 $\to$ larger batch $\to$ compute-bound $\to$ new optimization target.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 The playbook ordered the steps. This case study shows the compounding
@@ -1252,31 +1328,46 @@ which changes AI, which changes the next optimization target.
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Concrete case study validating the playbook.
 IF SHORT: Show the summary table and the 7.5x result.
-}
+```
 
-{}{1.1}
-{tabular}{@{}lrrrl@{}}
-  
-  **Step** & **Throughput** & **Latency** & **Gain** & **Mechanism** \\
-  
-  Baseline (FP16) & 80 tok/s & 50 ms ITL & --- & Unoptimized \\
-  + torch.compile & 100 tok/s & 42 ms & 1.25$×$ & Fusion + kernel select \\
-  + AWQ INT4 & 280 tok/s & 35 ms & 2.8$×$ & 4$×$ less weight BW \\
-  + FlashAttention & 350 tok/s & 30 ms & 1.25$×$ & O(N) attention HBM \\
-  + KV INT8 cache & 600 tok/s & 45 ms & 1.7$×$ & 2$×$ batch size \\
-  + Spec.\ decoding & 600 tok/s & 22 ms & lat.\ 2$×$ & Draft model parallel \\
-  
-{tabular}
-
-{0.15cm}
-{mlsyscard}{crimson}
-**7.5$×$ total throughput**, **2.3$×$ latency reduction** from the same hardware.\\
-{ Each optimization shifted the bottleneck. INT4 $$ larger batch $$ compute-bound $$ new optimization target.}
-{mlsyscard}
+</details>
 
 ## Your Turn: FlashAttention Changes the Roofline
 
-{
+[Original slide 30](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L1445)
+
+Calculate AI Before and After FlashAttention
+
+**Setup:** Sequence length $N = 2048$, head dim $d = 128$, FP16.
+
+1. **Naive:** HBM reads? Compute? AI?
+2. **FlashAttention:** HBM reads? AI?
+3. H100 ridge point: $\sim$295 FLOP/byte.
+   
+   Which regime is each in?
+
+(90 seconds — use the roofline model)
+
+**Solution:**
+
+**Naive:** 16 MB reads, 1.07 GFLOP
+
+AI = 67 FLOP/byte: **memory-bound**
+
+**Flash:** 1.5 MB reads, 1.07 GFLOP
+
+AI = 713 FLOP/byte: **compute-bound**
+
+Same operation, same compute.
+
+**10.6$\times$ higher AI** from tiling.
+
+FlashAttention crosses the ridge.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min]
 % -- LINK: What prior concept connects to this slide
 Students learned the roofline model and FlashAttention separately. This exercise connects them by showing how FlashAttention moves attention from memory-bound to compute-bound.
@@ -1292,41 +1383,30 @@ Students will forget to count both the QK^T and softmax*V reads in naive attenti
 
 % -- FLEX: [CORE] This exercise unifies the chapter's two key concepts: roofline and FlashAttention.
 IF SHORT: Show the solution and emphasize the regime change.
-}
+```
 
-[T]
-  
-    { Calculate AI Before and After FlashAttention}
-
-    {0.15cm}
-    **Setup:** Sequence length $N = 2048$, head dim $d = 128$, FP16.
-
-    {0.1cm}
-- **Naive:** HBM reads? Compute? AI?
-- **FlashAttention:** HBM reads? AI?
-- H100 ridge point: $$295 FLOP/byte.\ regime is each in?
-    
-
-    {{midgray}{(90 seconds --- use the roofline model)}}
-  
-  
-    
-    {mlsyscard}{datastroke}
-    **Solution:**\\[0.05cm]
-    {
-    **Naive:** 16 MB reads, 1.07 GFLOP\\
-    AI = 67 FLOP/byte: {errorstroke}{**memory-bound**}\\[0.05cm]
-    **Flash:** 1.5 MB reads, 1.07 GFLOP\\
-    AI = 713 FLOP/byte: {datastroke}{**compute-bound**}\\[0.1cm]
-    Same operation, same compute.\\
-    **10.6$×$ higher AI** from tiling.\\
-    FlashAttention crosses the ridge.
-    }
-    {mlsyscard}
+</details>
 
 ## Fallacies
 
-{
+[Original slide 31](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L1504)
+
+**Fallacy:** *More FLOPS means faster inference.*
+
+Most inference is memory-bound. A GPU with 2$\times$ FLOPS but the same bandwidth generates tokens at the same speed. Correct metric: bandwidth, not FLOPS.
+
+**Fallacy:** *FP8 always halves training time.*
+
+FP8 doubles peak TFLOPS and effective BW, but only for precision-sensitive operations. Element-wise ops are launch-overhead bound. Communication-bound steps gain nothing.
+
+**Fallacy:** *Graph compilers eliminate manual kernel engineering.*
+
+FlashAttention required recognizing that attention could be tiled with online softmax — an insight beyond any compiler's rewrite rules. Compilers automate known optimizations; humans discover new ones.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 The chapter covered diagnosis (roofline), treatment (fusion, precision,
@@ -1342,57 +1422,67 @@ FlashAttention-level innovations.''
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Quantitative rebuttals reinforce roofline reasoning.
 IF SHORT: Cover only the first fallacy (FLOPS vs. bandwidth).
-}
+```
 
-**Fallacy:** *More FLOPS means faster inference.*\\
-{ Most inference is memory-bound. A GPU with 2$×$ FLOPS but the same bandwidth generates tokens at the same speed. Correct metric: bandwidth, not FLOPS.}
-
-{0.15cm}
-**Fallacy:** *FP8 always halves training time.*\\
-{ FP8 doubles peak TFLOPS and effective BW, but only for precision-sensitive operations. Element-wise ops are launch-overhead bound. Communication-bound steps gain nothing.}
-
-{0.15cm}
-**Fallacy:** *Graph compilers eliminate manual kernel engineering.*\\
-{ FlashAttention required recognizing that attention could be tiled with online softmax --- an insight beyond any compiler's rewrite rules. Compilers automate known optimizations; humans discover new ones.}
+</details>
 
 ## Pitfalls
 
-{
+[Original slide 32](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L1537)
+
+**Pitfall:** *Optimizing the largest kernel while ignoring the long tail.*
+
+When the GEMM is near-optimal, dozens of smaller ops can consume $>$50% of time. Graph compilation addresses this tail.
+
+**Pitfall:** *Quantizing everything to the lowest precision.*
+
+INT4 weights + INT4 KV + FP8 activations can degrade quality invisibly. Targeted quantization: aggressive for KV cache, conservative for first/last layers.
+
+**Pitfall:** *Measuring throughput without measuring quality.*
+
+200 tok/s with 15% quality loss $\neq$ better than 100 tok/s at full quality. Optimize on the throughput vs. quality Pareto frontier.
+
+**Pitfall:** *A single profiling run characterizes performance.*
+
+Thermal throttling (10–15%), fragmentation, and congestion vary. Profile under sustained conditions.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 Fallacies addressed beliefs. Pitfalls address operational mistakes.
 
 % -- NARRATE: What to SAY while showing this slide
 ``Optimizing the largest kernel while ignoring the long tail: when GEMM
-is near-optimal, dozens of smaller ops consume over 50% of time.
+is near-optimal, dozens of smaller ops consume over 50\% of time.
 Quantizing everything uniformly: INT4 weights + INT4 KV + FP8
 activations can degrade quality invisibly. Measuring throughput without
-quality: 200 tok/s with 15% quality loss is not better. Single
-profiling run: thermal throttling varies 10--15%.''
+quality: 200 tok/s with 15\% quality loss is not better. Single
+profiling run: thermal throttling varies 10--15\%.''
 
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Operational pitfalls for performance engineering.
 IF SHORT: Cover only the first two pitfalls.
-}
+```
 
-**Pitfall:** *Optimizing the largest kernel while ignoring the long tail.*\\
-When the GEMM is near-optimal, dozens of smaller ops can consume $>$50% of time. Graph compilation addresses this tail.
-
-{0.08cm}
-**Pitfall:** *Quantizing everything to the lowest precision.*\\
-INT4 weights + INT4 KV + FP8 activations can degrade quality invisibly. Targeted quantization: aggressive for KV cache, conservative for first/last layers.
-
-{0.08cm}
-**Pitfall:** *Measuring throughput without measuring quality.*\\
-200 tok/s with 15% quality loss $$ better than 100 tok/s at full quality. Optimize on the throughput vs.\ quality Pareto frontier.
-
-{0.08cm}
-**Pitfall:** *A single profiling run characterizes performance.*\\
-Thermal throttling (10--15%), fragmentation, and congestion vary. Profile under sustained conditions.
+</details>
 
 ## Muddiest Point
 
-{
+[Original slide 33](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L1577)
+
+What was the **muddiest point** today?
+
+Write down the concept you found **most confusing**.
+
+Anonymous. One sentence. Submit before you leave.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min]
 % -- NARRATE: What to SAY while showing this slide
 ``Write the most confusing concept from today. Anonymous, one sentence.
@@ -1402,20 +1492,24 @@ I will address top confusions next lecture.''
 [CORE] Feedback loop.
 IF AHEAD: Add ``If nothing was muddy, write the one concept you most
 want to see applied to a real system.''
-}
+```
 
-{1.0cm}
-{ What was the **muddiest point** today?}
-
-{0.8cm}
-{ Write down the concept you found **most confusing**.}
-
-{0.5cm}
-{{midgray}{Anonymous. One sentence. Submit before you leave.}}
+</details>
 
 ## What Were the Key Ideas?
 
-{
+[Original slide 34](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L1602)
+
+Close your notes.
+
+Write down the **4 most important concepts** from today.
+
+90 seconds — no peeking.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- NARRATE: What to SAY while showing this slide
 ``Close notes. 90 seconds. Write 4 most important concepts.''
@@ -1423,46 +1517,62 @@ Walk around the room. Do NOT show next slide yet.
 
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Retrieval practice consolidates learning.
-}
+```
 
-{1.5cm}
-{ Close your notes.}
-
-{0.8cm}
-{ Write down the **4 most important concepts** from today.}
-
-{0.8cm}
-{{midgray}{90 seconds --- no peeking.}}
+</details>
 
 ## Key Takeaways
 
-{
+[Original slide 35](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L1625)
+
+- **Memory Wall**: Most transformer inference is memory-bound (AI $\ll$ 295 FLOP/byte). Reduce bytes moved, not operations computed.
+- **Roofline Model**: Diagnose compute-bound vs. memory-bound *before* optimizing. Wrong-term optimization yields zero improvement.
+- **Operator Fusion**: FlashAttention reduces attention HBM traffic 65$\times$ via tiling + online softmax. CUDA Graphs eliminate launch overhead.
+- **Precision**: INT4 (AWQ) gives 4$\times$ effective bandwidth. Block-wise quantization handles LLM outlier features.
+- **Graph Compilation**: torch.compile (1 line, 10–40%), XLA (55–65% MFU), TensorRT (1.3–1.8$\times$).
+- **Algorithmic**: Speculative decoding trades compute for latency (1.5–3$\times$). MoE decouples capacity from cost.
+- **Profile-Optimize-Reprofile**: Every optimization shifts the bottleneck. The iterative loop is the discipline.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 Students just attempted retrieval. Reveal for self-correction.
 
 % -- NARRATE: What to SAY while showing this slide
 Walk through each bullet with quantitative anchors: ``Ridge point 295.
-FlashAttention 65x. INT4 4x. torch.compile 10--40%. 7.5x total in
+FlashAttention 65x. INT4 4x. torch.compile 10--40\%. 7.5x total in
 the case study. Profile-optimize-reprofile never ends.''
 
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Summary after retrieval practice.
 IF SHORT: Read bullets quickly.
-}
+```
 
-{0pt}
-- **Memory Wall**: Most transformer inference is memory-bound (AI $$ 295 FLOP/byte). Reduce bytes moved, not operations computed.
-- **Roofline Model**: Diagnose compute-bound vs.\ memory-bound *before* optimizing. Wrong-term optimization yields zero improvement.
-- **Operator Fusion**: FlashAttention reduces attention HBM traffic 65$×$ via tiling + online softmax. CUDA Graphs eliminate launch overhead.
-- **Precision**: INT4 (AWQ) gives 4$×$ effective bandwidth. Block-wise quantization handles LLM outlier features.
-- **Graph Compilation**: torch.compile (1 line, 10--40%), XLA (55--65% MFU), TensorRT (1.3--1.8$×$).
-- **Algorithmic**: Speculative decoding trades compute for latency (1.5--3$×$). MoE decouples capacity from cost.
-- **Profile-Optimize-Reprofile**: Every optimization shifts the bottleneck. The iterative loop is the discipline.
+</details>
 
 ## References
 
-{
+[Original slide 36](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L1654)
+
+**Dao+22** Dao et al. “FlashAttention: Fast and Memory-Efficient Exact Attention.” NeurIPS 2022.
+
+**Williams+09** Williams, Waterman, Patterson. “Roofline: An Insightful Visual Performance Model.” CACM 2009.
+
+**Dettmers+22** Dettmers et al. “LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale.” NeurIPS 2022.
+
+**Lin+24** Lin et al. “AWQ: Activation-Aware Weight Quantization.” MLSys 2024.
+
+**Leviathan+23** Leviathan et al. “Fast Inference from Transformers via Speculative Decoding.” ICML 2023.
+
+**DeepSeek24** DeepSeek-AI. “DeepSeek-V3 Technical Report.” 2024.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min]
 % -- NARRATE: What to SAY while showing this slide
 ``Key papers: FlashAttention for tiled attention, Williams for the
@@ -1471,18 +1581,40 @@ speculative decoding, DeepSeek for MoE at scale.''
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Reference slide for self-study.
-}
+```
 
-{Dao+22}{Dao et al. ``FlashAttention: Fast and Memory-Efficient Exact Attention.'' NeurIPS 2022.}
-{Williams+09}{Williams, Waterman, Patterson. ``Roofline: An Insightful Visual Performance Model.'' CACM 2009.}
-{Dettmers+22}{Dettmers et al. ``LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale.'' NeurIPS 2022.}
-{Lin+24}{Lin et al. ``AWQ: Activation-Aware Weight Quantization.'' MLSys 2024.}
-{Leviathan+23}{Leviathan et al. ``Fast Inference from Transformers via Speculative Decoding.'' ICML 2023.}
-{DeepSeek24}{DeepSeek-AI. ``DeepSeek-V3 Technical Report.'' 2024.}
+</details>
 
 ## Next Lecture: Inference at Scale
 
-{
+[Original slide 37](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L1676)
+
+Cost
+
+Serving OpEx compounds
+
+over billions of requests
+
+Batching
+
+Continuous admission
+
+under latency SLOs
+
+KV Cache
+
+Memory pressure
+
+becomes the limiter
+
+Kernel speed is necessary but not sufficient.
+
+**Inference at Scale turns fast operations into a reliable service.**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min]
 % -- LINK: What prior concept connects to this slide
 Today's optimizations targeted single-node kernel efficiency. The next
@@ -1501,92 +1633,64 @@ decide whether the model is economically viable.''
 IF AHEAD: Ask: ``Given today's batch-size discussion, what new batching
 challenge do you expect in a production serving system with hundreds of
 concurrent users of different sequence lengths?''
-}
+```
 
-[c]
-  
-    
-    {mlsyscard}{computestroke}
-    { Cost}\\[0.1cm]
-    { Serving OpEx compounds\ billions of requests}
-    {mlsyscard}
-  
-  
-    
-    {mlsyscard}{routingstroke}
-    { Batching}\\[0.1cm]
-    { Continuous admission\ latency SLOs}
-    {mlsyscard}
-  
-  
-    
-    {mlsyscard}{errorstroke}
-    { KV Cache}\\[0.1cm]
-    { Memory pressure\ the limiter}
-    {mlsyscard}
-  
-
-{0.3cm}
-
-{ Kernel speed is necessary but not sufficient.}\\[0.1cm]
-{**Inference at Scale turns fast operations into a reliable service.**}
+</details>
 
 ## Backup: Roofline Quick Reference
 
-{
-[2 min]
-% -- NARRATE: Roofline classification for common ML operations.
-% -- FLEX: [OPTIONAL] Use during problem sets or profiling exercises.
-}
+[Original slide 38](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L1734)
 
 **Where common operations sit on the H100 roofline:**
 
-{0.1cm}
-{}{1.15}
-{tabular}{@{}lrll@{}}
-  
-  **Operation** & **AI (FLOP/byte)** & **Regime** & **Optimization** \\
-  
-  LLM Decode (B=1) & $$2     & {errorstroke}{Deeply mem-bound}  & Quantization, batching \\
-  Embedding lookup  & $$1     & {errorstroke}{Deeply mem-bound}  & Caching, INT8 \\
-  Attention (naive) & $$10    & {errorstroke}{Memory-bound}      & FlashAttention \\
-  Attention (Flash) & $$700+  & {datastroke}{Compute-bound}     & Tensor cores \\
-  GEMM (B=256)      & $$500   & {datastroke}{Compute-bound}     & Already efficient \\
-  LayerNorm         & $$3     & {errorstroke}{Memory-bound}      & Kernel fusion \\
-  
-{tabular}
+| **Operation** | **AI (FLOP/byte)** | **Regime** | **Optimization** |
+| --- | --- | --- | --- |
+| LLM Decode (B=1) | $\sim$2 | Deeply mem-bound | Quantization, batching |
+| Embedding lookup | $\sim$1 | Deeply mem-bound | Caching, INT8 |
+| Attention (naive) | $\sim$10 | Memory-bound | FlashAttention |
+| Attention (Flash) | $\sim$700+ | Compute-bound | Tensor cores |
+| GEMM (B=256) | $\sim$500 | Compute-bound | Already efficient |
+| LayerNorm | $\sim$3 | Memory-bound | Kernel fusion |
 
-{0.1cm}
-{**H100 ridge point:** $$295 FLOP/byte (dense FP16). Operations below this are memory-bound; optimizing compute will not help.}
+**H100 ridge point:** $\sim$295 FLOP/byte (dense FP16). Operations below this are memory-bound; optimizing compute will not help.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
+% -- NARRATE: Roofline classification for common ML operations.
+% -- FLEX: [OPTIONAL] Use during problem sets or profiling exercises.
+```
+
+</details>
 
 ## Backup: MoE Efficiency Analysis
 
-{
-[2 min]
-% -- NARRATE: Quantified MoE efficiency gains from Mixtral 8x7B.
-% -- FLEX: [OPTIONAL] Use when discussing algorithmic optimizations in depth.
-}
+[Original slide 39](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/09_performance_engineering/09_performance_engineering.tex#L1764)
 
 **Mixtral 8x7B: Decoupling Capacity from Cost**
 
-{0.1cm}
-{}{1.15}
-{tabular}{@{}lrr@{}}
-  
-  & **Dense (Llama 70B)** & **MoE (Mixtral 8$×$7B)** \\
-  
-  Total parameters    & 70B         & 46.7B (8$×$7B shared) \\
-  Active per token    & 70B         & **12.9B** (2 of 8 experts) \\
-  FLOPs per token     & 140 GFLOP   & **25 GFLOP** (5.6$×$ less) \\
-  Memory (weights)    & 140 GB      & 93 GB (all experts loaded) \\
-  Quality (MMLU)      & 69.8%      & 70.6% (comparable) \\
-  
-{tabular}
+|  | **Dense (Llama 70B)** | **MoE (Mixtral 8$\times$7B)** |
+| --- | --- | --- |
+| Total parameters | 70B | 46.7B (8$\times$7B shared) |
+| Active per token | 70B | **12.9B** (2 of 8 experts) |
+| FLOPs per token | 140 GFLOP | **25 GFLOP** (5.6$\times$ less) |
+| Memory (weights) | 140 GB | 93 GB (all experts loaded) |
+| Quality (MMLU) | 69.8% | 70.6% (comparable) |
 
-{0.1cm}
-{mlsyscard}{routingstroke}
-{**Systems challenge:** All 93 GB of weights must be in memory even though only 25% are active per token. MoE trades compute efficiency for memory inefficiency.}
-{mlsyscard}
+**Systems challenge:** All 93 GB of weights must be in memory even though only 25% are active per token. MoE trades compute efficiency for memory inefficiency.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
+% -- NARRATE: Quantified MoE efficiency gains from Mixtral 8x7B.
+% -- FLEX: [OPTIONAL] Use when discussing algorithmic optimizations in depth.
+```
+
+</details>
 
 ## Complete original Beamer source
 

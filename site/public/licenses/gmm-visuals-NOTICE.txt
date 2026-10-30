@@ -1,0 +1,20 @@
+Gaussian mixture model figures in Bookvar
+
+Jake VanderPlas, Python Data Science Handbook,
+In Depth: Gaussian Mixture Models
+https://jakevdp.github.io/PythonDataScienceHandbook/05.12-gaussian-mixtures.html
+
+CC BY-NC-ND 3.0 Unported:
+https://creativecommons.org/licenses/by-nc-nd/3.0/
+https://github.com/jakevdp/PythonDataScienceHandbook/blob/d66231454ef753818dc9213c9b5942e067266966/LICENSE-TEXT
+
+Six complete original figures, no modifications. Five PNGs are decoded
+from the pinned notebook's saved output, not regenerated. One is the
+repository's original covariance-type PNG. No crop, relabeling, translation,
+redrawing or pixel resampling. Separate original works retain their terms.
+
+Pinned repository: jakevdp/PythonDataScienceHandbook,
+d66231454ef753818dc9213c9b5942e067266966.
+Source notebook: notebooks/05.12-Gaussian-Mixtures.ipynb,
+cells 17, 23, 30, 32 and 37.
+Source figure: notebooks/figures/05.12-covariance-type.png.

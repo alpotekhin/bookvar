@@ -1,0 +1,261 @@
+[
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/diffusion-flow-2026-10/mit-conditional-marginal.png",
+    "source_asset": "05 Источники/Originals/diffusion-flow-2026-10-20/mit-notes-v3.pdf",
+    "source_page": 15,
+    "source_page_snapshot": "05 Источники/Originals/diffusion-flow-2026-10-20/mit-page15.png",
+    "crop_box_px": [
+      280,
+      410,
+      2820,
+      1725
+    ],
+    "label": "Figure 5",
+    "author": "Peter Holderrieth and Ezra Erives",
+    "source_url": "https://arxiv.org/abs/2506.02070v3",
+    "license": "CC BY-NC-ND 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "license_evidence": "05 Источники/Originals/diffusion-flow-2026-10-20/mit-notes-v3-abstract.html",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Unmodified complete figure and original English caption reproduced as an excerpt; page header and unrelated surrounding text excluded. Rendering only; no edits to labels, panels, colors or caption.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений.md"
+    ],
+    "sha256": "85fc236960506ba24ad32210bbae30e540d39596bb63535eeb04e7411a4315c1",
+    "id": "curated-diffusion-flow-mit-conditional-marginal-85fc23696050",
+    "source_asset_sha256": "22bc442a20981bd7a8d68f66176a70463df1f744d9d3d5c72992abc39eb9349a",
+    "source_page_sha256": "7ebe178710c108d15a212e3fb81c6357d2d5cc19967859b14c66b2dbfcfed745",
+    "license_evidence_sha256": "ce7d86e96fea9c0c440104b7127db821373bb4d6383364046b47c2b7c1a3c32b",
+    "render_page_size_px": [
+      3091,
+      4000
+    ],
+    "width": 2540,
+    "height": 1315
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/diffusion-flow-2026-10/mit-conditional-marginal-trajectories.png",
+    "source_asset": "05 Источники/Originals/diffusion-flow-2026-10-20/mit-notes-v3.pdf",
+    "source_page": 17,
+    "source_page_snapshot": "05 Источники/Originals/diffusion-flow-2026-10-20/mit-page17.png",
+    "crop_box_px": [
+      280,
+      400,
+      2820,
+      2450
+    ],
+    "label": "Figure 6",
+    "author": "Peter Holderrieth and Ezra Erives",
+    "source_url": "https://arxiv.org/abs/2506.02070v3",
+    "license": "CC BY-NC-ND 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "license_evidence": "05 Источники/Originals/diffusion-flow-2026-10-20/mit-notes-v3-abstract.html",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Unmodified complete figure and original English caption reproduced as an excerpt; page header and unrelated surrounding text excluded. Rendering only; no edits to labels, panels, colors or caption.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений.md"
+    ],
+    "sha256": "5693dedb9ae202d440bf7b78864352caf444c7e4a992c568e45f4a84a1e97bae",
+    "id": "curated-diffusion-flow-mit-conditional-marginal-trajectories-5693dedb9ae2",
+    "source_asset_sha256": "22bc442a20981bd7a8d68f66176a70463df1f744d9d3d5c72992abc39eb9349a",
+    "source_page_sha256": "16c604db87b937568289e3037cc2f49b9d92db7e1b58f23f3f899975259dc309",
+    "license_evidence_sha256": "ce7d86e96fea9c0c440104b7127db821373bb4d6383364046b47c2b7c1a3c32b",
+    "render_page_size_px": [
+      3091,
+      4000
+    ],
+    "width": 2540,
+    "height": 2050
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/diffusion-flow-2026-10/mit-flow-training-result.png",
+    "source_asset": "05 Источники/Originals/diffusion-flow-2026-10-20/mit-notes-v3.pdf",
+    "source_page": 23,
+    "source_page_snapshot": "05 Источники/Originals/diffusion-flow-2026-10-20/mit-page23.png",
+    "crop_box_px": [
+      280,
+      395,
+      2820,
+      1790
+    ],
+    "label": "Figure 7",
+    "author": "Peter Holderrieth and Ezra Erives",
+    "source_url": "https://arxiv.org/abs/2506.02070v3",
+    "license": "CC BY-NC-ND 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "license_evidence": "05 Источники/Originals/diffusion-flow-2026-10-20/mit-notes-v3-abstract.html",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Unmodified complete figure and original English caption reproduced as an excerpt; page header and unrelated surrounding text excluded. Rendering only; no edits to labels, panels, colors or caption.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений.md"
+    ],
+    "sha256": "1ca1ed5f5f9d23f3fd7b458cd24bbdce28baef4305b0fe84d16a1a05208ddbe7",
+    "id": "curated-diffusion-flow-mit-flow-training-result-1ca1ed5f5f9d",
+    "source_asset_sha256": "22bc442a20981bd7a8d68f66176a70463df1f744d9d3d5c72992abc39eb9349a",
+    "source_page_sha256": "326085beac6115dab26c9e6618b606ebc7f4af447391c2cc2cbcca55e13daef7",
+    "license_evidence_sha256": "ce7d86e96fea9c0c440104b7127db821373bb4d6383364046b47c2b7c1a3c32b",
+    "render_page_size_px": [
+      3091,
+      4000
+    ],
+    "width": 2540,
+    "height": 1395
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/diffusion-flow-2026-10/mit-cfg-mnist.png",
+    "source_asset": "05 Источники/Originals/diffusion-flow-2026-10-20/mit-notes-v3.pdf",
+    "source_page": 39,
+    "source_page_snapshot": "05 Источники/Originals/diffusion-flow-2026-10-20/mit-page39.png",
+    "crop_box_px": [
+      280,
+      410,
+      2820,
+      1510
+    ],
+    "label": "Figure 13",
+    "author": "Peter Holderrieth and Ezra Erives",
+    "source_url": "https://arxiv.org/abs/2506.02070v3",
+    "license": "CC BY-NC-ND 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "license_evidence": "05 Источники/Originals/diffusion-flow-2026-10-20/mit-notes-v3-abstract.html",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Unmodified complete figure and original English caption reproduced as an excerpt; page header and unrelated surrounding text excluded. Rendering only; no edits to labels, panels, colors or caption.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений.md"
+    ],
+    "sha256": "355c66c34a32cd78ced692026f4dd8c7d04e6a739a2b36ceef69ec2f5c0df876",
+    "id": "curated-diffusion-flow-mit-cfg-mnist-355c66c34a32",
+    "source_asset_sha256": "22bc442a20981bd7a8d68f66176a70463df1f744d9d3d5c72992abc39eb9349a",
+    "source_page_sha256": "9570a0e125b9950767ab9f91a061944e5121d41cea4dd419224a3f4fb3ca8e62",
+    "license_evidence_sha256": "ce7d86e96fea9c0c440104b7127db821373bb4d6383364046b47c2b7c1a3c32b",
+    "render_page_size_px": [
+      3091,
+      4000
+    ],
+    "width": 2540,
+    "height": 1100
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/diffusion-flow-2026-10/mit-unet.png",
+    "source_asset": "05 Источники/Originals/diffusion-flow-2026-10-20/mit-notes-v3.pdf",
+    "source_page": 46,
+    "source_page_snapshot": "05 Источники/Originals/diffusion-flow-2026-10-20/mit-page46.png",
+    "crop_box_px": [
+      280,
+      410,
+      2820,
+      1795
+    ],
+    "label": "Figure 15",
+    "author": "Peter Holderrieth and Ezra Erives",
+    "source_url": "https://arxiv.org/abs/2506.02070v3",
+    "license": "CC BY-NC-ND 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "license_evidence": "05 Источники/Originals/diffusion-flow-2026-10-20/mit-notes-v3-abstract.html",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Unmodified complete figure and original English caption reproduced as an excerpt; page header and unrelated surrounding text excluded. Rendering only; no edits to labels, panels, colors or caption.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений.md"
+    ],
+    "sha256": "75da24f7fa3284072749d3818d1f74ef63e1dc08ec4bd258a3376226fa8ed612",
+    "id": "curated-diffusion-flow-mit-unet-75da24f7fa32",
+    "source_asset_sha256": "22bc442a20981bd7a8d68f66176a70463df1f744d9d3d5c72992abc39eb9349a",
+    "source_page_sha256": "aec20160d3468ea3facd76fd0b6f73b69f7a17a59bc9d8346496853d0d8bc36c",
+    "license_evidence_sha256": "ce7d86e96fea9c0c440104b7127db821373bb4d6383364046b47c2b7c1a3c32b",
+    "render_page_size_px": [
+      3091,
+      4000
+    ],
+    "width": 2540,
+    "height": 1385
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/diffusion-flow-2026-10/dit-architecture.png",
+    "source_asset": "05 Источники/Originals/diffusion-flow-2026-10-20/dit.pdf",
+    "source_page": 3,
+    "source_page_snapshot": "05 Источники/Originals/diffusion-flow-2026-10-20/dit-page3.png",
+    "crop_box_px": [
+      240,
+      330,
+      2740,
+      1420
+    ],
+    "label": "Figure 3",
+    "author": "William Peebles and Saining Xie",
+    "source_url": "https://arxiv.org/abs/2212.09748v2",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/diffusion-flow-2026-10-20/dit-abstract.html",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Complete original diagram; surrounding article text and caption excluded. No edits to panels, labels or colors.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений.md"
+    ],
+    "sha256": "f2213dfba5238a320f1f719e6da34eb26a77ce8b174059f164a14df2eb4782f5",
+    "id": "curated-diffusion-flow-dit-architecture-f2213dfba523",
+    "source_asset_sha256": "5fbb0ec35e3ae76826240171ca63ed4c27de6cb43180367453019e9d28a8b076",
+    "source_page_sha256": "9ef5bc7e22850800c64f2025730fd97257920d50b8c3e72206c89c1b847129fb",
+    "license_evidence_sha256": "1468dd0fa2d31b227b18a81908ea4ef9208aa8dc24c703557e86effd58195ce8",
+    "render_page_size_px": [
+      3091,
+      4000
+    ],
+    "width": 2500,
+    "height": 1090
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/diffusion-flow-2026-10/sd3-mmdit.png",
+    "source_asset": "05 Источники/Originals/diffusion-flow-2026-10-20/sd3-pmlr.pdf",
+    "source_page": 5,
+    "source_page_snapshot": "05 Источники/Originals/diffusion-flow-2026-10-20/sd3-page5.png",
+    "crop_box_px": [
+      270,
+      325,
+      2750,
+      1935
+    ],
+    "label": "Figure 2",
+    "author": "Patrick Esser et al.",
+    "source_url": "https://proceedings.mlr.press/v235/esser24a.html",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/vlm-evaluation-serving-2026-10-20/pmlr-license-agreement.pdf",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Complete original diagram; surrounding article text and caption excluded. No edits to panels, labels or colors.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений.md"
+    ],
+    "sha256": "2c2ac6fe8c5dc09e547972577f0702c52233be9939e43e9f4aaca8783c461d63",
+    "id": "curated-diffusion-flow-sd3-mmdit-2c2ac6fe8c5d",
+    "source_asset_sha256": "e3db32f3c0630f6d137f0867802b7ae13b1508e329ae89f11e401010a6021ffe",
+    "source_page_sha256": "c9c2dac9e45e7a124b0a4733fce3693165cb6c271b03633c13bc0efb39363a93",
+    "license_evidence_sha256": "3a3eac0ebdded57660c12c59028c5429b6d2b328be2c6fde534a104438444c31",
+    "render_page_size_px": [
+      3091,
+      4000
+    ],
+    "width": 2480,
+    "height": 1610
+  }
+]

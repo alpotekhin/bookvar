@@ -1,0 +1,33 @@
+[
+  {
+    "id": "curated-training-step-cs231n-two-layer-6d7bfc74b831",
+    "asset": "00 Учебник/Assets/Figures/curated/training-step-2026-10-27/cs231n-two-layer.jpeg",
+    "sha256": "6d7bfc74b8315a0d7ab35d4cb8aeaae38bc439cc56be1c561b1b9a98b208fac9",
+    "author": "Andrej Karpathy — Stanford CS231n",
+    "source_url": "https://cs231n.github.io/neural-networks-1/#layers",
+    "source_image_url": "https://raw.githubusercontent.com/cs231n/cs231n.github.io/8ec57ccfc32379ae4b37c45de949af359673f92f/assets/nn1/neural_net.jpeg",
+    "commit": "8ec57ccfc32379ae4b37c45de949af359673f92f",
+    "source_asset": "05 Источники/Originals/frameworks-2026-10-27/cs231n-8ec57ccf-neural-net.jpeg",
+    "source_asset_sha256": "6d7bfc74b8315a0d7ab35d4cb8aeaae38bc439cc56be1c561b1b9a98b208fac9",
+    "source_page_snapshot": "05 Источники/Originals/frameworks-2026-10-27/cs231n-8ec57ccf-neural-networks-1.md",
+    "source_page_sha256": "28196e335053230ac9f1fff728c8baa089e05814982d950ffc6339462828f0f3",
+    "license": "MIT",
+    "license_url": "https://github.com/cs231n/cs231n.github.io/blob/8ec57ccfc32379ae4b37c45de949af359673f92f/LICENSE",
+    "license_evidence": "05 Источники/Originals/backpropagation-2026-10-21/cs231n-LICENSE.txt",
+    "license_evidence_sha256": "85b365f07b4cfc5d678c548bc41965bc3bc782106b8903bd3b876d9d49a4270d",
+    "public_license_copy": "site/public/licenses/cs231n-MIT.txt",
+    "dimensions_px": [
+      511,
+      350
+    ],
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original JPEG, byte-for-byte copy, with all three layer labels and all connections. No crop, resizing, redraw, translation, relabeling or recompression. Adjacent caption distinguishes the illustrated 3-4-2 widths from the worked 784-256-10 model.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-27",
+    "used_in": [
+      "00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md"
+    ]
+  }
+]

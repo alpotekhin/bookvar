@@ -1,0 +1,49 @@
+...F.                                                                    [100%]
+=================================== FAILURES ===================================
+_________ test_seeded_score_matches_expected_value_with_high_precision _________
+
+    @pytest.mark.unit
+    def test_seeded_score_matches_expected_value_with_high_precision():
+        model = ToxicityModel(seed=7)
+        model.load()
+    
+        # With a fixed seed, we can verify tiny floating-point jitter precisely.
+>       assert model.score("neutral text") == pytest.approx(0.0000323832, rel=0, abs=1e-10)
+E       assert 6.476655296663248e-05 == 3.23832e-05 ± 1.0e-10
+E         
+E         comparison failed
+E         Obtained: 6.476655296663248e-05
+E         Expected: 3.23832e-05 ± 1.0e-10
+
+tests/test_model.py:25: AssertionError
+=============================== warnings summary ===============================
+../../../../../../../../../../../../.cache/uv/archive-v0/ey9kN7nCn0WB0NMCrrbXB/lib/python3.14/site-packages/starlette/testclient.py:45
+  /Users/aleksan.potekhin/.cache/uv/archive-v0/ey9kN7nCn0WB0NMCrrbXB/lib/python3.14/site-packages/starlette/testclient.py:45: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+app/main.py:37
+tests/test_health.py::test_health_transitions_from_not_ready_to_ready
+tests/test_health.py::test_predict_returns_503_while_model_is_loading
+  /Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/00_basics/non-smokers-repo/app/main.py:37: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    @app.on_event("startup")
+
+../../../../../../../../../../../../.cache/uv/archive-v0/ey9kN7nCn0WB0NMCrrbXB/lib/python3.14/site-packages/fastapi/applications.py:4575
+tests/test_health.py::test_health_transitions_from_not_ready_to_ready
+tests/test_health.py::test_predict_returns_503_while_model_is_loading
+  /Users/aleksan.potekhin/.cache/uv/archive-v0/ey9kN7nCn0WB0NMCrrbXB/lib/python3.14/site-packages/fastapi/applications.py:4575: DeprecationWarning: 
+          on_event is deprecated, use lifespan event handlers instead.
+  
+          Read more about it in the
+          [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+          
+    return self.router.on_event(event_type)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_model.py::test_seeded_score_matches_expected_value_with_high_precision
+1 failed, 4 passed, 7 warnings in 0.82s

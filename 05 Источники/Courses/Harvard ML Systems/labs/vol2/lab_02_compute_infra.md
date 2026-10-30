@@ -9,35 +9,22 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol2/lab_02_compute_infra.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol2/lab_02_compute_infra.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL2 Lab — Compute Infra
 
 ## Readable lab narrative
-
-**Formula**
-
-`rack_power_kw = rack_overhead_kw + accelerators_per_rack * accelerator_power_kw`
-
-`fleet_power_kw = rack_power_kw * rack_count`
-
-`sustained_capacity = accelerators * peak_per_accelerator * MFU`
-
-**Chapter anchor**
-
-`#sec-compute-rack` and `#sec-compute-power-wall` explain why dense AI racks
-cross air-cooling and power-delivery envelopes before advertised peak FLOPs
-settle the plan.
-
-**Source model**
-
-Hardware identity comes from `{v2_02_packet['hardware_ref']}`. Track thresholds
-are notebook-local teaching envelopes for this Wave 5 lab and are recorded in
-the report source trace.
-
----
 
 **Formula**
 
@@ -95,6 +82,217 @@ The final report is defensible only if it carries forward all four evidence type
 2. Operating envelope: utilization target and demand headroom.
 3. Procurement envelope: accelerator mix and rejected alternative.
 4. Governance envelope: cost, carbon, and the next network/storage implication.
+
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+### 1. Structured Prediction
+
+---
+
+Commit to the binding-budget prediction to unlock the rack instrument.
+
+---
+
+### 2. Manipulate The Physical Envelope
+
+---
+
+**Recovered envelope.** The current plan satisfies rack cooling, site power, and sustained capacity with `⟨value 1⟩` as the binding budget.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{state['binding']}" `
+
+---
+
+**Infrastructure violation:** `⟨value 1⟩` rejects the plan. Change cooling tier, reduce density, or adjust rack count until the physical budget recovers.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{state['binding']}" `
+
+---
+
+**Prediction check:** your prior matched the binding infrastructure budget.
+
+---
+
+**Prediction check:** the instrument found `⟨value 1⟩`, not `⟨value 2⟩`. Peak capacity is not the first question when the physical envelope fails.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{state['binding']}" `
+- value_2: ` f'{pA_pred.value}' `
+
+---
+
+**Formula**
+
+`rack_power_kw = rack_overhead_kw + accelerators_per_rack * accelerator_power_kw`
+
+`fleet_power_kw = rack_power_kw * rack_count`
+
+`sustained_capacity = accelerators * peak_per_accelerator * MFU`
+
+**Chapter anchor**
+
+`#sec-compute-rack` and `#sec-compute-power-wall` explain why dense AI racks
+cross air-cooling and power-delivery envelopes before advertised peak FLOPs
+settle the plan.
+
+**Source model**
+
+Hardware identity comes from `⟨value 1⟩`. Track thresholds
+are notebook-local teaching envelopes for this Wave 5 lab and are recorded in
+the report source trace.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_02_packet['hardware_ref']}" `
+
+---
+
+### 7. Checkpoint
+
+---
+
+### 1. Structured Prediction
+
+---
+
+Commit to a utilization prediction to unlock the economics instrument.
+
+---
+
+### 2. Manipulate Utilization And Demand
+
+---
+
+**Utilization target is defensible.** The plan turns capacity into useful work without erasing operating headroom.
+
+---
+
+**Waste boundary reached.** Bought accelerators are powered and cooled while too little useful work is extracted.
+
+---
+
+**Saturation boundary reached.** The plan may look efficient, but queue/capacity headroom is gone.
+
+---
+
+**Prediction check:** correct. Utilization is a guarded band, not a one-way maximize knob.
+
+---
+
+**Prediction check:** the evidence rejects one-sided utilization rules. Economics, carbon, and queue headroom move together.
+
+---
+
+### 7. Checkpoint
+
+---
+
+### 1. Structured Prediction
+
+---
+
+Choose a mix prediction to unlock the placement comparison.
+
+---
+
+### 2. Manipulate Mix Context
+
+---
+
+**Prediction check:** your predicted mix matches the current recommended candidate.
+
+---
+
+**Prediction check:** current evidence favors `⟨value 1⟩` under this placement and workload role.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{recommended['label']}" `
+
+---
+
+**Selected mix fails:** ⟨value 1⟩. A plan can be locally appealing and still fail the amount-system guardrails.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{', '.join(selected['violations'])}" `
+
+---
+
+**Selected mix passes Part C.** It still needs Part D's simultaneous power, utilization, cost, and carbon guardrails.
+
+---
+
+### 7. Checkpoint
+
+---
+
+### 1. Structured Prediction
+
+---
+
+Predict the rejecting guardrail to unlock the recommendation scorecard.
+
+---
+
+### 2. Manipulate Final Guardrails
+
+---
+
+**Recommendation passes.** The selected capacity plan satisfies all simultaneous guardrails.
+
+---
+
+**Recommendation not ready:** `⟨value 1⟩` is the first failed guardrail. The memo should revise or reject the plan.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{state['binding']}" `
+
+---
+
+**Prediction check:** your final guardrail prediction matches the scorecard.
+
+---
+
+**Prediction check:** no guardrail failed under the current controls. The memo can approve if the residual risk is named.
+
+---
+
+**Prediction check:** `⟨value 1⟩` rejected the plan first, not `⟨value 2⟩`.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{state['binding']}" `
+- value_2: ` f'{pD_pred.value}' `
+
+---
+
+### 7. Checkpoint
+
+---
+
+**Durable invariant:** ⟨value 1⟩ infrastructure is an amount system: chips become power, heat, useful throughput, cost, carbon, and network/storage obligations.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_02_packet['track_label']}" `
+
+---
+
+## Download Report
+
+---
+
+This V2-02 report is generated from the selected track, current controls, computed evidence, final recommendation, and residual risk.
+
+</details>
 
 ## Complete original Marimo source
 

@@ -1,0 +1,33 @@
+[
+  {
+    "id": "curated-ort-execution-providers-b3bcaacf4d33",
+    "asset": "00 Учебник/Assets/Figures/curated/model-export-2026-10-27/onnx-runtime-providers.png",
+    "sha256": "b3bcaacf4d33628bcdcf97e71cee7acb4dcd0d4c8bcbc13888d86d7d4db7bf53",
+    "author": "Microsoft Corporation and ONNX Runtime contributors",
+    "source_url": "https://github.com/microsoft/onnxruntime/blob/e3d000e3fe1b113c4153e6250dd605c2d03da3f0/docs/execution-providers/index.md",
+    "source_image_url": "https://raw.githubusercontent.com/microsoft/onnxruntime/e3d000e3fe1b113c4153e6250dd605c2d03da3f0/images/ONNX_Runtime_EP3.png",
+    "commit": "e3d000e3fe1b113c4153e6250dd605c2d03da3f0",
+    "source_asset": "05 Источники/Originals/model-export-2026-10-27/ONNX_Runtime_EP3.png",
+    "source_asset_sha256": "b3bcaacf4d33628bcdcf97e71cee7acb4dcd0d4c8bcbc13888d86d7d4db7bf53",
+    "source_page_snapshot": "05 Источники/Originals/model-export-2026-10-27/ort-execution-providers.md",
+    "source_page_sha256": "a1fe9c6b59b55379ff733a338de094eb49d69a21473208c097394cbbbb816560",
+    "license": "MIT",
+    "license_url": "https://github.com/microsoft/onnxruntime/blob/e3d000e3fe1b113c4153e6250dd605c2d03da3f0/LICENSE",
+    "license_evidence": "05 Источники/Originals/model-export-2026-10-27/ort-LICENSE.txt",
+    "license_evidence_sha256": "e9861036987ef519430f50a43532184b9fa0889cb6b3a0102acf7651181e8575",
+    "public_license_copy": "site/public/licenses/onnxruntime-e3d000e3-MIT.txt",
+    "dimensions_px": [
+      1454,
+      910
+    ],
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original PNG; byte-identical, no crop, redrawing, translation, relabeling or recompression. The provider architecture is not a multi-GPU serving schedule.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-27",
+    "used_in": [
+      "00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow.md"
+    ]
+  }
+]

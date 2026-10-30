@@ -1,0 +1,181 @@
+{
+  "date": "2026-10-29",
+  "status": "reconciled-existing-explanation",
+  "scope": "Full comparison of the legacy PPO note and its 971-line canonical owner. The chapter's full explanation, executable examples, four attributed figures and existing fallback routes are retained without a rewrite.",
+  "artifactHashes": {
+    "Concepts/Training/PPO.md": "f9754c4089a6b70022f65ce8e85b231b5646f000a82a66792a630bf51982cbb7",
+    "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md": "29efb9a8c255c1b04abdcedc5c696f659a20ef45010572fe59093429698fcae5",
+    "publishing/tools/check_ppo_examples.py": "a6b2794f4e9d4d078620e28e50c132eabeb0bc4bd0bf873238483785ea23c727",
+    "00 Учебник/Assets/Figures/curated/instructgpt/rlhf-pipeline-hf.png": "892936ad206bddaf217341733ea88f897faf54780c8033d3562442d3b0682aa0",
+    "00 Учебник/Assets/Figures/curated/ppo-review-2026-09/rlhf-overview.png": "7bea1360f9c9ce4e62a866f6746a295467f1d2ebcda03160baa52fcc4297f8c2",
+    "00 Учебник/Assets/Figures/curated/ppo-review-2026-09/ppo-clip-viz.png": "b23a0f2151970951720a5c736257127fe6ebf96d0c9347b0fb8351251739d026",
+    "00 Учебник/Assets/Figures/curated/ppo-review-2026-09/value-fn-training.png": "669a0852e8cee79f52631a82f44a7fb546227424af9ac86abbcd86aabdae15bf",
+    "00 Учебник/Assets/Figures/curated/ppo-2026-10-24/ppo-framework.png": "5871236be3cbdc8e2c3732304e6384e59b46dbeaa320f349751570d153172bd0"
+  },
+  "chapter": {
+    "source": "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md",
+    "sha256": "29efb9a8c255c1b04abdcedc5c696f659a20ef45010572fe59093429698fcae5",
+    "wholeTextRead": true,
+    "pythonBlocks": 6,
+    "figures": 4
+  },
+  "primarySections": [
+    {
+      "url": "https://spinningup.openai.com/en/latest/algorithms/ppo.html",
+      "read": "Complete Background and Key Equations through the early-stopping discussion.",
+      "comparison": "Signs, one-sided plateaus, lack of a hard policy-distance constraint, fresh on-policy data and early stopping match the canonical explanation."
+    },
+    {
+      "url": "https://spinningup.openai.com/en/latest/algorithms/trpo.html",
+      "read": "Complete Key Equations section, including the Taylor approximation, backtracking and conjugate-gradient Hessian-vector products.",
+      "comparison": "The archival claim that TRPO requires forming/storing a full Hessian is not transferred."
+    },
+    {
+      "url": "https://arxiv.org/html/2203.02155v1#S3.SS5",
+      "read": "InstructGPT Section 3.5, RL paragraph and Equation 2; Appendix C.2–C.4.",
+      "comparison": "The source maximizes expected log likelihood for the pretraining term. C.3's 10% pretraining mixture belongs to supervised initialization; C.4 describes a different PPO-ptx mixing recipe. Model roles need not have equal parameter counts."
+    }
+  ],
+  "mechanismCoverage": [
+    {
+      "section": "2. Вывод REINFORCE без пропущенных шагов",
+      "anchors": [
+        "reinforce"
+      ],
+      "retained": "Score-function identity, sequence log probability and a two-action exact gradient .24."
+    },
+    {
+      "section": "3. Базовый уровень и преимущество: сравнение с ожиданием",
+      "anchors": [
+        "baseline-advantage"
+      ],
+      "retained": "Action-independent baseline proof, exact variances .0384/.0096/0, value and advantage, finite-episode GAE, lambda endpoints, terminal versus technical truncation."
+    },
+    {
+      "section": "4. Генерация текста как эпизод обучения с подкреплением",
+      "retained": "Same-response reference probabilities, signed sampled KL terms and rewards fixed before optimizer steps."
+    },
+    {
+      "section": "5. Пять разных ролей в PPO",
+      "anchors": [
+        "ppo-roles"
+      ],
+      "retained": "Current, behavior/old, reference, reward and value roles; old log probabilities need not require another live model; shared critic backbone and placement tradeoffs."
+    },
+    {
+      "section": "6. Почему простого градиента стратегии недостаточно",
+      "anchors": [
+        "ppo-clip"
+      ],
+      "retained": "Local versus trajectory ratio, six sign/ratio regions, loss clipping versus ratio clamp, no hard ratio or KL bound, and shared-parameter effects."
+    },
+    {
+      "section": "7. Полная целевая функция",
+      "anchors": [
+        "ppo-reward-shaping"
+      ],
+      "retained": "Actor/value/entropy signs, stop-gradient targets, KL placement and maximized log-likelihood PPO-ptx."
+    },
+    {
+      "section": "8. Тензоры и поток данных для одного пакета; 9. Один цикл PPO",
+      "retained": "Pre-action hidden states/logits, prompt/response alignment, right-padding guards, terminal-score scatter, token weighting and actual tiny-Transformer CPU optimizer step."
+    },
+    {
+      "section": "10. Основные причины неудачного обучения; 11. Что измерять",
+      "anchors": [
+        "ppo-stale-rollouts"
+      ],
+      "retained": "Reward exploitation, critic errors, response diversity/length, old-rollout lag versus wrong behavior log probabilities, independent quality and two distinct KL measurements."
+    }
+  ],
+  "excludedClaims": [
+    "PPO clipping is a hard trust-region or a guarantee on every probability ratio/KL, or a clipped individual term freezes the entire model update.",
+    "TRPO must form and store its full Hessian; the reference implementation uses Hessian-vector products and conjugate gradients.",
+    "GAE is required by the PPO-Clip definition, a critic must have the policy's size, or four functional roles imply four equally sized models resident on one GPU.",
+    "Maximizing the displayed clipped surrogate plus positive cross-entropy is the PPO-ptx objective; the correct pretraining contribution is maximized log likelihood, or positive CE in a consistently minimized loss.",
+    "A universal 10%-of-total-loss rule or one universal set of eps/lambda/beta/epochs follows from InstructGPT.",
+    "GRPO is always more stable/better than PPO, DeepSeek-R1 establishes an equal-condition PPO comparison, or all production alignment follows a claimed historical trend."
+  ],
+  "sourceFigureDisposition": {
+    "canonicalFigures": [
+      {
+        "asset": "00 Учебник/Assets/Figures/curated/ppo-review-2026-09/rlhf-overview.png",
+        "sha256": "7bea1360f9c9ce4e62a866f6746a295467f1d2ebcda03160baa52fcc4297f8c2",
+        "license": "MIT",
+        "source_url": "https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/book/images/rlhf-overview.png"
+      },
+      {
+        "asset": "00 Учебник/Assets/Figures/curated/ppo-review-2026-09/ppo-clip-viz.png",
+        "sha256": "b23a0f2151970951720a5c736257127fe6ebf96d0c9347b0fb8351251739d026",
+        "license": "MIT",
+        "source_url": "https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/book/images/ppo-clip-viz.png"
+      },
+      {
+        "asset": "00 Учебник/Assets/Figures/curated/ppo-review-2026-09/value-fn-training.png",
+        "sha256": "669a0852e8cee79f52631a82f44a7fb546227424af9ac86abbcd86aabdae15bf",
+        "license": "MIT",
+        "source_url": "https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/book/images/value_fn_training.png"
+      },
+      {
+        "asset": "00 Учебник/Assets/Figures/curated/ppo-2026-10-24/ppo-framework.png",
+        "sha256": "5871236be3cbdc8e2c3732304e6384e59b46dbeaa320f349751570d153172bd0",
+        "license": "MIT",
+        "source_url": "https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/book/images/ppo_tikz.png"
+      }
+    ],
+    "legacyFigure": "The archival Hugging Face pipeline image remains physically present and hash-pinned. Its high-level dataflow is also explained by the existing canonical RLHF overview and full PPO-framework source diagrams; it was not duplicated as a new standalone course."
+  },
+  "executedChecks": [
+    {
+      "command": "uv run --offline --with torch==2.14.1 --with numpy==2.3.5 --with transformers==4.57.1 python publishing/tools/check_ppo_examples.py",
+      "result": "PASS: all 6 current blocks, exact baseline moments, 12 gamma/lambda settings, GAE/terminal/padding/stop-gradient guards, six clip regions and gradcheck, one real 3649-parameter Transformer/critic optimizer step, frozen reference and pre-action alignment.",
+      "log": "/var/tmp/bookvar-legacy-ppo-cpu-20261029.log",
+      "maxCausalAlignmentError": 0,
+      "device": "cpu"
+    },
+    {
+      "command": "Independent scalar log-likelihood versus cross-entropy gradient check.",
+      "result": "At z=0, maximized log-sigmoid has gradient +.5; maximized negative log-sigmoid has -.5. Opposite signs verified.",
+      "log": "/var/tmp/bookvar-legacy-ppo-ptx-sign-20261029.log"
+    }
+  ],
+  "visualReview": {
+    "desktop": {
+      "viewport": [
+        1280,
+        900
+      ],
+      "clientWidth": 1265,
+      "scrollWidth": 1265,
+      "katexErrors": 0,
+      "observed": "All four figures loaded; complete original two-panel PPO clipping illustration and caption inspected in viewer."
+    },
+    "mobile": {
+      "viewport": [
+        360,
+        800
+      ],
+      "clientWidth": 345,
+      "scrollWidth": 345,
+      "katexErrors": 0,
+      "observed": "PPO-ptx equation and surrounding signs/notation explanation in the explicitly labelled EN canonical-language fallback."
+    },
+    "evidence": [
+      {
+        "path": "docs/audit/evidence/2026-10-29-legacy-ppo/desktop-original-clip.png",
+        "sha256": "4f9e03f85e2e70e194ef2e9aa0cabacc9eda66d7043564d778004835ba127ab4"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-legacy-ppo/mobile-ppo-ptx-en-fallback.png",
+        "sha256": "f61130a0bbf07afb11b6990439e99e8789ad43fa3d3270ea49fc73d98bae0b8e"
+      }
+    ]
+  },
+  "styleReview": "The entire existing chapter was read. It develops complete worked explanations, not a list of definitions; no synthetic replacement or new translation was added.",
+  "remainingWithinThisNote": [],
+  "notClaimed": [
+    "No training-quality benchmark, GPU/RLHF throughput test, new translation or new Pages build.",
+    "GRPO/DPO have their own pending archival comparisons. Their names here are not acceptance of those notes.",
+    "The remaining 18 notes, route audit, complete release review and dev/Pages deployment remain open."
+  ]
+}

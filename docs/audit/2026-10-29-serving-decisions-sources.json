@@ -1,0 +1,22 @@
+[
+  {
+    "file": "05 Источники/Originals/serving-decisions-2026-10-29/pytorch-module-loading.py",
+    "sha256": "08ddae0636f070038270beeee3289ee8c8250bb1f043ad73ac5e6470fb16a5ab"
+  },
+  {
+    "file": "05 Источники/Originals/serving-decisions-2026-10-29/pytorch-tuning-guide.py",
+    "sha256": "9ee5027c8135f07594c60a3f07ddb642f08a059605037475df7d2681cf9e57b0"
+  },
+  {
+    "file": "05 Источники/Originals/serving-decisions-2026-10-29/pytorch-tutorials-LICENSE",
+    "sha256": "5703fcbe2d5dfcc48d486d26e4b9d2e48255c24602e1bd0270b60b8978116f86"
+  },
+  {
+    "file": "05 Источники/Originals/serving-decisions-2026-10-29/safetensors-LICENSE",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  {
+    "file": "05 Источники/Originals/serving-decisions-2026-10-29/safetensors-README.md",
+    "sha256": "0a932f120de5c2477b286cae5517b6fec5e1d3ed64a19b99ccfc0a8504db7b13"
+  }
+]

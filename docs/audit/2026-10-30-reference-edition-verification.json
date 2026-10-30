@@ -1,0 +1,191 @@
+{
+  "date": "2026-10-30",
+  "status": "verified-locally-not-published",
+  "scope": "Reference-index metadata and one stable anchor, an English metadata pin, and a single textbook edition notice. Existing explanations, code and figures preserved.",
+  "preservation": {
+    "journal": "docs/audit/2026-10-30-reference-index-metadata-additions.json",
+    "files": 6,
+    "unknownEditsRejected": true,
+    "english": "Canonical and EN complete-Transformer bodies are byte-identical before/after metadata changes. Its prior reviewed canonical revision exactly matched the journal before hash. Only canonical_revision and last_updated changed in EN; translation_reviewed remains 2026-10-29.",
+    "archive": "No archive note changed."
+  },
+  "checks": {
+    "topics": {
+      "status": "passed",
+      "topics": 152,
+      "indexes": 2,
+      "command": "npm --prefix publishing run check:topics"
+    },
+    "targeted": {
+      "status": "passed",
+      "files": 5,
+      "tests": 29,
+      "log": "/var/tmp/bookvar-reference-edition-unit-final-20261030.log",
+      "includes": "Six-file exact rewind, unknown-edit negatives, all six metadata terms and their owning indices, unchanged canonical/EN Transformer bodies, native BLEU cases, topic consolidation and reader contents."
+    },
+    "root": {
+      "status": "passed",
+      "pages": 2006,
+      "log": "/var/tmp/bookvar-reference-edition-root-20261030.log"
+    },
+    "output": {
+      "status": "passed",
+      "tests": 177,
+      "log": "/var/tmp/bookvar-reference-edition-output-20261030.log",
+      "coverage": "All current textbook root/EN routes checked for zero/one correct notice; 13 former default-notice assertions replaced with stricter exact-single-notice checks. Current/native English distinction and default notice outside textbook retained."
+    },
+    "links": {
+      "status": "passed",
+      "broken": 0,
+      "log": "/var/tmp/bookvar-reference-edition-links-20261030.log"
+    },
+    "diffCheck": {
+      "status": "passed",
+      "scope": "Touched chapters, indices, component/config and tests only."
+    },
+    "fullUnit": {
+      "status": "not-rerun-on-this-final-revision"
+    },
+    "pagesBase": {
+      "status": "deferred-to-final-release"
+    }
+  },
+  "visual": {
+    "browser": "Existing agent-owned tab 17; user RLVR tab untouched. Temporary viewport override reset; viewer closed; helpful self-attention page left open.",
+    "edition": {
+      "route": "/en/textbook/evaluation/models-contamination/",
+      "desktop": [
+        1280,
+        720
+      ],
+      "mobile": [
+        390,
+        844
+      ],
+      "notices": 1,
+      "mobileDocumentClientAndScroll": [
+        375,
+        375
+      ],
+      "result": "One explicit canonical-language notice and link. No second Starlight warning; no page overflow."
+    },
+    "englishReference": {
+      "from": "/en/reference/",
+      "to": "/en/textbook/transformer/full-transformer/#transformer-dropout",
+      "interaction": "Keyboard activation of the named subject link",
+      "owner": "The complete encoder–decoder Transformer",
+      "notices": 0,
+      "katexErrors": 0,
+      "result": "Actual EN URL and target anchor observed. No false partial-edition notice after the metadata-only pin advance."
+    },
+    "russianReference": {
+      "from": "/reference/",
+      "to": "/textbook/neural-networks/optimizers-schedules/#gradient-norm-clipping",
+      "interaction": "Keyboard activation of the named subject link",
+      "newAndOldHeadingAnchorsExist": true,
+      "katexErrors": 0,
+      "desktopDocumentClientAndScroll": [
+        1265,
+        1265
+      ],
+      "mobileDocumentClientAndScroll": [
+        375,
+        375
+      ]
+    },
+    "limits": "Navigation verified by keyboard activation, not a fresh claim about the previously inconsistent automated mouse-click behavior. Existing chapter images were not modified or all individually re-reviewed."
+  },
+  "artifactPins": [
+    {
+      "path": "docs/audit/2026-10-30-reference-index-metadata-additions.json",
+      "sha256": "cf6e81ad5365a9b8d07b06f947afb8a8321aeaf0211bcc81832e75e388a17099"
+    },
+    {
+      "path": "publishing/tools/sync-topic-index.ts",
+      "sha256": "747e06156164b2af8d745a98b93b2060e28695107fb203708ccda371b3aae04b"
+    },
+    {
+      "path": "publishing/tools/topic-consolidation-baseline.mjs",
+      "sha256": "51df9bf666186f9a16323eabcf6f5f4cfc47805c98e3a93d41cd0abc00e85ce9"
+    },
+    {
+      "path": "publishing/tools/topic_consolidation_baseline.py",
+      "sha256": "a68d9a54c6b9769c11ba73a22be67f0efc6d1a088e7605f16938f5fdb4327c65"
+    },
+    {
+      "path": "publishing/tests/reference-index-sync.test.ts",
+      "sha256": "26b8ace41cd3e9e06f0f41ce92cf696c99d9b01fe2dbadf4a62aad002eb04a76"
+    },
+    {
+      "path": "publishing/tests/reference-terms.test.ts",
+      "sha256": "adec689882a39a63417cf770aa9dcc531341b2e17732434cdfe96cc8732e8292"
+    },
+    {
+      "path": "publishing/tests/site-output.test.ts",
+      "sha256": "87611e9d4abfd1e15945f74e0456ae031752d16cfb099c3428c3eb173354abb7"
+    },
+    {
+      "path": "site/astro.config.mjs",
+      "sha256": "0bceb3e60797b83d84e486e2d3db7e7dc08ecb6f60f1c9c870bb827c3d2f9cc1"
+    },
+    {
+      "path": "site/src/components/BookPageTitle.astro",
+      "sha256": "b422edf0eb68019c1846d812c48a0ef4d3fd1265f6de982510e53d55ebb5c567"
+    },
+    {
+      "path": "site/src/components/BookFallbackContentNotice.astro",
+      "sha256": "d01c5c504d765f8b26a56b1b40cf1632ab71f21f12350341f1487e79558b7cfb"
+    },
+    {
+      "path": "00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация.md",
+      "sha256": "d68027e53fdf5a60f41b9fb7c15c7cebdfc0726c5c1129ab08f1312797490902"
+    },
+    {
+      "path": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "sha256": "6bcadba24fff88dceadf61dc300e1e1e991cb21fda546acfa38ef345b47c106c"
+    },
+    {
+      "path": "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md",
+      "sha256": "1ffb968f9bc3b562b3065f1b059c12e9e9c0b41f78176f2e6d6e5c303f6e52b5"
+    },
+    {
+      "path": "01 Справочник/_index.md",
+      "sha256": "190c7d3b35daa28a8903567d597bc9d69712708f852d107b349d0a25ed6e1ef6"
+    },
+    {
+      "path": "en/01 Reference/_index.md",
+      "sha256": "0c5222b2c8ef4f9e227e04013ac60a9ad74c0c25cd479ace082947949a9da384"
+    },
+    {
+      "path": "en/00 Textbook/05 Attention and Transformer/05 The complete Transformer.md",
+      "sha256": "9c36cb572ff16ceb2c5210f35ae30f752840e8b28a33cf6dcf4aa9ac76ed1838"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-reference-edition/en-reference-to-transformer-dropout.png",
+      "sha256": "9966fc5f07ca90660e867507cc5131a998c347ce838183a2772afb2a10c67877"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-reference-edition/en-single-notice-desktop.png",
+      "sha256": "f7acd624eec9c9b8af0af75035470cc0e5ecca5df4e0b105370fd116814703ac"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-reference-edition/en-single-notice-mobile.png",
+      "sha256": "f4e3709e3570b1eef5e82ada864db39b26dcb4e71ca12cbde97301ee98e7dfbd"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-reference-edition/ru-gradient-clipping-mobile.png",
+      "sha256": "54bdb8c8029632d6b9d0f813f5702d539d276c35814b4670ff5e7bebebdb7c60"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-reference-edition/ru-reference-to-gradient-clipping.png",
+      "sha256": "8e2e9fc728ae1df1a851a392d119d210dc678955cf69612a88fe8aa057f1b283"
+    }
+  ],
+  "publication": {
+    "committed": false,
+    "pushed": false,
+    "deployed": false,
+    "mainChanged": false
+  },
+  "remaining": "General route review continues after the first five reads. Fallback body locale preservation, stale distributed framing, alignment prerequisites, source-specific image reproduction gaps and final dev/Pages release remain."
+}

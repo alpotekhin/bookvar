@@ -30,24 +30,23 @@ describe('handbook landing output', () => {
         cards: [
           { href: './textbook/', label: 'Учебник' },
           { href: './reference/', label: 'Справочник' },
-          { href: './models/', label: 'Атлас моделей' },
-          { href: './sources/', label: 'Источники' },
-          { href: './practice/causal-self-attention/', label: 'Практика' },
-          { href: './questions/llm/', label: 'Вопросы' },
-        ]
-      },
-      {
-        labelledBy: 'university-courses',
-        cards: [
-          { href: './sources/courses/stanford-cs336-spring-2026/', label: 'Stanford CS336 — Language Modeling from Scratch' },
-          { href: './sources/courses/berkeley-advanced-llm-agents-spring-2025/', label: 'Berkeley Advanced LLM Agents' },
+          { href: './sources/', label: 'Библиотека источников' },
         ]
       }
     ]);
+    expect(html).toContain('href="./practice/"');
+    expect(html).toContain('href="./questions/"');
+    expect(html).not.toContain('id="university-courses"');
   });
 });
 
 describe('diagram presentation', () => {
+  test('keeps wrapped list links inside one continuous mobile hit target', async () => {
+    const css = await read('src/styles/custom.css');
+    const rule = css.match(/\.sl-markdown-content li > a\s*\{([^}]+)\}/);
+    expect(rule?.[1]).toMatch(/display:\s*inline-block/);
+    expect(rule?.[1]).toMatch(/max-width:\s*100%/);
+  });
   test.each([
     '2f10e92057738ef1e4a50e524fddf5389d61d795.svg',
     '3b022a3ffa6f028fe2c2c3165c292a16a3a9e0ff.svg',

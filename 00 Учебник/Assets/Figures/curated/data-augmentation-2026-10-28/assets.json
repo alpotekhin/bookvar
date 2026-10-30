@@ -1,0 +1,66 @@
+[
+  {
+    "id": "curated-data-augmentation-cutmix-comparison-7618a576a5ba",
+    "asset": "00 Учебник/Assets/Figures/curated/data-augmentation-2026-10-28/cutmix-comparison.png",
+    "author": "Sangdoo Yun, Dongyoon Han, Seong Joon Oh, Sanghyuk Chun, Junsuk Choe and Youngjoon Yoo; NAVER Corp.",
+    "source_url": "https://github.com/clovaai/CutMix-PyTorch/blob/2d8eb68faff7fe4962776ad51d175c3b01a25734/README.md",
+    "source_image_url": "https://raw.githubusercontent.com/clovaai/CutMix-PyTorch/2d8eb68faff7fe4962776ad51d175c3b01a25734/img1.PNG",
+    "commit": "2d8eb68faff7fe4962776ad51d175c3b01a25734",
+    "source_asset": "05 Источники/Originals/data-augmentation-2026-10-28/cutmix/img1.PNG",
+    "source_asset_sha256": "7618a576a5ba78601fc8611c064d894b99c1572830dba5cfbd5424859dfb4c02",
+    "sha256": "7618a576a5ba78601fc8611c064d894b99c1572830dba5cfbd5424859dfb4c02",
+    "source_page_snapshot": "05 Источники/Originals/data-augmentation-2026-10-28/cutmix/README.md",
+    "source_page_sha256": "e0b4302fefb15ce8ba444b4032d639c37e9de04c05579b1db21372bd32a59870",
+    "license": "MIT",
+    "license_url": "https://github.com/clovaai/CutMix-PyTorch/blob/2d8eb68faff7fe4962776ad51d175c3b01a25734/LICENSE",
+    "license_evidence": "05 Источники/Originals/data-augmentation-2026-10-28/cutmix/LICENSE",
+    "license_evidence_sha256": "3605511138ad9cb49718384c790846d2d18a55f07f0e238d944e99c3b2f05fcb",
+    "public_license_copy": "site/public/licenses/cutmix-2d8eb68-MIT.txt",
+    "derivation": "source-raster-copy",
+    "dimensions_px": [
+      649,
+      447
+    ],
+    "modifications": "Complete original copied byte-for-byte. No crop, redraw, translated labels, resampling or recompression. The D2L rendered output is pinned by its bytes and web snapshot, separately from the source-code commit. The CutMix image is the repository overview, not the paper CAM figure; historical result rows retain their task-specific metrics.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований.md"
+    ]
+  },
+  {
+    "id": "curated-data-augmentation-d2l-random-crops-0aa186faaee2",
+    "asset": "00 Учебник/Assets/Figures/curated/data-augmentation-2026-10-28/d2l-random-crops.svg",
+    "author": "Aston Zhang, Zachary C. Lipton, Mu Li and Alexander J. Smola",
+    "source_url": "https://d2l.ai/chapter_computer-vision/image-augmentation.html#flipping-and-cropping",
+    "source_image_url": "https://d2l.ai/_images/output_image-augmentation_7d0887_45_0.svg",
+    "commit": "23d7a5aecceee57d1292c56e90cce307f183bb0a",
+    "source_asset": "05 Источники/Originals/data-augmentation-2026-10-28/d2l/random-crops.svg",
+    "source_asset_sha256": "0aa186faaee2267fa0afe51adec4cf8daca445dfb71a292c236ff2aeb00294d3",
+    "sha256": "0aa186faaee2267fa0afe51adec4cf8daca445dfb71a292c236ff2aeb00294d3",
+    "source_page_snapshot": "05 Источники/Originals/data-augmentation-2026-10-28/d2l/web.html",
+    "source_page_sha256": "cad422db3d3ae48787b46969db565b144152653e76f79801f0c693b5c364b66a",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/data-augmentation-2026-10-28/d2l/LICENSE",
+    "license_evidence_sha256": "a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c",
+    "public_license_copy": "site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt",
+    "derivation": "source-svg-copy",
+    "source_viewbox": [
+      0,
+      0,
+      465.600016,
+      237.203471
+    ],
+    "modifications": "Complete original copied byte-for-byte. No crop, redraw, translated labels, resampling or recompression. The D2L rendered output is pinned by its bytes and web snapshot, separately from the source-code commit. The CutMix image is the repository overview, not the paper CAM figure; historical result rows retain their task-specific metrics.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований.md"
+    ]
+  }
+]

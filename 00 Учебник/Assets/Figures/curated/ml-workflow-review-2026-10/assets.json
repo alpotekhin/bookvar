@@ -1,0 +1,140 @@
+[
+  {
+    "id": "curated-workflow-google-pipes-b7bbc0843fd7",
+    "asset": "00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-pipes.png",
+    "author": "Google for Developers, Machine Learning education",
+    "source_url": "https://developers.google.com/machine-learning/managing-ml-projects/pipelines",
+    "source_image_url": "https://developers.google.com/static/machine-learning/managing-ml-projects/images/pipes.png",
+    "source_figure": 4,
+    "source_asset": "05 Источники/Originals/ml-workflow-2026-10-20/google-pipes.png",
+    "source_asset_sha256": "b7bbc0843fd78de1fb67dbfa370062f738155a7a08fbcb43a4d0f1bd3f8b2664",
+    "sha256": "b7bbc0843fd78de1fb67dbfa370062f738155a7a08fbcb43a4d0f1bd3f8b2664",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/ml-workflow-2026-10-20/google-pipelines.html",
+    "license_evidence_sha256": "232181516cc73ec07b649ea57d3b4b6fabc769c043285ebc58c3817151f841eb",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "official-google-ml-course-asset",
+    "metadata_status": "verified",
+    "modifications": "Original complete Google course PNG copied byte-for-byte. No crop, redraw, translation, resizing or other visual modification.",
+    "used_in": [
+      "00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow.md"
+    ],
+    "last_verified": "2026-10-20"
+  },
+  {
+    "id": "curated-workflow-google-data-process-ca3a265fa30b",
+    "asset": "00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-data-process.png",
+    "author": "Google for Developers, Machine Learning education",
+    "source_url": "https://developers.google.com/machine-learning/managing-ml-projects/pipelines",
+    "source_image_url": "https://developers.google.com/static/machine-learning/managing-ml-projects/images/data-process.png",
+    "source_figure": 8,
+    "source_asset": "05 Источники/Originals/ml-workflow-2026-10-20/google-data-process.png",
+    "source_asset_sha256": "ca3a265fa30b44e338214aaf8c920c3bedc84df693aec8c2f7d958bf7cad29a3",
+    "sha256": "ca3a265fa30b44e338214aaf8c920c3bedc84df693aec8c2f7d958bf7cad29a3",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/ml-workflow-2026-10-20/google-pipelines.html",
+    "license_evidence_sha256": "232181516cc73ec07b649ea57d3b4b6fabc769c043285ebc58c3817151f841eb",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "official-google-ml-course-asset",
+    "metadata_status": "verified",
+    "modifications": "Original complete Google course PNG copied byte-for-byte. No crop, redraw, translation, resizing or other visual modification.",
+    "used_in": [
+      "00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow.md"
+    ],
+    "last_verified": "2026-10-20"
+  },
+  {
+    "id": "curated-workflow-google-train-115d897b0df6",
+    "asset": "00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-train.png",
+    "author": "Google for Developers, Machine Learning education",
+    "source_url": "https://developers.google.com/machine-learning/managing-ml-projects/pipelines",
+    "source_image_url": "https://developers.google.com/static/machine-learning/managing-ml-projects/images/train.png",
+    "source_figure": 9,
+    "source_asset": "05 Источники/Originals/ml-workflow-2026-10-20/google-train.png",
+    "source_asset_sha256": "115d897b0df65aa1fa120b555ee10080f06fc72a0888c07fab35ccf3d0f6ba45",
+    "sha256": "115d897b0df65aa1fa120b555ee10080f06fc72a0888c07fab35ccf3d0f6ba45",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/ml-workflow-2026-10-20/google-pipelines.html",
+    "license_evidence_sha256": "232181516cc73ec07b649ea57d3b4b6fabc769c043285ebc58c3817151f841eb",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "official-google-ml-course-asset",
+    "metadata_status": "verified",
+    "modifications": "Original complete Google course PNG copied byte-for-byte. No crop, redraw, translation, resizing or other visual modification.",
+    "used_in": [
+      "00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow.md"
+    ],
+    "last_verified": "2026-10-20"
+  },
+  {
+    "id": "curated-workflow-google-offline-online-aeed21a56938",
+    "asset": "00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-offline-online.png",
+    "author": "Google for Developers, Machine Learning education",
+    "source_url": "https://developers.google.com/machine-learning/managing-ml-projects/pipelines",
+    "source_image_url": "https://developers.google.com/static/machine-learning/managing-ml-projects/images/offline-online.png",
+    "source_figure": 5,
+    "source_asset": "05 Источники/Originals/ml-workflow-2026-10-20/google-offline-online.png",
+    "source_asset_sha256": "aeed21a56938b175ff499ffc3212ea9bd9831520892c3773acb29eb9eb03b546",
+    "sha256": "aeed21a56938b175ff499ffc3212ea9bd9831520892c3773acb29eb9eb03b546",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/ml-workflow-2026-10-20/google-pipelines.html",
+    "license_evidence_sha256": "232181516cc73ec07b649ea57d3b4b6fabc769c043285ebc58c3817151f841eb",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "official-google-ml-course-asset",
+    "metadata_status": "verified",
+    "modifications": "Original complete Google course PNG copied byte-for-byte. No crop, redraw, translation, resizing or other visual modification.",
+    "used_in": [
+      "00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow.md"
+    ],
+    "last_verified": "2026-10-20"
+  },
+  {
+    "id": "curated-workflow-google-prediction-process-68e37d1d1053",
+    "asset": "00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-prediction-process.png",
+    "author": "Google for Developers, Machine Learning education",
+    "source_url": "https://developers.google.com/machine-learning/managing-ml-projects/pipelines",
+    "source_image_url": "https://developers.google.com/static/machine-learning/managing-ml-projects/images/prediction-process.png",
+    "source_figure": 6,
+    "source_asset": "05 Источники/Originals/ml-workflow-2026-10-20/google-prediction-process.png",
+    "source_asset_sha256": "68e37d1d1053f1ee90dcee17b0d2166ae673222ac58a3ca1ad904ecc5e11ffaa",
+    "sha256": "68e37d1d1053f1ee90dcee17b0d2166ae673222ac58a3ca1ad904ecc5e11ffaa",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/ml-workflow-2026-10-20/google-pipelines.html",
+    "license_evidence_sha256": "232181516cc73ec07b649ea57d3b4b6fabc769c043285ebc58c3817151f841eb",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "official-google-ml-course-asset",
+    "metadata_status": "verified",
+    "modifications": "Original complete Google course PNG copied byte-for-byte. No crop, redraw, translation, resizing or other visual modification.",
+    "used_in": [
+      "00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow.md"
+    ],
+    "last_verified": "2026-10-20"
+  },
+  {
+    "id": "curated-workflow-google-prediction-log-62ac87cbb776",
+    "asset": "00 Учебник/Assets/Figures/curated/ml-workflow-review-2026-10/google-prediction-log.png",
+    "author": "Google for Developers, Machine Learning education",
+    "source_url": "https://developers.google.com/machine-learning/managing-ml-projects/pipelines",
+    "source_image_url": "https://developers.google.com/static/machine-learning/managing-ml-projects/images/prediction-log.png",
+    "source_figure": 7,
+    "source_asset": "05 Источники/Originals/ml-workflow-2026-10-20/google-prediction-log.png",
+    "source_asset_sha256": "62ac87cbb77683f7f6ffc9315b878b77aef16a2d73cf3d48bf49319c20bf6a13",
+    "sha256": "62ac87cbb77683f7f6ffc9315b878b77aef16a2d73cf3d48bf49319c20bf6a13",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/ml-workflow-2026-10-20/google-pipelines.html",
+    "license_evidence_sha256": "232181516cc73ec07b649ea57d3b4b6fabc769c043285ebc58c3817151f841eb",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "official-google-ml-course-asset",
+    "metadata_status": "verified",
+    "modifications": "Original complete Google course PNG copied byte-for-byte. No crop, redraw, translation, resizing or other visual modification.",
+    "used_in": [
+      "00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow.md"
+    ],
+    "last_verified": "2026-10-20"
+  }
+]

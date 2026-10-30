@@ -1,0 +1,10 @@
+bash: warning: setlocale: LC_ALL: cannot change locale (C.UTF-8): Bad file descriptor
+
+ RUN  v4.1.10 /Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/publishing
+
+
+ Test Files  3 passed (3)
+      Tests  100 passed (100)
+   Start at  15:07:59
+   Duration  496ms (transform 102ms, setup 0ms, import 189ms, tests 280ms, environment 0ms)
+

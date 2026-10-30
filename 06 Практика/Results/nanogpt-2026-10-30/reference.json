@@ -1,0 +1,96 @@
+{
+  "status": "passed",
+  "upstream_revision": "3adf61e154c3fe3fca428ad6bc3818b27a3b8291",
+  "environment": {
+    "python": "3.14.3",
+    "torch": "2.14.1",
+    "numpy": "2.3.5",
+    "requests": "2.32.5",
+    "tiktoken": "0.12.0",
+    "device": "cpu",
+    "threads": 1
+  },
+  "model_checks": {
+    "parameters": 6832,
+    "training_logits": [
+      4,
+      8,
+      7
+    ],
+    "inference_logits": [
+      4,
+      1,
+      7
+    ],
+    "direct_target_loss": 1.9127993237016827,
+    "max_accumulation_gradient_error": 1.249000902703301e-16,
+    "math_backend_forced": true,
+    "upstream_flash_attribute": true,
+    "generation_input_lengths": [
+      6,
+      7,
+      8,
+      8,
+      8
+    ],
+    "generated_shape": [
+      1,
+      11
+    ],
+    "causal_prefix_equal": true,
+    "learning_rates": [
+      0.001,
+      0.002,
+      0.003,
+      0.002604594154601839,
+      0.00165,
+      0.0006954058453981609,
+      0.0003,
+      0.0003
+    ]
+  },
+  "native_execution": {
+    "corpus": "local fixed-seed four-character fixture, not Shakespeare",
+    "train_tokens": 1843,
+    "val_tokens": 205,
+    "vocab_size": 4,
+    "native_programs": [
+      "prepare.py",
+      "train.py (scratch twice, resume once)",
+      "sample.py"
+    ],
+    "optimizer_tokens_per_update": 32,
+    "scratch_logged_iterations": [
+      0,
+      1,
+      2
+    ],
+    "final_checkpoint_iteration": 2,
+    "checkpoint_optimizer_steps": 2,
+    "checkpoint_keys": [
+      "best_val_loss",
+      "config",
+      "iter_num",
+      "model",
+      "model_args",
+      "optimizer"
+    ],
+    "non_identical_resume_max_weight_error": 0.0017217905260622501,
+    "sampled_token_ids": [
+      2,
+      1,
+      1,
+      1,
+      1
+    ],
+    "sampled_text": "A    ",
+    "model_parameters": 6784,
+    "checkpoint_bytes": 110392,
+    "temporary_artifacts_deleted_on_exit": true
+  },
+  "limits": [
+    "No CUDA, DDP, compiler, real dataset, quality result or speed benchmark.",
+    "The original program is executed, not replaced by a simplified training loop.",
+    "Resume state restoration is not claimed to reproduce the stochastic trajectory."
+  ]
+}

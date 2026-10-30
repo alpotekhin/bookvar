@@ -1,0 +1,27 @@
+{
+  "reviewed_at": "2026-10-29",
+  "scope": "Local license/source evidence, current usage after topic consolidation, and explicit null license URLs where no blanket reuse license is asserted; original asset manifest remains frozen.",
+  "assets": {
+    "curated-cs336-v4-csa-ac355c5907c7": {
+      "used_in": ["00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md"]
+    },
+    "curated-cs336-v4-hca-5f873f142602": {
+      "used_in": ["00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md"]
+    },
+    "curated-cs336-air-taxonomy-cc05a82b6b55": {
+      "source_page_snapshot": "05 Источники/Originals/responsible-2026-10-20/air-bench.html",
+      "source_page_sha256": "bef924af939a826fba9b831cd6e3cedce16f0a9210f8508230016cbf00a803ff",
+      "license_evidence": "05 Источники/Originals/responsible-2026-10-20/air-bench.html",
+      "license_evidence_sha256": "bef924af939a826fba9b831cd6e3cedce16f0a9210f8508230016cbf00a803ff"
+    },
+    "curated-cs336-arc1-ca91237aa14d": {
+      "license_url": null
+    },
+    "curated-cs336-arc2-6f5c24072e35": {
+      "license_url": null
+    },
+    "curated-cs336-arc3-84e63ce2e889": {
+      "license_url": null
+    }
+  }
+}

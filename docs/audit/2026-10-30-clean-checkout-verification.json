@@ -1,0 +1,118 @@
+{
+  "date": "2026-10-30",
+  "status": "local-clean-checkout-verified; live-release-pending",
+  "scope": "Release reproducibility and publication behavior. No new chapter explanation or translation accepted by these checks.",
+  "checkedIndexTree": "beb636e476d5e947f8355d05857597fb360eec30",
+  "cleanCheckout": {
+    "path": "/var/tmp/bookvar-clean-20261030-PY2u8j",
+    "method": "git checkout-index followed by an independent frozen-lockfile dependency install",
+    "trackedFiles": 7894,
+    "blobMismatches": 0,
+    "sourceArchiveAbsent": true,
+    "confidentialDeckAbsent": true,
+    "node": "22.12.0",
+    "pnpm": "10.32.1",
+    "installedPackages": 476
+  },
+  "sourceEvidence": {
+    "fullLocalUnit": {
+      "files": 153,
+      "tests": 928,
+      "exit": 0
+    },
+    "cleanPublicationSuite": {
+      "files": 57,
+      "tests": 444,
+      "exit": 0
+    },
+    "strictEvidenceFiles": 96,
+    "split": "Full test:unit remains unchanged and includes source evidence. test:evidence is strict, not presence-skipped. Public CI runs a static publication suite without private source snapshots.",
+    "publicAssets": {
+      "registered": 1513,
+      "sha256Pinned": 1160,
+      "explicitLegacyUnhashed": 353,
+      "legacyFallbackForHashedFilesRejected": true
+    },
+    "archiveDiagnostic": "A preliminary full-suite run on the public projection failed on 96 archive-dependent test files. The archive was not published to make those tests pass.",
+    "warnings": "Full local unit checks passed despite retained PDF parser closepath and tar locale diagnostics; no source was rewritten to hide them."
+  },
+  "root": {
+    "astroErrors": 0,
+    "astroHints": 6,
+    "outputTests": 187,
+    "siteTests": 93,
+    "builtRoutes": 2007,
+    "files": 5544,
+    "bytes": 844769926,
+    "brokenInternalLinks": 0,
+    "scope": "Root compile/output checks preceded two test-only fixture refinements; no renderer, adapter, chapter, image or other build input changed after those checks."
+  },
+  "pages": {
+    "base": "/bookvar",
+    "builtRoutes": 2007,
+    "files": 5544,
+    "bytes": 848040515,
+    "limit": 1000000000,
+    "headroom": 151959485,
+    "brokenInternalLinks": 0
+  },
+  "browser": {
+    "preview": "Clean-checkout Pages artifact on 127.0.0.1:4331",
+    "gpt3English": {
+      "loadedFigures": 5,
+      "katexErrors": 0,
+      "clientWidth": 1265,
+      "scrollWidth": 1265,
+      "originalFigureViewer": "Complete native source illustration and attribution inspected at desktop width."
+    },
+    "schedulerMobile": {
+      "requestedViewport": [
+        360,
+        800
+      ],
+      "clientWidth": 345,
+      "scrollWidth": 345,
+      "executed": "One step, then run to completion through actual controls",
+      "completedRequests": 4,
+      "outputTokens": 10,
+      "iterations": 5,
+      "currentKvMiB": 0,
+      "peakBlocks": "3/8",
+      "englishFallbackExplicit": true
+    },
+    "sourceAlias": {
+      "from": "/bookvar/en/sources/courses/harvard-ml-systems/tinytorch/19-benchmarking/?from=clean-qa#complete-python-source",
+      "to": "/bookvar/sources/courses/harvard-ml-systems/tinytorch/19-benchmarking/?from=clean-qa#complete-python-source",
+      "lineBlocks": 4119,
+      "decodedCharacters": 151419,
+      "decodedSha256": "7369360962cf8a1cfdc6cc04013e15f35f430f4beb71d0414c7c4a55aaff8713",
+      "matchesRetainedOriginal": true
+    },
+    "evidenceDirectory": "docs/audit/evidence/2026-10-30-clean-checkout",
+    "viewportRestored": true
+  },
+  "preservation": {
+    "journal": "docs/audit/2026-10-30-clean-checkout-additions.json",
+    "earlierFigureDecision": "docs/audit/2026-10-30-figure-replacements-verification.json",
+    "earlierPublicationChecks": "docs/audit/2026-10-30-publication-delivery-verification.json",
+    "localOriginalsUnchanged": true
+  },
+  "release": {
+    "target": "HEAD:dev",
+    "author": "Alexander Potekhin <al_potechin@mail.ru>",
+    "base": "75e18703ca0572718f7fad0850d9fc914303395e",
+    "freshOriginDevComparison": [
+      0,
+      0
+    ],
+    "forcePush": false,
+    "mainMutation": false,
+    "commitPushAndLiveCi": "Pending when this local receipt was written. Verify separately against the resulting commit SHA."
+  },
+  "remaining": {
+    "wholeBook": "The route journal records 34 whole canonical-owner reads plus 14 earlier whole-owner reads reused at pinned revisions or reviewed deltas, out of 152 owners. This is not whole-book explanation/source/visual acceptance.",
+    "courses": "The source library preserves original courses; topic explanations remain on canonical textbook routes. Full source-to-topic completeness remains an editorial task, not a CI conclusion.",
+    "linkedFigures": "Sequential MTP, Toolformer and EAGLE objects that lack a confirmed reproduction basis remain direct links rather than new copied figures.",
+    "legacyAssets": "353 old registry entries remain unhashed. This explicit legacy list is technical debt, not a quality or rights approval."
+  }
+}

@@ -1,0 +1,57 @@
+[
+  {
+    "id": "curated-small-data-asapp-a4a3f45c72dc",
+    "asset": "00 Учебник/Assets/Figures/curated/small-data-finetuning-2026-10-29/asapp-overview.png",
+    "author": "Tianyi Zhang, Felix Wu, Arzoo Katiyar, Kilian Q. Weinberger, Yoav Artzi; ASAPP Inc.",
+    "title": "Bias correction, reinitialization and training duration: original repository illustration",
+    "source_url": "https://github.com/asappresearch/revisit-bert-finetuning/blob/0aa4f4e117ee4422f7cb9355158203e01d6730db/README.md",
+    "source_asset": "05 Источники/Originals/small-data-finetuning-2026-10-29/asapp-repo_illustration.png",
+    "source_asset_sha256": "a4a3f45c72dc3c2a7fbabd6f4e3644c2c37d3e8caa3a83739c9173519d2a2d8a",
+    "source_image_url": "https://raw.githubusercontent.com/asappresearch/revisit-bert-finetuning/0aa4f4e117ee4422f7cb9355158203e01d6730db/repo_illustration.png",
+    "commit": "0aa4f4e117ee4422f7cb9355158203e01d6730db",
+    "license": "MIT",
+    "license_url": "https://opensource.org/license/mit/",
+    "license_evidence": "05 Источники/Originals/small-data-finetuning-2026-10-29/asapp-LICENSE",
+    "license_evidence_sha256": "573d2a944b2964ab1c030d71f15cdbc18b171534f18457a11b075dbfdcfe039c",
+    "copyright": "Copyright (c) 2020 ASAPP Inc.",
+    "width": 1394,
+    "height": 475,
+    "bytes": 178869,
+    "sha256": "a4a3f45c72dc3c2a7fbabd6f4e3644c2c37d3e8caa3a83739c9173519d2a2d8a",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original repository raster copied byte-for-byte. No crop, redrawing, relabeling, resize or recompression.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md"
+    ]
+  },
+  {
+    "id": "curated-small-data-mosbach-a994bb0e2860",
+    "asset": "00 Учебник/Assets/Figures/curated/small-data-finetuning-2026-10-29/mosbach-stability.png",
+    "author": "Marius Mosbach, Maksym Andriushchenko, Dietrich Klakow",
+    "title": "Development-score distributions across 25 seeds: original Figure 1 with caption",
+    "source_url": "https://github.com/uds-lsv/bert-stable-fine-tuning/blob/3cf27e8667aee9d1c822d747c63ce331b231f283/README.md",
+    "source_asset": "05 Источники/Originals/small-data-finetuning-2026-10-29/mosbach-fig1.png",
+    "source_asset_sha256": "a994bb0e2860fddd0aeb34644c8a2916d0ffee47e1a098dec389a171e8f20088",
+    "source_image_url": "https://raw.githubusercontent.com/uds-lsv/bert-stable-fine-tuning/3cf27e8667aee9d1c822d747c63ce331b231f283/images/fig1.png",
+    "commit": "3cf27e8667aee9d1c822d747c63ce331b231f283",
+    "license": "Apache-2.0",
+    "license_url": "https://www.apache.org/licenses/LICENSE-2.0",
+    "license_evidence": "05 Источники/Originals/small-data-finetuning-2026-10-29/mosbach-LICENSE",
+    "license_evidence_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "width": 1632,
+    "height": 616,
+    "bytes": 150613,
+    "sha256": "a994bb0e2860fddd0aeb34644c8a2916d0ffee47e1a098dec389a171e8f20088",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original repository raster copied byte-for-byte. No crop, redrawing, relabeling, resize or recompression.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md"
+    ]
+  }
+]

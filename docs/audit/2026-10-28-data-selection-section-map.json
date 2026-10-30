@@ -1,0 +1,555 @@
+{
+  "title": "Harvard Data Selection: thematic section map and explicit gaps",
+  "reviewed_at": "2026-10-29",
+  "status": "section-map-complete-recorded-reader-gaps-closed",
+  "scope": "Every pinned source line has a disposition. Mapping and byte-level tests are not proof of pedagogical completeness. All three recorded reader gaps have scoped explanation, source, execution and visual reviews. Existing audits retain their recorded limitations; this is not a whole-course or English-textbook completion claim.",
+  "source": {
+    "path": "05 Источники/Originals/data-selection-2026-10-28/chapter-2bd97c5.qmd",
+    "sha256": "7bdfce0af42c461eb4277da4f61f3a18442af22360b65ce57a8073fef7de8f5c",
+    "commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "line_count": 4741,
+    "read_boundary": "All 4741 source lines read cumulatively in this Data Selection pass, including code and TikZ; the source is not restarted at each follow-up.",
+    "native_figures": "05 Источники/Originals/data-selection-reconciliation-2026-10-28/native-figure-decisions.json",
+    "generated_figures": "05 Источники/Originals/data-selection-reconciliation-2026-10-28/generated-figure-decisions.json"
+  },
+  "targets": {
+    "data": {
+      "path": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+      "sha256": "016059980cfd4582d7786c3bf09a1c6c513f4ad6c19e39df0202c5fe06b667c7",
+      "review": "docs/audit/2026-10-23-corpus-intro-collection.md"
+    },
+    "dedup": {
+      "path": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+      "sha256": "bb41bfeacf3a7a33b41af695d3679a1b33d8061fa78a35c2c3b9da369216a2cc",
+      "review": "docs/audit/2026-10-23-corpus-dedup.md",
+      "current_sha256": "b614c77415a2209e0ec017b94fa11ea7a22aca3de0532c9f21d7f76f1609425f",
+      "additional_review": "docs/audit/2026-10-29-selection-gaps.md",
+      "baseline_restoration": "docs/audit/2026-10-29-selection-gaps-additions.json"
+    },
+    "scores": {
+      "path": "00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting.md",
+      "sha256": "77c2b1dd27626e40bb33f9cfcd204b5744fd72575fc82ac736961047c90f9a6a",
+      "review": "docs/audit/2026-10-28-data-selection-scores.md",
+      "current_sha256": "18aa3e0c623deceaf7bd475e03f045c7a5e5e8b68ccc7921297e106fa4b04fe4",
+      "additional_review": "docs/audit/2026-10-29-confident-learning.md",
+      "baseline_restoration": "docs/audit/2026-10-29-confident-learning-addition.json"
+    },
+    "active": {
+      "path": "00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров.md",
+      "sha256": "f74660cc1515d21e0e423e2e2ee232fdb641765a7b8a43cd8aa4424dfc8c19e6",
+      "review": "docs/audit/2026-10-28-active-learning.md"
+    },
+    "geometry": {
+      "path": "00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding.md",
+      "sha256": "ed07daa1b7b286ad7e49739e8baa0c3e59223cb195062fe4240dbe4eba70e65a",
+      "review": "docs/audit/2026-10-28-geometric-coresets.md"
+    },
+    "semi": {
+      "path": "00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch.md",
+      "sha256": "48ca69139d0f48425b995970e1113eacc53dd39dcb66c67cbd4390facbbcb1a2",
+      "review": "docs/audit/2026-10-28-semi-supervised.md",
+      "additional_review": "docs/audit/2026-10-28-data-selection-reconciliation.md"
+    },
+    "simclr": {
+      "path": "00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений.md",
+      "sha256": "4b371ae35466962a0c3bf6ed9daad1004a70ee70a9c3217fe2c53ace1dccbfb2",
+      "review": "docs/audit/2026-10-28-simclr.md"
+    },
+    "moco": {
+      "path": "00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder.md",
+      "sha256": "b1436d67484c43e8ab9b4cb93754c6100ce0ead0997da342e9752d318266963d",
+      "review": "docs/audit/2026-10-28-moco.md"
+    },
+    "mae": {
+      "path": "00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей.md",
+      "sha256": "6cfa1df55e37e02515ce19faefd57f77dcaa9aed2cb4bb913b199b956cc83b64",
+      "review": "docs/audit/2026-10-28-mae.md"
+    },
+    "engineering": {
+      "path": "00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества.md",
+      "sha256": "c1f958a0143ee05efa1ec4f6d58e5ebb5d0822cd500edd407cb95cce6ee48175",
+      "review": "docs/audit/2026-10-28-selection-engineering.md",
+      "additional_review": "docs/audit/2026-10-28-data-selection-reconciliation.md"
+    },
+    "scaling": {
+      "path": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "sha256": "a2953c0e6343ee9ee34a7ba82d77f3bb441ef14f560f23acfd2d526d409422fb",
+      "review": "docs/audit/2026-10-23-scaling.md"
+    },
+    "synthetic": {
+      "path": "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md",
+      "sha256": "df616fb7536981209a3fdef659003fb3f5b336c1983132f75f7d126b95fc3dd4",
+      "review": "docs/audit/2026-10-25-synthetic-data.md"
+    },
+    "simreal": {
+      "path": "00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции.md",
+      "sha256": "63368115b8d0dd1f51ba8d16950b572be3fa57b08c491953fdf175ba5c85957a",
+      "review": "docs/audit/2026-10-28-sim-to-real.md"
+    },
+    "augmentation": {
+      "path": "00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований.md",
+      "sha256": "d35a256a67948d010ba6a0e3feae9a3d3d2c7856d47be695f9570c8750d3ddd7",
+      "review": "docs/audit/2026-10-28-data-augmentation.md"
+    },
+    "gan": {
+      "path": "00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор.md",
+      "sha256": "a55940b1d05c1544877d2779656b388a769edb0fdd07996f2275865f8aa86c98",
+      "review": "docs/audit/2026-10-28-gan-dcgan.md"
+    },
+    "distillation": {
+      "path": "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md",
+      "sha256": "e7ea39b04663903565f4e9796adc5718ab1f7c3a23dee13d0c768faaba3bba4c",
+      "review": "docs/audit/2026-10-25-distillation.md"
+    },
+    "compression": {
+      "path": "00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md",
+      "sha256": "e818fccc317a2025b020f453a2e578e43ea1a2ba39ae893a86c6ee0a89bed5d3",
+      "review": "docs/audit/2026-10-19-model-compression.md"
+    },
+    "recsys": {
+      "path": "00 Учебник/02 Рекомендательные системы/03 Ranking и нейронные рекомендательные модели.md",
+      "sha256": "86e293dab73545f32be8b908ab0b8a663e9b247f454223c93f44427e50e1f1cb",
+      "review": "docs/audit/2026-10-27-dlrm.md",
+      "current_sha256": "50a59283ee0867710665f414954291080304333961a107b6418e360e3f759bf1",
+      "additional_review": "docs/audit/2026-10-29-selection-gaps.md",
+      "baseline_restoration": "docs/audit/2026-10-29-selection-gaps-additions.json"
+    },
+    "pipeline": {
+      "path": "00 Учебник/10 ML Systems/06 Data pipeline, padding и packing.md",
+      "sha256": "5f2a58816bfc82f2ccb0e43cea2a4bdbae1d22d8aae17d0fb36f82a2baac2917",
+      "review": "docs/audit/2026-10-28-tf-data-cache.md"
+    }
+  },
+  "open_items": {},
+  "source_findings": {
+    "proxy": "EL2N/GraNd/entropy/information gain are not the same measured quantity; high error can indicate a wrong label, minority case or model weakness.",
+    "geometry": "The k-center guarantee is geometric under stated assumptions, not an accuracy guarantee. Source language 'facility-location-style' does not introduce another algorithm.",
+    "dedup": "Lexical Jaccard is not generic paraphrase equivalence; LSH candidate recall/complexity and thresholds need actual corpus assumptions. Hash equality needs the declared canonicalization and collision handling.",
+    "synthetic": "Unconditional domain marginals do not determine labels; sample count does not establish independent parents, correct labels, privacy or an optimal synthetic ratio.",
+    "systems": "Retained fraction, training step count, elapsed time, GPU-hours, I/O and money need separate boundaries. Gains across unchanged and changed stages do not universally multiply.",
+    "measurement": "Assigned scenarios, synthetic curves and forecasts are not observed benchmarks or universal thresholds. PPD/AULC/DCR need units and fixed evaluation boundaries.",
+    "licensing": "Pinned QMD uses CC BY-NC-SA 4.0. The separately archived web-edition figures use CC BY-NC-ND 4.0 and remain complete, unmodified objects."
+  },
+  "sections": [
+    {
+      "start": 1,
+      "end": 55,
+      "heading": "Purpose and metadata",
+      "targets": [
+        "data",
+        "engineering"
+      ],
+      "status": "mapped",
+      "notes": "The introductory goals are developed through corpus provenance and end-to-end selection costs; no new introduction copied.",
+      "source_span_sha256": "fca477bdb5e477b1e2441fc3e1db954534764b4a460a738d42feab5fa5533315"
+    },
+    {
+      "start": 56,
+      "end": 289,
+      "heading": "Fundamentals and human-data projection",
+      "targets": [
+        "data",
+        "synthetic",
+        "scaling"
+      ],
+      "status": "mapped-with-source-findings",
+      "notes": "Corpus availability, reuse and evaluation are covered. The extrapolation is link-only, not a verified exhaustion date; it is not needed as a prerequisite for selection.",
+      "source_span_sha256": "c439f0d9e2755e52deb7b99b381d31b7e691c32c08a0355cf93819fc8f5b862c"
+    },
+    {
+      "start": 290,
+      "end": 355,
+      "heading": "Definition of selection",
+      "targets": [
+        "scores",
+        "engineering"
+      ],
+      "status": "mapped",
+      "notes": "Separate candidate pool, score, selected IDs, schedule and quality constraint. Fewer retained records alone do not prove fewer training operations.",
+      "source_span_sha256": "114f9916dfe566ad10586b1ae34ad154fd7d6228d761abaf4818bd3c64d4916a"
+    },
+    {
+      "start": 356,
+      "end": 444,
+      "heading": "Systems perspective",
+      "targets": [
+        "engineering",
+        "pipeline"
+      ],
+      "status": "mapped",
+      "notes": "Account for preparation, training, bytes, annotation, elapsed time and recurring work separately.",
+      "source_span_sha256": "2979e2c86d3f8f103ec46896815bb18d24e678e0a55ea074540c58e831cd0703"
+    },
+    {
+      "start": 445,
+      "end": 699,
+      "heading": "Information-compute ratio and triad",
+      "targets": [
+        "engineering",
+        "scores"
+      ],
+      "status": "mapped-with-source-findings",
+      "notes": "The ICR clarification distinguishes conceptual information gain from measured proxies and PPD units. The triad is omitted for recorded explanatory inconsistency, not claimed visually rendered.",
+      "source_span_sha256": "d66ed05342dfbabf480ecad81a9dc421e32cd5c7ffb950beb6caad8258b84319"
+    },
+    {
+      "start": 700,
+      "end": 1050,
+      "heading": "ICR frontier and proxy selection setup",
+      "targets": [
+        "scores",
+        "engineering"
+      ],
+      "status": "mapped-with-source-findings",
+      "notes": "EL2N/GraNd/forgetting have definitions, executable source-faithful examples and validation boundaries. High score is not proof of usefulness or boundary proximity.",
+      "source_span_sha256": "ea8907cd242f30f36f7c679749b473bd499057035682599b79d8797a5f088ca1"
+    },
+    {
+      "start": 1051,
+      "end": 1130,
+      "heading": "Static pruning and smaller datasets",
+      "targets": [
+        "scores",
+        "engineering"
+      ],
+      "status": "mapped-with-source-findings",
+      "notes": "Compare full and random equal-size controls, stable record IDs, retained fractions, quality and update budgets. Source compute savings are conditional on fixed epochs.",
+      "source_span_sha256": "b1b9e0aa88847f5379f77984c9e08914e51b25880971a1571cdc09a0fc349f8c"
+    },
+    {
+      "start": 1131,
+      "end": 1355,
+      "heading": "Coreset algorithms and EL2N workflow",
+      "targets": [
+        "geometry",
+        "scores"
+      ],
+      "status": "mapped-with-source-findings",
+      "notes": "k-center and herding are separately derived and executed; proxy-based scoring remains distinct. The uncertainty-sampling sketch is not passed off as a general geometric coreset. No separate facility-location algorithm is derived in this source range.",
+      "source_span_sha256": "a24e940ca3f39ce37acca8bef34b929bdba8d82f87961110dba0074c9243b9a8"
+    },
+    {
+      "start": 1356,
+      "end": 1385,
+      "heading": "Deduplication, images and DLRM cold IDs",
+      "targets": [
+        "dedup",
+        "recsys"
+      ],
+      "status": "mapped-with-source-findings",
+      "notes": "Exact/MinHash/LSH remain in the text-corpus chapter. Its image section now develops byte/pixel matching, perceptual hashes, embedding similarity, candidate verification and false removals. The DLRM section develops cold-ID cutoff, remapping, allocation, optimizer state, managed ownership and held-out tail evaluation. Source percentages are explicitly not imported; scoped acceptance is in 2026-10-29-selection-gaps.md.",
+      "source_span_sha256": "1e42dd8e5d9d65d898464580e865bcebb7468b0477ee718ce2f070f4aba3d925"
+    },
+    {
+      "start": 1386,
+      "end": 1403,
+      "heading": "Quality pruning and dynamic-selection introduction",
+      "targets": [
+        "data",
+        "scores",
+        "engineering"
+      ],
+      "status": "mapped-with-source-findings",
+      "notes": "Confident Learning now develops the label-error gap with OOF probabilities, class thresholds, literal/estimated counts, executable examples, candidate review and rare-class/model-error counterexamples. The source's broad assertion that confident disagreements are usually annotation mistakes is not generalized; label issues are distinguished from confirmed errors.",
+      "source_span_sha256": "41a66563071a770fd601f4c64f8d177ef39ac7a5886cca5655e42b1bab74c784"
+    },
+    {
+      "start": 1404,
+      "end": 1506,
+      "heading": "Curriculum learning",
+      "targets": [
+        "synthetic"
+      ],
+      "status": "mapped-with-source-findings",
+      "notes": "Existing chapter 53 develops curriculum ordering and experimental budgets. A pacing change does not establish lower work at a fixed update count.",
+      "source_span_sha256": "b8dd5a25654d972e078ba255f919452e5bbe0d9346e5345a6db08c1deaa662ef"
+    },
+    {
+      "start": 1507,
+      "end": 1924,
+      "heading": "Active learning",
+      "targets": [
+        "active"
+      ],
+      "status": "mapped-with-source-findings",
+      "notes": "Pool, acquisition, annotation, refit and held-out evaluation are developed with executed examples and original workflow figures. The hypothetical fourfold curve is not empirical evidence.",
+      "source_span_sha256": "a1f28ebb1add38961c825de6b6c7ecd9e7289cf31e85ce4745fadcc6807a234e"
+    },
+    {
+      "start": 1925,
+      "end": 2188,
+      "heading": "Semi-supervised learning",
+      "targets": [
+        "semi"
+      ],
+      "status": "mapped-with-source-findings",
+      "notes": "Pseudo-label origin, confidence errors, weak/strong views, masked full-batch denominator, actual small update, graph propagation and label/training-cost distinctions are retained.",
+      "source_span_sha256": "879a72bc57e5e496d549e87aaa37284c60dba229a2f9faa88e526ca1115b35ff"
+    },
+    {
+      "start": 2189,
+      "end": 2371,
+      "heading": "Self-supervised learning and amortization",
+      "targets": [
+        "simclr",
+        "moco",
+        "mae",
+        "semi"
+      ],
+      "status": "mapped-with-source-findings",
+      "notes": "Contrastive and masked reconstruction objectives have separate full readers. The unchanged original amortization figure and actual 10/11-task calculation include upfront pretraining.",
+      "source_span_sha256": "5abd99252e3d2bf5d18a6359f72c75a94f5e3344c0b95ce1aeaa8fe77259fb5c"
+    },
+    {
+      "start": 2372,
+      "end": 2387,
+      "heading": "Foundation-model reuse",
+      "targets": [
+        "semi",
+        "scaling"
+      ],
+      "status": "mapped",
+      "notes": "Task-specific adaptation and upfront pretraining are separated; downstream quality is measured, not inferred from pretext loss or a low adaptation cost.",
+      "source_span_sha256": "5aa7c060bcf0234b0b7672906adf9df4f4c6e2a0546f0fa7267e66f253d7d094"
+    },
+    {
+      "start": 2388,
+      "end": 2419,
+      "heading": "Data augmentation",
+      "targets": [
+        "augmentation"
+      ],
+      "status": "mapped-with-source-findings",
+      "notes": "Label/box/mask transformations, source Mixup/CutMix, policy selection, text/speech constraints and TTA are developed. Back-translation is not reduced to a round trip.",
+      "source_span_sha256": "cafca8aa765f732cda483202f898f2ff4266cc0f23ab33cf87c771010a366375"
+    },
+    {
+      "start": 2420,
+      "end": 2481,
+      "heading": "Generative synthesis and domain-gap illustration",
+      "targets": [
+        "gan",
+        "synthetic",
+        "simreal"
+      ],
+      "status": "mapped-with-source-findings",
+      "notes": "GAN/DCGAN and LLM generation have full thematic destinations. A sketch of unconditional marginals cannot determine target decision boundaries; the misleading source use is not adopted.",
+      "source_span_sha256": "e973daf165dc27cd5b0437e885e14318b5684794623902c79705c6dfeaa9c28b"
+    },
+    {
+      "start": 2482,
+      "end": 2601,
+      "heading": "Sim-to-real, keyword spotting and collapse",
+      "targets": [
+        "simreal",
+        "synthetic",
+        "augmentation"
+      ],
+      "status": "mapped-with-source-findings",
+      "notes": "Renderer annotations, domain randomization, weighting, GRL/DANN, marginal counterexamples and real-mixture validation are covered. Derived examples are not independent parents/speakers; no universal synthetic mixing ratio or privacy guarantee is adopted.",
+      "source_span_sha256": "ff0c0dd914a0fdd35c0e8aa7ad553b8f35aa5071d2f13e068209ce237eeec967"
+    },
+    {
+      "start": 2602,
+      "end": 2611,
+      "heading": "Knowledge distillation",
+      "targets": [
+        "distillation",
+        "compression"
+      ],
+      "status": "mapped-with-source-findings",
+      "notes": "Existing readers derive temperature/class versus sequence targets, KL directions and student rollouts. Higher teacher entropy does not alone establish useful supervision; accepted bodies are not repeated.",
+      "source_span_sha256": "246a2bb070a29c8407a6f382e7c6efa763dd2423634e6dc645cdaa17676868d7"
+    },
+    {
+      "start": 2612,
+      "end": 2760,
+      "heading": "Decision framework",
+      "targets": [
+        "engineering"
+      ],
+      "status": "mapped",
+      "notes": "Retain the original English prerequisite table, original Figure 12 and quality-constrained worked choice before cost minimization. Resource constraints can apply simultaneously.",
+      "source_span_sha256": "7edaf2a17d6ee3d3305d21cf4b1d20e61f0b687e7c8afb86b00162f3d83443a8"
+    },
+    {
+      "start": 2761,
+      "end": 3014,
+      "heading": "Selection engineering and inequality",
+      "targets": [
+        "engineering"
+      ],
+      "status": "mapped-with-source-findings",
+      "notes": "Opening 100 versus 5+40 versus 60+40 example includes all preparation. Refresh costs and fixed-epoch/update comparisons are executed. Ten-percent overhead is not a universal break-even rule.",
+      "source_span_sha256": "af8aa8a81af5f2beafe5fc155e4b98cf8601e8047337392c169ca2fc90afbb1f"
+    },
+    {
+      "start": 3015,
+      "end": 3112,
+      "heading": "Random-access I/O",
+      "targets": [
+        "engineering",
+        "pipeline"
+      ],
+      "status": "mapped-with-source-findings",
+      "notes": "Worked IOPS/bytes versus sequential reading, selected shards and bounded shuffle are developed; hardware rates are assigned, not measured specifications.",
+      "source_span_sha256": "1a85d506f3f1b0390883716ef27da6163eefeeb310c68de342dab0a0e1078887"
+    },
+    {
+      "start": 3113,
+      "end": 3229,
+      "heading": "Data echoing",
+      "targets": [
+        "engineering"
+      ],
+      "status": "mapped-with-source-findings",
+      "notes": "Fresh visits, downstream presentations, echo placement, steady-state timing and equal-budget comparisons are executed. The primary 3.25 speedup is tied to its actual experiment, not generalized.",
+      "source_span_sha256": "28595b3beec9bffd12dfefcbb22c1da9ad7135f3e73ceb3c940341e762b6bcfc"
+    },
+    {
+      "start": 3230,
+      "end": 3439,
+      "heading": "Costs, ROI and break-even",
+      "targets": [
+        "engineering"
+      ],
+      "status": "mapped-with-source-findings",
+      "notes": "Acquisition/annotation/storage/processing, sunk labels, repeated costs and ROI denominators are distinct. Equal-quality claims are not inferred from arithmetic.",
+      "source_span_sha256": "2abc4cfb87754d7c150b4710a424f5b1c39f229292e44a61ef87ca39bee3822f"
+    },
+    {
+      "start": 3440,
+      "end": 3549,
+      "heading": "Amortization across runs",
+      "targets": [
+        "engineering",
+        "semi"
+      ],
+      "status": "mapped",
+      "notes": "The first profitable integer run/task is distinguished from equality. Corpus refresh can recur; existing excerpts and calculations are preserved.",
+      "source_span_sha256": "e934b8ca890e9260864f9b30e91045dfa89f97031aa4212f39f7f59664bf671b"
+    },
+    {
+      "start": 3550,
+      "end": 3735,
+      "heading": "Distributed selection and consistency",
+      "targets": [
+        "engineering"
+      ],
+      "status": "mapped-with-source-findings",
+      "notes": "Local quota counterexample, exact scalar top-k proof, stable score identity, bytes, freshness, cross-shard duplicates and 67-minute scenario are developed. The proof is not generalized to relational coreset objectives.",
+      "source_span_sha256": "f97504756403b063620f9d7b721d8b07fe027db9c3dc9c846c454db1c406d29e"
+    },
+    {
+      "start": 3736,
+      "end": 4140,
+      "heading": "Cross-layer interactions and optimization stack",
+      "targets": [
+        "engineering",
+        "compression",
+        "pipeline"
+      ],
+      "status": "mapped-with-source-findings",
+      "notes": "The original complete stack is retained with arrow direction and artifact semantics. The 20+80/4=40 example separates fixed work; training-data reduction does not shrink model weights or per-request inference work.",
+      "source_span_sha256": "6729f228d910d4fd9425ba4d43228f0b64d9b886af9834a1df5307f6e8e577a0"
+    },
+    {
+      "start": 4141,
+      "end": 4175,
+      "heading": "PPD, AULC and DCR",
+      "targets": [
+        "engineering"
+      ],
+      "status": "mapped",
+      "notes": "Definitions, units, initial state, trapezoid intermediates, first observed quality budget and executed calculations are retained; storage ratio is not quality-constrained DCR.",
+      "source_span_sha256": "78179a54834787b99186a909ad0c871a842facc2f47957d3db986861b655f8b4"
+    },
+    {
+      "start": 4176,
+      "end": 4482,
+      "heading": "Compute frontier, Chinchilla and plotted learning curves",
+      "targets": [
+        "engineering",
+        "scaling"
+      ],
+      "status": "mapped-with-source-findings",
+      "notes": "The illustrative PPD plot is retained; the synthetic compute-frontier plot is link-only. Twenty tokens per parameter and a point below a frontier do not uniquely diagnose data starvation.",
+      "source_span_sha256": "f8925846e7a67dc97abef36e7349d09316ae1c18fceb86c21a7b32684dda89af"
+    },
+    {
+      "start": 4483,
+      "end": 4689,
+      "heading": "Fallacies and pitfalls",
+      "targets": [
+        "scores",
+        "active",
+        "semi",
+        "engineering",
+        "synthetic",
+        "simreal"
+      ],
+      "status": "mapped-with-source-findings",
+      "notes": "Existing worked counterexamples cover difficult versus noisy records, distribution/label assumptions, pseudo-label confirmation, omitted selection cost, quality/coverage and synthetic-domain/privacy failure.",
+      "source_span_sha256": "b4ee6c8a7b0408981c32f32269601480f3d9b8e1a0f9fdfd0d465fc8cda38c83"
+    },
+    {
+      "start": 4690,
+      "end": 4741,
+      "heading": "Source summary",
+      "targets": [
+        "engineering"
+      ],
+      "status": "mapped",
+      "notes": "Covered by the thematic destinations and recorded findings; no duplicate reader recap added.",
+      "source_span_sha256": "f582e06798eb638c713d9c67306538b5b358a757b6abadaa533d2a5b43983a45"
+    }
+  ],
+  "closed_items": {
+    "label-errors": {
+      "source_lines": [
+        1386,
+        1394
+      ],
+      "targets": [
+        "scores",
+        "dedup"
+      ],
+      "required": "Develop out-of-sample predicted probabilities, class-dependent confident thresholds, candidate review and rare-class/model-error counterexamples from the primary Confident Learning explanation. Cleanlab is named in the source, but its algorithm is not yet developed in the reader.",
+      "status": "reader-explanation-reviewed",
+      "review": "docs/audit/2026-10-29-confident-learning.md",
+      "chapter_sha256": "18aa3e0c623deceaf7bd475e03f045c7a5e5e8b68ccc7921297e106fa4b04fe4",
+      "anchor": "confident-learning",
+      "resolution": "OOF predictions, class thresholds, raw and row-calibrated joint, candidate IDs and ranking, rare valid-label counterexample, paper/software discrepancy, two original figures and three executable examples."
+    },
+    "image-dedup": {
+      "source_lines": [
+        1370,
+        1373
+      ],
+      "targets": [
+        "dedup"
+      ],
+      "required": "Add a worked image duplicate example that distinguishes bytes, perceptual hash and embedding similarity, with explicit thresholds, candidate verification and false removals. Existing MinHash text derivation does not close image semantics.",
+      "status": "reader-explanation-reviewed",
+      "review": "docs/audit/2026-10-29-selection-gaps.md",
+      "chapter_sha256": "b614c77415a2209e0ec017b94fa11ea7a22aca3de0532c9f21d7f76f1609425f",
+      "anchor": "image-deduplication",
+      "resolution": "Bytes/pixels/annotations, executable dHash and pHash collisions, SemDeDup threshold and all-earlier rule, full original figure and precision/recall example."
+    },
+    "cold-embedding-ids": {
+      "source_lines": [
+        1380,
+        1382
+      ],
+      "targets": [
+        "recsys"
+      ],
+      "required": "Show interaction deduplication versus removing/remapping ID rows, table/optimizer memory and lookup effects, OOV policy and held-out recommendation quality. Do not import the source's unsupported 20% interaction -> 30-40% table-memory claim.",
+      "status": "reader-explanation-reviewed",
+      "review": "docs/audit/2026-10-29-selection-gaps.md",
+      "chapter_sha256": "50a59283ee0867710665f414954291080304333961a107b6418e360e3f759bf1",
+      "anchor": "cold-embedding-ids",
+      "resolution": "Retry semantics, frequency policy, OOV remapping, weights and optimizer state, allocation versus traffic, managed slot ownership and unchanged chronological tail evaluation."
+    }
+  }
+}

@@ -1,0 +1,193 @@
+[
+  {
+    "id": "curated-edge-tinytl-memory-figure1-41adadc7703e",
+    "asset": "00 Учебник/Assets/Figures/curated/edge-review-2026-10/tinytl-memory-figure1.png",
+    "author": "Han Cai, Chuang Gan, Ligeng Zhu, Song Han",
+    "source_url": "https://arxiv.org/pdf/2007.11622v5#page=2",
+    "source_figure_label": "Figure 1",
+    "source_asset": "05 Источники/Originals/edge-2026-10-20/tinytl.pdf",
+    "source_asset_sha256": "90104d87f15f56a199e47503283954e9c6b7b56d3aa11d1689e764e0ed3477a0",
+    "sha256": "41adadc7703e6b0ba78556301da7d64bab46fec95ce32acdadaf2cc1fb2830fc",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/edge-2026-10-20/tinytl-arxiv.html",
+    "license_evidence_sha256": "3a053151cb244edf1497c6a1a594a4cfbc707636e7df5fb49237c81233c92841",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "licensed-paper-figure",
+    "metadata_status": "verified",
+    "modifications": "Direct source PDF rendering at page maximum dimension 6000 px, then rectangular crop. No redrawing, translation, bitmap upscaling or label modification.",
+    "used_in": [
+      "00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment.md"
+    ],
+    "last_verified": "2026-10-20",
+    "source_page": 2,
+    "crop_box_px": [
+      800,
+      490,
+      3860,
+      1530
+    ],
+    "render_page_size_px": [
+      4637,
+      6000
+    ],
+    "render_options": {
+      "scale_to": 6000,
+      "x": 800,
+      "y": 490,
+      "width": 3060,
+      "height": 1040
+    }
+  },
+  {
+    "id": "curated-edge-tinytl-activation-figure2-f24eb4c4c48a",
+    "asset": "00 Учебник/Assets/Figures/curated/edge-review-2026-10/tinytl-activation-figure2.png",
+    "author": "Han Cai, Chuang Gan, Ligeng Zhu, Song Han",
+    "source_url": "https://arxiv.org/pdf/2007.11622v5#page=4",
+    "source_figure_label": "Figure 2",
+    "source_asset": "05 Источники/Originals/edge-2026-10-20/tinytl.pdf",
+    "source_asset_sha256": "90104d87f15f56a199e47503283954e9c6b7b56d3aa11d1689e764e0ed3477a0",
+    "sha256": "f24eb4c4c48a7c37b3bfab10d9b5de699795f19f3009d5df471e7d868e5f0a1c",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/edge-2026-10-20/tinytl-arxiv.html",
+    "license_evidence_sha256": "3a053151cb244edf1497c6a1a594a4cfbc707636e7df5fb49237c81233c92841",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "licensed-paper-figure",
+    "metadata_status": "verified",
+    "modifications": "Direct source PDF rendering at page maximum dimension 6000 px, then rectangular crop. No redrawing, translation, bitmap upscaling or label modification.",
+    "used_in": [
+      "00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment.md"
+    ],
+    "last_verified": "2026-10-20",
+    "source_page": 4,
+    "crop_box_px": [
+      1090,
+      500,
+      3610,
+      2050
+    ],
+    "render_page_size_px": [
+      4637,
+      6000
+    ],
+    "render_options": {
+      "scale_to": 6000,
+      "x": 1090,
+      "y": 500,
+      "width": 2520,
+      "height": 1550
+    }
+  },
+  {
+    "id": "curated-edge-fedavg-initialization-figure1-45cdb0eb7d46",
+    "asset": "00 Учебник/Assets/Figures/curated/edge-review-2026-10/fedavg-initialization-figure1.png",
+    "author": "H. Brendan McMahan, Eider Moore, Daniel Ramage, Seth Hampson, Blaise Agüera y Arcas",
+    "source_url": "https://proceedings.mlr.press/v54/mcmahan17a.html",
+    "source_figure_label": "Figure 1, PDF p. 4",
+    "source_asset": "05 Источники/Originals/edge-2026-10-20/fedavg.pdf",
+    "source_asset_sha256": "a7a8e2e3e437855c1efb53fe8f35f645eae7735fe9b6ac1f656a62004dbf5146",
+    "sha256": "45cdb0eb7d4617ec1872cbbfe812f8ca748b038cd2f5cc732cb3e5ca0c59fe31",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/edge-2026-10-20/pmlr-license.html",
+    "license_evidence_sha256": "1c8123a6c840ca2752e383f0924fa23ba38552140a2cc54f69ea9df5acfcdd3d",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "licensed-paper-figure",
+    "metadata_status": "verified",
+    "modifications": "Direct source PDF rendering at page maximum dimension 6000 px, then rectangular crop. No redrawing, translation, bitmap upscaling or label modification.",
+    "used_in": [
+      "00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment.md"
+    ],
+    "last_verified": "2026-10-20",
+    "source_page": 4,
+    "crop_box_px": [
+      2430,
+      505,
+      4330,
+      1415
+    ],
+    "render_page_size_px": [
+      4637,
+      6000
+    ],
+    "render_options": {
+      "scale_to": 6000,
+      "x": 2430,
+      "y": 505,
+      "width": 1900,
+      "height": 910
+    }
+  },
+  {
+    "id": "curated-edge-litert-checkpoint-926d5bdfc8a0",
+    "asset": "00 Учебник/Assets/Figures/curated/edge-review-2026-10/litert-checkpoint.png",
+    "author": "Google AI Edge Authors",
+    "source_url": "https://developers.google.com/edge/litert/conversion/tensorflow/build/ondevice_training",
+    "source_figure_label": "Restore the trained weights: logits before/after restore",
+    "source_asset": "05 Источники/Originals/edge-2026-10-20/litert-checkpoint.png",
+    "source_asset_sha256": "926d5bdfc8a090de31a1651e1023d05872a13c5b4442c234680d2cda0dca1420",
+    "sha256": "926d5bdfc8a090de31a1651e1023d05872a13c5b4442c234680d2cda0dca1420",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/edge-2026-10-20/litert-training.html",
+    "license_evidence_sha256": "c0b0b5615179388cf4e10c94cd2be46b1d5b8fa9d6dfb508569dec80cfe54fa9",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "official-google-source-asset",
+    "metadata_status": "verified",
+    "modifications": "Complete original copied byte-for-byte. No crop, redrawing, translation or bitmap upscaling.",
+    "used_in": [
+      "00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment.md"
+    ],
+    "last_verified": "2026-10-20",
+    "source_image_url": "https://developers.google.com/static/edge/litert/conversion/tensorflow/build/ondevice_training_files/output_fjiUbx7zIoLq_0.png"
+  },
+  {
+    "id": "curated-edge-harvard-stragglers-7f326d898815",
+    "asset": "00 Учебник/Assets/Figures/curated/edge-review-2026-10/harvard-stragglers.svg",
+    "author": "Harvard Edge ML Systems Book contributors",
+    "source_url": "https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/edge_intelligence/images/svg/edge_intelligence_straggler_cutoff_strip.svg",
+    "source_figure_label": "Client scheduling: first K updates",
+    "source_asset": "05 Источники/Originals/edge-2026-10-20/harvard-stragglers.svg",
+    "source_asset_sha256": "7f326d898815122565bb6a735024e3c721ac4450984423169d3d0ef51c256deb",
+    "sha256": "7f326d898815122565bb6a735024e3c721ac4450984423169d3d0ef51c256deb",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/edge-2026-10-20/harvard-LICENSE.md",
+    "license_evidence_sha256": "b6f4689d6fccf48d82d0871a3b994a122427fcb0b278971f6ba008be44e2c926",
+    "derivation": "source-svg-copy",
+    "provenance_confirmation": "pinned-harvard-source-asset",
+    "metadata_status": "verified",
+    "modifications": "Complete original copied byte-for-byte. No crop, redrawing, translation or bitmap upscaling.",
+    "used_in": [
+      "00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment.md"
+    ],
+    "last_verified": "2026-10-20",
+    "commit": "45ecc8d82fcae70c149cdce550d3b3d3411df913",
+    "source_image_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/edge_intelligence/images/svg/edge_intelligence_straggler_cutoff_strip.svg"
+  },
+  {
+    "id": "curated-edge-harvard-secure-agg-d8f1f91f2be8",
+    "asset": "00 Учебник/Assets/Figures/curated/edge-review-2026-10/harvard-secure-agg.svg",
+    "author": "Harvard Edge ML Systems Book contributors",
+    "source_url": "https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/edge_intelligence/images/svg/secure-agg.svg",
+    "source_figure_label": "Secure aggregation, two-client masking",
+    "source_asset": "05 Источники/Originals/edge-2026-10-20/harvard-secure-agg.svg",
+    "source_asset_sha256": "d8f1f91f2be85e39ce9e193325319985c81a5e442466234317dac73aa69da81d",
+    "sha256": "d8f1f91f2be85e39ce9e193325319985c81a5e442466234317dac73aa69da81d",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/edge-2026-10-20/harvard-LICENSE.md",
+    "license_evidence_sha256": "b6f4689d6fccf48d82d0871a3b994a122427fcb0b278971f6ba008be44e2c926",
+    "derivation": "source-svg-copy",
+    "provenance_confirmation": "pinned-harvard-source-asset",
+    "metadata_status": "verified",
+    "modifications": "Complete original copied byte-for-byte. No crop, redrawing, translation or bitmap upscaling.",
+    "used_in": [
+      "00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment.md"
+    ],
+    "last_verified": "2026-10-20",
+    "commit": "45ecc8d82fcae70c149cdce550d3b3d3411df913",
+    "source_image_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/edge_intelligence/images/svg/secure-agg.svg"
+  }
+]

@@ -1,0 +1,263 @@
+{
+  "date": "2026-10-30",
+  "status": "comparison-verified-locally-not-published",
+  "scope": "nanoGPT legacy-note reconciliation and the complete worked implementation appendix in existing practice 20. The overall textbook and release are not complete.",
+  "chapter": {
+    "path": "06 Практика/20 Собрать языковую модель с нуля.md",
+    "sha256": "4def1208324566dce45443f6cbdf0588e4577537c4e18942d7cbe365048ed85e",
+    "lines": 588,
+    "wholeRead": "Final complete chapter read in non-truncated ranges 1–205, 206–405, 406–EOF. Full NTP (806 lines) and GPT-2 (685 lines) owners were read before the small link additions; those exact reviewed deltas are recorded separately in the ledger."
+  },
+  "explanationReview": {
+    "data": "Character alphabet, complete-source alphabet scope versus BPE, uint16 storage and int64 lookup, concrete overlapping x/y windows, direct corresponding CE, -1 versus real zero ID.",
+    "update": "Two equal [2,8] microbatches give 32 targets; divide/backward accumulation, unscale/clip/step/zero order, FP64 gradient comparison, source-derived DDP accumulation adjustment and final-microbatch logging example.",
+    "state": "Evaluation and checkpoint before the update, source-specific > stop condition, three executed updates versus a two-update checkpoint, six saved keys and omitted stochastic/scaler/prefetch state, measured non-identical resume.",
+    "generation": "Full [B,T,V] training logits versus last-only projection without targets, native uncached prefix recomputation and cropped/reset positions, observed [6,7,8,8,8] input lengths, flash attribute separated from forced CPU math backend.",
+    "sourceContext": "Author's original plot point versus reported final loss and WebText/OpenWebText domain difference; historical hardware timings and distinct build-nanogpt/Zero-to-Hero/nanochat criteria.",
+    "style": "no-ai-slop SKILL.md and eval.md applied with repository academic qualifications. New explanation is English; original excerpts are unchanged. Existing CS336 exercise, NTP/GPT-2 derivations and figures are preserved through the exact reversal journal.",
+    "limits": "The lab does not implement CS336's adapters, pass its 48 official tests, reproduce full GPT-2/nanochat quality or measure CUDA/DDP/compile/real-corpus performance."
+  },
+  "sources": {
+    "packet": "05 Источники/Originals/nanogpt-2026-10-30",
+    "nanoGPTRevision": "3adf61e154c3fe3fca428ad6bc3818b27a3b8291",
+    "nanochatRevision": "92d63d4e8bb4df75c3b71618f31ddde2378b2bcd",
+    "readScopes": "Complete nanoGPT README, LICENSE, model.py, train.py, sample.py, configurator.py, character preparer and its training configuration. Exact selected nanochat README sections are in manifest.json; no whole nanochat implementation review is claimed. The retained build-nanogpt README was read completely.",
+    "figure": "Complete 1206×614 original gpt2_124M_loss.png, byte-identical copy with MIT notice and public license text. No crop, upscale or generated replacement.",
+    "storage": "Small pinned source packet only; no model, full external corpus, video or whole repository checkout. Runner creates and cleans its small temporary fixture/checkpoints."
+  },
+  "checks": {
+    "nativeCPU": {
+      "status": "passed",
+      "runner": "06 Практика/Code/nanogpt_reference_lab.py",
+      "savedResult": "06 Практика/Results/nanogpt-2026-10-30/reference.json",
+      "log": "/var/tmp/bookvar-nanogpt-native-20261030.log",
+      "details": {
+        "python": "3.14.3",
+        "torch": "2.14.1",
+        "numericalModelParameters": 6832,
+        "nativeModelParameters": 6784,
+        "trainIDs": 1843,
+        "valIDs": 205,
+        "targetsPerUpdate": 32,
+        "processTrainingTargets": 96,
+        "checkpointOptimizerSteps": 2,
+        "temporaryCheckpointBytes": 110392,
+        "accumulationMaxGradientError": 1.249000902703301e-16,
+        "resumeMaxWeightDifference": 0.0017217905260622501,
+        "sampledIDs": [
+          2,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "rerun": "The new unit test also executed the original preparer, three trainer processes and sampler successfully."
+    },
+    "targeted": {
+      "status": "passed",
+      "tests": 168,
+      "files": 4,
+      "log": "/var/tmp/bookvar-nanogpt-targeted-20261030.log"
+    },
+    "fullUnit": {
+      "status": "passed",
+      "tests": 857,
+      "files": 137,
+      "log": "/var/tmp/bookvar-nanogpt-unit-20261030.log"
+    },
+    "rootBuild": {
+      "status": "passed",
+      "pages": 2006,
+      "log": "/var/tmp/bookvar-nanogpt-root-20261030.log"
+    },
+    "output": {
+      "status": "passed",
+      "tests": 175,
+      "log": "/var/tmp/bookvar-nanogpt-output-20261030.log"
+    },
+    "internalLinks": {
+      "status": "passed",
+      "broken": 0,
+      "log": "/var/tmp/bookvar-nanogpt-links-20261030.log"
+    },
+    "immutableArchive": {
+      "status": "passed",
+      "notes": 31,
+      "mismatches": []
+    },
+    "preservation": "Five exact journal reversals and unknown-edit negative controls passed. The original CS336 assignment contract remains at 39af049ba810cd63e6a51fd6ba16242b75c3fdb63deec0ffd0eed29d48fc6cbd. Historical receipts were not rebaselined.",
+    "warnings": "Existing PDF extraction emitted No current point in closepath warnings; tests exited 0. Initial targeted shell also emitted locale warnings; the full unit/build/output/link runs used LC_ALL=C LANG=C.",
+    "pagesBase": {
+      "status": "deferred",
+      "reason": "Fresh /bookvar build and actual Pages deployment remain part of final release acceptance."
+    }
+  },
+  "visual": {
+    "route": "http://127.0.0.1:4330/practice/20-sobrat-yazykovuyu-model-s-nulya/#nanogpt-worked-reference",
+    "desktop": {
+      "viewport": [
+        1280,
+        900
+      ],
+      "clientWidth": 1265,
+      "scrollWidth": 1265,
+      "originalPlotNaturalSize": [
+        1206,
+        614
+      ],
+      "plotDisplayWidth": 616.9921875,
+      "katexErrors": 0,
+      "codeBlocks": 8
+    },
+    "mobile": {
+      "viewport": [
+        360,
+        800
+      ],
+      "clientWidth": 345,
+      "scrollWidth": 345,
+      "plotDisplayWidth": 312.9921875,
+      "katexErrors": 0,
+      "tableClientWidth": 313,
+      "tableScrollWidth": 386,
+      "tableScrollLeftAfterNativePan": 73
+    },
+    "viewer": "Entire original inspected on desktop; mobile 2× zoom and actual rightward panning show the selected 399:2.905 point. The inline mobile plot is an overview; small labels require the tested viewer.",
+    "locales": "Existing /en route inspected at mobile width with an explicit fallback notice. Same English appendix is present, not a new English translation of the existing Russian CS336 exercise.",
+    "evidenceDirectory": "docs/audit/evidence/2026-10-30-nanogpt",
+    "screenshots": [
+      "desktop-entry.png",
+      "desktop-plot.png",
+      "desktop-original-viewer.png",
+      "mobile-plot.png",
+      "mobile-original-zoom.png",
+      "mobile-original-right.png",
+      "mobile-checkpoint-table.png",
+      "mobile-checkpoint-table-pan.png",
+      "mobile-en-entry.png"
+    ]
+  },
+  "ledger": {
+    "total": 31,
+    "sourceFullRead": 26,
+    "reconciled": 26,
+    "readInProgress": 0,
+    "unread": 5,
+    "canonicalWholeReads": 32
+  },
+  "remaining": [
+    "ReAct, Tool Use, Toolformer, Tree of Thoughts and BLEU archive reconciliation.",
+    "Complete conceptual-route reading, reference/atlas/course-library dependencies and retained UI/permission observations.",
+    "Frozen final release checks, scoped dev commit/push under the user's identity and verified actual Pages deployment."
+  ],
+  "publication": {
+    "commit": false,
+    "push": false,
+    "deploy": false,
+    "newTranslation": false,
+    "mainChanged": false
+  },
+  "artifactHashes": [
+    {
+      "path": "06 Практика/20 Собрать языковую модель с нуля.md",
+      "sha256": "4def1208324566dce45443f6cbdf0588e4577537c4e18942d7cbe365048ed85e"
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md",
+      "sha256": "769b26049eb04c2ca10a5e951dcc8efc6c6fb30dc1c3536e7f32feb3c9d9f5ee"
+    },
+    {
+      "path": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md",
+      "sha256": "a0417ae755c137144bbccc8f09b935b5b1abf1657d1411eacdec1585b7b7ab23"
+    },
+    {
+      "path": "06 Практика/_index.md",
+      "sha256": "17a03a8f142cfa2957282e36f838ce99c2b81e244db0e9f9b3be5eeefed85815"
+    },
+    {
+      "path": "05 Источники/asset-registry.yml",
+      "sha256": "e59e85c76fa5410a677065282da9a85df579f9da3e9d7ce4927dc59b4fe78bdf"
+    },
+    {
+      "path": "docs/audit/2026-10-30-nanogpt-additions.json",
+      "sha256": "8a24d0ce47a231bce462d461b2383f7b02664a04c75e101acf03e034bf87c1f8"
+    },
+    {
+      "path": "docs/audit/2026-10-29-legacy-notes-review.json",
+      "sha256": "773a75b740b18a2030ddece17d189517be410e2db54889e416a648deca9f4121"
+    },
+    {
+      "path": "docs/audit/2026-10-29-release-completion-plan.md",
+      "sha256": "a7138a841f76529ba3ad48bcd20e6bea19f8bc8fdc8309db68e9f64c9ebc066a"
+    },
+    {
+      "path": "06 Практика/Code/nanogpt_reference_lab.py",
+      "sha256": "8029aad7ecc3f0023725112dd53f33198400837a638ad6d1c4b6f8214eabeea4"
+    },
+    {
+      "path": "06 Практика/Results/nanogpt-2026-10-30/reference.json",
+      "sha256": "296c8735cc24e31decbdc74aed3be9cc6695cf3903bf99cd13a6d0e68a42e493"
+    },
+    {
+      "path": "06 Практика/Contracts/stanford-cs336-a1.yml",
+      "sha256": "39af049ba810cd63e6a51fd6ba16242b75c3fdb63deec0ffd0eed29d48fc6cbd"
+    },
+    {
+      "path": "Concepts/Training/nanoGPT.md",
+      "sha256": "5f1bd4fa83967b9d0478d95601a505a8e8d80e1fc97980e25261db769ac30d4d"
+    },
+    {
+      "path": "05 Источники/Originals/nanogpt-2026-10-30/manifest.json",
+      "sha256": "a741292394eaab88aa3dafe3321b4a68fa90675ae6a2437b51b6b68c5f84d093"
+    },
+    {
+      "path": "05 Источники/Originals/nanogpt-2026-10-30/SOURCE-NOTES.md",
+      "sha256": "4dcd6a469fae0fb9ef2081925aa546dbd0b9e14d5eae2ad1c7f0faf633159012"
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/nanogpt-2026-10-30/loss-original.png",
+      "sha256": "50bb25d32eea8873f6fac6955366a2be607af6ac051972be2c84646a7eff83ae"
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/nanogpt-2026-10-30/assets.json",
+      "sha256": "af812734a46da7b10f64a0f5b2f9963ad3fa36c1a1f2dbabf59ed8e158ef0bf6"
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/nanogpt-2026-10-30/NOTICE.md",
+      "sha256": "30aa6f73e60c6502913dc21e2f683a2a47abaac286fc125b2a53800ec18495d1"
+    },
+    {
+      "path": "site/public/licenses/nanogpt-3adf61e1-MIT.txt",
+      "sha256": "a59ec5cdb1c1e447e5266a014b3e7ded511f8d6e5a08931e931c87490ff821fe"
+    },
+    {
+      "path": "publishing/tests/nanogpt-reference.test.ts",
+      "sha256": "3c746eb6fadf11125ec5b28a040e0397a44bc34936c36fb2826bdff4e6fcdb0b"
+    },
+    {
+      "path": "publishing/tests/site-output.test.ts",
+      "sha256": "a9435faacedf7a13b0d599e499c90da0e8ed233da593f90b17d79398827e10e4"
+    },
+    {
+      "path": "publishing/tests/asset-registry.test.ts",
+      "sha256": "940da720ec82da3fb8afac300697c156c5824d3f5292188101b8c218132362c5"
+    },
+    {
+      "path": "publishing/tests/semi-extensions.test.ts",
+      "sha256": "a98f4309a432b6dbf7747fb5a61799343429fe184d0f464b3a53f84383ded8f7"
+    },
+    {
+      "path": "publishing/tests/synthetic-recipes.test.ts",
+      "sha256": "d5a67abcaa0099ac90bfbe0c8f4a59327e0fe3352194a17c6460cc7e364d2787"
+    },
+    {
+      "path": "publishing/tools/topic-consolidation-baseline.mjs",
+      "sha256": "0f675b4166c2df8902d6566ce83476d2b9c727302a9b1d967c4844ce1a33c617"
+    },
+    {
+      "path": "publishing/tools/topic_consolidation_baseline.py",
+      "sha256": "e6fe66c6b4b4723baef40a9b6f47af4604b222ae742a64397f6cb34f5f9016ca"
+    }
+  ]
+}

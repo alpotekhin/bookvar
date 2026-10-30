@@ -1,0 +1,74 @@
+[
+  {
+    "author": "Baolin Li, Tirthak Patel, Siddharth Samsi, Vijay Gadepally and Devesh Tiwari",
+    "source_url": "https://arxiv.org/abs/2207.11428v3",
+    "source_image_url": "https://arxiv.org/src/2207.11428v3",
+    "source_archive": "05 Источники/Originals/mig-2026-10-26/miso-source.tar",
+    "source_archive_sha256": "c2a8f52d4303873ff986f057fe454ea277902e5a09737142867db1909efd5f61",
+    "source_pdf": "05 Источники/Originals/mig-2026-10-26/miso-2207.11428v3.pdf",
+    "source_pdf_sha256": "cfae4fd8988d73c67dce53e20737675a2b677afebf61a4f60ce0524778fee175",
+    "source_page_snapshot": "05 Источники/Originals/mig-2026-10-26/miso-license.html",
+    "source_page_sha256": "292826961a7ecfcfab193d88532396729d5f4aeeb23d43745a19317621e1ddc1",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/mig-2026-10-26/miso-license.html",
+    "license_evidence_sha256": "292826961a7ecfcfab193d88532396729d5f4aeeb23d43745a19317621e1ddc1",
+    "derivation": "source-pdf-render",
+    "render_dpi": 400,
+    "modifications": "Complete native vector figure extracted unchanged from the authors' arXiv v3 source archive and rendered at 400 dpi with pdftoppm; no crop, redraw, translated labels, edited data or composition changes. Full source figure caption is retained adjacent to the image.",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-26",
+    "used_in": [
+      "00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md"
+    ],
+    "id": "curated-mig-miso-sharing-cb9c6ff13f78",
+    "asset": "00 Учебник/Assets/Figures/curated/mig-2026-10-26/miso-mps-vs-mig.png",
+    "sha256": "cb9c6ff13f784acdc4d3c6ccb9e2caf1d7a0bad7e2185745148ad035fa9cc18b",
+    "source_asset": "05 Источники/Originals/mig-2026-10-26/figures/bkgd1_mps_vs_mig.pdf",
+    "source_asset_sha256": "9381b01db2161d34439ea79b4d53bdb3f388ca224ce36f10749823115060a54a",
+    "source_member": "figures/bkgd1_mps_vs_mig.pdf",
+    "source_page": 2,
+    "dimensions_px": [
+      2917,
+      750
+    ]
+  },
+  {
+    "author": "Baolin Li, Tirthak Patel, Siddharth Samsi, Vijay Gadepally and Devesh Tiwari",
+    "source_url": "https://arxiv.org/abs/2207.11428v3",
+    "source_image_url": "https://arxiv.org/src/2207.11428v3",
+    "source_archive": "05 Источники/Originals/mig-2026-10-26/miso-source.tar",
+    "source_archive_sha256": "c2a8f52d4303873ff986f057fe454ea277902e5a09737142867db1909efd5f61",
+    "source_pdf": "05 Источники/Originals/mig-2026-10-26/miso-2207.11428v3.pdf",
+    "source_pdf_sha256": "cfae4fd8988d73c67dce53e20737675a2b677afebf61a4f60ce0524778fee175",
+    "source_page_snapshot": "05 Источники/Originals/mig-2026-10-26/miso-license.html",
+    "source_page_sha256": "292826961a7ecfcfab193d88532396729d5f4aeeb23d43745a19317621e1ddc1",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/mig-2026-10-26/miso-license.html",
+    "license_evidence_sha256": "292826961a7ecfcfab193d88532396729d5f4aeeb23d43745a19317621e1ddc1",
+    "derivation": "source-pdf-render",
+    "render_dpi": 400,
+    "modifications": "Complete native vector figure extracted unchanged from the authors' arXiv v3 source archive and rendered at 400 dpi with pdftoppm; no crop, redraw, translated labels, edited data or composition changes. Full source figure caption is retained adjacent to the image.",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-26",
+    "used_in": [
+      "00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md"
+    ],
+    "id": "curated-mig-miso-job-mix-8f1314e7f379",
+    "asset": "00 Учебник/Assets/Figures/curated/mig-2026-10-26/miso-workload-mix.png",
+    "sha256": "8f1314e7f3797c45718b34c962b93400d419053e2f6a2e38a32633d20b3be3e1",
+    "source_asset": "05 Источники/Originals/mig-2026-10-26/figures/motiv2_MPSvsMIG.pdf",
+    "source_asset_sha256": "3909436d4c8c967feb6841c3a6ab180500ca7386704b2a7152d437e2253eb65f",
+    "source_member": "figures/motiv2_MPSvsMIG.pdf",
+    "source_page": 3,
+    "dimensions_px": [
+      2612,
+      990
+    ]
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "backend": "gloo",
+  "ranks": 2,
+  "rank": 1,
+  "gradient_max_abs_error": 7.450580596923828e-09,
+  "global_batch": 8,
+  "step_matches_global_batch": true,
+  "all_reduce_sum": 3.0,
+  "scope": "DDP/global-batch correctness; small fixture, not a training throughput benchmark"
+}

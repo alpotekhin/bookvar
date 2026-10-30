@@ -1,0 +1,52 @@
+[
+  {
+    "id": "curated-network-jax-superpod-2817ab222ef3",
+    "asset": "00 Учебник/Assets/Figures/curated/network-checkpoint-2026-10-23/jax-superpod-diagram.png",
+    "author": "Jacob Austin, Swapnil Patil, Adam Paszke, Reiner Pope; How to Scale Your Model",
+    "source_url": "https://github.com/jax-ml/scaling-book/blob/3ae1dee9eef3430aa671162397afe5dd79f299ca/gpus.md#networking",
+    "source_image_url": "https://raw.githubusercontent.com/jax-ml/scaling-book/3ae1dee9eef3430aa671162397afe5dd79f299ca/assets/gpu/superpod-diagram.png",
+    "commit": "3ae1dee9eef3430aa671162397afe5dd79f299ca",
+    "source_asset": "05 Источники/Originals/network-checkpoint-2026-10-23/jax-superpod-diagram.png",
+    "source_asset_sha256": "2817ab222ef378b67aa1fd909f8821032a9a58ee90b040060ec2f815c555c560",
+    "sha256": "2817ab222ef378b67aa1fd909f8821032a9a58ee90b040060ec2f815c555c560",
+    "source_page_snapshot": "05 Источники/Originals/network-checkpoint-2026-10-23/jax-gpus.md",
+    "source_page_sha256": "9e66ec05d0775a5e919f1082f1c294f0e20a8945891582648cce4fe0d3cac0bb",
+    "license": "MIT",
+    "license_url": "https://github.com/jax-ml/scaling-book/blob/3ae1dee9eef3430aa671162397afe5dd79f299ca/LICENSE",
+    "license_evidence": "05 Источники/Originals/network-checkpoint-2026-10-23/jax-LICENSE-MIT.txt",
+    "license_evidence_sha256": "2567a694c350d7bd2e509ae31062341ff74d59f4f5b1b3dc49ca32dd79570ebb",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "source-license-verified",
+    "metadata_status": "verified",
+    "modifications": "none; complete unchanged upstream PNG, no crop, redraw, resampling or translation. Full license retained with sources and in public/licenses.",
+    "last_verified": "2026-10-23",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints.md"
+    ]
+  },
+  {
+    "id": "curated-network-deepspeed-ucp-c1c581ce327b",
+    "asset": "00 Учебник/Assets/Figures/curated/network-checkpoint-2026-10-23/deepspeed-ucp-flowchart.png",
+    "author": "Xinyu Lian, Sam Ade Jacobs, Lev Kurilenko, Masahiro Tanaka, Stas Bekman, Olatunji Ruwase, Minjia Zhang; DeepSpeed",
+    "source_url": "https://github.com/deepspeedai/DeepSpeed/blob/c2c81993948fc28385542196c8544fb442017987/blogs/deepspeed-ucp/README.md#universal-checkpoint-language",
+    "source_image_url": "https://raw.githubusercontent.com/deepspeedai/DeepSpeed/c2c81993948fc28385542196c8544fb442017987/blogs/deepspeed-ucp/media/flowchart.png",
+    "commit": "c2c81993948fc28385542196c8544fb442017987",
+    "source_asset": "05 Источники/Originals/network-checkpoint-2026-10-23/deepspeed-ucp-flowchart.png",
+    "source_asset_sha256": "c1c581ce327bafff6316cafb8012191e9d1c4b2b0dcf89eeb684d77fb2436ee0",
+    "sha256": "c1c581ce327bafff6316cafb8012191e9d1c4b2b0dcf89eeb684d77fb2436ee0",
+    "source_page_snapshot": "05 Источники/Originals/network-checkpoint-2026-10-23/deepspeed-ucp-README.md",
+    "source_page_sha256": "b3223f707e06c468a2de0d5eb5001ce59b71de7ac249d9545f859a0ee3e5ef3b",
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/deepspeedai/DeepSpeed/blob/c2c81993948fc28385542196c8544fb442017987/LICENSE",
+    "license_evidence": "05 Источники/Originals/network-checkpoint-2026-10-23/deepspeed-LICENSE-Apache-2.0.txt",
+    "license_evidence_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "source-license-verified",
+    "metadata_status": "verified",
+    "modifications": "none; complete unchanged upstream PNG, no crop, redraw, resampling or translation. Full license retained with sources and in public/licenses.",
+    "last_verified": "2026-10-23",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints.md"
+    ]
+  }
+]

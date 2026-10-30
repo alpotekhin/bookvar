@@ -1,0 +1,38 @@
+{
+  "scope": "config counts, source bytes, reproducible PDF extraction; no V4 model inference",
+  "config_sha256": "5fe4568daee51c208cb8a79538eaeda090ae011ade1dee2c386aa95f569c810e",
+  "decoder_layer_counts": {
+    "0": 0,
+    "4": 30,
+    "128": 31
+  },
+  "mtp_compression_ratios": [
+    0
+  ],
+  "logical_pool_counts_at_1048576": {
+    "CSA": 262144,
+    "HCA": 8192
+  },
+  "original_byte_copies": 5,
+  "hca_pdf_reproduction": "passed",
+  "lecture02_renderings": [
+    "images/cpu-gpu.png",
+    "images/deep-network.png",
+    "images/deep-network.png",
+    "images/deep-network.png"
+  ],
+  "assets": {
+    "air-bench-taxonomy.png": "cc05a82b6b5528ee6e14a920861947c6e6b672e68f96e1c8a1323f8b85bb7ef9",
+    "arc-agi-2-example.png": "6f5c24072e35c5b7fd89463d61213c8f027a9f40c4df6786780ec9379402db2a",
+    "arc-agi-3.png": "84e63ce2e889d7abc9e1652def5b95b4150913800c00b4861018d48e30d23772",
+    "arc-task-grids.jpg": "ca91237aa14d52a9b8b2b2ecd4b92fdc9014ee190627fb267ec94e3e3671ea37",
+    "deepseek-v4-csa.png": "ac355c5907c7cc2710b4a8d980fe88d58d13e5a273404cbb4bc9cf9a71bdd8bd",
+    "deepseek-v4-hca.png": "5f873f1426027f2cf003c954eee7c92d56304e94a64e51453fba4215851f2a56",
+    "gcg-historical-examples.png": "47f4beeb87d905dc06d2eb239c42daf85b614740f196e4dc01347554d6ad2d93"
+  },
+  "chapters": {
+    "02 Атлас моделей/Семейства/DeepSeek.md": "38e826d52ccdd0211258915018b19f32d9d2a2b1abd5fe9dabeb0c462a8e459c",
+    "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md": "a00a99d9e049b00cc053117b84e703ad0d5f5f88b06713c31f999e1dbcfa62d5",
+    "00 Учебник/18 Evaluation и методология/59a Responsible systems.md": "6ba6e205b27037d40ae02ad0b43ca09d3c9e1e9dbcc4979809829ff5ffd7745d"
+  }
+}

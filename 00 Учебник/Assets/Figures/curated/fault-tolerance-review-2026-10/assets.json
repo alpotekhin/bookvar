@@ -1,0 +1,34 @@
+[
+  {
+    "id": "curated-fault-tolerance-gang-deadlock-11eb48297257",
+    "asset": "00 Учебник/Assets/Figures/curated/fault-tolerance-review-2026-10/gang-deadlock.svg",
+    "author": "Harvard Edge ML Systems Book contributors",
+    "source_url": "https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/fleet_orchestration/images/svg/gang-deadlock.svg",
+    "commit": "45ecc8d82fcae70c149cdce550d3b3d3411df913",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "derivation": "source-svg-copy",
+    "sha256": "11eb48297257ed819ca48e2c31bf8097a5eef3e3a441fbed7e88e123b99c32cd",
+    "modifications": "None; upstream original copied byte-for-byte.",
+    "used_in": ["00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration.md"],
+    "metadata_status": "verified",
+    "provenance_confirmation": "pinned-upstream-repository",
+    "last_verified": "2026-10-13"
+  },
+  {
+    "id": "curated-fault-tolerance-failure-types-4e4c167ee73d",
+    "asset": "00 Учебник/Assets/Figures/curated/fault-tolerance-review-2026-10/failure-types.svg",
+    "author": "Harvard Edge ML Systems Book contributors",
+    "source_url": "https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/fault_tolerance/images/svg/failure-types.svg",
+    "commit": "45ecc8d82fcae70c149cdce550d3b3d3411df913",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "derivation": "source-svg-copy",
+    "sha256": "4e4c167ee73d53a7e8f3fd12c28a2d279e24626d3e928f262c62049fa93586f2",
+    "modifications": "None; caption distinguishes schematic coordinator from DDP and explains timeout/checksum limitations.",
+    "used_in": ["00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration.md"],
+    "metadata_status": "verified",
+    "provenance_confirmation": "pinned-upstream-repository",
+    "last_verified": "2026-10-13"
+  }
+]

@@ -1,0 +1,97 @@
+[
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/inference-benchmark-review-2026-10/mlperf-loadgen.svg",
+    "author": "MLCommons Inference contributors",
+    "source_url": "https://github.com/mlcommons/inference/blob/3fbc329939999c13d0a7b5e67fb2092287e06047/loadgen/loadgen_integration_diagram.svg",
+    "source_image_url": "https://raw.githubusercontent.com/mlcommons/inference/3fbc329939999c13d0a7b5e67fb2092287e06047/loadgen/loadgen_integration_diagram.svg",
+    "commit": "3fbc329939999c13d0a7b5e67fb2092287e06047",
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/mlcommons/inference/blob/3fbc329939999c13d0a7b5e67fb2092287e06047/LICENSE.md",
+    "derivation": "source-svg-copy",
+    "provenance_confirmation": "pinned-upstream-repository",
+    "metadata_status": "verified",
+    "modifications": "Original SVG copied byte-for-byte; no label, geometry or viewport changes.",
+    "id": "curated-inference-benchmark-mlperf-loadgen-a053bf1f5b9c",
+    "sha256": "a053bf1f5b9cd3437e834568bd887eef656b98b81d3e54677f42181d064e4299",
+    "used_in": [
+      "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md"
+    ],
+    "last_verified": "2026-10-20"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/inference-benchmark-review-2026-10/sre-burn-budget.webp",
+    "author": "Steven Thurgood with Jess Frame, Anthony Lenton, Carmela Quinito, Anton Tolchanov and Nejc Trdin; Google",
+    "source_url": "https://sre.google/workbook/alerting-on-slos/#4-alert-on-burn-rate",
+    "source_image_url": "https://sre.google/img/dynamic/sre-workbook/86108654d23ef098e63d958a9b73a326.webp",
+    "license": "CC BY-NC-ND 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "source_asset": "05 Источники/Originals/inference-benchmark-2026-10-20/sre-burn-budget.webp",
+    "license_evidence": "05 Источники/Originals/inference-benchmark-2026-10-20/sre-alerting-on-slos.html",
+    "license_evidence_sha256": "340f148f65a7a92596c65f0a44828cbc1bcf165291cccf2c33a2b57673dd30b3",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "official-sre-book-asset",
+    "metadata_status": "verified",
+    "modifications": "Original complete WebP copied byte-for-byte. No crop, redraw, translation or other modification.",
+    "id": "curated-inference-benchmark-sre-burn-budget-a3c6453e3747",
+    "sha256": "a3c6453e37474fb5221fb1b47d70aff49f17b4b3b5c77048df48cba984b09dce",
+    "source_asset_sha256": "a3c6453e37474fb5221fb1b47d70aff49f17b4b3b5c77048df48cba984b09dce",
+    "used_in": [
+      "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md"
+    ],
+    "last_verified": "2026-10-20"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/inference-benchmark-review-2026-10/sre-alert-windows.webp",
+    "author": "Steven Thurgood with Jess Frame, Anthony Lenton, Carmela Quinito, Anton Tolchanov and Nejc Trdin; Google",
+    "source_url": "https://sre.google/workbook/alerting-on-slos/#6-multiwindow-multi-burn-rate-alerts",
+    "source_image_url": "https://sre.google/img/dynamic/sre-workbook/8e0f30e8897c5d378ee005a87e074641.webp",
+    "license": "CC BY-NC-ND 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "source_asset": "05 Источники/Originals/inference-benchmark-2026-10-20/sre-alert-windows.webp",
+    "license_evidence": "05 Источники/Originals/inference-benchmark-2026-10-20/sre-alerting-on-slos.html",
+    "license_evidence_sha256": "340f148f65a7a92596c65f0a44828cbc1bcf165291cccf2c33a2b57673dd30b3",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "official-sre-book-asset",
+    "metadata_status": "verified",
+    "modifications": "Original complete WebP copied byte-for-byte. No crop, redraw, translation or other modification.",
+    "id": "curated-inference-benchmark-sre-alert-windows-0f59f6e9d41d",
+    "sha256": "0f59f6e9d41dfdf572f6c85c12cd382e174d94c85b377f117b4e4203ee0a76ba",
+    "source_asset_sha256": "0f59f6e9d41dfdf572f6c85c12cd382e174d94c85b377f117b4e4203ee0a76ba",
+    "used_in": [
+      "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md"
+    ],
+    "last_verified": "2026-10-20"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/inference-benchmark-review-2026-10/distserve-figure1-original.png",
+    "author": "Yinmin Zhong et al.",
+    "source_url": "https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf#page=2",
+    "source_asset": "05 Источники/Papers/Source PDFs/distserve-osdi24-zhong-yinmin.pdf",
+    "source_asset_sha256": "bb03e59d6ec6550015901f3f78d7e68f5a07cad8ccacb12f72835a8b667341c1",
+    "source_page": 2,
+    "render_page_size_px": [
+      4637,
+      6000
+    ],
+    "render_scale_to": 6000,
+    "crop_box_px": [
+      2380,
+      1920,
+      4270,
+      3780
+    ],
+    "license": "Existing reproduction permission record; no new named license asserted",
+    "license_url": "https://www.usenix.org/system/files/osdi24-zhong-yinmin.pdf",
+    "rights_status": "existing-figure-reextraction; rights-not-reaudited",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "user-confirmed-open-materials",
+    "metadata_status": "needs-confirmation",
+    "modifications": "Complete original Figure 1 and caption re-extracted from the same previously approved source PDF. Old local plot differed in points/layout; it is not deleted or relabeled as original. No source curves, text, labels or scales changed.",
+    "id": "curated-inference-benchmark-distserve-figure1-original-9ebd5bf8cc5b",
+    "sha256": "9ebd5bf8cc5b228be15450a8895fea21eb48caa24e1305f2e6bfe3e8315cc795",
+    "used_in": [
+      "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md"
+    ],
+    "last_verified": "2026-10-20"
+  }
+]

@@ -1,0 +1,31 @@
+[
+  {
+    "id": "curated-geometric-coresets-erickson-3b573c802a0f",
+    "asset": "00 Учебник/Assets/Figures/curated/geometric-coresets-2026-10-28/erickson-farthest-first.png",
+    "author": "Jeff Erickson",
+    "source_url": "https://jeffe.cs.illinois.edu/teaching/algorithms/notes/J-approx.pdf#page=14",
+    "source_image_url": "https://jeffe.cs.illinois.edu/teaching/algorithms/notes/J-approx.pdf",
+    "source_asset": "05 Источники/Originals/geometric-coresets-2026-10-28/erickson-approx.pdf",
+    "source_asset_sha256": "ea9e8c5c0d4a5ea885d84e713760be45ba6c65fbee5de830404cd8da11c873a1",
+    "sha256": "3b573c802a0fcb4a4b0bce52f50acc8fbf95bf07b19212670f00c8741b63cfbc",
+    "source_page": 14,
+    "source_printed_page": 14,
+    "render_dpi": 288,
+    "render_page_size_px": [2448, 3168],
+    "crop_box_px": [620, 1452, 2120, 2308],
+    "dimensions_px": [1500, 856],
+    "source_page_snapshot": "05 Источники/Originals/geometric-coresets-2026-10-28/erickson-permissions.html",
+    "source_page_sha256": "f82cd7b38f78deb0726793e4e0ea89ebf3fdf08031b6693a0acae838382e0d41",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/geometric-coresets-2026-10-28/erickson-permissions.html",
+    "license_evidence_sha256": "f82cd7b38f78deb0726793e4e0ea89ebf3fdf08031b6693a0acae838382e0d41",
+    "derivation": "pdf-page-render-crop",
+    "modifications": "All six original panels and the complete original caption, extracted at 288 dpi. Page body omitted; no panel omitted, redrawing, translated labels or edited geometry. Caption explains the selected points and remaining-distance witness; text distinguishes metric-radius guarantees from task accuracy.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": ["00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding.md"]
+  }
+]

@@ -1,0 +1,2498 @@
+{
+  "date": "2026-10-29",
+  "scope": "Seven English inference chapters. Physics and benchmarking are parent-owned; distributed/disaggregated inference is sibling-owned.",
+  "completed": 7,
+  "assigned": 7,
+  "chapters": [
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md",
+      "path": "en/00 Textbook/14 Inference and optimization/54 Decoding and next-token selection.md",
+      "before_sha256": "71f2879c94bc4a1c853d8883931648305da9d0918345f5897cf8637a39f6ef4c",
+      "source_read_lines": [
+        1,
+        788
+      ],
+      "previous_en_read_lines": [
+        1,
+        253
+      ],
+      "mechanisms": [
+        "Stable softmax and p versus transformed q",
+        "Greedy versus full-sequence/EOS probability",
+        "Beam pooled expansion, length normalization, stopping and non-monotonic beam-width example",
+        "Temperature ratios, ties, limits and corrected original figure caption",
+        "Top-k boundary ties, top-p threshold crossing, min-p and transform order",
+        "Repetition sign/shift dependence, frequency/presence and n-gram bans",
+        "Grammar-local masking versus conditioning on valid complete strings",
+        "String-stop boundary cases and real StopStringCriteria",
+        "Real random-weight Llama generate/beam/sampling CPU examples"
+      ],
+      "source_sha256": "cb53484debaf97e673ff30e804afc4d9941b94e6d87eebc8cae78bdda05685a0",
+      "after_sha256": "7b280782736d3f81e8d1eb6b31cc87a4541ca0e01df911efd25ea5f8779aab42",
+      "substantive_parity": true,
+      "prose_review": "Complete canonical and previous English bodies read; full explanations, worked examples and caveats reconciled; final prose reread against no-ai-slop with quotations and code protected.",
+      "visual_review": "Not claimed here; parent handles rebuilt desktop/mobile rendered QA.",
+      "source_sections": [
+        {
+          "level": 1,
+          "title": "Декодирование и выбор следующего токена",
+          "anchor": "декодирование-и-выбор-следующего-токена"
+        },
+        {
+          "level": 2,
+          "title": "От логитов к распределению",
+          "anchor": "от-логитов-к-распределению"
+        },
+        {
+          "level": 2,
+          "title": "Greedy: локально лучший токен",
+          "anchor": "greedy-локально-лучший-токен"
+        },
+        {
+          "level": 2,
+          "title": "Beam search: несколько гипотез одновременно",
+          "anchor": "beam-search-несколько-гипотез-одновременно"
+        },
+        {
+          "level": 3,
+          "title": "Завершённые гипотезы и нормировка длины",
+          "anchor": "завершённые-гипотезы-и-нормировка-длины"
+        },
+        {
+          "level": 2,
+          "title": "Случайная выборка",
+          "anchor": "случайная-выборка"
+        },
+        {
+          "level": 2,
+          "title": "Temperature меняет контраст вероятностей",
+          "anchor": "temperature-меняет-контраст-вероятностей"
+        },
+        {
+          "level": 3,
+          "title": "Расчёт на одном распределении",
+          "anchor": "расчёт-на-одном-распределении"
+        },
+        {
+          "level": 2,
+          "title": "Top-k: фиксированное число кандидатов",
+          "anchor": "top-k-фиксированное-число-кандидатов"
+        },
+        {
+          "level": 2,
+          "title": "Top-p: переменный набор заданной массы",
+          "anchor": "top-p-переменный-набор-заданной-массы"
+        },
+        {
+          "level": 2,
+          "title": "Min-p: порог относительно лидера",
+          "anchor": "min-p-порог-относительно-лидера"
+        },
+        {
+          "level": 2,
+          "title": "Почему порядок преобразований меняет результат",
+          "anchor": "почему-порядок-преобразований-меняет-результат"
+        },
+        {
+          "level": 2,
+          "title": "Ограничения и штрафы",
+          "anchor": "ограничения-и-штрафы"
+        },
+        {
+          "level": 3,
+          "title": "Repetition penalty и знак логита",
+          "anchor": "repetition-penalty-и-знак-логита"
+        },
+        {
+          "level": 3,
+          "title": "Frequency, presence и запрет n-грамм",
+          "anchor": "frequency-presence-и-запрет-n-грамм"
+        },
+        {
+          "level": 3,
+          "title": "Ограничение формата",
+          "anchor": "ограничение-формата"
+        },
+        {
+          "level": 2,
+          "title": "Остановка тоже относится к декодированию",
+          "anchor": "остановка-тоже-относится-к-декодированию"
+        },
+        {
+          "level": 2,
+          "title": "Как выбирать стратегию",
+          "anchor": "как-выбирать-стратегию"
+        },
+        {
+          "level": 2,
+          "title": "Воспроизводимый эксперимент",
+          "anchor": "воспроизводимый-эксперимент"
+        },
+        {
+          "level": 3,
+          "title": "Проверка настоящего generate без загрузки весов",
+          "anchor": "проверка-настоящего-generate-без-загрузки-весов"
+        },
+        {
+          "level": 2,
+          "title": "Практика и первоисточники",
+          "anchor": "практика-и-первоисточники"
+        }
+      ],
+      "english_sections": [
+        {
+          "level": 1,
+          "title": "Decoding and next-token selection",
+          "anchor": "decoding-and-next-token-selection"
+        },
+        {
+          "level": 2,
+          "title": "From logits to a distribution",
+          "anchor": "from-logits-to-a-distribution"
+        },
+        {
+          "level": 2,
+          "title": "Greedy decoding: the locally best token",
+          "anchor": "greedy-decoding-the-locally-best-token"
+        },
+        {
+          "level": 2,
+          "title": "Beam search: several hypotheses at once",
+          "anchor": "beam-search-several-hypotheses-at-once"
+        },
+        {
+          "level": 3,
+          "title": "Finished hypotheses and length normalization",
+          "anchor": "finished-hypotheses-and-length-normalization"
+        },
+        {
+          "level": 2,
+          "title": "Random sampling",
+          "anchor": "random-sampling"
+        },
+        {
+          "level": 2,
+          "title": "Temperature changes probability contrast",
+          "anchor": "temperature-changes-probability-contrast"
+        },
+        {
+          "level": 3,
+          "title": "Calculate one distribution",
+          "anchor": "calculate-one-distribution"
+        },
+        {
+          "level": 2,
+          "title": "Top-k: a fixed candidate count",
+          "anchor": "top-k-a-fixed-candidate-count"
+        },
+        {
+          "level": 2,
+          "title": "Top-p: a variable set with a mass threshold",
+          "anchor": "top-p-a-variable-set-with-a-mass-threshold"
+        },
+        {
+          "level": 2,
+          "title": "Min-p: a threshold relative to the leading token",
+          "anchor": "min-p-a-threshold-relative-to-the-leading-token"
+        },
+        {
+          "level": 2,
+          "title": "Transformation order changes the result",
+          "anchor": "transformation-order-changes-the-result"
+        },
+        {
+          "level": 2,
+          "title": "Constraints and penalties",
+          "anchor": "constraints-and-penalties"
+        },
+        {
+          "level": 3,
+          "title": "Repetition penalty and logit sign",
+          "anchor": "repetition-penalty-and-logit-sign"
+        },
+        {
+          "level": 3,
+          "title": "Frequency, presence and n-gram bans",
+          "anchor": "frequency-presence-and-n-gram-bans"
+        },
+        {
+          "level": 3,
+          "title": "Constraining the format",
+          "anchor": "constraining-the-format"
+        },
+        {
+          "level": 2,
+          "title": "Stopping is part of decoding",
+          "anchor": "stopping-is-part-of-decoding"
+        },
+        {
+          "level": 2,
+          "title": "Choosing a strategy",
+          "anchor": "choosing-a-strategy"
+        },
+        {
+          "level": 2,
+          "title": "A reproducible experiment",
+          "anchor": "a-reproducible-experiment"
+        },
+        {
+          "level": 3,
+          "title": "Test real generate without downloading weights",
+          "anchor": "test-real-generate-without-downloading-weights"
+        },
+        {
+          "level": 2,
+          "title": "Practice and primary sources",
+          "anchor": "practice-and-primary-sources"
+        }
+      ],
+      "source_explicit_aliases": [],
+      "retained_aliases": [
+        "декодирование-и-выбор-следующего-токена",
+        "от-логитов-к-распределению",
+        "greedy-локально-лучший-токен",
+        "beam-search-несколько-гипотез-одновременно",
+        "завершённые-гипотезы-и-нормировка-длины",
+        "случайная-выборка",
+        "temperature-меняет-контраст-вероятностей",
+        "расчёт-на-одном-распределении",
+        "top-k-фиксированное-число-кандидатов",
+        "top-p-переменный-набор-заданной-массы",
+        "min-p-порог-относительно-лидера",
+        "почему-порядок-преобразований-меняет-результат",
+        "ограничения-и-штрафы",
+        "repetition-penalty-и-знак-логита",
+        "frequency-presence-и-запрет-n-грамм",
+        "ограничение-формата",
+        "остановка-тоже-относится-к-декодированию",
+        "как-выбирать-стратегию",
+        "воспроизводимый-эксперимент",
+        "проверка-настоящего-generate-без-загрузки-весов",
+        "практика-и-первоисточники"
+      ],
+      "figures": [
+        {
+          "path": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-greedy_search.png",
+          "sha256": "1f4390b7ada9e92902d379ed61c80a0966d95f1a5c3b7156792544780aed7b19"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-beam_search.png",
+          "sha256": "e1db549ab759682f802dbc4dbf6e3d357bafef10f71f300069cdd583eafe568a"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-sampling_search.png",
+          "sha256": "ed8b6920d219c2a32d47a7ce8bfc28d434cf306ad44792d59b37ba4015361edd"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-sampling_search_with_temp.png",
+          "sha256": "816eab79cdfd4efa9966ef3e4fc1a9071a0ea227bf2b483935462d320aceb250"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-top_k_sampling.png",
+          "sha256": "bf7c378f0879ff8acb31af88adbab0cfff411addd1e1f0e2c8f544c5182c847d"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-top_p_sampling.png",
+          "sha256": "6cdf2ce91023691463116196e2a27629344c497a14660df76d5cf3e49eda6931"
+        }
+      ],
+      "lines": 829,
+      "source_lines": 788,
+      "outstanding_substantive_omissions": []
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+      "path": "en/00 Textbook/14 Inference and optimization/55 KV cache batching and PagedAttention.md",
+      "before_sha256": "c1943a8890b2834439ca484ccbf0a9e02f8a0aeb43f71496d109c1379e0b6570",
+      "source_read_lines": [
+        1,
+        694
+      ],
+      "previous_en_read_lines": [
+        1,
+        253
+      ],
+      "mechanisms": [
+        "Causal layer-by-layer cache invariance and invalidation assumptions",
+        "Full-versus-chunked attention and rectangular mask alignment",
+        "Multilayer GQA/RoPE cache, mutation and sampled-token timing",
+        "Left padding, cache positions and logical RoPE positions",
+        "Exact KV bytes and architectural/placement limits",
+        "Reserved versus internal/external fragmentation",
+        "Logical-to-physical block addressing",
+        "Global softmax merge and worked 2.5-versus-2 counterexample",
+        "Block-size/reference-count/copy-on-write and completion synchronization",
+        "Prefix identity, full-block V1 hits and request admission"
+      ],
+      "source_sha256": "bbd791d15c4b4f2254b81fd575442aa3d16ad45ca395720676ce3a156409038e",
+      "after_sha256": "d047e0427087b06e98e92811923d5a19d23179c7593fd5b059b178ed8e392509",
+      "substantive_parity": true,
+      "prose_review": "Complete canonical and previous English bodies read; full explanations, worked examples and caveats reconciled; final prose reread against no-ai-slop with quotations and code protected.",
+      "visual_review": "Not claimed here; parent handles rebuilt desktop/mobile rendered QA.",
+      "source_sections": [
+        {
+          "level": 1,
+          "title": "KV-cache, пакетирование и PagedAttention",
+          "anchor": "kv-cache-пакетирование-и-pagedattention"
+        },
+        {
+          "level": 2,
+          "title": "Prefill и decode используют устройство по-разному",
+          "anchor": "prefill-и-decode-используют-устройство-по-разному"
+        },
+        {
+          "level": 2,
+          "title": "Что именно сохраняет KV-cache",
+          "anchor": "что-именно-сохраняет-kv-cache"
+        },
+        {
+          "level": 3,
+          "title": "Проверка: целый префикс и обработка по частям",
+          "anchor": "проверка-целый-префикс-и-обработка-по-частям"
+        },
+        {
+          "level": 3,
+          "title": "Кеш в многослойной модели",
+          "anchor": "кеш-в-многослойной-модели"
+        },
+        {
+          "level": 3,
+          "title": "Выбранный токен ещё не находится в кеше",
+          "anchor": "выбранный-токен-ещё-не-находится-в-кеше"
+        },
+        {
+          "level": 3,
+          "title": "Padding, cache_position и position_ids",
+          "anchor": "padding-cache_position-и-position_ids"
+        },
+        {
+          "level": 2,
+          "title": "Сколько памяти занимает история",
+          "anchor": "сколько-памяти-занимает-история"
+        },
+        {
+          "level": 2,
+          "title": "Почему статический пакет простаивает",
+          "anchor": "почему-статический-пакет-простаивает"
+        },
+        {
+          "level": 2,
+          "title": "Почему непрерывного пакетирования недостаточно",
+          "anchor": "почему-непрерывного-пакетирования-недостаточно"
+        },
+        {
+          "level": 2,
+          "title": "PagedAttention: логическая последовательность, физические блоки",
+          "anchor": "pagedattention-логическая-последовательность-физические-блоки"
+        },
+        {
+          "level": 3,
+          "title": "Как найти токен по таблице блоков",
+          "anchor": "как-найти-токен-по-таблице-блоков"
+        },
+        {
+          "level": 3,
+          "title": "Softmax остаётся общим для всей истории",
+          "anchor": "softmax-остаётся-общим-для-всей-истории"
+        },
+        {
+          "level": 3,
+          "title": "Размер блока: полезная память и резерв",
+          "anchor": "размер-блока-полезная-память-и-резерв"
+        },
+        {
+          "level": 2,
+          "title": "Совместное использование префикса",
+          "anchor": "совместное-использование-префикса"
+        },
+        {
+          "level": 2,
+          "title": "Планировщик связывает вычисления и память",
+          "anchor": "планировщик-связывает-вычисления-и-память"
+        },
+        {
+          "level": 2,
+          "title": "Что измерять",
+          "anchor": "что-измерять"
+        },
+        {
+          "level": 2,
+          "title": "Практика и первоисточники",
+          "anchor": "практика-и-первоисточники"
+        }
+      ],
+      "english_sections": [
+        {
+          "level": 1,
+          "title": "KV cache, batching, and PagedAttention",
+          "anchor": "kv-cache-batching-and-pagedattention"
+        },
+        {
+          "level": 2,
+          "title": "Prefill and decode use the device differently",
+          "anchor": "prefill-and-decode-use-the-device-differently"
+        },
+        {
+          "level": 2,
+          "title": "What the KV cache stores",
+          "anchor": "what-the-kv-cache-stores"
+        },
+        {
+          "level": 3,
+          "title": "Check a complete prefix against chunked processing",
+          "anchor": "check-a-complete-prefix-against-chunked-processing"
+        },
+        {
+          "level": 3,
+          "title": "Caching in a multilayer model",
+          "anchor": "caching-in-a-multilayer-model"
+        },
+        {
+          "level": 3,
+          "title": "A selected token is not yet cached",
+          "anchor": "a-selected-token-is-not-yet-cached"
+        },
+        {
+          "level": 3,
+          "title": "Padding, cache_position and position_ids",
+          "anchor": "padding-cache_position-and-position_ids"
+        },
+        {
+          "level": 2,
+          "title": "How much memory history consumes",
+          "anchor": "how-much-memory-history-consumes"
+        },
+        {
+          "level": 2,
+          "title": "Why static batches leave capacity idle",
+          "anchor": "why-static-batches-leave-capacity-idle"
+        },
+        {
+          "level": 2,
+          "title": "Why continuous batching is not enough",
+          "anchor": "why-continuous-batching-is-not-enough"
+        },
+        {
+          "level": 2,
+          "title": "PagedAttention: logical sequences and physical blocks",
+          "anchor": "pagedattention-logical-sequences-and-physical-blocks"
+        },
+        {
+          "level": 3,
+          "title": "Find a token through the block table",
+          "anchor": "find-a-token-through-the-block-table"
+        },
+        {
+          "level": 3,
+          "title": "Softmax still spans the complete history",
+          "anchor": "softmax-still-spans-the-complete-history"
+        },
+        {
+          "level": 3,
+          "title": "Block size: useful memory and reservation",
+          "anchor": "block-size-useful-memory-and-reservation"
+        },
+        {
+          "level": 2,
+          "title": "Sharing a prefix",
+          "anchor": "sharing-a-prefix"
+        },
+        {
+          "level": 2,
+          "title": "The scheduler couples computation and memory",
+          "anchor": "the-scheduler-couples-computation-and-memory"
+        },
+        {
+          "level": 2,
+          "title": "What to measure",
+          "anchor": "what-to-measure"
+        },
+        {
+          "level": 2,
+          "title": "Practice and primary sources",
+          "anchor": "practice-and-primary-sources"
+        }
+      ],
+      "source_explicit_aliases": [],
+      "retained_aliases": [
+        "kv-cache-пакетирование-и-pagedattention",
+        "prefill-и-decode-используют-устройство-по-разному",
+        "что-именно-сохраняет-kv-cache",
+        "проверка-целый-префикс-и-обработка-по-частям",
+        "кеш-в-многослойной-модели",
+        "выбранный-токен-ещё-не-находится-в-кеше",
+        "padding-cache_position-и-position_ids",
+        "сколько-памяти-занимает-история",
+        "почему-статический-пакет-простаивает",
+        "почему-непрерывного-пакетирования-недостаточно",
+        "pagedattention-логическая-последовательность-физические-блоки",
+        "как-найти-токен-по-таблице-блоков",
+        "softmax-остаётся-общим-для-всей-истории",
+        "размер-блока-полезная-память-и-резерв",
+        "совместное-использование-префикса",
+        "планировщик-связывает-вычисления-и-память",
+        "что-измерять",
+        "практика-и-первоисточники"
+      ],
+      "figures": [
+        {
+          "path": "00 Учебник/Assets/Figures/curated/attention-review-2026-09/prefill-decode.png",
+          "sha256": "947a70b7cef4d1875d295692731cd4216f189daaf5ac7b586106fc542626e3a6"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/paged-attention-fragmentation.png",
+          "sha256": "43fdea6749242beb1b07c82bc7d4e617012e485271f284093c94c198b410fe41"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/paged-attention-blocks.png",
+          "sha256": "16b5c731f1f5ee4e031b5cbbce0ca97a4df580b63864de1dd08fde82dc605f6d"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/paged-attention-logical.png",
+          "sha256": "8caaf998a04761655545fa4fc33b99cb4874d258f426c858609f5e4a54b38c9c"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/paged-attention-sharing.png",
+          "sha256": "2a600d666147a345d730186eab6406fda63d62a40c9ae8616806ca7645283068"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/paged-attention-copy-on-write.png",
+          "sha256": "38f03b9e6ce4a587b950d2fc260ff19faa896af4089483a048d055b734dfd4e8"
+        }
+      ],
+      "lines": 745,
+      "source_lines": 694,
+      "outstanding_substantive_omissions": []
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md",
+      "path": "en/00 Textbook/14 Inference and optimization/55b Scheduling — continuous batching, chunked prefill, and prefix caching.md",
+      "source_sha256": "3256c046c7c117b55a8532fdf20a713eb575723327fa9c75839c55b24b582847",
+      "before_sha256": "cb9282cacbf1a33fd29a7524969c7813890c20d44e3b6bd3ff61eed09afe42c8",
+      "source_read_lines": [
+        1,
+        1035
+      ],
+      "previous_en_read_lines": [
+        1,
+        305
+      ],
+      "substantive_parity": true,
+      "mechanisms": [
+        "Iteration scheduling and slot-count simulation",
+        "Packed linear layers versus request-isolated attention",
+        "Token and KV budgets with synchronous admission model",
+        "Async allocation versus completed writes",
+        "FCFS,aging,preemption,recomputation and overload",
+        "Chunk latency trade-off and SARATHI policy",
+        "Three mixed passes with exact masks and context-dependent attention cost",
+        "Chained prefix hashes and full original allocation workflow",
+        "Full-hit last forward,free versus evicted blocks",
+        "Radix split/reuse/eviction and cache-aware fairness",
+        "Reuse namespace,cache salt and side-channel limitations",
+        "Combined18-token timeline and benchmark protocol"
+      ],
+      "after_sha256": "aa4debaa5cc7f8c5f99a3cac50073270d8e1613a8a75a4178e60f881f04aab96",
+      "source_sections": [
+        {
+          "level": 1,
+          "title": "Scheduling: continuous batching, chunked prefill и prefix caching",
+          "anchor": "scheduling-continuous-batching-chunked-prefill-и-prefix-caching"
+        },
+        {
+          "level": 2,
+          "title": "Почему в статическом пакете простаивают места",
+          "anchor": "почему-в-статическом-пакете-простаивают-места"
+        },
+        {
+          "level": 2,
+          "title": "Orca: планирование на уровне итерации",
+          "anchor": "orca-планирование-на-уровне-итерации"
+        },
+        {
+          "level": 3,
+          "title": "Какие операции можно объединить",
+          "anchor": "какие-операции-можно-объединить"
+        },
+        {
+          "level": 3,
+          "title": "Новый prefill рядом с продолжающимся decode",
+          "anchor": "новый-prefill-рядом-с-продолжающимся-decode"
+        },
+        {
+          "level": 2,
+          "title": "Что выбирает планировщик на каждом шаге",
+          "anchor": "что-выбирает-планировщик-на-каждом-шаге"
+        },
+        {
+          "level": 3,
+          "title": "Токенов может хватить, а памяти — нет",
+          "anchor": "токенов-может-хватить-а-памяти--нет"
+        },
+        {
+          "level": 3,
+          "title": "План и завершённое вычисление — разные состояния",
+          "anchor": "план-и-завершённое-вычисление--разные-состояния"
+        },
+        {
+          "level": 2,
+          "title": "Fairness, preemption и перегрузка",
+          "anchor": "fairness-preemption-и-перегрузка"
+        },
+        {
+          "level": 3,
+          "title": "Что происходит при нехватке KV-блоков",
+          "anchor": "что-происходит-при-нехватке-kv-блоков"
+        },
+        {
+          "level": 3,
+          "title": "Почему перестановки очереди недостаточно",
+          "anchor": "почему-перестановки-очереди-недостаточно"
+        },
+        {
+          "level": 2,
+          "title": "Почему длинный prefill мешает decode",
+          "anchor": "почему-длинный-prefill-мешает-decode"
+        },
+        {
+          "level": 3,
+          "title": "Чему помогает разбиение: расчёт времени",
+          "anchor": "чему-помогает-разбиение-расчёт-времени"
+        },
+        {
+          "level": 3,
+          "title": "SARATHI и Sarathi-Serve",
+          "anchor": "sarathi-и-sarathi-serve"
+        },
+        {
+          "level": 3,
+          "title": "Как меняется пакет за три прохода",
+          "anchor": "как-меняется-пакет-за-три-прохода"
+        },
+        {
+          "level": 3,
+          "title": "Почему токеновый бюджет не равен бюджету времени",
+          "anchor": "почему-токеновый-бюджет-не-равен-бюджету-времени"
+        },
+        {
+          "level": 2,
+          "title": "Prefix caching: не вычислять общий вход повторно",
+          "anchor": "prefix-caching-не-вычислять-общий-вход-повторно"
+        },
+        {
+          "level": 3,
+          "title": "Почему ключ блока зависит от предыдущих блоков",
+          "anchor": "почему-ключ-блока-зависит-от-предыдущих-блоков"
+        },
+        {
+          "level": 3,
+          "title": "Как запрос получает найденные блоки",
+          "anchor": "как-запрос-получает-найденные-блоки"
+        },
+        {
+          "level": 3,
+          "title": "Полное попадание и последний forward",
+          "anchor": "полное-попадание-и-последний-forward"
+        },
+        {
+          "level": 3,
+          "title": "Свободный блок не обязательно пустой",
+          "anchor": "свободный-блок-не-обязательно-пустой"
+        },
+        {
+          "level": 3,
+          "title": "RadixAttention и порядок обслуживания",
+          "anchor": "radixattention-и-порядок-обслуживания"
+        },
+        {
+          "level": 3,
+          "title": "Корректность и изоляция",
+          "anchor": "корректность-и-изоляция"
+        },
+        {
+          "level": 2,
+          "title": "Как механизмы взаимодействуют",
+          "anchor": "как-механизмы-взаимодействуют"
+        },
+        {
+          "level": 2,
+          "title": "Версии движков и проверка производительности",
+          "anchor": "версии-движков-и-проверка-производительности"
+        },
+        {
+          "level": 2,
+          "title": "Практика и первоисточники",
+          "anchor": "практика-и-первоисточники"
+        }
+      ],
+      "english_sections": [
+        {
+          "level": 1,
+          "title": "Scheduling: continuous batching, chunked prefill, and prefix caching",
+          "anchor": "scheduling-continuous-batching-chunked-prefill-and-prefix-caching"
+        },
+        {
+          "level": 2,
+          "title": "Why static batches leave slots idle",
+          "anchor": "why-static-batches-leave-slots-idle"
+        },
+        {
+          "level": 2,
+          "title": "Orca: iteration-level scheduling",
+          "anchor": "orca-iteration-level-scheduling"
+        },
+        {
+          "level": 3,
+          "title": "Which operations can be batched",
+          "anchor": "which-operations-can-be-batched"
+        },
+        {
+          "level": 3,
+          "title": "A new prefill beside ongoing decode",
+          "anchor": "a-new-prefill-beside-ongoing-decode"
+        },
+        {
+          "level": 2,
+          "title": "What the scheduler selects at each step",
+          "anchor": "what-the-scheduler-selects-at-each-step"
+        },
+        {
+          "level": 3,
+          "title": "Token capacity and memory capacity are separate",
+          "anchor": "token-capacity-and-memory-capacity-are-separate"
+        },
+        {
+          "level": 3,
+          "title": "A plan is not a completed computation",
+          "anchor": "a-plan-is-not-a-completed-computation"
+        },
+        {
+          "level": 2,
+          "title": "Fairness, preemption and overload",
+          "anchor": "fairness-preemption-and-overload"
+        },
+        {
+          "level": 3,
+          "title": "When KV blocks run out",
+          "anchor": "when-kv-blocks-run-out"
+        },
+        {
+          "level": 3,
+          "title": "Reordering cannot remove overload",
+          "anchor": "reordering-cannot-remove-overload"
+        },
+        {
+          "level": 2,
+          "title": "Why a long prefill disrupts decode",
+          "anchor": "why-a-long-prefill-disrupts-decode"
+        },
+        {
+          "level": 3,
+          "title": "A timing calculation",
+          "anchor": "a-timing-calculation"
+        },
+        {
+          "level": 3,
+          "title": "SARATHI and Sarathi-Serve",
+          "anchor": "sarathi-and-sarathi-serve"
+        },
+        {
+          "level": 3,
+          "title": "Three mixed passes",
+          "anchor": "three-mixed-passes"
+        },
+        {
+          "level": 3,
+          "title": "A token budget is not a time budget",
+          "anchor": "a-token-budget-is-not-a-time-budget"
+        },
+        {
+          "level": 2,
+          "title": "Prefix caching: avoid recomputing shared input",
+          "anchor": "prefix-caching-avoid-recomputing-shared-input"
+        },
+        {
+          "level": 3,
+          "title": "Why block keys depend on earlier blocks",
+          "anchor": "why-block-keys-depend-on-earlier-blocks"
+        },
+        {
+          "level": 3,
+          "title": "How a request acquires matching blocks",
+          "anchor": "how-a-request-acquires-matching-blocks"
+        },
+        {
+          "level": 3,
+          "title": "A full hit still needs output logits",
+          "anchor": "a-full-hit-still-needs-output-logits"
+        },
+        {
+          "level": 3,
+          "title": "A free block need not be empty",
+          "anchor": "a-free-block-need-not-be-empty"
+        },
+        {
+          "level": 3,
+          "title": "RadixAttention and service order",
+          "anchor": "radixattention-and-service-order"
+        },
+        {
+          "level": 3,
+          "title": "Correctness and isolation",
+          "anchor": "correctness-and-isolation"
+        },
+        {
+          "level": 2,
+          "title": "How the mechanisms interact",
+          "anchor": "how-the-mechanisms-interact"
+        },
+        {
+          "level": 2,
+          "title": "Engine versions and performance verification",
+          "anchor": "engine-versions-and-performance-verification"
+        },
+        {
+          "level": 2,
+          "title": "Practice and primary sources",
+          "anchor": "practice-and-primary-sources"
+        }
+      ],
+      "source_explicit_aliases": [
+        "почему-статический-пакет-теряет-вместимость",
+        "устойчивый-механизм-и-меняющийся-api"
+      ],
+      "retained_aliases": [
+        "scheduling-continuous-batching-chunked-prefill-и-prefix-caching",
+        "почему-в-статическом-пакете-простаивают-места",
+        "почему-статический-пакет-теряет-вместимость",
+        "orca-планирование-на-уровне-итерации",
+        "какие-операции-можно-объединить",
+        "новый-prefill-рядом-с-продолжающимся-decode",
+        "что-выбирает-планировщик-на-каждом-шаге",
+        "токенов-может-хватить-а-памяти--нет",
+        "план-и-завершённое-вычисление--разные-состояния",
+        "fairness-preemption-и-перегрузка",
+        "что-происходит-при-нехватке-kv-блоков",
+        "почему-перестановки-очереди-недостаточно",
+        "почему-длинный-prefill-мешает-decode",
+        "чему-помогает-разбиение-расчёт-времени",
+        "sarathi-и-sarathi-serve",
+        "как-меняется-пакет-за-три-прохода",
+        "почему-токеновый-бюджет-не-равен-бюджету-времени",
+        "prefix-caching-не-вычислять-общий-вход-повторно",
+        "почему-ключ-блока-зависит-от-предыдущих-блоков",
+        "как-запрос-получает-найденные-блоки",
+        "полное-попадание-и-последний-forward",
+        "свободный-блок-не-обязательно-пустой",
+        "radixattention-и-порядок-обслуживания",
+        "корректность-и-изоляция",
+        "как-механизмы-взаимодействуют",
+        "версии-движков-и-проверка-производительности",
+        "устойчивый-механизм-и-меняющийся-api",
+        "практика-и-первоисточники"
+      ],
+      "figures": [
+        {
+          "path": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/anyscale-static-batching.png",
+          "sha256": "a4b1963edf5361606005f9986c8577492b874e5fb6aa65004989d8203c9a8acb"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/scheduling-2026-10-25/hf-dynamic-batching.png",
+          "sha256": "1721080f5c46eed465bcf3d6e19f276037c7fea144acd3ec7b386a76f60ee641"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/inference-advanced/physics-scheduling/gordic-chunked-prefill.png",
+          "sha256": "5988dc983eb22c8068b0ca2700108fc11d50389e20c078682b3ecc9249d96b31"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/scheduling-2026-10-25/hf-continuous-batching.png",
+          "sha256": "c57b1deeacea8c2e591687d1eb105722fd352492d86cdfd74c05f166fc96068d"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/inference-scheduling-review-2026-10/vllm-prefix-cache-overview.png",
+          "sha256": "44f3000fcd73ec08ad66183ca8b3e0901e4b52044cf501f19fa8839391ac4e6a"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/inference-scheduling-review-2026-10/vllm-prefix-release-shared-blocks.png",
+          "sha256": "12043b8bd2b1bf7a03d6b5a2723c66276f6e18ae45aa29b3d7824e31c7a8035e"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/inference-scheduling-review-2026-10/sglang-radix-tree-original.jpg",
+          "sha256": "408a78d48a1efcd4cec9fb6b10969730adaff8b4672821d10f8bdec5b62b2b80"
+        }
+      ],
+      "lines": 1037,
+      "source_lines": 1035,
+      "outstanding_substantive_omissions": [],
+      "prose_review": "Complete canonical and previous English bodies read; full explanations, worked examples and caveats reconciled; final prose reread against no-ai-slop with quotations and code protected.",
+      "visual_review": "Not claimed here; parent handles rebuilt desktop/mobile rendered QA."
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md",
+      "path": "en/00 Textbook/14 Inference and optimization/55c Serving engines — vLLM, SGLang, TensorRT-LLM, and FlashInfer.md",
+      "before_sha256": "91ffbf3b639090fdcfe3ddac5b118bffd3045c8719729c7472c0c9d6fd756bf4",
+      "source_read_lines": [
+        1,
+        791
+      ],
+      "previous_en_read_lines": [
+        1,
+        543
+      ],
+      "mechanisms": [
+        "Complete licensed original vLLM/SGLang/TensorRT-LLM/FlashInfer explanations retained",
+        "Request-state timing and independent packed attention CPU check",
+        "NUMA CPU placement versus memory residency",
+        "Thread-pool oversubscription",
+        "mmap first touch, meta initialization, assign and CPU storage/output test",
+        "Safetensors layout and loading boundaries",
+        "Pinned runtime and course reference links"
+      ],
+      "source_sha256": "fee6d97ff4f17a23b48f6b3a73e7311d7699f1da456c414094d4ba934062f255",
+      "after_sha256": "ffc56a229cf5766a222b9588ecbf551d2ed01588078b2686648f0ffa25e43423",
+      "substantive_parity": true,
+      "prose_review": "Complete canonical and previous English bodies read; full explanations, worked examples and caveats reconciled; final prose reread against no-ai-slop with quotations and code protected.",
+      "visual_review": "Not claimed here; parent handles rebuilt desktop/mobile rendered QA.",
+      "source_sections": [
+        {
+          "level": 1,
+          "title": "Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer",
+          "anchor": "serving-engines--vllm-sglang-tensorrt-llm-и-flashinfer"
+        },
+        {
+          "level": 2,
+          "title": "vLLM: Architecture Overview",
+          "anchor": "vllm-architecture-overview"
+        },
+        {
+          "level": 3,
+          "title": "V1 Process Architecture",
+          "anchor": "v1-process-architecture"
+        },
+        {
+          "level": 4,
+          "title": "API Server Process",
+          "anchor": "api-server-process"
+        },
+        {
+          "level": 4,
+          "title": "Engine Core Process",
+          "anchor": "engine-core-process"
+        },
+        {
+          "level": 4,
+          "title": "GPU Worker Processes",
+          "anchor": "gpu-worker-processes"
+        },
+        {
+          "level": 4,
+          "title": "DP Coordinator Process (conditional)",
+          "anchor": "dp-coordinator-process-conditional"
+        },
+        {
+          "level": 4,
+          "title": "Process Count Summary",
+          "anchor": "process-count-summary"
+        },
+        {
+          "level": 3,
+          "title": "Worker",
+          "anchor": "worker"
+        },
+        {
+          "level": 3,
+          "title": "Model Runner",
+          "anchor": "model-runner"
+        },
+        {
+          "level": 3,
+          "title": "Model",
+          "anchor": "model"
+        },
+        {
+          "level": 3,
+          "title": "Sharding and Quantization at Initialization",
+          "anchor": "sharding-and-quantization-at-initialization"
+        },
+        {
+          "level": 2,
+          "title": "SGLang: RadixAttention и перекрытие CPU/GPU",
+          "anchor": "sglang-radixattention-и-перекрытие-cpugpu"
+        },
+        {
+          "level": 3,
+          "title": "RadixAttention",
+          "anchor": "radixattention"
+        },
+        {
+          "level": 3,
+          "title": "Overlapped CPU scheduler and GPU worker",
+          "anchor": "overlapped-cpu-scheduler-and-gpu-worker"
+        },
+        {
+          "level": 2,
+          "title": "TensorRT-LLM: Architecture Overview",
+          "anchor": "tensorrt-llm-architecture-overview"
+        },
+        {
+          "level": 3,
+          "title": "Runtime Optimizations",
+          "anchor": "runtime-optimizations"
+        },
+        {
+          "level": 4,
+          "title": "CUDA Graph",
+          "anchor": "cuda-graph"
+        },
+        {
+          "level": 4,
+          "title": "Overlap Scheduler",
+          "anchor": "overlap-scheduler"
+        },
+        {
+          "level": 2,
+          "title": "FlashInfer: KV-Cache Layout",
+          "anchor": "flashinfer-kv-cache-layout"
+        },
+        {
+          "level": 3,
+          "title": "Layout: NHD/HND",
+          "anchor": "layout-nhdhnd"
+        },
+        {
+          "level": 3,
+          "title": "Ragged Tensor",
+          "anchor": "ragged-tensor"
+        },
+        {
+          "level": 4,
+          "title": "FlashInfer APIs",
+          "anchor": "flashinfer-apis"
+        },
+        {
+          "level": 3,
+          "title": "Mask Layout (2D Ragged Tensor)",
+          "anchor": "mask-layout-2d-ragged-tensor"
+        },
+        {
+          "level": 3,
+          "title": "Page Table Layout",
+          "anchor": "page-table-layout"
+        },
+        {
+          "level": 3,
+          "title": "Multi-head Latent Attention Page Layout",
+          "anchor": "multi-head-latent-attention-page-layout"
+        },
+        {
+          "level": 4,
+          "title": "FlashInfer APIs",
+          "anchor": "flashinfer-apis-1"
+        },
+        {
+          "level": 3,
+          "title": "FAQ",
+          "anchor": "faq"
+        },
+        {
+          "level": 2,
+          "title": "Примеры: KV-cache и границы запросов",
+          "anchor": "примеры-kv-cache-и-границы-запросов"
+        },
+        {
+          "level": 3,
+          "title": "Когда появляется KV выбранного токена",
+          "anchor": "когда-появляется-kv-выбранного-токена"
+        },
+        {
+          "level": 3,
+          "title": "Проверка упакованного внимания на CPU",
+          "anchor": "проверка-упакованного-внимания-на-cpu"
+        },
+        {
+          "level": 2,
+          "title": "Host placement, thread pools and loading weights",
+          "anchor": "host-placement-thread-pools-and-loading-weights"
+        },
+        {
+          "level": 3,
+          "title": "CPU affinity and memory placement are separate decisions",
+          "anchor": "cpu-affinity-and-memory-placement-are-separate-decisions"
+        },
+        {
+          "level": 3,
+          "title": "Count thread pools, not just server processes",
+          "anchor": "count-thread-pools-not-just-server-processes"
+        },
+        {
+          "level": 3,
+          "title": "A mapped checkpoint is not a ready model",
+          "anchor": "a-mapped-checkpoint-is-not-a-ready-model"
+        },
+        {
+          "level": 2,
+          "title": "Связанные темы",
+          "anchor": "связанные-темы"
+        },
+        {
+          "level": 2,
+          "title": "Практика и первоисточники",
+          "anchor": "практика-и-первоисточники"
+        }
+      ],
+      "english_sections": [
+        {
+          "level": 1,
+          "title": "Serving engines — vLLM, SGLang, TensorRT-LLM, and FlashInfer",
+          "anchor": "serving-engines--vllm-sglang-tensorrt-llm-and-flashinfer"
+        },
+        {
+          "level": 2,
+          "title": "Five layers of one system",
+          "anchor": "five-layers-of-one-system"
+        },
+        {
+          "level": 2,
+          "title": "vLLM: Architecture Overview",
+          "anchor": "vllm-architecture-overview"
+        },
+        {
+          "level": 3,
+          "title": "V1 Process Architecture",
+          "anchor": "v1-process-architecture"
+        },
+        {
+          "level": 4,
+          "title": "API Server Process",
+          "anchor": "api-server-process"
+        },
+        {
+          "level": 4,
+          "title": "Engine Core Process",
+          "anchor": "engine-core-process"
+        },
+        {
+          "level": 4,
+          "title": "GPU Worker Processes",
+          "anchor": "gpu-worker-processes"
+        },
+        {
+          "level": 4,
+          "title": "DP Coordinator Process (conditional)",
+          "anchor": "dp-coordinator-process-conditional"
+        },
+        {
+          "level": 4,
+          "title": "Process Count Summary",
+          "anchor": "process-count-summary"
+        },
+        {
+          "level": 3,
+          "title": "Worker",
+          "anchor": "worker"
+        },
+        {
+          "level": 3,
+          "title": "Model Runner",
+          "anchor": "model-runner"
+        },
+        {
+          "level": 3,
+          "title": "Model",
+          "anchor": "model"
+        },
+        {
+          "level": 3,
+          "title": "Sharding and Quantization at Initialization",
+          "anchor": "sharding-and-quantization-at-initialization"
+        },
+        {
+          "level": 2,
+          "title": "SGLang: RadixAttention and CPU/GPU overlap",
+          "anchor": "sglang-radixattention-and-cpugpu-overlap"
+        },
+        {
+          "level": 3,
+          "title": "RadixAttention",
+          "anchor": "radixattention"
+        },
+        {
+          "level": 3,
+          "title": "Overlapped CPU scheduler and GPU worker",
+          "anchor": "overlapped-cpu-scheduler-and-gpu-worker"
+        },
+        {
+          "level": 2,
+          "title": "TensorRT-LLM: Architecture Overview",
+          "anchor": "tensorrt-llm-architecture-overview"
+        },
+        {
+          "level": 3,
+          "title": "Runtime Optimizations",
+          "anchor": "runtime-optimizations"
+        },
+        {
+          "level": 4,
+          "title": "CUDA Graph",
+          "anchor": "cuda-graph"
+        },
+        {
+          "level": 4,
+          "title": "Overlap Scheduler",
+          "anchor": "overlap-scheduler"
+        },
+        {
+          "level": 2,
+          "title": "FlashInfer: KV-Cache Layout",
+          "anchor": "flashinfer-kv-cache-layout"
+        },
+        {
+          "level": 3,
+          "title": "Layout: NHD/HND",
+          "anchor": "layout-nhdhnd"
+        },
+        {
+          "level": 3,
+          "title": "Ragged Tensor",
+          "anchor": "ragged-tensor"
+        },
+        {
+          "level": 4,
+          "title": "FlashInfer APIs",
+          "anchor": "flashinfer-apis"
+        },
+        {
+          "level": 3,
+          "title": "Mask Layout (2D Ragged Tensor)",
+          "anchor": "mask-layout-2d-ragged-tensor"
+        },
+        {
+          "level": 3,
+          "title": "Page Table Layout",
+          "anchor": "page-table-layout"
+        },
+        {
+          "level": 3,
+          "title": "Multi-head Latent Attention Page Layout",
+          "anchor": "multi-head-latent-attention-page-layout"
+        },
+        {
+          "level": 4,
+          "title": "FlashInfer APIs",
+          "anchor": "flashinfer-apis-1"
+        },
+        {
+          "level": 3,
+          "title": "FAQ",
+          "anchor": "faq"
+        },
+        {
+          "level": 2,
+          "title": "Worked examples: cache timing and request boundaries",
+          "anchor": "worked-examples-cache-timing-and-request-boundaries"
+        },
+        {
+          "level": 3,
+          "title": "When a sampled token acquires its KV state",
+          "anchor": "when-a-sampled-token-acquires-its-kv-state"
+        },
+        {
+          "level": 3,
+          "title": "Packed attention must preserve request boundaries",
+          "anchor": "packed-attention-must-preserve-request-boundaries"
+        },
+        {
+          "level": 2,
+          "title": "Host placement, thread pools and loading weights",
+          "anchor": "host-placement-thread-pools-and-loading-weights"
+        },
+        {
+          "level": 3,
+          "title": "CPU affinity and memory placement are separate decisions",
+          "anchor": "cpu-affinity-and-memory-placement-are-separate-decisions"
+        },
+        {
+          "level": 3,
+          "title": "Count thread pools, not just server processes",
+          "anchor": "count-thread-pools-not-just-server-processes"
+        },
+        {
+          "level": 3,
+          "title": "A mapped checkpoint is not a ready model",
+          "anchor": "a-mapped-checkpoint-is-not-a-ready-model"
+        },
+        {
+          "level": 2,
+          "title": "Where Triton fits",
+          "anchor": "where-triton-fits"
+        },
+        {
+          "level": 2,
+          "title": "How to choose a runtime",
+          "anchor": "how-to-choose-a-runtime"
+        },
+        {
+          "level": 2,
+          "title": "Sources and further reading",
+          "anchor": "sources-and-further-reading"
+        }
+      ],
+      "source_explicit_aliases": [
+        "пять-уровней-одной-системы",
+        "vllm-scheduler-и-блочная-память-в-центре-архитектуры",
+        "vllm-граница-между-сервером-и-исполнением-модели",
+        "sglang-структура-программы-становится-частью-расписания",
+        "sglang-язык-программ-и-самостоятельный-сервер",
+        "tensorrt-llm-два-пути-исполнения-внутри-одного-проекта",
+        "flashinfer-библиотека-ядер-а-не-ещё-один-scheduler",
+        "flashinfer-что-движок-передаёт-библиотеке-ядер",
+        "что-происходит-с-одним-запросом",
+        "где-находится-triton",
+        "llamacpp-полезный-контраст-cpu-first-runtime",
+        "llamacpp-другой-набор-условий-развёртывания",
+        "как-выбирать-runtime",
+        "как-сравнивать-движки",
+        "что-остаётся-стабильным-а-что-нужно-перепроверять"
+      ],
+      "retained_aliases": [
+        "serving-engines--vllm-sglang-tensorrt-llm-и-flashinfer",
+        "пять-уровней-одной-системы",
+        "vllm-scheduler-и-блочная-память-в-центре-архитектуры",
+        "vllm-граница-между-сервером-и-исполнением-модели",
+        "sglang-radixattention-и-перекрытие-cpugpu",
+        "sglang-структура-программы-становится-частью-расписания",
+        "sglang-язык-программ-и-самостоятельный-сервер",
+        "tensorrt-llm-два-пути-исполнения-внутри-одного-проекта",
+        "flashinfer-библиотека-ядер-а-не-ещё-один-scheduler",
+        "flashinfer-что-движок-передаёт-библиотеке-ядер",
+        "примеры-kv-cache-и-границы-запросов",
+        "что-происходит-с-одним-запросом",
+        "когда-появляется-kv-выбранного-токена",
+        "проверка-упакованного-внимания-на-cpu",
+        "где-находится-triton",
+        "как-выбирать-runtime",
+        "как-сравнивать-движки",
+        "что-остаётся-стабильным-а-что-нужно-перепроверять",
+        "связанные-темы",
+        "практика-и-первоисточники",
+        "llamacpp-полезный-контраст-cpu-first-runtime",
+        "llamacpp-другой-набор-условий-развёртывания"
+      ],
+      "figures": [
+        {
+          "path": "00 Учебник/Assets/Figures/curated/serving-engines-review-2026-10/vllm-v1-processes-tp4.png",
+          "sha256": "8602fecbabf3b5fb4ceeb831f608dc178d14ec4a686e2f2cff58b1af78f8951d"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/serving-originals-2026-10/vllm-tp2-dp4.png",
+          "sha256": "5c79b2b2ce38b6b2f1737a1b5c5fe8d3acd0cbf0d1f6ed542fd4d85c28f8c46b"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/serving-originals-2026-10/sglang-overlap-scheduler.jpg",
+          "sha256": "b6069f00b9361b44dcdfb8c98d42c464daeb01a56f6843b3facf09dd298be351"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/serving-engines-review-2026-10/tensorrt-llm-pyexecutor.png",
+          "sha256": "2083d1860246bc30cac0e8d2ebab8540a185cc0e76c9b2ad773d2bd73dd28318"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/serving-engines-review-2026-10/flashinfer-ragged.png",
+          "sha256": "efc4f5e9d414679f0bffb3bf3b96956b62c62ecc4eed621aff903e0b23b600d3"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/serving-originals-2026-10/flashinfer-mask-layout.png",
+          "sha256": "93515341110b2877f5b1c6a5f1a996dda025e16d20ab349e534e4cbc9b7c81ee"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/serving-originals-2026-10/flashinfer-page-layout.png",
+          "sha256": "76c22bd22ebbde4650b9cebcf8cef841b191abca11c13a68d8450989cc4d7afe"
+        }
+      ],
+      "lines": 779,
+      "source_lines": 791,
+      "outstanding_substantive_omissions": []
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/56 FlashAttention.md",
+      "source": "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+      "before_sha256": "33c1200f6fb1f115da8529e316a07d4b6c812af9326c8dd29b33409443933d61",
+      "source_read_lines": [
+        1,
+        802
+      ],
+      "previous_en_read_lines": [
+        1,
+        376
+      ],
+      "mechanisms": [
+        "HBM/SRAM capacity versus traffic and exact byte example",
+        "Online softmax, rescaling and logsumexp",
+        "Complete forward/backward derivation and numerical gradients",
+        "Dropout, causal incomplete tiles, atomics and ownership",
+        "FA2 non-matrix work, task count and sliced-Q",
+        "FA3 producer/consumer, pingpong and pipeline dependencies",
+        "Register pressure, FP8, pinned implementation support",
+        "Backend and benchmark verification boundaries"
+      ],
+      "after_sha256": "6b8db3db140edaba6e45847a03bd61961aeff4a009d8f66533bde7cf0fe4652c",
+      "source_sha256": "15ba654d059b1ccd35bd07c6b041e405bef2f99d74ee03f672c205263b7589a1",
+      "source_sections": [
+        {
+          "level": 1,
+          "title": "FlashAttention: точное внимание с меньшим обменом данными",
+          "anchor": "flashattention-точное-внимание-с-меньшим-обменом-данными"
+        },
+        {
+          "level": 2,
+          "title": "Вычислительная сложность не объясняет время работы",
+          "anchor": "вычислительная-сложность-не-объясняет-время-работы"
+        },
+        {
+          "level": 2,
+          "title": "Обычная реализация материализует квадратные тензоры",
+          "anchor": "обычная-реализация-материализует-квадратные-тензоры"
+        },
+        {
+          "level": 2,
+          "title": "Блочный проход через SRAM",
+          "anchor": "блочный-проход-через-sram"
+        },
+        {
+          "level": 2,
+          "title": "Как softmax считается по частям",
+          "anchor": "как-softmax-считается-по-частям"
+        },
+        {
+          "level": 3,
+          "title": "Пример: новый блок содержит больший максимум",
+          "anchor": "пример-новый-блок-содержит-больший-максимум"
+        },
+        {
+          "level": 3,
+          "title": "Объединение двух блоков",
+          "anchor": "объединение-двух-блоков"
+        },
+        {
+          "level": 2,
+          "title": "Почему память становится линейной",
+          "anchor": "почему-память-становится-линейной"
+        },
+        {
+          "level": 2,
+          "title": "Проверяемая реализация блочного forward",
+          "anchor": "проверяемая-реализация-блочного-forward"
+        },
+        {
+          "level": 2,
+          "title": "Backward: что требуется пересчитать",
+          "anchor": "backward-что-требуется-пересчитать"
+        },
+        {
+          "level": 3,
+          "title": "Пример градиентов для одной строки",
+          "anchor": "пример-градиентов-для-одной-строки"
+        },
+        {
+          "level": 3,
+          "title": "Восстановление блоков вероятностей",
+          "anchor": "восстановление-блоков-вероятностей"
+        },
+        {
+          "level": 3,
+          "title": "Dropout и воспроизводимость пересчёта",
+          "anchor": "dropout-и-воспроизводимость-пересчёта"
+        },
+        {
+          "level": 3,
+          "title": "Два способа накопить градиенты",
+          "anchor": "два-способа-накопить-градиенты"
+        },
+        {
+          "level": 3,
+          "title": "Causal mask в неполной плитке",
+          "anchor": "causal-mask-в-неполной-плитке"
+        },
+        {
+          "level": 2,
+          "title": "Что изменил FlashAttention-2",
+          "anchor": "что-изменил-flashattention-2"
+        },
+        {
+          "level": 3,
+          "title": "Меньше нормировок внутри цикла",
+          "anchor": "меньше-нормировок-внутри-цикла"
+        },
+        {
+          "level": 3,
+          "title": "Больше независимых блоков работы",
+          "anchor": "больше-независимых-блоков-работы"
+        },
+        {
+          "level": 3,
+          "title": "Меньше обмена между warp",
+          "anchor": "меньше-обмена-между-warp"
+        },
+        {
+          "level": 2,
+          "title": "FlashAttention-3: одновременная передача и обработка блоков",
+          "anchor": "flashattention-3-одновременная-передача-и-обработка-блоков"
+        },
+        {
+          "level": 3,
+          "title": "Загрузка следующего блока во время вычислений",
+          "anchor": "загрузка-следующего-блока-во-время-вычислений"
+        },
+        {
+          "level": 3,
+          "title": "Softmax одной группы и матричное умножение другой",
+          "anchor": "softmax-одной-группы-и-матричное-умножение-другой"
+        },
+        {
+          "level": 3,
+          "title": "Конвейер внутри одной группы",
+          "anchor": "конвейер-внутри-одной-группы"
+        },
+        {
+          "level": 3,
+          "title": "FP8: отдельный выбор точности",
+          "anchor": "fp8-отдельный-выбор-точности"
+        },
+        {
+          "level": 2,
+          "title": "Реализация и номер версии",
+          "anchor": "реализация-и-номер-версии"
+        },
+        {
+          "level": 2,
+          "title": "Обучение, prefill и decode",
+          "anchor": "обучение-prefill-и-decode"
+        },
+        {
+          "level": 2,
+          "title": "FlashAttention не следует путать с архитектурой внимания",
+          "anchor": "flashattention-не-следует-путать-с-архитектурой-внимания"
+        },
+        {
+          "level": 2,
+          "title": "Как понять, что kernel действительно используется",
+          "anchor": "как-понять-что-kernel-действительно-используется"
+        },
+        {
+          "level": 2,
+          "title": "Практика и первоисточники",
+          "anchor": "практика-и-первоисточники"
+        }
+      ],
+      "english_sections": [
+        {
+          "level": 1,
+          "title": "FlashAttention: exact attention with less memory traffic",
+          "anchor": "flashattention-exact-attention-with-less-memory-traffic"
+        },
+        {
+          "level": 2,
+          "title": "Computational complexity does not determine execution time",
+          "anchor": "computational-complexity-does-not-determine-execution-time"
+        },
+        {
+          "level": 2,
+          "title": "A conventional implementation materializes square tensors",
+          "anchor": "a-conventional-implementation-materializes-square-tensors"
+        },
+        {
+          "level": 2,
+          "title": "A tiled pass through SRAM",
+          "anchor": "a-tiled-pass-through-sram"
+        },
+        {
+          "level": 2,
+          "title": "Computing softmax incrementally",
+          "anchor": "computing-softmax-incrementally"
+        },
+        {
+          "level": 3,
+          "title": "A larger maximum in the next block",
+          "anchor": "a-larger-maximum-in-the-next-block"
+        },
+        {
+          "level": 3,
+          "title": "Merging two blocks",
+          "anchor": "merging-two-blocks"
+        },
+        {
+          "level": 2,
+          "title": "Why memory usage becomes linear",
+          "anchor": "why-memory-usage-becomes-linear"
+        },
+        {
+          "level": 2,
+          "title": "A checkable blocked forward pass",
+          "anchor": "a-checkable-blocked-forward-pass"
+        },
+        {
+          "level": 2,
+          "title": "Recomputing the backward pass",
+          "anchor": "recomputing-the-backward-pass"
+        },
+        {
+          "level": 3,
+          "title": "Gradients for one row",
+          "anchor": "gradients-for-one-row"
+        },
+        {
+          "level": 3,
+          "title": "Recovering probability tiles",
+          "anchor": "recovering-probability-tiles"
+        },
+        {
+          "level": 3,
+          "title": "Dropout and reproducible recomputation",
+          "anchor": "dropout-and-reproducible-recomputation"
+        },
+        {
+          "level": 3,
+          "title": "Two ways to accumulate gradients",
+          "anchor": "two-ways-to-accumulate-gradients"
+        },
+        {
+          "level": 3,
+          "title": "A causal mask in an incomplete tile",
+          "anchor": "a-causal-mask-in-an-incomplete-tile"
+        },
+        {
+          "level": 2,
+          "title": "What FlashAttention-2 changed",
+          "anchor": "what-flashattention-2-changed"
+        },
+        {
+          "level": 3,
+          "title": "Fewer normalizations inside the loop",
+          "anchor": "fewer-normalizations-inside-the-loop"
+        },
+        {
+          "level": 3,
+          "title": "More independent work blocks",
+          "anchor": "more-independent-work-blocks"
+        },
+        {
+          "level": 3,
+          "title": "Less communication between warps",
+          "anchor": "less-communication-between-warps"
+        },
+        {
+          "level": 2,
+          "title": "FlashAttention-3: overlapping transfers and computation",
+          "anchor": "flashattention-3-overlapping-transfers-and-computation"
+        },
+        {
+          "level": 3,
+          "title": "Loading the next tile during computation",
+          "anchor": "loading-the-next-tile-during-computation"
+        },
+        {
+          "level": 3,
+          "title": "Softmax in one group, matrix multiplication in another",
+          "anchor": "softmax-in-one-group-matrix-multiplication-in-another"
+        },
+        {
+          "level": 3,
+          "title": "Pipelining within one group",
+          "anchor": "pipelining-within-one-group"
+        },
+        {
+          "level": 3,
+          "title": "FP8 is a separate precision choice",
+          "anchor": "fp8-is-a-separate-precision-choice"
+        },
+        {
+          "level": 2,
+          "title": "Implementations and version numbers",
+          "anchor": "implementations-and-version-numbers"
+        },
+        {
+          "level": 2,
+          "title": "Training, prefill and decode",
+          "anchor": "training-prefill-and-decode"
+        },
+        {
+          "level": 2,
+          "title": "FlashAttention is not an attention architecture",
+          "anchor": "flashattention-is-not-an-attention-architecture"
+        },
+        {
+          "level": 2,
+          "title": "Verifying that the kernel is used",
+          "anchor": "verifying-that-the-kernel-is-used"
+        },
+        {
+          "level": 2,
+          "title": "Practice and primary sources",
+          "anchor": "practice-and-primary-sources"
+        }
+      ],
+      "source_explicit_aliases": [
+        "cs336-flashattention",
+        "почему-в-алгоритме-два-tiled-прохода"
+      ],
+      "retained_aliases": [
+        "flashattention-точное-внимание-с-меньшим-обменом-данными",
+        "cs336-flashattention",
+        "вычислительная-сложность-не-объясняет-время-работы",
+        "обычная-реализация-материализует-квадратные-тензоры",
+        "блочный-проход-через-sram",
+        "как-softmax-считается-по-частям",
+        "пример-новый-блок-содержит-больший-максимум",
+        "объединение-двух-блоков",
+        "почему-память-становится-линейной",
+        "проверяемая-реализация-блочного-forward",
+        "backward-что-требуется-пересчитать",
+        "пример-градиентов-для-одной-строки",
+        "восстановление-блоков-вероятностей",
+        "dropout-и-воспроизводимость-пересчёта",
+        "два-способа-накопить-градиенты",
+        "почему-в-алгоритме-два-tiled-прохода",
+        "causal-mask-в-неполной-плитке",
+        "что-изменил-flashattention-2",
+        "меньше-нормировок-внутри-цикла",
+        "больше-независимых-блоков-работы",
+        "меньше-обмена-между-warp",
+        "flashattention-3-одновременная-передача-и-обработка-блоков",
+        "загрузка-следующего-блока-во-время-вычислений",
+        "softmax-одной-группы-и-матричное-умножение-другой",
+        "конвейер-внутри-одной-группы",
+        "fp8-отдельный-выбор-точности",
+        "реализация-и-номер-версии",
+        "обучение-prefill-и-decode",
+        "flashattention-не-следует-путать-с-архитектурой-внимания",
+        "как-понять-что-kernel-действительно-используется",
+        "практика-и-первоисточники"
+      ],
+      "figures": [
+        {
+          "path": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/flashattention-tiling.png",
+          "sha256": "5075e06a143990fab1917354a31b7dce8f7b5ca9b3ea5f6673d992d883165558"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/flashattention2-partitioning.png",
+          "sha256": "d1ac6e76e166b0fb841e8b0aeeb2876169281878020b296b65acc669f6427e4f"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/flashattention-review-2026-10/fa3-pingpong-original.png",
+          "sha256": "73c1561658aa3a2520367192045056ab72fe66082ea61ebe4f4a1202570b285c"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/flashattention-review-2026-10/fa3-gemm-softmax-original.png",
+          "sha256": "83cbc027e89dbf5d2fe8655cd8a9aae9b02bf9ebe139ef6e395f01421727ad4c"
+        }
+      ],
+      "lines": 819,
+      "source_lines": 802,
+      "substantive_parity": true,
+      "outstanding_substantive_omissions": [],
+      "prose_review": "Complete canonical and previous English bodies read; full explanations, worked examples and caveats reconciled; final prose reread against no-ai-slop with quotations and code protected.",
+      "visual_review": "Not claimed here; parent handles rebuilt desktop/mobile rendered QA."
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md",
+      "source": "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+      "before_sha256": "7addebb6d6a19f791a895e99a385b50987a2691d279654fdfa07ecf6c82aa50b",
+      "source_read_lines": [
+        1,
+        952
+      ],
+      "previous_en_read_lines": [
+        1,
+        329
+      ],
+      "mechanisms": [
+        "Symmetric/asymmetric grids, metadata, zero points and packing",
+        "PTQ calibration, clipping and scale choices",
+        "GPTQ compensation and inverse-Hessian convention",
+        "AWQ worked output-error reduction",
+        "LLM.int8 outliers and SmoothQuant GEMM-compatible scaling",
+        "QAT fake quantization and STE worked update",
+        "NF4, exact Double Quantization excerpt and paged optimizers",
+        "FP8/MXFP4/NVFP4 and byte accounting",
+        "Rotations, SpinQuant objectives, absorption and runtime compatibility"
+      ],
+      "after_sha256": "b5f15380d0673e04036b240169923ea5ca8de7eee487cb4565fd374579014774",
+      "source_sha256": "d6054dd0ad83840c6328be92241f51454cc2dc9911321140b8705be7920452bd",
+      "source_sections": [
+        {
+          "level": 1,
+          "title": "Квантизация языковых моделей",
+          "anchor": "квантизация-языковых-моделей"
+        },
+        {
+          "level": 2,
+          "title": "Действительное число заменяется кодом и масштабом",
+          "anchor": "действительное-число-заменяется-кодом-и-масштабом"
+        },
+        {
+          "level": 3,
+          "title": "Кодирование и восстановление",
+          "anchor": "кодирование-и-восстановление"
+        },
+        {
+          "level": 2,
+          "title": "Симметричная и асимметричная сетка",
+          "anchor": "симметричная-и-асимметричная-сетка"
+        },
+        {
+          "level": 3,
+          "title": "Общий масштаб для тензора, канала или группы",
+          "anchor": "общий-масштаб-для-тензора-канала-или-группы"
+        },
+        {
+          "level": 3,
+          "title": "Упаковка INT4",
+          "anchor": "упаковка-int4"
+        },
+        {
+          "level": 2,
+          "title": "Что именно квантуется",
+          "anchor": "что-именно-квантуется"
+        },
+        {
+          "level": 2,
+          "title": "PTQ: квантизация уже обученной модели",
+          "anchor": "ptq-квантизация-уже-обученной-модели"
+        },
+        {
+          "level": 3,
+          "title": "Статические и динамические масштабы",
+          "anchor": "статические-и-динамические-масштабы"
+        },
+        {
+          "level": 3,
+          "title": "GPTQ",
+          "anchor": "gptq"
+        },
+        {
+          "level": 3,
+          "title": "AWQ",
+          "anchor": "awq"
+        },
+        {
+          "level": 3,
+          "title": "Выбросы активаций и LLM.int8()",
+          "anchor": "выбросы-активаций-и-llmint8"
+        },
+        {
+          "level": 3,
+          "title": "SmoothQuant",
+          "anchor": "smoothquant"
+        },
+        {
+          "level": 2,
+          "title": "QAT: модель видит ошибку во время обучения",
+          "anchor": "qat-модель-видит-ошибку-во-время-обучения"
+        },
+        {
+          "level": 2,
+          "title": "NF4 и QLoRA решают задачу дообучения",
+          "anchor": "nf4-и-qlora-решают-задачу-дообучения"
+        },
+        {
+          "level": 3,
+          "title": "NF4: четыре бита как индекс таблицы",
+          "anchor": "nf4-четыре-бита-как-индекс-таблицы"
+        },
+        {
+          "level": 3,
+          "title": "Double Quantization: сжатие масштабов",
+          "anchor": "double-quantization-сжатие-масштабов"
+        },
+        {
+          "level": 3,
+          "title": "Paged optimizers и выпуск модели",
+          "anchor": "paged-optimizers-и-выпуск-модели"
+        },
+        {
+          "level": 2,
+          "title": "Формат файла не равен формату вычисления",
+          "anchor": "формат-файла-не-равен-формату-вычисления"
+        },
+        {
+          "level": 3,
+          "title": "FP8: восемь бит не задают один диапазон",
+          "anchor": "fp8-восемь-бит-не-задают-один-диапазон"
+        },
+        {
+          "level": 3,
+          "title": "FP4, MXFP4 и NVFP4",
+          "anchor": "fp4-mxfp4-и-nvfp4"
+        },
+        {
+          "level": 3,
+          "title": "Общая шкала связывает соседние значения",
+          "anchor": "общая-шкала-связывает-соседние-значения"
+        },
+        {
+          "level": 3,
+          "title": "Что меняется в одном линейном слое",
+          "anchor": "что-меняется-в-одном-линейном-слое"
+        },
+        {
+          "level": 3,
+          "title": "Поворот координат перед квантизацией",
+          "anchor": "поворот-координат-перед-квантизацией"
+        },
+        {
+          "level": 3,
+          "title": "Совместимость файла и вычислительного ядра",
+          "anchor": "совместимость-файла-и-вычислительного-ядра"
+        },
+        {
+          "level": 2,
+          "title": "Почему средняя perplexity недостаточна",
+          "anchor": "почему-средняя-perplexity-недостаточна"
+        },
+        {
+          "level": 2,
+          "title": "Проверка готового артефакта",
+          "anchor": "проверка-готового-артефакта"
+        },
+        {
+          "level": 2,
+          "title": "Практика и первоисточники",
+          "anchor": "практика-и-первоисточники"
+        }
+      ],
+      "english_sections": [
+        {
+          "level": 1,
+          "title": "Quantizing language models",
+          "anchor": "quantizing-language-models"
+        },
+        {
+          "level": 2,
+          "title": "Replacing a real number with a code and scale",
+          "anchor": "replacing-a-real-number-with-a-code-and-scale"
+        },
+        {
+          "level": 3,
+          "title": "Encoding and reconstruction",
+          "anchor": "encoding-and-reconstruction"
+        },
+        {
+          "level": 2,
+          "title": "Symmetric and asymmetric grids",
+          "anchor": "symmetric-and-asymmetric-grids"
+        },
+        {
+          "level": 3,
+          "title": "Sharing a scale across a tensor, channel or group",
+          "anchor": "sharing-a-scale-across-a-tensor-channel-or-group"
+        },
+        {
+          "level": 3,
+          "title": "Packing INT4",
+          "anchor": "packing-int4"
+        },
+        {
+          "level": 2,
+          "title": "What exactly is quantized?",
+          "anchor": "what-exactly-is-quantized"
+        },
+        {
+          "level": 2,
+          "title": "PTQ: quantizing an already trained model",
+          "anchor": "ptq-quantizing-an-already-trained-model"
+        },
+        {
+          "level": 3,
+          "title": "Static and dynamic scales",
+          "anchor": "static-and-dynamic-scales"
+        },
+        {
+          "level": 3,
+          "title": "GPTQ",
+          "anchor": "gptq"
+        },
+        {
+          "level": 3,
+          "title": "AWQ",
+          "anchor": "awq"
+        },
+        {
+          "level": 3,
+          "title": "Activation outliers and LLM.int8()",
+          "anchor": "activation-outliers-and-llmint8"
+        },
+        {
+          "level": 3,
+          "title": "SmoothQuant",
+          "anchor": "smoothquant"
+        },
+        {
+          "level": 2,
+          "title": "QAT: exposing the model to error during training",
+          "anchor": "qat-exposing-the-model-to-error-during-training"
+        },
+        {
+          "level": 2,
+          "title": "NF4 and QLoRA address fine-tuning",
+          "anchor": "nf4-and-qlora-address-fine-tuning"
+        },
+        {
+          "level": 3,
+          "title": "NF4: four bits index a table",
+          "anchor": "nf4-four-bits-index-a-table"
+        },
+        {
+          "level": 3,
+          "title": "Double Quantization compresses scales",
+          "anchor": "double-quantization-compresses-scales"
+        },
+        {
+          "level": 3,
+          "title": "Paged optimizers and deployment",
+          "anchor": "paged-optimizers-and-deployment"
+        },
+        {
+          "level": 2,
+          "title": "File format is not compute format",
+          "anchor": "file-format-is-not-compute-format"
+        },
+        {
+          "level": 3,
+          "title": "FP8: eight bits do not specify one range",
+          "anchor": "fp8-eight-bits-do-not-specify-one-range"
+        },
+        {
+          "level": 3,
+          "title": "FP4, MXFP4 and NVFP4",
+          "anchor": "fp4-mxfp4-and-nvfp4"
+        },
+        {
+          "level": 3,
+          "title": "A shared scale couples neighboring values",
+          "anchor": "a-shared-scale-couples-neighboring-values"
+        },
+        {
+          "level": 3,
+          "title": "What changes in one linear layer",
+          "anchor": "what-changes-in-one-linear-layer"
+        },
+        {
+          "level": 3,
+          "title": "Rotating coordinates before quantization",
+          "anchor": "rotating-coordinates-before-quantization"
+        },
+        {
+          "level": 3,
+          "title": "Compatibility between file and kernel",
+          "anchor": "compatibility-between-file-and-kernel"
+        },
+        {
+          "level": 2,
+          "title": "Why average perplexity is insufficient",
+          "anchor": "why-average-perplexity-is-insufficient"
+        },
+        {
+          "level": 2,
+          "title": "Validating a deployable artifact",
+          "anchor": "validating-a-deployable-artifact"
+        },
+        {
+          "level": 2,
+          "title": "Practice and primary sources",
+          "anchor": "practice-and-primary-sources"
+        }
+      ],
+      "source_explicit_aliases": [
+        "worked-execution-weight-only-против-wa",
+        "rotation-methods-где-возникает-и-куда-исчезает-поворот"
+      ],
+      "retained_aliases": [
+        "квантизация-языковых-моделей",
+        "действительное-число-заменяется-кодом-и-масштабом",
+        "кодирование-и-восстановление",
+        "симметричная-и-асимметричная-сетка",
+        "общий-масштаб-для-тензора-канала-или-группы",
+        "упаковка-int4",
+        "что-именно-квантуется",
+        "ptq-квантизация-уже-обученной-модели",
+        "статические-и-динамические-масштабы",
+        "выбросы-активаций-и-llmint8",
+        "qat-модель-видит-ошибку-во-время-обучения",
+        "nf4-и-qlora-решают-задачу-дообучения",
+        "nf4-четыре-бита-как-индекс-таблицы",
+        "double-quantization-сжатие-масштабов",
+        "paged-optimizers-и-выпуск-модели",
+        "формат-файла-не-равен-формату-вычисления",
+        "fp8-восемь-бит-не-задают-один-диапазон",
+        "fp4-mxfp4-и-nvfp4",
+        "общая-шкала-связывает-соседние-значения",
+        "что-меняется-в-одном-линейном-слое",
+        "worked-execution-weight-only-против-wa",
+        "поворот-координат-перед-квантизацией",
+        "rotation-methods-где-возникает-и-куда-исчезает-поворот",
+        "совместимость-файла-и-вычислительного-ядра",
+        "почему-средняя-perplexity-недостаточна",
+        "проверка-готового-артефакта",
+        "практика-и-первоисточники"
+      ],
+      "figures": [
+        {
+          "path": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/hf-quantization-rounding.png",
+          "sha256": "77f49147ee2f69632f62c744ed8b235f9efb7f25c123e7c093f9acfddd196523"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/quantization-review-2026-10/hf-weight-packing.png",
+          "sha256": "1ba2c975cb6391b42d0d460b700788753a9178c17003f895870dd931b033b0c3"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/awq-schema.png",
+          "sha256": "c5f86883ca05966fde3e45890d83e926326a045d5d24b04ecd91fe4ff8ccd2a4"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/quantization-review-2026-10/smoothquant-intuition.png",
+          "sha256": "54ff002e8de45b53fc6d5210c8f88537c4f645184c52e7a61684a33d12c99f01"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/quantization-review-2026-10/smoothquant-migrate.jpg",
+          "sha256": "561e562cd216a66bbae6ab739241d0e0c6b09d12d71bb9183b73b914e1f7e1ed"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/quantization-review-2026-10/qlora-training-original.png",
+          "sha256": "5035d5990255985976069eb59ee2833c7f99605d9a7d79b70e3e9e4b8c4df595"
+        }
+      ],
+      "lines": 949,
+      "source_lines": 952,
+      "substantive_parity": true,
+      "outstanding_substantive_omissions": [],
+      "prose_review": "Complete canonical and previous English bodies read; full explanations, worked examples and caveats reconciled; final prose reread against no-ai-slop with quotations and code protected.",
+      "visual_review": "Not claimed here; parent handles rebuilt desktop/mobile rendered QA."
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md",
+      "source": "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+      "before_sha256": "20c9816cfc52a12cade5524dfdc5aa3953b2733cc983cf808903fc08f8feb5b5",
+      "source_read_lines": [
+        1,
+        928
+      ],
+      "previous_en_read_lines": [
+        1,
+        213
+      ],
+      "mechanisms": [
+        "Greedy versus exact sampling and residual mass",
+        "Full accept/reject/bonus cycle and stopping",
+        "Target/draft KV synchronization and rollback",
+        "Total variation, expected progress and lookahead cost",
+        "Draft alternatives and tokenizer synchronization",
+        "EAGLE-1 shifted features and teacher losses",
+        "EAGLE-2 reranking, masks and residual tree verification",
+        "EAGLE-3 multilevel states and training-time masks",
+        "Experimental scope, latency/goodput and measurement boundaries"
+      ],
+      "after_sha256": "e1e621c0b87a693931e6796f7eb10b5e9617c620946381249bd985031e0e47bd",
+      "source_sha256": "4f60e570288e3dd4ec403f160a396f683f7a69e5db95433a73e0a1b4b8c73097",
+      "source_sections": [
+        {
+          "level": 1,
+          "title": "Спекулятивное декодирование",
+          "anchor": "спекулятивное-декодирование"
+        },
+        {
+          "level": 2,
+          "title": "Откуда берётся возможность ускорения",
+          "anchor": "откуда-берётся-возможность-ускорения"
+        },
+        {
+          "level": 2,
+          "title": "Почему нельзя просто принять совпавший argmax",
+          "anchor": "почему-нельзя-просто-принять-совпавший-argmax"
+        },
+        {
+          "level": 3,
+          "title": "Жадное декодирование",
+          "anchor": "жадное-декодирование"
+        },
+        {
+          "level": 3,
+          "title": "Случайная выборка",
+          "anchor": "случайная-выборка"
+        },
+        {
+          "level": 3,
+          "title": "Какие вероятности подставлять",
+          "anchor": "какие-вероятности-подставлять"
+        },
+        {
+          "level": 2,
+          "title": "Один цикл: принять B, отклонить A, выдать замену",
+          "anchor": "один-цикл-принять-b-отклонить-a-выдать-замену"
+        },
+        {
+          "level": 2,
+          "title": "Полный алгоритм на исходном слайде",
+          "anchor": "полный-алгоритм-на-исходном-слайде"
+        },
+        {
+          "level": 2,
+          "title": "KV-cache двух моделей",
+          "anchor": "kv-cache-двух-моделей"
+        },
+        {
+          "level": 2,
+          "title": "Вероятность принятия и число токенов за цикл",
+          "anchor": "вероятность-принятия-и-число-токенов-за-цикл"
+        },
+        {
+          "level": 2,
+          "title": "Почему больше draft-токенов не всегда лучше",
+          "anchor": "почему-больше-draft-токенов-не-всегда-лучше"
+        },
+        {
+          "level": 2,
+          "title": "Чем может быть draft",
+          "anchor": "чем-может-быть-draft"
+        },
+        {
+          "level": 2,
+          "title": "EAGLE: draft на уровне признаков",
+          "anchor": "eagle-draft-на-уровне-признаков"
+        },
+        {
+          "level": 3,
+          "title": "EAGLE-1: почему нужен уже выбранный следующий токен",
+          "anchor": "eagle-1-почему-нужен-уже-выбранный-следующий-токен"
+        },
+        {
+          "level": 3,
+          "title": "EAGLE-2: расширение и повторный отбор дерева",
+          "anchor": "eagle-2-расширение-и-повторный-отбор-дерева"
+        },
+        {
+          "level": 3,
+          "title": "Proposal, verification и rollback дерева",
+          "anchor": "proposal-verification-и-rollback-дерева"
+        },
+        {
+          "level": 3,
+          "title": "EAGLE-3: объединение слоёв и обучение на собственных состояниях",
+          "anchor": "eagle-3-объединение-слоёв-и-обучение-на-собственных-состояниях"
+        },
+        {
+          "level": 3,
+          "title": "Пример расчёта выигрыша дерева",
+          "anchor": "пример-расчёта-выигрыша-дерева"
+        },
+        {
+          "level": 2,
+          "title": "Когда ускорения не будет",
+          "anchor": "когда-ускорения-не-будет"
+        },
+        {
+          "level": 2,
+          "title": "Как измерять",
+          "anchor": "как-измерять"
+        },
+        {
+          "level": 2,
+          "title": "Практика и первоисточники",
+          "anchor": "практика-и-первоисточники"
+        }
+      ],
+      "english_sections": [
+        {
+          "level": 1,
+          "title": "Speculative decoding",
+          "anchor": "speculative-decoding"
+        },
+        {
+          "level": 2,
+          "title": "Where the speedup comes from",
+          "anchor": "where-the-speedup-comes-from"
+        },
+        {
+          "level": 2,
+          "title": "Why matching argmax is not enough",
+          "anchor": "why-matching-argmax-is-not-enough"
+        },
+        {
+          "level": 3,
+          "title": "Greedy decoding",
+          "anchor": "greedy-decoding"
+        },
+        {
+          "level": 3,
+          "title": "Sampling",
+          "anchor": "sampling"
+        },
+        {
+          "level": 3,
+          "title": "Which probabilities belong in the test",
+          "anchor": "which-probabilities-belong-in-the-test"
+        },
+        {
+          "level": 2,
+          "title": "One cycle: accept B, reject A, emit a correction",
+          "anchor": "one-cycle-accept-b-reject-a-emit-a-correction"
+        },
+        {
+          "level": 2,
+          "title": "The full algorithm in the original slide",
+          "anchor": "the-full-algorithm-in-the-original-slide"
+        },
+        {
+          "level": 2,
+          "title": "The two models' KV caches",
+          "anchor": "the-two-models-kv-caches"
+        },
+        {
+          "level": 2,
+          "title": "Acceptance probability and progress per cycle",
+          "anchor": "acceptance-probability-and-progress-per-cycle"
+        },
+        {
+          "level": 2,
+          "title": "Why more draft tokens are not always better",
+          "anchor": "why-more-draft-tokens-are-not-always-better"
+        },
+        {
+          "level": 2,
+          "title": "What can serve as a draft",
+          "anchor": "what-can-serve-as-a-draft"
+        },
+        {
+          "level": 2,
+          "title": "EAGLE: drafting in feature space",
+          "anchor": "eagle-drafting-in-feature-space"
+        },
+        {
+          "level": 3,
+          "title": "EAGLE-1: why the selected next token is an input",
+          "anchor": "eagle-1-why-the-selected-next-token-is-an-input"
+        },
+        {
+          "level": 3,
+          "title": "EAGLE-2: tree expansion and reranking",
+          "anchor": "eagle-2-tree-expansion-and-reranking"
+        },
+        {
+          "level": 3,
+          "title": "Tree proposal, verification and rollback",
+          "anchor": "tree-proposal-verification-and-rollback"
+        },
+        {
+          "level": 3,
+          "title": "EAGLE-3: combining layers and training on self-generated states",
+          "anchor": "eagle-3-combining-layers-and-training-on-self-generated-states"
+        },
+        {
+          "level": 3,
+          "title": "Calculating a tree's latency trade-off",
+          "anchor": "calculating-a-trees-latency-trade-off"
+        },
+        {
+          "level": 2,
+          "title": "When speculation does not help",
+          "anchor": "when-speculation-does-not-help"
+        },
+        {
+          "level": 2,
+          "title": "Measuring speculative decoding",
+          "anchor": "measuring-speculative-decoding"
+        },
+        {
+          "level": 2,
+          "title": "Practice and primary sources",
+          "anchor": "practice-and-primary-sources"
+        }
+      ],
+      "source_explicit_aliases": [
+        "процент-принятия-связывает-качество-и-скорость",
+        "worked-trade-off"
+      ],
+      "retained_aliases": [
+        "спекулятивное-декодирование",
+        "откуда-берётся-возможность-ускорения",
+        "почему-нельзя-просто-принять-совпавший-argmax",
+        "жадное-декодирование",
+        "случайная-выборка",
+        "какие-вероятности-подставлять",
+        "один-цикл-принять-b-отклонить-a-выдать-замену",
+        "полный-алгоритм-на-исходном-слайде",
+        "kv-cache-двух-моделей",
+        "вероятность-принятия-и-число-токенов-за-цикл",
+        "процент-принятия-связывает-качество-и-скорость",
+        "почему-больше-draft-токенов-не-всегда-лучше",
+        "чем-может-быть-draft",
+        "eagle-draft-на-уровне-признаков",
+        "eagle-1-почему-нужен-уже-выбранный-следующий-токен",
+        "eagle-2-расширение-и-повторный-отбор-дерева",
+        "proposal-verification-и-rollback-дерева",
+        "eagle-3-объединение-слоёв-и-обучение-на-собственных-состояниях",
+        "пример-расчёта-выигрыша-дерева",
+        "worked-trade-off",
+        "когда-ускорения-не-будет",
+        "как-измерять",
+        "практика-и-первоисточники"
+      ],
+      "figures": [
+        {
+          "path": "00 Учебник/Assets/Figures/curated/speculative-review-2026-10/leviathan-generation.png",
+          "sha256": "0014d0d865498feb7553c4e478a0355b24db0b1b20c353223f8df0bec044fc4e"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/speculative-review-2026-10/leviathan-timeline.png",
+          "sha256": "cf52d86993010de8bded6f85dc2c7efee41b9bca17bb35f5f6d5a36576c97ce3"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-algorithm.png",
+          "sha256": "c9f40f7455a5c576b4d632437a50b0d99502e1409014d40fb8ac8a4bdf634061"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/speculative-review-2026-10/chen-lookahead.png",
+          "sha256": "01fecc8b77ad17cf579ec574260f40eeadeaf7e4e1127668f05ca8c35f197a79"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-results.png",
+          "sha256": "09e9fb30e66bf5bc0355a3ab193c89ff38037b50746054d5d0814beec409d03a"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/speculative-review-2026-10/eagle-shifted-input.png",
+          "sha256": "7ebaaa392d1b3dac4653fcfe6249626c628ac310e72987b97e943430bf03545f"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/speculative-review-2026-10/eagle-feature-tree.png",
+          "sha256": "7536383a14b792b4131e1a918fc25c5357e5c186511702dc9ea9a76927db35f0"
+        },
+        {
+          "path": "00 Учебник/Assets/Figures/curated/speculative-review-2026-10/eagle2-tree-mask.png",
+          "sha256": "7d83e9589f0a45d6facf97837c75134dd8a03e59fb7d59e6ff0f6f45d4d14365"
+        }
+      ],
+      "lines": 887,
+      "source_lines": 928,
+      "substantive_parity": true,
+      "outstanding_substantive_omissions": [],
+      "prose_review": "Complete canonical and previous English bodies read; full explanations, worked examples and caveats reconciled; final prose reread against no-ai-slop with quotations and code protected.",
+      "visual_review": "Not claimed here; parent handles rebuilt desktop/mobile rendered QA."
+    }
+  ],
+  "verification": {
+    "cpu_command": "LC_ALL=C LANG=C HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 uv run --offline --with torch==2.14.1 --with transformers==4.57.1 --with numpy==2.3.5 python publishing/tools/check_en_inference_examples.py",
+    "cpu_status": "pass",
+    "executed_python_blocks": 33,
+    "independent_checks": {
+      "attention_output_lse_gradient_cases": 36,
+      "int4_pairs": 256,
+      "residual_distributions": 102,
+      "qat_ste_update": true
+    },
+    "not_executed": [
+      "Serving original runtime/layout snippets 1–5",
+      "FlashAttention CUDA diagnostic block 2"
+    ],
+    "build_visual": "Not claimed here; parent handles aggregate build and browser QA.",
+    "source_preservation": "All canonical figures, source URLs, mathematics and code mechanisms retained. Existing Serving packed-attention comment and diagnostic print remain English; computation is unchanged.",
+    "math_reflow": "Expanded canonical FlashAttention derivations supersede four shorter historic EN displays, retaining line-broken layouts and adding missing steps. No mathematical values changed."
+  }
+}

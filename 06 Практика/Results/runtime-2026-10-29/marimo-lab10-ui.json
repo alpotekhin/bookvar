@@ -1,0 +1,144 @@
+{
+  "big_takeaways": [
+    "Prefill/input and decode/output are different amount systems.",
+    "Recurring serving cost compounds.",
+    "State/KV memory caps concurrency.",
+    "Batching policy is workload- and SLO-dependent.",
+    "A serving policy ships only if all guardrails pass."
+  ],
+  "binding_constraints": {},
+  "decisions": {},
+  "evidence_summary": {
+    "actual_crossover_days": 12.86,
+    "annual_savings": "$6,307,200",
+    "binding_constraint": "none - all guardrails pass",
+    "binding_phase": "Decode / output-loop amount",
+    "continuous_speedup": 27.2,
+    "daily_cost": "$13,248",
+    "decode_ms": 21397.015,
+    "max_concurrent": 1,
+    "padding_waste_pct": 96.875,
+    "prefill_ms": 29.6,
+    "rejected_alternative": "Rejected single-unit FP16 static policy: KV/cache headroom is fragile and p99 risk is high.",
+    "replicas_needed": 23,
+    "slo_margin_ms": 53.691,
+    "state_per_request_gb": 343.597384
+  },
+  "final_decision": {
+    "binding_constraint": "none - all guardrails pass",
+    "cost_per_day": 13248.0,
+    "rejected_alternative": "Rejected single-unit FP16 static policy: KV/cache headroom is fragile and p99 risk is high.",
+    "replicas_needed": 23,
+    "selected_policy": "continuous",
+    "selected_precision": "INT4",
+    "selected_routing": "priority_routing",
+    "v2_11_edge_implication": "V2-11 asks which parts of this policy can move toward edge devices when HBM, NVLink, and always-on connectivity disappear."
+  },
+  "incomplete_fields": [],
+  "knob_settings": {
+    "avg_len": 4096,
+    "batch_size": 8,
+    "context_tokens": 131072,
+    "cost_per_event": 0.01,
+    "decode_tokens": 512,
+    "demand_qps": 200,
+    "fill_factor": 0.85,
+    "max_len": 131072,
+    "optimization_pct": 10,
+    "precision_bytes_partB": 2.0,
+    "prefill_tokens": 8192,
+    "release_devices": 8,
+    "release_policy": "Continuous batching",
+    "release_precision": "INT4",
+    "release_routing": "priority_routing"
+  },
+  "learning_objectives": [
+    "Separate prefill/input work from decode/output work before sizing the service.",
+    "Quantify when recurring serving cost exceeds setup or training cost.",
+    "Compute the selected track's state/KV or runtime-state memory wall.",
+    "Compare scheduling policies under request variance and SLO pressure.",
+    "Choose a release policy under memory, latency, quality, and cost guardrails."
+  ],
+  "metadata": {
+    "book_anchor": "Volume II, Chapter 10: Inference at Scale",
+    "chapter": "Chapter 10",
+    "lab_id": "v2_10_inference_economy",
+    "lab_version": "1.0.0",
+    "ledger_schema_version": "1.0",
+    "mlsysbook_labs_version": "0.1.0",
+    "mlsysim_version": "0.1.2",
+    "release_channel": "dev",
+    "report_schema_version": "1.0",
+    "title": "The Inference Economy",
+    "updated_at": "2026-06-02",
+    "volume": "Volume II"
+  },
+  "predictions": {
+    "partA_predicted_crossover": "weeks",
+    "partA_predicted_phase": "decode",
+    "partB_predicted_capacity": "one",
+    "partC_predicted_policy": "continuous",
+    "partD_predicted_release_policy": "best_feasible"
+  },
+  "reflections": {
+    "batching_checkpoint": "conditional",
+    "cost_inversion_checkpoint": "optimize",
+    "phase_amount_prediction": "decode",
+    "release_checkpoint": "guardrails",
+    "state_wall_checkpoint": "precision",
+    "student_justification": ""
+  },
+  "residual_risk": "Validate teaching estimates with production traces: real token distributions, thermal/power replay, p99 load tests, quality canaries, routing behavior, and current pricing.",
+  "result_snapshot": {
+    "batching": {
+      "continuous_throughput": 217.6,
+      "padding_waste_pct": 96.875,
+      "speedup": 27.2,
+      "static_throughput": 8.0
+    },
+    "cost_crossover": {
+      "annual_savings": 6307200.0,
+      "crossover_days": 12.860082304526745,
+      "crossover_weeks": 1.8371546149323923,
+      "daily_cost": 155520.00000000003,
+      "weekly_cost": 1088640.0000000002
+    },
+    "serving_plan": {
+      "baseline_daily_cost": 38592.0,
+      "daily_cost": 13248.0,
+      "max_batch": 1,
+      "oom": false,
+      "per_replica_qps": 4.5,
+      "replicas_needed": 23,
+      "savings_pct": 65.67164179104478,
+      "target_qps": 100.0,
+      "total_devices": 184
+    },
+    "state_capacity": {
+      "available_gb": 547.19476736,
+      "max_concurrent": 1,
+      "oom": false,
+      "state_kind": "KV cache",
+      "state_per_request_gb": 343.59738368,
+      "total_memory_gb": 687.19476736,
+      "weight_gb": 140.0
+    }
+  },
+  "scenario": "Production LLM service where GPU-hours, KV cache memory, continuous batching, and replicas determine cost/request.",
+  "source_trace": {
+    "hardware_ref": "Hardware.Cloud.H100",
+    "helper_apis": [
+      "cost_crossover",
+      "state_capacity",
+      "batching_result",
+      "serving_plan"
+    ],
+    "model_ref": "Models.Language.Llama2_70B",
+    "scenario_id": "v2_10_cloud_kv_fleet",
+    "shared_helper": "mlsysbook_labs.inference",
+    "source_policy": "Hardware facts come from Hardware.Cloud.H100; fleet topology comes from Systems.Clusters.Lab_64_H100.",
+    "track_id": "cloud_fleet"
+  },
+  "student_id": "",
+  "track": "Cloud Fleet"
+}

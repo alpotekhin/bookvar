@@ -1,0 +1,27 @@
+[
+  {
+    "id": "curated-dropout-training-e83c953fe971",
+    "asset": "00 Учебник/Assets/Figures/curated/dropout-2026-10-26/d2l-training.svg",
+    "author": "Aston Zhang and Dive into Deep Learning contributors",
+    "source_url": "https://d2l.ai/chapter_multilayer-perceptrons/dropout.html#training",
+    "source_image_url": "https://d2l.ai/_images/output_dropout_1110bf_63_0.svg",
+    "source_asset": "00 Учебник/Assets/Figures/curated/dropout-2026-10-26/d2l-training.svg",
+    "source_asset_sha256": "e83c953fe97128563bec6271a4f19f71405ad6337af07736aaee6d0055d971f2",
+    "sha256": "e83c953fe97128563bec6271a4f19f71405ad6337af07736aaee6d0055d971f2",
+    "source_page_snapshot": "05 Источники/Originals/dropout-2026-10-26/d2l-dropout.html",
+    "source_page_sha256": "659ae0e0d0628b298fccbc594b2ca924a8fe1a24378869d23b16ec5a0fbbadc6",
+    "source_code": "05 Источники/Originals/dropout-2026-10-26/d2l-dropout.md",
+    "source_code_url": "https://github.com/d2l-ai/d2l-en/blob/23d7a5aecceee57d1292c56e90cce307f183bb0a/chapter_multilayer-perceptrons/dropout.md",
+    "source_code_sha256": "e5fd93ac9cca9ad6a563f216df28af485ea885b07a4f8e0ce874c5045a619cd3",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/initialization-normalization-2026-10-21/d2l-LICENSE.txt",
+    "license_evidence_sha256": "a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c",
+    "derivation": "source-svg-copy",
+    "modifications": "Complete rendered D2L 1.0.3 PyTorch training SVG downloaded without changes. Rendered output is pinned by bytes and HTML snapshot independently of the source-code commit. No crop, translation, redraw or local training rerun.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-26",
+    "used_in": ["00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация.md"]
+  }
+]

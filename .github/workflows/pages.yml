@@ -17,8 +17,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      PUBLICATION_BASE_PATH: /bookvar
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
@@ -32,10 +30,24 @@ jobs:
           cache: pnpm
       - uses: actions/configure-pages@v5
       - run: pnpm install --frozen-lockfile
-      - run: pnpm --dir publishing test:unit
+      - run: pnpm --dir publishing check:topics
+      - run: pnpm --dir publishing test:publication
       - run: pnpm --dir site check
-      - run: pnpm --dir site build
+      - name: Build root artifact for semantic output tests
+        run: pnpm --dir site build
       - run: pnpm --dir publishing test:output
+      - run: pnpm --dir site test
+      - run: pnpm --dir publishing check:links
+      - name: Build GitHub Pages artifact
+        run: pnpm --dir site build
+        env:
+          PUBLICATION_BASE_PATH: /bookvar
+      - name: Check routes, fragments and files below the Pages prefix
+        run: pnpm --dir publishing check:links
+        env:
+          PUBLICATION_BASE_PATH: /bookvar
+      - name: Check uncompressed Pages artifact size
+        run: pnpm --dir publishing check:size
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site/dist

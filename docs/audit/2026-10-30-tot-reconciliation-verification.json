@@ -1,0 +1,343 @@
+{
+  "date": "2026-10-30",
+  "status": "comparison-verified-locally-not-published",
+  "scope": "Tree of Thoughts archive reconciliation within the existing TTC chapter, with an agent-planning crosslink and subject-index entries. The overall goal remains active.",
+  "goalTurnClassification": "progress: 29 to 30 reconciled archive notes; BLEU, general reading-route review and release remain.",
+  "chapters": [
+    {
+      "path": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
+      "sha256": "0828f31f6c72d7d7f37692d171e1a9214f72865e9d0e8bb02420cf399687af03",
+      "lines": 1850,
+      "reading": "Complete preceding 1640-line chapter at c25a11e9 read before editing. All added sections and integration paragraphs reread at the final revision, including the child-cap caveat. Exact journal reversal preserves the full preceding text. This does not claim a second new whole-document reading of all unchanged paragraphs."
+    },
+    {
+      "path": "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
+      "sha256": "718e68fb6cf58e941e10d76e02acc0761e06a19d8c4bb8496ac6dd3353bcd628",
+      "lines": 1398,
+      "reading": "Complete preceding 1396-line chapter at a56e872d read before editing. Only metadata and one crosslink paragraph changed. The ToT recap and adjacent planning/LATS bridges reread; no old example or figure removed."
+    }
+  ],
+  "explanationReview": {
+    "sourcePacket": "05 Источники/Originals/tot-reconciliation-2026-10-30",
+    "sourceSections": "Exact paper/code scopes recorded in manifest.json; §§3,4.1–4.3,6 limitations and Appendix A/B read. Complete pinned TextTask, crossword environment/task/prompts and all DFS notebook code cells read. Dataset/trajectory completeness not claimed.",
+    "mechanisms": "Two-stage plan/passage sampling and votes; scalar final coherency judgments; majority versus plurality and parser rules; crossings and state constraints; confidence aggregation; native overwrite/status detection; DFS pruning and backtracking; paper/code budget differences; child-cap reset gap; oracle versus usable output selection.",
+    "workedExamples": "Original Figure 4 plan contrast; 1.3 versus 1.0 proposal priority; TM___ to TM_S_; pruned SALON and alternative GRAND; real native snapshot restoration and reproduced cap-exit gap using explicit responses.",
+    "sourceLimitations": "Human judgments are by a subset of the authors; 20 crossword tasks and task-specific May 2023 GPT-4 results are not a general benchmark claim. 45% is not greater than 49%. No universal API-call budget inferred.",
+    "style": "no-ai-slop and eval.md applied with local academic qualifications; original English captions and existing RU exposition retained. No new translation or generated infographic."
+  },
+  "checks": {
+    "nativeCPU": {
+      "status": "passed",
+      "log": "/var/tmp/bookvar-tot-native-cpu-20261030.log",
+      "voteCases": 3,
+      "loggedChildren": 2,
+      "expandedStates": 2,
+      "exactCrops": 3,
+      "childCapExitGapReproduced": true,
+      "llmRun": false
+    },
+    "ttcCPU": {
+      "status": "passed",
+      "log": "/var/tmp/bookvar-tot-all-ttc-cpu-20261030.log",
+      "pythonFences": 7,
+      "finiteSubsetCases": 440,
+      "unbiasedCases": 275,
+      "voteCases": 3280,
+      "coconutGradientCases": 41,
+      "coconutCurriculumCases": 16,
+      "nativeBFSReplay": "3 proposals, 6 evaluation calls, 18 explicit outputs"
+    },
+    "agentMemoryCPU": {
+      "status": "passed",
+      "log": "/var/tmp/bookvar-tot-memory-cpu-20261030.log",
+      "pythonFences": 4,
+      "standaloneAndSharedRuns": 8,
+      "exactEarlierCrops": 2,
+      "originalPSLSections": "17 paragraphs from 6 complete sections and 3 original figures retained"
+    },
+    "finalTargeted": {
+      "status": "passed",
+      "tests": 10,
+      "files": 3,
+      "log": "/var/tmp/bookvar-tot-targeted-accepted-20261030.log"
+    },
+    "assetAndEarlierTargeted": {
+      "status": "passed",
+      "tests": 168,
+      "files": 4,
+      "log": "/var/tmp/bookvar-tot-targeted-20261030.log",
+      "scopeLimit": "Asset checks after all three figures and registry entries were frozen, before index-journal expansion and the cap-exit prose/control. Final changed native/chapter/preservation tests rerun separately."
+    },
+    "rootBuild": {
+      "status": "passed",
+      "pages": 2006,
+      "log": "/var/tmp/bookvar-tot-root-final-20261030.log"
+    },
+    "output": {
+      "status": "passed",
+      "tests": 175,
+      "log": "/var/tmp/bookvar-tot-output-final-20261030.log"
+    },
+    "links": {
+      "status": "passed",
+      "broken": 0,
+      "log": "/var/tmp/bookvar-tot-links-final-20261030.log"
+    },
+    "diffCheck": {
+      "status": "passed",
+      "scope": "Affected tracked chapters, indices, tests and helper files; not a claim that all inherited worktree changes are clean."
+    },
+    "topics": {
+      "status": "failed-existing-synchronization-gap",
+      "log": "/var/tmp/bookvar-tot-topics-diff-20261030.log",
+      "finding": "First difference at RU index line 56 precedes the new ToT entry: retained DropConnect/stochastic-depth links have no corresponding generator metadata. Useful entries preserved. Fix remains in the general structural pass."
+    },
+    "pagesBase": {
+      "status": "deferred-to-final-release"
+    },
+    "fullUnit": {
+      "status": "not-rerun-on-final-ToT-revision"
+    },
+    "earlyOutputAttempt": {
+      "status": "not-valid-acceptance",
+      "log": "/var/tmp/bookvar-tot-output-20261030.log",
+      "reason": "Started before the root build finished; Pagefind setup missing, 175 tests skipped. After the build completed, all 175 passed in the separate final log."
+    }
+  },
+  "visual": {
+    "desktop": {
+      "viewport": [
+        1280,
+        900
+      ],
+      "documentClientAndScroll": [
+        1265,
+        1265
+      ],
+      "sourceFigures": "All 3 new originals loaded, shown in context and opened in the full-figure viewer; all panels, labels and English captions inspected."
+    },
+    "mobile": {
+      "viewport": [
+        360,
+        800
+      ],
+      "documentClientAndScroll": [
+        345,
+        345
+      ],
+      "viewer": "2× enlargement and horizontal panning inspected on both sides of the original crossword figure."
+    },
+    "english": "Same new English sections/figures rendered in /en, with explicit fallback notice for the existing untranslated body. Not counted as a newly translated chapter.",
+    "mathErrors": 0,
+    "navigation": "Both ToT-to-LATS and agent-context-to-ToT links reached the expected route/anchor via keyboard Enter. An automated mouse click did not navigate; its cause was not established. Do not report mouse navigation as passed or infer a site bug without further diagnosis.",
+    "screenshots": [
+      "docs/audit/evidence/2026-10-30-tot-reconciliation/desktop-creative-context.png",
+      "docs/audit/evidence/2026-10-30-tot-reconciliation/desktop-creative-original.png",
+      "docs/audit/evidence/2026-10-30-tot-reconciliation/desktop-crossword-context.png",
+      "docs/audit/evidence/2026-10-30-tot-reconciliation/desktop-crossword-original.png",
+      "docs/audit/evidence/2026-10-30-tot-reconciliation/desktop-results-original.png",
+      "docs/audit/evidence/2026-10-30-tot-reconciliation/mobile-en-crossword-context.png",
+      "docs/audit/evidence/2026-10-30-tot-reconciliation/mobile-en-crossword-zoom-left.png",
+      "docs/audit/evidence/2026-10-30-tot-reconciliation/mobile-en-crossword-zoom-right.png",
+      "docs/audit/evidence/2026-10-30-tot-reconciliation/mobile-en-crossword-zoom-start.png"
+    ]
+  },
+  "preservation": "Five-file exact reverse journal, unknown-edit negative controls and current immutable archive hashes checked. Original source files, old explanatory code and receipts are not rebaselined.",
+  "remaining": [
+    "BLEU archive comparison and full owner explanation",
+    "Conceptual reading-route review, source-course integration and retained index metadata synchronization",
+    "Duplicate fallback notices, locale-link behavior and unexplained automated mouse-link behavior",
+    "Source-specific outstanding permissions from previous receipts",
+    "Frozen final checks, current origin/dev, scoped commit, push to dev and actual Pages deploy verification"
+  ],
+  "publication": {
+    "head": "75e1870",
+    "author": "Alexander Potekhin <al_potechin@mail.ru>",
+    "commitCreated": false,
+    "pushed": false,
+    "deployed": false,
+    "mainChanged": false
+  },
+  "artifactPins": [
+    {
+      "path": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
+      "bytes": 139843,
+      "sha256": "0828f31f6c72d7d7f37692d171e1a9214f72865e9d0e8bb02420cf399687af03"
+    },
+    {
+      "path": "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
+      "bytes": 131383,
+      "sha256": "718e68fb6cf58e941e10d76e02acc0761e06a19d8c4bb8496ac6dd3353bcd628"
+    },
+    {
+      "path": "01 Справочник/_index.md",
+      "bytes": 35199,
+      "sha256": "ce9177e70d8ccf66d88ff6a721f45d54d86f2930a30ec1b8d79a8d719cb974fd"
+    },
+    {
+      "path": "en/01 Reference/_index.md",
+      "bytes": 30335,
+      "sha256": "ee1e76d8d9db4fe11b52eb1d5deb2a74638eba6c644c4dde4c79d6fc8d72fb51"
+    },
+    {
+      "path": "05 Источники/asset-registry.yml",
+      "bytes": 1879952,
+      "sha256": "8abf172e6b73e67aebe3aed84c59bf155689ae12173855e1fd075404ef246759"
+    },
+    {
+      "path": "docs/audit/2026-10-30-tot-reconciliation-additions.json",
+      "bytes": 21361,
+      "sha256": "e8d623ef234b1f9719c39052f7e59e141d12a1f74ff9f278d48b00ee18265f2f"
+    },
+    {
+      "path": "docs/audit/2026-10-29-legacy-notes-review.json",
+      "bytes": 135891,
+      "sha256": "3ad695a56aa3b3c18ed171a135ef41b2497290f29971f7768c12c69f79babdb3"
+    },
+    {
+      "path": "docs/audit/2026-10-29-release-completion-plan.md",
+      "bytes": 31476,
+      "sha256": "8f14a15525d21eb3049e49f42b2f8ab6c7032704700ee967213ba379f1126a7e"
+    },
+    {
+      "path": "publishing/tools/check_tot_reconciliation_examples.py",
+      "bytes": 6350,
+      "sha256": "a154aab091dc0e55f7bbd5475ecee84170b97225f05c3a3d9e45a580242da271"
+    },
+    {
+      "path": "publishing/tools/check_test_time_compute_examples.py",
+      "bytes": 11719,
+      "sha256": "98ebd60447b0673628c040538b77d60d932a998bb72d03db18642e04cfee6024"
+    },
+    {
+      "path": "publishing/tools/check_agent_memory_planning_examples.py",
+      "bytes": 6202,
+      "sha256": "11862150f527d08700da36ee1df63cb6dc5ba601200087b96ba2345e4f5b79ca"
+    },
+    {
+      "path": "publishing/tools/import_planseqlearn_excerpt.py",
+      "bytes": 16358,
+      "sha256": "eabf116c823b2f6436514bf19ef99c70b46f539aaf051433866ee7d6530e5206"
+    },
+    {
+      "path": "publishing/tools/topic-consolidation-baseline.mjs",
+      "bytes": 2940,
+      "sha256": "fd86b6bc59afcfac563966a017289b3d894bc54ca18bce31a2ce8947f7059fef"
+    },
+    {
+      "path": "publishing/tools/topic_consolidation_baseline.py",
+      "bytes": 3059,
+      "sha256": "ba8c72795cbce0b6cc1ee722ebb8b323207c50508852eb65eb1ae0e6684012a2"
+    },
+    {
+      "path": "publishing/tools/sync-topic-index.ts",
+      "bytes": 10152,
+      "sha256": "1701775b162535aaadeb9dc28ef59283bab5d710d74efebbe6839964338dc7a8"
+    },
+    {
+      "path": "publishing/tests/tot-reconciliation.test.ts",
+      "bytes": 3444,
+      "sha256": "6581291d38fb0d8ff349b7f3938cdad35a729769e424bc2903856efe0c6e7ac4"
+    },
+    {
+      "path": "publishing/tests/coconut-integration.test.ts",
+      "bytes": 3034,
+      "sha256": "f279b44030318bf3172b9f7c629ca79abd95ae8d68ebcb83bb4eeb2588a5aa5f"
+    },
+    {
+      "path": "publishing/tests/agent-reconciliation.test.ts",
+      "bytes": 4038,
+      "sha256": "8d43377f57fb227181cd970c87e4aefcab74b5e4a800abf3920fb740e7777f99"
+    },
+    {
+      "path": "publishing/tests/site-output.test.ts",
+      "bytes": 225341,
+      "sha256": "2943c06703b8f8fa747b4f6b37794851f747c4f419cc1b47ed883475c1b85c1e"
+    },
+    {
+      "path": "publishing/tests/asset-registry.test.ts",
+      "bytes": 578358,
+      "sha256": "a67141e99a2b917af0b8cec9691ef0789a2c2298c873dac9e9897f05b5859d11"
+    },
+    {
+      "path": "05 Источники/Originals/tot-reconciliation-2026-10-30/README.md",
+      "bytes": 997,
+      "sha256": "c5000847be1cbfdb3aea657196df149273a1bb2438a5275ce37c803b198a00cc"
+    },
+    {
+      "path": "05 Источники/Originals/tot-reconciliation-2026-10-30/extract_figures.py",
+      "bytes": 823,
+      "sha256": "fe363eaa9d574c1efa6532ab58506eee64a6841d30f0e0e76f4660780a0692fe"
+    },
+    {
+      "path": "05 Источники/Originals/tot-reconciliation-2026-10-30/manifest.json",
+      "bytes": 10029,
+      "sha256": "f1d9a7ccb41cbd0f30a33d4122c329a55e38b8e4887671cbe8fa5550e559a455"
+    },
+    {
+      "path": "05 Источники/Originals/tot-reconciliation-2026-10-30/tot-07.png",
+      "bytes": 733320,
+      "sha256": "c81d3939dd4794c3031e62faef01b7157825864f3305e865229fb5df51abda88"
+    },
+    {
+      "path": "05 Источники/Originals/tot-reconciliation-2026-10-30/tot-08.png",
+      "bytes": 712625,
+      "sha256": "e7c6dd5b1f93400582c79bccf150ea607ae0eb81345acc5c11f29347830e0554"
+    },
+    {
+      "path": "05 Источники/Originals/tot-reconciliation-2026-10-30/tot-crosswords-data.json",
+      "bytes": 134771,
+      "sha256": "50590d5886fac5e0971f483df93668a8f3c638d8312a490655b869a93d569154"
+    },
+    {
+      "path": "05 Источники/Originals/tot-reconciliation-2026-10-30/tot-crosswords-dfs.ipynb",
+      "bytes": 8518,
+      "sha256": "0cc5f528c840f42488d68829e6467a977fce68c34ecac0a7f26de0ab749cba20"
+    },
+    {
+      "path": "05 Источники/Originals/tot-reconciliation-2026-10-30/tot-crosswords-prompts.py",
+      "bytes": 8348,
+      "sha256": "899e26ea42dff19a3037c963611b6e8be16cfb449a6e975a2876a9dad2d776ba"
+    },
+    {
+      "path": "05 Источники/Originals/tot-reconciliation-2026-10-30/tot-crosswords.py",
+      "bytes": 9894,
+      "sha256": "7b70cdb908eac4a3489517d3ae2a29d1ee7b4b081108dd6d43926fb026f00b55"
+    },
+    {
+      "path": "05 Источники/Originals/tot-reconciliation-2026-10-30/tot-text-prompts.py",
+      "bytes": 983,
+      "sha256": "a88bc18eb0cf0f68c610ac7c5681607763fc33a306263537f2578033e7080bac"
+    },
+    {
+      "path": "05 Источники/Originals/tot-reconciliation-2026-10-30/tot-text.py",
+      "bytes": 3371,
+      "sha256": "2c94d1cd19053572c617e94b4394c3585272b843094e0e6f32960067bff13c6a"
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/tot-reconciliation-2026-10-30/NOTICE.md",
+      "bytes": 705,
+      "sha256": "1a580b104571cc15e0214be8469b57300c195cc02c99f8bb629b12d647635d78"
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/tot-reconciliation-2026-10-30/assets.json",
+      "bytes": 5824,
+      "sha256": "9c4830af2b4c84e3244abc7e28cae803e958735a5f3dcf3ef2d7b4fee24b2f79"
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/tot-reconciliation-2026-10-30/tot-creative-results.png",
+      "bytes": 34666,
+      "sha256": "da6f37a5e39f90a3336f40197b6f47fd80c9053412381ea47112730cdda41231"
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/tot-reconciliation-2026-10-30/tot-creative-search.png",
+      "bytes": 250492,
+      "sha256": "61bea3f4f86b0728499a82838196f3bd8aca11d6045e180e721522b81d6cac71"
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/tot-reconciliation-2026-10-30/tot-crossword-dfs.png",
+      "bytes": 161091,
+      "sha256": "2c692a2260acee60bcf348b50c14445dcbaaf9da027c8e13901d19b34adeb37d"
+    }
+  ]
+}

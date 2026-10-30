@@ -9,89 +9,25 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol1/lab_01_ml_intro.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol1/lab_01_ml_intro.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL1 Lab — Ml Intro
 
 ## Readable lab narrative
 
 **Recommended Reading** - Complete the Introduction chapter's discussion of
-    production ML as a system before starting this lab.
-
----
-
-## Part A: Model Behavior Is Not Normal Software Behavior
-
-**Concept.** In traditional software, behavior usually changes when code changes.
-In ML systems, learned behavior can degrade silently because the current input
-distribution drifts away from the training distribution.
-
-**Track lens.** For **{v1_01_profile.label}**, watch **{_lens['silent_metric']}**
-under {_lens['drift_driver']}. The guardrail is **{v1_01_triad.guardrail_metric}**.
-
----
-
-**Evidence Table**
-
-| Quantity | Value | Why it matters |
-|---|---:|---|
-| Drift pressure | {silent['drift_pct']:.0f}% | {_lens['drift_driver']} |
-| Months in production | {silent['months']:.0f} | time lets drift accumulate |
-| Monitoring cadence | every {silent['cadence_weeks']:.0f} week(s) | slower cadence delays detection |
-| {_lens['silent_metric']} | {silent['quality_pct']:.1f}% | quality can move while code is fixed |
-| Code/infrastructure health | 100.0% | conventional dashboards can stay green |
-
----
-
-## Part B: Data, Algorithm, and Machine Are Coupled
-
-**Concept.** The same symptom can come from Data, Algorithm, or Machine. The
-first useful intervention targets the axis with the weakest margin to its
-track-specific threshold.
-
-- **Data:** {v1_01_triad.data_axis}
-- **Algorithm:** {v1_01_triad.algorithm_axis}
-- **Machine:** {v1_01_triad.machine_axis}
-
----
-
-**Diagnosis Table**
-
-| Axis | Score | {v1_01_profile.label} threshold | Margin | Meaning |
-|---|---:|---:|---:|---|
-| Data | {diag.data_score_pct:.0f}% | {diag.data_threshold_pct:.0f}% | {selected_margins['Data']:+.1f} pp | {v1_01_triad.data_axis} |
-| Algorithm | {diag.algorithm_score_pct:.0f}% | {diag.algorithm_threshold_pct:.0f}% | {selected_margins['Algorithm']:+.1f} pp | {v1_01_triad.algorithm_axis} |
-| Machine | {diag.machine_score_pct:.0f}% | {diag.machine_threshold_pct:.0f}% | {selected_margins['Machine']:+.1f} pp | {v1_01_triad.machine_axis} |
-
-**Track Comparison: Same Scores, Different Envelope**
-
-| Track | Binding axis | Primary metric | Guardrail | Data margin | Algorithm margin | Machine margin |
-|---|---|---|---|---:|---:|---:|
-| {v1_01_profile.label} | {diag.binding_axis} | {diag.primary_metric} | {diag.guardrail_metric} | {selected_margins['Data']:+.1f} | {selected_margins['Algorithm']:+.1f} | {selected_margins['Machine']:+.1f} |
-| {v1_01_comparison_profile.label} | {compare_diag.binding_axis} | {compare_diag.primary_metric} | {compare_diag.guardrail_metric} | {compare_margins['Data']:+.1f} | {compare_margins['Algorithm']:+.1f} | {compare_margins['Machine']:+.1f} |
-
----
-
-## Part C: Training and Inference Create Different Amount Systems
-
-**Concept.** Training evidence is not inference evidence. Training asks whether
-the system can learn within a throughput or cost envelope. Inference asks whether
-the learned artifact can serve within a request, sensor-window, or device budget.
-
-For **{v1_01_profile.label}**, the inference gate is **{_lens['infer_amount_label']}**
-plus **{_lens['guardrail_amount_label']}**.
-
----
-
-**Amount-System Evidence**
-
-| Stage | Quantity | Value | Limit | Unit | Decision |
-|---|---|---:|---:|---|---|
-| Training | {_lens['train_amount_label']} | {amounts['training_amount']:.1f} | {amounts['training_limit']:.1f} | {_lens['train_unit']} | {"PASS" if amounts['training_pass'] else "FAIL"} |
-| Inference | {_lens['infer_amount_label']} | {amounts['inference_amount']:.1f} | {amounts['inference_limit']:.1f} | {_lens['infer_unit']} | {"PASS" if amounts['inference_pass'] else "FAIL"} |
-| Inference guardrail | {_lens['guardrail_amount_label']} | {amounts['guardrail_amount']:.1f} | {amounts['guardrail_limit']:.1f} | {_lens['guardrail_unit']} | {"PASS" if amounts['guardrail_pass'] else "FAIL"} |
+production ML as a system before starting this lab.
 
 ---
 
@@ -103,22 +39,340 @@ must include validation evidence that could overturn the choice.
 
 ---
 
-**Frontier Table**
-
-| Axis | Budget | Post-score | Interpretation |
-|---|---:|---:|---|
-| Data | {frontier.data_budget_pct:.0f}% | {frontier.data_score_pct:.1f}% | {v1_01_triad.data_axis} |
-| Algorithm | {frontier.algorithm_budget_pct:.0f}% | {frontier.algorithm_score_pct:.1f}% | {v1_01_triad.algorithm_axis} |
-| Machine | {frontier.machine_budget_pct:.0f}% | {frontier.machine_score_pct:.1f}% | {v1_01_triad.machine_axis} |
-
-Rejected alternatives for the selected intervention: {", ".join(frontier.rejected_alternatives)}.
-
----
-
 ## Synthesis: Triad Diagnosis Memo
 
 Record one memo that connects silent model behavior, D-A-M diagnosis,
 training/inference evidence, and the first lifecycle fix.
+
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+## Part A: Model Behavior Is Not Normal Software Behavior
+
+**Concept.** In traditional software, behavior usually changes when code changes.
+In ML systems, learned behavior can degrade silently because the current input
+distribution drifts away from the training distribution.
+
+**Track lens.** For **⟨value 1⟩**, watch **⟨value 2⟩**
+under ⟨value 3⟩. The guardrail is **⟨value 4⟩**.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_01_profile.label}' `
+- value_2: ` f"{_lens['silent_metric']}" `
+- value_3: ` f"{_lens['drift_driver']}" `
+- value_4: ` f'{v1_01_triad.guardrail_metric}' `
+
+---
+
+Make the prediction first, then the degradation instrument unlocks.
+
+---
+
+**Evidence Table**
+
+| Quantity | Value | Why it matters |
+|---|---:|---|
+| Drift pressure | ⟨value 1⟩% | ⟨value 2⟩ |
+| Months in production | ⟨value 3⟩ | time lets drift accumulate |
+| Monitoring cadence | every ⟨value 4⟩ week(s) | slower cadence delays detection |
+| ⟨value 5⟩ | ⟨value 6⟩% | quality can move while code is fixed |
+| Code/infrastructure health | 100.0% | conventional dashboards can stay green |
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{silent['drift_pct']:.0f}" `
+- value_2: ` f"{_lens['drift_driver']}" `
+- value_3: ` f"{silent['months']:.0f}" `
+- value_4: ` f"{silent['cadence_weeks']:.0f}" `
+- value_5: ` f"{_lens['silent_metric']}" `
+- value_6: ` f"{silent['quality_pct']:.1f}" `
+
+---
+
+**Boundary not crossed yet.** The system still clears the ⟨value 1⟩% floor, but the chart shows why monitoring must exist before user complaints become the detector.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_lens['quality_floor_pct']:.1f}" `
+
+---
+
+**Reversible failure:** ⟨value 1⟩ is below the ⟨value 2⟩% floor. For ⟨value 3⟩, the consequence is ⟨value 4⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_lens['silent_metric']}" `
+- value_2: ` f"{_lens['quality_floor_pct']:.1f}" `
+- value_3: ` f'{v1_01_profile.label}' `
+- value_4: ` f"{_lens['silent_consequence']}" `
+
+---
+
+**Defensible response.** You chose a monitoring/data response for a behavior change that code logs would not expose.
+
+---
+
+**Reconsider the failure mode.** The evidence points to **⟨value 1⟩** before treating this as a normal code or capacity incident.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_lens['correct_response']}" `
+
+---
+
+## Part B: Data, Algorithm, and Machine Are Coupled
+
+**Concept.** The same symptom can come from Data, Algorithm, or Machine. The
+first useful intervention targets the axis with the weakest margin to its
+track-specific threshold.
+
+- **Data:** ⟨value 1⟩
+- **Algorithm:** ⟨value 2⟩
+- **Machine:** ⟨value 3⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_01_triad.data_axis}' `
+- value_2: ` f'{v1_01_triad.algorithm_axis}' `
+- value_3: ` f'{v1_01_triad.machine_axis}' `
+
+---
+
+Make the D-A-M prediction first. The readiness controls stay hidden until you commit.
+
+---
+
+**Diagnosis Table**
+
+| Axis | Score | ⟨value 1⟩ threshold | Margin | Meaning |
+|---|---:|---:|---:|---|
+| Data | ⟨value 2⟩% | ⟨value 3⟩% | ⟨value 4⟩ pp | ⟨value 5⟩ |
+| Algorithm | ⟨value 6⟩% | ⟨value 7⟩% | ⟨value 8⟩ pp | ⟨value 9⟩ |
+| Machine | ⟨value 10⟩% | ⟨value 11⟩% | ⟨value 12⟩ pp | ⟨value 13⟩ |
+
+**Track Comparison: Same Scores, Different Envelope**
+
+| Track | Binding axis | Primary metric | Guardrail | Data margin | Algorithm margin | Machine margin |
+|---|---|---|---|---:|---:|---:|
+| ⟨value 14⟩ | ⟨value 15⟩ | ⟨value 16⟩ | ⟨value 17⟩ | ⟨value 18⟩ | ⟨value 19⟩ | ⟨value 20⟩ |
+| ⟨value 21⟩ | ⟨value 22⟩ | ⟨value 23⟩ | ⟨value 24⟩ | ⟨value 25⟩ | ⟨value 26⟩ | ⟨value 27⟩ |
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_01_profile.label}' `
+- value_2: ` f'{diag.data_score_pct:.0f}' `
+- value_3: ` f'{diag.data_threshold_pct:.0f}' `
+- value_4: ` f"{selected_margins['Data']:+.1f}" `
+- value_5: ` f'{v1_01_triad.data_axis}' `
+- value_6: ` f'{diag.algorithm_score_pct:.0f}' `
+- value_7: ` f'{diag.algorithm_threshold_pct:.0f}' `
+- value_8: ` f"{selected_margins['Algorithm']:+.1f}" `
+- value_9: ` f'{v1_01_triad.algorithm_axis}' `
+- value_10: ` f'{diag.machine_score_pct:.0f}' `
+- value_11: ` f'{diag.machine_threshold_pct:.0f}' `
+- value_12: ` f"{selected_margins['Machine']:+.1f}" `
+- value_13: ` f'{v1_01_triad.machine_axis}' `
+- value_14: ` f'{v1_01_profile.label}' `
+- value_15: ` f'{diag.binding_axis}' `
+- value_16: ` f'{diag.primary_metric}' `
+- value_17: ` f'{diag.guardrail_metric}' `
+- value_18: ` f"{selected_margins['Data']:+.1f}" `
+- value_19: ` f"{selected_margins['Algorithm']:+.1f}" `
+- value_20: ` f"{selected_margins['Machine']:+.1f}" `
+- value_21: ` f'{v1_01_comparison_profile.label}' `
+- value_22: ` f'{compare_diag.binding_axis}' `
+- value_23: ` f'{compare_diag.primary_metric}' `
+- value_24: ` f'{compare_diag.guardrail_metric}' `
+- value_25: ` f"{compare_margins['Data']:+.1f}" `
+- value_26: ` f"{compare_margins['Algorithm']:+.1f}" `
+- value_27: ` f"{compare_margins['Machine']:+.1f}" `
+
+---
+
+**Track context changed the answer.** The selected track binds on **⟨value 1⟩**, while ⟨value 2⟩ binds on **⟨value 3⟩** under the same raw scores.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{diag.binding_axis}' `
+- value_2: ` f'{v1_01_comparison_profile.label}' `
+- value_3: ` f'{compare_diag.binding_axis}' `
+
+---
+
+**Same binding axis, different evidence.** Both tracks bind on **⟨value 1⟩**, but the primary metric and guardrail language differ.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{diag.binding_axis}' `
+
+---
+
+**Good diagnosis.** Your checkpoint matches the evidence and the selected track envelope.
+
+---
+
+**Re-check the margin.** You chose ⟨value 1⟩, but the current binding axis is **⟨value 2⟩**.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{decision}' `
+- value_2: ` f'{diag.binding_axis}' `
+
+---
+
+## Part C: Training and Inference Create Different Amount Systems
+
+**Concept.** Training evidence is not inference evidence. Training asks whether
+the system can learn within a throughput or cost envelope. Inference asks whether
+the learned artifact can serve within a request, sensor-window, or device budget.
+
+For **⟨value 1⟩**, the inference gate is **⟨value 2⟩**
+plus **⟨value 3⟩**.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_01_profile.label}' `
+- value_2: ` f"{_lens['infer_amount_label']}" `
+- value_3: ` f"{_lens['guardrail_amount_label']}" `
+
+---
+
+Commit to an evidence prediction before changing model scale or operating pressure.
+
+---
+
+**Amount-System Evidence**
+
+| Stage | Quantity | Value | Limit | Unit | Decision |
+|---|---|---:|---:|---|---|
+| Training | ⟨value 1⟩ | ⟨value 2⟩ | ⟨value 3⟩ | ⟨value 4⟩ | ⟨value 5⟩ |
+| Inference | ⟨value 6⟩ | ⟨value 7⟩ | ⟨value 8⟩ | ⟨value 9⟩ | ⟨value 10⟩ |
+| Inference guardrail | ⟨value 11⟩ | ⟨value 12⟩ | ⟨value 13⟩ | ⟨value 14⟩ | ⟨value 15⟩ |
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_lens['train_amount_label']}" `
+- value_2: ` f"{amounts['training_amount']:.1f}" `
+- value_3: ` f"{amounts['training_limit']:.1f}" `
+- value_4: ` f"{_lens['train_unit']}" `
+- value_5: ` f"{('PASS' if amounts['training_pass'] else 'FAIL')}" `
+- value_6: ` f"{_lens['infer_amount_label']}" `
+- value_7: ` f"{amounts['inference_amount']:.1f}" `
+- value_8: ` f"{amounts['inference_limit']:.1f}" `
+- value_9: ` f"{_lens['infer_unit']}" `
+- value_10: ` f"{('PASS' if amounts['inference_pass'] else 'FAIL')}" `
+- value_11: ` f"{_lens['guardrail_amount_label']}" `
+- value_12: ` f"{amounts['guardrail_amount']:.1f}" `
+- value_13: ` f"{amounts['guardrail_limit']:.1f}" `
+- value_14: ` f"{_lens['guardrail_unit']}" `
+- value_15: ` f"{('PASS' if amounts['guardrail_pass'] else 'FAIL')}" `
+
+---
+
+**Correct evidence standard.** Deployment needs runtime inference evidence, not only a training or offline score.
+
+---
+
+**Training is not the deployment gate.** For ⟨value 1⟩, the memo must attach runtime evidence for ⟨value 2⟩ and ⟨value 3⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_01_profile.label}' `
+- value_2: ` f"{_lens['infer_amount_label']}" `
+- value_3: ` f"{_lens['guardrail_amount_label']}" `
+
+---
+
+**Memo-ready evidence.** You selected a packet that measures the deployed artifact in its operating envelope.
+
+---
+
+**Evidence gap.** Attach **⟨value 1⟩** before treating the artifact as deployable.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_lens['correct_evidence']}" `
+
+---
+
+Predict the lifecycle budget strategy before opening the intervention frontier.
+
+---
+
+**Frontier Table**
+
+| Axis | Budget | Post-score | Interpretation |
+|---|---:|---:|---|
+| Data | ⟨value 1⟩% | ⟨value 2⟩% | ⟨value 3⟩ |
+| Algorithm | ⟨value 4⟩% | ⟨value 5⟩% | ⟨value 6⟩ |
+| Machine | ⟨value 7⟩% | ⟨value 8⟩% | ⟨value 9⟩ |
+
+Rejected alternatives for the selected intervention: ⟨value 10⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{frontier.data_budget_pct:.0f}' `
+- value_2: ` f'{frontier.data_score_pct:.1f}' `
+- value_3: ` f'{v1_01_triad.data_axis}' `
+- value_4: ` f'{frontier.algorithm_budget_pct:.0f}' `
+- value_5: ` f'{frontier.algorithm_score_pct:.1f}' `
+- value_6: ` f'{v1_01_triad.algorithm_axis}' `
+- value_7: ` f'{frontier.machine_budget_pct:.0f}' `
+- value_8: ` f'{frontier.machine_score_pct:.1f}' `
+- value_9: ` f'{v1_01_triad.machine_axis}' `
+- value_10: ` f"{', '.join(frontier.rejected_alternatives)}" `
+
+---
+
+**Reversible lifecycle failure:** this budget leaves **⟨value 1⟩** below threshold. Change the budget or selected intervention until the first fix is defensible.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{frontier.binding_axis}' `
+
+---
+
+**Defend carefully.** The selected fix is ⟨value 1⟩, but the frontier says ⟨value 2⟩ has the strongest margin.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{frontier.selected_intervention}' `
+- value_2: ` f'{frontier.best_intervention}' `
+
+---
+
+**Defensible first fix.** The selected intervention matches the strongest current frontier evidence.
+
+---
+
+**Correct principle.** Spend first where the constraint is binding, then validate that the bottleneck did not migrate.
+
+---
+
+**Budget follows diagnosis.** Even spending, hardware-first spending, or architecture-first spending can miss the binding axis.
+
+---
+
+**Chapter invariant.** A machine learning system does what its data, arithmetic, and hardware permit. The memo is defensible only if the selected evidence names which quantity changed and which constraint now binds.
+
+---
+
+## Report Status
+
+---
+
+Finish the required predictions and decisions before downloading the Lab 01 triad diagnosis memo.
+
+---
+
+## Download Report
+
+---
+
+This V1-01 diagnosis memo is generated locally from the selected track, your inputs, and the computed evidence.
+
+</details>
 
 ## Complete original Marimo source
 

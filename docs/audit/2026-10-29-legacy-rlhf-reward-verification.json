@@ -1,0 +1,269 @@
+{
+  "date": "2026-10-29",
+  "status": "reconciled-existing-explanations",
+  "scope": "Full comparison of the two unpublished archival notes against complete current preference-data and reward-modeling chapters, with already-read SFT, alignment and PPO owners reused at their verified revisions. No chapter prose, code, figures or translations were replaced.",
+  "artifactHashes": {
+    "Concepts/Training/RLHF.md": "0780e7493e215c01d98a1bf0674432c8b0fdf9f4f07309c8fda0f13f9155710e",
+    "Concepts/Training/Reward Model.md": "46d1436267820cb06d546ef66346a8e665449989eef03f1e30fb6c9506e0bc5b",
+    "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md": "ae8ad7536eb7463667bbe8a5983fc54008e92079e775ea49ca481a12d3bb570e",
+    "00 Учебник/12 Post-training и Alignment/02 Preference data.md": "e24409a09129f2b7ba6f01d6a85f45879f1cbab2dec4c099267c5e11d934dffa",
+    "publishing/tools/check_reward_modeling_examples.py": "197b2d7e5685c25b3824a27e120e3be41058070271ed9ddb489afc61e269ef2d",
+    "publishing/tools/check_preference_data_examples.py": "7df2368e21a6a37009b386bc382dd6c79a32427fe341006f0698a47ac59fc354",
+    "docs/audit/2026-10-23-reward-modeling.md": "eca12d3699d66d9f3fe60cd0b685fec3e11f72bc93e57ba54c34bb8a84535ef2",
+    "docs/audit/2026-10-23-preference-data.md": "36e1fd42dd830f80b72db387c22fa4167bfa659f29edfade96821efe578e6287",
+    "00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md": "dea0e616abf368f5a008701d203ac7cbb70d5346dd7b57e1b97c5e50416fe1c1",
+    "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md": "3afbb8b75a2866dc5d493a929e0354aa3d1fa141cbdbdd82f0c866a5f387d872",
+    "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md": "29efb9a8c255c1b04abdcedc5c696f659a20ef45010572fe59093429698fcae5",
+    "00 Учебник/Assets/Figures/curated/instructgpt/chatgpt-training-pipeline.png": "ffb549dc81ca08e62ae8d936d2313f41711ef5def80e834e89ced8926f4c8724",
+    "00 Учебник/Assets/Figures/curated/dpo/fig1.png": "af51c080272561bcb736aef8b56c1ef220465f89b8ad3bf045014922941e89c4",
+    "00 Учебник/Assets/Figures/curated/instructgpt/reward-model-hf.png": "30107284e8d7b9b1bf859363656dd01439024457d063ae22f8bc3cf90393cec9",
+    "00 Учебник/Assets/Figures/curated/instructgpt/rlhf-pipeline-hf.png": "892936ad206bddaf217341733ea88f897faf54780c8033d3562442d3b0682aa0",
+    "00 Учебник/Assets/Figures/curated/preference-reward-review-2026-09/preference-rm-training.png": "2b5e36bfedca9400fcbe06186af34280245ae17f4d140b8ab7f12961f17fad36",
+    "00 Учебник/Assets/Figures/curated/preference-reward-review-2026-09/prm-step-supervision.png": "2549359b244474880d28ec904154359ded160d552b71fe41bf6b9a3f4d5170ba",
+    "00 Учебник/Assets/Figures/curated/preference-reward-review-2026-09/self-rewarding-loop.png": "5293f88e4903fad3cde90901d21eee4aace374dac8f3c3bdc55dcb9cd1ae0c90",
+    "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m02-p89-meta-rewarding-loop.png": "a71278754379be356a430531a7a6854905e627cfc41a59c4c9ee7a501497d956",
+    "00 Учебник/Assets/Figures/curated/preference-reward-review-2026-09/evalplanner-plan-execution-loop.png": "e28b20278c3e583c81ebd1a89ac32bffbda4320cad506b1d1916b6e2a24a507b",
+    "00 Учебник/Assets/Figures/curated/reward-modeling-2026-10-23/hh-calibration.png": "74e8528aedab2bb961f831beddbb34c7ed8ad34cfecbc7ab8a2d5fb4c2a31d80",
+    "00 Учебник/Assets/Figures/curated/preference-reward-review-2026-09/reward-overoptimization-best-of-n.png": "219751157f38c646d723bae800d595e7cf76d63ad40e69bda80d8ce71de793e5",
+    "00 Учебник/Assets/Figures/curated/preference-2026-10-23/hh-workflow.png": "f1b6b64ba26f7ec28cd54d80013c7e769153324705b409c7ff6acb74930d16fe",
+    "00 Учебник/Assets/Figures/curated/preference-2026-10-23/hh-data-distributions.png": "54e1c75340ea96895d8b0810fbf6fc82edd0036c0ba8a003d607c4ec389f0eb5",
+    "00 Учебник/Assets/Figures/curated/preference-2026-10-23/hh-feedback-interface.png": "1e05a370a1ce3f1e1b9a742fcb406a790b6d0a61856ef02147e4d15605febca1",
+    "docs/audit/evidence/2026-10-29-legacy-rlhf-reward/desktop-calibration.png": "5ff2a1b29cf5b6ebf00ec73b9acf539b9a445dd65e89d5dab94e70eb3e4f6458",
+    "docs/audit/evidence/2026-10-29-legacy-rlhf-reward/desktop-original-calibration.png": "8ed4c53dae893231b332811ac26808f267d2e972d21892a5200d9d2d82824243",
+    "docs/audit/evidence/2026-10-29-legacy-rlhf-reward/mobile-bt-en-fallback.png": "1a4fa47bf7b8879e80655ea77006a0c395ae8e53a0d9757d035ffaa66ae3a357",
+    "docs/audit/evidence/2026-10-29-legacy-rlhf-reward/mobile-original-preference-interface.png": "a6798f40fa09aeb09f853449df53387338924478243ba4827e2c4bc3097c1a8f"
+  },
+  "fullReads": [
+    {
+      "source": "Concepts/Training/RLHF.md",
+      "lines": 184,
+      "sha256": "0780e7493e215c01d98a1bf0674432c8b0fdf9f4f07309c8fda0f13f9155710e"
+    },
+    {
+      "source": "Concepts/Training/Reward Model.md",
+      "lines": 171,
+      "sha256": "46d1436267820cb06d546ef66346a8e665449989eef03f1e30fb6c9506e0bc5b"
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/02 Preference data.md",
+      "lines": 859,
+      "sha256": "e24409a09129f2b7ba6f01d6a85f45879f1cbab2dec4c099267c5e11d934dffa",
+      "pythonBlocks": 5,
+      "figures": 3
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
+      "lines": 1076,
+      "sha256": "ae8ad7536eb7463667bbe8a5983fc54008e92079e775ea49ca481a12d3bb570e",
+      "pythonBlocks": 6,
+      "figures": 8
+    }
+  ],
+  "mechanismCoverage": [
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/02 Preference data.md",
+      "sections": [
+        "1. Откуда берутся ответы для сравнения",
+        "2. Оценка, попарное сравнение и ранжирование"
+      ],
+      "retained": "Collection policy and iterative refresh, shared multi-turn histories, rating versus strength of preference, ties and complete ranking; full original workflow, interface and distribution-shift figures."
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/02 Preference data.md",
+      "sections": [
+        "Почему число пар меняет вес запроса",
+        "7. Преобразование ранжирования в пары без утечки"
+      ],
+      "retained": "6 versus 28 pairs, 0.694 versus 0.5 loss weighting, grouped split before expansion, strict comparisons only across tied groups and source-model identifiers."
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/02 Preference data.md",
+      "sections": [
+        "3. Как предпочтение превращается в вероятность",
+        "5. Систематические смещения разметки",
+        "6. Измерение согласия"
+      ],
+      "retained": "A single noisy cycle versus a persistent majority cycle, position/verbosity/sycophancy controls, verdict normalization and kappa; agreement is not correctness."
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
+      "sections": [
+        "1. Архитектура модели награды для целого ответа",
+        "2. Модель Брэдли—Терри",
+        "3. Один пакет в коде"
+      ],
+      "anchors": [
+        "bradley-terry"
+      ],
+      "retained": "Same-prompt chosen/rejected scores, EOS rather than PAD, position ids, shift versus scale, likelihood and gradient, soft labels and a real CPU training step."
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
+      "sections": [
+        "4. От ранжирования к функции потерь"
+      ],
+      "retained": "Grouped pair likelihood versus normalized Plackett-Luce ranking likelihood, with worked 1/6 versus 1/8 and 8/21 versus 16/45 comparisons."
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
+      "sections": [
+        "5. Какие виды оценщиков существуют"
+      ],
+      "retained": "Preference model, outcome supervision, process supervision, programmatic verification, generative judge and PPO value function are distinguished by target and label provenance, not merely output-head shape."
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
+      "sections": [
+        "6. Совместное улучшение ответов и их оценки"
+      ],
+      "retained": "Existing complete Self-Rewarding, TPO, Meta-Rewarding and EvalPlanner explanations, examples and source figures were read and left intact. Their previous same-revision source review is retained; this is not a new review of every Berkeley slide."
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
+      "sections": [
+        "7. Проверка до обучения с подкреплением",
+        "8. Эксплуатация награды и сдвиг распределения"
+      ],
+      "anchors": [
+        "rm-validation",
+        "reward-overoptimization"
+      ],
+      "retained": "Ordering versus calibration, same-accuracy/different-loss example, independent best-of-N check, proxy versus Gold model, iterative data and ensemble caveats."
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md",
+      "anchors": [
+        "ppo-roles",
+        "ppo-clip",
+        "ppo-reward-shaping"
+      ],
+      "retained": "Previously accepted complete PPO mechanism, model roles, signed KL and correctly signed pretraining log likelihood; no new abbreviated RLHF overview was created."
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md",
+      "retained": "Previously read two-stage Constitutional AI mechanism and source-of-feedback distinction remain the canonical explanation, rather than the archival one-line substitute."
+    }
+  ],
+  "primarySourceComparison": [
+    {
+      "url": "https://arxiv.org/html/2203.02155v1#S3.SS1",
+      "read": "Full three-step method and iterative collection paragraph.",
+      "result": "SFT, preference comparisons and scalar-reward policy optimization are separate stages; comparison/RL stages may repeat."
+    },
+    {
+      "url": "https://arxiv.org/html/2203.02155v1#S3.SS5",
+      "read": "Complete Reward modeling subsection, including grouped comparisons, Equation 1 and reward recentering.",
+      "result": "K=4..9 is the experiment's recipe, correlated pairs are grouped, and shift invariance does not establish an absolute quality scale."
+    },
+    {
+      "url": "https://arxiv.org/html/2203.02155v1",
+      "read": "Dataset sizes paragraph and complete Table 6.",
+      "result": "12,725 SFT training prompts, 33,207 RM training prompts and 31,144 PPO training prompts count different datasets. The archival pair totals are not substantiated by this prompt-count table."
+    },
+    {
+      "url": "https://arxiv.org/html/2203.02155v1",
+      "read": "Appendix C.2, Details of RM training (section title used because generated HTML fragment names can differ).",
+      "result": "One 6B RM served all policy sizes in this experiment; final initialization and base/SFT comparison do not support a universal SFT-only rule."
+    },
+    {
+      "url": "https://rlhfbook.com/c/05-reward-models",
+      "read": "Bradley-Terry derivation and default scalar architecture, complete Balancing Multiple Comparisons Per Prompt and K-Wise Loss Function, and LLM-as-judge prompt/limitations discussion.",
+      "result": "Matches current loss, grouping, listwise distinction and generative-judge roles. Existing same-revision October 23 report supplies the prior full implementation/ORM/PRM source comparison."
+    },
+    {
+      "url": "https://arxiv.org/html/2204.05862v1#S3.SS3",
+      "read": "Complete calibration section including Figure 9 and limits on transfer to higher-score answers; iterative online algorithm and Figure 15 discussion.",
+      "result": "Current captions correctly distinguish HH mixture/helpful-only and independent human preference from optimized PM predictions."
+    }
+  ],
+  "excludedClaims": [
+    "Next-token pretraining always produces the most probable continuation, and RLHF fully closes an alignment gap or guarantees helpful, truthful and harmless behavior.",
+    "The two archival comparison totals are interchangeable facts. InstructGPT Table 6 counts prompts, not independent pairs; K and dropped ties are needed to recover the number of comparisons.",
+    "SFT is always the best RM initialization. InstructGPT Appendix C.2 reports a public-NLP-finetuned GPT-3 initialization and similar results from GPT-3/SFT initializations.",
+    "Reward models are necessarily trained once for an entire project, or frozen evaluation within one optimization round precludes collecting new comparisons and retraining between rounds.",
+    "A KL penalty or PPO clipping guarantees protection against reward hacking, or PPO-ptx universally eliminates regressions.",
+    "Functional roles imply four equally sized, simultaneously resident models; RM size ratios prove a universal policy-to-RM sizing rule or better quality.",
+    "RLAIF is a competing optimizer in the same category as PPO/DPO, Constitutional AI removes learned reward models, or GRPO inherently requires or excludes a learned reward model.",
+    "DPO is unconditionally mathematically equivalent to an actual PPO training run; an implicit reward expression has a unique absolute prompt-independent origin.",
+    "RLVR always uses a binary, infallible correctness reward; arbitrary factual QA has a deterministic complete verifier.",
+    "An archive trend list establishes universal superiority, stability, adoption or a complete description of all later commercial model training recipes.",
+    "Unscoped toxicity/hallucination percentages or parameter-size comparisons establish general capability dominance. Historical comparisons require their prompt distribution, baselines and evaluation protocol."
+  ],
+  "historicalMaterialDisposition": "Archival files remain byte-for-byte intact, including their source links and illustrations. Historical hyperparameter/size/result lists are not promoted to universal textbook rules, and are not counted as an additional mechanism. The linked primary reports remain available for the exact experimental recipes. This acceptance is migration of these two conceptual notes, not acceptance of every named model release, every benchmark number or every later method.",
+  "sourceFigureDisposition": {
+    "preservedCanonicalFigures": 11,
+    "newFigures": 0,
+    "originals": "All 8 reward-modeling and 3 preference-data figures loaded. Original calibration graph with both panels/caption inspected at desktop size and in the viewer; original HH annotation interface inspected at mobile 2x.",
+    "hfTrainingFigure": "The source illustration used by both legacy notes is already in the canonical RM chapter. Current publication-provenance receipt records its CC BY-NC-SA 4.0 source, pinned raster and license evidence; the older October 23 needs-confirmation state is not silently reused as current clearance.",
+    "provenanceReceipt": "05 Источники/Originals/publication-asset-provenance-2026-10-29/verified-assets.json",
+    "otherLegacyFigures": "The Chip Huyen pipeline, DPO teaser and HF RL pipeline remain physically present and hash-pinned. They are not copied again into a new overview."
+  },
+  "executedChecks": [
+    {
+      "command": "uv run --offline --with torch==2.14.1 --with numpy==2.3.5 --with transformers==4.57.1 python publishing/tools/check_reward_modeling_examples.py",
+      "log": "/var/tmp/bookvar-legacy-rlhf-reward-cpu-20261029.log",
+      "result": "PASS all 6 current fences, 3136-parameter random tiny Llama + head, actual AdamW step, stable pair loss/gradients, 24 left/right padding comparisons, listwise normalization/gradcheck, PRM aggregation and calibration.",
+      "lossBefore": 0.7038449048995972,
+      "lossAfter": 0.5182136297225952,
+      "maxPaddingError": 5.960464477539063e-8
+    },
+    {
+      "command": "uv run --offline --with torch==2.14.1 --with numpy==2.3.5 --with transformers==4.57.1 python publishing/tools/check_preference_data_examples.py",
+      "log": "/var/tmp/bookvar-legacy-rlhf-preference-cpu-20261029.log",
+      "result": "PASS all 5 current fences, rankings/ties, group split, histories, structured verdicts, verbatim pinned dataset row, cycle probability, loss weighting and kappa.",
+      "kappa": 0.5959595959595959,
+      "cycleProbability": 0.09453439083199781
+    }
+  ],
+  "visualReview": {
+    "rootDesktop": {
+      "viewport": [
+        1280,
+        900
+      ],
+      "clientWidth": 1265,
+      "scrollWidth": 1265,
+      "katexErrors": 0,
+      "rewardImagesLoaded": 8
+    },
+    "rootMobile": {
+      "viewport": [
+        360,
+        800
+      ],
+      "clientWidth": 345,
+      "scrollWidth": 345,
+      "katexErrors": 0,
+      "preferenceImagesLoaded": 3,
+      "observed": "EN reward route explicitly identifies the canonical-language fallback. Bradley-Terry derivation renders without a page-level horizontal overflow; original annotation interface can be enlarged."
+    },
+    "evidence": [
+      {
+        "path": "docs/audit/evidence/2026-10-29-legacy-rlhf-reward/desktop-calibration.png",
+        "sha256": "5ff2a1b29cf5b6ebf00ec73b9acf539b9a445dd65e89d5dab94e70eb3e4f6458"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-legacy-rlhf-reward/desktop-original-calibration.png",
+        "sha256": "8ed4c53dae893231b332811ac26808f267d2e972d21892a5200d9d2d82824243"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-legacy-rlhf-reward/mobile-bt-en-fallback.png",
+        "sha256": "1a4fa47bf7b8879e80655ea77006a0c395ae8e53a0d9757d035ffaa66ae3a357"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-legacy-rlhf-reward/mobile-original-preference-interface.png",
+        "sha256": "a6798f40fa09aeb09f853449df53387338924478243ba4827e2c4bc3097c1a8f"
+      }
+    ],
+    "observedRemainingUiIssue": "The EN fallback displays both the project notice and Starlight's default untranslated-content warning. This is a duplicate notice, not a completed English translation; retain it for the final route/UI pass.",
+    "reset": "Viewer closed and viewport reset."
+  },
+  "styleReview": "Both complete current chapters were read. Their worked reasoning, source excerpts, original figures and caveats are retained; no compressed synthetic rewrite or new translation was added.",
+  "remainingWithinTheseTwoNotes": [],
+  "notClaimed": [
+    "No new chapter text, figure acquisition, translation or content build was performed. Current chapter hashes still match their previous verified revisions.",
+    "No quality benchmark, GPU training run, real LLM-judge call or complete re-review of every linked course.",
+    "DPO, GRPO, RLVR and Constitutional AI archival acceptance remain separate pending records; naming them here does not close those records.",
+    "The remaining 16 archival comparisons, conceptual route review and dev/Pages release are still open."
+  ]
+}

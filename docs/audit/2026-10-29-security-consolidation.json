@@ -1,0 +1,1287 @@
+{
+  "schema": 1,
+  "date": "2026-10-29",
+  "scope": "Two published Security/Robustness reference articles, integrated as full chapters of Deployment, Reliability and MLOps. Parent owns navigation, topic aliases, snapshots and publication.",
+  "status": "content-integrated-and-locally-checked; navigation-alias-and-browser-acceptance-pending-parent",
+  "entries": [
+    {
+      "source": "01 Справочник/Security и Robustness/01 Security и privacy.md",
+      "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+      "decision": "alias",
+      "role": "canonical-topic-alias",
+      "sourceSha256": "9c590a886aa99f00eb28f8d0190a5016a854eeba5aa034a27baeed68157af527",
+      "canonicalSha256": "f86ccfcc15ff468c8b29843ee1b9984315cad8f9c751a9a5aa3405283f1df794",
+      "comparisonComplete": true,
+      "uniqueContentMoved": [
+        "Общая модель угроз ML-систем, матрица активов/прав/сигналов, кража артефакта vs функциональное извлечение, аудит membership inference и утечек, многоуровневая защита и security review перенесены в 19/04.",
+        "В 19/04 добавлен причинный пример с классификатором обращений, учебный расчёт извлечения известной логистической модели по двум вероятностям и разбор общего отказа проверок hash/manifest.",
+        "Явная формула DP-SGD и пример user-level чувствительности (noise scales 2/40, release 121.4) сохранены в Responsible systems, не продублированы отдельным выводом в 19/04.",
+        "Все пять Harvard-рисунков сохранены в новой главе. Подпись Figure 24 исправлена по первоисточнику."
+      ],
+      "topics": [
+        {
+          "sourceSection": "Введение: security / privacy",
+          "coverage": "partial",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+          "canonicalHeading": "Безопасность и приватность ML-систем",
+          "action": "Общее различие сохранено как начало главы; формальные гарантии DP имеют отдельного владельца Responsible systems."
+        },
+        {
+          "sourceSection": "Threat model до выбора защиты; black/gray/white-box; likelihood/impact",
+          "coverage": "unique",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+          "canonicalHeading": "Модель угроз: актив, доступ и наблюдаемый ущерб",
+          "action": "Полное объяснение, таблица и обе исходные схемы перенесены; agent72 остаётся прикладным примером для гибридного агента."
+        },
+        {
+          "sourceSection": "Угрозы по жизненному циклу; data/model/API/infrastructure",
+          "coverage": "unique",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+          "canonicalHeading": "Угрозы по жизненному циклу",
+          "action": "Полная таблица сохранена, TEE и MIG больше не смешиваются в одной альтернативе."
+        },
+        {
+          "sourceSection": "MIG/MPS/time-slicing и tenant isolation",
+          "coverage": "covered",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md",
+          "canonicalHeading": "A GPU resource name does not specify its isolation",
+          "action": "Не создаётся второй разбор; точная ссылка из security на существующую главу MLOps."
+        },
+        {
+          "sourceSection": "Model extraction и model theft",
+          "coverage": "unique",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+          "canonicalHeading": "Извлечение модели и кража весов",
+          "action": "Сохранены разные объекты и меры защиты; добавлен проверенный toy-logistic пример."
+        },
+        {
+          "sourceSection": "Membership inference, training-data extraction, de-identification, canary audit",
+          "coverage": "partial",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+          "canonicalHeading": "Установление участия записи и извлечение обучающих данных",
+          "action": "Сохранён операционный разбор атак; Responsible systems содержит DP-гарантию, а не конкурирующий security обзор."
+        },
+        {
+          "sourceSection": "Poisoning, backdoor и adversarial input",
+          "coverage": "partial",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+          "canonicalHeading": "Отравление обучающих данных и скрытые триггеры",
+          "action": "В security оставлен жизненный цикл угроз и необходимое различие training/inference; полный механизм защиты находится в 19/05."
+        },
+        {
+          "sourceSection": "LLM prompt injection, poisoned retrieval, tool authorization",
+          "coverage": "covered",
+          "canonicalSource": "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md",
+          "canonicalHeading": "Модель угроз на примере работы с отчётом",
+          "action": "Из security дана точная ссылка на полный agent72; независимое повторное объяснение не создаётся."
+        },
+        {
+          "sourceSection": "Defense in depth, минимальная поверхность, fail-safe defaults",
+          "coverage": "unique",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+          "canonicalHeading": "Многоуровневая защита и реагирование",
+          "action": "Пояснены конкретные проверки, общие точки отказа и цена ложных блокировок; нет обещания статистической независимости защит."
+        },
+        {
+          "sourceSection": "DP definition, adjacency, Laplace sensitivity, post-processing",
+          "coverage": "covered",
+          "canonicalSource": "00 Учебник/18 Evaluation и методология/59a Responsible systems.md",
+          "canonicalHeading": "Приватность и дифференциальная приватность",
+          "action": "Единственный полный вывод остаётся в Responsible systems. В security — чтение схемы гарантии и контракт проверки."
+        },
+        {
+          "sourceSection": "Численные примеры Laplace (120+1.4, eps=.5, per-user20 events)",
+          "coverage": "unique",
+          "canonicalSource": "00 Учебник/18 Evaluation и методология/59a Responsible systems.md",
+          "canonicalHeading": "Приватность и дифференциальная приватность",
+          "action": "Перенесены в основной DP-раздел с явным изменением чувствительности и масштаба, без двойного самостоятельного вывода."
+        },
+        {
+          "sourceSection": "DP-SGD explicit aggregate equation and record/user distinction",
+          "coverage": "unique",
+          "canonicalSource": "00 Учебник/18 Evaluation и методология/59a Responsible systems.md",
+          "canonicalHeading": "Приватность и дифференциальная приватность",
+          "action": "Перенесены формула, обозначения B/C/sigma/I и ссылка Abadi Algorithm1. DP-accountant не выводится из одного шага."
+        },
+        {
+          "sourceSection": "Composition, global budget, post-processing",
+          "coverage": "covered",
+          "canonicalSource": "00 Учебник/18 Evaluation и методология/59a Responsible systems.md",
+          "canonicalHeading": "Приватность и дифференциальная приватность",
+          "action": "Главный вывод не дублируется; security уточняет, что обычный inference уже выпущенной DP-модели не тратит бюджет обучения заново."
+        },
+        {
+          "sourceSection": "Federated gradients / secure aggregation / DP",
+          "coverage": "partial",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment.md",
+          "canonicalHeading": "Edge и federated deployment",
+          "action": "В security оставлены границы гарантий; полное устройство протокола не повторяется."
+        },
+        {
+          "sourceSection": "Privacy–utility, cost/fairness implications, risk-control table",
+          "coverage": "unique",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+          "canonicalHeading": "Компромиссы privacy–utility",
+          "action": "Сохранены ограничения и таблица; затраты per-example clipping описаны как зависящие от реализации."
+        },
+        {
+          "sourceSection": "Deletion/unlearning workflow",
+          "coverage": "covered",
+          "canonicalSource": "00 Учебник/18 Evaluation и методология/59a Responsible systems.md",
+          "canonicalHeading": "Удаление данных и machine unlearning",
+          "action": "В risk-control таблице остаётся указатель на lineage/retention; основное причинное объяснение — Responsible systems."
+        },
+        {
+          "sourceSection": "Минимальный security review",
+          "coverage": "unique",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+          "canonicalHeading": "Минимальный security review",
+          "action": "Сохранён полный набор проверяемых результатов, а не список инструментов."
+        }
+      ],
+      "headingAliases": [
+        {
+          "sourceHeading": "Threat model до выбора защиты",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+          "canonicalHeading": "Модель угроз: актив, доступ и наблюдаемый ущерб"
+        },
+        {
+          "sourceHeading": "Model extraction и model theft",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+          "canonicalHeading": "Извлечение модели и кража весов"
+        },
+        {
+          "sourceHeading": "Membership inference и извлечение обучающих данных",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+          "canonicalHeading": "Установление участия записи и извлечение обучающих данных"
+        },
+        {
+          "sourceHeading": "Poisoning, backdoor и adversarial input",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+          "canonicalHeading": "Отравление обучения и атака на готовую модель"
+        },
+        {
+          "sourceHeading": "Defense in depth",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+          "canonicalHeading": "Многоуровневая защита и реагирование"
+        },
+        {
+          "sourceHeading": "Дифференциальная приватность",
+          "canonicalSource": "00 Учебник/18 Evaluation и методология/59a Responsible systems.md",
+          "canonicalHeading": "Приватность и дифференциальная приватность"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/Security и Robustness/02 Robustness.md",
+      "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+      "decision": "alias",
+      "role": "canonical-topic-alias",
+      "sourceSha256": "8877b9174d7ef2de8c071bf2b0a3795c3da38d8fb789efd2222e39446e759ce0",
+      "canonicalSha256": "e0db3f27372fedb3fd65433c52aea8138eb2260fa5bb9c35ea4bb766335488c9",
+      "comparisonComplete": true,
+      "uniqueContentMoved": [
+        "Три источника нарушения устойчивости, диагностика причин, covariate/label/concept shift, FGSM/PGD, minimax training, adaptive evaluation, certification, poisoning defense и evaluation matrix перенесены в 19/05.",
+        "Сохранены полный Huber вывод и пример производных при остатках10/100: заявленного в старой ссылке подробного Huber-разбора в foundations/losses фактически нет.",
+        "Численный PSI=.25ln3 и нормированное сглаживание по счётчикам (n_i+alpha)/(N+k alpha) перенесены в MLOps — единственное место подробного PSI расчёта.",
+        "Все восемь исходных рисунков сохранены. Переписаны неверные подписи robustness_tax и poisoning Figure20; рядом с shift-types явно объяснена ошибка подписи в неизменённом оригинале."
+      ],
+      "topics": [
+        {
+          "sourceSection": "Введение и три источника нарушения устойчивости",
+          "coverage": "unique",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+          "canonicalHeading": "Три источника нарушения устойчивости",
+          "action": "Сохранены Figure7 и различие мира/атаки/исполнения; диагностические эвристики больше не выдаются за гарантированные признаки."
+        },
+        {
+          "sourceSection": "Covariate / label(prior) / concept shift",
+          "coverage": "partial",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+          "canonicalHeading": "Distribution shift и concept drift",
+          "action": "Сохранены формальные условия и Figure9; обозначена ошибка same p(Y|X) на исходной панели label shift."
+        },
+        {
+          "sourceSection": "Мониторинг без меток, delayed labels, cohorts, windows, multiple checks",
+          "coverage": "covered",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md",
+          "canonicalHeading": "Наблюдаемость сервиса, данных, модели и продукта",
+          "action": "В новой Robustness контекст и точная ссылка; полные правила наблюдения не повторяются."
+        },
+        {
+          "sourceSection": "PSI formula, .275 example, zero bins, alpha smoothing",
+          "coverage": "partial",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md",
+          "canonicalHeading": "Сдвиг распределения и изменение качества",
+          "action": "Уникальные пример и сглаживание перенесены, нормировка и зависимость порогов от процедуры проверены."
+        },
+        {
+          "sourceSection": "KL formula",
+          "coverage": "covered",
+          "canonicalSource": "00 Учебник/00 Математические и ML-основания/04 Функции потерь.md",
+          "canonicalHeading": "Cross-entropy, entropy и KL divergence",
+          "action": "Точное существующее определение и вывод прочитаны; добавлена ссылка из Robustness, формула второй раз не размножается."
+        },
+        {
+          "sourceSection": "JS / KS / MMD comparison roles",
+          "coverage": "unique",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+          "canonicalHeading": "Distribution shift и concept drift",
+          "action": "Сохранена роль одномерных и многомерных сравнений; не заявлен полный математический вывод KS/MMD, которого не было в старой статье."
+        },
+        {
+          "sourceSection": "PSI-knee illustration and response to drift",
+          "coverage": "partial",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+          "canonicalHeading": "Distribution shift и concept drift",
+          "action": "Исходная иллюстрация сохранена с оговоркой об условной кривой; действия различаются по причине, а не универсальному порогу."
+        },
+        {
+          "sourceSection": "FGSM, linearized loss and l-infinity/l2 worked example",
+          "coverage": "unique",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+          "canonicalHeading": "Атака на вход готовой модели",
+          "action": "Сохранены формулы и пример g=(3,4), epsilon=.1; добавлено объяснение пересчёта направления PGD."
+        },
+        {
+          "sourceSection": "PGD norm-specific step/projection, targeted/untargeted, white/black-box",
+          "coverage": "unique",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+          "canonicalHeading": "Атака на вход готовой модели",
+          "action": "Формула PGD и ограничения области явно описаны; сохранён исходный FGSM SVG."
+        },
+        {
+          "sourceSection": "Minimax adversarial training, cost and clean trade-off",
+          "coverage": "unique",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+          "canonicalHeading": "Обучение против атак и проверка полученной защиты",
+          "action": "Обе оптимизации объяснены отдельно; исходный tax-график правильно читается как два значения clean accuracy."
+        },
+        {
+          "sourceSection": "Adaptive attacks and gradient masking",
+          "coverage": "unique",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+          "canonicalHeading": "Обучение против атак и проверка полученной защиты",
+          "action": "Симптомы не объявлены доказательством; добавлена первичная работа Athalye et al."
+        },
+        {
+          "sourceSection": "Certified robustness and randomized smoothing",
+          "coverage": "unique",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+          "canonicalHeading": "Что даёт сертификат",
+          "action": "Сохранено различие empirical/certified; пояснены smoothed classifier, статистическая оценка, abstention и certified accuracy."
+        },
+        {
+          "sourceSection": "Poisoning/backdoors/federated malicious updates, provenance",
+          "coverage": "unique",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+          "canonicalHeading": "Отравление обучающих данных и скрытые триггеры",
+          "action": "Сохранены supply-chain контроли и объяснение нормального clean validation при hidden trigger."
+        },
+        {
+          "sourceSection": "Spectral signatures / influence / robust aggregation",
+          "coverage": "unique",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+          "canonicalHeading": "Отравление обучающих данных и скрытые триггеры",
+          "action": "Сохранены механизмы и предпосылки, Figure20 прочитан как цикл атаки/очистки/переобучения."
+        },
+        {
+          "sourceSection": "Huber loss, residual gradient cap and counterexample",
+          "coverage": "unique",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+          "canonicalHeading": "Отравление обучающих данных и скрытые триггеры",
+          "action": "Полная формула и пример сохранены. Убрано ложное обещание подробного Huber-разбора в Функциях потерь; ограничение по остаткам отделено от ограничения градиента по весам."
+        },
+        {
+          "sourceSection": "Bit flip in exponent, effect on a forward pass",
+          "coverage": "unique",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+          "canonicalHeading": "Когда неверный ответ вызван исполнением",
+          "action": "Исходная Figure5 сохранена; уточнены условия нормальных конечных float для множителя2^(±2^k)."
+        },
+        {
+          "sourceSection": "Fleet silent-error probability",
+          "coverage": "partial",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+          "canonicalHeading": "Когда неверный ответ вызван исполнением",
+          "action": "Сохранены график и необходимый для его чтения дискретный расчёт; нет второго вывода MTBF/Young–Daly/checkpoint механики."
+        },
+        {
+          "sourceSection": "Failure domains, ECC/hash/recompute, checkpoint and recovery",
+          "coverage": "covered",
+          "canonicalSource": "00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration.md",
+          "canonicalHeading": "Домены отказа и silent corruption",
+          "action": "Основное объяснение и восстановление остаются в44h; 19/05 задаёт контекст проверки правильности, а не повторный reliability учебник."
+        },
+        {
+          "sourceSection": "Robustness evaluation matrix and deployment process",
+          "coverage": "unique",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+          "canonicalHeading": "Как проверять устойчивость",
+          "action": "Сохранены все семь осей, метрики, условия атаки/fault injection и восемь шагов выпуска."
+        }
+      ],
+      "headingAliases": [
+        {
+          "sourceHeading": "Adversarial examples",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+          "canonicalHeading": "Атака на вход готовой модели"
+        },
+        {
+          "sourceHeading": "Adversarial training и сертификация",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+          "canonicalHeading": "Обучение против атак и проверка полученной защиты"
+        },
+        {
+          "sourceHeading": "Poisoning и backdoors",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+          "canonicalHeading": "Отравление обучающих данных и скрытые триггеры"
+        },
+        {
+          "sourceHeading": "System-level faults и silent corruption",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+          "canonicalHeading": "Когда неверный ответ вызван исполнением"
+        },
+        {
+          "sourceHeading": "Как оценивать robustness",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+          "canonicalHeading": "Как проверять устойчивость"
+        },
+        {
+          "sourceHeading": "Минимальный production-процесс",
+          "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+          "canonicalHeading": "Порядок проверки перед выпуском"
+        }
+      ]
+    }
+  ],
+  "canonicalSequence": [
+    {
+      "source": "00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment.md",
+      "role": "previous chapter"
+    },
+    {
+      "source": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+      "role": "ML threat models, leakage and defense"
+    },
+    {
+      "source": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+      "role": "shift, adversarial robustness, poisoning and execution-correctness tests"
+    }
+  ],
+  "singleOwnerPolicy": [
+    {
+      "topic": "Formal DP/Laplace/DP-SGD/composition",
+      "source": "00 Учебник/18 Evaluation и методология/59a Responsible systems.md",
+      "heading": "Приватность и дифференциальная приватность"
+    },
+    {
+      "topic": "PSI computation/binning/smoothing and quality monitoring",
+      "source": "00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md",
+      "heading": "Сдвиг распределения и изменение качества"
+    },
+    {
+      "topic": "Failure domains and checkpoint/recovery mechanics",
+      "source": "00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration.md",
+      "heading": "Домены отказа и silent corruption"
+    },
+    {
+      "topic": "Agent-specific prompt injection, policy mediation and actual tool effects",
+      "source": "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md",
+      "heading": "Модель угроз на примере работы с отчётом"
+    }
+  ],
+  "figureMap": [
+    {
+      "asset": "Assets/Sources/Harvard ML Systems/vol2/security_privacy/attack-surface-taxonomy.svg",
+      "sha256": "1c778d9336f37b6b467dbec677d58a4fbcb7f8d88e4ebfc8592619b4322e3328",
+      "harvardSource": "05 Источники/Courses/Harvard ML Systems/vol2/security_privacy.md",
+      "harvardLine": 49,
+      "harvardHeading": "Purpose",
+      "harvardCaption": "Figure 1: **ML System Attack Surface**: Visualizing entry points for adversarial actions across the ML lifecycle. Defense requires a multi-layered approach: protecting data collection (Data Layer), securing weights and training (Model Layer), hardening compute/network/orchestration (Infrastructure Layer), and validating frameworks, firmware, and hardware provenance (Supply Chain Layer).",
+      "reference": {
+        "source": "01 Справочник/Security и Robustness/01 Security и privacy.md",
+        "line": 29,
+        "heading": "Security и privacy ML-систем",
+        "excerpt": "*Поверхность атаки проходит через данные, модель, инфраструктуру и supply\nchain. Оригинальная Figure 1 из\n[Security & Privacy](https://mlsysbook.ai/vol2/security_privacy/security_privacy.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/security_privacy|локальная полная глава]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      "canonical": {
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+        "line": 22,
+        "heading": "Безопасность и приватность ML-систем",
+        "excerpt": "*Поверхность атаки проходит через данные, модель, инфраструктуру и supply\nchain. Оригинальная Figure 1 из\n[Security & Privacy](https://mlsysbook.ai/vol2/security_privacy/security_privacy.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/security_privacy|локальная полная глава]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      "bytesUnchanged": true,
+      "captionReview": "Исходный смысл и атрибуция сохранены; схема прочитана в контексте Harvard и проверена по неизменённому изображению."
+    },
+    {
+      "asset": "Assets/Sources/Harvard ML Systems/vol2/security_privacy/threat-prioritization-matrix.svg",
+      "sha256": "2735b82f85687dfa61188ad0294ecb67de4f1dd973fdaae669243415f49bf732",
+      "harvardSource": "05 Источники/Courses/Harvard ML Systems/vol2/security_privacy.md",
+      "harvardLine": 256,
+      "harvardHeading": "Threat prioritization framework",
+      "harvardCaption": "Figure 3: **Threat Prioritization Matrix**: A <span class=\"source-math-inline\"><span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.7278em;vertical-align:-0.0833em;\"></span><span class=\"mord\">2</span><span class=\"mord\"><span class=\"mord\">×</span></span><span class=\"mord\">2</span></span></span></span></span> matrix classifying ML threats by likelihood and impact. High-likelihood/high-impact threats (for example, data poisoning, prompt injection) deserve automated defenses. Low-likelihood/high-impact threats (for example, hardware side-channels) justify preparation in high-value deployments. High-likelihood/low-impact threats (for example, model extraction) are often addressed through rate limiting and API design.",
+      "reference": {
+        "source": "01 Справочник/Security и Robustness/01 Security и privacy.md",
+        "line": 62,
+        "heading": "Threat model до выбора защиты",
+        "excerpt": "*Матрица приоритетов показывает способ распределять инженерный бюджет, а не\nуниверсальный рейтинг угроз. Оригинальная Figure 3 из\n[Security & Privacy](https://mlsysbook.ai/vol2/security_privacy/security_privacy.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/security_privacy|локальный оригинал]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      "canonical": {
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+        "line": 55,
+        "heading": "Модель угроз: актив, доступ и наблюдаемый ущерб",
+        "excerpt": "*Матрица приоритетов показывает способ распределять инженерный бюджет, а не\nуниверсальный рейтинг угроз. Оригинальная Figure 3 из\n[Security & Privacy](https://mlsysbook.ai/vol2/security_privacy/security_privacy.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/security_privacy|локальный оригинал]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      "bytesUnchanged": true,
+      "captionReview": "Исходный смысл и атрибуция сохранены; схема прочитана в контексте Harvard и проверена по неизменённому изображению."
+    },
+    {
+      "asset": "Assets/Sources/Harvard ML Systems/vol2/security_privacy/security_privacy_output_leakage_ladder.svg",
+      "sha256": "115e0ef03f826bfdecf654f023f758f25f6f0b3eac907c42f7d90d4e1d188889",
+      "harvardSource": "05 Источники/Courses/Harvard ML Systems/vol2/security_privacy.md",
+      "harvardLine": 583,
+      "harvardHeading": "Defenses against model extraction",
+      "harvardCaption": "*Full distributions leak far more than top-k outputs.*",
+      "reference": {
+        "source": "01 Справочник/Security и Robustness/01 Security и privacy.md",
+        "line": 105,
+        "heading": "Membership inference и извлечение обучающих данных",
+        "excerpt": "*Увеличение подробности ответа повышает полезность API и одновременно объём\nутекающей информации. Оригинальная иллюстрация из\n[Security & Privacy](https://mlsysbook.ai/vol2/security_privacy/security_privacy.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/security_privacy|локальная полная глава]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      "canonical": {
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+        "line": 134,
+        "heading": "Установление участия записи и извлечение обучающих данных",
+        "excerpt": "*Увеличение подробности ответа повышает полезность API и одновременно объём\nдоступной противнику информации. В авторском примере сравниваются\n1000 оценок классов и только top-5: число возвращаемых оценок уменьшается\nв 200 раз. Это не доказательство 200-кратного уменьшения риска или\nчисла необходимых запросов. Оригинальная иллюстрация из\n[Security & Privacy](https://mlsysbook.ai/vol2/security_privacy/security_privacy.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/security_privacy|локальная полная глава]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      "bytesUnchanged": true,
+      "captionReview": "200x относится к числу возвращаемых оценок 1000/5, не к доказанному снижению риска извлечения."
+    },
+    {
+      "asset": "Assets/Sources/Harvard ML Systems/vol2/security_privacy/defense-stack.svg",
+      "sha256": "9308cf48b75e664ba2aeae032f2e5ce17d9dc2d7a400fa4c19242add962d6377",
+      "harvardSource": "05 Источники/Courses/Harvard ML Systems/vol2/security_privacy.md",
+      "harvardLine": 1166,
+      "harvardHeading": "Comprehensive Defense Architectures",
+      "harvardCaption": "Figure 18: **Layered Defense Stack**: Machine learning systems require multi-faceted security strategies that progress from foundational hardware protections to data-centric privacy techniques, building trust across all layers. This architecture integrates safeguards at the hardware, system, model, and data levels to mitigate threats and ensure robust deployment in production environments.",
+      "reference": {
+        "source": "01 Справочник/Security и Robustness/01 Security и privacy.md",
+        "line": 143,
+        "heading": "Defense in depth",
+        "excerpt": "*Многоуровневая защита покрывает данные, модель, deployment, runtime и\nаппаратную основу. Оригинальная иллюстрация из\n[Security & Privacy](https://mlsysbook.ai/vol2/security_privacy/security_privacy.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/security_privacy|локальная полная глава]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      "canonical": {
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+        "line": 173,
+        "heading": "Многоуровневая защита и реагирование",
+        "excerpt": "*Многоуровневая защита покрывает данные, модель, deployment, runtime и\nаппаратную основу. Оригинальная иллюстрация из\n[Security & Privacy](https://mlsysbook.ai/vol2/security_privacy/security_privacy.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/security_privacy|локальная полная глава]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      "bytesUnchanged": true,
+      "captionReview": "Исходный смысл и атрибуция сохранены; схема прочитана в контексте Harvard и проверена по неизменённому изображению."
+    },
+    {
+      "asset": "Assets/Sources/Harvard ML Systems/vol2/security_privacy/71393fab82f7333b27d3df80508ecbcfeca4b822.svg",
+      "sha256": "6c5c193626f5830be7f895868d9b5cf1487a2588894bc7dff37844aeb7030039",
+      "harvardSource": "05 Источники/Courses/Harvard ML Systems/vol2/security_privacy.md",
+      "harvardLine": 1727,
+      "harvardHeading": "Differential Privacy",
+      "harvardCaption": "Figure 24: **Differential Privacy Indistinguishability**: Differential privacy ensures that the probability distribution of an algorithm’s output on dataset <span class=\"source-math-inline\"><span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.6833em;\"></span><span class=\"mord mathnormal\" style=\"margin-right:0.0278em;\">D</span></span></span></span></span> is nearly identical to its output on an adjacent dataset <span class=\"source-math-inline\"><span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.7519em;\"></span><span class=\"mord\"><span class=\"mord mathnormal\" style=\"margin-right:0.0278em;\">D</span><span class=\"msupsub\"><span class=\"vlist-t\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.7519em;\"><span style=\"top:-3.063em;margin-right:0.05em;\"><span class=\"pstrut\" style=\"height:2.7em;\"></span><span class=\"sizing reset-size6 size3 mtight\"><span class=\"mord mtight\"><span class=\"mord mtight\">′</span></span></span></span></span></span></span></span></span></span></span></span></span>. This statistical indistinguishability (controlled by the privacy budget <span class=\"source-math-inline\"><span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.4306em;\"></span><span class=\"mord mathnormal\">ϵ</span></span></span></span></span>) prevents an observer from inferring whether any single individual’s data was included in the training set.",
+      "reference": {
+        "source": "01 Справочник/Security и Robustness/01 Security и privacy.md",
+        "line": 236,
+        "heading": "Дифференциальная приватность",
+        "excerpt": "*DP-SGD: per-example clipping предшествует агрегации и добавлению шума.\nОригинальная иллюстрация из\n[Security & Privacy](https://mlsysbook.ai/vol2/security_privacy/security_privacy.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/security_privacy|локальный оригинал]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      "canonical": {
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+        "line": 230,
+        "heading": "Что именно гарантирует приватность",
+        "excerpt": "*Сравнение распределений результата случайного алгоритма на соседних\nнаборах $D$ и $D'$. Это Figure 24, Differential Privacy Indistinguishability\nиз [Harvard Security & Privacy](https://mlsysbook.ai/vol2/security_privacy/security_privacy.html#fig-differential-privacy),\nCC BY-NC-SA 4.0; исходный SVG сохранён без изменений.*"
+      },
+      "bytesUnchanged": true,
+      "captionReview": "Старая подпись называла рисунок алгоритмом DP-SGD. Это сравнение распределений A(D), A(D′), Harvard Figure 24. Исправлена подпись и объяснено различие pure DP / (epsilon,delta)-DP."
+    },
+    {
+      "asset": "Assets/Sources/Harvard ML Systems/vol2/robust_ai/f379357456b6019c3804c10b13f2b37a9769547e.svg",
+      "sha256": "d2d3e4a421014562c4204be291d0b5f1891908821370525aaceeae759bbd3740",
+      "harvardSource": "05 Источники/Courses/Harvard ML Systems/vol2/robust_ai.md",
+      "harvardLine": 265,
+      "harvardHeading": "The three pillars of robust AI",
+      "harvardCaption": "Figure 7: **Three Pillars Framework**: The three core categories of robustness challenges that AI systems must address to ensure reliable operation in real-world deployments. A robust AI system is built upon effectively handling these three challenge areas.",
+      "reference": {
+        "source": "01 Справочник/Security и Robustness/02 Robustness.md",
+        "line": 30,
+        "heading": "Три источника нарушения устойчивости",
+        "excerpt": "*Environmental shift, input-level attacks и system-level faults требуют разных\nсигналов и защит. Оригинальная Figure 7 из\n[Robust AI](https://mlsysbook.ai/vol2/robust_ai/robust_ai.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/robust_ai|локальная полная глава]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      "canonical": {
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "line": 23,
+        "heading": "Три источника нарушения устойчивости",
+        "excerpt": "*Environmental shift, input-level attacks и system-level faults требуют разных\nсигналов и защит. Оригинальная Figure 7 из\n[Robust AI](https://mlsysbook.ai/vol2/robust_ai/robust_ai.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/robust_ai|локальная полная глава]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      "bytesUnchanged": true,
+      "captionReview": "Исходный смысл и атрибуция сохранены; схема прочитана в контексте Harvard и проверена по неизменённому изображению."
+    },
+    {
+      "asset": "Assets/Sources/Harvard ML Systems/vol2/robust_ai/shift-types.svg",
+      "sha256": "7d7f90de96349d143210fc4d63a2dde349ab9ebd75d16ab9c4e3e8cfae04b966",
+      "harvardSource": "05 Источники/Courses/Harvard ML Systems/vol2/robust_ai.md",
+      "harvardLine": 406,
+      "harvardHeading": "Distribution shift and concept drift",
+      "harvardCaption": "Figure 9: **Types of Distribution Shift**: Comparison of covariate shift (<span class=\"source-math-inline\"><span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:1em;vertical-align:-0.25em;\"></span><span class=\"mord mathnormal\">p</span><span class=\"mopen\">(</span><span class=\"mord mathnormal\">x</span><span class=\"mclose\">)</span></span></span></span></span> changes), label shift (<span class=\"source-math-inline\"><span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:1em;vertical-align:-0.25em;\"></span><span class=\"mord mathnormal\">p</span><span class=\"mopen\">(</span><span class=\"mord mathnormal\" style=\"margin-right:0.0359em;\">y</span><span class=\"mclose\">)</span></span></span></span></span> changes), and concept drift (<span class=\"source-math-inline\"><span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:1em;vertical-align:-0.25em;\"></span><span class=\"mord mathnormal\">p</span><span class=\"mopen\">(</span><span class=\"mord mathnormal\" style=\"margin-right:0.0359em;\">y</span><span class=\"mspace\" style=\"margin-right:0.2778em;\"></span><span class=\"mrel\">∣</span><span class=\"mspace\" style=\"margin-right:0.2778em;\"></span></span><span class=\"base\"><span class=\"strut\" style=\"height:1em;vertical-align:-0.25em;\"></span><span class=\"mord mathnormal\">x</span><span class=\"mclose\">)</span></span></span></span></span> changes). Understanding the specific type of shift is crucial for selecting the correct adaptation strategy (for example, importance re-weighting vs. model retraining).",
+      "reference": {
+        "source": "01 Справочник/Security и Robustness/02 Robustness.md",
+        "line": 68,
+        "heading": "Distribution shift и concept drift",
+        "excerpt": "*Различие сдвига входов, частот классов и условной зависимости. Оригинальная\nиллюстрация из\n[Robust AI](https://mlsysbook.ai/vol2/robust_ai/robust_ai.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/robust_ai|локальный оригинал]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      "canonical": {
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "line": 72,
+        "heading": "Distribution shift и concept drift",
+        "excerpt": "*Различие сдвига входов, частот классов и условной зависимости. Оригинальная\nиллюстрация из\n[Robust AI](https://mlsysbook.ai/vol2/robust_ai/robust_ai.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/robust_ai|локальный оригинал]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      "bytesUnchanged": true,
+      "captionReview": "В исходной панели (b) ошибочно написано same p(Y|X) для label shift. SVG сохранён byte-for-byte; пояснение рядом задаёт правильную предпосылку p(X|Y) и изменение p(Y|X)."
+    },
+    {
+      "asset": "Assets/Sources/Harvard ML Systems/vol2/robust_ai/robust_ai_psi_drift_knee.svg",
+      "sha256": "7be3f303dd6dd5efe38afa0e613e5cd12ed88454e404a9683b1ef530f4e1c605",
+      "harvardSource": "05 Источники/Courses/Harvard ML Systems/vol2/robust_ai.md",
+      "harvardLine": 654,
+      "harvardHeading": "Level 2: Performance correlation",
+      "harvardCaption": "*Drift stays benign until the index crosses a threshold; past the knee, reliability degrades fast.*",
+      "reference": {
+        "source": "01 Справочник/Security и Robustness/02 Robustness.md",
+        "line": 112,
+        "heading": "Distribution shift и concept drift",
+        "excerpt": "*PSI становится полезен после привязки статистического сдвига к операционному\nдействию. Оригинальная иллюстрация из\n[Robust AI](https://mlsysbook.ai/vol2/robust_ai/robust_ai.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/robust_ai|локальная полная глава]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      "canonical": {
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "line": 104,
+        "heading": "Distribution shift и concept drift",
+        "excerpt": "*Иллюстративная зависимость надёжности от индекса сдвига из\n[[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/robust_ai#Retraining decision framework|Harvard Robust AI, Retraining decision framework]],\nCC BY-NC-SA 4.0. Исходный SVG без изменений. Изгиб выбранной автором кривой\nне задаёт универсального порога PSI и не доказывает, что малый PSI безопасен.*"
+      },
+      "bytesUnchanged": true,
+      "captionReview": "Сохранена авторская иллюстративная кривая; её изгиб не выдан за универсальный PSI-порог."
+    },
+    {
+      "asset": "Assets/Sources/Harvard ML Systems/vol2/robust_ai/gradient-attack.svg",
+      "sha256": "766d1977a930b864e3551b540382cf074d7b8aa1061e4f4509559fb1d4ff89b2",
+      "harvardSource": "05 Источники/Courses/Harvard ML Systems/vol2/robust_ai.md",
+      "harvardLine": 780,
+      "harvardHeading": "Attack categories and mechanisms",
+      "harvardCaption": "Figure 13: **Adversarial Perturbations**: Gradient-based attacks generate subtle, intentionally crafted input noise with magnitude controlled by <span class=\"source-math-inline\"><span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.4306em;\"></span><span class=\"mord mathnormal\">ϵ</span></span></span></span></span> that maximizes the loss function <span class=\"source-math-inline\"><span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:1em;vertical-align:-0.25em;\"></span><span class=\"mord mathcal\">L</span><span class=\"mopen\">(</span><span class=\"mord mathnormal\" style=\"margin-right:0.0278em;\">θ</span><span class=\"mpunct\">,</span><span class=\"mspace\" style=\"margin-right:0.1667em;\"></span><span class=\"mord mathnormal\">x</span><span class=\"mpunct\">,</span><span class=\"mspace\" style=\"margin-right:0.1667em;\"></span><span class=\"mord mathnormal\" style=\"margin-right:0.0359em;\">y</span><span class=\"mclose\">)</span></span></span></span></span> and causes misclassification by the model. These perturbations, imperceptible to humans, exploit model vulnerabilities by moving the input <span class=\"source-math-inline\"><span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.4306em;\"></span><span class=\"mord mathnormal\">x</span></span></span></span></span> across the decision boundary. Source: adapted from a gradient-based-attacks tutorial at defence.AI.",
+      "reference": {
+        "source": "01 Справочник/Security и Robustness/02 Robustness.md",
+        "line": 163,
+        "heading": "Adversarial examples",
+        "excerpt": "*Gradient-based атака движет вход в сторону роста loss, сохраняя ограничение на\nperturbation. Оригинальная иллюстрация из\n[Robust AI](https://mlsysbook.ai/vol2/robust_ai/robust_ai.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/robust_ai|локальный оригинал]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      "canonical": {
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "line": 173,
+        "heading": "Атака на вход готовой модели",
+        "excerpt": "*Схематический шаг FGSM: градиент берут по входу, а не по весам.\nПоказанные классы, confidence и $\\varepsilon$ принадлежат авторской\nиллюстрации; незаметность зависит от масштаба и преобразований изображения.\nОригинальная иллюстрация из\n[Robust AI](https://mlsysbook.ai/vol2/robust_ai/robust_ai.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/robust_ai|локальный оригинал]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      "bytesUnchanged": true,
+      "captionReview": "Исходный смысл и атрибуция сохранены; схема прочитана в контексте Harvard и проверена по неизменённому изображению."
+    },
+    {
+      "asset": "Assets/Sources/Harvard ML Systems/vol2/robust_ai/robust_ai_robustness_tax.svg",
+      "sha256": "0f33c7f2eceecf84782edf8d432931c7e373fda0a8056d3df0aa81546ccfc594",
+      "harvardSource": "05 Источники/Courses/Harvard ML Systems/vol2/robust_ai.md",
+      "harvardLine": 1005,
+      "harvardHeading": "Adversarial defense workflow",
+      "harvardCaption": "*Adversarial robustness costs roughly 26 points of clean accuracy.*",
+      "reference": {
+        "source": "01 Справочник/Security и Robustness/02 Robustness.md",
+        "line": 207,
+        "heading": "Adversarial training и сертификация",
+        "excerpt": "*Таксономия различает эмпирические и сертифицированные защиты и не позволяет\nсводить их к одному показателю. Оригинальная иллюстрация из\n[Robust AI](https://mlsysbook.ai/vol2/robust_ai/robust_ai.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/robust_ai|локальная полная глава]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      "canonical": {
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "line": 228,
+        "heading": "Обучение против атак и проверка полученной защиты",
+        "excerpt": "*В примере Harvard сравниваются два значения **clean Top-1 accuracy**:\n76% у обычного ResNet-50 и около 50% у модели после adversarial training\nс бюджетом $\\varepsilon=8/255$. Это иллюстрация из\n[[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/robust_ai#Adversarial defense workflow|Robust AI, The robustness tax]],\nCC BY-NC-SA 4.0; исходный SVG сохранён. Это не таксономия защит и не\nсравнение clean accuracy с robust accuracy. Без полного протокола числа\nнельзя переносить на другую модель или бюджет атаки.*"
+      },
+      "bytesUnchanged": true,
+      "captionReview": "Старая подпись называла два столбца таксономией эмпирических и сертифицированных защит. Это сравнение clean accuracy 76% / ~50% из авторского robustness-tax примера. Исправлена подпись, обозначены границы переноса чисел."
+    },
+    {
+      "asset": "Assets/Sources/Harvard ML Systems/vol2/robust_ai/0d8106a3c7ca65302fa306b4b86e5170bc79e78f.svg",
+      "sha256": "96ffaf898add5d1c926ac38c4358f49d1f9bc4a28fb837e87cd8a63b68dab163",
+      "harvardSource": "05 Источники/Courses/Harvard ML Systems/vol2/robust_ai.md",
+      "harvardLine": 1155,
+      "harvardHeading": "Data Poisoning Defenses",
+      "harvardCaption": "Figure 20: **Data Poisoning Attack**: Adversaries inject malicious data into the training set to manipulate model behavior, potentially causing misclassification or performance degradation during deployment. This attack emphasizes the vulnerability of machine learning systems to compromised data integrity and the need for robust data validation techniques. Source: adapted from a *Mathematics* 12(2):247 illustration.",
+      "reference": {
+        "source": "01 Справочник/Security и Robustness/02 Robustness.md",
+        "line": 238,
+        "heading": "Poisoning и backdoors",
+        "excerpt": "*Защита от poisoning начинается на входе данных и продолжается в\nпредставлениях, objective и аудите. Оригинальная иллюстрация из\n[Robust AI](https://mlsysbook.ai/vol2/robust_ai/robust_ai.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/robust_ai|локальный оригинал]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      "canonical": {
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "line": 298,
+        "heading": "Отравление обучающих данных и скрытые триггеры",
+        "excerpt": "*Схема Data Poisoning Attack: противник добавляет данные, после обучения\nпоявляется отравленная модель, а защищающая сторона анализирует данные\nи повторяет обучение. Исходная Figure 20 из\n[Robust AI](https://mlsysbook.ai/vol2/robust_ai/robust_ai.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/robust_ai|локальный оригинал]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      "bytesUnchanged": true,
+      "captionReview": "Подпись уточнена по Figure 20: схема отравления данных и повторного обучения, а не таксономия всех механизмов защиты."
+    },
+    {
+      "asset": "Assets/Sources/Harvard ML Systems/vol2/robust_ai/weight-corruption.svg",
+      "sha256": "3f2c0df7969c61becbc465ba15a891888b3e5289e7f92c44e6f083d10d05ecdf",
+      "harvardSource": "05 Источники/Courses/Harvard ML Systems/vol2/robust_ai.md",
+      "harvardLine": 243,
+      "harvardHeading": "From ML performance to system reliability",
+      "harvardCaption": "Figure 5: **Weight Corruption via Bit Flip**: A neural-network forward-pass diagram (left) shows a BIT FLIP on one weight, turning a normal path into a corrupted path whose error propagates to the outputs. The weight-value histogram (right) shows a single corrupted weight landing at the extreme <span class=\"source-math-inline\"><span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.8491em;\"></span><span class=\"mord\">1</span><span class=\"mord\"><span class=\"mord\">0</span><span class=\"msupsub\"><span class=\"vlist-t\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.8491em;\"><span style=\"top:-3.063em;margin-right:0.05em;\"><span class=\"pstrut\" style=\"height:2.7em;\"></span><span class=\"sizing reset-size6 size3 mtight\"><span class=\"mord mathnormal mtight\" style=\"margin-right:0.0315em;\">k</span></span></span></span></span></span></span></span></span></span></span></span> tail, far outside the normal distribution. Flipping an exponent bit with place value <span class=\"source-math-inline\"><span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:0.8491em;\"></span><span class=\"mord\"><span class=\"mord\">2</span><span class=\"msupsub\"><span class=\"vlist-t\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.8491em;\"><span style=\"top:-3.063em;margin-right:0.05em;\"><span class=\"pstrut\" style=\"height:2.7em;\"></span><span class=\"sizing reset-size6 size3 mtight\"><span class=\"mord mathnormal mtight\" style=\"margin-right:0.0315em;\">k</span></span></span></span></span></span></span></span></span></span></span></span> in IEEE 754 changes the value by a factor of <span class=\"source-math-inline\"><span class=\"katex\"><span class=\"katex-html\" aria-hidden=\"true\"><span class=\"base\"><span class=\"strut\" style=\"height:1.0119em;\"></span><span class=\"mord\"><span class=\"mord\">2</span><span class=\"msupsub\"><span class=\"vlist-t\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:1.0119em;\"><span style=\"top:-3.063em;margin-right:0.05em;\"><span class=\"pstrut\" style=\"height:2.7em;\"></span><span class=\"sizing reset-size6 size3 mtight\"><span class=\"mord mtight\"><span class=\"mord mtight\">±</span><span class=\"mord mtight\"><span class=\"mord mtight\">2</span><span class=\"msupsub\"><span class=\"vlist-t\"><span class=\"vlist-r\"><span class=\"vlist\" style=\"height:0.927em;\"><span style=\"top:-2.931em;margin-right:0.0714em;\"><span class=\"pstrut\" style=\"height:2.5em;\"></span><span class=\"sizing reset-size3 size1 mtight\"><span class=\"mord mathnormal mtight\" style=\"margin-right:0.0315em;\">k</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span>, saturating downstream neurons and causing silent misclassification.",
+      "reference": {
+        "source": "01 Справочник/Security и Robustness/02 Robustness.md",
+        "line": 274,
+        "heading": "System-level faults и silent corruption",
+        "excerpt": "*Одна ошибка в разряде exponent выводит вес далеко за обычное распределение и\nраспространяет искажение по forward pass. Оригинальная Figure 5 из\n[Robust AI](https://mlsysbook.ai/vol2/robust_ai/robust_ai.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/robust_ai|локальная полная глава]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      "canonical": {
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "line": 341,
+        "heading": "Когда неверный ответ вызван исполнением",
+        "excerpt": "*Одна ошибка в разряде exponent выводит вес далеко за обычное распределение и\nраспространяет искажение по forward pass. Оригинальная Figure 5 из\n[Robust AI](https://mlsysbook.ai/vol2/robust_ai/robust_ai.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/robust_ai|локальная полная глава]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      "bytesUnchanged": true,
+      "captionReview": "Исходный смысл и атрибуция сохранены; схема прочитана в контексте Harvard и проверена по неизменённому изображению."
+    },
+    {
+      "asset": "Assets/Sources/Harvard ML Systems/vol2/robust_ai/cell-4-output-1.png",
+      "sha256": "3e4d56e367ff98bf2647a503d16e90366e66c46507383aa939cb6c6d380ff2c5",
+      "harvardSource": "05 Источники/Courses/Harvard ML Systems/vol2/robust_ai.md",
+      "harvardLine": 255,
+      "harvardHeading": "From ML performance to system reliability",
+      "harvardCaption": "Figure 6: **Silent Error Probability at Scale**: Probability of at least one silent data corruption event per hour as a function of cluster size, for three illustrative per-device error rates. The curves show how quickly cluster-scale probabilities compound as per-device rates increase.",
+      "reference": {
+        "source": "01 Справочник/Security и Robustness/02 Robustness.md",
+        "line": 295,
+        "heading": "System-level faults и silent corruption",
+        "excerpt": "*Вероятность хотя бы одной silent corruption быстро растёт с числом устройств.\nОригинальный расчёт и график из\n[Robust AI](https://mlsysbook.ai/vol2/robust_ai/robust_ai.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/robust_ai|локальная полная глава]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      "canonical": {
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "line": 362,
+        "heading": "Когда неверный ответ вызван исполнением",
+        "excerpt": "*Авторский расчёт вероятности хотя бы одного события при росте числа\nустройств. Вывод зависит от вероятностей и предпосылок расчёта, а не только\nот размера парка. Оригинальный график из\n[Robust AI](https://mlsysbook.ai/vol2/robust_ai/robust_ai.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/robust_ai|локальная полная глава]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      "bytesUnchanged": true,
+      "captionReview": "Исходный смысл и атрибуция сохранены; схема прочитана в контексте Harvard и проверена по неизменённому изображению."
+    }
+  ],
+  "readSources": [
+    {
+      "source": "01 Справочник/Security и Robustness/01 Security и privacy.md",
+      "scope": "entire article",
+      "sha256": "9c590a886aa99f00eb28f8d0190a5016a854eeba5aa034a27baeed68157af527"
+    },
+    {
+      "source": "01 Справочник/Security и Robustness/02 Robustness.md",
+      "scope": "entire article",
+      "sha256": "8877b9174d7ef2de8c071bf2b0a3795c3da38d8fb789efd2222e39446e759ce0"
+    },
+    {
+      "source": "00 Учебник/18 Evaluation и методология/59a Responsible systems.md",
+      "scope": "entire chapter before edit; changed DP subsection reread after edit",
+      "beforeSha256": "6ba6e205b27037d40ae02ad0b43ca09d3c9e1e9dbcc4979809829ff5ffd7745d",
+      "afterSha256": "b0f72ba4a3322be3f20efdb35950fecb65482cd4fdea8e414d5947ab46f72ce5"
+    },
+    {
+      "source": "00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md",
+      "scope": "entire 2817-line chapter before edit; changed drift subsection reread after edit",
+      "beforeSha256": "16e7174177cbe112cc35562f557554368f4d23eb3bc74e5651ac70a6ea4360bb",
+      "afterSha256": "e7cfbc4f4fd01784dbb52ee6dc3a3636c389a796a973603fbbea16b0b00e1711"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration.md",
+      "scope": "sections only: Почему большой запуск прерывается чаще; Домены отказа и silent corruption; Падение, зависание и неверный результат; Как обнаруживать остановку обучения; Медленный участник и цена его замены"
+    },
+    {
+      "source": "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md",
+      "scope": "sections only: lines1–410 and639–804, including threat model, injection/AgentPoison, layered defenses, information flow and DataSentinel; no claim of fresh full Progent re-audit"
+    },
+    {
+      "source": "00 Учебник/00 Математические и ML-основания/04 Функции потерь.md",
+      "scope": "Cross-entropy, entropy и KL divergence section read; full heading/term inventory checked for Huber, absent"
+    },
+    {
+      "source": "05 Источники/Courses/Harvard ML Systems/vol2/security_privacy.md",
+      "sha256": "19b3ad5a7c34546b5662e361a5c76c44914c038de32ceace68fde0c99db2707f",
+      "scope": "selected source mechanisms and all13 figure captions/context; not a new full-course ingestion acceptance"
+    },
+    {
+      "source": "05 Источники/Courses/Harvard ML Systems/vol2/robust_ai.md",
+      "sha256": "389f32e9301de11958578c7eb05b54407ea8bdf1a9d3f71f78a17d1bb56ccc42",
+      "scope": "selected source mechanisms and all13 figure captions/context; not a new full-course ingestion acceptance"
+    },
+    {
+      "source": "https://arxiv.org/html/1706.06083",
+      "scope": "minimax, FGSM/PGD equations and outer update, §§2.1,3.3"
+    },
+    {
+      "source": "https://arxiv.org/html/1607.00133v2",
+      "scope": "§3.1 and Algorithm1"
+    },
+    {
+      "source": "https://proceedings.mlr.press/v97/cohen19c.html",
+      "scope": "primary randomized-smoothing paper record/abstract; deeper explanation also checked against the imported Harvard section"
+    },
+    {
+      "source": "https://proceedings.mlr.press/v80/athalye18a.html",
+      "scope": "primary gradient-masking paper record/abstract; diagnostic explanation checked against Harvard and legacy article"
+    },
+    {
+      "source": "https://www.usenix.org/conference/usenixsecurity16/technical-sessions/presentation/tramer",
+      "scope": "primary extraction paper record"
+    },
+    {
+      "source": "https://arxiv.org/abs/1412.6572",
+      "scope": "primary FGSM paper record"
+    },
+    {
+      "source": "https://proceedings.mlr.press/v80/lipton18a.html",
+      "scope": "Primary label-shift definition p(y) changes, p(x|y) invariant; paper record and introduction excerpt read."
+    }
+  ],
+  "verifiedExamples": [
+    {
+      "example": "sigmoid(log3)=.75; b=0 at p(0)=.5",
+      "result": "passed Python arithmetic"
+    },
+    {
+      "example": "user-level Laplace scales 1/.5=2,20/.5=40;120+1.4=121.4",
+      "result": "passed Python arithmetic"
+    },
+    {
+      "example": "DP-SGD clip(3,4),C=2 ->(1.2,1.6); mean with(0,1)->(.6,1.3)",
+      "result": "passed NumPy assertions"
+    },
+    {
+      "example": "FGSM l-infinity(.1,.1) vs l2(.06,.08), radius.1",
+      "result": "passed NumPy norm assertions"
+    },
+    {
+      "example": "PSI(.5,.5; .75,.25)=.2746530721670274; alpha=.5 from counts ->.2686767831907422",
+      "result": "both actual Python blocks of the MLOps drift section executed successfully"
+    },
+    {
+      "example": "1-(1-1e-4)^10000=.6321389535670701",
+      "result": "passed stable Python expm1/log1p assertion"
+    },
+    {
+      "example": "Huber delta1, residual10/100 ->residual derivative1, not10/100",
+      "result": "piecewise residual-gradient branches executed in Python, plus source and interpretation review"
+    }
+  ],
+  "checks": {
+    "newChaptersWholeTextReread": true,
+    "noAiSlopReview": "Mechanism-first context, concrete scoped examples; source excerpts and unchanged source figures not style-rewritten.",
+    "math": "62 new-chapter expressions and19 transferred DP/PSI expressions parsed successfully by KaTeX0.16.47; no standalone single-dollar display delimiters.",
+    "localLinks": "49 new-chapter wiki links/embeds, including13 figures, resolved; every explicit local heading checked against source. Parent must verify final public-route rewriting.",
+    "figures": "13/13 original asset references preserved; no source image bytes changed; source labels inspected, derived contact sheet visually reviewed.",
+    "reverseDeltas": "Responsible and MLOps exact changes reverse to recorded before SHA256.",
+    "visualQa": {
+      "sourceAssetContactSheet": ".cache/security-consolidation-qa/contact.png",
+      "browser": "not yet run: new pages await parent manifest/navigation wiring"
+    },
+    "newEnglishTranslations": false,
+    "referenceOriginalsEdited": false,
+    "committed": false,
+    "published": false,
+    "unitTest": {
+      "command": "pnpm --dir publishing exec vitest run tests/math-reflow.test.ts",
+      "result": "1 test file,3 tests passed"
+    }
+  },
+  "remainingParentWork": [
+    "Add the two canonical files to deployment module navigation and linear reading order.",
+    "Apply aliases for both old reference paths and their renamed/DP cross-page headings; preserve existing original snapshots.",
+    "Include security-consolidation-additions.json in revision/baseline reverse chains before earlier CS336/serving baselines.",
+    "Rebuild and inspect final desktop/mobile routes, figures, math, previous/next and old reference redirects.",
+    "Do not claim all Harvard Security/Robust AI knowledge newly ingested: this pass integrates the two previously published reference articles and checked mechanisms; complete original English chapters remain source material."
+  ],
+  "proseRevisions": [
+    {
+      "id": "2026-10-29-security-prose",
+      "date": "2026-10-29",
+      "deltaFile": "docs/audit/2026-10-29-security-prose-additions.json",
+      "files": [
+        {
+          "source": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+          "before_sha256": "f86ccfcc15ff468c8b29843ee1b9984315cad8f9c751a9a5aa3405283f1df794",
+          "after_sha256": "b9dc519d8a0c8c04c157f4e96a4ad4c0dc1549273588d9b4d0d54cf282603131"
+        },
+        {
+          "source": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+          "before_sha256": "e0db3f27372fedb3fd65433c52aea8138eb2260fa5bb9c35ea4bb766335488c9",
+          "after_sha256": "36dce79e4885a8b9f7bd7a9134e4d1def07e6273652fc5d755d61633f2037209"
+        }
+      ],
+      "headingRenames": [
+        {
+          "source": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+          "before": "Компромиссы privacy–utility",
+          "after": "Приватность, качество и затраты",
+          "retainedAnchor": "компромиссы-privacyutility"
+        },
+        {
+          "source": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+          "before": "Минимальный security review",
+          "after": "Проверка безопасности перед выпуском",
+          "retainedAnchor": "минимальный-security-review"
+        },
+        {
+          "source": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+          "before": "Distribution shift и concept drift",
+          "after": "Сдвиг распределения и изменение зависимости между входом и ответом",
+          "retainedAnchor": "distribution-shift-и-concept-drift"
+        }
+      ],
+      "wholeChaptersReread": true,
+      "scope": "Final prose editing of both new canonical chapters; no new factual mechanisms, formulas, examples, source material or illustration assets."
+    }
+  ],
+  "currentRevision": {
+    "id": "2026-10-29-security-prose",
+    "deltaFile": "docs/audit/2026-10-29-security-prose-additions.json",
+    "status": "prose reviewed; final publication acceptance remains with parent",
+    "files": [
+      {
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+        "sha256": "b9dc519d8a0c8c04c157f4e96a4ad4c0dc1549273588d9b4d0d54cf282603131",
+        "lines": 351,
+        "wholeTextReread": true
+      },
+      {
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "sha256": "36dce79e4885a8b9f7bd7a9134e4d1def07e6273652fc5d755d61633f2037209",
+        "lines": 483,
+        "wholeTextReread": true
+      }
+    ],
+    "topics": [
+      {
+        "sourceSection": "Введение: security / privacy",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+        "canonicalHeading": "Безопасность и приватность ML-систем",
+        "coverage": "partial"
+      },
+      {
+        "sourceSection": "Threat model до выбора защиты; black/gray/white-box; likelihood/impact",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+        "canonicalHeading": "Модель угроз: актив, доступ и наблюдаемый ущерб",
+        "coverage": "unique"
+      },
+      {
+        "sourceSection": "Угрозы по жизненному циклу; data/model/API/infrastructure",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+        "canonicalHeading": "Угрозы по жизненному циклу",
+        "coverage": "unique"
+      },
+      {
+        "sourceSection": "MIG/MPS/time-slicing и tenant isolation",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md",
+        "canonicalHeading": "A GPU resource name does not specify its isolation",
+        "coverage": "covered"
+      },
+      {
+        "sourceSection": "Model extraction и model theft",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+        "canonicalHeading": "Извлечение модели и кража весов",
+        "coverage": "unique"
+      },
+      {
+        "sourceSection": "Membership inference, training-data extraction, de-identification, canary audit",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+        "canonicalHeading": "Установление участия записи и извлечение обучающих данных",
+        "coverage": "partial"
+      },
+      {
+        "sourceSection": "Poisoning, backdoor и adversarial input",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "canonicalHeading": "Отравление обучающих данных и скрытые триггеры",
+        "coverage": "partial"
+      },
+      {
+        "sourceSection": "LLM prompt injection, poisoned retrieval, tool authorization",
+        "canonicalSource": "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md",
+        "canonicalHeading": "Модель угроз на примере работы с отчётом",
+        "coverage": "covered"
+      },
+      {
+        "sourceSection": "Defense in depth, минимальная поверхность, fail-safe defaults",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+        "canonicalHeading": "Многоуровневая защита и реагирование",
+        "coverage": "unique"
+      },
+      {
+        "sourceSection": "DP definition, adjacency, Laplace sensitivity, post-processing",
+        "canonicalSource": "00 Учебник/18 Evaluation и методология/59a Responsible systems.md",
+        "canonicalHeading": "Приватность и дифференциальная приватность",
+        "coverage": "covered"
+      },
+      {
+        "sourceSection": "Численные примеры Laplace (120+1.4, eps=.5, per-user20 events)",
+        "canonicalSource": "00 Учебник/18 Evaluation и методология/59a Responsible systems.md",
+        "canonicalHeading": "Приватность и дифференциальная приватность",
+        "coverage": "unique"
+      },
+      {
+        "sourceSection": "DP-SGD explicit aggregate equation and record/user distinction",
+        "canonicalSource": "00 Учебник/18 Evaluation и методология/59a Responsible systems.md",
+        "canonicalHeading": "Приватность и дифференциальная приватность",
+        "coverage": "unique"
+      },
+      {
+        "sourceSection": "Composition, global budget, post-processing",
+        "canonicalSource": "00 Учебник/18 Evaluation и методология/59a Responsible systems.md",
+        "canonicalHeading": "Приватность и дифференциальная приватность",
+        "coverage": "covered"
+      },
+      {
+        "sourceSection": "Federated gradients / secure aggregation / DP",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment.md",
+        "canonicalHeading": "Edge и federated deployment",
+        "coverage": "partial"
+      },
+      {
+        "sourceSection": "Privacy–utility, cost/fairness implications, risk-control table",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+        "canonicalHeading": "Приватность, качество и затраты",
+        "coverage": "unique"
+      },
+      {
+        "sourceSection": "Deletion/unlearning workflow",
+        "canonicalSource": "00 Учебник/18 Evaluation и методология/59a Responsible systems.md",
+        "canonicalHeading": "Удаление данных и machine unlearning",
+        "coverage": "covered"
+      },
+      {
+        "sourceSection": "Минимальный security review",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+        "canonicalHeading": "Проверка безопасности перед выпуском",
+        "coverage": "unique"
+      },
+      {
+        "sourceSection": "Введение и три источника нарушения устойчивости",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "canonicalHeading": "Три источника нарушения устойчивости",
+        "coverage": "unique"
+      },
+      {
+        "sourceSection": "Covariate / label(prior) / concept shift",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "canonicalHeading": "Сдвиг распределения и изменение зависимости между входом и ответом",
+        "coverage": "partial"
+      },
+      {
+        "sourceSection": "Мониторинг без меток, delayed labels, cohorts, windows, multiple checks",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md",
+        "canonicalHeading": "Наблюдаемость сервиса, данных, модели и продукта",
+        "coverage": "covered"
+      },
+      {
+        "sourceSection": "PSI formula, .275 example, zero bins, alpha smoothing",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md",
+        "canonicalHeading": "Сдвиг распределения и изменение качества",
+        "coverage": "partial"
+      },
+      {
+        "sourceSection": "KL formula",
+        "canonicalSource": "00 Учебник/00 Математические и ML-основания/04 Функции потерь.md",
+        "canonicalHeading": "Cross-entropy, entropy и KL divergence",
+        "coverage": "covered"
+      },
+      {
+        "sourceSection": "JS / KS / MMD comparison roles",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "canonicalHeading": "Сдвиг распределения и изменение зависимости между входом и ответом",
+        "coverage": "unique"
+      },
+      {
+        "sourceSection": "PSI-knee illustration and response to drift",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "canonicalHeading": "Сдвиг распределения и изменение зависимости между входом и ответом",
+        "coverage": "partial"
+      },
+      {
+        "sourceSection": "FGSM, linearized loss and l-infinity/l2 worked example",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "canonicalHeading": "Атака на вход готовой модели",
+        "coverage": "unique"
+      },
+      {
+        "sourceSection": "PGD norm-specific step/projection, targeted/untargeted, white/black-box",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "canonicalHeading": "Атака на вход готовой модели",
+        "coverage": "unique"
+      },
+      {
+        "sourceSection": "Minimax adversarial training, cost and clean trade-off",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "canonicalHeading": "Обучение против атак и проверка полученной защиты",
+        "coverage": "unique"
+      },
+      {
+        "sourceSection": "Adaptive attacks and gradient masking",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "canonicalHeading": "Обучение против атак и проверка полученной защиты",
+        "coverage": "unique"
+      },
+      {
+        "sourceSection": "Certified robustness and randomized smoothing",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "canonicalHeading": "Что даёт сертификат",
+        "coverage": "unique"
+      },
+      {
+        "sourceSection": "Poisoning/backdoors/federated malicious updates, provenance",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "canonicalHeading": "Отравление обучающих данных и скрытые триггеры",
+        "coverage": "unique"
+      },
+      {
+        "sourceSection": "Spectral signatures / influence / robust aggregation",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "canonicalHeading": "Отравление обучающих данных и скрытые триггеры",
+        "coverage": "unique"
+      },
+      {
+        "sourceSection": "Huber loss, residual gradient cap and counterexample",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "canonicalHeading": "Отравление обучающих данных и скрытые триггеры",
+        "coverage": "unique"
+      },
+      {
+        "sourceSection": "Bit flip in exponent, effect on a forward pass",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "canonicalHeading": "Когда неверный ответ вызван исполнением",
+        "coverage": "unique"
+      },
+      {
+        "sourceSection": "Fleet silent-error probability",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "canonicalHeading": "Когда неверный ответ вызван исполнением",
+        "coverage": "partial"
+      },
+      {
+        "sourceSection": "Failure domains, ECC/hash/recompute, checkpoint and recovery",
+        "canonicalSource": "00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration.md",
+        "canonicalHeading": "Домены отказа и silent corruption",
+        "coverage": "covered"
+      },
+      {
+        "sourceSection": "Robustness evaluation matrix and deployment process",
+        "canonicalSource": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "canonicalHeading": "Как проверять устойчивость",
+        "coverage": "unique"
+      }
+    ],
+    "figureMap": [
+      {
+        "asset": "Assets/Sources/Harvard ML Systems/vol2/security_privacy/attack-surface-taxonomy.svg",
+        "sha256": "1c778d9336f37b6b467dbec677d58a4fbcb7f8d88e4ebfc8592619b4322e3328",
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+        "line": 22,
+        "heading": "Безопасность и приватность ML-систем",
+        "caption": "*Противник может воздействовать на данные, модель, инфраструктуру и цепочку\nпоставки программного обеспечения и оборудования. Оригинальная Figure 1 из\n[Security & Privacy](https://mlsysbook.ai/vol2/security_privacy/security_privacy.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/security_privacy|локальная полная глава]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      {
+        "asset": "Assets/Sources/Harvard ML Systems/vol2/security_privacy/threat-prioritization-matrix.svg",
+        "sha256": "2735b82f85687dfa61188ad0294ecb67de4f1dd973fdaae669243415f49bf732",
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+        "line": 57,
+        "heading": "Модель угроз: актив, доступ и наблюдаемый ущерб",
+        "caption": "*Матрица приоритетов показывает способ распределять инженерный бюджет, а не\nуниверсальный рейтинг угроз. Оригинальная Figure 3 из\n[Security & Privacy](https://mlsysbook.ai/vol2/security_privacy/security_privacy.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/security_privacy|локальный оригинал]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      {
+        "asset": "Assets/Sources/Harvard ML Systems/vol2/security_privacy/security_privacy_output_leakage_ladder.svg",
+        "sha256": "115e0ef03f826bfdecf654f023f758f25f6f0b3eac907c42f7d90d4e1d188889",
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+        "line": 145,
+        "heading": "Установление участия записи и извлечение обучающих данных",
+        "caption": "*Увеличение подробности ответа повышает полезность API и одновременно объём\nдоступной противнику информации. В авторском примере сравниваются\n1000 оценок классов и пять наибольших оценок (top-5): их число уменьшается\nв 200 раз. Это не доказательство 200-кратного уменьшения риска или\nчисла необходимых запросов. Оригинальная иллюстрация из\n[Security & Privacy](https://mlsysbook.ai/vol2/security_privacy/security_privacy.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/security_privacy|локальная полная глава]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      {
+        "asset": "Assets/Sources/Harvard ML Systems/vol2/security_privacy/defense-stack.svg",
+        "sha256": "9308cf48b75e664ba2aeae032f2e5ce17d9dc2d7a400fa4c19242add962d6377",
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+        "line": 186,
+        "heading": "Многоуровневая защита и реагирование",
+        "caption": "*Средства защиты применяются к данным, модели, развёртыванию, исполнению\nи аппаратной основе. Оригинальная иллюстрация из\n[Security & Privacy](https://mlsysbook.ai/vol2/security_privacy/security_privacy.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/security_privacy|локальная полная глава]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      {
+        "asset": "Assets/Sources/Harvard ML Systems/vol2/security_privacy/71393fab82f7333b27d3df80508ecbcfeca4b822.svg",
+        "sha256": "6c5c193626f5830be7f895868d9b5cf1487a2588894bc7dff37844aeb7030039",
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+        "line": 243,
+        "heading": "Что именно гарантирует приватность",
+        "caption": "*Сравнение распределений результата случайного алгоритма на соседних\nнаборах $D$ и $D'$. Это Figure 24, Differential Privacy Indistinguishability\nиз [Harvard Security & Privacy](https://mlsysbook.ai/vol2/security_privacy/security_privacy.html#fig-differential-privacy),\nCC BY-NC-SA 4.0; исходный SVG сохранён без изменений.*"
+      },
+      {
+        "asset": "Assets/Sources/Harvard ML Systems/vol2/robust_ai/f379357456b6019c3804c10b13f2b37a9769547e.svg",
+        "sha256": "d2d3e4a421014562c4204be291d0b5f1891908821370525aaceeae759bbd3740",
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "line": 24,
+        "heading": "Три источника нарушения устойчивости",
+        "caption": "*Изменение внешних условий, атаки через входные данные и сбои вычислительной\nсистемы обнаруживают и ограничивают разными средствами. Оригинальная Figure 7 из\n[Robust AI](https://mlsysbook.ai/vol2/robust_ai/robust_ai.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/robust_ai|локальная полная глава]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      {
+        "asset": "Assets/Sources/Harvard ML Systems/vol2/robust_ai/shift-types.svg",
+        "sha256": "7d7f90de96349d143210fc4d63a2dde349ab9ebd75d16ab9c4e3e8cfae04b966",
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "line": 74,
+        "heading": "Сдвиг распределения и изменение зависимости между входом и ответом",
+        "caption": "*Различие сдвига входов, частот классов и условной зависимости. Оригинальная\nиллюстрация из\n[Robust AI](https://mlsysbook.ai/vol2/robust_ai/robust_ai.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/robust_ai|локальный оригинал]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      {
+        "asset": "Assets/Sources/Harvard ML Systems/vol2/robust_ai/robust_ai_psi_drift_knee.svg",
+        "sha256": "7be3f303dd6dd5efe38afa0e613e5cd12ed88454e404a9683b1ef530f4e1c605",
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "line": 109,
+        "heading": "Сдвиг распределения и изменение зависимости между входом и ответом",
+        "caption": "*Иллюстративная зависимость надёжности от индекса сдвига из\n[[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/robust_ai#Retraining decision framework|Harvard Robust AI, Retraining decision framework]],\nCC BY-NC-SA 4.0. Исходный SVG без изменений. Изгиб выбранной автором кривой\nне задаёт универсального порога PSI и не доказывает, что малый PSI безопасен.*"
+      },
+      {
+        "asset": "Assets/Sources/Harvard ML Systems/vol2/robust_ai/gradient-attack.svg",
+        "sha256": "766d1977a930b864e3551b540382cf074d7b8aa1061e4f4509559fb1d4ff89b2",
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "line": 179,
+        "heading": "Атака на вход готовой модели",
+        "caption": "*Схематический шаг FGSM: градиент берут по входу, а не по весам.\nПоказанные классы, оценки уверенности и $\\varepsilon$ принадлежат авторской\nиллюстрации; незаметность зависит от масштаба и преобразований изображения.\nОригинальная иллюстрация из\n[Robust AI](https://mlsysbook.ai/vol2/robust_ai/robust_ai.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/robust_ai|локальный оригинал]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      {
+        "asset": "Assets/Sources/Harvard ML Systems/vol2/robust_ai/robust_ai_robustness_tax.svg",
+        "sha256": "0f33c7f2eceecf84782edf8d432931c7e373fda0a8056d3df0aa81546ccfc594",
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "line": 238,
+        "heading": "Обучение против атак и проверка полученной защиты",
+        "caption": "*В примере Harvard сравнивается доля исходных, не подвергавшихся атаке\nизображений, для которых правильно выбран класс с наибольшей оценкой\n(clean Top-1 accuracy):\n76% у обычного ResNet-50 и около 50% у модели, обученной против атак\nс бюджетом $\\varepsilon=8/255$. Это иллюстрация из\n[[02 Areas/ML & DL/05 Источники/Courses/Harvard ML Systems/vol2/robust_ai#Adversarial defense workflow|Robust AI, The robustness tax]],\nCC BY-NC-SA 4.0; исходный SVG сохранён. Это не таксономия защит и не\nсравнение качества на исходных изображениях с качеством при атаке. Без полного протокола числа\nнельзя переносить на другую модель или бюджет атаки.*"
+      },
+      {
+        "asset": "Assets/Sources/Harvard ML Systems/vol2/robust_ai/0d8106a3c7ca65302fa306b4b86e5170bc79e78f.svg",
+        "sha256": "96ffaf898add5d1c926ac38c4358f49d1f9bc4a28fb837e87cd8a63b68dab163",
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "line": 321,
+        "heading": "Отравление обучающих данных и скрытые триггеры",
+        "caption": "*Схема Data Poisoning Attack: противник добавляет данные, после обучения\nпоявляется отравленная модель, а защищающая сторона анализирует данные\nи повторяет обучение. Исходная Figure 20 из\n[Robust AI](https://mlsysbook.ai/vol2/robust_ai/robust_ai.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/robust_ai|локальный оригинал]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      {
+        "asset": "Assets/Sources/Harvard ML Systems/vol2/robust_ai/weight-corruption.svg",
+        "sha256": "3f2c0df7969c61becbc465ba15a891888b3e5289e7f92c44e6f083d10d05ecdf",
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "line": 365,
+        "heading": "Когда неверный ответ вызван исполнением",
+        "caption": "*Ошибка в разряде порядка может вывести вес далеко за обычный диапазон\nи исказить результаты последующих слоёв при прямом проходе. Оригинальная Figure 5 из\n[Robust AI](https://mlsysbook.ai/vol2/robust_ai/robust_ai.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/robust_ai|локальная полная глава]].\nЛицензия CC BY-NC-SA 4.0.*"
+      },
+      {
+        "asset": "Assets/Sources/Harvard ML Systems/vol2/robust_ai/cell-4-output-1.png",
+        "sha256": "3e4d56e367ff98bf2647a503d16e90366e66c46507383aa939cb6c6d380ff2c5",
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "line": 386,
+        "heading": "Когда неверный ответ вызван исполнением",
+        "caption": "*Авторский расчёт вероятности хотя бы одного события при росте числа\nустройств. Вывод зависит от вероятностей и предпосылок расчёта, а не только\nот размера парка. Оригинальный график из\n[Robust AI](https://mlsysbook.ai/vol2/robust_ai/robust_ai.html);\n[[05 Источники/Courses/Harvard ML Systems/vol2/robust_ai|локальная полная глава]].\nЛицензия CC BY-NC-SA 4.0.*"
+      }
+    ],
+    "headingRenames": [
+      {
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+        "before": "Компромиссы privacy–utility",
+        "after": "Приватность, качество и затраты",
+        "retainedAnchor": "компромиссы-privacyutility"
+      },
+      {
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+        "before": "Минимальный security review",
+        "after": "Проверка безопасности перед выпуском",
+        "retainedAnchor": "минимальный-security-review"
+      },
+      {
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+        "before": "Distribution shift и concept drift",
+        "after": "Сдвиг распределения и изменение зависимости между входом и ответом",
+        "retainedAnchor": "distribution-shift-и-concept-drift"
+      }
+    ],
+    "historyPolicy": "The initial entries.canonicalSha256 and original figure/excerpt mappings are historical evidence and are intentionally unchanged. This object identifies the current prose revision.",
+    "checks": {
+      "protectedContent": [
+        {
+          "source": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+          "before": "f86ccfcc15ff468c8b29843ee1b9984315cad8f9c751a9a5aa3405283f1df794",
+          "after": "b9dc519d8a0c8c04c157f4e96a4ad4c0dc1549273588d9b4d0d54cf282603131",
+          "reverseVerified": true,
+          "math": {
+            "unchanged": true,
+            "count": 14
+          },
+          "figs": {
+            "unchanged": true,
+            "count": 5
+          },
+          "urls": {
+            "unchanged": true,
+            "count": 11
+          },
+          "code": {
+            "unchanged": true,
+            "count": 0
+          }
+        },
+        {
+          "source": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+          "before": "e0db3f27372fedb3fd65433c52aea8138eb2260fa5bb9c35ea4bb766335488c9",
+          "after": "36dce79e4885a8b9f7bd7a9134e4d1def07e6273652fc5d755d61633f2037209",
+          "reverseVerified": true,
+          "math": {
+            "unchanged": true,
+            "count": 48
+          },
+          "figs": {
+            "unchanged": true,
+            "count": 8
+          },
+          "urls": {
+            "unchanged": true,
+            "count": 16
+          },
+          "code": {
+            "unchanged": true,
+            "count": 0
+          }
+        }
+      ],
+      "math": {
+        "expressions": 62,
+        "parser": "KaTeX0.16.47",
+        "result": "passed"
+      },
+      "localLinks": {
+        "count": 49,
+        "figures": 13,
+        "renamedHeadingCompatibilityAnchors": 3,
+        "result": "passed"
+      },
+      "unitTests": {
+        "command": "pnpm --dir publishing exec vitest run tests/links.test.ts tests/math-reflow.test.ts",
+        "files": 2,
+        "tests": 10,
+        "result": "passed"
+      },
+      "publicBrowserQa": "not rerun by this worker; parent owns rebuild, generated topic index and final desktop/mobile acceptance",
+      "committed": false,
+      "published": false
+    },
+    "parentIntegrationStatus": "Parent reported both new chapters connected and old references converted to aliases before this prose pass. This worker did not modify navigation or aliases."
+  }
+}

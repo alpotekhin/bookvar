@@ -1,0 +1,126 @@
+{
+  "verified_at": "2026-10-19",
+  "used_in": "00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md",
+  "assets": [
+    {
+      "id": "curated-kv-compression-kivi-axes-original-9a332d591827",
+      "asset": "00 Учебник/Assets/Figures/curated/kv-compression-review-2026-10/kivi-axes-original.png",
+      "author": "Zirui Liu, Jiayi Yuan, Hongye Jin, Shaochen Zhong, Zhaozhuo Xu, Vladimir Braverman, Beidi Chen, Xia Hu",
+      "title": "KIVI Figure 1",
+      "source_url": "https://arxiv.org/src/2402.02750v2",
+      "source_asset": "05 Источники/Papers/Source PDFs/kivi-2402.02750v2-figure1.pdf",
+      "source_asset_sha256": "5215df203728fcff82b74524b4551ea8b4f0ec2ca2da8bda2136944302f5eedc",
+      "source_member": "figures/quant_scheme.pdf",
+      "source_archive": "raw/papers/kivi-2402.02750v2/source.tar.gz",
+      "source_archive_sha256": "3c27dccdef29c022b0ed3f5522da4a0e3830dfeedb973256e10f9dd49af09531",
+      "source_page": 1,
+      "crop_box_px": [
+        0,
+        0,
+        2800,
+        1825
+      ],
+      "render_page_size_px": [
+        2800,
+        1825
+      ],
+      "width": 2800,
+      "height": 1825,
+      "sha256": "9a332d591827a244426214c9b4d1c51a24f995d65bdf8be93d05f5235134a11b",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence": "https://arxiv.org/abs/2402.02750v2",
+      "derivation": "pdf-page-render-crop",
+      "provenance_confirmation": "source-license-verified",
+      "modifications": "Full-page Poppler render of the author-supplied standalone vector figure PDF; crop box is the whole page. No content removed or redrawn.",
+      "metadata_status": "verified",
+      "last_verified": "2026-10-19",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md"
+      ]
+    },
+    {
+      "id": "curated-kv-compression-kivi-algorithm-original-86f4bda69466",
+      "asset": "00 Учебник/Assets/Figures/curated/kv-compression-review-2026-10/kivi-algorithm-original.png",
+      "author": "Zirui Liu, Jiayi Yuan, Hongye Jin, Shaochen Zhong, Zhaozhuo Xu, Vladimir Braverman, Beidi Chen, Xia Hu",
+      "title": "KIVI Figure 3",
+      "source_url": "https://arxiv.org/src/2402.02750v2",
+      "source_asset": "05 Источники/Papers/Source PDFs/kivi-2402.02750v2-figure3.pdf",
+      "source_asset_sha256": "efc2610c62990c7c9e3753fbddbb457c7caa9fc88e0bee41ec39165d7ab7413a",
+      "source_member": "figures/kivi_algo_v3.pdf",
+      "source_archive": "raw/papers/kivi-2402.02750v2/source.tar.gz",
+      "source_archive_sha256": "3c27dccdef29c022b0ed3f5522da4a0e3830dfeedb973256e10f9dd49af09531",
+      "source_page": 1,
+      "crop_box_px": [
+        0,
+        0,
+        3400,
+        1114
+      ],
+      "render_page_size_px": [
+        3400,
+        1114
+      ],
+      "width": 3400,
+      "height": 1114,
+      "sha256": "86f4bda69466db3734a64a6e2962851d03d1e7c1e5e6d2adf2ee66dc7c6ca9f3",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence": "https://arxiv.org/abs/2402.02750v2",
+      "derivation": "pdf-page-render-crop",
+      "provenance_confirmation": "source-license-verified",
+      "modifications": "Full-page Poppler render of the author-supplied standalone vector figure PDF; crop box is the whole page. No content removed or redrawn.",
+      "metadata_status": "verified",
+      "last_verified": "2026-10-19",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md"
+      ]
+    },
+    {
+      "id": "curated-kv-compression-streaming-3436400bb8b9",
+      "asset": "00 Учебник/Assets/Figures/curated/kv-compression-review-2026-10/streaming-schemes.png",
+      "author": "Guangxuan Xiao, Yuandong Tian, Beidi Chen, Song Han, Mike Lewis",
+      "title": "StreamingLLM Figure 1: comparison of streaming strategies",
+      "source_url": "https://github.com/mit-han-lab/streaming-llm/blob/2e5042606d69933d88fbf909bd77907456b9b4dd/figures/schemes.png",
+      "source_image_url": "https://raw.githubusercontent.com/mit-han-lab/streaming-llm/2e5042606d69933d88fbf909bd77907456b9b4dd/figures/schemes.png",
+      "commit": "2e5042606d69933d88fbf909bd77907456b9b4dd",
+      "sha256": "3436400bb8b99d91c126eb770a947e684cffee49fec3f6f67c475d4fa5bbb5d6",
+      "width": 3810,
+      "height": 1288,
+      "license": "MIT",
+      "license_url": "https://github.com/mit-han-lab/streaming-llm/blob/2e5042606d69933d88fbf909bd77907456b9b4dd/LICENSE",
+      "license_copy": "site/public/licenses/streaming-2e504260-MIT.txt",
+      "derivation": "source-raster-copy",
+      "provenance_confirmation": "pinned-upstream-repository",
+      "modifications": "Copied unchanged; no crop, resize or redrawing.",
+      "metadata_status": "verified",
+      "last_verified": "2026-10-19",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md"
+      ]
+    },
+    {
+      "id": "curated-kv-compression-snapkv-83205bdcd73f",
+      "asset": "00 Учебник/Assets/Figures/curated/kv-compression-review-2026-10/snapkv-workflow.png",
+      "author": "Yuhong Li, Yingbing Huang, Bowen Yang, Bharat Venkitesh, Acyr Locatelli, Hanchen Ye, Tianle Cai, Patrick Lewis, Deming Chen",
+      "title": "SnapKV Figure 1: observation-window selection",
+      "source_url": "https://arxiv.org/abs/2404.14469v2",
+      "source_image_url": "https://arxiv.org/html/2404.14469v2/illustration.png",
+      "sha256": "83205bdcd73f560179200b0c6e0478c51b57227e3af48d10437e235db68f1005",
+      "source_asset_sha256": "83205bdcd73f560179200b0c6e0478c51b57227e3af48d10437e235db68f1005",
+      "width": 1169,
+      "height": 355,
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence": "https://arxiv.org/abs/2404.14469v2",
+      "derivation": "source-raster-copy",
+      "provenance_confirmation": "source-license-verified",
+      "modifications": "Copied unchanged from the versioned arXiv HTML figure; no crop, resize or redrawing.",
+      "metadata_status": "verified",
+      "last_verified": "2026-10-19",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md"
+      ]
+    }
+  ]
+}

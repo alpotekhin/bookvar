@@ -5,10 +5,14 @@
   "scripts": {
     "test": "vitest run --exclude tests/site-output.test.ts",
     "test:unit": "vitest run --exclude tests/site-output.test.ts",
+    "test:publication": "vitest run --config vitest.publication.config.ts",
+    "test:evidence": "vitest run --config vitest.evidence.config.ts",
     "test:output": "vitest run tests/site-output.test.ts",
     "check:links": "tsx adapter/check-built-links.ts",
+    "check:size": "tsx adapter/check-built-size.ts",
     "check:source-coverage": "node tools/check-source-coverage.mjs",
     "check:course-ingestion": "tsx tools/check-course-ingestion.ts",
+    "check:topics": "tsx tools/sync-topic-index.ts --check",
     "build": "tsx adapter/build.ts"
   },
   "dependencies": { "gray-matter": "4.0.3", "yaml": "2.9.0" },

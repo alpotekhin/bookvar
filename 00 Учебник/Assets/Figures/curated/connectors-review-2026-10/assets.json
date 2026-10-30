@@ -1,0 +1,102 @@
+[
+  {
+    "id": "curated-connectors-blip2-llm-connection-a854dcf8f7d9",
+    "asset": "00 Учебник/Assets/Figures/curated/connectors-review-2026-10/blip2-llm-connection.png",
+    "author": "Junnan Li, Dongxu Li, Silvio Savarese and Steven Hoi",
+    "source_url": "https://proceedings.mlr.press/v202/li23q.html",
+    "source_asset": "05 Источники/Originals/connectors-2026-10-20/blip2.pdf",
+    "source_asset_sha256": "d59913d16edf1dc7e661ca3510c6efaa2b001146840d2e464a7fde980d088dd2",
+    "source_page": 4,
+    "source_page_snapshot": "05 Источники/Originals/connectors-2026-10-20/blip2-page4.png",
+    "source_page_sha256": "808785e8483a1bc71d7ec39de526485325aab0bc44bc8371594c8616ddcda92e",
+    "render_page_size_px": [
+      2473,
+      3200
+    ],
+    "crop_box_px": [
+      300,
+      265,
+      2120,
+      805
+    ],
+    "sha256": "a854dcf8f7d90da1f3658f734a0a80a394c230a59e01cf6e6683a9583db197e1",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/reranking-2026-10-20/pmlr-license-agreement.html",
+    "license_evidence_sha256": "1c8123a6c840ca2752e383f0924fa23ba38552140a2cc54f69ea9df5acfcdd3d",
+    "modifications": "Original Figure 3 rendered with Poppler at 3200 pixels on the longest page side and cropped; both panels retained without redraw, translation, recoloring or label changes",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64a Connectors и fusion.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "pdf-page-render-crop"
+  },
+  {
+    "id": "curated-connectors-blip2-qformer-6cbba67268cf",
+    "asset": "00 Учебник/Assets/Figures/curated/connectors-review-2026-10/blip2-qformer.png",
+    "author": "Junnan Li, Dongxu Li, Silvio Savarese and Steven Hoi",
+    "source_url": "https://proceedings.mlr.press/v202/li23q.html",
+    "source_asset": "05 Источники/Originals/connectors-2026-10-20/blip2.pdf",
+    "source_asset_sha256": "d59913d16edf1dc7e661ca3510c6efaa2b001146840d2e464a7fde980d088dd2",
+    "source_page": 3,
+    "source_page_snapshot": "05 Источники/Originals/connectors-2026-10-20/blip2-page3.png",
+    "source_page_sha256": "f2bb5cdb8dedb7be0d84ebd592eb6617d5401b14c32646c64b1101c54be616ad",
+    "render_page_size_px": [
+      2473,
+      3200
+    ],
+    "crop_box_px": [
+      210,
+      270,
+      1405,
+      690
+    ],
+    "sha256": "6cbba67268cfe11bfced1219da71d9e6cee1b41c1b0991599fd43af3268746d1",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/reranking-2026-10-20/pmlr-license-agreement.html",
+    "license_evidence_sha256": "1c8123a6c840ca2752e383f0924fa23ba38552140a2cc54f69ea9df5acfcdd3d",
+    "modifications": "Original Figure 2 left architecture panel rendered with Poppler at 3200 pixels on the longest page side and cropped; labels and geometry unchanged",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64a Connectors и fusion.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "pdf-page-render-crop"
+  },
+  {
+    "id": "curated-connectors-blip2-attention-masks-10dd65158c54",
+    "asset": "00 Учебник/Assets/Figures/curated/connectors-review-2026-10/blip2-attention-masks.png",
+    "author": "Junnan Li, Dongxu Li, Silvio Savarese and Steven Hoi",
+    "source_url": "https://proceedings.mlr.press/v202/li23q.html",
+    "source_asset": "05 Источники/Originals/connectors-2026-10-20/blip2.pdf",
+    "source_asset_sha256": "d59913d16edf1dc7e661ca3510c6efaa2b001146840d2e464a7fde980d088dd2",
+    "source_page": 3,
+    "source_page_snapshot": "05 Источники/Originals/connectors-2026-10-20/blip2-page3.png",
+    "source_page_sha256": "f2bb5cdb8dedb7be0d84ebd592eb6617d5401b14c32646c64b1101c54be616ad",
+    "render_page_size_px": [
+      2473,
+      3200
+    ],
+    "crop_box_px": [
+      1440,
+      270,
+      2200,
+      690
+    ],
+    "sha256": "10dd65158c5427743603c2d6705b7acc8c552450f37f1c6a0f4484842a4da503",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/reranking-2026-10-20/pmlr-license-agreement.html",
+    "license_evidence_sha256": "1c8123a6c840ca2752e383f0924fa23ba38552140a2cc54f69ea9df5acfcdd3d",
+    "modifications": "Original Figure 2 right attention-mask panel rendered with Poppler at 3200 pixels on the longest page side and cropped; labels and geometry unchanged",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64a Connectors и fusion.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "pdf-page-render-crop"
+  }
+]
+

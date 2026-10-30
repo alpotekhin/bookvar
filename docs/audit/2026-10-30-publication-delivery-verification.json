@@ -1,0 +1,235 @@
+{
+  "date": "2026-10-30",
+  "status": "local-publication-checks-passed; release-not-executed",
+  "goalTurnClassification": "progress",
+  "scope": "Publication footprint, one source-language course body, search formula duplication, and release-input inspection. No new textbook content or translation in this turn.",
+  "changes": {
+    "mathSearch": "MathML and its original TeX annotation remain in the DOM for accessibility. Only their duplicate search text is ignored; visible KaTeX HTML remains indexed.",
+    "courseOriginals": "575 redundant English source-archive bodies replaced with direct canonical aliases. Full source-language bodies, code and images remain on canonical source routes. Course hubs and real English editions are not deduplicated.",
+    "compatibility": "Old EN source addresses retain query strings and fragments; aliases are noindex and link directly to a non-redirect original.",
+    "coursePdfs": "20 linked complete lecture PDFs now open at their recorded official origins. Commit-pinned GitHub blobs use the corresponding raw file URL. Local originals are unchanged.",
+    "longSourceCode": "Archive listings of at least 5000 characters use plaintext highlighting. No truncation or source-text edits; textbook examples retain their original highlighting.",
+    "sizeGate": "Pages upload now requires the full uncompressed artifact to fit within 1000000000 bytes.",
+    "preservationJournal": "docs/audit/2026-10-30-publication-delivery-additions.json"
+  },
+  "checks": {
+    "publishingUnit": {
+      "files": 151,
+      "tests": 921,
+      "exit": 0
+    },
+    "siteTests": {
+      "files": 7,
+      "tests": 93,
+      "exit": 0
+    },
+    "rootOutput": {
+      "tests": 187,
+      "exit": 0
+    },
+    "astroCheck": {
+      "errors": 0,
+      "warnings": 0,
+      "hints": 6,
+      "scope": "24 files, before the later source-alias adapter change; final adapter behavior covered by full unit/build checks."
+    },
+    "root": {
+      "builtRoutes": 2007,
+      "files": 5544,
+      "bytes": 844769926,
+      "brokenInternalLinks": 0
+    },
+    "pages": {
+      "base": "/bookvar",
+      "builtRoutes": 2007,
+      "files": 5544,
+      "bytes": 848040515,
+      "limit": 1000000000,
+      "headroom": 151959485,
+      "brokenInternalLinks": 0,
+      "temporaryOutput": "/var/tmp/bookvar-pages-20261030-delivery",
+      "temporaryOutputRemovedAfterVerification": true
+    },
+    "initialArtifact": {
+      "bytes": 1212501599,
+      "sizeGateRejected": true
+    },
+    "rootReductionBytes": 367731673,
+    "sourceImages": {
+      "architectureOriginalCount": 24,
+      "frameworksOriginalCount": 21,
+      "scope": "Current canonical HTML counts plus the retained source hashes; not fresh visual acceptance of every source figure."
+    },
+    "officialLecturePdfLinks": {
+      "method": "curl HEAD with redirects",
+      "checked": 20,
+      "http200": 20,
+      "scope": "Availability only; no new remote PDF-byte comparison."
+    },
+    "diffCheck": {
+      "scoped": "passed",
+      "wholeTree": "retained source archives contain Markdown hard-break whitespace and original-source whitespace; not rewritten to satisfy git diff --check"
+    },
+    "secretPatternScan": {
+      "files": 3254,
+      "highConfidenceMatches": 0,
+      "scope": "Text files up to 8 MB, common token/private-key patterns; not a complete security or personal-data audit."
+    }
+  },
+  "browser": {
+    "rootAlias": {
+      "from": "/en/sources/courses/harvard-ml-systems/tinytorch/19-benchmarking/?from=qa#complete-python-source",
+      "to": "/sources/courses/harvard-ml-systems/tinytorch/19-benchmarking/?from=qa#complete-python-source",
+      "verified": true
+    },
+    "pagesAlias": {
+      "from": "/bookvar/en/sources/courses/harvard-ml-systems/tinytorch/19-benchmarking/?from=qa#complete-python-source",
+      "to": "/bookvar/sources/courses/harvard-ml-systems/tinytorch/19-benchmarking/?from=qa#complete-python-source",
+      "verified": true
+    },
+    "sourceListing": {
+      "characters": 151419,
+      "visibleLineBlocks": 4119,
+      "linesIncludingFinalEmpty": 4120,
+      "sha256": "7369360962cf8a1cfdc6cc04013e15f35f430f4beb71d0414c7c4a55aaff8713",
+      "matchesOriginalFence": true,
+      "decoding": "Join EC line text with LF, decode only EC's empty-line LF placeholder, restore the terminal LF."
+    },
+    "mobile": {
+      "requestedViewport": [
+        360,
+        800
+      ],
+      "documentClientWidth": 345,
+      "documentScrollWidth": 345,
+      "codeClientWidth": 311,
+      "codeScrollWidth": 2679,
+      "scope": "Canonical source listing reached through the Pages EN alias; horizontal scrolling stays inside code."
+    },
+    "gpt3PagesEnglish": {
+      "loadedFigures": 5,
+      "correctAssetPrefix": true,
+      "mathMLNodes": 89,
+      "duplicateSearchMathMLIgnored": 89,
+      "katexErrors": 0
+    },
+    "search": {
+      "root": "23 GPT-3 results; learning-rate formula appears once, without TeX annotation.",
+      "pages": "Same query and corrected snippet verified in /bookvar/en/; source and section URLs retain the project prefix."
+    },
+    "evidenceDirectory": "docs/audit/evidence/2026-10-30-publication-delivery",
+    "viewportRestored": true
+  },
+  "failureHistory": [
+    "New math-search regression failed before renderer wiring, then passed.",
+    "Course-delivery fixture initially lacked its required link allowlist; fixture corrected.",
+    "Full 918-test run initially rejected the unrecorded renderer revision. The exact reversible journal now restores both historical hashes; no old expected hash was changed.",
+    "Source-alias base-path test exposed normalization before prefix application; order corrected and root/Pages fixtures passed.",
+    "Two old output contracts expected duplicate English source figures. They now require the complete canonical figure set plus the direct EN alias; 187 output checks passed."
+  ],
+  "release": {
+    "branch": "editorial-route-alignment",
+    "base": "75e1870",
+    "freshOriginDevComparison": {
+      "localOnly": 0,
+      "remoteOnly": 0
+    },
+    "author": "Alexander Potekhin <al_potechin@mail.ru>",
+    "committed": false,
+    "pushed": false,
+    "deployed": false,
+    "remaining": [
+      "Finish the clean-checkout dependency/source-evidence plan before staging the full change set. Local retained verification archives must not be blanket-published.",
+      "Review the full scoped commit contents, exclude .cache and unrelated files, then commit and push HEAD:dev without changing main.",
+      "Verify GitHub Actions and the live Pages artifact after the push.",
+      "Continue source-by-source, whole-chapter explanation acceptance. This publication work does not increase the reading-route count of 34 fresh owners plus 14 reconciled previous reads out of 152."
+    ]
+  },
+  "sourceEvidencePreparation": {
+    "inventory": "docs/audit/2026-10-30-source-pdf-evidence-inventory.json",
+    "localPdfCount": 223,
+    "bytes": 907831788,
+    "versionedArxivCandidates": 124,
+    "withAssetRegistryReferences": 90,
+    "completeHydrationContract": false,
+    "notes": "Inventory contains hashes and candidate source metadata only. Version candidates have not been remotely byte-verified. It does not authorize redistributing local PDFs. UV offline SymPy and Poppler are explicit dependencies observed in existing full tests; fresh CI provisioning has not been verified."
+  },
+  "pins": [
+    {
+      "file": "publishing/adapter/build.ts",
+      "sha256": "a32cb1d11981e3dd84868146bbeefa749c8f4b4e962fdb08573cb553347a19e0"
+    },
+    {
+      "file": "publishing/adapter/course-downloads.ts",
+      "sha256": "87e79434ac1ba358c06226a5a8124aa11abf24a33215bce6f0e845810b6b3363"
+    },
+    {
+      "file": "publishing/adapter/check-built-size.ts",
+      "sha256": "b626de7f106e843ccb96a616ab1c5f3b719828793b70e5b8677308c23e9210b0"
+    },
+    {
+      "file": "publishing/package.json",
+      "sha256": "8e8351ac822c6c6a371d3f38df5a673b21e5e16e4ab7a61578776981815db410"
+    },
+    {
+      "file": "publishing/tests/course-downloads.test.ts",
+      "sha256": "1f2e602069ee2582a13fc36da53f3816d917955cb882c4e0829990a4392eb574"
+    },
+    {
+      "file": "publishing/tests/check-built-size.test.ts",
+      "sha256": "d0983d1e8e98ae679c40edefd6a56b45aa14896101712ee0a30ecf80d2276dc3"
+    },
+    {
+      "file": "publishing/tests/source-archive-editions.test.ts",
+      "sha256": "a1eb085eb50353050af38658d93b40fe0d29dffcb86685ce93623ad7aebc92c9"
+    },
+    {
+      "file": "publishing/tests/pages-workflow.test.ts",
+      "sha256": "9a566415a4bb681fad5b5ac49d1f361a519e47de6ffc3511e44464dd79f43787"
+    },
+    {
+      "file": "publishing/tests/scheduler-lab.test.ts",
+      "sha256": "f4afc14f11809f4af0c24afadf58da7fe3ba01c43b9b61b7d6ddb2eab4ff1aec"
+    },
+    {
+      "file": "publishing/tests/site-output.test.ts",
+      "sha256": "365dddc0c77d88cd8cf43a3adc6ef8097063433ede9684fef91e0f4d1e43e138"
+    },
+    {
+      "file": "publishing/tools/topic-consolidation-baseline.mjs",
+      "sha256": "5882fa8026e4f8bd88bdf4aaffefb0fdd5a558b16ee03847bcf88ade9d185c94"
+    },
+    {
+      "file": "publishing/tools/topic_consolidation_baseline.py",
+      "sha256": "1093c916097ad1f49f6096d66f37776d94f47e8e726e95733f5fcd03c5c6d108"
+    },
+    {
+      "file": "site/astro.config.mjs",
+      "sha256": "9ab0fe89bb2d8d8da928d4501343b4d585390bf0eeabbf6c859684710c5678c9"
+    },
+    {
+      "file": "site/src/lib/markdown-publication.ts",
+      "sha256": "652a4521469669128132155956cfc70daf1325cbd71cc6562f2885fba0d2dc49"
+    },
+    {
+      "file": "site/tests/markdown-publication.test.ts",
+      "sha256": "34a4fd153b0432441ecd04393935a12044f9a335aaad0d4bcccd72b1fadcd8db"
+    },
+    {
+      "file": ".github/workflows/pages.yml",
+      "sha256": "563fa39bb995199b67ff25d7422006522db1d61171ddd9f2cf0e5f9dce9fca9f"
+    },
+    {
+      "file": "docs/PUBLISHING.md",
+      "sha256": "f97fc45b3223ce76e7429866783607ce7d19cf762806ca99d7795fdfddcdaa44"
+    },
+    {
+      "file": "docs/audit/2026-10-30-publication-delivery-additions.json",
+      "sha256": "b6cc3acc751cd1be9ba6e54ab91edfee61fca20616368a41b7beb1239f66eb2d"
+    },
+    {
+      "file": "docs/audit/2026-10-30-source-pdf-evidence-inventory.json",
+      "sha256": "913f711f63a2a2dcb09389c3059f048c10c68b1d6a98a0d952ce10d7b2074f37"
+    }
+  ]
+}

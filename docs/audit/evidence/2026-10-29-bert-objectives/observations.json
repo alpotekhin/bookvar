@@ -1,0 +1,249 @@
+{
+  "desktop": {
+    "images": [
+      {
+        "alt": "bert-base-bert-large-encoders",
+        "loaded": true,
+        "natural": [
+          1434,
+          603
+        ],
+        "parent": "A",
+        "parentRole": null,
+        "shown": [
+          617,
+          259
+        ]
+      },
+      {
+        "alt": "bert-figure2",
+        "loaded": true,
+        "natural": [
+          2280,
+          740
+        ],
+        "parent": "A",
+        "parentRole": null,
+        "shown": [
+          617,
+          200
+        ]
+      },
+      {
+        "alt": "BERT-language-modeling-masked-lm",
+        "loaded": true,
+        "natural": [
+          1210,
+          795
+        ],
+        "parent": "A",
+        "parentRole": null,
+        "shown": [
+          617,
+          405
+        ]
+      },
+      {
+        "alt": "bert-next-sentence-prediction",
+        "loaded": true,
+        "natural": [
+          1165,
+          801
+        ],
+        "parent": "A",
+        "parentRole": null,
+        "shown": [
+          617,
+          424
+        ]
+      },
+      {
+        "alt": "bert-figure1",
+        "loaded": true,
+        "natural": [
+          2330,
+          1310
+        ],
+        "parent": "A",
+        "parentRole": null,
+        "shown": [
+          617,
+          347
+        ]
+      },
+      {
+        "alt": "bert-figure4",
+        "loaded": true,
+        "natural": [
+          1950,
+          2040
+        ],
+        "parent": "A",
+        "parentRole": null,
+        "shown": [
+          617,
+          645
+        ]
+      },
+      {
+        "alt": "bert-feature-extraction-contextualized-embeddings",
+        "loaded": true,
+        "natural": [
+          1287,
+          776
+        ],
+        "parent": "A",
+        "parentRole": null,
+        "shown": [
+          617,
+          372
+        ]
+      },
+      {
+        "alt": "Original SpanBERT span-boundary objective and token predictions",
+        "loaded": true,
+        "natural": [
+          1840,
+          970
+        ],
+        "parent": "A",
+        "parentRole": null,
+        "shown": [
+          617,
+          325
+        ]
+      },
+      {
+        "alt": "Original SpanBERT distribution of sampled span lengths",
+        "loaded": true,
+        "natural": [
+          910,
+          885
+        ],
+        "parent": "A",
+        "parentRole": null,
+        "shown": [
+          617,
+          600
+        ]
+      }
+    ],
+    "katexErrors": 0,
+    "pre": 11,
+    "scrollWidth": 1265,
+    "url": "http://127.0.0.1:4330/textbook/models/bert-roberta-deberta/#spanbert-boundary-objective",
+    "width": 1265
+  },
+  "mobile": {
+    "figures": 9,
+    "katexErrors": 0,
+    "pre": 11,
+    "scrollWidth": 345,
+    "tables": [
+      {
+        "client": 313,
+        "overflow": "auto",
+        "parentClient": 313,
+        "parentOverflow": "visible",
+        "parentScroll": 320,
+        "scroll": 380,
+        "tag": "DIV"
+      },
+      {
+        "client": 313,
+        "overflow": "auto",
+        "parentClient": 313,
+        "parentOverflow": "visible",
+        "parentScroll": 320,
+        "scroll": 313,
+        "tag": "DIV"
+      },
+      {
+        "client": 313,
+        "overflow": "auto",
+        "parentClient": 313,
+        "parentOverflow": "visible",
+        "parentScroll": 320,
+        "scroll": 474,
+        "tag": "DIV"
+      }
+    ],
+    "url": "http://127.0.0.1:4330/en/textbook/models/bert-roberta-deberta/#sentence-order-prediction",
+    "width": 345
+  },
+  "mobileZoom": {
+    "dialog": [
+      {
+        "bottom": 800,
+        "client": 360,
+        "scroll": 360,
+        "top": 0
+      }
+    ],
+    "scrollWidth": 360,
+    "width": 360,
+    "zoomButtons": [
+      "Zoom out",
+      "Zoom in",
+      "Fit",
+      "Close"
+    ]
+  },
+  "pagesMobile": {
+    "figures": [
+      {
+        "loaded": true,
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/bert/bert-base-bert-large-encoders.png"
+      },
+      {
+        "loaded": true,
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/bert-family-2026-10-22/bert-figure2.png"
+      },
+      {
+        "loaded": true,
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/bert/BERT-language-modeling-masked-lm.png"
+      },
+      {
+        "loaded": true,
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/bert/bert-next-sentence-prediction.png"
+      },
+      {
+        "loaded": true,
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/bert-family-2026-10-22/bert-figure1.png"
+      },
+      {
+        "loaded": true,
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/architecture-patterns-2026-10-21/bert-figure4.png"
+      },
+      {
+        "loaded": true,
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/bert/bert-feature-extraction-contextualized-embeddings.png"
+      },
+      {
+        "loaded": true,
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/bert-objectives-2026-10-29/spanbert-boundary-objective.png"
+      },
+      {
+        "loaded": true,
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/bert-objectives-2026-10-29/spanbert-span-lengths.png"
+      }
+    ],
+    "katexErrors": 0,
+    "licenses": [
+      "/bookvar/licenses/google-bert-eedf5716-Apache-2.0.txt",
+      "/bookvar/licenses/google-albert-b772393d-Apache-2.0.txt"
+    ],
+    "pre": 11,
+    "scrollWidth": 345,
+    "url": "http://127.0.0.1:62839/bookvar/en/textbook/models/bert-roberta-deberta/#whole-word-masking",
+    "width": 345
+  },
+  "pagesDesktop": {
+    "katexErrors": 0,
+    "loadedFigures": 9,
+    "pre": 11,
+    "scrollWidth": 1265,
+    "url": "http://127.0.0.1:62839/bookvar/textbook/models/bert-roberta-deberta/#spanbert-boundary-objective",
+    "width": 1265
+  }
+}

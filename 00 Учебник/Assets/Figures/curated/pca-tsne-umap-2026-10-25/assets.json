@@ -1,0 +1,208 @@
+[
+  {
+    "id": "curated-dimensionality-jake-pca-projection-0705fa33bf4c",
+    "asset": "00 Учебник/Assets/Figures/curated/pca-tsne-umap-2026-10-25/jake-pca-projection.png",
+    "author": "Jake VanderPlas",
+    "source_url": "https://github.com/jakevdp/PythonDataScienceHandbook/blob/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.09-Principal-Component-Analysis.ipynb",
+    "source_image_url": "https://raw.githubusercontent.com/jakevdp/PythonDataScienceHandbook/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.09-Principal-Component-Analysis.ipynb",
+    "source_asset": "05 Источники/Originals/pca-tsne-umap-2026-10-25/jake-pca.ipynb",
+    "source_asset_sha256": "fa00993593486ca2d2445bf4781eba2ea79bb07f3360fa9456d67f573b9da9f2",
+    "sha256": "0705fa33bf4c3edf7bb3141dcd82ebfa35897e2bf6886cf74bfa59f35e4843da",
+    "dimensions_px": [
+      372,
+      244
+    ],
+    "commit": "d66231454ef753818dc9213c9b5942e067266966",
+    "license": "CC BY-NC-ND 3.0 Unported",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/3.0/",
+    "license_evidence": "05 Источники/Originals/pca-tsne-umap-2026-10-25/jake-LICENSE-TEXT",
+    "license_evidence_sha256": "d74e67958cad1ae4cb585402ef66ae41958ba546e6c5e80a93920013cb81bc2a",
+    "modifications": "Unmodified PNG decoded from the pinned notebook's saved output. Notebook not executed to generate a replacement.",
+    "derivation": "notebook-output-extraction",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/01 Классическое машинное обучение/07 PCA, t-SNE и UMAP.md"
+    ],
+    "source_member": "/cells/18/outputs/0/data/image~1png"
+  },
+  {
+    "id": "curated-dimensionality-jake-pca-whitening-f3ef65e6c2ad",
+    "asset": "00 Учебник/Assets/Figures/curated/pca-tsne-umap-2026-10-25/jake-pca-whitening.png",
+    "author": "Jake VanderPlas",
+    "source_url": "https://github.com/jakevdp/PythonDataScienceHandbook/blob/d66231454ef753818dc9213c9b5942e067266966/notebooks/figures/05.09-PCA-rotation.png",
+    "source_image_url": "https://raw.githubusercontent.com/jakevdp/PythonDataScienceHandbook/d66231454ef753818dc9213c9b5942e067266966/notebooks/figures/05.09-PCA-rotation.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/pca-tsne-umap-2026-10-25/jake-pca-whitening.png",
+    "source_asset_sha256": "f3ef65e6c2adc29869cbbf51f4cc7e844daa1d7eda669f5d3d2221782e9c98e7",
+    "sha256": "f3ef65e6c2adc29869cbbf51f4cc7e844daa1d7eda669f5d3d2221782e9c98e7",
+    "dimensions_px": [
+      1152,
+      432
+    ],
+    "commit": "d66231454ef753818dc9213c9b5942e067266966",
+    "license": "CC BY-NC-ND 3.0 Unported",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/3.0/",
+    "license_evidence": "05 Источники/Originals/pca-tsne-umap-2026-10-25/jake-LICENSE-TEXT",
+    "license_evidence_sha256": "d74e67958cad1ae4cb585402ef66ae41958ba546e6c5e80a93920013cb81bc2a",
+    "modifications": "None; complete original PNG preserved byte-for-byte, no crop, redraw, relabeling or pixel resampling.",
+    "derivation": "source-image-copy",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/01 Классическое машинное обучение/07 PCA, t-SNE и UMAP.md"
+    ],
+    "source_page_snapshot": "05 Источники/Originals/pca-tsne-umap-2026-10-25/jake-figure-code.html",
+    "source_page_sha256": "e218603396c12e31cdd58244045f15b474f295a383f68a1ac1c2ad9324e6ba2e"
+  },
+  {
+    "id": "curated-dimensionality-distill-cluster-sizes-input-3863ed3fefd9",
+    "asset": "00 Учебник/Assets/Figures/curated/pca-tsne-umap-2026-10-25/distill-cluster-sizes-input.png",
+    "author": "Martin Wattenberg, Fernanda Viégas, Ian Johnson",
+    "source_url": "https://github.com/distillpub/post--misread-tsne/blob/f2492b469bec8aaa7aa83cc828081e14a295414d/public/assets/figure_03_original.png",
+    "source_image_url": "https://raw.githubusercontent.com/distillpub/post--misread-tsne/f2492b469bec8aaa7aa83cc828081e14a295414d/public/assets/figure_03_original.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/pca-tsne-umap-2026-10-25/distill-cluster-sizes-input.png",
+    "source_asset_sha256": "3863ed3fefd9aac427be9d4f524cdfaeb2db133f31f46fd7217da36d14b5fcc8",
+    "sha256": "3863ed3fefd9aac427be9d4f524cdfaeb2db133f31f46fd7217da36d14b5fcc8",
+    "dimensions_px": [
+      300,
+      300
+    ],
+    "commit": "f2492b469bec8aaa7aa83cc828081e14a295414d",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "license_evidence": "05 Источники/Originals/pca-tsne-umap-2026-10-25/distill-license-evidence.md",
+    "license_evidence_sha256": "31a3777a1d2fc875aae3c48241f109f1150be8d63dff56bc776954da9c5da8d5",
+    "modifications": "None; complete original PNG preserved byte-for-byte, no crop, redraw, relabeling or pixel resampling.",
+    "derivation": "source-image-copy",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/01 Классическое машинное обучение/07 PCA, t-SNE и UMAP.md"
+    ],
+    "source_code": "05 Источники/Originals/pca-tsne-umap-2026-10-25/distill-figure-configs.js",
+    "source_code_sha256": "8204a1f4138a1c292ca20412f54722954282377fb9cfec72fec9311752b0c5d3",
+    "source_page_snapshot": "05 Источники/Originals/pca-tsne-umap-2026-10-25/distill-index.html",
+    "source_page_sha256": "559094dadbb3816665c32c36dc9b709581b7cbc38e407c972818ef8d831434c8"
+  },
+  {
+    "id": "curated-dimensionality-distill-cluster-sizes-tsne30-43ab675d0bd6",
+    "asset": "00 Учебник/Assets/Figures/curated/pca-tsne-umap-2026-10-25/distill-cluster-sizes-tsne30.png",
+    "author": "Martin Wattenberg, Fernanda Viégas, Ian Johnson",
+    "source_url": "https://github.com/distillpub/post--misread-tsne/blob/f2492b469bec8aaa7aa83cc828081e14a295414d/public/assets/figure_03_03.png",
+    "source_image_url": "https://raw.githubusercontent.com/distillpub/post--misread-tsne/f2492b469bec8aaa7aa83cc828081e14a295414d/public/assets/figure_03_03.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/pca-tsne-umap-2026-10-25/distill-cluster-sizes-tsne30.png",
+    "source_asset_sha256": "43ab675d0bd6c5f401f020980be57664d3db6d05b0bb5ee0a475471816a93496",
+    "sha256": "43ab675d0bd6c5f401f020980be57664d3db6d05b0bb5ee0a475471816a93496",
+    "dimensions_px": [
+      300,
+      300
+    ],
+    "commit": "f2492b469bec8aaa7aa83cc828081e14a295414d",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "license_evidence": "05 Источники/Originals/pca-tsne-umap-2026-10-25/distill-license-evidence.md",
+    "license_evidence_sha256": "31a3777a1d2fc875aae3c48241f109f1150be8d63dff56bc776954da9c5da8d5",
+    "modifications": "None; complete original PNG preserved byte-for-byte, no crop, redraw, relabeling or pixel resampling.",
+    "derivation": "source-image-copy",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/01 Классическое машинное обучение/07 PCA, t-SNE и UMAP.md"
+    ],
+    "source_code": "05 Источники/Originals/pca-tsne-umap-2026-10-25/distill-figure-configs.js",
+    "source_code_sha256": "8204a1f4138a1c292ca20412f54722954282377fb9cfec72fec9311752b0c5d3",
+    "source_page_snapshot": "05 Источники/Originals/pca-tsne-umap-2026-10-25/distill-index.html",
+    "source_page_sha256": "559094dadbb3816665c32c36dc9b709581b7cbc38e407c972818ef8d831434c8"
+  },
+  {
+    "id": "curated-dimensionality-umap-open-cover-950748fe26cf",
+    "asset": "00 Учебник/Assets/Figures/curated/pca-tsne-umap-2026-10-25/umap-open-cover.png",
+    "author": "Leland McInnes and UMAP contributors",
+    "source_url": "https://github.com/lmcinnes/umap/blob/e82ed0d457b566b043ef44f4007a7149b0daca74/doc/images/how_umap_works_open_cover.png",
+    "source_image_url": "https://raw.githubusercontent.com/lmcinnes/umap/e82ed0d457b566b043ef44f4007a7149b0daca74/doc/images/how_umap_works_open_cover.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/pca-tsne-umap-2026-10-25/umap-open-cover.png",
+    "source_asset_sha256": "950748fe26cf1cfe707e1f33119895f1f267d4aac1aef70ca1fd4470e885611c",
+    "sha256": "950748fe26cf1cfe707e1f33119895f1f267d4aac1aef70ca1fd4470e885611c",
+    "dimensions_px": [
+      683,
+      392
+    ],
+    "commit": "e82ed0d457b566b043ef44f4007a7149b0daca74",
+    "license": "BSD-3-Clause",
+    "license_url": "https://github.com/lmcinnes/umap/blob/e82ed0d457b566b043ef44f4007a7149b0daca74/LICENSE.txt",
+    "license_evidence": "05 Источники/Originals/pca-tsne-umap-2026-10-25/umap-LICENSE.txt",
+    "license_evidence_sha256": "46fc974145ef85e0992ac3173d03ffe6cdf2611292950e323c5a69b9ca35ff1e",
+    "modifications": "None; complete original PNG preserved byte-for-byte, no crop, redraw, relabeling or pixel resampling.",
+    "derivation": "source-image-copy",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/01 Классическое машинное обучение/07 PCA, t-SNE и UMAP.md"
+    ],
+    "source_page_snapshot": "05 Источники/Originals/pca-tsne-umap-2026-10-25/how_umap_works.rst",
+    "source_page_sha256": "c4afc72f8f0daf93b0f59a8b446d7c45c23ea4f5e32d95e38d3d6a8b0eb67fd7"
+  },
+  {
+    "id": "curated-dimensionality-umap-adaptive-cover-b0e2ed3673ef",
+    "asset": "00 Учебник/Assets/Figures/curated/pca-tsne-umap-2026-10-25/umap-adaptive-cover.png",
+    "author": "Leland McInnes and UMAP contributors",
+    "source_url": "https://github.com/lmcinnes/umap/blob/e82ed0d457b566b043ef44f4007a7149b0daca74/doc/images/how_umap_works_local_metric_open_cover.png",
+    "source_image_url": "https://raw.githubusercontent.com/lmcinnes/umap/e82ed0d457b566b043ef44f4007a7149b0daca74/doc/images/how_umap_works_local_metric_open_cover.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/pca-tsne-umap-2026-10-25/umap-adaptive-cover.png",
+    "source_asset_sha256": "b0e2ed3673ef8f8d12ad5304dd8fdf172adfe64b08433527190d0be676c9a4fd",
+    "sha256": "b0e2ed3673ef8f8d12ad5304dd8fdf172adfe64b08433527190d0be676c9a4fd",
+    "dimensions_px": [
+      683,
+      392
+    ],
+    "commit": "e82ed0d457b566b043ef44f4007a7149b0daca74",
+    "license": "BSD-3-Clause",
+    "license_url": "https://github.com/lmcinnes/umap/blob/e82ed0d457b566b043ef44f4007a7149b0daca74/LICENSE.txt",
+    "license_evidence": "05 Источники/Originals/pca-tsne-umap-2026-10-25/umap-LICENSE.txt",
+    "license_evidence_sha256": "46fc974145ef85e0992ac3173d03ffe6cdf2611292950e323c5a69b9ca35ff1e",
+    "modifications": "None; complete original PNG preserved byte-for-byte, no crop, redraw, relabeling or pixel resampling.",
+    "derivation": "source-image-copy",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/01 Классическое машинное обучение/07 PCA, t-SNE и UMAP.md"
+    ],
+    "source_page_snapshot": "05 Источники/Originals/pca-tsne-umap-2026-10-25/how_umap_works.rst",
+    "source_page_sha256": "c4afc72f8f0daf93b0f59a8b446d7c45c23ea4f5e32d95e38d3d6a8b0eb67fd7"
+  },
+  {
+    "id": "curated-dimensionality-umap-fuzzy-graph-d9e83915a97b",
+    "asset": "00 Учебник/Assets/Figures/curated/pca-tsne-umap-2026-10-25/umap-fuzzy-graph.png",
+    "author": "Leland McInnes and UMAP contributors",
+    "source_url": "https://github.com/lmcinnes/umap/blob/e82ed0d457b566b043ef44f4007a7149b0daca74/doc/images/how_umap_works_umap_graph.png",
+    "source_image_url": "https://raw.githubusercontent.com/lmcinnes/umap/e82ed0d457b566b043ef44f4007a7149b0daca74/doc/images/how_umap_works_umap_graph.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/pca-tsne-umap-2026-10-25/umap-fuzzy-graph.png",
+    "source_asset_sha256": "d9e83915a97b8b6da4eec03f3de2e9ba3f1efb74ee09f71a00b07515994a5d3c",
+    "sha256": "d9e83915a97b8b6da4eec03f3de2e9ba3f1efb74ee09f71a00b07515994a5d3c",
+    "dimensions_px": [
+      683,
+      392
+    ],
+    "commit": "e82ed0d457b566b043ef44f4007a7149b0daca74",
+    "license": "BSD-3-Clause",
+    "license_url": "https://github.com/lmcinnes/umap/blob/e82ed0d457b566b043ef44f4007a7149b0daca74/LICENSE.txt",
+    "license_evidence": "05 Источники/Originals/pca-tsne-umap-2026-10-25/umap-LICENSE.txt",
+    "license_evidence_sha256": "46fc974145ef85e0992ac3173d03ffe6cdf2611292950e323c5a69b9ca35ff1e",
+    "modifications": "None; complete original PNG preserved byte-for-byte, no crop, redraw, relabeling or pixel resampling.",
+    "derivation": "source-image-copy",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/01 Классическое машинное обучение/07 PCA, t-SNE и UMAP.md"
+    ],
+    "source_page_snapshot": "05 Источники/Originals/pca-tsne-umap-2026-10-25/how_umap_works.rst",
+    "source_page_sha256": "c4afc72f8f0daf93b0f59a8b446d7c45c23ea4f5e32d95e38d3d6a8b0eb67fd7"
+  }
+]

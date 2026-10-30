@@ -224,6 +224,35 @@ class StanfordSemanticAuditTest(unittest.TestCase):
         required_semantics = {"section", "derivation", "experiment", "worked-example", "failure-mode"}
         self.assertTrue(required_semantics.issubset({unit["kind"] for unit in units}))
 
+    def test_lecture_02_fp4_umbrella_has_four_complete_bounded_destinations(self) -> None:
+        expected = {
+            "lecture-02-fp4-block-scaling": (174, 183, "covered-existing", "fp4-mxfp4-и-nvfp4"),
+            "lecture-02-tensor-device-placement": (184, 201, "integrated", "torch-device-placement"),
+            "lecture-02-einops-named-axes": (202, 278, "covered-existing", "einops-attention-shapes"),
+            "lecture-02-flop-units": (279, 288, "covered-existing", "compute-accounting"),
+        }
+        units = {unit["id"]: unit for unit in self.units["units"]}
+        rows = {row["source_unit"]: row for row in self.coverage["rows"]}
+        covered_lines = set()
+        for unit_id, (start, end, disposition, anchor) in expected.items():
+            unit, row = units[unit_id], rows[unit_id]
+            self.assertEqual(unit["source_object"], "lecture-02")
+            self.assertEqual((unit["source_line_start"], unit["source_line_end"]), (start, end))
+            self.assertIn(f"lines={start}-{end}:", unit["source_location"])
+            self.assertTrue(unit["evidence_locations"])
+            self.assertEqual(row["disposition"], disposition)
+            self.assertEqual(row["destination_anchor"], anchor)
+            destination = (REPOSITORY_ROOT / row["destination"]).read_text("utf-8")
+            self.assertIn(f"  - {unit_id}\n", destination)
+            covered_lines.update(range(start, end + 1))
+        self.assertEqual(covered_lines, set(range(174, 289)))
+        umbrella = rows["lecture-02-section-111-fp4"]
+        self.assertEqual(umbrella["disposition"], "excluded")
+        self.assertIn("duplicate umbrella", umbrella["reason"])
+        for unit_id in expected:
+            self.assertIn(unit_id, umbrella["reason"])
+        self.assertEqual(rows["lecture-02-figure-step-125-rendering-1"]["disposition"], "source-only")
+
     def test_visuals_link_to_units_without_page_raster_duplicates(self) -> None:
         units_by_id = {unit["id"]: unit for unit in self.units["units"]}
         seen_semantic_locations: set[tuple[str, str]] = set()

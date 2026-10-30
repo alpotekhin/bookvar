@@ -9,17 +9,40 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`slides/vol2/17_conclusion/17_conclusion.tex`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static slide archive
+> Text and equations retain the original language. Layout wrappers are simplified;
+> speaker notes are separate, and original SVGs are not redrawn or cropped.
+> Unsupported TeX remains visible and is listed beside the affected slide.
+> This archive is not a checked transcript or a finished Bookvar chapter.
 
 # VOL2 Slides — Conclusion
 
 ## Readable slide sequence
 
+## Conclusion
+
+[Original slide 1](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L62)
+
+Engineering Intelligence at Scale
+
 ## Learning Objectives
 
-{
+[Original slide 2](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L67)
+
+1. Synthesize the **six principles** of distributed ML systems engineering
+2. Evaluate how infrastructure, distributed training, fault tolerance, and operations **integrate** as one system
+3. Apply **systems thinking** to design systems that scale horizontally, fail gracefully, and operate sustainably
+4. Connect technical excellence with **responsible engineering** and environmental sustainability
+5. Formulate professional strategies for engineering ML systems that serve humanity **responsibly**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [2 min] Walk through each objective. ``This is the synthesis chapter ---
 everything connects. Every principle from the volume converges here.''
@@ -30,53 +53,60 @@ notes?'' Cold-call 2--3 students. [Primes the retrieval exercise later.]
 
 % -- FLEX: [CORE] + contingency
 [CORE] Sets the synthesis scope. IF SHORT: Read objectives 1 and 5 aloud.
-}
-- Synthesize the **six principles** of distributed ML systems engineering
-- Evaluate how infrastructure, distributed training, fault tolerance, and operations **integrate** as one system
-- Apply **systems thinking** to design systems that scale horizontally, fail gracefully, and operate sustainably
-- Connect technical excellence with **responsible engineering** and environmental sustainability
-- Formulate professional strategies for engineering ML systems that serve humanity **responsibly**
+```
+
+</details>
 
 ## Visual Language
 
-{
+[Original slide 3](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L92)
+
+Throughout this course, colors carry meaning:
+
+**Blue** — Compute / Processing
+
+GPU ops, forward/backward pass, inference
+
+**Green** — Data / Memory
+
+Data flow, caches, healthy paths
+
+**Orange** — Routing / Scheduling
+
+Load balancers, batch windows
+
+**Red** — Error / Cost / Bottleneck
+
+Loss, decode phase, waste
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [1 min] ``You have seen these colors across 17 chapters. By now they should be
 second nature --- compute is blue, data is green, routing is orange, error is red.''
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Skip if students have internalized the color system.
-}
+```
 
-Throughout this course, colors carry meaning:
-
-{0.3cm}
-[T]
-  
-    {mlsyscard}{computestroke}
-    **Blue** --- Compute / Processing\\
-    { GPU ops, forward/backward pass, inference}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{datastroke}
-    **Green** --- Data / Memory\\
-    { Data flow, caches, healthy paths}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{routingstroke}
-    **Orange** --- Routing / Scheduling\\
-    { Load balancers, batch windows}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{errorstroke}
-    **Red** --- Error / Cost / Bottleneck\\
-    { Loss, decode phase, waste}
-    {mlsyscard}
+</details>
 
 ## The Fleet Stack: Four Layers, One Discipline
 
-{
+[Original slide 4](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L138)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/17_conclusion/images/fleet-stack-synthesis.svg]]
+
+Harvard Edge ML Systems Book contributors, [fleet-stack-synthesis.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/images/fleet-stack-synthesis.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Key:** The complete stack equips engineers to make informed decisions at every level.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The learning objectives listed six principles. This diagram shows the four-layer
 stack that organizes them --- the complete architecture students have built.
@@ -95,18 +125,26 @@ Ask: ``Which layer did you find most surprising over this volume?'' Cold-call
 % -- FLEX: [CORE] + contingency
 [CORE] The Fleet Stack is the chapter's organizing diagram.
 IF SHORT: Name the four layers without elaborating each.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{fleet-stack-synthesis.pdf}
-
-{0.1cm}
-{Key:}{The complete stack equips engineers to make informed decisions at every level.}
+</details>
 
 ## Retrieval: Name the Six Principles
 
-{
+[Original slide 5](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L170)
+
+Close your notes.
+
+Write down the **6 principles** of distributed ML systems.
+
+60 seconds — no peeking.
+
+Hint: think about the Fleet Stack layers.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [2 min] ``Close your notes. Write down all six principles of distributed ML
 systems. 60 seconds, no peeking.'' Walk around the room. Do NOT reveal yet ---
@@ -119,23 +157,24 @@ gap between what they recall and what they miss reveals what needs reinforcement
 
 % -- FLEX: [CORE] + contingency
 [CORE] First active learning moment. Do not skip or shorten.
-}
+```
 
-{1.2cm}
-{ Close your notes.}
-
-{0.6cm}
-{ Write down the **6 principles** of distributed ML systems.}
-
-{0.6cm}
-{ 60 seconds --- no peeking.}
-
-{0.6cm}
-{{midgray}{Hint: think about the Fleet Stack layers.}}
+</details>
 
 ## Six Principles of Distributed ML Systems
 
-{
+[Original slide 6](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L205)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/17_conclusion/images/six-principles.svg]]
+
+Harvard Edge ML Systems Book contributors, [six-principles.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/images/six-principles.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Pattern:** Infrastructure constrains, operations expose, governance directs, scale transforms.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Students just attempted to recall all six. This slide reveals the answers ---
 compare what they wrote to what is on screen.
@@ -145,7 +184,7 @@ compare what they wrote to what is on screen.
 infrastructure determination, responsible engineering, sustainability
 constraints, qualitative scale effects.'' Spend most time on principle 2
 (routine failure): ``Meta's Llama 3 training run on 16,384 GPUs suffered
-419 unexpected failures over 54 days --- one failure every $ 3.1$
+419 unexpected failures over 54 days --- one failure every $\approx 3.1$
 hours. This is not bad luck; it is the statistical reality of operating
 thousands of components.'' Then principle 6: ``Scale does not just make
 things bigger --- it creates new phenomena like stragglers, network
@@ -158,28 +197,39 @@ newer to most CS students.]
 
 % -- WARN: What students will get wrong on THIS topic
 On Principle 1 (communication dominance): students often conflate this with
-**latency**. Correct framing: at scale the binding constraint is
-**bandwidth**, not per-hop latency --- AllReduce moves $2M$ bytes per
+\textbf{latency}. Correct framing: at scale the binding constraint is
+\textbf{bandwidth}, not per-hop latency --- AllReduce moves $2M$ bytes per
 worker and bandwidth-to-compute ratio is what limits throughput.
 On Principle 5 (sustainability): students treat it as a soft aspiration.
 Correct framing: EU AI Act energy reporting and GDPR-scale fines make
-sustainability a **hard legal and financial constraint**.
+sustainability a \textbf{hard legal and financial constraint}.
 
 % -- FLEX: [CORE] + contingency
 [CORE] The six principles are the volume's thesis.
 IF SHORT: Walk principles 1 and 2 only; use the Llama 3 number to anchor principle 2.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{six-principles.pdf}
-
-{0.1cm}
-{Pattern:}{Infrastructure constrains, operations expose, governance directs, scale transforms.}
+</details>
 
 ## Principle Summary Table
 
-{
+[Original slide 7](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L250)
+
+| **Principle** | **Core Question** | **Key Metric** | **Chapter** |
+| --- | --- | --- | --- |
+| **1. Communication** | What is the bottleneck? | BW utilization | Collective Comm. |
+| **2. Failure** | How do we recover? | MTBF, ckpt overhead | Fault Tolerance |
+| **3. Infrastructure** | What is possible? | FLOPS, mem BW | Compute Infra. |
+| **4. Responsible** | Who is affected? | Fairness, audits | Responsible AI |
+| **5. Sustainability** | What is the cost? | kWh, carbon | Sustainable AI |
+| **6. Scale** | What breaks at 1000$\times$? | Scaling efficiency | Distributed Training |
+
+**Remember:** All six must be satisfied simultaneously — no principle operates in isolation.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The diagram showed the six principles visually. This table provides the
 reference-grade summary with questions, metrics, and chapter mappings.
@@ -191,54 +241,73 @@ Photograph this slide --- it is your cheat sheet.'' Read the bottom callout:
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Reference slide. IF SHORT: Skip and point students to the textbook.
-}
+```
 
-{}{1.2}
-{tabular}{@{}lllp{3.2cm}@{}}
-  
-  **Principle** & **Core Question** & **Key Metric** & **Chapter** \\
-  
-  **1. Communication** & What is the bottleneck? & BW utilization & Collective Comm. \\
-  **2. Failure** & How do we recover? & MTBF, ckpt overhead & Fault Tolerance \\
-  **3. Infrastructure** & What is possible? & FLOPS, mem BW & Compute Infra. \\
-  **4. Responsible** & Who is affected? & Fairness, audits & Responsible AI \\
-  **5. Sustainability** & What is the cost? & kWh, carbon & Sustainable AI \\
-  **6. Scale** & What breaks at 1000$×$? & Scaling efficiency & Distributed Training \\
-  
-{tabular}
+</details>
 
-{0.15cm}
-{Remember:}{All six must be satisfied simultaneously --- no principle operates in isolation.}
+## The Fleet Law
+
+[Original slide 8](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L286)
+
+$T_{\text{step}}(N) = \dfrac{T_{\text{compute}}}{N} + T_{\text{comm}}(N) + T_{\text{sync}}(N) - T_{\text{overlap}}$
 
 ## Fleet Law: The Distributed Counterpart to the Iron Law
 
-{
+[Original slide 9](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L290)
+
+The **Fleet Law** is the volume's governing equation:
+each term maps to a principle.
+
+- $T_{\text{compute}}/N$ — ideal linear speedup
+- $T_{\text{comm}}(N)$ — grows with $N$; bandwidth-bound
+  (**Principle 1: Communication Dominates**)
+- $T_{\text{sync}}(N)$ — barrier cost; straggler-bound
+  (**Principle 6: Scale Creates Change**)
+- $T_{\text{overlap}}$ — pipelining reclaims idle time
+
+As $N$ grows, the compute term shrinks but comm and sync
+terms grow — eventually making them the binding constraint.
+This is the quantitative foundation for why the six principles exist.
+
+| **Term** | **Trend with $N$** |
+| --- | --- |
+| $T_{\text{compute}}/N$ | $\downarrow$ decreases |
+| $T_{\text{comm}}(N)$ | $\uparrow$ grows |
+| $T_{\text{sync}}(N)$ | $\uparrow$ grows |
+| $T_{\text{overlap}}$ | Engineering savings |
+
+**Vol I $\to$ Vol II:** Same physics, different scale — one machine became a fleet.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Volume I was governed by the Iron Law: single-machine performance is a matter
 of quantitative physics. Volume II shifts to networked collectives. The Fleet
 Law is the bridge: the same cost-accounting discipline applied to N machines.
 
 % -- NARRATE: What to SAY while showing this slide
-[2 min] Walk through each term: ``$T_{{compute}}/N$ is the ideal speedup
-term --- halved each time we double $N$. $T_{{comm}}(N)$ grows with $N$
-because more workers exchange more data. $T_{{sync}}(N)$ is the barrier
-cost --- every AllReduce waits for the slowest worker. $T_{{overlap}}$
+[2 min] Walk through each term: ``$T_{\text{compute}}/N$ is the ideal speedup
+term --- halved each time we double $N$. $T_{\text{comm}}(N)$ grows with $N$
+because more workers exchange more data. $T_{\text{sync}}(N)$ is the barrier
+cost --- every AllReduce waits for the slowest worker. $T_{\text{overlap}}$
 is what good engineering buys back by pipelining communication with
 computation.'' The key insight: as $N$ grows, the compute term shrinks but
 comm and sync terms grow, eventually making them the dominant bottleneck
---- this is why Principle 1 says *communication dominates*.
+--- this is why Principle 1 says \emph{communication dominates}.
 ANALOGY: just as the iron law told you what is possible on one machine,
 the Fleet Law tells you what changes when you add the second.
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
 Ask: ``Which term is hardest to reduce as $N$ grows to 10,000?''
-[Expected: $T_{{sync}}$ --- because every synchronous barrier must
+[Expected: $T_{\text{sync}}$ --- because every synchronous barrier must
 wait for the slowest of $N$ workers, and stragglers grow more probable
 with $N$.]
 
 % -- WARN: What students will get wrong on THIS topic
 Common error: students assume the communication term is about latency.
-Correct framing: $T_{{comm}}(N)$ is dominated by **bandwidth**,
+Correct framing: $T_{\text{comm}}(N)$ is dominated by \textbf{bandwidth},
 not latency --- bandwidth-at-scale is the binding constraint for AllReduce
 in large clusters, not the per-hop latency.
 
@@ -247,50 +316,24 @@ in large clusters, not the per-hop latency.
 most important named equation in the conclusion chapter. Do not skip.
 IF SHORT: Read the equation aloud and name the two terms that grow with $N$
 (comm and sync). Students only need the qualitative intuition.
-}
+```
 
-[T]
-  
-    The **Fleet Law** is the volume's governing equation:
-    each term maps to a principle.
-
-    {0.08cm}
-    {0pt}
-- $T_{{compute}}/N$ --- ideal linear speedup
-- $T_{{comm}}(N)$ --- grows with $N$; bandwidth-bound
-        (**Principle 1: Communication Dominates**)
-- $T_{{sync}}(N)$ --- barrier cost; straggler-bound
-        (**Principle 6: Scale Creates Change**)
-- $T_{{overlap}}$ --- pipelining reclaims idle time
-    
-
-    {0.05cm}
-    {mlsyscard}{crimson}
-    { As $N$ grows, the compute term shrinks but comm and sync
-    terms grow --- eventually making them the binding constraint.
-    This is the quantitative foundation for why the six principles exist.}
-    {mlsyscard}
-  
-  
-    
-    {}{1.05}
-    {tabular}{@{}lc@{}}
-      
-      **Term** & **Trend with $N$** \\
-      
-      $T_{{compute}}/N$ & $$ decreases \\
-      $T_{{comm}}(N)$   & $$ grows \\
-      $T_{{sync}}(N)$   & $$ grows \\
-      $T_{{overlap}}$   & Engineering savings \\
-      
-    {tabular}
-
-    {0.08cm}
-    {Vol I $$ Vol II:}{Same physics, different scale --- one machine became a fleet.}
+</details>
 
 ## Principle Tensions: The Art of Trade-offs
 
-{
+[Original slide 10](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L376)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/17_conclusion/images/principle-tensions.svg]]
+
+Harvard Edge ML Systems Book contributors, [principle-tensions.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/images/principle-tensions.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+Navigating these tensions defines the **art** of distributed ML engineering.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The six principles must all be satisfied. But they sometimes CONFLICT ---
 this slide reveals the tensions engineers must navigate.
@@ -310,18 +353,30 @@ that is fast but unfair, or robust but unsustainable, fails to deploy.
 % -- FLEX: [CORE] + contingency
 [CORE] Tensions define the engineering challenge of the discipline.
 IF SHORT: Name three tension pairs from the diagram.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{principle-tensions.pdf}
-
-{0.05cm}
-{ Navigating these tensions defines the **art** of distributed ML engineering.}
+</details>
 
 ## Discussion: Which Trade-off is Hardest?
 
-{
+[Original slide 11](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L409)
+
+Turn and Talk (90 seconds)
+
+A hyperscaler must choose between:
+
+**(A)** Maximizing training throughput
+
+**(B)** Minimizing carbon footprint
+
+**(C)** Ensuring fairness across user groups
+
+**Which trade-off is hardest to navigate, and why?**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The tensions diagram showed abstract conflicts. This discussion grounds them
 in a concrete hyperscaler decision.
@@ -337,23 +392,33 @@ vs.\ serving, regulated vs.\ unregulated domain.
 
 % -- FLEX: [CORE] + contingency
 [CORE] Second active learning moment. IF SHORT: Reduce to 60 seconds.
-}
+```
 
-{0.8cm}
-{ Turn and Talk {midgray}{(90 seconds)}}
-
-{0.6cm}
-{ A hyperscaler must choose between:\\[0.2cm]
-{computestroke}{**(A)**} Maximizing training throughput\\[0.1cm]
-{datastroke}{**(B)**} Minimizing carbon footprint\\[0.1cm]
-{errorstroke}{**(C)**} Ensuring fairness across user groups}
-
-{0.5cm}
-**Which trade-off is hardest to navigate, and why?**
+</details>
 
 ## No Principle Exists in Isolation
 
-{
+[Original slide 12](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L443)
+
+In production, principles create **cross-cutting constraints**:
+
+- Communication optimization $\to$ more sync $\to$ failure exposure
+- Sustainability $\to$ limits infrastructure choices
+- Responsible AI $\to$ adds latency to serving
+- Scale amplifies *every* tension
+
+The engineer must find designs that balance all six principles within acceptable trade-offs.
+
+| **Conflict** | **Resolution** |
+| --- | --- |
+| Comm $\leftrightarrow$ Fault | Async ckpt |
+| Perf $\leftrightarrow$ Green | Carbon sched. |
+| Ethics $\leftrightarrow$ Latency | Offline audit |
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The discussion surfaced context-dependent trade-offs. This slide codifies the
 cross-cutting constraint pattern.
@@ -368,61 +433,50 @@ Carbon-aware scheduling resolves performance vs.\ sustainability.''
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Extends the tensions discussion with resolution patterns.
 IF SHORT: Read the crimson card insight only.
-}
+```
 
-[T]
-  
-    In production, principles create **cross-cutting constraints**:
-
-    {0.1cm}
-    {0pt}
-- Communication optimization $$ more sync $$ failure exposure
-- Sustainability $$ limits infrastructure choices
-- Responsible AI $$ adds latency to serving
-- Scale amplifies *every* tension
-    
-
-    {0.1cm}
-    {mlsyscard}{crimson}
-    { The engineer must find designs that balance all six principles within acceptable trade-offs.}
-    {mlsyscard}
-  
-  
-    
-    {}{1.1}
-    {tabular}{@{}lc@{}}
-      
-      **Conflict** & **Resolution** \\
-      
-      Comm $$ Fault & Async ckpt \\
-      Perf $$ Green & Carbon sched. \\
-      Ethics $$ Latency & Offline audit \\
-      
-    {tabular}
+</details>
 
 ## Quick Check
 
-{
+[Original slide 13](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L497)
+
+Quick Check
+
+Name three principle tensions from this volume
+
+where optimizing one hurts another.
+
+15 seconds — then I will cold-call.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [1 min] Read the question. Give 15 seconds. Cold-call. Answer: communication
 vs.\ fault tolerance, performance vs.\ sustainability, ethics vs.\ latency.
 
 % -- FLEX: [CORE] + contingency
 [CORE] Micro-retrieval reinforcing the tension pairs.
-}
+```
 
-{1.0cm}
-{ Quick Check}
-
-{0.6cm}
-{ Name three principle tensions from this volume\ optimizing one hurts another.}
-
-{0.5cm}
-{{midgray}{15 seconds --- then I will cold-call.}}
+</details>
 
 ## Three Core Competencies Mastered
 
-{
+[Original slide 14](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L525)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/17_conclusion/images/competency-framework.svg]]
+
+Harvard Edge ML Systems Book contributors, [competency-framework.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/images/competency-framework.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+These competencies span **all four layers** of the Fleet Stack.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Principles and tensions describe the discipline. Competencies describe what
 students can now DO --- the professional capabilities they have developed.
@@ -440,26 +494,52 @@ Ask: ``Which competency do you feel strongest in?'' Cold-call 2 students.
 Common error: students treat governance as a soft skill or an add-on that
 non-engineers handle. Correct framing: governance at fleet scale requires
 implementing differential privacy, auditing bias in model outputs, and
-scheduling workloads for carbon efficiency --- these are **engineering
-competencies** that require the same quantitative rigor as AllReduce or
+scheduling workloads for carbon efficiency --- these are \textbf{engineering
+competencies} that require the same quantitative rigor as AllReduce or
 checkpoint optimization. A systems engineer who cannot implement them is
 not a complete fleet engineer.
 
 % -- FLEX: [CORE] + contingency
 [CORE] Competencies validate the learning outcomes.
 IF SHORT: Name the three pillars and ask the self-assessment question.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{competency-framework.pdf}
-
-{0.05cm}
-{ These competencies span **all four layers** of the Fleet Stack.}
+</details>
 
 ## Exercise: Map the Competency
 
-{
+[Original slide 15](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L564)
+
+Match each skill to its competency:
+
+**Skills:**
+
+1. Ring AllReduce bandwidth analysis
+2. Continuous batching optimization
+3. Differential privacy implementation
+
+**Competencies:**
+
+- Distributed Systems
+- Production Operations
+- Governance & Ethics
+
+(90 seconds — then compare with a neighbor)
+
+**Solution:**
+
+1 $\to$ **A** Distributed Systems
+
+2 $\to$ **B** Production Operations
+
+3 $\to$ **C** Governance & Ethics
+
+Each maps to a Fleet Stack layer.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The competency framework named three pillars abstractly. This exercise tests
 whether students can classify specific skills into the correct pillar.
@@ -475,45 +555,48 @@ Three-way matching exercise. Falsifiable: students can get the mapping wrong.
 
 % -- FLEX: [CORE] + contingency
 [CORE] Third active learning moment. IF SHORT: Reduce to 60 seconds.
-}
+```
 
-{ Match each skill to its competency:}
-
-{0.15cm}
-[T]
-  
-    **Skills:**
-    {0pt}
-- Ring AllReduce bandwidth analysis
-- Continuous batching optimization
-- Differential privacy implementation
-    
-
-    {0.1cm}
-    **Competencies:**
-    {0pt}
-- [{computestroke}{A}] Distributed Systems
-- [{routingstroke}{B}] Production Operations
-- [{datastroke}{C}] Governance & Ethics
-    
-
-    {{midgray}{(90 seconds --- then compare with a neighbor)}}
-  
-  
-    
-    {mlsyscard}{datastroke}
-    **Solution:**\\[0.05cm]
-    {
-    1 $$ {computestroke}{**A**} Distributed Systems\\
-    2 $$ {routingstroke}{**B**} Production Operations\\
-    3 $$ {datastroke}{**C**} Governance & Ethics\\[0.05cm]
-    Each maps to a Fleet Stack layer.
-    }
-    {mlsyscard}
+</details>
 
 ## The Complete Production System
 
-{
+[Original slide 16](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L626)
+
+**Four interdependent layers:**
+
+**L4: Governance**
+
+Security, sustainability, responsibility — determines *whether* to deploy
+
+**L3: Operations**
+
+Serving, monitoring, CI/CD — determines *how well* it runs
+
+**L2: Training**
+
+Distributed optimization, fault tolerance — determines *what* the model learns
+
+**L1: Infrastructure**
+
+Compute, network, storage — determines *what is possible*
+
+**Weakest-Link Principle**
+
+A failure at any layer propagates upward:
+
+GPU fault $\to$ corrupted training
+
+Bad model $\to$ SLA violation
+
+SLA violation $\to$ governance failure
+
+**No component operates in isolation.** The system is as strong as its weakest layer.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Students mastered competencies in isolation. This slide integrates them into
 the complete production system --- showing how infrastructure, training,
@@ -537,48 +620,37 @@ infrastructure alarms.]
 
 % -- WARN: What students will get wrong on THIS topic
 Common error: students think the layers are independent. Correct framing:
-the layers are tightly coupled --- a 15% security tax at the infrastructure
+the layers are tightly coupled --- a 15\% security tax at the infrastructure
 layer reduces training throughput, which delays operations deployment, which
 affects governance SLAs.
 
 % -- FLEX: [CORE] + contingency
 [CORE] The integrated view is the chapter's unique contribution.
 IF SHORT: Name the four layers and state the weakest-link principle.
-}
+```
 
-[T]
-  
-    **Four interdependent layers:**
+</details>
 
-    {0.1cm}
-    {datastroke}{**L4: Governance**}\\
-    { Security, sustainability, responsibility --- determines *whether* to deploy}
+## The Compound Capability Law
 
-    {0.08cm}
-    {routingstroke}{**L3: Operations**}\\
-    { Serving, monitoring, CI/CD --- determines *how well* it runs}
+[Original slide 17](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L699)
 
-    {0.08cm}
-    {computestroke}{**L2: Training**}\\
-    { Distributed optimization, fault tolerance --- determines *what* the model learns}
-
-    {0.08cm}
-    {errorstroke}{**L1: Infrastructure**}\\
-    { Compute, network, storage --- determines *what is possible*}
-  
-  
-    {mlsyscard}{crimson}
-    **Weakest-Link Principle**\\[0.05cm]
-    { A failure at any layer propagates upward:\\[0.05cm]
-    GPU fault $$ corrupted training\\
-    Bad model $$ SLA violation\\
-    SLA violation $$ governance failure\\[0.1cm]
-    **No component operates in isolation.** The system is as strong as its weakest layer.}
-    {mlsyscard}
+$\text{Capability} \propto \text{Model}_{IQ} \times (\text{Tools} + \text{Context} + \text{Planning})^N$
 
 ## From Scaling to Composition
 
-{
+[Original slide 18](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L703)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/17_conclusion/images/compound-ai-systems.svg]]
+
+Harvard Edge ML Systems Book contributors, [compound-ai-systems.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/images/compound-ai-systems.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Insight:** The next breakthrough is a smarter **System Architecture**, not a larger GPU.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The six principles and three competencies describe what IS. This section looks
 forward: the Era of Scaling is flattening, and Composition is the next frontier.
@@ -597,18 +669,32 @@ Ask: ``What does it mean for your career if orchestration is the bottleneck?''
 % -- FLEX: [CORE] + contingency
 [CORE] The composition thesis is the volume's forward look.
 IF SHORT: State the FLOP-to-Reasoning-Chain shift.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
+</details>
 
-{compound-ai-systems.pdf}
+## The 100$\times$ Efficiency Decomposition
 
-{0.05cm}
-{Insight:}{The next breakthrough is a smarter **System Architecture**, not a larger GPU.}
+[Original slide 19](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L734)
 
-## The 100$×$ Efficiency Decomposition
+**Where does the next 100$\times$ improvement come from?**
 
-{
+$$
+100\times = \underbrace{4\times}_{\text{Hardware}} \times \underbrace{2.5\times}_{\text{Algorithm}} \times \underbrace{10\times}_{\text{Orchestration}}
+$$
+
+| **Source** | **Gain** | **Mechanism** | **Status** |
+| --- | --- | --- | --- |
+| **Hardware** | 4$\times$ | Next-gen silicon (B200 vs H100) | Diminishing returns |
+| **Algorithm** | 2.5$\times$ | Structured sparsity + distillation | Incremental |
+| **Orchestration** | **10$\times$** | Compound AI systems | **Largest opportunity** |
+
+The bulk of future scaling must come from **System Orchestration**: reasoning loops, tool-use, and dynamic retrieval delivering 10$\times$ more utility from the same FLOPs.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The compound AI slide stated orchestration is the bottleneck. This slide
 decomposes the 100x into its three sources.
@@ -624,43 +710,33 @@ decade of AI.''
 % -- FLEX: [CORE] + contingency
 [CORE] The 100x decomposition justifies the entire curriculum.
 IF SHORT: State the equation and the 10x orchestration opportunity.
-}
+```
 
-**Where does the next 100$×$ improvement come from?**
-
-{0.1cm}
-$$100× = {4×}_{{Hardware}} × {2.5×}_{{Algorithm}} × {10×}_{{Orchestration}}$$
-
-{0.05cm}
-
-{}{1.1}
-{tabular}{@{}llll@{}}
-  
-  **Source** & **Gain** & **Mechanism** & **Status** \\
-  
-  {computestroke}{**Hardware**} & 4$×$ & Next-gen silicon (B200 vs H100) & Diminishing returns \\
-  {routingstroke}{**Algorithm**} & 2.5$×$ & Structured sparsity + distillation & Incremental \\
-  {datastroke}{**Orchestration**} & **10$×$** & Compound AI systems & {datastroke}{**Largest opportunity**} \\
-  
-{tabular}
-
-{0.1cm}
-{mlsyscard}{crimson}
-{ The bulk of future scaling must come from **System Orchestration**: reasoning loops, tool-use, and dynamic retrieval delivering 10$×$ more utility from the same FLOPs.}
-{mlsyscard}
+</details>
 
 ## The Fermi Estimate of Intelligence
 
-{
+[Original slide 20](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L779)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/17_conclusion/images/fermi-brain-vs-cluster.svg]]
+
+Harvard Edge ML Systems Book contributors, [fermi-brain-vs-cluster.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/images/fermi-brain-vs-cluster.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Punchline:** We have conquered **Scale**. The challenge is **Efficiency**.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The 100x decomposition showed where gains come from. The Fermi estimate
 compares our best machines to the ultimate efficiency benchmark: the brain.
 
 % -- NARRATE: What to SAY while showing this slide
 [3 min] Walk through the diagram scenario: the chapter uses 25,000 H100 GPUs at
-989 TFLOP/s (FP16). Machine: $25{,}000 × 989 × 10^{12}  2.47
-× 10^{19}$ FLOP/s. Brain: $10^{14}$ synaptic ops/s. Raw throughput ratio
-$ 247{,}000×$. Power: $25{,}000 × 700$ W $= 17.5$ MW vs.\
+989 TFLOP/s (FP16). Machine: $25{,}000 \times 989 \times 10^{12} \approx 2.47
+\times 10^{19}$ FLOP/s. Brain: $10^{14}$ synaptic ops/s. Raw throughput ratio
+$\approx 247{,}000\times$. Power: $25{,}000 \times 700$ W $= 17.5$ MW vs.\
 brain's 20 W. The efficiency comparison depends on how you define brain
 ``operations'' and is left qualitative in the chapter. The punchline: ``We have
 conquered Scale. The challenge for the next generation is Efficiency.''
@@ -669,29 +745,44 @@ NOTE: these are the chapter's canonical numbers (25K GPUs). The exercise slide
 below uses a simplified 10K-GPU version for student calculation.
 
 % -- WARN: What students will get wrong on THIS topic
-Common error: students will recall round numbers like ``2,500$×$ faster''
-or ``350,000$×$ more efficient'' from older slide versions; those figures
+Common error: students will recall round numbers like ``2,500$\times$ faster''
+or ``350,000$\times$ more efficient'' from older slide versions; those figures
 were inconsistent and not from the chapter's LEGO cell. The chapter computes
-throughput ratio $ 247{,}000×$ for the 25K-GPU scenario. The energy
+throughput ratio $\approx 247{,}000\times$ for the 25K-GPU scenario. The energy
 efficiency gap is left qualitative by the chapter because it depends heavily on
 how synaptic operations are modeled.
 
 % -- FLEX: [CORE] + contingency
 [CORE] The Fermi estimate is the capstone quantitative moment.
-IF SHORT: State the $ 247{,}000×$ raw throughput advantage and
+IF SHORT: State the $\approx 247{,}000\times$ raw throughput advantage and
 the qualitative efficiency gap.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{fermi-brain-vs-cluster.pdf}
-
-{0.1cm}
-{Punchline:}{We have conquered **Scale**. The challenge is **Efficiency**.}
+</details>
 
 ## Post-Silicon Frontiers
 
-{
+[Original slide 21](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L820)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/17_conclusion/images/post-silicon-frontier.svg]]
+
+Harvard Edge ML Systems Book contributors, [post-silicon-frontier.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/images/post-silicon-frontier.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Technology timelines:**
+
+| **Technology** | **Horizon** |
+| --- | --- |
+| Optical interconnect | 2028–2030 |
+| Chiplet integration | 2026–2028 |
+| In-memory compute | 2027–2030 |
+| Neuromorphic | 2030–2035 |
+
+Optical: 2$\times$ pJ/bit improvement (10$\to$5 pJ/bit), a meaningful fabric lever. The principles from this textbook **endure** across substrates.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The Fermi estimate showed the qualitative efficiency gap between machine clusters
 and the human brain. Post-silicon technologies aim to close that gap ---
@@ -699,60 +790,72 @@ and the principles from this textbook apply to any substrate.
 
 % -- NARRATE: What to SAY while showing this slide
 [2 min] Walk through the diagram: ``Electrical interconnect: 10 pJ/bit. Optical:
-5 pJ/bit --- a 2$×$ efficiency gain per bit. This is a meaningful fabric
+5 pJ/bit --- a 2$\times$ efficiency gain per bit. This is a meaningful fabric
 lever, though orders-of-magnitude fabric-wide reductions are not yet
 demonstrated.'' Key statement: ``The principles from this textbook ---
 bandwidth, fault tolerance, governance --- endure across substrates.''
 
 % -- WARN: What students will get wrong on THIS topic
-Common error: students assume photonics delivers 1,000$×$ or more efficiency
+Common error: students assume photonics delivers 1,000$\times$ or more efficiency
 improvement based on older press coverage. Correct framing: the chapter's LEGO
-cell uses 10 pJ/bit (electrical) vs.\ 5 pJ/bit (optical), giving 2$×$
+cell uses 10 pJ/bit (electrical) vs.\ 5 pJ/bit (optical), giving 2$\times$
 for today's publicly documented optical I/O; larger gains require co-packaged
 optics advances not yet at production scale.
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Forward-looking content on post-silicon.
-IF SHORT: State the 2$×$ optical efficiency gain and the enduring principles.
-}
+IF SHORT: State the 2$\times$ optical efficiency gain and the enduring principles.
+```
 
-% --- Layout: 60/40 two-column with diagram + timeline ---
+</details>
 
-[T]
-  
-    {post-silicon-frontier.pdf}
-  
-  
-    **Technology timelines:**
+## Your Turn: Brain vs. Cluster
 
-    {0.1cm}
-    {
-    {}{1.1}
-    {tabular}{@{}lr@{}}
-      
-      **Technology** & **Horizon** \\
-      
-      Optical interconnect   & 2028--2030 \\
-      Chiplet integration    & 2026--2028 \\
-      In-memory compute      & 2027--2030 \\
-      Neuromorphic           & 2030--2035 \\
-      
-    {tabular}
-    }
+[Original slide 22](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L884)
 
-    {0.1cm}
-    {mlsyscard}{crimson}
-    { Optical: 2$×$ pJ/bit improvement (10$$5 pJ/bit), a meaningful fabric lever. The principles from this textbook **endure** across substrates.}
-    {mlsyscard}
+Fermi Estimate: Brain vs. H100 Cluster
 
-## Your Turn: Brain vs.\ Cluster
+**Human brain:**
 
-{
+- $\sim 10^{15}$ synaptic ops/sec
+- Power: 20 W
+
+**H100 cluster (10K GPUs):**
+
+- 989 TFLOPS (FP16) per GPU
+- Power: 700 W per GPU
+
+**Calculate:** Speed ratio and energy ratio.
+
+(90 seconds — then compare with a neighbor)
+
+**Solution:**
+
+Cluster speed: $10^4 \times 989 \times 10^{12}$
+
+= $9.89 \times 10^{18}$ FLOPS
+
+**Speed**: cluster is **9,890$\times$** faster
+
+Brain: $10^{15} / 20$ = $5 \times 10^{13}$ ops/J
+
+Cluster: $9.89 \times 10^{18} / 7 \times 10^{6}$
+
+= $1.4 \times 10^{12}$ ops/J
+
+**Efficiency**: brain is
+
+**35,000$\times$** more efficient
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The Fermi estimate slide presented the chapter's 25K-GPU scenario
-($ 247{,}000×$ raw throughput, qualitative efficiency gap).
+($\approx 247{,}000\times$ raw throughput, qualitative efficiency gap).
 This simplified exercise uses 10K GPUs so students can derive comparable
-numbers by hand: 9,890$×$ speed and 35,000$×$ efficiency.
+numbers by hand: 9,890$\times$ speed and 35,000$\times$ efficiency.
 Both slides convey the same message: raw throughput scale has been
 conquered; the open frontier is energy efficiency.
 
@@ -776,50 +879,36 @@ the comparison is approximate but directionally correct.
 % -- FLEX: [CORE] + contingency
 [CORE] The capstone quantitative exercise of the course.
 IF SHORT: Reduce to 60 seconds; show the efficiency ratio only.
-}
+```
 
-[T]
-  
-    { Fermi Estimate: Brain vs.\ H100 Cluster}
-
-    {0.1cm}
-    **Human brain:**
-    {0pt}
-- $ 10^{15}$ synaptic ops/sec
-- Power: 20 W
-    
-
-    {0.05cm}
-    **H100 cluster (10K GPUs):**
-    {0pt}
-- 989 TFLOPS (FP16) per GPU
-- Power: 700 W per GPU
-    
-
-    {0.05cm}
-    **Calculate:** Speed ratio and energy ratio.
-
-    {{midgray}{(90 seconds --- then compare with a neighbor)}}
-  
-  
-    
-    {mlsyscard}{datastroke}
-    **Solution:**\\[0.05cm]
-    {
-    Cluster speed: $10^4 × 989 × 10^{12}$\\
-    = $9.89 × 10^{18}$ FLOPS\\[0.05cm]
-    **Speed**: cluster is {computestroke}{**9,890$×$**} faster\\[0.05cm]
-    Brain: $10^{15} / 20$ = $5 × 10^{13}$ ops/J\\
-    Cluster: $9.89 × 10^{18} / 7 × 10^{6}$\\
-    = $1.4 × 10^{12}$ ops/J\\[0.05cm]
-    **Efficiency**: brain is\\
-    {errorstroke}{**35,000$×$**} more efficient
-    }
-    {mlsyscard}
+</details>
 
 ## What's Next for You?
 
-{
+[Original slide 23](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L960)
+
+**Infrastructure Engineer**
+
+Build compute, network, storage systems. Chapters 2–4 are your foundation.
+
+**ML Platform Engineer**
+
+Build orchestration, monitoring, CI/CD. Chapters 8–12 are your playbook.
+
+**Research Scientist**
+
+Push frontiers of distributed optimization. Chapters 5–7, 10 are your toolkit.
+
+**ML Governance Lead**
+
+Ensure systems serve humanity well. Chapters 13–16 are your mandate.
+
+The skills from this volume are **foundational to every path** in production AI.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Competencies described what students can do. This slide bridges from competencies
 to career paths --- making the learning personally actionable.
@@ -840,40 +929,34 @@ relevance of the curriculum.]
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Career reflection bridging competencies to the real world.
 IF SHORT: Name the four paths without elaboration.
-}
+```
 
-[T]
-  
-    {mlsyscard}{computestroke}
-    **Infrastructure Engineer**\\
-    { Build compute, network, storage systems. Chapters 2--4 are your foundation.}
-    {mlsyscard}
-
-    {0.15cm}
-    {mlsyscard}{routingstroke}
-    **ML Platform Engineer**\\
-    { Build orchestration, monitoring, CI/CD. Chapters 8--12 are your playbook.}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{datastroke}
-    **Research Scientist**\\
-    { Push frontiers of distributed optimization. Chapters 5--7, 10 are your toolkit.}
-    {mlsyscard}
-
-    {0.15cm}
-    {mlsyscard}{errorstroke}
-    **ML Governance Lead**\\
-    { Ensure systems serve humanity well. Chapters 13--16 are your mandate.}
-    {mlsyscard}
-  
-
-{0.15cm}
-{ The skills from this volume are **foundational to every path** in production AI.}
+</details>
 
 ## Fallacies
 
-{
+[Original slide 24](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L1017)
+
+**Fallacy:** *Distributed ML is just single-machine ML with more GPUs.*
+
+Scale creates qualitatively new phenomena: stragglers, network partitions, Byzantine faults, and heterogeneity. None exist on a single machine.
+
+**Fallacy:** *You can optimize one principle and ignore the others.*
+
+A system that is fast but unfair, or robust but unsustainable, fails to deploy. All six principles must be satisfied simultaneously.
+
+**Fallacy:** *The next breakthrough requires a bigger model.*
+
+The Era of Scaling is flattening. The 100$\times$ decomposition shows 10$\times$ from orchestration vs. 4$\times$ from hardware. Systems engineering is the highest-leverage investment.
+
+**Fallacy:** *Governance is separate from engineering.*
+
+GDPR fines reach 4% of global revenue. EU AI Act mandates energy reporting. Governance is a hard constraint, not a soft aspiration.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [2 min] Read each fallacy. These address the most common misconceptions
 students carry out of the course. The first is critical: scale does not
@@ -882,26 +965,30 @@ just make things bigger --- it creates qualitatively new phenomena.
 % -- FLEX: [CORE] + contingency
 [CORE] Fallacies correct end-of-course misconceptions.
 IF SHORT: Read fallacies 1 and 3 only.
-}
+```
 
-**Fallacy:** *Distributed ML is just single-machine ML with more GPUs.*\\
-{ Scale creates qualitatively new phenomena: stragglers, network partitions, Byzantine faults, and heterogeneity. None exist on a single machine.}
-
-{0.08cm}
-**Fallacy:** *You can optimize one principle and ignore the others.*\\
-{ A system that is fast but unfair, or robust but unsustainable, fails to deploy. All six principles must be satisfied simultaneously.}
-
-{0.08cm}
-**Fallacy:** *The next breakthrough requires a bigger model.*\\
-{ The Era of Scaling is flattening. The 100$×$ decomposition shows 10$×$ from orchestration vs.\ 4$×$ from hardware. Systems engineering is the highest-leverage investment.}
-
-{0.08cm}
-**Fallacy:** *Governance is separate from engineering.*\\
-{ GDPR fines reach 4% of global revenue. EU AI Act mandates energy reporting. Governance is a hard constraint, not a soft aspiration.}
+</details>
 
 ## Pitfalls
 
-{
+[Original slide 25](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L1047)
+
+**Pitfall:** *Optimizing for a single layer of the Fleet Stack.*
+
+A training optimization that doubles throughput but triples network traffic reduces end-to-end efficiency. Always evaluate changes across all four layers: infrastructure, training, operations, governance.
+
+**Pitfall:** *Treating the six principles as a checklist rather than a system of tensions.*
+
+Communication optimization increases synchronization, which increases failure exposure. Sustainability limits infrastructure choices. The art is navigating trade-offs, not checking boxes.
+
+**Pitfall:** *Assuming today's best practices are tomorrow's.*
+
+Post-silicon technologies (optical interconnect, neuromorphic computing) will reshape the landscape. The enduring skill is quantitative reasoning about constraints — not memorizing current solutions.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [2 min] Read each pitfall. These are operational warnings for students
 entering the field.
@@ -909,22 +996,24 @@ entering the field.
 % -- FLEX: [CORE] + contingency
 [CORE] Pitfalls provide actionable warnings for new practitioners.
 IF SHORT: Cover the first two pitfalls only.
-}
+```
 
-**Pitfall:** *Optimizing for a single layer of the Fleet Stack.*\\
-A training optimization that doubles throughput but triples network traffic reduces end-to-end efficiency. Always evaluate changes across all four layers: infrastructure, training, operations, governance.
-
-{0.15cm}
-**Pitfall:** *Treating the six principles as a checklist rather than a system of tensions.*\\
-Communication optimization increases synchronization, which increases failure exposure. Sustainability limits infrastructure choices. The art is navigating trade-offs, not checking boxes.
-
-{0.15cm}
-**Pitfall:** *Assuming today's best practices are tomorrow's.*\\
-Post-silicon technologies (optical interconnect, neuromorphic computing) will reshape the landscape. The enduring skill is quantitative reasoning about constraints --- not memorizing current solutions.
+</details>
 
 ## Muddiest Point
 
-{
+[Original slide 26](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L1075)
+
+What was the **muddiest point** today?
+
+Write down the concept you found **most confusing**.
+
+Anonymous. One sentence. Submit before you leave.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [2 min] ``Write the single concept from today --- or from the entire volume ---
 that you found most confusing. Anonymous, one sentence.'' Collect responses.
@@ -932,20 +1021,24 @@ This is the final feedback moment of the course.
 
 % -- FLEX: [CORE] + contingency
 [CORE] Closes the course feedback loop. Do not skip.
-}
+```
 
-{1.0cm}
-{ What was the **muddiest point** today?}
-
-{0.8cm}
-{ Write down the concept you found **most confusing**.}
-
-{0.5cm}
-{{midgray}{Anonymous. One sentence. Submit before you leave.}}
+</details>
 
 ## What Were the Key Ideas?
 
-{
+[Original slide 27](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L1098)
+
+Close your notes.
+
+Write down the **4 most important ideas** from this entire volume.
+
+90 seconds — this is your synthesis of the course.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [2 min] ``Close your notes. Write down the 4 most important ideas from this
 entire volume. 90 seconds --- this is your synthesis of the course.'' Walk
@@ -954,20 +1047,23 @@ course. Do NOT show the next slide yet.
 
 % -- FLEX: [CORE] + contingency
 [CORE] Final retrieval practice. The capstone learning intervention.
-}
+```
 
-{1.5cm}
-{ Close your notes.}
-
-{0.8cm}
-{ Write down the **4 most important ideas** from this entire volume.}
-
-{0.8cm}
-{{midgray}{90 seconds --- this is your synthesis of the course.}}
+</details>
 
 ## Key Takeaways
 
-{
+[Original slide 28](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L1122)
+
+- **Six principles** define distributed ML systems: communication dominance, routine failure, infrastructure determination, responsible engineering, sustainability constraints, and qualitative scale effects.
+- **Single-machine to distributed is qualitative**: new phenomena emerge at scale (stragglers, network partitions, heterogeneity) requiring distinct engineering approaches.
+- **Production ML is an integrated whole**: infrastructure, training, fault tolerance, operations, security, and governance are interconnected — no component operates in isolation.
+- **Engineering decisions carry ethical weight**: the systems we build affect billions of lives through recommendations, medical AI, climate models, and accessibility tools.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [2 min] Reveal after retrieval. Walk through each bullet slowly: ``Six
 principles define the discipline. Single-machine to distributed is qualitative
@@ -977,35 +1073,56 @@ decisions carry ethical weight.'' The fourth bullet is the most important:
 
 % -- FLEX: [CORE] + contingency
 [CORE] The volume's synthesis. Read all four bullets.
-}
+```
 
-{3pt}
-- **Six principles** define distributed ML systems: communication dominance, routine failure, infrastructure determination, responsible engineering, sustainability constraints, and qualitative scale effects.
-- **Single-machine to distributed is qualitative**: new phenomena emerge at scale (stragglers, network partitions, heterogeneity) requiring distinct engineering approaches.
-- **Production ML is an integrated whole**: infrastructure, training, fault tolerance, operations, security, and governance are interconnected --- no component operates in isolation.
-- **Engineering decisions carry ethical weight**: the systems we build affect billions of lives through recommendations, medical AI, climate models, and accessibility tools.
+</details>
 
 ## References
 
-{
+[Original slide 29](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L1148)
+
+**Dean+12** Dean & Ghemawat. “Large Scale Distributed Deep Networks.” NeurIPS 2012.
+
+**Dubey+24** Dubey et al. “The Llama 3 Herd of Models.” Meta AI, 2024.
+
+**Sergeev+18** Sergeev & Del Balso. “Horovod: Fast and Easy Distributed Deep Learning.” 2018.
+
+**Strubell+19** Strubell et al. “Energy and Policy Considerations for Deep Learning.” ACL 2019.
+
+**Patterson+21** Patterson et al. “Carbon Emissions and Large Neural Networks.” 2021.
+
+**Amodei+16** Amodei et al. “Concrete Problems in AI Safety.” 2016.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [1 min] Highlight Dean+12 (the distributed deep learning foundation) and
 Amodei+16 (AI safety). These bookend the volume: scale and responsibility.
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Students can photograph. Do not read every entry.
-}
+```
 
-{Dean+12}{Dean & Ghemawat. ``Large Scale Distributed Deep Networks.'' NeurIPS 2012.}
-{Dubey+24}{Dubey et al. ``The Llama 3 Herd of Models.'' Meta AI, 2024.}
-{Sergeev+18}{Sergeev & Del Balso. ``Horovod: Fast and Easy Distributed Deep Learning.'' 2018.}
-{Strubell+19}{Strubell et al. ``Energy and Policy Considerations for Deep Learning.'' ACL 2019.}
-{Patterson+21}{Patterson et al. ``Carbon Emissions and Large Neural Networks.'' 2021.}
-{Amodei+16}{Amodei et al. ``Concrete Problems in AI Safety.'' 2016.}
+</details>
 
-## Frame 27
+## 
 
-{
+[Original slide 30](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L1172)
+
+Build systems that scale.
+
+Build systems that endure.
+
+Build systems that serve humanity well.
+
+*Prof. Vijay Janapa Reddi, Harvard University*
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [2 min] This is the closing moment of the entire course. Read the three
 imperatives slowly, with pauses between each: ``Build systems that scale.
@@ -1015,83 +1132,68 @@ entire volume. This is not a lecture slide --- it is a send-off.
 
 % -- FLEX: [CORE] + contingency
 [CORE] The course's final moment. Do not rush. Do not skip.
-}
+```
 
-{1.5cm}
-
-{ Build systems that scale.}
-
-{0.4cm}
-
-{ Build systems that endure.}
-
-{0.4cm}
-
-{ Build systems that serve humanity well.}
-
-{1.0cm}
-
-{{midgray}{*Prof.\ Vijay Janapa Reddi, Harvard University*}}
+</details>
 
 ## Backup: The Six Principles Quick Reference
 
-{
+[Original slide 31](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L1208)
+
+| **#** | **Principle** | **Defining Equation** | **Source** |
+| --- | --- | --- | --- |
+| 1 | Communication Dominance | $T_{comm} > T_{compute}$ at scale | Ch 3, 6 |
+| 2 | Routine Failure | MTBF $\propto 1/N_{components}$ | Ch 7 |
+| 3 | Infrastructure Determination | Roofline: $\min(BW, FLOPS/AI)$ | Ch 2, 10 |
+| 4 | Responsible Engineering | Impossibility theorem (Kleinberg) | Ch 16 |
+| 5 | Sustainability Constraints | $C_{lifecycle} = C_{train} + C_{infer} + C_{embodied}$ | Ch 15 |
+| 6 | Qualitative Scale Effects | New phenomena emerge at 1000$\times$ | Ch 1, 5 |
+
+All six must be satisfied simultaneously. Optimizing one at the expense of another produces a system that is fast but unfair, robust but unsustainable, or efficient but insecure.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 Backup. One-page reference card for the six principles with their defining
 equations and chapter sources. Students can photograph for exam review.
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Reference card. Show if students ask for a summary sheet.
-}
+```
 
-{}{1.15}
-{tabular}{@{}llll@{}}
-  
-  **\#** & **Principle** & **Defining Equation** & **Source** \\
-  
-  1 & Communication Dominance & $T_{comm} > T_{compute}$ at scale & Ch 3, 6 \\
-  2 & Routine Failure & MTBF $ 1/N_{components}$ & Ch 7 \\
-  3 & Infrastructure Determination & Roofline: $(BW, FLOPS/AI)$ & Ch 2, 10 \\
-  4 & Responsible Engineering & Impossibility theorem (Kleinberg) & Ch 16 \\
-  5 & Sustainability Constraints & $C_{lifecycle} = C_{train} + C_{infer} + C_{embodied}$ & Ch 15 \\
-  6 & Qualitative Scale Effects & New phenomena emerge at 1000$×$ & Ch 1, 5 \\
-  
-{tabular}
-
-{0.15cm}
-{mlsyscard}{crimson}
-{ All six must be satisfied simultaneously. Optimizing one at the expense of another produces a system that is fast but unfair, robust but unsustainable, or efficient but insecure.}
-{mlsyscard}
+</details>
 
 ## Backup: Compound AI Systems Architecture
 
-{
+[Original slide 32](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/17_conclusion/17_conclusion.tex#L1240)
+
+**The compound AI architecture:**
+
+| **Component** | **Role** | **Systems Challenge** |
+| --- | --- | --- |
+| **Foundation Model** | Core reasoning | Memory, latency budgets |
+| **Retrieval (RAG)** | External knowledge | Index freshness, ranking quality |
+| **Tool Use** | Environment actions | Sandboxing, error handling |
+| **Planning** | Multi-step reasoning | Latency amplification, loops |
+| **Guardrails** | Safety + compliance | Real-time filtering overhead |
+
+The unit of compute shifts from **FLOP** to **Reasoning Chain**. Orchestration latency dominates model latency. Every principle from this textbook applies — communication, fault tolerance, monitoring — but at the reasoning-chain granularity.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 Backup. Extended compound AI systems architecture showing the shift from
 monolithic models to orchestrated multi-component systems.
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Show if students want deeper context on compound AI.
-}
+```
 
-**The compound AI architecture:**
-
-{0.1cm}
-{}{1.15}
-{tabular}{@{}lll@{}}
-  
-  **Component** & **Role** & **Systems Challenge** \\
-  
-  **Foundation Model** & Core reasoning       & Memory, latency budgets \\
-  **Retrieval (RAG)**  & External knowledge   & Index freshness, ranking quality \\
-  **Tool Use**         & Environment actions   & Sandboxing, error handling \\
-  **Planning**         & Multi-step reasoning  & Latency amplification, loops \\
-  **Guardrails**       & Safety + compliance   & Real-time filtering overhead \\
-  
-{tabular}
-
-{0.1cm}
-{ The unit of compute shifts from **FLOP** to **Reasoning Chain**. Orchestration latency dominates model latency. Every principle from this textbook applies --- communication, fault tolerance, monitoring --- but at the reasoning-chain granularity.}
+</details>
 
 ## Complete original Beamer source
 

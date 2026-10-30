@@ -1,0 +1,56 @@
+[
+  {
+    "name": "ffn-ratio-evidence-slide.png",
+    "asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architecture/ffn-ratio-evidence-slide.png",
+    "sha256": "6c5ef9d5b0dc6aa64d8a40b5afbf883c3401b2f56a43e8e0d59cac083a1e0daa",
+    "source_asset": "05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/lecture_03.pdf",
+    "source_asset_sha256": "20a953541b41a099bc69b8d809139a4ccdb2aefedaa13e50c766245fe4b5167e",
+    "source_page": 40,
+    "render_dpi": 360,
+    "render_page_size_px": [
+      3600,
+      2027
+    ],
+    "commit": "8b59b50730766695c2ffedd1a79c50cd09b9eb91",
+    "derivation": "pdf-page-render",
+    "rights_status": "source-verified; third-party-rights-not-independently-verified",
+    "metadata_status": "needs-confirmation",
+    "license": "User permission record (not a named license)"
+  },
+  {
+    "name": "aspect-ratio-evidence-slide.png",
+    "asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architecture/aspect-ratio-evidence-slide.png",
+    "sha256": "33802eadfcd1e0e9d8abf67dadb88b88b3314ed627cd703f1c0b86e6fefaabd2",
+    "source_asset": "05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/lecture_03.pdf",
+    "source_asset_sha256": "20a953541b41a099bc69b8d809139a4ccdb2aefedaa13e50c766245fe4b5167e",
+    "source_page": 46,
+    "render_dpi": 360,
+    "render_page_size_px": [
+      3600,
+      2027
+    ],
+    "commit": "8b59b50730766695c2ffedd1a79c50cd09b9eb91",
+    "derivation": "pdf-page-render",
+    "rights_status": "source-verified; third-party-rights-not-independently-verified",
+    "metadata_status": "needs-confirmation",
+    "license": "User permission record (not a named license)"
+  },
+  {
+    "name": "weight-decay-evidence-slide.png",
+    "asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architecture/weight-decay-evidence-slide.png",
+    "sha256": "7271a25388b70d2a4299342e9a55cba6959e6c83ffa785cfa85890018759910d",
+    "source_asset": "05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/lecture_03.pdf",
+    "source_asset_sha256": "20a953541b41a099bc69b8d809139a4ccdb2aefedaa13e50c766245fe4b5167e",
+    "source_page": 50,
+    "render_dpi": 360,
+    "render_page_size_px": [
+      3600,
+      2027
+    ],
+    "commit": "8b59b50730766695c2ffedd1a79c50cd09b9eb91",
+    "derivation": "pdf-page-render",
+    "rights_status": "source-verified; third-party-rights-not-independently-verified",
+    "metadata_status": "needs-confirmation",
+    "license": "User permission record (not a named license)"
+  }
+]

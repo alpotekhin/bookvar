@@ -9,9 +9,18 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol1/lab_13_model_serving.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol1/lab_13_model_serving.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL1 Lab — Model Serving
 
@@ -19,28 +28,8 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 **Recommended Reading** - Complete before this lab:
 
-    - **The Model Serving chapter** - queuing theory, batching strategies,
-      live state/cache management, autoscaling, and cold start latency.
-
----
-
-## Concept: Batching Is A Trade, Not A Free Win
-
-A batch can improve throughput per serving unit, but the first request in the
-batch waits while the batch forms. For {v1_13_serving.label}, that wait is paid
-inside the same {v1_13_serving.slo_ms:g} ms p99 budget as model service time.
-
----
-
-```
-formation_delay_ms = (batch_size - 1) / (2 * arrival_qps) * 1000
-batched_service_ms = service_ms * (1 + 0.08*log2(batch_size)) / efficiency_gain
-total_p99_ms       = formation_delay + batched_service + queue_tail
-```
-
-Current values: batch ``…``, arrival ``…`` QPS, total p99
-`{result.total_p99_ms:.1f}` ms. Source helper: `mlsysbook_labs.batching_tax`.
-Chapter anchor: Traffic-Aware Batching Strategy and the batching-tax formula.
+- **The Model Serving chapter** - queuing theory, batching strategies,
+  live state/cache management, autoscaling, and cold start latency.
 
 ---
 
@@ -52,6 +41,104 @@ latency distribution, not the average alone.
 
 ---
 
+## Concept: Scale-Out Buys Headroom, Not A Free Guarantee
+
+Replicas reduce utilization and usually lower p99. They also raise the standing
+capacity bill and create a warm-pool/cold-start obligation during scale-out.
+
+---
+
+## Concept: Feasibility Is A Conjunction
+
+A policy is not launchable because one metric looks good. It must pass p99/SLA,
+live-state capacity, cost or energy, and warm/fallback guardrails under the same
+track workload.
+
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+## Concept: Batching Is A Trade, Not A Free Win
+
+A batch can improve throughput per serving unit, but the first request in the
+batch waits while the batch forms. For ⟨value 1⟩, that wait is paid
+inside the same ⟨value 2⟩ ms p99 budget as model service time.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_13_serving.label}' `
+- value_2: ` f'{v1_13_serving.slo_ms:g}' `
+
+---
+
+Commit to a batching prediction before opening the latency decomposition.
+
+---
+
+**Boundary status:** total p99 is ⟨value 1⟩ ms within the ⟨value 2⟩ ms SLO. The binding amount is ⟨value 3⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{result.total_p99_ms:.1f}' `
+- value_2: ` f'{slo:g}' `
+- value_3: ` f'{binding_term.lower()}' `
+
+---
+
+**SLO violated.** Total p99 is ⟨value 1⟩ ms against ⟨value 2⟩ ms. Mitigation: reduce batch size, increase arrival-adaptive scheduling, or reserve more capacity.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{result.total_p99_ms:.1f}' `
+- value_2: ` f'{slo:g}' `
+
+---
+
+```
+formation_delay_ms = (batch_size - 1) / (2 * arrival_qps) * 1000
+batched_service_ms = service_ms * (1 + 0.08*log2(batch_size)) / efficiency_gain
+total_p99_ms       = formation_delay + batched_service + queue_tail
+```
+
+Current values: batch `⟨value 1⟩`, arrival `⟨value 2⟩` QPS, total p99
+`⟨value 3⟩` ms. Source helper: `mlsysbook_labs.batching_tax`.
+Chapter anchor: Traffic-Aware Batching Strategy and the batching-tax formula.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{batch}' `
+- value_2: ` f'{arrival:g}' `
+- value_3: ` f'{result.total_p99_ms:.1f}' `
+
+---
+
+Checkpoint: choose how the batching decision should appear in the launch memo.
+
+---
+
+Commit to a queueing prediction before opening the arrival-rate sweep.
+
+---
+
+**Queueing boundary holds.** P99 is ⟨value 1⟩ ms, but the margin depends on staying below utilization ⟨value 2⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{selected.p99_latency_ms:.1f}' `
+- value_2: ` f'{selected.utilization:.2f}' `
+
+---
+
+**Tail failure.** P99 is ⟨value 1⟩ ms > ⟨value 2⟩ ms at utilization ⟨value 3⟩. First mitigation: ⟨value 4⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{selected.p99_latency_ms:.1f}' `
+- value_2: ` f'{slo:g}' `
+- value_3: ` f'{selected.utilization:.2f}' `
+- value_4: ` f"{v1_13_packet['first_mitigation']}" `
+
+---
+
 ```
 mu       = 1000 / service_ms
 rho      = arrival_qps / (replicas * mu)
@@ -59,18 +146,31 @@ p99      = service_ms + queue_tail(rho, replicas, service_cv)
 Little's Law: live_requests ~= arrival_qps * latency_seconds
 ```
 
-Current values: arrival ``…`` QPS, service ``…`` ms,
-replicas `{v1_13_serving.replicas}`, rho `{selected.utilization:.2f}`,
-p99 `{selected.p99_latency_ms:.1f}` ms. Source helper:
+Current values: arrival `⟨value 1⟩` QPS, service `⟨value 2⟩` ms,
+replicas `⟨value 3⟩`, rho `⟨value 4⟩`,
+p99 `⟨value 5⟩` ms. Source helper:
 `mlsysbook_labs.queueing_latency`. Chapter anchor: Queuing Theory for Capacity
 Planning and Tail Latency and Headroom.
 
+Runtime fields (not evaluated):
+
+- value_1: ` f'{arrival:g}' `
+- value_2: ` f'{svc:g}' `
+- value_3: ` f'{v1_13_serving.replicas}' `
+- value_4: ` f'{selected.utilization:.2f}' `
+- value_5: ` f'{selected.p99_latency_ms:.1f}' `
+
 ---
 
-## Concept: Scale-Out Buys Headroom, Not A Free Guarantee
+Checkpoint: choose the queueing rule that should constrain Part C.
 
-Replicas reduce utilization and usually lower p99. They also raise the standing
-capacity bill and create a warm-pool/cold-start obligation during scale-out.
+---
+
+Commit to a replica/autoscaling prediction before opening the frontier.
+
+---
+
+**Replica frontier passes.** The selected scale posture has p99, cost/energy, and warm-capacity evidence inside guardrails.
 
 ---
 
@@ -81,18 +181,45 @@ rho              = arrival_qps / capacity_qps
 cost_per_request = standing_capacity_cost / (arrival_qps * 3600)
 ```
 
-Current values: visible `{partC_replicas.value}`, planned `{selected['planned']}`,
-rho `{selected['batching'].utilization:.2f}`, p99 `{selected['batching'].total_p99_ms:.1f}` ms,
-{v1_13_packet['cost_label']} `{v1_13_fmt_amount(selected['cost']['value'], selected['cost']['unit'])}`.
+Current values: visible `⟨value 1⟩`, planned `⟨value 2⟩`,
+rho `⟨value 3⟩`, p99 `⟨value 4⟩` ms,
+⟨value 5⟩ `⟨value 6⟩`.
 Source helpers: `queueing_latency`, `batching_tax`, and `cold_start_latency`; cost coefficients are V1-13 scenario assumptions.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{partC_replicas.value}' `
+- value_2: ` f"{selected['planned']}" `
+- value_3: ` f"{selected['batching'].utilization:.2f}" `
+- value_4: ` f"{selected['batching'].total_p99_ms:.1f}" `
+- value_5: ` f"{v1_13_packet['cost_label']}" `
+- value_6: ` f"{v1_13_fmt_amount(selected['cost']['value'], selected['cost']['unit'])}" `
 
 ---
 
-## Concept: Feasibility Is A Conjunction
+Checkpoint: choose the scale posture that should feed the policy gate.
 
-A policy is not launchable because one metric looks good. It must pass p99/SLA,
-live-state capacity, cost or energy, and warm/fallback guardrails under the same
-track workload.
+---
+
+Commit to a launch-policy prediction before opening the candidate gate.
+
+---
+
+**Launch gate passes.** ⟨value 1⟩ satisfies p99, capacity, ⟨value 2⟩, and warm/fallback guardrails.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{selected['candidate']['label']}" `
+- value_2: ` f"{v1_13_packet['cost_label'].lower()}" `
+
+---
+
+**Launch gate fails.** Binding constraint: ⟨value 1⟩. First mitigation: ⟨value 2⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{selected['binding']}" `
+- value_2: ` f"{v1_13_packet['first_mitigation']}" `
 
 ---
 
@@ -101,13 +228,50 @@ feasible = p99_ok and capacity_ok and cost_ok and warm_start_ok
 live_required = ceil(arrival_qps * p99_ms / 1000 * (1 + reserve_pct/100))
 ```
 
-Selected policy: `{selected['candidate']['label']}`. Binding constraint:
-`{selected['binding']}`. Rejected alternative: `{rejected['candidate']['label']}`.
-Carry-forward risk: `…`
+Selected policy: `⟨value 1⟩`. Binding constraint:
+`⟨value 2⟩`. Rejected alternative: `⟨value 3⟩`.
+Carry-forward risk: ⟨value 4⟩
 
 Source helpers: `batching_tax`, `queueing_latency`, `cache_capacity`, and
 `cold_start_latency`; V1-13 notebook-local policy scoring supplies the conjunction
 and track-specific cost/energy labels.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{selected['candidate']['label']}" `
+- value_2: ` f"{selected['binding']}" `
+- value_3: ` f"{rejected['candidate']['label']}" `
+- value_4: ` f'{risk_text}' `
+
+---
+
+## Serving Launch Memo
+
+---
+
+**Chapter invariant:** serving is a latency distribution plus a capacity system. Batching, queueing, replicas, live state, warm capacity, and cost must be judged together.
+
+---
+
+**Final report frame for ⟨value 1⟩:** choose `⟨value 2⟩`, name `⟨value 3⟩` as the binding constraint, reject `⟨value 4⟩`, and carry forward: ⟨value 5⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_13_serving.label}' `
+- value_2: ` f"{selected['candidate']['label']}" `
+- value_3: ` f"{selected['binding']}" `
+- value_4: ` f"{rejected['candidate']['label']}" `
+- value_5: ` f'{risk_text}' `
+
+---
+
+## Download Report
+
+---
+
+This V1-13 report is generated locally from the selected track, MLSysIM hardware/model refs, shared serving helpers, and notebook-local V1-13 policy scoring.
+
+</details>
 
 ## Complete original Marimo source
 

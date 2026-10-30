@@ -1,0 +1,159 @@
+[
+  {
+    "id": "curated-peft-20261029-6ffea276f84b",
+    "asset": "00 Учебник/Assets/Figures/curated/peft-2026-10-29/houlsby-adapter.png",
+    "author": "Neil Houlsby, Andrei Giurgiu, Stanislaw Jastrzebski, Bruna Morrone, Quentin de Laroussilhe, Andrea Gesmundo, Mona Attariyan, Sylvain Gelly",
+    "title": "Bottleneck adapter architecture and Transformer placement, Figure 2",
+    "source_url": "https://proceedings.mlr.press/v97/houlsby19a.html",
+    "source_asset": "05 Источники/Originals/peft-2026-10-29/houlsby19a.pdf",
+    "source_asset_sha256": "fc1e0f0d643dd116049b6d42d562b7c7203121db89cc2110e79714d57dda8021",
+    "source_page": 3,
+    "render_scale_to": 3200,
+    "render_page_size_px": [
+      2473,
+      3200
+    ],
+    "crop_box_px": [
+      250,
+      250,
+      1180,
+      930
+    ],
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/peft-2026-10-29/pmlr-license-agreement.pdf",
+    "license_evidence_sha256": "3a3eac0ebdded57660c12c59028c5429b6d2b328be2c6fde534a104438444c31",
+    "derivation": "pdf-page-render-crop",
+    "modifications": "Poppler render scaled to 3200 pixels high. Crop retains both complete Figure 2 diagram panels, excluding page furniture and the adjacent textual caption, which is described in the chapter. No redrawing, relabeling or resizing after the crop.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "sha256": "6ffea276f84b38e57c4ac45cdfdf07e856885a696d944b25d2ee5c697e19431c",
+    "width": 930,
+    "height": 680,
+    "bytes": 72806,
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md"
+    ]
+  },
+  {
+    "id": "curated-peft-20261029-398088f0cf9b",
+    "asset": "00 Учебник/Assets/Figures/curated/peft-2026-10-29/lora-animated.gif",
+    "author": "Hugging Face Team",
+    "title": "LoRA frozen projection and factorized branch",
+    "source_url": "https://huggingface.co/datasets/huggingface/documentation-images/blob/861b6c920fe27492d35256c39f266592a518d50c/peft/lora_animated.gif",
+    "source_asset": "05 Источники/Originals/peft-2026-10-29/lora-animated.gif",
+    "source_asset_sha256": "398088f0cf9b564859a3fcb5b66002b070bf60d0001f69ae561d1a1a17bf4773",
+    "source_image_url": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/861b6c920fe27492d35256c39f266592a518d50c/peft/lora_animated.gif",
+    "commit": "861b6c920fe27492d35256c39f266592a518d50c",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/peft-2026-10-29/hf-images-license.md",
+    "license_evidence_sha256": "5e6a73b7ff47813e90e2ed21d14807256b2e89fa55e5075ec69fdf01cde801ce",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original image copied byte-for-byte, including all GIF frames when applicable. No crop, redrawing, relabeling, resizing or recompression.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "sha256": "398088f0cf9b564859a3fcb5b66002b070bf60d0001f69ae561d1a1a17bf4773",
+    "width": 600,
+    "height": 439,
+    "bytes": 322447,
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md"
+    ]
+  },
+  {
+    "id": "curated-peft-20261029-4313422c5f27",
+    "asset": "00 Учебник/Assets/Figures/curated/peft-2026-10-29/lora-merge.png",
+    "author": "Hugging Face Team",
+    "title": "Merging LoRA into a linear projection",
+    "source_url": "https://huggingface.co/datasets/huggingface/documentation-images/blob/861b6c920fe27492d35256c39f266592a518d50c/peft/lora_diagram.png",
+    "source_asset": "05 Источники/Originals/peft-2026-10-29/lora-merge.png",
+    "source_asset_sha256": "4313422c5f2755897fb8ddfc5b99251358f679647ec0f2d120a3f1ff060defe7",
+    "source_image_url": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/861b6c920fe27492d35256c39f266592a518d50c/peft/lora_diagram.png",
+    "commit": "861b6c920fe27492d35256c39f266592a518d50c",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/peft-2026-10-29/hf-images-license.md",
+    "license_evidence_sha256": "5e6a73b7ff47813e90e2ed21d14807256b2e89fa55e5075ec69fdf01cde801ce",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original image copied byte-for-byte, including all GIF frames when applicable. No crop, redrawing, relabeling, resizing or recompression.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "sha256": "4313422c5f2755897fb8ddfc5b99251358f679647ec0f2d120a3f1ff060defe7",
+    "width": 1247,
+    "height": 528,
+    "bytes": 69174,
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md"
+    ]
+  },
+  {
+    "id": "curated-peft-20261029-f8e55f300e76",
+    "asset": "00 Учебник/Assets/Figures/curated/peft-2026-10-29/prompt-tuning.png",
+    "author": "Brian Lester, Rami Al-Rfou, Noah Constant; reproduced by Hugging Face",
+    "title": "Model tuning and shared-model prompt tuning",
+    "source_url": "https://huggingface.co/datasets/huggingface/documentation-images/blob/861b6c920fe27492d35256c39f266592a518d50c/peft/prompt-tuning.png",
+    "source_asset": "05 Источники/Originals/peft-2026-10-29/prompt-tuning.png",
+    "source_asset_sha256": "f8e55f300e76b69cfd48c146bd71e9f40d4173c610fdb3c0562f369689a88908",
+    "source_image_url": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/861b6c920fe27492d35256c39f266592a518d50c/peft/prompt-tuning.png",
+    "commit": "861b6c920fe27492d35256c39f266592a518d50c",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/peft-2026-10-29/hf-images-license.md",
+    "license_evidence_sha256": "5e6a73b7ff47813e90e2ed21d14807256b2e89fa55e5075ec69fdf01cde801ce",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original image copied byte-for-byte, including all GIF frames when applicable. No crop, redrawing, relabeling, resizing or recompression.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "sha256": "f8e55f300e76b69cfd48c146bd71e9f40d4173c610fdb3c0562f369689a88908",
+    "width": 938,
+    "height": 498,
+    "bytes": 125873,
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md"
+    ]
+  },
+  {
+    "id": "curated-peft-20261029-097897ac6364",
+    "asset": "00 Учебник/Assets/Figures/curated/peft-2026-10-29/prefix-tuning.png",
+    "author": "Xiang Lisa Li, Percy Liang; reproduced by Hugging Face",
+    "title": "Fine-tuning versus layer-wise prefix states",
+    "source_url": "https://huggingface.co/datasets/huggingface/documentation-images/blob/861b6c920fe27492d35256c39f266592a518d50c/peft/prefix-tuning.png",
+    "source_asset": "05 Источники/Originals/peft-2026-10-29/prefix-tuning.png",
+    "source_asset_sha256": "097897ac636473f8434692b0db5fbbc10395ec014b1e5ee136a501bd6aa1e86c",
+    "source_image_url": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/861b6c920fe27492d35256c39f266592a518d50c/peft/prefix-tuning.png",
+    "commit": "861b6c920fe27492d35256c39f266592a518d50c",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/peft-2026-10-29/hf-images-license.md",
+    "license_evidence_sha256": "5e6a73b7ff47813e90e2ed21d14807256b2e89fa55e5075ec69fdf01cde801ce",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original image copied byte-for-byte, including all GIF frames when applicable. No crop, redrawing, relabeling, resizing or recompression.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "sha256": "097897ac636473f8434692b0db5fbbc10395ec014b1e5ee136a501bd6aa1e86c",
+    "width": 1188,
+    "height": 908,
+    "bytes": 202648,
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md"
+    ]
+  },
+  {
+    "id": "curated-quantization-qlora-5035d5990255",
+    "asset": "00 Учебник/Assets/Figures/curated/quantization-review-2026-10/qlora-training-original.png",
+    "source_asset": "05 Источники/Papers/Source PDFs/qlora-2305.14314v1-figure1.pdf",
+    "source_asset_sha256": "453b30dc72b3d8f88b315c75424459aabde5e515c40f17f834ae2b282625c640",
+    "sha256": "5035d5990255985976069eb59ee2833c7f99605d9a7d79b70e3e9e4b8c4df595",
+    "license": "CC BY 4.0",
+    "reused": true,
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md"
+    ]
+  }
+]

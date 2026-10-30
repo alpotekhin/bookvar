@@ -9,28 +9,22 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol2/lab_09_perf_engineering.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol2/lab_09_perf_engineering.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL2 Lab — Perf Engineering
 
 ## Readable lab narrative
-
-## Lab Brief
-
-You are the performance engineer for **{v2_09_packet['label']}**. The stakeholder
-has a concrete launch decision for **{v2_09_packet['workload']}**.
-
-The shared sequence is:
-
-1. Localize the bottleneck before optimizing.
-2. Prove regressions with baseline, variance, and detectability.
-3. Convert measured bottlenecks into capacity headroom and cost.
-4. Defend an optimization trade-off and reject an alternative.
-5. Save a memo that V2-10 inference can inherit.
-
----
 
 ### Scenario
 
@@ -48,17 +42,113 @@ Decide whether the release owner should ship, hold for more evidence, or block.
 
 ### Scenario
 
-The launch forecast is expressed as **{v2_09_packet['amount_unit']}**. Use the
-measured profile to decide whether the selected **{v2_09_packet['serving_unit']}**
-count is enough.
+The engineering lead does not want a benchmark screenshot. They want the
+optimization you recommend, the trade-off it accepts, and the tempting
+alternative it rejects.
+
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+Commit to the structured prediction before using this evidence.
+
+---
+
+**⟨value 1⟩**  
+⟨value 2⟩  
+
+Recovery path: ⟨value 3⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{title}' `
+- value_2: ` f'{detail}' `
+- value_3: ` f'{recovery}' `
+
+---
+
+**Boundary holds: ⟨value 1⟩**  
+⟨value 2⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{title}' `
+- value_2: ` f'{detail}' `
+
+---
+
+## Lab Brief
+
+You are the performance engineer for **⟨value 1⟩**. The stakeholder
+has a concrete launch decision for **⟨value 2⟩**.
+
+The shared sequence is:
+
+1. Localize the bottleneck before optimizing.
+2. Prove regressions with baseline, variance, and detectability.
+3. Convert measured bottlenecks into capacity headroom and cost.
+4. Defend an optimization trade-off and reject an alternative.
+5. Save a memo that V2-10 inference can inherit.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_09_packet['label']}" `
+- value_2: ` f"{v2_09_packet['workload']}" `
+
+---
+
+**Track consequence:** for ⟨value 1⟩, the natural failure is ⟨value 2⟩. Track constraints emphasize ⟨value 3⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_09_packet['label']}" `
+- value_2: ` f"{v2_09_packet['failure_mode']}" `
+- value_3: ` f"{v2_09_packet['constraint_note']}" `
+
+---
+
+Commit to the bottleneck prediction before revealing the profile.
+
+---
+
+Commit to the regression decision prediction before revealing the run evidence.
 
 ---
 
 ### Scenario
 
-The engineering lead does not want a benchmark screenshot. They want the
-optimization you recommend, the trade-off it accepts, and the tempting
-alternative it rejects.
+The launch forecast is expressed as **⟨value 1⟩**. Use the
+measured profile to decide whether the selected **⟨value 2⟩**
+count is enough.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_09_packet['amount_unit']}" `
+- value_2: ` f"{v2_09_packet['serving_unit']}" `
+
+---
+
+Commit to the capacity prediction before opening the amount-system planner.
+
+---
+
+Commit to the candidate prediction before opening the frontier.
+
+---
+
+## Synthesis - Performance Engineering Memo
+
+---
+
+**Memo summary:** ⟨value 1⟩  
+
+**V2-10 implication:** ⟨value 2⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{final_summary}' `
+- value_2: ` f'{implication_text}' `
+
+</details>
 
 ## Complete original Marimo source
 

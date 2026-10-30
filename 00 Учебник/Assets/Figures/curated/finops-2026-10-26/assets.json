@@ -1,0 +1,32 @@
+[
+  {
+    "id": "curated-finops-harvard-tco-1cce3eb79f5b",
+    "asset": "00 Учебник/Assets/Figures/curated/finops-2026-10-26/harvard-tco-iceberg.png",
+    "sha256": "1cce3eb79f5b6a28b6a4e605aa23b19ecf5d6d5192c4cba7e57080ed0b46d33a",
+    "author": "Harvard Edge ML Systems Book contributors",
+    "source_url": "https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/ops_scale/ops_scale.qmd#L3847",
+    "source_code_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/ops_scale/ops_scale.qmd",
+    "commit": "45ecc8d82fcae70c149cdce550d3b3d3411df913",
+    "source_code": "05 Источники/Originals/mlops-2026-10-20/harvard-ops-scale.qmd",
+    "source_code_sha256": "21fd839e4d7825e2a61f379447a94db10162f2dff954005a1b413c1da573f5cd",
+    "source_page_snapshot": "05 Источники/Originals/mlops-2026-10-20/harvard-ops-scale.qmd",
+    "source_page_sha256": "21fd839e4d7825e2a61f379447a94db10162f2dff954005a1b413c1da573f5cd",
+    "source_member": "fig-tco-iceberg: complete Python cell",
+    "source_member_sha256": "5298b850a89ef1bd8e68d72c0be90db4208d859134713fd269b2c12b4a66b431",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md",
+    "license_evidence": "05 Источники/Originals/mlops-2026-10-20/harvard-LICENSE.md",
+    "license_evidence_sha256": "b6f4689d6fccf48d82d0871a3b994a122427fcb0b278971f6ba008be44e2c926",
+    "derivation": "source-code-render",
+    "render_dpi": 300,
+    "dimensions_px": [3099, 2130],
+    "renderer": "publishing/tools/render_finops_source_figure.py",
+    "renderer_versions": {"matplotlib": "3.9.4", "numpy": "2.1.3"},
+    "modifications": "Original plotting cell executed unchanged. plt.show exports PNG at 300 dpi; output bounds include the entire original canvas and out-of-canvas labels, without moving or changing any artists, data, text or colors. Input percentages are illustrative, not empirical budget shares.",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-26",
+    "used_in": ["00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md"]
+  }
+]

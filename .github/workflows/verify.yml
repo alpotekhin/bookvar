@@ -10,6 +10,7 @@ permissions:
 
 jobs:
   test:
+    name: Public checkout and rendered book
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
@@ -23,8 +24,12 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm --dir publishing test:unit
+      - run: pnpm --dir publishing check:topics
+      - run: pnpm --dir publishing test:publication
       - run: pnpm --dir site check
       - run: pnpm --dir site build
       - run: pnpm --dir publishing test:output
+      - run: pnpm --dir site test
+      - run: pnpm --dir publishing check:links
+      - run: pnpm --dir publishing check:size
       - run: git diff --exit-code -- . ':(exclude)site/generated-sidebar.mjs'

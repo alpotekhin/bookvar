@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-30",
+  "scope": "Two compatibility anchors and navigation metadata in the English contents. Both complete current contents documents were read and their chapter routes/order matched; advance the EN canonical revision to the actual root contents hash and record today's navigation review. No translated prose, list item, code or figure changes.",
+  "files": [
+    {
+      "source": "en/00 Textbook/_index.md",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-29\n",
+          "new": "last_updated: 2026-10-30\n"
+        },
+        {
+          "old": "\n## Specialist modules\n",
+          "new": "\n<a id=\"углублённые-модули\"></a>\n\n## Specialist modules\n"
+        },
+        {
+          "old": "\n### Contrastive and masked pre-training\n",
+          "new": "\n<a id=\"контрастивное-и-маскированное-предобучение\"></a>\n\n### Contrastive and masked pre-training\n"
+        },
+        {
+          "old": "canonical_revision: \"db08c24b15c0ba7919d84e672d302858d66fe91db6b245129accb58822298b4f\"\n",
+          "new": "canonical_revision: \"c6b73441468617524d453765d73be44bb66c4c68015269af0bb455df65040183\"\n"
+        },
+        {
+          "old": "translation_reviewed: \"2026-10-29\"\n",
+          "new": "translation_reviewed: \"2026-10-30\"\n"
+        }
+      ],
+      "before_sha256": "26b06dc7dfa3efd78eda3c4e2fee81677bd9c5132f5eac07938acae9832e1551",
+      "after_sha256": "19affe803286bac7fe7d22d69604b87297efb70cdf25eeae656fd8fb62594f11"
+    }
+  ]
+}

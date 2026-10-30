@@ -1,0 +1,248 @@
+{
+  "date": "2026-10-29",
+  "origin": "http://127.0.0.1:4330",
+  "method": "Read-only rendered DOM inspection through CUA after completed static build; separate screenshots and figure-viewer inspections in companion report.",
+  "viewports": [
+    {
+      "width": 1280,
+      "height": 800
+    },
+    {
+      "width": 360,
+      "height": 800
+    }
+  ],
+  "cases": 36,
+  "routes": [
+    {
+      "route": "textbook/ml-systems/gpu-cuda-memory-hierarchy/",
+      "images": 18,
+      "checks_at_both_widths": {
+        "non_404_title": true,
+        "document_overflow": false,
+        "broken_images": 0,
+        "pending_images": 0,
+        "katex_errors": 0,
+        "display_math_overflow": 0
+      }
+    },
+    {
+      "route": "textbook/inference/model-compression-pruning-distillation-low-rank/",
+      "images": 12,
+      "checks_at_both_widths": {
+        "non_404_title": true,
+        "document_overflow": false,
+        "broken_images": 0,
+        "pending_images": 0,
+        "katex_errors": 0,
+        "display_math_overflow": 0
+      }
+    },
+    {
+      "route": "textbook/inference/serving-engines/",
+      "images": 7,
+      "checks_at_both_widths": {
+        "non_404_title": true,
+        "document_overflow": false,
+        "broken_images": 0,
+        "pending_images": 0,
+        "katex_errors": 0,
+        "display_math_overflow": 0
+      }
+    },
+    {
+      "route": "textbook/inference/benchmarking-slo/",
+      "images": 6,
+      "checks_at_both_widths": {
+        "non_404_title": true,
+        "document_overflow": false,
+        "broken_images": 0,
+        "pending_images": 0,
+        "katex_errors": 0,
+        "display_math_overflow": 0
+      }
+    },
+    {
+      "route": "textbook/inference/queueing-capacity-planning/",
+      "images": 5,
+      "checks_at_both_widths": {
+        "non_404_title": true,
+        "document_overflow": false,
+        "broken_images": 0,
+        "pending_images": 0,
+        "katex_errors": 0,
+        "display_math_overflow": 0
+      }
+    },
+    {
+      "route": "textbook/deployment/mlops/",
+      "images": 19,
+      "checks_at_both_widths": {
+        "non_404_title": true,
+        "document_overflow": false,
+        "broken_images": 0,
+        "pending_images": 0,
+        "katex_errors": 0,
+        "display_math_overflow": 0
+      }
+    },
+    {
+      "route": "textbook/evaluation/models-contamination/",
+      "images": 13,
+      "checks_at_both_widths": {
+        "non_404_title": true,
+        "document_overflow": false,
+        "broken_images": 0,
+        "pending_images": 0,
+        "katex_errors": 0,
+        "display_math_overflow": 0
+      }
+    },
+    {
+      "route": "textbook/evaluation/responsible-systems/",
+      "images": 12,
+      "checks_at_both_widths": {
+        "non_404_title": true,
+        "document_overflow": false,
+        "broken_images": 0,
+        "pending_images": 0,
+        "katex_errors": 0,
+        "display_math_overflow": 0
+      }
+    },
+    {
+      "route": "models/families/deepseek/",
+      "images": 4,
+      "checks_at_both_widths": {
+        "non_404_title": true,
+        "document_overflow": false,
+        "broken_images": 0,
+        "pending_images": 0,
+        "katex_errors": 0,
+        "display_math_overflow": 0
+      }
+    },
+    {
+      "route": "practice/09-realizovat-ring-all-reduce/",
+      "images": 1,
+      "checks_at_both_widths": {
+        "non_404_title": true,
+        "document_overflow": false,
+        "broken_images": 0,
+        "pending_images": 0,
+        "katex_errors": 0,
+        "display_math_overflow": 0
+      }
+    },
+    {
+      "route": "practice/14-sobrat-minimalnyy-inference-engine/",
+      "images": 4,
+      "checks_at_both_widths": {
+        "non_404_title": true,
+        "document_overflow": false,
+        "broken_images": 0,
+        "pending_images": 0,
+        "katex_errors": 0,
+        "display_math_overflow": 0
+      }
+    },
+    {
+      "route": "practice/17-razvernut-nablyudaemyy-ml-servis/",
+      "images": 3,
+      "checks_at_both_widths": {
+        "non_404_title": true,
+        "document_overflow": false,
+        "broken_images": 0,
+        "pending_images": 0,
+        "katex_errors": 0,
+        "display_math_overflow": 0
+      }
+    },
+    {
+      "route": "practice/18-harvard-ml-systems-interactive-design-labs/",
+      "images": 0,
+      "checks_at_both_widths": {
+        "non_404_title": true,
+        "document_overflow": false,
+        "broken_images": 0,
+        "pending_images": 0,
+        "katex_errors": 0,
+        "display_math_overflow": 0
+      }
+    },
+    {
+      "route": "en/textbook/transformer/self-attention/",
+      "images": 4,
+      "checks_at_both_widths": {
+        "non_404_title": true,
+        "document_overflow": false,
+        "broken_images": 0,
+        "pending_images": 0,
+        "katex_errors": 0,
+        "display_math_overflow": 0
+      }
+    },
+    {
+      "route": "en/textbook/inference/scheduling/",
+      "images": 7,
+      "checks_at_both_widths": {
+        "non_404_title": true,
+        "document_overflow": false,
+        "broken_images": 0,
+        "pending_images": 0,
+        "katex_errors": 0,
+        "display_math_overflow": 0
+      }
+    },
+    {
+      "route": "en/textbook/inference/serving-engines/",
+      "images": 7,
+      "checks_at_both_widths": {
+        "non_404_title": true,
+        "document_overflow": false,
+        "broken_images": 0,
+        "pending_images": 0,
+        "katex_errors": 0,
+        "display_math_overflow": 0
+      }
+    },
+    {
+      "route": "en/textbook/inference/flashattention/",
+      "images": 4,
+      "checks_at_both_widths": {
+        "non_404_title": true,
+        "document_overflow": false,
+        "broken_images": 0,
+        "pending_images": 0,
+        "katex_errors": 0,
+        "display_math_overflow": 0
+      }
+    },
+    {
+      "route": "en/textbook/ml-systems/gpu-cuda-memory-hierarchy/",
+      "images": 18,
+      "checks_at_both_widths": {
+        "non_404_title": true,
+        "document_overflow": false,
+        "broken_images": 0,
+        "pending_images": 0,
+        "katex_errors": 0,
+        "display_math_overflow": 0
+      }
+    }
+  ],
+  "exclusions": [
+    "Empty hidden figure-viewer img without src is a template, not an image load.",
+    "Transient 404 observations while astro build replaced dist were discarded and all cases rerun after successful completion."
+  ],
+  "notice_checks": {
+    "current_no_partial_notice": "en/textbook/transformer/self-attention/",
+    "partial": [
+      "en/textbook/inference/scheduling/",
+      "en/textbook/inference/serving-engines/",
+      "en/textbook/inference/flashattention/"
+    ],
+    "canonical_language_fallback": "en/textbook/ml-systems/gpu-cuda-memory-hierarchy/"
+  },
+  "screenshot": "/var/tmp/bookvar-completion-systolic-final.png"
+}

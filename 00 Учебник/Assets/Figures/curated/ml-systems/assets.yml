@@ -101,6 +101,7 @@ assets:
     modified: false
     used_in:
       - 00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints.md
+    review_note: "Historical usage only: withdrawn from RU 44g on 2026-10-23, source original preserved. Current usage is recorded in the central registry; the reader sees the JAX scaling-book topology instead."
   - file: harvard/distributed/gpudirect-data-path.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/network_fabrics/images/svg/gpudirect-data-path.svg
@@ -108,7 +109,8 @@ assets:
     license: CC BY-NC-SA 4.0
     modified: false
     used_in:
-      - 00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints.md
+      - docs/audit/2026-10-13-network-checkpoints.md
+    review_note: "Retired from RU 44g on 2026-10-14: misleading numerical annotation; replaced by original Open Hackathons or PyTorch illustration. Original bytes retained. See docs/audit/2026-10-13-network-checkpoints.md."
   - file: harvard/distributed/complete-data-path.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/data_storage/images/svg/complete-data-path.svg
@@ -116,7 +118,8 @@ assets:
     license: CC BY-NC-SA 4.0
     modified: false
     used_in:
-      - 00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints.md
+      - docs/audit/2026-10-13-network-checkpoints.md
+    review_note: "Retired from RU 44g on 2026-10-14: misleading numerical annotation; replaced by original Open Hackathons or PyTorch illustration. Original bytes retained. See docs/audit/2026-10-13-network-checkpoints.md."
   - file: harvard/distributed/collective-primitives-overview.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/collective_communication/images/svg/collective-primitives-overview.svg
@@ -167,8 +170,8 @@ assets:
     modified: false
     sha256: 4571f4c2f935765e2deeb623ffa8c8143fc27821d07dcdc6b8325d88b620702d
     used_in:
-      - 00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md
-      - 00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism.md
+      - "00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md"
+    review_note: "Withdrawn from revised RU chapter on 2026-10-14; original bytes preserved. Audit records retirement; central registry records current embeds."
   - file: harvard/distributed/distributed_training_memory_budget.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/images/svg/distributed_training_memory_budget.svg
@@ -185,7 +188,8 @@ assets:
     license: CC BY-NC-SA 4.0
     modified: false
     used_in:
-      - 00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md
+      - "docs/audit/2026-10-14-fsdp.md"
+    review_note: "Withdrawn from revised RU chapter on 2026-10-14; original bytes preserved. Audit records retirement; central registry records current embeds."
   - file: harvard/distributed/3d-parallelism-cube.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/images/svg/3d-parallelism-cube.svg
@@ -193,7 +197,8 @@ assets:
     license: CC BY-NC-SA 4.0
     modified: false
     used_in:
-      - 00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism.md
+      - "docs/audit/2026-10-13-expert-hybrid.md"
+    review_note: "Withdrawn from revised RU chapter on 2026-10-14; original bytes preserved. Audit records retirement; central registry records current embeds."
   - file: harvard/distributed/parallelism-decision-tree.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/distributed_training/images/svg/parallelism-decision-tree.svg
@@ -201,7 +206,8 @@ assets:
     license: CC BY-NC-SA 4.0
     modified: false
     used_in:
-      - 00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism.md
+      - "docs/audit/2026-10-13-expert-hybrid.md"
+    review_note: "Withdrawn from revised RU chapter on 2026-10-14; original bytes preserved. Audit records retirement; central registry records current embeds."
   - file: harvard/distributed/failure-domains.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/fault_tolerance/images/svg/failure-domains.svg
@@ -217,7 +223,8 @@ assets:
     license: CC BY-NC-SA 4.0
     modified: false
     used_in:
-      - 00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration.md
+      - "docs/audit/2026-10-14-fault-tolerance.md"
+    review_note: "Withdrawn from revised RU chapter on 2026-10-14; original bytes preserved. Audit records retirement; central registry records current embeds."
   - file: harvard/distributed/topology-placement.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/fleet_orchestration/images/svg/topology-placement.svg
@@ -306,6 +313,7 @@ assets:
     sha256: 7d4ff073291dab794eccb0ab71691adbfe4af43e78938861145c5846c70db103
     used_in:
       - 00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md
+    review_note: "Historical placement only: withdrawn from S6-S7 on 2026-10-08; current usage is in the central registry."
   - file: harvard/data/data_engineering_storage_latency_hierarchy.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/data_engineering/images/svg/data_engineering_storage_latency_hierarchy.svg
@@ -315,6 +323,7 @@ assets:
     sha256: f95d2489900bd977c591fd0397249a1964c01c487ca4b94dccdcadefa7723909
     used_in:
       - 00 Учебник/10 ML Systems/06 Data pipeline, padding и packing.md
+    review_note: "Historical placement only: withdrawn from S6-S7 on 2026-10-08; current usage is in the central registry."
   - file: bookvar/padding-bucketing-packing-ledger.svg
     author: Bookvar contributors
     source_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week02_fast_pipelines/lecture.pdf
@@ -325,6 +334,7 @@ assets:
     sha256: c01bab8fa293e06e0afd89ba8b83d5433cd219e2ffdf1b07d5e0ef8c68069eb9
     used_in:
       - 00 Учебник/10 ML Systems/06 Data pipeline, padding и packing.md
+    review_note: "Historical placement only: withdrawn from S6-S7 on 2026-10-08; current usage is in the central registry."
   - file: bookvar/packed-causal-mask-ledger.svg
     author: Bookvar contributors
     source_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week02_fast_pipelines/lecture.pdf
@@ -335,11 +345,12 @@ assets:
     sha256: 2ae7f1bc4b225b47b76d03a585acda6fce9546cf7ea65b41a398cdfac8c84a70
     used_in:
       - 00 Учебник/10 ML Systems/06 Data pipeline, padding и packing.md
+    review_note: "Historical placement only: withdrawn from S6-S7 on 2026-10-08; current usage is in the central registry."
   - file: edls/optimal-sequence-processing.png
-    author: Dmitry Ryabinin, Efficient DL Systems contributors
+    author: Max Ryabinin, Efficient DL Systems contributors
     source_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week02_fast_pipelines/lecture.pdf
     commit: e632aa89ca9e6638d52e1b686095e7442faffbb0
-    license: CC BY 4.0
+    license: MIT
     modified: false
     sha256: 6a2a5fa8a00798d145a1af0b20f278d189249163f93951db08754cffee63705e
     used_in:
@@ -359,7 +370,8 @@ assets:
     license: CC BY-NC-SA 4.0
     modified: false
     used_in:
-      - 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md
+      - docs/audit/2026-10-14-inference-scheduling.md
+    review_note: "Retired from RU inference explanation: the zero-waste label is not supported by the pictured idle slots. Original file retained."
   - file: harvard/inference/kv-cache-fragmentation.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/kv-cache-fragmentation.svg
@@ -367,7 +379,8 @@ assets:
     license: CC BY-NC-SA 4.0
     modified: false
     used_in:
-      - 00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md
+      - docs/audit/2026-10-14-kv-cache.md
+    review_note: "Retired from RU chapter 55; retained original PagedAttention figures explain the same allocation mechanism with larger labels. File preserved for existing EN/source uses."
   - file: harvard/inference/disaggregated-serving.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/disaggregated-serving.svg
@@ -383,7 +396,8 @@ assets:
     license: CC BY-NC-SA 4.0
     modified: false
     used_in:
-      - 00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning.md
+      - docs/audit/2026-10-20-queueing-capacity.md
+    review_note: "Removed from chapter 58c: rho/(1-rho) counts all in-system requests, not queue-only requests; the footer's unbounded-growth threshold at 85% is false for M/M/1. Original file preserved."
   - file: harvard/inference/tensor-parallel-routing.svg
     author: Harvard Edge ML Systems Book contributors
     source_url: https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol2/inference/images/svg/tensor-parallel-routing.svg
@@ -415,7 +429,7 @@ assets:
     license: CC BY-NC-SA 4.0
     modified: false
     used_in:
-      - 00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning.md
+      - docs/audit/2026-10-20-queueing-capacity.md
   - file: editorial/eagle-feature-drafting.svg
     author: Bookvar contributors
     source_url: https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week09_inference_algorithms/lecture.pdf

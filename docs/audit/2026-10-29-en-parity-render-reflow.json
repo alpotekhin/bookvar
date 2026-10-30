@@ -1,0 +1,150 @@
+{
+  "date": "2026-10-29",
+  "scope": "20 display-only reflows after 360px browser inspection; original prose, Python blocks, and source figures unchanged.",
+  "files": [
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64 Multimodal models.md",
+      "before_sha256": "6c3de4da21b1efa89a05eaf2e6feef5f37121aba8ce1eb94ad8b7bf4c6fe3129",
+      "restored_sha256": "6c3de4da21b1efa89a05eaf2e6feef5f37121aba8ce1eb94ad8b7bf4c6fe3129",
+      "after_sha256": "3e13eee9fec248a67604c7cf97897a088975a93d7f6031e0c4a86aaa22c7b4ab",
+      "changes": [
+        {
+          "old": "p_{r,c}=\\operatorname{vec}(X_{r:r+16,c:c+16,:})W+b,\n\\qquad W\\in\\mathbb R^{768\\times d}.",
+          "new": "\\begin{gathered}\np_{r,c}=\\operatorname{vec}(X_{r:r+16,c:c+16,:})W+b,\n\\\\\nW\\in\\mathbb R^{768\\times d}.\n\\end{gathered}"
+        },
+        {
+          "old": "U=Z+\\operatorname{MSA}(\\operatorname{LN}(Z)),\\qquad\nZ'=U+\\operatorname{MLP}(\\operatorname{LN}(U)).",
+          "new": "\\begin{gathered}\nU=Z+\\operatorname{MSA}(\\operatorname{LN}(Z)),\\\\\nZ'=U+\\operatorname{MLP}(\\operatorname{LN}(U)).\n\\end{gathered}"
+        },
+        {
+          "old": "\\mathcal L_{\\mathrm{CLIP}}\n=-\\frac{1}{2B}\\left[\n\\sum_i\\log\\frac{e^{S_{ii}}}{\\sum_j e^{S_{ij}}}\n+\\sum_j\\log\\frac{e^{S_{jj}}}{\\sum_i e^{S_{ij}}}\n\\right].",
+          "new": "\\begin{aligned}\n\\mathcal L_{\\mathrm{CLIP}}=-\\frac{1}{2B}\\Bigg[&\n\\sum_i\\log\\frac{e^{S_{ii}}}{\\sum_j e^{S_{ij}}}\\\\\n&+\\sum_j\\log\\frac{e^{S_{jj}}}{\\sum_i e^{S_{ij}}}\n\\Bigg].\n\\end{aligned}"
+        },
+        {
+          "old": "\\mathcal L_{\\mathrm{SigLIP}}\n=-\\frac1B\\sum_{i=1}^{B}\\sum_{j=1}^{B}\n\\log\\sigma\\!\\left(y_{ij}(a\\,v_i^\\top t_j+b)\\right).",
+          "new": "\\begin{aligned}\n\\mathcal L_{\\mathrm{SigLIP}}={}&-\\frac1B\\sum_{i=1}^{B}\\sum_{j=1}^{B}\\\\\n&\\log\\sigma\\!\\left(y_{ij}(a\\,v_i^\\top t_j+b)\\right).\n\\end{aligned}"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64a Connectors and fusion.md",
+      "before_sha256": "3c6db05312e0e21b5b653fa549b4a07d3e8e68f4f2bb2fc37027f4d5f6634056",
+      "restored_sha256": "3c6db05312e0e21b5b653fa549b4a07d3e8e68f4f2bb2fc37027f4d5f6634056",
+      "after_sha256": "f5882df05aa71cff14b047ee434d24b35c4ce44b387220a0e7b860d20a9a5d3a",
+      "changes": [
+        {
+          "old": "H_v=Z_vW,\\qquad W\\in\\mathbb R^{d_v\\times d_l},\n\\qquad H_v\\in\\mathbb R^{N_v\\times d_l}.",
+          "new": "\\begin{gathered}\nH_v=Z_vW,\\\\\nW\\in\\mathbb R^{d_v\\times d_l},\n\\\\\nH_v\\in\\mathbb R^{N_v\\times d_l}.\n\\end{gathered}"
+        },
+        {
+          "old": "U=Y+\\tanh(\\alpha_a)\\operatorname{CrossAttn}(Y,R),\n\\qquad Y'=U+\\tanh(\\alpha_f)\\operatorname{FFW}(U).",
+          "new": "\\begin{gathered}\nU=Y+\\tanh(\\alpha_a)\\operatorname{CrossAttn}(Y,R),\n\\\\\nY'=U+\\tanh(\\alpha_f)\\operatorname{FFW}(U).\n\\end{gathered}"
+        },
+        {
+          "old": "A=\\operatorname{softmax}\\left(\\frac{QK(Z_v)^\\top}{\\sqrt{d_k}}\\right),\n\\qquad H=AV(Z_v).",
+          "new": "\\begin{gathered}\nA=\\operatorname{softmax}\\left(\\frac{QK(Z_v)^\\top}{\\sqrt{d_k}}\\right),\n\\\\\nH=AV(Z_v).\n\\end{gathered}"
+        },
+        {
+          "old": "K_{\\rm all}=[K(Z_v);K(R)],\\qquad V_{\\rm all}=[V(Z_v);V(R)].",
+          "new": "\\begin{gathered}\nK_{\\rm all}=[K(Z_v);K(R)],\\\\\nV_{\\rm all}=[V(Z_v);V(R)].\n\\end{gathered}"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md",
+      "before_sha256": "47ff0e008a05ae6afae77ddbf3104984ee1146e28dd1148491ebf4175c455795",
+      "restored_sha256": "47ff0e008a05ae6afae77ddbf3104984ee1146e28dd1148491ebf4175c455795",
+      "after_sha256": "a570a03c487c9f6bb89977abb8607e68d2ce5b616daa00b3bac863954a4f5de4",
+      "changes": [
+        {
+          "old": "(224/14)^2=256\\quad\\text{patch positions},\n\\qquad 256/4=64\\quad\\text{merged visual vectors}.",
+          "new": "\\begin{gathered}\n(224/14)^2=256\\\\\n\\text{patch positions},\n\\\\\n256/4=64\\\\\n\\text{merged visual vectors}.\n\\end{gathered}"
+        },
+        {
+          "old": "\\frac{(112-12,\\;56-6,\\;312-12,\\;156-6)}{0.5}\n=(200,100,600,300).",
+          "new": "\\begin{gathered}\n\\frac{(112-12,\\;56-6,\\;312-12,\\;156-6)}{0.5}\\\\\n=(200,100,600,300).\n\\end{gathered}"
+        },
+        {
+          "old": "x=(u+o_x-p_x)/s_x,\\quad y=(v+o_y-p_y)/s_y.",
+          "new": "\\begin{gathered}\nx=(u+o_x-p_x)/s_x,\\\\\ny=(v+o_y-p_y)/s_y.\n\\end{gathered}"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64c Training VLMs — alignment, instruction tuning, and data.md",
+      "before_sha256": "f77dfcd29d6788cdf9116363714e6ce0c7c1fb1830b6be96fa0d090ad097dc6d",
+      "restored_sha256": "f77dfcd29d6788cdf9116363714e6ce0c7c1fb1830b6be96fa0d090ad097dc6d",
+      "after_sha256": "03af54d2d4fbce4863a67e2072d4e00dd888be0c2c092bb724f030acd0adbaa4",
+      "changes": [
+        {
+          "old": "\\mathcal L=-\\sum_t m_t\\log p(y_t\\mid y_{<t},I),\n\\qquad\nm_t=\\mathbf1[\\text{assistant target at }t].",
+          "new": "\\begin{gathered}\n\\mathcal L=-\\sum_t m_t\\log p(y_t\\mid y_{<t},I),\n\\\\\nm_t=\\mathbf1[\\text{assistant target at }t].\n\\end{gathered}"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding.md",
+      "before_sha256": "fcc390a2d7555568d52ef9a37f124201cf1cea0384357cc410f5be069d605e8b",
+      "restored_sha256": "fcc390a2d7555568d52ef9a37f124201cf1cea0384357cc410f5be069d605e8b",
+      "after_sha256": "843a0776cafc3d9ed8c49acbb8a2ae654a9846c154dfdbf43cc2e338d5b44ee3",
+      "changes": [
+        {
+          "old": "x=(u+o_x-p_x)/s,\\qquad y=(v+o_y-p_y)/s.",
+          "new": "\\begin{gathered}\nx=(u+o_x-p_x)/s,\\\\\ny=(v+o_y-p_y)/s.\n\\end{gathered}"
+        },
+        {
+          "old": "x=(120+500-20)/0.5=1200,\\qquad\ny=(60+800)/0.5=1720.",
+          "new": "\\begin{gathered}\nx=(120+500-20)/0.5=1200,\\\\\ny=(60+800)/0.5=1720.\n\\end{gathered}"
+        },
+        {
+          "old": "A=\\begin{pmatrix}s&0&p_x-o_x\\\\0&s&p_y-o_y\\\\0&0&1\\end{pmatrix},\n\\qquad (u,v,1)^\\top=A(x,y,1)^\\top.",
+          "new": "\\begin{gathered}\nA=\\begin{pmatrix}s&0&p_x-o_x\\\\0&s&p_y-o_y\\\\0&0&1\\end{pmatrix},\n\\\\\n(u,v,1)^\\top=A(x,y,1)^\\top.\n\\end{gathered}"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving.md",
+      "before_sha256": "60cd1ee654cd9e25cccf145bc64ef64d4fe9833606371afe46d170bd0680baf9",
+      "restored_sha256": "60cd1ee654cd9e25cccf145bc64ef64d4fe9833606371afe46d170bd0680baf9",
+      "after_sha256": "6e4cfae4a2fd9c4c6d67620f80f0a907b11bb8f8c50b7f22ea080976e40b267e",
+      "changes": [
+        {
+          "old": "\\text{text:}\\quad\ns(I_0,T_0)>s(I_0,T_1),\\quad\ns(I_1,T_1)>s(I_1,T_0),",
+          "new": "\\begin{gathered}\n\\text{text:}\\\\\ns(I_0,T_0)>s(I_0,T_1),\\\\\ns(I_1,T_1)>s(I_1,T_0),\n\\end{gathered}"
+        },
+        {
+          "old": "\\text{image:}\\quad\ns(I_0,T_0)>s(I_1,T_0),\\quad\ns(I_1,T_1)>s(I_0,T_1).",
+          "new": "\\begin{gathered}\n\\text{image:}\\\\\ns(I_0,T_0)>s(I_1,T_0),\\\\\ns(I_1,T_1)>s(I_0,T_1).\n\\end{gathered}"
+        },
+        {
+          "old": "MG=S_v-S_{wv},\\qquad ML=\\max(0,S_{wv}-S_t),",
+          "new": "\\begin{gathered}\nMG=S_v-S_{wv},\\\\\nML=\\max(0,S_{wv}-S_t),\n\\end{gathered}"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md",
+      "before_sha256": "b565dab6ce636acdfbc6445986a319585bd4306ccafa932eba21efb07f9821f4",
+      "restored_sha256": "b565dab6ce636acdfbc6445986a319585bd4306ccafa932eba21efb07f9821f4",
+      "after_sha256": "d87da76554c6fe72e35b7af5b05ea375f84cae8e5930698b6750c0a483302638",
+      "changes": [
+        {
+          "old": "q_t=x_tW_Q,\\qquad k_t=x_tW_K,\\qquad v_t=x_tW_V,",
+          "new": "\\begin{aligned}\nq_t&=x_tW_Q,\\\\\nk_t&=x_tW_K,\\\\\nv_t&=x_tW_V,\n\\end{aligned}"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md",
+      "before_sha256": "88d929b6a5c9ab816c80ccc51eb31d7826272479a7a9e850b63f61509b168a2c",
+      "restored_sha256": "88d929b6a5c9ab816c80ccc51eb31d7826272479a7a9e850b63f61509b168a2c",
+      "after_sha256": "888b25e8db26b37c2d2fcecc366d21744b88ba8ba229df0365c18794529847c5",
+      "changes": [
+        {
+          "old": "Q^c=HW_{q,c},\\quad K^c=HW_{k,c},\\quad V^c=HW_{v,c},",
+          "new": "\\begin{aligned}\nQ^c&=HW_{q,c},\\\\\nK^c&=HW_{k,c},\\\\\nV^c&=HW_{v,c}.\n\\end{aligned}"
+        }
+      ]
+    }
+  ]
+}

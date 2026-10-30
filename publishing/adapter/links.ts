@@ -1,7 +1,7 @@
 import type { RouteRegistry } from './types.js';
+import { mapMarkdownProse } from './markdown-prose.js';
 
 const IMAGE_EXTENSION = /\.(?:png|jpe?g|webp|svg|gif)$/i;
-const PROTECTED_TOKEN_PREFIX = 'BOOKVARPROTECTEDCODE';
 
 function basename(target: string): string {
   const name = target.slice(target.lastIndexOf('/') + 1);
@@ -39,6 +39,9 @@ function convertLink(
     else allowed.push({ target, reason });
     return label;
   }
+
+  const canonicalHref = registry.canonicalHrefForWikiTarget?.(target, heading);
+  if (canonicalHref !== undefined) return `[${label}](${canonicalHref})`;
 
   let anchor = '';
   if (heading !== undefined) {
@@ -84,40 +87,19 @@ export function convertWikiSyntax(
 } {
   const unresolved: string[] = [];
   const allowlisted: Array<{ target: string; reason: string }> = [];
-  const protectedSegments: string[] = [];
-  const protect = (segment: string): string => {
-    const token = `${PROTECTED_TOKEN_PREFIX}${protectedSegments.length}TOKEN`;
-    protectedSegments.push(segment);
-    return token;
-  };
-  // Obsidian syntax is meaningful in prose, not inside literal source code.
-  // Protect fenced blocks first, then inline code spans. The fence expression
-  // deliberately accepts both backticks and tildes and preserves the source
-  // byte-for-byte when the tokens are restored below.
-  const withoutFencedCode = markdown.replace(
-    /^( {0,3})(`{3,}|~{3,})[^\n]*\n[\s\S]*?^\1\2[ \t]*$/gm,
-    protect
-  );
-  const withoutCode = withoutFencedCode.replace(
-    /(`+)([\s\S]*?)\1/g,
-    protect
-  );
-  const withoutEmbeds = withoutCode.replace(
+  // Transform prose in place. Nested temporary markers could survive a single
+  // restoration pass and replace entire source blocks in the rendered book.
+  const restored = mapMarkdownProse(markdown, prose => prose.replace(
     /!\[\[([^\]\n]+)\]\]/g,
     (match, expression: string) => expression.trim() === ''
       ? match
       : convertEmbed(expression, registry, unresolved, allowlist, allowlisted)
-  );
-  const converted = withoutEmbeds.replace(
+  ).replace(
     /\[\[([^\]\n]+)\]\]/g,
     (match, expression: string) => expression.trim() === ''
       ? match
       : convertLink(expression, registry, unresolved, allowlist, allowlisted)
-  );
-  const restored = converted.replace(
-    new RegExp(`${PROTECTED_TOKEN_PREFIX}(\\d+)TOKEN`, 'g'),
-    (_match, index: string) => protectedSegments[Number(index)]
-  );
+  ));
 
   return { markdown: restored, unresolved, allowlisted };
 }

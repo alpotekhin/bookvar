@@ -1,0 +1,39 @@
+[
+  {
+    "id": "curated-bertscore-recall-d917184b34ff",
+    "asset": "00 Учебник/Assets/Figures/curated/bleu-reconciliation-2026-10-30/bert-score-recall.png",
+    "sha256": "d917184b34ffda8ff892710a84a611d949bc23b39b383956d4053ceb7cab66ce",
+    "bytes": 280783,
+    "width": 2533,
+    "height": 728,
+    "dimensions_px": [
+      2533,
+      728
+    ],
+    "author": "Tianyi Zhang, Varsha Kishore, Felix Wu, Kilian Q. Weinberger and Yoav Artzi",
+    "title": "BERTScore recall: contextual embeddings, pairwise cosine similarity, greedy maxima and IDF",
+    "source_url": "https://github.com/Tiiiger/bert_score/blob/19e7f551fe4fa43fdd07b8129ae947015b902b2d/README.md#overview",
+    "source_image_url": "https://raw.githubusercontent.com/Tiiiger/bert_score/19e7f551fe4fa43fdd07b8129ae947015b902b2d/bert_score.png",
+    "commit": "19e7f551fe4fa43fdd07b8129ae947015b902b2d",
+    "git_blob": "deb6b282ad11d595853d4fcf1b1ed315c6754b69",
+    "source_asset": "05 Источники/Originals/bleu-reconciliation-2026-10-30/bert_score.png",
+    "source_asset_sha256": "d917184b34ffda8ff892710a84a611d949bc23b39b383956d4053ceb7cab66ce",
+    "source_page_snapshot": "05 Источники/Originals/bleu-reconciliation-2026-10-30/bertscore-README.md",
+    "license_evidence": "05 Источники/Originals/bleu-reconciliation-2026-10-30/bertscore-LICENSE",
+    "public_license_copy": "site/public/licenses/bertscore-19e7f551-MIT.txt",
+    "license": "MIT",
+    "license_url": "https://github.com/Tiiiger/bert_score/blob/19e7f551fe4fa43fdd07b8129ae947015b902b2d/LICENSE",
+    "copyright": "Copyright (c) 2019 Tianyi Zhang, Varsha Kishore, Felix Wu, Kilian Q. Weinberger, and Yoav Artzi.",
+    "derivation": "source-image-copy",
+    "modifications": "Complete original copied byte-for-byte. No crop, redraw, translation, relabeling, retouching, resampling or recompression.",
+    "metadata_status": "verified",
+    "rights_status": "source-license-verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-30",
+    "used_in": [
+      "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md"
+    ],
+    "source_page_sha256": "8759bfb999742dd1c21ac47a8ce2c92b1f7c91d35a9ab4439a69a6cc6043734c",
+    "license_evidence_sha256": "a0444a63d2a9eea7f3ad6a912700cad4c4e5e50e9bac371aa584a8e2e770f766"
+  }
+]

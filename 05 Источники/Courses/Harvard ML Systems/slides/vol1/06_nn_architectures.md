@@ -9,22 +9,47 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`slides/vol1/06_nn_architectures/06_nn_architectures.tex`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static slide archive
+> Text and equations retain the original language. Layout wrappers are simplified;
+> speaker notes are separate, and original SVGs are not redrawn or cropped.
+> Unsupported TeX remains visible and is listed beside the affected slide.
+> This archive is not a checked transcript or a finished Bookvar chapter.
 
 # VOL1 Slides — Nn Architectures
 
 ## Readable slide sequence
 
+## Network Architectures
+
+[Original slide 1](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L64)
+
+Architecture Is Infrastructure
+
 ## Learning Objectives
 
-{
+[Original slide 2](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L69)
+
+1. Distinguish the **computational signatures** of MLPs, CNNs, RNNs, Transformers, and DLRM
+2. Explain how **inductive biases** encode data structure into computation
+3. Analyze **arithmetic intensity** and memory scaling across architectures
+4. Identify shared **building blocks** (skip connections, normalization, gating)
+5. Apply the **architecture selection framework** to match data, hardware, and constraints
+6. Evaluate how architecture determines **Iron Law** bottlenecks ($O$, $D_{\text{vol}}$, $L_{\text{lat}}$)
+7. Critique common architectural selection **fallacies** using systems reasoning
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min] Walk through each objective briefly; students follow along.
 
 % -- NARRATE: What to SAY while showing this slide
 Walk through each objective. Stress that this chapter is about the
-*systems consequences* of architecture choice, not model accuracy.
+\emph{systems consequences} of architecture choice, not model accuracy.
 ``Every architecture signs a contract with physics---by the end of today,
 you will be able to read that contract.''
 
@@ -35,20 +60,36 @@ Cold-call one student. [Expected answer: O(N\^{}2) memory, high bandwidth demand
 % -- FLEX: [CORE] This slide is essential --- do not skip.
 [CORE] Sets the framing for the entire lecture.
 IF SHORT: Read objectives 1, 4, and 6 aloud; let students read the rest.
-}
+```
 
-{0pt}
-- Distinguish the **computational signatures** of MLPs, CNNs, RNNs, Transformers, and DLRM
-- Explain how **inductive biases** encode data structure into computation
-- Analyze **arithmetic intensity** and memory scaling across architectures
-- Identify shared **building blocks** (skip connections, normalization, gating)
-- Apply the **architecture selection framework** to match data, hardware, and constraints
-- Evaluate how architecture determines **Iron Law** bottlenecks ($O$, $D_{{vol}}$, $L_{{lat}}$)
-- Critique common architectural selection **fallacies** using systems reasoning
+</details>
 
 ## Visual Language
 
-{
+[Original slide 3](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L101)
+
+Throughout this course, colors carry meaning:
+
+**Blue** — Compute / Processing
+
+GPU ops, forward/backward pass, inference
+
+**Green** — Data / Memory
+
+Data flow, caches, healthy paths
+
+**Orange** — Routing / Scheduling
+
+Load balancers, batch windows
+
+**Red** — Error / Cost / Bottleneck
+
+Loss, decode phase, waste
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [0.5 min] Show briefly; students internalize through use across the lecture.
 
 % -- NARRATE: What to SAY while showing this slide
@@ -59,37 +100,47 @@ decisions. Red flags a bottleneck or cost.''
 % -- FLEX: [CORE] Establishes the visual vocabulary for every subsequent slide.
 [CORE] First time students see the color system; revisit briefly at start of Ch7.
 IF SHORT: Show for 30 seconds and move on---students will internalize through use.
-}
+```
 
-Throughout this course, colors carry meaning:
-
-{0.3cm}
-[T]
-  
-    {mlsyscard}{computestroke}
-    **Blue** --- Compute / Processing\\
-    { GPU ops, forward/backward pass, inference}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{datastroke}
-    **Green** --- Data / Memory\\
-    { Data flow, caches, healthy paths}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{routingstroke}
-    **Orange** --- Routing / Scheduling\\
-    { Load balancers, batch windows}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{errorstroke}
-    **Red** --- Error / Cost / Bottleneck\\
-    { Loss, decode phase, waste}
-    {mlsyscard}
+</details>
 
 ## War Story: The Ensemble Netflix Did Not Ship (2009)
 
-{
+[Original slide 4](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L151)
+
+**Context**: Netflix Prize (2006–2009)
+
+- &#36;1M prize: beat Cinematch by 10%
+- Winner: BellKor's Pragmatic Chaos
+- Method: **100+ model ensemble**
+- Result: 10.06% improvement on test set
+
+**Failure**: Offline accuracy $\neq$ deployable system
+
+Engineering effort to ship the ensemble was not
+justified by the accuracy gain. By 2012, the product had
+shifted to streaming—rating signal mattered less.
+
+**Consequence**: Netflix deployed *simpler* earlier ideas.
+
+The Grand Prize ensemble was **never shipped**.
+
+**Systems Lesson**
+
+Architecture choice must be judged against the **cost
+of running the model**, not only benchmark accuracy.
+
+A network with more parameters can lose to a simpler one whose compute
+and memory budgets fit the production system.
+
+**The thesis:** Architecture = Infrastructure.
+
+Source on slide: Johnston & Nikolova, Netflix Prize Retrospective, 2012
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1.5 min] This is the chapter's only war-story callout and its primary
 motivating example---do not skip it.
 
@@ -124,59 +175,47 @@ constraints beats a complex one that does not.
 % -- FLEX: [CORE] Sets up the chapter's central thesis before any equations.
 [CORE] This motivates every subsequent architecture trade-off discussion.
 IF SHORT: Read Context and Systems Lesson only---skip the 2012 streaming note.
-}
+```
 
-[T]
-  
-    **Context**: Netflix Prize (2006--2009)
-    {0pt}
-- \$1M prize: beat Cinematch by 10%
-- Winner: BellKor's Pragmatic Chaos
-- Method: **100+ model ensemble**
-- Result: 10.06% improvement on test set
-    
-
-    {0.1cm}
-    **Failure**: Offline accuracy $$ deployable system\\
-    { Engineering effort to ship the ensemble was not
-    justified by the accuracy gain. By 2012, the product had
-    shifted to streaming---rating signal mattered less.}
-
-    {0.1cm}
-    **Consequence**: Netflix deployed *simpler* earlier ideas.\\
-    The Grand Prize ensemble was **never shipped**.
-  
-  
-    {0.3cm}
-    {mlsyscard}{errorstroke}
-    **Systems Lesson**\\[0.2cm]
-    { Architecture choice must be judged against the **cost
-    of running the model**, not only benchmark accuracy.\\[0.2cm]
-    A network with more parameters can lose to a simpler one whose compute
-    and memory budgets fit the production system.}
-    {mlsyscard}
-
-    {0.2cm}
-    {The thesis:}{Architecture = Infrastructure.}
-  
-
-{Johnston & Nikolova, Netflix Prize Retrospective, 2012}
+</details>
 
 ## Architecture Is a Contract with Physics
 
-{
+[Original slide 5](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L228)
+
+Choosing an architecture means **signing a contract**:
+
+- **CNN** $\to$ spatial locality, parallel convolutions
+- **Transformer** $\to$ $O(N^2)$ memory, global attention
+- **RNN** $\to$ sequential dependencies, low parallelism
+- **DLRM** $\to$ TB-scale embedding tables
+
+Architecture determines **Iron Law terms**:
+Operations ($O$), data movement ($D_{\text{vol}}$), overhead ($L_{\text{lat}}$).
+
+| **Choice** | **Consequence** |
+| --- | --- |
+| CNN | Fits mobile memory |
+| Transf. | Needs datacenter |
+| RNN | 30–50% GPU util. |
+| DLRM | TB of DRAM |
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Core thesis slide; spend time on the table.
 
 % -- LINK: What prior concept connects to this slide
-Students learned the Iron Law ($O$, $D_{{vol}}$, $L_{{lat}}$) and the
+Students learned the Iron Law ($O$, $D_{\text{vol}}$, $L_{\text{lat}}$) and the
 roofline model in earlier chapters. This slide shows that the architecture
-*determines* which Iron Law term dominates.
+\emph{determines} which Iron Law term dominates.
 
 % -- NARRATE: What to SAY while showing this slide
 ``Architecture is not a modeling decision---it is an infrastructure commitment.
 When you pick a CNN, you commit to spatial locality and high arithmetic intensity.
 When you pick a Transformer, you commit to O(N\^{}2) memory.''
-Point to the table on the right: ``RNN: 30--50% GPU utilization. That is the
+Point to the table on the right: ``RNN: 30--50\% GPU utilization. That is the
 contract you sign.''
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
@@ -192,49 +231,33 @@ run the model---accuracy is necessary but not sufficient.
 % -- FLEX: [CORE] This slide is the chapter thesis.
 [CORE] Do not skip---every subsequent slide builds on this framing.
 IF AHEAD: ``Can you name an architecture whose systems cost killed a product?''
-}
+```
 
-[T]
-  
-    Choosing an architecture means **signing a contract**:
-
-    {0.1cm}
-    {0pt}
-- **CNN** $$ spatial locality, parallel convolutions
-- **Transformer** $$ $O(N^2)$ memory, global attention
-- **RNN** $$ sequential dependencies, low parallelism
-- **DLRM** $$ TB-scale embedding tables
-    
-
-    {0.1cm}
-    {mlsyscard}{crimson}
-    Architecture determines **Iron Law terms**:
-    Operations ($O$), data movement ($D_{{vol}}$), overhead ($L_{{lat}}$).
-    {mlsyscard}
-  
-  
-    {}{1.15}
-    {
-    {tabular}{@{}ll@{}}
-      
-      **Choice** & **Consequence** \\
-      
-      CNN    & Fits mobile memory \\
-      Transf.& Needs datacenter \\
-      RNN    & 30--50% GPU util. \\
-      DLRM   & TB of DRAM \\
-      
-    {tabular}
-    }
+</details>
 
 ## Predict: What Unifies All Architectures?
 
-{
+[Original slide 6](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L298)
+
+Think–Write–Share
+
+MLPs, CNNs, RNNs, and Transformers look very different.
+
+What single concept *unifies* all architecture choices?
+
+Write your answer. (60 seconds)
+
+Hint: it explains why CNNs use 47$\times$ fewer parameters than MLPs on MNIST.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Active learning moment; do not skip neighbor sharing.
 
 % -- LINK: What prior concept connects to this slide
 The previous slide showed four architectures with wildly different contracts.
-Now students must identify what single concept explains *why* those
+Now students must identify what single concept explains \emph{why} those
 contracts differ.
 
 % -- NARRATE: What to SAY while showing this slide
@@ -251,24 +274,24 @@ encodes about data.]
 % -- FLEX: [CORE] This prediction primes the key concept reveal.
 [CORE] The prediction must happen before the reveal slide.
 IF SHORT: Reduce to 30 seconds writing, skip neighbor sharing.
-}
+```
 
-{1.0cm}
-{ Think--Write--Share}
-
-{0.6cm}
-{ MLPs, CNNs, RNNs, and Transformers look very different.\\
-What single concept *unifies* all architecture choices?}
-
-{0.5cm}
-{ Write your answer. {midgray}{(60 seconds)}}
-
-{0.5cm}
-{{lightgray}{Hint: it explains why CNNs use 47$×$ fewer parameters than MLPs on MNIST.}}
+</details>
 
 ## Inductive Bias: The Unifying Concept
 
-{
+[Original slide 7](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L339)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/06_nn_architectures/images/ch06-inductive-bias-spectrum.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch06-inductive-bias-spectrum.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/images/ch06-inductive-bias-spectrum.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Definition:** Inductive bias is a structural constraint that restricts the hypothesis space, encoding domain assumptions directly into the computational graph.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Key concept reveal; walk the spectrum diagram carefully.
 
 % -- LINK: What prior concept connects to this slide
@@ -300,22 +323,28 @@ vs.\ hurt?''
 % -- FLEX: [CORE] This is the chapter's central definition.
 [CORE] Every subsequent architecture slide references inductive bias.
 IF AHEAD: ``What happens when your bias mismatches the data structure?''
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{ch06-inductive-bias-spectrum.pdf}
-
-{0.15cm}
-{Definition:}{Inductive bias is a structural constraint that restricts the hypothesis space, encoding domain assumptions directly into the computational graph.}
+</details>
 
 ## Five Lighthouse Models
 
-{
+[Original slide 8](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L387)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/06_nn_architectures/images/ch06-architecture-bottleneck-map.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch06-architecture-bottleneck-map.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/images/ch06-architecture-bottleneck-map.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+Each lighthouse isolates a **distinct system bottleneck** — no single “best” architecture exists.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1.5 min] Establish all five lighthouses; students must remember which bottleneck each isolates.
 
 % -- LINK: What prior concept connects to this slide
-Inductive bias explains *why* architectures differ. Now we introduce
+Inductive bias explains \emph{why} architectures differ. Now we introduce
 five concrete architectures that each isolate a different system bottleneck,
 mapping to the workload archetypes from Ch2.
 
@@ -339,18 +368,29 @@ Each reveals a specific hardware-workload interaction.
 % -- FLEX: [CORE] Establishes the five recurring examples for the rest of the course.
 [CORE] Students must memorize which bottleneck each lighthouse isolates.
 IF SHORT: Name all five quickly; spend detail time on the next slides.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{ch06-architecture-bottleneck-map.pdf}
-
-{0.1cm}
-{ Each lighthouse isolates a **distinct system bottleneck** --- no single ``best'' architecture exists.}
+</details>
 
 ## Arithmetic Intensity Spectrum
 
-{
+[Original slide 9](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L427)
+
+**Arithmetic Intensity** ($I$) = FLOPs per byte of data moved
+
+| **Model** | **Intensity** | **Regime** | **Hardware Affinity** |
+| --- | --- | --- | --- |
+| **ResNet-50** | $\sim$40 FLOPs/B | Compute-bound | GPU/TPU (saturates ALUs) |
+| **MobileNet** | $\sim$21 FLOPs/B | Balanced | Mobile NPU |
+| **GPT-2 (inf)** | $\sim$0.5 FLOPs/B | Memory-bound | HBM3 bandwidth |
+| **DLRM** | $\ll 1$ FLOPs/B | Capacity-bound | TB-scale DRAM |
+
+**Roughly 80$\times$ (about two orders of magnitude)** separate ResNet and GPT-2. The architecture determines whether your system needs a faster processor or faster memory.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Key quantitative slide; work through the table row by row.
 
 % -- LINK: What prior concept connects to this slide
@@ -361,7 +401,7 @@ is compute-bound or memory-bound.
 % -- NARRATE: What to SAY while showing this slide
 Point to each row: ``ResNet at 40 FLOPs/byte---above the ridge point,
 compute-bound, GPU-friendly. GPT-2 at 0.5 FLOPs/byte---below the ridge,
-bandwidth-starved. Roughly 80$×$ (about two orders of magnitude) separate
+bandwidth-starved. Roughly 80$\times$ (about two orders of magnitude) separate
 them. The architecture determines whether your system needs a faster processor or faster memory.''
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
@@ -379,33 +419,37 @@ IF STUCK: ``Draw the roofline---where does each model land?''
 architecture and hardware.
 [CORE] This table is referenced in the Fallacies slide and the selection framework.
 IF AHEAD: ``What would it take to make GPT-2 inference compute-bound?''
-}
+```
 
-**Arithmetic Intensity** ($I$) = FLOPs per byte of data moved
-
-{0.15cm}
-{}{1.15}
-{
-{tabular}{@{}llll@{}}
-  
-  **Model** & **Intensity** & **Regime** & **Hardware Affinity** \\
-  
-  **ResNet-50** & $$40 FLOPs/B & {computestroke}{Compute-bound} & GPU/TPU (saturates ALUs) \\
-  **MobileNet** & $$21 FLOPs/B & Balanced & Mobile NPU \\
-  **GPT-2 (inf)** & $$0.5 FLOPs/B & {datastroke}{Memory-bound} & HBM3 bandwidth \\
-  **DLRM** & $ 1$ FLOPs/B & {errorstroke}{Capacity-bound} & TB-scale DRAM \\
-  
-{tabular}
-}
-
-{0.2cm}
-{mlsyscard}{crimson}
-{ **Roughly 80$×$ (about two orders of magnitude)** separate ResNet and GPT-2. The architecture determines whether your system needs a faster processor or faster memory.}
-{mlsyscard}
+</details>
 
 ## MLPs: The Universal Baseline
 
-{
+[Original slide 10](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L484)
+
+**Multi-Layer Perceptrons**
+
+- **Bias**: None — any input relates to any output
+- **Data**: Tabular, unstructured features
+- **Scaling**: $O(d^2)$ params per layer
+- **1024 $\to$ 1024**: 1,048,576 parameters
+
+UAT guarantees MLPs *can* represent any function. Catch: “sufficiently wide” can mean exponentially many neurons.
+
+| **Property** | **Value** |
+| --- | --- |
+| Bias | None |
+| Params/layer | $O(d^2)$ |
+| Parallelism | High |
+| Utilization | 80–90% |
+| Bottleneck | Bandwidth |
+
+**Baseline:** Every other architecture is an MLP + structural constraints.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Establishes the baseline against which all other architectures are compared.
 
 % -- LINK: What prior concept connects to this slide
@@ -417,7 +461,7 @@ connectivity. This slide unpacks what that means in systems terms.
 connects to every output. The Universal Approximation Theorem guarantees
 they can represent anything, but at enormous cost. One 1024-to-1024 layer:
 over one million parameters. That is the price of zero inductive bias.''
-Point to the table: ``High parallelism and 80--90% utilization---the
+Point to the table: ``High parallelism and 80--90\% utilization---the
 computation is simple dense MatMul, which GPUs love.''
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
@@ -436,45 +480,32 @@ add constraints on top.
 are compared.
 [CORE] The 1M parameter number recurs in the CNN comparison.
 IF SHORT: Skip the UAT card; keep the table and the ``baseline'' insight.
-}
+```
 
-[T]
-  
-    **Multi-Layer Perceptrons**
-    {0pt}
-- { **Bias**: None --- any input relates to any output}
-- { **Data**: Tabular, unstructured features}
-- { **Scaling**: $O(d^2)$ params per layer}
-- { **1024 $$ 1024**: 1,048,576 parameters}
-    
-
-    {0.1cm}
-    {mlsyscard}{errorstroke}
-    { UAT guarantees MLPs *can* represent any function. Catch: ``sufficiently wide'' can mean exponentially many neurons.}
-    {mlsyscard}
-  
-  
-    {}{1.05}
-    {
-    {tabular}{@{}lr@{}}
-      
-      **Property** & **Value** \\
-      
-      Bias & None \\
-      Params/layer & $O(d^2)$ \\
-      Parallelism & High \\
-      Utilization & 80--90% \\
-      Bottleneck & Bandwidth \\
-      
-    {tabular}
-    }
-
-    {0.1cm}
-    {Baseline:}{Every other architecture is an MLP + structural constraints.}
+</details>
 
 ## CNNs: Spatial Pattern Processing
 
-{
+[Original slide 11](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L557)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/06_nn_architectures/images/ch06-cnn-weight-sharing.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch06-cnn-weight-sharing.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/images/ch06-cnn-weight-sharing.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**MLP**: 1,048,576 parameters
+
+Every pixel $\to$ every output
+
+**CNN**: 9,408 parameters
+
+Shared 3$\times$3 filter slides across image
+
+**Key:** Weight sharing = 47$\times$ fewer params (MNIST) = fits on mobile devices.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Walk the weight sharing diagram; emphasize the 47x (MNIST) ratio.
 
 % -- LINK: What prior concept connects to this slide
@@ -503,32 +534,41 @@ CNNs compute-bound and GPU-friendly.
 % -- FLEX: [CORE] The 47x MNIST ratio is a key quantitative anchor (chapter-canonical).
 [CORE] Referenced in Key Takeaways and the Fallacies slide.
 IF AHEAD: ``How does depthwise separable convolution change this ratio?''
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{ch06-cnn-weight-sharing.pdf}
-
-{0.1cm}
-
-[T]
-  
-    
-    {errorstroke}{**MLP**}: 1,048,576 parameters\\
-    { Every pixel $$ every output}
-  
-  
-    
-    {datastroke}{**CNN**}: 9,408 parameters\\
-    { Shared 3$×$3 filter slides across image}
-  
-
-{0.05cm}
-{Key:}{Weight sharing = 47$×$ fewer params (MNIST) = fits on mobile devices.}
+</details>
 
 ## CNN System Properties
 
-{
+[Original slide 12](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L612)
+
+**Why CNNs map well to GPUs:**
+
+- Weight reuse $\to$ high arithmetic intensity
+- Regular memory access $\to$ cache-friendly
+- Batch processing $\to$ saturates tensor cores
+- **ResNet-50**: 80–95% peak throughput
+
+**MobileNet (Depthwise Separable):**
+
+- 8–9$\times$ fewer FLOPs for 3$\times$3 kernels
+- Fits phones: 14 MB, 300 MFLOPs
+- But: **starves datacenter GPUs** (low intensity)
+
+|  | **ResNet-50** | **MobileNet** |
+| --- | --- | --- |
+| Params | 25.6 M | 3.5 M |
+| FLOPs | 4.1 G | 300 M |
+| Memory | 98 MB | 14 MB |
+| Intensity | $\sim$40 | $\sim$21 |
+| GPU util. | 80–95% | 30–50% |
+
+**FLOPs $\neq$ speed!** MobileNet uses 14$\times$ fewer FLOPs but can run *slower* on datacenter GPUs.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] The FLOPs-vs-speed paradox is the central lesson; emphasize it.
 
 % -- LINK: What prior concept connects to this slide
@@ -540,7 +580,7 @@ excellent GPU utilization.
 ``Because each weight is reused many times across spatial positions, CNNs
 achieve high arithmetic intensity---around 40 FLOPs/byte for ResNet-50.
 That puts them above the ridge point: compute-bound, the ideal regime for
-GPUs. ResNet-50 achieves 80--95% of peak throughput.''
+GPUs. ResNet-50 achieves 80--95\% of peak throughput.''
 Point to the MobileNet column: ``Depthwise separable convolutions cut
 FLOPs by 8--9x, making MobileNet fit on phones at 14 MB and 300 MFLOPs.
 But the tradeoff: low intensity starves datacenter GPUs.''
@@ -560,50 +600,24 @@ IF STUCK: ``Draw both models on the roofline---which hits the ceiling?''
 % -- FLEX: [CORE] The FLOPs-vs-speed paradox is a central lesson.
 [CORE] This directly supports the ``FLOPs != speed'' fallacy slide.
 IF SHORT: Skip MobileNet details; keep the ResNet utilization numbers.
-}
+```
 
-[T]
-  
-    **Why CNNs map well to GPUs:**
-    {0pt}
-- Weight reuse $$ high arithmetic intensity
-- Regular memory access $$ cache-friendly
-- Batch processing $$ saturates tensor cores
-- **ResNet-50**: 80--95% peak throughput
-    
-
-    {0.1cm}
-    **MobileNet (Depthwise Separable):**
-    {0pt}
-- 8--9$×$ fewer FLOPs for 3$×$3 kernels
-- Fits phones: 14 MB, 300 MFLOPs
-- But: **starves datacenter GPUs** (low intensity)
-    
-  
-  
-    {}{1.1}
-    {
-    {tabular}{@{}lrr@{}}
-      
-      & **ResNet-50** & **MobileNet** \\
-      
-      Params     & 25.6 M & 3.5 M \\
-      FLOPs      & 4.1 G  & 300 M \\
-      Memory     & 98 MB  & 14 MB \\
-      Intensity  & $$40  & $$21 \\
-      GPU util.  & 80--95% & 30--50% \\
-      
-    {tabular}
-    }
-
-    {0.1cm}
-    {mlsyscard}{errorstroke}
-    { **FLOPs $$ speed!** MobileNet uses 14$×$ fewer FLOPs but can run *slower* on datacenter GPUs.}
-    {mlsyscard}
+</details>
 
 ## Quick Check
 
-{
+[Original slide 13](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L691)
+
+Quick check — no peeking.
+
+ What is the memory scaling of Transformer attention with respect to sequence length?
+
+30 seconds — then we continue.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [0.5 min] Micro-retrieval; 30 seconds student time plus reveal.
 
 % -- NARRATE: What to SAY while showing this slide
@@ -613,15 +627,30 @@ After 30 seconds, take one answer aloud. [Expected answer: O(N\^{}2).]
 
 % -- FLEX: [OPTIONAL] Micro-retrieval for spaced practice.
 [OPTIONAL] If running behind, skip this and move directly to RNNs.
-}
+```
 
- Quick check --- no peeking.\\[0.5cm]
- What is the memory scaling of Transformer attention with respect to sequence length?\\[0.3cm]
-{ 30 seconds --- then we continue.}
+</details>
 
 ## RNNs: Sequential Pattern Processing
 
-{
+[Original slide 14](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L712)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/06_nn_architectures/images/ch06-rnn-unrolled.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch06-rnn-unrolled.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/images/ch06-rnn-unrolled.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Strength**: $O(1)$ memory per step
+
+Constant state size, streaming-friendly
+
+**Weakness**: Sequential bottleneck
+
+30–50% GPU utilization, gradient vanishes
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Sets up the RNN-vs-Transformer trade-off; single-lane highway analogy lands well.
 
 % -- LINK: What prior concept connects to this slide
@@ -632,7 +661,7 @@ killing GPU parallelism.
 % -- NARRATE: What to SAY while showing this slide
 Walk through the unrolled RNN diagram: ``Each timestep reads the hidden
 state from the previous step. The GPU cannot start step $t$ until step
-$t-1$ finishes. This sequential dependency limits utilization to 30--50%.''
+$t-1$ finishes. This sequential dependency limits utilization to 30--50\%.''
 Point to the dashed red line: ``The vanishing gradient---by the time
 gradients reach early timesteps, they have shrunk exponentially. LSTM
 and GRU gates partially solve this but cannot fix the parallelism problem.''
@@ -651,30 +680,26 @@ Correct framing: RNNs are ideal for streaming edge deployment (O(1) memory,
 low latency per step). They fail at training throughput, not at all tasks.
 
 % -- FLEX: [CORE] Sets up the RNN-vs-Transformer trade-off on the next slide.
-[CORE] The 30--50% utilization number is referenced in the comparison table.
+[CORE] The 30--50\% utilization number is referenced in the comparison table.
 IF SHORT: Focus on the sequential bottleneck; skip the vanishing gradient detail.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{ch06-rnn-unrolled.pdf}
-
-{0.1cm}
-
-[T]
-  
-    
-    {routingstroke}{**Strength**}: $O(1)$ memory per step\\
-    { Constant state size, streaming-friendly}
-  
-  
-    
-    {errorstroke}{**Weakness**}: Sequential bottleneck\\
-    { 30--50% GPU utilization, gradient vanishes}
+</details>
 
 ## Attention: Dynamic Processing
 
-{
+[Original slide 15](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L772)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/06_nn_architectures/images/ch06-attention-mechanism.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch06-attention-mechanism.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/images/ch06-attention-mechanism.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Key:** Doubling sequence length **quadruples** attention memory — $O(N^2)$ is permanent.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Walk the QKV diagram; the 32 MB per head calculation drives the point home.
 
 % -- LINK: What prior concept connects to this slide
@@ -696,25 +721,55 @@ more attention memory do you need?'' Give 10 seconds.
 
 % -- WARN: What students will get wrong on THIS topic
 Common error: students think attention is expensive because of the
-dot products. In reality, the bottleneck is *materializing* the
+dot products. In reality, the bottleneck is \emph{materializing} the
 NxN matrix in HBM---it is a memory problem, not a compute problem.
 IF STUCK: ``Think about where the NxN matrix lives during computation.''
 
 % -- FLEX: [CORE] O(N\^{}2) scaling is the defining constraint of Transformers.
 [CORE] This sets up the memory budget exercise two slides later.
 IF AHEAD: ``How does FlashAttention avoid materializing this matrix?''
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
+</details>
 
-{ch06-attention-mechanism.pdf}
+## The Attention Trade-off
 
-{0.05cm}
-{Key:}{Doubling sequence length **quadruples** attention memory --- $O(N^2)$ is permanent.}
+[Original slide 16](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L813)
+
+RNN: $O(1)$ memory, $O(N)$ sequential steps
+
+Transformer: $O(N^2)$ memory, $O(1)$ information depth
+
+Choose your constraint: time or space.
 
 ## The Transformer Architecture
 
-{
+[Original slide 17](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L836)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/06_nn_architectures/images/ch06-transformer-block.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch06-transformer-block.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/images/ch06-transformer-block.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Two sub-layers per block:**
+
+**Multi-Head Attention**
+
+$\sim$33% of FLOPs, $O(N^2)$ memory
+
+**Feed-Forward MLP (4$\times$ hidden)**
+
+$\sim$67% of FLOPs, dense MatMul
+
+**Skip + LayerNorm**
+
+Enables training 100+ layer networks
+
+**Parallelization:** All $N$ tokens processed simultaneously — vs. RNN's $N$ sequential steps.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] The 33/67 attention/FFN FLOP split is a key misconception target.
 
 % -- LINK: What prior concept connects to this slide
@@ -723,8 +778,8 @@ slide dissects the Transformer block to show where compute actually goes.
 
 % -- NARRATE: What to SAY while showing this slide
 Point to the diagram: ``Two sub-layers per block. Multi-head attention
-is 33% of FLOPs but owns the O(N\^{}2) memory. The feed-forward MLP
-is 67% of FLOPs---it is the computational workhorse, not attention.''
+is 33\% of FLOPs but owns the O(N\^{}2) memory. The feed-forward MLP
+is 67\% of FLOPs---it is the computational workhorse, not attention.''
 Point to skip connections: ``These gradient highways enable stacking
 100+ layers. Without them, training collapses beyond 20 layers.''
 Point to parallelization card: ``All N tokens processed simultaneously---
@@ -733,7 +788,7 @@ this is why Transformers replaced RNNs for training throughput.''
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
 Ask: ``Which sub-layer would you optimize first to speed up a Transformer:
 attention or FFN?'' Give 15 seconds.
-[Expected answer: FFN---it accounts for 67% of FLOPs. But attention
+[Expected answer: FFN---it accounts for 67\% of FLOPs. But attention
 dominates memory, so the answer depends on whether you are compute-bound
 or memory-bound.]
 
@@ -741,40 +796,42 @@ or memory-bound.]
 Common error: students assume attention is the expensive part because
 it gets all the research attention. The FFN is actually the larger
 compute cost per block.
-Correct framing: attention dominates *memory*; FFN dominates *compute*.
+Correct framing: attention dominates \emph{memory}; FFN dominates \emph{compute}.
 
 % -- FLEX: [CORE] Students must understand the two-sub-layer anatomy.
 [CORE] The 33/67 split recurs in Ch8 (training optimization).
 IF SHORT: Skip the parallelization card; keep the diagram walkthrough.
-}
+```
 
-[T]
-  
-    {ch06-transformer-block.pdf}
-  
-  
-    **Two sub-layers per block:**
-
-    {0.15cm}
-    {computestroke}{**Multi-Head Attention**}\\
-    { $$33% of FLOPs, $O(N^2)$ memory}
-
-    {0.1cm}
-    {routingstroke}{**Feed-Forward MLP (4$×$ hidden)**}\\
-    { $$67% of FLOPs, dense MatMul}
-
-    {0.1cm}
-    {datastroke}{**Skip + LayerNorm**}\\
-    { Enables training 100+ layer networks}
-
-    {0.15cm}
-    {mlsyscard}{computestroke}
-    { **Parallelization:** All $N$ tokens processed simultaneously --- vs.\ RNN's $N$ sequential steps.}
-    {mlsyscard}
+</details>
 
 ## Your Turn: Attention Memory Budget
 
-{
+[Original slide 18](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L901)
+
+Calculate Attention Memory
+
+A Transformer processes $N = 4{,}096$ tokens.
+
+- Attention matrix: $N \times N$ in FP16 (2 bytes/entry)
+- Model: 32 layers, 32 heads per layer
+
+**Calculate:** (1) Memory per attention matrix, (2) Total across all heads/layers
+
+(90 seconds — compare with a neighbor)
+
+**Solution:**
+
+Per head: $4096^2 \times 2 =$ **32 MB**
+
+Total: $32 \times 32 \times 32$ MB = **32 GB**
+
+**Exceeds a single GPU!**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min] Active learning exercise; give 90 seconds for calculation plus peer instruction.
 
 % -- LINK: What prior concept connects to this slide
@@ -784,7 +841,7 @@ must calculate the concrete memory cost for a real model configuration.
 % -- NARRATE: What to SAY while showing this slide
 ``Time for math. A Transformer with 4096 tokens, 32 heads, 32 layers.
 How much memory just for attention matrices?'' Present the problem (30s).
-After 90 seconds, use peer instruction: if 30--70% get it right, have
+After 90 seconds, use peer instruction: if 30--70\% get it right, have
 pairs discuss for 90s, then re-vote. Then reveal.
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
@@ -802,116 +859,115 @@ IF STUCK: ``Start with one head, one layer. Then scale up.''
 [CORE] The 32 GB number motivates FlashAttention in Ch8.
 IF AHEAD: ``What if we use FP32 instead of FP16?'' [Answer: 64 GB.]
 IF SHORT: Show the solution immediately and walk through the arithmetic.
-}
+```
 
-[T]
-  
-    { Calculate Attention Memory}
-
-    {0.1cm}
-    A Transformer processes $N = 4{,}096$ tokens.
-    {0pt}
-- Attention matrix: $N × N$ in FP16 (2 bytes/entry)
-- Model: 32 layers, 32 heads per layer
-    
-
-    {0.1cm}
-    **Calculate:** (1) Memory per attention matrix, (2) Total across all heads/layers
-
-    {{midgray}{(90 seconds --- compare with a neighbor)}}
-  
-  
-    
-    {mlsyscard}{errorstroke}
-    **Solution:**\\[0.05cm]
-    {
-    Per head: $4096^2 × 2 = $ **32 MB**\\[0.05cm]
-    Total: $32 × 32 × 32$ MB = **32 GB**\\[0.05cm]
-    {errorstroke}{**Exceeds a single GPU!**}
-    }
-    {mlsyscard}
+</details>
 
 ## Transformer Compute Cost
 
-{
+[Original slide 19](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L964)
+
+**Transformer forward pass FLOPs:**
+
+$\text{FLOPs} \approx 12 \times L \times H^2 \times S$
+
+| $L$ | Number of layers |
+| --- | --- |
+| $H$ | Hidden dimension |
+| $S$ | Sequence length |
+
+**Training** adds $\sim$2$\times$ (backward pass):
+
+$$
+\text{Train FLOPs} \approx 6 \times N \times D
+$$
+
+where $N$ = parameters, $D$ = tokens processed.
+
+|  | **GPT-2** | **GPT-3** |
+| --- | --- | --- |
+| Layers | 12 | 96 |
+| Hidden | 768 | 12,288 |
+| Seq len | 1,024 | 2,048 |
+| Params | 117M | 175B |
+| Fwd FLOPs | $\sim$7G | $\sim$314T |
+| **Ratio** | **45,000$\times$** (source columns 2–3) |  |
+
+FLOPs scale with $H^2 \times S$. Doubling hidden dimension **quadruples** compute.
+
+> [!warning] Source arithmetic mismatch
+> Substituting the listed dimensions into the printed estimate, 12 × L × H² × S, gives 86,973,087,744 FLOPs (86.973 GFLOPs) for L=12, H=768, S=1024, and 356,241,767,399,424 FLOPs (356.242 TFLOPs) for L=96, H=12288, S=2048. Their ratio is 4096. The table's 7G, 314T and 45,000× do not follow from that calculation. The original table is retained unchanged. These calculations check the source's own approximation; they are not measured hardware results or a complete Transformer cost model.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Quantitative FLOP analysis; the 45,000x GPT-2-to-GPT-3 gap is viscerally memorable.
 
-% -- LINK: Students just saw the Transformer block anatomy (33% attention,
-% 67% FFN). This slide derives the exact FLOP count so students can
+% -- LINK: Students just saw the Transformer block anatomy (33\% attention,
+% 67\% FFN). This slide derives the exact FLOP count so students can
 % calculate training and inference costs for any Transformer configuration.
 
 % -- NARRATE: Walk through the formula.
-``The total FLOPs for a Transformer forward pass scale as $12 × L
-× H^2 × S$ where $L$ is layers, $H$ is hidden dimension, and
+``The total FLOPs for a Transformer forward pass scale as $12 \times L
+\times H^2 \times S$ where $L$ is layers, $H$ is hidden dimension, and
 $S$ is sequence length. For GPT-2 (12 layers, 768 hidden, 1024 tokens):
-$$7 GFLOPs per forward pass. GPT-3 (96 layers, 12288 hidden, 2048
-tokens): $$314 TFLOPs per forward pass. That is a 45,000$×$
+$\sim$7 GFLOPs per forward pass. GPT-3 (96 layers, 12288 hidden, 2048
+tokens): $\sim$314 TFLOPs per forward pass. That is a 45,000$\times$
 gap from GPT-2 to GPT-3.''
 
-% -- ENGAGE: ``GPT-3 has 100$×$ more parameters than GPT-2.
-% Why is the FLOP count 45,000$×$ more, not 100$×$?''
+% -- ENGAGE: ``GPT-3 has 100$\times$ more parameters than GPT-2.
+% Why is the FLOP count 45,000$\times$ more, not 100$\times$?''
 % Give 15 seconds. [Expected answer: FLOPs scale with $H^2$, so doubling
 % hidden dimension quadruples FLOPs. Plus longer sequences.]
 
 % -- WARN: Students will confuse parameter count with FLOP count.
-% Parameters scale as $O(H^2)$, FLOPs scale as $O(H^2 × S)$.
+% Parameters scale as $O(H^2)$, FLOPs scale as $O(H^2 \times S)$.
 % Sequence length is the multiplicative factor students forget.
 
 % -- FLEX: [CORE] Quantitative FLOP analysis for Transformers.
 % IF SHORT: Show the formula and the GPT-2 vs GPT-3 comparison only.
-}
+```
 
-[T]
-  
-    **Transformer forward pass FLOPs:**
+</details>
 
-    {0.1cm}
-    { ${FLOPs}  12 × L × H^2 × S$}
+<details>
+<summary>Projection limits for this slide</summary>
 
-    {0.1cm}
-    {
-    {tabular}{@{}ll@{}}
-      $L$ & Number of layers \\
-      $H$ & Hidden dimension \\
-      $S$ & Sequence length \\
-    {tabular}
-    }
+- ` Column spans are labelled and expanded into separate Markdown cells `
 
-    {0.1cm}
-    **Training** adds $$2$×$ (backward pass):
-    $${Train FLOPs}  6 × N × D$$
-    { where $N$ = parameters, $D$ = tokens processed.}
-  
-  
-    {}{1.1}
-    {
-    {tabular}{@{}lrr@{}}
-      
-      & **GPT-2** & **GPT-3** \\
-      
-      Layers & 12 & 96 \\
-      Hidden & 768 & 12,288 \\
-      Seq len & 1,024 & 2,048 \\
-      Params & 117M & 175B \\
-      Fwd FLOPs & $$7G & $$314T \\
-      **Ratio** & {2}{c}{**45,000$×$**} \\
-      
-    {tabular}
-    }
-
-    {0.1cm}
-    {mlsyscard}{errorstroke}
-    { FLOPs scale with $H^2 × S$. Doubling hidden dimension **quadruples** compute.}
-    {mlsyscard}
+</details>
 
 ## DLRM: Sparse Architectures
 
-{
+[Original slide 20](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L1045)
+
+**Deep Learning Recommendation Model**
+
+- **Data**: Categorical features (user ID, item ID)
+- **Core op**: Embedding table lookups, not MatMul
+- **Tables**: 25B+ entries, 100+ GB in production
+- **Access**: Random, sparse — worst case for caches
+
+Neither compute nor bandwidth but **raw memory capacity** is the binding constraint.
+
+| **Property** | **Value** |
+| --- | --- |
+| Embed. entries | 25B+ |
+| Table size | 100+ GB |
+| Arith. intensity | $\ll 1$ |
+| Access pattern | Random |
+| GPU utilization | Very low |
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Completes the five-lighthouse set; the capacity-bottleneck regime is new to most students.
 
 % -- LINK: What prior concept connects to this slide
 All previous architectures (MLP, CNN, RNN, Transformer) use dense operations.
-DLRM is fundamentally different: the bottleneck is raw memory *capacity*,
+DLRM is fundamentally different: the bottleneck is raw memory \emph{capacity},
 not compute or bandwidth.
 
 % -- NARRATE: What to SAY while showing this slide
@@ -939,44 +995,39 @@ distributed memory across many machines, SSD-backed embedding tables.
 % -- FLEX: [CORE] DLRM represents a completely different bottleneck regime.
 [CORE] Completes the five-lighthouse set.
 IF SHORT: Cover the capacity bottleneck; skip the random access detail.
-}
+```
 
-[T]
-  
-    **Deep Learning Recommendation Model**
-
-    {0.05cm}
-    {0pt}
-- **Data**: Categorical features (user ID, item ID)
-- **Core op**: Embedding table lookups, not MatMul
-- **Tables**: 25B+ entries, 100+ GB in production
-- **Access**: Random, sparse --- worst case for caches
-    
-
-    {0.1cm}
-    {mlsyscard}{errorstroke}
-    Neither compute nor bandwidth but **raw memory capacity** is the binding constraint.
-    {mlsyscard}
-  
-  
-    {}{1.1}
-    {
-    {tabular}{@{}lr@{}}
-      
-      **Property** & **Value** \\
-      
-      Embed.\ entries & 25B+ \\
-      Table size & 100+ GB \\
-      Arith.\ intensity & $ 1$ \\
-      Access pattern & Random \\
-      GPU utilization & Very low \\
-      
-    {tabular}
-    }
+</details>
 
 ## DLRM at Meta: Production Numbers
 
-{
+[Original slide 21](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L1119)
+
+**Meta DLRM Production System:**
+
+- Serves **billions** of recommendations/day
+- Embedding tables: **10+ TB** across fleet
+- Each inference: 50–100 table lookups
+- DLRM accounts for **$>$50%** of Meta's AI training compute
+
+**System design:** Distributed across 100s of machines. SSD-backed embedding tables. Custom hardware (ZionEX) with high-bandwidth memory pooling.
+
+| **Metric** | **Value** |
+| --- | --- |
+| Daily inferences | Billions |
+| Total embed. size | 10+ TB |
+| Tables per query | 50–100 |
+| Latency budget | $<$50 ms |
+| % of AI compute | $>$50% |
+
+**Key:** Recommendation is the largest AI workload at Meta—not LLMs.
+
+Source on slide: Naumov et al., “Deep Learning Recommendation Model,” 2019
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1.5 min] Grounds DLRM's capacity bottleneck in real production scale.
 
 % -- LINK: Students just learned DLRM's architectural properties. This slide
@@ -990,7 +1041,7 @@ tables---the antithesis of dense MatMul.''
 
 % -- ENGAGE: ``If each recommendation reads 100 embedding rows of 128
 % floats each, how much data is accessed per inference?''
-% Give 10 seconds. [Expected answer: 100 $×$ 128 $×$ 4 = 50 KB.
+% Give 10 seconds. [Expected answer: 100 $\times$ 128 $\times$ 4 = 50 KB.
 % But scattered across TB of memory, defeating all caching.]
 
 % -- WARN: Students will try to apply GPU optimization strategies (batching,
@@ -999,48 +1050,28 @@ tables---the antithesis of dense MatMul.''
 
 % -- FLEX: [OPTIONAL] Concrete production numbers for DLRM.
 % IF SHORT: Show the table for 20 seconds; emphasize the TB-scale challenge.
-}
+```
 
-[T]
-  
-    **Meta DLRM Production System:**
-    {0pt}
-- { Serves **billions** of recommendations/day}
-- { Embedding tables: **10+ TB** across fleet}
-- { Each inference: 50--100 table lookups}
-- { DLRM accounts for **$>$50%** of Meta's AI training compute}
-    
-
-    {0.1cm}
-    {mlsyscard}{routingstroke}
-    { **System design:** Distributed across 100s of machines. SSD-backed embedding tables. Custom hardware (ZionEX) with high-bandwidth memory pooling.}
-    {mlsyscard}
-  
-  
-    {}{1.05}
-    {
-    {tabular}{@{}lr@{}}
-      
-      **Metric** & **Value** \\
-      
-      Daily inferences & Billions \\
-      Total embed.\ size & 10+ TB \\
-      Tables per query & 50--100 \\
-      Latency budget & $<$50 ms \\
-      % of AI compute & $>$50% \\
-      
-    {tabular}
-    }
-
-    {0.1cm}
-    {Key:}{Recommendation is the largest AI workload at Meta---not LLMs.}
-  
-
-{Naumov et al., ``Deep Learning Recommendation Model,'' 2019}
+</details>
 
 ## Shared Building Blocks Across Architectures
 
-{
+[Original slide 22](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L1189)
+
+**Three primitives that enable deep networks:**
+
+| **Block** | **What It Does** | **Why It Matters** | **Used In** |
+| --- | --- | --- | --- |
+| **Skip Conn.** | $y = F(x) + x$ | Gradient highway, trains 100+ layers | ResNet, Transf. |
+| **Norm.** | Rescale activations | Prevents explosion/collapse | All modern nets |
+| **Gating** | Learned switches | Selectively retains/forgets state | LSTM, GRU, Transf. |
+
+These are **prerequisites**, not optimizations. Without skip connections, networks cannot train beyond $\sim$20 layers. Born in CNNs/RNNs, they transfer to every modern architecture.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Three primitives that enable depth; skip connections as a structural requirement, not an optimization.
 
 % -- LINK: What prior concept connects to this slide
@@ -1072,32 +1103,28 @@ requirements for depth. Removing them breaks training, not just slows it.
 [CORE] Skip connections are referenced in the Key Takeaways.
 IF SHORT: Focus on skip connections only; mention normalization and gating
 in passing.
-}
+```
 
-**Three primitives that enable deep networks:**
-
-{0.1cm}
-{}{1.1}
-{
-{tabular}{@{}lp{3cm}p{3cm}l@{}}
-  
-  **Block** & **What It Does** & **Why It Matters** & **Used In** \\
-  
-  **Skip Conn.** & $y = F(x) + x$ & Gradient highway, trains 100+ layers & ResNet, Transf. \\
-  **Norm.** & Rescale activations & Prevents explosion/collapse & All modern nets \\
-  **Gating** & Learned switches & Selectively retains/forgets state & LSTM, GRU, Transf. \\
-  
-{tabular}
-}
-
-{0.1cm}
-{mlsyscard}{datastroke}
-These are **prerequisites**, not optimizations. Without skip connections, networks cannot train beyond $$20 layers. Born in CNNs/RNNs, they transfer to every modern architecture.
-{mlsyscard}
+</details>
 
 ## Computational Primitives
 
-{
+[Original slide 23](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L1248)
+
+| **Primitive** | **Operation** | **Bottleneck** | **FLOPs/B** | **GPU Util.** |
+| --- | --- | --- | --- | --- |
+| **Dense MatMul** | Matrix $\times$ Matrix | Compute | 200+ | 80–95% |
+| **MatVec** | Matrix $\times$ Vector | Bandwidth | $\sim$2 | 10–30% |
+| **Sparse Lookup** | Embedding gather | Capacity | $\ll 1$ | $<$10% |
+| **Reduction** | Softmax, LayerNorm | Bandwidth | 5–8 | 15–30% |
+| **Elementwise** | ReLU, Add | Bandwidth | 0.1 | $<$5% |
+
+**Mapping rule:** Dense MatMul achieves 80–95% GPU utilization. Everything else: 10–50%. Maximize time in dense MatMul.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1.5 min] Dense MatMul vs. MatVec utilization difference is the key number.
 
 % -- LINK: What prior concept connects to this slide
@@ -1107,7 +1134,7 @@ are the low-level operations those blocks reduce to on hardware.
 % -- NARRATE: What to SAY while showing this slide
 ``Every architecture, no matter how complex, reduces to five types of
 primitive operations. Dense MatMul---matrix times matrix---maps perfectly
-to GPUs at 80--95% utilization. MatVec is bandwidth-bound because one
+to GPUs at 80--95\% utilization. MatVec is bandwidth-bound because one
 operand is a vector. Sparse lookups (DLRM) are capacity-bound. Reductions
 (softmax, LayerNorm) are bandwidth-bound because they read all data but
 produce a small result.''
@@ -1121,35 +1148,31 @@ generation, each step multiplies the weight matrix by a single token vector.]
 
 % -- WARN: What students will get wrong on THIS topic
 Common error: students assume all matrix operations are equally fast.
-Correct framing: MatMul (matrix*matrix) achieves 80--95% utilization;
-MatVec (matrix*vector) achieves 10--30%. The shape of the operands
+Correct framing: MatMul (matrix*matrix) achieves 80--95\% utilization;
+MatVec (matrix*vector) achieves 10--30\%. The shape of the operands
 determines GPU efficiency.
 
 % -- FLEX: [OPTIONAL] Reinforces the roofline model concepts.
 [OPTIONAL] Safe to abbreviate if running short.
 IF SHORT: Show the table for 30 seconds; state the mapping rule; move on.
-}
+```
 
-{}{1.05}
-{tabular}{@{}lllrl@{}}
-  
-  **Primitive** & **Operation** & **Bottleneck** & **FLOPs/B** & **GPU Util.** \\
-  
-  **Dense MatMul** & Matrix $×$ Matrix & Compute & 200+ & 80--95% \\
-  **MatVec** & Matrix $×$ Vector & Bandwidth & $$2 & 10--30% \\
-  **Sparse Lookup** & Embedding gather & Capacity & $ 1$ & $<$10% \\
-  **Reduction** & Softmax, LayerNorm & Bandwidth & 5--8 & 15--30% \\
-  **Elementwise** & ReLU, Add & Bandwidth & 0.1 & $<$5% \\
-  
-{tabular}
-
-{0.1cm}
-
-{Mapping rule:}{Dense MatMul achieves 80--95% GPU utilization. Everything else: 10--50%. Maximize time in dense MatMul.}
+</details>
 
 ## Architecture Selection Framework
 
-{
+[Original slide 24](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L1306)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/06_nn_architectures/images/ch06-architecture-selection-flowchart.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch06-architecture-selection-flowchart.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/images/ch06-architecture-selection-flowchart.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Rule:** A model that violates any deployment constraint has **zero utility** — regardless of accuracy.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Two-phase decision flowchart; the zero-utility rule for constraint violations lands strongly.
 
 % -- LINK: What prior concept connects to this slide
@@ -1166,10 +1189,10 @@ utility regardless of accuracy. The retry loop forces scaling down or
 switching architecture entirely.''
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
-Ask: ``A model achieves 99% accuracy but exceeds the memory budget by
-10%. Is it deployable?'' Give 10 seconds.
+Ask: ``A model achieves 99\% accuracy but exceeds the memory budget by
+10\%. Is it deployable?'' Give 10 seconds.
 [Expected answer: no---violating any deployment constraint means zero
-utility. 99% accuracy is irrelevant if it cannot run.]
+utility. 99\% accuracy is irrelevant if it cannot run.]
 
 % -- WARN: What students will get wrong on THIS topic
 Common error: students evaluate architecture by accuracy first, then
@@ -1181,18 +1204,28 @@ then maximize accuracy within the feasible set.
 [CORE] Directly used in the Discussion exercise next.
 IF AHEAD: ``What if no architecture meets all constraints?'' [Answer:
 change the constraints or change the problem.]
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{ch06-architecture-selection-flowchart.pdf}
-
-{0.1cm}
-{Rule:}{A model that violates any deployment constraint has **zero utility** --- regardless of accuracy.}
+</details>
 
 ## Architecture Complexity Comparison
 
-{
+[Original slide 25](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L1350)
+
+|  | **MLP** | **CNN** | **RNN** | **Transformer** | **DLRM** |
+| --- | --- | --- | --- | --- | --- |
+| **Bias** | None | Spatial | Temporal | Learned | Categorical |
+| **Params** | $O(d^2)$ | $O(K^2 C)$ | $O(d^2)$ | $O(d^2)$ | $O(\text{vocab})$ |
+| **Memory** | Linear | Linear | $O(1)$/step | $O(N^2)$ | TB-scale |
+| **Parallel** | Full | Full | None | Full | Full |
+| **GPU util.** | 80–90% | 80–95% | 30–50% | 50–80% | 10–30% |
+
+No single “best” architecture. CNNs dominate spatial perception. Transformers master reasoning at quadratic cost. DLRM needs TB-scale memory. **Match bias to data, validate against constraints.**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1.5 min] Summary table; students scan it while you narrate two key columns only.
 
 % -- LINK: What prior concept connects to this slide
@@ -1200,9 +1233,9 @@ The selection flowchart identifies candidates. This comparison table
 provides the quantitative data to choose among them.
 
 % -- NARRATE: What to SAY while showing this slide
-``No single best architecture. CNNs dominate spatial perception at 80--95%
+``No single best architecture. CNNs dominate spatial perception at 80--95\%
 GPU utilization. Transformers master reasoning but cost O(N\^{}2) memory.
-RNNs have zero parallelism---30--50% utilization. DLRM needs terabytes
+RNNs have zero parallelism---30--50\% utilization. DLRM needs terabytes
 of memory for embedding tables.''
 Point to the bottom card: ``Match bias to data, validate against constraints.
 That is the full decision procedure.''
@@ -1222,30 +1255,53 @@ For spatial data on edge, a CNN or MobileNet variant is the right choice.
 % -- FLEX: [OPTIONAL] The table summarizes what students already know.
 [OPTIONAL] If running short, let students read it; do not narrate every cell.
 IF SHORT: Point to the CNN and Transformer columns only; move to Discussion.
-}
+```
 
-{}{1.05}
-{tabular}{@{}llllll@{}}
-  
-  & **MLP** & **CNN** & **RNN** & **Transformer** & **DLRM** \\
-  
-  **Bias**    & None    & Spatial      & Temporal     & Learned      & Categorical \\
-  **Params**  & $O(d^2)$  & $O(K^2 C)$ & $O(d^2)$   & $O(d^2)$   & $O({vocab})$ \\
-  **Memory**  & Linear  & Linear       & $O(1)$/step  & $O(N^2)$     & TB-scale \\
-  **Parallel**& Full    & Full         & None         & Full         & Full \\
-  **GPU util.**& 80--90% & 80--95%   & 30--50%     & 50--80%     & 10--30% \\
-  
-{tabular}
-
-{0.1cm}
-
-{mlsyscard}{crimson}
-No single ``best'' architecture. CNNs dominate spatial perception. Transformers master reasoning at quadratic cost. DLRM needs TB-scale memory. **Match bias to data, validate against constraints.**
-{mlsyscard}
+</details>
 
 ## Your Turn: Jetson Orin Throughput
 
-{
+[Original slide 26](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L1406)
+
+Edge Deployment Calculation
+
+**Target**: 1,000 images/sec on **Jetson Orin NX**
+
+(100 TOPS INT8, 32 GB LPDDR5)
+
+Measured inference latency (batch=1):
+
+- ResNet-50: **5 ms/image**
+- ViT-B: **12 ms/image**
+
+**Calculate:** Which model meets the target?
+
+What batch size is needed?
+
+(60 seconds — then compare)
+
+**Solution:**
+
+ResNet: $1/5\text{ms} = 200$ img/s
+
+Need batch $\geq 5$ for 1000 img/s
+
+Memory: $5 \times 98$ MB = 490 MB
+
+**Fits easily!**
+
+ViT-B: $1/12\text{ms} = 83$ img/s
+
+Need batch $\geq 12$ for 1000 img/s
+
+Memory: $12 \times 340$ MB = 4 GB
+
+**Tight on 32 GB**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min] Quantitative deployment exercise; 60 seconds individual then reveal.
 
 % -- LINK: Students just saw the selection framework and comparison table.
@@ -1259,59 +1315,49 @@ What batch size is needed?''
 
 % -- ENGAGE: Students calculate individually (60s), then compare.
 % ResNet-50: 1/5ms = 200 img/s per stream. Need 1000/200 = 5 parallel
-% streams. At batch=5: 5$×$5ms = 25ms per batch of 5 = 200 batches/s
+% streams. At batch=5: 5$\times$5ms = 25ms per batch of 5 = 200 batches/s
 % = 1000 img/s. Fits!
-% ViT-B: 1/12ms = 83 img/s. Need 1000/83 = 12 streams. But 12$×$340MB
+% ViT-B: 1/12ms = 83 img/s. Need 1000/83 = 12 streams. But 12$\times$340MB
 % = 4 GB weights alone. 32 GB RAM, activations scale too. Tight.
 
 % -- WARN: Students will divide peak TOPS by model FLOPs.
 % Correct framing: use measured latency, not theoretical peak.
-% Real utilization on edge is 30--50% of peak TOPS.
+% Real utilization on edge is 30--50\% of peak TOPS.
 
 % -- FLEX: [CORE] Practical deployment calculation.
 % IF SHORT: Show the solution immediately; emphasize the memory constraint.
-}
+```
 
-[T]
-  
-    { Edge Deployment Calculation}
-
-    {0.1cm}
-    **Target**: 1,000 images/sec on **Jetson Orin NX**\\
-    (100 TOPS INT8, 32 GB LPDDR5)
-
-    {0.1cm}
-    Measured inference latency (batch=1):
-    {0pt}
-- ResNet-50: **5 ms/image**
-- ViT-B: **12 ms/image**
-    
-
-    {0.1cm}
-    **Calculate:** Which model meets the target?\\
-    What batch size is needed?
-
-    {{midgray}{(60 seconds --- then compare)}}
-  
-  
-    
-    {mlsyscard}{datastroke}
-    **Solution:**\\[0.05cm]
-    {
-    ResNet: $1/5{ms} = 200$ img/s\\
-    Need batch $ 5$ for 1000 img/s\\
-    Memory: $5 × 98$ MB = 490 MB\\
-    {datastroke}{**Fits easily!**}\\[0.1cm]
-    ViT-B: $1/12{ms} = 83$ img/s\\
-    Need batch $ 12$ for 1000 img/s\\
-    Memory: $12 × 340$ MB = 4 GB\\
-    {routingstroke}{**Tight on 32 GB**}
-    }
-    {mlsyscard}
+</details>
 
 ## Discussion: Pick the Architecture
 
-{
+[Original slide 27](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L1477)
+
+Turn and Talk (90 seconds)
+
+A startup deploys a vision model on an edge device
+
+with **4 GB RAM** and a **100 ms latency** target.
+
+Their ML team trained a Vision Transformer (ViT)
+
+with 86M parameters requiring 340 MB weights.
+
+**Should they deploy this model? If not, what architecture?**
+
+Deploy ViT
+
+Switch to CNN
+
+Switch to MobileNet
+
+Quantize ViT
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2.5 min] Turn and talk (90s) plus cold-call debrief (60s).
 
 % -- LINK: What prior concept connects to this slide
@@ -1343,30 +1389,34 @@ memory can exceed the budget even with quantized weights.
 % -- FLEX: [CORE] This is the chapter's primary application exercise.
 [CORE] Must complete this discussion before moving to Wrap-Up.
 IF SHORT: Do a show-of-hands poll (30s) instead of full turn-and-talk.
-}
+```
 
-{0.5cm}
-{ Turn and Talk {midgray}{(90 seconds)}}
-
-{0.4cm}
-{ A startup deploys a vision model on an edge device\\
-with **4 GB RAM** and a **100 ms latency** target.\\[0.2cm]
-Their ML team trained a Vision Transformer (ViT)\\
-with 86M parameters requiring 340 MB weights.}
-
-{0.3cm}
-**Should they deploy this model? If not, what architecture?**
-
-{0.2cm}
-[c]
-   Deploy ViT
-   Switch to CNN
-   Switch to MobileNet
-   Quantize ViT
+</details>
 
 ## Fallacies
 
-{
+[Original slide 28](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L1539)
+
+**Fallacy:** *More complex architectures always perform better.*
+
+CNN: 99% on MNIST with 421K params. MLP: 98% with 20M params. Defaulting to Transformers for tabular data wastes 5–10$\times$ resources.
+
+**Fallacy:** *Architecture performance transfers across hardware.*
+
+Transformer at 50 ms on A100 $\to$ 2,000 ms on mobile SoC (40$\times$ slowdown, no HBM).
+
+**Fallacy:** *FLOPs determine inference speed.*
+
+MobileNet: 14$\times$ fewer FLOPs than ResNet but runs *slower* on datacenter GPUs (low intensity starves ALUs).
+
+**Fallacy:** *KV cache is a minor serving cost.*
+
+Seq 2,048, 32 layers $\times$ 32 heads, head_dim=128, FP16: each user needs $\approx$1 GB KV cache. At 4 users, rivals model weights.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Four fallacies; read each with its quantitative rebuttal.
 
 % -- LINK: What prior concept connects to this slide
@@ -1375,38 +1425,42 @@ These fallacies show what goes wrong when people skip that framework.
 
 % -- NARRATE: What to SAY while showing this slide
 Read each fallacy and its rebuttal. Emphasize the numbers:
-``CNN hits 99% on MNIST with 421K params vs.\ MLP's 20M---complexity
+``CNN hits 99\% on MNIST with 421K params vs.\ MLP's 20M---complexity
 is not a proxy for performance.''
 ``Transformer at 50 ms on A100 becomes 2,000 ms on mobile---a 40x
 slowdown because mobile lacks HBM.''
 ``MobileNet uses 14x fewer FLOPs but runs slower on datacenter GPUs---
 FLOPs do not predict speed.''
-``KV cache at 2048 tokens, 32 layers, 32 heads, head_dim=128: $$1 GB per user (FP16).
+``KV cache at 2048 tokens, 32 layers, 32 heads, head\_dim=128: $\approx$1 GB per user (FP16).
 Four concurrent users rival model weight memory.''
 
 % -- FLEX: [CORE] Fallacies reinforce the chapter's quantitative reasoning.
 [CORE] Each fallacy maps to a specific concept from the lecture.
 IF SHORT: Cover fallacies 1 and 3 (complexity and FLOPs); skip 2 and 4.
-}
+```
 
-**Fallacy:** *More complex architectures always perform better.*\\
-CNN: 99% on MNIST with 421K params. MLP: 98% with 20M params. Defaulting to Transformers for tabular data wastes 5--10$×$ resources.
-
-{0.08cm}
-**Fallacy:** *Architecture performance transfers across hardware.*\\
-Transformer at 50 ms on A100 $$ 2,000 ms on mobile SoC (40$×$ slowdown, no HBM).
-
-{0.08cm}
-**Fallacy:** *FLOPs determine inference speed.*\\
-MobileNet: 14$×$ fewer FLOPs than ResNet but runs *slower* on datacenter GPUs (low intensity starves ALUs).
-
-{0.08cm}
-**Fallacy:** *KV cache is a minor serving cost.*\\
-Seq 2,048, 32 layers $×$ 32 heads, head_dim=128, FP16: each user needs $$1 GB KV cache. At 4 users, rivals model weights.
+</details>
 
 ## Pitfalls
 
-{
+[Original slide 29](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L1581)
+
+**Pitfall:** *Selecting architectures based solely on accuracy.*
+
+Transformers: seq 2,048 needs 16$\times$ more memory than 512. Miss latency SLAs (100 ms $\to$ 500 ms), 25% GPU efficiency.
+
+**Pitfall:** *Combining patterns without profiling interactions.*
+
+Attention + CNN flushes feature maps from cache. ResNet: 250 img/s $\to$ 80 img/s (3$\times$ drop).
+
+**Pitfall:** *Designing for training hardware, ignoring deployment.*
+
+8$\times$ A100 cluster (640 GB) $\to$ 4 GB edge device = 160$\times$ gap. Requires architectural changes, not just quantization.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Operational mistakes; each maps to a systems failure students will encounter.
 
 % -- LINK: What prior concept connects to this slide
@@ -1416,7 +1470,7 @@ from correct knowledge applied carelessly.
 % -- NARRATE: What to SAY while showing this slide
 ``Pitfall 1: selecting by accuracy alone. A Transformer at sequence 2048
 needs 16x more memory than at 512. You hit latency SLAs, you drop to
-25% GPU efficiency.''
+25\% GPU efficiency.''
 ``Pitfall 2: mixing architectural patterns without profiling. Adding
 attention to a CNN flushes feature maps from cache---ResNet drops from
 250 to 80 img/s, a 3x hit.''
@@ -1427,22 +1481,26 @@ cannot bridge.''
 % -- FLEX: [CORE] Operational pitfalls complement the conceptual fallacies.
 [CORE] These are real-world mistakes students will encounter in projects.
 IF SHORT: Cover pitfalls 1 and 3; skip pitfall 2.
-}
+```
 
-**Pitfall:** *Selecting architectures based solely on accuracy.*\\
-Transformers: seq 2,048 needs 16$×$ more memory than 512. Miss latency SLAs (100 ms $$ 500 ms), 25% GPU efficiency.
-
-{0.08cm}
-**Pitfall:** *Combining patterns without profiling interactions.*\\
-Attention + CNN flushes feature maps from cache. ResNet: 250 img/s $$ 80 img/s (3$×$ drop).
-
-{0.08cm}
-**Pitfall:** *Designing for training hardware, ignoring deployment.*\\
-8$×$ A100 cluster (640 GB) $$ 4 GB edge device = 160$×$ gap. Requires architectural changes, not just quantization.
+</details>
 
 ## Muddiest Point
 
-{
+[Original slide 30](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L1620)
+
+One-minute paper
+
+ Write down the **muddiest point** from today's lecture.
+
+What concept was most confusing or unclear?
+
+(Hand in on your way out — or submit digitally)
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min] Diagnostic tool; collect responses before students leave.
 
 % -- NARRATE: What to SAY while showing this slide
@@ -1453,16 +1511,24 @@ I will open next lecture by addressing the top 2--3 muddiest points.''
 % -- FLEX: [CORE] Diagnostic tool for the instructor.
 [CORE] Collect responses to open the next lecture with targeted clarification.
 IF SHORT: Ask students to submit digitally after class instead of in person.
-}
+```
 
- One-minute paper\\[0.5cm]
- Write down the **muddiest point** from today's lecture.\\[0.2cm]
-{ What concept was most confusing or unclear?}\\[0.5cm]
-{{midgray}{(Hand in on your way out --- or submit digitally)}}
+</details>
 
 ## What Were the Key Ideas?
 
-{
+[Original slide 31](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L1642)
+
+Close your notes.
+
+Write down the **4 most important concepts** from today.
+
+90 seconds — no peeking.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1.5 min] Retrieval practice; 90 seconds writing then hold for Key Takeaways.
 
 % -- NARRATE: What to SAY while showing this slide
@@ -1473,20 +1539,26 @@ Do NOT show the Key Takeaways slide yet.
 % -- FLEX: [CORE] Retrieval practice is the highest-impact learning activity.
 [CORE] Students must write before seeing the answer slide.
 IF SHORT: Reduce to 60 seconds.
-}
+```
 
-{1.5cm}
-{ Close your notes.}
-
-{0.8cm}
-{ Write down the **4 most important concepts** from today.}
-
-{0.8cm}
-{{midgray}{90 seconds --- no peeking.}}
+</details>
 
 ## Key Takeaways
 
-{
+[Original slide 32](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L1668)
+
+- **Inductive bias unifies all architectures**: Locality (CNN), sequence (RNN), global context (Transformer). Bias trades generality for efficiency.
+- **Arithmetic intensity determines bottleneck**: High (CNN) = compute-bound. Low (GPT-2) = memory-bound. $\approx$80$\times$ gap.
+- **$O(N^2)$ is permanent**: Transformer attention scales quadratically. This constrains deployment.
+- **Lighthouses isolate bottlenecks**: ResNet (compute), GPT-2 (bandwidth), DLRM (capacity), MobileNet (latency), KWS (power).
+- **FLOPs $\neq$ speed**: MobileNet uses 14$\times$ fewer FLOPs but runs slower on datacenter GPUs.
+- **Skip connections enable depth**: Prerequisites for networks beyond $\sim$20 layers.
+- **Architecture = deployment**: The model determines memory, latency, power, and cost.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Reveal after retrieval practice; walk each bullet with its quantitative anchor.
 
 % -- LINK: What prior concept connects to this slide
@@ -1506,20 +1578,30 @@ Walk through each bullet with its quantitative anchor:
 % -- FLEX: [CORE] Consolidates the lecture.
 [CORE] Read all bullets; emphasize the numbers.
 IF SHORT: Read bullets 1, 3, and 7; let students read the rest.
-}
+```
 
-{0pt}
-- **Inductive bias unifies all architectures**: Locality (CNN), sequence (RNN), global context (Transformer). Bias trades generality for efficiency.
-- **Arithmetic intensity determines bottleneck**: High (CNN) = compute-bound. Low (GPT-2) = memory-bound. $$80$×$ gap.
-- **$O(N^2)$ is permanent**: Transformer attention scales quadratically. This constrains deployment.
-- **Lighthouses isolate bottlenecks**: ResNet (compute), GPT-2 (bandwidth), DLRM (capacity), MobileNet (latency), KWS (power).
-- **FLOPs $$ speed**: MobileNet uses 14$×$ fewer FLOPs but runs slower on datacenter GPUs.
-- **Skip connections enable depth**: Prerequisites for networks beyond $$20 layers.
-- **Architecture = deployment**: The model determines memory, latency, power, and cost.
+</details>
 
 ## References
 
-{
+[Original slide 33](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L1704)
+
+**He+16** K. He et al. “Deep Residual Learning for Image Recognition.” CVPR 2016.
+
+**Vaswani+17** A. Vaswani et al. “Attention Is All You Need.” NeurIPS 2017.
+
+**Howard+17** A. Howard et al. “MobileNets.” arXiv 2017.
+
+**Naumov+19** M. Naumov et al. “Deep Learning Recommendation Model (DLRM).” arXiv 2019.
+
+**Radford+19** A. Radford et al. “Language Models are Unsupervised Multitask Learners.” 2019.
+
+**Bahdanau+14** D. Bahdanau et al. “Neural Machine Translation by Jointly Learning to Align.” 2014.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [0.5 min] Point to the slide; do not read citations aloud.
 
 % -- NARRATE: What to SAY while showing this slide
@@ -1529,18 +1611,44 @@ Read at least the abstracts before next class.''
 
 % -- FLEX: [OPTIONAL] Reference slides are for student self-study.
 [OPTIONAL] Do not read citations aloud; point students to the slide.
-}
+```
 
-{He+16}{K. He et al. ``Deep Residual Learning for Image Recognition.'' CVPR 2016.}
-{Vaswani+17}{A. Vaswani et al. ``Attention Is All You Need.'' NeurIPS 2017.}
-{Howard+17}{A. Howard et al. ``MobileNets.'' arXiv 2017.}
-{Naumov+19}{M. Naumov et al. ``Deep Learning Recommendation Model (DLRM).'' arXiv 2019.}
-{Radford+19}{A. Radford et al. ``Language Models are Unsupervised Multitask Learners.'' 2019.}
-{Bahdanau+14}{D. Bahdanau et al. ``Neural Machine Translation by Jointly Learning to Align.'' 2014.}
+</details>
 
 ## Next Lecture: ML Frameworks
 
-{
+[Original slide 34](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L1727)
+
+We have the **blueprints**. Now we need the **tools**.
+
+PyTorch
+
+Eager execution
+
+Dynamic graphs
+
+TensorFlow
+
+Graph-based
+
+Production serving
+
+JAX
+
+Functional transforms
+
+XLA compilation
+
+How do frameworks translate architecture graphs
+
+into the low-level kernels that run on silicon?
+
+**The “contract with physics” signed here is enforced by the compiler.**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min] Forward hook; end on the compiler-enforces-the-contract metaphor.
 
 % -- LINK: What prior concept connects to this slide
@@ -1556,146 +1664,127 @@ framework compiler is what enforces it.''
 
 % -- FLEX: [CORE] Forward hook must connect to Ch7.
 [CORE] Keep to 1 minute. End on the compiler metaphor.
-}
+```
 
-{0.3cm}
-{ We have the **blueprints**. Now we need the **tools**.}
-
-{0.4cm}
-[c]
-  
-    
-    {mlsyscard}{computestroke}
-    { PyTorch}\\[0.1cm]
-    { Eager execution\ graphs}
-    {mlsyscard}
-  
-  
-    
-    {mlsyscard}{datastroke}
-    { TensorFlow}\\[0.1cm]
-    { Graph-based\ serving}
-    {mlsyscard}
-  
-  
-    
-    {mlsyscard}{routingstroke}
-    { JAX}\\[0.1cm]
-    { Functional transforms\ compilation}
-    {mlsyscard}
-  
-
-{0.3cm}
-{ How do frameworks translate architecture graphs\ the low-level kernels that run on silicon?}\\[0.1cm]
-{**The ``contract with physics'' signed here is enforced by the compiler.**}
+</details>
 
 ## Backup: KV Cache Memory Calculation
 
-{
-[1 min] Use if students want to understand KV cache scaling in detail.
-
-% -- NARRATE: Use if students want to understand KV cache scaling in detail.
-Per layer, per head: $2 × N × d_k$ values (K and V).
-With $N=2048$, $d_k=128$, FP16: $2 × 2048 × 128 × 2 = 2$ MB per head per layer.
-32 heads $×$ 32 layers = $$2 GB just for KV cache at 2K context.
-Chapter canonical (KVCacheServingPitfall LEGO): layers=32, heads=32, head_dim=128, seq=2048, FP16 → 1.07 GB.
-
-% -- FLEX: [OPTIONAL] Backup slide for advanced questions.
-}
+[Original slide 35](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L1788)
 
 Use if students want to understand KV cache scaling.
 
-{0.2cm}
-**Formula**: Per layer, per head: $2 × N × d_k$ values (K and V).
+**Formula**: Per layer, per head: $2 \times N \times d_k$ values (K and V).
 
-{0.1cm}
 **Chapter example** (32 layers, 32 heads, $d_k=128$, seq=2,048, FP16):
-$$32 × 2 × 32 × 2048 × 128 × 2 { bytes}  **1 GB per request**$$
 
-{0.1cm}
-{mlsyscard}{errorstroke}
-{ At 4 concurrent users: $$4 GB KV cache alone.
-This rivals the model weights---making KV cache the binding serving constraint.}
-{mlsyscard}
+$$
+32 \times 2 \times 32 \times 2048 \times 128 \times 2 \text{ bytes} \approx \textbf{1 GB per request}
+$$
+
+At 4 concurrent users: $\approx$4 GB KV cache alone.
+This rivals the model weights—making KV cache the binding serving constraint.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[1 min] Use if students want to understand KV cache scaling in detail.
+
+% -- NARRATE: Use if students want to understand KV cache scaling in detail.
+Per layer, per head: $2 \times N \times d_k$ values (K and V).
+With $N=2048$, $d_k=128$, FP16: $2 \times 2048 \times 128 \times 2 = 2$ MB per head per layer.
+32 heads $\times$ 32 layers = $\approx$2 GB just for KV cache at 2K context.
+Chapter canonical (KVCacheServingPitfall LEGO): layers=32, heads=32, head\_dim=128, seq=2048, FP16 → 1.07 GB.
+
+% -- FLEX: [OPTIONAL] Backup slide for advanced questions.
+```
+
+</details>
 
 ## Backup: Why FLOPs Do Not Predict Speed
 
-{
+[Original slide 36](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L1817)
+
+Use if students question the MobileNet paradox.
+
+MobileNet: 300 MFLOPs but low arithmetic intensity ($\sim$21 FLOPs/byte).
+
+ResNet-50: 4.1 GFLOPs but high intensity ($\sim$40 FLOPs/byte).
+
+On datacenter GPUs, ResNet saturates tensor cores; MobileNet starves them.
+
+Result: MobileNet can be *slower* despite 14$\times$ fewer FLOPs.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min] Use if students question the MobileNet paradox.
 
 % -- NARRATE: Use if students question the MobileNet paradox.
 
 % -- FLEX: [OPTIONAL] Backup slide for the FLOPs paradox.
-}
+```
 
-Use if students question the MobileNet paradox.\\
-MobileNet: 300 MFLOPs but low arithmetic intensity ($$21 FLOPs/byte).\\
-ResNet-50: 4.1 GFLOPs but high intensity ($$40 FLOPs/byte).\\
-On datacenter GPUs, ResNet saturates tensor cores; MobileNet starves them.\\
-Result: MobileNet can be *slower* despite 14$×$ fewer FLOPs.
+</details>
 
 ## Backup: The Architecture Arms Race
 
-{
+[Original slide 37](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L1833)
+
+**War Story: When Architecture Meets Production**
+
+In 2020, a major cloud provider migrated their image classification pipeline from ResNet-50 to ViT-B, expecting accuracy gains. Results:
+
+|  | **ResNet-50** | **ViT-B** |
+| --- | --- | --- |
+| Accuracy | 76.1% | 77.9% (+1.8%) |
+| Latency (A100) | 3.2 ms | 8.7 ms |
+| Memory/request | 98 MB | 340 MB |
+| Serving cost | &#36;1.00 | &#36;2.70 |
+
+**Lesson**: 1.8% accuracy gain cost 2.7$\times$ more to serve. The team reverted to ResNet-50 with better data augmentation, achieving 77.5% accuracy at the original cost.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min] Use when students ask whether architecture choice matters in practice.
 
 % -- NARRATE: War story about architecture selection gone wrong.
 % Use when students ask ``does architecture choice really matter in practice?''
 
 % -- FLEX: [OPTIONAL] Motivational backup for industry context.
-}
+```
 
-**War Story: When Architecture Meets Production**
-
-{0.1cm}
-In 2020, a major cloud provider migrated their image classification pipeline from ResNet-50 to ViT-B, expecting accuracy gains. Results:
-
-{0.05cm}
-
-{}{1.05}
-{tabular}{@{}lrr@{}}
-  
-  & **ResNet-50** & **ViT-B** \\
-  
-  Accuracy & 76.1% & 77.9% (+1.8%) \\
-  Latency (A100) & 3.2 ms & 8.7 ms \\
-  Memory/request & 98 MB & 340 MB \\
-  Serving cost & \$1.00 & \$2.70 \\
-  
-{tabular}
-
-{0.05cm}
-
-{mlsyscard}{errorstroke}
-{ **Lesson**: 1.8% accuracy gain cost 2.7$×$ more to serve. The team reverted to ResNet-50 with better data augmentation, achieving 77.5% accuracy at the original cost.}
-{mlsyscard}
+</details>
 
 ## Backup: Architecture Memory Cheat Sheet
 
-{
+[Original slide 38](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/06_nn_architectures/06_nn_architectures.tex#L1869)
+
+| **Architecture** | **Weight Memory** | **Activation Memory** | **Total (batch=32)** | **Fits On** |
+| --- | --- | --- | --- | --- |
+| MLP (784-1024-10) | 3.2 MB | 128 KB $\times$ B | $\sim$7 MB | Any |
+| ResNet-50 | 98 MB | 2 MB $\times$ B | $\sim$162 MB | Mobile |
+| GPT-2 (117M) | 468 MB | 50 MB $\times$ B | $\sim$2 GB | Edge GPU |
+| GPT-2 XL (1.5B) | 6 GB | 200 MB $\times$ B | $\sim$12 GB | Datacenter |
+| DLRM (production) | 100+ GB | Minimal | 100+ GB | Fleet |
+
+**Rule of thumb**: Weights determine if the model *fits*. Activations determine if a *batch* fits. Architecture determines both.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [0.5 min] Quick reference for assignments and projects.
 
 % -- NARRATE: Quick reference for architecture memory scaling.
 % -- FLEX: [OPTIONAL] Reference slide for assignments and projects.
-}
+```
 
-{}{1.05}
-{tabular}{@{}lllll@{}}
-  
-  **Architecture** & **Weight Memory** & **Activation Memory** & **Total (batch=32)** & **Fits On** \\
-  
-  MLP (784-1024-10) & 3.2 MB & 128 KB $×$ B & $$7 MB & Any \\
-  ResNet-50 & 98 MB & 2 MB $×$ B & $$162 MB & Mobile \\
-  GPT-2 (117M) & 468 MB & 50 MB $×$ B & $$2 GB & Edge GPU \\
-  GPT-2 XL (1.5B) & 6 GB & 200 MB $×$ B & $$12 GB & Datacenter \\
-  DLRM (production) & 100+ GB & Minimal & 100+ GB & Fleet \\
-  
-{tabular}
-
-{0.1cm}
-{mlsyscard}{crimson}
-{ **Rule of thumb**: Weights determine if the model *fits*. Activations determine if a *batch* fits. Architecture determines both.}
-{mlsyscard}
+</details>
 
 ## Complete original Beamer source
 

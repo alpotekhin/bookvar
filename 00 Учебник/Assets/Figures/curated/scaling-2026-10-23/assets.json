@@ -1,0 +1,76 @@
+[
+  {
+    "id": "curated-scaling-porian-ablation-c6de58a59c32",
+    "asset": "00 Учебник/Assets/Figures/curated/scaling-2026-10-23/porian-figure1.svg",
+    "author": "Tomer Porian, Mitchell Wortsman, Jenia Jitsev, Ludwig Schmidt and Yair Carmon",
+    "source_url": "https://arxiv.org/abs/2406.19146v1",
+    "source_image_url": "https://arxiv.org/html/2406.19146v1/figure1.svg",
+    "source_asset": "05 Источники/Originals/scaling-2026-10-23/porian-figure1.svg",
+    "source_asset_sha256": "c6de58a59c3203a2e4ba9f7574513f6a6c60e6da426f35dd42ec91b7c1f9b5ba",
+    "sha256": "c6de58a59c3203a2e4ba9f7574513f6a6c60e6da426f35dd42ec91b7c1f9b5ba",
+    "source_page_snapshot": "05 Источники/Originals/scaling-2026-10-23/porian-v1.html",
+    "source_page_sha256": "041c2ce5acd48ad743247ebabc256531e4284a6910cec1c296f3f6b3ddaa78d0",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/scaling-2026-10-23/porian-v1.html",
+    "license_evidence_sha256": "041c2ce5acd48ad743247ebabc256531e4284a6910cec1c296f3f6b3ddaa78d0",
+    "modifications": "None; complete original Figure 1 SVG copied byte-for-byte, all five panels, arrows, axes and English labels retained.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "source-svg-copy",
+    "last_verified": "2026-10-23",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md"
+    ]
+  },
+  {
+    "id": "curated-scaling-sp-coordinates-8569933d788d",
+    "asset": "00 Учебник/Assets/Figures/curated/scaling-2026-10-23/sp-coordinates.png",
+    "author": "Greg Yang and microsoft/mup contributors; Copyright (c) Microsoft Corporation",
+    "source_url": "https://github.com/microsoft/mup/blob/19814971934ef91dd546f88e913fc963e096d11c/coord_checks/sp_mlp_adam_lr0.001_nseeds5_bn0_coord.png",
+    "source_image_url": "https://raw.githubusercontent.com/microsoft/mup/19814971934ef91dd546f88e913fc963e096d11c/coord_checks/sp_mlp_adam_lr0.001_nseeds5_bn0_coord.png",
+    "commit": "19814971934ef91dd546f88e913fc963e096d11c",
+    "source_asset": "05 Источники/Originals/scaling-2026-10-23/sp-coordinates.png",
+    "source_asset_sha256": "8569933d788dc2ad7ced8bada362b29c17472fd54f8da6e4a8fb2b2f48cd22f6",
+    "sha256": "8569933d788dc2ad7ced8bada362b29c17472fd54f8da6e4a8fb2b2f48cd22f6",
+    "source_page_snapshot": "05 Источники/Originals/scaling-2026-10-23/mup-README.md",
+    "source_page_sha256": "bbcde1822a34ae54bd2ac22e76089ee9d1e8bead024d7026220ae02a0f01f1db",
+    "license": "MIT",
+    "license_url": "https://github.com/microsoft/mup/blob/19814971934ef91dd546f88e913fc963e096d11c/LICENSE",
+    "license_evidence": "05 Источники/Originals/scaling-2026-10-23/mup-LICENSE.txt",
+    "license_evidence_sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
+    "modifications": "None; original 1500x400 PNG copied byte-for-byte, all three time panels, axes and English labels retained.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "pinned-upstream-repository",
+    "derivation": "source-raster-copy",
+    "last_verified": "2026-10-23",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md"
+    ]
+  },
+  {
+    "id": "curated-scaling-mup-coordinates-260297652888",
+    "asset": "00 Учебник/Assets/Figures/curated/scaling-2026-10-23/mup-coordinates.png",
+    "author": "Greg Yang and microsoft/mup contributors; Copyright (c) Microsoft Corporation",
+    "source_url": "https://github.com/microsoft/mup/blob/19814971934ef91dd546f88e913fc963e096d11c/coord_checks/%CE%BCp_mlp_adam_lr0.001_nseeds5_bn0_coord.png",
+    "source_image_url": "https://raw.githubusercontent.com/microsoft/mup/19814971934ef91dd546f88e913fc963e096d11c/coord_checks/%CE%BCp_mlp_adam_lr0.001_nseeds5_bn0_coord.png",
+    "commit": "19814971934ef91dd546f88e913fc963e096d11c",
+    "source_asset": "05 Источники/Originals/scaling-2026-10-23/mup-coordinates.png",
+    "source_asset_sha256": "260297652888aacc47a458333eae437ac669e3cf9330204aed389c61ee83288a",
+    "sha256": "260297652888aacc47a458333eae437ac669e3cf9330204aed389c61ee83288a",
+    "source_page_snapshot": "05 Источники/Originals/scaling-2026-10-23/mup-README.md",
+    "source_page_sha256": "bbcde1822a34ae54bd2ac22e76089ee9d1e8bead024d7026220ae02a0f01f1db",
+    "license": "MIT",
+    "license_url": "https://github.com/microsoft/mup/blob/19814971934ef91dd546f88e913fc963e096d11c/LICENSE",
+    "license_evidence": "05 Источники/Originals/scaling-2026-10-23/mup-LICENSE.txt",
+    "license_evidence_sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
+    "modifications": "None; original 1500x400 PNG copied byte-for-byte, all three time panels, axes and English labels retained.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "pinned-upstream-repository",
+    "derivation": "source-raster-copy",
+    "last_verified": "2026-10-23",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md"
+    ]
+  }
+]

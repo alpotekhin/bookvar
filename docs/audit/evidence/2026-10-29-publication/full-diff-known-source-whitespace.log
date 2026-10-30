@@ -1,0 +1,86 @@
+05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_09_perf_engineering.md:56: trailing whitespace.
++**⟨value 1⟩**  
+05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_09_perf_engineering.md:57: trailing whitespace.
++⟨value 2⟩  
+05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_09_perf_engineering.md:69: trailing whitespace.
++**Boundary holds: ⟨value 1⟩**  
+05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_09_perf_engineering.md:142: trailing whitespace.
++**Memo summary:** ⟨value 1⟩  
+05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_10_inference.md:58: trailing whitespace.
++**⟨value 1⟩**  
+05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_10_inference.md:59: trailing whitespace.
++⟨value 2⟩  
+05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_10_inference.md:71: trailing whitespace.
++**Recovered boundary: ⟨value 1⟩**  
+05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_14_robust_ai.md:46: trailing whitespace.
++**⟨value 1⟩**  
+05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_14_robust_ai.md:47: trailing whitespace.
++⟨value 2⟩  
+05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_14_robust_ai.md:59: trailing whitespace.
++**Recovered boundary: ⟨value 1⟩**  
+05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_15_sustainable_ai.md:34: trailing whitespace.
++**⟨value 1⟩**  
+05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_15_sustainable_ai.md:35: trailing whitespace.
++⟨value 2⟩  
+05 Источники/Courses/Harvard ML Systems/labs/vol2/lab_15_sustainable_ai.md:47: trailing whitespace.
++**Boundary recovered: ⟨value 1⟩**  
+05 Источники/Courses/Harvard ML Systems/slides/vol1/04_data_engineering.md:250: trailing whitespace.
++  
+05 Источники/Courses/Harvard ML Systems/slides/vol1/12_benchmarking.md:261: trailing whitespace.
++   
+05 Источники/Courses/Harvard ML Systems/slides/vol1/12_benchmarking.md:264: trailing whitespace.
++   
+05 Источники/Courses/Harvard ML Systems/slides/vol1/12_benchmarking.md:266: trailing whitespace.
++   
+05 Источники/Courses/Harvard ML Systems/slides/vol1/12_benchmarking.md:269: trailing whitespace.
++   
+05 Источники/Courses/Harvard ML Systems/slides/vol1/12_benchmarking.md:271: trailing whitespace.
++   
+05 Источники/Courses/Harvard ML Systems/slides/vol1/13_model_serving.md:679: trailing whitespace.
++**TTFT** (Time to First Token): Responsiveness.  
+05 Источники/Courses/Harvard ML Systems/slides/vol1/14_ml_ops.md:1799: trailing whitespace.
++small 
+05 Источники/Courses/Harvard ML Systems/slides/vol1/16_conclusion.md:1421: trailing whitespace.
++ 
+05 Источники/Courses/Harvard ML Systems/slides/vol2/00_course_overview.md:540: trailing whitespace.
++**Compute** constraints in Part I & II  | 
+05 Источники/Courses/Harvard ML Systems/slides/vol2/00_course_overview.md:541: trailing whitespace.
++**Communication** in Part II & III  | 
+05 Источники/Courses/Harvard ML Systems/slides/vol2/01_introduction.md:808: trailing whitespace.
++Data: $10^{0.74} = 5.5\times$ 
+05 Источники/Courses/Harvard ML Systems/slides/vol2/01_introduction.md:1022: trailing whitespace.
++$T_{\text{comm}}^{\text{IB}}$: 700/25 = 28 s $\to$ 
+05 Источники/Courses/Harvard ML Systems/slides/vol2/01_introduction.md:1026: trailing whitespace.
++$T_{\text{comm}}^{\text{ETH}}$: 700/12.5 = 56 s $\to$ 
+05 Источники/Courses/Harvard ML Systems/slides/vol2/02_compute_infrastructure.md:1614: trailing whitespace.
++Params (FP16): $2N$ bytes  | 
+05 Источники/Courses/Harvard ML Systems/slides/vol2/02_compute_infrastructure.md:1615: trailing whitespace.
++Gradients (FP16): $2N$ bytes  | 
+05 Источники/Courses/Harvard ML Systems/slides/vol2/05_distributed_training.md:995: trailing whitespace.
++   
+05 Источники/Courses/Harvard ML Systems/slides/vol2/05_distributed_training.md:998: trailing whitespace.
++   
+05 Источники/Courses/Harvard ML Systems/slides/vol2/05_distributed_training.md:1001: trailing whitespace.
++   
+05 Источники/Courses/Harvard ML Systems/slides/vol2/07_fault_tolerance.md:327: trailing whitespace.
++**Scale inverts reliability:** 
+05 Источники/Courses/Harvard ML Systems/slides/vol2/09_performance_engineering.md:1346: trailing whitespace.
++   
+05 Источники/Courses/Harvard ML Systems/slides/vol2/10_inference.md:1090: trailing whitespace.
++**Random assignment:**  
+05 Источники/Courses/Harvard ML Systems/slides/vol2/10_inference.md:1093: trailing whitespace.
++**Power of two choices:**  
+05 Источники/Courses/Harvard ML Systems/slides/vol2/11_edge_intelligence.md:690: trailing whitespace.
++` 
+05 Источники/Courses/Harvard ML Systems/slides/vol2/13_security_privacy.md:566: trailing whitespace.
++Stop sign $+$ tape $\to$ “speed limit” 
+05 Источники/Courses/Harvard ML Systems/slides/vol2/13_security_privacy.md:621: trailing whitespace.
++   
+05 Источники/Courses/Harvard ML Systems/slides/vol2/13_security_privacy.md:624: trailing whitespace.
++   
+05 Источники/Courses/Harvard ML Systems/slides/vol2/13_security_privacy.md:627: trailing whitespace.
++   
+05 Источники/Courses/Harvard ML Systems/slides/vol2/15_sustainable_ai.md:577: trailing whitespace.
++$PUE = P_{\text{total}} / P_{\text{IT}}$ (ideal = 1.0)  
+05 Источники/Courses/Harvard ML Systems/slides/vol2/17_conclusion.md:1110: trailing whitespace.
++## 

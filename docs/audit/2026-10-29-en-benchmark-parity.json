@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-29",
+  "entries": [
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md",
+      "canonical": "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md",
+      "route": "textbook/inference/benchmarking-slo",
+      "before_sha256": "02ab9485a059a1493ab3c1d2ba5566dbfa09efb7e85b0afd1baf232f778a0bee",
+      "after_sha256": "bceaa1e5f7ce1f6463baaac8772ce9cb831ce21e6e19a2afd6a7b31c5b9d6fb4",
+      "canonical_sha256": "1d453c6e9f77e4aee10c81305bc406fe0bf3a50e69fc4edd22748a555e5a0b9c",
+      "status": "current",
+      "en_body_read": true,
+      "canonical_full_body_read": true,
+      "english_after_full_read": true,
+      "source_read_ranges": [
+        {
+          "path": "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md",
+          "lines": [
+            1,
+            914
+          ]
+        },
+        {
+          "path": "en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md",
+          "lines": [
+            1,
+            924
+          ]
+        }
+      ],
+      "before_lines": 291,
+      "after_lines": 924,
+      "figures": [
+        "00 Учебник/Assets/Figures/curated/inference-benchmark-review-2026-10/mlperf-loadgen.svg",
+        "00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png",
+        "00 Учебник/Assets/Figures/curated/inference-benchmark-review-2026-10/distserve-figure1-original.png",
+        "00 Учебник/Assets/Figures/curated/serving-operations-2026-10-29/power-measurement-boundaries.svg",
+        "00 Учебник/Assets/Figures/curated/inference-benchmark-review-2026-10/sre-burn-budget.webp",
+        "00 Учебник/Assets/Figures/curated/inference-benchmark-review-2026-10/sre-alert-windows.webp"
+      ],
+      "python_blocks": 8,
+      "outstanding_expansions": [],
+      "review_scope": "Full canonical/English pair; all mechanisms, six figures, eight executable code blocks, and the complete original-language energy section preserved.",
+      "checks": {
+        "cpu": "Eight actual Markdown Python blocks; 600 independent timestamp/context/energy cases passed.",
+        "source": "Pinned vLLM request scheduling, queue-time recording and goodput code; Google multiwindow burn-rate section cross-checked. No global freshness claim.",
+        "style": "Full finished text reread using no-ai-slop with academic qualifications; mathematical caveats and all numerical examples retained.",
+        "render": "Pending parent integrated browser pass."
+      }
+    }
+  ]
+}

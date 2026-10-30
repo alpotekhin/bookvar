@@ -1,0 +1,55 @@
+{
+  "verified_at": "2026-10-14",
+  "used_in": "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+  "assets": [
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/flashattention-review-2026-10/fa3-pingpong-original.png",
+      "author": "Jay Shah, Ganesh Bikshandi, Ying Zhang, Vijay Thakkar, Pradeep Ramani, Tri Dao",
+      "title": "FlashAttention-3, Figure 1: Pingpong scheduling for 2 warpgroups",
+      "source_url": "https://arxiv.org/src/2407.08608v1",
+      "source_asset": "raw/papers/flashattention-3-2407.08608v1/source.tar.gz",
+      "source_asset_sha256": "642f40096dcd70a0654a93798bd49dd1448e89504273910f525bf8a08be4f766",
+      "source_member": "figs/pingpong_pipelining.png",
+      "source_member_sha256": "73c1561658aa3a2520367192045056ab72fe66082ea61ebe4f4a1202570b285c",
+      "source_reference": "https://arxiv.org/html/2407.08608v1#S3.F1",
+      "source_page": 6,
+      "sha256": "73c1561658aa3a2520367192045056ab72fe66082ea61ebe4f4a1202570b285c",
+      "width": 3285,
+      "height": 671,
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence": "https://arxiv.org/html/2407.08608v1",
+      "modifications": "Original PNG extracted unchanged from the versioned arXiv source archive; no crop, resizing or redrawing. Not the downscaled HTML image.",
+      "provenance": "pinned-arxiv-source-archive-member",
+      "status": "source-license-verified"
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/flashattention-review-2026-10/fa3-gemm-softmax-original.png",
+      "author": "Jay Shah, Ganesh Bikshandi, Ying Zhang, Vijay Thakkar, Pradeep Ramani, Tri Dao",
+      "title": "FlashAttention-3, Figure 2: 2-stage WGMMA-softmax pipelining",
+      "source_url": "https://arxiv.org/html/2407.08608v1/figs/2_stage_pipelining.png",
+      "source_reference": "https://arxiv.org/html/2407.08608v1#S3.F2",
+      "source_page": 6,
+      "sha256": "83cbc027e89dbf5d2fe8655cd8a9aae9b02bf9ebe139ef6e395f01421727ad4c",
+      "source_asset_sha256": "83cbc027e89dbf5d2fe8655cd8a9aae9b02bf9ebe139ef6e395f01421727ad4c",
+      "width": 652,
+      "height": 140,
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence": "https://arxiv.org/html/2407.08608v1",
+      "modifications": "Copied unchanged from the versioned arXiv HTML image URL. Original transparent PNG, no crop, resizing, sharpening or redrawing; display on the site's white image background.",
+      "provenance": "pinned-arxiv-html-raster-copy",
+      "status": "source-license-verified"
+    }
+  ],
+  "retired_used_in": [
+    "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p52.png",
+    "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p53.png",
+    "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/l05-p54.png",
+    "00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/gpu-memory-hierarchy.svg",
+    "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-p23-attention-equations.png",
+    "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-p24-backward-recompute.png",
+    "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-p25-flash-forward.png",
+    "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/systems/a2-p29-flash-backward.png"
+  ]
+}

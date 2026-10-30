@@ -1,0 +1,49 @@
+{
+  "reviewed_at": "2026-10-29",
+  "source_url": "https://cs231n.stanford.edu/slides/2025/lecture_2.pdf",
+  "source_asset": "05 Источники/Originals/cs231n-provenance-2026-10-29/lecture_2.pdf",
+  "source_asset_sha256": "191488d0a96f85574e8e2ebb8246865d3aac6d84da88fe0962aa1651f814565e",
+  "source_bytes": 2091514,
+  "scope": "Source/physical-page/RGB-pixel verification only. Does not create a new image license; existing named-slide rights limitation remains.",
+  "render_tool": "pdftoppm version 26.04.0",
+  "records": [
+    {
+      "id": "curated-cs231n-softmax-ce-0000000000a6",
+      "asset": "00 Учебник/Assets/Figures/curated/foundations-source-first/cs231n-softmax-cross-entropy.png",
+      "sha256": "48e8acfe3a1c34d5b8bc5efbe89fa57cb0a8d9aa07cab18acc902be9d2ffcecb",
+      "source_page": 75,
+      "source_printed_page": 77,
+      "dimensions_px": [
+        1600,
+        900
+      ],
+      "render_dpi": 160,
+      "identical_rgb_pixels": true,
+      "mean_absolute_error_rgb": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modifications": "Existing complete-slide PNG retained unchanged; exact RGB pixel identity to a fresh full-page pdftoppm render of the verified source PDF."
+    },
+    {
+      "id": "curated-cs231n-boundaries-0000000000a7",
+      "asset": "00 Учебник/Assets/Figures/curated/foundations-source-first/cs231n-linear-decision-boundaries.png",
+      "sha256": "1c5ac40bbb84b0d962ef5ed15a6e3c63097fd8f6ccd3535a20f2cf9d4a33b7e6",
+      "source_page": 61,
+      "source_printed_page": 63,
+      "dimensions_px": [
+        1600,
+        900
+      ],
+      "render_dpi": 160,
+      "identical_rgb_pixels": true,
+      "mean_absolute_error_rgb": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "modifications": "Existing complete-slide PNG retained unchanged; exact RGB pixel identity to a fresh full-page pdftoppm render of the verified source PDF."
+    }
+  ]
+}

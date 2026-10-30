@@ -9,9 +9,18 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol1/lab_11_hw_accel.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol1/lab_11_hw_accel.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL1 Lab — Hw Accel
 
@@ -26,57 +35,6 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 ---
 
-### Concept
-
-Peak throughput is only the flat roof. A workload below the ridge point is limited by
-{v1_11_lens['memory_name']} bandwidth; above it, the compute ceiling is active.
-
----
-
-Formula:
-
-```text
-AI = FLOPs / bytes
-ridge = peak FLOP/s / memory bandwidth
-R_attainable = min(peak FLOP/s, memory bandwidth * AI)
-```
-
-Source model: `mlsysbook_labs.gemm_workload` and `mlsysbook_labs.roofline_point`
-with `{v1_11_roofline.hardware_ref}` from MLSysIM. The chapter claim is the
-Roofline Model: the plot reveals whether the active ceiling is compute or bandwidth.
-
----
-
-### Concept
-
-Fusion and tiling do not reduce the mathematical operation count. They reduce traffic through
-{v1_11_lens['memory_name']} and keep reused values in {v1_11_lens['local_memory_name']}.
-
----
-
-Fusion traffic model:
-
-```text
-eager bytes = (reads + writes) * tensor bytes
-fused bytes = (one read + one write) * tensor bytes
-movement time = selected bytes / bandwidth
-```
-
-Source model: `mlsysbook_labs.fusion_traffic`, using `{v1_11_roofline.bandwidth_gbs:g} GB/s`
-from `{v1_11_roofline.hardware_ref}`. Chapter connection: Memory hierarchy and host-accelerator
-communication explain why eliminated round-trips can dominate speed and energy.
-
----
-
-### Concept
-
-Reduced precision changes both sides of the roofline: fewer bytes move and specialized datapaths
-can raise peak throughput. That only helps when `{v1_11_lens['accelerator_path']}` supports the
-format, dimension multiples of {v1_11_lens['shape_multiple']} are respected, and quality loss stays
-within {v1_11_lens['quality_tolerance_pct']:.1f}%.
-
----
-
 Precision affects both bytes and peak throughput:
 
 ```text
@@ -87,14 +45,6 @@ fast path = supported_format and aligned_shape and quality_delta <= tolerance
 Source model: `mlsysbook_labs.gemm_workload` plus notebook-local `v1_11_precision_result`.
 Chapter connection: Tensor cores require supported precision and shape contracts; mixed precision
 must still pass validation.
-
----
-
-### Concept
-
-The deployable accelerator is the one that passes the amount system for this track:
-{v1_11_lens['amount_focus']}. The chapter feasibility check is practical: compute time,
-memory fit, power or cost, and validation must all pass at the same time.
 
 ---
 
@@ -112,26 +62,205 @@ and Part C/D use notebook-local `v1_11_` scenario assumptions for deployment bud
 Chapter connection: the feasibility assessment asks whether the workload can run inside
 memory, bandwidth, compute, power, cost, and validation limits.
 
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+### Concept
+
+Peak throughput is only the flat roof. A workload below the ridge point is limited by
+⟨value 1⟩ bandwidth; above it, the compute ceiling is active.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v1_11_lens['memory_name']}" `
+
 ---
 
-**Decision:** {v1_11_lens['report_frame']}
+Select a prediction to unlock the roofline evidence.
 
-**Bottleneck diagnosis:** Part A measured AI = {a_result['workload'].arithmetic_intensity:.1f}
-FLOP/B against ridge = {v1_11_roofline.ridge_flop_per_byte:.1f}, so the active regime is
-{a_result['point'].regime.lower()}.
+---
 
-**Memory movement evidence:** Part B selected `{b_result['mode']}` execution with
-{b_result['selected_bytes']/1024:.1f} KB of slower-memory traffic, {b_result['selected_time_us']:.2f} us
-movement time, and {"a local-memory spill" if b_result['spills'] else "no local-memory spill"}.
+Formula:
 
-**Selected accelerator/precision:** Part C selected {c_result['selected']['precision'].upper()}
-with status `{c_result['selected']['status']}`. Part D selected `{selected['label']}` and recommends
-`{recommendation['label']}`.
+```text
+AI = FLOPs / bytes
+ridge = peak FLOP/s / memory bandwidth
+R_attainable = min(peak FLOP/s, memory bandwidth * AI)
+```
 
-**Rejected alternatives:** {rejected if rejected else "No alternative was rejected by the current constraints."}
+Source model: `mlsysbook_labs.gemm_workload` and `mlsysbook_labs.roofline_point`
+with `⟨value 1⟩` from MLSysIM. The chapter claim is the
+Roofline Model: the plot reveals whether the active ceiling is compute or bandwidth.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_11_roofline.hardware_ref}' `
+
+---
+
+### Concept
+
+Fusion and tiling do not reduce the mathematical operation count. They reduce traffic through
+⟨value 1⟩ and keep reused values in ⟨value 2⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v1_11_lens['memory_name']}" `
+- value_2: ` f"{v1_11_lens['local_memory_name']}" `
+
+---
+
+Select a prediction to unlock the memory movement evidence.
+
+---
+
+Boundary hit: ⟨value 1⟩. This is reversible by moving the controls.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_why}' `
+
+---
+
+The selected memory plan stays inside the current local-buffer and movement-time budgets.
+
+---
+
+Fusion traffic model:
+
+```text
+eager bytes = (reads + writes) * tensor bytes
+fused bytes = (one read + one write) * tensor bytes
+movement time = selected bytes / bandwidth
+```
+
+Source model: `mlsysbook_labs.fusion_traffic`, using `⟨value 1⟩ GB/s`
+from `⟨value 2⟩`. Chapter connection: Memory hierarchy and host-accelerator
+communication explain why eliminated round-trips can dominate speed and energy.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_11_roofline.bandwidth_gbs:g}' `
+- value_2: ` f'{v1_11_roofline.hardware_ref}' `
+
+---
+
+### Concept
+
+Reduced precision changes both sides of the roofline: fewer bytes move and specialized datapaths
+can raise peak throughput. That only helps when `⟨value 1⟩` supports the
+format, dimension multiples of ⟨value 2⟩ are respected, and quality loss stays
+within ⟨value 3⟩%.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v1_11_lens['accelerator_path']}" `
+- value_2: ` f"{v1_11_lens['shape_multiple']}" `
+- value_3: ` f"{v1_11_lens['quality_tolerance_pct']:.1f}" `
+
+---
+
+Select a prediction to unlock the tensor/precision evidence.
+
+---
+
+⟨value 1⟩ satisfies the current tensor/precision contract.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{selected['precision'].upper()}" `
+
+---
+
+Contract failure: ⟨value 1⟩. Speedup is not valid until this is fixed.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{selected['reason']}" `
+
+---
+
+### Concept
+
+The deployable accelerator is the one that passes the amount system for this track:
+⟨value 1⟩. The chapter feasibility check is practical: compute time,
+memory fit, power or cost, and validation must all pass at the same time.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v1_11_lens['amount_focus']}" `
+
+---
+
+Select a prediction to unlock the deployment comparison.
+
+---
+
+The selected path passes the current deployment constraints: ⟨value 1⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{selected['label']}" `
+
+---
+
+Deployment failure for ⟨value 1⟩: ⟨value 2⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{selected['label']}" `
+- value_2: ` f"{selected['reason']}" `
+
+---
+
+## Synthesis: Hardware Acceleration Memo
+
+---
+
+**Decision:** ⟨value 1⟩
+
+**Bottleneck diagnosis:** Part A measured AI = ⟨value 2⟩
+FLOP/B against ridge = ⟨value 3⟩, so the active regime is
+⟨value 4⟩.
+
+**Memory movement evidence:** Part B selected `⟨value 5⟩` execution with
+⟨value 6⟩ KB of slower-memory traffic, ⟨value 7⟩ us
+movement time, and ⟨value 8⟩.
+
+**Selected accelerator/precision:** Part C selected ⟨value 9⟩
+with status `⟨value 10⟩`. Part D selected `⟨value 11⟩` and recommends
+`⟨value 12⟩`.
+
+**Rejected alternatives:** ⟨value 13⟩
 
 **Residual risk:** validate profiler counters, supported-operator coverage, thermal or duty-cycle behavior,
 and production p99 before treating the recommendation as release evidence.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v1_11_lens['report_frame']}" `
+- value_2: ` f"{a_result['workload'].arithmetic_intensity:.1f}" `
+- value_3: ` f'{v1_11_roofline.ridge_flop_per_byte:.1f}' `
+- value_4: ` f"{a_result['point'].regime.lower()}" `
+- value_5: ` f"{b_result['mode']}" `
+- value_6: ` f"{b_result['selected_bytes'] / 1024:.1f}" `
+- value_7: ` f"{b_result['selected_time_us']:.2f}" `
+- value_8: ` f"{('a local-memory spill' if b_result['spills'] else 'no local-memory spill')}" `
+- value_9: ` f"{c_result['selected']['precision'].upper()}" `
+- value_10: ` f"{c_result['selected']['status']}" `
+- value_11: ` f"{selected['label']}" `
+- value_12: ` f"{recommendation['label']}" `
+- value_13: ` f"{(rejected if rejected else 'No alternative was rejected by the current constraints.')}" `
+
+---
+
+## Download Report
+
+---
+
+This V1-11 report is generated locally from the selected track, MLSysIM hardware refs, shared roofline calculations, and notebook-local deployment scenario budgets.
+
+</details>
 
 ## Complete original Marimo source
 

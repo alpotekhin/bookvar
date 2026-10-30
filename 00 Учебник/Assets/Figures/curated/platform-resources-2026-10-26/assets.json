@@ -1,0 +1,99 @@
+[
+  {
+    "id": "curated-platform-queueing-components-18fcf9f13aa0",
+    "asset": "00 Учебник/Assets/Figures/curated/platform-resources-2026-10-26/queueing-components.svg",
+    "author": "Kubernetes Authors and Kueue contributors",
+    "source_url": "https://github.com/kubernetes-sigs/kueue/blob/bca571a3dae56ebca83109ae6769bade1c73dcfa/site/content/en/docs/concepts/_index.md",
+    "source_image_url": "https://raw.githubusercontent.com/kubernetes-sigs/kueue/bca571a3dae56ebca83109ae6769bade1c73dcfa/site/static/images/queueing-components.svg",
+    "commit": "bca571a3dae56ebca83109ae6769bade1c73dcfa",
+    "source_asset": "05 Источники/Originals/platform-resources-2026-10-26/queueing-components.svg",
+    "source_asset_sha256": "18fcf9f13aa0e11d24c55f4415e80a148daada74e1e46bcc3402cd7324e12714",
+    "sha256": "18fcf9f13aa0e11d24c55f4415e80a148daada74e1e46bcc3402cd7324e12714",
+    "source_page_snapshot": "05 Источники/Originals/platform-resources-2026-10-26/kueue-concepts.md",
+    "source_page_sha256": "e3678de5792301157126c43baab7c18e392e37b1c36535d3f3b39ea85d512831",
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/kubernetes-sigs/kueue/blob/bca571a3dae56ebca83109ae6769bade1c73dcfa/LICENSE",
+    "license_evidence": "05 Источники/Originals/platform-resources-2026-10-26/kueue-LICENSE",
+    "license_evidence_sha256": "e4fc8a66ee0d461aa3a115980f1e081dcb6d153618fa5415ed79912ecef6efbd",
+    "public_license_copy": "site/public/licenses/kueue-bca571-LICENSE.txt",
+    "derivation": "source-svg-copy",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-26",
+    "source_viewbox": [
+      0,
+      180,
+      960,
+      360
+    ],
+    "modifications": "Complete original, byte-for-byte copy; no crop, redraw, translation, relabeling or recompression. Source diagram describes logical ownership/quota relationships, not verified runtime isolation.",
+    "used_in": [
+      "00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md"
+    ]
+  },
+  {
+    "id": "curated-platform-cluster-queue-c5d8b56814ff",
+    "asset": "00 Учебник/Assets/Figures/curated/platform-resources-2026-10-26/cluster-queue.svg",
+    "author": "Kubernetes Authors and Kueue contributors",
+    "source_url": "https://github.com/kubernetes-sigs/kueue/blob/bca571a3dae56ebca83109ae6769bade1c73dcfa/site/content/en/docs/concepts/cluster_queue.md",
+    "source_image_url": "https://raw.githubusercontent.com/kubernetes-sigs/kueue/bca571a3dae56ebca83109ae6769bade1c73dcfa/site/static/images/cluster-queue.svg",
+    "commit": "bca571a3dae56ebca83109ae6769bade1c73dcfa",
+    "source_asset": "05 Источники/Originals/platform-resources-2026-10-26/cluster-queue.svg",
+    "source_asset_sha256": "c5d8b56814ff92c4bdd169e32aef486447fd6d515e3da7eb8d6138b754ba2282",
+    "sha256": "c5d8b56814ff92c4bdd169e32aef486447fd6d515e3da7eb8d6138b754ba2282",
+    "source_page_snapshot": "05 Источники/Originals/platform-resources-2026-10-26/kueue-cluster-queue.md",
+    "source_page_sha256": "fa19830d0ee88d8022e8a3e709b56b704d033c10bf3025980471b000d8214291",
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/kubernetes-sigs/kueue/blob/bca571a3dae56ebca83109ae6769bade1c73dcfa/LICENSE",
+    "license_evidence": "05 Источники/Originals/platform-resources-2026-10-26/kueue-LICENSE",
+    "license_evidence_sha256": "e4fc8a66ee0d461aa3a115980f1e081dcb6d153618fa5415ed79912ecef6efbd",
+    "public_license_copy": "site/public/licenses/kueue-bca571-LICENSE.txt",
+    "derivation": "source-svg-copy",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-26",
+    "source_viewbox": [
+      0,
+      180,
+      820,
+      480
+    ],
+    "modifications": "Complete original, byte-for-byte copy; no crop, redraw, translation, relabeling or recompression. Source diagram describes logical ownership/quota relationships, not verified runtime isolation.",
+    "used_in": [
+      "00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md"
+    ]
+  },
+  {
+    "id": "curated-platform-kubernetes-multi-tenancy-a3ab247facc2",
+    "asset": "00 Учебник/Assets/Figures/curated/platform-resources-2026-10-26/kubernetes-multi-tenancy.png",
+    "author": "The Kubernetes Authors",
+    "source_url": "https://github.com/kubernetes/website/blob/ed70e311737a341574ed5758b7af24e3bba232cb/content/en/docs/concepts/security/multi-tenancy.md",
+    "source_image_url": "https://raw.githubusercontent.com/kubernetes/website/ed70e311737a341574ed5758b7af24e3bba232cb/static/images/docs/multi-tenancy.png",
+    "commit": "ed70e311737a341574ed5758b7af24e3bba232cb",
+    "source_asset": "05 Источники/Originals/platform-resources-2026-10-26/kubernetes-multi-tenancy.png",
+    "source_asset_sha256": "a3ab247facc2e9958d8fe60f32a42cb45411ac54e2b9d8de98120cda0c5b0bac",
+    "sha256": "a3ab247facc2e9958d8fe60f32a42cb45411ac54e2b9d8de98120cda0c5b0bac",
+    "source_page_snapshot": "05 Источники/Originals/platform-resources-2026-10-26/kubernetes-multi-tenancy.md",
+    "source_page_sha256": "4fa87adc3371db47420272e1219bd57742a9b5126c0d2b2b70b8738b3926c74d",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/platform-resources-2026-10-26/kubernetes-LICENSE",
+    "license_evidence_sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411",
+    "public_license_copy": "site/public/licenses/kubernetes-ed70e3-LICENSE.txt",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-26",
+    "dimensions_px": [
+      1155,
+      698
+    ],
+    "modifications": "Complete original, byte-for-byte copy; no crop, redraw, translation, relabeling or recompression. Source diagram describes logical ownership/quota relationships, not verified runtime isolation.",
+    "used_in": [
+      "00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md"
+    ]
+  }
+]

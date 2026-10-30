@@ -1,0 +1,101 @@
+[
+  {
+    "id": "curated-vision-encoders-clip-objectives-a37a9e3e59e0",
+    "asset": "00 Учебник/Assets/Figures/curated/vision-encoders-review-2026-10/clip-objectives.png",
+    "author": "Alec Radford et al.",
+    "source_url": "https://proceedings.mlr.press/v139/radford21a.html",
+    "source_asset": "05 Источники/Originals/vision-encoders-2026-10-20/clip.pdf",
+    "source_asset_sha256": "2a4952960f350e50a3a4a847371b80b8aaa09ba82d1c2a8f6b30450e392a1fe4",
+    "source_page": 3,
+    "source_page_snapshot": "05 Источники/Originals/vision-encoders-2026-10-20/clip-page3.png",
+    "source_page_sha256": "252c437ecb8d29d5e59de3d05ba459306140b503688fcbccd80eb1aec932b488",
+    "render_page_size_px": [
+      2473,
+      3200
+    ],
+    "crop_box_px": [
+      210,
+      250,
+      1200,
+      975
+    ],
+    "sha256": "a37a9e3e59e0dd8c06c7fa993f7ec64cb5e737fdfc8b0ea43ecd937a209433b2",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/reranking-2026-10-20/pmlr-license-agreement.html",
+    "license_evidence_sha256": "1c8123a6c840ca2752e383f0924fa23ba38552140a2cc54f69ea9df5acfcdd3d",
+    "modifications": "Original plot rendered with Poppler at 3200 pixels on the longest page side and cropped; no redraw, translation, recoloring or changes to labels",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "pdf-page-render-crop"
+  },
+  {
+    "id": "curated-vision-encoders-clip-zero-shot-linear-probe-0436ca002107",
+    "asset": "00 Учебник/Assets/Figures/curated/vision-encoders-review-2026-10/clip-zero-shot-linear-probe.png",
+    "author": "Alec Radford et al.",
+    "source_url": "https://proceedings.mlr.press/v139/radford21a.html",
+    "source_asset": "05 Источники/Originals/vision-encoders-2026-10-20/clip.pdf",
+    "source_asset_sha256": "2a4952960f350e50a3a4a847371b80b8aaa09ba82d1c2a8f6b30450e392a1fe4",
+    "source_page": 6,
+    "source_page_snapshot": "05 Источники/Originals/vision-encoders-2026-10-20/clip-page6.png",
+    "source_page_sha256": "1c510cbdf7d18169d3f40f37b9ceef125a7db96ddece801b343596374030af7d",
+    "render_page_size_px": [
+      2473,
+      3200
+    ],
+    "crop_box_px": [
+      210,
+      245,
+      1190,
+      940
+    ],
+    "sha256": "0436ca0021076d86ae6b714faaa57f15d26f294fd1b6602b2d0c35f76ac743bf",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/reranking-2026-10-20/pmlr-license-agreement.html",
+    "license_evidence_sha256": "1c8123a6c840ca2752e383f0924fa23ba38552140a2cc54f69ea9df5acfcdd3d",
+    "modifications": "Original plot rendered with Poppler at 3200 pixels on the longest page side and cropped; no redraw, translation, recoloring or changes to labels",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "pdf-page-render-crop"
+  },
+  {
+    "id": "curated-vision-encoders-siglip-batch-size-0b00fc131461",
+    "asset": "00 Учебник/Assets/Figures/curated/vision-encoders-review-2026-10/siglip-batch-size.png",
+    "author": "Xiaohua Zhai, Basil Mustafa, Alexander Kolesnikov and Lucas Beyer",
+    "source_url": "https://arxiv.org/abs/2303.15343v4",
+    "source_asset": "05 Источники/Originals/vision-encoders-2026-10-20/siglip.pdf",
+    "source_asset_sha256": "2efade8de3baeffe9eba759aab9f510ea8f8ac3c365f02f0da75d9baf9ffa2db",
+    "source_page": 4,
+    "source_page_snapshot": "05 Источники/Originals/vision-encoders-2026-10-20/siglip-page4.png",
+    "source_page_sha256": "df7190c2f2b1801b529a0c972b1c353f74f5a401414a2d7a292887b1641a252f",
+    "render_page_size_px": [
+      2473,
+      3200
+    ],
+    "crop_box_px": [
+      880,
+      270,
+      1530,
+      925
+    ],
+    "sha256": "0b00fc13146149beabf41796b60dc1f16ff51120d7bf86a98d3751a812ec261d",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/vision-encoders-2026-10-20/siglip-abstract.html",
+    "license_evidence_sha256": "bb4246ec588170bc529126b69c34c98320cf1ca31109db74433e4401cf3fdcb7",
+    "modifications": "Original plot rendered with Poppler at 3200 pixels on the longest page side and cropped; no redraw, translation, recoloring or changes to labels",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "pdf-page-render-crop"
+  }
+]

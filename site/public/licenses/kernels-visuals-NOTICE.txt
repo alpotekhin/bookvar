@@ -1,0 +1,14 @@
+Jake VanderPlas — Python Data Science Handbook
+In Depth: Support Vector Machines
+https://jakevdp.github.io/PythonDataScienceHandbook/05.07-support-vector-machines.html
+
+CC BY-NC-ND 3.0 Unported
+https://creativecommons.org/licenses/by-nc-nd/3.0/
+https://github.com/jakevdp/PythonDataScienceHandbook/blob/d66231454ef753818dc9213c9b5942e067266966/LICENSE-TEXT
+
+Seven unmodified figures from saved notebook outputs, cells 7,16,20,25,29,33,38.
+https://github.com/jakevdp/PythonDataScienceHandbook/blob/d66231454ef753818dc9213c9b5942e067266966/notebooks/05.07-Support-Vector-Machines.ipynb
+
+No crop, redrawing, relabeling, translation or pixel resampling.
+The notebook was not executed to create replacement figures.
+Figures remain separate works under their original terms.

@@ -1,0 +1,569 @@
+---
+title: Оценивание и эксплуатация рекомендательных систем
+type: textbook-chapter
+status: canonical
+last_updated: 2026-09-15
+---
+
+# Оценивание и эксплуатация рекомендательных систем
+
+Offline metric имеет смысл только вместе с протоколом, который создал её
+входы. Recall@$K=0.30$ ничего не говорит без ответа на вопросы: какие события
+считались relevant, как проведён split, из каких candidates выбирала модель,
+сколько negatives использовано, исключались ли seen и какие пользователи
+попали в усреднение.
+
+## До метрики: evaluation contract
+
+Зафиксируйте:
+
+1. dataset snapshot и временные границы;
+2. unit of evaluation: interaction, user, session, request или slate;
+3. ground-truth relevance и attribution window;
+4. candidate universe в каждый момент;
+5. seen/unavailable filtering;
+6. full-catalog или sampled ranking;
+7. $K$ и способ усреднения;
+8. warm/cold eligibility;
+9. baselines и post-processing.
+
+Изменение любого пункта может изменить score сильнее, чем замена модели.
+
+## Rating metrics
+
+Для explicit ratings, когда prediction и ground truth относятся к одним и тем
+же $(u,i)$:
+
+$$
+\operatorname{MAE}
+=\frac1N\sum_{n=1}^N|r_n-\hat r_n|,
+$$
+
+$$
+\operatorname{RMSE}
+=\sqrt{\frac1N\sum_{n=1}^N(r_n-\hat r_n)^2}.
+$$
+
+RMSE сильнее реагирует на крупные ошибки; MAE остаётся в единицах rating и
+проще интерпретируется. LF notebook также рассчитывает $R^2$ и explained
+variance. Однако rating metrics неприменимы к произвольным recommendation
+scores: например, score SAR не обязан лежать на шкале ratings.
+
+### Worked example
+
+Ground truth ratings: $(5,3,1)$, predictions: $(4,3,3)$.
+
+$$
+\operatorname{MAE}=\frac{1+0+2}{3}=1,
+$$
+
+$$
+\operatorname{RMSE}=\sqrt{\frac{1^2+0^2+2^2}{3}}
+\approx1.29.
+$$
+
+Одна ошибка величины 2 заметнее влияет на RMSE. Но ни одна метрика не сообщает,
+какой item окажется первым в recommendation list.
+
+## Ranking metrics
+
+Пусть $L_u^K$ — первые $K$ рекомендаций, $G_u$ — relevant test items.
+
+$$
+\operatorname{Precision@K}_u
+=\frac{|L_u^K\cap G_u|}{K},
+\qquad
+\operatorname{Recall@K}_u
+=\frac{|L_u^K\cap G_u|}{|G_u|}.
+$$
+
+При единственном held-out item Recall@$K$ равен HitRate@$K$. Это важно
+указывать: «recall» в таком protocol не измеряет покрытие множества интересов.
+
+Для position-sensitive оценки:
+
+$$
+\operatorname{DCG@K}_u
+=\sum_{r=1}^K
+\frac{2^{rel_{u,r}}-1}{\log_2(r+1)},
+$$
+
+$$
+\operatorname{NDCG@K}_u
+=\frac{\operatorname{DCG@K}_u}
+{\operatorname{IDCG@K}_u}.
+$$
+
+Average Precision для пользователя:
+
+$$
+\operatorname{AP@K}_u
+=\frac{1}{\min(|G_u|,K)}
+\sum_{r=1}^K
+\operatorname{Precision@r}_u\,
+\mathbf1[\ell_{u,r}\in G_u],
+$$
+
+а MAP усредняет AP по users.
+
+### Один список, четыре взгляда
+
+Пусть $K=4$, relevant items $G_u=\{B,D\}$, список
+$L_u=[B,A,C,D]$.
+
+$$
+\operatorname{Precision@4}=2/4=0.5,
+\qquad
+\operatorname{Recall@4}=2/2=1.
+$$
+
+Оба relevant найдены, но `D` стоит последним. Для binary relevance:
+
+$$
+\operatorname{DCG@4}
+=1+\frac1{\log_2 5}\approx1.431.
+$$
+
+Идеальный список ставит оба relevant первыми:
+
+$$
+\operatorname{IDCG@4}=1+\frac1{\log_2 3}\approx1.631,
+$$
+
+поэтому NDCG@$4\approx0.877$. Recall этого positional defect не видит.
+
+## Candidate set — часть результата
+
+Разделим три evaluation задачи:
+
+- **sampled ranker benchmark:** eligible positives плюс 99 uniform negatives;
+- **full-catalog ranking:** все доступные и разрешённые пользователю items;
+- **end-to-end replay:** candidates, которые действительно вернул retrieval из
+  этого допустимого каталога, затем ranking и post-ranking.
+
+Первая задача условно проверяет порядок внутри искусственного набора. Вторая
+включает всех competitors, но не проверяет потери отдельного retrieval-stage.
+Третья сохраняет такие потери: если retrieval не нашёл relevant item, ranker не
+получает его обратно из ground truth. Scores этих режимов нельзя подменять друг
+другом; несогласованность sampled и полных метрик разобрана в [Krichene & Rendle,
+On Sampled Metrics for Item Recommendation](https://research.google/pubs/on-sampled-metrics-for-item-recommendation/).
+
+Ниже end-to-end replay. Availability и запреты определяются состоянием системы
+на момент запроса, а не будущим target. Для Recall/NDCG в этом примере заранее
+выбран denominator из relevant items, которые тогда были доступны и разрешены;
+исключённые targets и запросы без eligible target учитываются отдельными
+счётчиками. Эта политика едина для всех сравниваемых моделей.
+
+```python
+for user in eligible_test_users:
+    time = test_time[user]
+    eligible = set(catalog.available_at(time)) - set(forbidden_items(user, time))
+    observed_positives = set(test_relevant[user])
+    positives = observed_positives & eligible
+    report_target_eligibility(user, total=len(observed_positives), eligible=len(positives))
+
+    candidates = set(retrieve(user, time, eligible)) & eligible
+
+    scores = model.score(user, candidates)
+    top_k = take_top_k(scores, k)
+    if positives:
+        accumulate_candidate_recall(candidates, positives)
+        accumulate_metrics(top_k, positives)
+    else:
+        report_no_eligible_target(user)
+```
+
+Здесь `retrieve`, `model.score` и фильтры получают только доступные к `time`
+данные; `test_relevant` используется исключительно оценщиком. Пропущенный
+retrieval-ом eligible positive остаётся в denominator и даёт промах, даже при
+пустом candidate set. Запрос без eligible target нельзя молча удалить из отчёта:
+для него выбранные Recall/NDCG не определены, а его число и причина исключения
+должны быть видны рядом с метрикой. Если контракт требует считать недоступные
+targets промахами всей продуктовой системы, это отдельный заранее заявленный
+denominator, а не основание вставлять такие items в выдачу.
+
+Для full-catalog ranking строку вызова retrieval заменяют на
+`candidates = eligible`. Только в **условном sampled ranker benchmark** допустимо
+намеренно собрать набор из eligible positives и sampled negatives. Такой тест
+не измеряет candidate recall или end-to-end качество, и его ground-truth-based
+набор не передают обучающему sampler. Seed, distribution, число negatives и
+eligibility policy сохраняются в конфигурации. Временная доступность каталога
+критична: [Ji et al.](https://arxiv.org/abs/2010.11060) показывают, как нарушение
+глобального timeline позволяет моделям рекомендовать ещё не доступные items.
+
+## Leakage и неверные splits
+
+**Random interaction split** переносит будущие события пользователя в train и
+облегчает warm-start задачу.
+
+**Future catalog leakage** допускает items до их release date.
+
+**Feature leakage** возникает, если popularity, CTR, normalization или
+vocabulary fit с test.
+
+**Duplicate leakage** помещает повтор одного impression либо почти одинаковые
+sequence windows в обе части.
+
+**Survivorship bias** исключает inactive/cold users из denominator без
+отдельного отчёта.
+
+Минимальный набор protocols:
+
+| Protocol | Что измеряет |
+|---|---|
+| temporal warm-start | качество для известных users/items в будущем |
+| user holdout | новый пользователь |
+| item holdout | новый объект |
+| rolling windows | устойчивость к drift |
+| full-catalog replay | весь retrieval contract |
+
+## Beyond accuracy
+
+LF notebook показывает важный результат: ALS превосходит random recommender по
+Precision, Recall, NDCG и MAP, а случайная выдача может оказаться лучше по
+diversity. Это не противоречие. Модель оптимизирует близость к наблюдаемым
+preferences и часто концентрируется на популярных items.
+
+### Catalog coverage
+
+$$
+\operatorname{CatalogCoverage}
+=\frac{|\{i:i\text{ was recommended}\}|}
+{|\{i:i\text{ is available in the catalog}\}|}.
+$$
+
+Coverage не говорит, равномерно ли распределены показы. Два алгоритма могут
+затронуть одинаковую долю каталога, но один отдаст почти весь exposure нескольким
+head items.
+
+Distributional coverage в LF notebook — entropy exposure distribution:
+
+$$
+H(R)=-\sum_i p(i\mid R)\log_2p(i\mid R).
+$$
+
+### Diversity
+
+Пусть $\operatorname{sim}(i,j)$ — cosine similarity content или interaction
+vectors. Intra-list similarity:
+
+$$
+\operatorname{ILS}(L_u)
+=\frac{1}{\binom K2}
+\sum_{\substack{i,j\in L_u\\i<j}}
+\operatorname{sim}(i,j).
+$$
+
+Тогда
+
+$$
+\operatorname{Diversity}(L_u)=1-\operatorname{ILS}(L_u).
+$$
+
+Список из пяти почти одинаковых фильмов может иметь высокий relevance и низкую
+diversity. Но слишком разнообразный список способен потерять смысл запроса.
+
+### Novelty
+
+Для popularity $p(i)$:
+
+$$
+\operatorname{Novelty}(i)=-\log_2p(i).
+$$
+
+Редкий item новее в статистическом смысле. Это ещё не значит, что он релевантен
+или неизвестен конкретному пользователю.
+
+### Serendipity
+
+Serendipity соединяет неожиданность с relevance. LF notebook определяет
+expectedness кандидата относительно истории:
+
+$$
+\operatorname{expectedness}(i\mid u)
+=\frac1{|H_u|}\sum_{j\in H_u}\operatorname{sim}(i,j),
+$$
+
+и учитывает $(1-\operatorname{expectedness})\cdot\operatorname{relevance}$.
+Нерелевантная случайность не является serendipity.
+
+## Re-ranking как constrained optimization
+
+Ranker выдаёт relevance scores, но продукт строит slate. Упрощённо:
+
+$$
+L^\star
+=\arg\max_{L,\ |L|=K}
+\left[
+\sum_{i\in L}s(u,i)
++\alpha D(L)
++\gamma N(L)
+-\beta C(L)
+\right],
+$$
+
+где $D$ — diversity, $N$ — novelty, $C$ — violations или concentration cost.
+Коэффициенты не следует выбирать по вкусу автора. Они задают продуктовый
+trade-off и проверяются offline frontier и online experiment.
+
+Полезнее показать Pareto curve `NDCG vs coverage`, чем скрыть две цели в одном
+числе без интерпретации.
+
+## Baseline ladder
+
+Каждая новая система сравнивается последовательно:
+
+1. random unseen;
+2. global popularity;
+3. segmented/contextual popularity;
+4. item-item/SAR;
+5. MF/ALS;
+6. новый retrieval или ranker;
+7. новый ranker с тем же post-processing;
+8. полный новый production pipeline.
+
+Если candidate generator и ranker изменились одновременно, attribution
+невозможен. Для multi-stage системы отдельно измеряют:
+
+$$
+\operatorname{CandidateRecall@N}
+=\frac{\text{relevant items among first }N\text{ candidates}}
+{\text{all relevant items}}.
+$$
+
+Ranker не способен вернуть item, потерянный retrieval stage.
+
+## Offline replay не равен online effect
+
+Логи созданы прежней policy:
+
+$$
+\pi_0
+\to \text{exposure}
+\to \text{observed response}.
+$$
+
+Для item, который $\pi_0$ не показала, response отсутствует. Новая policy
+$\pi_1$ меняет exposure, позиции, конкурирующие items и поведение пользователя.
+Поэтому offline improvement — основание для эксперимента, а не доказательство
+product impact.
+
+Связь между этапами полезно формулировать как цепочку проверяемых утверждений:
+
+| Переход | Что действительно доказывает наблюдение | Чего оно ещё не доказывает |
+|---|---|---|
+| Training loss → offline ranking | optimizer научился различать пары из выбранного sampler | качество на полном доступном каталоге |
+| Offline ranking → replay | модель улучшает порядок при зафиксированных candidates и исторических признаках | поведение при новой policy показа |
+| Replay → shadow serving | pipeline собирается на production features и укладывается в deadline без показа пользователю | изменение пользовательского response |
+| Shadow → A/B test | treatment доставлен выбранным пользователям и создаёт causal contrast с control | долгосрочный эффект после novelty period |
+| A/B primary metric → rollout | средний causal effect положителен при соблюдённых guardrails | безопасность для каждого slice и устойчивость после retraining |
+
+Иными словами, каждый переход требует нового вида данных. Ни высокая NDCG, ни
+успешный shadow traffic не заменяют randomization. В обратную сторону причинный
+разбор тоже идёт по стадиям: падение online outcome может возникнуть из-за
+retrieval recall, re-ranking rules, latency/fallback или ошибочного exposure
+logging, даже если веса ranker не изменились.
+
+Особенно опасны:
+
+- position и selection bias;
+- feedback loops;
+- novelty effect новой выдачи;
+- изменение latency;
+- метрики, оптимизирующие addiction вместо ценности;
+- delayed outcomes: retention, возвраты, churn.
+
+## A/B test
+
+До запуска фиксируют:
+
+| Решение | Пример |
+|---|---|
+| unit of randomization | user, account, session, cluster |
+| primary metric | qualified watch time per eligible user |
+| guardrails | latency, complaints, cancellations, supplier exposure |
+| eligibility | пользователи, для которых выдача могла измениться |
+| exposure event | фактический показ хотя бы одного treatment item |
+| horizon | минимум один полный weekly cycle |
+| stopping rule | заранее заданный sample size/time |
+
+Randomization по request может загрязнять пользовательский опыт: один и тот же
+user видит обе policies. Randomization по user обычно устойчивее, но требует
+учёта network effects и shared inventory.
+
+Нужно логировать assignment даже при ошибке serving. Иначе treatment failures
+исчезнут из анализа, а метрика станет условной на успешный ответ.
+
+Этот раздел задаёт обзорный контракт, а не полный курс экспериментальной
+статистики. Для базовой интерпретации интервалов полезна глава
+[[00 Учебник/00 Математические и ML-основания/06 Переобучение, регуляризация и оценивание|оценивание и неопределённость]];
+для online-design нужны также мощность, множественные проверки и нарушения
+независимости между пользователями.
+Подробный первичный разбор дизайна, мощности и практических ошибок —
+[Kohavi et al., Practical Guide to Controlled Experiments on the Web](https://ai.stanford.edu/~ronnyk/GuideControlledExperiments.pdf).
+
+Рассмотрим искусственный рандомизированный пример. До назначения определена
+группа eligible users; 10 000 назначены control и 10 000 treatment.
+Исход $Y_u$ равен 1, если пользователь за фиксированные семь дней совершил
+хотя бы одно целевое действие, иначе 0. Единица анализа — пользователь,
+не показ и не клик. Estimand — разность вероятностей этого исхода при
+назначении двух policies для данной популяции и горизонта. Анализ ведётся
+по назначению (intention-to-treat), включая serving failures.
+
+Пусть в control наблюдалось 1000 таких пользователей, в treatment — 1200.
+Оценка эффекта $\hat\Delta=0{,}12-0{,}10=0{,}02$, то есть 2 процентных
+пункта, а не 2%. При независимых пользователях приближённая standard error:
+
+$$
+\widehat{SE}=\sqrt{\frac{0{,}12(1-0{,}12)}{10000}
++\frac{0{,}10(1-0{,}10)}{10000}}\approx0{,}004423.
+$$
+
+Двусторонний нормальный 95%-интервал
+$\hat\Delta\pm1{,}96\widehat{SE}$ составляет примерно
+$[0{,}01133;0{,}02867]$, или от 1,13 до 2,87 процентного пункта.
+Это приближение приемлемо для выбранных больших binomial counts; для
+редких исходов, ratio metrics и cluster randomization формула меняется.
+
+Размер выборки планируют **до** наблюдения эффекта. При baseline 0,1,
+10 000 users на вариант, уровне 0,05 и мощности около 80% грубая
+оценка минимального обнаружимого абсолютного эффекта равна
+$(1{,}96+0{,}84)\sqrt{2\cdot0{,}1\cdot0{,}9/10000}
+\approx0{,}0119$, около 1,2 процентного пункта. Это планировочное
+приближение, не post-hoc «мощность» уже полученного результата.
+Если каждый день смотреть на обычный интервал и останавливаться при первом
+исключении нуля, заявленная ошибка первого рода не сохраняется. Здесь
+предполагается один заранее назначенный анализ после закрытия всех окон;
+необходимость раннего решения требует отдельного последовательного дизайна.
+
+## Production architecture
+
+LF operationalization notebook разворачивает ALS pipeline: загрузка MovieLens,
+split, обучение, top-$K$ scoring, evaluation, сохранение модели, materialization
+recommendations и web service. Конкретный Azure stack историчен, но границы
+артефактов остаются полезными.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/linux-foundation-recommenders-architecture.png|Архитектура operationalization recommender из Linux Foundation Recommenders]]
+
+*Архитектура примера ALS из [Linux Foundation Recommenders: Operationalizing a
+Movie Recommender](https://github.com/recommenders-team/recommenders/blob/6232b154548c955315650d58dca6bf1411c56020/examples/05_operationalize/als_movie_o16n.ipynb).
+На рисунке следует отделить offline path подготовки данных и модели от online
+path запроса: между ними передаются версионированные артефакты и заранее
+материализованные рекомендации, а response снова должен попасть в журнал
+событий. Конкретные Azure-сервисы можно заменить; границы между training,
+storage и serving остаются.*
+
+Production recommender обычно включает:
+
+1. immutable event log;
+2. versioned dataset snapshot;
+3. point-in-time feature computation;
+4. model artifact вместе с ID mappings и schema;
+5. offline или online candidate generation;
+6. feature hydration;
+7. ranking и post-ranking;
+8. cache/fallback;
+9. impression, candidate, score и response logging;
+10. controlled rollout и retraining.
+
+### Batch и online serving
+
+**Batch precompute** заранее сохраняет top-$K$ для активных users. Он дешёв,
+предсказуем и подходит для медленно меняющихся preferences, но плохо реагирует
+на session context и новые items.
+
+**Online scoring** учитывает свежие events и availability, но требует low
+latency feature access и устойчивого fallback.
+
+Часто используется hybrid: batch candidates плюс online filtering/ranking.
+
+## Что именно мониторить
+
+### Система
+
+- p50/p95/p99 latency по retrieval, hydration, ranking и post-ranking;
+- timeout/error/fallback rate;
+- candidates before/after filters;
+- cache hit rate;
+- artifact/model/schema version.
+
+### Данные
+
+- event delay и missing fields;
+- unknown user/item rate;
+- history length;
+- feature freshness;
+- category/cardinality drift;
+- доля requests без impression log.
+
+### Модель и выдача
+
+- score distribution и calibration;
+- embedding norms/OOV;
+- candidate recall;
+- popularity concentration;
+- catalog and supplier coverage;
+- repeated-item rate;
+- slice metrics для cold/head/tail/activity groups.
+
+### Продукт
+
+- primary outcome и guardrails;
+- treatment-control divergence;
+- delayed outcomes;
+- доля пользователей, реально exposed к изменению.
+
+Средний CTR может оставаться стабильным, пока tail coverage падает, latency
+растёт, а cold users массово уходят на fallback. Поэтому aggregate dashboard
+не заменяет stage и slice monitoring.
+
+## Incident protocol
+
+Если online metric упала после rollout:
+
+1. проверить assignment и exposure logging;
+2. сравнить traffic eligibility;
+3. проверить latency, errors и fallback;
+4. сверить model/data/schema versions;
+5. сравнить candidate counts и filter rates;
+6. локализовать degradation по user/item slices;
+7. проверить feature freshness и vocabulary/OOV;
+8. откатить policy, если guardrail нарушен;
+9. только после этого разбирать веса модели.
+
+Такой порядок предотвращает типичную ошибку: переобучать ranker, когда причина
+— пустой candidate set или устаревший feature join.
+
+## Итоговый reproducibility card
+
+Для каждого результата хранится карточка:
+
+```yaml
+dataset_snapshot: 2026-07-01T00:00:00Z
+train_end: 2026-06-15T00:00:00Z
+validation_end: 2026-06-22T00:00:00Z
+target: purchase_within_24h
+candidates: retrieval_v17_top_1000
+candidate_universe: eligible_catalog_at_request_time
+seen_item_policy: exclude_purchased_30d
+target_eligibility: available_and_allowed_at_request_time
+evaluation: end_to_end_replay
+k: [10, 50]
+model: ranker_v23
+features: feature_schema_v9
+post_ranker: slate_policy_v4
+code_commit: ...
+random_seed: ...
+```
+
+Без такой карточки score невозможно воспроизвести или сравнить с будущей
+версией.
+
+## Первоисточники
+
+- [[05 Источники/Courses/Linux Foundation Recommenders/examples/03_evaluate/evaluation.ipynb|LF: complete evaluation notebook]];
+- [[05 Источники/Courses/Linux Foundation Recommenders/examples/03_evaluate/als_movielens_diversity_metrics.ipynb|LF: beyond-accuracy metrics with ALS and random baselines]];
+- [[05 Источники/Courses/Linux Foundation Recommenders/examples/06_benchmarks/movielens.ipynb|LF: benchmark protocol]];
+- [[05 Источники/Courses/Linux Foundation Recommenders/examples/05_operationalize/als_movie_o16n.ipynb|LF: model operationalization]];
+- [[05 Источники/Courses/Linux Foundation Recommenders/examples/01_prepare_data/data_split.ipynb|LF: random, chronological and stratified data splitting]];
+- [[00 Учебник/02 Рекомендательные системы/00 Карта модуля|карта модуля]] — вернуться к структуре.

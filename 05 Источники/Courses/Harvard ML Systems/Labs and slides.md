@@ -8,8 +8,16 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 # Harvard ML Systems — labs and slides
 
-Complete source-native practice and lecture layer from commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-Each page contains a readable extraction and the full original source.
+Original English archives from commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`:
+34 Marimo labs and 35 Beamer decks. Each page retains the complete, hash-verified
+source alongside a static projection. The labs do not execute on this site;
+their runtime interfaces and plots remain in the Python source.
+
+The slide archives include 269 unmodified source SVGs, equations, tables and
+separate speaker-note drawers. Fourteen raster references retain direct links
+to the pinned originals. Projection limits are listed beside the affected
+slides. These are course-source archives, not independently checked textbook
+explanations or a claim that every course topic has been integrated into Bookvar.
 
 ## Marimo labs
 

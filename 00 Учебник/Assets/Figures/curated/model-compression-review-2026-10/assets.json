@@ -1,0 +1,44 @@
+{
+  "verified_at": "2026-10-19",
+  "used_in": "00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md",
+  "assets": [
+    {
+      "id": "curated-model-compression-minitron-distillation-382d2aa601ba",
+      "asset": "00 Учебник/Assets/Figures/curated/model-compression-review-2026-10/minitron-distillation-vector.png",
+      "author": "Saurav Muralidharan et al.",
+      "title": "Minitron Figure 4: distillation framework",
+      "source_url": "https://arxiv.org/src/2407.14679v2",
+      "source_asset": "05 Источники/Papers/Source PDFs/minitron-2407.14679v2-figure4.pdf",
+      "source_asset_sha256": "71fb31ac62bf865ca82c048001aa5cd4d3b24b59da2bbe381e3283adbd3ee714",
+      "source_member": "fig/distill.pdf",
+      "source_archive": "raw/papers/minitron-2407.14679v2/source.tar.gz",
+      "source_archive_sha256": "9bba8c5aa913daca444a2dbb6fc7af3d33e474d18297d3b054bc0fd231f24bbe",
+      "source_page": 1,
+      "crop_box_px": [
+        0,
+        0,
+        3200,
+        906
+      ],
+      "render_page_size_px": [
+        3200,
+        906
+      ],
+      "width": 3200,
+      "height": 906,
+      "sha256": "382d2aa601ba47c3db6581bd7e3675ffec92420b6db01aba4e270e399ce9110e",
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence": "https://arxiv.org/abs/2407.14679v2",
+      "derivation": "pdf-page-render-crop",
+      "provenance_confirmation": "source-license-verified",
+      "modifications": "Full-page Poppler render of the author-supplied standalone vector figure PDF; crop box is the whole page. No content removed or redrawn.",
+      "metadata_status": "verified",
+      "last_verified": "2026-10-19",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md"
+      ]
+    }
+  ]
+}
+

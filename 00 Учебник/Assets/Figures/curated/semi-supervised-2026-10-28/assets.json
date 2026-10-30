@@ -1,0 +1,107 @@
+[
+  {
+    "id": "curated-semi-supervised-fixmatch-6f9c4668372f",
+    "asset": "00 Учебник/Assets/Figures/curated/semi-supervised-2026-10-28/fixmatch-diagram.png",
+    "author": "Kihyuk Sohn, David Berthelot and co-authors",
+    "source_url": "https://arxiv.org/pdf/2001.07685v2#page=2",
+    "source_image_url": "https://arxiv.org/pdf/2001.07685v2",
+    "commit": "d4985a158065947dba803e626ee9a6721709c570",
+    "source_asset": "05 Источники/Originals/semi-supervised-2026-10-28/fixmatch-2001.07685v2.pdf",
+    "source_asset_sha256": "6cd643401271c6f4946a9b982c670c2b65b486842eb974abd1dedcca704dcb88",
+    "sha256": "6f9c4668372f4583a5af45bce7d605eca42e9a903629b409b4c856c2c189adbb",
+    "source_page_snapshot": "05 Источники/Originals/semi-supervised-2026-10-28/fixmatch/README.md",
+    "source_page_sha256": "97d1efc565bc7e7ea02035c88e22884ad4edb1a7e53e792c38622a361f156825",
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/google-research/fixmatch/blob/d4985a158065947dba803e626ee9a6721709c570/LICENSE",
+    "license_evidence": "05 Источники/Originals/semi-supervised-2026-10-28/fixmatch/LICENSE",
+    "license_evidence_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "public_license_copy": "site/public/licenses/fixmatch-d4985a1-Apache-2.0.txt",
+    "dimensions_px": [
+      1850,
+      700
+    ],
+    "derivation": "pdf-page-render-crop",
+    "modifications": "Complete original diagram, extracted from native PDF page 2 at 400 dpi, retaining all branches, bars, labels and white margins. No redraw, relabeling, translation or bitmap upscaling. Permission applies to this same diagram separately released as a PNG in the Apache-2.0 author repository; not to the entire arXiv paper. The repository original is archived as permission_asset and was visually compared.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch.md"
+    ],
+    "permission_asset": "05 Источники/Originals/semi-supervised-2026-10-28/fixmatch/FixMatch-diagram-white.png",
+    "permission_asset_sha256": "fdd7acf0fa895003968e1c747990801301fe263530b5a58a03979a927bfe6e6f",
+    "source_page": 2,
+    "render_dpi": 400,
+    "crop_box_px": [
+      800,
+      375,
+      2650,
+      1075
+    ],
+    "render_page_size_px": [
+      3400,
+      4400
+    ]
+  },
+  {
+    "id": "curated-semi-supervised-circles-raw-eb560bb3c4dc",
+    "asset": "00 Учебник/Assets/Figures/curated/semi-supervised-2026-10-28/circles-raw.png",
+    "author": "The scikit-learn developers",
+    "source_url": "https://scikit-learn.org/stable/auto_examples/semi_supervised/plot_label_propagation_structure.html",
+    "source_image_url": "https://scikit-learn.org/stable/_images/sphx_glr_plot_label_propagation_structure_001.png",
+    "source_asset": "05 Источники/Originals/semi-supervised-2026-10-28/sklearn/circles-raw.png",
+    "source_asset_sha256": "eb560bb3c4dcdcd5949e0950fc9965a87932c220cf6d2238181cd8ed0fca9f52",
+    "sha256": "eb560bb3c4dcdcd5949e0950fc9965a87932c220cf6d2238181cd8ed0fca9f52",
+    "source_page_snapshot": "05 Источники/Originals/semi-supervised-2026-10-28/sklearn/circles.html",
+    "source_page_sha256": "65a438c53ed2f2f5012f7e36df5e38a9725f9c136568b2f960b737a39433e71e",
+    "license": "BSD-3-Clause",
+    "license_url": "https://github.com/scikit-learn/scikit-learn/blob/main/COPYING",
+    "license_evidence": "05 Источники/Originals/clustering-2026-10-21/sklearn-COPYING",
+    "license_evidence_sha256": "50d6a9d340f19ab355609917993114daf5f47e3161067bcf34955bbd05cd9cb0",
+    "public_license_copy": "site/public/licenses/semi-supervised-sklearn-BSD-3-Clause.txt",
+    "dimensions_px": [
+      400,
+      400
+    ],
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original published PNG, byte-for-byte; no crop, redraw, relabeling or recompression. Legend and axes preserved. Unknown observations are not represented as a third class.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch.md"
+    ]
+  },
+  {
+    "id": "curated-semi-supervised-circles-spread-f4f3999fbd3e",
+    "asset": "00 Учебник/Assets/Figures/curated/semi-supervised-2026-10-28/circles-spread.png",
+    "author": "The scikit-learn developers",
+    "source_url": "https://scikit-learn.org/stable/auto_examples/semi_supervised/plot_label_propagation_structure.html",
+    "source_image_url": "https://scikit-learn.org/stable/_images/sphx_glr_plot_label_propagation_structure_002.png",
+    "source_asset": "05 Источники/Originals/semi-supervised-2026-10-28/sklearn/circles-spread.png",
+    "source_asset_sha256": "f4f3999fbd3e841b8b06285ba58d4490ef3c5744469abe791d4e68d8d7ae97a7",
+    "sha256": "f4f3999fbd3e841b8b06285ba58d4490ef3c5744469abe791d4e68d8d7ae97a7",
+    "source_page_snapshot": "05 Источники/Originals/semi-supervised-2026-10-28/sklearn/circles.html",
+    "source_page_sha256": "65a438c53ed2f2f5012f7e36df5e38a9725f9c136568b2f960b737a39433e71e",
+    "license": "BSD-3-Clause",
+    "license_url": "https://github.com/scikit-learn/scikit-learn/blob/main/COPYING",
+    "license_evidence": "05 Источники/Originals/clustering-2026-10-21/sklearn-COPYING",
+    "license_evidence_sha256": "50d6a9d340f19ab355609917993114daf5f47e3161067bcf34955bbd05cd9cb0",
+    "public_license_copy": "site/public/licenses/semi-supervised-sklearn-BSD-3-Clause.txt",
+    "dimensions_px": [
+      400,
+      400
+    ],
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original published PNG, byte-for-byte; no crop, redraw, relabeling or recompression. The caption identifies LabelSpreading with KNN and alpha=0.8 rather than calling it the hard-clamped harmonic example.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch.md"
+    ]
+  }
+]

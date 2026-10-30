@@ -1,0 +1,50 @@
+[
+  {
+    "id": "curated-cs231n-losses-margin-f2ee54147d03",
+    "asset": "00 Учебник/Assets/Figures/curated/losses-2026-10-23/margin.jpg",
+    "author": "Andrej Karpathy",
+    "source_url": "https://cs231n.github.io/linear-classify/#svm",
+    "source_image_url": "https://raw.githubusercontent.com/cs231n/cs231n.github.io/8ec57ccfc32379ae4b37c45de949af359673f92f/assets/margin.jpg",
+    "source_asset": "00 Учебник/Assets/Figures/curated/losses-2026-10-23/margin.jpg",
+    "source_asset_sha256": "f2ee54147d0346ce8ffb64d2081a7295156ec5d6964ddbc11d0fdaa12446adfb",
+    "sha256": "f2ee54147d0346ce8ffb64d2081a7295156ec5d6964ddbc11d0fdaa12446adfb",
+    "commit": "8ec57ccfc32379ae4b37c45de949af359673f92f",
+    "source_code": "05 Источники/Originals/losses-2026-10-23/linear-classify.md",
+    "source_code_sha256": "0062ffae16d3c9ad11b5d47b6cfa28949c48587103f31f9cf7071f7995464563",
+    "license": "MIT",
+    "license_url": "https://github.com/cs231n/cs231n.github.io/blob/8ec57ccfc32379ae4b37c45de949af359673f92f/LICENSE",
+    "license_evidence": "05 Источники/Originals/loss-functions-2026-10-21/cs231n-LICENSE.txt",
+    "license_evidence_sha256": "85b365f07b4cfc5d678c548bc41965bc3bc782106b8903bd3b876d9d49a4270d",
+    "modifications": "None; complete original course image copied byte-for-byte; no crop, redraw, relabeling, translation, or upsampling.",
+    "used_in": [
+      "00 Учебник/00 Математические и ML-основания/04 Функции потерь.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "source-raster-copy"
+  },
+  {
+    "id": "curated-cs231n-losses-svmvssoftmax-974bf1b201eb",
+    "asset": "00 Учебник/Assets/Figures/curated/losses-2026-10-23/svmvssoftmax.png",
+    "author": "Andrej Karpathy",
+    "source_url": "https://cs231n.github.io/linear-classify/#svmvssoftmax",
+    "source_image_url": "https://raw.githubusercontent.com/cs231n/cs231n.github.io/8ec57ccfc32379ae4b37c45de949af359673f92f/assets/svmvssoftmax.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/losses-2026-10-23/svmvssoftmax.png",
+    "source_asset_sha256": "974bf1b201eb50337a6acda0af2a75b71bbcf550bb2394fed4f9ce0b71bbd2ce",
+    "sha256": "974bf1b201eb50337a6acda0af2a75b71bbcf550bb2394fed4f9ce0b71bbd2ce",
+    "commit": "8ec57ccfc32379ae4b37c45de949af359673f92f",
+    "source_code": "05 Источники/Originals/losses-2026-10-23/linear-classify.md",
+    "source_code_sha256": "0062ffae16d3c9ad11b5d47b6cfa28949c48587103f31f9cf7071f7995464563",
+    "license": "MIT",
+    "license_url": "https://github.com/cs231n/cs231n.github.io/blob/8ec57ccfc32379ae4b37c45de949af359673f92f/LICENSE",
+    "license_evidence": "05 Источники/Originals/loss-functions-2026-10-21/cs231n-LICENSE.txt",
+    "license_evidence_sha256": "85b365f07b4cfc5d678c548bc41965bc3bc782106b8903bd3b876d9d49a4270d",
+    "modifications": "None; complete original course image copied byte-for-byte; no crop, redraw, relabeling, translation, or upsampling.",
+    "used_in": [
+      "00 Учебник/00 Математические и ML-основания/04 Функции потерь.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "source-raster-copy"
+  }
+]

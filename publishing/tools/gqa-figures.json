@@ -1,0 +1,104 @@
+[
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/attention-review-2026-09/prefill-decode.png",
+    "source_asset": "05 Источники/Originals/gqa-2026-10-22/prefill-decode.png",
+    "source_asset_sha256": "947a70b7cef4d1875d295692731cd4216f189daaf5ac7b586106fc542626e3a6",
+    "sha256": "947a70b7cef4d1875d295692731cd4216f189daaf5ac7b586106fc542626e3a6"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/attention-review-2026-09/cached-first-token.png",
+    "source_asset": "05 Источники/Originals/gqa-2026-10-22/cached-first-token.png",
+    "source_asset_sha256": "c5df87a583d98ae3dcbeaf069a2d1a270464ae193181486eee05d82c266c84b7",
+    "sha256": "c5df87a583d98ae3dcbeaf069a2d1a270464ae193181486eee05d82c266c84b7"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/attention-review-2026-09/next-token-attends-cache.png",
+    "source_asset": "05 Источники/Originals/gpt2-2026-10-22/gpt2-self-attention-qkv-3-2.png",
+    "source_asset_sha256": "6c608bc2633dd7ce6a4c3469fc63d0e900632ee0caf3c99298f5a666e300888b",
+    "sha256": "6c608bc2633dd7ce6a4c3469fc63d0e900632ee0caf3c99298f5a666e300888b"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/gqa/mha-gqa-mqa.png",
+    "source_asset": "05 Источники/Originals/llama-2026-10-22/gqa-source.png",
+    "source_asset_sha256": "02c3d00ec9f339211daae34392aeed850b013457b64f8088f1c5c054a5e94ab6",
+    "sha256": "02c3d00ec9f339211daae34392aeed850b013457b64f8088f1c5c054a5e94ab6"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/gqa/uptrain-recycling.png",
+    "source_asset": "05 Источники/Originals/gqa-2026-10-22/recycling.png",
+    "source_asset_sha256": "96869d5f7e013dc55093c0581b9fee75e3a7d27ed5a9da34136a6d3ffb5f1933",
+    "sha256": "96869d5f7e013dc55093c0581b9fee75e3a7d27ed5a9da34136a6d3ffb5f1933"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/gqa-2026-10-22/task-results.png",
+    "source_asset": "05 Источники/Originals/llama-2026-10-22/gqa-emnlp.pdf",
+    "source_asset_sha256": "c52de1d3339174fbf93b588aa4cc9bf36092c865f2358ece3999de152f57455c",
+    "source_page": 3,
+    "render_dpi": 300,
+    "render_page_size_px": [
+      2481,
+      3508
+    ],
+    "crop_box_px": [
+      285,
+      270,
+      2200,
+      870
+    ],
+    "sha256": "b0da31de9938b52f4c363ca863a5dfaa484455141d04115f3a459ee34c38e708"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/gqa-2026-10-22/conversion-methods.png",
+    "source_asset": "05 Источники/Originals/llama-2026-10-22/gqa-emnlp.pdf",
+    "source_asset_sha256": "c52de1d3339174fbf93b588aa4cc9bf36092c865f2358ece3999de152f57455c",
+    "source_page": 4,
+    "render_dpi": 300,
+    "render_page_size_px": [
+      2481,
+      3508
+    ],
+    "crop_box_px": [
+      285,
+      270,
+      1225,
+      1055
+    ],
+    "sha256": "a3d60a2aa617fa8860e59051be8c0655c06b677982c1fbb088de9a3d43ae937f"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/gqa-2026-10-22/uptraining-proportion.png",
+    "source_asset": "05 Источники/Originals/llama-2026-10-22/gqa-emnlp.pdf",
+    "source_asset_sha256": "c52de1d3339174fbf93b588aa4cc9bf36092c865f2358ece3999de152f57455c",
+    "source_page": 4,
+    "render_dpi": 300,
+    "render_page_size_px": [
+      2481,
+      3508
+    ],
+    "crop_box_px": [
+      285,
+      1280,
+      1225,
+      2015
+    ],
+    "sha256": "bebb96e28b3ba327606d5440608352d00e8472a98212a6c772328cc7d4581f46"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/gqa-2026-10-22/groups-speed.png",
+    "source_asset": "05 Источники/Originals/llama-2026-10-22/gqa-emnlp.pdf",
+    "source_asset_sha256": "c52de1d3339174fbf93b588aa4cc9bf36092c865f2358ece3999de152f57455c",
+    "source_page": 4,
+    "render_dpi": 300,
+    "render_page_size_px": [
+      2481,
+      3508
+    ],
+    "crop_box_px": [
+      1265,
+      270,
+      2210,
+      1145
+    ],
+    "sha256": "69b9738c88e8ec7cca78f523baa624714f95b69dfadf3f6484ebe13e1e41da87"
+  }
+]

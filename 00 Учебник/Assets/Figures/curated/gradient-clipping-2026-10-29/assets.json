@@ -1,0 +1,81 @@
+[
+  {
+    "last_verified": "2026-10-29",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md"
+    ],
+    "author": "Andy Brock, Soham De, Samuel L. Smith, Karen Simonyan",
+    "title": "NFNet Figure 2: batch size and AGC threshold ablations",
+    "source_url": "https://proceedings.mlr.press/v139/brock21a.html",
+    "source_image_url": "https://proceedings.mlr.press/v139/brock21a/brock21a.pdf#page=4",
+    "source_asset": "05 Источники/Originals/gradient-clipping-2026-10-29/brock21a.pdf",
+    "source_asset_sha256": "4fed88ab128f2c3e4fc9fa2c50d0aba2520ef16015e211e1b6f444c328dba3a2",
+    "source_page": 4,
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/peft-2026-10-29/pmlr-license-agreement.pdf",
+    "license_evidence_sha256": "3a3eac0ebdded57660c12c59028c5429b6d2b328be2c6fde534a104438444c31",
+    "copyright": "Copyright 2021 the authors; ICML 2021, PMLR 139:1059-1071",
+    "derivation": "pdf-page-render-crop",
+    "render_dpi": 288,
+    "render_page_size_px": [
+      2448,
+      3168
+    ],
+    "crop_box_px": [
+      1215,
+      265,
+      2185,
+      775
+    ],
+    "modifications": "Both complete panels and original caption cropped from PDF page 4. No redraw, relabeling, translation or resizing.",
+    "asset": "00 Учебник/Assets/Figures/curated/gradient-clipping-2026-10-29/nfnet-agc-ablation.png",
+    "dimensions_px": [
+      970,
+      510
+    ],
+    "width": 970,
+    "height": 510,
+    "bytes": 138140,
+    "sha256": "083f5af777621f5e5d1e759360cffc650c12e5254d75ca56e1bdc7fbd17b94a9",
+    "id": "curated-adaptive-clipping-083f5af77762"
+  },
+  {
+    "last_verified": "2026-10-29",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md"
+    ],
+    "author": "Prem Seetharaman, Gordon Wichern, Bryan Pardo, Jonathan Le Roux",
+    "title": "Original AutoClip mask-inference training animation",
+    "source_url": "https://github.com/pseeth/autoclip/blob/dfb622c3caca9dc0ecc8bf0afeb773e190256d6e/README.md#training-dynamics",
+    "source_image_url": "https://raw.githubusercontent.com/pseeth/autoclip/dfb622c3caca9dc0ecc8bf0afeb773e190256d6e/images/mi.gif",
+    "source_asset": "05 Источники/Originals/gradient-clipping-2026-10-29/autoclip-mi.gif",
+    "source_asset_sha256": "57cdb8d1dd158320347f4a1017a4554dd0405c40cbaf311e1107c2ec38367397",
+    "source_commit": "dfb622c3caca9dc0ecc8bf0afeb773e190256d6e",
+    "source_page_snapshot": "05 Источники/Originals/gradient-clipping-2026-10-29/autoclip-README.md",
+    "source_page_sha256": "f1719fbbd196ebdd9be10c19803567beb4410a9f6a583feb2b31642ad0f6e870",
+    "license": "MIT",
+    "license_url": "https://github.com/pseeth/autoclip/blob/dfb622c3caca9dc0ecc8bf0afeb773e190256d6e/LICENSE",
+    "license_evidence": "05 Источники/Originals/gradient-clipping-2026-10-29/autoclip-MIT.txt",
+    "license_evidence_sha256": "3391e95d6d3cc339dd66a12af61511fbe637abac4fa18254a8c667f794a8fc33",
+    "public_license_copy": "site/public/licenses/autoclip-dfb622c3-MIT.txt",
+    "copyright": "Copyright (c) 2020 pseeth",
+    "derivation": "source-raster-copy",
+    "modifications": "None. Complete original GIF copied byte-for-byte, including all forty frames and their timing.",
+    "asset": "00 Учебник/Assets/Figures/curated/gradient-clipping-2026-10-29/autoclip-mi.gif",
+    "dimensions_px": [
+      864,
+      576
+    ],
+    "width": 864,
+    "height": 576,
+    "bytes": 1171235,
+    "sha256": "57cdb8d1dd158320347f4a1017a4554dd0405c40cbaf311e1107c2ec38367397",
+    "frames": 40,
+    "id": "curated-adaptive-clipping-57cdb8d1dd15"
+  }
+]

@@ -1,0 +1,40 @@
+{
+  "chapter": "00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA.md",
+  "chapter_sha256": "f8877b751c12f83d4fbe6b8b281f3bc65045125e03244907ceab1e2c14672569",
+  "checker_sha256": "873db26efc535bc345dc8d637146797e25ddbd513d6ee9b7bc7db42bb161c21b",
+  "python_blocks": 4,
+  "exact_finite_state_checks": [
+    {
+      "steps": 1,
+      "invalid_probability": 0.5
+    },
+    {
+      "steps": 2,
+      "invalid_probability": 0.25
+    },
+    {
+      "steps": 3,
+      "invalid_probability": 0.16666666666666669
+    },
+    {
+      "steps": 4,
+      "invalid_probability": 0.125
+    },
+    {
+      "steps": 8,
+      "invalid_probability": 0.0625
+    },
+    {
+      "steps": 16,
+      "invalid_probability": 0.03125
+    },
+    {
+      "steps": 32,
+      "invalid_probability": 0.015625
+    }
+  ],
+  "remasking_marginal_cases": 120,
+  "negative_controls": 6,
+  "training_stream_leakage_control": true,
+  "scope": "CPU arithmetic and finite-state toy sampler. No neural training, model downloads, GPU timing or language-quality benchmark."
+}

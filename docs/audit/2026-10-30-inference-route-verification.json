@@ -1,0 +1,365 @@
+{
+  "date": "2026-10-30",
+  "classification": "progress",
+  "previousGoalTurn": "docs/audit/2026-10-30-pretraining-reader-verification.json",
+  "scope": "Reading-route continuity of physics → KV-cache/PagedAttention → scheduling, plus discovery and locale-preserving access to the existing interactive scheduler. No claim of full textbook, full-course ingestion or visual acceptance of all figures.",
+  "wholeReads": [
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+      "route": "textbook/inference/llm-inference-physics",
+      "sha256": "dcdc7f9712614b5342b15d03cba1beb7f641ea72b27fe6ee04730ad70fd66bdc",
+      "lines": 950,
+      "read": "Complete owner read for the conceptual reading-route review, including all programs, formulas, original excerpts and figure captions. This is not fresh visual acceptance of every figure or a new source-completeness audit.",
+      "findings": [
+        "Prefill/decode dependence is introduced before allocation and scheduling. The owner separates FLOPs, stored bytes and HBM traffic, then works through MLP fusion, MHA/GQA, roofline, MBU and client token intervals.",
+        "No explanatory body changed. Five actual CPU programs checked; source figures and original JAX Appendix A retained, with source-granularity limitations stated."
+      ]
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+      "route": "textbook/inference/kv-cache-batching-pagedattention",
+      "sha256": "42438233617da20ba81611806b40ed450beaf6506e90ec181e2d43ac92580832",
+      "lines": 710,
+      "read": "Complete owner read for the conceptual reading-route review, including all programs, formulas, original excerpts and figure captions. This is not fresh visual acceptance of every figure or a new source-completeness audit.",
+      "findings": [
+        "The owner explains why causal hidden states permit per-layer K/V reuse, then derives offset masks, GQA/RoPE cache shape, left padding, paged addressing, global softmax and copy-on-write.",
+        "The next owner is scheduling rather than a second independent paging reference. Five CPU programs checked, including a real random two-layer decoder and negative controls. No text or figure changed."
+      ]
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md",
+      "route": "textbook/inference/scheduling",
+      "sha256": "53a8c18595f4e2f2205a0d43c009e443e948720dc199e50f966449a838e8e0ec",
+      "lines": 1037,
+      "read": "Complete owner read for the conceptual reading-route review, including all programs, formulas, original excerpts and figure captions. This is not fresh visual acceptance of every figure or a new source-completeness audit.",
+      "findings": [
+        "The complete owner distinguishes known/generated tokens, computed KV positions, token budget and allocated blocks. It develops admission, chunked prefill, cache hashes, full-hit recomputation, RadixAttention and fairness through examples.",
+        "The missing link to the existing interactive scheduler is added to both fully read editions. An actual EN click then exposed a separate static redirect, now replaced by a canonical-language EN wrapper without translating the original exercise."
+      ],
+      "readRevisionBeforeEditorialDelta": "3256c046c7c117b55a8532fdf20a713eb575723327fa9c75839c55b24b582847",
+      "linesAtWholeRead": 1035,
+      "finalDeltaReview": "One practice-list entry, a blank separator and last_updated only; every existing teaching paragraph, code fence, mathematical block and figure preserved."
+    }
+  ],
+  "englishWholeRead": {
+    "path": "en/00 Textbook/14 Inference and optimization/55b Scheduling — continuous batching, chunked prefill, and prefix caching.md",
+    "linesAtWholeRead": 1037,
+    "wholeReadRevision": "aa4debaa5cc7f8c5f99a3cac50073270d8e1613a8a75a4178e60f881f04aab96",
+    "currentSha256": "055803b8783e0c643f02a6928e375ea9a007a41f3076479f59473e5e96c13206",
+    "lines": 1039,
+    "review": "Complete English scheduling edition read. The exact shared practice-list entry and current canonical-revision metadata were reviewed separately; no translation or replacement of the explanatory body."
+  },
+  "practiceWholeRead": {
+    "path": "06 Практика/14b Планировщик запросов и KV-память.md",
+    "route": "practice/inference-scheduler",
+    "sha256": "08206ae7089e1b496d90523ca7f8cf8a62994957b49c27596dde3f2df8d811ac",
+    "lines": 151,
+    "figures": 1,
+    "pythonFences": 0,
+    "review": "Entire 151-line canonical practice read to verify the proposed link's description, its four-request trace and stated simulation limits."
+  },
+  "journals": [
+    "docs/audit/2026-10-30-scheduler-practice-link-additions.json",
+    "docs/audit/2026-10-30-en-scheduler-navigation-additions.json"
+  ],
+  "preservation": {
+    "changedChapterBodies": "Exactly one practice-list entry and blank separator in each fully read scheduling edition. Every preceding explanatory paragraph, code fence, formula, licensed excerpt and figure remains unchanged. last_updated and EN canonical/review metadata updated.",
+    "unchangedOwners": [
+      {
+        "path": "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+        "route": "textbook/inference/llm-inference-physics",
+        "sha256": "dcdc7f9712614b5342b15d03cba1beb7f641ea72b27fe6ee04730ad70fd66bdc",
+        "lines": 950,
+        "figures": 7,
+        "pythonFences": 5
+      },
+      {
+        "path": "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+        "route": "textbook/inference/kv-cache-batching-pagedattention",
+        "sha256": "42438233617da20ba81611806b40ed450beaf6506e90ec181e2d43ac92580832",
+        "lines": 710,
+        "figures": 6,
+        "pythonFences": 5
+      }
+    ],
+    "rootIllustrations": 20,
+    "newFigures": 0,
+    "newTranslations": 0,
+    "historicalReceipts": "Original hashes retained; exact deltas reverse independently, unknown edits still fail."
+  },
+  "style": {
+    "guidance": "no-ai-slop SKILL.md and eval.md read completely; local academic/editorial qualifications apply.",
+    "scope": "Minimal new practice description and existing edition-status UI. The description names editable arrivals/lengths/budgets and the simulator's actual limits. No synthetic summary replaced the existing explanations.",
+    "review": "All three complete preceding root owners and the complete EN scheduling edition read; exact navigation/metadata deltas reviewed separately rather than claiming a second whole reread of unchanged paragraphs."
+  },
+  "cpu": [
+    {
+      "command": "python3 publishing/tools/check_inference_physics_examples.py",
+      "exitCode": 0,
+      "result": "Two marked programs; independent MLP traffic ledgers, parameter/embedding/cache accounting, MHA/GQA intensity, triangular FLOPs, roofline and token-interval calculations.",
+      "sha256": "dcdc7f9712614b5342b15d03cba1beb7f641ea72b27fe6ee04730ad70fd66bdc"
+    },
+    {
+      "command": "python3 publishing/tools/check_inference_mbu_examples.py",
+      "exitCode": 0,
+      "result": "All five actual physics programs, including the preceding two; fixed-batch MBU identity, 16 MoE routes, model versus physical bytes and uneven-rank lower bound. Count as five unique programs, not seven.",
+      "sha256": "dcdc7f9712614b5342b15d03cba1beb7f641ea72b27fe6ee04730ad70fd66bdc"
+    },
+    {
+      "command": "LC_ALL=C LANG=C uv run --offline --with torch==2.14.1 --with transformers==4.57.1 --with numpy==2.3.5 python publishing/tools/check_kv_cache_examples.py",
+      "exitCode": 0,
+      "result": {
+        "programs": 5,
+        "randomModelParameters": 5200,
+        "maximumCachedLogitError": 2.9802322387695312e-8,
+        "kvBytesFP32": 768,
+        "greedyMatchesGenerate": true,
+        "negativeControls": [
+          "wrong RoPE positions",
+          "duplicated prefix with existing cache",
+          "wrong left-padding position",
+          "SDPA upper-left non-square causal alignment"
+        ],
+        "additionalChecks": [
+          "paged reads and global stable softmax",
+          "rounding and allocation",
+          "copy-on-write reference counts"
+        ]
+      },
+      "sha256": "42438233617da20ba81611806b40ed450beaf6506e90ec181e2d43ac92580832"
+    },
+    {
+      "command": "python3 publishing/tools/check_inference_scheduling_examples.py",
+      "exitCode": 0,
+      "result": {
+        "programs": 6,
+        "batchingTraces": 8736,
+        "admissionPlans": 3000,
+        "chunkingTraces": 4096,
+        "fullBlockHitCases": 20800,
+        "packedMaskLayouts": 1884,
+        "sourceExcerpts": 2,
+        "figureEmbeds": 7,
+        "fullHFFigureHashes": 2
+      },
+      "sha256": "53a8c18595f4e2f2205a0d43c009e443e948720dc199e50f966449a838e8e0ec"
+    }
+  ],
+  "checks": {
+    "rootBuild": {
+      "command": "npm run build",
+      "directory": "site",
+      "exitCode": 0,
+      "pages": 2007,
+      "seconds": 31.47,
+      "finalRevision": "Final build started after the final product changes; prior config-invalidation build kept separate."
+    },
+    "unit": {
+      "command": "npm run test:unit",
+      "directory": "publishing",
+      "exitCode": 0,
+      "files": 144,
+      "tests": 899,
+      "seconds": 74.32
+    },
+    "output": {
+      "command": "npm run test:output",
+      "directory": "publishing",
+      "exitCode": 0,
+      "tests": 183,
+      "seconds": 14.7
+    },
+    "links": {
+      "command": "npm run check:links",
+      "exitCode": 0,
+      "broken": 0
+    },
+    "topics": {
+      "command": "npm run check:topics",
+      "exitCode": 0,
+      "topics": 152,
+      "indexes": 2
+    },
+    "regressionBeforeFix": {
+      "command": "npm run test:output -- -t 'renders a working canonical-language scheduler'",
+      "exitCode": 1,
+      "expectedFailure": "Observed static EN scheduler document contained a meta refresh to RU. This exact test passes after the fix."
+    },
+    "focusedDiffCheck": {
+      "exitCode": 0
+    },
+    "warnings": "Known Poppler closepath and tar-locale warnings in unit checks. Existing static-route priority notices remain; custom route output and its UI were verified."
+  },
+  "visualQa": {
+    "surface": "Local preview http://127.0.0.1:4330 of final root dist.",
+    "desktop": "New scheduling practice entry visible and followed into root scheduler. A forward step processed four prompt positions, emitted two tokens and allocated two four-position blocks (1 MiB); a full run completed all four requests and ten tokens in five steps.",
+    "mobile": {
+      "viewportWidth": 375,
+      "clientWidth": 360,
+      "scrollWidth": 360,
+      "katexErrors": 0,
+      "editionNotices": 1,
+      "completedRequests": "4 / 4",
+      "emittedTokens": 10,
+      "iterations": 5,
+      "observedRoute": "/en/practice/inference-scheduler/",
+      "returnRoute": "/en/textbook/inference/scheduling/"
+    },
+    "locale": "Real click from the EN chapter remains under /en/. Lab text and controls stay in their original Russian with one canonical-language exercise notice. A real return click reaches EN scheduling.",
+    "artifacts": [
+      {
+        "path": "docs/audit/evidence/2026-10-30-inference-route/scheduling-practice-desktop.png",
+        "sha256": "381e6f2065ea3d0d988dffedf4bed7240edc0bc7caeef772444da47c36791e07"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-30-inference-route/scheduler-step-zero-desktop.png",
+        "sha256": "c15fcdff593ee741195662f89a0f5da4c134ef7527b82b0c5d1d0fcd10879c4d"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-30-inference-route/en-scheduling-practice-mobile.png",
+        "sha256": "a18c64b0b3ea0a433b658d09068bb681016249f036a0c6b9f65b34f6203833dc"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-30-inference-route/en-scheduler-mobile-notice.png",
+        "sha256": "c7207c616dea361014504e26a4346040c2077253703c65a87b198b4017bf2b44"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-30-inference-route/en-scheduler-mobile-completed.png",
+        "sha256": "c5cefee1570fb4efe81b2e38df6718d2d4da6c0a906e5a5ed2ce90b0a63f6859"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-30-inference-route/scheduler-completed-desktop.png",
+        "sha256": "0d3c0bc77c0f6b4c11c8344f8606d08050430530301542147f443d951583a411"
+      }
+    ],
+    "limits": "This is functional/layout QA of the changed navigation and existing simulator, not a fresh visual review of all 20 source illustrations in the three chapters.",
+    "cleanup": "Temporary mobile viewport reset. Original user tabs untouched; agent-owned tab 17 retained as a deliverable."
+  },
+  "publication": {
+    "committed": false,
+    "pushed": false,
+    "deployed": false,
+    "head": "75e1870",
+    "author": "Alexander Potekhin <al_potechin@mail.ru>",
+    "pagesBase": "Fresh physical /bookvar build for these changes remains required before release."
+  },
+  "remaining": [
+    "Continue the serving-engines and remaining inference/evaluation route owners, then atlas/model comparisons, with exact earlier evidence reused only at its verified revision and scope.",
+    "Resolve the specifically recorded figure-permission gaps; existing source captions are not a blanket reproduction grant.",
+    "Freeze the scoped diff, perform required root and physical /bookvar release checks, inspect origin/dev and author, then commit/push dev and verify Pages. Do not change main."
+  ],
+  "pins": [
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+      "sha256": "dcdc7f9712614b5342b15d03cba1beb7f641ea72b27fe6ee04730ad70fd66bdc"
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+      "sha256": "42438233617da20ba81611806b40ed450beaf6506e90ec181e2d43ac92580832"
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md",
+      "sha256": "53a8c18595f4e2f2205a0d43c009e443e948720dc199e50f966449a838e8e0ec"
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/55b Scheduling — continuous batching, chunked prefill, and prefix caching.md",
+      "sha256": "055803b8783e0c643f02a6928e375ea9a007a41f3076479f59473e5e96c13206"
+    },
+    {
+      "path": "06 Практика/14b Планировщик запросов и KV-память.md",
+      "sha256": "08206ae7089e1b496d90523ca7f8cf8a62994957b49c27596dde3f2df8d811ac"
+    },
+    {
+      "path": "publishing/adapter/build.ts",
+      "sha256": "55d4f4b70c78b2ea6c0108c8c7c96c34ed396a170903189a3feb0b088d6f3d58"
+    },
+    {
+      "path": "site/astro.config.mjs",
+      "sha256": "a6db8b84bea5b68f2359485b827f4121830d50518fc10f5b05bf98797d80ef02"
+    },
+    {
+      "path": "site/src/components/BookPageTitle.astro",
+      "sha256": "0981b5a8925b03f8f523ace0dd7656bacfe3022cb2c2de32a2d80c909789878c"
+    },
+    {
+      "path": "site/src/pages/en/practice/inference-scheduler.astro",
+      "sha256": "24d47a3e454141fd482a79bc17a973914be0a1854af22acaaf4e506a98779806"
+    },
+    {
+      "path": "publishing/tools/en-inference-parity.mjs",
+      "sha256": "86492d0d05f9944c2ddbbf08023e135d78a817b8a4ef90506d10bde64bebaf5c"
+    },
+    {
+      "path": "publishing/tools/topic-consolidation-baseline.mjs",
+      "sha256": "2a3ed5a69536cbd3531086fa15db1257b4b7bf8c3baa24537f5244ac2586a4a0"
+    },
+    {
+      "path": "publishing/tools/topic_consolidation_baseline.py",
+      "sha256": "cf7827df8827b06356dedeef05f5e35fe5cc513199f4374507895410381ec234"
+    },
+    {
+      "path": "publishing/tests/scheduler-lab.test.ts",
+      "sha256": "8101e6aa2273aea624b12a9f4df4ece3f08c1f2946897efc2f9af441353f67c8"
+    },
+    {
+      "path": "publishing/tests/site-output.test.ts",
+      "sha256": "dfe83300e05d67273d7e13f37308fb0a2133ed6c58483a2738a991c47592a407"
+    },
+    {
+      "path": "publishing/tools/check_inference_physics_examples.py",
+      "sha256": "94003a76cd5e6123788b45d9f4c18018d3aa6bffe6fccfce2fd5b58ab3131a58"
+    },
+    {
+      "path": "publishing/tools/check_inference_mbu_examples.py",
+      "sha256": "8402c08db113cb1a5779e325f9d0338715c83b52d8e14887d65cf79eba71d2e8"
+    },
+    {
+      "path": "publishing/tools/check_kv_cache_examples.py",
+      "sha256": "131b0b1741c10811855346a3666f6d5b7ba02766eb947ab507cba369a46c4bf7"
+    },
+    {
+      "path": "publishing/tools/check_inference_scheduling_examples.py",
+      "sha256": "eb0f607f9db5e6a9fa44cc86392553c672163c9c7423a1a5f8f650a37e6f4962"
+    },
+    {
+      "path": "docs/audit/2026-10-30-scheduler-practice-link-additions.json",
+      "sha256": "c6733f740eecf3c92e7666cb4414f9e8bbcc16666592aecb9dd981d808f5ba79"
+    },
+    {
+      "path": "docs/audit/2026-10-30-en-scheduler-navigation-additions.json",
+      "sha256": "2fb35776a3e97b0bb55590e4ccbca8ed890d9ddfae00f29890688ff98b34ddde"
+    },
+    {
+      "path": "docs/audit/2026-10-30-reading-route-review.json",
+      "sha256": "53d64882f5cb055d07e590a046acf77a6231050c2954c1df6ac27353e155688d"
+    },
+    {
+      "path": "docs/audit/2026-10-29-release-completion-plan.md",
+      "sha256": "960d42bd17c35a35c4e461d60b3e6b6e8b725210e7922f02a00a177042fa2ea8"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-inference-route/scheduling-practice-desktop.png",
+      "sha256": "381e6f2065ea3d0d988dffedf4bed7240edc0bc7caeef772444da47c36791e07"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-inference-route/scheduler-step-zero-desktop.png",
+      "sha256": "c15fcdff593ee741195662f89a0f5da4c134ef7527b82b0c5d1d0fcd10879c4d"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-inference-route/en-scheduling-practice-mobile.png",
+      "sha256": "a18c64b0b3ea0a433b658d09068bb681016249f036a0c6b9f65b34f6203833dc"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-inference-route/en-scheduler-mobile-notice.png",
+      "sha256": "c7207c616dea361014504e26a4346040c2077253703c65a87b198b4017bf2b44"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-inference-route/en-scheduler-mobile-completed.png",
+      "sha256": "c5cefee1570fb4efe81b2e38df6718d2d4da6c0a906e5a5ed2ce90b0a63f6859"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-inference-route/scheduler-completed-desktop.png",
+      "sha256": "0d3c0bc77c0f6b4c11c8344f8606d08050430530301542147f443d951583a411"
+    }
+  ]
+}

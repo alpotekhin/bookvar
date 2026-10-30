@@ -1,0 +1,333 @@
+{
+  "date": "2026-10-29",
+  "status": "verified-locally-not-published",
+  "scope": "Small-data encoder fine-tuning and LoRA experiment/budget additions inside the existing PEFT chapter. This receipt does not accept the entire textbook, all archived notes or a live deployment.",
+  "canonicalMarkdown": "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md",
+  "routes": [
+    "/textbook/post-training/fine-tuning-peft/",
+    "/en/textbook/post-training/fine-tuning-peft/"
+  ],
+  "sourceLanguage": "English source excerpts and English explanation shared by both routes. No new translation or fallback.",
+  "priorReceipt": "docs/audit/2026-10-29-peft-verification.json",
+  "journal": "docs/audit/2026-10-29-small-data-finetuning-additions.json",
+  "sha256": {
+    "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md": "a80d648c80c7a96e0833d5820450a0bee77121d2eba26a4e25716c6bccf59023",
+    "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md": "fa3595eca44cec1269db1425337a04773d132d2dd685432d1b12518a15ae19b4",
+    "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md": "3afbb8b75a2866dc5d493a929e0354aa3d1fa141cbdbdd82f0c866a5f387d872",
+    "publishing/tools/check_peft_examples.py": "3a788b3b610b240964b9251855ae12aca8d712ddf3be60792e3a011f50f0b6fe",
+    "publishing/tests/small-data-finetuning.test.ts": "4034ef081004c16856c24cbae673003c339a52f397b5dbb45d5601522a69dca7",
+    "publishing/tests/peft-fine-tuning.test.ts": "a93d5752fd177c5c422956763b5ba5db93386529c7de1d322960ca1319848d4c",
+    "publishing/tests/asset-registry.test.ts": "f875458020aed5cbc025715dd4233c5c58b366034cfbb553936679614b2ca632",
+    "publishing/tests/site-output.test.ts": "406247a4be6779e30d23e261713a2fdd794f7c907b23d766caa8806a2a519a8e",
+    "publishing/tools/topic-consolidation-baseline.mjs": "1bb2197d001b87ca6ba4808f30d97966ce3943aded227f003f42904a4c482b28",
+    "publishing/tools/topic_consolidation_baseline.py": "89ee40321970c278ff03a6b3f4c63f77eecfc0017fb7c0d21602b4033adbda62",
+    "docs/audit/2026-10-29-small-data-finetuning-additions.json": "a5966c135fd98964b4bae7e928fbd51387d68771e9b72483e7089efb56b4c284",
+    "05 Источники/asset-registry.yml": "5dbf6b60d547bc8255aff5f38f8315fe7ee7d4a0864310453c43cee05a5cd106",
+    "01 Справочник/_index.md": "fd38f0cef2b7dda12604130667322a6526e58c3c76f152e218fb5cb7c68593e7",
+    "en/01 Reference/_index.md": "656412135a179a986393056b32b0ccd0bbdc0182983cb48e32864711d22acc50",
+    "00 Учебник/Assets/Figures/curated/small-data-finetuning-2026-10-29/assets.json": "1c154185d3644c01ea206666321ce8136cd873fb149dafd22b51d5b66b362583",
+    "site/dist/textbook/post-training/fine-tuning-peft/index.html": "c7db73d1a67475ac9e6ddd6ce28db865bb5304fd455d4e7e866e974d7d286c60",
+    "site/dist/en/textbook/post-training/fine-tuning-peft/index.html": "2669aacf46d0194d9e70dd25a093d37a87c18cf0bfa61ae3a0ed7f70c58dab23",
+    "/var/tmp/bookvar-small-data-pages-20261029/textbook/post-training/fine-tuning-peft/index.html": "533dab4685f64e23c778ae7c7a0510c2b241c2dc92ade20722f2768d002ba21b",
+    "/var/tmp/bookvar-small-data-pages-20261029/en/textbook/post-training/fine-tuning-peft/index.html": "77bebe08dbba3cf29bced8fa5541cfd4e86674090a9184ec474b9bf076b3f952",
+    "docs/audit/evidence/2026-10-29-small-data/observations.json": "f67935a280f001a3f7254c412bdad12a80e178731fce6b938bd92bc998884526",
+    "05 Источники/Originals/small-data-finetuning-2026-10-29/asapp-LICENSE": "573d2a944b2964ab1c030d71f15cdbc18b171534f18457a11b075dbfdcfe039c",
+    "05 Источники/Originals/small-data-finetuning-2026-10-29/asapp-README.md": "50ce7bb5cc61ae80265d142b7717fd2851b812eff7addd379c128c956f275ec9",
+    "05 Источники/Originals/small-data-finetuning-2026-10-29/asapp-model_utils.py": "acbec6a95ea9f32c59eacc3d7f053d34dd0a0af2cf09c780147e2a5f9825796e",
+    "05 Источники/Originals/small-data-finetuning-2026-10-29/asapp-repo_illustration.png": "a4a3f45c72dc3c2a7fbabd6f4e3644c2c37d3e8caa3a83739c9173519d2a2d8a",
+    "05 Источники/Originals/small-data-finetuning-2026-10-29/asapp-run_glue.py": "d8d61570ff69d433e7e05f224ae612093e581166ca0cf83abd689039a991a826",
+    "05 Источники/Originals/small-data-finetuning-2026-10-29/mosbach-LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "05 Источники/Originals/small-data-finetuning-2026-10-29/mosbach-README.md": "40298bd10e75d75e54e76f50eabd05011295bad0bdebf1f2dfd59a3ef6aafc1a",
+    "05 Источники/Originals/small-data-finetuning-2026-10-29/mosbach-fig1.png": "a994bb0e2860fddd0aeb34644c8a2916d0ffee47e1a098dec389a171e8f20088",
+    "00 Учебник/Assets/Figures/curated/small-data-finetuning-2026-10-29/asapp-overview.png": "a4a3f45c72dc3c2a7fbabd6f4e3644c2c37d3e8caa3a83739c9173519d2a2d8a",
+    "00 Учебник/Assets/Figures/curated/small-data-finetuning-2026-10-29/mosbach-stability.png": "a994bb0e2860fddd0aeb34644c8a2916d0ffee47e1a098dec389a171e8f20088"
+  },
+  "explanationReview": {
+    "fullFinalChapterRead": true,
+    "chapterSha256": "a80d648c80c7a96e0833d5820450a0bee77121d2eba26a4e25716c6bccf59023",
+    "sourceComparisons": [
+      {
+        "mechanism": "Optimization failure versus generalization",
+        "source": "Mosbach et al., sections 4–5, Figures 2, 4 and 8",
+        "url": "https://arxiv.org/html/2006.04884v3",
+        "preserved": "A near-trivial training loss distinguishes an unfitted classifier from two fitted runs with different development predictions. Lower-layer gradient observations do not prove a universal saturated-tanh explanation.",
+        "example": "Balanced binary loss log(2); prescribed fitted/dev predictions; constructed head gradient 0.7310585748 versus lower gradient 6.02729617e-9. Examples are labelled synthetic."
+      },
+      {
+        "mechanism": "Adam bias correction",
+        "source": "Zhang et al., section 4 and Algorithm 1; Mosbach et al., sections 5–6",
+        "url": "https://arxiv.org/html/2006.05987v3",
+        "preserved": "Historical BERTAdam omission, moment estimates and corrected update, fixed-current-moment ratio, epsilon/weight-decay caveats, empirical failure rate scoped to the authors' 50-seed BERT-Large experiment.",
+        "example": "g=2, beta1=.9, beta2=.999, alpha=.001 gives raw update .00316227766 and corrected update .001; ratio at t=10 is about 6.528, not monotone linear warmup."
+      },
+      {
+        "mechanism": "Upper-layer and pooler reinitialization",
+        "source": "Zhang et al., section 5 and BERT branch of run_glue.py lines 736–764 at 0aa4f4e117ee4422f7cb9355158203e01d6730db",
+        "url": "https://github.com/asappresearch/revisit-bert-finetuning/blob/0aa4f4e117ee4422f7cb9355158203e01d6730db/run_glue.py#L736-L764",
+        "preserved": "Architecture and lower pretrained weights retained; parameter-type initialization; pooler reset separately; both retained/reset blocks remain trainable; optimizer created after reset.",
+        "example": "Three small blocks: count zero leaves all blocks unchanged, count one preserves lower two, LayerNorm becomes one/zero; invalid counts rejected. This is not a full BERT run."
+      },
+      {
+        "mechanism": "Training and model-selection budget",
+        "source": "Zhang et al., section 6; Mosbach et al., section 6",
+        "url": "https://arxiv.org/html/2006.05987v3",
+        "preserved": "Epoch/update distinction, warmup trajectory, checkpoint candidate count, eight seeds for budget selection versus twenty for reporting; longer training is an experimental choice rather than a universal recipe.",
+        "example": "1000 examples, batch 32, three epochs -> 96 retained-partial-batch updates or 93 drop-last; 2400 -> 225; 20 epochs on 1000 -> 640."
+      },
+      {
+        "mechanism": "Intermediate-task transfer",
+        "source": "Zhang et al., section 7 and Table 2",
+        "url": "https://arxiv.org/html/2006.05987v3",
+        "preserved": "Additional labelled MNLI supervision and cost; encoder transfer with correctly shaped target head/new optimizer; target-task results and deviations, not a universal superiority claim.",
+        "example": "Supplied four-dimensional intermediate encoder, three-class intermediate head and two-class target head; one target update changes the copied target encoder but not the original checkpoint."
+      },
+      {
+        "mechanism": "Failure reporting and evaluation",
+        "source": "Mosbach et al., sections 4–6 and original repository Figure 1; Zhang et al., experimental methodology",
+        "url": "https://github.com/uds-lsv/bert-stable-fine-tuning/blob/3cf27e8667aee9d1c822d747c63ce331b231f283/README.md",
+        "preserved": "Optimization failures and residual generalization variation; all-run distributions; legitimate validation-based stopping distinguished from survivor-only reporting; development protocol not ranked directly against another study's test halves.",
+        "example": "Scores .50,.51,.70,.72 have mean .6075; dropping two failures reports .71 while hiding a 50% failure rate."
+      },
+      {
+        "mechanism": "LoRA quality and checkpoint budget",
+        "source": "Hu et al., section 5.5 and Table 4, distinguished from section 7/Table 5",
+        "url": "https://arxiv.org/html/2106.09685v2",
+        "preserved": "Reported GPT-3 175B full/4.7M/37.7M adaptation results remain task-specific; separate experimental adapter counts do not establish universal quality/speed/memory.",
+        "example": "4.7M FP16 parameters are about 9.4 decimal MB; 18M are about 36 MB; rank 256 factors of a 4096-square projection are one eighth of its full parameter count."
+      }
+    ],
+    "sourceDiscrepancies": [
+      "Zhang et al. CoLA Re-init differs between source Tables 1 and 2. The chapter explicitly follows Table 2 (64.2 ± 1.6) and does not silently mix it with Table 1 (63.9 ± 1.9). Both original PDF pages were visually inspected."
+    ],
+    "reasoning": "All fourteen published CPU fences executed in order; added independent checks and negative controls verify gradients, reset boundaries, transfer shapes and memory arithmetic. These small examples do not reproduce a BERT/GLUE study.",
+    "style": "Full chapter reread against no-ai-slop plus local academic-writing qualifications. Preserve quoted source prose, necessary terminology, derivations, examples and caveats; no generated diagram replaces a source illustration.",
+    "remainingWithinAddedScope": [],
+    "notClaimed": "No full-model training, GPU QLoRA, GLUE benchmark reproduction, universal hyperparameter rule or comprehensive catalogue of every PEFT algorithm."
+  },
+  "cpu": {
+    "chapter_sha256": "a80d648c80c7a96e0833d5820450a0bee77121d2eba26a4e25716c6bccf59023",
+    "torch": "2.14.1",
+    "published_python_fences": 14,
+    "independent_gradient_max_error": 4.440892098500626e-16,
+    "soft_prompt_output": [
+      0.6697615493266569,
+      0
+    ],
+    "prefix_output": [
+      0.6697615493266569,
+      0.6604769013466861
+    ],
+    "adapter_parameters": 4194304,
+    "saved_scale_gb_65b": 3.031005859375,
+    "small_data": {
+      "trivial_binary_loss": 0.6931471805599453,
+      "head_gradient": 0.731058574805862,
+      "lower_gradient": 6.027296172703554e-9,
+      "raw_to_corrected_first_update": 3.1622776601683773,
+      "all_runs_mean": 0.6074999999999999,
+      "survivor_only_mean": 0.71,
+      "reset_zero_blocks_preserves_blocks": true,
+      "reset_one_block_preserves_lower_blocks": true,
+      "target_head_classes": 2,
+      "intermediate_head_classes": 3
+    },
+    "negative_controls": [
+      "both factors zero",
+      "detached frozen upper layer",
+      "wrong merge scaling",
+      "double merge",
+      "zero prefix is not identity",
+      "factor sum cross terms",
+      "zero block count does not select all blocks",
+      "invalid reset count is rejected"
+    ],
+    "scope": "Small CPU algebra/gradient examples, not full-model tuning or GPU QLoRA"
+  },
+  "checks": {
+    "publisher": {
+      "files": 126,
+      "tests": 818,
+      "passed": true,
+      "log": "/var/tmp/bookvar-small-data-unit-final-20261029.log"
+    },
+    "site": {
+      "files": 6,
+      "tests": 89,
+      "passed": true,
+      "log": "/var/tmp/bookvar-small-data-site-test-20261029.log"
+    },
+    "output": {
+      "tests": 171,
+      "passed": true,
+      "log": "/var/tmp/bookvar-small-data-output-20261029.log"
+    },
+    "root": {
+      "pages": 2006,
+      "brokenLinks": 0,
+      "buildLog": "/var/tmp/bookvar-small-data-root-build-20261029.log",
+      "linkLog": "/var/tmp/bookvar-small-data-links-20261029.log"
+    },
+    "pages": {
+      "base": "/bookvar",
+      "pages": 2006,
+      "brokenLinks": 0,
+      "buildLog": "/var/tmp/bookvar-small-data-pages-build-20261029.log",
+      "linkLog": "/var/tmp/bookvar-small-data-pages-links-20261029.log",
+      "liveDeployment": false
+    },
+    "servedLicenses": [
+      {
+        "url": "http://127.0.0.1:62829/bookvar/licenses/asapp-finetuning-0aa4f4e-LICENSE.txt",
+        "status": 200,
+        "sha256": "573d2a944b2964ab1c030d71f15cdbc18b171534f18457a11b075dbfdcfe039c",
+        "equalsArchive": true
+      },
+      {
+        "url": "http://127.0.0.1:62829/bookvar/licenses/mosbach-finetuning-3cf27e8-Apache-2.0.txt",
+        "status": 200,
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+        "equalsArchive": true
+      }
+    ],
+    "typecheck": "Not rerun in this content-only increment. Previous receipt records the earlier check; it is not presented as fresh evidence.",
+    "historicalEvidence": "Previous PEFT receipt and journals were not rebaselined. The new exact reversible journal restores the preceding f106f753 chapter, asset registry and reference indexes.",
+    "warnings": "Full publisher suite passes while retained Harvard source PDFs emit Poppler path diagnostics and source archives emit locale warnings. Whole-worktree diff check also finds inherited source-authored trailing whitespace; original source files are not reformatted.",
+    "scopedDiffCheck": "Passed on the changed chapter, reference indexes, registry, publication helpers/tests and current plan/ledger. Historical source-authored whitespace elsewhere in the dirty worktree was preserved."
+  },
+  "provenance": {
+    "figuresInCurrentChapter": 8,
+    "newFigures": 2,
+    "assets": [
+      {
+        "id": "curated-small-data-asapp-a4a3f45c72dc",
+        "asset": "00 Учебник/Assets/Figures/curated/small-data-finetuning-2026-10-29/asapp-overview.png",
+        "author": "Tianyi Zhang, Felix Wu, Arzoo Katiyar, Kilian Q. Weinberger, Yoav Artzi; ASAPP Inc.",
+        "title": "Bias correction, reinitialization and training duration: original repository illustration",
+        "source_url": "https://github.com/asappresearch/revisit-bert-finetuning/blob/0aa4f4e117ee4422f7cb9355158203e01d6730db/README.md",
+        "source_asset": "05 Источники/Originals/small-data-finetuning-2026-10-29/asapp-repo_illustration.png",
+        "source_asset_sha256": "a4a3f45c72dc3c2a7fbabd6f4e3644c2c37d3e8caa3a83739c9173519d2a2d8a",
+        "source_image_url": "https://raw.githubusercontent.com/asappresearch/revisit-bert-finetuning/0aa4f4e117ee4422f7cb9355158203e01d6730db/repo_illustration.png",
+        "commit": "0aa4f4e117ee4422f7cb9355158203e01d6730db",
+        "license": "MIT",
+        "license_url": "https://opensource.org/license/mit/",
+        "license_evidence": "05 Источники/Originals/small-data-finetuning-2026-10-29/asapp-LICENSE",
+        "license_evidence_sha256": "573d2a944b2964ab1c030d71f15cdbc18b171534f18457a11b075dbfdcfe039c",
+        "copyright": "Copyright (c) 2020 ASAPP Inc.",
+        "width": 1394,
+        "height": 475,
+        "bytes": 178869,
+        "sha256": "a4a3f45c72dc3c2a7fbabd6f4e3644c2c37d3e8caa3a83739c9173519d2a2d8a",
+        "derivation": "source-raster-copy",
+        "modifications": "Complete original repository raster copied byte-for-byte. No crop, redrawing, relabeling, resize or recompression.",
+        "metadata_status": "verified",
+        "provenance_confirmation": "source-license-verified",
+        "last_verified": "2026-10-29",
+        "used_in": [
+          "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md"
+        ]
+      },
+      {
+        "id": "curated-small-data-mosbach-a994bb0e2860",
+        "asset": "00 Учебник/Assets/Figures/curated/small-data-finetuning-2026-10-29/mosbach-stability.png",
+        "author": "Marius Mosbach, Maksym Andriushchenko, Dietrich Klakow",
+        "title": "Development-score distributions across 25 seeds: original Figure 1 with caption",
+        "source_url": "https://github.com/uds-lsv/bert-stable-fine-tuning/blob/3cf27e8667aee9d1c822d747c63ce331b231f283/README.md",
+        "source_asset": "05 Источники/Originals/small-data-finetuning-2026-10-29/mosbach-fig1.png",
+        "source_asset_sha256": "a994bb0e2860fddd0aeb34644c8a2916d0ffee47e1a098dec389a171e8f20088",
+        "source_image_url": "https://raw.githubusercontent.com/uds-lsv/bert-stable-fine-tuning/3cf27e8667aee9d1c822d747c63ce331b231f283/images/fig1.png",
+        "commit": "3cf27e8667aee9d1c822d747c63ce331b231f283",
+        "license": "Apache-2.0",
+        "license_url": "https://www.apache.org/licenses/LICENSE-2.0",
+        "license_evidence": "05 Источники/Originals/small-data-finetuning-2026-10-29/mosbach-LICENSE",
+        "license_evidence_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+        "width": 1632,
+        "height": 616,
+        "bytes": 150613,
+        "sha256": "a994bb0e2860fddd0aeb34644c8a2916d0ffee47e1a098dec389a171e8f20088",
+        "derivation": "source-raster-copy",
+        "modifications": "Complete original repository raster copied byte-for-byte. No crop, redrawing, relabeling, resize or recompression.",
+        "metadata_status": "verified",
+        "provenance_confirmation": "source-license-verified",
+        "last_verified": "2026-10-29",
+        "used_in": [
+          "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md"
+        ]
+      }
+    ],
+    "sourceText": "The ASAPP README Overview excerpt remains verbatim English, MIT. The reset example adapts the pinned BERT branch with attribution and combined MIT/Apache license. Other new numerical explanations are labelled additions.",
+    "privatePapers": [
+      {
+        "path": "raw/papers/small-data-finetuning-2026-10-29/zhang-2006.05987v3.pdf",
+        "sha256": "3b1b0de0e507ed2c16da6b7691ad722b6fdb1b78a5b6123bc7b21b13d11c5456"
+      },
+      {
+        "path": "raw/papers/small-data-finetuning-2026-10-29/mosbach-2006.04884v3.pdf",
+        "sha256": "c3bdbf08b76d3da7a4540a65722fa3ed3d91edc49eed10754400f9b2096c06ca"
+      }
+    ],
+    "privatePaperPolicy": "Both PDFs are git-ignored under raw; full public PDF reproduction rights were not established. Published figures are byte-identical licensed repository PNGs, not unlicensed PDF extractions.",
+    "unusedArchiveFile": "asapp-model_utils.py is retained as source context; it was not executed and is not a chapter example."
+  },
+  "browser": {
+    "observations": "docs/audit/evidence/2026-10-29-small-data/observations.json",
+    "viewports": [
+      "1280x900 desktop, client 1265",
+      "360x800 mobile, client 345"
+    ],
+    "observed": "Root and /bookvar routes show fourteen code blocks and eight loaded original figures, no KaTeX errors, no document-level horizontal overflow and native English without a translation fallback. Both new figures inspected in the viewer; zoom and internal table scrolling checked.",
+    "readability": "Wide source figures have small labels at mobile default width. Full originals can be opened and zoomed; no crop or synthetic redraw was substituted.",
+    "screenshots": [
+      {
+        "path": "docs/audit/evidence/2026-10-29-small-data/desktop-original-distributions.png",
+        "sha256": "685013b07eae2f7766601f744cbdd419ee409cca542447bdb0a56bd317de30da"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-small-data/desktop-original-overview.png",
+        "sha256": "b01b832452582446df65f762ef8538fbd940d2bdd5e94195f0cd9fb2c6ed1b68"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-small-data/desktop-section.png",
+        "sha256": "b1491fb003ea65f09b0a233d9c0a6f563832622c3a8bb323bfd6b1f921c7ce87"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-small-data/mobile-original-zoom.png",
+        "sha256": "fceca06770ea12c1727241d06bd48fe263ef935e187e658a519bb5045d8c95b7"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-small-data/mobile-reported-results.png",
+        "sha256": "0103b6f0c2710feb5416f88416f4b3b49a9d504d542cd63d47cc18b0d61fe540"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-small-data/mobile-update-budget.png",
+        "sha256": "f42ae1578a0c7e9b1aeeff8c9c65537a918778850d4b33b650a66e26d2551215"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-small-data/pages-english-desktop.png",
+        "sha256": "8f66cd974484d398adf63630f9846025d33086eb609d9d106b9f8c32ff342660"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-small-data/pages-mobile.png",
+        "sha256": "02091dfe00d653257c3d856c4f7d4a68665033480114d2f956817c8dc0e8b33a"
+      }
+    ]
+  },
+  "publication": "Not committed, pushed or deployed by this increment. The normal root preview remains the local deliverable; release-wide reconciliation is still in progress.",
+  "temporaryBuildCleanup": "Both recorded Pages chapter HTML hashes matched before cleanup. The dedicated preview processes on port 62829 were stopped, and only /var/tmp/bookvar-small-data-pages-20261029 was removed. The root preview on port 4330, source packet, canonical Markdown, original figures and screenshots remain. Pages HTML hashes are historical build evidence after cleanup.",
+  "legacyReconciliation": {
+  "passed": true,
+  "counts": {
+    "total": 31,
+    "sourceFullRead": 15,
+    "reconciled": 5,
+    "readInProgress": 10,
+    "unread": 16,
+    "canonicalWholeReads": 7
+  },
+  "originalSourceHashesChecked": 31,
+  "acceptedSourceTargetsChecked": 5,
+  "receiptHashesChecked": 30,
+  "screenshotsChecked": 8,
+  "SFTJournalRestoresFullRead": true,
+  "errors": []
+}
+}

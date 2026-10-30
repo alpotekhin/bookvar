@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-30",
+  "scope": "Clarify the architecture-map GQA example by naming the released Llama 2 70B variant. Keep the complete comparison, figures and links; no new translation or latest-release claim.",
+  "primaryEvidence": "https://arxiv.org/html/2307.09288v2#S2.T1",
+  "files": [
+    {
+      "source": "02 Атлас моделей/Сравнения/Карта архитектурных линий.md",
+      "before_sha256": "df0a7a22b4329129d19bae0f01b2c317d1a95dbc307db8e79f5bb1fca50430d7",
+      "after_sha256": "954574f99992b9640b7e3daf55686eeca2253008e35779795500c2e344b99443",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-29",
+          "new": "last_updated: 2026-10-30"
+        },
+        {
+          "old": "[[02 Атлас моделей/Семейства/Llama|Llama 2/3: GQA]]",
+          "new": "[[02 Атлас моделей/Семейства/Llama|Llama 2 70B / Llama 3: GQA]]"
+        }
+      ]
+    }
+  ]
+}

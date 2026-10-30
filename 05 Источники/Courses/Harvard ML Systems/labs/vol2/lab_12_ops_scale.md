@@ -9,105 +9,178 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol2/lab_12_ops_scale.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol2/lab_12_ops_scale.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL2 Lab — Ops Scale
 
 ## Readable lab narrative
 
 ### Scenario
-                You are the {v2_12_packet['stakeholder']}. A release is ready for the
-                {v2_12_packet['ops_unit']}, but the chapter's SLO idea requires you to
-                translate reliability into budgets before approving more exposure.
+You now choose the operating policy for the next rollout and incident path.
+The chapter's self-service deployment invariants make this a guardrail
+conjunction: SLO, blast radius, cost, and governance must all pass.
+
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+Commit to the structured prediction first; the instrument is hidden until the prior is explicit.
+
+---
+
+### Scenario
+You are the ⟨value 1⟩. A release is ready for the
+⟨value 2⟩, but the chapter's SLO idea requires you to
+translate reliability into budgets before approving more exposure.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_12_packet['stakeholder']}" `
+- value_2: ` f"{v2_12_packet['ops_unit']}" `
 
 ---
 
 Error-budget minutes = period minutes x (1 - SLO).
 
-                            For this 30-day window: `{v2_12_fmt_minutes(v2_12_a['error_budget_minutes'])}`
-                            are allowed by the availability SLO. Incident spend is
-                            `{v2_12_incident_count.value}` incidents x
-                            (`{v2_12_detection_min.value}` detection min + `{v2_12_impact_min.value}` impact min)
-                            = `{v2_12_fmt_minutes(v2_12_a['impact_minutes'])}`.
+For this 30-day window: `⟨value 1⟩`
+are allowed by the availability SLO. Incident spend is
+`⟨value 2⟩` incidents x
+(`⟨value 3⟩` detection min + `⟨value 4⟩` impact min)
+= `⟨value 5⟩`.
 
-                            Quality error budget = baseline quality - quality floor =
-                            `{v2_12_packet['baseline_quality_pct']:.1f}% - {v2_12_quality_floor.value:.1f}%`
-                            = `{v2_12_a['quality_budget_pp']:.2f}` percentage points.
+Quality error budget = baseline quality - quality floor =
+`⟨value 6⟩% - ⟨value 7⟩%`
+= `⟨value 8⟩` percentage points.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_12_fmt_minutes(v2_12_a['error_budget_minutes'])}" `
+- value_2: ` f'{v2_12_incident_count.value}' `
+- value_3: ` f'{v2_12_detection_min.value}' `
+- value_4: ` f'{v2_12_impact_min.value}' `
+- value_5: ` f"{v2_12_fmt_minutes(v2_12_a['impact_minutes'])}" `
+- value_6: ` f"{v2_12_packet['baseline_quality_pct']:.1f}" `
+- value_7: ` f'{v2_12_quality_floor.value:.1f}' `
+- value_8: ` f"{v2_12_a['quality_budget_pp']:.2f}" `
 
 ---
 
 ### Scenario
-                The same control loop now moves from target setting to live rollout.
-                The candidate gets production evidence only from the canary slice, but
-                every exposed {v2_12_packet['traffic_unit']} spends blast-radius budget.
+The same control loop now moves from target setting to live rollout.
+The candidate gets production evidence only from the canary slice, but
+every exposed ⟨value 1⟩ spends blast-radius budget.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_12_packet['traffic_unit']}" `
 
 ---
 
 Chapter formula: `T_stage = n_samples_needed / (request_rate * p_stage)`.
 
-                            Here, `T_stage = {v2_12_sample_needed.value:,} / `
-                            `({v2_12_fmt_number(v2_12_b['traffic_rate'])} * {v2_12_canary_pct.value / 100:.2f})`
-                            = `{v2_12_fmt_hours(v2_12_b['required_hours'])}`.
+Here, `T_stage = ⟨value 1⟩ / `
+`(⟨value 2⟩ * ⟨value 3⟩)`
+= `⟨value 4⟩`.
 
-                            Blast-radius spend = traffic rate x canary fraction x stage hours =
-                            `{v2_12_fmt_number(v2_12_b['blast_units'])}` {v2_12_packet['traffic_unit']}.
+Blast-radius spend = traffic rate x canary fraction x stage hours =
+`⟨value 5⟩` ⟨value 6⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v2_12_sample_needed.value:,}' `
+- value_2: ` f"{v2_12_fmt_number(v2_12_b['traffic_rate'])}" `
+- value_3: ` f'{v2_12_canary_pct.value / 100:.2f}' `
+- value_4: ` f"{v2_12_fmt_hours(v2_12_b['required_hours'])}" `
+- value_5: ` f"{v2_12_fmt_number(v2_12_b['blast_units'])}" `
+- value_6: ` f"{v2_12_packet['traffic_unit']}" `
 
 ---
 
 ### Scenario
-                A production incident is visible in `{v2_12_packet['quality_signal']}` while
-                basic health checks can still look normal. The runbook must preserve diagnostic
-                order and limit lost work while the control loop detects, attributes, mitigates,
-                and recovers.
+A production incident is visible in `⟨value 1⟩` while
+basic health checks can still look normal. The runbook must preserve diagnostic
+order and limit lost work while the control loop detects, attributes, mitigates,
+and recovers.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_12_packet['quality_signal']}" `
 
 ---
 
 Lost work = affected amount per minute x impact fraction x minutes.
 
-                            Before mitigation: `{v2_12_fmt_number(v2_12_packet['affected_units_per_min'])}`
-                            {v2_12_packet['traffic_unit']}/min x `{v2_12_fmt_pct(v2_12_packet['incident_impact_fraction'] * 100)}`
-                            x `{v2_12_fmt_minutes(v2_12_c['pre_mitigation_minutes'])}`.
+Before mitigation: `⟨value 1⟩`
+⟨value 2⟩/min x `⟨value 3⟩`
+x `⟨value 4⟩`.
 
-                            After mitigation, residual impact is
-                            `{v2_12_fmt_pct(v2_12_c['residual_fraction'] * 100)}` for
-                            `{v2_12_fmt_minutes(v2_12_recovery_min.value)}`.
-                            The chapter runbook flow is detect user impact -> localize dependency ->
-                            bound blast radius -> escalate by evidence -> learn from the gap.
+After mitigation, residual impact is
+`⟨value 5⟩` for
+`⟨value 6⟩`.
+The chapter runbook flow is detect user impact -> localize dependency ->
+bound blast radius -> escalate by evidence -> learn from the gap.
 
----
+Runtime fields (not evaluated):
 
-### Scenario
-                You now choose the operating policy for the next rollout and incident path.
-                The chapter's self-service deployment invariants make this a guardrail
-                conjunction: SLO, blast radius, cost, and governance must all pass.
+- value_1: ` f"{v2_12_fmt_number(v2_12_packet['affected_units_per_min'])}" `
+- value_2: ` f"{v2_12_packet['traffic_unit']}" `
+- value_3: ` f"{v2_12_fmt_pct(v2_12_packet['incident_impact_fraction'] * 100)}" `
+- value_4: ` f"{v2_12_fmt_minutes(v2_12_c['pre_mitigation_minutes'])}" `
+- value_5: ` f"{v2_12_fmt_pct(v2_12_c['residual_fraction'] * 100)}" `
+- value_6: ` f'{v2_12_fmt_minutes(v2_12_recovery_min.value)}' `
 
 ---
 
 Policy feasibility is not a weighted average. The release is valid only when:
 
-                            `slo_ok and blast_ok and cost_ok and governance_ok`.
+`slo_ok and blast_ok and cost_ok and governance_ok`.
 
-                            Current selected policy:
-                            SLO spend `{v2_12_fmt_pct(v2_12_selected_policy['slo_spend_pct'])}`,
-                            blast radius `{v2_12_fmt_pct(v2_12_selected_policy['blast_pct'])}`,
-                            cost index `{v2_12_selected_policy['cost_index']:.1f}`,
-                            governance score `{v2_12_selected_policy['governance_score']:.2f}`.
+Current selected policy:
+SLO spend `⟨value 1⟩`,
+blast radius `⟨value 2⟩`,
+cost index `⟨value 3⟩`,
+governance score `⟨value 4⟩`.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_12_fmt_pct(v2_12_selected_policy['slo_spend_pct'])}" `
+- value_2: ` f"{v2_12_fmt_pct(v2_12_selected_policy['blast_pct'])}" `
+- value_3: ` f"{v2_12_selected_policy['cost_index']:.1f}" `
+- value_4: ` f"{v2_12_selected_policy['governance_score']:.2f}" `
 
 ---
 
 ### Operations-at-Scale Memo
 
-                    **Report frame:** {v2_12_packet['report_frame']}
+**Report frame:** ⟨value 1⟩
 
-                    **Selected rollout/incident policy:** `{v2_12_selected_policy['name']}`
+**Selected rollout/incident policy:** `⟨value 2⟩`
 
-                    **Binding ops amount:** ``…``
+**Binding ops amount:** `⟨value 3⟩`
 
-                    **Rejected alternative:** `{v2_12_rejected_policy_result['name']}`
+**Rejected alternative:** `⟨value 4⟩`
 
-                    **V2-13 implication:** `…`
+**V2-13 implication:** ⟨value 5⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_12_packet['report_frame']}" `
+- value_2: ` f"{v2_12_selected_policy['name']}" `
+- value_3: ` f'{binding_ops_amount}' `
+- value_4: ` f"{v2_12_rejected_policy_result['name']}" `
+- value_5: ` f'{security_text}' `
+
+</details>
 
 ## Complete original Marimo source
 

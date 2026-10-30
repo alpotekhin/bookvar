@@ -9,9 +9,18 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol1/lab_12_perf_bench.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol1/lab_12_perf_bench.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL1 Lab — Perf Bench
 
@@ -19,122 +28,281 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 **Recommended Reading** -- Complete these chapter anchors before the lab:
 
-    - **Benchmarks as proxies** and **Benchmarking Granularity** for workload and metric validity.
-    - **Micro-benchmarking rules** and **Statistical and methodological issues** for warmup, variance, and confidence.
-    - **Latency and tail latency** plus **Fallacies and Pitfalls** for average-vs-tail failures.
-    - **Benchmark Components**, **Run Rules**, and **MLPerf execution scenarios** for fair comparison.
-
----
-
-## Valid Benchmarks Match Workload And Metric
-
-            A benchmark is not a universal number. It is evidence for one workload,
-            one metric, and one decision boundary. For this track, the production
-            boundary is: **{v1_12_packet['production_scope']}**.
-
----
-
-The local validity score weights four overlaps:
-
-            ```
-            validity = 0.35*workload + 0.30*metric + 0.20*duration + 0.15*guardrail
-            ```
-
-            Workload match is `{pA_workload.value}%`. The selected metric is
-            `{result["selected_metric"]}`. This mirrors the chapter claim that
-            benchmark results are proxies whose boundaries must be named.
-
-            Source model: Chapter sections on benchmarks as proxies, Benchmarking
-            Granularity, MLPerf execution scenarios, and `mlsysbook_labs.amdahl_speedup`
-            for the component-vs-end-to-end cross-check.
-
----
-
-## Warmup, Variance, And Sample Size Set Confidence
-
-            {v1_12_packet["amount_line_b"]} A reportable benchmark needs warmup
-            discard, repeated samples, coefficient of variation, and a confidence
-            interval rather than a single impressive run.
-
----
-
-```
-            CV = sigma_run / mean_run
-            95% CI half-width = 1.96 * sigma_run / sqrt(n)
-            ```
-
-            Current values:
-
-            ```
-            mean = {result["mean"]:.2f} ms
-            sigma = {result["std"]:.2f} ms
-            n = {pB_samples.value}
-            CV = {result["cv_pct"]:.2f}%
-            CI = +/- {result["ci_half"]:.2f} ms
-            ```
-
-            Source model: Chapter micro-benchmarking rules and statistical
-            confidence discussion.
-
----
-
-## Averages Hide Tail And Guardrail Failures
-
-            {v1_12_packet["amount_line_c"]} This module keeps the concept
-            shared across tracks: the mean can pass while the deployment guardrail fails.
-
----
-
-```
-            p_q = base_latency * exp(z_q * sigma)
-            p99 uses z = 2.326
-            p99.9 uses z = 3.09
-            ```
-
-            Current source model:
-
-            ```
-            base = {v1_12_benchmark.tail_base_ms:.1f} ms
-            sigma = {pC_sigma.value:.2f}
-            mean = {tail.mean_ms:.1f} ms
-            p99 = {tail.p99_ms:.1f} ms
-            p99.9 = {tail.p999_ms:.1f} ms
-            ```
-
-            Source helper: `mlsysbook_labs.tail_latency`. Chapter anchor:
-            latency and tail latency plus single-metric fallacies.
-
----
-
-## Fair Comparison Requires Controlled Conditions
-
-            {v1_12_packet["amount_line_d"]} A larger number loses if it is
-            measured under easier rules or omits the guardrail evidence.
-
----
-
-```
-            fair_comparison_index = controlled_conditions / required_conditions
-            ```
-
-            Current index:
-
-            ```
-            controlled = {len(v1_12_packet["conditions"]) - len(result["missing"])}
-            required = {len(v1_12_packet["conditions"])}
-            index = {result["index"]:.0f}%
-            ```
-
-            Source model: Chapter Benchmark Components, System Specifications,
-            Run Rules, and MLPerf reference-vs-submission validation.
+- **Benchmarks as proxies** and **Benchmarking Granularity** for workload and metric validity.
+- **Micro-benchmarking rules** and **Statistical and methodological issues** for warmup, variance, and confidence.
+- **Latency and tail latency** plus **Fallacies and Pitfalls** for average-vs-tail failures.
+- **Benchmark Components**, **Run Rules**, and **MLPerf execution scenarios** for fair comparison.
 
 ---
 
 ## Synthesis: Benchmark Report
 
-            The durable lesson is not that one metric is always best. The report is
-            valid only when metric, confidence, tail/guardrail evidence, and
-            comparison rules match the deployment question.
+The durable lesson is not that one metric is always best. The report is
+valid only when metric, confidence, tail/guardrail evidence, and
+comparison rules match the deployment question.
+
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+## Valid Benchmarks Match Workload And Metric
+
+A benchmark is not a universal number. It is evidence for one workload,
+one metric, and one decision boundary. For this track, the production
+boundary is: **⟨value 1⟩**.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v1_12_packet['production_scope']}" `
+
+---
+
+Commit to a validity prediction before opening the evidence.
+
+---
+
+You predicted `⟨value 1⟩`; actual benchmark evidence must match deployment workload and metric.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{pA_pred.value}' `
+
+---
+
+**Correct.** The valid benchmark is the one whose workload and metric match the deployment question.
+
+---
+
+**Consequence:** the headline number misses ⟨value 1⟩. A benchmark can be precise and still answer the wrong question.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_12_benchmark.hidden_failure_metric}' `
+
+---
+
+The local validity score weights four overlaps:
+
+```
+validity = 0.35*workload + 0.30*metric + 0.20*duration + 0.15*guardrail
+```
+
+Workload match is `⟨value 1⟩%`. The selected metric is
+`⟨value 2⟩`. This mirrors the chapter claim that
+benchmark results are proxies whose boundaries must be named.
+
+Source model: Chapter sections on benchmarks as proxies, Benchmarking
+Granularity, MLPerf execution scenarios, and `mlsysbook_labs.amdahl_speedup`
+for the component-vs-end-to-end cross-check.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{pA_workload.value}' `
+- value_2: ` f"{result['selected_metric']}" `
+
+---
+
+Checkpoint: choose which benchmark result belongs in the final report.
+
+---
+
+## Warmup, Variance, And Sample Size Set Confidence
+
+⟨value 1⟩ A reportable benchmark needs warmup
+discard, repeated samples, coefficient of variation, and a confidence
+interval rather than a single impressive run.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v1_12_packet['amount_line_b']}" `
+
+---
+
+Commit to a confidence prediction before opening the run-rule controls.
+
+---
+
+**Confidence gate passes.** The run rule is strong enough to support a bounded benchmark claim.
+
+---
+
+**Confidence gate fails.** A precise-looking number can be underpowered, noisy, or polluted by warmup artifacts.
+
+---
+
+**Correct.** Warmup plus repeated-run confidence is the minimum credible rule.
+
+---
+
+The chapter's warmup and variance rules reject single-run claims.
+
+---
+
+```
+CV = sigma_run / mean_run
+95% CI half-width = 1.96 * sigma_run / sqrt(n)
+```
+
+Current values:
+
+```
+mean = ⟨value 1⟩ ms
+sigma = ⟨value 2⟩ ms
+n = ⟨value 3⟩
+CV = ⟨value 4⟩%
+CI = +/- ⟨value 5⟩ ms
+```
+
+Source model: Chapter micro-benchmarking rules and statistical
+confidence discussion.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{result['mean']:.2f}" `
+- value_2: ` f"{result['std']:.2f}" `
+- value_3: ` f'{pB_samples.value}' `
+- value_4: ` f"{result['cv_pct']:.2f}" `
+- value_5: ` f"{result['ci_half']:.2f}" `
+
+---
+
+Checkpoint: choose the confidence verdict for the benchmark report.
+
+---
+
+## Averages Hide Tail And Guardrail Failures
+
+⟨value 1⟩ This module keeps the concept
+shared across tracks: the mean can pass while the deployment guardrail fails.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v1_12_packet['amount_line_c']}" `
+
+---
+
+Commit to a mean-vs-tail prediction before opening the distribution.
+
+---
+
+**Release blocked.** Mean latency does not cover ⟨value 1⟩. Failure consequence: ⟨value 2⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v1_12_packet['guardrail_label']}" `
+- value_2: ` f"{result['failure_rate']}" `
+
+---
+
+**Guardrails pass under this setting.** The report still needs tail evidence, not only the mean.
+
+---
+
+**Correct.** Percentile and guardrail evidence decides production viability.
+
+---
+
+The average is not a release gate when the deployment question is percentile or guardrail based.
+
+---
+
+```
+p_q = base_latency * exp(z_q * sigma)
+p99 uses z = 2.326
+p99.9 uses z = 3.09
+```
+
+Current source model:
+
+```
+base = ⟨value 1⟩ ms
+sigma = ⟨value 2⟩
+mean = ⟨value 3⟩ ms
+p99 = ⟨value 4⟩ ms
+p99.9 = ⟨value 5⟩ ms
+```
+
+Source helper: `mlsysbook_labs.tail_latency`. Chapter anchor:
+latency and tail latency plus single-metric fallacies.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_12_benchmark.tail_base_ms:.1f}' `
+- value_2: ` f'{pC_sigma.value:.2f}' `
+- value_3: ` f'{tail.mean_ms:.1f}' `
+- value_4: ` f'{tail.p99_ms:.1f}' `
+- value_5: ` f'{tail.p999_ms:.1f}' `
+
+---
+
+Checkpoint: choose the tail/guardrail decision for the report.
+
+---
+
+## Fair Comparison Requires Controlled Conditions
+
+⟨value 1⟩ A larger number loses if it is
+measured under easier rules or omits the guardrail evidence.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v1_12_packet['amount_line_d']}" `
+
+---
+
+Commit to a comparison prediction before opening the fairness audit.
+
+---
+
+**Comparison is reportable.** The headline-only comparison is still rejected; the report can use ⟨value 1⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v1_12_packet['accepted_comparison']}" `
+
+---
+
+**Correct.** Fair comparisons are governed by run rules, not headline size.
+
+---
+
+The faster number is not reportable unless the workload, run rules, and guardrails match.
+
+---
+
+```
+fair_comparison_index = controlled_conditions / required_conditions
+```
+
+Current index:
+
+```
+controlled = ⟨value 1⟩
+required = ⟨value 2⟩
+index = ⟨value 3⟩%
+```
+
+Source model: Chapter Benchmark Components, System Specifications,
+Run Rules, and MLPerf reference-vs-submission validation.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{len(v1_12_packet['conditions']) - len(result['missing'])}" `
+- value_2: ` f"{len(v1_12_packet['conditions'])}" `
+- value_3: ` f"{result['index']:.0f}" `
+
+---
+
+Checkpoint: choose the comparison decision for the final report.
+
+---
+
+## Download Report
+
+---
+
+This V1-12 report is generated locally from the selected track, MLSysIM hardware/model refs, shared benchmarking helpers, and notebook-local `v1_12_` protocol calculations.
+
+</details>
 
 ## Complete original Marimo source
 

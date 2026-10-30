@@ -1,0 +1,715 @@
+{
+  "title": "Harvard Training: section decisions and source findings",
+  "reviewed_at": "2026-10-28",
+  "status": "source-chapter-thematic-review-complete-with-findings",
+  "scope": "The pinned Training source chapter and individual image decisions only; no whole-course, lab/deck, new GPU benchmark or English-translation acceptance.",
+  "source": {
+    "path": "05 Источники/Originals/training-2026-10-28/chapter-2bd97c5.qmd",
+    "sha256": "9c6869cd6b115ab0a63ac020206f3537206535d1f465c0297c7cf93242e5b6eb",
+    "commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "line_count": 6801,
+    "read_boundary": "All non-TikZ prose, Python and pseudocode read sequentially to EOF; long coordinate blocks listed separately. This is not a claim to have read every coordinate.",
+    "unread_coordinate_ranges": [
+      [
+        2051,
+        2206
+      ],
+      [
+        2907,
+        2962
+      ],
+      [
+        3363,
+        3429
+      ],
+      [
+        3470,
+        3582
+      ],
+      [
+        3588,
+        3694
+      ],
+      [
+        5588,
+        5788
+      ],
+      [
+        5802,
+        5973
+      ],
+      [
+        5981,
+        6134
+      ],
+      [
+        6303,
+        6352
+      ]
+    ],
+    "figure_review": "docs/audit/2026-10-28-training-figures.json"
+  },
+  "targets": {
+    "systems": {
+      "path": "00 Учебник/10 ML Systems/01 Модель как часть системы.md",
+      "sha256": "c958fbd61b171e67163951269d76375e26376e7a54c69d76b4e3ad24c7b6676d",
+      "review": "docs/audit/2026-10-26-architecture-selection.md"
+    },
+    "tensors": {
+      "path": "00 Учебник/00 Математические и ML-основания/01 Векторы, матрицы и тензоры.md",
+      "sha256": "7764790a11f7cbf12fbb9e662d62d56bd94ad8d39863a8995423f29161ff6ebb",
+      "review": "docs/audit/2026-10-27-frameworks-native-figures.md"
+    },
+    "gpu": {
+      "path": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "sha256": "d432d06ee1687fca66fe6151028a1c4a2bb2313a7e23d9d2b7d877b96cb48d81",
+      "review": "docs/audit/2026-10-27-tensors-gpu-primitives.md"
+    },
+    "roofline": {
+      "path": "00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md",
+      "sha256": "ee3b591a0085982c18c2ae691889e38f2f624b505cb2a414520c947c1f57323b",
+      "review": "docs/audit/2026-10-27-tensors-gpu-primitives.md"
+    },
+    "kernels": {
+      "path": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "sha256": "8826db488145077e23c59f37abb23d42e66afe4d57688bd30f109d521817ea08",
+      "review": "docs/audit/2026-10-27-jax-runtime.md"
+    },
+    "mlp": {
+      "path": "00 Учебник/01 Основы нейронных сетей/01 Нейрон и MLP.md",
+      "sha256": "17e763a94b26580e6c4d015c6ab092c1d33d57a9f6c77e34a598fdc27379507b",
+      "review": "docs/audit/2026-10-27-module-hooks.md"
+    },
+    "backprop": {
+      "path": "00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md",
+      "sha256": "8795146abe1f9c7a8de8a232c958aae472e3788d963f99aba557b90690fee2c0",
+      "review": "docs/audit/2026-10-27-jax-transforms.md"
+    },
+    "profiling": {
+      "path": "00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md",
+      "sha256": "f6fdc8028d115f4026643fc090bc843f2fdd8ddfc97207332681bca22e672a80",
+      "review": "docs/audit/2026-10-27-training-step.md"
+    },
+    "collectives": {
+      "path": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "sha256": "e1e9b7999ca10a61e9a48a24484f704b13cb7918cede4d5ba050b06876cbc8db",
+      "review": "docs/audit/2026-10-27-collective-destinations.md"
+    },
+    "distributed": {
+      "path": "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md",
+      "sha256": "732257fa15ab9d21f4c28ec94b07c0d9f945a6a975de38960a66cd9afcaa86ac",
+      "review": "docs/audit/2026-10-28-frameworks-placement.md"
+    },
+    "mlops": {
+      "path": "00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md",
+      "sha256": "cec102f93b2e1314a9aa80cb5d36421b465a49eb7083fd2c92cb08597d9ab007",
+      "review": "docs/audit/2026-10-26-ops-scale.md",
+      "comparison": "All 2360 current lines read in the TensorFlow export pass; compatibility/rollback, target admission/isolation and full cost/quality feasibility already have worked explanations. Chapter bytes preserved; comparison recorded in docs/audit/2026-10-27-tensorflow-export.md."
+    },
+    "arithmetic": {
+      "path": "00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md",
+      "sha256": "2d49342ee5b2998d93980151ff95f2fdbf5a464c1cbb6911f9e7c3c4dce0cafa",
+      "review": "docs/audit/2026-10-23-transformer-arithmetic.md"
+    },
+    "precision": {
+      "path": "00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md",
+      "sha256": "9a72e3c171518af749c26271e183bf35c55d2f98f76a146cf93c8d8404efa02d",
+      "review": "docs/audit/2026-10-28-training-reconciliation.md"
+    },
+    "data": {
+      "path": "00 Учебник/10 ML Systems/06 Data pipeline, padding и packing.md",
+      "sha256": "5f2a58816bfc82f2ccb0e43cea2a4bdbae1d22d8aae17d0fb36f82a2baac2917",
+      "review": "docs/audit/2026-10-28-tf-data-cache.md"
+    },
+    "activation": {
+      "path": "00 Учебник/01 Основы нейронных сетей/02 Функции активации.md",
+      "sha256": "467efffdbfaad2a74bb9e31ff86fed9553cc0478664407efd34d2c678e4b7696",
+      "review": "docs/audit/2026-10-21-activation-functions.md"
+    },
+    "checkpoint": {
+      "path": "00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload.md",
+      "sha256": "3fe01a82c9a8f60a417d7e3eacce59dac608cd767944af5d85db5ab549be1f5e",
+      "review": "docs/audit/2026-10-23-checkpoint-offload.md"
+    },
+    "flash": {
+      "path": "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+      "sha256": "98b6a0fddd6b6d7b7136bf1b3a9eacc32d6334f182f59bd4218b99e1c3652add",
+      "review": "docs/audit/2026-10-19-flashattention.md"
+    },
+    "optimizers": {
+      "path": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "sha256": "b9a3d638815bb981cedc989003a9ac0cc6ec3314a849c4bf2c57c0940a5ffa84",
+      "review": "docs/audit/2026-10-28-training-reconciliation.md"
+    },
+    "responsible": {
+      "path": "00 Учебник/18 Evaluation и методология/59a Responsible systems.md",
+      "sha256": "5e70d3ce66b8874cfc6b32928762cdea7d71b9f92b000aa6355d7cacf248cc5c",
+      "review": "docs/audit/2026-10-20-responsible-systems.md",
+      "comparison": "All 1136 current lines read in this Training pass. The energy section already derives sampled power integration, full versus incremental energy, facility/PUE boundaries, time-varying grid intensity, carbon shifting, lifecycle accounting, rebound and hardware payback. CPU checker rerun; no new chapter or hardware measurement."
+    }
+  },
+  "open_items": {},
+  "source_findings": {
+    "benchmark": "Assigned activation/throughput/loss/quality/cost/utilization figures are not reproducible measurements or universal thresholds.",
+    "pipeline": "Serial sums, overlapping stages, sustained rates and queue capacity are different boundaries; prefetch does not eliminate every stall.",
+    "memory": "Mixed precision does not halve every training object. Peak activation storage depends on lifetimes, not just the widest layer; raw attention scores need not all be saved.",
+    "hardware": "Warp/block/tile/wave and tensor-core generation/dtype/alignment must be distinguished. Nominal aggregate interconnect bandwidth is not one effective application link.",
+    "optimizer": "Batch/noise and LR depend on the data/recipe. Gradient synchronization payload follows parameters and dtype, not automatically the microbatch count.",
+    "diagnosis": "Low utilization is not a unique data-bound diagnosis; low MFU is not a direct stalled-time fraction.",
+    "precision": "FP16 normal minimum is not the subnormal floor. Native autocast does not imply persistent FP16 weights plus FP32 masters, FP16 loss for every operation or halved communication.",
+    "flash": "Q/K/V-only storage is not total peak attention memory. Backward can reconstruct probabilities; illustrative source timings/OOM thresholds are not actual benchmark evidence or a universal compute-bound guarantee.",
+    "checkpoint": "The source checkpoint table conflicts with its boundary model; one extra forward is +100% forward or about +33% F+B only under B=2F. Printed accumulation code does not contain the no_sync claimed by adjacent prose.",
+    "cost": "Fewer GPU-hours per wall-clock hour do not prove cheaper completed work. The optimized-memory code double-counts one parameter-equivalent relative to its own AMP model.",
+    "scaling": "Fixed 1B/10B/10TB/two-week cutoffs are not physical laws. Dataset storage need not be fully resident; collective paths, resource ownership and schedule semantics must be stated.",
+    "energy": "TDP is not observed average power; halving runtime does not halve energy if power changes. Electricity consumption and operational CO2e have separate derivations already present in Responsible systems. Its existing schematic lifecycle shares and prefill/decode ratios are explicitly qualified, not accepted as universal measurements."
+  },
+  "sections": [
+    {
+      "start": 1,
+      "heading_line": 27,
+      "heading": "Purpose",
+      "end": 136,
+      "targets": [
+        "systems"
+      ],
+      "status": "source-framing-retained",
+      "decision": "Purpose and setup remain in the complete source layer; do not insert another meta-introduction into the linear textbook.",
+      "findings": [
+        "benchmark"
+      ]
+    },
+    {
+      "start": 137,
+      "heading_line": 137,
+      "heading": "Training Systems Fundamentals",
+      "end": 192,
+      "targets": [
+        "systems",
+        "optimizers",
+        "checkpoint"
+      ],
+      "status": "mapped-with-source-findings",
+      "decision": "The model-as-system example, full optimizer-state ledger and checkpoint memory lifetime explain why training differs from inference. Illustrative costs and failure anecdotes are not measurements.",
+      "findings": [
+        "benchmark",
+        "memory"
+      ]
+    },
+    {
+      "start": 193,
+      "heading_line": 193,
+      "heading": "The staged system pipeline: Identifying \"accelerator bubbles\"",
+      "end": 223,
+      "targets": [
+        "data",
+        "profiling"
+      ],
+      "status": "mapped",
+      "decision": "Preparation, transfer, forward/backward/update and inter-stage waiting are explained with actual data-pipeline examples and a complete profiled CPU step.",
+      "findings": []
+    },
+    {
+      "start": 224,
+      "heading_line": 224,
+      "heading": "Iron Law of Training Performance",
+      "end": 334,
+      "targets": [
+        "systems",
+        "profiling",
+        "roofline",
+        "data",
+        "mlops"
+      ],
+      "status": "mapped-with-source-findings",
+      "decision": "Serial stage sums are separated from overlapped critical paths. Fixed-work arithmetic, bytes and communication have explicit units; cost is mapped to the existing billed-time ledger.",
+      "findings": [
+        "pipeline",
+        "benchmark"
+      ]
+    },
+    {
+      "start": 335,
+      "heading_line": 335,
+      "heading": "Running example: Training GPT-2",
+      "end": 383,
+      "targets": [
+        "arithmetic",
+        "precision",
+        "checkpoint"
+      ],
+      "status": "mapped-with-source-findings",
+      "decision": "GPT-2 dimensions are a running workload, not a hardware-independent fit/speed claim. Current arithmetic and lifetime ledgers state batch, sequence, dtype and stored-object boundaries.",
+      "findings": [
+        "memory",
+        "benchmark"
+      ]
+    },
+    {
+      "start": 384,
+      "heading_line": 384,
+      "heading": "Mathematical Foundations",
+      "end": 396,
+      "targets": [
+        "tensors",
+        "mlp",
+        "arithmetic"
+      ],
+      "status": "source-framing-retained",
+      "decision": "Opening mathematical taxonomy; mechanisms are reconciled in the following interval.",
+      "findings": []
+    },
+    {
+      "start": 397,
+      "heading_line": 397,
+      "heading": "Neural network computation",
+      "end": 817,
+      "targets": [
+        "tensors",
+        "mlp",
+        "arithmetic",
+        "activation",
+        "gpu"
+      ],
+      "status": "mapped-with-source-findings",
+      "decision": "GEMM/GEMV and batch dimensions, FLOP conventions, activations and coupled softmax are already worked through in accepted chapters with primary figures and executable examples.",
+      "findings": [
+        "benchmark",
+        "hardware"
+      ]
+    },
+    {
+      "start": 818,
+      "heading_line": 818,
+      "heading": "Optimization algorithms",
+      "end": 1180,
+      "targets": [
+        "optimizers"
+      ],
+      "status": "mapped-with-source-findings",
+      "decision": "Full/minibatch gradients, noise, momentum, adaptive moments, AdamW, state storage, optimizer contract and schedule boundaries have complete numerical explanations. Source rankings and universal LR rules are not imported.",
+      "findings": [
+        "optimizer",
+        "benchmark"
+      ]
+    },
+    {
+      "start": 1181,
+      "heading_line": 1181,
+      "heading": "Backpropagation mechanics",
+      "end": 1458,
+      "targets": [
+        "backprop",
+        "profiling",
+        "checkpoint",
+        "arithmetic"
+      ],
+      "status": "mapped-with-source-findings",
+      "decision": "Reverse-mode dependencies, saved tensors, actual parameter/input derivatives and segment recomputation are explained. Current examples do not assume every raw score or activation must be retained.",
+      "findings": [
+        "memory",
+        "checkpoint"
+      ]
+    },
+    {
+      "start": 1459,
+      "heading_line": 1459,
+      "heading": "Arithmetic intensity",
+      "end": 1684,
+      "targets": [
+        "roofline",
+        "gpu",
+        "arithmetic"
+      ],
+      "status": "mapped-with-source-findings",
+      "decision": "Operational intensity uses an explicit byte boundary and ridge; logical traffic, cache reuse and sustained counters are distinguished. Source operation labels are not a measured roofline.",
+      "findings": [
+        "hardware",
+        "benchmark"
+      ]
+    },
+    {
+      "start": 1685,
+      "heading_line": 1685,
+      "heading": "Pipeline Architecture",
+      "end": 1866,
+      "targets": [
+        "data",
+        "profiling"
+      ],
+      "status": "source-framing-retained",
+      "decision": "Pipeline overview is retained as source context. Concrete stages, timing and queue behavior are mapped below rather than duplicated as a short new textbook page.",
+      "findings": [
+        "pipeline"
+      ]
+    },
+    {
+      "start": 1867,
+      "heading_line": 1867,
+      "heading": "Architectural overview",
+      "end": 1953,
+      "targets": [
+        "data",
+        "profiling",
+        "collectives"
+      ],
+      "status": "mapped-with-source-findings",
+      "decision": "Existing chapters explain stage ownership and queue/transfer boundaries, without treating arbitrary pipeline rates or stage percentages as universal observations.",
+      "findings": [
+        "pipeline",
+        "benchmark"
+      ]
+    },
+    {
+      "start": 1954,
+      "heading_line": 1954,
+      "heading": "Data pipeline",
+      "end": 2583,
+      "targets": [
+        "data",
+        "collectives"
+      ],
+      "status": "mapped-with-source-findings",
+      "decision": "Accepted S6 now retains full original TensorFlow caching prose/figure and five actual examples: map/cache/prefetch placement, epoch shuffle, complete input and file identity. Distributed data ownership and weighted counts are separate.",
+      "findings": [
+        "pipeline"
+      ]
+    },
+    {
+      "start": 2584,
+      "heading_line": 2584,
+      "heading": "Forward pass",
+      "end": 2849,
+      "targets": [
+        "gpu",
+        "arithmetic",
+        "profiling"
+      ],
+      "status": "mapped-with-source-findings",
+      "decision": "Forward shapes, activation lifetimes, tensor-core constraints and kernel dispatch are already explained. Warp/block/tile/wave, width-only peak estimates and universal batch-multiple rules are not conflated.",
+      "findings": [
+        "hardware",
+        "memory"
+      ]
+    },
+    {
+      "start": 2850,
+      "heading_line": 2850,
+      "heading": "Parameter updates and optimizers",
+      "end": 3168,
+      "targets": [
+        "optimizers",
+        "precision",
+        "collectives"
+      ],
+      "status": "mapped-with-source-findings",
+      "decision": "The real optimizer-memory gap is closed by primary Adafactor/8-bit/GaLoRE explanations, three actual programs and three original author figures. Gradient accumulation, batch noise and DDP payload are distinguished.",
+      "findings": [
+        "optimizer",
+        "benchmark"
+      ]
+    },
+    {
+      "start": 3169,
+      "heading_line": 3169,
+      "heading": "Identifying Bottlenecks",
+      "end": 3327,
+      "targets": [
+        "profiling",
+        "roofline",
+        "data"
+      ],
+      "status": "mapped-with-source-findings",
+      "decision": "Current causal timeline examples distinguish host preparation, dispatch, device work and transfers. Missing MFU is not assigned wholesale to stalls, nor low utilization uniquely to input data.",
+      "findings": [
+        "diagnosis",
+        "benchmark"
+      ]
+    },
+    {
+      "start": 3328,
+      "heading_line": 3328,
+      "heading": "Pipeline Optimizations",
+      "end": 3346,
+      "targets": [
+        "profiling"
+      ],
+      "status": "source-framing-retained",
+      "decision": "Optimization framing; the following interval contains the actual decision procedure and its limitations.",
+      "findings": []
+    },
+    {
+      "start": 3347,
+      "heading_line": 3347,
+      "heading": "Systematic optimization framework",
+      "end": 3434,
+      "targets": [
+        "profiling",
+        "roofline",
+        "data",
+        "checkpoint"
+      ],
+      "status": "mapped-with-source-findings",
+      "decision": "Current profiling examples require an observed dependency/bottleneck before a change. The course utilization/memory threshold flowchart is retained as a source finding, not copied as a diagnostic law.",
+      "findings": [
+        "diagnosis"
+      ]
+    },
+    {
+      "start": 3435,
+      "heading_line": 3435,
+      "heading": "Data prefetching and overlapping",
+      "end": 3779,
+      "targets": [
+        "data",
+        "profiling"
+      ],
+      "status": "mapped-with-source-findings",
+      "decision": "Producer/consumer stage rates, queue depth, cache placement and overlap are explained with original TensorFlow material and executed CPU examples. Prefetch can hide work only within the stated rate and dependency limits.",
+      "findings": [
+        "pipeline",
+        "benchmark"
+      ]
+    },
+    {
+      "start": 3780,
+      "heading_line": 3780,
+      "heading": "Mixed-precision training",
+      "end": 4340,
+      "targets": [
+        "precision",
+        "optimizers",
+        "gpu"
+      ],
+      "status": "mapped-with-source-findings",
+      "decision": "Complete S5 read in this pass. Bit patterns, subnormals, tie rounding, master weights versus native autocast, scaling/clipping/weighted accumulation, FP8 scaling and MXFP8 already have worked cases and six original figures; CPU checker rerun.",
+      "findings": [
+        "precision",
+        "hardware",
+        "memory"
+      ]
+    },
+    {
+      "start": 4341,
+      "heading_line": 4341,
+      "heading": "Flash attention: IO-aware attention optimization",
+      "end": 4655,
+      "targets": [
+        "flash",
+        "roofline",
+        "gpu"
+      ],
+      "status": "mapped-with-source-findings",
+      "decision": "Complete FlashAttention chapter read. Tiling, stable online merge, causal tails, backward reconstruction, gradient ownership and FA2/FA3 execution are more detailed than this source; existing CPU forward/backward cases rerun.",
+      "findings": [
+        "flash",
+        "benchmark"
+      ]
+    },
+    {
+      "start": 4656,
+      "heading_line": 4656,
+      "heading": "Gradient accumulation and checkpointing",
+      "end": 5045,
+      "targets": [
+        "checkpoint",
+        "collectives",
+        "precision"
+      ],
+      "status": "mapped-with-source-findings",
+      "decision": "Complete 44b comparison and CPU rerun. Segment boundary/internal storage, early-stop/SAC, placement, offload lifetime, normalized accumulation and actual no_sync usage are explicit; source contradictions are retained as findings.",
+      "findings": [
+        "checkpoint",
+        "memory"
+      ]
+    },
+    {
+      "start": 5046,
+      "heading_line": 5046,
+      "heading": "Optimization technique comparison",
+      "end": 5068,
+      "targets": [
+        "data",
+        "precision",
+        "checkpoint",
+        "optimizers"
+      ],
+      "status": "mapped-with-source-findings",
+      "decision": "Technique comparison maps to actual object/phase boundaries and examples rather than unmeasured percentage rankings.",
+      "findings": [
+        "benchmark"
+      ]
+    },
+    {
+      "start": 5069,
+      "heading_line": 5069,
+      "heading": "GPT-2 optimization walkthrough",
+      "end": 5233,
+      "targets": [
+        "arithmetic",
+        "precision",
+        "checkpoint",
+        "data"
+      ],
+      "status": "mapped-with-source-findings",
+      "decision": "The GPT-2 combination is reconciled by stated per-object budgets and recomputation examples. Fixed peak-memory divisions, step-time gains and convergence tolerances are illustrative source inputs, not verified results.",
+      "findings": [
+        "memory",
+        "checkpoint",
+        "benchmark"
+      ]
+    },
+    {
+      "start": 5234,
+      "heading_line": 5234,
+      "heading": "Optimization impact summary",
+      "end": 5425,
+      "targets": [
+        "arithmetic",
+        "precision",
+        "checkpoint",
+        "mlops"
+      ],
+      "status": "mapped-with-source-findings",
+      "decision": "Current ledgers separate object accounting, work and billed time. The source's optimized-memory code counts five FP32-parameter equivalents where its stated AMP budget counts four before activations; this is recorded, not silently reproduced.",
+      "findings": [
+        "memory",
+        "cost",
+        "benchmark"
+      ]
+    },
+    {
+      "start": 5426,
+      "heading_line": 5426,
+      "heading": "Scaling Training Systems",
+      "end": 5573,
+      "targets": [
+        "systems",
+        "collectives",
+        "distributed",
+        "mlops"
+      ],
+      "status": "mapped-with-source-findings",
+      "decision": "Amdahl's fixed-fraction law and limit are derived with an original MIT slide in S1. Current DDP example separately models exposed overlap and communication. Source labeled scaling curves are hypothetical, not benchmark data.",
+      "findings": [
+        "scaling",
+        "benchmark"
+      ]
+    },
+    {
+      "start": 5574,
+      "heading_line": 5574,
+      "heading": "Single-node multi-GPU training",
+      "end": 6184,
+      "targets": [
+        "distributed",
+        "collectives",
+        "checkpoint",
+        "arithmetic"
+      ],
+      "status": "mapped-with-source-findings",
+      "decision": "DP/MP/PP/TP ownership, updates, payloads, stage and microbatch scheduling, and placement are already worked. GPipe and PipeDream are not treated as identical schedules; mandatory end-only AllReduce is not a universal training contract.",
+      "findings": [
+        "scaling",
+        "hardware"
+      ]
+    },
+    {
+      "start": 6185,
+      "heading_line": 6185,
+      "heading": "Scaling beyond a single node",
+      "end": 6294,
+      "targets": [
+        "collectives",
+        "distributed",
+        "data",
+        "mlops"
+      ],
+      "status": "mapped-with-source-findings",
+      "decision": "Current collectives chapter gives startup/bandwidth/payload models, overlap and node hierarchy. Data can stream without full residence; capacities, bandwidth paths and deadlines must be stated.",
+      "findings": [
+        "scaling",
+        "hardware"
+      ]
+    },
+    {
+      "start": 6295,
+      "heading_line": 6295,
+      "heading": "The evolution of training infrastructure",
+      "end": 6368,
+      "targets": [
+        "systems",
+        "mlops"
+      ],
+      "status": "source-framing-retained",
+      "decision": "Historical mainframe/HPC/cloud/AI overview remains source context, not another technical glossary page or a current product ranking.",
+      "findings": []
+    },
+    {
+      "start": 6369,
+      "heading_line": 6369,
+      "heading": "When to scale: The physical ceiling",
+      "end": 6680,
+      "targets": [
+        "precision",
+        "checkpoint",
+        "data",
+        "distributed",
+        "mlops",
+        "responsible"
+      ],
+      "status": "mapped-with-source-findings",
+      "decision": "Memory, streaming and timing ceilings already have concrete assumptions. Complete Responsible systems was read and supplies the operational-energy/CO2e derivation, 6000-J trace, full/incremental boundary, one-time PUE, 480-to-408-kg shifting example, rebound and lifecycle payback. MLOps supplies billed-time/cost accounting. The provisional MLOps-only search gap is resolved without duplicating reader material.",
+      "findings": [
+        "scaling",
+        "energy",
+        "cost"
+      ]
+    },
+    {
+      "start": 6681,
+      "heading_line": 6681,
+      "heading": "Fallacies and Pitfalls",
+      "end": 6716,
+      "targets": [
+        "profiling",
+        "optimizers",
+        "precision",
+        "checkpoint",
+        "data",
+        "mlops",
+        "responsible"
+      ],
+      "status": "mapped-with-source-findings",
+      "decision": "Accepted chapters already expose batch/convergence, numeric range, recomputation, I/O and cost trade-offs. Unsupported assigned quality losses, fixed duration/parameter/data thresholds and universal utilization-to-energy savings are not imported.",
+      "findings": [
+        "benchmark",
+        "precision",
+        "scaling",
+        "energy"
+      ]
+    },
+    {
+      "start": 6717,
+      "heading_line": 6717,
+      "heading": "Summary",
+      "end": 6801,
+      "targets": [
+        "systems",
+        "arithmetic",
+        "data",
+        "distributed"
+      ],
+      "status": "source-framing-retained",
+      "decision": "Source recap remains available without adding a reader-facing summary-only chapter. All named comparisons are resolved for this pinned Training source; this is not whole-course, lab/deck, whole-book or translation completion.",
+      "findings": []
+    }
+  ],
+  "resolved_items": {
+    "energy-emissions": {
+      "review": "docs/audit/2026-10-28-training-reconciliation.md",
+      "destination": "responsible",
+      "reason": "The provisional gap was caused by searching only the MLOps destination. The existing Responsible systems chapter supplies the full explanation and examples; all 1136 lines and its two original energy figures were inspected. Preserve that chapter rather than duplicate it.",
+      "checks": "/var/tmp/bookvar-training-responsible-check.log"
+    }
+  }
+}

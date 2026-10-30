@@ -1,0 +1,95 @@
+[
+  {
+    "id": "curated-torchrec-dlrm-training-a72804742056",
+    "asset": "00 Учебник/Assets/Figures/curated/dlrm-2026-10-26/torchrec-full-training-loop.png",
+    "author": "Meta Platforms, Inc. and affiliates / TorchRec contributors",
+    "source_url": "https://github.com/meta-pytorch/torchrec/blob/36ae8ed89ac78e34a18ab00a08b93afe19410b55/docs/source/high-level-arch.rst#embedding-tables",
+    "source_image_url": "https://raw.githubusercontent.com/meta-pytorch/torchrec/36ae8ed89ac78e34a18ab00a08b93afe19410b55/docs/source/_static/img/full_training_loop.png",
+    "commit": "36ae8ed89ac78e34a18ab00a08b93afe19410b55",
+    "source_asset": "05 Источники/Originals/dlrm-2026-10-26/torchrec-full-training-loop.png",
+    "source_asset_sha256": "a72804742056fc69c434b2b9fbbf1342c9c5253c4848176678bdf43f4ce74902",
+    "sha256": "a72804742056fc69c434b2b9fbbf1342c9c5253c4848176678bdf43f4ce74902",
+    "dimensions_px": [
+      1818,
+      920
+    ],
+    "source_page_snapshot": "05 Источники/Originals/dlrm-2026-10-26/torchrec-high-level-arch.rst",
+    "source_page_sha256": "c5149a1e41f7ebac22f7bd4caa95545bf00f3029a19417cf576e7d47eb11c738",
+    "license": "BSD-3-Clause",
+    "license_url": "https://github.com/meta-pytorch/torchrec/blob/36ae8ed89ac78e34a18ab00a08b93afe19410b55/LICENSE",
+    "license_evidence": "05 Источники/Originals/dlrm-2026-10-26/torchrec-LICENSE",
+    "license_evidence_sha256": "7b4128b5b7ffac73983ee114969a486efc32e1237df0266797f86ac2f6c30384",
+    "public_license_copy": "site/public/licenses/torchrec-BSD-3-Clause.txt",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original PNG copied byte-for-byte; no crop, redraw, translation, resampling or recompression.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-26",
+    "used_in": [
+      "00 Учебник/02 Рекомендательные системы/03 Ranking и нейронные рекомендательные модели.md"
+    ]
+  },
+  {
+    "id": "curated-torchrec-dlrm-sharding-e6ee30cc456b",
+    "asset": "00 Учебник/Assets/Figures/curated/dlrm-2026-10-26/torchrec-sharding.png",
+    "author": "Meta Platforms, Inc. and affiliates / TorchRec contributors",
+    "source_url": "https://github.com/meta-pytorch/torchrec/blob/36ae8ed89ac78e34a18ab00a08b93afe19410b55/docs/source/concepts.rst#sharding-of-embeddingtables",
+    "source_image_url": "https://raw.githubusercontent.com/meta-pytorch/torchrec/36ae8ed89ac78e34a18ab00a08b93afe19410b55/docs/source/_static/img/sharding.png",
+    "commit": "36ae8ed89ac78e34a18ab00a08b93afe19410b55",
+    "source_asset": "05 Источники/Originals/dlrm-2026-10-26/torchrec-sharding.png",
+    "source_asset_sha256": "e6ee30cc456b15ef914b4508d588c9a4ec983bbaa27cf9cb017a7a5b8990385a",
+    "sha256": "e6ee30cc456b15ef914b4508d588c9a4ec983bbaa27cf9cb017a7a5b8990385a",
+    "dimensions_px": [
+      2688,
+      1310
+    ],
+    "source_page_snapshot": "05 Источники/Originals/dlrm-2026-10-26/torchrec-concepts.rst",
+    "source_page_sha256": "649b666872516aae69b6c7d366518afcbd3ae1b52a270efbcda5ba405177c2be",
+    "license": "BSD-3-Clause",
+    "license_url": "https://github.com/meta-pytorch/torchrec/blob/36ae8ed89ac78e34a18ab00a08b93afe19410b55/LICENSE",
+    "license_evidence": "05 Источники/Originals/dlrm-2026-10-26/torchrec-LICENSE",
+    "license_evidence_sha256": "7b4128b5b7ffac73983ee114969a486efc32e1237df0266797f86ac2f6c30384",
+    "public_license_copy": "site/public/licenses/torchrec-BSD-3-Clause.txt",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original PNG copied byte-for-byte; no crop, redraw, translation, resampling or recompression.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-26",
+    "used_in": [
+      "00 Учебник/02 Рекомендательные системы/03 Ranking и нейронные рекомендательные модели.md"
+    ]
+  },
+  {
+    "id": "curated-torchrec-dlrm-forward-a05b77422e35",
+    "asset": "00 Учебник/Assets/Figures/curated/dlrm-2026-10-26/torchrec-forward.png",
+    "author": "Meta Platforms, Inc. and affiliates / TorchRec contributors",
+    "source_url": "https://github.com/meta-pytorch/torchrec/blob/36ae8ed89ac78e34a18ab00a08b93afe19410b55/docs/source/concepts.rst#distributed-training-with-torchrec-sharded-modules",
+    "source_image_url": "https://raw.githubusercontent.com/meta-pytorch/torchrec/36ae8ed89ac78e34a18ab00a08b93afe19410b55/docs/source/_static/img/torchrec_forward.png",
+    "commit": "36ae8ed89ac78e34a18ab00a08b93afe19410b55",
+    "source_asset": "05 Источники/Originals/dlrm-2026-10-26/torchrec-torchrec_forward.png",
+    "source_asset_sha256": "a05b77422e35efe5932c4f0ee8b266549b0c829b22bcf2c18c4901b9ef6d69d4",
+    "sha256": "a05b77422e35efe5932c4f0ee8b266549b0c829b22bcf2c18c4901b9ef6d69d4",
+    "dimensions_px": [
+      2230,
+      1152
+    ],
+    "source_page_snapshot": "05 Источники/Originals/dlrm-2026-10-26/torchrec-concepts.rst",
+    "source_page_sha256": "649b666872516aae69b6c7d366518afcbd3ae1b52a270efbcda5ba405177c2be",
+    "license": "BSD-3-Clause",
+    "license_url": "https://github.com/meta-pytorch/torchrec/blob/36ae8ed89ac78e34a18ab00a08b93afe19410b55/LICENSE",
+    "license_evidence": "05 Источники/Originals/dlrm-2026-10-26/torchrec-LICENSE",
+    "license_evidence_sha256": "7b4128b5b7ffac73983ee114969a486efc32e1237df0266797f86ac2f6c30384",
+    "public_license_copy": "site/public/licenses/torchrec-BSD-3-Clause.txt",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original PNG copied byte-for-byte; no crop, redraw, translation, resampling or recompression.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-26",
+    "used_in": [
+      "00 Учебник/02 Рекомендательные системы/03 Ranking и нейронные рекомендательные модели.md"
+    ]
+  }
+]

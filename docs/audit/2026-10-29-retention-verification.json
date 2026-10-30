@@ -1,0 +1,171 @@
+{
+  "date": "2026-10-29",
+  "status": "verified-locally-not-published",
+  "scope": "Retention section in the existing Fine-tuning/PEFT chapter and reconciliation of the legacy Fine-tuning overview. This does not accept the remaining 23 archived notes, the whole-book reading route or a live release.",
+  "canonicalMarkdown": "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md",
+  "routes": [
+    "/textbook/post-training/fine-tuning-peft/",
+    "/en/textbook/post-training/fine-tuning-peft/"
+  ],
+  "sourceLanguage": "New and existing English-native content is shared unchanged by both locale routes; no new translation or fallback.",
+  "priorReceipt": "docs/audit/2026-10-29-small-data-finetuning-verification.json",
+  "journal": "docs/audit/2026-10-29-retention-additions.json",
+  "sha256": {
+    "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md": "5102f8b7db11f1ce749c7263d75bb124cbeb6ed217e5d6762e10b6f9d96d24b0",
+    "05 Источники/asset-registry.yml": "9ac87adeca4ef545e720c02c533f7ddcbf42721be5fcecc3f3e34a753175e757",
+    "01 Справочник/_index.md": "2945bd44e90f7c50017d54d1d47f58f8ebcf5c006c93bff15cdae2908d59661e",
+    "en/01 Reference/_index.md": "0c302fd78b59a6a8296b1c6b41fb1764c55b435455714f67e5a185030ea83e52",
+    "05 Источники/Originals/retention-2026-10-29/li18a.pdf": "da898e24defa977a5d38eeaab61da0e08b7cdbc358476b23ff1a28b5de666db0",
+    "05 Источники/Originals/peft-2026-10-29/pmlr-license-agreement.pdf": "3a3eac0ebdded57660c12c59028c5429b6d2b328be2c6fde534a104438444c31",
+    "00 Учебник/Assets/Figures/curated/retention-2026-10-29/assets.json": "987ddfc9a922759f7ae73e3ad777618effe09ac6e16008564c35216b2675e8c3",
+    "00 Учебник/Assets/Figures/curated/retention-2026-10-29/l2sp-target-comparison.png": "37ee7a43639cb4abda0d3ad54b63c18d89ce0dff7a09ad4d9bcec2236c33bcf1",
+    "00 Учебник/Assets/Figures/curated/retention-2026-10-29/l2sp-retention.png": "e344b0d6cb6ce3feb7e5a601fdd13517b8dc9e0e3beda52ef8d68053b90fed25",
+    "publishing/tools/check_peft_examples.py": "ebc2be0128e102e37e3cf68f5bac8d571b4652e7c079da8aa86945f7bbd4fd4b",
+    "publishing/tools/topic-consolidation-baseline.mjs": "624a033d53c8bf24a651d35b371fa1cd693621d47d251945e37750aa82b90c34",
+    "publishing/tools/topic_consolidation_baseline.py": "73d01a384129ed1b32a7a16233dd857d68f305628b8e50f58593cc4113ad28d1",
+    "publishing/tests/retention-finetuning.test.ts": "57067e6338b49c8db1397d44c1160e088007d0847b9c9adb35843ca34d6c9882",
+    "publishing/tests/peft-fine-tuning.test.ts": "b5a889dd2fa004a946a7636358598061c88f7957228b861ec837bf3135b4076c",
+    "publishing/tests/small-data-finetuning.test.ts": "6dbdbb14adbe7c5e9b3eb4e51a21def89d10586cb57f16000ee15a81f48a5317",
+    "publishing/tests/bert-objectives.test.ts": "cc11e6b7217266a39a9c8af70e155c8dd7f68c21f6b4a40eed27fde2ce9ccc12",
+    "publishing/tests/site-output.test.ts": "46d490c3a060c146d8e2828aab96c951760161ae2a8662ca29d69ba4c2c06ce5",
+    "docs/audit/2026-10-29-retention-additions.json": "7e457168f41839f272b83c74e60732e9c7f3ea5adfa03d85b4ae74e9d9baabc4",
+    "docs/audit/2026-10-29-legacy-notes-review.json": "95e944f370aad4b1de3794186e9b4a1b05b17a1fbc95f63da9b20ef1226bcafa",
+    "docs/audit/2026-10-29-release-completion-plan.md": "faacba77d8a30b2e20ef5cb8b3cbfba245fb7606384e3f7ac94f19196d38ac9e",
+    "site/dist/textbook/post-training/fine-tuning-peft/index.html": "7039ae5cee47b49ccaaa094031046e10df611288c4ea4c1613f806d8001eba26",
+    "site/dist/en/textbook/post-training/fine-tuning-peft/index.html": "39cfa3ec595446741907a39d796451626c7faa6fc55cd41d74eb025851b8463d",
+    "/var/tmp/bookvar-retention-pages-20261029/textbook/post-training/fine-tuning-peft/index.html": "8d8afa2b9aab8a41a0636767daf94800ac497305e3336a4220cd79e1dbca917a",
+    "/var/tmp/bookvar-retention-pages-20261029/en/textbook/post-training/fine-tuning-peft/index.html": "db34daf1fa7a7e64f87cd77604b52975852af65b9c5dc921b72f9e0556ed3714",
+    "docs/audit/evidence/2026-10-29-retention/desktop-ewc.png": "20d9382a6a3448f4acd20efbba1375094fb1135f80bd3309f04bbb9b275d94be",
+    "docs/audit/evidence/2026-10-29-retention/desktop-original-viewer.png": "9668d4db8d35337aa99d7217ef3a1947c0c6eda657588f8f6226ccb1d8869508",
+    "docs/audit/evidence/2026-10-29-retention/mobile-fisher-en.png": "b06b1f3f3a83c74baea741e6abd128958ccbadea94954eec02dad3e547adc061",
+    "docs/audit/evidence/2026-10-29-retention/mobile-table-zoom-en.png": "3a71b019e4524f5dce109f5311f4116941fb97db7b3f7347d494f147ebd92f13",
+    "docs/audit/evidence/2026-10-29-retention/pages-mobile-replay.png": "e9fbbd19dc052f534004b1d693396a85634201576ef4bc1db437158484df7350",
+    "docs/audit/evidence/2026-10-29-retention/pages-desktop-originals-en.png": "ed2173f2cb3b92fcf63c7e2a7fad098397352dda0475b7c3c200e78109049d08",
+    "docs/audit/evidence/2026-10-29-retention/observations.json": "70b011fbde69c2537eae846b50194a0ca6e808d8a1ceae23255ff5289cc13058"
+  },
+  "explanationReview": {
+    "wholeFinalChapterRead": true,
+    "revision": "5102f8b7db11f1ce749c7263d75bb124cbeb6ed217e5d6762e10b6f9d96d24b0",
+    "mechanisms": [
+      {
+        "mechanism": "Replay",
+        "source": "Kirkpatrick et al., Introduction; complete canonical synthetic-data chapter read at 2e465a3a. Complete unchanged PPO owner read at 29efb9a8, including PPO-ptx in section 7.",
+        "reasoning": "Weighted mean losses give the mixture gradient; the scalar conflicting-target example yields theta=2rho-1 and shows retention/adaptation trade-offs. Token/document/loss-bearing-token fractions, buffer coverage, repeated use and held-out old-task evaluation remain distinct."
+      },
+      {
+        "mechanism": "L2-SP",
+        "source": "Li, Grandvalet and Davoine, original ICML 2018 PDF, introduction and section 3, equations 1–3.",
+        "reasoning": "An explicit pretrained-centred penalty has gradient lambda(theta-anchor), distinct from zero-centred L2 and AdamW decay. The two-parameter solution and detached anchor are checked. New classifier parameters do not acquire an unrelated source head anchor."
+      },
+      {
+        "mechanism": "EWC",
+        "source": "Kirkpatrick et al., arXiv 1612.00796v2, section 2 equation 3; Li et al., section 3 equation 4.",
+        "reasoning": "Per-coordinate penalty gradients and the exact solution for supplied F=(9,.1) explain differential movement. Old/new constructed losses are calculated separately; coefficients are not misreported as measured Fisher estimates. A frozen-base LoRA counterexample changes output 1 to -1."
+      },
+      {
+        "mechanism": "Fisher estimation and limits",
+        "source": "Li et al., categorical expectation below equation 4; Kunstner et al. 1905.12558v3, sections 1 and 4; Huszar 1712.03847v1 two-task and recursive Laplace derivations.",
+        "reasoning": "Per-example squared score averages are separated from squared batch gradients and observed-label empirical Fisher. Values .25 versus 0 and .01 versus .09 are checked. Local diagonal approximation, normalization, anchor/precision memory and multi-task double counting are qualified."
+      },
+      {
+        "mechanism": "Reported transfer and retention",
+        "source": "Li et al., sections 4.2–4.3.2, complete Figure 2 and Table 3 on PDF page 6.",
+        "reasoning": "Target-task accuracy plots do not replace the restored-old-head retention measure. ImageNet baseline 76.7 and drops 14.1/4.7/4.2 yield 62.6/72/72.5. The paper reports vision results; the chapter makes no LLM benchmark or guaranteed preservation claim."
+      }
+    ],
+    "sourceReuse": "The original English introduction passage and complete Figure 2/Table 3 captions are reproduced with attribution under PMLR CC BY 4.0. The remaining reserved-text arXiv works are linked, not copied wholesale.",
+    "existingAcceptedContent": "The exact new journal restores the prior a80d648c chapter; earlier source excerpts, examples and eight figures are unchanged. Current whole chapter reread and all eighteen CPU blocks were checked.",
+    "styleReview": "Finished prose reread against no-ai-slop and project academic qualifications: explanation, intermediate calculations, caveats, sources and figures retained; no generic introduction or list of definitions substituted.",
+    "unresolvedWithinChangedSection": []
+  },
+  "checks": {
+    "cpu": {
+      "command": "uv run --offline --with torch==2.14.1 --with numpy==2.3.5 python publishing/tools/check_peft_examples.py",
+      "exitCode": 0,
+      "publishedBlocks": 18,
+      "newBlocks": 4,
+      "independentGradientMaxError": 4.440892098500626e-16,
+      "ewcSolution": [
+        1.8,
+        0.18181818181818182
+      ],
+      "ewcNewLoss": 1.6365289256198348,
+      "ewcProtectedOldLoss": 0.34528925619834705,
+      "gradientMeanSquare": 0.25,
+      "squaredGradientMean": 0
+    },
+    "publisherUnit": {
+      "exitCode": 0,
+      "files": 128,
+      "tests": 827,
+      "log": "/var/tmp/bookvar-retention-unit-20261029.log"
+    },
+    "siteUnit": {
+      "exitCode": 0,
+      "files": 6,
+      "tests": 89,
+      "log": "/var/tmp/bookvar-retention-site-20261029.log"
+    },
+    "builtOutput": {
+      "exitCode": 0,
+      "tests": 172,
+      "log": "/var/tmp/bookvar-retention-output-20261029.log"
+    },
+    "rootBuild": {
+      "exitCode": 0,
+      "pages": 2006,
+      "log": "/var/tmp/bookvar-retention-root-20261029.log",
+      "brokenLinks": 0,
+      "linksLog": "/var/tmp/bookvar-retention-links-20261029.log"
+    },
+    "pagesBuild": {
+      "exitCode": 0,
+      "base": "/bookvar",
+      "pages": 2006,
+      "log": "/var/tmp/bookvar-retention-pages-20261029.log",
+      "brokenLinks": 0,
+      "linksLog": "/var/tmp/bookvar-retention-pages-links-20261029.log"
+    },
+    "sourcePreservation": {
+      "legacyNotes": 31,
+      "unchangedHashes": 31
+    },
+    "diffWhitespace": "Scoped git diff --check passed."
+  },
+  "visualQA": {
+    "observations": "docs/audit/evidence/2026-10-29-retention/observations.json",
+    "screenshots": 6,
+    "rootAndPages": true,
+    "desktopAndMobile": true,
+    "locales": [
+      "ru",
+      "en"
+    ],
+    "contentFigures": 10,
+    "allContentFiguresLoaded": true,
+    "codeBlocks": 18,
+    "katexErrors": 0,
+    "temporaryViewportReset": true,
+    "remainingRootPreview": "http://127.0.0.1:4330/textbook/post-training/fine-tuning-peft/#retaining-capabilities"
+  },
+  "archiveReconciliation": {
+    "total": 31,
+    "sourceFullRead": 15,
+    "reconciled": 8,
+    "readInProgress": 7,
+    "unread": 16,
+    "canonicalWholeReads": 10
+  },
+  "limitations": [
+    "Only constructed CPU examples were run; no large-model fine-tuning, continual-learning or GPU benchmark was reproduced.",
+    "The original EWC arXiv figure was not copied under an unverified reproduction permission; the original licensed transfer-comparison figures and table were used with their actual scope.",
+    "Long displayed formulas scroll within their own container at mobile width; the document itself has no horizontal overflow.",
+    "Existing locale, Poppler path and unknown promql/toc highlighting warnings remain outside the changed explanation. Astro type checking was not rerun for this content-only increment.",
+    "No commit, push or GitHub Pages deployment occurred; root/Pages checks are local."
+  ],
+  "cleanup": {
+    "ownedPagesPreview": "Owned processes 32856 and 32845 were command-line guarded and stopped. Port 62839 output, owned /var/tmp Pages build, PDF render/text intermediates and an unused downloaded volume index were removed. The two recorded /var/tmp HTML hashes are historical after this cleanup.",
+    "rootPreview": "Retained; generated publication content restored to root paths.",
+    "finalTab": "Existing QA tab left at the new root retention section; user's original tabs not modified."
+  }
+}

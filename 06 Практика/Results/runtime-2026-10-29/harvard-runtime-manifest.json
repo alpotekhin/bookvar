@@ -1,0 +1,1572 @@
+{
+  "commit": "45ecc8d82fcae70c149cdce550d3b3d3411df913",
+  "files": [
+    {
+      "path": "LICENSE.md",
+      "bytes": 274,
+      "git_blob": "0fee23e26394fcd24a825e12c3dd7aa420cd2928",
+      "sha256": "b6f4689d6fccf48d82d0871a3b994a122427fcb0b278971f6ba008be44e2c926"
+    },
+    {
+      "path": "labs/bootstrap.py",
+      "bytes": 1139,
+      "git_blob": "ed512bc7e829675c1e44a5bb4abd0d68b4389bb4",
+      "sha256": "8e04a333ae4fc7bc8a9f7de31d650b6b6b7cea51e51a36eae84c5671b88250f6"
+    },
+    {
+      "path": "labs/mlsysbook_labs/__init__.py",
+      "bytes": 14472,
+      "git_blob": "26a62b9b3ee45cc26cb67bda40dc29bea34b1539",
+      "sha256": "1414f15c3a8f91e0d8bad8fb0c9aed61b6454b2a625341594b43026675330ca0"
+    },
+    {
+      "path": "labs/mlsysbook_labs/architecture.py",
+      "bytes": 15842,
+      "git_blob": "cb61d53c992126fddd3aabe1a63db2896b0996a6",
+      "sha256": "af2db23e0d799774f0ea7ac9a239cd9348821473f018121ec8f79030a6c8f297"
+    },
+    {
+      "path": "labs/mlsysbook_labs/benchmarking.py",
+      "bytes": 7887,
+      "git_blob": "12e5bd0a58be18aa1c7a65693c4c5fb8b62f18e6",
+      "sha256": "f7438c6ea76b63d191aac78f9582478454ccfdbb83cb8ae44e5e0a81b391f7f1"
+    },
+    {
+      "path": "labs/mlsysbook_labs/capstone.py",
+      "bytes": 10607,
+      "git_blob": "7aeffbd194248c1e2fc4614092bfe4fb93d7d7d8",
+      "sha256": "b429ba3e2af20c37332bfb55089cd13f03d315197dcbf0049c08499f44d10241"
+    },
+    {
+      "path": "labs/mlsysbook_labs/catalog.py",
+      "bytes": 10103,
+      "git_blob": "44dce25930a4ae5c2bc4d0f3fcde804ea67036c5",
+      "sha256": "e95c381aac96765c380b8c44617d3398ef736c49c5f60d9593df9cbd9bdba46b"
+    },
+    {
+      "path": "labs/mlsysbook_labs/data_pipeline.py",
+      "bytes": 11488,
+      "git_blob": "f99b3ed881a709b90b5c5324d62eb00e0729d3a8",
+      "sha256": "d4ed3f7dccf19b16c734f1106ba3adc3692dcffed241048ed0770e445f15d572"
+    },
+    {
+      "path": "labs/mlsysbook_labs/deployment.py",
+      "bytes": 15001,
+      "git_blob": "03e3672a8a17dc1180974cbc61013f9a47dcb5c1",
+      "sha256": "de91114a1d1ee240a0e6784e4ac56629b9287ae6f9fd84ea0ef5a194ab034a77"
+    },
+    {
+      "path": "labs/mlsysbook_labs/edge.py",
+      "bytes": 12188,
+      "git_blob": "be616f0f7a4cf63f0fa2cb0391f9e7c075bfeb07",
+      "sha256": "6b596cd479a225bcd575542807d8ebabb6940511ac4f9ded345fcf467aa228c5"
+    },
+    {
+      "path": "labs/mlsysbook_labs/frameworks.py",
+      "bytes": 14477,
+      "git_blob": "67522f92edb1928ca9a7b9484c18082bc18d81bc",
+      "sha256": "e8b7191b26cda06cf38c59f8348e72b581c61ce28d183130fa5ff2f6bb13424d"
+    },
+    {
+      "path": "labs/mlsysbook_labs/inference.py",
+      "bytes": 9645,
+      "git_blob": "3e1d9252fdcc31938928ff545e07dfae58b305e5",
+      "sha256": "444197061f8bdb408d2e43836fec845e89030d050717e08cf4841661bd1fdad9"
+    },
+    {
+      "path": "labs/mlsysbook_labs/legacy_components.py",
+      "bytes": 490,
+      "git_blob": "0915395ce7175d43b7b27d61b7603c06fb96a29c",
+      "sha256": "54eec7fc630ff6e5daca968bac440f47201944147bb16ef04c481a7508105a6b"
+    },
+    {
+      "path": "labs/mlsysbook_labs/migration.py",
+      "bytes": 6871,
+      "git_blob": "6e4ab930a70a141ce76f416d2e6c2d0c8e5c6f33",
+      "sha256": "2ab6930a1204be6709acbc1cfe080ba1abc58aec3373ba156f6947b0eab8f67c"
+    },
+    {
+      "path": "labs/mlsysbook_labs/neural_compute.py",
+      "bytes": 12508,
+      "git_blob": "62de584a41207ba8439395ec3bd5e32966a15c7d",
+      "sha256": "e30c8544d882bd013d5a1f4f8c0985ecaab4c5796f2e32210736739df610e3fa"
+    },
+    {
+      "path": "labs/mlsysbook_labs/ops.py",
+      "bytes": 11087,
+      "git_blob": "c21078737ad2aa48eda74f5fc86898b6b1fa1a38",
+      "sha256": "7eec3bc3505453661019080a4ea4f5b7e53541f9537312d4b50a0bbe998c322d"
+    },
+    {
+      "path": "labs/mlsysbook_labs/registry_refs.py",
+      "bytes": 1023,
+      "git_blob": "18b42d23a4a6d47a8261e921d49f72ad1c5cc981",
+      "sha256": "6e31717b279012c90446bbb587714c0012b69e5d691df978e7e1d4c803f50105"
+    },
+    {
+      "path": "labs/mlsysbook_labs/reports.py",
+      "bytes": 9014,
+      "git_blob": "7283a370942e174fc507e06a38dcd4757409ee70",
+      "sha256": "2e5221f7abeb69063f49584b50a18841d2bc8ce34e59d8e074a2c96e26bff2af"
+    },
+    {
+      "path": "labs/mlsysbook_labs/responsibility.py",
+      "bytes": 15634,
+      "git_blob": "8695752438deb203861c736a6f277341dc4dca2c",
+      "sha256": "838d359fdc200358c578f54b2ac626713dac40dc9c5522b1e05dd2ccaac08a41"
+    },
+    {
+      "path": "labs/mlsysbook_labs/roofline.py",
+      "bytes": 5146,
+      "git_blob": "7a9781e950c3c6241e3c0181da9dd44feb28e356",
+      "sha256": "bb548f4ad9506b08d9e846c0f3a84d50c70079af6742e3349110f87c1d4ef6d5"
+    },
+    {
+      "path": "labs/mlsysbook_labs/schemas.py",
+      "bytes": 4883,
+      "git_blob": "c03c0101518288857cb8bc521d03e56db8839046",
+      "sha256": "993b28e9c90d89deb577fc200e9e1b7aa65218f871f35d8f8ffcff1ec3044c6e"
+    },
+    {
+      "path": "labs/mlsysbook_labs/selection.py",
+      "bytes": 14814,
+      "git_blob": "b023501462f829b83a90e7cbaffeacc98d4b42e6",
+      "sha256": "5d324986b9967627b8f1f225e42345a39d640e396390f695c54ec322b346ad08"
+    },
+    {
+      "path": "labs/mlsysbook_labs/serving.py",
+      "bytes": 15150,
+      "git_blob": "c545960d62871c2205d39617015bfc40196a98cb",
+      "sha256": "5135a988416b3e8db567265212b5b0a69a3955c31066ff8d206cb423e7498f96"
+    },
+    {
+      "path": "labs/mlsysbook_labs/state.py",
+      "bytes": 144,
+      "git_blob": "d8ea555364306425a56b2f2769af5357a4ce582d",
+      "sha256": "36424b2ea3739899c35d598c77c4f0901ddea7498a2d26584319259fffc6bc7e"
+    },
+    {
+      "path": "labs/mlsysbook_labs/style.py",
+      "bytes": 393,
+      "git_blob": "c57f73143449c867ce5cf5656018c50c5880e730",
+      "sha256": "a4b3c6fb349356e90c99750a56fcc48155492a766041766ac7a457d5abfeb1b0"
+    },
+    {
+      "path": "labs/mlsysbook_labs/system_design.py",
+      "bytes": 38201,
+      "git_blob": "247cc69d02dd187fa6273fe0c91350c5cafb34f7",
+      "sha256": "91367635f48ed2c4da49dd97b386a96983b70cb457ef84b1f6b4630a519c81ba"
+    },
+    {
+      "path": "labs/mlsysbook_labs/track_arcs.py",
+      "bytes": 17262,
+      "git_blob": "af7ea3cf975e74e5409dafddc0fe47c5bb5871c6",
+      "sha256": "f0cdb2cbf54083c0108265934565e36b6fc97b7168b9d4226977770a456e5057"
+    },
+    {
+      "path": "labs/mlsysbook_labs/tracks.py",
+      "bytes": 5805,
+      "git_blob": "df55510f6665b18117b0df366fd571c074bc515b",
+      "sha256": "54bc0ebcb226c65ae673e0765d99c6d85bd7108c909410926272761b94e62011"
+    },
+    {
+      "path": "labs/mlsysbook_labs/training.py",
+      "bytes": 14886,
+      "git_blob": "042539f4d821e015203696f4f143c835d2a49fb1",
+      "sha256": "ea3a28d47d8e97720f9ed07790a3556418ca53b45dfc841b3aa9fc82ffe7dd80"
+    },
+    {
+      "path": "labs/mlsysbook_labs/triad.py",
+      "bytes": 7460,
+      "git_blob": "3be1771d8604924717825b5ea97420817a2a58bd",
+      "sha256": "a362f82aa5d1e52ad0596af71b44d6239001894e30a535be1e380932ca8baf2d"
+    },
+    {
+      "path": "labs/mlsysbook_labs/ui.py",
+      "bytes": 38521,
+      "git_blob": "80af9812822cea76a0f15f5d9718429cbd64cdb3",
+      "sha256": "eec0934489dfdd18979fb0aac5cfdde9a5cf165aece6671ce847f1674059c7c7"
+    },
+    {
+      "path": "labs/mlsysbook_labs/variants.py",
+      "bytes": 224163,
+      "git_blob": "70d030df6f96f87616fae59e986e256f6b4d245d",
+      "sha256": "48fd7cdc02527e53a20e02dcf408c280d8bd3c4cd5098396e710eaadbcf89e94"
+    },
+    {
+      "path": "labs/mlsysbook_labs/versions.py",
+      "bytes": 187,
+      "git_blob": "0de1c3b1c20bfcde9b6c22bfeb3bf348709249c3",
+      "sha256": "3d0cbb5fddaaf64b81597229157527c845821bfe784bf47fe0768779a67043bb"
+    },
+    {
+      "path": "labs/mlsysbook_labs/workflow.py",
+      "bytes": 9994,
+      "git_blob": "8a1d7fa4ff14672a66921ec2f718e3686ca6e9d5",
+      "sha256": "8f6db58f8c6b0f7446d3b5be0ec51a2b52ff23530ce3bef1de7ec9917899b2de"
+    },
+    {
+      "path": "labs/vol1/lab_00_introduction.py",
+      "bytes": 73236,
+      "git_blob": "ec451f942695942125267ea18bd14bbf2ca45c9c",
+      "sha256": "68ed806ad82ca633e80ebabc7926daf0c25b2b6f9d874f1941d4403938b15500"
+    },
+    {
+      "path": "labs/vol1/lab_01_ml_intro.py",
+      "bytes": 69736,
+      "git_blob": "883e942c7c084795292384423031464c8da88f0e",
+      "sha256": "7788cd8bf66e00f755fb3f1f826f57098b47378106fe55a757283c2184c32f49"
+    },
+    {
+      "path": "labs/vol1/lab_02_ml_systems.py",
+      "bytes": 66500,
+      "git_blob": "884bcea6607c76fb4a59aead1e692e83b212007c",
+      "sha256": "004f309d4c7ff4838690cb72e541f62d87069349a3e62eca4be01db07c8db3fa"
+    },
+    {
+      "path": "labs/vol1/lab_03_ml_workflow.py",
+      "bytes": 56394,
+      "git_blob": "003f5244deedfe1294d583f1018ae6a2b0a09b21",
+      "sha256": "93b0196375cb889b6557f2c4377d9a01f16c894afafa7f38628bddb0a703402a"
+    },
+    {
+      "path": "labs/vol1/lab_04_data_engr.py",
+      "bytes": 78015,
+      "git_blob": "0e3a46caf9c20a60bbef1dfa9bd5b878fd490120",
+      "sha256": "496b8fd2508dda4ad68c3c8cc51dfe5c44035023a36e1e2bc2bfe023f7fcb953"
+    },
+    {
+      "path": "labs/vol1/lab_05_nn_compute.py",
+      "bytes": 70541,
+      "git_blob": "5054337bacb06967145776d2b042834e7e815d38",
+      "sha256": "7cc2be9b8ab05c92303ff615a4695437ee57deda0d1a1634ea875aed1f3190f3"
+    },
+    {
+      "path": "labs/vol1/lab_06_nn_arch.py",
+      "bytes": 73201,
+      "git_blob": "1db0df349dd9dbc031268a9c75d783275d1f65c1",
+      "sha256": "181ccf098b317f439b3f5ec5a739ba618f31abee400598ad86875b476665f9a6"
+    },
+    {
+      "path": "labs/vol1/lab_07_ml_frameworks.py",
+      "bytes": 67252,
+      "git_blob": "9755bde3a652345fd1d7dafe42a5c766c211bb22",
+      "sha256": "f20820e4a59aa6a9735b2288130ffa5e7dc72bc34df9e4ba6bf86cdeb6c25918"
+    },
+    {
+      "path": "labs/vol1/lab_08_model_train.py",
+      "bytes": 61839,
+      "git_blob": "86945963809d4e8685fe8bc2d6b5e00e9cdc4344",
+      "sha256": "4064f98d0048428af7507083be592a53651efbac30faf4c54fc0b8c1cfe1d76d"
+    },
+    {
+      "path": "labs/vol1/lab_09_data_selection.py",
+      "bytes": 75753,
+      "git_blob": "b0606a063c75ab00a62453bb52091c1d22dc0b35",
+      "sha256": "2c9b7159f921ff9bceef64dbac0ca4a67d6986e6fdb5e47276719fd57d4c219c"
+    },
+    {
+      "path": "labs/vol1/lab_10_model_compress.py",
+      "bytes": 80212,
+      "git_blob": "f8b85d5043b6d996f0b071e9b26cc277a143f71f",
+      "sha256": "91b9f786295921dba651f13733668965734c838aa4fbc10c37208b36d939c097"
+    },
+    {
+      "path": "labs/vol1/lab_11_hw_accel.py",
+      "bytes": 70358,
+      "git_blob": "9b23aafde971795fa6dbd02682eecd956116fb5a",
+      "sha256": "f92b8d45b173847c7f935601e770634084ac9e67f1b36c0b66d0d82f0c24ccb3"
+    },
+    {
+      "path": "labs/vol1/lab_12_perf_bench.py",
+      "bytes": 68637,
+      "git_blob": "fa92cc29374c377a58e0b0c91c47f0a34ac6ae1d",
+      "sha256": "966e7c77004315a9ab27a2e712839a8c12ef464420d4f1f80120f79be24a1ad6"
+    },
+    {
+      "path": "labs/vol1/lab_13_model_serving.py",
+      "bytes": 81022,
+      "git_blob": "faaf5842a6d5c0d5abd55d6d768d9584e5c295d0",
+      "sha256": "0a2c4c17e0395736f4c235fac7e0f4412e8a7ab65b756b5f27c412bd39ca6a08"
+    },
+    {
+      "path": "labs/vol1/lab_14_ml_ops.py",
+      "bytes": 71054,
+      "git_blob": "c3e0ab80a2c73ad2dd71bd29a0dd4ee974084b40",
+      "sha256": "ce245d29828180dacebfb812f437a25ea879fefd7763e18c9ba3e4660d1731ea"
+    },
+    {
+      "path": "labs/vol1/lab_15_responsible_engr.py",
+      "bytes": 73692,
+      "git_blob": "32d5e23f2ef1bdbb6db469b467202346003c71f5",
+      "sha256": "d9ec0b577cf745356fa2466621d53901d279c6af4d8d514a68241ffcc8deb284"
+    },
+    {
+      "path": "labs/vol1/lab_16_ml_conclusion.py",
+      "bytes": 73612,
+      "git_blob": "f74817e379d3337a95623fb01a2e6a0ed9e089d1",
+      "sha256": "ca7033613b1be29d38d497c68e0dbf8c5f4adc9cc2e8d0e4c6fdb5f9a4802f6b"
+    },
+    {
+      "path": "labs/vol2/lab_01_introduction.py",
+      "bytes": 55465,
+      "git_blob": "9ba880e393deeceb19daafad9aa34361086e2b3c",
+      "sha256": "41563385c6a50493b6f93815d922f6cf02344feed5224defb5b5cff3029ed94a"
+    },
+    {
+      "path": "labs/vol2/lab_02_compute_infra.py",
+      "bytes": 69869,
+      "git_blob": "4f29e5007c31a97f748f0e0bdd817f9cb54c54c2",
+      "sha256": "737fbc905b098f708b5516596ade69ddde2fa5b34a713f7ad96d7309d533eccd"
+    },
+    {
+      "path": "labs/vol2/lab_03_communication.py",
+      "bytes": 69191,
+      "git_blob": "bd2aa03fe38699c2b4b6deab1251d536f86457bf",
+      "sha256": "858216429a3f88a534b5e08b8965e3d0aa9f3aedb22d2dc49523066adcee8939"
+    },
+    {
+      "path": "labs/vol2/lab_04_data_storage.py",
+      "bytes": 80605,
+      "git_blob": "73f36db19521dae4f7800ff9a7a9ec3662fc1428",
+      "sha256": "980efe73660c3270a44bb04bcc72601b40a5d691ca537ed80b35578eae6fc1aa"
+    },
+    {
+      "path": "labs/vol2/lab_05_dist_train.py",
+      "bytes": 73001,
+      "git_blob": "ec912b373bde7b61a143b72e36b071b606ed165e",
+      "sha256": "400c776d523f8a282369ac1d1cc83918b3280fcff58aa5d724899be881f6806b"
+    },
+    {
+      "path": "labs/vol2/lab_06_collective_communication.py",
+      "bytes": 67700,
+      "git_blob": "13d48d27b43e63e4eafa05db0042dd1eedf88055",
+      "sha256": "5b2b9b5827f05f441299eb21c5441166f776c09f77a4808757c1d92744ad4ff5"
+    },
+    {
+      "path": "labs/vol2/lab_07_fault_tolerance.py",
+      "bytes": 64949,
+      "git_blob": "74c04094983eb37aed41614d54f1a4c6443de595",
+      "sha256": "98c518f10fa80189dd84e5cec5edd1feaa166da8ece478cb788699b66e8f8a63"
+    },
+    {
+      "path": "labs/vol2/lab_08_fleet_orch.py",
+      "bytes": 76280,
+      "git_blob": "2a54a8a162a4f0a2c3b1d3206cd768a04ff0d967",
+      "sha256": "85936097b5a4cf9747c5724323a67d99fa6503a91901d63a758522dc9d9dfe1b"
+    },
+    {
+      "path": "labs/vol2/lab_09_perf_engineering.py",
+      "bytes": 71883,
+      "git_blob": "e2e70b8e8e00a1e0f5e6b687452c2669f70a5fa7",
+      "sha256": "610454e785c393c7375fea944d6ebac0796d570f29d055285b02c31b3cea36eb"
+    },
+    {
+      "path": "labs/vol2/lab_10_inference.py",
+      "bytes": 99225,
+      "git_blob": "b7eab60d143fa248a2d3035677998d1a71496b51",
+      "sha256": "82b6f9a57c635a3026319e976dca90ce34bc2605bd71d9856af8271de9e4e239"
+    },
+    {
+      "path": "labs/vol2/lab_11_edge_intelligence.py",
+      "bytes": 98041,
+      "git_blob": "40e49a49d33c8d15ceacc3035638098126eae958",
+      "sha256": "6490ab7647d2ce7b9a9d9c60dbec87b821bcad2f76434024864c9e85d385353d"
+    },
+    {
+      "path": "labs/vol2/lab_12_ops_scale.py",
+      "bytes": 73503,
+      "git_blob": "a8d09e939deade76d21f9cb9557df06dff89e299",
+      "sha256": "ec9b37e07f0579cc9937656d65d886efd79a560576f8b49038deea48ad7e6046"
+    },
+    {
+      "path": "labs/vol2/lab_13_security_privacy.py",
+      "bytes": 80193,
+      "git_blob": "9db1e6c92f2c1a5db0863eb92d81f46c8b5f2b78",
+      "sha256": "782c0221fccf55f1399a39b0386bba46ac81a55bf7951e45cb9d6cd42bc74324"
+    },
+    {
+      "path": "labs/vol2/lab_14_robust_ai.py",
+      "bytes": 97245,
+      "git_blob": "f2ec70f10445c357ae55162c3594ef96291c5d61",
+      "sha256": "d14d43df65c6a1c3a62eca666050fdcba9955bb0d6657068c8b536936242d6f9"
+    },
+    {
+      "path": "labs/vol2/lab_15_sustainable_ai.py",
+      "bytes": 79700,
+      "git_blob": "b606dfe61afa5ff1828ea1feb7fe957e2f68ebd4",
+      "sha256": "484c46a5d4741b47dcb902ad9da2953005c90f3d98646f74cd06acca5e9ca4b1"
+    },
+    {
+      "path": "labs/vol2/lab_16_responsible_ai.py",
+      "bytes": 76653,
+      "git_blob": "75e4e30aa5d16b83af05f6a533d97b2575b29dfb",
+      "sha256": "e734748522d4f34e8c7e76903e923548184f4df49f4ce5f1cdf9f2afc839c9d5"
+    },
+    {
+      "path": "labs/vol2/lab_17_fleet_synthesis.py",
+      "bytes": 87208,
+      "git_blob": "0fcd462c3d355df74c57b87126b0ef62ce58e150",
+      "sha256": "9ffefa34829d91e50de124d52ee48a6c8c53dcdc8024b1f86ac060b1a795cbec"
+    },
+    {
+      "path": "mlsysim/mlsysim/__init__.py",
+      "bytes": 2631,
+      "git_blob": "a974fa59d69288bffb5ad8be53454630872b01df",
+      "sha256": "8f9c4288cc61fc6ae27e2876405662b2aeb071bf5544d3fa14de6d24e86b88f3"
+    },
+    {
+      "path": "mlsysim/mlsysim/__main__.py",
+      "bytes": 330,
+      "git_blob": "f61a8e4abb23b444bd6ba7548fb8cdaf61607397",
+      "sha256": "28c94bc02084179f322133ac3b986b1f8b81063eb61163c67687dcdb77c4bcca"
+    },
+    {
+      "path": "mlsysim/mlsysim/cli/DESIGN.md",
+      "bytes": 4682,
+      "git_blob": "47c11a167d3543a601d5ad8bd926feeed2df4a85",
+      "sha256": "8f0a0252e22986e3ef88fa8f6be48767904346c01d5e4fb11aa0ad2ac1733518"
+    },
+    {
+      "path": "mlsysim/mlsysim/cli/__init__.py",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "mlsysim/mlsysim/cli/commands/__init__.py",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "mlsysim/mlsysim/cli/commands/audit.py",
+      "bytes": 5881,
+      "git_blob": "f94ddfcd1b0c734a8ce35b84451254507af3e41a",
+      "sha256": "1194775a69c4847d038a4af699a5f2047489951be8260838bedf9b77d3bb5061"
+    },
+    {
+      "path": "mlsysim/mlsysim/cli/commands/eval.py",
+      "bytes": 7710,
+      "git_blob": "e22f971ce6d1fad1d2702893bc6d6f7eeb7dc07b",
+      "sha256": "343d0aa604b157e7973e613fc7c87c7eef057223edd5a6519babe4f5c8f3299c"
+    },
+    {
+      "path": "mlsysim/mlsysim/cli/commands/optimize.py",
+      "bytes": 5077,
+      "git_blob": "e2d11ddd72b9309393f153d8bdcadf7d6b93f234",
+      "sha256": "aba23c5c0b9800d9853106e7d48cbba84a9e3d026823f50f49ab109bd94eb307"
+    },
+    {
+      "path": "mlsysim/mlsysim/cli/commands/schema.py",
+      "bytes": 1441,
+      "git_blob": "7ea0fd2205b6ccabfd98283d6834145c596ae733",
+      "sha256": "040ea67f2c92e6a66068deedf960b5557897890942dac3654f202e72a8e4a0fb"
+    },
+    {
+      "path": "mlsysim/mlsysim/cli/commands/serve.py",
+      "bytes": 6216,
+      "git_blob": "77145d1908f4db43f31fe5176a6b6acf97493cbd",
+      "sha256": "67d7a3dd887c3b355cb805881b9db5a58f6bf751bf2241b34b372c2bab2f00f7"
+    },
+    {
+      "path": "mlsysim/mlsysim/cli/commands/zoo.py",
+      "bytes": 1727,
+      "git_blob": "1ce6b41b22c3f182e75a72d990eb54e74097d4c7",
+      "sha256": "6e1939e103fee90e352415e7bbd1c1b1108c60abe8586b92014a384cbb70bc6a"
+    },
+    {
+      "path": "mlsysim/mlsysim/cli/context.py",
+      "bytes": 1581,
+      "git_blob": "5c758912bb4d49bf4a159f3aaa7a2dd465695ad4",
+      "sha256": "72e6f9d29c96ec84d52d430a4c2a70d3e11ed4444ac9d7d5fd8ee9914b8c5d09"
+    },
+    {
+      "path": "mlsysim/mlsysim/cli/exceptions.py",
+      "bytes": 1741,
+      "git_blob": "eeca6fee95eff981eb52a590ec1458d22a4047fd",
+      "sha256": "63eda8270356fae65a763c1347694744df7570a956e5b56bc8a7c7d8ad3b24af"
+    },
+    {
+      "path": "mlsysim/mlsysim/cli/interviewer.py",
+      "bytes": 2330,
+      "git_blob": "541b6f01b699da2282746b9a499b12c8bc18639c",
+      "sha256": "108c660abbdcf195634908b25776ff0e3bc2835f8b0e27fd59945b63f0955ad9"
+    },
+    {
+      "path": "mlsysim/mlsysim/cli/main.py",
+      "bytes": 1779,
+      "git_blob": "093174fdf889bbf9fdc2df63cf5bf12c18ae5d52",
+      "sha256": "c23ad419c486c035f87a2eb4cf7f6a57406bb1dd3d6808b3d1b04430c827a09e"
+    },
+    {
+      "path": "mlsysim/mlsysim/cli/renderers.py",
+      "bytes": 13879,
+      "git_blob": "001be9a205fc1a469fc9d85b3c99c4ce8f00824a",
+      "sha256": "792d70d1af25165cbcbb510b85311ab3766047434452ffc09d34e383f14c2edc"
+    },
+    {
+      "path": "mlsysim/mlsysim/cli/schemas.py",
+      "bytes": 9801,
+      "git_blob": "98d1c253269b131f63e40b64a423941e39d302f7",
+      "sha256": "0a9d6afa7c54f21f1a4211bdad394cf6ff2c99608fb9f357c342d0f71a6e32d3"
+    },
+    {
+      "path": "mlsysim/mlsysim/core/__init__.py",
+      "bytes": 565,
+      "git_blob": "5f5398b0337c32bd6285e3a5eed0904748e2cd28",
+      "sha256": "3b95fb127da8f21204a4f97156f223048df590adb085a960e28fedc5b077a2fe"
+    },
+    {
+      "path": "mlsysim/mlsysim/core/_validation.py",
+      "bytes": 1163,
+      "git_blob": "a5a7912fd2cc181a06b5f3be622bf7c8e589a751",
+      "sha256": "429d3ea7e85e8649fc59f4fd2d17da390f1750e19f7979287a22f2b4efac9252"
+    },
+    {
+      "path": "mlsysim/mlsysim/core/exceptions.py",
+      "bytes": 723,
+      "git_blob": "2b514293206fb6f05c29d8c63a4cf397104a9d2f",
+      "sha256": "6ccd44a86b5709d7647e55893e1e43917a268a8689b3caaaa65605baed7eaf8f"
+    },
+    {
+      "path": "mlsysim/mlsysim/core/loader.py",
+      "bytes": 9000,
+      "git_blob": "89f61c5a4f384b5895c77c0ba0e50f908b3d889c",
+      "sha256": "f0167f525c242524b661dd8772310c53c297b2fd62d7eca4cca1213e9b8633dd"
+    },
+    {
+      "path": "mlsysim/mlsysim/core/mlsysim_units.txt",
+      "bytes": 1913,
+      "git_blob": "be2f52fc92bafa5ada9ede4b6f223e42a3d77a63",
+      "sha256": "b45796444e75b65e39fed803658985dd44567c0778c24c31c0c38fda03a23f37"
+    },
+    {
+      "path": "mlsysim/mlsysim/core/optimization/README.md",
+      "bytes": 1228,
+      "git_blob": "ef01486eadcf0fb0663c2a3953450fa681a8f899",
+      "sha256": "01a63780c6686c42300c1f1c24f70ed878ad7186f985721d045ff1493ecde7e3"
+    },
+    {
+      "path": "mlsysim/mlsysim/core/optimization/__init__.py",
+      "bytes": 380,
+      "git_blob": "4a43321c2aaf1cc752db6cd8b8c6602ebe5cbc94",
+      "sha256": "40bead0ccacd1c00ac7647e03ebbf5bc132b002371d8c1e75405968448bbfddb"
+    },
+    {
+      "path": "mlsysim/mlsysim/core/optimization/exhaustive_backend.py",
+      "bytes": 3019,
+      "git_blob": "fd1e96847a2d9fedf26483d6ec2b273ef2f3cf83",
+      "sha256": "e1db882fc62028ac936f6540f70a12436ba0c21269f6c3de5965589317060a4b"
+    },
+    {
+      "path": "mlsysim/mlsysim/core/optimization/ortools_backend.py",
+      "bytes": 3250,
+      "git_blob": "59134e3ca7a821240003c18fe1fd0bb90c67ea86",
+      "sha256": "c4ed7c4c6e93b1c67a13e8a11fcf5ed451d8dc3e05911dfd5b1af970a4562b7f"
+    },
+    {
+      "path": "mlsysim/mlsysim/core/optimization/protocol.py",
+      "bytes": 742,
+      "git_blob": "53aae760389394bb17acb75790e0b02357fb150f",
+      "sha256": "3b13865fefd75d4e8679738ac5ca982ab8352496de38fababb94d31664ff383b"
+    },
+    {
+      "path": "mlsysim/mlsysim/core/optimization/registry.py",
+      "bytes": 2101,
+      "git_blob": "e7db117f41d5686515743eac0e59a6e18bc4cfb3",
+      "sha256": "8e53f6a0a6439b2fea528fe88480599072e7e2102e2718aa0dc3fa592c4f74c2"
+    },
+    {
+      "path": "mlsysim/mlsysim/core/optimization/scipy_backend.py",
+      "bytes": 2974,
+      "git_blob": "c6872252b71456312fc9b6808a555b3b7a0347e8",
+      "sha256": "5d779b818f13d31ed9f0938481225871653f7680eee3fe5e3dca3d1846b6a9e1"
+    },
+    {
+      "path": "mlsysim/mlsysim/core/provenance.py",
+      "bytes": 7232,
+      "git_blob": "efac26becc1d2d52e491fca193eb0e3dea27ef6f",
+      "sha256": "98251bb9faf0bd71d592a3ccb1ccfc1b42e804bf33b740053c6ce397af237471"
+    },
+    {
+      "path": "mlsysim/mlsysim/core/provenance_catalog.py",
+      "bytes": 34333,
+      "git_blob": "94cb3638aabf440412fb986e72915a46e858a858",
+      "sha256": "b23f75d449a009060a6b6783517e8b9d05cc56aa0c44ff2e30ae8794b2f6206f"
+    },
+    {
+      "path": "mlsysim/mlsysim/core/registry/__init__.py",
+      "bytes": 2462,
+      "git_blob": "322de2bc9e79fe7e156f788851ae2002becaec56",
+      "sha256": "f72c602a44f93df7f011ea62d6a5f88bbf2b3738185e6783f60f87bfc4bde31e"
+    },
+    {
+      "path": "mlsysim/mlsysim/core/registry/plugin_manager.py",
+      "bytes": 2180,
+      "git_blob": "930789d49b92eed1c83efe43a51271b7da40cad7",
+      "sha256": "603663a05b533cc6851741c6fff5db6b69ed87ecc10925fac4d3d565863882c9"
+    },
+    {
+      "path": "mlsysim/mlsysim/core/types.py",
+      "bytes": 4269,
+      "git_blob": "6ea1c4f2fe1dc11b2b67beddd502bc91935c0151",
+      "sha256": "34b76a76bd664ea6f1a2557da419cc8510bfc38f10bf2130e06afa62522bc462"
+    },
+    {
+      "path": "mlsysim/mlsysim/core/units.py",
+      "bytes": 8303,
+      "git_blob": "8dabed93edc9414ac7f9436dcf4178f9e14561dc",
+      "sha256": "cd64d6a5f9f274e5dd0f5df8346e77eaa035c18c1a498578b7a2e6c51afff4ad"
+    },
+    {
+      "path": "mlsysim/mlsysim/datasets/__init__.py",
+      "bytes": 162,
+      "git_blob": "2a708083ef39c38bd3a614b45bdf20f1b1241b20",
+      "sha256": "e0cd692265f61a8a5ffa2a18c0077ab3a9bb1e238e74eccced4d8d9413f48b5b"
+    },
+    {
+      "path": "mlsysim/mlsysim/datasets/data/CIFAR10.yaml",
+      "bytes": 205,
+      "git_blob": "27f8b35a308cefd33df6ef505038c6de6fa506cb",
+      "sha256": "b64dc825167f679d422d1f0739122c64753f2d687a6681784bdfc308eea7c26c"
+    },
+    {
+      "path": "mlsysim/mlsysim/datasets/data/ImageNet.yaml",
+      "bytes": 280,
+      "git_blob": "1486e64bc383724b27e8d1c2e412fb6a779031fb",
+      "sha256": "c21da687b60fcbc594ba89dbffeda423db838770ce5239a09fda1b58e5d68969"
+    },
+    {
+      "path": "mlsysim/mlsysim/datasets/data/MNIST.yaml",
+      "bytes": 198,
+      "git_blob": "91018d0b7e19f2c63d12749f4318e3c476b4c6d3",
+      "sha256": "1e6e554f4ecc3724919cc6309a6c82509ffb86be545c9333807e1fa09c699871"
+    },
+    {
+      "path": "mlsysim/mlsysim/datasets/data/MSWC.yaml",
+      "bytes": 232,
+      "git_blob": "4ad799da48080654b6dd3b0efb270f8f48259eec",
+      "sha256": "7fd447e2224c528fe6436bea2f9e5dee1944e35f03a22212e9a35cd0c7a39279"
+    },
+    {
+      "path": "mlsysim/mlsysim/datasets/registry.py",
+      "bytes": 577,
+      "git_blob": "d1d730628bb42b7cbba541cdecae0cbc0bfbe909",
+      "sha256": "a246507f2aae8cd0281394cf60c12ecf9c7494a5d3b39955c4bfb3368d4ef5a8"
+    },
+    {
+      "path": "mlsysim/mlsysim/datasets/types.py",
+      "bytes": 1827,
+      "git_blob": "decef45fd87c131121d685b64f52b7aea3c99f12",
+      "sha256": "7e5151519cc9734fbe188667547f8348639b2dc9e6fa0e7e875250e581db39c8"
+    },
+    {
+      "path": "mlsysim/mlsysim/engine/__init__.py",
+      "bytes": 665,
+      "git_blob": "e98e8f019e2fee6620b4ae432867c625392a2478",
+      "sha256": "04be379eb6aece6576ea3447c1a82ffb166da9befbe3a0da3c9e202bec1848c4"
+    },
+    {
+      "path": "mlsysim/mlsysim/engine/calibration.py",
+      "bytes": 3404,
+      "git_blob": "bda6c4de2aebcecb33a9f67d9dab7b1d04b076b4",
+      "sha256": "6cf53d010c91d736795775d08e38ba1f0c1a65e7967fd56982f1b50c98ed0918"
+    },
+    {
+      "path": "mlsysim/mlsysim/engine/config.py",
+      "bytes": 2022,
+      "git_blob": "4988afb74fbb3e64b3bc523376fd102dd258d9ba",
+      "sha256": "c071c550bcf0b4d6d55a022bf0ff1cdd4749383aaa3f123ba758b7d2ebb356de"
+    },
+    {
+      "path": "mlsysim/mlsysim/engine/dse.py",
+      "bytes": 6706,
+      "git_blob": "cb5f8b9b6cd3b4d2a461c5c523a0c831146b786d",
+      "sha256": "f34acf47692ae291b27e2924bc58ff88ec0ce818952eabd5c4cbc9e75e94c93b"
+    },
+    {
+      "path": "mlsysim/mlsysim/engine/empirical.py",
+      "bytes": 7068,
+      "git_blob": "143911cd78bca834f1f9cf844a03b9569072bc3e",
+      "sha256": "42e655e37001e6ff5d6ca6366a5d63ad5345110f4d0ea727bcafa6e7ca666970"
+    },
+    {
+      "path": "mlsysim/mlsysim/engine/engine.py",
+      "bytes": 19107,
+      "git_blob": "cd864493cfdadd8efaa281705ea501c46fbb4baf",
+      "sha256": "8746c6341e252b205237915f51ce27a1940f3243f446c5c48bb9f31d8a78a5b0"
+    },
+    {
+      "path": "mlsysim/mlsysim/engine/evaluation.py",
+      "bytes": 9952,
+      "git_blob": "913ee2a7b207bcf499e6a6fac4415ed7fc3a9966",
+      "sha256": "a7e5c510d30d8f233911274078e3db1fc8ac9ee7f29a2fcae9b194526bb32592"
+    },
+    {
+      "path": "mlsysim/mlsysim/engine/explainers.py",
+      "bytes": 3747,
+      "git_blob": "a7a5a1512e45031853a7a25e6dfd753f0a7cedab",
+      "sha256": "e91d58908871545cdd0b60dcda991cbd96e54109e7a251d95c9f803f00031260"
+    },
+    {
+      "path": "mlsysim/mlsysim/engine/pipeline.py",
+      "bytes": 6779,
+      "git_blob": "5dd94cb94ee199b1735964682a0dfda3970e14f8",
+      "sha256": "a8625e4a2645a1476dfd1eb436c74093af8a3fbbf26000d549affed40e0dc219"
+    },
+    {
+      "path": "mlsysim/mlsysim/engine/resolver_factory.py",
+      "bytes": 3024,
+      "git_blob": "c0378b64b95ad094101a7a68232204299e0fbec7",
+      "sha256": "72ef5bb08e6725c451841bdd1bc6b59abf6f3fecf04af46efd4fd2a1387d38bc"
+    },
+    {
+      "path": "mlsysim/mlsysim/engine/results.py",
+      "bytes": 12758,
+      "git_blob": "ad759341d66d1e9849436f554ad29cbc660948c8",
+      "sha256": "7acb5b06ac0358ff58b15946011fed39a643821d64b56d12c96988b78c94252d"
+    },
+    {
+      "path": "mlsysim/mlsysim/engine/scenarios.py",
+      "bytes": 10619,
+      "git_blob": "a4474465b5ecbe67baefc4f64b87c240b3639ba9",
+      "sha256": "57bacbb5dc662816b70cde4b6959ff1c52c013c52f3caf7efcf87f24385e2475"
+    },
+    {
+      "path": "mlsysim/mlsysim/engine/solvers/__init__.py",
+      "bytes": 1690,
+      "git_blob": "ec61692a1aecbf384fe8f190ecdcf47477ced19f",
+      "sha256": "3d2147ae6ba2eae1d942518a0d1ec2c7bffacd75428d80e972f4d44b3fe70bdf"
+    },
+    {
+      "path": "mlsysim/mlsysim/engine/solvers/base.py",
+      "bytes": 2953,
+      "git_blob": "dee9669ce390e59e7e48529711565215c42b8ca9",
+      "sha256": "e74dc24a12e5793e0f783e3a4fef1f39ecd738b47760c567eb8ed3055bf97f37"
+    },
+    {
+      "path": "mlsysim/mlsysim/engine/solvers/compression.py",
+      "bytes": 16915,
+      "git_blob": "e931094957413ef0720037e589623db7bc823b88",
+      "sha256": "b6beb1ce4dcc387e08faf3329e107dcc399e701dcc4a5c79d99dc38b2ebb47e6"
+    },
+    {
+      "path": "mlsysim/mlsysim/engine/solvers/data.py",
+      "bytes": 6072,
+      "git_blob": "b7fa75660eb4b2d7704cb4991d1c6e26caaba2b9",
+      "sha256": "cbbfbd87512f14b787e8fe774c570db7f036fd58f5cb77508c10e7931bc8d53c"
+    },
+    {
+      "path": "mlsysim/mlsysim/engine/solvers/distributed.py",
+      "bytes": 32639,
+      "git_blob": "4c3419ae2d8c510a5fc921cd8248e75e208409f5",
+      "sha256": "12311b2f952f14b6a948e13eaa114142880f8e28a75211bd9b5b1859f1e6fe25"
+    },
+    {
+      "path": "mlsysim/mlsysim/engine/solvers/economics.py",
+      "bytes": 18721,
+      "git_blob": "2685f38eb9a2e52a53a3dc72cd7dffb2377554a0",
+      "sha256": "37417e2e92cab0a7aac42d17e8e5a59ae4609f4d78a88b39bfcbd8baa3723669"
+    },
+    {
+      "path": "mlsysim/mlsysim/engine/solvers/orchestration.py",
+      "bytes": 3014,
+      "git_blob": "32fc5ee34e7617ef097a3ea7bb43af78d209a008",
+      "sha256": "a0e3816b1764bcca19278ee303fbac0e390f73fd9db88738a088b6f934e17740"
+    },
+    {
+      "path": "mlsysim/mlsysim/engine/solvers/performance.py",
+      "bytes": 20418,
+      "git_blob": "fcdefab92e1c09e5ebd88a21a3a6bf7e6761c332",
+      "sha256": "7fe682473ab231866c0ba12ef0c1fd75047e1abe882d680b6dae273636deaad0"
+    },
+    {
+      "path": "mlsysim/mlsysim/engine/solvers/reliability.py",
+      "bytes": 4076,
+      "git_blob": "eb596861449704cc9766e643a16b3e146161a57c",
+      "sha256": "6c7f98bacb0879866c5a2d3e5fc5907bc725acbdc961e4c94bf1b48652eebf13"
+    },
+    {
+      "path": "mlsysim/mlsysim/engine/solvers/serving.py",
+      "bytes": 49940,
+      "git_blob": "11b9628f33c84903a873f126fe751f4766c82a5d",
+      "sha256": "ba67cb780099f60982f571c8a90eb16ece6723896f9c6fdfa65a6b4da8d75c40"
+    },
+    {
+      "path": "mlsysim/mlsysim/engine/solvers/training.py",
+      "bytes": 16165,
+      "git_blob": "18bc4dc3dd71324357fdb89ed694c47a79d5a807",
+      "sha256": "29631d6f31e8ff854e9d0551a489b75431eac6de10d1c6fbdcbf3f7579c38d63"
+    },
+    {
+      "path": "mlsysim/mlsysim/engine/solvers/utils.py",
+      "bytes": 1827,
+      "git_blob": "9a2d09dcdcc5348bdc46ebc646f24300aa49730e",
+      "sha256": "d0bae39a31dd7329a373f234883cd56cc2432493457096ce8ccce7f21cc800b0"
+    },
+    {
+      "path": "mlsysim/mlsysim/engine/walls.py",
+      "bytes": 13570,
+      "git_blob": "ba0b8b527119a977c0b407c7b5694afb76120465",
+      "sha256": "4039eb8b8778ea91697625773dd5202f59515395bf81f0c310f93b1cf21b61e9"
+    },
+    {
+      "path": "mlsysim/mlsysim/fmt.py",
+      "bytes": 107302,
+      "git_blob": "1921fd5a5c8457409d66534b8d90cec8e50e636d",
+      "sha256": "df7da6a88b780f705e364598c4eb87f1b0b617eb24069cba6a4e20a498bcfafc"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/__init__.py",
+      "bytes": 63,
+      "git_blob": "bd475dfb5feb840ac6cc0525432f6788be8c0b94",
+      "sha256": "c418151d6a232e3cd907ee7f3c51cc863ee9cc76987382a82181b39869d87cff"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/cloud/A100.yaml",
+      "bytes": 1763,
+      "git_blob": "021c303b5a14b31d2d4cb362f6e89831fffa8869",
+      "sha256": "115d93d97947e2cef6e8b5e6953d91fba2fee016fb7aa1016a42a42de464d083"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/cloud/B200.yaml",
+      "bytes": 762,
+      "git_blob": "c5bd052b5579499aa07a6be638d16e8ae59768b1",
+      "sha256": "15950c9a8452b4cab871743e7c1593d5d8cd85441570e2e0087ea67c73602f84"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/cloud/Cerebras_CS3.yaml",
+      "bytes": 516,
+      "git_blob": "51a6cb3fc58ddd8c37de6064ffb9c63951de24fe",
+      "sha256": "f06e684d39974b8f85edf7c88cf1b9b14bf87e418e43953f085c92698ae58bce"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/cloud/DMatrix_Corsair.yaml",
+      "bytes": 460,
+      "git_blob": "29cbc2727109739f459cf87b9a7b024055b472ab",
+      "sha256": "cae5ca21df2dace64cc38895d79d316ec86641c48f3a81af96b386d3294fb16b"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/cloud/GB200_NVL72.yaml",
+      "bytes": 677,
+      "git_blob": "fbee9116d3e92c9041dfec3d979232c2efd3e7cc",
+      "sha256": "b24e9ebd34076d874502e6e4976d30139ec26f1c9f8ce24021c0515c1b763adc"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/cloud/Gaudi2.yaml",
+      "bytes": 556,
+      "git_blob": "732dc320d6b215e200dbdf8289fd61dae8b3fa06",
+      "sha256": "7ad27be6a700e6325ee9ea4d1ee91bd81cb6ea57852f35bdd2091f2a0653855b"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/cloud/Gaudi3.yaml",
+      "bytes": 658,
+      "git_blob": "c59fbe4b1733c7019e54362d7a55d3f2666ba92d",
+      "sha256": "8303f14c67c05d8e51e10d7276e597a8764abc56d82daab2304d688e382791b4"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/cloud/Graphcore_GC200.yaml",
+      "bytes": 686,
+      "git_blob": "499e3343292513238dcd987de6306b11dfa6ed50",
+      "sha256": "44f16d84111c2e60b06530431c25f0e3b931d2449b03b04a733d0940d9e598f1"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/cloud/Groq_LPU.yaml",
+      "bytes": 467,
+      "git_blob": "ff4820e3b70e0534889a86269b98db72418f9854",
+      "sha256": "af24152adab39b4baa12a05528ba0336d1d21efc493e0d9774e1cd06267bd62b"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/cloud/H100.yaml",
+      "bytes": 1489,
+      "git_blob": "64d90d79ef87d18b425e3fa28dfd3913ac3d72de",
+      "sha256": "2d190e9bd33ab16969ba11fdfcc9b1b3c8398b7c76e13b42ec65ba56145c2d1d"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/cloud/H200.yaml",
+      "bytes": 999,
+      "git_blob": "e3b9befed7f1db6f1debbf1bc03dd0446e152d9b",
+      "sha256": "ec3049f9d3beee5ab39fe1827f815bbe21c5c4f3c1aee763b151cd23e264b89e"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/cloud/IntelSGX.yaml",
+      "bytes": 522,
+      "git_blob": "d1c78646098f135024ff73feca906254b0f7f1ac",
+      "sha256": "323db1d3216b972690b08e972df179c25b32dbcc08420eaacab104caf4fb9759"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/cloud/MI250X.yaml",
+      "bytes": 479,
+      "git_blob": "c020ca84c9e26f8f4eba8c3310043ae3fb8e43fa",
+      "sha256": "db7be03a8a126ad8e91ea232b1d9669f2ddab431e4babfa4d1be4a8646675085"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/cloud/MI300X.yaml",
+      "bytes": 533,
+      "git_blob": "9200fa2d3a3b49f0fb46f97d5bec4382d33ae933",
+      "sha256": "2e6d5953e5002570e916f735e0e7865d6920960bb78809efc764baeff6781fc0"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/cloud/ReferenceCPU.yaml",
+      "bytes": 422,
+      "git_blob": "efc9a53b562dd5fd1ce5058516b7fb9f56adf1fc",
+      "sha256": "1e58bb154a2ac4d7cd7006dc21369aca26732c34f9d1258db893dc26f909d236"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/cloud/T4.yaml",
+      "bytes": 443,
+      "git_blob": "7692f0f765b51050155439424afdce820799d123",
+      "sha256": "0fb0756e185d10d139c011f9ac2cd5782b42ba44291fe5cc2d8908c37963a573"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/cloud/TPUv1.yaml",
+      "bytes": 440,
+      "git_blob": "ec59f7d3aaa1b37708d23f010bd990e8f0d1dc12",
+      "sha256": "87694f689809fd9f9a17d0000d580f4a13afc215e4188e3769bf1a2c3e643625"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/cloud/TPUv2.yaml",
+      "bytes": 465,
+      "git_blob": "b29664e2b8046c126d38e56200b394008c7c73f9",
+      "sha256": "c0daf8b356f74939c0c09d37b898eb6fa330bcb81658873839bf75cfaad53c6b"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/cloud/TPUv3.yaml",
+      "bytes": 467,
+      "git_blob": "2bc14a0fe1cb8e3d0c3dc341ebbe7fb997491d82",
+      "sha256": "741eb79acb3f4c190d2b4887b52a31ec6804de8adddd11f4fb59f98e7fdd000b"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/cloud/TPUv4.yaml",
+      "bytes": 485,
+      "git_blob": "81803457ea64598d9c3a7a8d697596b384a7a99f",
+      "sha256": "5c4b7324d1e1113c6b0088824d3d2117a538f10c5c9bcbb21df2595d43846ffa"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/cloud/TPUv5p.yaml",
+      "bytes": 548,
+      "git_blob": "b27074c05565e4828d6c9962f1c47c85c4162738",
+      "sha256": "82e11a2ba1c5796fbb7ddf039cf74a5fb80c57d4d52bb76c9ab3ec9d4dde77e9"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/cloud/TPUv6.yaml",
+      "bytes": 423,
+      "git_blob": "56e84c16fcf8e89f22f16195079b6c240ef2ca83",
+      "sha256": "374f39b751f0c7e478de2301de92e12ed8935f29079cb289e3627401aded2997"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/cloud/Trainium2.yaml",
+      "bytes": 466,
+      "git_blob": "f84074d3863b34e96dd38e98ecaa6870db37d37b",
+      "sha256": "7eafb8a5640e4ebdf134b9a0c1d761877dcadb9ab86f92688418d86bdc7c9934"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/cloud/Untether_speedAI240.yaml",
+      "bytes": 558,
+      "git_blob": "ab18bebdd64bd54c7f2c7433594ca2c5cb462ffb",
+      "sha256": "98c4dada1ab5f65ba89ae18b116e06b23f855e3ec954cdb1efda8da989cb646e"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/cloud/V100.yaml",
+      "bytes": 732,
+      "git_blob": "f662ae494c76b052d3c56fe6ec59bd8d46efbea2",
+      "sha256": "c67a1ac6254637891786cac0c21cda944a0463f6e793c87fd99ffc0708ad2aff"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/cloud/V100_PCIe.yaml",
+      "bytes": 929,
+      "git_blob": "5679d8671e96b9c34a92c84d8bc50a06b8ffd2ad",
+      "sha256": "930c6b144b8b5ceff970117eeff1c0674bfc2580cbd1f3126ac3929b1aa93e0a"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/edge/Coral.yaml",
+      "bytes": 388,
+      "git_blob": "521996c75156ed9112ad9caa170433728dc41c2b",
+      "sha256": "39b32f5eb32487932d89b3dc5cd2f314ba30fb3461d50784fc6d52c8fe924665"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/edge/GenericServer.yaml",
+      "bytes": 376,
+      "git_blob": "251ea9a897047ae0c23add624fed9b66bb05db7f",
+      "sha256": "2d2cbe1a8859f6f39d50c263469695aeca7a6eeca3dfaf288710feb634041efc"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/edge/JetsonAGXOrin.yaml",
+      "bytes": 495,
+      "git_blob": "e66ab0446cbd40e655e44ae2b158a60f35c3af4c",
+      "sha256": "ed8e94bdd57930ffe71986845e604512c964d9caf74886b1524a6a9c3e173248"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/edge/JetsonOrinNX.yaml",
+      "bytes": 503,
+      "git_blob": "6c753677fece1358c7eb83b64afc34372e328ac1",
+      "sha256": "940fc77fa1df4f0cb07f0890e4f37ba847a29747bc984b0c44f84f922cf62c1d"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/edge/JetsonOrinNano.yaml",
+      "bytes": 998,
+      "git_blob": "2382470da515e06030e416082b3ccd0d56ceca2e",
+      "sha256": "c1b65d7b7ab14136cecfb5a4b8256928773ca806ef59f629d9c848c4a31d1b46"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/edge/NUC_Movidius.yaml",
+      "bytes": 599,
+      "git_blob": "a3b58b391118ea7676b232f1f97d14ff903385b5",
+      "sha256": "f93e24da4bdc8bcbc8b20bd56cc7d0d29e7129f480256d47c1830941f7022de7"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/edge/RoboTaxi.yaml",
+      "bytes": 919,
+      "git_blob": "5fb625afbfb14a6b109c98936027b3d06e0102c3",
+      "sha256": "bf038730db47df5c09fb27ee3cd02f8a85b396c90953c086da77941d4b9345c9"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/mobile/AppleM2.yaml",
+      "bytes": 835,
+      "git_blob": "7869300d9ae34a421d8e33e492dc8042e96d9789",
+      "sha256": "3a5817a06aaa23c1b1eccc968b6d61bcf9e24d6b6b239e17df2259901d476953"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/mobile/Pixel8.yaml",
+      "bytes": 498,
+      "git_blob": "114c3c9b8edb5e2638a2571797e90e185d4ab90c",
+      "sha256": "1bb464c77c88bc138b91424c9de734fa327a758e2c86bcbcecdfbcff3c519880"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/mobile/Snapdragon8Gen3.yaml",
+      "bytes": 500,
+      "git_blob": "e4c36c30d17c60f00fbfa37d8483f4be47466c0d",
+      "sha256": "33a70b9c8d34a5cb73fe260f87bbf6298df78ce3a6190b7c36cd7bb1811a9ad6"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/mobile/iPhone15Pro.yaml",
+      "bytes": 524,
+      "git_blob": "5b0488fb26ed01cc6ea3408f0d5cce42a1f4574c",
+      "sha256": "50819d170ccd9f2326d6a829c9c3783b167298c49af27a364b2626ce06220cd2"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/tech/effective_compute.yaml",
+      "bytes": 585,
+      "git_blob": "ac222238332a6181766c6ec0fe73e85e66115766",
+      "sha256": "21e5c2529c3ed6fc5fe30131224b0ec577f43a71747ec891fd500a546564670e"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/tech/interconnect.yaml",
+      "bytes": 210,
+      "git_blob": "2118b009fc7d29b96b791a926eddd692aba8bda4",
+      "sha256": "d62c80381fa5cb84efb83c0b9ea8c931df33c0f4355410300d7f6cbbec437ee3"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/tech/memory.yaml",
+      "bytes": 989,
+      "git_blob": "7a2fc66ed91abbcf6b15565c9ae90aff9cf8fb23",
+      "sha256": "10cf11ad54c2d23de2a3311e148b439be9d4164df7c30d23a4c9bc902af51591"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/tech/movement.yaml",
+      "bytes": 682,
+      "git_blob": "5347ad4264b97f108dad93af8734145127ca2d57",
+      "sha256": "e6b0d7bf3804de1b03a906c1182e3793a2dc68354c1c1ed093652654fcf094e9"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/tech/op.yaml",
+      "bytes": 789,
+      "git_blob": "0e93fc32c46ec36d9b8785a696d5242fe0fbfd05",
+      "sha256": "afb161f2b6b7916492b9ec29e211ef8492687dcedfb10a52cb7421142e901263"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/tech/storage.yaml",
+      "bytes": 754,
+      "git_blob": "7e29aa490b808d26d52527f40655b2d7f628c68c",
+      "sha256": "3665d24a613e72c86c3503c308910bc34acd762ad15156903bc18364c7416f12"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/tiny/ESP32_S3.yaml",
+      "bytes": 604,
+      "git_blob": "ce6e037abdc4d9e7cfa78350f070a818b703b272",
+      "sha256": "fb1db998ea67d9d21bb1da12b0f02ee4add232dde36c818b82bcda11810558b1"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/tiny/HimaxWE1.yaml",
+      "bytes": 429,
+      "git_blob": "1306252fdcdc2303dfd94a4962c07f4c8f607bc0",
+      "sha256": "867cf589852daf28a5b52f3f812bbca31ca2ccd5e8f77231acde3f8c016f31ac"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/tiny/OuraRing.yaml",
+      "bytes": 969,
+      "git_blob": "8484f4884c6f01e5c97340c27b8e1dac5df60bf2",
+      "sha256": "68d4fa0fb48ff41cd7c2e3d0b1452109540e2625f274caac31c98832a0ab260e"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/tiny/nRF52840.yaml",
+      "bytes": 619,
+      "git_blob": "da7269db085031c646fbbb2d78aa3f6fe864ae1f",
+      "sha256": "b728cc19cad8d0d2624edf99290e7d99c3e57015391145df5a22572cdfd00a4d"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/workstation/DGX_Spark.yaml",
+      "bytes": 958,
+      "git_blob": "ff14adbb2bb09fa672c6900608565ba4743c9435",
+      "sha256": "d954dcef53bc50cb535e3d2e97614e169d30f9c4d8f5ba8c1a0984ac80be1303"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/data/workstation/MacBookM3Max.yaml",
+      "bytes": 578,
+      "git_blob": "0ce1800bd7ab39b5e77ef2f3f5ab74bde5e27e87",
+      "sha256": "9fa4adfec01830e4d531372a274cccbd9b2b73f9687705ca422fea4b64889027"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/registry.py",
+      "bytes": 2049,
+      "git_blob": "475a8eb6cdf71636f3b980d66d04076f86a2b756",
+      "sha256": "4ab35227a2ba47dfd39b51fc1404a2523499d2e1292411b3781597ec4fa6230e"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/tech.py",
+      "bytes": 6670,
+      "git_blob": "54728237e675202e5ff64c9eb55e5d8004c4ad77",
+      "sha256": "5fe81fd8e02f4554fae7976748c1e7976bbef76e8fc4af90605c794be122db6d"
+    },
+    {
+      "path": "mlsysim/mlsysim/hardware/types.py",
+      "bytes": 10486,
+      "git_blob": "2dbeac970446206df91e6ac4a2e574cfcbdfd8e0",
+      "sha256": "d52097512b4d2a3ffd9986e992add71b765d2a2490e49008446a601b2c6a10fc"
+    },
+    {
+      "path": "mlsysim/mlsysim/infrastructure/__init__.py",
+      "bytes": 64,
+      "git_blob": "2ad6b2c250fbfc44bbf67aea2586550b6e59902c",
+      "sha256": "5b6e10142f192a5e841385cc730ed64f0414cfa2cdaf53e0c75f4a344348a4f7"
+    },
+    {
+      "path": "mlsysim/mlsysim/infrastructure/capacity.py",
+      "bytes": 672,
+      "git_blob": "c5026f3b727d8770491719b5056f945637578112",
+      "sha256": "60646b429694e75d5670784daa3e8b416d8d31bf3089fd7274d19969d92878fc"
+    },
+    {
+      "path": "mlsysim/mlsysim/infrastructure/data/grids.yaml",
+      "bytes": 2469,
+      "git_blob": "391df036c7ea65ef3b29d759d7190f0b493e4fb0",
+      "sha256": "a1cc7224e275ddfbad695b0120f9850d186a50552882dd881044c9da0af6ea84"
+    },
+    {
+      "path": "mlsysim/mlsysim/infrastructure/pricing.py",
+      "bytes": 5982,
+      "git_blob": "711053ff9dc160844b989f0a85c8e9c0c4d28494",
+      "sha256": "9e0086647f8d57185119db1410bd67e8f12e278a9ad588c95e12243afd822fb6"
+    },
+    {
+      "path": "mlsysim/mlsysim/infrastructure/registry.py",
+      "bytes": 5834,
+      "git_blob": "acb5847a5644c846ba57da77907a415a11c3b990",
+      "sha256": "b8669f32d2c530fe6d68b8860bfc330f4bf33f0a5fd58c39e32b9c2d8606362e"
+    },
+    {
+      "path": "mlsysim/mlsysim/infrastructure/types.py",
+      "bytes": 3009,
+      "git_blob": "67a85a76d7b98cf6d221cad346211456b7d2c6c1",
+      "sha256": "af60ce5388883755350d90a59434d399af46896cc0566e9846687d18fea1f91e"
+    },
+    {
+      "path": "mlsysim/mlsysim/labs/__init__.py",
+      "bytes": 1021,
+      "git_blob": "7241919fffed760cc5a0fff7aed2637df0f76a96",
+      "sha256": "312ee90e39439f7df09bcc12442fa3491c55354f8d0962391779aebdfa980995"
+    },
+    {
+      "path": "mlsysim/mlsysim/labs/components.py",
+      "bytes": 14511,
+      "git_blob": "464e224ae82216ac9722b00273a02c42d776e15b",
+      "sha256": "afa6c468efab7850a39029de1e93c9494ee60158088f33211d08756c0b8220b4"
+    },
+    {
+      "path": "mlsysim/mlsysim/labs/state.py",
+      "bytes": 7542,
+      "git_blob": "7275cbf6fa71ea0a9955ee948c786d84c6f4b59a",
+      "sha256": "1bf9cf8a6c12226c44def1b8efe14df7a6414fbba24590f5e963ba4daf39a90e"
+    },
+    {
+      "path": "mlsysim/mlsysim/labs/style.py",
+      "bytes": 22075,
+      "git_blob": "248ff0745b24b4b6156e3382f7df3a091248c198",
+      "sha256": "ddce8d3eabc20950f4f6d5607978290cbd6d51bef735d82efe2a70d3569070ec"
+    },
+    {
+      "path": "mlsysim/mlsysim/literature/__init__.py",
+      "bytes": 59,
+      "git_blob": "c30e33dc0d2bc1b8e5675120c489bac3047012b2",
+      "sha256": "c789b67fba4988447969d5660ef99f90dea470c81a79776afa410e9920064da2"
+    },
+    {
+      "path": "mlsysim/mlsysim/literature/data/batchsize.yaml",
+      "bytes": 558,
+      "git_blob": "1c8d43da8e7145369e308e92c06e1427fd90a578",
+      "sha256": "57176889eb41e3d8aa269307a7f0829581514a3222091bb680d877243b5b7863"
+    },
+    {
+      "path": "mlsysim/mlsysim/literature/data/benchmarks.yaml",
+      "bytes": 867,
+      "git_blob": "27ef8219a07b7fabab0077470c6e75d071322141",
+      "sha256": "b20bee43fe93c65ea97860f16a0527fb386d56ab21ff91ac3a81272f9ebe6a24"
+    },
+    {
+      "path": "mlsysim/mlsysim/literature/data/chinchilla.yaml",
+      "bytes": 556,
+      "git_blob": "7e397abd10ce14a96d4a181c29149f61f1eeae4a",
+      "sha256": "6a72c30678c38e6d90b0b8a2bedb634276a934f4ae2925542d89da5af3f96f8a"
+    },
+    {
+      "path": "mlsysim/mlsysim/literature/data/communication.yaml",
+      "bytes": 155,
+      "git_blob": "c571d3ccd5a616614ed3fd27343f69d844efc85a",
+      "sha256": "542f8f9da0b1ddc5106d6d7197822469361f7ed94512bd352ac847b9df0f9ba3"
+    },
+    {
+      "path": "mlsysim/mlsysim/literature/data/crypto.yaml",
+      "bytes": 3468,
+      "git_blob": "92ecfbef10cf2828a34238e50e7f3eba0eedc158",
+      "sha256": "55e7387f2aa89d18c06394fe262c900a6bb6dd8a633ec8180aa8ca50766029fd"
+    },
+    {
+      "path": "mlsysim/mlsysim/literature/data/fairness.yaml",
+      "bytes": 935,
+      "git_blob": "1decbcd4c3793a2496f6d02ab46cd47ccdac4c6b",
+      "sha256": "fb1877891777c6f12b2867e9e064ad3c1941d6544ecfc4441f4a1265da202be7"
+    },
+    {
+      "path": "mlsysim/mlsysim/literature/data/rai_overhead.yaml",
+      "bytes": 4167,
+      "git_blob": "551c631bcd683831090c3ce2da549b311a54204e",
+      "sha256": "4f344043e797538e32783eb0f988399b60c488c9c266738911342618b37cb61e"
+    },
+    {
+      "path": "mlsysim/mlsysim/literature/data/surveys.yaml",
+      "bytes": 1534,
+      "git_blob": "add3e5dd6b1e53e515333a9e13237e2db70dd37e",
+      "sha256": "45651c8f747dd2631d1e3ca80ca27f64666af646d4c9e586fdaeefbb4fd81d1d"
+    },
+    {
+      "path": "mlsysim/mlsysim/literature/data/training.yaml",
+      "bytes": 656,
+      "git_blob": "5624c31bfc12e09c8f528348a2b39358c60b921c",
+      "sha256": "15110a48e7d402a0ccac0404e7babeac2fe75890ca26a621543aebb9511ca8ff"
+    },
+    {
+      "path": "mlsysim/mlsysim/literature/registry.py",
+      "bytes": 7655,
+      "git_blob": "3e0b2067512052442a7989cb6ec6d3d5e5fed305",
+      "sha256": "dc974abbe567af04c8d5be7dadedf9903a0b995f084a0b3992a15e55f9370b3f"
+    },
+    {
+      "path": "mlsysim/mlsysim/models/__init__.py",
+      "bytes": 67,
+      "git_blob": "096c95ebcdd77d5fbf1c638f65fed479c66637db",
+      "sha256": "3ff3f3d2e3e1f9e8bc009e7d62d00607da55cdf4e765fdfdc9b7bf224d210ea9"
+    },
+    {
+      "path": "mlsysim/mlsysim/models/data/generativevision.yaml",
+      "bytes": 488,
+      "git_blob": "486b754dd4a331075882da4ab3fce6a01189acf2",
+      "sha256": "1401ba63781964e5dd661a5ac708e8ab31eff863a377003ee4e6bf99847cadd9"
+    },
+    {
+      "path": "mlsysim/mlsysim/models/data/language.yaml",
+      "bytes": 7660,
+      "git_blob": "e49acaa162b33a4812867d6dd0c816df32ad1fba",
+      "sha256": "3738843837b89f94d7430a6f8353afea0976e7dad38332507b01a91bb3b13f85"
+    },
+    {
+      "path": "mlsysim/mlsysim/models/data/recommendation.yaml",
+      "bytes": 421,
+      "git_blob": "7ee9a4bb6ba846332d6e722b4754e3d7419c762f",
+      "sha256": "bacd8bfbfe98ba77b0ee64adf8962b129d56104c2044f99f13aebfa298943b1b"
+    },
+    {
+      "path": "mlsysim/mlsysim/models/data/statespace.yaml",
+      "bytes": 881,
+      "git_blob": "ae6306c2a877aed417c7d00c72477e10af527e8c",
+      "sha256": "bb556131572b2c36cb0b42a6e66ddbcf981952199bcfad9c326bb3be06f0da14"
+    },
+    {
+      "path": "mlsysim/mlsysim/models/data/tiny.yaml",
+      "bytes": 1158,
+      "git_blob": "666acbd31f2c12db29853696ff3b113cfeb22070",
+      "sha256": "8d257fd7559b3f47cd18498f13054534d87ab11f965c7fa3624e1697e02623ed"
+    },
+    {
+      "path": "mlsysim/mlsysim/models/data/vision.yaml",
+      "bytes": 4734,
+      "git_blob": "f080588b669dc70e0ac0e4f685f407b2112824c6",
+      "sha256": "ce1f24b58c5991692cf858fefd12952c1a73c1a089d8245701042d4a09c8f66a"
+    },
+    {
+      "path": "mlsysim/mlsysim/models/importer.py",
+      "bytes": 5789,
+      "git_blob": "54e226ad7ec270c91d0eb30ecd51279071ad4d6b",
+      "sha256": "cbbde60b7fe70eb63d6017f672c331ac477d545fdaa2abea01ed374eb25896d2"
+    },
+    {
+      "path": "mlsysim/mlsysim/models/registry.py",
+      "bytes": 1902,
+      "git_blob": "0f627d14e1234f88fb3e6e0c8b55d83d18f844ba",
+      "sha256": "ac84fbc7425caeb2d70a303f1672f0f4602c1ad03e6413eb9df687b291398510"
+    },
+    {
+      "path": "mlsysim/mlsysim/models/types.py",
+      "bytes": 17413,
+      "git_blob": "a85426a32150ae1bf2168f74d7facdae7a76b944",
+      "sha256": "a211e7e2c98aa7564887d708ddfe1546d2c3909bcba5980b9362ae39490dbedd"
+    },
+    {
+      "path": "mlsysim/mlsysim/ops/__init__.py",
+      "bytes": 45,
+      "git_blob": "8a917cdec80e395a35f6615afc6c06fbf1d47fdd",
+      "sha256": "a6e8236d6906024a2ecf36924b3d465d47d255904a1a19350d7ad541249231b6"
+    },
+    {
+      "path": "mlsysim/mlsysim/ops/monitoring.py",
+      "bytes": 1283,
+      "git_blob": "8124018276ee5dc369808ce46e1a107ccc87e5cd",
+      "sha256": "3da29574c8ca45c66b57f9262d5ffd4b50f60c2fc2d7389701c4241255e68b0d"
+    },
+    {
+      "path": "mlsysim/mlsysim/ops/registry.py",
+      "bytes": 465,
+      "git_blob": "c6ed346d253e01635c27831176e23c8de6b19520",
+      "sha256": "a59cf552957933ddb3c124d09affc503805b7cd6f3a411c6545255a96da7fd1d"
+    },
+    {
+      "path": "mlsysim/mlsysim/ops/runtime.py",
+      "bytes": 1643,
+      "git_blob": "924003a8a2ee23dbd27af065a48b015fd0558779",
+      "sha256": "013ded4f60a3f5f5f1cbc6a4cd220944b92214335ab46e8441797b471859b3f8"
+    },
+    {
+      "path": "mlsysim/mlsysim/ops/training.py",
+      "bytes": 1099,
+      "git_blob": "08558f196c6b48c51c933c61d47a5bc52f2a8532",
+      "sha256": "057682c7a2b14558be86b58dce77346de33c24bcd16ddae8a7b7f2a2844c9d27"
+    },
+    {
+      "path": "mlsysim/mlsysim/physics/__init__.py",
+      "bytes": 3632,
+      "git_blob": "8d3124641fce6f236c4f57270c13ff6a2423fdee",
+      "sha256": "bcf5f2bded355f0a9ba3ea99f146714ccd7bab6636e61a3c81634270a10abbf1"
+    },
+    {
+      "path": "mlsysim/mlsysim/physics/_units.py",
+      "bytes": 1272,
+      "git_blob": "1d149e79e424e40620ec6204b00462486f8085c4",
+      "sha256": "f702592f218435b37fcacf9ed588fe5fdc175b7d4d01db35d8fba7fe750dc079"
+    },
+    {
+      "path": "mlsysim/mlsysim/physics/communication.py",
+      "bytes": 15588,
+      "git_blob": "7cfde24ccf6bcd8d865ed43b341976dca6eda880",
+      "sha256": "9696584ec3cace59d920ca9d2a981458fef1902afac26cd1c5f94331383e49c3"
+    },
+    {
+      "path": "mlsysim/mlsysim/physics/constants.py",
+      "bytes": 670,
+      "git_blob": "296b59d85a3175f2f49f57d5c8b536298c331db4",
+      "sha256": "cfb69a448c54a86505c5bf34b856ff1a2f6e1525f3f2e2b3c7e7e8f1fe6fed3e"
+    },
+    {
+      "path": "mlsysim/mlsysim/physics/economics.py",
+      "bytes": 3373,
+      "git_blob": "6d10599bc72264b979cb1d9446037b7aa7261d2b",
+      "sha256": "240c33f6676eddae321aed4595510baf272ca32323041bd694cca6852effd88a"
+    },
+    {
+      "path": "mlsysim/mlsysim/physics/memory.py",
+      "bytes": 9606,
+      "git_blob": "d10f20f35d2c7fbf8b5699619a06e9b566578022",
+      "sha256": "3819b66688381a84761cba7bc1b99bc69f75e6bcd4640537ffd6baae0762e0a3"
+    },
+    {
+      "path": "mlsysim/mlsysim/physics/networking.py",
+      "bytes": 1105,
+      "git_blob": "f9351a811139d9d1cea245576be0cdb5f6e4de94",
+      "sha256": "edd75360802f76dfeb3a2de2fc35aa040116ebe39ed00b9a5e406566d5af54a6"
+    },
+    {
+      "path": "mlsysim/mlsysim/physics/performance.py",
+      "bytes": 8481,
+      "git_blob": "3695805485bf20a6b691ecc41b1d55cdf91a521a",
+      "sha256": "7b0da5ab5198a392864f755df119daedcc187485b407c8b5f5f3b0578a820477"
+    },
+    {
+      "path": "mlsysim/mlsysim/physics/quantities.py",
+      "bytes": 3843,
+      "git_blob": "f26304fc2ee3c76095f320ef5a3ade2718e17203",
+      "sha256": "8a8d12a05643fc1f8c8543fd57e35df50a1fc4c36086c8c1be78af3a716d64d4"
+    },
+    {
+      "path": "mlsysim/mlsysim/physics/reliability.py",
+      "bytes": 6069,
+      "git_blob": "0a0b12f0e181d5facc663501ee4f64bc4b6f636d",
+      "sha256": "74c6d0ff5957c14a3eabd7330d6dff376b56eee25047ef5bd66228040173be0b"
+    },
+    {
+      "path": "mlsysim/mlsysim/physics/serving.py",
+      "bytes": 4125,
+      "git_blob": "c2c0b92bdbf769ee7e23950e421fa6305c5e7422",
+      "sha256": "0de7a3ab140d23e7929a5a9b3a7ab339361e3f3beee2b814f9ff0c6168130baa"
+    },
+    {
+      "path": "mlsysim/mlsysim/physics/statistics.py",
+      "bytes": 3471,
+      "git_blob": "34cec2312240e48f7f2eb7af056fa895bb4ee248",
+      "sha256": "733398a4f4caa569ed5b9a0b8cfcad4b13cef7d186e3d6e93e0d523227769b01"
+    },
+    {
+      "path": "mlsysim/mlsysim/physics/transformer.py",
+      "bytes": 1253,
+      "git_blob": "76895d9b1abcc87d6e8e26888dba10c871bd109b",
+      "sha256": "65b2da087f014a85c1c5eefdb574a1662cd81c1269096be0925d69a7016d6848"
+    },
+    {
+      "path": "mlsysim/mlsysim/platforms/__init__.py",
+      "bytes": 151,
+      "git_blob": "e9981a93cdff2126a6de0a2babcecfaebd174218",
+      "sha256": "65daf9445a542a47cdf2d5f0fa6a6a50f7600e3227fe8f6221efbd051d7b5d02"
+    },
+    {
+      "path": "mlsysim/mlsysim/platforms/registry.py",
+      "bytes": 2561,
+      "git_blob": "a0d821f2662f22f10ca58ae70ad701a038f89f83",
+      "sha256": "7d08758423d8eb19f478cc1efced941781f76da4ef17a8bdd0b5ff9d6bb5d117"
+    },
+    {
+      "path": "mlsysim/mlsysim/platforms/types.py",
+      "bytes": 1948,
+      "git_blob": "c81238dee680974578bdfef5210c3f2480b2c66e",
+      "sha256": "07e5a626c49a115fc38a727dceaa133dba5543fca5fe82593365e7bd05499807"
+    },
+    {
+      "path": "mlsysim/mlsysim/py.typed",
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "mlsysim/mlsysim/reference_stats/__init__.py",
+      "bytes": 67,
+      "git_blob": "17cace8dd7b19adb950304fcfb492960100679cb",
+      "sha256": "a1d76115fbceeb8c9aaf1df658692dc329d86a836aff65e841a7985455a897bf"
+    },
+    {
+      "path": "mlsysim/mlsysim/reference_stats/registry.py",
+      "bytes": 30949,
+      "git_blob": "979eb5f6ca8a23c3d3253997c9b0a70f4cf21be8",
+      "sha256": "150e67815ed3d85f70de49de872a2d5a57d570e358405a33191238b235dd6194"
+    },
+    {
+      "path": "mlsysim/mlsysim/show.py",
+      "bytes": 4502,
+      "git_blob": "2ee949d28dfbf7f6a47da72d995d0e34545046ec",
+      "sha256": "ee1b79bb13b57ef1a39fadcced2eb2e5c41b94a1342fe6e24d658ea5b1b3f8af"
+    },
+    {
+      "path": "mlsysim/mlsysim/sim/__init__.py",
+      "bytes": 297,
+      "git_blob": "8f13c5dc7007f4b4f4dba799d0439d6ae53502b2",
+      "sha256": "f0bdd4dc192e70625307f6f4772aec6b31e65d88260d6d06d020a7931495faaa"
+    },
+    {
+      "path": "mlsysim/mlsysim/sim/ledger.py",
+      "bytes": 2671,
+      "git_blob": "62e4b4af6ffc7cdf61eabad4e590df8a1c03f6d6",
+      "sha256": "0610e1b41b5005cb6ed286adc7a42f4bdc15b20671fcd3916348842b373dc6c2"
+    },
+    {
+      "path": "mlsysim/mlsysim/sim/personas.py",
+      "bytes": 3001,
+      "git_blob": "352d696cc71d03238c0b1b5450155cfc5e258cb3",
+      "sha256": "eecdc477879ef1e0676dc16d6f888c23e900505918e58e3a0d956f6711e3dab7"
+    },
+    {
+      "path": "mlsysim/mlsysim/sim/simulations.py",
+      "bytes": 5770,
+      "git_blob": "6c811562c4f7b5c3bd087be41ee3b871070ad7a4",
+      "sha256": "4285a1cd95165fdb1f64d98b0806851bc19ff028b94e8327a07947cc2ade2754"
+    },
+    {
+      "path": "mlsysim/mlsysim/solvers.py",
+      "bytes": 601,
+      "git_blob": "d54a9a7cd91095ed8205c62e2d7e2ffabf05c95a",
+      "sha256": "78a33e1c1df2e3516bcb09d7ad61d215082106793008abcdcbdc2f1770990d38"
+    },
+    {
+      "path": "mlsysim/mlsysim/systems/__init__.py",
+      "bytes": 30,
+      "git_blob": "d2fab4d841daceb8e9aa7b7fdf0ee9c98ff1d29b",
+      "sha256": "cd37c6123f956ede63c929968bca44e9be56a34c3bce57db37a037a72b64460b"
+    },
+    {
+      "path": "mlsysim/mlsysim/systems/orchestration.py",
+      "bytes": 525,
+      "git_blob": "c60078be597b1d906d641c2117e1907aa60e2760",
+      "sha256": "8423da7d5ee7c2b32c2fbbdf5087ac6138dbf6a4390dc5512211498154fee3f1"
+    },
+    {
+      "path": "mlsysim/mlsysim/systems/registry.py",
+      "bytes": 17585,
+      "git_blob": "bb385a1598f9d0a16cddffa1fcee50d4bf0a71f6",
+      "sha256": "e7b625bac284e402d3d2f0b281a8af9e4143b805bd56da3e69ff40cf73179971"
+    },
+    {
+      "path": "mlsysim/mlsysim/systems/reliability.py",
+      "bytes": 6020,
+      "git_blob": "5e877934d08c2b4bb4f5fa6dac9537091985e545",
+      "sha256": "909aeffe322134cbb2567ea4fd9c0b8fba9ec6fc56c2a70671d7893784292039"
+    },
+    {
+      "path": "mlsysim/mlsysim/systems/types.py",
+      "bytes": 8265,
+      "git_blob": "a044dd08771aaf2084d6419dbd18e4d27eadba1c",
+      "sha256": "e568dfce3cab526bc8b8855b5db2abf278fa9f784c73821ba036b1effec75dd0"
+    },
+    {
+      "path": "mlsysim/mlsysim/tools/__init__.py",
+      "bytes": 52,
+      "git_blob": "d6722ed2bb3d9861f87cde0f415185498829d3e6",
+      "sha256": "dd0de3fdb08ca3da684b922947f98a0cadef3a11ff511f69e4bcd8b2cf156c68"
+    },
+    {
+      "path": "mlsysim/mlsysim/tools/audit_provenance.py",
+      "bytes": 12439,
+      "git_blob": "bb9248976c5c38b8c4d987716a147f2c15cb6470",
+      "sha256": "8a9a58715cf78adcee822fab80033ba1fae2bb2f80a38776122c97e290995bb1"
+    },
+    {
+      "path": "mlsysim/mlsysim/viz/__init__.py",
+      "bytes": 93,
+      "git_blob": "200918c39513ea275aa03244116e4aedddadcae0",
+      "sha256": "f020900a45dacb0d7e05f68005ac420ec401780f8feb8e70dc6d3ed1e335059e"
+    },
+    {
+      "path": "mlsysim/mlsysim/viz/plots.py",
+      "bytes": 15117,
+      "git_blob": "b2c4929b5332c0264894e5ab6f7f30aadfbfc9e2",
+      "sha256": "b6b13b9b8602a310896cb22f08cc9101e5fec7fbeffcd502fcfab963d3648428"
+    },
+    {
+      "path": "wheels/mlsysbook_labs-0.1.0-py3-none-any.whl",
+      "bytes": 136549,
+      "git_blob": "7e1929b3b6a866e868437c5b5fbd86da0f8d01d7",
+      "sha256": "d54320515aeac77d3d720c569a8335876370dd88dcf8e33f63016a79af88c26a"
+    },
+    {
+      "path": "wheels/mlsysim-0.1.2-py3-none-any.whl",
+      "bytes": 280641,
+      "git_blob": "05fbfbf3e11ad95415286c270d80fb09ea9f0c2b",
+      "sha256": "92789e71ee0306ed4d0f6020f302bbcd5a2354f247436e09a006fc93b4a14d7e"
+    }
+  ],
+  "bytes": 4417974
+}

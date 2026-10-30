@@ -1,0 +1,1348 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-29",
+  "scope": "Published training/post-training/reasoning/evaluation reference consolidation; separate non-destructive inventory of unpublished legacy notes.",
+  "readMethod": "All 17 published owned reference files and their canonical target chapters were read in full. Specific primary-source sections were checked for moved HHH/CAI, HELM, MMLU, HumanEval and feature-KD material. Most unpublished legacy files were inventoried only, as stated individually. Existing full explanations, figures, caveats and executable examples were retained; no blanket new pedagogical acceptance is claimed.",
+  "counts": {
+    "published": 17,
+    "publishedAlias": 17,
+    "unpublishedRetain": 31,
+    "pythonFencesExecuted": 66
+  },
+  "entries": [
+    {
+      "source": "Concepts/Training/Alignment.md",
+      "publicationStatus": "published",
+      "canonicalSource": "00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md",
+      "decision": "alias",
+      "uniqueContentMoved": [
+        "Rewritten HHH/CAI/RLAIF explanation moved intact into a new textbook chapter.",
+        "Original CAI Figure 1 with author/source/CC BY attribution."
+      ],
+      "coverage": [
+        "HHH criteria and their operationalization",
+        "Critique/revision then SFT; AI preference labels then RM and RL",
+        "Human helpfulness remains in the original CAI recipe",
+        "Alignment-tax is an observed regression, not a law"
+      ],
+      "notes": "New chapter belongs before SFT. The reference is left intact for the parent's reversible route migration. Removed duplicated mechanisms and unsupported universal claims; no guarantee against reward hacking.",
+      "verifiedExamples": [
+        "Mechanism compared against Askell et al. v3 §1.1 and Bai et al. v1 §1.2, 3.1, 4.1.",
+        "Original CAI PNG inspected in full locally."
+      ],
+      "readSources": [
+        "Concepts/Training/Alignment.md",
+        "00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md"
+      ],
+      "readScope": "Full reference body and full canonical chapter; source sections specifically used for additions read separately.",
+      "route": "reference/training/alignment",
+      "sourceSha256": "27afe9d02c45ae70f715b2a7b6ac85aead9bd3cfa0eb189370ac8b1844838b57",
+      "canonicalSha256": "dea0e616abf368f5a008701d203ac7cbb70d5346dd7b57e1b97c5e50416fe1c1"
+    },
+    {
+      "source": "Concepts/Training/Causal Language Modeling.md",
+      "publicationStatus": "published",
+      "canonicalSource": "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "coverage": [
+        "Autoregressive factorization and causal mask",
+        "Teacher forcing, shifted targets and CE gradients",
+        "Perplexity and tokenization caveats",
+        "Effective token count and MTP distinction"
+      ],
+      "notes": "Core CLM explanations and correct examples are more complete in the target. Unsupported BERT-vs-GPT universals, training-signal speed multipliers and misleading mask-only architectural equivalence are not carried. GPT-2/GPT-3/LLaMA history belongs to existing architecture chapters; no new architecture claims added.",
+      "verifiedExamples": [
+        "publishing/tools/check_ntp_examples.py"
+      ],
+      "readSources": [
+        "Concepts/Training/Causal Language Modeling.md",
+        "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md"
+      ],
+      "readScope": "Full reference body and full canonical chapter; source sections specifically used for additions read separately.",
+      "route": "reference/training/causal-language-modeling",
+      "sourceSha256": "0587b4e9c1a28ebc54481c191973f34f33c8932a64015e314c71a1c1a6ef47c2",
+      "canonicalSha256": "aca814c431df4b4d489ac98e4f147b85ba6f600eb41463c1b3ae4b6f7d9f3f3f"
+    },
+    {
+      "source": "Concepts/Training/Instruction Tuning.md",
+      "publicationStatus": "published",
+      "canonicalSource": "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "coverage": [
+        "Instruction-response data and formats",
+        "Supervised objective and conditional assistant-only masking",
+        "Task mixture, packing, validation and catastrophic forgetting",
+        "FLAN/Self-Instruct and InstructGPT roles"
+      ],
+      "notes": "Target distinguishes the instruction-tuning objective from preference optimization and explains FLAN/Tulu/Self-Instruct rather than preserving unverifiable score tables.",
+      "verifiedExamples": [
+        "publishing/tools/check_sft_examples.py"
+      ],
+      "readSources": [
+        "Concepts/Training/Instruction Tuning.md",
+        "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+        "00 Учебник/12 Post-training и Alignment/02 Preference data.md"
+      ],
+      "readScope": "Full reference body and full canonical chapter; source sections specifically used for additions read separately.",
+      "route": "reference/training/instruction-tuning",
+      "sourceSha256": "44791b1cd124052ea55db205f5814d1367451ac4a69ba3cb8c632bf43de4154f",
+      "canonicalSha256": "8480355a6edc89fcf2ee256df2d2e753ca6986c7dfb6413f4a3bc958e4c2e960"
+    },
+    {
+      "source": "Concepts/Training/Distillation.md",
+      "publicationStatus": "published",
+      "canonicalSource": "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md",
+      "canonicalHeading": "Дистилляция промежуточных представлений",
+      "decision": "alias",
+      "uniqueContentMoved": [
+        "Feature-KD subsection: chosen hidden layers, trainable projection, stop-gradient, loss, worked vector example and executable gradients."
+      ],
+      "coverage": [
+        "Soft targets, temperature, KL and mixed loss",
+        "Sequence/reasoning distillation",
+        "Feature/hint distillation",
+        "On-policy data and vocabulary/access constraints"
+      ],
+      "notes": "Feature-KD was the unique missing mechanism. Erroneous parameter counts and universal capacity/quality guarantees were not carried. Teacher does not receive a feature-loss gradient; projection and student do.",
+      "verifiedExamples": [
+        "publishing/tools/check_distillation_examples.py"
+      ],
+      "readSources": [
+        "Concepts/Training/Distillation.md",
+        "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md"
+      ],
+      "readScope": "Full reference body and full canonical chapter; source sections specifically used for additions read separately.",
+      "route": "reference/training/distillation",
+      "sourceSha256": "6e2b9be12e66439d8f1a0c795f26825deaa3b4fe3f42f175ef1fcee288da9963",
+      "canonicalSha256": "94becb658274ac9476ba8bb06c904b25ec6a71d5fe60e3453cb2884f186ad7b4"
+    },
+    {
+      "source": "Concepts/Reasoning/Self-Consistency.md",
+      "publicationStatus": "published",
+      "canonicalSource": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
+      "canonicalHeading": "4. Self-consistency",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "coverage": [
+        "Sample independent reasoning paths",
+        "Extract final answers and majority/marginalized selection",
+        "Weighted vs unweighted vote",
+        "Correlated errors and finite budgets"
+      ],
+      "notes": "Canonical contains full worked and executable examples. Agreement is not a guarantee of truth; arbitrary 40-path production prescriptions are not retained.",
+      "verifiedExamples": [
+        "publishing/tools/check_test_time_compute_examples.py"
+      ],
+      "readSources": [
+        "Concepts/Reasoning/Self-Consistency.md",
+        "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md"
+      ],
+      "readScope": "Full reference body and full canonical chapter; source sections specifically used for additions read separately.",
+      "route": "reference/reasoning/self-consistency",
+      "sourceSha256": "9740f40e97a862a52adf98ded92dcfb4582ed4c8eef3c16e1cbabe89574621c5",
+      "canonicalSha256": "a5f87fca761675e036bc3368a1cb00e3feca573daa1bc64eb86d557a0ff93bef"
+    },
+    {
+      "source": "Concepts/Reasoning/Test-time Compute.md",
+      "publicationStatus": "published",
+      "canonicalSource": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "coverage": [
+        "Longer reasoning and multiple candidates",
+        "Self-consistency, selection, verification and search",
+        "Training vs inference compute",
+        "Explicit token/call cost accounting and budget control"
+      ],
+      "notes": "Canonical is substantially broader. Unsupported fixed log-linear accuracy laws and speculative proprietary model architectures were not promoted into facts.",
+      "verifiedExamples": [
+        "publishing/tools/check_test_time_compute_examples.py"
+      ],
+      "readSources": [
+        "Concepts/Reasoning/Test-time Compute.md",
+        "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md"
+      ],
+      "readScope": "Full reference body and full canonical chapter; source sections specifically used for additions read separately.",
+      "route": "reference/reasoning/test-time-compute",
+      "sourceSha256": "d37f45301fb2157dd5a9da64080446d74817c5d9d1cdd91a7d7aea4ecc0f7920",
+      "canonicalSha256": "a5f87fca761675e036bc3368a1cb00e3feca573daa1bc64eb86d557a0ff93bef"
+    },
+    {
+      "source": "Concepts/Evaluation/Perplexity.md",
+      "publicationStatus": "published",
+      "canonicalSource": "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md",
+      "canonicalHeading": "Перплексия",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "coverage": [
+        "NLL and exp cross-entropy",
+        "Token-weighted aggregation",
+        "Sliding-window accounting",
+        "Tokenizer comparability and BPB conversion"
+      ],
+      "notes": "Target corrects missing ln(2) in byte-based conversion and does not treat illustrative model perplexities as comparable measurements.",
+      "verifiedExamples": [
+        "publishing/tools/check_ntp_examples.py"
+      ],
+      "readSources": [
+        "Concepts/Evaluation/Perplexity.md",
+        "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md"
+      ],
+      "readScope": "Full reference body and full canonical chapter; source sections specifically used for additions read separately.",
+      "route": "reference/evaluation/perplexity",
+      "sourceSha256": "7f32b6a1f728fc5c6f5ee165be328976750e186c97e9ebd088917345d0748e93",
+      "canonicalSha256": "aca814c431df4b4d489ac98e4f147b85ba6f600eb41463c1b3ae4b6f7d9f3f3f"
+    },
+    {
+      "source": "Concepts/Evaluation/MMLU.md",
+      "publicationStatus": "published",
+      "canonicalSource": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "canonicalHeading": "MMLU: предметные знания в формате выбора ответа",
+      "decision": "alias",
+      "uniqueContentMoved": [
+        "MMLU subsection with source-version-specific dataset counts, log-probability selection example and protocol caveats."
+      ],
+      "coverage": [
+        "Original 57-subject four-choice design",
+        "Dev/validation/test roles",
+        "Original letter-probability protocol and few-shot examples",
+        "Subjectwise reporting and limits of multiple choice"
+      ],
+      "notes": "Original dataset design and protocol verified against Hendrycks et al. v3 §3–5. Unsupported contemporary leaderboard/parameter tables are not moved; the untouched legacy file preserves historical draft content for review. This alias is the benchmark's explanatory entry, not a claim that every legacy leaderboard row was verified.",
+      "verifiedExamples": [
+        "Toy log-probability scores choose B; count of integers 25..100 inclusive is 76.",
+        "All 9 existing Evaluation Python fences execute."
+      ],
+      "readSources": [
+        "Concepts/Evaluation/MMLU.md",
+        "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md"
+      ],
+      "readScope": "Full reference body and full canonical chapter; source sections specifically used for additions read separately.",
+      "route": "reference/evaluation/mmlu",
+      "sourceSha256": "d4a68a2df64081198d3d7f8ed4082e4cb4d117bd492010ac1244b633bbdf7173",
+      "canonicalSha256": "50fc2e140ed82af09da1b935d37c27f90bc48998cf2a0c5628e703eac70a582c"
+    },
+    {
+      "source": "Concepts/Evaluation/HumanEval.md",
+      "publicationStatus": "published",
+      "canonicalSource": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "canonicalHeading": "HumanEval: проверять программу исполнением",
+      "decision": "alias",
+      "uniqueContentMoved": [
+        "HumanEval subsection with benchmark roles, original test density, execution-safety and contamination caveats."
+      ],
+      "coverage": [
+        "164 handwritten Python function completion tasks",
+        "Signature/docstring input; reference and tests for grading",
+        "Functional correctness vs text similarity",
+        "Sandboxing; finite tests; pass@k and selection limits"
+      ],
+      "notes": "Chen et al. v2 §2–3 checked. Existing canonical pass@k derivation and executable estimator retained. Universal correctness/contamination guarantees and unpinned modern leaderboard rows are not moved. Legacy file remains for historical-draft inspection, not automatic publication.",
+      "verifiedExamples": [
+        "All 9 actual Evaluation Python fences; exact-combination pass@k with n=10,c=3,k=2 yields 24/45."
+      ],
+      "readSources": [
+        "Concepts/Evaluation/HumanEval.md",
+        "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md"
+      ],
+      "readScope": "Full reference body and full canonical chapter; source sections specifically used for additions read separately.",
+      "route": "reference/evaluation/humaneval",
+      "sourceSha256": "9197b3abba443c5fae58c26a077dd0b4c78da35d5c840350af4b9df7a548563d",
+      "canonicalSha256": "50fc2e140ed82af09da1b935d37c27f90bc48998cf2a0c5628e703eac70a582c"
+    },
+    {
+      "source": "01 Справочник/Post-training/SFT.md",
+      "publicationStatus": "published",
+      "canonicalSource": "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "coverage": [
+        "Token CE on demonstrations",
+        "Causal shift, EOS/PAD and assistant-only masks",
+        "Prompt gradients and valid packing",
+        "Dataset quality, mixture and real CPU update"
+      ],
+      "notes": "Every explanatory point in the short reference is covered by the full target; no unique material needed moving.",
+      "verifiedExamples": [
+        "publishing/tools/check_sft_examples.py"
+      ],
+      "readSources": [
+        "01 Справочник/Post-training/SFT.md",
+        "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+        "00 Учебник/12 Post-training и Alignment/02 Preference data.md"
+      ],
+      "readScope": "Full reference body and full canonical chapter; source sections specifically used for additions read separately.",
+      "route": "reference/post-training/sft",
+      "sourceSha256": "b96ab79063ffa2db1bc91137d4d3b219da060ac3e3b76a2b8b38339a47ee653f",
+      "canonicalSha256": "8480355a6edc89fcf2ee256df2d2e753ca6986c7dfb6413f4a3bc958e4c2e960"
+    },
+    {
+      "source": "01 Справочник/Post-training/Reward Model.md",
+      "publicationStatus": "published",
+      "canonicalSource": "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "coverage": [
+        "Bradley–Terry pairwise loss",
+        "Scalar reward and score identifiability",
+        "Data split, position/length bias",
+        "Reward hacking, process/outcome supervision"
+      ],
+      "notes": "Target also covers ties/soft labels/listwise comparisons, calibration and actual tiny-model CPU optimization.",
+      "verifiedExamples": [
+        "publishing/tools/check_reward_modeling_examples.py"
+      ],
+      "readSources": [
+        "01 Справочник/Post-training/Reward Model.md",
+        "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md"
+      ],
+      "readScope": "Full reference body and full canonical chapter; source sections specifically used for additions read separately.",
+      "route": "reference/post-training/reward-model",
+      "sourceSha256": "e84dfadbeee92129d3e19aeb6bc872d3805dddf0fd0e07926a0190fbbc9ff839",
+      "canonicalSha256": "ae8ad7536eb7463667bbe8a5983fc54008e92079e775ea49ca481a12d3bb570e"
+    },
+    {
+      "source": "01 Справочник/Post-training/RLHF.md",
+      "publicationStatus": "published",
+      "canonicalSource": "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "coverage": [
+        "Human preference pipeline",
+        "Policy gradient and tokenwise rewards",
+        "KL to reference vs PPO ratio to old policy",
+        "Clipping, GAE, actor/value roles and ptx"
+      ],
+      "notes": "Reference pipeline and conceptual boundaries are fully explained; no second independently maintained definition remains necessary.",
+      "verifiedExamples": [
+        "publishing/tools/check_ppo_examples.py"
+      ],
+      "readSources": [
+        "01 Справочник/Post-training/RLHF.md",
+        "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md"
+      ],
+      "readScope": "Full reference body and full canonical chapter; source sections specifically used for additions read separately.",
+      "route": "reference/post-training/rlhf",
+      "sourceSha256": "532551c9b9f38d0bac81a45df2b6280bae6cf134d9673583ec0bb106ea4eb38f",
+      "canonicalSha256": "29efb9a8c255c1b04abdcedc5c696f659a20ef45010572fe59093429698fcae5"
+    },
+    {
+      "source": "01 Справочник/Post-training/DPO.md",
+      "publicationStatus": "published",
+      "canonicalSource": "00 Учебник/12 Post-training и Alignment/05 DPO.md",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "coverage": [
+        "Preference pairs and reference log-ratio",
+        "Implicit reward derivation",
+        "Beta and reference dependence",
+        "Offline limitations, length and data biases"
+      ],
+      "notes": "Full target includes gradients, actual CPU step and limitations; no independent short formulation required.",
+      "verifiedExamples": [
+        "publishing/tools/check_dpo_examples.py"
+      ],
+      "readSources": [
+        "01 Справочник/Post-training/DPO.md",
+        "00 Учебник/12 Post-training и Alignment/05 DPO.md"
+      ],
+      "readScope": "Full reference body and full canonical chapter; source sections specifically used for additions read separately.",
+      "route": "reference/post-training/dpo",
+      "sourceSha256": "1e92bde6ab1696528968ea76cb18f06ecfc3471f59182e8215b51b39eb4df8f6",
+      "canonicalSha256": "fd7a08d5813a5427b74a943d8a57f00978877b8edce13ac1027ccc04cf172c06"
+    },
+    {
+      "source": "01 Справочник/Post-training/GRPO.md",
+      "publicationStatus": "published",
+      "canonicalSource": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "coverage": [
+        "Group-relative advantages",
+        "No separate critic in original group baseline",
+        "Clipped surrogate and KL role",
+        "Degenerate groups, normalization and masking"
+      ],
+      "notes": "Canonical separates GRPO from RLVR and explains later variants with source-specific formulas; all short-card mechanisms covered.",
+      "verifiedExamples": [
+        "publishing/tools/check_grpo_examples.py"
+      ],
+      "readSources": [
+        "01 Справочник/Post-training/GRPO.md",
+        "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md"
+      ],
+      "readScope": "Full reference body and full canonical chapter; source sections specifically used for additions read separately.",
+      "route": "reference/post-training/grpo",
+      "sourceSha256": "76eec6574b83082cf03e40e624d6d69c2cfb7306fcb74df3aac9816cf655b403",
+      "canonicalSha256": "7173f3bbdb587d32f8d2f04c5663164c132563b6966ce7543ccc613f4e007e1a"
+    },
+    {
+      "source": "01 Справочник/Post-training/RLVR.md",
+      "publicationStatus": "published",
+      "canonicalSource": "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "coverage": [
+        "Programmatic reward contract",
+        "Verifier vs optimization algorithm",
+        "Binary/sparse reward and partial signals",
+        "Grader exploitation and hidden evaluation"
+      ],
+      "notes": "Target explains the actual parser/checker boundary and why verification is not synonymous with truth; short-card content covered.",
+      "verifiedExamples": [
+        "publishing/tools/check_rlvr_examples.py"
+      ],
+      "readSources": [
+        "01 Справочник/Post-training/RLVR.md",
+        "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md"
+      ],
+      "readScope": "Full reference body and full canonical chapter; source sections specifically used for additions read separately.",
+      "route": "reference/post-training/rlvr",
+      "sourceSha256": "a882007e7c9b7fb96f77b329bbc36726fc2258b6d9fd31735fc4c3a1c07c4032",
+      "canonicalSha256": "7b8b6d68960196ce4dd0c59fe047f974decd60b187f95b3acda55076b73efbba"
+    },
+    {
+      "source": "01 Справочник/Post-training/Verifiable Reward.md",
+      "publicationStatus": "published",
+      "canonicalSource": "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
+      "canonicalHeading": "Награда и алгоритм обновления",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "coverage": [
+        "Source of reward independent from PPO/GRPO",
+        "Deterministic grading limits",
+        "Hidden tests, format and partial correctness",
+        "Reward-hacking and repeated-attempt interpretation"
+      ],
+      "notes": "Explicit existing anchor verifiable-reward retained in the canonical chapter.",
+      "verifiedExamples": [
+        "publishing/tools/check_rlvr_examples.py"
+      ],
+      "readSources": [
+        "01 Справочник/Post-training/Verifiable Reward.md",
+        "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md"
+      ],
+      "readScope": "Full reference body and full canonical chapter; source sections specifically used for additions read separately.",
+      "route": "reference/post-training/verifiable-reward",
+      "sourceSha256": "dac546581e5d60f6c6d69cdb8c9889e208559dde254309af0809c1c48872734c",
+      "canonicalSha256": "7b8b6d68960196ce4dd0c59fe047f974decd60b187f95b3acda55076b73efbba"
+    },
+    {
+      "source": "01 Справочник/Evaluation/Evaluation.md",
+      "publicationStatus": "published",
+      "canonicalSource": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "decision": "alias",
+      "uniqueContentMoved": [
+        "Complete original HELM Figure 2 v2 with full caption (replaces cropped asset).",
+        "Scenario/metric interpretation and application example.",
+        "Direct cross-link to full agent-system evaluation."
+      ],
+      "coverage": [
+        "Construct/scenario/metric separation",
+        "Fixed protocol and evaluation harness",
+        "Uncertainty, repeated generations and pass@k",
+        "Contamination and agentic evaluation"
+      ],
+      "notes": "HELM taxonomy diagram and independent scenario/metric explanation were the missing useful material. Added a direct route to the full agent-evaluation chapter rather than copying it.",
+      "verifiedExamples": [
+        "All 9 actual Evaluation Python fences; no unsafe generated-code execution."
+      ],
+      "readSources": [
+        "01 Справочник/Evaluation/Evaluation.md",
+        "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md"
+      ],
+      "readScope": "Full reference body and full canonical chapter; source sections specifically used for additions read separately.",
+      "route": "reference/evaluation/evaluation",
+      "sourceSha256": "047fa7677177c76461f5154c0f96053ccae8f98cc23f5576502bedddcb15483e",
+      "canonicalSha256": "50fc2e140ed82af09da1b935d37c27f90bc48998cf2a0c5628e703eac70a582c"
+    },
+    {
+      "source": "Concepts/Training/Adversarial Training.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Training/Adversarial Training.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Зачем это нужно: регуляризация через worst-case",
+        "Ключевая идея: perturbation в embedding space",
+        "Формализация",
+        "Алгоритм одного шага обучения",
+        "Ключевые результаты",
+        "Эволюция: от LSTM к Transformer"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Training/Adversarial Training.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "d7ea9937a19ba3021531457b10000592cc97f2d627b04d3af14e10a608d1b7a4"
+    },
+    {
+      "source": "Concepts/Training/Backpropagation.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Training/Backpropagation.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Зачем это нужно: градиенты для обучения сетей",
+        "Chain rule — математическая основа",
+        "Forward pass + Backward pass",
+        "Автоматическое дифференцирование",
+        "Backprop для ключевых операций",
+        "Численная стабильность"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Training/Backpropagation.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "1db38521de2dde688470b54af2a92c4711e78f692654ebd6f1ca8a69d522a42e"
+    },
+    {
+      "source": "Concepts/Training/Constitutional AI.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Training/Constitutional AI.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Зачем это нужно: проблемы стандартного RLHF",
+        "Обзор метода: две стадии",
+        "Стадия 1: SL-CAI (Critique и Revision)",
+        "Стадия 2: RL-CAI (RLAIF)",
+        "Ключевые результаты",
+        "Goodharting и его решение"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Training/Constitutional AI.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "3b35e33f34fee062c071568abdebd21f157be268a83f7d1c169854d14b293b5c"
+    },
+    {
+      "source": "Concepts/Training/DPO.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Training/DPO.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Зачем это нужно: сложность RLHF pipeline",
+        "Математическая деривация: от RLHF к DPO",
+        "Pipeline DPO на практике",
+        "Результаты: DPO vs PPO",
+        "Теоретические гарантии",
+        "Сравнение pipeline: DPO vs RLHF"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Training/DPO.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "8ddf8990c301a7e07014e53b934685f92706230c2b9736e25fb1c3cf47bf09c5"
+    },
+    {
+      "source": "Concepts/Training/Disentangled Attention.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Training/Disentangled Attention.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Зачем это нужно: content и position -- разные вещи",
+        "Идея DeBERTa: два отдельных вектора",
+        "Три компонента attention score",
+        "Relative vs Absolute Position Embeddings",
+        "Enhanced Mask Decoder (EMD)",
+        "Ключевые результаты"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Training/Disentangled Attention.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "2d179865004ed4cfce784a79d0339727555680bf0d6b6800039d3595776149e0"
+    },
+    {
+      "source": "Concepts/Training/Dropout.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Training/Dropout.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Проблема: переобучение в больших сетях",
+        "Механизм работы",
+        "PyTorch автоматически масштабирует на 1/(1-p) при training",
+        "и ничего не делает при eval",
+        "Почему Dropout работает: неявный ансамбль",
+        "Dropout в Transformer"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Training/Dropout.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "e50c3e6655f7a04ab9627eeacbecf0a1cd4ace06e97215a688f367f876190a71"
+    },
+    {
+      "source": "Concepts/Training/Few-shot Fine-tuning.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Training/Few-shot Fine-tuning.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Зачем это нужно: реальность low-data режимов",
+        "Проблема 1: баг в BERTAdam (bias correction)",
+        "Проблема 2: плохая инициализация верхних слоёв",
+        "Проблема 3: стандартные 3 эпохи -- слишком мало",
+        "Сравнение с другими методами стабилизации",
+        "Рецепт: few-shot fine-tuning BERT"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Training/Few-shot Fine-tuning.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "444191fbbeaa3cf330fc7cf305963ce82b666621fc24c1327eec34a77ad9233a"
+    },
+    {
+      "source": "Concepts/Training/Fine-tuning.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Training/Fine-tuning.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Зачем это нужно: от general representations к конкретной задаче",
+        "Эволюция парадигм fine-tuning",
+        "Full Fine-Tuning: классический подход",
+        "Parameter-Efficient Fine-Tuning (PEFT): обзор методов",
+        "Требования к compute: практическая таблица",
+        "Catastrophic Forgetting: когда fine-tuning вредит"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Training/Fine-tuning.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "d601527debe697c89ea5a098fcfd56f21073dc0883d014572c21bfdc228bb594"
+    },
+    {
+      "source": "Concepts/Training/GRPO.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Training/GRPO.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Зачем это нужно: проблема PPO для LLM",
+        "PPO vs GRPO: обзор архитектуры",
+        "Как работает PPO (baseline)",
+        "Как работает GRPO",
+        "Почему группа заменяет critic",
+        "Сравнение PPO и GRPO"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Training/GRPO.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "d9ef78345403abaac74b315dee091199a2c750e70652936b455aa9db2dc1bc55"
+    },
+    {
+      "source": "Concepts/Training/Gradient Clipping.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Training/Gradient Clipping.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Зачем это нужно: проблема взрывающихся градиентов",
+        "Clip by Value vs Clip by Norm",
+        "Стандартные значения",
+        "Где ставить clip в training loop",
+        "Почему критично для RNN",
+        "Почему важно для LLM"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Training/Gradient Clipping.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "ca01c38ddab5e31ad0b06f51cef94e4725810adfaa4d13e8f2e7c0fa9505cef7"
+    },
+    {
+      "source": "Concepts/Training/LoRA.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Training/LoRA.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Зачем это нужно: проблема масштаба fine-tuning",
+        "Ключевая гипотеза: low intrinsic rank",
+        "Как работает LoRA: пошаговый разбор",
+        "Результаты: LoRA vs Full Fine-Tuning",
+        "Выбор rank: сколько достаточно?",
+        "QLoRA: 4-bit квантизация + LoRA"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Training/LoRA.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "00a58dd2d1968b406e55646ec9d515bd8d5165dfb8dc485eca763f31750239f2"
+    },
+    {
+      "source": "Concepts/Training/Masked Language Modeling.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Training/Masked Language Modeling.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Зачем это нужно: проблема однонаправленности",
+        "Как работает MLM: схема 80/10/10",
+        "Static vs Dynamic Masking",
+        "Расширения MLM",
+        "MLM vs CLM: фундаментальное сравнение",
+        "Когда использовать MLM-модели"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Training/Masked Language Modeling.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "30bc3ced843ec381b120407280e196f5b216c5b80d0a34f380fce73b6720103e"
+    },
+    {
+      "source": "Concepts/Training/Multi-head Latent Attention.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Training/Multi-head Latent Attention.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Зачем это нужно: KV-cache как bottleneck",
+        "Существующие решения и их недостатки",
+        "MLA: другой подход — сжатие вместо сокращения",
+        "Decoupled Rotary Position Embedding",
+        "Экономия памяти",
+        "Почему MLA не теряет качество"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Training/Multi-head Latent Attention.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "922ce19c86524433ecdca8308a0b5e4450f3a6031dd85a8420fd26cf2deb8c59"
+    },
+    {
+      "source": "Concepts/Training/Next Sentence Prediction.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Training/Next Sentence Prediction.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Зачем это придумали",
+        "Как работает NSP",
+        "Почему NSP вредит: ablation от RoBERTa",
+        "Альтернативы NSP",
+        "Почему [CLS] token всё равно полезен",
+        "Влияние NSP на современные модели"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Training/Next Sentence Prediction.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "765ede2a9c128136870264e001f6bd723d09cca7ab1f8cf6055ef985d7c16c12"
+    },
+    {
+      "source": "Concepts/Training/PEFT.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Training/PEFT.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Зачем это нужно: проблема полного fine-tuning",
+        "Таксономия PEFT-методов",
+        "LoRA: стандарт де-факто",
+        "QLoRA: LoRA для одной GPU",
+        "Adapter Layers: bottleneck-модули",
+        "Prefix Tuning: virtual tokens в attention"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Training/PEFT.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "06b2c3ecbdf0aa8f87324e3abd1c4b77c3a0091f3a8314ff3c3a86a9dc27ed2f"
+    },
+    {
+      "source": "Concepts/Training/PPO.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Training/PPO.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Зачем PPO: проблемы vanilla policy gradient",
+        "Clipped Surrogate Objective",
+        "Advantage Estimation: GAE",
+        "4 модели в памяти: проблема масштабирования",
+        "PPO-ptx: борьба с забыванием",
+        "Алгоритм PPO для LLM: пошагово"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Training/PPO.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "f9754c4089a6b70022f65ce8e85b231b5646f000a82a66792a630bf51982cbb7"
+    },
+    {
+      "source": "Concepts/Training/Pre-training.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Training/Pre-training.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Зачем это нужно: от tabula rasa к «пониманию» языка",
+        "Три парадигмы pre-training objectives",
+        "Датасеты pre-training: от 16 GB до 15T+ токенов",
+        "Архитектура и compute",
+        "Tricks для стабильности обучения",
+        "Факторы качества pre-training"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Training/Pre-training.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "5cad623efa6ae23c3659d28c99b7cd1373c82562f87c9fafa94744eba190ccbe"
+    },
+    {
+      "source": "Concepts/Training/RLHF.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Training/RLHF.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Зачем это нужно: разрыв между pre-training и alignment",
+        "Трёхступенчатый pipeline: SFT → RM → PPO",
+        "Ключевые результаты InstructGPT",
+        "Что не так с RLHF: проблемы и ограничения",
+        "Развитие RLHF: от InstructGPT к ChatGPT и далее",
+        "Сравнение RLHF pipeline с альтернативами"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Training/RLHF.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "0780e7493e215c01d98a1bf0674432c8b0fdf9f4f07309c8fda0f13f9155710e"
+    },
+    {
+      "source": "Concepts/Training/RLVR.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Training/RLVR.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Legacy body read in full; retained unpublished for separately checking historical/proprietary claims and source-specific expansions. No route or deletion decision is inferred from similar published names.",
+      "potentialUniqueTopics": [
+        "Зачем это нужно: проблема reward signal",
+        "Как работает RLVR",
+        "Reward design в RLVR",
+        "RLVR и [[02 Areas/ML & DL/Concepts/Training/GRPO|GRPO]]",
+        "Ограничения RLVR",
+        "Ландшафт RLVR для tool-use (2025-2026)"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Training/RLVR.md"
+      ],
+      "readScope": "full legacy body; not a new complete source-paper verification",
+      "sourceSha256": "16e44366ba81a677e062875451c4c71254568f958f6af938ba582581ff1046b4"
+    },
+    {
+      "source": "Concepts/Training/Reward Model.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Training/Reward Model.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Зачем нужна Reward Model",
+        "Сбор данных: pairwise comparisons",
+        "Bradley-Terry Model: формализация предпочтений",
+        "Архитектура Reward Model",
+        "Reward Hacking: главная проблема RM",
+        "RM в контексте pipeline"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Training/Reward Model.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "46d1436267820cb06d546ef66346a8e665449989eef03f1e30fb6c9506e0bc5b"
+    },
+    {
+      "source": "Concepts/Training/SFT.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Training/SFT.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Legacy body read in full; retained unpublished for separately checking historical/proprietary claims and source-specific expansions. No route or deletion decision is inferred from similar published names.",
+      "potentialUniqueTopics": [
+        "Что это и зачем",
+        "Отличие от pre-training",
+        "Формат данных: chat templates",
+        "Loss masking: учим только на ответах",
+        "Промпт: label = -100 (игнорируется CrossEntropyLoss)",
+        "Completion: label = token_id"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Training/SFT.md"
+      ],
+      "readScope": "full legacy body; not a new complete source-paper verification",
+      "sourceSha256": "9199a8d4349dadff2534c3f84fe8fa005aa2462db770918f7d050750df08725c"
+    },
+    {
+      "source": "Concepts/Training/Scaling Laws.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Training/Scaling Laws.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Зачем это нужно: предсказуемость стоимостью в миллионы долларов",
+        "Kaplan et al. (2020): больше параметров — важнее всего",
+        "Chinchilla (Hoffmann et al., 2022): баланс параметров и данных",
+        "LLaMA: Inference-Budget Scaling",
+        "GPT-4: Predictable Scaling",
+        "PaLM 2: Data Quality > Scale"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Training/Scaling Laws.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "5ae6209008f95e8dac63994929600c4948e64a1b7aed2ec9bfc5468bdf4f1cca"
+    },
+    {
+      "source": "Concepts/Training/Semi-supervised Learning.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Training/Semi-supervised Learning.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Зачем это нужно: разметка -- это дорого",
+        "Три основных подхода",
+        "Сравнение подходов",
+        "Assumptions semi-supervised learning",
+        "SSL в эпоху BERT и LLM",
+        "Практический рецепт для SSL в NLP (2024+)"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Training/Semi-supervised Learning.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "17fc6e2ba4319aea871a27ac89b9cad0c3281bbf28448a649e87a889fde77144"
+    },
+    {
+      "source": "Concepts/Training/Synthetic Data.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Training/Synthetic Data.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Зачем это нужно",
+        "Phi Series: «textbook quality» тезис",
+        "Nemotron Pipeline: индустриальный масштаб",
+        "Таксономия подходов к synthetic data",
+        "Риски и ограничения",
+        "Формула успеха (эмпирическая)"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Training/Synthetic Data.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "c5cf6ead4cde20b9eafddf99a7fb9ac84b5555dc39ce4b4d3fc7d084404b4a3c"
+    },
+    {
+      "source": "Concepts/Training/Vanishing Gradient.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Training/Vanishing Gradient.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "В чём проблема",
+        "Математическая причина",
+        "Последствия",
+        "Решения",
+        "Современная ситуация",
+        "Related concepts"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Training/Vanishing Gradient.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "00d64033654378d0e3d5b2d955ec1dbd25873bcba14fa00f1d668dd7eee0a853"
+    },
+    {
+      "source": "Concepts/Training/nanoGPT.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Training/nanoGPT.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "What it is",
+        "Архитектура",
+        "Чему учит nanoGPT",
+        "Код: пошаговый разбор ключевых компонентов",
+        "Ключевые элементы:",
+        "Flash Attention (PyTorch 2.0+):"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Training/nanoGPT.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "5f1bd4fa83967b9d0478d95601a505a8e8d80e1fc97980e25261db769ac30d4d"
+    },
+    {
+      "source": "Concepts/Reasoning/ReAct.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Reasoning/ReAct.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Зачем это нужно: два изолированных мира",
+        "Ключевая идея: расширенное пространство действий",
+        "Паттерн Thought -> Action -> Observation",
+        "Эксперименты и результаты",
+        "Стратегии комбинирования ReAct и CoT",
+        "Почему ReAct стал фундаментом LLM-агентов"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Reasoning/ReAct.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "db772fc7834f840df36b2386a72790ba3d6e7e142780d11956d2829fae81b883"
+    },
+    {
+      "source": "Concepts/Reasoning/Tool Use.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Reasoning/Tool Use.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Зачем это нужно: ограничения closed-box LLM",
+        "Как работает вызов инструментов",
+        "Эволюция: три волны",
+        "Обучение tool-use через RL",
+        "Challenges",
+        "Бенчмарки"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Reasoning/Tool Use.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "7fcc266613ab789abadfd800e3ecdb5d578fde1b48f29e2d96c64b889a566db7"
+    },
+    {
+      "source": "Concepts/Reasoning/Toolformer.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Reasoning/Toolformer.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Зачем это нужно: парадокс больших моделей",
+        "Ключевая идея: пусть модель сама решит, когда инструмент полезен",
+        "Три шага pipeline",
+        "Пять инструментов",
+        "Результаты: маленькая модель с инструментами побеждает гиганта",
+        "Scaling: эмерджентное появление tool use"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Reasoning/Toolformer.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "c22dab7ecf6adb342f4b95453045d2f808ab8e60c90beba1ab7f8f5f65006d88"
+    },
+    {
+      "source": "Concepts/Reasoning/Tree of Thoughts.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Reasoning/Tree of Thoughts.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Зачем это нужно: LLM как «System 1» мышление",
+        "Формализация: IO, CoT, CoT-SC как частные случаи деревьев",
+        "Четыре компонента ToT",
+        "Эксперименты",
+        "Стоимость: trade-off quality vs compute",
+        "Концептуальные достоинства"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Reasoning/Tree of Thoughts.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "6ef781048ed0cc9a8856e3da0e7fa26d56c2288ea1f974483d3cdb88c8359626"
+    },
+    {
+      "source": "Concepts/Evaluation/BLEU Score.md",
+      "publicationStatus": "unpublished-legacy",
+      "canonicalSource": "Concepts/Evaluation/BLEU Score.md",
+      "decision": "retain",
+      "uniqueContentMoved": [],
+      "notes": "Inventoried title, frontmatter and section outline only; not a full content-equivalence audit. Do not redirect, delete, or call a duplicate based on this inventory.",
+      "potentialUniqueTopics": [
+        "Зачем это нужно: автоматическая оценка перевода",
+        "Формула",
+        "Corpus-level vs sentence-level",
+        "sacreBLEU — стандарт воспроизводимости",
+        "Типичные значения",
+        "BLEU в знаковых работах"
+      ],
+      "topicStatus": "Candidate material, not confirmed absent from the textbook or fact-checked.",
+      "verifiedExamples": [],
+      "readSources": [
+        "Concepts/Evaluation/BLEU Score.md"
+      ],
+      "readScope": "metadata and heading inventory only",
+      "sourceSha256": "d432707ef676024e1f9b8f639f9d1df3b2d327e1207fd8cf14cb40b2d9a67988"
+    }
+  ],
+  "canonicalReadInFull": [
+    "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md",
+    "00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md",
+    "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+    "00 Учебник/12 Post-training и Alignment/02 Preference data.md",
+    "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
+    "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md",
+    "00 Учебник/12 Post-training и Alignment/05 DPO.md",
+    "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
+    "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+    "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md",
+    "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
+    "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md"
+  ],
+  "additionalReadInFull": [
+    "00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники.md"
+  ],
+  "primarySourceSectionsRead": [
+    {
+      "url": "https://arxiv.org/html/2112.00861v3#S1.SS1",
+      "sections": "§1.1; Appendix E for HHH criteria"
+    },
+    {
+      "url": "https://arxiv.org/html/2212.08073v1",
+      "sections": "§1.2, 3.1, 4.1; Figure 1; license"
+    },
+    {
+      "url": "https://arxiv.org/pdf/2211.09110v2",
+      "sections": "Figure 2, PDF p.3; §1–2 taxonomy"
+    },
+    {
+      "url": "https://arxiv.org/html/2009.03300v3",
+      "sections": "§3–5; original MMLU design and §4.1 protocol"
+    },
+    {
+      "url": "https://arxiv.org/html/2107.03374v2",
+      "sections": "§2–3; original HumanEval design, pass@k and execution boundary"
+    },
+    {
+      "url": "https://github.com/openai/human-eval",
+      "sections": "README Usage security warning"
+    },
+    {
+      "url": "https://arxiv.org/html/1412.6550v4#S2.SS2",
+      "sections": "FitNets §2.2–2.3; Equation 3; staged training"
+    }
+  ],
+  "verification": {
+    "tests": [
+      {
+        "script": "publishing/tools/check_sft_examples.py",
+        "status": "pass",
+        "pythonFences": 3,
+        "chapterSha256": "8480355a6edc89fcf2ee256df2d2e753ca6986c7dfb6413f4a3bc958e4c2e960",
+        "runtime": "/Users/aleksan.potekhin/.cache/uv/archive-v0/quxIVrt0SvuKkVgXWy8L8/bin/python",
+        "claim": "Actual chapter fences and independent CPU assertions; no full training, GPU or quality benchmark."
+      },
+      {
+        "script": "publishing/tools/check_preference_data_examples.py",
+        "status": "pass",
+        "pythonFences": 5,
+        "chapterSha256": "e24409a09129f2b7ba6f01d6a85f45879f1cbab2dec4c099267c5e11d934dffa",
+        "runtime": "/Users/aleksan.potekhin/.cache/uv/archive-v0/quxIVrt0SvuKkVgXWy8L8/bin/python",
+        "claim": "Actual chapter fences and independent CPU assertions; no full training, GPU or quality benchmark."
+      },
+      {
+        "script": "publishing/tools/check_reward_modeling_examples.py",
+        "status": "pass",
+        "pythonFences": 6,
+        "chapterSha256": "ae8ad7536eb7463667bbe8a5983fc54008e92079e775ea49ca481a12d3bb570e",
+        "runtime": "/Users/aleksan.potekhin/.cache/uv/archive-v0/quxIVrt0SvuKkVgXWy8L8/bin/python",
+        "claim": "Actual chapter fences and independent CPU assertions; no full training, GPU or quality benchmark."
+      },
+      {
+        "script": "publishing/tools/check_ppo_examples.py",
+        "status": "pass",
+        "pythonFences": 6,
+        "chapterSha256": "29efb9a8c255c1b04abdcedc5c696f659a20ef45010572fe59093429698fcae5",
+        "runtime": "/Users/aleksan.potekhin/.cache/uv/archive-v0/quxIVrt0SvuKkVgXWy8L8/bin/python",
+        "claim": "Actual chapter fences and independent CPU assertions; no full training, GPU or quality benchmark."
+      },
+      {
+        "script": "publishing/tools/check_dpo_examples.py",
+        "status": "pass",
+        "pythonFences": 6,
+        "chapterSha256": "fd7a08d5813a5427b74a943d8a57f00978877b8edce13ac1027ccc04cf172c06",
+        "runtime": "/Users/aleksan.potekhin/.cache/uv/archive-v0/quxIVrt0SvuKkVgXWy8L8/bin/python",
+        "claim": "Actual chapter fences and independent CPU assertions; no full training, GPU or quality benchmark."
+      },
+      {
+        "script": "publishing/tools/check_rlvr_examples.py",
+        "status": "pass",
+        "pythonFences": 4,
+        "chapterSha256": "7b8b6d68960196ce4dd0c59fe047f974decd60b187f95b3acda55076b73efbba",
+        "runtime": "/Users/aleksan.potekhin/.cache/uv/archive-v0/quxIVrt0SvuKkVgXWy8L8/bin/python",
+        "claim": "Actual chapter fences and independent CPU assertions; no full training, GPU or quality benchmark."
+      },
+      {
+        "script": "publishing/tools/check_grpo_examples.py",
+        "status": "pass",
+        "pythonFences": 11,
+        "chapterSha256": "7173f3bbdb587d32f8d2f04c5663164c132563b6966ce7543ccc613f4e007e1a",
+        "runtime": "/Users/aleksan.potekhin/.cache/uv/archive-v0/tyfjdCMqv7cyAAV04Wdz4/bin/python",
+        "claim": "Actual chapter fences and independent CPU assertions; no full training, GPU or quality benchmark."
+      },
+      {
+        "script": "publishing/tools/check_distillation_examples.py",
+        "status": "pass",
+        "pythonFences": 8,
+        "chapterSha256": "94becb658274ac9476ba8bb06c904b25ec6a71d5fe60e3453cb2884f186ad7b4",
+        "runtime": "/Users/aleksan.potekhin/.cache/uv/archive-v0/quxIVrt0SvuKkVgXWy8L8/bin/python",
+        "claim": "Actual chapter fences and independent CPU assertions; no full training, GPU or quality benchmark."
+      },
+      {
+        "script": "publishing/tools/check_test_time_compute_examples.py",
+        "status": "pass",
+        "pythonFences": 5,
+        "chapterSha256": "a5f87fca761675e036bc3368a1cb00e3feca573daa1bc64eb86d557a0ff93bef",
+        "runtime": "/Users/aleksan.potekhin/.cache/uv/archive-v0/quxIVrt0SvuKkVgXWy8L8/bin/python",
+        "claim": "Actual chapter fences and independent CPU assertions; no full training, GPU or quality benchmark."
+      },
+      {
+        "script": "publishing/tools/check_ntp_examples.py",
+        "status": "pass",
+        "pythonFences": 3,
+        "chapterSha256": "aca814c431df4b4d489ac98e4f147b85ba6f600eb41463c1b3ae4b6f7d9f3f3f",
+        "runtime": "/Users/aleksan.potekhin/.cache/uv/archive-v0/quxIVrt0SvuKkVgXWy8L8/bin/python",
+        "claim": "Actual chapter fences and independent CPU assertions; no full training, GPU or quality benchmark."
+      }
+    ],
+    "evaluation": {
+      "status": "pass",
+      "method": "Read actual Evaluation chapter and execute all 9 Python fences in shared namespace; independently assert MMLU toy scores select B and len(range(25,101))==76.",
+      "chapterSha256": "50fc2e140ed82af09da1b935d37c27f90bc48998cf2a0c5628e703eac70a582c"
+    },
+    "assets": [
+      {
+        "source": "00 Учебник/Assets/Figures/curated/reference-source-first/helm-taxonomy-figure2.png",
+        "before_sha256": "d5aa81dc46fcf346988693af8d7e1754511df41c7443b76c097394affd15aeb6",
+        "after_sha256": "9288b3710949b979f737b88274135b28836831df44068ac4ddccac44ab229ee8",
+        "bytes": 228163,
+        "width": 2010,
+        "height": 1005,
+        "original_url": "https://arxiv.org/pdf/2211.09110v2",
+        "license": "CC BY 4.0",
+        "visualCheck": "Local final PNG inspected in full; no clipped labels or caption."
+      },
+      {
+        "source": "00 Учебник/Assets/Figures/curated/consolidation-2026-10-29/constitutional-ai-overview.png",
+        "before_sha256": null,
+        "after_sha256": "43db0cfc079e1864f8aa5358962a290090c6980b77701665bebd91f1e4d54ea4",
+        "bytes": 140646,
+        "width": 2025,
+        "height": 844,
+        "original_url": "https://arxiv.org/html/2212.08073v1/CAI-Overview.png",
+        "license": "CC BY 4.0",
+        "visualCheck": "Local final PNG inspected in full; no clipped labels or caption."
+      }
+    ],
+    "renderedWebsiteQA": "Pending parent integration/build/desktop-mobile inspection. Local PNG inspection is not website QA.",
+    "english": "No existing EN post-training/reasoning/evaluation counterpart chapter found under en/00 Textbook; no new translation authored."
+  },
+  "changesLedger": "docs/audit/2026-10-29-training-consolidation-additions.json",
+  "excludedScope": [
+    "Concepts/Training/Mixed Precision Training.md — assigned to another agent.",
+    "Concepts/Training/Distributed Training.md — assigned to another agent.",
+    "Category _index.md files, publishing/navigation.yml, publisher and central audit ledgers — parent-owned."
+  ],
+  "remaining": [
+    "Parent: integrate new HHH/CAI chapter before SFT and replace reviewed published routes with direct topic aliases.",
+    "Parent: link/provenance checks, full build, actual desktop/mobile figure and navigation QA.",
+    "Unpublished notes remain untouched; their content-equivalence/fact audits are not claimed complete."
+  ]
+}

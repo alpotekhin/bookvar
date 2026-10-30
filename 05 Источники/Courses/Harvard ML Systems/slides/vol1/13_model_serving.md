@@ -9,17 +9,43 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`slides/vol1/13_model_serving/13_model_serving.tex`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static slide archive
+> Text and equations retain the original language. Layout wrappers are simplified;
+> speaker notes are separate, and original SVGs are not redrawn or cropped.
+> Unsupported TeX remains visible and is listed beside the affected slide.
+> This archive is not a checked transcript or a finished Bookvar chapter.
 
 # VOL1 Slides — Model Serving
 
 ## Readable slide sequence
 
+## Model Serving
+
+[Original slide 1](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L61)
+
+Inverting Every Training Priority
+
 ## Learning Objectives
 
-{[2 min]
+[Original slide 2](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L66)
+
+1. Explain the **serving inversion** from throughput to latency minimization
+2. Decompose request latency using the **latency budget framework**
+3. Apply **queuing theory** (Little's Law, M/M/1) to capacity planning
+4. Identify sources of **training-serving skew** and prevention strategies
+5. Select batching strategies based on **traffic patterns** and latency constraints
+6. Evaluate **KV-cache**, **TTFT/TPOT**, and **continuous batching** for LLM serving
+7. Evaluate deployment tradeoffs across precision, runtime, and cost
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: What prior concept connects to this slide
 Students spent 12 chapters optimizing throughput. This slide frames the
 inversion: every training priority is about to flip.
@@ -37,25 +63,41 @@ biggest surprise?'' Cold-call one responder.
 % -- WARN: What students will get wrong on THIS topic
 Common error: students assume serving is just calling model.predict().
 Correct framing: serving is a six-stage pipeline where the model is one
-stage consuming less than 50% of the budget.
+stage consuming less than 50\% of the budget.
 
 % -- FLEX: [CORE] This slide is essential --- do not skip.
 IF AHEAD: Ask students to predict which objective will be hardest.
 IF SHORT: Read objectives without discussion; move to content.
-}
+```
 
-{0pt}
-- Explain the **serving inversion** from throughput to latency minimization
-- Decompose request latency using the **latency budget framework**
-- Apply **queuing theory** (Little's Law, M/M/1) to capacity planning
-- Identify sources of **training-serving skew** and prevention strategies
-- Select batching strategies based on **traffic patterns** and latency constraints
-- Evaluate **KV-cache**, **TTFT/TPOT**, and **continuous batching** for LLM serving
-- Evaluate deployment tradeoffs across precision, runtime, and cost
+</details>
 
 ## Visual Language
 
-{
+[Original slide 3](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L105)
+
+Throughout this course, colors carry meaning:
+
+**Blue** — Compute / Processing
+
+GPU ops, forward/backward pass, inference
+
+**Green** — Data / Memory
+
+Data flow, caches, healthy paths
+
+**Orange** — Routing / Scheduling
+
+Load balancers, batch windows
+
+**Red** — Error / Cost / Bottleneck
+
+Loss, decode phase, waste
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 Point to each card: ``Blue is compute --- GPU forward passes. Green is data
 flow and memory. Orange is routing and scheduling. Red flags bottlenecks
@@ -64,37 +106,24 @@ blue inference runners, with red marking decode bottlenecks.
 
 % -- FLEX: [OPTIONAL] Skip if students already know the palette from earlier chapters.
 IF SHORT: Say ``same colors as always'' and advance.
-}
+```
 
-Throughout this course, colors carry meaning:
-
-{0.3cm}
-[T]
-  
-    {mlsyscard}{computestroke}
-    **Blue** --- Compute / Processing\\
-    { GPU ops, forward/backward pass, inference}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{datastroke}
-    **Green** --- Data / Memory\\
-    { Data flow, caches, healthy paths}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{routingstroke}
-    **Orange** --- Routing / Scheduling\\
-    { Load balancers, batch windows}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{errorstroke}
-    **Red** --- Error / Cost / Bottleneck\\
-    { Loss, decode phase, waste}
-    {mlsyscard}
+</details>
 
 ## Why Serving Is Different
 
-{
+[Original slide 4](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L152)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/13_model_serving/images/serving-inversion.svg]]
+
+Harvard Edge ML Systems Book contributors, [serving-inversion.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/images/serving-inversion.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Key:** Training optimizes samples/hour. Serving optimizes ms/request. Same GPU, opposite goals.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 In every prior chapter, success meant saturating the GPU. This slide
 reveals why that strategy fails in production serving.
@@ -109,8 +138,8 @@ ANALOGY: ``Training is a freight train --- pack it full. Serving is an
 ambulance --- it must always be ready to go.''
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
-Ask: ``If training saturates GPUs at 95%, why would serving aim for
-50%?'' Give 15 seconds, then cold-call. [Expected: queuing theory ---
+Ask: ``If training saturates GPUs at 95\%, why would serving aim for
+50\%?'' Give 15 seconds, then cold-call. [Expected: queuing theory ---
 high utilization causes latency spikes.]
 
 % -- WARN: What students will get wrong on THIS topic
@@ -119,21 +148,30 @@ Correct framing: serving inverts the optimization objective itself ---
 latency replaces throughput as the primary metric.
 
 % -- FLEX: [CORE] This slide is essential --- do not skip.
-IF AHEAD: ``What happens to cost when you run GPUs at 50% instead of 95%?''
+IF AHEAD: ``What happens to cost when you run GPUs at 50\% instead of 95\%?''
 IF SHORT: Show diagram, state the inversion, skip the DAM walkthrough.
-}
+```
 
-% --- Full-width diagram ---
+</details>
 
-{serving-inversion.pdf}
+## The D$\bullet$A$\bullet$M Inversion
 
-{0.1cm}
-{Key:}{Training optimizes samples/hour. Serving optimizes ms/request. Same GPU, opposite goals.}
+[Original slide 5](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L191)
 
-## Frame 4
+| **D$\bullet$A$\bullet$M Axis** | **Training** | **Serving** | **Implication** |
+| --- | --- | --- | --- |
+| **Data** | Volume (billions) | Freshness (one now) | Cache vs. stream |
+| **Algorithm** | Mutable (backprop) | Frozen (forward only) | No optimizer state |
+| **Machine** | Saturate (95–100%) | Headroom (40–60%) | Absorb traffic spikes |
+| **Iron Law** | Compute term dominates | Latency term dominates | $L_{\text{lat}}$ is the constraint |
+| **Metric** | Samples/hour | ms/request (p99) | Tail latency matters |
 
-{The D{0.04em}{$$}A{0.04em}{$$}M Inversion}
-{
+**The Serving Inversion:** Models that train beautifully often serve poorly. Batch-heavy training optimizations are ill-suited for bursty, latency-critical production traffic.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The previous slide showed the inversion visually. This slide formalizes
 it along the three DAM axes students learned in Ch1.
@@ -142,8 +180,8 @@ it along the three DAM axes students learned in Ch1.
 Walk down the table row by row: ``Data: training ingests billions of
 samples; serving handles one request at a time --- freshness replaces
 volume. Algorithm: training runs backprop; serving is forward-only ---
-no optimizer state needed. Machine: training saturates at 95%; serving
-holds headroom at 40--60% to absorb traffic spikes.'' End on the Iron
+no optimizer state needed. Machine: training saturates at 95\%; serving
+holds headroom at 40--60\% to absorb traffic spikes.'' End on the Iron
 Law row: ``The dominant term flips from compute to latency overhead.''
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
@@ -160,30 +198,40 @@ latency term that training's large batches amortized away.
 % -- FLEX: [CORE] This slide is essential --- do not skip.
 IF AHEAD: ``What happens to the Machine row during a traffic spike?''
 IF SHORT: Cover Data and Machine rows; skip Algorithm row.
-}
+```
 
-{}{1.1}
-{tabular}{@{}llll@{}}
-  
-  {{} Axis} & **Training** & **Serving** & **Implication** \\
-  
-  {datastroke}{**Data**} & Volume (billions) & Freshness (one now) & Cache vs.\ stream \\
-  {computestroke}{**Algorithm**} & Mutable (backprop) & Frozen (forward only) & No optimizer state \\
-  {routingstroke}{**Machine**} & Saturate (95--100%) & Headroom (40--60%) & Absorb traffic spikes \\
-  
-  **Iron Law** & Compute term dominates & Latency term dominates & $L_{{lat}}$ is the constraint \\
-  **Metric** & Samples/hour & ms/request (p99) & Tail latency matters \\
-  
-{tabular}
+</details>
 
-{0.1cm}
-{mlsyscard}{crimson}
-{ **The Serving Inversion:** Models that train beautifully often serve poorly. Batch-heavy training optimizations are ill-suited for bursty, latency-critical production traffic.}
-{mlsyscard}
+## Static vs. Dynamic Inference
 
-## Static vs.\ Dynamic Inference
+[Original slide 6](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L243)
 
-{
+**Static (Batch) Inference**
+
+Pre-compute predictions for anticipated inputs.
+
+10,000 photos $\times$ 5 ms $\approx$ 50 s total.
+
+**Pro:** Eliminates inference latency.
+
+**Con:** Cannot handle novel inputs.
+
+**Dynamic (Real-time) Inference**
+
+Compute predictions on demand.
+
+Each request: full pipeline under 100 ms budget.
+
+**Pro:** Handles any input, reflects updates.
+
+**Con:** Strict latency, higher cost.
+
+**Production:** Most systems use **hybrid** — cached results for common queries, dynamic inference for novel inputs.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The DAM inversion showed that serving prioritizes freshness over volume.
 This slide presents the first design decision that follows: when to
@@ -209,221 +257,271 @@ of users nightly; only the final ranking is dynamic.
 % -- FLEX: [OPTIONAL] This slide provides context but is not load-bearing.
 IF SHORT: Cover the two cards quickly and move on to Server Anatomy.
 IF AHEAD: ``What determines the boundary between cached and dynamic?''
-}
+```
 
-[T]
-  
-    {mlsyscard}{datastroke}
-    **Static (Batch) Inference**\\[0.05cm]
-    {
-    Pre-compute predictions for anticipated inputs.\\
-    10,000 photos $×$ 5 ms $$ 50 s total.\\
-    **Pro:** Eliminates inference latency.\\
-    **Con:** Cannot handle novel inputs.}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{errorstroke}
-    **Dynamic (Real-time) Inference**\\[0.05cm]
-    {
-    Compute predictions on demand.\\
-    Each request: full pipeline under 100 ms budget.\\
-    **Pro:** Handles any input, reflects updates.\\
-    **Con:** Strict latency, higher cost.}
-    {mlsyscard}
-  
-
-{0.1cm}
-{Production:}{Most systems use **hybrid** --- cached results for common queries, dynamic inference for novel inputs.}
+</details>
 
 ## The Inference Pipeline
 
-{[3 min] Walk through the full pipeline from client to GPU and back.
+[Original slide 7](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L305)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/13_model_serving/images/inference-pipeline.svg]]
+
+Harvard Edge ML Systems Book contributors, [inference-pipeline.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/images/inference-pipeline.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Surprise:** When inference is fast (5 ms), **preprocessing dominates** (45–70% of total latency). Optimize the pipeline, not just the model.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] Walk through the full pipeline from client to GPU and back.
 Key insight: the neural network is only ONE stage. Preprocessing often
-consumes 45--70% of total latency when inference is optimized.
-Ask: ``Which stage do you think is the bottleneck?''}
+consumes 45--70\% of total latency when inference is optimized.
+Ask: ``Which stage do you think is the bottleneck?''
+```
 
-% --- Full-width diagram ---
-
-{inference-pipeline.pdf}
-
-{0.1cm}
-{Surprise:}{When inference is fast (5 ms), **preprocessing dominates** (45--70% of total latency). Optimize the pipeline, not just the model.}
+</details>
 
 ## Inference Server Components
 
-{[3 min] Six stages of the inference server pipeline. Each stage isolates
+[Original slide 8](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L320)
+
+| **Component** | **Purpose** | **Key Concern** |
+| --- | --- | --- |
+| **Load Balancer** | Route requests to replicas | Least-connections, latency-aware |
+| **Network Ingress** | HTTP/gRPC, TLS termination | Serialization overhead |
+| **Request Queue** | Absorb bursty traffic (FIFO) | Queue depth vs. latency |
+| **Dynamic Batcher** | Group requests by window | Batch size vs. wait time |
+| **Inference Runner** | Execute model on accelerator | GPU utilization |
+| **Postprocessor** | Format response (softmax) | Minimal overhead |
+
+**Key:** The inference server is a **high-performance scheduler**, not a model wrapper. Dynamic batching improves GPU utilization by up to 70%.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] Six stages of the inference server pipeline. Each stage isolates
 a concern. The request queue absorbs bursty traffic; the dynamic batcher
 forms efficient GPU batches. This is NOT a simple model.predict() call.
-Common error: thinking ``serving = calling forward().''}
+Common error: thinking ``serving = calling forward().''
+```
 
-{}{1.05}
-{tabular}{@{}lp{4cm}p{4cm}@{}}
-  
-  **Component** & **Purpose** & **Key Concern** \\
-  
-  {routingstroke}{**Load Balancer**} & Route requests to replicas & Least-connections, latency-aware \\
-  {routingstroke}{**Network Ingress**} & HTTP/gRPC, TLS termination & Serialization overhead \\
-  {datastroke}{**Request Queue**} & Absorb bursty traffic (FIFO) & Queue depth vs.\ latency \\
-  {computestroke}{**Dynamic Batcher**} & Group requests by window & Batch size vs.\ wait time \\
-  {computestroke}{**Inference Runner**} & Execute model on accelerator & GPU utilization \\
-  **Postprocessor** & Format response (softmax) & Minimal overhead \\
-  
-{tabular}
-
-{0.1cm}
-{Key:}{The inference server is a **high-performance scheduler**, not a model wrapper. Dynamic batching improves GPU utilization by up to 70%.}
+</details>
 
 ## Predict: Where Does Time Go?
 
-{[2 min] Prediction exercise before revealing the latency budget.
+[Original slide 9](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L347)
+
+Think–Write–Share
+
+A ResNet-50 model runs inference in 5 ms on a GPU.
+
+The end-to-end serving latency is 10.1 ms.
+
+**Where does the other 5.1 ms go?**
+
+Rank the stages: preprocessing, serialization, transfer, postprocessing.
+
+(60 seconds — then compare with a neighbor)
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Prediction exercise before revealing the latency budget.
 Give students 60 seconds. Most will guess ``inference'' dominates.
-The reveal will surprise them.}
+The reveal will surprise them.
+```
 
-{0.6cm}
-{ Think--Write--Share}
-
-{0.4cm}
-{ A ResNet-50 model runs inference in 5 ms on a GPU.\\
-The end-to-end serving latency is 10.1 ms.\\[0.2cm]
-**Where does the other 5.1 ms go?**}
-
-{0.3cm}
-{ Rank the stages: preprocessing, serialization, transfer, postprocessing.}
-
-{0.3cm}
-{{lightgray}{(60 seconds --- then compare with a neighbor)}}
+</details>
 
 ## The Latency Budget Framework
 
-{[3 min] Reveal after prediction exercise. Walk through the budget.
-Key surprise: preprocessing (resize, normalize) takes 4.3 ms and CPU$$GPU
-transfer takes 0.5 ms --- together nearly matching inference itself. The model
-gets less than 50% of the total budget.
-Common error: optimizing only the model and ignoring preprocessing.}
+[Original slide 10](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L373)
 
 **ResNet-50 inference: Where every millisecond goes**
 
-{0.1cm}
-{}{1.05}
-{
-{tabular}{@{}llrr@{}}
-  
-  **Stage** & **Operation** & **Time** & **% Total** \\
-  
-  {routingstroke}{Deserialize} & Parse JSON, decode payload & 0.2 ms & 2% \\
-  {routingstroke}{Preprocess} & Resize, normalize, to-tensor & **4.3 ms** & **43%** \\
-  {computestroke}{CPU$$GPU} & Transfer tensor via PCIe & 0.5 ms & 5% \\
-  {computestroke}{Inference} & Neural network forward pass & **5.0 ms** & **50%** \\
-  {datastroke}{Postprocess} & Softmax, format response & 0.1 ms & 1% \\
-  
-  & **Total** & **10.1 ms** & **100%** \\
-  
-{tabular}
-}
+| **Stage** | **Operation** | **Time** | **% Total** |
+| --- | --- | --- | --- |
+| Deserialize | Parse JSON, decode payload | 0.2 ms | 2% |
+| Preprocess | Resize, normalize, to-tensor | **4.3 ms** | **43%** |
+| CPU$\to$GPU | Transfer tensor via PCIe | 0.5 ms | 5% |
+| Inference | Neural network forward pass | **5.0 ms** | **50%** |
+| Postprocess | Softmax, format response | 0.1 ms | 1% |
+|  | **Total** | **10.1 ms** | **100%** |
 
-{0.1cm}
-{Amdahl's Law:}{The model gets $<$50% of the budget. A 2$×$ model speedup reduces total latency by only 25%. Optimize the *pipeline*, not just the model.}
+**Amdahl's Law:** The model gets $<$50% of the budget. A 2$\times$ model speedup reduces total latency by only 25%. Optimize the *pipeline*, not just the model.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] Reveal after prediction exercise. Walk through the budget.
+Key surprise: preprocessing (resize, normalize) takes 4.3 ms and CPU$\to$GPU
+transfer takes 0.5 ms --- together nearly matching inference itself. The model
+gets less than 50\% of the total budget.
+Common error: optimizing only the model and ignoring preprocessing.
+```
+
+</details>
 
 ## The Cost of Latency
 
-{[2 min] Quantify the dollar cost of latency constraints.
+[Original slide 11](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L406)
+
+**GPU rental: &#36;4/hour. How much does each millisecond cost?**
+
+| **Scenario** | **Latency** | **Throughput** | **Cost/M queries** |
+| --- | --- | --- | --- |
+| **A** (batch=1, low latency) | 5 ms | 200 req/s | **&#36;5.56** |
+| **B** (batch=8, high throughput) | 10 ms | 800 req/s | **&#36;1.39** |
+
+**Trade-off:** Reducing latency from 10 ms to 5 ms increases the hardware bill by **$\approx$300%**. Latency requirements must be business-justified.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Quantify the dollar cost of latency constraints.
 Key insight: halving latency (from 10ms to 5ms) can 4x the cost.
-This is why latency requirements must be business-justified.}
+This is why latency requirements must be business-justified.
+```
 
-**GPU rental: \$4/hour. How much does each millisecond cost?**
+</details>
 
-{0.1cm}
-{}{1.1}
-{
-{tabular}{@{}lrrr@{}}
-  
-  **Scenario** & **Latency** & **Throughput** & **Cost/M queries** \\
-  
-  **A** (batch=1, low latency) & 5 ms & 200 req/s & **\$5.56** \\
-  **B** (batch=8, high throughput) & 10 ms & 800 req/s & **\$1.39** \\
-  
-{tabular}
-}
+## Little's Law
 
-{0.1cm}
-{Trade-off:}{Reducing latency from 10 ms to 5 ms increases the hardware bill by **$$300%**. Latency requirements must be business-justified.}
+[Original slide 12](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L436)
+
+$L = \lambda \cdot W$
+
+Average queue length = Arrival rate $\times$ Average wait time
 
 ## The Utilization-Latency Curve
 
-{[3 min] Walk through the M/M/1 queuing curve. Key insight: latency is
-NOT linear with utilization. At 70%, latency is 3.3x service time. At 90%,
-it is 10x. This is why production systems run at 40-60% utilization.
-Ask: ``Your manager wants to run GPUs at 90% to save money. What do you say?''}
+[Original slide 13](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L441)
 
-% --- Full-width diagram ---
+![[Assets/Sources/Harvard ML Systems/slides/vol1/13_model_serving/images/queuing-latency.svg]]
 
-{queuing-latency.pdf}
+Harvard Edge ML Systems Book contributors, [queuing-latency.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/images/queuing-latency.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
 
-{0.1cm}
-{The Knee:}{At $$70% utilization, latency starts exploding. Moving 70%$$90% saves $$22% cost but **triples** latency.}
+**The Knee:** At $\sim$70% utilization, latency starts exploding. Moving 70%$\to$90% saves $\sim$22% cost but **triples** latency.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] Walk through the M/M/1 queuing curve. Key insight: latency is
+NOT linear with utilization. At 70\%, latency is 3.3x service time. At 90\%,
+it is 10x. This is why production systems run at 40-60\% utilization.
+Ask: ``Your manager wants to run GPUs at 90\% to save money. What do you say?''
+```
+
+</details>
 
 ## Quick Check
 
-{[0.5 min] Micro-retrieval. Give students 30 seconds to recall.
-This distributed practice improves retention (Roediger & Karpicke, 2006).}
+[Original slide 14](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L456)
 
- Quick check --- no peeking.\\[0.5cm]
- At what GPU utilization does queuing latency start to explode?\\[0.3cm]
-{ 30 seconds --- then we continue.}
+Quick check — no peeking.
+
+ At what GPU utilization does queuing latency start to explode?
+
+30 seconds — then we continue.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[0.5 min] Micro-retrieval. Give students 30 seconds to recall.
+This distributed practice improves retention (Roediger \& Karpicke, 2006).
+```
+
+</details>
 
 ## M/M/1 Wait Time
 
-{[3 min] The governing equation. Walk through each variable.
-At 80% utilization with 5ms service time: wait = 20ms, total = 25ms.
+[Original slide 15](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L468)
+
+$$
+W_q = \frac{\rho}{1 - \rho} \cdot \mu^{-1} \qquad \text{where } \rho = \frac{\lambda}{\mu}
+$$
+
+| $W_q$ — Average wait time in queue | $\rho$ — Utilization ($\lambda / \mu$) |
+| --- | --- |
+| $\lambda$ — Arrival rate (req/s) | $\mu$ — Service rate (1 / service time) |
+
+| **Utilization** | **Wait** | **Total** | **p99 ($\approx$4.6$\times$)** | **Assessment** |
+| --- | --- | --- | --- | --- |
+| 50% | 1$\times$ | 2$\times$ | 9.2$\times$ | Safe |
+| 70% | 2.3$\times$ | 3.3$\times$ | 15.3$\times$ | Caution |
+| 80% | 4$\times$ | 5$\times$ | 23$\times$ | Danger |
+| 90% | 9$\times$ | 10$\times$ | 46$\times$ | Critical |
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] The governing equation. Walk through each variable.
+At 80\% utilization with 5ms service time: wait = 20ms, total = 25ms.
 The p99 is approximately 4.6x the mean: 115ms.
-This single equation explains why production systems cannot run hot.}
+This single equation explains why production systems cannot run hot.
+```
 
-$$W_q = {}{1 - }  ^{-1}  {where }  = {}{}$$
-
-{0.05cm}
-{
-{tabular}{@{}ll@{}}
-  $W_q$ --- Average wait time in queue &
-  $$ --- Utilization ($ / $) \\
-  $$ --- Arrival rate (req/s) &
-  $$ --- Service rate (1 / service time) \\
-{tabular}
-}
-
-{0.05cm}
-{}{1.0}
-{
-{tabular}{@{}rrrrr@{}}
-  
-  **Utilization** & **Wait** & **Total** & **p99 ($$4.6$×$)** & **Assessment** \\
-  
-  50% & 1$×$ & 2$×$ & 9.2$×$ & {datastroke}{Safe} \\
-  70% & 2.3$×$ & 3.3$×$ & 15.3$×$ & {routingstroke}{Caution} \\
-  80% & 4$×$ & 5$×$ & 23$×$ & {errorstroke}{Danger} \\
-  90% & 9$×$ & 10$×$ & 46$×$ & {errorstroke}{Critical} \\
-  
-{tabular}
-}
+</details>
 
 ## War Story: The Tail at Scale
 
-{
+[Original slide 16](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L504)
+
+**Dean & Barroso (2013): “The Tail at Scale”**
+
+One server slow 1% of the time.
+
+A request touching $N$ servers:
+
+$$
+P(\text{$\geq$1 slow}) = 1 - 0.99^N
+$$
+
+| **Servers** | **P($\geq$1 slow)** |
+| --- | --- |
+| 1 | 1% |
+| 10 | 10% |
+| 100 | **63%** |
+| 1000 | 99.99% |
+
+**Mitigations**
+
+**Hedged requests:** Send to 2 replicas, take first response. Tail $\downarrow$ 75%.
+
+**Tied requests:** Second server cancels if first responds. Near-zero overhead.
+
+**Micro-partitioning:** Fine-grained shards for load balance.
+
+**At scale:** Component p99 becomes the system **median**. Design for the tail, not the average.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The M/M/1 model showed why high utilization explodes latency for one
 server. This slide extends the insight to fan-out systems with hundreds
 of servers --- the production reality at Google, Meta, and Amazon.
 
 % -- NARRATE: What to SAY while showing this slide
-``Dean and Barroso, 2013: a single server is slow 1% of the time. With
+``Dean and Barroso, 2013: a single server is slow 1\% of the time. With
 100 servers, the probability that at least one is slow is $1 - 0.99^{100}
-= 63%$. With 1,000 servers: 99.99%. Your p99 at the component level
+= 63\%$. With 1,000 servers: 99.99\%. Your p99 at the component level
 becomes the median at the system level.'' Point to the table: ``At 100
 servers, most requests hit at least one straggler. Hedged requests ---
 sending the same query to two servers and taking the first response ---
-reduce tail latency by 75%.''
+reduce tail latency by 75\%.''
 ANALOGY: ``One slow cashier at a supermarket is an annoyance. One slow
-cashier across 100 checkout lanes means 63% of shoppers wait.''
+cashier across 100 checkout lanes means 63\% of shoppers wait.''
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
 Ask: ``Your search query fans out to 1,000 shards. Each shard has p99 =
@@ -439,227 +537,234 @@ experience.
 % -- FLEX: [CORE] The Tail at Scale insight is essential for production systems
 [CORE] Connects queuing theory to real-world distributed serving.
 IF AHEAD: ``How do hedged requests interact with utilization?''
-IF SHORT: State the 63% number and the hedging mitigation.
-}
+IF SHORT: State the 63\% number and the hedging mitigation.
+```
 
-**Dean & Barroso (2013): ``The Tail at Scale''**
-
-{0.1cm}
-[T]
-  
-    {
-    One server slow 1% of the time.\\
-    A request touching $N$ servers:
-    $$P({$$1 slow}) = 1 - 0.99^N$$
-    }
-
-    {-0.1cm}
-    {
-    {}{1.0}
-    {tabular}{@{}rr@{}}
-      
-      **Servers** & **P($$1 slow)** \\
-      
-      1    & 1% \\
-      10   & 10% \\
-      100  & **63%** \\
-      1000 & 99.99% \\
-      
-    {tabular}
-    }
-  
-  
-    {mlsyscard}{routingstroke}
-    **Mitigations**\\[0.05cm]
-    {
-    **Hedged requests:** Send to 2 replicas, take first response. Tail $$ 75%.\\[0.05cm]
-    **Tied requests:** Second server cancels if first responds. Near-zero overhead.\\[0.05cm]
-    **Micro-partitioning:** Fine-grained shards for load balance.}
-    {mlsyscard}
-  
-
-{0.05cm}
-{At scale:}{Component p99 becomes the system **median**. Design for the tail, not the average.}
+</details>
 
 ## Your Turn: Capacity Planning
 
-{[3 min] Give students 90 seconds. Answer: At 200 req/s with 5ms
+[Original slide 17](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L583)
+
+Capacity Planning Exercise
+
+A serving system has:
+
+- Service time: 5 ms per request
+- Expected traffic: 200 req/s
+- SLO: p99 latency $<$ 100 ms
+
+**Calculate:** (1) utilization $\rho$, (2) can one server meet the SLO?, (3) how many servers needed?
+
+(90 seconds — then compare with a neighbor)
+
+**Solution:**
+
+$\rho = 200 \times 0.005 = 1.0$
+
+**At 100%!** Infinite queue.
+
+Need $\rho < 0.7$ for p99 target.
+
+Min: $\lceil 200 / (200 \times 0.7) \rceil$ = **2 servers**.
+
+With 2: $\rho = 0.5$, p99 $\approx$ 46 ms ✓
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] Give students 90 seconds. Answer: At 200 req/s with 5ms
 service time, rho = 200 * 0.005 = 1.0 --- system is AT capacity.
 Average wait is infinite. Need to either reduce service time or add servers.
 PEER INSTRUCTION PROTOCOL:
 1. Present problem (30s). 2. Individual vote (60s).
-3. If 30-70% correct: pair discussion (90s), then re-vote.
-4. Reveal and explain.}
+3. If 30-70\% correct: pair discussion (90s), then re-vote.
+4. Reveal and explain.
+```
 
-[T]
-  
-    { Capacity Planning Exercise}
-
-    {0.1cm}
-    A serving system has:
-    {0pt}
-- Service time: 5 ms per request
-- Expected traffic: 200 req/s
-- SLO: p99 latency $<$ 100 ms
-    
-
-    {0.1cm}
-    **Calculate:** (1) utilization $$, (2) can one server meet the SLO?, (3) how many servers needed?
-
-    {0.1cm}
-    {{midgray}{(90 seconds --- then compare with a neighbor)}}
-  
-  
-    
-    {mlsyscard}{computestroke}
-    **Solution:**\\[0.05cm]
-    {
-    $ = 200 × 0.005 = 1.0$\\[0.03cm]
-    {errorstroke}{**At 100%!**} Infinite queue.\\[0.05cm]
-    Need $ < 0.7$ for p99 target.\\
-    Min: $ 200 / (200 × 0.7) $ = **2 servers**.\\[0.05cm]
-    With 2: $ = 0.5$, p99 $$ 46 ms {datastroke}{}
-    }
-    {mlsyscard}
+</details>
 
 ## Why Batching Helps
 
-{[3 min] Full-width timeline comparing batch-1 vs batch-8.
+[Original slide 18](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L632)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/13_model_serving/images/batching-comparison.svg]]
+
+Harvard Edge ML Systems Book contributors, [batching-comparison.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/images/batching-comparison.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Trade-off:** Larger batches improve throughput and cost, but increase latency. The **SLO** sets the upper bound.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] Full-width timeline comparing batch-1 vs batch-8.
 Key numbers: 200 vs 879 img/s (4.4x), cost drops from \$5.56 to \$1.26
-per million queries. GPU goes from 50% idle to 65% utilized.
-Ask: ``Why not batch=1024?'' (answer: latency SLO violation)}
+per million queries. GPU goes from 50\% idle to 65\% utilized.
+Ask: ``Why not batch=1024?'' (answer: latency SLO violation)
+```
 
-% --- Full-width diagram ---
+</details>
 
-{batching-comparison.pdf}
+## Static vs. Dynamic Batching
 
-{0.05cm}
-{Trade-off:}{Larger batches improve throughput and cost, but increase latency. The **SLO** sets the upper bound.}
+[Original slide 19](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L647)
 
-## Static vs.\ Dynamic Batching
+**Static Batching**
 
-{[2 min] Two batching strategies. Static: fixed batch size, wait for N
+Fixed batch size (e.g., 8).
+
+Wait until batch is full.
+
+**Pro:** Simple implementation.
+
+**Con:** High latency during low traffic (waiting for requests to fill the batch).
+
+**Dynamic Batching**
+
+Time window (e.g., 5 ms) + max size.
+
+Fire when *either* condition met.
+
+**Pro:** Adapts to traffic patterns.
+
+**Con:** Tuning window size is critical (too small $\to$ small batches; too large $\to$ SLO violation).
+
+**Production pattern:** Dynamic batching with adaptive windows is the default in NVIDIA Triton, TF Serving, and TorchServe.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Two batching strategies. Static: fixed batch size, wait for N
 requests. Dynamic: time-window-based, fires when window expires OR batch is
-full. Dynamic is strictly better for variable traffic but adds complexity.}
+full. Dynamic is strictly better for variable traffic but adds complexity.
+```
 
-[T]
-  
-    {mlsyscard}{routingstroke}
-    **Static Batching**\\[0.1cm]
-    {
-    Fixed batch size (e.g., 8).\\
-    Wait until batch is full.\\[0.1cm]
-    **Pro:** Simple implementation.\\
-    **Con:** High latency during low traffic (waiting for requests to fill the batch).}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{computestroke}
-    **Dynamic Batching**\\[0.1cm]
-    {
-    Time window (e.g., 5 ms) + max size.\\
-    Fire when *either* condition met.\\[0.1cm]
-    **Pro:** Adapts to traffic patterns.\\
-    **Con:** Tuning window size is critical (too small $$ small batches; too large $$ SLO violation).}
-    {mlsyscard}
-  
-
-{0.15cm}
-{Production pattern:}{Dynamic batching with adaptive windows is the default in NVIDIA Triton, TF Serving, and TorchServe.}
+</details>
 
 ## Traffic Patterns and Batching Strategy
 
-{[2 min] Match batching strategy to traffic pattern. Four patterns from
+[Original slide 20](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L681)
+
+| **MLPerf Scenario** | **Traffic Pattern** | **Batching** | **Example** |
+| --- | --- | --- | --- |
+| **Server** | Poisson arrivals | Dynamic window | Web API, recommendation |
+| **SingleStream** | One at a time | None (batch=1) | Mobile app, edge device |
+| **MultiStream** | Synchronized sensors | Fixed batch | Autonomous vehicle cameras |
+| **Offline** | All data available | Max batch | Nightly batch processing |
+
+**Key:** The deployment paradigm determines the traffic pattern. Cloud $\to$ Server. Mobile $\to$ SingleStream. Edge $\to$ MultiStream.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Match batching strategy to traffic pattern. Four patterns from
 MLPerf scenarios. The deployment paradigm from Ch2 determines which pattern
-applies. If short: just cover Server and SingleStream.}
+applies. If short: just cover Server and SingleStream.
+```
 
-{}{1.05}
-{tabular}{@{}lp{2.5cm}p{2.2cm}p{3.5cm}@{}}
-  
-  **MLPerf Scenario** & **Traffic Pattern** & **Batching** & **Example** \\
-  
-  **Server** & Poisson arrivals & Dynamic window & Web API, recommendation \\
-  **SingleStream** & One at a time & None (batch=1) & Mobile app, edge device \\
-  **MultiStream** & Synchronized sensors & Fixed batch & Autonomous vehicle cameras \\
-  **Offline** & All data available & Max batch & Nightly batch processing \\
-  
-{tabular}
-
-{0.1cm}
-{Key:}{The deployment paradigm determines the traffic pattern. Cloud $$ Server. Mobile $$ SingleStream. Edge $$ MultiStream.}
+</details>
 
 ## LLM Serving: Two Phases, Two Bottlenecks
 
-{[3 min] The defining challenge of LLM serving. Walk through the timeline.
+[Original slide 21](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L708)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/13_model_serving/images/ttft-tpot-timeline.svg]]
+
+Harvard Edge ML Systems Book contributors, [ttft-tpot-timeline.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/images/ttft-tpot-timeline.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**TTFT** (Time to First Token): Responsiveness.  
+**TPOT** (Time Per Output Token): Fluidity.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] The defining challenge of LLM serving. Walk through the timeline.
 Prefill is compute-bound (all tokens in parallel). Decode is memory-bandwidth
 bound (one token at a time, read entire model per token).
 These are governed by DIFFERENT hardware limits.
-Ask: ``Adding more compute cores would help which phase?''}
+Ask: ``Adding more compute cores would help which phase?''
+```
 
-% --- Full-width diagram ---
-
-{ttft-tpot-timeline.pdf}
-
-{0.05cm}
-{
-{computestroke}{**TTFT**} (Time to First Token): Responsiveness. 
-{errorstroke}{**TPOT**} (Time Per Output Token): Fluidity.}
+</details>
 
 ## The KV Cache: Memory That Grows
 
-{[3 min] The defining memory constraint of LLM serving. KV cache grows
+[Original slide 22](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L726)
+
+**KV Cache grows with every token:**
+
+| **Scenario** | **KV Cache** | **vs. FP16 weights** |
+| --- | --- | --- |
+| Llama-70B, batch 1, 640 tok | 210 MB | 0.002$\times$ |
+| Llama-70B, batch 8, 8K tok | 21 GB | 0.15$\times$ |
+| Llama-70B, batch 32, 8K tok | **86 GB** | **0.6$\times$** |
+
+**OOM risk:** At batch 32 + 8K context, KV cache alone can overflow an 80 GB GPU once weights and runtime overhead are included. Without GQA, it can exceed the weights.
+
+**Solutions**
+
+**PagedAttention:** Fixed-size memory pages, near-zero waste (OS virtual memory concept).
+
+**Prefix Caching:** Reuse KV states for shared system prompts.
+
+**KV Offloading:** Spill inactive contexts to CPU RAM or SSD.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] The defining memory constraint of LLM serving. KV cache grows
 linearly with sequence length AND batch size. For Llama-70B with grouped-query
 attention, each token needs about 0.3 MB of KV cache. At batch 32 and 8K context,
 the cache is about 86 GB. Models without GQA can be several times larger.
-Key number: always compute KV cache from layers, KV heads, head dimension, and precision.}
+Key number: always compute KV cache from layers, KV heads, head dimension, and precision.
+```
 
-[T]
-  
-    **KV Cache grows with every token:**
-
-    {0.15cm}
-    {
-    {}{1.15}
-    {tabular}{@{}lrr@{}}
-      
-      **Scenario** & **KV Cache** & **vs.\ FP16 weights** \\
-      
-      Llama-70B, batch 1, 640 tok & 210 MB & 0.002$×$ \\
-      Llama-70B, batch 8, 8K tok & 21 GB & 0.15$×$ \\
-      Llama-70B, batch 32, 8K tok & **86 GB** & **0.6$×$** \\
-      
-    {tabular}
-    }
-
-    {0.15cm}
-    {{OOM risk:}{At batch 32 + 8K context, KV cache alone can overflow an 80\,GB GPU once weights and runtime overhead are included. Without GQA, it can exceed the weights.}}
-  
-  
-    {mlsyscard}{datastroke}
-    **Solutions**\\[0.1cm]
-    {
-    **PagedAttention:** Fixed-size memory pages, near-zero waste (OS virtual memory concept).\\[0.1cm]
-    **Prefix Caching:** Reuse KV states for shared system prompts.\\[0.1cm]
-    **KV Offloading:** Spill inactive contexts to CPU RAM or SSD.}
-    {mlsyscard}
+</details>
 
 ## Continuous Batching
 
-{[3 min] Walk through static vs continuous batching grids.
-Static: batch locked until longest request finishes, wasting 40% compute.
-Continuous: slots reused immediately, 95% utilization, 2-4x throughput.
-This is the key innovation enabling practical LLM serving (vLLM, TGI).}
+[Original slide 23](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L768)
 
-% --- Full-width diagram ---
+![[Assets/Sources/Harvard ML Systems/slides/vol1/13_model_serving/images/continuous-vs-static-batching.svg]]
 
-{continuous-vs-static-batching.pdf}
+Harvard Edge ML Systems Book contributors, [continuous-vs-static-batching.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/images/continuous-vs-static-batching.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
 
-{0.05cm}
-{vLLM innovation:}{Continuous batching + PagedAttention together achieve 2--4$×$ throughput over naive static batching.}
+**vLLM innovation:** Continuous batching + PagedAttention together achieve 2–4$\times$ throughput over naive static batching.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] Walk through static vs continuous batching grids.
+Static: batch locked until longest request finishes, wasting 40\% compute.
+Continuous: slots reused immediately, 95\% utilization, 2-4x throughput.
+This is the key innovation enabling practical LLM serving (vLLM, TGI).
+```
+
+</details>
 
 ## Node-Level Optimization
 
-{
+[Original slide 24](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L783)
+
+| **Technique** | **How It Works** | **When to Use** |
+| --- | --- | --- |
+| **MIG** | Partition 1 GPU into 7 instances | Multiple small models / right-size GPU slices |
+| **Tensor Parallelism** | Split layers across 2–8 GPUs via NVLink (900 GB/s) | Model $>$ 1 GPU memory |
+| **Speculative Decode** | Small draft model proposes, large model verifies | Decode-bound LLMs (2–3$\times$ speedup) |
+
+**Key:** Exhaust single-node optimizations **before** scaling to multiple nodes. NVLink (900 GB/s) $\gg$ network (400 Gbps = 50 GB/s).
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Continuous batching and PagedAttention optimize the software layer.
 This slide addresses the hardware layer: how to extract maximum throughput
@@ -691,25 +796,40 @@ when the model does not fit.
 [OPTIONAL] Supplements the core LLM serving content.
 IF AHEAD: ``What is the communication overhead of tensor parallelism?''
 IF SHORT: Name the three techniques with one sentence each, move on.
-}
+```
 
-{}{1.05}
-{tabular}{@{}lp{3.5cm}p{3.5cm}@{}}
-  
-  **Technique** & **How It Works** & **When to Use** \\
-  
-  **MIG** & Partition 1 GPU into 7 instances & Multiple small models / right-size GPU slices \\
-  **Tensor Parallelism** & Split layers across 2--8 GPUs via NVLink (900 GB/s) & Model $>$ 1 GPU memory \\
-  **Speculative Decode** & Small draft model proposes, large model verifies & Decode-bound LLMs (2--3$×$ speedup) \\
-  
-{tabular}
-
-{0.15cm}
-{Key:}{Exhaust single-node optimizations **before** scaling to multiple nodes. NVLink (900 GB/s) $$ network (400 Gbps = 50 GB/s).}
+</details>
 
 ## From Fixed to Variable: Why LLMs Change Everything
 
-{
+[Original slide 25](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L836)
+
+**Fixed-Size Inference**
+
+ResNet: batch of 8 images.
+
+All 8 finish simultaneously.
+
+GPU utilization: **high**.
+
+Batching strategy: straightforward.
+
+**Variable-Length Generation**
+
+LLM: batch of 8 prompts.
+
+Request A: 50 tokens. Request H: 500.
+
+GPU wastes **$\sim$90%** waiting.
+
+Static batching: catastrophic waste.
+
+**The problem:** Variable output lengths break fixed batching. **Continuous batching** fills slots as requests finish — the key innovation for practical LLM serving.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Students just learned batching strategies for fixed-size inputs (images).
 This slide bridges to LLM serving where outputs are variable-length.
@@ -719,7 +839,7 @@ This slide bridges to LLM serving where outputs are variable-length.
 A ResNet batch of 8 images: 8 identical forward passes, done. An LLM
 batch of 8 prompts: each generates a different number of tokens. Request
 A finishes in 50 tokens; Request H needs 500. Static batching wastes
-90% of compute waiting for the longest request.''
+90\% of compute waiting for the longest request.''
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
 Ask: ``If one request in a batch of 8 generates 10x more tokens than
@@ -734,56 +854,78 @@ calculus --- continuous batching exists to solve this specific problem.
 % -- FLEX: [CORE] Essential bridge between batching and LLM serving
 [CORE] Without this bridge, students will not understand why continuous
 batching is necessary. IF SHORT: State the key contrast in 30 seconds.
-}
+```
 
-{0.3cm}
-
-[T]
-  
-    {mlsyscard}{datastroke}
-    **Fixed-Size Inference**\\[0.1cm]
-    {
-    ResNet: batch of 8 images.\\
-    All 8 finish simultaneously.\\
-    GPU utilization: **high**.\\
-    Batching strategy: straightforward.}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{errorstroke}
-    **Variable-Length Generation**\\[0.1cm]
-    {
-    LLM: batch of 8 prompts.\\
-    Request A: 50 tokens. Request H: 500.\\
-    GPU wastes **$$90%** waiting.\\
-    Static batching: catastrophic waste.}
-    {mlsyscard}
-  
-
-{0.2cm}
-{The problem:}{Variable output lengths break fixed batching. **Continuous batching** fills slots as requests finish --- the key innovation for practical LLM serving.}
+</details>
 
 ## Discussion: The Decode Bottleneck
 
-{[3 min] Turn-and-talk. Students discuss in pairs for 90 seconds.
+[Original slide 26](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L896)
+
+Turn and Talk (90 seconds)
+
+An LLM generates tokens at 20 tok/s on an H100 (989 TFLOPS).
+
+You upgrade to a GPU with 2$\times$ compute but same memory bandwidth.
+
+**Does token generation speed double?**
+
+Hint: Is decode compute-bound or memory-bandwidth-bound?
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] Turn-and-talk. Students discuss in pairs for 90 seconds.
 Key insight: adding more FLOPS does NOT help decode because it is
 memory-bandwidth bound. Only faster memory or smaller models help.
-Cold-call 2--3 pairs.}
+Cold-call 2--3 pairs.
+```
 
-{0.5cm}
-{ Turn and Talk {midgray}{(90 seconds)}}
-
-{0.4cm}
-{ An LLM generates tokens at 20 tok/s on an H100 (989 TFLOPS).\\
-You upgrade to a GPU with 2$×$ compute but same memory bandwidth.\\[0.2cm]
-**Does token generation speed double?**}
-
-{0.3cm}
-{ Hint: Is decode compute-bound or memory-bandwidth-bound?}
+</details>
 
 ## Your Turn: Llama-3-70B Decode Throughput
 
-{
+[Original slide 27](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L917)
+
+LLM Decode Throughput
+
+Llama-3-70B at FP16:
+
+- Model weights: 70B $\times$ 2 B = **140 GB**
+- H100 HBM3 bandwidth: **3.35 TB/s**
+- Decode reads full model per token step
+
+**Calculate:**
+
+1. Max tok/s at batch=1?
+2. Max tok/s at batch=8?
+3. Why does batching help?
+
+(90 seconds — compare with a neighbor)
+
+**Solution:**
+
+**Batch=1:**
+
+$140\text{ GB} / 3.35\text{ TB/s} = 41.8$ ms/step
+
+$=$ **23.9 tok/s**
+
+**Batch=8:**
+
+Same 41.8 ms/step, but 8 tokens/step
+
+$=$ **191 tok/s** aggregate
+
+**Why:** Weights read once per step.
+
+Batch amortizes bandwidth cost.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The discussion established that decode is memory-bandwidth bound. This
 exercise forces students to calculate the exact throughput limit.
@@ -797,7 +939,7 @@ tok/s aggregate. The model weights are read once per step regardless of
 batch size --- batching amortizes the bandwidth cost.''
 
 % -- ENGAGE: Peer Instruction Protocol
-Present problem (30s). Individual calculation (60s). If 30--70%
+Present problem (30s). Individual calculation (60s). If 30--70\%
 correct: pair discussion (90s), re-vote.
 [Expected errors: students multiply bandwidth by batch size, or forget
 that batch=8 still reads weights only once per step.]
@@ -811,174 +953,172 @@ arithmetic intensity without increasing bandwidth demand.
 [CORE] The 23.9 tok/s number anchors Key Takeaways and cost analysis.
 IF AHEAD: ``At what batch size does this become compute-bound?''
 IF SHORT: Show the solution directly, skip peer discussion.
-}
+```
 
-[T]
-  
-    { LLM Decode Throughput}
-
-    {0.1cm}
-    Llama-3-70B at FP16:
-    {0pt}
-- Model weights: 70B $×$ 2 B = **140 GB**
-- H100 HBM3 bandwidth: **3.35 TB/s**
-- Decode reads full model per token step
-    
-
-    {0.1cm}
-    **Calculate:**
-    {0pt}
-- Max tok/s at batch=1?
-- Max tok/s at batch=8?
-- Why does batching help?
-    
-
-    {{midgray}{(90 seconds --- compare with a neighbor)}}
-  
-  
-    
-    {mlsyscard}{computestroke}
-    **Solution:**\\[0.05cm]
-    {
-    **Batch=1:**\\
-    $140{ GB} / 3.35{ TB/s} = 41.8$ ms/step\\
-    $= $ **23.9 tok/s**\\[0.08cm]
-    **Batch=8:**\\
-    Same 41.8 ms/step, but 8 tokens/step\\
-    $= $ **191 tok/s** aggregate\\[0.08cm]
-    {datastroke}{**Why:**} Weights read once per step.\\
-    Batch amortizes bandwidth cost.
-    }
-    {mlsyscard}
+</details>
 
 ## Training-Serving Skew
 
-{[3 min] Full-width diagram. Walk through specific examples of skew.
-PIL bilinear vs OpenCV bicubic resize alone can cause 0.5-1% accuracy drop.
+[Original slide 28](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L995)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/13_model_serving/images/training-serving-skew.svg]]
+
+Harvard Edge ML Systems Book contributors, [training-serving-skew.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/images/training-serving-skew.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Silent failure:** Same weights + different preprocessing = different predictions. 5% accuracy loss invisible to latency monitoring.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] Full-width diagram. Walk through specific examples of skew.
+PIL bilinear vs OpenCV bicubic resize alone can cause 0.5-1\% accuracy drop.
 The model weights are IDENTICAL. Standard monitoring catches nothing.
-This is the most insidious failure mode in serving.}
+This is the most insidious failure mode in serving.
+```
 
-% --- Full-width diagram ---
-
-{training-serving-skew.pdf}
-
-{0.1cm}
-{Silent failure:}{Same weights + different preprocessing = different predictions. 5% accuracy loss invisible to latency monitoring.}
+</details>
 
 ## Cold Start and Model Loading
 
-{[2 min] Cold start is not just loading weights. Graph compilation and
+[Original slide 29](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L1010)
+
+**Cold start = more than weight loading:**
+
+| **Phase** | **Time** |
+| --- | --- |
+| Container startup | 5–30 s |
+| Weight loading (CPU$\to$GPU) | 2–10 s |
+| Graph compilation / JIT | 5–60 s |
+| Memory allocation (KV cache) | 1–5 s |
+| Warmup inference | 1–5 s |
+| **Total cold start** | **15–110 s** |
+
+Original figure reference: ` server-rack-datacenter.jpg `.
+
+Production serving infrastructure. CC BY 2.0.
+
+**Mitigations:** model caching, pre-warming, serialized engines, keep-alive (never scale to zero).
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Cold start is not just loading weights. Graph compilation and
 memory allocation often take longer than the data transfer. Cloud cold start
-can be seconds to minutes. Mobile: milliseconds. TinyML: microseconds.}
+can be seconds to minutes. Mobile: milliseconds. TinyML: microseconds.
+```
 
-[T]
-  
-    {**Cold start = more than weight loading:**}
+</details>
 
-    {0.1cm}
-    {}{1.0}
-    {tabular}{@{}lr@{}}
-      
-      **Phase** & **Time** \\
-      
-      Container startup & 5--30 s \\
-      Weight loading (CPU$$GPU) & 2--10 s \\
-      Graph compilation / JIT & 5--60 s \\
-      Memory allocation (KV cache) & 1--5 s \\
-      Warmup inference & 1--5 s \\
-      
-      **Total cold start** & **15--110 s** \\
-      
-    {tabular}
-  
-  
-    {0.1cm}
-    {server-rack-datacenter.jpg}
+<details>
+<summary>Projection limits for this slide</summary>
 
-    {0.05cm}
-    {{midgray}{Production serving infrastructure. CC BY 2.0.}}
+- [server-rack-datacenter.jpg](https://raw.githubusercontent.com/harvard-edge/cs249r_book/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/images/server-rack-datacenter.jpg): raster source link retained; individual provenance not established.
 
-    {0.1cm}
-    {mlsyscard}{routingstroke}
-    {**Mitigations:** model caching, pre-warming, serialized engines, keep-alive (never scale to zero).}
-    {mlsyscard}
+</details>
 
 ## Inference Runtime Selection
 
-{[2 min] The runtime can vary by 10x in performance for the same model.
+[Original slide 30](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L1056)
+
+| **Runtime** | **Speedup** | **Pro** | **Con** |
+| --- | --- | --- | --- |
+| **Framework-native** (PyTorch, TF) | 1$\times$ (baseline) | Any model works | Training overhead |
+| **ONNX Runtime** | 2–3$\times$ | Cross-platform | Export step required |
+| **TensorRT** | 3–5$\times$ | Max GPU perf | NVIDIA-only |
+| **vLLM / TGI** | 2–4$\times$ (LLM) | Continuous batching | LLM-specific |
+
+**Key:** Runtime selection is as impactful as model architecture. TensorRT delivers 3–5$\times$ speedup = 3–5$\times$ fewer GPUs.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] The runtime can vary by 10x in performance for the same model.
 Walk through the three tiers: framework-native (simplest), ONNX (portable),
-TensorRT (fastest but vendor-locked). Each has clear tradeoffs.}
+TensorRT (fastest but vendor-locked). Each has clear tradeoffs.
+```
 
-{}{1.0}
-{tabular}{@{}lp{2.2cm}p{2.2cm}p{2.8cm}@{}}
-  
-  **Runtime** & **Speedup** & **Pro** & **Con** \\
-  
-  **Framework-native** (PyTorch, TF) & 1$×$ (baseline) & Any model works & Training overhead \\
-  **ONNX Runtime** & 2--3$×$ & Cross-platform & Export step required \\
-  **TensorRT** & 3--5$×$ & Max GPU perf & NVIDIA-only \\
-  **vLLM / TGI** & 2--4$×$ (LLM) & Continuous batching & LLM-specific \\
-  
-{tabular}
-
-{0.1cm}
-{Key:}{Runtime selection is as impactful as model architecture. TensorRT delivers 3--5$×$ speedup = 3--5$×$ fewer GPUs.}
+</details>
 
 ## Precision Selection for Serving
 
-{[2 min] Extend the quantization concepts from Ch10 into serving.
-INT8 gives  3x throughput over FP32 with careful calibration.
+[Original slide 31](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L1079)
+
+| **Precision** | **Bytes** | **Throughput** | **Accuracy Risk** | **Use Case** |
+| --- | --- | --- | --- | --- |
+| FP32 | 4 B | 1$\times$ | None | Debugging, reference |
+| FP16 / BF16 | 2 B | $\sim$2$\times$ | Minimal | Safe default for serving |
+| INT8 | 1 B | $\sim$3$\times$ | Low–moderate | Cost-sensitive, validated |
+| INT4 | 0.5 B | $\sim$5$\times$ | Moderate–high | Research, edge |
+
+**Calibration pitfall:** Calibrate with **production traffic**, not training data. Distribution mismatch invalidates quantization.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Extend the quantization concepts from Ch10 into serving.
+INT8 gives ~3x throughput over FP32 with careful calibration.
 Key pitfall: calibrate with PRODUCTION traffic, not training data.
-FP16/BF16 is the safe default; INT8 requires validation.}
+FP16/BF16 is the safe default; INT8 requires validation.
+```
 
-{}{1.0}
-{tabular}{@{}lrrrr@{}}
-  
-  **Precision** & **Bytes** & **Throughput** & **Accuracy Risk** & **Use Case** \\
-  
-  FP32 & 4 B & 1$×$ & None & Debugging, reference \\
-  FP16 / BF16 & 2 B & $$2$×$ & Minimal & Safe default for serving \\
-  INT8 & 1 B & $$3$×$ & Low--moderate & Cost-sensitive, validated \\
-  INT4 & 0.5 B & $$5$×$ & Moderate--high & Research, edge \\
-  
-{tabular}
-
-{0.05cm}
-
-{Calibration pitfall:}{Calibrate with **production traffic**, not training data. Distribution mismatch invalidates quantization.}
+</details>
 
 ## Serving Economics: Llama-3-8B Case Study
 
-{[3 min] Concrete cost analysis. Walk through the numbers for serving
+[Original slide 32](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L1104)
+
+**Serving Llama-3-8B on H100 (&#36;4/hour)**
+
+| **Config** | **Precision** | **Throughput** | **Cost/M tokens** | **Savings** |
+| --- | --- | --- | --- | --- |
+| Naive (batch=1, PyTorch) | FP16 | 50 tok/s | &#36;22.22 | — |
+| + TensorRT | FP16 | 150 tok/s | &#36;7.41 | 3.0$\times$ |
+| + INT8 quantization | INT8 | 400 tok/s | &#36;2.78 | 8.0$\times$ |
+| + Dynamic batching (b=32) | INT8 | 1,200 tok/s | &#36;0.93 | **24$\times$** |
+
+**Key:** Runtime (3$\times$) + quantization (2.7$\times$) + batching (3$\times$) = **24$\times$ cost reduction** on the same GPU.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] Concrete cost analysis. Walk through the numbers for serving
 Llama-3-8B on an H100. Key takeaways: INT8 halves cost, batching halves it
 again. Runtime + precision choices directly determine financial viability.
-The intelligence deflation trend makes margins tighter every year.}
+The intelligence deflation trend makes margins tighter every year.
+```
 
-**Serving Llama-3-8B on H100 (\$4/hour)**
-
-{0.05cm}
-{}{1.0}
-{
-{tabular}{@{}llrrr@{}}
-  
-  **Config** & **Precision** & **Throughput** & **Cost/M tokens** & **Savings** \\
-  
-  Naive (batch=1, PyTorch) & FP16 & 50 tok/s & \$22.22 & --- \\
-  + TensorRT & FP16 & 150 tok/s & \$7.41 & 3.0$×$ \\
-  + INT8 quantization & INT8 & 400 tok/s & \$2.78 & 8.0$×$ \\
-  + Dynamic batching (b=32) & INT8 & 1,200 tok/s & \$0.93 & **24$×$** \\
-  
-{tabular}
-}
-
-{0.1cm}
-{Key:}{Runtime (3$×$) + quantization (2.7$×$) + batching (3$×$) = **24$×$ cost reduction** on the same GPU.}
+</details>
 
 ## War Story: The Inference Tax at Facebook (1/2)
 
-{[1 min]
+[Original slide 33](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L1133)
+
+**Hazelwood et al. (2018): ML at Facebook's Fleet Scale**
+
+**Context**
+
+News Feed, Ads, Search, image understanding, face recognition — every user-facing surface.
+
+Inference: **tens of trillions of ops/day** under tail-latency targets.
+
+A one-hour-old ranking model measurably degraded News Feed quality.
+
+**Systems lesson**
+
+Training creates the model; serving pays the **recurring bill**. Co-design models, accelerators, memory systems, and serving platforms — never treat serving as an afterthought.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[1 min]
 % -- LINK: What prior concept connects to this slide
-The previous slide showed that serving costs can drop 24$×$ with the right
+The previous slide showed that serving costs can drop 24$\times$ with the right
 stack. This slide grounds that economic imperative in a real fleet at
 billion-user scale, from the chapter's only formal war-story callout.
 
@@ -1005,27 +1145,31 @@ in isolation.
 % -- FLEX: [CORE] First half of war story.
 IF SHORT: State the headline numbers (tens of trillions of ops/day) and
 the systems lesson, then advance to the next slide.
-}
+```
 
-**Hazelwood et al. (2018): ML at Facebook's Fleet Scale**
-
-{0.2cm}
-{mlsyscard}{errorstroke}
-**Context**\\[0.08cm]
-{ News Feed, Ads, Search, image understanding, face recognition --- every user-facing surface.\\[0.05cm]
-Inference: **tens of trillions of ops/day** under tail-latency targets.\\[0.05cm]
-A one-hour-old ranking model measurably degraded News Feed quality.}
-{mlsyscard}
-
-{0.2cm}
-{mlsyscard}{datastroke}
-**Systems lesson**\\[0.08cm]
-{ Training creates the model; serving pays the **recurring bill**. Co-design models, accelerators, memory systems, and serving platforms --- never treat serving as an afterthought.}
-{mlsyscard}
+</details>
 
 ## War Story: The Inference Tax at Facebook (2/2)
 
-{[1 min]
+[Original slide 34](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L1184)
+
+**Intelligence Deflation: The Cost Curve Never Stops**
+
+**Public API token prices (log scale)**
+
+- 2020: **&#36;20** / M tokens (GPT-3)
+- 2023: **&#36;2** / M tokens
+- 2025: **$<$&#36;0.10** / M tokens
+
+$\approx$**5.8$\times$ per 18 months** — Every efficiency gain opens new applications (Jevons Paradox); the serving engineer's job never ends.
+
+**Economic law:** Training is a one-time cost. Serving is the recurring bill. At fleet scale, serving efficiency determines financial viability.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[1 min]
 % -- LINK: What prior concept connects to this slide
 The prior slide established the scale: tens of trillions of ops/day.
 This slide shows that the cost pressure never relents --- intelligence
@@ -1034,7 +1178,7 @@ deflation makes serving efficiency a permanent business constraint.
 % -- NARRATE: What to SAY while showing this slide
 Point to the intelligence deflation card: ``Public API token prices have
 collapsed from \$20 per million tokens in 2020 to under \$0.10 in
-2025---a roughly 5.8$×$ drop per 18-month period. Every efficiency
+2025---a roughly 5.8$\times$ drop per 18-month period. Every efficiency
 gain opens new applications (Jevons Paradox); the serving engineer's job
 never ends.''
 
@@ -1048,160 +1192,256 @@ IF AHEAD: ``What specific model-architecture choice would you change to
 reduce the inference tax?'' (Expected: smaller embeddings, quantization,
 reduced request rate via caching.)
 IF SHORT: State the headline numbers and advance.
-}
+```
 
-**Intelligence Deflation: The Cost Curve Never Stops**
-
-{0.1cm}
-{mlsyscard}{routingstroke}
-**Public API token prices (log scale)**\\[0.05cm]
-{
-{0pt}
-- 2020: **\$20** / M tokens (GPT-3)
-- 2023: **\$2** / M tokens
-- 2025: **$<$\$0.10** / M tokens
-
-{0.03cm}
-$$**5.8$×$ per 18 months** --- Every efficiency gain opens new applications (Jevons Paradox); the serving engineer's job never ends.}
-{mlsyscard}
-
-{0.1cm}
-{Economic law:}{Training is a one-time cost. Serving is the recurring bill. At fleet scale, serving efficiency determines financial viability.}
+</details>
 
 ## Fallacies
 
-{[2 min] Four common misconceptions with quantitative evidence.}
+[Original slide 35](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L1235)
 
-**Fallacy:** *Reducing model inference latency proportionally reduces user-perceived latency.*\\
-{ At 80% utilization, queuing wait = 20 ms on top of 5 ms inference. A 2.5$×$ model speedup yields 8.5$×$ system speedup due to nonlinear queuing effects.}
+**Fallacy:** *Reducing model inference latency proportionally reduces user-perceived latency.*
 
-{0.1cm}
-**Fallacy:** *Training accuracy guarantees serving accuracy.*\\
-{ PIL vs.\ OpenCV resize alone shifts accuracy by 0.5--1%. A model at 95% validation drops to 90% in production from preprocessing mismatches --- invisible to latency monitoring.}
+At 80% utilization, queuing wait = 20 ms on top of 5 ms inference. A 2.5$\times$ model speedup yields 8.5$\times$ system speedup due to nonlinear queuing effects.
 
-{0.1cm}
-**Fallacy:** *Larger serving batches always improve throughput.*\\
-{ Beyond the optimal batch size, queuing delay exceeds throughput gains. The SLO sets a hard ceiling: batch=64 may maximize throughput but violate the 50 ms p99 target.}
+**Fallacy:** *Training accuracy guarantees serving accuracy.*
+
+PIL vs. OpenCV resize alone shifts accuracy by 0.5–1%. A model at 95% validation drops to 90% in production from preprocessing mismatches — invisible to latency monitoring.
+
+**Fallacy:** *Larger serving batches always improve throughput.*
+
+Beyond the optimal batch size, queuing delay exceeds throughput gains. The SLO sets a hard ceiling: batch=64 may maximize throughput but violate the 50 ms p99 target.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Four common misconceptions with quantitative evidence.
+```
+
+</details>
 
 ## Pitfalls
 
-{[2 min] Three operational pitfalls.}
+[Original slide 36](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L1252)
 
-**Pitfall:** *Running serving infrastructure at high utilization for cost efficiency.*\\
-70%$$90% utilization saves $$22% cost but **triples latency**. p99 jumps from $$77 ms to $$230 ms.
+**Pitfall:** *Running serving infrastructure at high utilization for cost efficiency.*
 
-{0.08cm}
-**Pitfall:** *Using average latency to evaluate serving performance.*\\
-At 70% utilization, mean = $$17 ms but p99 = $$77 ms (4.6$×$ gap). Average dashboards mask 1-in-100 user experience.
+70%$\to$90% utilization saves $\sim$22% cost but **triples latency**. p99 jumps from $\sim$77 ms to $\sim$230 ms.
 
-{0.08cm}
-**Pitfall:** *Calibrating quantized models with training data rather than production traffic.*\\
-INT8 models calibrated on training data can lose 2--5% accuracy on production inputs with different dynamic ranges.
+**Pitfall:** *Using average latency to evaluate serving performance.*
 
-{0.08cm}
-**Pitfall:** *Cold start latency only matters for the first request.*\\
-During traffic spikes, new instances must warm up simultaneously. TensorRT compilation alone takes 30--120 s per instance; 10 new instances warming in parallel means every request to cold replicas sees 10--100$×$ steady-state latency precisely when traffic is highest.
+At 70% utilization, mean = $\sim$17 ms but p99 = $\sim$77 ms (4.6$\times$ gap). Average dashboards mask 1-in-100 user experience.
+
+**Pitfall:** *Calibrating quantized models with training data rather than production traffic.*
+
+INT8 models calibrated on training data can lose 2–5% accuracy on production inputs with different dynamic ranges.
+
+**Pitfall:** *Cold start latency only matters for the first request.*
+
+During traffic spikes, new instances must warm up simultaneously. TensorRT compilation alone takes 30–120 s per instance; 10 new instances warming in parallel means every request to cold replicas sees 10–100$\times$ steady-state latency precisely when traffic is highest.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Three operational pitfalls.
+```
+
+</details>
 
 ## Muddiest Point
 
-{[1 min] One-minute paper. Collect responses (physical or digital).
-Use responses to open the NEXT lecture with targeted clarification.
-Angelo & Cross (1993) --- powerful diagnostic tool.}
+[Original slide 37](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L1274)
 
- One-minute paper\\[0.5cm]
- Write down the **muddiest point** from today's lecture.\\[0.2cm]
-{ What concept was most confusing or unclear?}\\[0.5cm]
-{{midgray}{(Hand in on your way out --- or submit digitally)}}
+One-minute paper
+
+ Write down the **muddiest point** from today's lecture.
+
+What concept was most confusing or unclear?
+
+(Hand in on your way out — or submit digitally)
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[1 min] One-minute paper. Collect responses (physical or digital).
+Use responses to open the NEXT lecture with targeted clarification.
+Angelo \& Cross (1993) --- powerful diagnostic tool.
+```
+
+</details>
 
 ## What Were the Key Ideas?
 
-{[2 min] Retrieval practice. Students write 90 seconds, no notes.}
+[Original slide 38](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L1287)
 
-{1.5cm}
-{ Close your notes.}
+Close your notes.
 
-{0.8cm}
-{ Write down the **4 most important concepts** from today.}
+Write down the **4 most important concepts** from today.
 
-{0.8cm}
-{{midgray}{90 seconds --- no peeking.}}
+90 seconds — no peeking.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Retrieval practice. Students write 90 seconds, no notes.
+```
+
+</details>
 
 ## Key Takeaways
 
-{[2 min] Reveal. Walk through each bullet. Emphasize quantitative anchors:
-4.4x batching, 24x optimization stack, 3.3x queuing at 70%, 5% skew loss.}
+[Original slide 39](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L1302)
 
-{0pt}
-- **Serving inverts training**: Throughput $$ latency. Saturation $$ headroom. Volume $$ freshness.
-- **Preprocessing dominates**: When inference is fast (5 ms), preprocessing consumes 45--70% of total latency. Optimize the pipeline.
-- **Queuing theory governs capacity**: At 80% util, wait = 5$×$ service time. At 90%, 10$×$. The knee at $$70% sets the ceiling.
+- **Serving inverts training**: Throughput $\to$ latency. Saturation $\to$ headroom. Volume $\to$ freshness.
+- **Preprocessing dominates**: When inference is fast (5 ms), preprocessing consumes 45–70% of total latency. Optimize the pipeline.
+- **Queuing theory governs capacity**: At 80% util, wait = 5$\times$ service time. At 90%, 10$\times$. The knee at $\sim$70% sets the ceiling.
 - **Batching follows traffic**: Poisson arrivals use dynamic batching; streaming sensors use synchronized batches; mobile eliminates batching.
 - **Training-serving skew**: Different preprocessing causes 5% accuracy loss invisible to standard monitoring. Use identical code paths.
-- **LLM serving is memory-BW bound**: Decode reads entire model per token. Continuous batching + PagedAttention = 2--4$×$ throughput.
-- **Runtime + precision = cost**: TensorRT + INT8 + batching = 24$×$ cost reduction on identical hardware.
-- **Serving is the recurring bill**: Training is a one-time cost; serving pays forever. Intelligence deflation ($$5.8$×$/18 months) means margins tighten continuously --- serving efficiency is a business imperative.
+- **LLM serving is memory-BW bound**: Decode reads entire model per token. Continuous batching + PagedAttention = 2–4$\times$ throughput.
+- **Runtime + precision = cost**: TensorRT + INT8 + batching = 24$\times$ cost reduction on identical hardware.
+- **Serving is the recurring bill**: Training is a one-time cost; serving pays forever. Intelligence deflation ($\approx$5.8$\times$/18 months) means margins tighten continuously — serving efficiency is a business imperative.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Reveal. Walk through each bullet. Emphasize quantitative anchors:
+4.4x batching, 24x optimization stack, 3.3x queuing at 70\%, 5\% skew loss.
+```
+
+</details>
 
 ## References
 
-{[1 min] Point students to canonical papers.}
+[Original slide 40](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L1320)
 
-{Kwon+23}{Kwon et al. ``Efficient Memory Management for LLM Serving with PagedAttention.'' SOSP 2023.}
-{Yu+22}{Yu et al. ``Orca: A Distributed Serving System for Transformer-Based Models.'' OSDI 2022.}
-{Barroso+17}{Barroso, Clidaras, H\"{o}lzle. *The Datacenter as a Computer.* 3rd ed., 2017.}
-{Dean+13}{Dean & Barroso. ``The Tail at Scale.'' CACM, 2013.}
-{Crankshaw+17}{Crankshaw et al. ``Clipper: A Low-Latency Online Prediction Serving System.'' NSDI 2017.}
-{Hazelwood+18}{Hazelwood et al. ``Applied Machine Learning at Facebook: A Datacenter Infrastructure Perspective.'' HPCA 2018.}
-{MLPerf}{MLCommons. MLPerf Inference Benchmark Suite.}
+**Kwon+23** Kwon et al. “Efficient Memory Management for LLM Serving with PagedAttention.” SOSP 2023.
+
+**Yu+22** Yu et al. “Orca: A Distributed Serving System for Transformer-Based Models.” OSDI 2022.
+
+**Barroso+17** Barroso, Clidaras, Hölzle. *The Datacenter as a Computer.* 3rd ed., 2017.
+
+**Dean+13** Dean & Barroso. “The Tail at Scale.” CACM, 2013.
+
+**Crankshaw+17** Crankshaw et al. “Clipper: A Low-Latency Online Prediction Serving System.” NSDI 2017.
+
+**Hazelwood+18** Hazelwood et al. “Applied Machine Learning at Facebook: A Datacenter Infrastructure Perspective.” HPCA 2018.
+
+**MLPerf** MLCommons. MLPerf Inference Benchmark Suite.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[1 min] Point students to canonical papers.
+```
+
+</details>
 
 ## Next Lecture: ML Operations
 
-{[1 min] Forward hook. A single node is fragile. Models drift.
+[Original slide 41](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L1334)
+
+CI/CD
+
+Automated testing, canary deploys, rollback
+
+Monitoring
+
+Detect drift, accuracy decay, data quality
+
+Feature Stores
+
+Consistent features across train and serve
+
+From the single node to the **full system lifecycle**.
+
+How do we keep production ML systems running reliably through crashes, drift, and continuous updates?
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[1 min] Forward hook. A single node is fragile. Models drift.
 Deployments must roll out without downtime. Monitoring must detect silent
-degradation. Ch14 scales from the single request to the full system lifecycle.}
+degradation. Ch14 scales from the single request to the full system lifecycle.
+```
 
-[c]
-  
-    
-    {mlsyscard}{computestroke}
-    { CI/CD}\\[0.05cm]
-    { Automated testing, canary deploys, rollback}
-    {mlsyscard}
-  
-  
-    
-    {mlsyscard}{datastroke}
-    { Monitoring}\\[0.05cm]
-    { Detect drift, accuracy decay, data quality}
-    {mlsyscard}
-  
-  
-    
-    {mlsyscard}{errorstroke}
-    { Feature Stores}\\[0.05cm]
-    { Consistent features across train and serve}
-    {mlsyscard}
-  
-
-{0.2cm}
-
-{ From the single node to the **full system lifecycle**.}\\[0.05cm]
-{ How do we keep production ML systems running reliably through crashes, drift, and continuous updates?}
+</details>
 
 ## Backup: M/M/1 Queuing Worked Example
 
-{Use for additional depth or if students need alternative explanation.}
+[Original slide 42](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L1377)
 
-Use if students struggle with the queuing theory calculations.\ Service time: 5 ms ($ = 200$ req/s). Arrival rate: 140 req/s.\\ $ = 140/200 = 0.70$.\\ $W_q = {0.70}{1 - 0.70} × 5 = 11.7$ ms.\\ Total: $11.7 + 5 = 16.7$ ms.\\ p99 $ 4.6 × 16.7 = 77$ ms.
+Use if students struggle with the queuing theory calculations.
+
+small Service time: 5 ms ($\mu = 200$ req/s). Arrival rate: 140 req/s.
+
+ $\rho = 140/200 = 0.70$.
+
+ $W_q = \frac{0.70}{1 - 0.70} \times 5 = 11.7$ ms.
+
+ Total: $11.7 + 5 = 16.7$ ms.
+
+ p99 $\approx 4.6 \times 16.7 = 77$ ms.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+Use for additional depth or if students need alternative explanation.
+```
+
+</details>
 
 ## Backup: Continuous Batching Mechanics
 
-{Use for additional depth or if students need alternative explanation.}
+[Original slide 43](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L1383)
 
-Use if students want deeper understanding of vLLM.\ Static batching: all requests start and end together. Wasted compute on padding.\\ Continuous batching: when a request finishes, its slot is immediately filled.\\ PagedAttention: KV cache stored in fixed-size pages (like OS virtual memory).\\ Combined: 2--4$×$ throughput improvement over naive batching.
+Use if students want deeper understanding of vLLM.
 
-## Backup: Cold Start --- The Problem
+small Static batching: all requests start and end together. Wasted compute on padding.
 
-{
+ Continuous batching: when a request finishes, its slot is immediately filled.
+
+ PagedAttention: KV cache stored in fixed-size pages (like OS virtual memory).
+
+ Combined: 2–4$\times$ throughput improvement over naive batching.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+Use for additional depth or if students need alternative explanation.
+```
+
+</details>
+
+## Backup: Cold Start — The Problem
+
+[Original slide 44](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L1389)
+
+**Cold Start Timeline (Llama-3-70B on H100):**
+
+| **Phase** | **Time** | **Bottleneck** |
+| --- | --- | --- |
+| Container pull + startup | 10–30 s | Network + CPU |
+| Weight deserialization (140 GB) | 5–15 s | PCIe / NVLink |
+| Graph compilation (TensorRT) | 30–120 s | CPU |
+| KV cache pre-allocation | 2–5 s | GPU memory |
+| Warmup inference (compile kernels) | 3–10 s | GPU |
+| **Total** | **50–180 s** |  |
+
+**Key:** Graph compilation is often the longest phase — not weight loading. Serialized engines (TensorRT plan files) skip this step entirely.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: Expanded cold start timeline for deeper discussion
 Walk through each phase: container pull, weight deserialization, graph
 compilation (often the longest), memory pre-allocation, warmup inference.
@@ -1209,83 +1449,75 @@ The total can exceed 2 minutes for large LLMs.
 
 % -- FLEX: [OPTIONAL] Pull if students want more detail on cold start
 [OPTIONAL] Use when the main Cold Start slide felt too compressed.
-}
+```
 
-**Cold Start Timeline (Llama-3-70B on H100):**
+</details>
 
-{0.1cm}
+## Backup: Cold Start — The Solutions
 
-{}{1.1}
-{tabular}{@{}lrl@{}}
-  
-  **Phase** & **Time** & **Bottleneck** \\
-  
-  Container pull + startup & 10--30 s & Network + CPU \\
-  Weight deserialization (140 GB) & 5--15 s & PCIe / NVLink \\
-  Graph compilation (TensorRT) & 30--120 s & CPU \\
-  KV cache pre-allocation & 2--5 s & GPU memory \\
-  Warmup inference (compile kernels) & 3--10 s & GPU \\
-  
-  **Total** & **50--180 s** & \\
-  
-{tabular}
+[Original slide 45](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L1423)
 
-{0.1cm}
-{Key:}{Graph compilation is often the longest phase --- not weight loading. Serialized engines (TensorRT plan files) skip this step entirely.}
+**Cold Start Mitigations:**
 
-## Backup: Cold Start --- The Solutions
+| **Strategy** | **How It Works** | **Savings** |
+| --- | --- | --- |
+| **Pre-warming** | Keep $N$ instances always hot | 100% (no cold start) |
+| **Model caching** | Cache weights on local NVMe SSD | 80% of load time |
+| **Serialized engines** | Pre-compiled TensorRT plans | Skip 30–120 s compile |
+| **Keep-alive** | Never scale to zero | 100% (no cold start) |
+| **Predictive scaling** | Scale up before traffic spike | Depends on prediction |
 
-{
+**Trade-off:** Pre-warming and keep-alive eliminate cold start but cost money during idle periods. Model caching is the best compromise for bursty traffic.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: Mitigation strategies organized by effectiveness
 Pre-warming keeps instances hot. Model caching avoids re-downloading.
 Serialized engines skip compilation. Keep-alive prevents scale-to-zero.
 
 % -- FLEX: [OPTIONAL] Pull alongside the Cold Start Problem slide
 [OPTIONAL] Pair with the previous backup for a complete cold start module.
-}
+```
 
-**Cold Start Mitigations:**
+</details>
 
-{0.1cm}
+## Backup: Tail at Scale — Hedged Requests Worked Example
 
-{}{1.1}
-{tabular}{@{}lp{4cm}r@{}}
-  
-  **Strategy** & **How It Works** & **Savings** \\
-  
-  **Pre-warming** & Keep $N$ instances always hot & 100% (no cold start) \\
-  **Model caching** & Cache weights on local NVMe SSD & 80% of load time \\
-  **Serialized engines** & Pre-compiled TensorRT plans & Skip 30--120 s compile \\
-  **Keep-alive** & Never scale to zero & 100% (no cold start) \\
-  **Predictive scaling** & Scale up before traffic spike & Depends on prediction \\
-  
-{tabular}
+[Original slide 46](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/13_model_serving/13_model_serving.tex#L1454)
 
-{0.1cm}
-{Trade-off:}{Pre-warming and keep-alive eliminate cold start but cost money during idle periods. Model caching is the best compromise for bursty traffic.}
+Use if students want to calculate hedged request improvements.
 
-## Backup: Tail at Scale --- Hedged Requests Worked Example
+**Without hedging:**
 
-{
+$P(\text{slow}) = 0.01$. p99 = 50 ms.
+
+**With hedging (2 replicas):**
+
+$P(\text{both slow}) = 0.01^2 = 0.0001$
+
+Effective p99.99 = 50 ms. Effective p99 $\approx$ 10 ms.
+
+**Cost:** 2$\times$ requests. **Benefit:** 5$\times$ better tail latency.
+
+Net: hedging is almost always worth it when tail latency matters.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: Concrete hedged request calculation
 Service time: 5 ms (p50), 50 ms (p99). Without hedging: p99 = 50 ms.
-With hedging (send to 2 replicas): p99 = $P({both slow}) = 0.01^2
+With hedging (send to 2 replicas): p99 = $P(\text{both slow}) = 0.01^2
 = 0.0001$. Effective p99 drops from 50 ms to approximately 10 ms.
 Cost: 2x requests but 5x better tail.
 
 % -- FLEX: [OPTIONAL] Pull for deeper Tail at Scale discussion
 [OPTIONAL] Use if the war story generated strong student interest.
-}
+```
 
-Use if students want to calculate hedged request improvements.\\
-
-**Without hedging:**\\
-$P({slow}) = 0.01$. p99 = 50 ms.\\[0.1cm]
-**With hedging (2 replicas):**\\
-$P({both slow}) = 0.01^2 = 0.0001$\\
-Effective p99.99 = 50 ms. Effective p99 $$ 10 ms.\\[0.1cm]
-**Cost:** 2$×$ requests. **Benefit:** 5$×$ better tail latency.\\
-Net: hedging is almost always worth it when tail latency matters.
+</details>
 
 ## Complete original Beamer source
 

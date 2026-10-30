@@ -3,214 +3,329 @@ title: "LLaMA"
 aliases: [Llama, LLaMA-1]
 type: concept
 status: legacy
+last_verified: 2026-10-22
 category: Architectures
 papers:
   - "[[02 Areas/ML & DL/Papers/LLaMA]]"
   - "[[02 Areas/ML & DL/Papers/LLaMA 2]]"
 courses: []
 sources:
-  - "[Sebastian Raschka — The Big LLM Architecture Comparison](https://magazine.sebastianraschka.com/p/the-big-llm-architecture-comparison)"
-  - "[Lilian Weng — The Transformer Family v2](https://lilianweng.github.io/posts/2023-01-27-the-transformer-family-v2/)"
-  - "[d2l.ai — Large-Scale Pretraining with Transformers](https://d2l.ai/chapter_attention-mechanisms-and-transformers/large-pretraining-transformers.html)"
+  - https://arxiv.org/abs/2302.13971v1
+  - https://github.com/meta-llama/llama/blob/1076b9c51c77ad06e9d7ba8a4c6df775741732bd/llama/model.py
 ---
 
 # LLaMA — Open and Efficient Foundation Language Models
 
-## Зачем это нужно: inference-budget-optimal scaling
+Исходная LLaMA 2023 года — causal decoder-only Transformer
+с RMSNorm, SwiGLU и RoPE. Она предсказывает следующий токен,
+не имеет отдельного encoder и использует MHA во всех четырёх
+размерах. Последующие Llama меняют конфигурации и обучение;
+их свойства нельзя автоматически приписывать первому выпуску.
 
-К началу 2023 года ландшафт LLM выглядел так:
-- **GPT-3** (175B, OpenAI) — закрытый, дорогой в inference
-- **PaLM** (540B, Google) — закрытый, ещё дороже
-- **Chinchilla** (70B, DeepMind) — показал, что меньшая модель на большем количестве данных лучше, но тоже закрытый
-- **OPT** (175B, Meta) — открытый, но не конкурентоспособный с PaLM/Chinchilla
+Последовательный разбор и исполняемые примеры:
+[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура|глава LLaMA]].
+Таблицы результатов и протоколы:
+[[02 Areas/ML & DL/Papers/LLaMA|заметка о статье]].
 
-**Hoffmann et al. (2022) — Chinchilla scaling laws** установили: для фиксированного training compute бюджета оптимально обучать модель, где число параметров и число токенов масштабируются пропорционально. Для 175B модели оптимум — ~3.5T токенов (GPT-3 обучен только на 300B — **в 10x меньше оптимума**).
+<span id="зачем-это-нужно-inference-budget-optimal-scaling"></span>
 
-Но Touvron et al. (2023) заметили фундаментальный недостаток Chinchilla: **она оптимизирует training budget, а не inference budget**. На практике модель обучается один раз, но используется миллиарды раз. Поэтому **лучше обучить меньшую модель на большем количестве токенов** — она дешевле при inference.
+## Обучение с учётом последующего вывода
 
-Результат: **LLaMA-13B превосходит GPT-3 (175B) на большинстве бенчмарков** — при 13x меньшем размере и возможности inference на **одном GPU**.
+Оптимизация предобучения при фиксированном бюджете отвечает,
+какие размер модели и число токенов выбрать для этого бюджета.
+Если модель потом многократно генерирует текст, появляется
+другая статья расходов. При требуемом качестве может оказаться
+выгоднее дольше обучать меньшую модель, чтобы сократить
+вычисления каждого последующего запуска (§1 LLaMA).
 
-## Архитектура: три ключевых улучшения
+Это мотив исследования, а не доказательство оптимальности
+любого маленького checkpoint. Введение сопоставляет рекомендацию
+10B на 200B токенов с наблюдением о продолжающемся улучшении
+7B после 1T. Оно не устанавливает точный оптимум 200B для 7B
+и не задаёт универсальное отношение токенов к параметрам.
 
-LLaMA = стандартный decoder-only [[02 Areas/ML & DL/Concepts/Architectures/Transformer|Transformer]] + три модификации, каждая заимствованная из успешных предшественников:
+Модель с меньшим числом весов может требовать меньше памяти,
+но задержка также зависит от оборудования, пакета, длины входа,
+KV-cache и реализации. Отношение 175B/13B не означает,
+что конкретный сервис ускорится в 13 раз.
 
-### 1. Pre-normalization с RMSNorm (от GPT-3)
+<span id="архитектура-три-ключевых-улучшения"></span>
 
-Оригинальный Transformer использует **Post-LN**: $\text{LayerNorm}(x + \text{Sublayer}(x))$. GPT-3 переключился на **Pre-LN**: $x + \text{Sublayer}(\text{Norm}(x))$ — это стабильнее при большом масштабе, т.к. residual stream не проходит через нормализацию.
+## Устройство блока
 
-LLaMA заменяет LayerNorm на **RMSNorm** (Zhang & Sennrich, 2019):
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/llama-2026-10-22/cs336-prenorm-block.png]]
 
-$$\text{RMSNorm}(x) = \frac{x}{\sqrt{\frac{1}{d}\sum_{i=1}^{d} x_i^2}} \cdot \gamma$$
+*Stanford CS336 Staff, Assignment 1 Version 26.0.3,
+[Figure 2, с. 13](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf#page=13).
+Оригинальная учебная схема pre-norm блока с RoPE и SwiGLU, MIT.
+Это схема курса, не рисунок из статьи LLaMA.*
 
-**Зачем RMSNorm вместо LayerNorm?** RMSNorm убирает mean-centering (вычитание среднего) — остаётся только масштабирование по RMS. Это быстрее (меньше операций) и эмпирически работает не хуже. Нет bias correction членов ($\beta = 0$).
+На входе и выходе блока остаётся одна ширина вектора.
+Нормализация готовит вход attention, его выход прибавляется
+к исходному состоянию. Другая RMSNorm готовит вход FFN,
+а выход FFN прибавляется к результату первого сложения.
+Веса двух норм и веса разных блоков раздельные.
 
-### 2. SwiGLU activation (от PaLM)
+<span id="1-pre-normalization-с-rmsnorm-от-gpt-3"></span>
 
-Оригинальный Transformer FFN: $\text{FFN}(x) = \text{ReLU}(xW_1 + b_1)W_2 + b_2$ с hidden dim = $4d$.
+### Pre-norm и RMSNorm
 
-LLaMA заменяет ReLU на **SwiGLU** (Shazeer, 2020):
+Положение нормы и её формула — разные решения.
+GPT-2/3 используют pre-norm с LayerNorm. В LLaMA
+применяется pre-norm с RMSNorm Zhang и Sennrich.
 
-$$\text{SwiGLU}(x, W, V, W_2) = (\text{Swish}(xW) \odot (xV)) \cdot W_2$$
+RMSNorm не вычитает среднее: вектор (1,2,2) делится
+на √3 и даёт примерно (0.5774,1.1547,1.1547)
+до обучаемого масштаба. В реализации к среднему квадрату
+прибавляется epsilon, затем каждая координата умножается
+на собственный обучаемый gain.
 
-где $\text{Swish}(x) = x \cdot \sigma(x)$, а $\odot$ — поэлементное умножение.
+При нулевом epsilon положительное масштабирование всего
+вектора не меняет нормализованный результат. Сдвиг всех
+координат меняет его, отрицательное масштабирование меняет
+знак, а около нуля epsilon уже нельзя игнорировать.
+Исходный код вычисляет статистику в FP32, чтобы избежать,
+например, переполнения квадратов FP16.
 
-**Зачем SwiGLU?** GLU-варианты (Gated Linear Units) эмпирически показывают лучшее качество, чем ReLU/GeLU при том же compute. Механизм: один путь ($xW$) генерирует «контент», другой ($xV$) — «гейт», определяющий какую часть контента пропустить. Hidden dim = $\frac{2}{3} \times 4d$ (вместо $4d$) для компенсации дополнительной матрицы.
+В pre-norm ненормализованное состояние проходит напрямую
+к остаточному сложению. При нулевом выходе подслоя оно
+сохранится. В post-norm после сложения всё равно применяется
+норма. Это объясняет различие путей градиента, но не гарантирует
+устойчивости при любых инициализации и настройках обучения.
 
-### 3. Rotary Positional Embeddings — RoPE (от GPT-Neo)
+<span id="2-swiglu-activation-от-palm"></span>
 
-Оригинальный Transformer: абсолютные позиционные эмбеддинги, суммируемые с токенными. BERT, GPT-2: обучаемые абсолютные.
+### SwiGLU и три матрицы FFN
 
-LLaMA убирает абсолютные позиции и добавляет **RoPE** (Su et al., 2021) **на каждом слое**:
+Из одного вектора позиции строятся две проекции.
+К первой применяется SiLU: SiLU(z)=z·sigmoid(z).
+Её результат поэлементно умножается на вторую проекцию,
+затем третья матрица возвращает исходную ширину.
 
-$$f(q, m) = q_m \cdot e^{i \cdot m \cdot \theta}$$
+SiLU не ограничена отрезком [0,1], поэтому вентиль не является
+вероятностью пропуска. Для входных проекций (−1,0,2) и
+(2,−3,0.5) их произведение после SiLU равно примерно
+(−0.5379,0,0.8808). FFN выполняет эту операцию отдельно
+в каждой позиции, не обращаясь к соседним токенам.
 
-где $m$ — позиция, $\theta$ — частоты по размерностям.
+Для обычной FFN ширины 4d две матрицы содержат 8d² весов.
+У SwiGLU ширины f три матрицы содержат 3df. Равенство даёт
+f=8d/3, после чего исходный код округляет ширину вверх
+до кратного 256: при d=4096 получается 11008.
+В `w1/w3/w2` SiLU применяется к `w1`, а не к `w3`.
+Перестановка ветвей сохраняет формы, но меняет функцию.
 
-**Зачем RoPE?**
-- Кодирует **относительные** позиции (dot product $q_m \cdot k_n$ зависит только от $m - n$)
-- Применяется на **каждом слое** (а не только на входе) — позиционная информация не затухает
-- Лучше обобщается на длинные контексты (можно экстраполировать за пределы training context window)
+<span id="3-rotary-positional-embeddings-rope-от-gpt-neo"></span>
+
+### RoPE в запросах и ключах
+
+Соседние координаты каждой головы образуют двумерные пары.
+Для пары с частотой ω запрос в позиции m вращается
+на mω, ключ в позиции n — на nω. Относительное
+произведение содержит поворот на (n−m)ω вместе
+с исходными query/key.
+
+Например, при q=k=(1,0), ω=1, m=3 и n=1 произведение
+равно cos(−2)≈−0.4161. Общий сдвиг обеих позиций
+сохраняет его. Однако сами векторы зависят от содержания,
+поэтому score не определяется одним расстоянием.
+
+В первой LLaMA Q и K вращаются на каждом слое, V — нет.
+Частоты определяются основанием 10000 и шириной головы,
+а не обучаемой таблицей индексов. RoPE не обещает надёжного
+использования произвольно длинного текста: новые сочетания
+фаз могут не встречаться при обучении.
 
 ### Сравнительная таблица: оригинальный Transformer vs LLaMA
 
-| Компонент | Original Transformer | LLaMA |
-|-----------|---------------------|-------|
-| Normalization | Post-LayerNorm | **Pre-RMSNorm** |
-| Activation | ReLU | **SwiGLU** |
-| FFN hidden dim | $4d$ | $\frac{2}{3} \times 4d$ |
-| Positional encoding | Sinusoidal (вход) | **RoPE (каждый слой)** |
-| Attention | Full bidirectional (encoder) | Causal only |
-| Architecture | Encoder-Decoder | **Decoder-only** |
+| Компонент | Исходный Transformer | Исходная LLaMA |
+| --- | --- | --- |
+| Стеки | Encoder и decoder | Только causal decoder |
+| Положение нормализации | После подслоя и сложения | Перед подслоем |
+| Норма | LayerNorm | RMSNorm |
+| FFN | ReLU, две матрицы | SwiGLU, три матрицы |
+| Позиции | Синусоидальные векторы на входе | Повороты Q/K на каждом слое |
+| Связывание словарных таблиц | Зависит от конфигурации источника/цели | Вход и выход раздельные |
 
-Эта тройка (**RMSNorm + SwiGLU + RoPE**) стала **де-факто стандартом** для всех последующих открытых LLM: LLaMA 2, Mistral 7B, Falcon, Qwen, Yi, DeepSeek.
+Исходный Transformer уже содержит causal self-attention decoder.
+Сравнение с ним нельзя свести к «двунаправленное attention
+заменили причинным». У LLaMA также отсутствует cross-attention.
+Наличие трёх перечисленных компонентов не определяет всё
+устройство любой последующей открытой LLM.
 
 ## Размеры моделей (Table 2 из статьи)
 
-| Параметры | $d_{\text{model}}$ | Heads | Layers | Learning Rate | Batch Size | Tokens |
-|-----------|---------------------|-------|--------|--------------|------------|--------|
-| **7B** | 4096 | 32 | 32 | 3e-4 | 4M | **1T** |
-| **13B** | 5120 | 40 | 40 | 3e-4 | 4M | **1T** |
-| **33B** | 6656 | 52 | 60 | 1.5e-4 | 4M | **1.4T** |
-| **65B** | 8192 | 64 | 80 | 1.5e-4 | 4M | **1.4T** |
+| Модель | Ширина | Головы | Слои | FFN по правилу кода | Обучающих токенов |
+| --- | ---: | ---: | ---: | ---: | --- |
+| 7B | 4096 | 32 | 32 | 11008 | 1.0T |
+| 13B | 5120 | 40 | 40 | 13824 | 1.0T |
+| 33B | 6656 | 52 | 60 | 17920 | 1.4T |
+| 65B | 8192 | 64 | 80 | 22016 | 1.4T |
 
-**Обрати внимание на tokens**: 1T-1.4T — это **в 3-5x больше**, чем Chinchilla-optimal для этих размеров. Суть LLaMA: **перетренировать** маленькую модель, чтобы она была дешевле при inference.
+У всех четырёх размеров ширина головы равна 128.
+Проекции attention и FFN не имеют bias; входные embeddings
+и словарный выход не связаны. У 7B 6 738 415 616 весов,
+занимающих около 12.55 GiB в FP16. Это только веса,
+без временных состояний, KV-cache и оптимизатора.
 
 ## Training Data — только публичные данные
 
-| Источник | Доля | Эпохи | Объём |
-|----------|------|-------|-------|
-| CommonCrawl (CCNet filtered) | 67% | 1.10 | 3.3 TB |
-| C4 (Raffel et al., 2020) | 15% | 1.06 | 783 GB |
-| Github (Apache/BSD/MIT) | 4.5% | 0.64 | 328 GB |
-| Wikipedia (20 языков) | 4.5% | 2.45 | 83 GB |
-| Gutenberg + Books3 | 4.5% | 2.23 | 85 GB |
-| ArXiv | 2.5% | 1.06 | 92 GB |
-| StackExchange | 2% | 1.03 | 78 GB |
+| Источник | Доля выборки | Проходов при 1.4T |
+| --- | ---: | ---: |
+| Common Crawl / CCNet | 67% | 1.10 |
+| C4 | 15% | 1.06 |
+| GitHub | 4.5% | 0.64 |
+| Wikipedia | 4.5% | 2.45 |
+| Gutenberg + Books3 | 4.5% | 2.23 |
+| arXiv | 2.5% | 1.06 |
+| Stack Exchange | 2% | 1.03 |
 
-**~1.4T токенов** после токенизации. Токенайзер: **BPE через SentencePiece** (числа разбиваются на отдельные цифры, unknown UTF-8 — на байты).
+Это доли семплирования, а не проценты размера на диске.
+Например, при 1.4T Wikipedia даёт около 63B выбранных
+токенов, при 1T — 45B. Столбец числа проходов
+не переносится без изменения на короткий запуск.
 
-**Критически важно**: в отличие от GPT-3, PaLM, Chinchilla — **только публичные данные**. Это сделало модель совместимой с open sourcing и позволило исследовательскому сообществу воспроизводить и развивать результаты.
+Токенизатор — BPE через SentencePiece, с отдельными цифрами
+и byte fallback. Объём 1.4T относится к большому запуску,
+а не ко всем размерам независимо от расписания.
+Точные исходные фильтры приведены в §2.1 статьи и заметке о ней.
+
+Публичная доступность обучающих текстов не определяет условия
+использования весов. Model card первого выпуска указывает
+некоммерческую лицензию; условия поздних выпусков Llama
+не описывают этот первый checkpoint.
 
 ## Обучение: оптимизатор и эффективность
 
-**Оптимизатор**: AdamW ($\beta_1 = 0.9$, $\beta_2 = 0.95$, weight decay = 0.1, gradient clipping = 1.0)
-
-**LR schedule**: cosine decay до 10% от максимального LR, 2000 warmup шагов.
+AdamW использует β₁=0.9, β₂=0.95, weight decay 0.1
+и gradient clipping 1.0. После 2000 шагов warmup
+скорость убывает по косинусу до 10% максимальной.
 
 ### Efficient Implementation
 
-- **Flash Attention** (causal) через xformers — не хранит attention weights, не вычисляет masked scores
-- **Gradient checkpointing**: сохраняем только дорогие активации (выходы linear layers), пересчитываем остальное при backward pass
-- **Model + sequence parallelism** (Korthikanti et al., 2022)
-- Overlap compute и communication (all_reduce)
+Эффективный causal attention из xFormers уменьшает хранение
+attention weights и вычисления запрещённых пар Q/K.
+Выборочное сохранение дорогих активаций уменьшает их пересчёт.
+Также используются model/sequence parallelism и перекрытие
+вычислений с сетевыми обменами (§2.4).
 
-**Скорость**: ~380 tokens/sec/GPU на 2048 A100 80GB. Training LLaMA-65B на 1.4T токенов ≈ **21 день**.
+В статье сообщается около 380 токенов/с/GPU при обучении 65B
+на 2048 A100 80GB. Примерно 21 день относится к этому
+обучению на 1.4T, а не к произвольному GPU или новому inference engine.
 
 ## Ключевые результаты
 
 ### Common Sense Reasoning (Table 3, zero-shot)
 
-| Модель | Params | BoolQ | PIQA | HellaSwag | WinoGrande |
-|--------|--------|-------|------|-----------|-----------|
-| GPT-3 | 175B | 60.5 | 81.0 | 78.9 | 70.2 |
-| Chinchilla | 70B | 83.7 | 81.8 | 80.8 | 74.9 |
-| PaLM | 540B | 88.0 | 82.3 | 83.4 | 81.1 |
-| **LLaMA-13B** | **13B** | 78.1 | 80.1 | 79.2 | 73.0 |
-| **LLaMA-65B** | **65B** | **85.3** | **82.8** | **84.2** | **77.0** |
+| Модель | BoolQ | PIQA | HellaSwag | WinoGrande | ARC-e |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| GPT-3 175B | 60.5 | 81.0 | 78.9 | 70.2 | 68.8 |
+| LLaMA-13B | 78.1 | 80.1 | 79.2 | 73.0 | 74.8 |
+| LLaMA-65B | 85.3 | 82.8 | 84.2 | 77.0 | 78.9 |
 
-**LLaMA-13B превосходит GPT-3 (175B)** на HellaSwag, WinoGrande, ARC-e, ARC-c — при **13x меньшем размере**.
-
-**LLaMA-65B** конкурентна с Chinchilla-70B и приближается к PaLM-540B (который в 8x больше).
+Результат 13B выше GPT-3 в четырёх показанных столбцах,
+но ниже на PIQA. В статье выбираются готовые продолжения
+по нормированной likelihood; это не свободный диалог.
+Для BoolQ и OpenBookQA используется фоновый контекст `Answer:`.
 
 ### Closed-Book QA (NaturalQuestions, Table 4)
 
-| Модель | 0-shot | 1-shot | 5-shot | 64-shot |
-|--------|--------|--------|--------|---------|
-| GPT-3 175B | 14.6 | 23.0 | — | 29.9 |
-| Chinchilla 70B | 16.6 | — | 31.5 | 35.5 |
-| PaLM 540B | 21.2 | 29.3 | — | 39.6 |
-| **LLaMA-13B** | 20.1 | 23.4 | 28.1 | 31.9 |
-| **LLaMA-65B** | 23.8 | 31.0 | 35.0 | **39.9** |
-
-LLaMA-65B few-shot **превосходит PaLM-540B** на NaturalQuestions 64-shot.
+У LLaMA-65B exact match равен 23.8 в zero-shot
+и 39.9 в 64-shot; у PaLM 540B в 64-shot — 39.6.
+Число демонстраций входит в протокол. Модель не получает
+retrieved documents с доказательством ответа.
 
 ### Code Generation (HumanEval, pass@1)
 
-| Модель | 0-shot |
-|--------|--------|
-| PaLM 62B | 15.9% |
-| PaLM-Coder 62B | 36.0% |
-| **LLaMA-13B** | 15.8% |
-| **LLaMA-65B** | **23.7%** |
+У LLaMA-13B pass@1 равен 15.8, у 65B — 23.7.
+HumanEval используется в zero-shot, MBPP — в 3-shot.
+Pass@1 оценён при температуре 0.1, pass@100 — при 0.8;
+числа из разных столбцов нельзя сравнивать как одну процедуру.
 
-Включение Github кода в training data значительно помогает — LLaMA-13B конкурирует с PaLM-62B на code generation.
+GitHub входит в предобучение, но сравнение с другой моделью
+не выделяет его независимый вклад. Подробные результаты
+математики, MMLU и safety находятся в заметке о статье.
 
 ## Inference-budget vs Training-budget
 
-Это центральная идея LLaMA, часто неправильно понимаемая:
+Для сравнения полной стоимости нужно учитывать предобучение
+и последующие запросы при требуемом качестве. Дополнительное
+предобучение не уменьшает число весов уже выбранного размера;
+оно может позволить выбрать меньший размер вместо большего.
 
-**Chinchilla** оптимизирует: «какую модель обучить за X FLOPs обучения?» Ответ: 70B на 1.4T tokens (для бюджета ~$10^{24}$ FLOPs).
+При выводе причинная модель кэширует K/V каждого слоя.
+Сохранённые ключи уже содержат RoPE своих позиций. Новый
+токен обрабатывается в следующей глобальной позиции;
+обнуление позиции сохраняет формы, но меняет attention scores.
 
-**LLaMA** оптимизирует: «какую модель **использовать** при inference за Y FLOPs/запрос?» Ответ: 13B, обученную на 1T tokens (больше, чем Chinchilla-optimal) — потому что 13B **в 13x дешевле** при inference, чем 175B.
+Префикс длины 2 и три шага генерации требуют 4 обработанных
+позиции с кэшем вместо 2+3+4=9 без него. Последний выбранный
+ID ещё не подавался в модель: в последовательности пять
+ID, а в cache четыре. Это число вычисленных позиций,
+не измеренный выигрыш по времени.
 
-Формально: пусть $C_{\text{train}}$ — стоимость обучения, $C_{\text{inference}} \times N$ — стоимость $N$ inference запросов. При достаточно большом $N$ (миллиарды запросов для production LLM) суммарная стоимость доминируется inference. Поэтому лучше потратить больше на training (обучить дольше), чтобы сэкономить на inference (меньшая модель).
+У исходной 7B FP16 KV-cache на 2048 позиций одного запроса
+занимает 1 GiB. Если одновременно хранить больше запросов,
+эта часть памяти растёт, хотя веса модели могут быть общими.
+Уменьшение числа параметров не задаёт допустимый размер
+пакета без учёта таких состояний.
 
-## Влияние: open-weight революция
+<span id="влияние-open-weight-революция"></span>
 
-LLaMA запустила цепную реакцию в открытом AI-сообществе:
+## Качество при продолжении обучения
 
-1. **Fine-tuning взрыв**: Alpaca (Stanford, $600), Vicuna, WizardLM, CodeLlama — десятки fine-tuned вариантов в первые месяцы
-2. **Quantization**: GPTQ, GGML, AWQ — методы запуска 13B-65B моделей на consumer hardware
-3. **Архитектурный стандарт**: RMSNorm + SwiGLU + RoPE стали default для новых LLM
-4. **Открытая конкуренция**: Mistral 7B, Falcon, Qwen, Yi — все строят на наследии LLaMA
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/llama-2026-10-22/llama1-downstream-training.png]]
+
+*Touvron et al., [Figure 2, с. 8](https://arxiv.org/pdf/2302.13971v1#page=8).
+Исходные шесть графиков с полной подписью. CC BY 4.0.*
+
+На SIQA результаты колеблются; на WinoGrande 33B и 65B
+расположены близко, хотя их training loss различается.
+Для большинства других показанных задач продолжение обучения
+даёт более последовательный рост (§3.7).
+Таким образом, loss и качество конкретной задачи нужно
+измерять отдельно, не заменяя одно другим.
 
 ### Эволюция LLaMA
 
-| Версия | Год | Ключевые изменения |
-|--------|-----|-------------------|
-| LLaMA 1 | Feb 2023 | Baseline, 7B-65B, public data only |
-| LLaMA 2 | Jul 2023 | 70B, GQA, extended context (4K), RLHF chat version, 2T tokens |
-| LLaMA 3 | Apr 2024 | 8B/70B, 15T tokens, 128K context, multilingual |
-| LLaMA 3.1 | Jul 2024 | 405B, native tool use, 128K context |
+| Выпуск | Конфигурация, относящаяся к этому выпуску |
+| --- | --- |
+| LLaMA, февраль 2023 | 7B/13B/33B/65B, MHA; 1.0T или 1.4T токенов |
+| Llama 2, июль 2023 | Выпущены 7B/13B/70B; GQA у 70B, контекст 4K; базовые и chat-варианты |
+| Llama 3, 18 апреля 2024 | 8B/70B, GQA в обоих размерах, 8K, более 15T токенов |
+| Июльское расширение Llama 3 | Отдельное продолжение обучения с расширением до 128K; серия включает 405B |
+
+Апрельские модели обучались с контекстом 8K. Расширение до 128K
+описано в июльском отчёте как дополнительный этап обучения.
+Таблица фиксирует эти исторические выпуски, а не последнюю
+доступную версию семейства.
+
+Источники:
+[Llama 2, §2 и Table 1](https://arxiv.org/pdf/2307.09288v1#page=6),
+[апрельская Llama 3 model card](https://github.com/meta-llama/llama3/blob/a0940f9cf7065d45bb6675660f80d305c041a754/MODEL_CARD.md),
+[Herd of Models, §3.4](https://arxiv.org/pdf/2407.21783v1#page=14).
+Последующие варианты:
+[[02 Areas/ML & DL/02 Атлас моделей/Семейства/Llama|атлас Llama]].
 
 ## Key papers
 
-- [[02 Areas/ML & DL/Papers/LLaMA]] — оригинал (Touvron et al., Feb 2023)
-- [[02 Areas/ML & DL/Papers/LLaMA 2]] — LLaMA 2 (70B, GQA, RLHF chat, Jul 2023)
+- [[02 Areas/ML & DL/Papers/LLaMA|Исходная статья]].
+- [[02 Areas/ML & DL/Papers/LLaMA 2|Llama 2]].
+- [[02 Areas/ML & DL/Papers/LLaMA 3 Herd of Models|The Llama 3 Herd of Models]].
 
 ## Related concepts
 
-- [[02 Areas/ML & DL/Concepts/Architectures/Decoder-only|Decoder-only]] — архитектурная парадигма
-- [[02 Areas/ML & DL/Concepts/Architectures/Transformer|Transformer]] — базовая архитектура
-- [[02 Areas/ML & DL/Concepts/Training/Scaling Laws|Scaling Laws]] — Chinchilla laws и их расширение
-- [[02 Areas/ML & DL/Concepts/Training/RLHF|RLHF]] — alignment в LLaMA 2 Chat
-- [[02 Areas/ML & DL/Concepts/Architectures/LLaMA 2|LLaMA 2]] — наследник
-- [[02 Areas/ML & DL/Concepts/Architectures/Mistral 7B|Mistral 7B]] — использует тот же архитектурный стек
-- [[02 Areas/ML & DL/Concepts/Inference/Flash Attention|Flash Attention]] — используется при обучении
+- [[02 Areas/ML & DL/Concepts/Architectures/Decoder-only|Decoder-only]].
+- [[02 Areas/ML & DL/Concepts/Architectures/Transformer|Transformer]].
+- [[02 Areas/ML & DL/Concepts/Training/Scaling Laws|Scaling laws]].
+- [[02 Areas/ML & DL/Concepts/Training/RLHF|RLHF]].
+- [[02 Areas/ML & DL/Concepts/Architectures/LLaMA 2|Llama 2]].
+- [[02 Areas/ML & DL/Concepts/Architectures/Mistral 7B|Mistral]].
 
 ## Дополнительные ресурсы
 
-- [Sebastian Raschka — The Big LLM Architecture Comparison](https://magazine.sebastianraschka.com/p/the-big-llm-architecture-comparison) — детальное сравнение архитектур GPT/LLaMA/Mistral
-- [Lilian Weng — The Transformer Family v2](https://lilianweng.github.io/posts/2023-01-27-the-transformer-family-v2/) — обзор вариантов Transformer
-- [Meta AI — LLaMA repo](https://github.com/facebookresearch/llama) — официальный код
-- [d2l.ai — Large-Scale Pretraining](https://d2l.ai/chapter_attention-mechanisms-and-transformers/large-pretraining-transformers.html) — контекст pre-training
+- [Touvron et al., LLaMA v1](https://arxiv.org/abs/2302.13971v1).
+- [Первый model.py, закреплённая ревизия](https://github.com/meta-llama/llama/blob/1076b9c51c77ad06e9d7ba8a4c6df775741732bd/llama/model.py).
+- [Stanford CS336, Assignment 1](https://github.com/stanford-cs336/assignment1-basics/blob/a158843b20107949f1a8d7df1b05cd33b9166712/cs336_assignment1_basics.pdf).
+- [Lilian Weng — The Transformer Family v2](https://lilianweng.github.io/posts/2023-01-27-the-transformer-family-v2/).
+- [Sebastian Raschka — The Big LLM Architecture Comparison](https://magazine.sebastianraschka.com/p/the-big-llm-architecture-comparison).

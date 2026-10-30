@@ -1,55 +1,20 @@
 ---
 title: FlashAttention
 type: concept
-status: canonical
-last_updated: 2026-09-15
-last_verified: 2026-09-15
+status: redirect
+last_updated: '2026-10-29'
+last_verified: 2026-09-15T00:00:00.000Z
 primary_sources:
-  - https://arxiv.org/abs/2205.14135
-  - https://arxiv.org/abs/2307.08691
+  - 'https://arxiv.org/abs/2205.14135'
+  - 'https://arxiv.org/abs/2307.08691'
+canonical_topic: 00 Учебник/14 Inference и оптимизация/56 FlashAttention.md
 ---
-
 # FlashAttention
 
-**FlashAttention** вычисляет exact scaled dot-product attention, не материализуя целиком матрицу attention в медленной HBM-памяти. Он разбивает Q/K/V на tiles, использует SRAM и online softmax.
+Полное объяснение: [[00 Учебник/14 Inference и оптимизация/56 FlashAttention|FlashAttention: точное внимание с меньшим обменом данными]].
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/flashattention-tiling.png]]
-
-*Forward pass FlashAttention: внешние циклы перебирают блоки $K,V$ и $Q$,
-локальная матрица $S_{ij}$ живёт в SRAM, а статистики softmax и блок выхода
-обновляются без записи полной $N\times N$ матрицы в HBM. Оригинальная схема Tri
-Dao et al., [FlashAttention, Algorithm 1](https://arxiv.org/abs/2205.14135).*
-
-Главное на схеме — граница памяти. Алгоритм не меняет формулу attention: он
-переставляет вычисления так, чтобы дорогие чтения и записи HBM происходили для
-блоков входа и выхода, а промежуточные scores оставались в быстрой SRAM.
-
-Обычная реализация часто записывает и снова читает $n\times n$ score/probability matrices. FlashAttention уменьшает memory I/O — критический bottleneck GPU — и поэтому работает быстрее при меньшем memory footprint.
-
-## Что важно
-
-- результат математически exact с учётом обычной floating-point погрешности, а не sparse approximation;
-- асимптотическое число attention FLOPs остаётся квадратичным по длине;
-- он не уменьшает размер [[02 Areas/ML & DL/01 Справочник/Inference/KV-cache|KV-cache]] сам по себе;
-- поддержка masks, dropout, GQA и hardware зависит от версии/kernel implementation.
-
-FlashAttention-2 изменил распределение работы между блоками и варпами GPU и
-уменьшил накладные расходы, сохранив математический оператор внимания.
-Проверенный срез этой карточки — 2026-09-15: определения относятся к
-FlashAttention и FlashAttention-2, а не являются исчерпывающим каталогом релизов.
-Поддерживаемые GPU, типы данных, размерности голов и варианты масок следует
-сверять с [README официальной реализации](https://github.com/Dao-AILab/flash-attention)
-для закреплённого release/commit. Название FlashAttention само по себе не
-гарантирует, что конкретный вызов или оборудование поддерживаются выбранным
-ядром.
-
-## Подробнее
-
-IO-aware разбиение, online softmax и отличие от разреженного attention подробно
-разобраны в главе [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/56 FlashAttention|FlashAttention]].
-
-## Источники
-
-- [FlashAttention](https://arxiv.org/abs/2205.14135)
-- [FlashAttention-2](https://arxiv.org/abs/2307.08691)
-- [Official repository](https://github.com/Dao-AILab/flash-attention)
+<!-- Compatibility anchors for existing Obsidian and web links. -->
+<span id="flashattention" aria-hidden="true"></span>
+<span id="что-важно" aria-hidden="true"></span>
+<span id="подробнее" aria-hidden="true"></span>
+<span id="источники" aria-hidden="true"></span>

@@ -1,0 +1,64 @@
+[
+  {
+    "id": "curated-frameworks-tensor-layout-f0d88143e556",
+    "asset": "00 Учебник/Assets/Figures/curated/frameworks-native-2026-10-27/tensor-memory-layout.svg",
+    "author": "Vijay Janapa Reddi and Harvard ML Systems contributors",
+    "source_url": "https://github.com/harvard-edge/cs249r_book/blob/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/frameworks/frameworks.qmd#L2904",
+    "source_image_url": "https://mlsysbook.ai/vol1/frameworks/frameworks_files/mediabag/115792cae262163c79a0976128326960bdd7e9ee.svg",
+    "commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "source_asset": "Assets/Sources/Harvard ML Systems/vol1/frameworks/115792cae262163c79a0976128326960bdd7e9ee.svg",
+    "source_asset_sha256": "f0d88143e5561c8061bfba1f5ebc9f79e7c9d712e4e79fd195ce06a8e1a4f036",
+    "sha256": "f0d88143e5561c8061bfba1f5ebc9f79e7c9d712e4e79fd195ce06a8e1a4f036",
+    "source_code": "05 Источники/Originals/frameworks-2026-10-27/chapter-2bd97c5.qmd",
+    "source_code_sha256": "2cdf087ebca6106368840273f9ef6c447aba277de197223bc3c24a7022010059",
+    "source_page_snapshot": "05 Источники/Courses/Harvard ML Systems/vol1/frameworks.md",
+    "source_page_sha256": "c348b78528c0f0af99a477e0bd07651b03a445ebbda51b0adf046e97777c6e14",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/nn-architectures-2026-10-26/LICENSE-2bd97c5.md",
+    "license_evidence_sha256": "b6f4689d6fccf48d82d0871a3b994a122427fcb0b278971f6ba008be44e2c926",
+    "derivation": "source-svg-copy",
+    "modifications": "Complete archived SVG copied byte-for-byte. No crop, redraw or label translation. The adjacent explanation distinguishes element offsets from byte addresses, and a column-major copy from a transposed view.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-27",
+    "used_in": [
+      "00 Учебник/00 Математические и ML-основания/01 Векторы, матрицы и тензоры.md"
+    ]
+  },
+  {
+    "id": "curated-frameworks-placement-6c3e1e350e56",
+    "asset": "00 Учебник/Assets/Figures/curated/frameworks-native-2026-10-27/device-placement-dimensions.svg",
+    "author": "Vijay Janapa Reddi and Harvard ML Systems contributors",
+    "source_url": "https://github.com/harvard-edge/cs249r_book/blob/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/frameworks/frameworks.qmd#L3339",
+    "source_image_url": "https://mlsysbook.ai/vol1/frameworks/frameworks_files/mediabag/2989ddaa72253cc48b5b80d50c512a87ca09ff9b.svg",
+    "commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "source_asset": "Assets/Sources/Harvard ML Systems/vol1/frameworks/2989ddaa72253cc48b5b80d50c512a87ca09ff9b.svg",
+    "source_asset_sha256": "6c3e1e350e5653c517ac8b82ec4a7184eceb7573ae8320b56c4ca222861c6b12",
+    "sha256": "6c3e1e350e5653c517ac8b82ec4a7184eceb7573ae8320b56c4ca222861c6b12",
+    "source_code": "05 Источники/Originals/frameworks-2026-10-27/chapter-2bd97c5.qmd",
+    "source_code_sha256": "2cdf087ebca6106368840273f9ef6c447aba277de197223bc3c24a7022010059",
+    "source_page_snapshot": "05 Источники/Courses/Harvard ML Systems/vol1/frameworks.md",
+    "source_page_sha256": "c348b78528c0f0af99a477e0bd07651b03a445ebbda51b0adf046e97777c6e14",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/nn-architectures-2026-10-26/LICENSE-2bd97c5.md",
+    "license_evidence_sha256": "b6f4689d6fccf48d82d0871a3b994a122427fcb0b278971f6ba008be44e2c926",
+    "derivation": "source-svg-copy",
+    "modifications": "Complete archived SVG copied byte-for-byte, without crop, redraw, translation or relabeling. Full original caption retained. Added logical coordinate/group/batch example distinguishes eight stacks from 32 GPUs and placement from topology or pipeline timing. CSS display width only: up to 40rem within the column; source vector geometry and bytes remain unchanged.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md"
+    ],
+    "source_viewbox": [
+      0,
+      0,
+      274.96933,
+      168.46268
+    ]
+  }
+]

@@ -1,197 +1,24 @@
 ---
 title: Triton и GPU kernels для LLM inference
 type: concept
-status: active
-last_updated: 2026-07-21
-last_verified: 2026-07-21
+status: redirect
+last_updated: '2026-10-29'
+last_verified: 2026-07-21T00:00:00.000Z
+canonical_topic: 05 Источники/Implementation studies/Triton GPU kernels.md
 ---
-
 # Triton и GPU kernels для LLM inference
 
-PyTorch выражает вычисление как операции над тензорами. GPU исполняет kernels —
-программы, определяющие, какие threads читают какие адреса, где хранят
-промежуточные значения и когда записывают результат. Между этими уровнями
-возникает разрыв: композиция математически простых операций может несколько раз
-прочитать и записать большой tensor в HBM, хотя промежуточное значение могло
-остаться в registers или shared memory.
+Полное объяснение: [[05 Источники/Implementation studies/Triton GPU kernels|Triton и GPU kernels для LLM inference]].
 
-Triton — язык и compiler для написания специализированных GPU kernels на
-Python-подобном уровне. Он не является serving engine и не конкурирует с vLLM
-или SGLang: engines используют Triton наряду с CUDA, CUTLASS, FlashAttention,
-FlashInfer и другими backends.
-
-## Модель исполнения: программа обрабатывает tile
-
-CUDA обычно начинает объяснение с отдельных threads. Triton предлагает мыслить
-крупнее: grid состоит из program instances, каждая instance обрабатывает блок
-данных. `tl.program_id(axis)` выбирает координату программы; `tl.arange`
-создаёт offsets элементов; `tl.load` и `tl.store` работают с векторами адресов и
-masks.
-
-Для сложения векторов логика такова:
-
-1. выбрать `BLOCK_SIZE`;
-2. вычислить номер program instance;
-3. получить диапазон offsets;
-4. замаскировать выход за размер массива;
-5. загрузить два блока, сложить и записать.
-
-Compiler распределяет векторные операции по GPU threads. Автор по-прежнему
-управляет tiling и memory access, но не прописывает каждую thread вручную.
-
-## Почему fusion ускоряет softmax
-
-Наивный softmax может состоять из max reduction, вычитания, exponentiation,
-sum reduction и деления. Если framework материализует промежуточные tensors,
-матрица несколько раз проходит через HBM. Fused kernel загружает строку один
-раз, выполняет редукции и нормализацию на chip и записывает только результат.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/triton-fused-softmax-benchmark.png]]
-
-*Сравнение fused Triton softmax с реализацией PyTorch на оборудовании авторов
-tutorial. График нужно читать как проверку конкретного kernel и shape range, а
-не универсальную гарантию ускорения. Источник: OpenAI Triton,
-[Fused Softmax tutorial](https://triton-lang.org/main/getting-started/tutorials/02-fused-softmax.html).*
-
-Выигрыш появляется не потому, что формула softmax изменилась, а потому что
-уменьшилось движение данных. На слишком широких строках registers/shared memory
-не хватает, occupancy падает, и стратегия должна измениться.
-
-## Matmul: три измерения и память
-
-Пусть $A\in\mathbb{R}^{M\times K}$, $B\in\mathbb{R}^{K\times N}$,
-$C=AB$. Программа отвечает за двумерный блок $C_{I,J}$, где $I$ — диапазон
-строк, $J$ — диапазон столбцов. По очереди перебирая диапазоны $R$ внутренней
-оси длины $K$, она накапливает
-
-$$C_{I,J}\mathrel{+}=A_{I,R}B_{R,J}.$$
-
-Формы блоков — соответственно
-$B_M\times B_N$, $B_M\times B_K$ и $B_K\times B_N$,
-где $B_M,B_N,B_K$ — размеры плиток, а не размеры исходных матриц.
-В tutorial ядро вызывает `tl.dot`, хранит накопитель в FP32 и перед записью
-может применить объединённую с вычислением функцию активации. На краях матриц
-нужны маски, потому что размеры $M,N,K$ не обязаны делиться на размеры плиток.
-
-Главные параметры:
-
-- `BLOCK_SIZE_M`, `BLOCK_SIZE_N`, `BLOCK_SIZE_K`;
-- число warps;
-- порядок обхода tiles;
-- dtype inputs и accumulator;
-- число pipeline stages;
-- hardware-specific launch configuration.
-
-## Grouped ordering и L2 locality
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/triton-grouped-vs-row-major.png]]
-
-*При row-major нумерации плиток сначала меняется индекс столбца выходной
-матрицы: одна полоса A умножается на последовательные полосы B.
-Grouped ordering группирует несколько плиточных строк, чтобы повторно
-использовать блоки A и B, пока они находятся в L2. Речь идёт о назначении
-program IDs; фактический порядок исполнения блоков выбирает GPU.
-Источник: OpenAI Triton,
-[Matrix Multiplication tutorial](https://triton-lang.org/main/getting-started/tutorials/03-matrix-multiplication.html).*
-
-Например, для сетки выходных плиток 2×3 row-major назначает координаты
-`(0,0), (0,1), (0,2), (1,0), (1,1), (1,2)`: при фиксированном диапазоне
-внутренней оси повторяется блок строки A, а блоки столбцов B меняются.
-Группа из двух строк задаёт `(0,0), (1,0), (0,1), (1,1), (0,2), (1,2)`:
-соседние программы могут повторно использовать один блок B для двух строк A.
-Ограниченный размер группы помогает также удерживать нужные блоки A в L2;
-это мотивированное назначение program IDs, не обещание строгого порядка GPU.
-
-Порядок математически независимых tiles влияет на реальную производительность.
-Если соседние program instances повторно используют части A или B до их
-вытеснения из L2, уменьшается traffic к HBM. Поэтому layout и scheduling — часть
-алгоритма kernel, хотя в формуле матричного умножения их нет.
-
-## Autotuning
-
-Оптимальные block sizes зависят от shape, dtype и GPU. Triton позволяет описать
-несколько configurations и выбрать быструю экспериментально для ключа вроде
-$(M,N,K)$. Autotuning нельзя путать с обучением модели: это benchmark вариантов
-kernel на целевом устройстве.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/triton-matmul-benchmark-fp16.png]]
-
-*FP16 matmul из официального tutorial: Triton сопоставляется с vendor BLAS на
-наборе shapes. Источник: OpenAI Triton,
-[Matrix Multiplication tutorial](https://triton-lang.org/main/getting-started/tutorials/03-matrix-multiplication.html).*
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/inference-serving/triton-matmul-benchmark-fp8.png]]
-
-*Тот же tutorial отдельно показывает FP8: смена формата меняет доступные
-инструкции, точность и сравнительный результат. Это не «бесплатное ускорение»,
-а отдельная конфигурация kernel, которую нужно проверять на поддерживаемом GPU и
-на допустимой для модели ошибке. Источник: OpenAI Triton,
-[Matrix Multiplication tutorial](https://triton-lang.org/main/getting-started/tutorials/03-matrix-multiplication.html).*
-
-Результат нельзя переносить на произвольную GPU. Версия compiler, clocks,
-precision, shape distribution и warm-up должны быть зафиксированы. В production
-важна не максимальная точка графика, а performance на реальных batch и sequence
-shapes.
-
-## Где Triton встречается в LLM runtime
-
-- fused RMSNorm, activation и residual operations;
-- quantization/dequantization;
-- attention prefill/decode kernels;
-- paged KV-cache access;
-- sampling и logits processing;
-- MoE routing, grouped GEMM и token permutation;
-- linear attention/state-space scans;
-- специализированные MLA/GQA layouts.
-
-Не каждый kernel выгодно писать на Triton. CUDA/CUTLASS/CuTe могут дать лучший
-контроль над новыми tensor cores; vendor libraries сильны на стандартных GEMM;
-torch.compile способен автоматически fuse часть графа. Triton особенно полезен,
-когда layout или fusion специфичны для модели и стандартная библиотечная
-операция материализует лишние промежуточные данные.
-
-## От kernel к serving engine
-
-Уровни системы нужно держать раздельно:
-
-| Уровень | Вопрос | Примеры |
-|---|---|---|
-| Kernel | как выполнить одну операцию и двигать данные | Triton, CUDA, CUTLASS |
-| Attention backend | как реализовать prefill/decode для layout cache | FlashAttention, FlashInfer, Triton attention |
-| Model executor | как запустить слои и коллективные обмены | vLLM/SGLang workers |
-| Scheduler/cache | какие requests и blocks исполнять сейчас | continuous batching, PagedAttention, RadixAttention |
-| Serving | как принимать, маршрутизировать и наблюдать запросы | API server, replicas, load balancer |
-
-Быстрый softmax kernel не исправляет плохой scheduler; высокий cache hit rate не
-компенсирует медленный MoE kernel. End-to-end performance появляется только при
-согласовании уровней.
-
-## Практический маршрут чтения
-
-Официальные tutorials лучше проходить по возрастанию сложности:
-
-1. Vector Addition — grid, offsets и mask;
-2. Fused Softmax — reduction и memory traffic;
-3. Matrix Multiplication — tiling, `tl.dot`, grouping и autotune;
-4. LayerNorm — reductions и fusion;
-5. Fused Attention — online softmax и причинная маска;
-6. Group GEMM — shapes, характерные для MoE.
-
-После каждого примера следует проверять correctness против PyTorch, а затем
-benchmark на нескольких shapes. Измерение только одного удобного размера учит
-подгонке графика, а не kernel engineering.
-
-## Связанные страницы
-
-- [[02 Areas/ML & DL/01 Справочник/Inference/vLLM — анатомия inference engine]]
-- [[02 Areas/ML & DL/01 Справочник/Inference/SGLang и RadixAttention]]
-- [[02 Areas/ML & DL/01 Справочник/Inference/PagedAttention]]
-- [[02 Areas/ML & DL/01 Справочник/Inference/FlashAttention]]
-
-## Источники
-
-- [Triton documentation](https://triton-lang.org/main/).
-- [Triton tutorials](https://triton-lang.org/main/getting-started/tutorials/).
-- Tillet, Kung, Cox, [Triton: an intermediate language and compiler for tiled neural network computations](https://dl.acm.org/doi/10.1145/3315508.3329973), 2019.
-- [vLLM Triton attention backend](https://docs.vllm.ai/en/stable/api/vllm/v1/attention/backends/).
-- [SGLang attention backend selection](https://github.com/sgl-project/sglang/blob/main/docs/advanced_features/attention_backend.md).
+<!-- Compatibility anchors for existing Obsidian and web links. -->
+<span id="triton-и-gpu-kernels-для-llm-inference" aria-hidden="true"></span>
+<span id="модель-исполнения-программа-обрабатывает-tile" aria-hidden="true"></span>
+<span id="почему-fusion-ускоряет-softmax" aria-hidden="true"></span>
+<span id="matmul-три-измерения-и-память" aria-hidden="true"></span>
+<span id="grouped-ordering-и-l2-locality" aria-hidden="true"></span>
+<span id="autotuning" aria-hidden="true"></span>
+<span id="где-triton-встречается-в-llm-runtime" aria-hidden="true"></span>
+<span id="от-kernel-к-serving-engine" aria-hidden="true"></span>
+<span id="практический-маршрут-чтения" aria-hidden="true"></span>
+<span id="связанные-страницы" aria-hidden="true"></span>
+<span id="источники" aria-hidden="true"></span>

@@ -1,0 +1,53 @@
+[
+  {
+    "id": "curated-checkpoint-fg3-3cf959c8e9dd",
+    "asset": "00 Учебник/Assets/Figures/curated/checkpoint-2026-10-23/pytorch-eager-saved-tensors.png",
+    "author": "PyTorch contributors",
+    "source_url": "https://github.com/pytorch/pytorch.github.io/blob/563f92c6e87782196b81894c4e671428cd8d34af/assets/images/activation-checkpointing-techniques/fg3.png",
+    "source_image_url": "https://raw.githubusercontent.com/pytorch/pytorch.github.io/563f92c6e87782196b81894c4e671428cd8d34af/assets/images/activation-checkpointing-techniques/fg3.png",
+    "commit": "563f92c6e87782196b81894c4e671428cd8d34af",
+    "source_asset": "05 Источники/Originals/checkpoint-2026-10-23/fg3.png",
+    "source_asset_sha256": "3cf959c8e9dd01d0cb5dc230849ce570134ac655f38c076378075419ba2c310d",
+    "sha256": "3cf959c8e9dd01d0cb5dc230849ce570134ac655f38c076378075419ba2c310d",
+    "source_page_snapshot": "05 Источники/Originals/checkpoint-2026-10-23/pytorch-checkpointing.html",
+    "source_page_sha256": "97dde26a47ff399a486def586e5983d16821fb9bf864d1339444e80761be2462",
+    "license": "BSD-3-Clause",
+    "license_url": "https://github.com/pytorch/pytorch.github.io/blob/563f92c6e87782196b81894c4e671428cd8d34af/LICENSE",
+    "license_evidence": "05 Источники/Originals/checkpoint-2026-10-23/pytorch-BSD-3-Clause.txt",
+    "license_evidence_sha256": "9e8b5a3ee55cbf30f0ce2b43b25daff2461f1251862d40e012f5c45916603dd2",
+    "modifications": "Complete original PNG copied byte-for-byte; no crop, translation, redraw, recoloring or resizing. The live article snapshot is dated 2026-10-23; only the image and license are pinned to the upstream commit.",
+    "derivation": "source-raster-copy",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-23",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload.md"
+    ]
+  },
+  {
+    "id": "curated-checkpoint-fg12-02c989ad39fc",
+    "asset": "00 Учебник/Assets/Figures/curated/checkpoint-2026-10-23/pytorch-memory-budget-pareto.png",
+    "author": "PyTorch contributors",
+    "source_url": "https://github.com/pytorch/pytorch.github.io/blob/563f92c6e87782196b81894c4e671428cd8d34af/assets/images/activation-checkpointing-techniques/fg12.png",
+    "source_image_url": "https://raw.githubusercontent.com/pytorch/pytorch.github.io/563f92c6e87782196b81894c4e671428cd8d34af/assets/images/activation-checkpointing-techniques/fg12.png",
+    "commit": "563f92c6e87782196b81894c4e671428cd8d34af",
+    "source_asset": "05 Источники/Originals/checkpoint-2026-10-23/fg12.png",
+    "source_asset_sha256": "02c989ad39fc3c3f42f747674945a26ff060079898648a74a622e72fa1b99b3f",
+    "sha256": "02c989ad39fc3c3f42f747674945a26ff060079898648a74a622e72fa1b99b3f",
+    "source_page_snapshot": "05 Источники/Originals/checkpoint-2026-10-23/pytorch-checkpointing.html",
+    "source_page_sha256": "97dde26a47ff399a486def586e5983d16821fb9bf864d1339444e80761be2462",
+    "license": "BSD-3-Clause",
+    "license_url": "https://github.com/pytorch/pytorch.github.io/blob/563f92c6e87782196b81894c4e671428cd8d34af/LICENSE",
+    "license_evidence": "05 Источники/Originals/checkpoint-2026-10-23/pytorch-BSD-3-Clause.txt",
+    "license_evidence_sha256": "9e8b5a3ee55cbf30f0ce2b43b25daff2461f1251862d40e012f5c45916603dd2",
+    "modifications": "Complete original PNG copied byte-for-byte; no crop, translation, redraw, recoloring or resizing. The live article snapshot is dated 2026-10-23; only the image and license are pinned to the upstream commit.",
+    "derivation": "source-raster-copy",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-23",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload.md"
+    ]
+  }
+]
+

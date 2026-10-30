@@ -9,9 +9,18 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol2/lab_14_robust_ai.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol2/lab_14_robust_ai.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL2 Lab — Robust Ai
 
@@ -30,6 +39,116 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 3. Which robustness tax became binding?
 4. What residual failure case remains after your selected policy?
 5. What energy or carbon implication should V2-15 inherit?
+
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+**⟨value 1⟩**  
+⟨value 2⟩  
+
+Recovery path: ⟨value 3⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{title}' `
+- value_2: ` f'{detail}' `
+- value_3: ` f'{recovery}' `
+
+---
+
+**Recovered boundary: ⟨value 1⟩**  
+Current settings pass. Boundary to watch: ⟨value 2⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{title}' `
+- value_2: ` f'{detail}' `
+
+---
+
+**Track consequence:** ⟨value 1⟩. Every part uses the same concept sequence; the selected track changes thresholds, costs, and residual-risk framing.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_params['likely_failure']}" `
+
+---
+
+Commit to the likely shift and failure cost before manipulating the stress exposure.
+
+---
+
+Select both Part A predictions to unlock the shift instrument.
+
+---
+
+### Manipulate the shift and failure cost
+
+---
+
+Checkpoint saved: the response treats robustness as a measurable operating condition.
+
+---
+
+Monitor-only is safe only for negligible shift and low consequence. Recheck the PSI tier and expected loss.
+
+---
+
+Select your budget-account prediction to unlock Part B.
+
+---
+
+### Allocate exactly 100 robustness points
+
+---
+
+Checkpoint saved: protect the weakest required account before increasing the strongest one.
+
+---
+
+A single strong account can still leave a silent residual failure in the underfunded account.
+
+---
+
+Select your tax prediction to unlock Part C.
+
+---
+
+### Tune hardening strength and uncertainty sampling
+
+---
+
+Checkpoint saved: choose the strongest defense that still passes the operating envelope.
+
+---
+
+The frontier matters: maximum robustness and minimum cost are rarely the same feasible point.
+
+---
+
+Select your policy prediction to unlock Part D.
+
+---
+
+### Select the policy, strictness, and residual failure
+
+---
+
+Checkpoint saved: the policy is a guardrail conjunction, not a single robustness score.
+
+---
+
+A robustness policy needs every guardrail plus a residual-risk disclosure.
+
+---
+
+## Download Report
+
+---
+
+This report is generated locally from the selected track, typed lab variant metadata, and notebook-local `v2_14_` robustness-budget helpers.
+
+</details>
 
 ## Complete original Marimo source
 

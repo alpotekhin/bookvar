@@ -1,0 +1,47 @@
+[
+  {
+    "id": "curated-cai-revisions-a5cd3aae0031",
+    "asset": "00 Учебник/Assets/Figures/curated/constitutional-ai-2026-10-29/revisions-tradeoff.png",
+    "author": "Yuntao Bai et al.",
+    "title": "Constitutional AI Figure 5: revision scores and the helpfulness trade-off",
+    "source_url": "https://arxiv.org/abs/2212.08073v1",
+    "source_image_url": "https://arxiv.org/pdf/2212.08073v1#page=9",
+    "source_asset": "05 Источники/Originals/constitutional-ai-2026-10-29/bai-v1.pdf",
+    "source_asset_sha256": "9a456a07ad346e3372f9867d346f69f5b0f68b4c65f060aca0b8a13fa9d98e83",
+    "source_page": 9,
+    "source_page_snapshot": "05 Источники/Originals/training-consolidation-2026-10-29/cai-arxiv-v1.html",
+    "source_page_sha256": "2f175dac8902db65a5c0a7cd280109fa91e0d3c1d129e49edb9ab439edc3c97d",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/training-consolidation-2026-10-29/cai-arxiv-v1.html",
+    "license_evidence_sha256": "2f175dac8902db65a5c0a7cd280109fa91e0d3c1d129e49edb9ab439edc3c97d",
+    "derivation": "pdf-page-render-crop",
+    "render_dpi": 288,
+    "render_page_size_px": [
+      2448,
+      3168
+    ],
+    "crop_box_px": [
+      340,
+      280,
+      2120,
+      1030
+    ],
+    "modifications": "Complete Figure 5 with all three panels, axes, parameter colour scale and full original English caption. Only surrounding page material removed. No redraw, translated labels, resampling or panel rearrangement.",
+    "dimensions_px": [
+      1780,
+      750
+    ],
+    "width": 1780,
+    "height": 750,
+    "bytes": 180321,
+    "sha256": "a5cd3aae003155f2e5d0fb01cb66ef4080568f010bf8eb22938e69d91327f479",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md"
+    ]
+  }
+]

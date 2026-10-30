@@ -1,0 +1,209 @@
+[
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/moe-2026-10-23/switch-scaling.png",
+    "author": "William Fedus, Barret Zoph, Noam Shazeer",
+    "source_asset": "05 Источники/Originals/moe-2026-10-23/switch-jmlr.pdf",
+    "source_asset_sha256": "8831edca732dd939854957b4b1a493fa553e7b43dd431a5d4fee15493bba6e3e",
+    "sha256": "c617f3379f8166f87332a968c98ea235030ff315026974e6f247976b5295cef9",
+    "source_url": "https://jmlr.org/papers/volume23/21-0998/21-0998.pdf#page=2",
+    "source_image_url": "https://jmlr.org/papers/volume23/21-0998/21-0998.pdf#page=2",
+    "source_page": 2,
+    "render_dpi": 300,
+    "render_page_size_px": [
+      2550,
+      3300
+    ],
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/moe-2026-10-23/switch-jmlr.pdf",
+    "license_evidence_sha256": "8831edca732dd939854957b4b1a493fa553e7b43dd431a5d4fee15493bba6e3e",
+    "derivation": "pdf-crop",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Rendered original PDF; all panels, axes, legends and English labels retained; full English caption retained",
+    "crop_box_px": [
+      360,
+      560,
+      2205,
+      1540
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/moe-2026-10-23/switch-capacity.png",
+    "author": "William Fedus, Barret Zoph, Noam Shazeer",
+    "source_asset": "05 Источники/Originals/moe-2026-10-23/switch-jmlr.pdf",
+    "source_asset_sha256": "8831edca732dd939854957b4b1a493fa553e7b43dd431a5d4fee15493bba6e3e",
+    "sha256": "7476e726fad2337680038b2041f2263952a2d6242874e29d155a5dfce10ab6ed",
+    "source_url": "https://jmlr.org/papers/volume23/21-0998/21-0998.pdf#page=5",
+    "source_image_url": "https://jmlr.org/papers/volume23/21-0998/21-0998.pdf#page=5",
+    "source_page": 5,
+    "render_dpi": 300,
+    "render_page_size_px": [
+      2550,
+      3300
+    ],
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/moe-2026-10-23/switch-jmlr.pdf",
+    "license_evidence_sha256": "8831edca732dd939854957b4b1a493fa553e7b43dd431a5d4fee15493bba6e3e",
+    "derivation": "pdf-crop",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Rendered original PDF; all panels, axes, legends and English labels retained; full English caption retained",
+    "crop_box_px": [
+      360,
+      515,
+      2205,
+      1730
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/moe-2026-10-23/switch-parallelism.png",
+    "author": "William Fedus, Barret Zoph, Noam Shazeer",
+    "source_asset": "05 Источники/Originals/moe-2026-10-23/switch-jmlr.pdf",
+    "source_asset_sha256": "8831edca732dd939854957b4b1a493fa553e7b43dd431a5d4fee15493bba6e3e",
+    "sha256": "5f5f719b7874163f019d873301bc725364eb821c0de3aca41688c130ffe5567a",
+    "source_url": "https://jmlr.org/papers/volume23/21-0998/21-0998.pdf#page=20",
+    "source_image_url": "https://jmlr.org/papers/volume23/21-0998/21-0998.pdf#page=20",
+    "source_page": 20,
+    "render_dpi": 300,
+    "render_page_size_px": [
+      2550,
+      3300
+    ],
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/moe-2026-10-23/switch-jmlr.pdf",
+    "license_evidence_sha256": "8831edca732dd939854957b4b1a493fa553e7b43dd431a5d4fee15493bba6e3e",
+    "derivation": "pdf-crop",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Rendered original PDF; all panels, axes, legends and English labels retained; full English caption retained",
+    "crop_box_px": [
+      360,
+      300,
+      2205,
+      2230
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/moe-2026-10-23/olmoe-shared.png",
+    "author": "Niklas Muennighoff et al. / Allen Institute for AI",
+    "source_asset": "05 Источники/Originals/moe-2026-10-23/olmoe-shared.pdf",
+    "source_asset_sha256": "0842577d406a5a9551d976aabb6241840cfdd881c612e5eaf3b0d281cc9bd698",
+    "sha256": "1151868abb076687b69bb7fdbae4af880a38ddbf552b27160847abf36a06503c",
+    "source_url": "https://github.com/allenai/OLMoE/blob/357454f4f647385839c0ff6b99a688dc7cd9c13f/visuals/figures/shared.pdf",
+    "source_image_url": "https://github.com/allenai/OLMoE/blob/357454f4f647385839c0ff6b99a688dc7cd9c13f/visuals/figures/shared.pdf",
+    "source_page": 1,
+    "render_dpi": 96,
+    "render_page_size_px": [
+      3084,
+      780
+    ],
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/allenai/OLMoE/blob/357454f4f647385839c0ff6b99a688dc7cd9c13f/LICENSE",
+    "license_evidence": "05 Источники/Originals/moe-2026-10-23/OLMoE-LICENSE.txt",
+    "license_evidence_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "derivation": "pdf-page-render",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Rendered original PDF; all panels, axes, legends and English labels retained; no crop or redraw",
+    "commit": "357454f4f647385839c0ff6b99a688dc7cd9c13f"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/moe-2026-10-23/olmoe-granularity.png",
+    "author": "Niklas Muennighoff et al. / Allen Institute for AI",
+    "source_asset": "05 Источники/Originals/moe-2026-10-23/olmoe-granularity.pdf",
+    "source_asset_sha256": "f28b7b9a3d0f63ebbdec93de6c23d8cd3904e68576be3f9080fd62947266a6a7",
+    "sha256": "524720dacf0cc78d6b8eff5fe057ad60d679e70a209c73af42720a0bb5ef3da9",
+    "source_url": "https://github.com/allenai/OLMoE/blob/357454f4f647385839c0ff6b99a688dc7cd9c13f/visuals/figures/granularity.pdf",
+    "source_image_url": "https://github.com/allenai/OLMoE/blob/357454f4f647385839c0ff6b99a688dc7cd9c13f/visuals/figures/granularity.pdf",
+    "source_page": 1,
+    "render_dpi": 96,
+    "render_page_size_px": [
+      3084,
+      780
+    ],
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/allenai/OLMoE/blob/357454f4f647385839c0ff6b99a688dc7cd9c13f/LICENSE",
+    "license_evidence": "05 Источники/Originals/moe-2026-10-23/OLMoE-LICENSE.txt",
+    "license_evidence_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "derivation": "pdf-page-render",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Rendered original PDF; all panels, axes, legends and English labels retained; no crop or redraw",
+    "commit": "357454f4f647385839c0ff6b99a688dc7cd9c13f"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/moe-2026-10-23/olmoe-lbl.png",
+    "author": "Niklas Muennighoff et al. / Allen Institute for AI",
+    "source_asset": "05 Источники/Originals/moe-2026-10-23/olmoe-lbl.pdf",
+    "source_asset_sha256": "c1b7675721cb579800f1581af5a938a008221e706984ad7bcf4a01e43d41ed11",
+    "sha256": "f2c2971536cacdc94d3c011db366ac632f7333727a9aa11ffa250dc80ea42197",
+    "source_url": "https://github.com/allenai/OLMoE/blob/357454f4f647385839c0ff6b99a688dc7cd9c13f/visuals/figures/lbl.pdf",
+    "source_image_url": "https://github.com/allenai/OLMoE/blob/357454f4f647385839c0ff6b99a688dc7cd9c13f/visuals/figures/lbl.pdf",
+    "source_page": 1,
+    "render_dpi": 96,
+    "render_page_size_px": [
+      3119,
+      780
+    ],
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/allenai/OLMoE/blob/357454f4f647385839c0ff6b99a688dc7cd9c13f/LICENSE",
+    "license_evidence": "05 Источники/Originals/moe-2026-10-23/OLMoE-LICENSE.txt",
+    "license_evidence_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "derivation": "pdf-page-render",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Rendered original PDF; all panels, axes, legends and English labels retained; no crop or redraw",
+    "commit": "357454f4f647385839c0ff6b99a688dc7cd9c13f"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/moe-2026-10-23/olmoe-lbltoks.png",
+    "author": "Niklas Muennighoff et al. / Allen Institute for AI",
+    "source_asset": "05 Источники/Originals/moe-2026-10-23/olmoe-lbltoks.pdf",
+    "source_asset_sha256": "0a2acfeb61e049cda3b70cb3796a464235df6629308a368a0c803dbd355ae044",
+    "sha256": "91ab3320ba5068482160ae6b61a5e7935d4ef5c4a9068658be50903c179ecf13",
+    "source_url": "https://github.com/allenai/OLMoE/blob/357454f4f647385839c0ff6b99a688dc7cd9c13f/visuals/figures/lbltoks.pdf",
+    "source_image_url": "https://github.com/allenai/OLMoE/blob/357454f4f647385839c0ff6b99a688dc7cd9c13f/visuals/figures/lbltoks.pdf",
+    "source_page": 1,
+    "render_dpi": 96,
+    "render_page_size_px": [
+      2661,
+      804
+    ],
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/allenai/OLMoE/blob/357454f4f647385839c0ff6b99a688dc7cd9c13f/LICENSE",
+    "license_evidence": "05 Источники/Originals/moe-2026-10-23/OLMoE-LICENSE.txt",
+    "license_evidence_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "derivation": "pdf-page-render",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Rendered original PDF; all panels, axes, legends and English labels retained; no crop or redraw",
+    "commit": "357454f4f647385839c0ff6b99a688dc7cd9c13f"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/moe-2026-10-23/olmoe-zloss.png",
+    "author": "Niklas Muennighoff et al. / Allen Institute for AI",
+    "source_asset": "05 Источники/Originals/moe-2026-10-23/olmoe-zloss.pdf",
+    "source_asset_sha256": "d067fc92fa3bebf8fa55d50e1a4b987548f65e7837406be1e043fa56b754338c",
+    "sha256": "8bee50bde79ab91dbf440d6ccf5db913d25291d35c592b19e9427e4e0fabe4cb",
+    "source_url": "https://github.com/allenai/OLMoE/blob/357454f4f647385839c0ff6b99a688dc7cd9c13f/visuals/figures/zloss.pdf",
+    "source_image_url": "https://github.com/allenai/OLMoE/blob/357454f4f647385839c0ff6b99a688dc7cd9c13f/visuals/figures/zloss.pdf",
+    "source_page": 1,
+    "render_dpi": 96,
+    "render_page_size_px": [
+      3083,
+      780
+    ],
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/allenai/OLMoE/blob/357454f4f647385839c0ff6b99a688dc7cd9c13f/LICENSE",
+    "license_evidence": "05 Источники/Originals/moe-2026-10-23/OLMoE-LICENSE.txt",
+    "license_evidence_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "derivation": "pdf-page-render",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Rendered original PDF; all panels, axes, legends and English labels retained; no crop or redraw",
+    "commit": "357454f4f647385839c0ff6b99a688dc7cd9c13f"
+  }
+]

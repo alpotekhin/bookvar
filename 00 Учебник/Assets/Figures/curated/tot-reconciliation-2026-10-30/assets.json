@@ -1,0 +1,125 @@
+[
+  {
+    "id": "curated-tot-reconciliation-tot-creative-search-61bea3f4f86b",
+    "asset": "00 Учебник/Assets/Figures/curated/tot-reconciliation-2026-10-30/tot-creative-search.png",
+    "sha256": "61bea3f4f86b0728499a82838196f3bd8aca11d6045e180e721522b81d6cac71",
+    "bytes": 250492,
+    "width": 1690,
+    "height": 750,
+    "author": "Shunyu Yao et al.",
+    "title": "Tree of Thoughts: Figure 4",
+    "source_url": "https://arxiv.org/abs/2305.10601v2",
+    "source_image_url": "https://arxiv.org/pdf/2305.10601v2#page=7",
+    "source_asset": "05 Источники/Originals/agent-memory-planning-2026-10-20/tree-of-thoughts.pdf",
+    "source_asset_sha256": "79c5237e3f63953a73f2b0d6894327702ee1f7e981450c251bb1b5cb4f8d7b8f",
+    "source_page": 7,
+    "source_page_snapshot": "05 Источники/Originals/tot-reconciliation-2026-10-30/tot-07.png",
+    "source_page_sha256": "c81d3939dd4794c3031e62faef01b7157825864f3305e865229fb5df51abda88",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/agent-memory-planning-2026-10-20/tree-of-thoughts-abstract.html",
+    "license_evidence_sha256": "9da03295d951ff9e2df517c41c438b16711c86aab22f0f137c8a9e8704d6995b",
+    "derivation": "pdf-page-render-crop",
+    "render_dpi": 300,
+    "render_page_size_px": [
+      2550,
+      3300
+    ],
+    "crop_box_px": [
+      440,
+      305,
+      2130,
+      1055
+    ],
+    "modifications": "Complete original numbered figure, all panels, labels and English caption. Surrounding paper material excluded. No redraw, translation, retouching or upscale.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-30",
+    "used_in": [
+      "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md"
+    ]
+  },
+  {
+    "id": "curated-tot-reconciliation-tot-creative-results-da6f37a5e39f",
+    "asset": "00 Учебник/Assets/Figures/curated/tot-reconciliation-2026-10-30/tot-creative-results.png",
+    "sha256": "da6f37a5e39f90a3336f40197b6f47fd80c9053412381ea47112730cdda41231",
+    "bytes": 34666,
+    "width": 1050,
+    "height": 520,
+    "author": "Shunyu Yao et al.",
+    "title": "Tree of Thoughts: Figure 5",
+    "source_url": "https://arxiv.org/abs/2305.10601v2",
+    "source_image_url": "https://arxiv.org/pdf/2305.10601v2#page=7",
+    "source_asset": "05 Источники/Originals/agent-memory-planning-2026-10-20/tree-of-thoughts.pdf",
+    "source_asset_sha256": "79c5237e3f63953a73f2b0d6894327702ee1f7e981450c251bb1b5cb4f8d7b8f",
+    "source_page": 7,
+    "source_page_snapshot": "05 Источники/Originals/tot-reconciliation-2026-10-30/tot-07.png",
+    "source_page_sha256": "c81d3939dd4794c3031e62faef01b7157825864f3305e865229fb5df51abda88",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/agent-memory-planning-2026-10-20/tree-of-thoughts-abstract.html",
+    "license_evidence_sha256": "9da03295d951ff9e2df517c41c438b16711c86aab22f0f137c8a9e8704d6995b",
+    "derivation": "pdf-page-render-crop",
+    "render_dpi": 300,
+    "render_page_size_px": [
+      2550,
+      3300
+    ],
+    "crop_box_px": [
+      440,
+      1075,
+      1490,
+      1595
+    ],
+    "modifications": "Complete original numbered figure, all panels, labels and English caption. Surrounding paper material excluded. No redraw, translation, retouching or upscale.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-30",
+    "used_in": [
+      "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md"
+    ]
+  },
+  {
+    "id": "curated-tot-reconciliation-tot-crossword-dfs-2c692a2260ac",
+    "asset": "00 Учебник/Assets/Figures/curated/tot-reconciliation-2026-10-30/tot-crossword-dfs.png",
+    "sha256": "2c692a2260acee60bcf348b50c14445dcbaaf9da027c8e13901d19b34adeb37d",
+    "bytes": 161091,
+    "width": 1690,
+    "height": 755,
+    "author": "Shunyu Yao et al.",
+    "title": "Tree of Thoughts: Figure 6",
+    "source_url": "https://arxiv.org/abs/2305.10601v2",
+    "source_image_url": "https://arxiv.org/pdf/2305.10601v2#page=8",
+    "source_asset": "05 Источники/Originals/agent-memory-planning-2026-10-20/tree-of-thoughts.pdf",
+    "source_asset_sha256": "79c5237e3f63953a73f2b0d6894327702ee1f7e981450c251bb1b5cb4f8d7b8f",
+    "source_page": 8,
+    "source_page_snapshot": "05 Источники/Originals/tot-reconciliation-2026-10-30/tot-08.png",
+    "source_page_sha256": "e7c6dd5b1f93400582c79bccf150ea607ae0eb81345acc5c11f29347830e0554",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/agent-memory-planning-2026-10-20/tree-of-thoughts-abstract.html",
+    "license_evidence_sha256": "9da03295d951ff9e2df517c41c438b16711c86aab22f0f137c8a9e8704d6995b",
+    "derivation": "pdf-page-render-crop",
+    "render_dpi": 300,
+    "render_page_size_px": [
+      2550,
+      3300
+    ],
+    "crop_box_px": [
+      440,
+      325,
+      2130,
+      1080
+    ],
+    "modifications": "Complete original numbered figure, all panels, labels and English caption. Surrounding paper material excluded. No redraw, translation, retouching or upscale.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-30",
+    "used_in": [
+      "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md"
+    ]
+  }
+]

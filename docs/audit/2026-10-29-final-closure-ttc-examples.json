@@ -1,0 +1,23 @@
+{
+  "python_fences": 6,
+  "subset_cases": 440,
+  "coconut_feedback_gradient_cases": 41,
+  "coconut_curriculum_cases": 16,
+  "coconut_rejected_inputs": 4,
+  "unbiased_cases": 275,
+  "majority_cases": 35,
+  "mode_cases": 3280,
+  "upstream_replay": {
+    "propose_calls": 3,
+    "value_calls": 6,
+    "value_outputs": 18
+  },
+  "stdout": [
+    "pass@4: 0.8333333333333334",
+    "weighted vote: 4 {4: Fraction(29, 20), 8: Fraction(9, 10), 5: Fraction(1, 5)}",
+    "frontier: ['A\\nA1\\n', 'A\\nA2\\n']",
+    "budget multipliers: 94 49/10"
+  ],
+  "stdout_note": "Omitted nondeterministic Python function address from replay diagnostics; complete stdout is archived with verification logs.",
+  "chapter_sha256": "c25a11e993cbcd37387d64003c575b2448c4979b828a7819b4f59a8cd4f5b99d"
+}

@@ -25,3 +25,9 @@ The full original remains linked. The legend is explained in the accompanying
 text. No translated labels, redrawing or colour changes.
 Local filenames differ from upstream filenames.
 Source URLs, checksums and usage locations are recorded in asset-registry.yml.
+
+2026-10-23: the inline NeMo crop was regenerated from the original JPEG,
+preserving its decoded RGB pixels and embedded ICC profile. The full decoded
+parent is nemo-checkpointing-source-exact.png. The previous full PNG conversion
+and a snapshot of the previous crop are retained for the audit; no original
+source file was overwritten. Geometry and labels remain unchanged.

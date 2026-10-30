@@ -1,0 +1,140 @@
+[
+  {
+    "id": "curated-lasr-overview-4271a43f4e1d",
+    "asset": "00 Учебник/Assets/Figures/curated/scientific-discovery-2026-10-21/lasr-overview.svg",
+    "author": "Arya Grayeli et al.",
+    "source_url": "https://arxiv.org/html/2409.09359v3#S1.F1",
+    "source_image_url": "https://arxiv.org/html/2409.09359v3/neurips24-lasr-figure-1-overview-loopy-2.svg",
+    "source_asset": "05 Источники/Originals/scientific-discovery-2026-10-21/lasr-overview.svg",
+    "source_asset_sha256": "4271a43f4e1dc2458c4915f33951e41b15db83e387a18b5bc3580ea724701a0a",
+    "source_page_snapshot": "05 Источники/Originals/scientific-discovery-2026-10-21/lasr-v3.html",
+    "source_page_sha256": "105604a9aadaa7564379c5717c78c108514eca67c530eb974351822a1e873200",
+    "sha256": "4271a43f4e1dc2458c4915f33951e41b15db83e387a18b5bc3580ea724701a0a",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/scientific-discovery-2026-10-21/lasr-license.html",
+    "license_evidence_sha256": "76e2d36483f78303dd261ed0ebb0f6f6cac2083d16f4aa816690fdf84c9dcd52",
+    "modifications": "Original version-pinned SVG copied byte-for-byte; no crop, translation, resize or redraw.",
+    "used_in": [
+      "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "source-svg-copy"
+  },
+  {
+    "id": "curated-lasr-evolution-12b3a4186910",
+    "asset": "00 Учебник/Assets/Figures/curated/scientific-discovery-2026-10-21/lasr-evolution.svg",
+    "author": "Arya Grayeli et al.",
+    "source_url": "https://arxiv.org/html/2409.09359v3#S3.F2",
+    "source_image_url": "https://arxiv.org/html/2409.09359v3/neurips24-lasr-figure-2-architecture-1.svg",
+    "source_asset": "05 Источники/Originals/scientific-discovery-2026-10-21/lasr-evolution.svg",
+    "source_asset_sha256": "12b3a418691062c3b379763d5a39528c4bed11534e2ea82e07a2b7c027605194",
+    "source_page_snapshot": "05 Источники/Originals/scientific-discovery-2026-10-21/lasr-v3.html",
+    "source_page_sha256": "105604a9aadaa7564379c5717c78c108514eca67c530eb974351822a1e873200",
+    "sha256": "12b3a418691062c3b379763d5a39528c4bed11534e2ea82e07a2b7c027605194",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/scientific-discovery-2026-10-21/lasr-license.html",
+    "license_evidence_sha256": "76e2d36483f78303dd261ed0ebb0f6f6cac2083d16f4aa816690fdf84c9dcd52",
+    "modifications": "Original version-pinned SVG copied byte-for-byte; no crop, translation, resize or redraw.",
+    "used_in": [
+      "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "source-svg-copy"
+  },
+  {
+    "id": "curated-lasr-ablations-00044c1265c5",
+    "asset": "00 Учебник/Assets/Figures/curated/scientific-discovery-2026-10-21/lasr-ablations.svg",
+    "author": "Arya Grayeli et al.",
+    "source_url": "https://arxiv.org/html/2409.09359v3#S4.F3",
+    "source_image_url": "https://arxiv.org/html/2409.09359v3/iter_graph.svg",
+    "source_asset": "05 Источники/Originals/scientific-discovery-2026-10-21/lasr-ablations.svg",
+    "source_asset_sha256": "00044c1265c5f29819427016c75cb8826c5253e7c11eab3ce10262d3a1cb09e5",
+    "source_page_snapshot": "05 Источники/Originals/scientific-discovery-2026-10-21/lasr-v3.html",
+    "source_page_sha256": "105604a9aadaa7564379c5717c78c108514eca67c530eb974351822a1e873200",
+    "sha256": "00044c1265c5f29819427016c75cb8826c5253e7c11eab3ce10262d3a1cb09e5",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/scientific-discovery-2026-10-21/lasr-license.html",
+    "license_evidence_sha256": "76e2d36483f78303dd261ed0ebb0f6f6cac2083d16f4aa816690fdf84c9dcd52",
+    "modifications": "Original version-pinned SVG copied byte-for-byte; no crop, translation, resize or redraw.",
+    "used_in": [
+      "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "source-svg-copy"
+  },
+  {
+    "id": "curated-escher-overview-5a076fbac829",
+    "asset": "00 Учебник/Assets/Figures/curated/scientific-discovery-2026-10-21/escher-overview.svg",
+    "author": "Atharva Sehgal et al.",
+    "source_url": "https://arxiv.org/html/2504.00185v1#S1.F1",
+    "source_image_url": "https://arxiv.org/html/2504.00185v1/CVPR25-concept-evolution-figure-1-overview-5.svg",
+    "source_asset": "05 Источники/Originals/scientific-discovery-2026-10-21/escher-overview.svg",
+    "source_asset_sha256": "5a076fbac829297c52889c8dcd856d8910a6e78981890a116c233da6717b677c",
+    "source_page_snapshot": "05 Источники/Originals/scientific-discovery-2026-10-21/escher-v1.html",
+    "source_page_sha256": "5d6572fb9f94fd51993768b5e674733926b157412d6aebeb5411e1cca78f3ce8",
+    "sha256": "5a076fbac829297c52889c8dcd856d8910a6e78981890a116c233da6717b677c",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/scientific-discovery-2026-10-21/escher-license.html",
+    "license_evidence_sha256": "76d9823e648acb142420a5666cd14146e3020bfd22c838e97fb289c276f0fee9",
+    "modifications": "Original version-pinned SVG copied byte-for-byte; no crop, translation, resize or redraw.",
+    "used_in": [
+      "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "source-svg-copy"
+  },
+  {
+    "id": "curated-escher-bird-concepts-276c119f9374",
+    "asset": "00 Учебник/Assets/Figures/curated/scientific-discovery-2026-10-21/escher-bird-concepts.svg",
+    "author": "Atharva Sehgal et al.",
+    "source_url": "https://arxiv.org/html/2504.00185v1#S5.F3",
+    "source_image_url": "https://arxiv.org/html/2504.00185v1/cvpr25-concept-evol-qualitative-figure-4.svg",
+    "source_asset": "05 Источники/Originals/scientific-discovery-2026-10-21/escher-bird-concepts.svg",
+    "source_asset_sha256": "276c119f937442186badddeeb15919e4589e1520544314777b54c4879322504f",
+    "source_page_snapshot": "05 Источники/Originals/scientific-discovery-2026-10-21/escher-v1.html",
+    "source_page_sha256": "5d6572fb9f94fd51993768b5e674733926b157412d6aebeb5411e1cca78f3ce8",
+    "sha256": "276c119f937442186badddeeb15919e4589e1520544314777b54c4879322504f",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/scientific-discovery-2026-10-21/escher-license.html",
+    "license_evidence_sha256": "76d9823e648acb142420a5666cd14146e3020bfd22c838e97fb289c276f0fee9",
+    "modifications": "Original version-pinned SVG copied byte-for-byte; no crop, translation, resize or redraw.",
+    "used_in": [
+      "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "source-svg-copy"
+  },
+  {
+    "id": "curated-escher-history-prompt-01e28ab6cd15",
+    "asset": "00 Учебник/Assets/Figures/curated/scientific-discovery-2026-10-21/escher-history-prompt.svg",
+    "author": "Atharva Sehgal et al.",
+    "source_url": "https://arxiv.org/html/2504.00185v1#S7.F6",
+    "source_image_url": "https://arxiv.org/html/2504.00185v1/cvpr25-escher-history-prompt.svg",
+    "source_asset": "05 Источники/Originals/scientific-discovery-2026-10-21/escher-history-prompt.svg",
+    "source_asset_sha256": "01e28ab6cd15e93001060f8a8ae4860db4092bf569cc6550721241319e938c4d",
+    "source_page_snapshot": "05 Источники/Originals/scientific-discovery-2026-10-21/escher-v1.html",
+    "source_page_sha256": "5d6572fb9f94fd51993768b5e674733926b157412d6aebeb5411e1cca78f3ce8",
+    "sha256": "01e28ab6cd15e93001060f8a8ae4860db4092bf569cc6550721241319e938c4d",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/scientific-discovery-2026-10-21/escher-license.html",
+    "license_evidence_sha256": "76d9823e648acb142420a5666cd14146e3020bfd22c838e97fb289c276f0fee9",
+    "modifications": "Original version-pinned SVG copied byte-for-byte; no crop, translation, resize or redraw.",
+    "used_in": [
+      "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "source-svg-copy"
+  }
+]

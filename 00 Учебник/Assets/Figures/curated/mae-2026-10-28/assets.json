@@ -1,0 +1,101 @@
+[
+  {
+    "id": "curated-mae-architecture-468cb0ed6bcd",
+    "asset": "00 Учебник/Assets/Figures/curated/mae-2026-10-28/architecture.png",
+    "author": "Kaiming He, Xinlei Chen, Saining Xie, Yanghao Li, Piotr Dollár, Ross Girshick and Meta Platforms contributors",
+    "source_url": "https://github.com/facebookresearch/mae/blob/efb2a8062c206524e35e47d04501ed4f544c0ae8/README.md",
+    "source_image_url": "https://user-images.githubusercontent.com/11435359/146857310-f258c86c-fde6-48e8-9cee-badd2b21bd2c.png",
+    "source_asset": "05 Источники/Originals/mae-2026-10-28/architecture-release.png",
+    "source_asset_sha256": "468cb0ed6bcd501bf3c05e257d253fc7dbd6e36efedbca8e7372bdcffaa80467",
+    "source_page_snapshot": "05 Источники/Originals/mae-2026-10-28/mae/README.md",
+    "source_page_sha256": "edda3ecd28d6cb32559e638c56c7d28d59d6e2f9ada2dd084292c8706764bea6",
+    "commit": "efb2a8062c206524e35e47d04501ed4f544c0ae8",
+    "license": "CC BY-NC 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
+    "license_evidence": "05 Источники/Originals/mae-2026-10-28/mae/LICENSE",
+    "license_evidence_sha256": "ffe3b1e0b58c1f1250ce48f84d8c37328f9a1ff59bb77b63bc97480cf2778b64",
+    "public_license_copy": "site/public/licenses/mae-efb2a80-CC-BY-NC-4.0.txt",
+    "derivation": "source-raster-copy",
+    "dimensions_px": [
+      2022,
+      1158
+    ],
+    "sha256": "468cb0ed6bcd501bf3c05e257d253fc7dbd6e36efedbca8e7372bdcffaa80467",
+    "modifications": "Complete original README diagram copied byte-for-byte. No redraw, crop, label translation or upscaling. The project license applies to this released illustration, not a blanket relicensing of the paper or image datasets.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей.md"
+    ]
+  },
+  {
+    "id": "curated-mae-pixel-reconstruction-44ed298d8a3d",
+    "asset": "00 Учебник/Assets/Figures/curated/mae-2026-10-28/pixel-reconstruction.png",
+    "author": "Kaiming He, Xinlei Chen, Saining Xie, Yanghao Li, Piotr Dollár, Ross Girshick and Meta Platforms contributors",
+    "source_url": "https://github.com/facebookresearch/mae/blob/efb2a8062c206524e35e47d04501ed4f544c0ae8/demo/mae_visualize.ipynb",
+    "source_image_url": "https://raw.githubusercontent.com/facebookresearch/mae/efb2a8062c206524e35e47d04501ed4f544c0ae8/demo/mae_visualize.ipynb",
+    "source_asset": "05 Источники/Originals/mae-2026-10-28/mae/mae_visualize.ipynb",
+    "source_asset_sha256": "66052e4579206d1b8b277bf813ac0458f835b94dcf78772f28b3c7edf932fd0b",
+    "source_page_snapshot": "05 Источники/Originals/mae-2026-10-28/mae/README.md",
+    "source_page_sha256": "edda3ecd28d6cb32559e638c56c7d28d59d6e2f9ada2dd084292c8706764bea6",
+    "source_cell": 10,
+    "source_output_mime": "image/png",
+    "original_image_credit": "Fox image: ILSVRC2012_val_00046145, credited in notebook cell 6",
+    "commit": "efb2a8062c206524e35e47d04501ed4f544c0ae8",
+    "license": "CC BY-NC 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
+    "license_evidence": "05 Источники/Originals/mae-2026-10-28/mae/LICENSE",
+    "license_evidence_sha256": "ffe3b1e0b58c1f1250ce48f84d8c37328f9a1ff59bb77b63bc97480cf2778b64",
+    "public_license_copy": "site/public/licenses/mae-efb2a80-CC-BY-NC-4.0.txt",
+    "derivation": "notebook-output-extraction",
+    "dimensions_px": [
+      1353,
+      323
+    ],
+    "sha256": "44ed298d8a3d88bb0fbf022eccf26e4d0e52f0f79bbc1509f92c7eec6df10fa3",
+    "modifications": "Complete original image/png output from notebook cell 10 decoded without pixel edits, crop, label translation or upscaling. All four panels and labels retained. Pixel-only reconstruction model. Authors source photo credit retained; no blanket ImageNet dataset relicensing is asserted.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей.md"
+    ]
+  },
+  {
+    "id": "curated-mae-gan-comparison-424d14cebe8f",
+    "asset": "00 Учебник/Assets/Figures/curated/mae-2026-10-28/gan-comparison.png",
+    "author": "Kaiming He, Xinlei Chen, Saining Xie, Yanghao Li, Piotr Dollár, Ross Girshick and Meta Platforms contributors",
+    "source_url": "https://github.com/facebookresearch/mae/blob/efb2a8062c206524e35e47d04501ed4f544c0ae8/demo/mae_visualize.ipynb",
+    "source_image_url": "https://raw.githubusercontent.com/facebookresearch/mae/efb2a8062c206524e35e47d04501ed4f544c0ae8/demo/mae_visualize.ipynb",
+    "source_asset": "05 Источники/Originals/mae-2026-10-28/mae/mae_visualize.ipynb",
+    "source_asset_sha256": "66052e4579206d1b8b277bf813ac0458f835b94dcf78772f28b3c7edf932fd0b",
+    "source_page_snapshot": "05 Источники/Originals/mae-2026-10-28/mae/README.md",
+    "source_page_sha256": "edda3ecd28d6cb32559e638c56c7d28d59d6e2f9ada2dd084292c8706764bea6",
+    "source_cell": 14,
+    "source_output_mime": "image/png",
+    "original_image_credit": "Fox image: ILSVRC2012_val_00046145, credited in notebook cell 6",
+    "commit": "efb2a8062c206524e35e47d04501ed4f544c0ae8",
+    "license": "CC BY-NC 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
+    "license_evidence": "05 Источники/Originals/mae-2026-10-28/mae/LICENSE",
+    "license_evidence_sha256": "ffe3b1e0b58c1f1250ce48f84d8c37328f9a1ff59bb77b63bc97480cf2778b64",
+    "public_license_copy": "site/public/licenses/mae-efb2a80-CC-BY-NC-4.0.txt",
+    "derivation": "notebook-output-extraction",
+    "dimensions_px": [
+      1353,
+      323
+    ],
+    "sha256": "424d14cebe8fe9a2a58e2503e7e434649f23fd76e98bb418760f2d840ff3b572",
+    "modifications": "Complete original image/png output from notebook cell 14 decoded without pixel edits, crop, label translation or upscaling. All four panels and labels retained. Separate optional extra-GAN-loss model, not the pixel-only baseline. Authors source photo credit retained; no blanket ImageNet dataset relicensing is asserted.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей.md"
+    ]
+  }
+]

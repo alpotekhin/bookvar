@@ -1,0 +1,114 @@
+[
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/agent-harness-2026-10/lost-middle-position-effect.png",
+    "source_asset": "05 Источники/Papers/Source PDFs/lost-in-the-middle-tacl-2024.pdf",
+    "source_page": 2,
+    "source_page_snapshot": "05 Источники/Originals/agent-harness-2026-10-20/lost-middle-page-02.png",
+    "crop_box_px": [
+      330,
+      250,
+      1390,
+      1895
+    ],
+    "render_page_size_px": [
+      2829,
+      4000
+    ],
+    "label": "Figure 1",
+    "author": "Nelson F. Liu et al.",
+    "source_url": "https://aclanthology.org/2024.tacl-1.9/",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/agent-harness-2026-10-20/lost-middle.txt",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Complete original numbered figure(s) and English caption(s); unrelated surrounding text excluded. No redraw, label translation or edits inside the figures.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/17 Tools и Agents/66 Agent harness и context engineering.md"
+    ],
+    "sha256": "48a91b777e9997484f9ee2dba9f375232412e1f3cc64a64766c3e83720c2ae76",
+    "source_asset_sha256": "f37f6fabe0fe0d8c73b67579cd115dbf14e282cfb7b7af655ae8109638402c9b",
+    "source_page_sha256": "21cd6a1e5a592c2f8f14e310693092722df76e680b528dc83c3accfbb0586211",
+    "license_evidence_sha256": "43c5e837e7f033a0e603fcb5b2462be1cc1ff579f387e6bfb6933e4fe283efc2",
+    "width": 1060,
+    "height": 1645,
+    "id": "curated-agent-harness-lost-middle-position-effect-48a91b777e99"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/agent-harness-2026-10/lost-middle-task-controls.png",
+    "source_asset": "05 Источники/Papers/Source PDFs/lost-in-the-middle-tacl-2024.pdf",
+    "source_page": 4,
+    "source_page_snapshot": "05 Источники/Originals/agent-harness-2026-10-20/lost-middle-page-04.png",
+    "crop_box_px": [
+      330,
+      260,
+      2510,
+      2435
+    ],
+    "render_page_size_px": [
+      2829,
+      4000
+    ],
+    "label": "Figures 2–4",
+    "author": "Nelson F. Liu et al.",
+    "source_url": "https://aclanthology.org/2024.tacl-1.9/",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/agent-harness-2026-10-20/lost-middle.txt",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Complete original numbered figure(s) and English caption(s); unrelated surrounding text excluded. No redraw, label translation or edits inside the figures.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/17 Tools и Agents/66 Agent harness и context engineering.md"
+    ],
+    "sha256": "9756e7d13e5d0dd86ccec1c9310fe74f0d3a40189f8b24c9601149fc5ca2192c",
+    "source_asset_sha256": "f37f6fabe0fe0d8c73b67579cd115dbf14e282cfb7b7af655ae8109638402c9b",
+    "source_page_sha256": "79b6484fd2914d4a163218facf6e681f8fb1a077fdae2057029d16e014981986",
+    "license_evidence_sha256": "43c5e837e7f033a0e603fcb5b2462be1cc1ff579f387e6bfb6933e4fe283efc2",
+    "width": 2180,
+    "height": 2175,
+    "id": "curated-agent-harness-lost-middle-task-controls-9756e7d13e5d"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/agent-harness-2026-10/swe-agent-prompt-workflow.png",
+    "source_asset": "05 Источники/Originals/agent-harness-2026-10-20/swe-agent.pdf",
+    "source_page": 39,
+    "source_page_snapshot": "05 Источники/Originals/agent-harness-2026-10-20/swe-agent-page-39.png",
+    "crop_box_px": [
+      530,
+      1280,
+      2560,
+      2285
+    ],
+    "render_page_size_px": [
+      3091,
+      4000
+    ],
+    "label": "Figure 26",
+    "author": "John Yang et al.",
+    "source_url": "https://arxiv.org/abs/2405.15793v3",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/agent-harness-2026-10-20/swe-agent-abstract.html",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Complete original numbered figure(s) and English caption(s); unrelated surrounding text excluded. No redraw, label translation or edits inside the figures.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/17 Tools и Agents/66 Agent harness и context engineering.md"
+    ],
+    "sha256": "207fb97a777800f5f71a03e17d81c2eec0b123b1bce7c9ed0a00481a5cac5941",
+    "source_asset_sha256": "d171e0693060b910ceb2cddd0fd4bc7cae302005d42d0d8059bfdbe056c3adba",
+    "source_page_sha256": "9db8310e29a532d92e5df67b26b0035f802f43cb19e68f8968655bdc7d00129b",
+    "license_evidence_sha256": "c00b334ab131db5e00a7f869618fe605755149fa3b158ff854af608222951884",
+    "width": 2030,
+    "height": 1005,
+    "id": "curated-agent-harness-swe-agent-prompt-workflow-207fb97a7778"
+  }
+]
+

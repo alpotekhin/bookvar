@@ -1,0 +1,55 @@
+[
+  {
+    "id": "curated-tulu3-overview-c41ba1e6892e",
+    "asset": "00 Учебник/Assets/Figures/curated/sft-2026-10-23/tulu3-overview.png",
+    "author": "Nathan Lambert et al.",
+    "source_url": "https://arxiv.org/html/2411.15124v5#S0.F1",
+    "source_image_url": "https://arxiv.org/html/2411.15124v5/tulu3_figure1_v2.png",
+    "source_asset": "05 Источники/Originals/sft-2026-10-23/tulu3-overview.png",
+    "source_asset_sha256": "c41ba1e6892e3cdc3bb1a3abca66e73d096e4af2f70779cf1c31b0cb0b3dd545",
+    "sha256": "c41ba1e6892e3cdc3bb1a3abca66e73d096e4af2f70779cf1c31b0cb0b3dd545",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/sft-2026-10-23/tulu3-v5.html",
+    "license_evidence_sha256": "0a437403a0fce0cab42931983f67753c1260df36df66dbd34abfe4603e9ef0ef",
+    "modifications": "Original version-pinned Figure 1 PNG copied byte-for-byte; no crop, resize, translation or redraw.",
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "source-raster-copy"
+  },
+  {
+    "id": "curated-minicpm-two-stage-700ff000c199",
+    "asset": "00 Учебник/Assets/Figures/curated/sft-2026-10-23/minicpm-two-stage-mixture.png",
+    "author": "Shengding Hu et al.",
+    "source_url": "https://arxiv.org/pdf/2404.06395v1#page=12",
+    "source_asset": "05 Источники/Originals/optimization-2026-10-21/minicpm-v1.pdf",
+    "source_asset_sha256": "46bd6d935ba60d5dec6ab4a1bfe9fbce6a8b81a03be9dd91c4502f4aabe5b880",
+    "source_page": 12,
+    "render_dpi": 600,
+    "render_page_size_px": [
+      5100,
+      6600
+    ],
+    "crop_box_px": [
+      860,
+      3380,
+      4240,
+      4980
+    ],
+    "sha256": "700ff000c1999eb13c98de77a33fb4fc77c6d9c0de072997a590c1aa2a5bd2c3",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/sft-2026-10-23/minicpm-v1-license.html",
+    "license_evidence_sha256": "e9c7e2b7585330c5f6e57e593b81e391f838e6acf3ae6c218bfb750a1cdb4266",
+    "modifications": "Poppler 600 dpi PDF rendering; crop only around both complete Figure 11 panels and full English caption, no redraw or translation.",
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "pdf-page-render-crop"
+  }
+]

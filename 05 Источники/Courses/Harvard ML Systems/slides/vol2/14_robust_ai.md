@@ -9,17 +9,41 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`slides/vol2/14_robust_ai/14_robust_ai.tex`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static slide archive
+> Text and equations retain the original language. Layout wrappers are simplified;
+> speaker notes are separate, and original SVGs are not redrawn or cropped.
+> Unsupported TeX remains visible and is listed beside the affected slide.
+> This archive is not a checked transcript or a finished Bookvar chapter.
 
 # VOL2 Slides — Robust Ai
 
 ## Readable slide sequence
 
+## Robust AI
+
+[Original slide 1](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L64)
+
+Making the Invisible Visible
+
 ## Learning Objectives
 
-{
+[Original slide 2](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L69)
+
+1. Classify robustness challenges into **environmental shifts**, **adversarial attacks**, and **data poisoning**
+2. Explain why ML systems **fail silently** and quantify the **robustness–accuracy trade-off**
+3. Evaluate adversarial attack techniques (**FGSM**, **PGD**, **C&W**) and their threat models
+4. Apply statistical methods (**MMD**, **PSI**, **KS tests**) to detect distribution shifts
+5. Construct **multi-layered defenses** combining adversarial training, certified defenses, and input sanitization
+6. Integrate robustness with **compute and accuracy trade-offs** across the ML lifecycle
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [2 min] Walk through each objective. Emphasize that robustness is a systems
 property, not just an algorithmic feature. ``This chapter makes the invisible
@@ -32,19 +56,36 @@ Cold-call one student. [Expected: most will admit they would not know.]
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] This slide sets the chapter scope.
 IF SHORT: Read objectives 1, 2, and 5 aloud; let students scan the rest.
-}
+```
 
-{0pt}
-- Classify robustness challenges into **environmental shifts**, **adversarial attacks**, and **data poisoning**
-- Explain why ML systems **fail silently** and quantify the **robustness--accuracy trade-off**
-- Evaluate adversarial attack techniques (**FGSM**, **PGD**, **C&W**) and their threat models
-- Apply statistical methods (**MMD**, **PSI**, **KS tests**) to detect distribution shifts
-- Construct **multi-layered defenses** combining adversarial training, certified defenses, and input sanitization
-- Integrate robustness with **compute and accuracy trade-offs** across the ML lifecycle
+</details>
 
 ## Visual Language
 
-{
+[Original slide 3](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L97)
+
+Throughout this course, colors carry meaning:
+
+**Blue** — Compute / Processing
+
+GPU ops, forward/backward pass, inference
+
+**Green** — Data / Memory
+
+Data flow, caches, healthy paths
+
+**Orange** — Routing / Scheduling
+
+Load balancers, batch windows
+
+**Red** — Error / Cost / Bottleneck
+
+Loss, decode phase, waste
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Students have already seen this color vocabulary across earlier chapters.
 This reminder anchors the chapter's dominant theme before the first concept.
@@ -60,37 +101,24 @@ Ask: ``Before we begin --- in this chapter, which color will dominate and why?''
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Skip if students have seen this in a previous lecture.
-}
+```
 
-Throughout this course, colors carry meaning:
-
-{0.3cm}
-[T]
-  
-    {mlsyscard}{computestroke}
-    **Blue** --- Compute / Processing\\
-    { GPU ops, forward/backward pass, inference}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{datastroke}
-    **Green** --- Data / Memory\\
-    { Data flow, caches, healthy paths}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{routingstroke}
-    **Orange** --- Routing / Scheduling\\
-    { Load balancers, batch windows}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{errorstroke}
-    **Red** --- Error / Cost / Bottleneck\\
-    { Loss, decode phase, waste}
-    {mlsyscard}
+</details>
 
 ## The Silent Failure Problem
 
-{
+[Original slide 4](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L152)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/14_robust_ai/images/silent-failure-modes.svg]]
+
+Harvard Edge ML Systems Book contributors, [silent-failure-modes.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/images/silent-failure-modes.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Key:** No code changed. No crash. No alert. The *world* changed.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Ch 13 covered intentional attacks. This chapter opens with a different threat:
 the model fails on its own, without any adversary, because the world changed.
@@ -99,7 +127,7 @@ the model fails on its own, without any adversary, because the world changed.
 [3 min] Point to the diagram: ``Traditional software crashes loudly with stack
 traces. ML models produce confident but wrong outputs --- no exception, no alert,
 no crash.'' The autonomous vehicle scenario makes this visceral: ``The model
-kept driving at full speed because it was 98% confident the white trailer was sky.''
+kept driving at full speed because it was 98\% confident the white trailer was sky.''
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
 Ask: ``What is more dangerous --- a system that crashes or one that keeps running
@@ -114,18 +142,31 @@ on out-of-distribution inputs the model encounters in production.
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] This is the chapter thesis --- do not skip.
 IF SHORT: State ``ML fails silently'' and show one line of the diagram.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{silent-failure-modes.pdf}
-
-{0.15cm}
-{Key:}{No code changed. No crash. No alert. The *world* changed.}
+</details>
 
 ## Defining Robust AI
 
-{
+[Original slide 5](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L188)
+
+**Robust AI:** The measurable systems property that predictions remain valid —
+within specified error bounds — under distribution shift, adversarial perturbation,
+and hardware/software faults.
+
+|  | **Standard Accuracy** | **Robustness** |
+| --- | --- | --- |
+| Measures | Average-case (i.i.d. test) | Worst-case (adversarial / OOD) |
+| Perturbation | None | $\varepsilon = 8/255$ ($L_\infty$) |
+| Accuracy | 76% (ResNet-50) | drops 30–60% in nonrobust models |
+| Failure mode | Visible in metrics | Silent, high-confidence |
+
+**Distinction:** 95% test accuracy can coexist with 100% vulnerability to targeted perturbations.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The previous slide showed that ML fails silently. This slide defines what
 ``robust'' means formally --- a measurable systems property, not a vague goal.
@@ -139,44 +180,46 @@ in nonrobust models. The goal: maintain accuracy within specified bounds.''
 
 % -- WARN: What students will get wrong on THIS topic
 Common error: students think robustness = higher accuracy. Correct framing:
-95% test accuracy can coexist with 100% vulnerability to targeted
+95\% test accuracy can coexist with 100\% vulnerability to targeted
 perturbations. They measure fundamentally different things.
 CAUTION: do not conflate adversarial perturbation with hardware bit flips ---
-the 76%$$11% single-bit-flip result (covered on the SDC slide) is a
-*hardware fault* failure mode, not the epsilon=8/255 adversarial attack.
+the 76\%$\to$11\% single-bit-flip result (covered on the SDC slide) is a
+\emph{hardware fault} failure mode, not the epsilon=8/255 adversarial attack.
 
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] The formal definition structures all subsequent slides.
 IF SHORT: Read the definition and the epsilon=8/255 number only.
-}
+```
 
-{mlsyscard}{crimson}
-**Robust AI:** The measurable systems property that predictions remain valid ---
-within specified error bounds --- under distribution shift, adversarial perturbation,
-and hardware/software faults.
-{mlsyscard}
-
-{0.1cm}
-{}{1.1}
-{
-{tabular}{@{}lll@{}}
-  
-  & **Standard Accuracy** & **Robustness** \\
-  
-  Measures     & Average-case (i.i.d.\ test) & Worst-case (adversarial / OOD) \\
-  Perturbation & None                         & $ = 8/255$ ($L_$) \\
-  Accuracy     & 76% (ResNet-50)             & drops 30--60% in nonrobust models \\
-  Failure mode & Visible in metrics           & Silent, high-confidence \\
-  
-{tabular}
-}
-
-{0.1cm}
-{Distinction:}{95% test accuracy can coexist with 100% vulnerability to targeted perturbations.}
+</details>
 
 ## War Story: Google Photos Gorilla Label (2015) (1/2)
 
-{
+[Original slide 6](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L245)
+
+**What happened:**
+
+- Google Photos (June 2015): automatic image labeling at consumer scale
+- Classifier mislabeled photos of Black users as “gorilla”
+- Chief Architect responded publicly within hours: “100% NOT OK”
+
+**Fix:**
+
+- Delete labels “gorilla,” “chimpanzee,” “monkey” entirely
+- Category deletion, not model correction
+
+**The Incident**
+
+High average accuracy masked a catastrophic failure on a specific
+demographic subpopulation. No alert fired. No exception thrown.
+A high-confidence model produced wrong outputs silently.
+
+Source on slide: Kasperkevic, The Guardian, 2015
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 We defined robustness as worst-case guarantees across the input distribution.
 This incident shows what ``worst case'' means at consumer scale: a model that
@@ -186,44 +229,38 @@ performs well on average catastrophically fails on a specific demographic slice.
 [2 min] Walk through the incident: ``In June 2015, Google Photos launched
 automatic image labeling at consumer scale. The classifier mislabeled photos of
 Black users as gorillas. The company's Chief Architect responded publicly within
-hours, calling it `100% NOT OK.' Google's interim fix: remove the labels
+hours, calling it `100\% NOT OK.' Google's interim fix: remove the labels
 entirely --- category deletion, not model correction.''
 
 % -- FLEX: [CORE] + contingency
 [CORE] This is the chapter's named war story and the primary real-world anchor.
 IF SHORT: State the incident in two sentences; continue to next slide.
-}
+```
 
-[T]
-  
-    **What happened:**
-    {2pt}
-- Google Photos (June 2015): automatic image labeling at consumer scale
-- Classifier mislabeled photos of Black users as ``gorilla''
-- Chief Architect responded publicly within hours: ``100% NOT OK''
-    
-
-    {0.15cm}
-    **Fix:**
-    {2pt}
-- Delete labels ``gorilla,'' ``chimpanzee,'' ``monkey'' entirely
-- Category deletion, not model correction
-    
-  
-  
-    {mlsyscard}{errorstroke}
-    **The Incident**\\[0.05cm]
-    { High average accuracy masked a catastrophic failure on a specific
-    demographic subpopulation. No alert fired. No exception thrown.
-    A high-confidence model produced wrong outputs silently.}
-    {mlsyscard}
-  
-
-{Kasperkevic, The Guardian, 2015}
+</details>
 
 ## War Story: Google Photos Gorilla Label (2015) (2/2)
 
-{
+[Original slide 7](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L294)
+
+**Long-term consequence:**
+
+- Years later: labels remain blocked — permanent mitigation trap
+- Team could not certify the classifier would not fail again
+- No per-slice robustness guarantee available
+
+**Systems Lesson**
+
+**Slice-level robustness** cannot be inferred from aggregate
+metrics. The permanent mitigation trap: when you cannot certify worst-case
+behavior, deletion is the only safe option.
+
+Source on slide: Kasperkevic, The Guardian, 2015
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The previous slide showed the incident. This slide covers the long-term
 consequence and the systems lesson about slice-level robustness.
@@ -243,36 +280,38 @@ not fail the same way on the same population again.]
 
 % -- WARN: What students will get wrong on THIS topic
 Common error: students think this was a data-labeling problem. Correct framing:
-it is a *slice-level robustness* problem --- collecting more data is
+it is a \emph{slice-level robustness} problem --- collecting more data is
 necessary but not sufficient without explicit per-slice guarantees.
 
 % -- FLEX: [CORE] + contingency
 [CORE] The permanent mitigation trap is the key systems lesson.
-}
+```
 
-[T]
-  
-    **Long-term consequence:**
-    {2pt}
-- Years later: labels remain blocked --- permanent mitigation trap
-- Team could not certify the classifier would not fail again
-- No per-slice robustness guarantee available
-    
-  
-  
-    {mlsyscard}{errorstroke}
-    **Systems Lesson**\\[0.05cm]
-    { **Slice-level robustness** cannot be inferred from aggregate
-    metrics. The permanent mitigation trap: when you cannot certify worst-case
-    behavior, deletion is the only safe option.}
-    {mlsyscard}
-  
-
-{Kasperkevic, The Guardian, 2015}
+</details>
 
 ## Cloud: AWS S3 Outage (2017)
 
-{
+[Original slide 8](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L345)
+
+**What happened:**
+
+- Engineer mistyped a maintenance command
+- US-East-1 region: 150+ services down for **4 hours**
+- Estimated **&#36;150M** in losses
+
+**ML Impact:**
+
+- Alexa (40M+ devices): completely unresponsive
+- Voice recognition: 200–500 ms $\to$ total failure
+
+**Systems Lesson**
+
+ML services assume infrastructure availability as an *invariant*, not a probabilistic guarantee. A single human error disables the entire ML fleet.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 We defined robustness formally. Now we ground it in real failures --- starting
 with infrastructure failure that cascades into ML service outage.
@@ -294,33 +333,33 @@ infrastructure layer; Google Photos illustrates the model-robustness layer.
 % -- FLEX: [OPTIONAL] or [CORE] + contingency
 [OPTIONAL] Context-setting infrastructure example. IF SHORT: State the cascade
 pattern and the ML-service invariant assumption in one sentence, move on.
-}
+```
 
-[T]
-  
-    **What happened:**
-    {0pt}
-- Engineer mistyped a maintenance command
-- US-East-1 region: 150+ services down for **4 hours**
-- Estimated **\$150M** in losses
-    
-
-    {0.1cm}
-    **ML Impact:**
-    {0pt}
-- Alexa (40M+ devices): completely unresponsive
-- Voice recognition: 200--500 ms $$ total failure
-    
-  
-  
-    {mlsyscard}{errorstroke}
-    **Systems Lesson**\\[0.05cm]
-    { ML services assume infrastructure availability as an *invariant*, not a probabilistic guarantee. A single human error disables the entire ML fleet.}
-    {mlsyscard}
+</details>
 
 ## Edge: Tesla Autopilot (2016)
 
-{
+[Original slide 9](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L397)
+
+**Fatal crash:** Tesla Model S at 74 mph
+
+- Camera: white trailer vs. bright sky $\to$ missed
+- Radar: trailer classified as overhead sign $\to$ ignored
+- Fusion logic: discarded both valid signals
+- Result: no braking, underride collision
+
+Both sensors received valid data. The **decision boundary** failed on an input absent from training.
+
+**Edge Fragility**
+
+Edge devices lack fallback redundancy. No secondary cluster to route to. Must degrade gracefully within power and memory envelope.
+
+Source on slide: NTSB, 2017
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 S3 was infrastructure failure. Tesla is a model-level robustness failure ---
 the system worked correctly on inputs it had seen, but failed fatally on a
@@ -347,35 +386,24 @@ gap on out-of-distribution inputs.
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] This is the anchor case study for edge robustness failures.
 IF SHORT: Focus on the ``both sensors received valid data'' insight.
-}
+```
 
-[T]
-  
-    **Fatal crash:** Tesla Model S at 74 mph
-    {0pt}
-- Camera: white trailer vs.\ bright sky $$ missed
-- Radar: trailer classified as overhead sign $$ ignored
-- Fusion logic: discarded both valid signals
-- Result: no braking, underride collision
-    
-
-    {0.05cm}
-    {mlsyscard}{errorstroke}
-    { Both sensors received valid data. The **decision boundary** failed on an input absent from training.}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{routingstroke}
-    **Edge Fragility**\\[0.05cm]
-    { Edge devices lack fallback redundancy. No secondary cluster to route to. Must degrade gracefully within power and memory envelope.}
-    {mlsyscard}
-  
-
-{NTSB, 2017}
+</details>
 
 ## Silent Data Corruption at Scale
 
-{
+[Original slide 10](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L454)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/14_robust_ai/images/sdc-at-scale.svg]]
+
+Harvard Edge ML Systems Book contributors, [sdc-at-scale.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/images/sdc-at-scale.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Scale transforms negligible per-device risk into near-certain system-level failure.**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Tesla showed an edge device failing on novel input. This slide shows a different
 failure mode: hardware silently corrupting model weights at datacenter scale.
@@ -383,8 +411,8 @@ failure mode: hardware silently corrupting model weights at datacenter scale.
 % -- NARRATE: What to SAY while showing this slide
 [3 min] Walk through the probability math in the diagram: ``P(at least 1 SDC)
 = 1 - (1-p) to the N. At 10K GPUs with Meta's reported per-device rate, you
-get 63% probability of at least one silent data corruption per hour.'' Key
-punchline: ``A single bit flip can drop ResNet-50 from 76% to 11%.''
+get 63\% probability of at least one silent data corruption per hour.'' Key
+punchline: ``A single bit flip can drop ResNet-50 from 76\% to 11\%.''
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
 Ask: ``Does ECC memory solve this?'' Give 5 seconds.
@@ -397,26 +425,38 @@ framing: ECC catches DRAM bit flips but not logic-path SDC, GPU register
 corruption, or interconnect errors.
 
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
-[CORE] The 63% per hour number is the key quantitative anchor for scale risk.
-IF SHORT: State the probability and the 76%-to-11% impact number.
-}
+[CORE] The 63\% per hour number is the key quantitative anchor for scale risk.
+IF SHORT: State the probability and the 76\%-to-11\% impact number.
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{sdc-at-scale.pdf}
-
-{0.1cm}
-{Scale transforms negligible per-device risk into near-certain system-level failure.}{}
+</details>
 
 ## Predict: What Makes ML Failures Unique?
 
-{
+[Original slide 11](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L491)
+
+Think–Write–Share
+
+A deployed model's accuracy drops from 95% to 72%
+
+over 3 months. No code changed. No alerts fired.
+
+**Name 3 possible causes.**
+
+Write them down. (60 seconds)
+
+Then compare with a neighbor.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Three real-world failures (S3, Tesla, SDC) showed different robustness threats.
 This prediction exercise asks students to synthesize those into general causes.
 
 % -- NARRATE: What to SAY while showing this slide
-[2 min] Read the scenario aloud: ``95% accuracy drops to 72% over 3 months.
+[2 min] Read the scenario aloud: ``95\% accuracy drops to 72\% over 3 months.
 No code changed. No alerts fired.'' Give 60 seconds of silent writing. Do NOT
 reveal the answer yet. Ask 2--3 students to share.
 
@@ -427,25 +467,24 @@ data pipeline corruption, hardware SDC, upstream feature changes, label drift.]
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] This active learning moment primes the unified framework on the next slide.
 IF SHORT: Reduce writing time to 30 seconds; still cold-call 2 students.
-}
+```
 
-{0.5cm}
-{ Think--Write--Share}
-
-{0.4cm}
-{ A deployed model's accuracy drops from 95% to 72%\\
-over 3 months. No code changed. No alerts fired.\\[0.2cm]
-**Name 3 possible causes.**}
-
-{0.4cm}
-{ Write them down. {midgray}{(60 seconds)}}
-
-{0.2cm}
-{{lightgray}{Then compare with a neighbor.}}
+</details>
 
 ## A Unified Robustness Framework
 
-{
+[Original slide 12](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L532)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/14_robust_ai/images/robustness-framework.svg]]
+
+Harvard Edge ML Systems Book contributors, [robustness-framework.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/images/robustness-framework.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Pattern:** Every threat demands a distinct defense. Multi-layered strategy is non-negotiable.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Students just predicted causes of silent degradation. This framework organizes
 all those causes (and their defenses) into a unified structure.
@@ -467,18 +506,47 @@ not distribution shift, hardware faults, or data poisoning.
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] This framework is the chapter's organizing structure.
 IF SHORT: Name the four threats and five defenses without elaborating each.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
+</details>
 
-{robustness-framework.pdf}
+## Robust AI
 
-{0.1cm}
-{Pattern:}{Every threat demands a distinct defense. Multi-layered strategy is non-negotiable.}
+[Original slide 13](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L566)
+
+$\text{Robustness} \neq \text{Accuracy}$
+
+A model with 95% test accuracy can be
+
+100% vulnerable to targeted perturbations
 
 ## From Previous Chapters
 
-{
+[Original slide 14](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L572)
+
+**What students already know:**
+
+- Fault Tolerance: Checkpointing, recovery
+- Security: Access control, threat models
+- Serving: Batching, pipeline parallelism
+- Ops: Monitoring, SLAs
+
+**What robustness adds:**
+
+- **Graceful degradation** under shift
+- **Adversarial resilience** at inference
+- **Data integrity** in training pipelines
+
+**The Robustness Gap**
+
+A system that is secure but fragile is useless. One that tolerates faults but not drift will silently degrade. Robustness closes the loop.
+
+**Scale amplifies risk:** 175B-param model on 8+ GPU nodes $\to$ 8$\times$ fault surface. INT8 quantization reduces robustness margin.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The framework showed four threat sources. This slide maps prior chapter knowledge
 to what robustness adds on top.
@@ -503,40 +571,24 @@ crash, no alert, and no exception.
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Bridging slide. IF SHORT: Skip --- the framework slide covered this.
-}
+```
 
-[T]
-  
-    **What students already know:**
-    {0pt}
-- {computestroke}{Fault Tolerance}: Checkpointing, recovery
-- {datastroke}{Security}: Access control, threat models
-- {routingstroke}{Serving}: Batching, pipeline parallelism
-- {errorstroke}{Ops}: Monitoring, SLAs
-    
-
-    {0.05cm}
-    **What robustness adds:**
-    {0pt}
-- **Graceful degradation** under shift
-- **Adversarial resilience** at inference
-- **Data integrity** in training pipelines
-    
-  
-  
-    {mlsyscard}{crimson}
-    **The Robustness Gap**\\[0.05cm]
-    { A system that is secure but fragile is useless. One that tolerates faults but not drift will silently degrade. Robustness closes the loop.}
-    {mlsyscard}
-
-    {0.1cm}
-    {mlsyscard}{errorstroke}
-    { **Scale amplifies risk:** 175B-param model on 8+ GPU nodes $$ 8$×$ fault surface. INT8 quantization reduces robustness margin.}
-    {mlsyscard}
+</details>
 
 ## Three Types of Distribution Shift
 
-{
+[Original slide 15](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L638)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/14_robust_ai/images/distribution-shift-types.svg]]
+
+Harvard Edge ML Systems Book contributors, [distribution-shift-types.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/images/distribution-shift-types.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Critical distinction:** Concept drift changes P(Y$|$X) — detectable *only* with ground-truth feedback.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The framework listed environmental shift as threat source 1. This slide decomposes
 it into three types with different detection strategies.
@@ -558,18 +610,33 @@ is unchanged.
 
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] The three-type taxonomy structures detection methods on the next slide.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{distribution-shift-types.pdf}
-
-{0.1cm}
-{Critical distinction:}{Concept drift changes P(Y$|$X) --- detectable *only* with ground-truth feedback.}
+</details>
 
 ## Detecting Drift: The Statistical Arsenal
 
-{
+[Original slide 16](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L672)
+
+| **Method** | **What It Detects** | **Strength** | **Limitation** |
+| --- | --- | --- | --- |
+| **KS Test** | Univariate shift | Fast ($O(n \log n)$) | 1D only |
+| **PSI** | Feature stability | Easy to interpret | Binning artifacts |
+| **MMD** | Joint distribution | High-dimensional | Compute-heavy |
+| **Chi-sq** | Categorical shift | Standard test | Discrete features |
+
+**Early Warning**
+
+PSI detects shifts **3–6 weeks** before accuracy falls below SLA thresholds, enabling proactive retraining.
+
+**Blind Spot**
+
+Concept drift ($P(Y|X)$ changes) is *invisible* to input monitoring. Requires ground-truth comparison.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Three drift types need detection tools. This slide provides the statistical
 monitoring toolkit.
@@ -589,39 +656,29 @@ neither catches concept drift.
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] The 3--6 week early warning is the key operational insight.
 IF SHORT: Point to the table and green card only.
-}
+```
 
-{}{1.15}
-{
-{tabular}{@{}llll@{}}
-  
-  **Method** & **What It Detects** & **Strength** & **Limitation** \\
-  
-  **KS Test**  & Univariate shift   & Fast ($O(n  n)$)  & 1D only \\
-  **PSI**      & Feature stability   & Easy to interpret     & Binning artifacts \\
-  **MMD**      & Joint distribution  & High-dimensional      & Compute-heavy \\
-  **Chi-sq**   & Categorical shift   & Standard test         & Discrete features \\
-  
-{tabular}
-}
-
-{0.2cm}
-[T]
-  
-    {mlsyscard}{datastroke}
-    **Early Warning**\\[0.05cm]
-    { PSI detects shifts **3--6 weeks** before accuracy falls below SLA thresholds, enabling proactive retraining.}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{errorstroke}
-    **Blind Spot**\\[0.05cm]
-    { Concept drift ($P(Y|X)$ changes) is *invisible* to input monitoring. Requires ground-truth comparison.}
-    {mlsyscard}
+</details>
 
 ## Worked Example: Is the World Changing?
 
-{
+[Original slide 17](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L728)
+
+**Scenario:** Baseline feature mean = 0.50. Last 1,000 requests: mean = 0.55.
+
+| **Step** | **Calculation** | **Value** |
+| --- | --- | --- |
+| Difference | $0.55 - 0.50$ | 0.05 |
+| Std. Error | $0.3 / \sqrt{1000}$ | 0.009 |
+| Z-score | $0.05 / 0.009$ | **5.5$\sigma$** |
+| P-value | — | **$< 0.001$** |
+
+**Verdict: Confirmed Regression.** A shift of 0.05 with 1,000 samples has $< 0.1\%$ probability of being noise. Trigger automated response: fallback model or emergency retraining.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The statistical arsenal showed tools. This worked example applies them to a
 concrete production scenario.
@@ -629,7 +686,7 @@ concrete production scenario.
 % -- NARRATE: What to SAY while showing this slide
 [2 min] Walk through the table row by row: ``Baseline mean 0.50, observed 0.55.
 Difference = 0.05, standard error = 0.009, Z-score = 5.5 sigma, p-value less
-than 0.001.'' Key insight: ``A 5% shift sounds small, but with 1,000 samples
+than 0.001.'' Key insight: ``A 5\% shift sounds small, but with 1,000 samples
 it is 5.5 standard errors --- statistically certain.''
 
 % -- WARN: What students will get wrong on THIS topic
@@ -639,33 +696,24 @@ is whether 0.05 shift matters for model accuracy.
 
 % -- FLEX: [OPTIONAL] or [CORE] + contingency
 [OPTIONAL] Reinforces the detection methods. IF SHORT: State the 5.5-sigma result.
-}
+```
 
-**Scenario:** Baseline feature mean = 0.50. Last 1,000 requests: mean = 0.55.
-
-{0.15cm}
-{}{1.15}
-{
-{tabular}{@{}llr@{}}
-  
-  **Step** & **Calculation** & **Value** \\
-  
-  Difference   & $0.55 - 0.50$               & 0.05 \\
-  Std.\ Error  & $0.3 / {1000}$         & 0.009 \\
-  Z-score      & $0.05 / 0.009$              & **5.5$$** \\
-  P-value      & ---                          & **$< 0.001$** \\
-  
-{tabular}
-}
-
-{0.15cm}
-{mlsyscard}{errorstroke}
-**Verdict: Confirmed Regression.** A shift of 0.05 with 1,000 samples has $< 0.1%$ probability of being noise. Trigger automated response: fallback model or emergency retraining.
-{mlsyscard}
+</details>
 
 ## Adversarial Attacks: Exploiting Decision Boundaries
 
-{
+[Original slide 18](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L778)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/14_robust_ai/images/adversarial-attack-fgsm.svg]]
+
+Harvard Edge ML Systems Book contributors, [adversarial-attack-fgsm.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/images/adversarial-attack-fgsm.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Not a bug:** Adversarial vulnerability is an inherent property of high-dimensional decision boundaries.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Distribution shift is accidental. Adversarial attacks are intentional --- they
 weaponize the same gradient used for training.
@@ -684,18 +732,29 @@ the geometry of the space enables it.
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] FGSM is the foundation for all adversarial attack discussion.
 IF AHEAD: ``Why does one gradient step suffice when training needs thousands?''
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{adversarial-attack-fgsm.pdf}
-
-{0.1cm}
-{Not a bug:}{Adversarial vulnerability is an inherent property of high-dimensional decision boundaries.}
+</details>
 
 ## Attack Taxonomy
 
-{
+[Original slide 19](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L809)
+
+| **Category** | **Mechanism** | **Access** | **Key Example** |
+| --- | --- | --- | --- |
+| **Gradient** | $\nabla_x J(\theta,x,y)$ | White-box | FGSM, PGD, JSMA |
+| **Optimization** | Min. perturbation | White-box | C&W (broke distillation) |
+| **Transfer** | Surrogate $\to$ target | **Black-box** | 30–70% success rate |
+| **Physical** | Real-world patches | **No access** | Stop sign stickers |
+
+**Transfer Attacks**: Train surrogate locally, craft attacks offline, transfer to production API. No queries needed.
+
+**Physical Patches**: Adversarial patches on clothing, stickers on stop signs. No digital access required.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 FGSM showed the mechanism. This slide organizes all adversarial attacks into
 four categories of increasing realism.
@@ -703,7 +762,7 @@ four categories of increasing realism.
 % -- NARRATE: What to SAY while showing this slide
 [2 min] Walk through the table: ``Gradient-based requires white-box access ---
 unlikely in production. Transfer-based is the realistic threat: craft on a
-surrogate, transfer to production with 30--70% success. Physical patches are
+surrogate, transfer to production with 30--70\% success. Physical patches are
 the most visceral: stickers on stop signs.''
 
 % -- WARN: What students will get wrong on THIS topic
@@ -714,35 +773,44 @@ they require zero access to the target model.
 % -- FLEX: [OPTIONAL] or [CORE] + contingency
 [OPTIONAL] Extends the FGSM slide with taxonomy context.
 IF SHORT: Focus on transfer and physical rows only.
-}
+```
 
-{}{1.0}
-{tabular}{@{}llll@{}}
-  
-  **Category** & **Mechanism** & **Access** & **Key Example** \\
-  
-  **Gradient**    & $_x J(,x,y)$ & White-box    & FGSM, PGD, JSMA \\
-  **Optimization** & Min.\ perturbation    & White-box    & C&W (broke distillation) \\
-  **Transfer**    & Surrogate $$ target    & {errorstroke}{**Black-box**} & 30--70% success rate \\
-  **Physical**    & Real-world patches        & {errorstroke}{**No access**} & Stop sign stickers \\
-  
-{tabular}
-
-{0.1cm}
-[T]
-  
-    {mlsyscard}{errorstroke}
-    { **Transfer Attacks**: Train surrogate locally, craft attacks offline, transfer to production API. No queries needed.}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{routingstroke}
-    { **Physical Patches**: Adversarial patches on clothing, stickers on stop signs. No digital access required.}
-    {mlsyscard}
+</details>
 
 ## Your Turn: Diagnose the Threat
 
-{
+[Original slide 20](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L861)
+
+Diagnose the Threat
+
+A fraud detection model deployed 6 months ago:
+
+- Input features: **unchanged**
+- Model confidence: **stable at 95%+**
+- Fraud precision: **85% $\to$ 68%**
+
+**1.** What type of shift is this?
+
+**2.** Why did input monitoring miss it?
+
+**3.** What is the correct response?
+
+(90 seconds — compare with a neighbor)
+
+**Solution:**
+
+**1.** Concept drift: $P(Y|X)$ changed (fraud patterns evolved)
+
+**2.** $P(X)$ unchanged — input monitoring only detects covariate/label shift
+
+**3.** Ground-truth feedback loop + retrain every 90–120 days
+
+**Concept drift is invisible to feature monitoring!**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Students learned drift types and adversarial attacks. This exercise tests whether
 they can diagnose a real-world scenario combining both concepts.
@@ -760,49 +828,31 @@ invisible to input monitoring, retrain every 90--120 days.]
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Second required active learning moment.
 IF SHORT: Reduce to 60 seconds; skip pair comparison.
-}
+```
 
-[T]
-  
-    { Diagnose the Threat}
-
-    {0.1cm}
-    A fraud detection model deployed 6 months ago:
-    {0pt}
-- Input features: **unchanged**
-- Model confidence: **stable at 95%+**
-- Fraud precision: **85% $$ 68%**
-    
-
-    {0.1cm}
-    **1.** What type of shift is this?\\
-    **2.** Why did input monitoring miss it?\\
-    **3.** What is the correct response?
-
-    {{midgray}{(90 seconds --- compare with a neighbor)}}
-  
-  
-    
-    {mlsyscard}{datastroke}
-    **Solution:**\\[0.05cm]
-    {
-    **1.** Concept drift: $P(Y|X)$ changed (fraud patterns evolved)\\[0.05cm]
-    **2.** $P(X)$ unchanged --- input monitoring only detects covariate/label shift\\[0.05cm]
-    **3.** Ground-truth feedback loop + retrain every 90--120 days\\[0.05cm]
-    {errorstroke}{**Concept drift is invisible to feature monitoring!**}
-    }
-    {mlsyscard}
+</details>
 
 ## The Robustness Tax
 
-{
+[Original slide 21](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L922)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/14_robust_ai/images/robustness-tax.svg]]
+
+Harvard Edge ML Systems Book contributors, [robustness-tax.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/images/robustness-tax.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Fundamental:** Robustness trades accuracy, compute, or both. Every defense has a cost.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 We have cataloged threats. Now the defense section opens with the uncomfortable
 truth: every defense has a cost.
 
 % -- NARRATE: What to SAY while showing this slide
-[3 min] Point to the bar chart: ``Standard ResNet-50: 76% accuracy. Adversarial
-training: 50% --- a 26% tax on clean accuracy. Certified smoothing: requires
+[3 min] Point to the bar chart: ``Standard ResNet-50: 76\% accuracy. Adversarial
+training: 50\% --- a 26\% tax on clean accuracy. Certified smoothing: requires
 100K noise samples per inference.'' Key punchline: ``Robustness cannot be turned
 on for free. Every defense trades accuracy, compute, or both.''
 
@@ -813,19 +863,59 @@ sacrificing non-robust features that were predictive on clean data.
 
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] The robustness tax frames all subsequent defense slides.
-IF SHORT: State the 26% accuracy tax and the 100K inference cost.
-}
+IF SHORT: State the 26\% accuracy tax and the 100K inference cost.
+```
 
-% --- Layout: FULL-WIDTH diagram ---
+</details>
 
-{robustness-tax.pdf}
+## Robustness Compute Penalty
 
-{0.1cm}
-{Fundamental:}{Robustness trades accuracy, compute, or both. Every defense has a cost.}
+[Original slide 22](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L953)
+
+**Principle:** PGD-style adversarial training requires
+
+inner attack steps per batch, costing 3–10$\times$ more
+
+compute than standard optimization.
+
+*External guardrails (input filtering, output
+
+verification) are more efficient than training
+
+intrinsic robustness into model weights.*
 
 ## Adversarial Training
 
-{
+[Original slide 23](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L962)
+
+**Empirical Defense:**
+
+Adversarial training augments each batch with PGD-generated perturbations:
+
+- Generate adversarial $x_{\text{adv}}$ for each $x$
+- Train on both clean and adversarial
+- Cost: **3–10$\times$** compute per epoch
+- Clean accuracy: 76% $\to$ **50%**
+
+**Why it works:** Model learns to ignore brittle, non-robust features.
+
+**Certified Defense:**
+
+Randomized smoothing provides *mathematical* guarantees:
+
+$g(x) = \arg\max_c \mathbb{P}(f(x+\delta) = c)$
+
+where $\delta \sim \mathcal{N}(0, \sigma^2 I)$
+
+- Certified radius: $R = \sigma \Phi^{-1}(p_A)$
+- 49% certified robustness
+- Cost: **100K samples/inference**
+- Restricted to offline auditing
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The Robustness Compute Penalty principle named the invariant. This slide
 explains the two primary defense mechanisms and why each costs what it does.
@@ -833,7 +923,7 @@ explains the two primary defense mechanisms and why each costs what it does.
 % -- NARRATE: What to SAY while showing this slide
 [2 min] Point to the left column: ``Adversarial training augments each batch with
 PGD-generated perturbations. Cost: 3--10x compute per epoch. Clean accuracy drops
-from 76% to 50%.'' Point to the right column: ``Certified smoothing provides
+from 76\% to 50\%.'' Point to the right column: ``Certified smoothing provides
 mathematical guarantees via randomized noise. But 100K samples per inference
 restricts it to offline auditing.''
 ANALOGY: ``Adversarial training is like sparring practice --- expensive but builds
@@ -847,61 +937,32 @@ zero protection against L-2 or geometric attacks.
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] These are the two primary defense paradigms.
 IF SHORT: Cover adversarial training only; mention certified smoothing as offline.
-}
+```
 
-[T]
-  
-    **Empirical Defense:**
-
-    {0.05cm}
-    { Adversarial training augments each batch with PGD-generated perturbations:}
-
-    {0.05cm}
-    {
-    {0pt}
-- Generate adversarial $x_{{adv}}$ for each $x$
-- Train on both clean and adversarial
-- Cost: **3--10$×$** compute per epoch
-- Clean accuracy: 76% $$ **50%**
-    
-    }
-
-    {0.05cm}
-    {Why it works:}{Model learns to ignore brittle, non-robust features.}
-  
-  
-    **Certified Defense:**
-
-    {0.05cm}
-    { Randomized smoothing provides *mathematical* guarantees:}
-
-    {0.05cm}
-    {
-    $g(x) = _c {P}(f(x+) = c)$\\
-    where $  {N}(0, ^2 I)$
-    }
-
-    {0.05cm}
-    {
-    {0pt}
-- Certified radius: $R =  ^{-1}(p_A)$
-- 49% certified robustness
-- Cost: **100K samples/inference**
-- Restricted to offline auditing
-    
-    }
+</details>
 
 ## Data Poisoning: Attacking the Supply Chain
 
-{
+[Original slide 24](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L1034)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/14_robust_ai/images/data-poisoning.svg]]
+
+Harvard Edge ML Systems Book contributors, [data-poisoning.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/images/data-poisoning.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Supply chain attack:** 0.1% poisoned training data embeds a 95%-effective backdoor.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Adversarial training defends inference. Data poisoning attacks training ---
 a different phase requiring different defenses (also covered in Ch 13).
 
 % -- NARRATE: What to SAY while showing this slide
 [3 min] Point to the diagram: ``Clean-label attacks are the most insidious:
-labels are correct, but images contain invisible triggers. 0.1% poisoned
-data achieves 95% backdoor success.'' Key point: ``No pipeline access needed
+labels are correct, but images contain invisible triggers. 0.1\% poisoned
+data achieves 95\% backdoor success.'' Key point: ``No pipeline access needed
 --- just contribute to a public dataset like ImageNet or LAION.''
 
 % -- WARN: What students will get wrong on THIS topic
@@ -911,49 +972,64 @@ data --- anyone can poison a crowdsourced dataset.
 
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Supply chain attacks are the highest-leverage training-time threat.
-IF SHORT: State the 0.1% number and the clean-label insight.
-}
+IF SHORT: State the 0.1\% number and the clean-label insight.
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{data-poisoning.pdf}
-
-{0.1cm}
-{Supply chain attack:}{0.1% poisoned training data embeds a 95%-effective backdoor.}
+</details>
 
 ## Multi-Layered Defense
 
-{
+[Original slide 25](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L1065)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/14_robust_ai/images/defense-layers.svg]]
+
+Harvard Edge ML Systems Book contributors, [defense-layers.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/images/defense-layers.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Defense-in-depth:** Each layer catches failures the others miss. No single technique is sufficient.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Individual defenses each have blind spots. This slide assembles them into a
 layered defense where each ring catches what the others miss.
 
 % -- NARRATE: What to SAY while showing this slide
 [3 min] Walk through the concentric rings: ``Outer ring: feature squeezing ---
-eliminates 70--90% of adversarial examples at negligible cost. Next: adversarial
+eliminates 70--90\% of adversarial examples at negligible cost. Next: adversarial
 training provides worst-case guarantees. Drift monitoring gives 3--6 weeks of
 early warning. Center: uncertainty quantification --- the model should be able
 to say `I do not know.'\,''
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
 Ask: ``Which layer provides the best cost-to-value ratio?'' Give 10 seconds.
-[Expected: feature squeezing --- 70--90% effectiveness at negligible cost.]
+[Expected: feature squeezing --- 70--90\% effectiveness at negligible cost.]
 
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Defense-in-depth is the chapter's design pattern.
 IF SHORT: Name the layers and highlight feature squeezing as highest leverage.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{defense-layers.pdf}
-
-{0.1cm}
-{Defense-in-depth:}{Each layer catches failures the others miss. No single technique is sufficient.}
+</details>
 
 ## Detection Techniques
 
-{
+[Original slide 26](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L1096)
+
+| **Approach** | **Mechanism** | **Effectiveness** | **Cost** |
+| --- | --- | --- | --- |
+| **Statistical** | Compare input to training dist.\ | KS, AD tests | Low (feature-level) |
+| **Feature Squeeze** | Reduce precision (256$\to$16) | 70–90% filtered | Negligible latency |
+| **MC Dropout** | Multiple forward passes | Uncertainty est.\ | 10–100$\times$ inference |
+| **Ensembles** | Multiple models, variance | Robust UQ | 3–5$\times$ compute |
+
+**Feature Squeezing** (highest value / lowest cost): Compare predictions on original vs. squeezed inputs. Large divergence flags adversarial. 95%+ clean accuracy at negligible latency.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The layered defense diagram showed the strategy. This slide provides the specific
 detection techniques that populate those layers.
@@ -961,35 +1037,53 @@ detection techniques that populate those layers.
 % -- NARRATE: What to SAY while showing this slide
 [2 min] Walk through the table: ``Statistical methods compare input to training
 distribution. Feature squeezing reduces precision from 256 to 16 colors ---
-70--90% of adversarial examples filtered at negligible latency. MC dropout runs
+70--90\% of adversarial examples filtered at negligible latency. MC dropout runs
 multiple forward passes for uncertainty estimates at 10--100x inference cost.''
 Point to the green card: ``Feature squeezing is the highest value-to-cost ratio.''
 
 % -- FLEX: [OPTIONAL] or [CORE] + contingency
 [OPTIONAL] Extends the defense layers slide with implementation detail.
 IF SHORT: Point to feature squeezing in the green card and move on.
-}
+```
 
-{}{1.0}
-{tabular}{@{}lp{2.8cm}p{2cm}p{2.8cm}@{}}
-  
-  **Approach** & **Mechanism** & **Effectiveness** & **Cost** \\
-  
-  **Statistical**    & Compare input to training dist.\ & KS, AD tests & Low (feature-level) \\
-  **Feature Squeeze** & Reduce precision (256$$16) & 70--90% filtered & Negligible latency \\
-  **MC Dropout**      & Multiple forward passes & Uncertainty est.\ & 10--100$×$ inference \\
-  **Ensembles**       & Multiple models, variance & Robust UQ & 3--5$×$ compute \\
-  
-{tabular}
-
-{0.1cm}
-{mlsyscard}{datastroke}
-{ **Feature Squeezing** (highest value / lowest cost): Compare predictions on original vs.\ squeezed inputs. Large divergence flags adversarial. 95%+ clean accuracy at negligible latency.}
-{mlsyscard}
+</details>
 
 ## Discussion: Choose Your Defense
 
-{
+[Original slide 27](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L1135)
+
+Turn and Talk (90 seconds)
+
+You are deploying a medical imaging classifier.
+
+Budget: 2$\times$ training compute, 1.5$\times$ inference latency.
+
+**Which defense strategy do you choose and why?**
+
+Adversarial
+
+ Training
+
+Certified
+
+ Smoothing
+
+Feature
+
+ Squeezing
+
+Ensemble +
+
+ MC Dropout
+
+Drift
+
+ Monitoring
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Students just learned five defense techniques with different cost profiles. This
 discussion forces them to choose under real constraints.
@@ -1008,27 +1102,46 @@ but provides weaker guarantees.]
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Third required active learning moment.
 IF SHORT: Reduce to 60 seconds; cold-call 2 pairs.
-}
+```
 
-{0.6cm}
-{ Turn and Talk {midgray}{(90 seconds)}}
-
-{0.5cm}
-{ You are deploying a medical imaging classifier.\\
-Budget: 2$×$ training compute, 1.5$×$ inference latency.\\[0.3cm]
-**Which defense strategy do you choose and why?**}
-
-{0.5cm}
-[c]
-   Adversarial\\ Training
-   Certified\\ Smoothing
-   Feature\\ Squeezing
-   Ensemble +\\ MC Dropout
-   Drift\\ Monitoring
+</details>
 
 ## Robustness in Generative AI
 
-{
+[Original slide 28](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L1177)
+
+**Three GenAI-specific failure modes:**
+
+**1. Hallucination**
+
+Confident generation of false information. No classification analog. Detection requires external grounding.
+
+**2. Reward Hacking**
+
+Models exploit RLHF proxy objectives. High reward scores + harmful outputs. Requires red-teaming beyond automated metrics.
+
+**3. Distributional Collapse**
+
+Training on model-generated data degrades quality across generations. Self-consuming loops are unstable.
+
+**The Core Problem**
+
+Standard metrics (perplexity, BLEU) cannot detect these failures. A model can be **fluent and confident while being wrong**.
+
+**Defenses:**
+
+Retrieval-augmented grounding
+
+Constitutional AI constraints
+
+Human-in-the-loop evaluation
+
+Data provenance tracking
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Defense layers covered classification robustness. Generative AI introduces
 qualitatively different robustness challenges: hallucination, reward hacking,
@@ -1056,47 +1169,61 @@ hallucinating --- fluency is not truthfulness.
 % -- FLEX: [CORE] + contingency
 [CORE] GenAI robustness extends the chapter to the dominant deployment paradigm.
 IF SHORT: Name the three failure modes and state ``fluency is not truthfulness.''
-}
+```
 
-[T]
-  
-    **Three GenAI-specific failure modes:**
-
-    {0.1cm}
-    {errorstroke}{**1. Hallucination**}\\
-    { Confident generation of false information. No classification analog. Detection requires external grounding.}
-
-    {0.08cm}
-    {routingstroke}{**2. Reward Hacking**}\\
-    { Models exploit RLHF proxy objectives. High reward scores + harmful outputs. Requires red-teaming beyond automated metrics.}
-
-    {0.08cm}
-    {computestroke}{**3. Distributional Collapse**}\\
-    { Training on model-generated data degrades quality across generations. Self-consuming loops are unstable.}
-  
-  
-    {mlsyscard}{crimson}
-    **The Core Problem**\\[0.05cm]
-    { Standard metrics (perplexity, BLEU) cannot detect these failures. A model can be **fluent and confident while being wrong**.\\[0.1cm]
-    **Defenses:**\\
-    Retrieval-augmented grounding\\
-    Constitutional AI constraints\\
-    Human-in-the-loop evaluation\\
-    Data provenance tracking}
-    {mlsyscard}
+</details>
 
 ## Your Turn: Calculate the Robustness Tax
 
-{
+[Original slide 29](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L1241)
+
+Calculate the Robustness Tax
+
+**ResNet-50 on ImageNet:**
+
+- Clean accuracy: **76%**
+- FGSM ($\epsilon$=0.01): accuracy drops to **42%**
+- After adversarial training: clean = **50%**, FGSM = **62%**
+
+**Calculate:**
+
+1. Robustness tax without defense
+
+2. Robustness tax with adversarial training
+
+3. Clean accuracy tax from defense
+
+(90 seconds — compare with a neighbor)
+
+**Solution:**
+
+1. Attack tax: $(76-42)/76$
+
+= **44.7%**
+
+2. With defense: $(76-62)/76$
+
+= **18.4%** (attack)
+
+3. Clean tax: $(76-50)/76$
+
+= **34.2%** (always paid)
+
+Defense halves attack tax but imposes permanent clean cost.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
-The robustness tax slide showed 76% to 50% accuracy drop. This exercise
+The robustness tax slide showed 76\% to 50\% accuracy drop. This exercise
 makes students compute the tax themselves for a specific scenario.
 
 % -- NARRATE: What to SAY while showing this slide
 [3 min] Read the scenario. Give 90 seconds. After pause reveal:
-``Robustness tax = (76 - 42) / 76 = 44.7%. With adversarial training:
-accuracy recovers to 62% under attack, so new tax = (76 - 62) / 76 = 18.4%.
-But clean accuracy drops to 50%, so the clean tax = (76 - 50) / 76 = 34.2%.''
+``Robustness tax = (76 - 42) / 76 = 44.7\%. With adversarial training:
+accuracy recovers to 62\% under attack, so new tax = (76 - 62) / 76 = 18.4\%.
+But clean accuracy drops to 50\%, so the clean tax = (76 - 50) / 76 = 34.2\%.''
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
 Students calculate robustness tax before and after adversarial training.
@@ -1111,54 +1238,49 @@ drop PLUS the remaining vulnerability.
 % -- FLEX: [CORE] + contingency
 [CORE] Quantitative exercise for adversarial robustness.
 IF SHORT: Reduce to 60 seconds; show only the first calculation.
-}
+```
 
-[T]
-  
-    { Calculate the Robustness Tax}
+</details>
 
-    {0.1cm}
-    **ResNet-50 on ImageNet:**
-    {0pt}
-- Clean accuracy: **76%**
-- FGSM ($$=0.01): accuracy drops to **42%**
-- After adversarial training: clean = **50%**, FGSM = **62%**
-    
+## The Robustness–Efficiency Tension
 
-    {0.08cm}
-    **Calculate:**\\
-    1. Robustness tax without defense\\
-    2. Robustness tax with adversarial training\\
-    3. Clean accuracy tax from defense
+[Original slide 30](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L1313)
 
-    {0.05cm}
-    {{midgray}{(90 seconds --- compare with a neighbor)}}
-  
-  
-    
-    {mlsyscard}{errorstroke}
-    **Solution:**\\[0.05cm]
-    {
-    1. Attack tax: $(76-42)/76$\\
-    = {errorstroke}{**44.7%**}\\[0.05cm]
-    2. With defense: $(76-62)/76$\\
-    = {routingstroke}{**18.4%**} (attack)\\[0.05cm]
-    3. Clean tax: $(76-50)/76$\\
-    = {errorstroke}{**34.2%**} (always paid)\\[0.05cm]
-    Defense halves attack tax but imposes permanent clean cost.
-    }
-    {mlsyscard}
+**Robustness costs are real:**
 
-## The Robustness--Efficiency Tension
+| **Mechanism** | **Overhead** |
+| --- | --- |
+| Error correction | 12–25% BW |
+| Redundant processing | 2–3$\times$ energy |
+| Monitoring | 5–15% compute |
+| Adv. training | 3–10$\times$/epoch |
+| Certified inference | 100K$\times$ latency |
 
-{
+**Decision:** Where does robustness investment provide the greatest value?
+
+**The Core Trade-off**
+
+Robustness is a resource allocation problem. A system that survives every failure yet consumes a city's worth of power is not viable.
+
+**Deploy-Tier Matching**
+
+Cloud: full redundancy + monitoring.
+
+Edge: targeted hardening of critical paths.
+
+TinyML: weaker guarantees on non-critical paths.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Defenses have costs. This slide quantifies the aggregate overhead and connects
 robustness to sustainability (Ch 15).
 
 % -- NARRATE: What to SAY while showing this slide
-[2 min] Walk through the overhead table: ``Error correction: 12--25% bandwidth.
-Redundant processing: 2--3x energy. Monitoring: 5--15% compute. Adversarial
+[2 min] Walk through the overhead table: ``Error correction: 12--25\% bandwidth.
+Redundant processing: 2--3x energy. Monitoring: 5--15\% compute. Adversarial
 training: 3--10x per epoch.'' Point to the crimson card: ``Robustness is a
 resource allocation problem. A system that survives every failure yet consumes
 a city's worth of power is not viable.''
@@ -1170,48 +1292,35 @@ edge, or TinyML?'' [Expected: depends on criticality of the application.]
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Connects robustness costs to the sustainability chapter.
 IF SHORT: State the key overhead numbers from the table.
-}
+```
 
-[T]
-  
-    **Robustness costs are real:**
-
-    {0.05cm}
-    {}{1.0}
-    {
-    {tabular}{@{}lr@{}}
-      
-      **Mechanism** & **Overhead** \\
-      
-      Error correction    & 12--25% BW \\
-      Redundant processing & 2--3$×$ energy \\
-      Monitoring           & 5--15% compute \\
-      Adv.\ training       & 3--10$×$/epoch \\
-      Certified inference  & 100K$×$ latency \\
-      
-    {tabular}
-    }
-
-    {0.05cm}
-    {{Decision:}{Where does robustness investment provide the greatest value?}}
-  
-  
-    {mlsyscard}{crimson}
-    **The Core Trade-off**\\[0.05cm]
-    { Robustness is a resource allocation problem. A system that survives every failure yet consumes a city's worth of power is not viable.}
-    {mlsyscard}
-
-    {0.1cm}
-    {mlsyscard}{routingstroke}
-    **Deploy-Tier Matching**\\[0.05cm]
-    { Cloud: full redundancy + monitoring.\\
-    Edge: targeted hardening of critical paths.\\
-    TinyML: weaker guarantees on non-critical paths.}
-    {mlsyscard}
+</details>
 
 ## Compound Threats
 
-{
+[Original slide 31](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L1377)
+
+**Failures compound, not just add:**
+
+- **Software fault** creates new adversarial vulnerability
+- **Distribution shift** masks subtle data poisoning
+- **Quantization** (INT8) reduces robustness margin
+- **Pipeline bug** mimics adversarial attack in monitoring
+
+**Key:** 60%+ of ML incidents stem from pipeline/data issues, not models.
+
+**Defense Implication**: No single technique addresses compound threats. Combine:
+
+1. Input sanitization
+2. Robust training objectives
+3. Output verification
+4. Continuous monitoring
+5. Uncertainty quantification
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Individual threats were covered separately. The final insight: in production,
 they arrive together and interact.
@@ -1220,7 +1329,7 @@ they arrive together and interact.
 [2 min] Walk through the bullet list: ``A software fault creates a new adversarial
 vulnerability. A distribution shift masks a subtle poisoning attack. Quantization
 to INT8 reduces robustness margins. A pipeline bug mimics an adversarial attack
-in monitoring.'' Key statistic: ``60%+ of ML incidents stem from pipeline and
+in monitoring.'' Key statistic: ``60\%+ of ML incidents stem from pipeline and
 data issues, not models.''
 
 % -- WARN: What students will get wrong on THIS topic
@@ -1230,95 +1339,94 @@ software bug is worse than either alone.
 
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Compound threats justify the multi-layered defense approach.
-IF SHORT: State the 60% pipeline statistic and the compounding principle.
-}
+IF SHORT: State the 60\% pipeline statistic and the compounding principle.
+```
 
-[T]
-  
-    **Failures compound, not just add:**
-
-    {0.05cm}
-    {
-    {0pt}
-- {computestroke}{**Software fault**} creates new adversarial vulnerability
-- {routingstroke}{**Distribution shift**} masks subtle data poisoning
-- {errorstroke}{**Quantization**} (INT8) reduces robustness margin
-- {datastroke}{**Pipeline bug**} mimics adversarial attack in monitoring
-    
-    }
-
-    {0.05cm}
-    {{Key:}{60%+ of ML incidents stem from pipeline/data issues, not models.}}
-  
-  
-    {mlsyscard}{errorstroke}
-    { **Defense Implication**: No single technique addresses compound threats. Combine:
-    {0pt}
-- Input sanitization
-- Robust training objectives
-- Output verification
-- Continuous monitoring
-- Uncertainty quantification
-    
-    }
-    {mlsyscard}
+</details>
 
 ## Fallacies
 
-{
+[Original slide 32](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L1439)
+
+**Fallacy:** *Adversarial examples are an academic curiosity.*
+
+Physical-world patches on stop signs reliably fool production vision systems. Defense requires 10–20% additional compute.
+
+**Fallacy:** *If the model passes the test set, it is robust.*
+
+I.I.D. test sets cannot measure OOD resilience. Drift causes 20–40% accuracy drops on out-of-distribution inputs.
+
+**Fallacy:** *Data poisoning requires pipeline access.*
+
+Clean-label attacks inject malicious samples into *public* datasets. 0.1% poisoned data $\to$ 95% backdoor success.
+
+**Fallacy:** *Adversarial training solves the problem.*
+
+Robustness is threat-model-specific. $L_\infty$-trained models offer zero protection against $L_2$ or geometric attacks.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [2 min] Read each fallacy and its rebuttal. Emphasize quantitative evidence:
-physical patches on stop signs, 20--40% OOD accuracy drops, 0.1% poisoning
+physical patches on stop signs, 20--40\% OOD accuracy drops, 0.1\% poisoning
 from public datasets, L-infinity training offering zero L-2 protection.
 
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Fallacies correct the most dangerous misconceptions.
 IF SHORT: Read fallacies 1 and 4 (academic curiosity and adversarial training).
-}
+```
 
-**Fallacy:** *Adversarial examples are an academic curiosity.*\\
-{ Physical-world patches on stop signs reliably fool production vision systems. Defense requires 10--20% additional compute.}
-
-{0.05cm}
-**Fallacy:** *If the model passes the test set, it is robust.*\\
-{ I.I.D.\ test sets cannot measure OOD resilience. Drift causes 20--40% accuracy drops on out-of-distribution inputs.}
-
-{0.05cm}
-**Fallacy:** *Data poisoning requires pipeline access.*\\
-{ Clean-label attacks inject malicious samples into *public* datasets. 0.1% poisoned data $$ 95% backdoor success.}
-
-{0.05cm}
-**Fallacy:** *Adversarial training solves the problem.*\\
-{ Robustness is threat-model-specific. $L_$-trained models offer zero protection against $L_2$ or geometric attacks.}
+</details>
 
 ## Pitfalls
 
-{
+[Original slide 33](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L1469)
+
+**Pitfall:** *Deploying without distribution shift monitoring.*
+
+Models degrade silently while maintaining high confidence scores. PSI monitoring detects shifts **3–6 weeks** before accuracy falls below SLA thresholds.
+
+**Pitfall:** *Using average accuracy as the sole robustness metric.*
+
+95% average accuracy can coexist with 100% vulnerability on critical edge cases. Evaluate **worst-case accuracy** under a specific perturbation budget ($\varepsilon = 8/255$).
+
+**Pitfall:** *Ignoring software faults because the model is correct.*
+
+Over **60%** of ML incidents stem from pipeline and data issues, not models. A model hardened against adversarial attacks remains fragile if a preprocessing bug silently corrupts its inputs.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [2 min] Read each pitfall. The first is critical: deploying without drift
 monitoring means silent degradation for weeks. The second: average accuracy
-hides 100% vulnerability on critical edge cases. The third: 60%+ of ML
+hides 100\% vulnerability on critical edge cases. The third: 60\%+ of ML
 incidents are pipeline issues, not model failures.
 
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Pitfalls are operational guidance students will use immediately.
 IF SHORT: Cover the first two pitfalls only.
-}
+```
 
-**Pitfall:** *Deploying without distribution shift monitoring.*\\
-Models degrade silently while maintaining high confidence scores. PSI monitoring detects shifts **3--6 weeks** before accuracy falls below SLA thresholds.
-
-{0.15cm}
-**Pitfall:** *Using average accuracy as the sole robustness metric.*\\
-95% average accuracy can coexist with 100% vulnerability on critical edge cases. Evaluate **worst-case accuracy** under a specific perturbation budget ($ = 8/255$).
-
-{0.15cm}
-**Pitfall:** *Ignoring software faults because the model is correct.*\\
-Over **60%** of ML incidents stem from pipeline and data issues, not models. A model hardened against adversarial attacks remains fragile if a preprocessing bug silently corrupts its inputs.
+</details>
 
 ## Muddiest Point
 
-{
+[Original slide 34](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L1499)
+
+What was the **muddiest point** today?
+
+Write down the concept you found **most confusing**.
+
+Anonymous. One sentence. Submit before you leave.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [2 min] ``Write down the single concept from today you found most confusing.
 Anonymous, one sentence.'' Collect responses. Scan for patterns --- likely
@@ -1326,78 +1434,114 @@ candidates: robustness tax math, concept drift detection, or compound threats.
 
 % -- FLEX: [CORE] + contingency
 [CORE] Closes the feedback loop. Do not skip.
-}
+```
 
-{1.0cm}
-{ What was the **muddiest point** today?}
-
-{0.8cm}
-{ Write down the concept you found **most confusing**.}
-
-{0.5cm}
-{{midgray}{Anonymous. One sentence. Submit before you leave.}}
+</details>
 
 ## What Were the Key Ideas?
 
-{
+[Original slide 35](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L1522)
+
+Close your notes.
+
+Write down the **4 most important concepts** from today.
+
+90 seconds — no peeking.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [2 min] ``Close your notes. Write down the 4 most important concepts from today.
 90 seconds, no peeking.'' Walk around the room. Do NOT show next slide yet.
 
 % -- FLEX: [CORE] + contingency
 [CORE] Retrieval practice is the highest-impact learning intervention.
-}
+```
 
-{1.5cm}
-{ Close your notes.}
-
-{0.8cm}
-{ Write down the **4 most important concepts** from today.}
-
-{0.8cm}
-{{midgray}{90 seconds --- no peeking.}}
+</details>
 
 ## Key Takeaways
 
-{
-% -- NARRATE: What to SAY while showing this slide
-[2 min] Reveal after retrieval. Walk through each bullet, anchoring on numbers:
-silent 15--25% degradation, 3--10x adversarial training cost, 26% clean accuracy
-tax, 3--6 week PSI early warning, 60%+ pipeline incidents.
+[Original slide 36](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L1544)
 
-% -- FLEX: [CORE] + contingency
-[CORE] Synthesis slide. IF SHORT: Read bullets 1, 3, and 5.
-}
-
-{1pt}
-- **Silent failure is the real threat**: ML systems degrade without crashes, alerts, or exceptions. Confidence stays high while accuracy drops 15--25% over months.
-- **Robustness $$ accuracy**: A model with 95% test accuracy can be 100% vulnerable to $ = 8/255$ perturbations. Standard test sets measure i.i.d.\ performance, not robustness.
-- **The robustness tax is real**: Adversarial training costs 3--10$×$ compute and 26% clean accuracy. Certified smoothing requires many noise samples per inference.
+- **Silent failure is the real threat**: ML systems degrade without crashes, alerts, or exceptions. Confidence stays high while accuracy drops 15–25% over months.
+- **Robustness $\neq$ accuracy**: A model with 95% test accuracy can be 100% vulnerable to $\varepsilon = 8/255$ perturbations. Standard test sets measure i.i.d. performance, not robustness.
+- **The robustness tax is real**: Adversarial training costs 3–10$\times$ compute and 26% clean accuracy. Certified smoothing requires many noise samples per inference.
 - **Three shift types**: Covariate (P(X) changes), label (P(Y) changes), concept (P(Y$|$X) changes). Only concept drift requires ground-truth feedback.
 - **Multi-layered defense**: Input sanitization, adversarial training, drift monitoring, data validation, and uncertainty quantification. Each catches what the others miss.
 - **Compound threats**: Software faults, distribution shift, and adversarial attacks interact and amplify each other. 60%+ of incidents are pipeline/data issues.
 
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+% -- NARRATE: What to SAY while showing this slide
+[2 min] Reveal after retrieval. Walk through each bullet, anchoring on numbers:
+silent 15--25\% degradation, 3--10x adversarial training cost, 26\% clean accuracy
+tax, 3--6 week PSI early warning, 60\%+ pipeline incidents.
+
+% -- FLEX: [CORE] + contingency
+[CORE] Synthesis slide. IF SHORT: Read bullets 1, 3, and 5.
+```
+
+</details>
+
 ## References
 
-{
+[Original slide 37](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L1567)
+
+**Goodfellow+15** Goodfellow et al. “Explaining and Harnessing Adversarial Examples.” ICLR 2015.
+
+**Madry+18** Madry et al. “Towards Deep Learning Models Resistant to Adversarial Attacks.” ICLR 2018.
+
+**Carlini+17** Carlini & Wagner. “Towards Evaluating the Robustness of Neural Networks.” IEEE S&P 2017.
+
+**Cohen+19** Cohen et al. “Certified Adversarial Robustness via Randomized Smoothing.” ICML 2019.
+
+**Dixit+21** Dixit et al. “Silent Data Corruptions at Scale.” arXiv 2021.
+
+**NTSB17** NTSB. “Tesla Autopilot Fatal Crash Investigation.” 2017.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [1 min] Highlight Madry+18 as the adversarial training foundation and Dixit+21
 for silent data corruption at scale. Students can photograph for later reading.
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Do not read every entry aloud.
-}
+```
 
-{Goodfellow+15}{Goodfellow et al. ``Explaining and Harnessing Adversarial Examples.'' ICLR 2015.}
-{Madry+18}{Madry et al. ``Towards Deep Learning Models Resistant to Adversarial Attacks.'' ICLR 2018.}
-{Carlini+17}{Carlini & Wagner. ``Towards Evaluating the Robustness of Neural Networks.'' IEEE S&P 2017.}
-{Cohen+19}{Cohen et al. ``Certified Adversarial Robustness via Randomized Smoothing.'' ICML 2019.}
-{Dixit+21}{Dixit et al. ``Silent Data Corruptions at Scale.'' arXiv 2021.}
-{NTSB17}{NTSB. ``Tesla Autopilot Fatal Crash Investigation.'' 2017.}
+</details>
 
 ## Next Lecture: Sustainable AI
 
-{
+[Original slide 38](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L1587)
+
+Carbon
+
+Lifecycle carbon accounting for ML training and inference
+
+Efficiency
+
+Algorithmic efficiency and hardware utilization optimization
+
+Scheduling
+
+Carbon-aware job scheduling and renewable energy alignment
+
+A system that survives every failure yet consumes a city's worth of power
+
+**is not a viable long-term solution.**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [1 min] ``We made the system robust --- but at what cost? Adversarial training,
 redundant processing, continuous monitoring all consume energy.'' Point to the
@@ -1406,95 +1550,67 @@ of power, that is not viable. Next lecture: sustainability as a hard constraint.
 
 % -- FLEX: [CORE] + contingency
 [CORE] Forward hook motivates attendance at the next lecture.
-}
+```
 
-[c]
-  
-    
-    {mlsyscard}{computestroke}
-    { Carbon}\\[0.1cm]
-    { Lifecycle carbon accounting for ML training and inference}
-    {mlsyscard}
-  
-  
-    
-    {mlsyscard}{datastroke}
-    { Efficiency}\\[0.1cm]
-    { Algorithmic efficiency and hardware utilization optimization}
-    {mlsyscard}
-  
-  
-    
-    {mlsyscard}{routingstroke}
-    { Scheduling}\\[0.1cm]
-    { Carbon-aware job scheduling and renewable energy alignment}
-    {mlsyscard}
-  
-
-{0.2cm}
-
-{ A system that survives every failure yet consumes a city's worth of power}\\[0.1cm]
-{**is not a viable long-term solution.**}
+</details>
 
 ## Backup: Production Drift Detection Pipeline
 
-{
+[Original slide 39](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L1635)
+
+**Production fraud model monitoring (textbook worked example):**
+
+| **Test** | **Detects** | **Threshold** | **Action** |
+| --- | --- | --- | --- |
+| **PSI** (hourly) | Covariate shift | $> 0.25$ | Alert + investigate |
+| **KL Divergence** | Label shift | $> 0.1$ | Flag for review |
+| **KS Test** | Feature drift | $p < 0.01$ | Trigger retraining |
+| **Ground-truth gap** | Concept drift | $> 5\%$ | Emergency retrain |
+
+PSI detects shifts **3–6 weeks** before accuracy falls below SLA. Running all four tests costs $<$5% compute overhead — far less than a single missed drift event.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 Backup. Concrete drift detection pipeline for production fraud detection,
 using PSI + KL divergence + KS test in combination.
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Show when students ask how to implement drift monitoring.
-}
+```
 
-**Production fraud model monitoring (textbook worked example):**
-
-{0.1cm}
-{}{1.15}
-{tabular}{@{}llrl@{}}
-  
-  **Test** & **Detects** & **Threshold** & **Action** \\
-  
-  **PSI** (hourly)      & Covariate shift  & $> 0.25$ & Alert + investigate \\
-  **KL Divergence**     & Label shift       & $> 0.1$  & Flag for review \\
-  **KS Test**           & Feature drift     & $p < 0.01$ & Trigger retraining \\
-  **Ground-truth gap**  & Concept drift     & $> 5%$  & Emergency retrain \\
-  
-{tabular}
-
-{0.15cm}
-{mlsyscard}{datastroke}
-{ PSI detects shifts **3--6 weeks** before accuracy falls below SLA. Running all four tests costs $<$5% compute overhead --- far less than a single missed drift event.}
-{mlsyscard}
+</details>
 
 ## Backup: Adversarial Training Cost Breakdown
 
-{
+[Original slide 40](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/14_robust_ai/14_robust_ai.tex#L1668)
+
+**PGD adversarial training: cost vs. robustness**
+
+| **PGD Steps** | **Compute Multiplier** | **Clean Acc.** | **Robust Acc.** |
+| --- | --- | --- | --- |
+| 0 (standard) | 1$\times$ | **76%** | 0% |
+| 3-step PGD | 4$\times$ | 58% | 38% |
+| 7-step PGD | 8$\times$ | 52% | 45% |
+| 20-step PGD | 21$\times$ | 50% | **47%** |
+
+Diminishing returns beyond 7 steps: doubling compute from 8$\times$ to 21$\times$ gains only 2% robust accuracy. The 7-step sweet spot provides 90%+ of the robustness at 40% of the cost.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 Backup. Detailed cost analysis of adversarial training at different PGD
 step counts, showing the compute-robustness Pareto frontier.
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Show when students ask about practical adversarial training budgets.
-}
+```
 
-**PGD adversarial training: cost vs.\ robustness**
-
-{0.1cm}
-{}{1.15}
-{tabular}{@{}lrrr@{}}
-  
-  **PGD Steps** & **Compute Multiplier** & **Clean Acc.** & **Robust Acc.** \\
-  
-  0 (standard)  & 1$×$   & **76%** & 0% \\
-  3-step PGD    & 4$×$   & 58%          & 38% \\
-  7-step PGD    & 8$×$   & 52%          & 45% \\
-  20-step PGD   & 21$×$  & 50%          & **47%** \\
-  
-{tabular}
-
-{0.15cm}
-{ Diminishing returns beyond 7 steps: doubling compute from 8$×$ to 21$×$ gains only 2% robust accuracy. The 7-step sweet spot provides 90%+ of the robustness at 40% of the cost.}
+</details>
 
 ## Complete original Beamer source
 

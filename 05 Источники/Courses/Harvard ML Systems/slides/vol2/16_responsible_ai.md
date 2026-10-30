@@ -9,17 +9,42 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`slides/vol2/16_responsible_ai/16_responsible_ai.tex`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static slide archive
+> Text and equations retain the original language. Layout wrappers are simplified;
+> speaker notes are separate, and original SVGs are not redrawn or cropped.
+> Unsupported TeX remains visible and is listed beside the affected slide.
+> This archive is not a checked transcript or a finished Bookvar chapter.
 
 # VOL2 Slides — Responsible Ai
 
 ## Readable slide sequence
 
+## Responsible AI
+
+[Original slide 1](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L67)
+
+Ethics as Engineering Infrastructure
+
 ## Learning Objectives
 
-{
+[Original slide 2](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L72)
+
+1. Define **fairness**, **transparency**, **accountability**, **privacy**, and **safety** as engineering constraints
+2. Calculate **fairness metrics** (demographic parity, equalized odds, equality of opportunity)
+3. Explain why **impossibility theorems** prove these metrics are mathematically incompatible
+4. Evaluate **explainability methods** (SHAP, LIME, gradient-based) and cost-fidelity trade-offs
+5. Analyze **feedback loops** that amplify bias in production systems
+6. Design **monitoring infrastructure** for detecting fairness degradation across groups
+7. Assess the **infrastructure cost** of responsible AI and why it must be budgeted at architecture time
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [2 min] Walk through each objective. ``This chapter transforms ethics from
 aspiration into measurable engineering constraints --- fairness has the same
@@ -31,57 +56,60 @@ bias?'' [Expected: most hands. This motivates the chapter.]
 
 % -- FLEX: [CORE] + contingency
 [CORE] Sets the chapter scope. IF SHORT: Read objectives 1, 3, and 7 aloud.
-}
+```
 
-{0pt}
-- Define **fairness**, **transparency**, **accountability**, **privacy**, and **safety** as engineering constraints
-- Calculate **fairness metrics** (demographic parity, equalized odds, equality of opportunity)
-- Explain why **impossibility theorems** prove these metrics are mathematically incompatible
-- Evaluate **explainability methods** (SHAP, LIME, gradient-based) and cost-fidelity trade-offs
-- Analyze **feedback loops** that amplify bias in production systems
-- Design **monitoring infrastructure** for detecting fairness degradation across groups
-- Assess the **infrastructure cost** of responsible AI and why it must be budgeted at architecture time
+</details>
 
 ## Visual Language
 
-{
+[Original slide 3](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L100)
+
+Throughout this course, colors carry meaning:
+
+**Blue** — Compute / Processing
+
+GPU ops, forward/backward pass, inference
+
+**Green** — Data / Memory
+
+Data flow, caches, healthy paths
+
+**Orange** — Routing / Scheduling
+
+Load balancers, batch windows
+
+**Red** — Error / Cost / Bottleneck
+
+Loss, decode phase, waste
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [1 min] Point to each card. ``In this chapter, red marks unfairness and bias ---
 the errors that harm people. Green marks equitable outcomes.''
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Skip if students have seen this in a previous lecture.
-}
+```
 
-Throughout this course, colors carry meaning:
-
-{0.3cm}
-[T]
-  
-    {mlsyscard}{computestroke}
-    **Blue** --- Compute / Processing\\
-    { GPU ops, forward/backward pass, inference}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{datastroke}
-    **Green** --- Data / Memory\\
-    { Data flow, caches, healthy paths}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{routingstroke}
-    **Orange** --- Routing / Scheduling\\
-    { Load balancers, batch windows}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{errorstroke}
-    **Red** --- Error / Cost / Bottleneck\\
-    { Loss, decode phase, waste}
-    {mlsyscard}
+</details>
 
 ## Responsible AI in the Fleet Stack
 
-{
+[Original slide 4](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L146)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/16_responsible_ai/images/responsible-ai-stack.svg]]
+
+Harvard Edge ML Systems Book contributors, [responsible-ai-stack.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/images/responsible-ai-stack.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Core Thesis:** Responsibility is infrastructure, not aspiration. Systems that fail responsibility requirements fail to deploy.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Ch 15 ensured the fleet is physically viable. This chapter asks the final
 question: whom does the system serve, and does it serve them fairly?
@@ -100,18 +128,42 @@ Ask: ``What happens when a technically excellent system exhibits bias?'' Give
 % -- FLEX: [CORE] + contingency
 [CORE] Positions responsibility as infrastructure, not aspiration.
 IF SHORT: State the thesis from the green callout and move on.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{responsible-ai-stack.pdf}
-
-{0.15cm}
-{Core Thesis:}{Responsibility is infrastructure, not aspiration. Systems that fail responsibility requirements fail to deploy.}
+</details>
 
 ## The Amazon Hiring Algorithm
 
-{
+[Original slide 5](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L177)
+
+**Amazon (2019):** Hiring algorithm scrapped after
+discovering systematic gender bias.
+
+- Trained on historical resume data
+- Learned male-dominated hiring patterns
+- Penalized resumes containing “women's”
+- Met every *technical* requirement
+
+**Statistically optimal, ethically disastrous.**
+
+Technical excellence can coexist with social harm.
+
+| **Metric** | **Status** |
+| --- | --- |
+| Accuracy | **Pass** |
+| Latency | **Pass** |
+| Security | **Pass** |
+| Robustness | **Pass** |
+| Fairness | **FAIL** |
+
+Passing all technical gates
+
+is necessary but not sufficient.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The stack showed responsibility as the top layer. This case study shows what
 happens when that layer is missing.
@@ -136,51 +188,31 @@ historical patterns encode structural discrimination.
 % -- FLEX: [CORE] + contingency
 [CORE] Amazon is the anchor case study for the chapter.
 IF SHORT: State ``passed all technical gates, failed fairness'' and move on.
-}
+```
 
-[T]
-  
-    **Amazon (2019):** Hiring algorithm scrapped after
-    discovering systematic gender bias.
-
-    {0.15cm}
-    {0pt}
-- Trained on historical resume data
-- Learned male-dominated hiring patterns
-- Penalized resumes containing ``women's''
-- Met every *technical* requirement
-    
-
-    {0.1cm}
-    {mlsyscard}{errorstroke}
-    **Statistically optimal, ethically disastrous.**\\
-    { Technical excellence can coexist with social harm.}
-    {mlsyscard}
-  
-  
-    {0.3cm}
-    {}{1.25}
-    {
-    {tabular}{@{}ll@{}}
-      
-      **Metric** & **Status** \\
-      
-      Accuracy     & {datastroke}{**Pass**} \\
-      Latency      & {datastroke}{**Pass**} \\
-      Security     & {datastroke}{**Pass**} \\
-      Robustness   & {datastroke}{**Pass**} \\
-      
-      Fairness     & {errorstroke}{**FAIL**} \\
-      
-    {tabular}
-    }
-
-    {0.15cm}
-    {{midgray}{Passing all technical gates\ necessary but not sufficient.}}
+</details>
 
 ## From Ethics to Engineering
 
-{
+[Original slide 6](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L250)
+
+**Responsible AI:** Designing, auditing, and operating ML
+systems to measurable fairness, safety, privacy, and accountability standards —
+translating ethical principles into verifiable system properties.
+
+|  | **Traditional View** | **Engineering View** |
+| --- | --- | --- |
+| Nature | Ethical aspiration | Hard deployment gate |
+| Timing | Post-hoc review | Designed-in from data collection |
+| Cost | “Nice to have” | 10–20 ms latency + 15–30% training |
+| Failure | Reputational risk | Regulatory shutdown |
+
+**Key shift:** Fairness constraints have the same force as memory limits or latency budgets.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Amazon showed a system that was technically sound but ethically failed. This
 slide reframes ethics from aspiration to hard engineering constraint.
@@ -206,33 +238,24 @@ degrades training data, privacy leaks invite regulatory shutdown.
 
 % -- FLEX: [CORE] + contingency
 [CORE] The reframing from aspiration to engineering is the chapter thesis.
-}
+```
 
-{mlsyscard}{crimson}
-**Responsible AI:** Designing, auditing, and operating ML
-systems to measurable fairness, safety, privacy, and accountability standards ---
-translating ethical principles into verifiable system properties.
-{mlsyscard}
-
-{0.1cm}
-{}{1.15}
-{tabular}{@{}lll@{}}
-  
-  & **Traditional View** & **Engineering View** \\
-  
-  Nature   & Ethical aspiration    & Hard deployment gate \\
-  Timing   & Post-hoc review       & Designed-in from data collection \\
-  Cost     & ``Nice to have''      & 10--20 ms latency + 15--30% training \\
-  Failure  & Reputational risk     & Regulatory shutdown \\
-  
-{tabular}
-
-{0.1cm}
-{Key shift:}{Fairness constraints have the same force as memory limits or latency budgets.}
+</details>
 
 ## Principles Across the ML Lifecycle
 
-{
+[Original slide 7](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L308)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/16_responsible_ai/images/lifecycle-principles.svg]]
+
+Harvard Edge ML Systems Book contributors, [lifecycle-principles.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/images/lifecycle-principles.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Key:** Constraints not designed in from data collection require fundamental retraining to fix.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The reframing established ethics as engineering. This slide maps responsible AI
 principles across the ML lifecycle --- showing it must be designed in, not bolted on.
@@ -257,18 +280,24 @@ retraining to fix.
 % -- FLEX: [CORE] + contingency
 [CORE] The lifecycle mapping structures the rest of the chapter.
 IF SHORT: State the ``designed-in, not bolted on'' insight.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{lifecycle-principles.pdf}
-
-{0.1cm}
-{Key:}{Constraints not designed in from data collection require fundamental retraining to fix.}
+</details>
 
 ## The Infrastructure Cost of Responsibility
 
-{
+[Original slide 8](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L345)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/16_responsible_ai/images/responsible-ai-overhead.svg]]
+
+Harvard Edge ML Systems Book contributors, [responsible-ai-overhead.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/images/responsible-ai-overhead.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+Responsible AI is **provisioned**, not optional — budgeted like security and fault tolerance.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The lifecycle showed WHEN to apply principles. This slide shows the
 infrastructure COST of each principle.
@@ -297,24 +326,36 @@ architecture time, not discovered at deployment.
 % -- FLEX: [CORE] + contingency
 [CORE] Cost awareness prevents retrofitting surprises.
 IF SHORT: State the SHAP overhead number and the ``budget at architecture time'' insight.
-}
+```
 
-% --- Layout: FULL-WIDTH table diagram ---
+</details>
 
-{responsible-ai-overhead.pdf}
+## Predict: What Should “Fair” Mean?
 
-{0.1cm}
-{ Responsible AI is **provisioned**, not optional --- budgeted like security and fault tolerance.}
+[Original slide 9](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L387)
 
-## Predict: What Should ``Fair'' Mean?
+Think–Write–Share
 
-{
+A loan approval model approves Group A at 70%
+
+and Group B at 40%. Is this unfair?
+
+Write your definition of “fair” in one sentence.
+
+(60 seconds — then compare with a neighbor.)
+
+Hint: What if Group B has a genuinely higher default rate?
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Students saw that fairness has infrastructure costs. But what does ``fair''
 even mean? This prediction surfaces conflicting definitions.
 
 % -- NARRATE: What to SAY while showing this slide
-[2 min] Read the scenario: ``Group A approved at 70%, Group B at 40%. Is
+[2 min] Read the scenario: ``Group A approved at 70\%, Group B at 40\%. Is
 this unfair?'' Read the hint: ``What if Group B has a genuinely higher default
 rate?'' Give 60 seconds. Ask 3--4 students to share their definitions.
 
@@ -326,27 +367,24 @@ conflict. This primes the impossibility theorem.
 % -- FLEX: [CORE] + contingency
 [CORE] First active learning moment. Primes the fairness metrics section.
 IF SHORT: Reduce to 30 seconds; still cold-call 2 students.
-}
+```
 
-{0.8cm}
-{ Think--Write--Share}
-
-{0.4cm}
-{ A loan approval model approves Group A at 70%\\
-and Group B at 40%. Is this unfair?}
-
-{0.3cm}
-{ Write your definition of ``fair'' in one sentence.}
-
-{0.3cm}
-{{midgray}{(60 seconds --- then compare with a neighbor.)}}
-
-{0.2cm}
-{{lightgray}{Hint: What if Group B has a genuinely higher default rate?}}
+</details>
 
 ## Three Definitions of Fairness
 
-{
+[Original slide 10](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L431)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/16_responsible_ai/images/fairness-metrics-comparison.svg]]
+
+Harvard Edge ML Systems Book contributors, [fairness-metrics-comparison.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/images/fairness-metrics-comparison.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Key:** Each metric captures a *different* aspect of fairness — and they conflict mathematically.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Students wrote conflicting definitions. This slide reveals that three formal
 metrics exist --- and they capture different intuitions about fairness.
@@ -370,18 +408,40 @@ these metrics conflict mathematically --- satisfying one can violate another.
 
 % -- FLEX: [CORE] + contingency
 [CORE] The three metrics are the foundation for the impossibility theorem.
-}
+```
 
-% --- Layout: FULL-WIDTH comparison ---
-
-{fairness-metrics-comparison.pdf}
-
-{0.1cm}
-{Key:}{Each metric captures a *different* aspect of fairness --- and they conflict mathematically.}
+</details>
 
 ## Fairness Metrics: The Math
 
-{
+[Original slide 11](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L467)
+
+**Let** $h(x)$ predict outcome, $S$ = sensitive attribute, $Y$ = true label.
+
+**1. Demographic Parity** (equal approval rates):
+
+$$
+P\big(h(x)=1 \mid S=a\big) = P\big(h(x)=1 \mid S=b\big)
+$$
+
+**2. Equalized Odds** (equal TPR *and* FPR):
+
+$$
+P\big(h(x)=1 \mid S=a, Y=y\big) = P\big(h(x)=1 \mid S=b, Y=y\big), \;\; y \in \{0,1\}
+$$
+
+**3. Equality of Opportunity** (equal TPR only):
+
+$$
+P\big(h(x)=1 \mid S=a, Y=1\big) = P\big(h(x)=1 \mid S=b, Y=1\big)
+$$
+
+**Impossibility** (Kleinberg et al., 2016): When base rates differ, no classifier satisfies all three simultaneously.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The diagram showed the intuitions. This slide provides the formal math ---
 precise definitions students can implement.
@@ -408,73 +468,70 @@ when base rates differ between groups.
 % -- FLEX: [CORE] + contingency
 [CORE] The formal definitions enable the worked exercise on the next active
 learning slide. IF SHORT: Show equations 1 and 2 and the impossibility card.
-}
+```
 
-**Let** $h(x)$ predict outcome, $S$ = sensitive attribute, $Y$ = true label.
-
-{0.02cm}
-**1. Demographic Parity** (equal approval rates):
-{-0.12cm}
-$$P(h(x)=1  S=a) = P(h(x)=1  S=b)$$
-
-{-0.18cm}
-**2. Equalized Odds** (equal TPR *and* FPR):
-{-0.12cm}
-$$P(h(x)=1  S=a, Y=y) = P(h(x)=1  S=b, Y=y), \;\; y  \{0,1\}$$
-
-{-0.18cm}
-**3. Equality of Opportunity** (equal TPR only):
-{-0.12cm}
-$$P(h(x)=1  S=a, Y=1) = P(h(x)=1  S=b, Y=1)$$
-
-{-0.12cm}
-{mlsyscard}{errorstroke}
-{ **Impossibility** (Kleinberg et al., 2016): When base rates differ, no classifier satisfies all three simultaneously.}
-{mlsyscard}
+</details>
 
 ## The Fairness Tax
 
-{
+[Original slide 12](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L522)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/16_responsible_ai/images/fairness-tax-visual.svg]]
+
+Harvard Edge ML Systems Book contributors, [fairness-tax-visual.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/images/fairness-tax-visual.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+Enforcing demographic parity cost **4% accuracy** — a huge drop in credit scoring.
+This is the **Fairness Tax**: the explicit cost of correcting for historical bias.
+Engineers must budget this trade-off, not pretend it does not exist.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The impossibility theorem says you cannot have all metrics. The fairness tax
 quantifies the cost of choosing one.
 
 % -- NARRATE: What to SAY while showing this slide
-[3 min] Walk through the diagram: ``Unconstrained: 85% accuracy, Group A 80%
-approval, Group B 60%. Enforce demographic parity: approve Group B at 80%
-too. This forces approving risky applicants. New accuracy: 81%. The 4% drop
+[3 min] Walk through the diagram: ``Unconstrained: 85\% accuracy, Group A 80\%
+approval, Group B 60\%. Enforce demographic parity: approve Group B at 80\%
+too. This forces approving risky applicants. New accuracy: 81\%. The 4\% drop
 is the Fairness Tax.'' Read the crimson card: ``Engineers must budget this
 trade-off, not pretend it does not exist.''
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
-Ask: ``What is the dollar cost of the 4% accuracy drop on 100,000 loans at
-\$200,000 each, if the default rate is 2%?'' Give 15 seconds for mental math.
-[Expected: 0.04 × 2% × 100,000 × \$200,000 = \$16M in additional defaults.
-This forces the business-stakes calculation --- 4% is not negligible.]
+Ask: ``What is the dollar cost of the 4\% accuracy drop on 100,000 loans at
+\$200,000 each, if the default rate is 2\%?'' Give 15 seconds for mental math.
+[Expected: 0.04 × 2\% × 100,000 × \$200,000 = \$16M in additional defaults.
+This forces the business-stakes calculation --- 4\% is not negligible.]
 
 % -- WARN: What students will get wrong on THIS topic
-Common error: students think 4% accuracy loss is negligible. Correct framing:
-in credit scoring, 4% accuracy drop means millions of dollars in additional
+Common error: students think 4\% accuracy loss is negligible. Correct framing:
+in credit scoring, 4\% accuracy drop means millions of dollars in additional
 defaults --- this is a real business cost that must be explicitly accepted.
 
 % -- FLEX: [CORE] + contingency
-[CORE] The 4% Fairness Tax is the key quantitative anchor.
-}
+[CORE] The 4\% Fairness Tax is the key quantitative anchor.
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{fairness-tax-visual.pdf}
-
-{0.1cm}
-{mlsyscard}{crimson}
-{ Enforcing demographic parity cost **4% accuracy** --- a huge drop in credit scoring.
-This is the **Fairness Tax**: the explicit cost of correcting for historical bias.
-Engineers must budget this trade-off, not pretend it does not exist.}
-{mlsyscard}
+</details>
 
 ## Quick Check
 
-{
+[Original slide 13](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L564)
+
+Quick Check
+
+Can a classifier satisfy Demographic Parity
+
+AND Equalized Odds when base rates differ?
+
+15 seconds — then I will cold-call.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [1 min] Read the question. Give 15 seconds. Cold-call. Answer: No --- the
 impossibility theorem (Kleinberg et al.) proves this is mathematically
@@ -482,20 +539,66 @@ impossible when base rates differ between groups.
 
 % -- FLEX: [CORE] + contingency
 [CORE] Micro-retrieval reinforcing the impossibility theorem.
-}
+```
 
-{1.0cm}
-{ Quick Check}
+</details>
 
-{0.6cm}
-{ Can a classifier satisfy Demographic Parity\ Equalized Odds when base rates differ?}
+## The Impossibility Theorems
 
-{0.5cm}
-{{midgray}{15 seconds --- then I will cold-call.}}
+[Original slide 14](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L589)
+
+When base rates differ and prediction is imperfect:
+
+**Calibrated** risk scores cannot also satisfy **Equalized Odds**
+
+(Kleinberg et al., 2016 $\cdot$ Chouldechova, 2017)
+
+ Demographic Parity is a *separate* selection-rate constraint
+
+that adds further conflicts with both.
+
+Fairness is a *value-laden engineering decision*,
+
+not a technical optimization with a single correct answer.
 
 ## Your Turn: Calculate Fairness Metrics
 
-{
+[Original slide 15](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L600)
+
+Calculate Fairness Metrics
+
+**Group A** (100 applicants):
+
+Approved: 70 (40 repaid, 30 defaulted)
+
+Rejected: 30 (5 would repay, 25 default)
+
+**Group B** (100 applicants):
+
+Approved: 40 (30 repaid, 10 defaulted)
+
+Rejected: 60 (20 would repay, 40 default)
+
+Calculate: **DP gap**, **TPR gap**, **FPR gap**.
+
+(90 seconds — compare with neighbor)
+
+**Solution:**
+
+DP: $70/100 - 40/100$ = **30 pp**
+
+TPR: $40/45 - 30/50$ = $0.89 - 0.60$ = **29 pp**
+
+FPR: $30/55 - 10/50$ = $0.55 - 0.20$ = **35 pp**
+
+**Violates all three criteria!**
+
+Fixing one does not fix the others.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Students learned the three metrics formally. This exercise forces them to
 compute all three from raw confusion matrix data.
@@ -511,42 +614,24 @@ can be wrong on the arithmetic. The reveal shows all three are violated.
 
 % -- FLEX: [CORE] + contingency
 [CORE] Second active learning moment. IF SHORT: Reduce to 60 seconds.
-}
+```
 
-[T]
-  
-    { Calculate Fairness Metrics}
+</details>
 
-    {0.15cm}
-    **Group A** (100 applicants):\\
-    Approved: 70 (40 repaid, 30 defaulted)\\
-    Rejected: 30 (5 would repay, 25 default)
+## Explainability Methods: Cost vs. Fidelity
 
-    {0.1cm}
-    **Group B** (100 applicants):\\
-    Approved: 40 (30 repaid, 10 defaulted)\\
-    Rejected: 60 (20 would repay, 40 default)
+[Original slide 16](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L659)
 
-    {0.1cm}
-    Calculate: **DP gap**, **TPR gap**, **FPR gap**.\\
-    {{midgray}{(90 seconds --- compare with neighbor)}}
-  
-  
-    
-    {mlsyscard}{datastroke}
-    **Solution:**\\[0.1cm]
-    {
-    DP: $70/100 - 40/100$ = **30 pp**\\[0.05cm]
-    TPR: $40/45 - 30/50$ = $0.89 - 0.60$ = **29 pp**\\[0.05cm]
-    FPR: $30/55 - 10/50$ = $0.55 - 0.20$ = **35 pp**\\[0.1cm]
-    {errorstroke}{**Violates all three criteria!**}\\
-    Fixing one does not fix the others.
-    }
-    {mlsyscard}
+![[Assets/Sources/Harvard ML Systems/slides/vol2/16_responsible_ai/images/explainability-methods.svg]]
 
-## Explainability Methods: Cost vs.\ Fidelity
+Harvard Edge ML Systems Book contributors, [explainability-methods.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/images/explainability-methods.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
 
-{
+**Selection rule:** Match method to deployment constraint — high-stakes decisions need SHAP-level fidelity; real-time systems need gradient or surrogate methods.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Fairness metrics showed WHAT to measure. Explainability shows HOW to provide
 meaningful information and support contestability for high-impact automated decisions.
@@ -571,18 +656,44 @@ to deployment constraint.
 % -- FLEX: [CORE] + contingency
 [CORE] The cost-fidelity spectrum is essential for deployment decisions.
 IF SHORT: State the SHAP cost and the selection rule from the callout.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{explainability-methods.pdf}
-
-{0.05cm}
-{Selection rule:}{Match method to deployment constraint --- high-stakes decisions need SHAP-level fidelity; real-time systems need gradient or surrogate methods.}
+</details>
 
 ## The Explainability Budget
 
-{
+[Original slide 17](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L696)
+
+**Scenario:** Rec. system, SLA: 100 ms, 10,000 QPS
+
+**SHAP adds**: 50–200 ms/request
+
+**Total latency**: 150–300 ms — **SLA VIOLATED**
+
+**Options:**
+
+- Pre-compute explanations (offline)
+- Use gradient-based methods (+1–10$\times$)
+- Accept 5$\times$ infrastructure cost
+- Choose inherently interpretable model
+
+| **Method** | **Overhead** |
+| --- | --- |
+| SHAP | 50–1000$\times$ |
+| LIME | 100–1000 passes |
+| Gradient | 1–10$\times$ |
+| Inherent | 0$\times$ (arch. cost) |
+
+GDPR Art. 22: High-stakes automated
+
+decisions require safeguards such as
+
+human review and contestability.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The methods slide showed costs abstractly. This worked example makes the SLA
 violation concrete.
@@ -597,51 +708,32 @@ explainability and human review a design requirement, not an optional dashboard.
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Concrete application of the cost spectrum.
 IF SHORT: State the SLA violation and the ``budget at architecture time'' point.
-}
+```
 
-[T]
-  
-    **Scenario:** Rec.\ system, SLA: 100 ms, 10{,}000 QPS
-
-    {0.04cm}
-    {mlsyscard}{errorstroke}
-    {
-    **SHAP adds**: 50--200 ms/request\\
-    **Total latency**: 150--300 ms --- {errorstroke}{**SLA VIOLATED**}}
-    {mlsyscard}
-
-    {0.04cm}
-    **Options:**
-    {-2pt}
-- Pre-compute explanations (offline)
-- Use gradient-based methods (+1--10$×$)
-- Accept 5$×$ infrastructure cost
-- Choose inherently interpretable model
-    
-  
-  
-    {}{1.0}
-    {
-    {tabular}{@{}lr@{}}
-      
-      **Method** & **Overhead** \\
-      
-      SHAP            & 50--1000$×$ \\
-      LIME            & 100--1000 passes \\
-      Gradient        & 1--10$×$ \\
-      Inherent        & 0$×$ (arch. cost) \\
-      
-    {tabular}
-    }
-
-    {0.04cm}
-    {{midgray}{GDPR Art. 22: High-stakes automated\\
-    decisions require safeguards such as\\
-    human review and contestability.}}
+</details>
 
 ## Apple Card: The Cost of Missing Explanations (1/2)
 
-{
+[Original slide 18](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L759)
+
+**Apple Card (2019):** Public controversy after high-profile users reported
+credit limits 10$\times$ lower than their spouses despite similar or superior
+financial profiles.
+
+- When customers appealed, support staff **could not explain** the decision
+- Algorithm offered no recourse and no contestability mechanism
+- NYDFS investigated — no fair-lending violations found
+- Reputational damage from *perceived* opacity was severe
+
+**Opacity failed at the customer interface.**
+
+Technical accuracy cannot substitute for a working explanation and
+recourse layer.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The Explainability Budget showed the systems cost of adding explanations.
 This case shows the cost of NOT having them --- opacity created a governance
@@ -664,29 +756,30 @@ without one.]
 % -- FLEX: [CORE] + contingency
 [CORE] Apple Card is the chapter's canonical case for explainability opacity.
 IF SHORT: State the 10x discrepancy and the ``could not explain'' failure.
-}
+```
 
-**Apple Card (2019):** Public controversy after high-profile users reported
-credit limits 10$×$ lower than their spouses despite similar or superior
-financial profiles.
-
-{0.2cm}
-{2pt}
-- When customers appealed, support staff **could not explain** the decision
-- Algorithm offered no recourse and no contestability mechanism
-- NYDFS investigated --- no fair-lending violations found
-- Reputational damage from *perceived* opacity was severe
-
-{0.2cm}
-{mlsyscard}{errorstroke}
-{ **Opacity failed at the customer interface.**\\
-Technical accuracy cannot substitute for a working explanation and
-recourse layer.}
-{mlsyscard}
+</details>
 
 ## Apple Card: Systems Lesson (2/2)
 
-{
+[Original slide 19](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L807)
+
+**Systems lesson:**
+
+Explainability is a **customer-service interface**,
+not merely a debugging tool. A system that cannot explain its decisions
+is operationally fragile regardless of its aggregate accuracy.
+Build explanation infrastructure before deployment in high-stakes
+domains.
+
+**Principle:** Perceived opacity is as damaging as actual discrimination — the absence of a recourse mechanism is an engineering failure.
+
+Source: NY Dept. of Financial Services investigation, 2021
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The previous slide described what happened. This slide distills the engineering
 lesson: explainability is not a debugging tool, it is a customer-service interface.
@@ -707,26 +800,24 @@ explanation layer.
 % -- FLEX: [CORE] + contingency
 [CORE] Grounds the abstract ``explainability = observability'' principle.
 IF SHORT: Read the crimson card in 20 seconds.
-}
+```
 
-{mlsyscard}{crimson}
-**Systems lesson:**\\[0.1cm]
-{ Explainability is a **customer-service interface**,
-not merely a debugging tool. A system that cannot explain its decisions
-is operationally fragile regardless of its aggregate accuracy.
-Build explanation infrastructure before deployment in high-stakes
-domains.}
-{mlsyscard}
-
-{0.3cm}
-{Principle:}{Perceived opacity is as damaging as actual discrimination --- the absence of a recourse mechanism is an engineering failure.}
-
-{0.3cm}
-{{midgray}{Source: NY Dept.\ of Financial Services investigation, 2021}}
+</details>
 
 ## Feedback Loops Amplify Bias
 
-{
+[Original slide 20](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L853)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/16_responsible_ai/images/feedback-loop-bias.svg]]
+
+Harvard Edge ML Systems Book contributors, [feedback-loop-bias.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/images/feedback-loop-bias.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Unstable:** An unfair system degrades its own training data — bias is a distributional instability.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Fairness metrics measure a snapshot. Feedback loops show how bias compounds
 over time --- the system destabilizes its own data distribution.
@@ -755,18 +846,34 @@ reinforces the bias. You must break the loop with external monitoring.
 % -- FLEX: [CORE] + contingency
 [CORE] Feedback loops are the most dangerous dynamic in deployed ML.
 IF SHORT: Walk through the cycle once and state the instability insight.
-}
+```
 
-% --- Layout: FULL-WIDTH comparison ---
-
-{feedback-loop-bias.pdf}
-
-{0.1cm}
-{Unstable:}{An unfair system degrades its own training data --- bias is a distributional instability.}
+</details>
 
 ## Sociotechnical Dynamics
 
-{
+[Original slide 21](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L894)
+
+**Automation Bias**
+
+Humans over-trust model outputs. Radiologists shown AI predictions exhibit **confirmation bias**, accepting errors they would catch independently.
+
+**Value Conflicts**
+
+Accuracy vs. fairness vs. privacy are competing constraints. No single optimization satisfies all stakeholders.
+
+**Contestability**
+
+Affected individuals must have mechanisms to challenge automated decisions. Requires explanation infrastructure.
+
+**Institutional Embedding**
+
+Governance structures must outlast individual champions. Responsible AI fails when tied to a single team.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Feedback loops showed technical dynamics. Sociotechnical dynamics add the human
 element --- how organizations and individuals interact with the system.
@@ -792,38 +899,33 @@ are invisible to dashboards --- they require organizational audits.]
 [OPTIONAL] Extends the technical discussion to organizational context.
 IF SHORT: Read the automation bias and contestability cards only --- these
 two carry the chapter's deepest governance implications.
-}
+```
 
-[T]
-  
-    {mlsyscard}{computestroke}
-    **Automation Bias**\\
-    { Humans over-trust model outputs. Radiologists shown AI predictions exhibit **confirmation bias**, accepting errors they would catch independently.}
-    {mlsyscard}
-
-    {0.15cm}
-
-    {mlsyscard}{routingstroke}
-    **Value Conflicts**\\
-    { Accuracy vs.\ fairness vs.\ privacy are competing constraints. No single optimization satisfies all stakeholders.}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{datastroke}
-    **Contestability**\\
-    { Affected individuals must have mechanisms to challenge automated decisions. Requires explanation infrastructure.}
-    {mlsyscard}
-
-    {0.15cm}
-
-    {mlsyscard}{errorstroke}
-    **Institutional Embedding**\\
-    { Governance structures must outlast individual champions. Responsible AI fails when tied to a single team.}
-    {mlsyscard}
+</details>
 
 ## The Algorithmic Grading Failure (Ofqual, 2020) (1/2)
 
-{
+[Original slide 22](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L955)
+
+**Ofqual (UK, 2020):** Algorithm assigned A-level grades during
+COVID-19 using schools' **historical performance distributions**
+to adjust teacher predictions.
+
+- Designed to preserve aggregate grade standards
+- High-achieving students at historically low-performing schools
+  were **downgraded** to fit the school's statistical prior
+- Individual merit decoupled from individual outcome
+- Government reversed the algorithm *within days*
+
+**Aggregate correct, individually catastrophic.**
+
+The algorithm was doing what it was designed to do.
+The failure was the design objective.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The Feedback Loops slide showed how bias amplifies technically. This case
 grounds the abstract cycle in a real, high-visibility public failure.
@@ -845,30 +947,32 @@ Give 20 seconds.
 % -- FLEX: [CORE] + contingency
 [CORE] Ofqual: canonical case for aggregate-vs-individual fairness conflict.
 IF SHORT: State ``aggregate correct, individually catastrophic'' in 20 seconds.
-}
+```
 
-**Ofqual (UK, 2020):** Algorithm assigned A-level grades during
-COVID-19 using schools' **historical performance distributions**
-to adjust teacher predictions.
-
-{0.1cm}
-{1pt}
-- Designed to preserve aggregate grade standards
-- High-achieving students at historically low-performing schools
-        were **downgraded** to fit the school's statistical prior
-- Individual merit decoupled from individual outcome
-- Government reversed the algorithm *within days*
-
-{0.1cm}
-{mlsyscard}{errorstroke}
-{ **Aggregate correct, individually catastrophic.**\\
-The algorithm was doing what it was designed to do.
-The failure was the design objective.}
-{mlsyscard}
+</details>
 
 ## The Algorithmic Grading Failure: Systems Lesson (2/2)
 
-{
+[Original slide 23](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L1003)
+
+**Systems lesson:**
+
+Optimizing for aggregate statistical properties
+(preventing grade inflation) without constraints on individual fairness
+(rank preservation) creates a system that is mathematically “correct”
+but socially catastrophic.
+
+Feedback loop: past institutional performance constrained future
+individual outcomes permanently.
+
+**Key:** Aggregate correctness and individual fairness can be mathematically incompatible. Optimizing one can destroy the other.
+
+Source: Ofqual, 2020; UK Parliamentary scrutiny
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The previous slide described the Ofqual failure. This slide extracts the
 durable engineering lesson: aggregate optimization without individual fairness
@@ -889,27 +993,32 @@ an individual fairness constraint.
 % -- FLEX: [CORE] + contingency
 [CORE] Systems lesson seals the Ofqual case.
 IF SHORT: Read the crimson card in 20 seconds.
-}
+```
 
-{mlsyscard}{crimson}
-**Systems lesson:**\\[0.1cm]
-{ Optimizing for aggregate statistical properties
-(preventing grade inflation) without constraints on individual fairness
-(rank preservation) creates a system that is mathematically ``correct''
-but socially catastrophic.\\[0.1cm]
-Feedback loop: past institutional performance constrained future
-individual outcomes permanently.}
-{mlsyscard}
-
-{0.3cm}
-{Key:}{Aggregate correctness and individual fairness can be mathematically incompatible. Optimizing one can destroy the other.}
-
-{0.3cm}
-{{midgray}{Source: Ofqual, 2020; UK Parliamentary scrutiny}}
+</details>
 
 ## Discussion: Which Fairness Metric?
 
-{
+[Original slide 24](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L1047)
+
+Turn and Talk (90 seconds)
+
+You are deploying a model in **three** domains:
+
+**1.** Criminal justice risk scoring
+
+**2.** Employee hiring screening
+
+**3.** Healthcare triage
+
+**Which fairness metric would you prioritize for each?**
+
+Consider: What type of error causes the most harm?
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Students learned three metrics and the impossibility theorem. This discussion
 forces them to choose a metric for a specific domain.
@@ -928,32 +1037,48 @@ for equally sick).]
 % -- FLEX: [CORE] + contingency
 [CORE] Third active learning moment.
 IF SHORT: Reduce to 60 seconds; cold-call 2 pairs.
-}
+```
 
-{0.6cm}
-{ Turn and Talk {midgray}{(90 seconds)}}
-
-{0.4cm}
-{ You are deploying a model in **three** domains:\\[0.15cm]
-**1.** Criminal justice risk scoring\\
-**2.** Employee hiring screening\\
-**3.** Healthcare triage\\[0.2cm]
-**Which fairness metric would you prioritize for each?**}
-
-{0.3cm}
-{{midgray}{Consider: What type of error causes the most harm?}}
+</details>
 
 ## Privacy Preservation at Scale
 
-{
+[Original slide 25](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L1089)
+
+**Differential Privacy**
+
+Mathematical guarantee: individual's data has **bounded influence** on model output.
+
+**DP-SGD**: Clip gradients + add noise.
+
+**Cost**: 2–5% accuracy, +15–30% training.
+
+**Benefit**: Enables legally restricted data.
+
+**Machine Unlearning**
+
+Remove specific user's influence from a trained model.
+
+**Exact**: Retrain from scratch (expensive).
+
+**Approximate**: Influence functions.
+
+**Legal**: Supports erasure/deletion requests such as GDPR Article 17 and CCPA/CPRA.
+
+**Key:** Privacy is a temporal dimension — unlearning enables compliance without full retraining.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Fairness addressed group-level equity. Privacy addresses individual-level
 protection --- connecting to the DP foundations from Ch 13.
 
 % -- NARRATE: What to SAY while showing this slide
 [3 min] Point to the left card: ``Differential privacy: bounded influence per
-individual. DP-SGD clips gradients and adds noise. Cost: 2--5% accuracy,
-15--30% training overhead. Benefit: enables use of legally restricted data.''
+individual. DP-SGD clips gradients and adds noise. Cost: 2--5\% accuracy,
+15--30\% training overhead. Benefit: enables use of legally restricted data.''
 Point to the right card: ``Machine unlearning: remove a specific user's
 influence without full retraining. It can support erasure/deletion obligations,
 but the exact legal requirement depends on the model, data, and jurisdiction.''
@@ -973,36 +1098,44 @@ from that data --- you need unlearning to remove the influence from weights.
 % -- FLEX: [CORE] + contingency
 [CORE] Privacy preservation is a compliance requirement, not optional.
 IF SHORT: Cover DP card only; mention unlearning as a tool for deletion requests.
-}
+```
 
-[T]
-  
-    {mlsyscard}{routingstroke}
-    **Differential Privacy**\\[0.05cm]
-    {
-    Mathematical guarantee: individual's data has **bounded influence** on model output.\\[0.05cm]
-    **DP-SGD**: Clip gradients + add noise.\\[0.05cm]
-    **Cost**: 2--5% accuracy, +15--30% training.\\[0.05cm]
-    **Benefit**: Enables legally restricted data.}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{computestroke}
-    **Machine Unlearning**\\[0.05cm]
-    {
-    Remove specific user's influence from a trained model.\\[0.05cm]
-    **Exact**: Retrain from scratch (expensive).\\[0.05cm]
-    **Approximate**: Influence functions.\\[0.05cm]
-    **Legal**: Supports erasure/deletion requests such as GDPR Article 17 and CCPA/CPRA.}
-    {mlsyscard}
-  
-
-{0.05cm}
-{Key:}{Privacy is a temporal dimension --- unlearning enables compliance without full retraining.}
+</details>
 
 ## Machine Unlearning: The Right to Be Forgotten
 
-{
+[Original slide 26](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L1149)
+
+**Three approaches to unlearning:**
+
+| **Method** | **Cost** | **Guarantee** |
+| --- | --- | --- |
+| **Exact** (retrain) | 100% train cost | Perfect |
+| **Influence fn.** | 0.01–0.1% | Statistical |
+| **SISA** (sharded) | 1–10% | Exact (per shard) |
+
+**Cost reality**: 175B model at &#36;4M to train. 100 deletion requests/month $\times$ exact retraining = **&#36;4.8B/year**. Approximate methods are not optional.
+
+**SISA Training**
+
+**S**harded, **I**solated, **S**liced, **A**ggregated:
+
+1. Partition data into $K$ shards
+
+2. Train sub-models per shard
+
+3. Aggregate predictions
+
+4. Unlearn $\to$ retrain 1 shard
+
+**Cost**: $1/K$ of full retrain
+
+With $K=100$: **100$\times$ cheaper**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The Privacy Preservation slide introduced machine unlearning briefly. This
 dedicated slide covers the systems engineering challenge in depth: erasure and
@@ -1010,7 +1143,7 @@ deletion requests can require removing user influence, not just deleting rows.
 
 % -- NARRATE: What to SAY while showing this slide
 [3 min] Walk through the three approaches: ``Exact unlearning: retrain from
-scratch without the user's data. Gold standard but costs 100% of original
+scratch without the user's data. Gold standard but costs 100\% of original
 training compute. Approximate: use influence functions to estimate and remove
 a user's contribution. 1,000--10,000x cheaper but provides only statistical
 guarantees. SISA training: partition data into shards so unlearning only
@@ -1032,47 +1165,27 @@ deletion from the dataset does not remove the influence from the weights.
 % -- FLEX: [CORE] + contingency
 [CORE] Machine unlearning is a practical compliance mechanism for deletion requests.
 IF SHORT: State the cost impossibility and introduce SISA as the practical approach.
-}
+```
 
-[T]
-  
-    **Three approaches to unlearning:**
-
-    {0.1cm}
-    {}{1.15}
-    {
-    {tabular}{@{}lrr@{}}
-      
-      **Method** & **Cost** & **Guarantee** \\
-      
-      **Exact** (retrain) & 100% train cost & Perfect \\
-      **Influence fn.**   & 0.01--0.1%      & Statistical \\
-      **SISA** (sharded)  & 1--10%           & Exact (per shard) \\
-      
-    {tabular}
-    }
-
-    {0.1cm}
-    {mlsyscard}{errorstroke}
-    { **Cost reality**: 175B model at \$4M to train. 100 deletion requests/month $×$ exact retraining = **\$4.8B/year**. Approximate methods are not optional.}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{routingstroke}
-    **SISA Training**\\[0.05cm]
-    {
-    **S**harded, **I**solated, **S**liced, **A**ggregated:\\[0.05cm]
-    1. Partition data into $K$ shards\\
-    2. Train sub-models per shard\\
-    3. Aggregate predictions\\
-    4. Unlearn $$ retrain 1 shard\\[0.1cm]
-    **Cost**: $1/K$ of full retrain\\
-    With $K=100$: **100$×$ cheaper**}
-    {mlsyscard}
+</details>
 
 ## Governance Infrastructure
 
-{
+[Original slide 27](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L1223)
+
+| **Mechanism** | **Purpose** | **Systems Requirement** |
+| --- | --- | --- |
+| **Model Cards** | Document use, limits, group perf. | Version-controlled docs in CI/CD |
+| **Audit Trails** | Decision and data lineage tracing | +2–5 ms/inference, TB-scale logs |
+| **System Prompts** | First line of LLM behavior defense | Version control across M users |
+| **Red Teaming** | Probe for bias, toxicity, jailbreaks | Specialized adversarial teams |
+
+Managing system prompts across a fleet requires the same **version control and CI/CD rigor** as model weights. Governance is infrastructure.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Privacy protected individuals. Governance provides the organizational
 infrastructure to enforce all responsible AI principles continuously.
@@ -1095,28 +1208,42 @@ governance artifacts, not just model weights.]
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Governance infrastructure detail.
 IF SHORT: Read the crimson card insight only.
-}
+```
 
-{}{1.1}
-{tabular}{@{}p{2.2cm}p{3.8cm}p{4cm}@{}}
-  
-  **Mechanism** & **Purpose** & **Systems Requirement** \\
-  
-  **Model Cards**     & Document use, limits, group perf. & Version-controlled docs in CI/CD \\
-  **Audit Trails**    & Decision and data lineage tracing & +2--5 ms/inference, TB-scale logs \\
-  **System Prompts**  & First line of LLM behavior defense & Version control across M users \\
-  **Red Teaming**     & Probe for bias, toxicity, jailbreaks & Specialized adversarial teams \\
-  
-{tabular}
-
-{0.1cm}
-{mlsyscard}{crimson}
-{ Managing system prompts across a fleet requires the same **version control and CI/CD rigor** as model weights. Governance is infrastructure.}
-{mlsyscard}
+</details>
 
 ## Implementation Challenges
 
-{
+[Original slide 28](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L1273)
+
+**Organizational Barriers:**
+
+- Ethics teams lack deployment authority
+- Responsibility tied to individual champions
+- Incentive structures misaligned
+
+**Data Constraints:**
+
+- Protected attributes often missing
+- Ground truth labels reflect historical bias
+- Proxy variables encode structural inequity
+
+**Competing Objectives:**
+
+- Accuracy vs. fairness (4% tax)
+- Privacy vs. transparency
+- Speed-to-market vs. governance
+
+**Scale & Standards:**
+
+- Monitoring overhead compounds at fleet scale
+- No agreed fairness benchmarks
+- Regulatory fragmentation (GDPR vs. CCPA)
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Governance described the ideal. This slide catalogues the real-world barriers
 that prevent implementation.
@@ -1125,7 +1252,7 @@ that prevent implementation.
 [2 min] Walk through the four quadrants: ``Organizational: ethics teams lack
 deployment authority. Data: protected attributes often missing, ground truth
 reflects historical bias. Competing objectives: accuracy vs.\ fairness costs
-4%. Scale: monitoring overhead compounds, no agreed benchmarks.''
+4\%. Scale: monitoring overhead compounds, no agreed benchmarks.''
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
 Ask: ``Which of these four barriers is hardest to fix with better technology?''
@@ -1136,43 +1263,37 @@ people-and-process problems that technology alone cannot solve. The others
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Implementation context. IF SHORT: Name the four barrier categories.
-}
+```
 
-[T]
-  
-    **Organizational Barriers:**
-    {-1pt}
-- Ethics teams lack deployment authority
-- Responsibility tied to individual champions
-- Incentive structures misaligned
-    
-
-    {0.05cm}
-    **Data Constraints:**
-    {-1pt}
-- Protected attributes often missing
-- Ground truth labels reflect historical bias
-- Proxy variables encode structural inequity
-    
-  
-  
-    **Competing Objectives:**
-    {-1pt}
-- Accuracy vs.\ fairness (4% tax)
-- Privacy vs.\ transparency
-- Speed-to-market vs.\ governance
-    
-
-    {0.05cm}
-    **Scale & Standards:**
-    {-1pt}
-- Monitoring overhead compounds at fleet scale
-- No agreed fairness benchmarks
-- Regulatory fragmentation (GDPR vs.\ CCPA)
+</details>
 
 ## AI Safety and Value Alignment
 
-{
+[Original slide 29](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L1334)
+
+**Value Alignment Problem:**
+
+AI systems may optimize proxy objectives diverging from human intent.
+
+**YouTube (pre-2017):** Optimized for CTR $\to$ promoted conspiracy content that maximized clicks while degrading user welfare. Required full reward pipeline redesign.
+
+**Generative Alignment:**
+
+RLHF bridges human preferences to model weights. System prompts govern fleet behavior.
+
+| **Mechanism** | **Scope** |
+| --- | --- |
+| RLHF | Training time |
+| System prompts | Serving time |
+| Red teaming | Pre-deploy |
+| Monitoring | Continuous |
+
+RLHF is limited by the representativeness of the rating population.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Implementation barriers are organizational. Value alignment is the deeper
 technical challenge: ensuring AI optimizes for human values, not proxy objectives.
@@ -1200,43 +1321,30 @@ values of whoever provides the preference labels.
 [CORE] This slide covers RLHF and the alignment problem --- a top-5 chapter
 takeaway. Include unless critically short on time.
 IF SHORT: State the YouTube example and the RLHF limitation (30 seconds).
-}
+```
 
-[T]
-  
-    **Value Alignment Problem:**\\
-    { AI systems may optimize proxy objectives diverging from human intent.}
-
-    {0.1cm}
-    {mlsyscard}{errorstroke}
-    { **YouTube (pre-2017):** Optimized for CTR $$ promoted conspiracy content that maximized clicks while degrading user welfare. Required full reward pipeline redesign.}
-    {mlsyscard}
-
-    {0.1cm}
-    **Generative Alignment:**\\
-    { RLHF bridges human preferences to model weights. System prompts govern fleet behavior.}
-  
-  
-    {}{1.1}
-    {
-    {tabular}{@{}lr@{}}
-      
-      **Mechanism** & **Scope** \\
-      
-      RLHF          & Training time \\
-      System prompts & Serving time \\
-      Red teaming    & Pre-deploy \\
-      Monitoring     & Continuous \\
-      
-    {tabular}
-    }
-
-    {0.1cm}
-    {{midgray}{RLHF is limited by the representativeness of the rating population.}}
+</details>
 
 ## Fallacies
 
-{
+[Original slide 30](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L1406)
+
+**Fallacy:** *Bias can be eliminated through better algorithms and more data.*
+
+The healthcare algorithm affected 200M Americans; the issue was proxy selection, not data quantity. Impossibility theorems prove no algorithm satisfies all fairness criteria simultaneously.
+
+**Fallacy:** *Achieving one fairness metric guarantees overall fairness.*
+
+Demographic parity forces calibration violations. Single-metric optimization exposes organizations to litigation on other legally relevant criteria.
+
+**Fallacy:** *Responsible AI practices impose only costs without business value.*
+
+Differential privacy enables use of legally restricted data. Bias monitoring detected the healthcare algorithm's 50% enrollment reduction before regulatory intervention.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [2 min] Read each fallacy. The healthcare algorithm fallacy is most impactful:
 it affected 200M Americans --- the issue was proxy selection, not data quantity.
@@ -1245,22 +1353,30 @@ The single-metric fallacy: demographic parity forces calibration violations.
 % -- FLEX: [CORE] + contingency
 [CORE] Fallacies correct dangerous misconceptions.
 IF SHORT: Read fallacies 1 (more data) and 2 (single metric) only.
-}
+```
 
-**Fallacy:** *Bias can be eliminated through better algorithms and more data.*\\
-{ The healthcare algorithm affected 200M Americans; the issue was proxy selection, not data quantity. Impossibility theorems prove no algorithm satisfies all fairness criteria simultaneously.}
-
-{0.08cm}
-**Fallacy:** *Achieving one fairness metric guarantees overall fairness.*\\
-{ Demographic parity forces calibration violations. Single-metric optimization exposes organizations to litigation on other legally relevant criteria.}
-
-{0.08cm}
-**Fallacy:** *Responsible AI practices impose only costs without business value.*\\
-{ Differential privacy enables use of legally restricted data. Bias monitoring detected the healthcare algorithm's 50% enrollment reduction before regulatory intervention.}
+</details>
 
 ## Pitfalls
 
-{
+[Original slide 31](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L1432)
+
+**Pitfall:** *Treating explainability as an optional post-deployment feature.*
+
+SHAP adds 50–200 ms per request. A 100 ms SLA system cannot retrofit SHAP without 5$\times$ infrastructure cost. Explainability must be budgeted at architecture time.
+
+**Pitfall:** *Implementing fairness via post-hoc threshold adjustment.*
+
+Group-specific thresholds destroy calibration: “80% confidence” means different things for different groups. Proper approach: jointly optimize during training, accepting accuracy-fairness trade-offs.
+
+**Pitfall:** *Assuming governance structures survive without institutional embedding.*
+
+Responsible AI tied to individual champions fails when they leave. Governance must be embedded in CI/CD pipelines, deployment gates, and organizational incentive structures.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [2 min] Read each pitfall. The first: SHAP adds 50--200 ms, violating 100 ms
 SLA --- explainability must be budgeted at architecture time. The second:
@@ -1270,22 +1386,24 @@ individual champions fails when they leave.
 % -- FLEX: [CORE] + contingency
 [CORE] Pitfalls are operational guidance.
 IF SHORT: Cover the first pitfall (explainability as architecture decision).
-}
+```
 
-**Pitfall:** *Treating explainability as an optional post-deployment feature.*\\
-SHAP adds 50--200 ms per request. A 100 ms SLA system cannot retrofit SHAP without 5$×$ infrastructure cost. Explainability must be budgeted at architecture time.
-
-{0.15cm}
-**Pitfall:** *Implementing fairness via post-hoc threshold adjustment.*\\
-Group-specific thresholds destroy calibration: ``80% confidence'' means different things for different groups. Proper approach: jointly optimize during training, accepting accuracy-fairness trade-offs.
-
-{0.15cm}
-**Pitfall:** *Assuming governance structures survive without institutional embedding.*\\
-Responsible AI tied to individual champions fails when they leave. Governance must be embedded in CI/CD pipelines, deployment gates, and organizational incentive structures.
+</details>
 
 ## Muddiest Point
 
-{
+[Original slide 32](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L1462)
+
+What was the **muddiest point** today?
+
+Write down the concept you found **most confusing**.
+
+Anonymous. One sentence. Submit before you leave.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [2 min] ``Write the single concept from today you found most confusing.
 Anonymous, one sentence.'' Collect responses. Likely confusions: impossibility
@@ -1293,79 +1411,125 @@ theorem mechanics, fairness tax justification, or feedback loop dynamics.
 
 % -- FLEX: [CORE] + contingency
 [CORE] Closes the feedback loop. Do not skip.
-}
+```
 
-{1.0cm}
-{ What was the **muddiest point** today?}
-
-{0.8cm}
-{ Write down the concept you found **most confusing**.}
-
-{0.5cm}
-{{midgray}{Anonymous. One sentence. Submit before you leave.}}
+</details>
 
 ## What Were the Key Ideas?
 
-{
+[Original slide 33](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L1485)
+
+Close your notes.
+
+Write down the **4 most important concepts** from today.
+
+90 seconds — no peeking.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [2 min] ``Close your notes. Write down the 4 most important concepts from today.
 90 seconds, no peeking.'' Walk around the room.
 
 % -- FLEX: [CORE] + contingency
 [CORE] Retrieval practice is the highest-impact learning intervention.
-}
+```
 
-{1.5cm}
-{ Close your notes.}
-
-{0.8cm}
-{ Write down the **4 most important concepts** from today.}
-
-{0.8cm}
-{{midgray}{90 seconds --- no peeking.}}
+</details>
 
 ## Key Takeaways
 
-{
+[Original slide 34](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L1507)
+
+- **Responsibility is infrastructure**: Fairness monitoring adds 10–20 ms; SHAP costs 50–1000$\times$ inference compute. Budget at architecture time.
+- **Impossibility theorems**: Calibrated risk scores generally cannot also satisfy equalized odds when base rates differ (Kleinberg; Chouldechova). Demographic parity is a separate constraint that adds further conflicts.
+- **The Fairness Tax**: Enforcing demographic parity costs $\sim$4% accuracy — the explicit price of correcting historical bias.
+- **Feedback loops**: Biased systems destabilize their own training data. Monitoring closes the governance loop.
+- **Explainability spectrum**: SHAP (high fidelity, 50–1000$\times$) to gradient-based (low cost, lower fidelity).
+- **Privacy preservation**: Differential privacy (2–5% accuracy, +15–30% training) enables legally restricted data use.
+- **Governance as CI/CD**: Model cards, audit trails, system prompts need the same version control rigor as model weights.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [2 min] Reveal after retrieval. Walk through each bullet, anchoring on numbers:
-impossibility theorem, 4% fairness tax, 50--1000x SHAP overhead, feedback loop
-instability, 2--5% DP accuracy cost, governance as CI/CD.
+impossibility theorem, 4\% fairness tax, 50--1000x SHAP overhead, feedback loop
+instability, 2--5\% DP accuracy cost, governance as CI/CD.
 
 % -- FLEX: [CORE] + contingency
 [CORE] Synthesis slide. IF SHORT: Read bullets 2, 3, and 4.
-}
+```
 
-{0pt}
-- **Responsibility is infrastructure**: Fairness monitoring adds 10--20 ms; SHAP costs 50--1000$×$ inference compute. Budget at architecture time.
-- **Impossibility theorems**: Calibrated risk scores generally cannot also satisfy equalized odds when base rates differ (Kleinberg; Chouldechova). Demographic parity is a separate constraint that adds further conflicts.
-- **The Fairness Tax**: Enforcing demographic parity costs $$4% accuracy --- the explicit price of correcting historical bias.
-- **Feedback loops**: Biased systems destabilize their own training data. Monitoring closes the governance loop.
-- **Explainability spectrum**: SHAP (high fidelity, 50--1000$×$) to gradient-based (low cost, lower fidelity).
-- **Privacy preservation**: Differential privacy (2--5% accuracy, +15--30% training) enables legally restricted data use.
-- **Governance as CI/CD**: Model cards, audit trails, system prompts need the same version control rigor as model weights.
+</details>
 
 ## References
 
-{
+[Original slide 35](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L1531)
+
+**Kleinberg+16** Kleinberg et al. “Inherent Trade-Offs in the Fair Determination of Risk Scores.” 2016.
+
+**Chouldechova17** A. Chouldechova. “Fair Prediction with Disparate Impact.” 2017.
+
+**Obermeyer+19** Obermeyer et al. “Dissecting Racial Bias in Healthcare.” *Science*, 2019.
+
+**Hardt+16** Hardt, Price, Srebro. “Equality of Opportunity in Supervised Learning.” NeurIPS, 2016.
+
+**Ribeiro+16** Ribeiro, Singh, Guestrin. “`Why Should I Trust You?' LIME.” KDD, 2016.
+
+**Lundberg+17** Lundberg & Lee. “A Unified Approach to Interpreting Model Predictions.” NeurIPS, 2017.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [1 min] Highlight Kleinberg+16 (impossibility theorem) and Obermeyer+19
 (healthcare racial bias) as the two must-read papers. Students can photograph.
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Do not read every entry aloud.
-}
+```
 
-{Kleinberg+16}{Kleinberg et al. ``Inherent Trade-Offs in the Fair Determination of Risk Scores.'' 2016.}
-{Chouldechova17}{A. Chouldechova. ``Fair Prediction with Disparate Impact.'' 2017.}
-{Obermeyer+19}{Obermeyer et al. ``Dissecting Racial Bias in Healthcare.'' *Science*, 2019.}
-{Hardt+16}{Hardt, Price, Srebro. ``Equality of Opportunity in Supervised Learning.'' NeurIPS, 2016.}
-{Ribeiro+16}{Ribeiro, Singh, Guestrin. ```Why Should I Trust You?' LIME.'' KDD, 2016.}
-{Lundberg+17}{Lundberg & Lee. ``A Unified Approach to Interpreting Model Predictions.'' NeurIPS, 2017.}
+</details>
 
 ## Next Lecture: Conclusion
 
-{
+[Original slide 36](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L1551)
+
+We have addressed every dimension of production ML systems:
+
+**Performance**
+
+Parts I–III
+
+**Security**
+
+Ch 13
+
+**Sustainability**
+
+Ch 15
+
+**Responsibility**
+
+Ch 16 (today)
+
+In **Ch 17: Conclusion**, we synthesize the principles
+
+from across this volume into a **unified perspective**
+
+on distributed ML systems engineering.
+
+**The enduring lessons that guide practice regardless of technology.**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [1 min] Point to the four columns: performance, security, sustainability,
 responsibility. ``We have addressed every dimension. In the conclusion, we
@@ -1374,42 +1538,29 @@ of distributed ML systems.''
 
 % -- FLEX: [CORE] + contingency
 [CORE] Forward hook to the final lecture.
-}
+```
 
-{0.5cm}
-
-{ We have addressed every dimension of production ML systems:}
-
-{0.4cm}
-[c]
-  
-    {computestroke}{**Performance**}\\[0.1cm]
-    { Parts I--III}
-  
-  
-    {routingstroke}{**Security**}\\[0.1cm]
-    { Ch 13}
-  
-  
-    {datastroke}{**Sustainability**}\\[0.1cm]
-    { Ch 15}
-  
-  
-    {errorstroke}{**Responsibility**}\\[0.1cm]
-    { Ch 16 (today)}
-  
-
-{0.5cm}
-{ In **Ch 17: Conclusion**, we synthesize the principles\\
-from across this volume into a **unified perspective**\\
-on distributed ML systems engineering.}
-
-{0.3cm}
-{**The enduring lessons that guide practice regardless of technology.**}
+</details>
 
 ## Backup: Intersectional Fairness
 
-{
+[Original slide 37](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L1602)
+
+**Single-axis metrics miss intersectional bias:**
+
+| **Group** | **Approval Rate** | **DP Gap (Gender)** | **DP Gap (Race)** |
+| --- | --- | --- | --- |
+| White Male | 75% | — | — |
+| White Female | 68% | 7 pp | — |
+| Black Male | 62% | — | 13 pp |
+| Black Female | **41%** | 7 pp | 13 pp |
+
+**Intersectional gap**: 34 pp (75% – 41%) far exceeds the sum of single-axis gaps (7 + 13 = 20 pp). Single-axis auditing systematically underestimates harm to intersectional subgroups.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [2 min] Backup. Shows how single-axis fairness metrics miss compound disadvantage
 at the intersection of multiple protected attributes. Walk through the table:
@@ -1419,31 +1570,28 @@ intersectional gap for Black women vs.\ White men is 34 pp --- far larger than
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Show when students ask why single-axis metrics are insufficient.
-}
+```
 
-**Single-axis metrics miss intersectional bias:**
-
-{0.1cm}
-{}{1.15}
-{tabular}{@{}lrrr@{}}
-  
-  **Group** & **Approval Rate** & **DP Gap (Gender)** & **DP Gap (Race)** \\
-  
-  White Male     & 75% & --- & --- \\
-  White Female   & 68% & 7 pp & --- \\
-  Black Male     & 62% & --- & 13 pp \\
-  Black Female   & {errorstroke}{**41%**} & 7 pp & 13 pp \\
-  
-{tabular}
-
-{0.1cm}
-{mlsyscard}{errorstroke}
-{ **Intersectional gap**: 34 pp (75% -- 41%) far exceeds the sum of single-axis gaps (7 + 13 = 20 pp). Single-axis auditing systematically underestimates harm to intersectional subgroups.}
-{mlsyscard}
+</details>
 
 ## Backup: Real-Time Fairness Monitoring Architecture
 
-{
+[Original slide 38](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/16_responsible_ai/16_responsible_ai.tex#L1638)
+
+**Production fairness monitoring pipeline:**
+
+1. **Inference logging**: Capture predictions + protected attributes (encrypted, access-controlled)
+2. **Windowed aggregation**: Compute DP, EO, EOpp gaps over 1-hour sliding windows
+3. **Statistical testing**: Alert when gap exceeds historical baseline + 3$\sigma$
+4. **Root cause analysis**: Attribute drift vs. model drift vs. population shift
+5. **Automated response**: Fallback to last-known-fair model if gap exceeds regulatory threshold
+
+**Overhead**: +10–20 ms latency for logging, +5% compute for aggregation. At 10K QPS, the fairness monitoring pipeline processes 36M decisions/hour.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [2 min] Backup. System design for continuous fairness monitoring at fleet scale.
 Use when students ask about production implementation. Walk through the five steps:
@@ -1454,22 +1602,9 @@ last-known-fair model automatically.'' At 10K QPS: 36M decisions/hour.
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Show for students interested in fairness monitoring systems.
-}
+```
 
-**Production fairness monitoring pipeline:**
-
-{0.1cm}
-{1pt}
-- **Inference logging**: Capture predictions + protected attributes (encrypted, access-controlled)
-- **Windowed aggregation**: Compute DP, EO, EOpp gaps over 1-hour sliding windows
-- **Statistical testing**: Alert when gap exceeds historical baseline + 3$$
-- **Root cause analysis**: Attribute drift vs.\ model drift vs.\ population shift
-- **Automated response**: Fallback to last-known-fair model if gap exceeds regulatory threshold
-
-{0.1cm}
-{mlsyscard}{routingstroke}
-{ **Overhead**: +10--20 ms latency for logging, +5% compute for aggregation. At 10K QPS, the fairness monitoring pipeline processes 36M decisions/hour.}
-{mlsyscard}
+</details>
 
 ## Complete original Beamer source
 

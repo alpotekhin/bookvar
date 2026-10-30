@@ -1,0 +1,50 @@
+[
+  {
+    "id": "curated-grpo-kimi-partial-rollouts-33af3f50a898",
+    "asset": "00 Учебник/Assets/Figures/curated/grpo-2026-10-24/kimi-partial-rollouts.svg",
+    "author": "Kimi Team",
+    "source_url": "https://arxiv.org/abs/2501.12599v1",
+    "source_image_url": "https://arxiv.org/html/2501.12599v1/mshrl-replaybuffer.svg",
+    "source_asset": "00 Учебник/Assets/Figures/curated/grpo-2026-10-24/kimi-partial-rollouts.svg",
+    "source_asset_sha256": "33af3f50a898c4760743f0caf571d171c0b4de14348cbb54cad262fdcf52a246",
+    "sha256": "33af3f50a898c4760743f0caf571d171c0b4de14348cbb54cad262fdcf52a246",
+    "source_page_snapshot": "05 Источники/Originals/grpo-2026-10-24/kimi-v1.html",
+    "source_page_sha256": "c1b9c36460dd2ae8488b78e329384cb3aad4d4a94a4ce41d998193cc7201ae4a",
+    "license": "CC BY-NC-ND 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "license_evidence": "05 Источники/Originals/grpo-2026-10-24/kimi-v1.html",
+    "license_evidence_sha256": "c1b9c36460dd2ae8488b78e329384cb3aad4d4a94a4ce41d998193cc7201ae4a",
+    "modifications": "None; complete original SVG copied byte-for-byte, no crop, redraw, relabeling, translation or conversion. The asset itself retains the original; no duplicate image archive.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "source-svg-copy",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md"
+    ]
+  },
+  {
+    "id": "curated-grpo-maxrl-weights-9c3b10853f44",
+    "asset": "00 Учебник/Assets/Figures/curated/grpo-2026-10-24/maxrl-weight-functions.svg",
+    "author": "Fahim Tajwar et al.",
+    "source_url": "https://arxiv.org/abs/2602.02710v1",
+    "source_image_url": "https://arxiv.org/html/2602.02710v1/weight_functions.svg",
+    "source_asset": "00 Учебник/Assets/Figures/curated/grpo-2026-10-24/maxrl-weight-functions.svg",
+    "source_asset_sha256": "9c3b10853f44bb14651f83b4026a0968fb371e5d6f2e240e4dfeeb1b56dac4cb",
+    "sha256": "9c3b10853f44bb14651f83b4026a0968fb371e5d6f2e240e4dfeeb1b56dac4cb",
+    "source_page_snapshot": "05 Источники/Originals/grpo-2026-10-24/maxrl-v1.html",
+    "source_page_sha256": "e2807b54f56911598301abd26e4549d6c98af3c4f6df632da3c9ec949c03aac0",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/grpo-2026-10-24/maxrl-v1.html",
+    "license_evidence_sha256": "e2807b54f56911598301abd26e4549d6c98af3c4f6df632da3c9ec949c03aac0",
+    "modifications": "None; complete original SVG copied byte-for-byte, no crop, redraw, relabeling, translation or conversion. The asset itself retains the original; no duplicate image archive.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "source-svg-copy",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md"
+    ]
+  }
+]

@@ -12,6 +12,7 @@ sources:
   meeting-10-slides.pdf: {sha256: 1c91d93b766b12ae1ddaaf3dc5575e8b8011b06505f3f7a9404ec13520fec78d, lecturer: "Sean Welleck and Thomas Zhu"}
   meeting-11-slides.pdf: {sha256: ff4ecc5cacafe5d9fd3253ca28c968e8034466770c1e9d67481a7d51a7f70cc4, lecturer: "Swarat Chaudhuri et al."}
 assets:
+  - {file: m10-p78.png, sha256: 09b2fc994b9febd300eeed6f370cb1c0cd769eaf4dd84c2896c00d53bc662013, source: "meeting-10-slides.pdf#page=78", source_unit_id: meeting-10-slides-leanhammer, visual_id: meeting-10-slides-visual-leanhammer, scale_to: 2000, size: 2000x1500}
   - {file: m08-p30.png, sha256: 4f8d836d7d268d780041cf55565f5f1f61d49ab53ef143184d5a95a2913c9be1, source: "meeting-08-slides.pdf#page=30", source_unit_id: meeting-08-slides-rl-and-alphazero, visual_id: meeting-08-slides-visual-rl-and-alphazero, dpi: 200, size: 2000x1125}
   - {file: m08-p79.png, sha256: d7d19209ad57f7787d235ca1cb1b3c5f647d190e4f81c778437bb0f9db691ef7, source: "meeting-08-slides.pdf#page=79", source_unit_id: meeting-08-slides-alphaproof-methods, visual_id: meeting-08-slides-visual-alphaproof-methods, dpi: 200, size: 2000x1125}
   - {file: m08-p84.png, sha256: 81ca3e832cabd750f79848195328fb0af8be6093ac4c01f98497ca261b0de9cb, source: "meeting-08-slides.pdf#page=84", source_unit_id: meeting-08-slides-alphaproof-methods, visual_id: meeting-08-slides-visual-alphaproof-methods, dpi: 200, size: 2000x1125}

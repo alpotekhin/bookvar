@@ -1,0 +1,94 @@
+[
+  {
+    "id": "curated-serving-originals-vllm-tp2-dp4-5c79b2b2ce38",
+    "asset": "00 Учебник/Assets/Figures/curated/serving-originals-2026-10/vllm-tp2-dp4.png",
+    "author": "vLLM contributors",
+    "source_url": "https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/docs/assets/design/arch_overview/v1_process_architecture_tp2_dp4.png",
+    "source_image_url": "https://raw.githubusercontent.com/vllm-project/vllm/db9527a46873454610df6dbedf79a36d6bf1a7f6/docs/assets/design/arch_overview/v1_process_architecture_tp2_dp4.png",
+    "commit": "db9527a46873454610df6dbedf79a36d6bf1a7f6",
+    "sha256": "5c79b2b2ce38b6b2f1737a1b5c5fe8d3acd0cbf0d1f6ed542fd4d85c28f8c46b",
+    "source_asset_sha256": "5c79b2b2ce38b6b2f1737a1b5c5fe8d3acd0cbf0d1f6ed542fd4d85c28f8c46b",
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/LICENSE",
+    "license_copy": "00 Учебник/Assets/Figures/curated/serving-engines-review-2026-10/vllm-LICENSE.txt",
+    "public_license_copy": "site/public/licenses/vllm-db9527a4-Apache-2.0.txt",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "pinned-upstream-repository",
+    "metadata_status": "verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-14",
+    "modifications": "None. Original image bytes, resolution and complete labels retained; no crop, translation, resampling or redrawing.",
+    "used_in": [
+      "00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md"
+    ]
+  },
+  {
+    "id": "curated-serving-originals-sglang-overlap-scheduler-b6069f00b936",
+    "asset": "00 Учебник/Assets/Figures/curated/serving-originals-2026-10/sglang-overlap-scheduler.jpg",
+    "author": "The SGLang Team / LMSYS Org",
+    "source_url": "https://github.com/lm-sys/lm-sys.github.io/blob/88c036dd1a78c8f2525782f98ee4493a63d7a532/public/images/blog/sglang_v0_4/scheduler.jpg",
+    "source_image_url": "https://raw.githubusercontent.com/lm-sys/lm-sys.github.io/88c036dd1a78c8f2525782f98ee4493a63d7a532/public/images/blog/sglang_v0_4/scheduler.jpg",
+    "commit": "88c036dd1a78c8f2525782f98ee4493a63d7a532",
+    "sha256": "b6069f00b9361b44dcdfb8c98d42c464daeb01a56f6843b3facf09dd298be351",
+    "source_asset_sha256": "b6069f00b9361b44dcdfb8c98d42c464daeb01a56f6843b3facf09dd298be351",
+    "license": "MIT",
+    "license_url": "https://github.com/lm-sys/lm-sys.github.io/blob/88c036dd1a78c8f2525782f98ee4493a63d7a532/LICENSE",
+    "license_copy": "00 Учебник/Assets/Figures/curated/inference-scheduling-review-2026-10/LICENSE-LMSYS-MIT.txt",
+    "public_license_copy": "site/public/licenses/lmsys-88c036dd-MIT.txt",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "pinned-upstream-repository",
+    "metadata_status": "verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-14",
+    "modifications": "None. Original image bytes, resolution and complete labels retained; no crop, translation, resampling or redrawing.",
+    "used_in": [
+      "00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md"
+    ]
+  },
+  {
+    "id": "curated-serving-originals-flashinfer-mask-layout-93515341110b",
+    "asset": "00 Учебник/Assets/Figures/curated/serving-originals-2026-10/flashinfer-mask-layout.png",
+    "author": "FlashInfer contributors",
+    "source_url": "https://github.com/flashinfer-ai/web-data/blob/d7cc3d229f23d7c0a81c1e45d8591f4337c18efb/tutorials/mask-layout.png",
+    "source_image_url": "https://raw.githubusercontent.com/flashinfer-ai/web-data/d7cc3d229f23d7c0a81c1e45d8591f4337c18efb/tutorials/mask-layout.png",
+    "commit": "d7cc3d229f23d7c0a81c1e45d8591f4337c18efb",
+    "sha256": "93515341110b2877f5b1c6a5f1a996dda025e16d20ab349e534e4cbc9b7c81ee",
+    "source_asset_sha256": "93515341110b2877f5b1c6a5f1a996dda025e16d20ab349e534e4cbc9b7c81ee",
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/flashinfer-ai/web-data/blob/d7cc3d229f23d7c0a81c1e45d8591f4337c18efb/LICENSE",
+    "license_copy": "00 Учебник/Assets/Figures/curated/serving-engines-review-2026-10/flashinfer-web-data-LICENSE.txt",
+    "public_license_copy": "site/public/licenses/flashinfer-web-data-d7cc3d22-Apache-2.0.txt",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "pinned-upstream-repository",
+    "metadata_status": "verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-14",
+    "modifications": "None. Original image bytes, resolution and complete labels retained; no crop, translation, resampling or redrawing.",
+    "used_in": [
+      "00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md"
+    ]
+  },
+  {
+    "id": "curated-serving-originals-flashinfer-page-layout-76c22bd22ebb",
+    "asset": "00 Учебник/Assets/Figures/curated/serving-originals-2026-10/flashinfer-page-layout.png",
+    "author": "FlashInfer contributors",
+    "source_url": "https://github.com/flashinfer-ai/web-data/blob/d7cc3d229f23d7c0a81c1e45d8591f4337c18efb/tutorials/page_layout.png",
+    "source_image_url": "https://raw.githubusercontent.com/flashinfer-ai/web-data/d7cc3d229f23d7c0a81c1e45d8591f4337c18efb/tutorials/page_layout.png",
+    "commit": "d7cc3d229f23d7c0a81c1e45d8591f4337c18efb",
+    "sha256": "76c22bd22ebbde4650b9cebcf8cef841b191abca11c13a68d8450989cc4d7afe",
+    "source_asset_sha256": "76c22bd22ebbde4650b9cebcf8cef841b191abca11c13a68d8450989cc4d7afe",
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/flashinfer-ai/web-data/blob/d7cc3d229f23d7c0a81c1e45d8591f4337c18efb/LICENSE",
+    "license_copy": "00 Учебник/Assets/Figures/curated/serving-engines-review-2026-10/flashinfer-web-data-LICENSE.txt",
+    "public_license_copy": "site/public/licenses/flashinfer-web-data-d7cc3d22-Apache-2.0.txt",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "pinned-upstream-repository",
+    "metadata_status": "verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-14",
+    "modifications": "None. Original image bytes, resolution and complete labels retained; no crop, translation, resampling or redrawing.",
+    "used_in": [
+      "00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md"
+    ]
+  }
+]

@@ -1,0 +1,422 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-29",
+  "scope": "Consolidation of architecture reference pages into existing full explanations; not a new full pedagogical acceptance of every source paper.",
+  "readMethod": "Every listed reference and target canonical chapter was read in full. Existing English self-attention chapter was read in full before its figure-only edit. Source papers were not all reread; existing source-based chapter reviews are not silently promoted to current pedagogical acceptance.",
+  "entries": [
+    {
+      "source": "01 Справочник/Attention/MHA.md",
+      "canonicalSource": "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md",
+      "canonicalHeading": "MHA: свой комплект K/V у каждой головы запроса",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "notes": "Уже служебная ссылка; её промежуточная цель заменяется полным объяснением, без цепочки из двух справочных страниц.",
+      "verifiedExamples": [
+        "32 KV-головы: 4 GiB для 32 слоёв, 8192 позиций, ширины 128 в BF16."
+      ],
+      "readSources": [
+        "01 Справочник/Attention/MHA.md",
+        "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md"
+      ],
+      "sourceSha256": "6b5c02740360d8b0feb455dbfb0ae6484bd124ecf03f1bfbd40ae39309f731e5",
+      "canonicalSha256": "c442a81b9e09fe55aedc225cb3e5d3d7fa91b3db13eb80a9fdefed28a5c5c571"
+    },
+    {
+      "source": "01 Справочник/Attention/MQA.md",
+      "canonicalSource": "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md",
+      "canonicalHeading": "MQA: один комплект K/V для всех запросов",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "notes": "Уже служебная ссылка; прямо к каноническому разделу MQA.",
+      "verifiedExamples": [
+        "Разные Q на общих K/V дают выходы (1.4621,1.0758) и (0.5379,2.9242)."
+      ],
+      "readSources": [
+        "01 Справочник/Attention/MQA.md",
+        "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md"
+      ],
+      "sourceSha256": "0c0bd3745704086507d3e91fb17e2f352e21f60c87edede795ede51d6de48c49",
+      "canonicalSha256": "c442a81b9e09fe55aedc225cb3e5d3d7fa91b3db13eb80a9fdefed28a5c5c571"
+    },
+    {
+      "source": "01 Справочник/Attention/GQA.md",
+      "canonicalSource": "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md",
+      "canonicalHeading": "GQA: один комплект K/V на группу запросов",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "notes": "Уже служебная ссылка; прямо к каноническому разделу GQA.",
+      "verifiedExamples": [
+        "8 Q-голов и 2 KV-головы: 0–3 читают группу 0, 4–7 группу 1."
+      ],
+      "readSources": [
+        "01 Справочник/Attention/GQA.md",
+        "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md"
+      ],
+      "sourceSha256": "f8c0dbfaa6d042964a79cad0b0c8d535d9fe5bdce8093d9c70b75bbcab913dec",
+      "canonicalSha256": "c442a81b9e09fe55aedc225cb3e5d3d7fa91b3db13eb80a9fdefed28a5c5c571"
+    },
+    {
+      "source": "01 Справочник/Attention/MHA, MQA и GQA.md",
+      "canonicalSource": "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "notes": "Число голов, формула памяти, различие cache/арифметики, uptraining и пределы ускорения уже раскрыты подробнее. Исходный рисунок Ainslie Figure 2 уже встроен в главу.",
+      "verifiedExamples": [
+        "MHA/GQA-8/MQA: 4 GiB/1 GiB/128 MiB логического cache; при TP8 репликация MQA меняет физическую сумму.",
+        "Усреднение K-проекций (1,0),(-1,0) меняет выходы 2.5379/3.4621 на 3.0."
+      ],
+      "readSources": [
+        "01 Справочник/Attention/MHA, MQA и GQA.md",
+        "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md"
+      ],
+      "sourceSha256": "3cc006c4ecaa8da99066da7bc252c6b7f8fb3b49397764ded69ee881274b9d39",
+      "canonicalSha256": "c442a81b9e09fe55aedc225cb3e5d3d7fa91b3db13eb80a9fdefed28a5c5c571"
+    },
+    {
+      "source": "01 Справочник/Attention/MLA.md",
+      "canonicalSource": "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "notes": "Все детали покрыты: общий latent, отдельный RoPE-key, размер cache, weight absorption и цена арифметики. Тот же обзорный рисунок CS336 уже есть в главе.",
+      "verifiedExamples": [
+        "Latent 512 + RoPE-key 64 = 576 элементов, 1152 байта в BF16 на токен и слой.",
+        "Полный и сжатый путь дают (1.4621,1.0758); sqrt(3) сохраняется после absorption."
+      ],
+      "readSources": [
+        "01 Справочник/Attention/MLA.md",
+        "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md"
+      ],
+      "sourceSha256": "f83cfc67e7293802a034fa92fd8ef867e83870e93a27f22e71d8f93f825285be",
+      "canonicalSha256": "aa2789b8788eda6efa42c4a31100734867554b63e02d32484996ad9dbb6f5e5f"
+    },
+    {
+      "source": "01 Справочник/Attention/Self-Attention.md",
+      "canonicalSource": "00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md",
+      "decision": "alias",
+      "uniqueContentMoved": [
+        {
+          "kind": "figure",
+          "asset": "00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_self-attention_visualization.png",
+          "destinations": [
+            "00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md",
+            "en/00 Textbook/05 Attention and Transformer/02 Self-Attention — Q, K, V.md"
+          ],
+          "placement": "Что легко перепутать / Common confusions",
+          "attribution": "Jay Alammar, The Illustrated Transformer, Self-Attention at a High Level; CC BY-NC-SA 4.0",
+          "sourceUrl": "https://jalammar.github.io/illustrated-transformer/",
+          "verification": "Открыт исходный раздел Self-Attention at a High Level; локальный рисунок осмотрен. Подпись уточняет encoder attention и доступ к правому контексту."
+        }
+      ],
+      "notes": "Теория covered; отдельная визуализация it перенесена с корректной подписью в обе локали. Маска со сдвигом целей подробно раскрыта в следующей главе, на которую канонический текст ссылается.",
+      "verifiedExamples": [
+        "X=I3 делает указанные Q/K/V совместимыми с общими линейными проекциями; третья строка A=(0.248255,0.248255,0.503490), Z3=(1.758725,1).",
+        "Null-space пример показывает разные положительные softmax-веса при одинаковом выходе."
+      ],
+      "readSources": [
+        "01 Справочник/Attention/Self-Attention.md",
+        "00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md",
+        "en/00 Textbook/05 Attention and Transformer/02 Self-Attention — Q, K, V.md",
+        "https://jalammar.github.io/illustrated-transformer/ — Self-Attention at a High Level"
+      ],
+      "sourceSha256": "abe3ad6744c7cc1c89fed9c375a3a07071899c901a7ede44a4632d9e3630fd11",
+      "canonicalSha256": "270146832ba9d5f349939f802663643786563c05fd88bb0271633fcfce0baba7"
+    },
+    {
+      "source": "01 Справочник/Attention/Cross-Attention.md",
+      "canonicalSource": "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md",
+      "canonicalHeading": "6. Оригинальный decoder block",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "notes": "Прямоугольные Q/K/V, независимые длины, маски и неизменная память раскрыты полным числовым примером. Устаревшая картинка по ошибке подписана как T5 Figure 1; переносить её обратно не следует.",
+      "verifiedExamples": [
+        "Два запроса к трём ключам с PAD дают веса (2/3,1/3,0), (1/4,3/4,0) и контексты (4/3,1), (1/2,9/4)."
+      ],
+      "readSources": [
+        "01 Справочник/Attention/Cross-Attention.md",
+        "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md"
+      ],
+      "figureDisposition": [
+        {
+          "asset": "00 Учебник/Assets/Figures/curated/t5/encoder-decoder-architecture.png",
+          "action": "retain-file-do-not-reembed",
+          "reason": "Это аннотированная исходная post-norm схема Transformer с синусоидальным PE, а не T5. Каноническая глава использует точные схемы потока Q/K/V."
+        }
+      ],
+      "sourceSha256": "185887e92835202620a24219d6f053eadbe88f0d2f1e72372edcdb9e9978b8fc",
+      "canonicalSha256": "8bda8af63d82960da7d5849e132be647542b90d4a9a9daca05ff5a0f2e66d356"
+    },
+    {
+      "source": "01 Справочник/Архитектурные паттерны/Encoder-only.md",
+      "canonicalSource": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md",
+      "canonicalHeading": "Encoder-only: построить контекстное представление",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "notes": "MLM, выходная матрица состояний, CLS/pooling/task heads, использование для поиска и ограничение генерации покрыты. Старая подпись bert-input-output.png неверно описывает сумму embeddings; рисунок фактически показывает один вход/выход и не нужен вместо точных схем BERT.",
+      "verifiedExamples": [
+        "MLM выбранных позиций с p=0.2,0.8: сумма потерь 1.832581; неизменённый выбранный токен тоже даёт градиент.",
+        "Классификация h=(1,2) даёт logits (1,-1) и p=(0.880797,0.119203)."
+      ],
+      "readSources": [
+        "01 Справочник/Архитектурные паттерны/Encoder-only.md",
+        "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md"
+      ],
+      "figureDisposition": [
+        {
+          "asset": "00 Учебник/Assets/Figures/curated/bert/bert-input-output.png",
+          "action": "retain-file-do-not-reembed",
+          "reason": "Локальный файл осмотрен: упрощённый вход/выход одного токена, не сумма трёх таблиц. Полная глава показывает MLM и оригинальную Figure 4 BERT для разных task heads."
+        }
+      ],
+      "sourceSha256": "97134cddf046c48f7afa8232342f8d4d535a29e13803a057aa4e24b164221a83",
+      "canonicalSha256": "a99819704bcdd1ff795c39a2240b8c32331fded5b1372c302f69e381d123d6e8"
+    },
+    {
+      "source": "01 Справочник/Архитектурные паттерны/Decoder-only.md",
+      "canonicalSource": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md",
+      "canonicalHeading": "Decoder-only: предсказать следующий токен",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "notes": "Teacher forcing, диагональ causal mask, NTP, текстовый формат задач, отсутствие обязательного cross-attention и cache раскрыты подробнее. Исходная GIF GPT-2 уже опубликована в собственной главе GPT-2.",
+      "verifiedExamples": [
+        "BOS+пять слов -> шесть NTP-целей с EOS; один проход при обучении и последовательные шаги при генерации.",
+        "Смена пятого значения не меняет первые четыре causal-состояния."
+      ],
+      "readSources": [
+        "01 Справочник/Архитектурные паттерны/Decoder-only.md",
+        "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md"
+      ],
+      "figureDisposition": [
+        {
+          "asset": "00 Учебник/Assets/Figures/curated/gpt-30/gpt2-autoregression-2.gif",
+          "action": "already-published",
+          "publishedIn": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md"
+        }
+      ],
+      "sourceSha256": "88662f687eefe3f65fb5f5e17857e05d8c742006277414c2fab4077d14025dc6",
+      "canonicalSha256": "a99819704bcdd1ff795c39a2240b8c32331fded5b1372c302f69e381d123d6e8"
+    },
+    {
+      "source": "01 Справочник/Архитектурные паттерны/Encoder-Decoder.md",
+      "canonicalSource": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md",
+      "canonicalHeading": "Encoder–Decoder: прочитать один текст, написать другой",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "notes": "Разделение стеков, T5/text-to-text, cache источника/декодера, teacher forcing и prefix-LM раскрыты. Общая топология не обещает скорости; канонический текст показывает это через способы повторного использования состояний.",
+      "verifiedExamples": [
+        "Перевод использует отдельную память источника; cross-attention маска имеет Ttgt×Tsrc.",
+        "T5 span corruption: Thank you <X> me to your party <Y> week. -> <X> for inviting <Y> last <Z>."
+      ],
+      "readSources": [
+        "01 Справочник/Архитектурные паттерны/Encoder-Decoder.md",
+        "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md"
+      ],
+      "figureDisposition": [
+        {
+          "asset": "00 Учебник/Assets/Figures/curated/t5/encoder-decoder-architecture.png",
+          "action": "retain-file-do-not-reembed",
+          "reason": "Ошибочная атрибуция T5; в главе стоят подлинные Figure 3 и Figure 4 T5 с разными масками/топологиями."
+        }
+      ],
+      "sourceSha256": "65a12b916fbe40f1589974a3037d57553c3f69d3d50d015a198a0078624cfc9d",
+      "canonicalSha256": "a99819704bcdd1ff795c39a2240b8c32331fded5b1372c302f69e381d123d6e8"
+    },
+    {
+      "source": "01 Справочник/FFN и MoE/Dense FFN и gated activations.md",
+      "canonicalSource": "00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "notes": "Все формулы, ширина 8d/3, MAC/FLOP convention, GLU/ReGLU/GEGLU/SwiGLU и отсутствие разреженного выбора covered. Оба рисунка справочника уже входят в главу.",
+      "verifiedExamples": [
+        "Две строки через ReLU-FFN дают (1,0), (0,6), не смешивая токены.",
+        "SwiGLU из U=(2,-1,0.5), Z=(0,1,-1) даёт выход (-0.1345,-0.5966).",
+        "3*4096*11008 = 135266304 весов; 6*d*m = 270532608 FLOP на токен."
+      ],
+      "readSources": [
+        "01 Справочник/FFN и MoE/Dense FFN и gated activations.md",
+        "00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md"
+      ],
+      "sourceSha256": "c9601ad61e01d72d00cdd11e554a8f3de87f704eb0fa7672636f620448b65e2e",
+      "canonicalSha256": "50f2528d8a0cba6231692f81353c6817f2626aa54945aa51a0b6e14aeccbffc3"
+    },
+    {
+      "source": "01 Справочник/FFN и MoE/SwiGLU.md",
+      "canonicalSource": "00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md",
+      "canonicalHeading": "Вентильная FFN: две входные проекции",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "notes": "Уже служебная ссылка; направить сразу к полному разбору двух ветвей.",
+      "verifiedExamples": [
+        "SiLU(-1)≈-0.269, SiLU(2)≈1.762: gate не вероятность в [0,1]."
+      ],
+      "readSources": [
+        "01 Справочник/FFN и MoE/SwiGLU.md",
+        "00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md"
+      ],
+      "sourceSha256": "613404a5632fbc32a7b1d1a5d024fd34d888c017903b7e18998a0292f0685f9f",
+      "canonicalSha256": "50f2528d8a0cba6231692f81353c6817f2626aa54945aa51a0b6e14aeccbffc3"
+    },
+    {
+      "source": "01 Справочник/FFN и MoE/Mixture of Experts.md",
+      "canonicalSource": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "notes": "Все определения и оговорки covered более подробно: top-k нормировка, capacity назначений, bias balancing V3 с sequence loss, shared experts, all-to-all. Рисунок Mixtral в главе — тот же Figure 1 под другим локальным именем.",
+      "verifiedExamples": [
+        "Top-2 вероятностей (0.5,0.3,0.15,0.05) даёт нормированные (0.625,0.375) и выход (1.25,1.5).",
+        "M=4096,N=8,k=2,c=1.25 -> capacity 1280 на эксперта; 10240 мест для 8192 назначений.",
+        "Смещение меняет выбор 1,2 -> 3,1, но коэффициенты берутся из исходных sigmoid-оценок."
+      ],
+      "readSources": [
+        "01 Справочник/FFN и MoE/Mixture of Experts.md",
+        "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md"
+      ],
+      "sourceSha256": "373913e41e4a65bf3b47747e9c09d30e0d6d2e4f6aa31acae96caf41ca212ba5",
+      "canonicalSha256": "9df758b69b1d720bbb8942594442f5c6e45071d70b28f740793fb57de2fd746c"
+    },
+    {
+      "source": "01 Справочник/Позиционные представления/RoPE.md",
+      "canonicalSource": "00 Учебник/07 Анатомия современной LLM/04 RoPE.md",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "notes": "Поворот пар, знак n-m, сетка частот, fixed Q/K оговорка, не-вращение V, scaling и границы экстраполяции раскрыты полностью. Обрезанный старый RoFormer Figure 1 заменён полным оригиналом той же статьи.",
+      "verifiedExamples": [
+        "q=(1,2),k=(3,4),theta=pi/6,m=2,n=5 -> произведение 2; неверный знак даёт -2.",
+        "Для dr=8,b=10000 частоты (1,0.1,0.01,0.001); PI/NTK/YaRN сравниваются численно."
+      ],
+      "readSources": [
+        "01 Справочник/Позиционные представления/RoPE.md",
+        "00 Учебник/07 Анатомия современной LLM/04 RoPE.md"
+      ],
+      "sourceSha256": "9760a831bc06f8d3024d5b651be0bd3876734a2d9074a8f059bc08d47968a6f7",
+      "canonicalSha256": "6de4b7919032e51d0ce74e0c4b39ae7ce08982ba3ee9dad4dd0009d440254bde"
+    },
+    {
+      "source": "01 Справочник/Математика и DL/Нормализация.md",
+      "canonicalSource": "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md",
+      "canonicalHeading": "От LayerNorm к RMSNorm",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "notes": "Формулы с делителем d, epsilon под корнем, per-token axes, отсутствие centering в RMSNorm и независимость norm type/layout покрыты. Каноническая глава дополняет производные и отрицательные контроли.",
+      "verifiedExamples": [
+        "x=(3,4,0,0) -> RMSNorm=(1.2,1.6,0,0), LayerNorm≈(0.7001,1.2603,-0.9802,-0.9802).",
+        "При цели y1 градиент RMSNorm (0.256,-0.192,0,0); detach знаменателя даёт неверный (0.4,0,0,0)."
+      ],
+      "readSources": [
+        "01 Справочник/Математика и DL/Нормализация.md",
+        "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md"
+      ],
+      "sourceSha256": "ebdc3aba48882b3c7b5282637ee4d0ec7d1cc1faae194aa14bdbd3bc3a16df13",
+      "canonicalSha256": "ba4dde89572fa4c17be5addc0bde7ea24bbffb300120d15467c2282fb120ced6"
+    },
+    {
+      "source": "01 Справочник/Текст и токенизация/Токенизация.md",
+      "canonicalSource": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "decision": "alias",
+      "uniqueContentMoved": [],
+      "notes": "Полный pipeline, необратимая нормализация, BPE/WordPiece/Unigram, SentencePiece как библиотека, special tokens и vocabulary/sequence trade-off уже раскрыты с работающими примерами. Тот же HF pipeline SVG встроен.",
+      "verifiedExamples": [
+        "aaabdaaabac после трёх merges: длины 11→9→7→5; обратное восстановление сохраняет строку.",
+        "WordPiece с ab без ##c возвращает UNK несмотря на альтернативу a+##bc.",
+        "Unigram для abc: массы 0.006,0.01,0.09 и EM update (48,3,8,5,45)/109."
+      ],
+      "readSources": [
+        "01 Справочник/Текст и токенизация/Токенизация.md",
+        "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md"
+      ],
+      "sourceSha256": "7712cd4481087abf5fecc05e5260eeceee25bfc3e9e1c514179378d69a462fb0",
+      "canonicalSha256": "fa5261a3994721e92f48c82dae8992e55c0ccc805dc795648ce61b7407d29ebe"
+    }
+  ],
+  "outstanding": [
+    "Parent must materialize aliases/navigation, remove obsolete cross-links to short reference summaries, rerun publication build/link checks and inspect rendered merged routes at desktop/mobile widths.",
+    "Global EN reconciliation ledgers and browser evidence must be refreshed for the self-attention figure addition; this agent owns no shared ledgers."
+  ],
+  "validation": {
+    "runtime": "/Users/aleksan.potekhin/.cache/uv/archive-v0/j5rpRmtreFP2Eh3XABiIQ/bin/python",
+    "torch": "2.14.1",
+    "checks": [
+      {
+        "script": "check_self_attention_examples.py",
+        "exitCode": 1,
+        "output": "tensor([[1.0000, 0.0000],\n        [0.5000, 1.0000],\n        [1.3333, 1.0000],\n        [0.7500, 1.5000]], dtype=torch.float64)\nPASS standalone published block 1\ndivisor: 1.0 weights: [0.00033535013046647816, 0.9996646498695336] softmax diagonal: 0.00033523767075636815\ndivisor: 8.0 weights: [0.26894142136999516, 0.7310585786300049] softmax diagonal: 0.19661193324148185\nPASS standalone published block 2\nweights: [[0.4011120926797859, 0.1977758146404282, 0.4011120926797859], [0.1977758146404282, 0.4011120926797859, 0.4011120926797859], [0.24825507825772308, 0.24825507825772308, 0.5034898434845538]]\noutputs: [[1.6044483707191437, 0.7966637219606423], [1.401112092679786, 1.2033362780393577], [1.7587246087113846, 1.0]]\none SGD step: 2.0465561246435064 -> 1.8381402347944618\nPASS standalone published block 3\ndifferent weights: [[0.25, 0.25, 0.5], [0.4, 0.4, 0.2]]\nsame output: [[0.5, 0.5], [0.5, 0.5]]\nPASS standalone published block 4\nPASS prefix averaging, exact variance and softmax saturation\nPASS backward worked stages: values, weights, softmax centering and query/key row support\nPASS complete projected example, all backward paths, independent loops, SDPA and finite differences\nPASS value/content separation, non-self maximum and qualified permutation equivariance\nTraceback (most recent call last):\n  File \"/Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/publishing/tools/check_self_attention_examples.py\", line 138, in <module>\n    assert hashlib.sha256(restored.encode()).hexdigest() == \"d402a9a6810e8076173faf2e0b0e9043dbffa3673d7edb794e16e9c29f7ffd60\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+      },
+      {
+        "script": "check_gqa_examples.py",
+        "exitCode": 0,
+        "output": "[[1.4621171572600098, 1.0757656854799806], [0.5378828427399903, 2.9242343145200196]]\ntorch.Size([1, 1, 2, 2])\nPASS actual published block 1\ntorch.Size([1, 2, 5, 2])\nPASS actual published block 2\n[2.5378828427399904, 3.46211715726001] 3.0\nPASS actual published block 3\nPASS shared-KV outputs and numerical mean-pooling counterexample\nPASS all 16 five-token partitions, outputs and Q/K/V gradients: MQA/GQA/MHA and batch=2\nPASS negative controls: repeat ordering and unshifted causal mask\nPASS detach preserves values but changes past-K/V gradients\nPASS pinned Llama repeat_kv 1 4 shared storage True\nPASS pinned Llama repeat_kv 2 2 shared storage False\nPASS pinned Llama repeat_kv 4 1 shared storage True\nPASS logical/physical TP cache, parameter inventories and declared one-read intensity\nNo GPU timing, HBM traffic, distributed execution or model quality measured\nchapter SHA256 c442a81b9e09fe55aedc225cb3e5d3d7fa91b3db13eb80a9fdefed28a5c5c571\n"
+      },
+      {
+        "script": "check_mla_examples.py",
+        "exitCode": 0,
+        "output": "[1.4621171572600098, 1.0757656854799806]\nPASS actual published block 1\n[0.0, 1.0]\n[0.0, 0.0]\nPASS actual published block 2\nPASS actual published block 3\nfull [(1, 5, 2, 6), (1, 5, 2, 2)]\nlatent [(1, 5, 2), (1, 5, 2)]\nPASS actual published block 4\nPASS numerical outputs, unchanged temperature and explicit RoPE obstruction\nPASS independent full attention; all 16 partitions x 2 cache layouts, B=2, outputs and all gradients\nPASS negative controls: latent scale, missing positional term, unshifted mask, collapsed heads\nPASS pinned DeepSeek-V3 original naive/absorb bodies, FP32 CPU, all 16 partitions; max error 4.470348358154297e-08\nPASS cache, TP replication and MAC calculations\nNo released checkpoint, GPU kernel, distributed execution, timing or quality benchmark run\nchapter SHA256 aa2789b8788eda6efa42c4a31100734867554b63e02d32484996ad9dbb6f5e5f\n"
+      },
+      {
+        "script": "check_full_transformer_examples.py",
+        "exitCode": 0,
+        "output": "tensor([[ 1., -2., -2.],\n        [-1.,  4.,  2.]]) tensor([[ 1.,  2.],\n        [22., 28.]]) tensor([[3., 0.],\n        [0., 0.]])\nPASS standalone published block 1\ntensor([[0.6667, 0.3333, 0.0000],\n        [0.2500, 0.7500, 0.0000]], dtype=torch.float64) tensor([[1.3333, 1.0000],\n        [0.5000, 2.2500]], dtype=torch.float64)\nPASS standalone published block 2\ntensor([0.2595, 0.7054, 0.0351], dtype=torch.float64) 0.3490122167681865 0.5490122167681866\nKL 0.1546145253207438 gradient tensor([ 0.2595, -0.2946,  0.0351], dtype=torch.float64)\nPASS standalone published block 3\nper-target loss: [9.786661926179915, 4.6317245489217065, 10.881613312063578, 12.110339920979285, 0.0]\ntarget probabilities: [[5.619617149893091e-05, 0.009737951040379715, 1.8800759085342424e-05, 5.50232448717143e-06, 0.006973468644400185]]\nshared PAD row gradient norm: 0.01103369267943304\nbefore/after 9.352584927036121 8.497538101285013\ncross-attention (1, 2, 5, 4)\nPASS standalone published block 4\nlogits (1, 4, 10) loss 2.727783915754131\nPASS standalone published block 5\nPASS worked FFN, norm layout, rectangular cross-attention, CE/KL and gradients\nPASS both post-norm layers against PyTorch: unequal lengths, padding and all input/memory/parameter gradients\nPASS full translation graph: four targets, tied weights, all prefixes, no future/PAD leakage, SGD\nPASS tokenwise CE, valid-target denominator, ignored rows versus PAD class, tied gradient sum and detached-memory negative control\nloss 9.352584927036121 -> 8.497538101285013\nPASS modern LM: dense RoPE/SDPA, all attention gradients, RMSNorm gradcheck, SwiGLU and causal prefixes\nPASS chapter SHA256 8bda8af63d82960da7d5849e132be647542b90d4a9a9daca05ff5a0f2e66d356\n"
+      },
+      {
+        "script": "check_architecture_examples.py",
+        "exitCode": 0,
+        "output": "MLM labels [-100, -100, -100, 6, 7] sum loss 1.8325814637483098\nNTP input/targets [1, 3, 4, 5, 6, 7] [3, 4, 5, 6, 7, 2]\nNTP supervised positions 6\nPASS standalone published block 1\nfull tensor([[1.7500, 0.7500],\n        [1.7500, 0.7500],\n        [1.7500, 0.7500],\n        [1.7500, 0.7500]], dtype=torch.float64) causal tensor([[1.0000, 0.0000],\n        [0.5000, 0.5000],\n        [1.0000, 1.0000],\n        [1.7500, 0.7500]], dtype=torch.float64)\nfull after append tensor([1.4000, 1.4000], dtype=torch.float64) new causal query tensor([1.4000, 1.4000], dtype=torch.float64)\nPASS standalone published block 2\nencoder input Thank you <extra_id_0> me to your party <extra_id_1> week.\ntarget <extra_id_0> for inviting <extra_id_1> last <extra_id_2>\nsupervised targets 7 decoder IDs [0, 12, 4, 5, 13, 10, 14, 1, 0]\nPASS standalone published block 3\ncorrect first target tensor([11.1250], dtype=torch.float64) leaking first target tensor([12.2500], dtype=torch.float64)\nPASS standalone published block 4\nPASS MLM selection/replacement distinction, unchanged target, six NTP targets and head example\nPASS four visibility modes, rectangular attention, gradients/gradcheck and indirect MLM paths\nPASS append arithmetic, fixed-prefix boundary and three-layer K/V reuse for three chunkings\nPASS T5 spans/sentinels, EOS/ignored PAD, valid PAD-ID start and pinned HF shift\nPASS two-layer leakage/Jacobians and pinned UniLM source/target/padding mask block\nPASS chapter SHA256 a99819704bcdd1ff795c39a2240b8c32331fded5b1372c302f69e381d123d6e8\n"
+      },
+      {
+        "script": "check_ffn_examples.py",
+        "exitCode": 0,
+        "output": "[-0.13447071 -0.59658787]\n(1, 2, 2)\nPASS published block 1\n[-0.13447071 -0.59658787]\nPASS published block 2\n(1, 2, 2) (2, 3) (2, 3) (3, 2)\nPASS published block 3\nPASS scalar operator, flatten, permutation and one-token intervention\nPASS independent central differences x 1.4207590659509606e-10\nPASS independent central differences wu 6.349165637686838e-11\nPASS independent central differences wg 2.835582879612275e-10\nPASS independent central differences wd 5.7948479348368664e-11\nPASS algebraic TP: outputs, input-gradient sum and all weight shards\nPASS swapped branch, mismatched shard coordinates and duplicate-bias controls\nPASS pinned Meta forward expression with NumPy projection adapters\nPASS manual ReLU, affine collapse, TP sums and vocabulary composition\nPASS parameters, MAC/FLOP, activations, width rounding and matched GLU budget\nPASS explanation checks; not a GPU, collectives, training or quality benchmark\nchapter SHA256 50f2528d8a0cba6231692f81353c6817f2626aa54945aa51a0b6e14aeccbffc3\n"
+      },
+      {
+        "script": "check_moe_examples.py",
+        "exitCode": 0,
+        "output": "[[1 2]\n [1 3]\n [1 4]\n [1 2]]\n[1.25 1.5 ]\n[4 2 1 1]\n[[ True  True]\n [ True  True]\n [False  True]\n [False  True]]\n[0.93333333 0.        ]\n[0. 0.]\n0.011 0.1\n[[1 2]]\n[[0.51612903 0.48387097]]\nPASS four published blocks 9df758b69b1d720bbb8942594442f5c6e45071d70b28f740793fb57de2fd746c\nPASS scalar dispatch/combine, 24 permutations, capacity 0..4, wrong-weight control\nPASS top-1/top-2 fixed-route task gradients and normalized-top-1 zero gradient\nPASS auxiliary gradient shift -10.0 max error 6.919641509089969e-12\nPASS auxiliary gradient shift 0.0 max error 1.3327366011998965e-12\nPASS auxiliary gradient shift 10.0 max error 1.1940867782403441e-11\nPASS consistent sub-1 balance example, stable LSE +/-1000 and sharp zero-z case\nPASS biased original-score weights and independently enumerated node-limited routes\nPASS parameter/memory/capacity/EP/serving arithmetic; no physical network claim\n"
+      },
+      {
+        "script": "check_rope_examples.py",
+        "exitCode": 0,
+        "output": "2.000000000000003\nPASS published block 1\n[0.11740994479147193, 0.09255814499203041, 0.13887957616807411, 0.27312207969052993, 0.37803025435789356]\n3.7018045538313427\nPASS published block 2\n[1.0, 0.1, 0.01, 0.001] [0.25, 0.025, 0.0025, 0.00025] [1.0, 0.06299605249474366, 0.003968502629920499, 0.00025] [1.0, 0.1, 0.00625, 0.00025]\n1.138629436111989 1.2964769927807063\nPASS published block 3\n0.0023262835464963327\nPASS published block 4\nPASS independent matrices, per-batch positions, partial tail, norms, gradients, shifts\nPASS pinned Meta source functions: FP32/FP16/BF16 and GQA repeat\nPASS pairing permutation and wrong-layout counterexample 0.9511529127972356 1.8067304541090508\nPASS all 16 cached partitions and q/k/v gradients; double rotation fails\nPASS changed-grid upper-layer cache counterexample 0.0023262835464963327\nPASS pinned HF default/linear/dynamic/YaRN; position/frequency scaling equivalence\nPASS position precision counterexamples\nPASS RoPE chapter CPU operator verification; not full-model quality or GPU kernel validation\nchapter SHA256 6de4b7919032e51d0ce74e0c4b39ae7ce08982ba3ee9dad4dd0009d440254bde\n"
+      },
+      {
+        "script": "check_norm_gating_examples.py",
+        "exitCode": 0,
+        "output": "pre output: tensor([0.877526, 2.000000, 3.122474], dtype=torch.float64) input gradient: tensor([ 1.020412, -0.040825,  0.020412], dtype=torch.float64)\npost output: tensor([-1.224745,  0.000000,  1.224745], dtype=torch.float64) input gradient: tensor([ 0.204124, -0.408248,  0.204124], dtype=torch.float64)\nnaive: tensor([0., 0., 0., 0.], dtype=torch.float16)\nFP32 statistics: tensor([1.200195, 1.599609, 0.000000, 0.000000], dtype=torch.float16)\ngate: tensor([[ 1., -1.]], dtype=torch.float64) values: tensor([[2., 3.]], dtype=torch.float64)\nproduct: tensor([[ 1.462117, -0.806824]], dtype=torch.float64) FFN output: tensor([[ 1.462117, -0.806824]], dtype=torch.float64)\nstable probabilities: tensor([0.731059, 0.268941], dtype=torch.float64)\nlog Z: tensor(1000.313262, dtype=torch.float64) z-loss: tensor(10.006266, dtype=torch.float64)\nz-loss gradient: tensor([0.014626, 0.005381], dtype=torch.float64)\ncorrect causal probabilities: tensor([[1., 0.]], dtype=torch.float64)\ncapping the mask leaks: tensor([[0.876968, 0.123032]], dtype=torch.float64)\nPASS all four published blocks in chapter order\nPASS pre/post outputs, full Jacobians and residual cancellation\nPASS LN/RMS axes, affine/invariance qualifications, pRMS subset and independent VJP/finite differences\nPASS epsilon-placement large difference, zero-input derivative, FP16 finite-wrong result and causal axis control\nPASS actual SwiGLU matrices, matched weight counts and separate QK-RMS example\nPASS stable-softmax distinction, independent z-loss derivative/shift, soft-capping and forbidden-key leak\nPASS branch-output normalization differs from both pre- and post-residual normalization\nPASS RMSNorm Table 4 actual rows and 6.9% time reduction, not whole-LLM speedup\nNo released-weight training, GPU latency or universal stability claim.\nCHAPTER_SHA256 ba4dde89572fa4c17be5addc0bde7ea24bbffb300120d15467c2282fb120ced6\n"
+      },
+      {
+        "script": "check_tokenization_chapter_examples.py",
+        "exitCode": 0,
+        "output": "PASS: 5 sequential chapter snippets; BPE traces, UTF-8 and 5460 upstream rank comparisons; original BERT greedy failure; exact vocabulary/logit/attention arithmetic; WordPiece scores; Unigram Viterbi, forward sum and EM; pinned sources/licenses.\nNo SentencePiece binary, full BERT/GPT-2 model, LLM training or tokenizer benchmark executed.\nChapter SHA256: fa5261a3994721e92f48c82dae8992e55c0ccc805dc795648ce61b7407d29ebe\n"
+      }
+    ],
+    "passed": 9,
+    "failed": 1,
+    "note": "Self-attention numerical checks pass; preservation SHA assertion needs parent-owned update after intended figure addition. No GPU/model-quality benchmark or browser layout acceptance claimed."
+  },
+  "readRevisions": {
+    "01 Справочник/Attention/MHA.md": "6b5c02740360d8b0feb455dbfb0ae6484bd124ecf03f1bfbd40ae39309f731e5",
+    "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md": "c442a81b9e09fe55aedc225cb3e5d3d7fa91b3db13eb80a9fdefed28a5c5c571",
+    "01 Справочник/Attention/MQA.md": "0c0bd3745704086507d3e91fb17e2f352e21f60c87edede795ede51d6de48c49",
+    "01 Справочник/Attention/GQA.md": "f8c0dbfaa6d042964a79cad0b0c8d535d9fe5bdce8093d9c70b75bbcab913dec",
+    "01 Справочник/Attention/MHA, MQA и GQA.md": "3cc006c4ecaa8da99066da7bc252c6b7f8fb3b49397764ded69ee881274b9d39",
+    "01 Справочник/Attention/MLA.md": "f83cfc67e7293802a034fa92fd8ef867e83870e93a27f22e71d8f93f825285be",
+    "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md": "aa2789b8788eda6efa42c4a31100734867554b63e02d32484996ad9dbb6f5e5f",
+    "01 Справочник/Attention/Self-Attention.md": "abe3ad6744c7cc1c89fed9c375a3a07071899c901a7ede44a4632d9e3630fd11",
+    "00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md": "270146832ba9d5f349939f802663643786563c05fd88bb0271633fcfce0baba7",
+    "en/00 Textbook/05 Attention and Transformer/02 Self-Attention — Q, K, V.md": "063b46c84e216fe5665cba49d32162b84b35c3964472dff410c2b5a04ee920c0",
+    "01 Справочник/Attention/Cross-Attention.md": "185887e92835202620a24219d6f053eadbe88f0d2f1e72372edcdb9e9978b8fc",
+    "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md": "8bda8af63d82960da7d5849e132be647542b90d4a9a9daca05ff5a0f2e66d356",
+    "01 Справочник/Архитектурные паттерны/Encoder-only.md": "97134cddf046c48f7afa8232342f8d4d535a29e13803a057aa4e24b164221a83",
+    "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md": "a99819704bcdd1ff795c39a2240b8c32331fded5b1372c302f69e381d123d6e8",
+    "01 Справочник/Архитектурные паттерны/Decoder-only.md": "88662f687eefe3f65fb5f5e17857e05d8c742006277414c2fab4077d14025dc6",
+    "01 Справочник/Архитектурные паттерны/Encoder-Decoder.md": "65a12b916fbe40f1589974a3037d57553c3f69d3d50d015a198a0078624cfc9d",
+    "01 Справочник/FFN и MoE/Dense FFN и gated activations.md": "c9601ad61e01d72d00cdd11e554a8f3de87f704eb0fa7672636f620448b65e2e",
+    "00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md": "50f2528d8a0cba6231692f81353c6817f2626aa54945aa51a0b6e14aeccbffc3",
+    "01 Справочник/FFN и MoE/SwiGLU.md": "613404a5632fbc32a7b1d1a5d024fd34d888c017903b7e18998a0292f0685f9f",
+    "01 Справочник/FFN и MoE/Mixture of Experts.md": "373913e41e4a65bf3b47747e9c09d30e0d6d2e4f6aa31acae96caf41ca212ba5",
+    "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md": "9df758b69b1d720bbb8942594442f5c6e45071d70b28f740793fb57de2fd746c",
+    "01 Справочник/Позиционные представления/RoPE.md": "9760a831bc06f8d3024d5b651be0bd3876734a2d9074a8f059bc08d47968a6f7",
+    "00 Учебник/07 Анатомия современной LLM/04 RoPE.md": "6de4b7919032e51d0ce74e0c4b39ae7ce08982ba3ee9dad4dd0009d440254bde",
+    "01 Справочник/Математика и DL/Нормализация.md": "ebdc3aba48882b3c7b5282637ee4d0ec7d1cc1faae194aa14bdbd3bc3a16df13",
+    "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md": "ba4dde89572fa4c17be5addc0bde7ea24bbffb300120d15467c2282fb120ced6",
+    "01 Справочник/Текст и токенизация/Токенизация.md": "7712cd4481087abf5fecc05e5260eeceee25bfc3e9e1c514179378d69a462fb0",
+    "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md": "fa5261a3994721e92f48c82dae8992e55c0ccc805dc795648ce61b7407d29ebe"
+  }
+}

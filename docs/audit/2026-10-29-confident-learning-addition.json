@@ -1,0 +1,8 @@
+{
+  "source": "00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting.md",
+  "before_sha256": "4457573c808536ae88f021c72f3d8be98d9ba9866b7f2b23af99da5c322acff2",
+  "after_sha256": "18aa3e0c623deceaf7bd475e03f045c7a5e5e8b68ccc7921297e106fa4b04fe4",
+  "block_sha256": "6135507961d69b0ee368b2de37aad343770f8bbd74ab104b580cd9d3bef1d620",
+  "review": "docs/audit/2026-10-29-confident-learning.md",
+  "scope": "One bounded explanatory addition plus two frontmatter dates. All pre-existing prose, five programs, two figures and navigation preserved byte-for-byte. This journal proves preservation, not explanation quality."
+}

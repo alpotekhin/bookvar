@@ -1,0 +1,218 @@
+[
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/omni-review-2026-10/mimi-split-rvq.png",
+    "sha256": "222bd4c27dcc7da5748321af68c37b29ec5ebcacbd015a5eee516e39a3c7108c",
+    "width": 1725,
+    "height": 590,
+    "source_asset": "05 Источники/Originals/omni-2026-10-20/moshi.pdf",
+    "source_asset_sha256": "ea702589e103f8d02b4fbec733c556b08d136c2ccaa013eb48a91a7366c7e390",
+    "source_page": 10,
+    "source_page_snapshot": "05 Источники/Originals/omni-2026-10-20/moshi-page10.png",
+    "source_page_sha256": "b436a2a5f1721d8a59a83ccfb652802ab0c13aa7567f32819e5754783a7ac072",
+    "render_page_size_px": [
+      2473,
+      3200
+    ],
+    "crop_box_px": [
+      365,
+      365,
+      2090,
+      955
+    ],
+    "id": "curated-omni-202610-mimi-split-rvq-222bd4c27dcc",
+    "author": "Alexandre Défossez et al.",
+    "source_url": "https://arxiv.org/pdf/2410.00037v2",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/omni-2026-10-20/moshi-abstract.html",
+    "license_evidence_sha256": "fb6fdb1a398e46ea7cb3fcf72eb9949adcb2086f70b12ecf5cd0bc5a63d3ca32",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Moshi Figure 2: split semantic VQ and acoustic RVQ; complete diagram, caption and page text excluded.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/omni-review-2026-10/moshi-rq-transformer.png",
+    "sha256": "4a6c2371fe17003ed134caa844ef93d644c80ac26a37e47288c7c74fde6a92eb",
+    "width": 910,
+    "height": 515,
+    "source_asset": "05 Источники/Originals/omni-2026-10-20/moshi.pdf",
+    "source_asset_sha256": "ea702589e103f8d02b4fbec733c556b08d136c2ccaa013eb48a91a7366c7e390",
+    "source_page": 13,
+    "source_page_snapshot": "05 Источники/Originals/omni-2026-10-20/moshi-page13.png",
+    "source_page_sha256": "cf9212292f6067395b980eff656dadc391fbc84cf9d59d6bfb65edf97e19f4db",
+    "render_page_size_px": [
+      2473,
+      3200
+    ],
+    "crop_box_px": [
+      790,
+      360,
+      1700,
+      875
+    ],
+    "id": "curated-omni-202610-moshi-rq-transformer-4a6c2371fe17",
+    "author": "Alexandre Défossez et al.",
+    "source_url": "https://arxiv.org/pdf/2410.00037v2",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/omni-2026-10-20/moshi-abstract.html",
+    "license_evidence_sha256": "fb6fdb1a398e46ea7cb3fcf72eb9949adcb2086f70b12ecf5cd0bc5a63d3ca32",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Moshi Figure 3: complete temporal/depth Transformer diagram; page header and caption excluded.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/omni-review-2026-10/moshi-duplex-streams.png",
+    "sha256": "1c677e22934d7dd38831b20b00afab770c48ce6271c8ea7e889bebbdca560c7f",
+    "width": 1645,
+    "height": 1125,
+    "source_asset": "05 Источники/Originals/omni-2026-10-20/moshi.pdf",
+    "source_asset_sha256": "ea702589e103f8d02b4fbec733c556b08d136c2ccaa013eb48a91a7366c7e390",
+    "source_page": 15,
+    "source_page_snapshot": "05 Источники/Originals/omni-2026-10-20/moshi-page15.png",
+    "source_page_sha256": "8c0d5b954ded288353c6d526d4a08f480fa783bbfa65a041d41997a22f290b0f",
+    "render_page_size_px": [
+      2473,
+      3200
+    ],
+    "crop_box_px": [
+      425,
+      350,
+      2070,
+      1475
+    ],
+    "id": "curated-omni-202610-moshi-duplex-streams-1c677e22934d",
+    "author": "Alexandre Défossez et al.",
+    "source_url": "https://arxiv.org/pdf/2410.00037v2",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/omni-2026-10-20/moshi-abstract.html",
+    "license_evidence_sha256": "fb6fdb1a398e46ea7cb3fcf72eb9949adcb2086f70b12ecf5cd0bc5a63d3ca32",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Moshi Figure 4: complete user/model streams, labels and code delays; running header and caption excluded.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/omni-review-2026-10/qwen3omni-architecture.png",
+    "sha256": "988f50b0b613de2e353240c6f20028e901536b196a33966da3555a9c9d283bac",
+    "width": 1440,
+    "height": 1485,
+    "source_asset": "05 Источники/Originals/omni-2026-10-20/qwen3omni.pdf",
+    "source_asset_sha256": "4608d7f5d0694dd09a66144dac921797e161331d92b5eef133615bec392ec928",
+    "source_page": 3,
+    "source_page_snapshot": "05 Источники/Originals/omni-2026-10-20/qwen3omni-page3.png",
+    "source_page_sha256": "47418fe60503be5e3630fdf9f8db06d2ae4d9f39b88303fb9d4c2f94c199a6d1",
+    "render_page_size_px": [
+      2263,
+      3200
+    ],
+    "crop_box_px": [
+      425,
+      245,
+      1865,
+      1730
+    ],
+    "id": "curated-omni-202610-qwen3omni-architecture-988f50b0b613",
+    "author": "Qwen Team",
+    "source_url": "https://arxiv.org/pdf/2509.17765v1",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/omni-2026-10-20/qwen3omni-abstract.html",
+    "license_evidence_sha256": "d15086198a7a2103e70332c7b2b8f748461b87a8f1379abd5a756d8dbaac0195",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Qwen3-Omni Figure 2: complete architecture, legend, waveform and time axis; caption excluded.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/omni-review-2026-10/qwen25omni-block-attention.png",
+    "sha256": "5e8f0f0410e4f3fa9ee2f65d3672b44e775749617a6ef5896bb05e60a43820aa",
+    "width": 795,
+    "height": 900,
+    "source_asset": "05 Источники/Originals/omni-2026-10-20/qwen25omni.pdf",
+    "source_asset_sha256": "95906505512440a3a32c37b10a6aeeef092c44d60fcfaebfb309950685b7cbf1",
+    "source_page": 5,
+    "source_page_snapshot": "05 Источники/Originals/omni-2026-10-20/qwen25omni-page5-hq.png",
+    "source_page_sha256": "fefdd4c8fe5668b5daeb9d848a5b1a6c94cb0c697d077bc48720e42a0a50e17f",
+    "render_page_size_px": [
+      3536,
+      5000
+    ],
+    "crop_box_px": [
+      1310,
+      3145,
+      2105,
+      4045
+    ],
+    "id": "curated-omni-202610-qwen25omni-block-attention-5e8f0f0410e4",
+    "author": "Jin Xu et al.",
+    "source_url": "https://arxiv.org/pdf/2503.20215v1",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/omni-2026-10-20/qwen25omni-abstract.html",
+    "license_evidence_sha256": "cc7374fb27c3e71bd8fe280483821873e8bfe0263100c895f8eabdd3cb8e9b5c",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Qwen2.5-Omni Figure 4: complete block attention mask and legend, rendered at higher resolution; surrounding two-column text and caption excluded.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md"
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/omni-review-2026-10/gens-frame-selection.png",
+    "sha256": "85ff65455c312357e454a3a0a78b865476e894b8ffa802be6ea8198388ede8fc",
+    "width": 1660,
+    "height": 905,
+    "source_asset": "05 Источники/Originals/omni-2026-10-20/gens-acl.pdf",
+    "source_asset_sha256": "a1a071b4a6501b459b01dc2594107fa2c8f813813b991384f5d40b68157aeb8a",
+    "source_page": 2,
+    "source_page_snapshot": "05 Источники/Originals/omni-2026-10-20/gens-acl-page2.png",
+    "source_page_sha256": "a8ce9038aa6fb079a2cf4adee56bff4931ce8503803d1bce89cb58ac050ff988",
+    "render_page_size_px": [
+      2263,
+      3200
+    ],
+    "crop_box_px": [
+      315,
+      220,
+      1975,
+      1125
+    ],
+    "id": "curated-omni-202610-gens-frame-selection-85ff65455c31",
+    "author": "Linli Yao et al.",
+    "source_url": "https://aclanthology.org/2025.findings-acl.921.pdf",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/omni-2026-10-20/acl-copyright.html",
+    "license_evidence_sha256": "683a1dc65a78ec30927630124f4acfaecc728142dcca4e8a1f0a2bfc96f8158b",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "GenS ACL 2025 Figure 1: both panels, full question, frame labels and authors' result plot; caption excluded.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md"
+    ]
+  }
+]

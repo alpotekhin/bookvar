@@ -1,0 +1,746 @@
+{
+  "title": "Harvard Network Architectures: section decisions",
+  "reviewed_at": "2026-10-27",
+  "scope": "Pinned chapter only; excludes complete course, Marimo UI/hardware execution and deferred English parity.",
+  "status": "section-review-with-findings",
+  "source": {
+    "path": "05 Источники/Originals/nn-architectures-2026-10-26/chapter-2bd97c5.qmd",
+    "sha256": "64ef2c6bab3a09846bdb089a33c0ee355ee32ecbf291447493708c276f18d9a6",
+    "commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "lines": 5256
+  },
+  "targets": {
+    "practice": {
+      "path": "06 Практика/18a Сравнить архитектуры по ресурсным ограничениям.md",
+      "sha256": "48c3d043fddf4bd75e57d79dfb7887d39d96bbdc784bd5be985b4c4038c601d8",
+      "review_evidence": "docs/audit/2026-10-27-wildlife-budgets.md",
+      "lines": 550
+    },
+    "mlp": {
+      "path": "00 Учебник/01 Основы нейронных сетей/01 Нейрон и MLP.md",
+      "sha256": "17e763a94b26580e6c4d015c6ab092c1d33d57a9f6c77e34a598fdc27379507b",
+      "review_evidence": "docs/audit/2026-10-27-module-hooks.md",
+      "lines": 1053
+    },
+    "cnn": {
+      "path": "00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md",
+      "sha256": "136cde481f65d808db9505969c6ef7fb8fee15fda1c760ebaf74b4d4d28b2b7f",
+      "review_evidence": "docs/audit/2026-10-27-winograd.md",
+      "lines": 1517
+    },
+    "rnn": {
+      "path": "00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT.md",
+      "sha256": "9e7990cd4670623c0f8b4cc78fc233d30dfca3696143dee5ad01f87f2fa136b4",
+      "review_evidence": "docs/audit/2026-10-26-rnn-execution.md",
+      "lines": 1035
+    },
+    "attention": {
+      "path": "00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md",
+      "sha256": "073f6e573481b59e93f2a2bee4bdd2e86c7ab5e1c9091764e9c506bfd18acc3c",
+      "review_evidence": "docs/audit/2026-10-26-attention-transformer.md",
+      "lines": 738
+    },
+    "transformer": {
+      "path": "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md",
+      "sha256": "8bda8af63d82960da7d5849e132be647542b90d4a9a9daca05ff5a0f2e66d356",
+      "review_evidence": "docs/audit/2026-10-26-attention-transformer.md",
+      "lines": 1094
+    },
+    "ranking": {
+      "path": "00 Учебник/02 Рекомендательные системы/03 Ranking и нейронные рекомендательные модели.md",
+      "sha256": "86e293dab73545f32be8b908ab0b8a663e9b247f454223c93f44427e50e1f1cb",
+      "review_evidence": "docs/audit/2026-10-27-dlrm.md",
+      "lines": 1305
+    },
+    "norm": {
+      "path": "00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md",
+      "sha256": "019c8f6a0270bcdb4f282ade039108c289f5d7d391dde779e664fd046fa61435",
+      "review_evidence": "docs/audit/2026-10-27-shared-blocks.md",
+      "lines": 873
+    },
+    "llmNorm": {
+      "path": "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md",
+      "sha256": "ba4dde89572fa4c17be5addc0bde7ea24bbffb300120d15467c2282fb120ced6",
+      "review_evidence": "docs/audit/2026-10-27-shared-blocks.md",
+      "lines": 718
+    },
+    "ffn": {
+      "path": "00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md",
+      "sha256": "861b4a9b9724ef3efb0446f09ae522b8117a71758c693dca64c5258c819a5b6a",
+      "review_evidence": "docs/audit/2026-10-27-shared-blocks.md",
+      "lines": 847
+    },
+    "tensors": {
+      "path": "00 Учебник/00 Математические и ML-основания/01 Векторы, матрицы и тензоры.md",
+      "sha256": "7764790a11f7cbf12fbb9e662d62d56bd94ad8d39863a8995423f29161ff6ebb",
+      "review_evidence": "docs/audit/2026-10-27-frameworks-native-figures.md",
+      "lines": 878
+    },
+    "gpu": {
+      "path": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "sha256": "d432d06ee1687fca66fe6151028a1c4a2bb2313a7e23d9d2b7d877b96cb48d81",
+      "review_evidence": "docs/audit/2026-10-27-tensors-gpu-primitives.md",
+      "lines": 910
+    },
+    "roofline": {
+      "path": "00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md",
+      "sha256": "ee3b591a0085982c18c2ae691889e38f2f624b505cb2a414520c947c1f57323b",
+      "review_evidence": "docs/audit/2026-10-27-tensors-gpu-primitives.md",
+      "lines": 1105
+    },
+    "kernels": {
+      "path": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "sha256": "8826db488145077e23c59f37abb23d42e66afe4d57688bd30f109d521817ea08",
+      "review_evidence": "docs/audit/2026-10-27-jax-runtime.md",
+      "lines": 2980
+    },
+    "collectives": {
+      "path": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "sha256": "e1e9b7999ca10a61e9a48a24484f704b13cb7918cede4d5ba050b06876cbc8db",
+      "review_evidence": "docs/audit/2026-10-27-collective-destinations.md",
+      "lines": 1632
+    },
+    "systems": {
+      "path": "00 Учебник/10 ML Systems/01 Модель как часть системы.md",
+      "sha256": "c958fbd61b171e67163951269d76375e26376e7a54c69d76b4e3ad24c7b6676d",
+      "review_evidence": "docs/audit/2026-10-26-architecture-selection.md",
+      "lines": 416
+    },
+    "arithmetic": {
+      "path": "00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md",
+      "sha256": "2d49342ee5b2998d93980151ff95f2fdbf5a464c1cbb6911f9e7c3c4dce0cafa",
+      "review_evidence": "docs/audit/2026-10-23-transformer-arithmetic.md",
+      "lines": 1227
+    }
+  },
+  "rows": [
+    {
+      "id": "scope",
+      "start": 1,
+      "end": 55,
+      "topic": "Front matter and purpose",
+      "targets": [],
+      "evidence": [
+        "docs/audit/2026-10-26-architecture-selection.md"
+      ],
+      "explanation": "Editorial framing is retained in the immutable source; it adds no separate model mechanism.",
+      "not_adopted": null
+    },
+    {
+      "id": "principles",
+      "start": 56,
+      "end": 318,
+      "topic": "Architectural principles and engineering trade-offs",
+      "targets": [
+        "mlp",
+        "cnn",
+        "rnn",
+        "attention",
+        "practice"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-26-architecture-selection.md",
+        "docs/audit/2026-10-21-neuron-mlp.md",
+        "docs/audit/2026-10-26-rnn-execution.md",
+        "docs/audit/2026-10-26-attention-transformer.md"
+      ],
+      "explanation": "Local connectivity, shared parameters, temporal state and learned pairwise mixing have explicit forward/backward cases; the practice treats family choice as candidate generation followed by hard constraints.",
+      "not_adopted": "No fixed total ordering of architecture quality or sample requirements."
+    },
+    {
+      "id": "lighthouses",
+      "start": 319,
+      "end": 381,
+      "topic": "Lighthouse models and profiles",
+      "targets": [
+        "practice",
+        "cnn",
+        "ranking"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-26-architecture-selection.md",
+        "docs/audit/2026-10-27-winograd.md",
+        "docs/audit/2026-10-27-dlrm.md"
+      ],
+      "explanation": "Named profiles illustrate distinct workloads; model parameter/activation/operator ledgers are separated in the destinations.",
+      "not_adopted": "Historical catalogue values and illustrative utilization are not current device measurements."
+    },
+    {
+      "id": "workloads",
+      "start": 382,
+      "end": 589,
+      "topic": "Workload signatures and training/inference footprints",
+      "targets": [
+        "roofline",
+        "arithmetic",
+        "practice"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-27-tensors-gpu-primitives.md",
+        "docs/audit/2026-10-23-transformer-arithmetic.md",
+        "docs/audit/2026-10-26-architecture-selection.md"
+      ],
+      "explanation": "Work, stored state, actual traffic, dtype and execution phase are separated; roofline and Transformer ledgers have worked numbers.",
+      "not_adopted": "Family labels alone do not determine arithmetic intensity, peak residency or latency."
+    },
+    {
+      "id": "mlp",
+      "start": 590,
+      "end": 1188,
+      "topic": "MLPs: patterns, algorithm, mapping and implications",
+      "targets": [
+        "mlp",
+        "tensors",
+        "gpu"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-21-neuron-mlp.md",
+        "docs/audit/2026-10-27-tensors-gpu-primitives.md"
+      ],
+      "explanation": "Affine map, parameter count, nonlinear composition, loss/backward and batched GEMM already have complete examples; Tensor/GPU chapters supply shapes, layout and tiling.",
+      "not_adopted": "Finite-data quality and universal-approximation existence do not guarantee optimization or deployment performance."
+    },
+    {
+      "id": "cnn-patterns",
+      "start": 1189,
+      "end": 1440,
+      "topic": "CNN pattern needs and locality",
+      "targets": [
+        "cnn"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-27-winograd.md"
+      ],
+      "explanation": "Shared local filters, spatial axes/channels and their gradient sums are worked numerically; geometric equivariance is treated separately.",
+      "not_adopted": "Translation equivariance does not imply arbitrary pose invariance; padding and stride qualify it."
+    },
+    {
+      "id": "cnn-algorithm",
+      "start": 1441,
+      "end": 1720,
+      "topic": "CNN algorithm and group equivariance",
+      "targets": [
+        "cnn"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-27-winograd.md"
+      ],
+      "explanation": "Channels, padding/stride/dilation, pooling, exact C4 lifting, transformed feature fields and full original escnn animations are integrated.",
+      "not_adopted": "Group-equivariant feature types are not Conv2d(groups); arbitrary rotations require resampling."
+    },
+    {
+      "id": "cnn-mapping",
+      "start": 1721,
+      "end": 1845,
+      "topic": "CNN lowering and memory mapping",
+      "targets": [
+        "cnn",
+        "gpu"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-27-winograd.md",
+        "docs/audit/2026-10-27-tensors-gpu-primitives.md"
+      ],
+      "explanation": "Complete native window-row SVG, both input channels, all outputs 356/392/464/500 and transposed unfold explain lowering and duplicated entries.",
+      "not_adopted": "Source row/column caption corrected adjacent; generic im2col 5–10x speedup not adopted."
+    },
+    {
+      "id": "cnn-cost",
+      "start": 1846,
+      "end": 1974,
+      "topic": "CNN compute, movement and efficient variants",
+      "targets": [
+        "cnn",
+        "roofline"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-27-winograd.md",
+        "docs/audit/2026-10-27-tensors-gpu-primitives.md"
+      ],
+      "explanation": "MAC convention, depthwise-plus-pointwise constraint, parameter counts and explicit traffic bounds are retained.",
+      "not_adopted": "Fewer FLOPs do not ensure a proportional speedup on either mobile CPUs or data-centre GPUs."
+    },
+    {
+      "id": "kws",
+      "start": 1975,
+      "end": 1990,
+      "topic": "Depthwise-separable CNN and keyword spotting",
+      "targets": [
+        "cnn",
+        "practice"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-27-winograd.md",
+        "docs/audit/2026-10-27-wildlife-budgets.md"
+      ],
+      "explanation": "The CNN explains spatial/channel factorization; the practice now gives its general cost ratio and distinguishes an always-on audio trigger from a visual species classifier.",
+      "not_adopted": "Number of output classes alone does not establish representational capacity, and an architecture name does not establish whole-device power."
+    },
+    {
+      "id": "rnn",
+      "start": 1991,
+      "end": 2233,
+      "topic": "RNNs: recurrence and system implications",
+      "targets": [
+        "rnn"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-26-rnn-execution.md"
+      ],
+      "explanation": "Scalar forward/BPTT, actual language-model training, input projections, chunks versus truncation, multilayer dependency grid and weight-gradient reductions are present.",
+      "not_adopted": "Parallel input projection does not remove the hidden-state dependency or make generated future inputs available."
+    },
+    {
+      "id": "attention",
+      "start": 2234,
+      "end": 2929,
+      "topic": "Attention: algorithm, mapping, memory and movement",
+      "targets": [
+        "attention",
+        "transformer",
+        "arithmetic"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-26-attention-transformer.md",
+        "docs/audit/2026-10-23-transformer-arithmetic.md"
+      ],
+      "explanation": "Finite Q/K/V example, scores/softmax, all projection gradients, permutation qualification, training/generation and materialized cost are explained; non-identifiability has a finite worked example.",
+      "not_adopted": "Input-dependent dense weights do not require random addressing or a dynamic execution graph; square score storage is implementation-specific."
+    },
+    {
+      "id": "transformer",
+      "start": 2930,
+      "end": 3458,
+      "topic": "Transformers: blocks, training and inference",
+      "targets": [
+        "transformer",
+        "llmNorm",
+        "arithmetic",
+        "collectives"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-26-attention-transformer.md",
+        "docs/audit/2026-10-27-shared-blocks.md",
+        "docs/audit/2026-10-23-transformer-arithmetic.md",
+        "docs/audit/2026-10-27-collective-destinations.md"
+      ],
+      "explanation": "Encoder/decoder/cross-attention, masks/PAD, shifted loss, residual/norm/FFN, modern causal block and phase-specific memory/parallel ownership have detailed examples.",
+      "not_adopted": "2017 translator, modern decoder-only model, training activations and autoregressive KV state are not interchangeable."
+    },
+    {
+      "id": "recsys",
+      "start": 3459,
+      "end": 3690,
+      "topic": "Sparse embedding architectures and DLRM",
+      "targets": [
+        "ranking",
+        "collectives"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-27-dlrm.md",
+        "docs/audit/2026-10-27-collective-destinations.md"
+      ],
+      "explanation": "Exact source interaction method, pooled IDs including empties/repeats, Gram order, BCE, gradients, table/row/column ownership and three original TorchRec figures are integrated.",
+      "not_adopted": "Sparse access is not universally uncacheable or the sole bottleneck for every DLRM shape; GB and GiB remain distinct."
+    },
+    {
+      "id": "shared-intro",
+      "start": 3691,
+      "end": 3715,
+      "topic": "Shared building blocks",
+      "targets": [
+        "norm",
+        "llmNorm",
+        "ffn"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-27-shared-blocks.md"
+      ],
+      "explanation": "Shared maps, skip paths, normalization and multiplicative gates are developed in their own chapters rather than duplicated as a second introduction.",
+      "not_adopted": null
+    },
+    {
+      "id": "dense",
+      "start": 3716,
+      "end": 3725,
+      "topic": "Dense linear maps",
+      "targets": [
+        "mlp",
+        "ffn"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-21-neuron-mlp.md",
+        "docs/audit/2026-10-27-shared-blocks.md"
+      ],
+      "explanation": "Rows, shared token-wise weights, expansion dimensions and both projection gradients are explicit.",
+      "not_adopted": null
+    },
+    {
+      "id": "skip-intro",
+      "start": 3726,
+      "end": 3741,
+      "topic": "Skip connections and depth",
+      "targets": [
+        "norm",
+        "llmNorm",
+        "cnn"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-27-shared-blocks.md",
+        "docs/audit/2026-10-27-winograd.md"
+      ],
+      "explanation": "Identity target, compatible shapes, direct gradient branch and projection shortcut are worked.",
+      "not_adopted": null
+    },
+    {
+      "id": "plain-depth",
+      "start": 3742,
+      "end": 3761,
+      "topic": "Plain-network gradient products and ReLU",
+      "targets": [
+        "norm",
+        "mlp"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-27-shared-blocks.md",
+        "docs/audit/2026-10-21-neuron-mlp.md"
+      ],
+      "explanation": "Scalar and matrix derivative products, initialization assumptions, active/dead paths and cancellation are explicit.",
+      "not_adopted": "Spectral radius bounds on individual changing Jacobians do not establish the asserted product bound."
+    },
+    {
+      "id": "residual",
+      "start": 3762,
+      "end": 3869,
+      "topic": "Residual computation and deep-network evidence",
+      "targets": [
+        "norm",
+        "llmNorm",
+        "cnn"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-27-shared-blocks.md",
+        "docs/audit/2026-10-27-winograd.md"
+      ],
+      "explanation": "I+J_F, F=-x cancellation, post-addition ReLU, full pre/post Jacobians and executable ResNet-18 are retained.",
+      "not_adopted": "A shortcut does not guarantee unchanged or nonzero gradients; historical evidence is not universal performance."
+    },
+    {
+      "id": "normalization",
+      "start": 3870,
+      "end": 3948,
+      "topic": "BatchNorm, LayerNorm and comparisons",
+      "targets": [
+        "norm",
+        "llmNorm"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-27-shared-blocks.md"
+      ],
+      "explanation": "Axes, train/eval statistics, numerical examples, LN/RMS VJP, epsilon, shift-null direction and normalization placement are explained.",
+      "not_adopted": "Universal Jacobian spectrum [0.5,2], fixed minimum batch size and inversion of arbitrary batch statistics are rejected."
+    },
+    {
+      "id": "gating",
+      "start": 3949,
+      "end": 3958,
+      "topic": "Gating",
+      "targets": [
+        "ffn",
+        "llmNorm"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-27-shared-blocks.md"
+      ],
+      "explanation": "Sigmoid/SiLU gates, both branch gradients, parameter-matched widths and local TP reconstruction have worked cases.",
+      "not_adopted": "Dense gating is not sparse expert routing; a historical kernel timing is not universal LLM throughput."
+    },
+    {
+      "id": "shared-synthesis",
+      "start": 3959,
+      "end": 4035,
+      "topic": "Building-block synthesis",
+      "targets": [
+        "norm",
+        "llmNorm",
+        "ffn",
+        "roofline"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-27-shared-blocks.md",
+        "docs/audit/2026-10-27-tensors-gpu-primitives.md"
+      ],
+      "explanation": "The existing explanations connect composition to activation lifetime, recomputation, precision and kernel traffic.",
+      "not_adopted": "No universal normalization speedup or optimization guarantee is adopted."
+    },
+    {
+      "id": "core-primitives",
+      "start": 4036,
+      "end": 4176,
+      "topic": "Core computational primitives",
+      "targets": [
+        "tensors",
+        "cnn",
+        "kernels"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-27-tensors-gpu-primitives.md",
+        "docs/audit/2026-10-27-winograd.md",
+        "docs/audit/2026-10-27-reduction-tree.md"
+      ],
+      "explanation": "Contraction/broadcast axes, exact convolution windows, stable reductions and a full reduction tree with original animation have explicit cases.",
+      "not_adopted": "Four-way fan-in art does not establish a reduction's work/depth or near-peak execution."
+    },
+    {
+      "id": "memory-access",
+      "start": 4177,
+      "end": 4240,
+      "topic": "Memory access primitives",
+      "targets": [
+        "tensors",
+        "gpu",
+        "kernels"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-27-tensors-gpu-primitives.md",
+        "docs/audit/2026-10-27-indexed-movement.md"
+      ],
+      "explanation": "Transpose versus reshape, strides, counted sectors, banks/XOR, indexed operations and source contracts are represented.",
+      "not_adopted": "Cache-sector counts are not unconditionally HBM traffic; model-family tags are not access-pattern proofs."
+    },
+    {
+      "id": "data-movement",
+      "start": 4241,
+      "end": 4434,
+      "topic": "Data movement primitives",
+      "targets": [
+        "kernels",
+        "collectives"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-27-indexed-movement.md",
+        "docs/audit/2026-10-27-collective-destinations.md"
+      ],
+      "explanation": "Gather/scatter with repeated indices, transpose gradients, rooted versus all-rank outputs and uneven all-to-all are worked; original source diagrams retained.",
+      "not_adopted": "Local indexing and network collectives are different; no universal 10x gather penalty is transferred."
+    },
+    {
+      "id": "system-impact",
+      "start": 4435,
+      "end": 4559,
+      "topic": "System impact of primitives",
+      "targets": [
+        "gpu",
+        "roofline",
+        "kernels",
+        "collectives"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-27-tensors-gpu-primitives.md",
+        "docs/audit/2026-10-27-reduction-tree.md",
+        "docs/audit/2026-10-27-indexed-movement.md",
+        "docs/audit/2026-10-27-collective-destinations.md"
+      ],
+      "explanation": "Tiling/fusion, neutral masks and synchronization, work/traffic bounds, stored state, streams and ownership are already explicit.",
+      "not_adopted": "No universal energy ratio, fixed hardware utilization or peak-performance guarantee is adopted."
+    },
+    {
+      "id": "selection-intro",
+      "start": 4560,
+      "end": 4565,
+      "topic": "Architecture selection framework",
+      "targets": [
+        "practice",
+        "systems"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-26-architecture-selection.md"
+      ],
+      "explanation": "Candidate family, required task quality and resource constraints are distinguished.",
+      "not_adopted": null
+    },
+    {
+      "id": "data-mapping",
+      "start": 4566,
+      "end": 4575,
+      "topic": "Data-to-architecture mapping",
+      "targets": [
+        "practice",
+        "cnn",
+        "rnn",
+        "ranking"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-26-architecture-selection.md",
+        "docs/audit/2026-10-27-winograd.md",
+        "docs/audit/2026-10-26-rnn-execution.md",
+        "docs/audit/2026-10-27-dlrm.md"
+      ],
+      "explanation": "Mappings generate candidates; all candidates re-enter hard constraint checks.",
+      "not_adopted": "A data modality does not have exactly one admissible architecture."
+    },
+    {
+      "id": "complexity",
+      "start": 4576,
+      "end": 4581,
+      "topic": "Computational complexity",
+      "targets": [
+        "arithmetic",
+        "cnn",
+        "roofline",
+        "practice"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-23-transformer-arithmetic.md",
+        "docs/audit/2026-10-27-winograd.md",
+        "docs/audit/2026-10-26-architecture-selection.md"
+      ],
+      "explanation": "Shapes, batch/context scaling, MAC versus FLOP, stored activation versus transfer bytes and operator-specific terms are retained.",
+      "not_adopted": "One architecture-wide fitted exponent cannot replace an operator ledger."
+    },
+    {
+      "id": "production",
+      "start": 4582,
+      "end": 4589,
+      "topic": "Production requirements",
+      "targets": [
+        "practice",
+        "collectives",
+        "roofline"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-26-architecture-selection.md",
+        "docs/audit/2026-10-27-collective-destinations.md",
+        "docs/audit/2026-10-27-tensors-gpu-primitives.md"
+      ],
+      "explanation": "Latency/throughput, critical dependency paths, failures, model/activation/optimizer state and operating envelope are separated.",
+      "not_adopted": "Fixed family efficiency ranges and mandatory square attention residency are not transferred."
+    },
+    {
+      "id": "hardware",
+      "start": 4590,
+      "end": 4643,
+      "topic": "Hardware mapping and optimization",
+      "targets": [
+        "cnn",
+        "gpu",
+        "kernels",
+        "llmNorm"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-27-winograd.md",
+        "docs/audit/2026-10-27-tensors-gpu-primitives.md",
+        "docs/audit/2026-10-27-shared-blocks.md"
+      ],
+      "explanation": "Full Winograd 1D/2D derivation, channel GEMM, valid tiling, precision counterexample, GEMM tiling, fusion and scoped numerical formats are integrated.",
+      "not_adopted": "2.25 counts variable products, not time; no blanket FP16 impossibility or universal tile size."
+    },
+    {
+      "id": "decision",
+      "start": 4644,
+      "end": 4727,
+      "topic": "Decision framework and original flow",
+      "targets": [
+        "practice"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-26-architecture-selection.md"
+      ],
+      "explanation": "Complete native selection SVG, unchanged four-step English procedure and five checked constraints are integrated.",
+      "not_adopted": "The flow suggests candidates rather than proving them deployable; a failed quality check cannot be waived by a score."
+    },
+    {
+      "id": "bias-hierarchy",
+      "start": 4728,
+      "end": 4735,
+      "topic": "Inductive-bias hierarchy",
+      "targets": [
+        "practice",
+        "cnn",
+        "rnn",
+        "attention"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-26-architecture-selection.md",
+        "docs/audit/2026-10-27-winograd.md",
+        "docs/audit/2026-10-26-rnn-execution.md",
+        "docs/audit/2026-10-26-attention-transformer.md"
+      ],
+      "explanation": "Actual sharing, state and mixing assumptions are explained and the practice distinguishes assigned bias indices from learning curves.",
+      "not_adopted": "No universal scalar hierarchy of architectural bias or guaranteed sample-count reduction is adopted."
+    },
+    {
+      "id": "throughput-ceiling",
+      "start": 4736,
+      "end": 4807,
+      "topic": "Architecture in practice: throughput ceiling",
+      "targets": [
+        "practice",
+        "roofline"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-27-wildlife-budgets.md",
+        "docs/audit/2026-10-27-tensors-gpu-primitives.md"
+      ],
+      "explanation": "Work times event rate and conditional sustained service capacity are distinguished; 75 ms per event is compared explicitly with sequential 30-fps arrival.",
+      "not_adopted": "Peak arithmetic headroom alone does not prove latency, sustained utilization, power or backlog stability."
+    },
+    {
+      "id": "wildlife",
+      "start": 4808,
+      "end": 4993,
+      "topic": "Worked wildlife camera case",
+      "targets": [
+        "practice"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-27-wildlife-budgets.md"
+      ],
+      "explanation": "Source constants reconstructed: partial memory 65.045056 MB, matched-unit conditional 75 ms, active energy 1.5 J/day; completed disjoint-state battery example separates idle draw and event rate.",
+      "not_adopted": "Source floating/integer work mismatch, inferred 90% quality, capacity from class count, automatic GPU exclusion and arbitrary 10% future capacity are not accepted."
+    },
+    {
+      "id": "pitfalls",
+      "start": 4994,
+      "end": 5215,
+      "topic": "Fallacies and pitfalls",
+      "targets": [
+        "practice",
+        "roofline",
+        "cnn",
+        "attention",
+        "ranking"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-26-architecture-selection.md",
+        "docs/audit/2026-10-27-wildlife-budgets.md",
+        "docs/audit/2026-10-27-tensors-gpu-primitives.md",
+        "docs/audit/2026-10-27-winograd.md",
+        "docs/audit/2026-10-26-attention-transformer.md",
+        "docs/audit/2026-10-27-dlrm.md"
+      ],
+      "explanation": "Complexity/quality, biased candidate selection, data requirements, state, traffic and hardware dependence are tied to concrete explanations and counterexamples.",
+      "not_adopted": "Illustrative percentages and catalogue anecdotes do not become empirical findings by appearing in a recap."
+    },
+    {
+      "id": "summary",
+      "start": 5216,
+      "end": 5256,
+      "topic": "Summary",
+      "targets": [
+        "practice",
+        "roofline",
+        "arithmetic"
+      ],
+      "evidence": [
+        "docs/audit/2026-10-26-architecture-selection.md",
+        "docs/audit/2026-10-27-wildlife-budgets.md",
+        "docs/audit/2026-10-27-tensors-gpu-primitives.md",
+        "docs/audit/2026-10-23-transformer-arithmetic.md"
+      ],
+      "explanation": "Existing chapter transitions and worked constraints provide the synthesis; the complete original recap stays available in the course archive.",
+      "not_adopted": "No mandatory quadratic resident score matrix or fixed family bottleneck is adopted."
+    }
+  ],
+  "figures": "docs/audit/2026-10-27-nn-native-figures.json"
+}

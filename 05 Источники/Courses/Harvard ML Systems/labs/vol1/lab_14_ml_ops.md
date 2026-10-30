@@ -9,9 +9,18 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol1/lab_14_ml_ops.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol1/lab_14_ml_ops.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL1 Lab — Ml Ops
 
@@ -19,8 +28,8 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 **Recommended Reading** - Complete before this lab:
 
-    - **The ML Operations chapter** - drift, delayed labels, retraining cadence,
-      rollback, escalation, and ML technical debt.
+- **The ML Operations chapter** - drift, delayed labels, retraining cadence,
+  rollback, escalation, and ML technical debt.
 
 ---
 
@@ -29,40 +38,6 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 Uptime, latency, and offline validation can stay green while deployed behavior
 drifts. The monitor has to include production telemetry, delayed labels, and the
 track guardrail that users actually experience.
-
----
-
-**Drift Visibility - Live Calculation**
-
-```
-drift source      = {v1_14_ops.drift_source}
-monitoring signal = {v1_14_ops.monitoring_signal}
-true PSI          = {_result.true_psi:.3f}
-observed PSI      = {_result.observed_psi:.3f}
-true quality      = {_result.true_quality_pct:.1f}%
-observed quality  = {_result.observed_quality_pct:.1f}%
-damage cost       = ${_result.accumulated_damage_cost:,.0f}
-```
-**Math Peek / Source Model**
-
-```
-quality(t) ~= A0 - lambda * PSI(t)
-detection delay = alert_day - quality_breach_day
-```
-
-*Source: `mlsysbook_labs.drift_visibility`; chapter sections on observable
-degradation and model/infrastructure monitoring.*
-
----
-
-## Concept Module B - Thresholds Spend Attention
-
-The chapter gives PSI > 0.2 as a useful starting point for feature-distribution
-drift, but a threshold is an operating policy. Tight thresholds spend on-call
-attention; loose thresholds spend quality, safety, battery, or SLO budget.
-
-Track amount system: **{_amounts['unit_label']}**, attention budget
-**{_amounts['attention_budget_hours']:.0f} review hours/year**.
 
 ---
 
@@ -77,14 +52,122 @@ total cost    = false alarm cost + missed damage cost + monitoring cost
 *Source: chapter feature-distribution thresholds and monitoring cost model;
 notebook-local `v1_14_threshold_economics`.*
 
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+Select your prediction to unlock the drift timeline.
+
+---
+
+**Silent degradation window.** Quality has crossed the floor, but the alert has not fired. Detection delay is ⟨value 1⟩ day(s).
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_result.detection_delay_days}' `
+
+---
+
+**Drift Visibility - Live Calculation**
+
+```
+drift source      = ⟨value 1⟩
+monitoring signal = ⟨value 2⟩
+true PSI          = ⟨value 3⟩
+observed PSI      = ⟨value 4⟩
+true quality      = ⟨value 5⟩%
+observed quality  = ⟨value 6⟩%
+damage cost       = $⟨value 7⟩
+```
+**Math Peek / Source Model**
+
+```
+quality(t) ~= A0 - lambda * PSI(t)
+detection delay = alert_day - quality_breach_day
+```
+
+*Source: `mlsysbook_labs.drift_visibility`; chapter sections on observable
+degradation and model/infrastructure monitoring.*
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_14_ops.drift_source}' `
+- value_2: ` f'{v1_14_ops.monitoring_signal}' `
+- value_3: ` f'{_result.true_psi:.3f}' `
+- value_4: ` f'{_result.observed_psi:.3f}' `
+- value_5: ` f'{_result.true_quality_pct:.1f}' `
+- value_6: ` f'{_result.observed_quality_pct:.1f}' `
+- value_7: ` f'{_result.accumulated_damage_cost:,.0f}' `
+
+---
+
+**Checkpoint.** Carry `⟨value 1⟩` into the runbook as the deployed-behavior signal, with `⟨value 2⟩` named as the residual blind spot.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_14_ops.monitoring_signal}' `
+- value_2: ` f"{_amounts['blind_spot']}" `
+
+---
+
+**Correct.** Deployed behavior proxies are the early signal; delayed labels confirm the diagnosis later.
+
+---
+
+**The server can be healthy while the model is stale.** Model health needs deployed-behavior telemetry and delayed-label confirmation.
+
+---
+
+## Concept Module B - Thresholds Spend Attention
+
+The chapter gives PSI > 0.2 as a useful starting point for feature-distribution
+drift, but a threshold is an operating policy. Tight thresholds spend on-call
+attention; loose thresholds spend quality, safety, battery, or SLO budget.
+
+Track amount system: **⟨value 1⟩**, attention budget
+**⟨value 2⟩ review hours/year**.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_amounts['unit_label']}" `
+- value_2: ` f"{_amounts['attention_budget_hours']:.0f}" `
+
+---
+
+Select your prediction to unlock the threshold sweep.
+
+---
+
+**Reversible failure state.** This threshold is not defensible because `⟨value 1⟩`. Move the PSI slider until both review attention and missed degradation fit the ⟨value 2⟩ budget.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_threshold['failure_mode']}" `
+- value_2: ` f'{v1_14_ops.label}' `
+
+---
+
+**Checkpoint.** Carry `⟨value 1⟩ PSI` into the runbook only if it avoids both alert fatigue and missed degradation.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{partB_threshold.value:.2f}' `
+
+---
+
+**Correct.** A threshold is a policy that trades false alarms against missed degradation.
+
+---
+
+**Thresholds are not universal constants.** Tune the PSI boundary against the track's attention budget and degradation cost.
+
 ---
 
 ## Concept Module C - Rollback Limits Blast Radius
 
-For **{v1_14_ops.label}**, rollback is:
+For **⟨value 1⟩**, rollback is:
 
 ```
-{v1_14_ops.rollback_policy}
+⟨value 2⟩
 ```
 
 Canary traffic, rollback time, and fallback coverage define the amount of
@@ -92,18 +175,56 @@ production behavior at risk before recovery. The same concept appears as a
 kill switch on iPhone, OTA rollback for Oura, geofenced fallback for RoboTaxi,
 and registry-pinned traffic rollback for Cloud Fleet.
 
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_14_ops.label}' `
+- value_2: ` f'{v1_14_ops.rollback_policy}' `
+
+---
+
+Select your prediction to unlock the rollout risk instrument.
+
 ---
 
 **Math Peek / Source Model**
 
 ```
 blast radius = daily units * canary share * rollback hours / 24 * unprotected share
-             = {_amounts['daily_units']:.1f} * {partC_canary.value / 100:.2f} * {partC_rollback.value / 24:.3f} * {(1 - partC_fallback.value / 100):.2f}
-             = {_rollout['exposed_units']:.2f} {_amounts['unit_label']}
+             = ⟨value 1⟩ * ⟨value 2⟩ * ⟨value 3⟩ * ⟨value 4⟩
+             = ⟨value 5⟩ ⟨value 6⟩
 ```
 
 *Source: chapter rollback strategy table and staged deployment discussion;
 notebook-local `v1_14_rollout_risk`.*
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_amounts['daily_units']:.1f}" `
+- value_2: ` f'{partC_canary.value / 100:.2f}' `
+- value_3: ` f'{partC_rollback.value / 24:.3f}' `
+- value_4: ` f'{1 - partC_fallback.value / 100:.2f}' `
+- value_5: ` f"{_rollout['exposed_units']:.2f}" `
+- value_6: ` f"{_amounts['unit_label']}" `
+
+---
+
+**Checkpoint.** Runbook rollback rule: `⟨value 1⟩` with ⟨value 2⟩% canary, ⟨value 3⟩ hour rollback exposure, and ⟨value 4⟩% ⟨value 5⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_14_ops.rollback_policy}' `
+- value_2: ` f'{partC_canary.value}' `
+- value_3: ` f'{partC_rollback.value:g}' `
+- value_4: ` f'{partC_fallback.value}' `
+- value_5: ` f"{_amounts['fallback_label']}" `
+
+---
+
+**Correct.** Rollout size only becomes safe when rollback and fallback bound the exposed behavior.
+
+---
+
+**A green aggregate canary is not the policy.** Blast radius and recovery time decide whether the rollout is operationally safe.
 
 ---
 
@@ -113,8 +234,26 @@ The final policy spends an explicit error budget. Detection delay spends days
 before the alert fires. Slow retraining spends stale-model exposure. Rollback
 spends blast-radius exposure. Residual blind spots spend owner attention.
 
-Track budget: **{_amounts['error_budget_days']:.1f} equivalent days** for
-{v1_14_ops.guardrail_metric}.
+Track budget: **⟨value 1⟩ equivalent days** for
+⟨value 2⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_amounts['error_budget_days']:.1f}" `
+- value_2: ` f'{v1_14_ops.guardrail_metric}' `
+
+---
+
+Select your prediction to unlock the policy ledger.
+
+---
+
+**Reversible failure state.** This runbook overspends the ⟨value 1⟩-day track budget: ⟨value 2⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_amounts['error_budget_days']:.1f}" `
+- value_2: ` f'{_violations}' `
 
 ---
 
@@ -122,16 +261,84 @@ Track budget: **{_amounts['error_budget_days']:.1f} equivalent days** for
 
 ```
 T* = sqrt(2 * retrain_cost / drift_cost_per_day)
-   = sqrt(2 * {v1_14_ops.retrain_cost:,.0f} / {v1_14_ops.drift_cost_per_day:,.0f})
-   = {_cadence.optimal_days:.1f} days
+   = sqrt(2 * ⟨value 1⟩ / ⟨value 2⟩)
+   = ⟨value 3⟩ days
 
 monitoring cost = C_ingest + C_storage + C_compute + C_alert
-policy cost     = ${_policy.total_annual_cost:,.0f}/year
+policy cost     = $⟨value 4⟩/year
 ```
 
 *Source: chapter cost-aware automation, monitoring cost model, and on-call
 practice sections; shared `mlsysbook_labs.ops_policy` and notebook-local
 `v1_14_error_budget`.*
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_14_ops.retrain_cost:,.0f}' `
+- value_2: ` f'{v1_14_ops.drift_cost_per_day:,.0f}' `
+- value_3: ` f'{_cadence.optimal_days:.1f}' `
+- value_4: ` f'{_policy.total_annual_cost:,.0f}' `
+
+---
+
+**Checkpoint.** Final runbook: alert at `⟨value 1⟩ PSI`, retrain every `⟨value 2⟩ days`, canary `⟨value 3⟩%`, rollback within `⟨value 4⟩ hours`, and carry `⟨value 5⟩`.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{partD_threshold.value:.2f}' `
+- value_2: ` f'{partD_cadence.value}' `
+- value_3: ` f'{partD_canary.value}' `
+- value_4: ` f'{partD_rollback.value:g}' `
+- value_5: ` f"{_amounts['carry_forward_risk']}" `
+
+---
+
+**Correct.** A defensible policy spends the error budget deliberately and names who owns the residual risk.
+
+---
+
+**Operations policy is not just cost minimization.** It must allocate detection, stale-model, rollout, rollback, and ownership risk under the track budget.
+
+---
+
+## Synthesis - Operations Runbook Memo
+
+---
+
+**Chapter invariant.** Production ML is a control loop: monitor deployed behavior, calibrate the alert threshold, limit rollout blast radius, and spend error budget deliberately.
+
+---
+
+**Runbook status: ⟨value 1⟩.** Alert at `⟨value 2⟩ PSI`; retrain every `⟨value 3⟩ days`; canary `⟨value 4⟩%`; rollback within `⟨value 5⟩ hours`; expected budget use `⟨value 6⟩` of `⟨value 7⟩` equivalent days.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_status}' `
+- value_2: ` f'{partD_threshold.value:.2f}' `
+- value_3: ` f'{partD_cadence.value}' `
+- value_4: ` f'{partD_canary.value}' `
+- value_5: ` f'{partD_rollback.value:g}' `
+- value_6: ` f"{_budget['total_days']:.1f}" `
+- value_7: ` f"{_budget['budget_days']:.1f}" `
+
+---
+
+**Residual blind spot.** ⟨value 1⟩ Carry-forward responsibility risk: ⟨value 2⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_amounts['blind_spot']}" `
+- value_2: ` f"{_amounts['carry_forward_risk']}" `
+
+---
+
+## Download Report
+
+---
+
+This V1-14 report is generated locally from the selected track, MLSysIM hardware/model refs, and shared `mlsysbook_labs.ops` calculations.
+
+</details>
 
 ## Complete original Marimo source
 

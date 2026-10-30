@@ -1,0 +1,124 @@
+[
+  {
+    "id": "curated-formal-math-leanstar-pipeline-e84975e7e2f4",
+    "asset": "00 Учебник/Assets/Figures/curated/formal-math-2026-10-21/leanstar-pipeline.png",
+    "sha256": "e84975e7e2f4396f849744a2dc58132fc43a1e4028f515b37a1a2cb5dc9f9b71",
+    "label": "Figure 4",
+    "author": "Haohan Lin, Zhiqing Sun, Yiming Yang, Sean Welleck",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "provenance_confirmation": "source-license-verified",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-21",
+    "used_in": [
+      "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md"
+    ],
+    "width": 8095,
+    "height": 3007,
+    "source_url": "https://arxiv.org/abs/2407.10040v1",
+    "source_image_url": "https://arxiv.org/html/2407.10040v1/lean_star_pipeline.png",
+    "source_asset_sha256": "e84975e7e2f4396f849744a2dc58132fc43a1e4028f515b37a1a2cb5dc9f9b71",
+    "derivation": "source-raster-copy",
+    "modifications": "Unmodified complete original figure; original English labels retained.",
+    "license_evidence": "05 Источники/Originals/formal-math-2026-10-21/leanstar-abstract.html",
+    "license_evidence_sha256": "438412fc5707bf980a1ff9ff3d5b81b1755c6a57f666fe0ea4116544db5d32ab"
+  },
+  {
+    "id": "curated-formal-math-leanstar-search-sampling-5319a615dc6e",
+    "asset": "00 Учебник/Assets/Figures/curated/formal-math-2026-10-21/leanstar-search-sampling.png",
+    "sha256": "5319a615dc6ed25fa4e0e803bacd25dfff9fac1792a666e67f854033f8aeb253",
+    "label": "Figure 5",
+    "author": "Haohan Lin, Zhiqing Sun, Yiming Yang, Sean Welleck",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "provenance_confirmation": "source-license-verified",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-21",
+    "used_in": [
+      "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md"
+    ],
+    "width": 5785,
+    "height": 3044,
+    "source_url": "https://arxiv.org/abs/2407.10040v1",
+    "source_image_url": "https://arxiv.org/html/2407.10040v1/search_vs_sampling_v2.png",
+    "source_asset_sha256": "5319a615dc6ed25fa4e0e803bacd25dfff9fac1792a666e67f854033f8aeb253",
+    "derivation": "source-raster-copy",
+    "modifications": "Unmodified complete original figure; original English labels retained.",
+    "license_evidence": "05 Источники/Originals/formal-math-2026-10-21/leanstar-abstract.html",
+    "license_evidence_sha256": "438412fc5707bf980a1ff9ff3d5b81b1755c6a57f666fe0ea4116544db5d32ab"
+  },
+  {
+    "id": "curated-formal-math-leaneuclid-construction-rules-65920c024871",
+    "asset": "00 Учебник/Assets/Figures/curated/formal-math-2026-10-21/leaneuclid-construction-rules.png",
+    "sha256": "65920c024871cb37fc685f8aaa19c6bba409c47be944f9e4e0f3427128a43429",
+    "label": "Figure 2",
+    "author": "Logan Murphy et al.",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "provenance_confirmation": "source-license-verified",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-21",
+    "used_in": [
+      "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md"
+    ],
+    "width": 1225,
+    "height": 1825,
+    "source_url": "https://proceedings.mlr.press/v235/murphy24a.html",
+    "source_asset": "05 Источники/Originals/formal-math-2026-10-21/leaneuclid-pmlr.pdf",
+    "source_asset_sha256": "70eaf379c001577389bf6c58862f97e64877ea881ccef4ead492fdeafaf6156b",
+    "source_page_snapshot": "05 Источники/Originals/formal-math-2026-10-21/leaneuclid-page-05.png",
+    "source_page_sha256": "a1bc84a98d599c3142e57eef31e11214cf1207ba191feaf1856b14fe4e14f609",
+    "source_page": 5,
+    "crop_box_px": [
+      1535,
+      600,
+      2760,
+      2425
+    ],
+    "render_page_size_px": [
+      3091,
+      4000
+    ],
+    "derivation": "pdf-page-render-crop",
+    "modifications": "Complete numbered Figure 2 and original English caption retained. Surrounding prose excluded; no edits inside the figure.",
+    "license_evidence": "05 Источники/Originals/reranking-2026-10-20/pmlr-license-agreement.html",
+    "license_evidence_sha256": "1c8123a6c840ca2752e383f0924fa23ba38552140a2cc54f69ea9df5acfcdd3d"
+  },
+  {
+    "id": "curated-formal-math-leaneuclid-autoformalization-c417f783ae75",
+    "asset": "00 Учебник/Assets/Figures/curated/formal-math-2026-10-21/leaneuclid-autoformalization.png",
+    "sha256": "c417f783ae7588b4a2d4479fd41d299041836ba7a05219d64c17edb491cbd596",
+    "label": "Figure 1",
+    "author": "Logan Murphy et al.",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "provenance_confirmation": "source-license-verified",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-21",
+    "used_in": [
+      "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md"
+    ],
+    "width": 2500,
+    "height": 1630,
+    "source_url": "https://proceedings.mlr.press/v235/murphy24a.html",
+    "source_asset": "05 Источники/Originals/formal-math-2026-10-21/leaneuclid-pmlr.pdf",
+    "source_asset_sha256": "70eaf379c001577389bf6c58862f97e64877ea881ccef4ead492fdeafaf6156b",
+    "source_page_snapshot": "05 Источники/Originals/formal-math-2026-10-21/leaneuclid-page-02.png",
+    "source_page_sha256": "537c8a362077d5b98c159f6ee564b2bb742c511aa3029e75b917ac4932f236f3",
+    "source_page": 2,
+    "crop_box_px": [
+      260,
+      320,
+      2760,
+      1950
+    ],
+    "render_page_size_px": [
+      3091,
+      4000
+    ],
+    "derivation": "pdf-page-render-crop",
+    "modifications": "Complete numbered Figure 1 and original English caption retained. Surrounding prose excluded; no edits inside the figure.",
+    "license_evidence": "05 Источники/Originals/reranking-2026-10-20/pmlr-license-agreement.html",
+    "license_evidence_sha256": "1c8123a6c840ca2752e383f0924fa23ba38552140a2cc54f69ea9df5acfcdd3d"
+  }
+]

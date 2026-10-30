@@ -1,0 +1,224 @@
+{
+  "date": "2026-10-29",
+  "scope": "Interactive scheduling/KV practice only. This is not acceptance of the full textbook or reconciliation of the 31 archival notes.",
+  "status": "verified-locally-not-published",
+  "temporaryBuildCleanup": "After hashing and browser verification, the dedicated Pages test server was stopped and only /var/tmp/bookvar-release-scheduler-pages-20261029 was removed after checking its route hash against this receipt. The normal root preview and all source material remain available.",
+  "route": "/practice/inference-scheduler/",
+  "canonicalMarkdown": "06 Практика/14b Планировщик запросов и KV-память.md",
+  "sha256": {
+    "site/src/lib/inference-scheduler.ts": "4cfece61abf7181722a2c3cde9218c1dc6bbcd0b8758de33e21a84979edbc33c",
+    "site/src/components/InferenceSchedulerLab.astro": "4c204ca6798cfbe5846803072a948026791e7dc03b0a55582bd584b92e6dee26",
+    "site/src/pages/practice/inference-scheduler.astro": "34417b73a6006a44c5bbcad7e27f9b52f327ac079468f668976361b3b15d2b3e",
+    "06 Практика/14b Планировщик запросов и KV-память.md": "08206ae7089e1b496d90523ca7f8cf8a62994957b49c27596dde3f2df8d811ac",
+    "site/tests/inference-scheduler.test.ts": "65e2e3f20b369b1b7ed750901f8f30c0da78629f461490d9360502254ad48012",
+    "site/tests/practice-output.test.ts": "795adfd00b8b224b88ee320680b5f3bc33b759cd1c7dbfebc56ac1d9b3a6678d",
+    "publishing/tests/scheduler-lab.test.ts": "a08628d780bd67c05d7171a5bc41011e3247664fb5ae1a535ccd05b1f9dd0af7",
+    "site/astro.config.mjs": "5935dc966a35611751de8bf6ce7363f6f971cd15d6629826a4321654d86d7274",
+    "publishing/navigation.yml": "5144398f45e553ad4a4dc8e728dd4fc193e3e2411eed47acc9ddfa660ed7805c",
+    "06 Практика/_index.md": "8fe1c3f0dabf6383ea1e06975fda38d0dec5d7a06e3caa8a10a16e3df5b000aa",
+    "05 Источники/asset-registry.yml": "9cffd3f37a7142f6843b147a1608890abff55a295ea874ea8f5e2de4b3aee858",
+    "00 Учебник/Assets/Figures/curated/scheduling-2026-10-25/hf-continuous-batching.png": "c57b1deeacea8c2e591687d1eb105722fd352492d86cdfd74c05f166fc96068d",
+    "site/dist/practice/inference-scheduler/index.html": "c1d2238f2b1366fe1b0d9281056f61e1159a7ddc7d81ee0192be330203e38fd1",
+    "/var/tmp/bookvar-release-scheduler-pages-20261029/practice/inference-scheduler/index.html": "fdb5b92e9ddba6d53989c90bcfd7e8aef8b5f71519a97fd5682f5e9423094981"
+  },
+  "explanationReview": {
+    "fullCanonicalRead": true,
+    "fullImplementationAndTestsRead": true,
+    "sourceSectionsRead": [
+      {
+        "url": "https://huggingface.co/blog/continuous_batching",
+        "sections": "Continuous batching explanation and original full PNG"
+      },
+      {
+        "url": "https://docs.vllm.ai/en/stable/configuration/optimization/",
+        "sections": "Chunked Prefill and Preemption"
+      }
+    ],
+    "furtherReferenceNotClaimedAsFullRead": "https://www.usenix.org/conference/osdi22/presentation/yu",
+    "workedExample": "A(0,2,2), B(0,2,5), C(1,1,1), D(2,1,2), token budget 4, two active slots, eight blocks of four. Hand trace and state-machine test: 10 emitted tokens and 12 processed input positions; continuous admission 5 iterations, closed cohort 7.",
+    "cacheBoundary": "The final predicted output is not yet an input: before release P+N-1 KV positions; no block reuse within the same forward.",
+    "style": "Full canonical exercise reread with no-ai-slop; preserves explanation, worked trace, limits, attribution and source illustration."
+  },
+  "checks": {
+    "publisherUnit": {
+      "files": 124,
+      "tests": 806,
+      "passed": true,
+      "log": "/var/tmp/bookvar-release-scheduler-unit.log"
+    },
+    "site": {
+      "files": 6,
+      "tests": 89,
+      "passed": true,
+      "log": "/var/tmp/bookvar-release-scheduler-site.log"
+    },
+    "model": {
+      "tests": 17,
+      "scheduleConfigurations": 1536,
+      "passed": true
+    },
+    "builtOutput": {
+      "tests": 170,
+      "passed": true,
+      "log": "/var/tmp/bookvar-release-scheduler-output.log"
+    },
+    "types": {
+      "errors": 0,
+      "warnings": 0,
+      "hints": 6,
+      "log": "/var/tmp/bookvar-release-scheduler-types.log"
+    },
+    "root": {
+      "pages": 2004,
+      "brokenLinks": 0,
+      "buildLog": "/var/tmp/bookvar-release-scheduler-build.log",
+      "linkLog": "/var/tmp/bookvar-release-scheduler-links.log"
+    },
+    "pagesBase": {
+      "base": "/bookvar",
+      "pages": 2004,
+      "brokenLinks": 0,
+      "buildLog": "/var/tmp/bookvar-release-scheduler-pages-build.log",
+      "linkLog": "/var/tmp/bookvar-release-scheduler-pages-links.log",
+      "buildWasLocal": true,
+      "liveDeployment": false
+    },
+    "diffCheck": {
+      "passed": true,
+      "excludedUnchangedOriginals": [
+        "05 Источники/Courses/Harvard ML Systems/labs",
+        "05 Источники/Courses/Harvard ML Systems/slides"
+      ]
+    },
+    "validationNotes": [
+      "An output scan timed out at the five-second default while another suite ran; the unchanged check passed when serialized. No timeout/assertion was weakened.",
+      "A concurrent Vite test scan raced publication's regenerated public assets. The serialized final site suite passed.",
+      "The initial custom Pages-link invocation used tsx's CJS eval and failed on top-level await. The ESM node --import tsx invocation completed with zero broken links."
+    ]
+  },
+  "browser": {
+    "rootPreview": "http://127.0.0.1:4330/practice/inference-scheduler/",
+    "pagesPreviewUsed": "http://127.0.0.1:62809/bookvar/practice/inference-scheduler/",
+    "viewports": [
+      {
+        "width": 1280,
+        "height": 900,
+        "clientWidth": 1265,
+        "scrollWidth": 1265
+      },
+      {
+        "width": 360,
+        "height": 800,
+        "clientWidth": 345,
+        "scrollWidth": 345
+      }
+    ],
+    "finalCases": [
+      {
+        "name": "Pages EN route",
+        "observed": "Redirects to /bookvar/practice/inference-scheduler/ and initializes; not an English translation"
+      },
+      {
+        "name": "Continuous default",
+        "completed": "4/4",
+        "tokens": 10,
+        "iterations": 5,
+        "residentMiB": 0
+      },
+      {
+        "name": "Closed cohort default",
+        "completed": "4/4",
+        "tokens": 10,
+        "iterations": 7,
+        "residentMiB": 0
+      },
+      {
+        "name": "Unchunked long prompt",
+        "completed": "1/2",
+        "tokens": 4,
+        "stalled": true,
+        "reason": "whole prompt exceeds iteration token budget"
+      },
+      {
+        "name": "Enable chunked prefill",
+        "completed": "2/2",
+        "tokens": 6,
+        "iterations": 6,
+        "stalled": false
+      },
+      {
+        "name": "Mobile insufficient KV",
+        "completed": "0/2",
+        "tokens": 2,
+        "stalled": true,
+        "residentMiB": 1
+      },
+      {
+        "name": "Mobile one active slot",
+        "completed": "2/2",
+        "tokens": 6,
+        "iterations": 6,
+        "residentMiB": 0
+      },
+      {
+        "name": "Mobile block size 8",
+        "observed": "During the last forward: one block, six written positions, two unused tail positions, 1 MiB"
+      },
+      {
+        "name": "Mobile memory after release",
+        "observed": "Zero blocks and zero resident MiB"
+      },
+      {
+        "name": "Root mobile final",
+        "completed": "4/4",
+        "tokens": 10,
+        "iterations": 5,
+        "clientWidth": 345,
+        "scrollWidth": 345,
+        "katexErrors": 0
+      },
+      {
+        "name": "Root desktop final",
+        "completed": "4/4",
+        "tokens": 10,
+        "iterations": 5,
+        "clientWidth": 1265,
+        "scrollWidth": 1265,
+        "katexErrors": 0,
+        "consoleErrors": 0
+      }
+    ],
+    "additionalUiCases": "Step/back/reset; empty numeric input disables execution with an alert; add/remove request; token budget 1 completes the default workload in 12 iterations. These were exercised in the same task before the final grammar-only adjustment.",
+    "figure": {
+      "originalPixels": [
+        2722,
+        2569
+      ],
+      "complete": true,
+      "uncroppedAspectRatio": true,
+      "zoomControlExercisedOnMobile": true,
+      "mobileLimit": "Full diagram is downscaled inline; small labels require the existing zoomable viewer."
+    },
+    "fixedVisualDefect": "A screen-reader-only table header escaped the horizontal scroll container. A positioned table-scroll container removes document overflow with the request editor expanded.",
+    "screenshots": [
+      "docs/audit/evidence/2026-10-29-scheduler-lab/desktop-timeline.png",
+      "docs/audit/evidence/2026-10-29-scheduler-lab/desktop-memory.png",
+      "docs/audit/evidence/2026-10-29-scheduler-lab/mobile-timeline.png",
+      "docs/audit/evidence/2026-10-29-scheduler-lab/mobile-memory.png",
+      "docs/audit/evidence/2026-10-29-scheduler-lab/mobile-figure-zoom.png"
+    ]
+  },
+  "publication": {
+    "committed": false,
+    "pushed": false,
+    "deployed": false,
+    "mainChanged": false,
+    "expectedIdentity": "Alexander Potekhin <al_potechin@mail.ru>"
+  },
+  "outstandingOutsideThisAcceptance": [
+    "Complete reconciliation of all 31 archival notes: 13 source notes read, 0 whole-note decisions accepted.",
+    "Fill the canonical fine-tuning/PEFT explanation and other confirmed explanatory gaps.",
+    "Complete the conceptual-linearity review.",
+    "Review the full release diff, commit to the authorized dev destination, and verify actual CI/Pages deployment."
+  ]
+}

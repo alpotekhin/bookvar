@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-30",
+  "scope": "Separate Falcon 2 and Falcon 3 sizes and per-checkpoint training budgets. Only the named historical model cards were checked afresh; no claim of a latest-family refresh.",
+  "primaryEvidence": [
+    "https://huggingface.co/tiiuae/falcon-11B",
+    "https://huggingface.co/tiiuae/Falcon3-7B-Base",
+    "https://huggingface.co/tiiuae/Falcon3-10B-Base"
+  ],
+  "files": [
+    {
+      "source": "02 Атлас моделей/Семейства/Falcon.md",
+      "before_sha256": "4558710667de04eb5d12a963e6d507774be92ba46c285ddf3611be39151a1128",
+      "after_sha256": "b1fe97f3c79c38e4994e8a31247ea04d3b9273fad35bd6c8d019ba666e9a7c65",
+      "changes": [
+        {
+          "old": "last_verified: 2026-09-15\n",
+          "new": "last_verified: 2026-09-15\nlast_updated: 2026-10-30\n"
+        },
+        {
+          "old": "| Falcon 2 / Falcon 3 (2024) | Малые эффективные модели 1B–10B; Falcon 3 получил 14T токенов и 32K. |",
+          "new": "| Falcon 2 (2024) | [Falcon2-11B](https://huggingface.co/tiiuae/falcon-11B): 11B параметров, более 5T обучающих токенов. |\n| Falcon 3 (2024) | Семейство 1B–10B с контекстом 32K; [7B обучена на 14T токенов](https://huggingface.co/tiiuae/Falcon3-7B-Base), а [10B получена увеличением глубины 7B и продолжением обучения на 2T токенов](https://huggingface.co/tiiuae/Falcon3-10B-Base). |"
+        }
+      ]
+    }
+  ]
+}

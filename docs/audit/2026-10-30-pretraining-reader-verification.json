@@ -1,0 +1,541 @@
+{
+  "date": "2026-10-30",
+  "classification": "progress",
+  "previousGoalTurn": "progress: eight whole reads, three modern-route corrections and course-library placement evidence delivered; publication not performed.",
+  "scope": "Four canonical-owner whole reads and the complete existing EN decoding edition; source-preface layout and RU/EN prerequisite correction; T5 and current CPU checks. Not whole-book or publication completion.",
+  "wholeReads": [
+    {
+      "path": "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
+      "route": "textbook/agents/memory-planning-orchestration",
+      "sha256": "63b05db50c38724b585562df56d1389ec1ed0ad1561917dc54ef76e00c0ac2a7",
+      "lines": 1403,
+      "read": "Complete preceding chapter, including all programs, original excerpts, figures/captions and navigation; exact final editorial delta reviewed separately.",
+      "findings": [
+        "The full owner distinguishes external memory, retrieval, symbolic planning, ToT/LATS search, imagined transitions, robotic control and orchestration with worked examples.",
+        "Only the PSL transfer preamble is a closed native disclosure. Seventeen original English paragraphs, three original figures, numerical explanations and programs remain in the main flow unchanged; visible captions retain attribution."
+      ],
+      "readRevisionBeforeEditorialDelta": "718e68fb6cf58e941e10d76e02acc0761e06a19d8c4bb8496ac6dd3353bcd628",
+      "linesAtWholeRead": 1398,
+      "finalDeltaReview": "Five disclosure-markup lines only; all substantive text, quotations, equations, programs and figures preserved."
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+      "route": "textbook/pretraining/data-and-pretraining",
+      "sha256": "b76bc6bdfbfcd06494c87accc8bc380eb9b019bd73d1d23c710653d251c8759f",
+      "lines": 514,
+      "read": "Complete saved chapter, frontmatter through all examples, sources and navigation.",
+      "findings": [
+        "The introduction explains corpus weights before separating stored documents, sampled tokens and training stages.",
+        "The full OLMo/Dolmino recipe covers independent continuations, checkpoint averaging, microanneals and held-out evaluation. It prepares the collection/filtering owner rather than replacing it with another overview."
+      ]
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+      "route": "textbook/pretraining/dedup-pii-corpus-quality",
+      "sha256": "b614c77415a2209e0ec017b94fa11ea7a22aca3de0532c9f21d7f76f1609425f",
+      "lines": 1207,
+      "read": "Complete saved chapter, frontmatter through all examples, sources and navigation.",
+      "findings": [
+        "The full text separates detection from masking policy, exact document/line/substring matching from MinHash/LSH candidates, verification and grouping.",
+        "Calculations cover recall limits, non-transitivity, image hashes/embeddings and contamination. The next NTP owner supplies the full likelihood/perplexity derivation; the paper plot here is a contextual comparison of data variants."
+      ]
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md",
+      "route": "textbook/inference/decoding",
+      "sha256": "c10fe3a763d44cf1f0e8d2e4103bcba7adae026fc7cf910e673515aaa51ab486",
+      "lines": 788,
+      "read": "Complete preceding chapter, including all programs, original excerpts, figures/captions and navigation; exact final editorial delta reviewed separately.",
+      "findings": [
+        "Complete RU and EN explanations develop transformed versus model distributions, greedy/beam failure cases, temperature, truncation, penalties, grammar constraints, stopping and real tiny-model generation.",
+        "The actual technical prerequisite is next-token probabilities, not synthetic-data preparation. Only frontmatter and EN revision/review metadata changed."
+      ],
+      "readRevisionBeforeEditorialDelta": "cb53484debaf97e673ff30e804afc4d9941b94e6d87eebc8cae78bdda05685a0",
+      "linesAtWholeRead": 788,
+      "finalDeltaReview": "Frontmatter only; the entire teaching body is byte-identical in both languages."
+    }
+  ],
+  "englishWholeRead": {
+    "path": "en/00 Textbook/14 Inference and optimization/54 Decoding and next-token selection.md",
+    "lines": 829,
+    "wholeReadRevision": "7b280782736d3f81e8d1eb6b31cc87a4541ca0e01df911efd25ea5f8779aab42",
+    "currentSha256": "0d7c5da19a434e037bcff27aff1721f1857573666788f23755197cd55eb02c80",
+    "review": "Complete existing English body read and compared with the complete RU owner. Final delta frontmatter-only; no translation authored or body replaced."
+  },
+  "reusedWholeReads": [
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+      "readSha256": "8b00b47bb39ec6d03b8942ae092e6399cc730e98e903bfdab33b5d8890cf99c2",
+      "priorEvidence": "docs/audit/2026-10-29-legacy-pretraining-verification.json",
+      "currentSha256": "8b00b47bb39ec6d03b8942ae092e6399cc730e98e903bfdab33b5d8890cf99c2",
+      "delta": "None. Reuse the prior whole read; current beginning/ending reviewed for the introduction→collection→deduplication transition, not a new whole reread."
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md",
+      "readSha256": "aca814c431df4b4d489ac98e4f147b85ba6f600eb41463c1b3ae4b6f7d9f3f3f",
+      "priorEvidence": "docs/audit/2026-10-29-legacy-pretraining-verification.json",
+      "currentSha256": "769b26049eb04c2ca10a5e951dcc8efc6c6fb30dc1c3536e7f32feb3c9d9f5ee",
+      "delta": "Only the exact nanoGPT practice paragraph from 2026-10-30-nanogpt-additions.json. Reversal restores the previous whole-read hash; current beginning/ending and the added paragraph reviewed, not a fresh whole reread."
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "readSha256": "472401f6f3bf906cc8b23f29a5ff206cb8c083da3f20ac5654249eaee61aef69",
+      "priorEvidence": "docs/audit/2026-10-29-legacy-mla-scaling-verification.json",
+      "currentSha256": "472401f6f3bf906cc8b23f29a5ff206cb8c083da3f20ac5654249eaee61aef69",
+      "delta": "None. Reuse the exact earlier whole read and explicit NTP→budget→post-training bridge. Fresh CPU arithmetic/source checks passed."
+    }
+  ],
+  "journals": [
+    "docs/audit/2026-10-30-reader-provenance-additions.json",
+    "docs/audit/2026-10-30-decoding-prerequisites-additions.json"
+  ],
+  "preservation": [
+    "All PSL quotation lines, programs, displays and figures compare exactly before/after the wrapper.",
+    "Both complete decoding bodies are byte-identical after frontmatter removal; current EN canonical revision checked separately.",
+    "Original historical source/translation hashes retained; exact journal reversal precedes their checks, with current-body parity still tested.",
+    "The PSL checker now passes current_raw into baseline, avoiding a second reversal of an already-restored revision. Original source hashes and refusal to overwrite later edits retained."
+  ],
+  "style": "no-ai-slop and eval read completely. No explanation or approved quotation shortened, translated or rewritten. The visible change moves transfer commentary out of the default reading flow.",
+  "cpu": {
+    "planning": {
+      "exitCode": 0,
+      "publishedBlocks": 4,
+      "executions": 8,
+      "sourceParagraphs": 17,
+      "sourceSections": 6,
+      "sourceFigures": 3,
+      "bracketCases": 511,
+      "limits": "No LLM, robotics, PDDL or quality benchmark."
+    },
+    "corpusIntro": {
+      "exitCode": 0,
+      "sourceRecipeParagraphs": 3,
+      "reportedScores": 40,
+      "inventoryRows": 22,
+      "inventoryQuantities": 88,
+      "limits": "Arithmetic and source identity; no OLMo training."
+    },
+    "corpusQuality": {
+      "exitCode": 0,
+      "scope": "Exact matching, forced collisions, all 120 MinHash permutations, LSH candidates/probabilities, NearDup parameters, non-transitivity and weighted audits."
+    },
+    "imageExamples": {
+      "exitCode": 0,
+      "qualityChapterPrograms": 3,
+      "sourceComparisons": 60,
+      "scope": "ImageHash source functions and assigned-vector SemDeDup. The checker also executes four existing ID/weighting programs; those owners are not newly whole-read.",
+      "limits": "No CLIP inference or TorchRec benchmark."
+    },
+    "collection": {
+      "exitCode": 0,
+      "sha256": "8b00b47bb39ec6d03b8942ae092e6399cc730e98e903bfdab33b5d8890cf99c2",
+      "scope": "Published code, source README, weighting/epochs, ROOTS original and license evidence."
+    },
+    "ntp": {
+      "exitCode": 0,
+      "sha256": "769b26049eb04c2ca10a5e951dcc8efc6c6fb30dc1c3536e7f32feb3c9d9f5ee",
+      "publishedBlocks": 3,
+      "scope": "Likelihood/gradients, masks, finite-window PPL, MTP weighting and a tiny CPU overfit fixture; no quality benchmark."
+    },
+    "scaling": {
+      "exitCode": 0,
+      "sha256": "472401f6f3bf906cc8b23f29a5ff206cb8c083da3f20ac5654249eaee61aef69",
+      "scope": "Both programs, stated arithmetic, source tables/figures; no real scaling campaign or GPU measurement."
+    },
+    "decoding": {
+      "exitCode": 0,
+      "publishedBlocks": 6,
+      "versions": {
+        "torch": "2.14.1",
+        "transformers": "4.57.1",
+        "tokenizers": "0.22.2"
+      },
+      "randomModelParameters": 2224,
+      "beamCounterexample": {
+        "greedy": 0.099,
+        "beam_2": 0.02,
+        "exhaustive": 0.1,
+        "paths": 31
+      },
+      "chapterSha256": "c10fe3a763d44cf1f0e8d2e4103bcba7adae026fc7cf910e673515aaa51ab486"
+    },
+    "englishInference": {
+      "exitCode": 0,
+      "executedBlocks": 33,
+      "chapters": [
+        {
+          "path": "en/00 Textbook/14 Inference and optimization/54 Decoding and next-token selection.md",
+          "sha256": "0d7c5da19a434e037bcff27aff1721f1857573666788f23755197cd55eb02c80",
+          "executedBlocks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        {
+          "path": "en/00 Textbook/14 Inference and optimization/55 KV cache batching and PagedAttention.md",
+          "sha256": "9a9325ba453932424faf0f55ccf07f6e05658ad40ca3c14bc7c14797877710f8",
+          "executedBlocks": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        },
+        {
+          "path": "en/00 Textbook/14 Inference and optimization/55b Scheduling — continuous batching, chunked prefill, and prefix caching.md",
+          "sha256": "aa4debaa5cc7f8c5f99a3cac50073270d8e1613a8a75a4178e60f881f04aab96",
+          "executedBlocks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        {
+          "path": "en/00 Textbook/14 Inference and optimization/55c Serving engines — vLLM, SGLang, TensorRT-LLM, and FlashInfer.md",
+          "sha256": "ffc56a229cf5766a222b9588ecbf551d2ed01588078b2686648f0ffa25e43423",
+          "executedBlocks": [
+            6,
+            7
+          ]
+        },
+        {
+          "path": "en/00 Textbook/14 Inference and optimization/56 FlashAttention.md",
+          "sha256": "6b8db3db140edaba6e45847a03bd61961aeff4a009d8f66533bde7cf0fe4652c",
+          "executedBlocks": [
+            1
+          ]
+        },
+        {
+          "path": "en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md",
+          "sha256": "f68e67a364332742b98b7edc36265178d74361bafa8d03a08fd41f4935161ff9",
+          "executedBlocks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        {
+          "path": "en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md",
+          "sha256": "5551a7a64f565703434ffcfa8fe57b06cbd78448de7791921dc06b0460821f55",
+          "executedBlocks": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ]
+        }
+      ],
+      "independentChecks": {
+        "attention_output_lse_gradient_cases": 36,
+        "int4_pairs": 256,
+        "residual_distributions": 102,
+        "qat_ste_update": true
+      },
+      "limits": [
+        "Serving source fragments 1–5 require pinned runtime/GPU objects and were not run.",
+        "FlashAttention block 2 is a CUDA-only diagnostic and was not run.",
+        "CPU correctness is not a latency, throughput, quality or GPU validation."
+      ]
+    },
+    "t5": {
+      "exit_code": 0,
+      "python": "3.13",
+      "command": "LC_ALL=C LANG=C uv run --python 3.13 --with torch --with numpy --with transformers==4.57.6 --with sentencepiece==0.2.1 python publishing/tools/check_t5_examples.py",
+      "chapterSha256": "1bced617c9985be26919d79c4d01a87e4d0a3087d59e65d2e200fd2f84608dfc",
+      "functionalMaxError": 3.725290298461914e-9,
+      "scope": "Two published CPU programs, actual tokenizer/sentinels, functional two-stack outputs/all gradients, masks/cache negative controls and resource accounting; no released-weight quality or TPU performance.",
+      "versions": {
+        "torch": "2.15.0",
+        "numpy": "2.5.4",
+        "transformers": "4.57.6",
+        "sentencepiece": "0.2.1"
+      },
+      "dependencyNote": "Earlier offline execution lacked SentencePiece. An isolated Python 3.13 environment installed recognized PyPI dependencies; actual runtime versions were read afterwards. No model weights downloaded."
+    }
+  },
+  "checks": {
+    "unit": {
+      "exitCode": 0,
+      "files": 144,
+      "tests": 895,
+      "durationSeconds": 73.87,
+      "priorFailure": "First full run exposed two historical EN-parity hash checks after metadata edits. Expected hashes were not rebaselined: exact journal restoration plus current-body/revision checks were added; final full run passed."
+    },
+    "output": {
+      "exitCode": 0,
+      "tests": 181,
+      "durationSeconds": 7.71
+    },
+    "rootBuild": {
+      "exitCode": 0,
+      "pages": 2006,
+      "durationSeconds": 32.71
+    },
+    "links": {
+      "exitCode": 0,
+      "broken": 0
+    },
+    "topics": {
+      "exitCode": 0,
+      "topics": 152,
+      "indexes": 2
+    },
+    "diff": {
+      "exitCode": 0,
+      "scope": "Current product/tool/test paths"
+    }
+  },
+  "visualQa": {
+    "preview": "http://127.0.0.1:4330/",
+    "desktop": {
+      "viewport": [
+        1280,
+        720
+      ],
+      "clientWidth": 1265,
+      "scrollWidth": 1265
+    },
+    "mobile": {
+      "viewport": [
+        390,
+        844
+      ],
+      "clientWidth": 375,
+      "scrollWidth": 375,
+      "katexErrors": 0,
+      "canonicalEditionNotices": 1
+    },
+    "observed": [
+      "Closed PSL disclosure opens/closes through keyboard input on root desktop and EN mobile.",
+      "All three full original PSL PNGs load at matching aspect ratios; method source size 1320×669.",
+      "Phone-fit labels are small; tested 2x original viewer and horizontal pan from scrollLeft 188 to 0. No destructive crop.",
+      "Current EN decoding has no false canonical-language notice. All six declared image sources load. The seventh main img is the closed dialog's intentionally empty template.",
+      "Complete original greedy graph, probability labels and caption inspected on EN desktop."
+    ],
+    "limits": "Selected views, not fresh visual acceptance of all unchanged illustrations."
+  },
+  "rightsSourceChecks": [
+    {
+      "paper": "GPT-3",
+      "url": "https://arxiv.org/abs/2005.14165v4",
+      "observedLicense": "https://arxiv.org/licenses/nonexclusive-distrib/1.0/license.html",
+      "result": "No third-party reproduction grant established; unresolved."
+    },
+    {
+      "paper": "DeepSeekMath",
+      "url": "https://arxiv.org/abs/2402.03300v3",
+      "observedLicense": "https://arxiv.org/licenses/nonexclusive-distrib/1.0/license.html",
+      "result": "No third-party reproduction grant established; unresolved."
+    },
+    {
+      "paper": "DeepSeek-V3",
+      "url": "https://arxiv.org/abs/2412.19437v2",
+      "observedLicense": "https://arxiv.org/licenses/nonexclusive-distrib/1.0/license.html",
+      "result": "Sequential MTP remains source-link-only; no new copied object."
+    },
+    {
+      "paper": "Gloeckle MTP",
+      "url": "https://arxiv.org/abs/2404.19737v1",
+      "observedLicense": "https://creativecommons.org/licenses/by/4.0/",
+      "result": "Existing declared CC BY 4.0 original confirmed; asset unchanged."
+    }
+  ],
+  "publication": {
+    "committed": false,
+    "pushed": false,
+    "deployed": false,
+    "mainChanged": false
+  },
+  "remaining": [
+    "Remaining inference/evaluation/atlas transitions; this is not a full 152-owner acceptance.",
+    "Resolve specific illustration grants or select good licensed originals without losing explanations.",
+    "Physical /bookvar checks, scoped diff/author/origin-dev review and dev/Pages release."
+  ],
+  "pins": [
+    {
+      "path": "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
+      "sha256": "63b05db50c38724b585562df56d1389ec1ed0ad1561917dc54ef76e00c0ac2a7",
+      "lines": 1403
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+      "sha256": "b76bc6bdfbfcd06494c87accc8bc380eb9b019bd73d1d23c710653d251c8759f",
+      "lines": 514
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+      "sha256": "b614c77415a2209e0ec017b94fa11ea7a22aca3de0532c9f21d7f76f1609425f",
+      "lines": 1207
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md",
+      "sha256": "c10fe3a763d44cf1f0e8d2e4103bcba7adae026fc7cf910e673515aaa51ab486",
+      "lines": 788
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/54 Decoding and next-token selection.md",
+      "sha256": "0d7c5da19a434e037bcff27aff1721f1857573666788f23755197cd55eb02c80",
+      "lines": 829
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+      "sha256": "8b00b47bb39ec6d03b8942ae092e6399cc730e98e903bfdab33b5d8890cf99c2",
+      "lines": 1086
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md",
+      "sha256": "769b26049eb04c2ca10a5e951dcc8efc6c6fb30dc1c3536e7f32feb3c9d9f5ee",
+      "lines": 812
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "sha256": "472401f6f3bf906cc8b23f29a5ff206cb8c083da3f20ac5654249eaee61aef69",
+      "lines": 1396
+    },
+    {
+      "path": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md",
+      "sha256": "1bced617c9985be26919d79c4d01a87e4d0a3087d59e65d2e200fd2f84608dfc",
+      "lines": 827
+    },
+    {
+      "path": "publishing/tools/topic-consolidation-baseline.mjs",
+      "sha256": "2ca691dda7a2c7a40a1da6a66ad109f39adafbb1c0baa97725fbe450533327eb"
+    },
+    {
+      "path": "publishing/tools/topic_consolidation_baseline.py",
+      "sha256": "69a68fe4424ad45b36f3c2ff6b547a42c47524b6c61536614948ce8306a52539"
+    },
+    {
+      "path": "publishing/tools/en-inference-parity.mjs",
+      "sha256": "e7a37911b6d7da6f869c4b8cd7ddedfc3e907988eb17db0f45682bf74741012c"
+    },
+    {
+      "path": "publishing/tools/import_planseqlearn_excerpt.py",
+      "sha256": "454087725ab89a46345d93a2d2511d01c8192ed166c45877237418887ccbe8a7"
+    },
+    {
+      "path": "publishing/tests/en-inference-parity.test.ts",
+      "sha256": "defbb3c693b30473440d19403d17d9e913b5672e654117becd9d66534e28f4af"
+    },
+    {
+      "path": "publishing/tests/planseqlearn.test.ts",
+      "sha256": "6ef28c7adde7221d7bbb281b62eb0193c99e0876c5c579ee49a83b30639b0b92"
+    },
+    {
+      "path": "publishing/tests/pretraining-inference-route.test.ts",
+      "sha256": "c2135767a32856cf62c739f4ecff2a7b4e1799f9bf812f5dcb61a1ec15c92a4a"
+    },
+    {
+      "path": "publishing/tests/site-output.test.ts",
+      "sha256": "ab38913632ff5e2e3ec8cf5037acbaeb259bd50d404a807721ab915d38e8ba68"
+    },
+    {
+      "path": "docs/audit/2026-10-30-reader-provenance-additions.json",
+      "sha256": "3ab5af71f71962e06d76cd99d4e84c41ffdcce05812d8188187f194fda96476c"
+    },
+    {
+      "path": "docs/audit/2026-10-30-decoding-prerequisites-additions.json",
+      "sha256": "4c965c3d6f24aba7f08104e955dcdc944844982d700bf4de048c6b5d12021d89"
+    },
+    {
+      "path": "publishing/tools/check_agent_memory_planning_examples.py",
+      "sha256": "11862150f527d08700da36ee1df63cb6dc5ba601200087b96ba2345e4f5b79ca"
+    },
+    {
+      "path": "publishing/tools/check_corpus_intro_examples.py",
+      "sha256": "e2829cc61ddf7abf49cfd63b92abb4f6fb3686638901d12f226c8837618ad0e1"
+    },
+    {
+      "path": "publishing/tools/check_corpus_dedup_examples.py",
+      "sha256": "fd038543036e39829a6e31605b486e25dd2f0ac9f7c41920a981e487c9a42506"
+    },
+    {
+      "path": "publishing/tools/check_selection_gap_examples.py",
+      "sha256": "1a0871457651a5c626735d53161e212a50fa2b72cf3b334525fef87d62aa92c7"
+    },
+    {
+      "path": "publishing/tools/check_corpus_collection_examples.py",
+      "sha256": "e4b3aa577660503b400c43ff00ca63ead6751b42d3e941a3e90daaac28f8ec6d"
+    },
+    {
+      "path": "publishing/tools/check_ntp_examples.py",
+      "sha256": "d00761340926b57715d889774d01e9ae8b97c890b9a13f4cb2f8726ddd92b9f5"
+    },
+    {
+      "path": "publishing/tools/check_scaling_examples.py",
+      "sha256": "bb261253a919eabd5689628358f843057811de7ec3268ea9adbdadb4b1f887c2"
+    },
+    {
+      "path": "publishing/tools/check_decoding_examples.py",
+      "sha256": "65464e9aa218e59a05eea6bff64ebc4191bcd7e30721c4d050a57c573c7cef3c"
+    },
+    {
+      "path": "publishing/tools/check_en_inference_examples.py",
+      "sha256": "8b37681ae049a9e763c96327192a12aa0987981ab091175e1cd6a3ef04eec463"
+    },
+    {
+      "path": "publishing/tools/check_t5_examples.py",
+      "sha256": "6b53d55305221ecbd8a34a05d519243cb6cc79f2fd774cf41cb5b81cbc23f736"
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/55 KV cache batching and PagedAttention.md",
+      "sha256": "9a9325ba453932424faf0f55ccf07f6e05658ad40ca3c14bc7c14797877710f8",
+      "lines": 760
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/55b Scheduling — continuous batching, chunked prefill, and prefix caching.md",
+      "sha256": "aa4debaa5cc7f8c5f99a3cac50073270d8e1613a8a75a4178e60f881f04aab96",
+      "lines": 1037
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/55c Serving engines — vLLM, SGLang, TensorRT-LLM, and FlashInfer.md",
+      "sha256": "ffc56a229cf5766a222b9588ecbf551d2ed01588078b2686648f0ffa25e43423",
+      "lines": 779
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/56 FlashAttention.md",
+      "sha256": "6b8db3db140edaba6e45847a03bd61961aeff4a009d8f66533bde7cf0fe4652c",
+      "lines": 819
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md",
+      "sha256": "f68e67a364332742b98b7edc36265178d74361bafa8d03a08fd41f4935161ff9",
+      "lines": 968
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md",
+      "sha256": "5551a7a64f565703434ffcfa8fe57b06cbd78448de7791921dc06b0460821f55",
+      "lines": 891
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-pretraining-reader/en-decoding-original-greedy.png",
+      "sha256": "026175b8fbe0e99dc832346c5d9ec36a57a2b1d3bb0023ad231b49d1f5022a8d"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-pretraining-reader/en-planning-mobile-closed.png",
+      "sha256": "0038d18ff5273777a04f34f18852dcccd95f29f993798edf74613591cafc6d66"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-pretraining-reader/en-planning-mobile-original-zoom.png",
+      "sha256": "296599967547930aa62eff8b3716cb4902a30ef9099d450af9eeacdf11009c04"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-pretraining-reader/planning-desktop-closed.png",
+      "sha256": "b33e06fa91c34f23a9732e2903becc122cd16242405d3786b167a53c4b789ffe"
+    }
+  ]
+}

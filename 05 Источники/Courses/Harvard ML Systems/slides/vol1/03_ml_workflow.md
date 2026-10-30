@@ -9,17 +9,42 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`slides/vol1/03_ml_workflow/03_ml_workflow.tex`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static slide archive
+> Text and equations retain the original language. Layout wrappers are simplified;
+> speaker notes are separate, and original SVGs are not redrawn or cropped.
+> Unsupported TeX remains visible and is listed beside the affected slide.
+> This archive is not a checked transcript or a finished Bookvar chapter.
 
 # VOL1 Slides — Ml Workflow
 
 ## Readable slide sequence
 
+## ML Workflow
+
+[Original slide 1](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L63)
+
+See the Whole Map Before Walking Any Path
+
 ## Learning Objectives
 
-{
+[Original slide 2](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L68)
+
+1. Describe the six **ML lifecycle stages** and their feedback-driven relationships
+2. Compare ML workflows to **traditional software** development
+3. Apply the **Constraint Propagation Principle** ($2^{N-1}$ cost escalation)
+4. Evaluate trade-offs using the **Iron Law of Workflow** — all six stages map to $D_{\text{vol}}$, $O$, $\eta_{\text{hw}}$, $L_{\text{lat}}$
+5. Explain why **iteration velocity** compounds into quality advantages
+6. Trace how **multi-scale feedback** loops enable continuous improvement
+7. Apply **systems thinking** principles to trace how decisions propagate and anticipate cross-stage failures
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [1 min]
 % -- LINK: Chapter 2 answered ``where should a model run?'' This chapter
 % answers ``how do we build ML systems systematically so that deployment
@@ -34,61 +59,66 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 %
 % -- FLEX: [CORE] Sets the learning contract for the chapter.
 % IF SHORT: Display objectives, highlight the Constraint Propagation Principle.
-}
-- Describe the six **ML lifecycle stages** and their feedback-driven relationships
-- Compare ML workflows to **traditional software** development
-- Apply the **Constraint Propagation Principle** ($2^{N-1}$ cost escalation)
-- Evaluate trade-offs using the **Iron Law of Workflow** --- all six stages map to $D_{{vol}}$, $O$, $_{{hw}}$, $L_{{lat}}$
-- Explain why **iteration velocity** compounds into quality advantages
-- Trace how **multi-scale feedback** loops enable continuous improvement
-- Apply **systems thinking** principles to trace how decisions propagate and anticipate cross-stage failures
+```
+
+</details>
 
 ## Visual Language
 
-{
+[Original slide 3](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L99)
+
+Throughout this course, colors carry meaning:
+
+**Blue** — Compute / Processing
+
+GPU ops, forward/backward pass, inference
+
+**Green** — Data / Memory
+
+Data flow, caches, healthy paths
+
+**Orange** — Routing / Scheduling
+
+Load balancers, batch windows
+
+**Red** — Error / Cost / Bottleneck
+
+Loss, decode phase, waste
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [0.5 min]
 % -- NARRATE: ``Quick reminder of our color system from Ch1. Blue = compute,
 % green = data, orange = routing, red = cost or bottleneck.''
 %
 % -- FLEX: [CORE] Brief reminder. 15 seconds is sufficient by Chapter 3.
-}
+```
 
-Throughout this course, colors carry meaning:
-
-{0.3cm}
-[T]
-  
-    {mlsyscard}{computestroke}
-    **Blue** --- Compute / Processing\\
-    { GPU ops, forward/backward pass, inference}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{datastroke}
-    **Green** --- Data / Memory\\
-    { Data flow, caches, healthy paths}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{routingstroke}
-    **Orange** --- Routing / Scheduling\\
-    { Load balancers, batch windows}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{errorstroke}
-    **Red** --- Error / Cost / Bottleneck\\
-    { Loss, decode phase, waste}
-    {mlsyscard}
+</details>
 
 ## The Day-150 Disaster
 
-{
+[Original slide 4](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L143)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/03_ml_workflow/images/ch03-day150-timeline.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch03-day150-timeline.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/images/ch03-day150-timeline.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Key:** The model's accuracy was excellent. The *workflow* failed.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: Chapter 2's decision framework emphasized that deployment
 % constraints must be known upfront. This story shows what happens when
 % they are not.
 %
 % -- NARRATE: ``Open with this visceral story. Build suspense: the model was
-% excellent---96% accuracy after architecture tuning. The team was excellent.
+% excellent---96\% accuracy after architecture tuning. The team was excellent.
 % But on Day 151, the deployment team discovered the model requires 4 GB of
 % memory. The target tablet has 512 MB. Five months of work discarded. Not
 % because the model was bad, but because the workflow failed.''
@@ -99,31 +129,47 @@ Throughout this course, colors carry meaning:
 % (Answer: Day 1.)
 %
 % -- WARN: Students think the Day-150 Disaster is about a bad model. Correct
-% framing: the model was excellent (96% accuracy). The WORKFLOW failed---
+% framing: the model was excellent (96\% accuracy). The WORKFLOW failed---
 % deployment constraints should have shaped every decision from Day 1.
 %
 % -- FLEX: [CORE] Motivating story for the entire chapter.
 % IF SHORT: Show the timeline, state the punchline, move on. (60 seconds)
-}
+```
 
-% --- Layout: FULL-WIDTH timeline ---
-
-{ch03-day150-timeline.pdf}
-
-{0.15cm}
-{Key:}{The model's accuracy was excellent. The *workflow* failed.}
+</details>
 
 ## What Went Wrong?
 
-{
+[Original slide 5](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L178)
+
+**The timeline:**
+
+- Day 1: “Build a diagnostic model”
+- Day 90: 95% accuracy on test set
+- Day 120: 96% after architecture tuning
+- Day 150: Handed to deployment
+- Day 151: Model requires **4 GB** memory
+- Day 152: Tablet has **512 MB**
+- Day 153: Five months discarded
+
+**Root cause:**
+
+A deployment constraint ($8\times$ memory violation) that should have shaped Day 1 was discovered on Day 151.
+
+This chapter introduces the **ML Workflow**: engineering that prevents such failures.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: The timeline showed the disaster. This slide breaks down the
 % root cause.
 %
 % -- NARRATE: ``The timeline tells the story. Day 1: vague brief (`build a
-% diagnostic model'). Day 90: 95% accuracy. Day 120: 96% after tuning.
+% diagnostic model'). Day 90: 95\% accuracy. Day 120: 96\% after tuning.
 % Day 150: handed to deployment. Day 151: model needs 4 GB. Day 152: tablet
-% has 512 MB---an 8$×$ violation. Day 153: five months discarded. The
+% has 512 MB---an 8$\times$ violation. Day 153: five months discarded. The
 % root cause: a deployment constraint that should have shaped Day 1 was
 % discovered on Day 151. This motivates the entire chapter.''
 %
@@ -133,42 +179,36 @@ Throughout this course, colors carry meaning:
 % changes every subsequent design decision.
 %
 % -- WARN: Students think the fix is ``compress the model at the end.''
-% Correct framing: compressing a 4 GB model to 512 MB (8$×$) while
-% maintaining 96% accuracy is often impossible. The architecture must be
+% Correct framing: compressing a 4 GB model to 512 MB (8$\times$) while
+% maintaining 96\% accuracy is often impossible. The architecture must be
 % designed for the constraint from the start.
 %
 % -- FLEX: [CORE] Root cause analysis that sets up the Constraint Propagation
 % Principle.
 % IF SHORT: State the root cause in one sentence and move on.
-}
+```
 
-[T]
-  
-    **The timeline:**
-    {0pt}
-- Day 1: ``Build a diagnostic model''
-- Day 90: 95% accuracy on test set
-- Day 120: 96% after architecture tuning
-- Day 150: Handed to deployment
-- Day 151: Model requires **4 GB** memory
-- Day 152: Tablet has **512 MB**
-- Day 153: Five months discarded
-    
-  
-  
-    {mlsyscard}{errorstroke}
-    **Root cause:**\\[0.05cm]
-    { A deployment constraint ($8×$ memory violation) that should have shaped Day 1 was discovered on Day 151.}
-    {mlsyscard}
-
-    {0.1cm}
-    {mlsyscard}{crimson}
-    { This chapter introduces the **ML Workflow**: engineering that prevents such failures.}
-    {mlsyscard}
+</details>
 
 ## The ML Lifecycle: Definition
 
-{
+[Original slide 6](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L235)
+
+**Machine Learning Lifecycle:** The continuous engineering discipline of managing
+**System Entropy** across the Data, Algorithm, and Machine axes.
+
+|  | **Traditional SW** | **ML System** |
+| --- | --- | --- |
+| Degrades via | Code modification | Data drift (untouched code) |
+| Release model | Ship and maintain | Continuous retraining loop |
+| End of lifecycle | Deployment | **Beginning** of feedback loop |
+
+**Key distinction:** *Lifecycle* = stages traversed. *Workflow* = how traversal is managed.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: The Day-150 Disaster showed a workflow failure. This slide defines
 % the ML Lifecycle formally and distinguishes it from traditional software.
@@ -192,44 +232,37 @@ Throughout this course, colors carry meaning:
 %
 % -- FLEX: [CORE] Definitional slide.
 % IF SHORT: State the two key distinctions and move on.
-}
+```
 
-{mlsyscard}{crimson}
-**Machine Learning Lifecycle:** The continuous engineering discipline of managing
-**System Entropy** across the Data, Algorithm, and Machine axes.
-{mlsyscard}
-
-{0.1cm}
-{}{1.1}
-{tabular}{@{}lll@{}}
-  
-  & **Traditional SW** & **ML System** \\
-  
-  Degrades via    & Code modification      & Data drift (untouched code) \\
-  Release model   & Ship and maintain      & Continuous retraining loop \\
-  End of lifecycle & Deployment             & **Beginning** of feedback loop \\
-  
-{tabular}
-
-{0.1cm}
-{Key distinction:}{*Lifecycle* = stages traversed. *Workflow* = how traversal is managed.}
+</details>
 
 ## Where Time Actually Goes
 
-{
+[Original slide 7](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L289)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/03_ml_workflow/images/ch03-time-allocation.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch03-time-allocation.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/images/ch03-time-allocation.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Implication:** Investment in data engineering yields the highest returns per hour spent.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: The lifecycle definition said ML workflows differ from traditional
 % software. This slide quantifies the difference with shocking data.
 %
 % -- NARRATE: ``This slide shocks students. Most expect model development to
-% dominate. Show the stacked bar: 79% of effort is data-related---collection,
-% cleaning, labeling, validation. Only 4% goes to refining algorithms. That
+% dominate. Show the stacked bar: 79\% of effort is data-related---collection,
+% cleaning, labeling, validation. Only 4\% goes to refining algorithms. That
 % means for every hour spent improving the model, 20 hours go into data.''
 %
 % -- ENGAGE: ``Where would you invest your next engineering hour for maximum
 % impact?'' Give 15 seconds. Cold-call one student.
 % Expected: data quality or data pipeline. Correct: investment in data
-% engineering yields the highest returns per hour spent because it is 79%
+% engineering yields the highest returns per hour spent because it is 79\%
 % of the effort.
 %
 % -- WARN: Students assume model development is the bottleneck. Correct
@@ -238,19 +271,30 @@ Throughout this course, colors carry meaning:
 % faster.
 %
 % -- FLEX: [CORE] Reframes student expectations about ML engineering.
-% IF SHORT: Show the chart, state the 79% number, move on.
-}
+% IF SHORT: Show the chart, state the 79\% number, move on.
+```
 
-% --- Layout: FULL-WIDTH image ---
+</details>
 
-{ch03-time-allocation.pdf}
+## ML vs. Traditional Software
 
-{0.1cm}
-{Implication:}{Investment in data engineering yields the highest returns per hour spent.}
+[Original slide 8](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L324)
 
-## ML vs.\ Traditional Software
+| **Dimension** | **Traditional Software** | **ML Systems** |
+| --- | --- | --- |
+| **Problem Def** | Precise specs upfront | Objectives evolve through exploration |
+| **Development** | Linear feature implementation | Iterative experimentation with data |
+| **Testing** | Deterministic pass/fail | Statistical validation with uncertainty |
+| **Deployment** | Static until updated | Drifts as data distributions shift |
+| **Maintenance** | Fix bugs, add features | Continuous monitoring + retraining |
+| **Feedback** | Minimal; later $\not\to$ earlier | **Frequent; deploy $\to$ data** |
 
-{
+**Core difference:** ML systems require continuous feedback loops that traditional software never needs.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: The time allocation showed that data dominates. This table shows
 % six dimensions where ML workflows diverge from traditional software.
@@ -263,7 +307,7 @@ Throughout this course, colors carry meaning:
 % bidirectional flow has no equivalent in traditional software.''
 %
 % -- ENGAGE: ``Which row in the table is most dangerous to ignore?'' Give 10
-% seconds. Expected: Feedback (deploy $$ data) or Deployment (static vs.\
+% seconds. Expected: Feedback (deploy $\to$ data) or Deployment (static vs.\
 % drifting). Both are valid.
 %
 % -- WARN: Students treat ML development as ``traditional software + a model.''
@@ -273,29 +317,41 @@ Throughout this course, colors carry meaning:
 %
 % -- FLEX: [CORE] Structural comparison.
 % IF SHORT: Focus on feedback loops and failure modes only.
-}
+```
 
-{}{1.1}
-{tabular}{@{}lp{3.5cm}p{5cm}@{}}
-  
-  **Dimension** & **Traditional Software** & **ML Systems** \\
-  
-  **Problem Def**  & Precise specs upfront         & Objectives evolve through exploration \\
-  **Development**   & Linear feature implementation & Iterative experimentation with data \\
-  **Testing**       & Deterministic pass/fail       & Statistical validation with uncertainty \\
-  **Deployment**    & Static until updated          & Drifts as data distributions shift \\
-  **Maintenance**   & Fix bugs, add features        & Continuous monitoring + retraining \\
-  **Feedback**      & Minimal; later $$ earlier & {errorstroke}{**Frequent; deploy $$ data**} \\
-  
-{tabular}
-
-{0.1cm}
-
-{Core difference:}{ML systems require continuous feedback loops that traditional software never needs.}
+</details>
 
 ## Why ML Breaks OS Assumptions: The Locality Violation
 
-{
+[Original slide 9](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L371)
+
+**50 years of OS assumptions:**
+
+If a program reads byte $X$, it will likely read $X\!+\!1$ soon (spatial locality).
+
+If it uses address $Y$, it will likely reuse it (temporal locality).
+
+**ML workloads violate both:**
+
+- Random shuffle of multi-TB datasets per epoch
+- Every sample fetched from a stochastic location
+- OS predictive caching fails completely
+- Data loaders must implement their own prefetching
+
+**Penalty at each level:**
+
+L1 cache hit: **$\sim$1 ns**
+
+DRAM miss: **50–100 ns** ($50\times$)
+
+NVMe SSD: **10–100 $\mu$s** ($10{,}000\times$)
+
+**Iron Law:** This OS-abstraction overhead *is* the $L_{\text{lat}}$ term in Software 2.0 pipelines.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: The comparison showed ML differs fundamentally from traditional
 % software. This slide explains a concrete, quantitative reason: ML workloads
@@ -308,71 +364,69 @@ Throughout this course, colors carry meaning:
 % epoch is the worst-case workload for OS prefetchers. Every `instruction' (a
 % training sample) is fetched from a random location in a massive pool. The OS
 % predictive cache fails. Cost: L1 cache hit = 1 ns. DRAM miss = 50--100 ns.
-% NVMe SSD = 10--100 microseconds. That is 10,000$×$ penalty per miss.
-% This is where the $L_{{lat}}$ overhead term in the Iron Law comes from
+% NVMe SSD = 10--100 microseconds. That is 10,000$\times$ penalty per miss.
+% This is where the $L_{\text{lat}}$ overhead term in the Iron Law comes from
 % in Software 2.0 --- not network latency, but OS-abstraction overhead.''
 %
 % -- ENGAGE: ``Why can't you just let the OS prefetch the next training
 % sample?'' Give 10 seconds. Expected: the next sample is random, not
 % sequential --- the OS has no signal for what to prefetch.
 %
-% -- WARN: Students think $L_{{lat}}$ is purely about network or serving
-% latency. Correct framing: in training pipelines, $L_{{lat}}$ is partly
+% -- WARN: Students think $L_{\text{lat}}$ is purely about network or serving
+% latency. Correct framing: in training pipelines, $L_{\text{lat}}$ is partly
 % an OS-abstraction overhead created by ML's violation of locality assumptions.
 % This motivates specialized data loaders and hardware-aware prefetching.
 %
 % -- FLEX: [OPTIONAL] Distinctive insight from the chapter. Can be cut in
 % short lectures.
 % IF SHORT: ``ML random shuffles break OS prefetch heuristics. That cost shows
-% up as $L_{{lat}}$ in the Iron Law.'' (30 seconds)
-}
+% up as $L_{\text{lat}}$ in the Iron Law.'' (30 seconds)
+```
 
-[T]
-  
-    **50 years of OS assumptions:**\\
-    { If a program reads byte $X$, it will likely read $X\!+\!1$ soon (spatial locality).\\
-    If it uses address $Y$, it will likely reuse it (temporal locality).}
-
-    {0.2cm}
-    **ML workloads violate both:**
-    {1pt}
-- Random shuffle of multi-TB datasets per epoch
-- Every sample fetched from a stochastic location
-- OS predictive caching fails completely
-- Data loaders must implement their own prefetching
-    
-  
-  
-    {mlsyscard}{errorstroke}
-    **Penalty at each level:**\\[0.05cm]
-    {
-    L1 cache hit: **$$1 ns**\\
-    DRAM miss: **50--100 ns** ($50×$)\\
-    NVMe SSD: **10--100 $$s** ($10{,}000×$)}
-    {mlsyscard}
-
-    {0.1cm}
-    {Iron Law:}{This OS-abstraction overhead *is* the $L_{{lat}}$ term in Software 2.0 pipelines.}
+</details>
 
 ## The Iteration Tax
 
-{
+[Original slide 10](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L436)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/03_ml_workflow/images/ch03-iteration-velocity.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch03-iteration-velocity.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/images/ch03-iteration-velocity.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**6-month competition:**
+
+**Large Model**
+
+Start: 95%, cycle: 1 week, +0.15%/iter. 26 iters $\to$ **99%**
+
+**Small Model**
+
+Start: 90%, cycle: 1 hour, +0.1%/iter. 100 iters $\to$ **99%** (99% ceiling cap)
+
+**Iteration velocity is a feature.**
+
+10 experiments/day almost always outperforms 1/week.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- LINK: The comparison showed ML systems require iterative experimentation.
 % This slide quantifies why iteration velocity matters.
 %
 % -- NARRATE: ``Worked example. Two models compete over 6 months. The large
-% model starts at 95% and iterates weekly (+0.15%/iter). The small model
-% starts at 90%---5% behind---but iterates hourly (+0.1%/iter). After 6
-% months: the large model reaches 99% (26 iterations). The small model also
-% reaches 99% (100 iterations)---but gets there months earlier because it
-% iterates 168$×$ faster. Iteration velocity is not a convenience; it is
+% model starts at 95\% and iterates weekly (+0.15\%/iter). The small model
+% starts at 90\%---5\% behind---but iterates hourly (+0.1\%/iter). After 6
+% months: the large model reaches 99\% (26 iterations). The small model also
+% reaches 99\% (100 iterations)---but gets there months earlier because it
+% iterates 168$\times$ faster. Iteration velocity is not a convenience; it is
 % a competitive advantage that compounds over time.''
 %
 % -- ENGAGE: ``Which model wins? Write your prediction before I reveal the
 % chart.'' Give 15 seconds. Pause before showing the diagram.
 % Expected: students split---some bet on higher starting accuracy, others on
-% faster iteration. The answer: both reach 99%, but the fast-iterating model
+% faster iteration. The answer: both reach 99\%, but the fast-iterating model
 % arrives months earlier.
 %
 % -- WARN: Students assume ``bigger model = better outcome'' because it starts
@@ -383,37 +437,35 @@ Throughout this course, colors carry meaning:
 % -- FLEX: [OPTIONAL] Powerful example but can be compressed.
 % IF SHORT: ``Fast iteration beats high starting accuracy. 10 experiments/day
 % beats 1/week.'' (30 seconds)
-}
+```
 
-[T]
-  
-    {ch03-iteration-velocity.pdf}
-  
-  
-    **6-month competition:**
-
-    {0.05cm}
-    {computestroke}{**Large Model**}\\
-    { Start: 95%, cycle: 1 week, +0.15%/iter. 26 iters $$ **99%**}
-
-    {0.05cm}
-    {datastroke}{**Small Model**}\\
-    { Start: 90%, cycle: 1 hour, +0.1%/iter. 100 iters $$ **99%** (99% ceiling cap)}
-
-    {0.1cm}
-    {mlsyscard}{datastroke}
-    { **Iteration velocity is a feature.**\\
-    10 experiments/day almost always outperforms 1/week.}
-    {mlsyscard}
+</details>
 
 ## Predict: What Happens Without Problem Definition?
 
-{
+[Original slide 11](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L493)
+
+Think–Write–Share
+
+A team builds a highly accurate model (98%)
+
+but skips the Problem Definition stage entirely.
+
+**What goes wrong at deployment?**
+
+Write down 2 specific failures. (60 seconds)
+
+Turn to a neighbor and compare your answers.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- LINK: The Iteration Tax showed that workflow design affects outcomes.
 % This prediction exercise asks what happens when the first stage is skipped.
 %
-% -- NARRATE: ``A team builds a 98% accurate model but skips Problem
+% -- NARRATE: ``A team builds a 98\% accurate model but skips Problem
 % Definition entirely. What goes wrong at deployment?''
 %
 % -- ENGAGE: Give students 60 seconds to write down 2 specific failures.
@@ -423,31 +475,42 @@ Throughout this course, colors carry meaning:
 % distribution does not match production).
 % This primes the Constraint Propagation Principle on the next slides.
 %
-% -- WARN: Students think 98% accuracy means the model is ready. Correct
-% framing: accuracy without constraints is meaningless. A 98% accurate model
+% -- WARN: Students think 98\% accuracy means the model is ready. Correct
+% framing: accuracy without constraints is meaningless. A 98\% accurate model
 % that exceeds the latency SLA has zero production utility.
 %
 % -- FLEX: [CORE] Prediction exercise scaffolds the lifecycle stages.
 % IF SHORT: Cut turn-and-talk; go straight to cold-call after 60 seconds.
-}
+```
 
-{0.6cm}
-{ Think--Write--Share}
+</details>
 
-{0.4cm}
-{ A team builds a highly accurate model (98%)\\
-but skips the Problem Definition stage entirely.\\[0.2cm]
-**What goes wrong at deployment?**}
+## War Story: Amazon Recruiting AI — Bias Failure (1/2)
 
-{0.4cm}
-{ Write down 2 specific failures. {midgray}{(60 seconds)}}
+[Original slide 12](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L535)
 
-{0.3cm}
-{{lightgray}{Turn to a neighbor and compare your answers.}}
+**Context:**
 
-## War Story: Amazon Recruiting AI --- Bias Failure (1/2)
+- Amazon, Edinburgh, 2014: rank technical job applicants via ML
+- Trained on 10 years of historical resumes + hiring outcomes
+- Labels reflected a male-dominated decade of hiring
 
-{
+**Failure:**
+
+- Model penalized the word “women's” in resumes
+- Downgraded graduates of two all-women's colleges
+- Predicted historical labels, not job ability
+
+**Consequence:**
+
+Amazon disbanded the team by early 2017. Four years, $\sim$12 engineers. **Never used to evaluate live applicants.**
+
+Source on slide: Dastin, Reuters, “Amazon scraps secret AI recruiting tool,” 2018
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [1.5 min]
 % -- LINK: The prediction exercise asked what goes wrong when Problem Definition
 % is skipped. This real case shows the answer: a four-year project scrapped
@@ -467,39 +530,26 @@ but skips the Problem Definition stage entirely.\\[0.2cm]
 %
 % -- FLEX: [CORE] The chapter's primary war story for Problem Definition.
 % IF SHORT: State the headline (4 years, scrapped) and move to the next slide.
-}
+```
 
-{-3pt}
-{}{-1pt}
-[T]
-  
-    **Context:**
-    {-1pt}
-- Amazon, Edinburgh, 2014: rank technical job applicants via ML
-- Trained on 10 years of historical resumes + hiring outcomes
-- Labels reflected a male-dominated decade of hiring
-    
+</details>
 
-    {0.03cm}
-    **Failure:**
-    {-1pt}
-- Model penalized the word ``women's'' in resumes
-- Downgraded graduates of two all-women's colleges
-- Predicted historical labels, not job ability
-    
-  
-  
-    {mlsyscard}{errorstroke}
-    **Consequence:**\\[0.03cm]
-    { Amazon disbanded the team by early 2017. Four years, $$12 engineers. **Never used to evaluate live applicants.**}
-    {mlsyscard}
-  
+## War Story: Amazon Recruiting AI — Systems Lesson (2/2)
 
-{Dastin, Reuters, ``Amazon scraps secret AI recruiting tool,'' 2018}
+[Original slide 13](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L590)
 
-## War Story: Amazon Recruiting AI --- Systems Lesson (2/2)
+**Root cause:**
 
-{
+Problem Definition never specified fairness criteria or rejection thresholds before data collection began. **The labels were the bias.**
+
+**Systems lesson:** Problem Definition must specify **fairness**, **auditability**, and **rejection criteria before** data collection begins. Labels can encode bias.
+
+**Key question:** Would more data have fixed this? No — more data from the same biased pool reinforces the bias.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [0.5 min]
 % -- LINK: The previous slide showed the context and consequence. This slide
 % draws out the actionable systems lesson.
@@ -515,22 +565,24 @@ but skips the Problem Definition stage entirely.\\[0.2cm]
 % before you collect labels.
 %
 % -- FLEX: [CORE] Actionable lesson slide.
-}
+```
 
-{mlsyscard}{crimson}
-**Root cause:**\\[0.1cm]
-{ Problem Definition never specified fairness criteria or rejection thresholds before data collection began. **The labels were the bias.**}
-{mlsyscard}
-
-{0.3cm}
-{Systems lesson:}{Problem Definition must specify **fairness**, **auditability**, and **rejection criteria before** data collection begins. Labels can encode bias.}
-
-{0.2cm}
-{Key question:}{Would more data have fixed this? No --- more data from the same biased pool reinforces the bias.}
+</details>
 
 ## The Six Lifecycle Stages
 
-{
+[Original slide 14](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L627)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/03_ml_workflow/images/ch03-lifecycle-circle.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch03-lifecycle-circle.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/images/ch03-lifecycle-circle.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Key:** Deployment is the *beginning* of the feedback loop, not the end.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: The prediction exercise surfaced failures from skipping Problem
 % Definition. This diagram shows all six stages and their feedback relationships.
@@ -544,7 +596,7 @@ but skips the Problem Definition stage entirely.\\[0.2cm]
 % goes live.''
 %
 % -- ENGAGE: ``Which arrow in the diagram is missing from traditional
-% software?'' Give 10 seconds. Expected: the Monitoring $$ Problem
+% software?'' Give 10 seconds. Expected: the Monitoring $\to$ Problem
 % Definition feedback loop.
 %
 % -- WARN: Students treat the lifecycle as a one-way pipeline. Correct
@@ -553,18 +605,26 @@ but skips the Problem Definition stage entirely.\\[0.2cm]
 %
 % -- FLEX: [CORE] Overview diagram for the rest of the chapter.
 % IF SHORT: Show the diagram, emphasize the loop, move on. (60 seconds)
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{ch03-lifecycle-circle.pdf}
-
-{0.15cm}
-{Key:}{Deployment is the *beginning* of the feedback loop, not the end.}
+</details>
 
 ## The Dual-Pipeline Architecture
 
-{
+[Original slide 15](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L662)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/03_ml_workflow/images/ch03-dual-pipeline.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch03-dual-pipeline.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/images/ch03-dual-pipeline.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Two pipelines, one system.** Data and model development run in parallel,
+
+unified by continuous feedback loops that have no equivalent in traditional software.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: The lifecycle showed six stages in a loop. This slide reveals the
 % internal structure: two parallel pipelines running simultaneously.
@@ -579,30 +639,55 @@ but skips the Problem Definition stage entirely.\\[0.2cm]
 % -- ENGAGE: ``Which pipeline gets more research attention? Which consumes
 % more engineering time?'' Give 10 seconds.
 % Expected: model pipeline gets more attention; data pipeline consumes more
-% time (79% from the earlier slide).
+% time (79\% from the earlier slide).
 %
 % -- WARN: Students focus on the model pipeline and treat the data pipeline
 % as a preprocessing step. Correct framing: the data pipeline is the larger
-% engineering effort and the more common failure point. 65--95% of ML
+% engineering effort and the more common failure point. 65--95\% of ML
 % failures trace to data, not models.
 %
 % -- FLEX: [CORE] Structural insight.
 % IF SHORT: Show the diagram, name the two pipelines, emphasize the feedback
 % arrows. (60 seconds)
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{ch03-dual-pipeline.pdf}
-
-{0.1cm}
-
-**Two pipelines, one system.** Data and model development run in parallel,\\
-unified by continuous feedback loops that have no equivalent in traditional software.
+</details>
 
 ## Case Study: DR Screening
 
-{
+[Original slide 16](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L701)
+
+**Diabetic Retinopathy Screening:**
+
+- Affects 100M+ people worldwide
+- Leading cause of preventable blindness
+- 1 ophthalmologist per 100K+ in rural areas
+- AI screening: medically essential
+
+**Why this case study?**
+
+- Simple surface, deep complexity
+- Spans the deployment spectrum
+- Well-documented journey to production
+
+**Five competing constraints:**
+
+1. Diagnostic accuracy
+
+2. Computational efficiency
+
+3. Workflow integration
+
+4. Regulatory compliance
+
+5. Cost-effectiveness
+
+Each constraint tightens the feasible design space for the others.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: The dual pipeline is abstract. This case study makes it concrete
 % with a real medical AI deployment.
@@ -620,60 +705,49 @@ unified by continuous feedback loops that have no equivalent in traditional soft
 % ``What if high accuracy requires a model too large for the clinic's tablet?''
 %
 % -- WARN: Students prioritize accuracy above all else. Correct framing: a
-% model with 99% accuracy that cannot run on the clinic's hardware helps zero
+% model with 99\% accuracy that cannot run on the clinic's hardware helps zero
 % patients. All five constraints must be satisfied simultaneously.
 %
 % -- FLEX: [OPTIONAL] Case study introduction. Can be compressed.
 % IF SHORT: Name the five constraints and move on. Details emerge in later
 % slides.
-}
+```
 
-[T]
-  
-    **Diabetic Retinopathy Screening:**
-    {0pt}
-- Affects 100M+ people worldwide
-- Leading cause of preventable blindness
-- 1 ophthalmologist per 100K+ in rural areas
-- AI screening: medically essential
-    
+</details>
 
-    {0.05cm}
-    **Why this case study?**
-    {0pt}
-- Simple surface, deep complexity
-- Spans the deployment spectrum
-- Well-documented journey to production
-    
-  
-  
-    {mlsyscard}{crimson}
-    **Five competing constraints:**\\[0.05cm]
-    {
-    1. Diagnostic accuracy\\
-    2. Computational efficiency\\
-    3. Workflow integration\\
-    4. Regulatory compliance\\
-    5. Cost-effectiveness}
-    {mlsyscard}
+## The Iron Law of Workflow
 
-    {0.05cm}
-    {{midgray}{Each constraint tightens the feasible design space for the others.}}
+[Original slide 17](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L769)
+
+Each lifecycle stage maps to a specific term in:
+
+$T_{\text{total}} = \underbrace{\dfrac{D_{\text{vol}}}{BW}}_{\text{Data Collection}} + \underbrace{\dfrac{O}{R_{\text{peak}} \cdot \eta}}_{\text{Model Dev}} + \underbrace{L_{\text{lat}}}_{\text{Deployment}}$
 
 ## Iron Law of Workflow: Stages Map to Terms
 
-{
+[Original slide 18](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L776)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/03_ml_workflow/images/ch03-iron-law-workflow.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch03-iron-law-workflow.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/images/ch03-iron-law-workflow.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Key insight:** Workflow management is mathematically equivalent to minimizing the Iron Law.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: Students know the Iron Law from Ch1 and the lifecycle stages from
 % this chapter. This slide bridges them: each stage optimizes a specific term.
 %
 % -- NARRATE: ``Each lifecycle stage maps to a specific Iron Law term. Data
-% Collection determines $D_{{vol}}$---how much data and how fast it
+% Collection determines $D_{\text{vol}}$---how much data and how fast it
 % moves. Model Development defines $O$---how many operations the model
-% requires. Deployment minimizes $L_{{lat}}$---the orchestration overhead.
+% requires. Deployment minimizes $L_{\text{lat}}$---the orchestration overhead.
 % The chapter maps all six stages: Problem Definition sets target constraints
 % (feasible region for every term); Evaluation verifies the achieved hardware
-% efficiency $_{{hw}}$ and confirms it meets deployment requirements;
+% efficiency $\eta_{\text{hw}}$ and confirms it meets deployment requirements;
 % Monitoring observes violations and feeds them back to trigger re-optimization.
 % Workflow management is mathematically equivalent to minimizing the Iron Law.
 % If you only optimize the model (compute term) but neglect data collection
@@ -690,19 +764,26 @@ unified by continuous feedback loops that have no equivalent in traditional soft
 %
 % -- FLEX: [CORE] Bridges the Iron Law to workflow management.
 % IF SHORT: State the mapping in one sentence and move on.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{ch03-iron-law-workflow.pdf}
-
-{0.1cm}
-
-{Key insight:}{Workflow management is mathematically equivalent to minimizing the Iron Law.}
+</details>
 
 ## Lighthouse Models: Different Workflows
 
-{
+[Original slide 19](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L817)
+
+| **Stage** | **ResNet-50** Compute Beast | **DLRM** Sparse Scatter | **KWS** Tiny Constraint |
+| --- | --- | --- | --- |
+| **Data** | Throughput: >80% GPU utilization | Feature store: <2 ms lookups | Fit in 256 KB RAM |
+| **Train** | Maximize $\eta$; mixed precision | Optimize sparse embeddings | NAS for smallest model |
+| **Deploy** | Batch >128 for throughput | Strict <10 ms p99 latency | <1 mW energy budget |
+
+**Key:** Same workflow stages, different Iron Law terms dominate by archetype.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: The Iron Law of Workflow said each stage maps to a term. Different
 % lighthouse models have different dominant terms, so they need different
@@ -710,8 +791,8 @@ unified by continuous feedback loops that have no equivalent in traditional soft
 %
 % -- NARRATE: ``Same lifecycle stages, different dominant Iron Law terms.
 % ResNet-50 is compute-bound: the workflow priority is maximizing GPU
-% utilization above 80% during training, using mixed precision to boost
-% $$. DLRM is I/O-bound: the workflow priority is the feature store
+% utilization above 80\% during training, using mixed precision to boost
+% $\eta$. DLRM is I/O-bound: the workflow priority is the feature store
 % delivering sub-2 ms lookups and strict sub-10 ms p99 serving latency.
 % KWS is energy-bound: the workflow priority is NAS to find the smallest
 % model that fits in 256 KB and runs under 1 mW.''
@@ -726,96 +807,104 @@ unified by continuous feedback loops that have no equivalent in traditional soft
 %
 % -- FLEX: [OPTIONAL] Reinforces the lighthouse mapping.
 % IF SHORT: Just contrast ResNet-50 vs.\ KWS. Skip DLRM.
-}
+```
 
-{}{1.05}
-{tabular}{@{}lp{3.2cm}p{3.2cm}p{3.2cm}@{}}
-  
-  **Stage** & **ResNet-50** {computestroke}{Compute Beast} & **DLRM** {datastroke}{Sparse Scatter} & **KWS** {errorstroke}{Tiny Constraint} \\
-  
-  **Data**    & Throughput: >80% GPU utilization  & Feature store: <2 ms lookups & Fit in 256 KB RAM \\
-  **Train**   & Maximize $$; mixed precision   & Optimize sparse embeddings   & NAS for smallest model \\
-  **Deploy**  & Batch >128 for throughput          & Strict <10 ms p99 latency    & <1 mW energy budget \\
-  
-{tabular}
-
-{0.1cm}
-
-{Key:}{Same workflow stages, different Iron Law terms dominate by archetype.}
+</details>
 
 ## Exercise: What Does Iteration Cost?
 
-{
+[Original slide 20](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L862)
+
+What Does Iteration Cost?
+
+- 50 experiments/week
+- Each experiment: 4 GPU-hours
+- Cloud cost: &#36;2/GPU-hour
+
+**Calculate:**
+
+1. Monthly experiment cost?
+2. If 2$\times$ iteration speed halves experiments needed?
+
+(60 seconds — show your work)
+
+**Solution:**
+
+$50 \times 4 \times \textdollar{}2 =$ **&#36;400/week**
+
+Monthly: **&#36;1,600/month**
+
+With 2$\times$ speed:
+
+25 exp $\times$ 4 $\times$ &#36;2 = **&#36;800/mo**
+
+**Or:** same budget, 2$\times$ more experiments for better results.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- LINK: The Iron Law of Workflow showed that each stage has a cost. This
 % exercise quantifies the cost of experimentation.
 %
 % -- NARRATE: ``A team runs 50 experiments per week, each taking 4 GPU-hours.
 % Cloud cost is \$2 per GPU-hour. What is the monthly experiment cost? And if
-% 2$×$ iteration speed lets them find the same result in half the
+% 2$\times$ iteration speed lets them find the same result in half the
 % experiments, what are the savings?'' Give students 60 seconds.
 %
 % -- ENGAGE: Students calculate individually, then compare.
-% Expected: 50 exp/wk $×$ 4 GPU-hr $×$ \$2 = \$400/wk = \$1,600/mo.
-% With 2$×$ speed: 25 exp/wk to same result = \$800/mo. Savings: \$800/mo.
-% But: 2$×$ speed could also mean 2$×$ more experiments for better
+% Expected: 50 exp/wk $\times$ 4 GPU-hr $\times$ \$2 = \$400/wk = \$1,600/mo.
+% With 2$\times$ speed: 25 exp/wk to same result = \$800/mo. Savings: \$800/mo.
+% But: 2$\times$ speed could also mean 2$\times$ more experiments for better
 % results at the same cost.
 %
 % -- WARN: Students focus only on compute cost. Correct framing: engineer time
-% is often 5--10$×$ more expensive than compute. A \$1,600/mo compute
+% is often 5--10$\times$ more expensive than compute. A \$1,600/mo compute
 % budget supports an engineer costing \$15,000/mo.
 %
 % -- FLEX: [CORE] Quantitative exercise for workflow economics.
 % IF SHORT: Show the problem, reveal answer after 30 seconds.
-}
+```
 
-[T]
-  
-    { What Does Iteration Cost?}
-
-    {0.1cm}
-    {0pt}
-- 50 experiments/week
-- Each experiment: 4 GPU-hours
-- Cloud cost: \$2/GPU-hour
-    
-
-    {0.1cm}
-    **Calculate:**
-    {0pt}
-- Monthly experiment cost?
-- If 2$×$ iteration speed halves experiments needed?
-    
-
-    {{midgray}{(60 seconds --- show your work)}}
-  
-  
-    
-    {mlsyscard}{routingstroke}
-    **Solution:**\\[0.05cm]
-    {
-    $50 × 4 × \$2 = $ **\$400/week**\\
-    Monthly: **\$1,600/month**\\[0.05cm]
-    With 2$×$ speed:\\
-    25 exp $×$ 4 $×$ \$2 = **\$800/mo**\\[0.05cm]
-    **Or:** same budget, 2$×$ more experiments for better results.
-    }
-    {mlsyscard}
+</details>
 
 ## Stage 2: Data Collection Challenges
 
-{
+[Original slide 21](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L929)
+
+**DR Screening Data Challenges:**
+
+- $10^5$ retinal photographs needed
+- Multiple expert ophthalmologist reviews
+- Diverse cameras, lighting, operators
+- Rural clinics: limited connectivity
+
+**Bandwidth vs. Compute:**
+
+150 patients $\times$ 10 photos $\times$ 5 MB = **7 GB/day**
+
+At 2 Mbps = **25+ hours** to upload (clinic: 8 hours)
+
+**Engineering conclusion:** Cloud-only is bandwidth-infeasible. Edge reduces uploads by **5,000$\times$**.
+
+**Lab-to-Field Gap:** Models trained on research images fail on blurry, poorly-lit clinic images.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: The Iron Law of Workflow mapped stages to terms. Data Collection
-% determines $D_{{vol}}/BW$---the data term.
+% determines $D_{\text{vol}}/BW$---the data term.
 %
 % -- NARRATE: ``For DR screening: 100K+ retinal photographs needed, multiple
 % expert ophthalmologist reviews per image, diverse cameras and lighting
 % conditions across clinics, and rural clinics with limited connectivity.
-% The bandwidth constraint is decisive: 150 patients $×$ 10 photos
-% $×$ 5 MB = 7 GB per day. At 2 Mbps, that is 25+ hours to upload---
+% The bandwidth constraint is decisive: 150 patients $\times$ 10 photos
+% $\times$ 5 MB = 7 GB per day. At 2 Mbps, that is 25+ hours to upload---
 % but the clinic is only open 8 hours. Cloud-only is bandwidth-infeasible.
-% Edge reduces uploads by 5,000$×$ by processing on-site.''
+% Edge reduces uploads by 5,000$\times$ by processing on-site.''
 %
 % -- ENGAGE: ``If the clinic has 2 Mbps upload and generates 7 GB/day, what
 % fraction can be uploaded during an 8-hour day?'' Give 15 seconds.
@@ -829,46 +918,44 @@ unified by continuous feedback loops that have no equivalent in traditional soft
 % real clinic conditions.
 %
 % -- FLEX: [CORE] Grounds the data term in a real scenario.
-% IF SHORT: State the bandwidth calculation and the 5,000$×$ edge
+% IF SHORT: State the bandwidth calculation and the 5,000$\times$ edge
 % reduction. Skip the detailed breakdown.
-}
+```
 
-[T]
-  
-    **DR Screening Data Challenges:**
-    {0pt}
-- $10^5$ retinal photographs needed
-- Multiple expert ophthalmologist reviews
-- Diverse cameras, lighting, operators
-- Rural clinics: limited connectivity
-    
-
-    {0.05cm}
-    **Bandwidth vs.\ Compute:**\\
-    { 150 patients $×$ 10 photos $×$ 5 MB = **7 GB/day**\\
-    At 2 Mbps = **25+ hours** to upload (clinic: 8 hours)}
-  
-  
-    {mlsyscard}{datastroke}
-    { **Engineering conclusion:** Cloud-only is bandwidth-infeasible. Edge reduces uploads by **5,000$×$**.}
-    {mlsyscard}
-
-    {0.1cm}
-    {mlsyscard}{routingstroke}
-    { **Lab-to-Field Gap:** Models trained on research images fail on blurry, poorly-lit clinic images.}
-    {mlsyscard}
+</details>
 
 ## Stage 3: Model Development
 
-{
+[Original slide 22](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L989)
+
+**DR Model Development:**
+
+- **Transfer learning**: Reuse ImageNet, fine-tune with domain data
+- Result: AUC 0.99, sensitivity 97.5%
+- But: initial model too large for edge
+
+**Accuracy vs. Efficiency:**
+
+- Quantization: FP32 $\to$ INT8
+- Pruning: remove redundant connections
+- Distillation: large $\to$ small model
+
+**Competition-Production Gap:** Netflix Prize: 800+ model ensemble. **Never deployed** — serving complexity exceeded value.
+
+**Reproducible artifact:** Weights + code + environment + config. “Works on my machine” = broken system.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: Data Collection established the dataset. Model Development
-% optimizes the compute term $O/(R_p  )$.
+% optimizes the compute term $O/(R_p \cdot \eta)$.
 %
-% -- NARRATE: ``The DR team has 128K images and a target: over 90%
+% -- NARRATE: ``The DR team has 128K images and a target: over 90\%
 % sensitivity on edge hardware with under 50 ms latency. Key technique:
 % transfer learning---reuse ImageNet representations, fine-tune with domain
-% data. Result: AUC 0.99, sensitivity 97.5%. But the initial model is too
+% data. Result: AUC 0.99, sensitivity 97.5\%. But the initial model is too
 % large for edge. Three compression techniques: quantization (FP32 to INT8),
 % pruning (remove redundant connections), distillation (large model teaches
 % small model). The Netflix Prize cautionary tale: an 800-model ensemble won
@@ -876,7 +963,7 @@ unified by continuous feedback loops that have no equivalent in traditional soft
 %
 % -- ENGAGE: ``Why was the Netflix Prize ensemble never deployed?'' Give 10
 % seconds. Expected: too complex to serve, latency too high, maintenance
-% impossible. Correct: the 0.8% accuracy gain did not justify the 800-model
+% impossible. Correct: the 0.8\% accuracy gain did not justify the 800-model
 % serving infrastructure.
 %
 % -- WARN: Students optimize accuracy without considering deployment cost.
@@ -885,38 +972,29 @@ unified by continuous feedback loops that have no equivalent in traditional soft
 %
 % -- FLEX: [CORE] Grounds model development in deployment constraints.
 % IF SHORT: State the transfer learning result and the Netflix Prize lesson.
-}
+```
 
-[T]
-  
-    **DR Model Development:**
-    {0pt}
-- **Transfer learning**: Reuse ImageNet, fine-tune with domain data
-- Result: AUC 0.99, sensitivity 97.5%
-- But: initial model too large for edge
-    
-
-    {0.05cm}
-    **Accuracy vs.\ Efficiency:**
-    {0pt}
-- Quantization: FP32 $$ INT8
-- Pruning: remove redundant connections
-- Distillation: large $$ small model
-    
-  
-  
-    {mlsyscard}{errorstroke}
-    { **Competition-Production Gap:** Netflix Prize: 800+ model ensemble. **Never deployed** --- serving complexity exceeded value.}
-    {mlsyscard}
-
-    {0.05cm}
-    {mlsyscard}{computestroke}
-    { **Reproducible artifact:** Weights + code + environment + config. ``Works on my machine'' = broken system.}
-    {mlsyscard}
+</details>
 
 ## Stage Interface Contracts
 
-{
+[Original slide 23](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L1049)
+
+| **Stage** | **Input Contract** | **Output Contract** | **Quality Invariant** |
+| --- | --- | --- | --- |
+| **Problem Def** | Business requirements | Measurable objectives; deployment paradigm | All criteria quantifiable |
+| **Data** | Objectives; target | Versioned dataset; validation rules | Distribution matches production |
+| **Model Dev** | Dataset; constraints | Trained weights; experiment logs | Meets accuracy within budget |
+| **Evaluation** | Model; test data | Metrics across subgroups | No subgroup below threshold |
+| **Deployment** | Validated model; SLA | Serving endpoint; monitoring | Latency and throughput met |
+| **Monitoring** | Live system; baselines | Drift alerts; retraining triggers | Degradation caught early |
+
+**Violation:** A missing deployment paradigm at Stage 1 costs $2^{5-1} = 16\times$ to fix at Stage 5.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: Stages 2 and 3 showed data collection and model development.
 % This slide formalizes the handoff between ALL stages as API contracts.
@@ -936,33 +1014,40 @@ unified by continuous feedback loops that have no equivalent in traditional soft
 % -- WARN: Students treat stage boundaries as informal handoffs. Correct
 % framing: without explicit contracts, teams discover mismatches at deployment
 % (the Day-150 Disaster). The contract violation at Stage 1 (no deployment
-% paradigm) cost $2^{5-1} = 16×$ to fix at Stage 5.
+% paradigm) cost $2^{5-1} = 16\times$ to fix at Stage 5.
 %
 % -- FLEX: [CORE] Formal mechanism preventing the Day-150 Disaster.
-% IF SHORT: Show the table, emphasize the $16×$ cost multiplier.
-}
+% IF SHORT: Show the table, emphasize the $16\times$ cost multiplier.
+```
 
-{}{0.95}
-{tabular}{@{}lp{2.8cm}p{3.3cm}p{3.3cm}@{}}
-  
-  **Stage** & **Input Contract** & **Output Contract** & **Quality Invariant** \\
-  
-  **Problem Def**  & Business requirements & Measurable objectives; deployment paradigm & All criteria quantifiable \\
-  **Data**          & Objectives; target    & Versioned dataset; validation rules        & Distribution matches production \\
-  **Model Dev**     & Dataset; constraints  & Trained weights; experiment logs            & Meets accuracy within budget \\
-  **Evaluation**    & Model; test data      & Metrics across subgroups                   & No subgroup below threshold \\
-  **Deployment**    & Validated model; SLA  & Serving endpoint; monitoring               & Latency and throughput met \\
-  **Monitoring**    & Live system; baselines & Drift alerts; retraining triggers          & Degradation caught early \\
-  
-{tabular}
-
-{0.05cm}
-
-{Violation:}{A missing deployment paradigm at Stage 1 costs $2^{5-1} = 16×$ to fix at Stage 5.}
+</details>
 
 ## Bridge: From Experiments to Evaluation
 
-{
+[Original slide 24](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L1097)
+
+**Experiment tracking bridges development and evaluation:**
+
+| **Track** | **Why** |
+| --- | --- |
+| Hyperparameters | Reproduce results |
+| Metrics per epoch | Compare runs |
+| Data version | Detect data drift |
+| Environment | “Works on my machine” |
+| Artifacts | Deploy the right model |
+
+**Key:** Untracked experiments are wasted compute.
+
+**DR case study**
+
+200+ experiments. Without tracking: which config achieved 97.5% sensitivity? Which data version? Which random seed?
+
+**Experiment tracking is version control for ML.**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: Model Development produces trained weights and experiment logs.
 % Before Evaluation, teams need experiment tracking infrastructure to know
@@ -970,10 +1055,10 @@ unified by continuous feedback loops that have no equivalent in traditional soft
 %
 % -- NARRATE: ``Between model development and evaluation sits experiment
 % tracking---the discipline of recording every training run. Tools like
-% MLflow or W&B log hyperparameters, metrics, artifacts, and environment.
+% MLflow or W\&B log hyperparameters, metrics, artifacts, and environment.
 % Without tracking, teams cannot reproduce results or compare runs. The DR
 % team ran 200+ experiments. Without tracking, they could not identify which
-% configuration achieved 97.5% sensitivity or reproduce it for deployment.
+% configuration achieved 97.5\% sensitivity or reproduce it for deployment.
 % Experiment tracking is the version control of ML.''
 %
 % -- ENGAGE: ``What happens if you find a bug and need to retrain the exact
@@ -985,51 +1070,51 @@ unified by continuous feedback loops that have no equivalent in traditional soft
 %
 % -- FLEX: [OPTIONAL] Bridge slide. Can compress to 30 seconds if needed.
 % IF SHORT: ``Experiment tracking is version control for ML. Log everything.''
-}
+```
 
-[T]
-  
-    **Experiment tracking bridges development and evaluation:**
-
-    {0.1cm}
-    {
-    {tabular}{@{}ll@{}}
-      
-      **Track** & **Why** \\
-      
-      Hyperparameters & Reproduce results \\
-      Metrics per epoch & Compare runs \\
-      Data version    & Detect data drift \\
-      Environment     & ``Works on my machine'' \\
-      Artifacts       & Deploy the right model \\
-      
-    {tabular}
-    }
-
-    {0.1cm}
-    {Key:}{Untracked experiments are wasted compute.}
-  
-  
-    {0.2cm}
-    {mlsyscard}{routingstroke}
-    **DR case study**\\[0.1cm]
-    { 200+ experiments. Without tracking: which config achieved 97.5% sensitivity? Which data version? Which random seed?\\[0.1cm]
-    **Experiment tracking is version control for ML.**}
-    {mlsyscard}
+</details>
 
 ## Stage 4: Evaluation and Validation
 
-{
+[Original slide 25](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L1162)
+
+**The Lab-to-Field Gap:**
+
+- AUC 0.99 on curated research data
+- Sensitivity **drops to 78%** at rural clinic
+- Older camera, untrained technician
+- Blurry, poorly-lit, inconsistent framing
+
+**Progressive validation stages:**
+
+1. Offline evaluation $\to$ algorithmic issues
+
+2. Shadow mode $\to$ integration issues
+
+3. Canary (1–5% traffic) $\to$ scaling issues
+
+4. A/B testing $\to$ user-facing issues
+
+**Lab $\neq$ Production**
+
+Medical AI systems experience 10–30% performance drops in real-world settings. The FDA now requires real-world performance studies.
+
+**Key:** Evaluation measures algorithm quality. Validation confirms production readiness.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: Interface contracts said Evaluation must show ``no subgroup below
 % threshold.'' This slide shows what happens when lab evaluation does not
 % predict field performance.
 %
 % -- NARRATE: ``The DR model gets AUC 0.99 on curated data, then sensitivity
-% drops to 78% at a rural clinic with older equipment. The camera is older,
+% drops to 78\% at a rural clinic with older equipment. The camera is older,
 % the technician is untrained, the images are blurry and poorly lit. Lab
 % success does NOT guarantee production value. Progressive validation catches
-% this: offline evaluation, shadow mode, canary deployment (1--5% traffic),
+% this: offline evaluation, shadow mode, canary deployment (1--5\% traffic),
 % then A/B testing. Each stage catches a different failure type.''
 %
 % -- ENGAGE: ``Why does a model that works in the lab fail in the field?''
@@ -1039,43 +1124,36 @@ unified by continuous feedback loops that have no equivalent in traditional soft
 % exactly this reason.
 %
 % -- WARN: Students think passing offline evaluation means the model is ready.
-% Correct framing: medical AI systems experience 10--30% performance drops
+% Correct framing: medical AI systems experience 10--30\% performance drops
 % in real-world settings. The lab-to-field gap is structural, not accidental.
 %
 % -- FLEX: [CORE] Critical lesson about evaluation vs.\ validation.
-% IF SHORT: State the 78% drop and the progressive validation stages.
-}
+% IF SHORT: State the 78\% drop and the progressive validation stages.
+```
 
-[T]
-  
-    **The Lab-to-Field Gap:**
-    {0pt}
-- AUC 0.99 on curated research data
-- Sensitivity **drops to 78%** at rural clinic
-- Older camera, untrained technician
-- Blurry, poorly-lit, inconsistent framing
-    
-
-    {0.1cm}
-    **Progressive validation stages:**\\
-    {
-    1. Offline evaluation $$ algorithmic issues\\
-    2. Shadow mode $$ integration issues\\
-    3. Canary (1--5% traffic) $$ scaling issues\\
-    4. A/B testing $$ user-facing issues}
-  
-  
-    {mlsyscard}{errorstroke}
-    { **Lab $$ Production**\\[0.1cm]
-    Medical AI systems experience 10--30% performance drops in real-world settings. The FDA now requires real-world performance studies.}
-    {mlsyscard}
-
-    {0.15cm}
-    {Key:}{Evaluation measures algorithm quality. Validation confirms production readiness.}
+</details>
 
 ## Stage 5: Deployment Economics
 
-{
+[Original slide 26](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L1222)
+
+**Cloud vs. Edge: 500 Clinics, 50 patients/day**
+
+|  | **Cloud (AWS)** | **Edge (Jetson)** |
+| --- | --- | --- |
+| Inference cost | &#36;0.01/image | &#36;0.001/image (electricity) |
+| Annual OpEx | **&#36;136,000** | &#36;25,000 maintenance |
+| CapEx | — | &#36;250,000 (one-time) |
+| Latency | 200+ ms | **<50 ms** |
+| Offline? | No | **Yes** |
+| **Payback** | — | **$\sim$2 years** |
+
+**Trade-off:** Edge: better reliability/latency but tighter model optimization and complex updates.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- LINK: Evaluation confirmed production readiness. Deployment selects the
 % paradigm---and the economics differ dramatically.
@@ -1089,8 +1167,8 @@ unified by continuous feedback loops that have no equivalent in traditional soft
 % Definition (Stage 1) determines whether this is even viable.''
 %
 % -- ENGAGE: ``At what number of clinics does edge become cheaper than cloud?''
-% Give 15 seconds. Expected: solve $250K + 25K × Y = 136K × Y$
-% for $Y$. $250K = 111K × Y$, so $Y  2.25$ years. At fewer
+% Give 15 seconds. Expected: solve $250K + 25K \times Y = 136K \times Y$
+% for $Y$. $250K = 111K \times Y$, so $Y \approx 2.25$ years. At fewer
 % clinics, cloud wins; at more, edge wins.
 %
 % -- WARN: Students assume cloud is always cheaper because there is no CapEx.
@@ -1099,54 +1177,73 @@ unified by continuous feedback loops that have no equivalent in traditional soft
 %
 % -- FLEX: [CORE] Quantitative deployment decision.
 % IF SHORT: Show the table, state the payback period. (90 seconds)
-}
+```
 
-**Cloud vs.\ Edge: 500 Clinics, 50 patients/day**
-
-{0.05cm}
-
-{}{1.05}
-{tabular}{@{}lll@{}}
-  
-  & **Cloud (AWS)** & **Edge (Jetson)** \\
-  
-  Inference cost  & \$0.01/image       & \$0.001/image (electricity) \\
-  Annual OpEx     & **\$136,000** & \$25,000 maintenance \\
-  CapEx           & ---                & \$250,000 (one-time) \\
-  Latency         & 200+ ms            & **<50 ms** \\
-  Offline?        & No                 & **Yes** \\
-  
-  **Payback** & --- & **$$2 years** \\
-  
-{tabular}
-
-{0.1cm}
-
-{Trade-off:}{Edge: better reliability/latency but tighter model optimization and complex updates.}
+</details>
 
 ## Quick Check
 
-{
+[Original slide 27](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L1275)
+
+Quick check — no peeking.
+
+ What is the cost multiplier for discovering a constraint at Stage 5 vs. Stage 1?
+
+30 seconds — then we continue.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [1 min]
 % -- NARRATE: ``Quick recall---no peeking. What is the cost multiplier for
 % discovering a constraint at Stage 5 vs.\ Stage 1? 30 seconds.''
 %
-% -- FLEX: [CORE] Micro-retrieval. Answer: $2^{5-1} = 16×$.
-}
+% -- FLEX: [CORE] Micro-retrieval. Answer: $2^{5-1} = 16\times$.
+```
 
- Quick check --- no peeking.\\[0.5cm]
- What is the cost multiplier for discovering a constraint at Stage 5 vs.\ Stage 1?\\[0.3cm]
-{ 30 seconds --- then we continue.}
+</details>
 
 ## Discussion: Which Stage Fails First?
 
-{
+[Original slide 28](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L1293)
+
+Turn and Talk (90 seconds)
+
+A startup deploys a DR screening model.
+
+Within 6 months, accuracy drops 15%.
+
+**Which lifecycle stage failed?**
+
+Problem
+
+ Def.
+
+Data
+
+ Collection
+
+Model
+
+ Dev.
+
+Evaluation
+
+Deployment
+
+Monitoring
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- LINK: Students have seen all six lifecycle stages through the DR case
 % study. This discussion tests their ability to diagnose a stage failure.
 %
 % -- NARRATE: ``A startup deploys a DR screening model. Within 6 months,
-% accuracy drops 15%. No code has changed. Which lifecycle stage failed?''
+% accuracy drops 15\%. No code has changed. Which lifecycle stage failed?''
 %
 % -- ENGAGE: Turn-and-talk for 90 seconds. Cold-call 2--3 pairs. The point:
 % all stages are interdependent. Monitoring failed to detect drift early
@@ -1157,45 +1254,59 @@ unified by continuous feedback loops that have no equivalent in traditional soft
 %
 % -- WARN: Students will pick one stage definitively. Correct framing: the
 % symptom appears at Monitoring, but the root cause is usually upstream.
-% A 15% accuracy drop with no code change is classic data drift---which
+% A 15\% accuracy drop with no code change is classic data drift---which
 % means Monitoring should have caught it AND Problem Definition should have
 % specified retraining triggers.
 %
 % -- FLEX: [CORE] Synthesis exercise.
 % IF SHORT: Do a show-of-hands poll instead of turn-and-talk.
-}
+```
 
-{0.5cm}
-{ Turn and Talk {midgray}{(90 seconds)}}
-
-{0.4cm}
-{ A startup deploys a DR screening model.\\
-Within 6 months, accuracy drops 15%.\\[0.2cm]
-**Which lifecycle stage failed?**}
-
-{0.4cm}
-[c]
-   Problem\\ Def.
-   Data\\ Collection
-   Model\\ Dev.
-   Evaluation
-   Deployment
-   {errorstroke}{Monitoring}
+</details>
 
 ## Stage 6: Silent Degradation
 
-{
+[Original slide 29](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L1344)
+
+**Six months after launch:**
+
+- Clinic upgrades fundus cameras
+- Sharper images, different color profiles
+- Sensitivity drops **8%** at that site
+- No code changed. No errors.
+- **Data drifted.**
+
+**Monitoring hierarchy:**
+
+Operational (seconds) $\to$ Proxy (hours) $\to$ Performance (weeks) $\to$ Drift (months)
+
+**Production thresholds:**
+
+Sensitivity: >90% (alert at 88%)
+
+Specificity: >80% (alert at 78%)
+
+Latency P95: <50 ms (alert at 100 ms)
+
+PSI drift: alert if >0.2
+
+**Rule:** ML systems degrade *silently* through data drift.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: The discussion asked ``which stage failed?'' This slide shows the
 % specific mechanism: data drift causing silent degradation.
 %
 % -- NARRATE: ``The DR system launches. Six months later, a clinic upgrades
 % its fundus cameras. The new cameras produce sharper images with different
-% color profiles. Sensitivity drops 8% at that site. No code changed. No
+% color profiles. Sensitivity drops 8\% at that site. No code changed. No
 % one made an error. The data drifted. This is the structural difference
 % from traditional software---the Degradation Equation from Ch1 in action.''
 %
-% -- ENGAGE: ``How would you detect an 8% sensitivity drop without ground
+% -- ENGAGE: ``How would you detect an 8\% sensitivity drop without ground
 % truth labels?'' Give 15 seconds. Cold-call one student.
 % Expected: monitor input distribution (PSI on pixel statistics), compare
 % to training distribution baseline. Proxy metrics: prediction confidence
@@ -1208,39 +1319,28 @@ Within 6 months, accuracy drops 15%.\\[0.2cm]
 %
 % -- FLEX: [CORE] Silent degradation is the defining challenge of ML systems.
 % IF SHORT: State the camera upgrade scenario and the monitoring hierarchy.
-}
+```
 
-[T]
-  
-    **Six months after launch:**
-    {0pt}
-- Clinic upgrades fundus cameras
-- Sharper images, different color profiles
-- Sensitivity drops **8%** at that site
-- No code changed. No errors.
-- {errorstroke}{**Data drifted.**}
-    
-
-    {0.05cm}
-    **Monitoring hierarchy:**\\
-    {
-    Operational (seconds) $$ Proxy (hours) $$ Performance (weeks) $$ Drift (months)}
-  
-  
-    {mlsyscard}{errorstroke}
-    { **Production thresholds:**\\
-    Sensitivity: >90% (alert at 88%)\\
-    Specificity: >80% (alert at 78%)\\
-    Latency P95: <50 ms (alert at 100 ms)\\
-    PSI drift: alert if >0.2}
-    {mlsyscard}
-
-    {0.05cm}
-    {Rule:}{ML systems degrade *silently* through data drift.}
+</details>
 
 ## Multi-Scale Feedback Loops
 
-{
+[Original slide 30](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L1404)
+
+| **Timescale** | **Loop** | **What It Catches** |
+| --- | --- | --- |
+| **Minutes** | Real-time inference | Misconfigured camera before a day of bad images |
+| **Days** | Batch monitoring | Accuracy drift at a specific clinic site |
+| **Weeks** | Drift detection | Equipment upgrade changed pixel distributions |
+| **Months** | Trend analysis | Demographic shift requires expanded training data |
+| **Quarters** | Strategic review | Architecture no longer meets clinical needs |
+
+**Design principle:** Fast iteration is a *systems feature*, not a convenience.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: Silent degradation requires monitoring. This slide shows monitoring
 % operates at five timescales, each catching different failures.
@@ -1253,7 +1353,7 @@ Within 6 months, accuracy drops 15%.\\[0.2cm]
 % expanded training data. Quarters: strategic review determines whether the
 % architecture still meets clinical needs. The temporal structure prevents
 % both over-reaction (retraining after one bad image) and sluggish adaptation
-% (waiting a year to notice a 15% drop).''
+% (waiting a year to notice a 15\% drop).''
 %
 % -- ENGAGE: ``Which timescale catches the camera upgrade problem from the
 % previous slide?'' Give 10 seconds.
@@ -1267,28 +1367,34 @@ Within 6 months, accuracy drops 15%.\\[0.2cm]
 %
 % -- FLEX: [OPTIONAL] Deepens the monitoring concept.
 % IF SHORT: State ``five timescales, each catches different failures.'' (30 seconds)
-}
+```
 
-{}{1.1}
-{tabular}{@{}llp{5.5cm}@{}}
-  
-  **Timescale** & **Loop** & **What It Catches** \\
-  
-  {errorstroke}{**Minutes**}  & Real-time inference  & Misconfigured camera before a day of bad images \\
-  {routingstroke}{**Days**}    & Batch monitoring     & Accuracy drift at a specific clinic site \\
-  {computestroke}{**Weeks**}   & Drift detection      & Equipment upgrade changed pixel distributions \\
-  {datastroke}{**Months**}     & Trend analysis       & Demographic shift requires expanded training data \\
-  **Quarters**   & Strategic review    & Architecture no longer meets clinical needs \\
-  
-{tabular}
+</details>
 
-{0.1cm}
+## War Story: Knight Capital — &#36;440M in 45 Minutes
 
-{Design principle:}{Fast iteration is a *systems feature*, not a convenience.}
+[Original slide 31](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L1454)
 
-## War Story: Knight Capital --- \$440M in 45 Minutes
+**August 1, 2012:**
 
-{
+- Deploy update to 8 trading servers
+- 1 server not updated (manual process)
+- Old code executes test algo on live markets
+- **&#36;440M loss in 45 minutes**
+- Company acquired days later
+
+**Root causes:** No canary deploy, no auto-rollback, no position-limit monitoring.
+
+**ML parallel**
+
+Automated ML serving makes 1000s of decisions/sec. A bad model deployment without rollback creates the same catastrophic risk. **Deployment and monitoring are not optional.**
+
+Source on slide: SEC Report, “In the Matter of Knight Capital,” 2013
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: Silent degradation showed ML failures are slow. This slide shows
 % that deployment failures in automated systems can also be catastrophically
@@ -1312,35 +1418,24 @@ Within 6 months, accuracy drops 15%.\\[0.2cm]
 %
 % -- FLEX: [CORE] War story connecting monitoring to catastrophic failure.
 % IF SHORT: State the headline numbers and the three root causes. (60 seconds)
-}
+```
 
-[T]
-  
-    **August 1, 2012:**
-    {0pt}
-- Deploy update to 8 trading servers
-- 1 server not updated (manual process)
-- Old code executes test algo on live markets
-- {errorstroke}{**\$440M loss in 45 minutes**}
-- Company acquired days later
-    
-
-    {0.1cm}
-    {Root causes:}{No canary deploy, no auto-rollback, no position-limit monitoring.}
-  
-  
-    {0.2cm}
-    {mlsyscard}{errorstroke}
-    **ML parallel**\\[0.1cm]
-    { Automated ML serving makes 1000s of decisions/sec. A bad model deployment without rollback creates the same catastrophic risk. **Deployment and monitoring are not optional.**}
-    {mlsyscard}
-  
-
-{SEC Report, ``In the Matter of Knight Capital,'' 2013}
+</details>
 
 ## Three Patterns of ML Systems Thinking
 
-{
+[Original slide 32](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L1512)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/03_ml_workflow/images/ch03-systems-thinking-triad.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch03-systems-thinking-triad.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/images/ch03-systems-thinking-triad.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Transformation:** Reactive debugging $\to$ Proactive design.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: The DR case study revealed failures at every lifecycle stage.
 % These three patterns formalize the reasoning that prevents such failures.
@@ -1363,59 +1458,92 @@ Within 6 months, accuracy drops 15%.\\[0.2cm]
 %
 % -- FLEX: [CORE] Overview of the three patterns.
 % IF SHORT: Name the three patterns, state which prevents what failure.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{ch03-systems-thinking-triad.pdf}
-
-{0.1cm}
-
-{Transformation:}{Reactive debugging $$ Proactive design.}
+</details>
 
 ## Constraint Propagation Principle
 
-{
+[Original slide 33](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L1548)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/03_ml_workflow/images/ch03-constraint-propagation.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch03-constraint-propagation.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/images/ch03-constraint-propagation.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+$\text{Correction Cost} \approx 2^{(N-1)} \times \text{Base Effort}$
+
+Deployment constraints must flow **backward** to Day 1. The deployment environment is the **Day-1 constraint**, not the last step.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- LINK: The Three Patterns overview named Constraint Propagation. This
 % slide formalizes it with the $2^{N-1}$ cost model.
 %
 % -- NARRATE: ``Formalize the Day-150 Disaster. Cost grows as $2^{N-1}$.
-% A constraint discovered at Stage 2 costs $2^1 = 2×$. Stage 3:
-% $2^2 = 4×$. Stage 5: $2^4 = 16×$. Stage 6: $2^5 = 32×$.
+% A constraint discovered at Stage 2 costs $2^1 = 2\times$. Stage 3:
+% $2^2 = 4\times$. Stage 5: $2^4 = 16\times$. Stage 6: $2^5 = 32\times$.
 % The Day-150 team discovered a Stage-1 constraint at Stage 5---that is
-% $16×$ base effort. The deployment paradigm is the Day-1 constraint,
+% $16\times$ base effort. The deployment paradigm is the Day-1 constraint,
 % not the last step. Constraints must flow backward.''
 %
 % -- ENGAGE: ``What is the cost of discovering a demographic requirement at
-% Stage 6?'' Give 10 seconds. Expected: $2^{6-1} = 32×$ base effort.
+% Stage 6?'' Give 10 seconds. Expected: $2^{6-1} = 32\times$ base effort.
 % (This sets up the exercise on the next slide.)
 %
 % -- WARN: Students think late-stage fixes are expensive but manageable.
 % Correct framing: the exponential cost model means a Stage-6 discovery is
-% not 6$×$ more expensive---it is 32$×$. Four stages of cascading
+% not 6$\times$ more expensive---it is 32$\times$. Four stages of cascading
 % rework, each with its own validation and testing overhead.
 %
 % -- FLEX: [CORE] Quantitative foundation for workflow design.
 % IF AHEAD: ``Is the $2^{N-1}$ model exact or an approximation?'' (Answer:
 % approximation based on Boehm 1981, but the exponential shape is well
 % documented across software engineering.)
-}
+```
 
-% --- Layout: FULL-WIDTH chart ---
-
-{ch03-constraint-propagation.pdf}
-
-{0.05cm}
-
-{mlsyscard}{crimson}
-${Correction Cost}  2^{(N-1)} × {Base Effort}$\\[0.05cm]
-{ Deployment constraints must flow **backward** to Day 1. The deployment environment is the **Day-1 constraint**, not the last step.}
-{mlsyscard}
+</details>
 
 ## Your Turn: Calculate the Cost
 
-{
+[Original slide 34](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L1590)
+
+Calculate the Cost
+
+A team discovers during **Monitoring (Stage 6)** that their DR model fails for patients over 70.
+
+This demographic requirement should have been specified at **Problem Definition (Stage 1)**.
+
+**1.** Calculate the cost multiplier using:
+
+$\text{Cost} = 2^{(N-1)}$
+
+**2.** Which stages must be revisited?
+
+(90 seconds — then compare with a neighbor)
+
+**Solution:**
+
+$2^{(6-1)} = 2^5 =$ **32$\times$** base effort
+
+**Stages to revisit:**
+
+2. Data Collection (expand demographics)
+
+3. Model Development (retrain)
+
+4. Evaluation (re-validate)
+
+5. Deployment (update models)
+
+**4 stages** of rework at exponential cost.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [4 min]
 % -- LINK: The Constraint Propagation Principle gave the formula. This
 % exercise applies it to a concrete scenario.
@@ -1427,8 +1555,8 @@ ${Correction Cost}  2^{(N-1)} × {Base Effort}$\\[0.05cm]
 %
 % -- ENGAGE: PEER INSTRUCTION PROTOCOL:
 % 1. Present problem (30s). 2. Individual work (60s).
-% 3. If 30--70% correct: pair discussion (90s), then re-vote.
-% 4. Reveal: $2^{(6-1)} = 2^5 = 32×$ base effort. Stages to revisit:
+% 3. If 30--70\% correct: pair discussion (90s), then re-vote.
+% 4. Reveal: $2^{(6-1)} = 2^5 = 32\times$ base effort. Stages to revisit:
 % Data Collection (expand demographics), Model Development (retrain),
 % Evaluation (re-validate across age groups), Deployment (update models at
 % 500 clinics). That is 4 stages of rework at exponential cost.
@@ -1442,44 +1570,40 @@ ${Correction Cost}  2^{(N-1)} × {Base Effort}$\\[0.05cm]
 %
 % -- FLEX: [CORE] Hands-on application of the formula.
 % IF SHORT: Skip pair discussion; go straight to reveal.
-}
+```
 
-[T]
-  
-    { Calculate the Cost}
-
-    {0.15cm}
-    A team discovers during **Monitoring (Stage 6)** that their DR model fails for patients over 70.
-
-    {0.1cm}
-    This demographic requirement should have been specified at **Problem Definition (Stage 1)**.
-
-    {0.15cm}
-    **1.** Calculate the cost multiplier using:\\
-    {1em}${Cost} = 2^{(N-1)}$
-
-    {0.1cm}
-    **2.** Which stages must be revisited?
-
-    {{midgray}{(90 seconds --- then compare with a neighbor)}}
-  
-  
-    
-    {mlsyscard}{errorstroke}
-    **Solution:**\\[0.1cm]
-    {
-    $2^{(6-1)} = 2^5 = $ **32$×$** base effort\\[0.1cm]
-    **Stages to revisit:**\\
-    2. Data Collection (expand demographics)\\
-    3. Model Development (retrain)\\
-    4. Evaluation (re-validate)\\
-    5. Deployment (update models)\\[0.1cm]
-    {errorstroke}{**4 stages**} of rework at exponential cost.}
-    {mlsyscard}
+</details>
 
 ## Emergent Complexity
 
-{
+[Original slide 35](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L1658)
+
+**Component vs. System behavior:**
+
+- Individual clinics: stable performance
+- System-wide: subtle demographic degradation
+- Invisible in single-site monitoring
+
+**Non-linear trade-offs:**
+
+2% accuracy gain $\to$ 2$\times$ model size
+
+$\to$ more powerful edge hardware
+
+$\to$ at 500 clinics: massive CapEx
+
+**ML vs. Traditional:**
+
+Traditional systems fail via *deterministic* cascades (crashes).
+
+ML systems fail via *probabilistic* degradation (drift, bias amplification).
+
+Probabilistic degradation lacks obvious error signals.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: Constraint Propagation showed how late discoveries cascade.
 % Emergent Complexity shows how system-level behavior diverges from
@@ -1488,7 +1612,7 @@ ${Correction Cost}  2^{(N-1)} × {Base Effort}$\\[0.05cm]
 % -- NARRATE: ``Individual clinics show stable performance---each site's
 % accuracy looks fine in isolation. But system-wide analysis across all 500
 % clinics detects subtle degradation across demographic groups. This is
-% invisible in single-site monitoring. The non-linear trade-off: a 2%
+% invisible in single-site monitoring. The non-linear trade-off: a 2\%
 % accuracy improvement requires doubling model size, which at 500 clinics
 % means replacing all edge hardware---massive CapEx. The key difference from
 % traditional software: traditional systems fail via deterministic cascades
@@ -1510,161 +1634,192 @@ ${Correction Cost}  2^{(N-1)} × {Base Effort}$\\[0.05cm]
 % -- FLEX: [OPTIONAL] Deepens systems thinking but can be compressed.
 % IF SHORT: ``Individual sites look fine; system-wide metrics reveal hidden
 % degradation.'' (30 seconds)
-}
+```
 
-[T]
-  
-    **Component vs.\ System behavior:**
-    {0pt}
-- Individual clinics: stable performance
-- System-wide: subtle demographic degradation
-- Invisible in single-site monitoring
-    
-
-    {0.15cm}
-    **Non-linear trade-offs:**\\
-    {
-    2% accuracy gain $$ 2$×$ model size\\
-    $$ more powerful edge hardware\\
-    $$ at 500 clinics: massive CapEx}
-  
-  
-    {mlsyscard}{routingstroke}
-    { **ML vs.\ Traditional:**\\[0.1cm]
-    Traditional systems fail via *deterministic* cascades (crashes).\\[0.1cm]
-    ML systems fail via *probabilistic* degradation (drift, bias amplification).\\[0.1cm]
-    Probabilistic degradation lacks obvious error signals.}
-    {mlsyscard}
+</details>
 
 ## Fallacies
 
-{
+[Original slide 36](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L1725)
+
+**Fallacy:** *ML development can follow traditional software workflows.*
+
+60–80% of ML projects never reach production. Projects forced into waterfall miss the 4–8 iteration cycles production requires.
+
+**Fallacy:** *Passing model evaluation means ready for deployment.*
+
+DR model: AUC 0.99 in lab, sensitivity 78% in rural clinic. Stage-5 discovery costs $16\times$.
+
+**Fallacy:** *More data always improves performance.*
+
+Doubling from 500K to 1M often improves accuracy <1% while doubling costs. 100K clean beats 1M noisy.
+
+**Pitfall:** *Treating data preparation as a one-time preprocessing step.*
+
+Models degrade 5–10% within months. Emergency retraining costs 3–5$\times$ proactive monitoring.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: The chapter covered the lifecycle, workflow differences, constraint
 % propagation, and systems thinking. These fallacies test internalization.
 %
 % -- NARRATE: ``Three fallacies and one pitfall. Fallacy 1: `ML can follow
-% traditional waterfall'---60--80% of ML projects fail, and forcing waterfall
+% traditional waterfall'---60--80\% of ML projects fail, and forcing waterfall
 % misses the 4--8 iteration cycles production requires. Fallacy 2: `passing
-% evaluation = ready'---the DR model had AUC 0.99 in the lab but 78% in the
-% field; a Stage-5 discovery costs $16×$. Fallacy 3: `more data always
-% helps'---doubling from 500K to 1M often improves accuracy less than 1% while
+% evaluation = ready'---the DR model had AUC 0.99 in the lab but 78\% in the
+% field; a Stage-5 discovery costs $16\times$. Fallacy 3: `more data always
+% helps'---doubling from 500K to 1M often improves accuracy less than 1\% while
 % doubling costs. Pitfall (not a fallacy): `data prep is one-time'---this is an
-% operational mistake, not a wrong belief; models degrade 5--10% within months;
-% emergency retraining costs 3--5$×$ proactive monitoring.''
+% operational mistake, not a wrong belief; models degrade 5--10\% within months;
+% emergency retraining costs 3--5$\times$ proactive monitoring.''
 %
 % -- FLEX: [CORE] Corrects the most common misconceptions.
 % IF SHORT: Focus on the first two fallacies.
-}
+```
 
-**Fallacy:** *ML development can follow traditional software workflows.*\\
-{ 60--80% of ML projects never reach production. Projects forced into waterfall miss the 4--8 iteration cycles production requires.}
-
-{0.05cm}
-**Fallacy:** *Passing model evaluation means ready for deployment.*\\
-{ DR model: AUC 0.99 in lab, sensitivity 78% in rural clinic. Stage-5 discovery costs $16×$.}
-
-{0.05cm}
-**Fallacy:** *More data always improves performance.*\\
-{ Doubling from 500K to 1M often improves accuracy <1% while doubling costs. 100K clean beats 1M noisy.}
-
-{0.05cm}
-**Pitfall:** *Treating data preparation as a one-time preprocessing step.*\\
-{ Models degrade 5--10% within months. Emergency retraining costs 3--5$×$ proactive monitoring.}
+</details>
 
 ## Pitfalls
 
-{
+[Original slide 37](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L1763)
+
+**Pitfall:** *Skipping validation to accelerate timelines.*
+
+Skipping shadow mode causes 10–50$\times$ latency spikes. “Saving” 2 weeks costs 6–8 weeks of emergency remediation.
+
+**Pitfall:** *Deferring deployment paradigm selection until after model development.*
+
+A team develops a 2 GB ensemble, discovers TinyML target with 256 KB. Constraint Propagation: $2^4 = 16\times$ rework.
+
+**Pitfall:** *Treating the model as the sole deliverable.*
+
+Reproducible artifact = weights + code + environment + config. Without bundling, “works on my machine” = broken.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: Fallacies named misconceptions. Pitfalls name operational mistakes.
 %
 % -- NARRATE: ``Three pitfalls. First: skipping shadow mode validation saves
-% 2 weeks but causes 10--50$×$ latency spikes and 6--8 weeks of emergency
+% 2 weeks but causes 10--50$\times$ latency spikes and 6--8 weeks of emergency
 % remediation. Second: deferring deployment paradigm selection until after
 % model development---exactly the Day-150 Disaster. A team develops a 2 GB
 % ensemble, then discovers the TinyML target has 256 KB. Constraint
-% Propagation: $2^4 = 16×$ rework. Third: treating the model as the
+% Propagation: $2^4 = 16\times$ rework. Third: treating the model as the
 % sole deliverable---without weights + code + environment + config bundled
 % together, `works on my machine' means broken in production.''
 %
 % -- FLEX: [CORE] Operational lessons.
 % IF SHORT: Cover the first two pitfalls---they connect directly to the
 % chapter's central themes.
-}
+```
 
-**Pitfall:** *Skipping validation to accelerate timelines.*\\
-{ Skipping shadow mode causes 10--50$×$ latency spikes. ``Saving'' 2 weeks costs 6--8 weeks of emergency remediation.}
-
-{0.08cm}
-**Pitfall:** *Deferring deployment paradigm selection until after model development.*\\
-{ A team develops a 2 GB ensemble, discovers TinyML target with 256 KB. Constraint Propagation: $2^4 = 16×$ rework.}
-
-{0.08cm}
-**Pitfall:** *Treating the model as the sole deliverable.*\\
-{ Reproducible artifact = weights + code + environment + config. Without bundling, ``works on my machine'' = broken.}
+</details>
 
 ## Muddiest Point
 
-{
+[Original slide 38](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L1797)
+
+One-minute paper
+
+ Write down the **muddiest point** from today's lecture.
+
+What concept was most confusing or unclear?
+
+(Hand in on your way out — or submit digitally)
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [1 min]
 % -- NARRATE: ``One-minute paper. Write down the one concept from today that
 % was most confusing. I will open the next lecture by addressing the top
 % muddiest points.''
 %
-% -- FLEX: [CORE] Diagnostic tool (Angelo & Cross, 1993). Never skip.
-}
+% -- FLEX: [CORE] Diagnostic tool (Angelo \& Cross, 1993). Never skip.
+```
 
- One-minute paper\\[0.5cm]
- Write down the **muddiest point** from today's lecture.\\[0.2cm]
-{ What concept was most confusing or unclear?}\\[0.5cm]
-{{midgray}{(Hand in on your way out --- or submit digitally)}}
+</details>
 
 ## What Were the Key Ideas?
 
-{
+[Original slide 39](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L1815)
+
+Close your notes.
+
+Write down the **4 most important concepts** from today.
+
+90 seconds — no peeking.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- NARRATE: ``Close your notes. Write down the 4 most important concepts
 % from today. 90 seconds, no peeking.'' Walk around the room.
 % Do NOT show the next slide yet.
 %
 % -- FLEX: [CORE] Retrieval practice. Never skip.
-}
+```
 
-{1.5cm}
-{ Close your notes.}
-
-{0.8cm}
-{ Write down the **4 most important concepts** from today.}
-
-{0.8cm}
-{{midgray}{90 seconds --- no peeking.}}
+</details>
 
 ## Key Takeaways
 
-{
+[Original slide 40](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L1837)
+
+- **Two pipelines, one system**: Data and model development run in parallel, unified by continuous feedback loops.
+- **60–80% of effort is data-related**: Model development is only 10–20%. Plan accordingly.
+- **Iteration velocity compounds**: 10 experiments/day beats 1/week, even starting 5% behind (Iteration Tax).
+- **Constraint propagation is exponential**: $\text{Cost} = 2^{(N-1)}$. A Stage-5 discovery costs $16\times$ base effort.
+- **All six stages map to the Iron Law**: Problem Def. $\to$ feasible region; Data $\to D_{\text{vol}}$; Model $\to O$; Eval $\to \eta_{\text{hw}}$; Deploy $\to L_{\text{lat}}$; Monitor $\to$ feedback.
+- **ML systems degrade silently**: Data drift, not code bugs. Continuous monitoring from day one.
+- **Systems thinking**: Constraint propagation + multi-scale feedback + emergent complexity.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- NARRATE: ``Reveal time. Walk through each bullet. Emphasize the three
-% quantitative anchors: 60--80% data time, 4--8 iteration cycles needed,
+% quantitative anchors: 60--80\% data time, 4--8 iteration cycles needed,
 % $2^{N-1}$ cost escalation. The Day-150 Disaster is the visceral story;
 % Constraint Propagation is the formal principle.''
 %
 % -- FLEX: [CORE] Summary slide.
 % IF SHORT: Hit the dual pipelines, constraint propagation, and silent
 % degradation.
-}
+```
 
-{1pt}
-- **Two pipelines, one system**: Data and model development run in parallel, unified by continuous feedback loops.
-- **60--80% of effort is data-related**: Model development is only 10--20%. Plan accordingly.
-- **Iteration velocity compounds**: 10 experiments/day beats 1/week, even starting 5% behind (Iteration Tax).
-- **Constraint propagation is exponential**: ${Cost} = 2^{(N-1)}$. A Stage-5 discovery costs $16×$ base effort.
-- **All six stages map to the Iron Law**: Problem Def.\ $$ feasible region; Data $ D_{{vol}}$; Model $ O$; Eval $ _{{hw}}$; Deploy $ L_{{lat}}$; Monitor $$ feedback.
-- **ML systems degrade silently**: Data drift, not code bugs. Continuous monitoring from day one.
-- **Systems thinking**: Constraint propagation + multi-scale feedback + emergent complexity.
+</details>
 
 ## References
 
-{
+[Original slide 41](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L1863)
+
+**Sculley+15** Sculley et al. “Hidden Technical Debt in ML Systems.” NeurIPS 2015.
+
+**CrowdFlower16** CrowdFlower. “Data Science Report.” 2016.
+
+**Amershi+19** Amershi et al. “Software Engineering for ML.” ICSE 2019.
+
+**Gulshan+16** Gulshan et al. “Development of a Deep Learning Algorithm for Detection of Diabetic Retinopathy.” JAMA 2016.
+
+**Paleyes+22** Paleyes et al. “Challenges in Deploying ML.” ACM Comp. Surveys 2022.
+
+**Boehm81** B. Boehm. *Software Engineering Economics*. 1981.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [1 min]
 % -- NARRATE: ``Six canonical references. Sculley for hidden technical debt.
 % CrowdFlower for the data time allocation. Amershi for software engineering
@@ -1672,92 +1827,96 @@ ${Correction Cost}  2^{(N-1)} × {Base Effort}$\\[0.05cm]
 % Boehm for the cost escalation model.''
 %
 % -- FLEX: [OPTIONAL] Show briefly.
-}
+```
 
-{Sculley+15}{Sculley et al. ``Hidden Technical Debt in ML Systems.'' NeurIPS 2015.}
-{CrowdFlower16}{CrowdFlower. ``Data Science Report.'' 2016.}
-{Amershi+19}{Amershi et al. ``Software Engineering for ML.'' ICSE 2019.}
-{Gulshan+16}{Gulshan et al. ``Development of a Deep Learning Algorithm for Detection of Diabetic Retinopathy.'' JAMA 2016.}
-{Paleyes+22}{Paleyes et al. ``Challenges in Deploying ML.'' ACM Comp.\ Surveys 2022.}
-{Boehm81}{B. Boehm. *Software Engineering Economics*. 1981.}
+</details>
 
 ## Next Lecture: Data Engineering
 
-{
+[Original slide 42](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L1884)
+
+Data Pipelines
+
+Collection, cleaning, versioning
+
+Feature Eng.
+
+Transform raw data into ML-ready features
+
+Data Quality
+
+Validation, drift detection, monitoring
+
+The engine needs fuel.
+
+**60–80% of ML effort is data engineering. That is where we go next.**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [1 min]
 % -- LINK: This chapter provided the workflow map. The next chapter dives into
 % the largest time investment: data engineering.
 %
 % -- NARRATE: ``The workflow framework provides the map. Now we need fuel:
-% data. Data engineering is where 60--80% of the effort goes, and where most
+% data. Data engineering is where 60--80\% of the effort goes, and where most
 % failures begin. The question: how do you build pipelines that feed the right
 % data to the right model at the right time?''
 %
 % -- FLEX: [CORE] Forward hook. Assign pre-reading if applicable.
 % IF SHORT: ``Next class: Data Engineering. Read Chapter 4.''
-}
+```
 
-[c]
-  
-    
-    {mlsyscard}{datastroke}
-    { Data Pipelines}\\[0.1cm]
-    { Collection, cleaning, versioning}
-    {mlsyscard}
-  
-  
-    
-    {mlsyscard}{computestroke}
-    { Feature Eng.}\\[0.1cm]
-    { Transform raw data into ML-ready features}
-    {mlsyscard}
-  
-  
-    
-    {mlsyscard}{errorstroke}
-    { Data Quality}\\[0.1cm]
-    { Validation, drift detection, monitoring}
-    {mlsyscard}
-  
-
-{0.3cm}
-
-{ The engine needs fuel.}\\[0.1cm]
-{**60--80% of ML effort is data engineering. That is where we go next.**}
+</details>
 
 ## Backup: Constraint Propagation Extended Example
 
-{
+[Original slide 43](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L1937)
+
+Use if students struggle with the $2^{(N-1)}$ cost model.
+
+A deployment constraint discovered at Stage 6 (Monitoring) costs $2^5 = 32\times$ base effort. Stages requiring rework: Data Collection, Model Development, Evaluation, Deployment — four stages of cascading corrections.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- NARRATE: Use if students struggle with the $2^{N-1}$ cost model.
-% A deployment constraint discovered at Stage 6 costs $2^5 = 32×$.
+% A deployment constraint discovered at Stage 6 costs $2^5 = 32\times$.
 % Stages requiring rework: Data Collection, Model Development, Evaluation,
 % Deployment---four stages of cascading corrections.
 %
 % -- FLEX: [OPTIONAL] Backup slide for additional depth.
-}
+```
 
-Use if students struggle with the $2^{(N-1)}$ cost model.
-
-A deployment constraint discovered at Stage 6 (Monitoring) costs $2^5 = 32×$ base effort. Stages requiring rework: Data Collection, Model Development, Evaluation, Deployment --- four stages of cascading corrections.
+</details>
 
 ## Backup: Iteration Velocity Calculation
 
-{
-% [2 min]
-% -- NARRATE: Use if students want to see the iteration comparison in detail.
-% Large model: 26 iterations at +0.15%/iter = 3.9% gain. Small model: 100
-% iterations at +0.1%/iter = 10% gain. Starting 5% behind, the
-% fast-iterating model catches up in about 50 iterations (2 days).
-%
-% -- FLEX: [OPTIONAL] Backup slide for quantitative detail.
-}
+[Original slide 44](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/03_ml_workflow/03_ml_workflow.tex#L1953)
 
 Use if students want to see the iteration comparison in detail.
 
-Large model: 26 iterations $×$ +0.15%/iter = 3.9% gain over 6 months.
+Large model: 26 iterations $\times$ +0.15%/iter = 3.9% gain over 6 months.
 
-Small model: 100 iterations $×$ +0.1%/iter = 10% gain uncapped; accuracy ceiling at 99% means effective gain = 9%. Starting 5% behind, the fast-iterating model catches up in $$50 iterations ($$2 days).
+Small model: 100 iterations $\times$ +0.1%/iter = 10% gain uncapped; accuracy ceiling at 99% means effective gain = 9%. Starting 5% behind, the fast-iterating model catches up in $\sim$50 iterations ($\sim$2 days).
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+% [2 min]
+% -- NARRATE: Use if students want to see the iteration comparison in detail.
+% Large model: 26 iterations at +0.15\%/iter = 3.9\% gain. Small model: 100
+% iterations at +0.1\%/iter = 10\% gain. Starting 5\% behind, the
+% fast-iterating model catches up in about 50 iterations (2 days).
+%
+% -- FLEX: [OPTIONAL] Backup slide for quantitative detail.
+```
+
+</details>
 
 ## Complete original Beamer source
 

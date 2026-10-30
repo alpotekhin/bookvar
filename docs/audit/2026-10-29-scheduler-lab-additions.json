@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-29",
+  "scope": "Add the interactive scheduler without altering the existing neural-engine and HTTP exercise bodies or original image bytes.",
+  "files": [
+    {
+      "source": "publishing/navigation.yml",
+      "changes": [
+        {
+          "old": "      - source: 06 Практика/14a HTTP streaming и жизненный цикл запроса.md\n        route: practice/14a-http-streaming-lifecycle\n",
+          "new": "      - source: 06 Практика/14a HTTP streaming и жизненный цикл запроса.md\n        route: practice/14a-http-streaming-lifecycle\n      - source: 06 Практика/14b Планировщик запросов и KV-память.md\n        route: practice/inference-scheduler\n"
+        }
+      ],
+      "before_sha256": "7f2f82a8a5dfd1946b2ceca86cee28f20f837aa0630dad8dea9ef41005f1ee72",
+      "after_sha256": "5144398f45e553ad4a4dc8e728dd4fc193e3e2411eed47acc9ddfa660ed7805c"
+    },
+    {
+      "source": "06 Практика/_index.md",
+      "changes": [
+        {
+          "old": "",
+          "new": "| [[02 Areas/ML & DL/06 Практика/14b Планировщик запросов и KV-память|Интерактивный планировщик и KV-память]] | Prefill, decode, KV-cache | Изменяемая нагрузка, расписание по шагам и видимое выделение блоков |\n"
+        },
+        {
+          "old": "Первая интерактивная лаборатория уже доступна на сайте. Работы 06–17 используют\n",
+          "new": "На сайте доступны интерактивные лаборатории причинного внимания и планирования\nзапросов. Вторая показывает prefill/decode, заполнение KV-блоков и остановку\nпри нехватке памяти. Работы 06–17 используют\n"
+        },
+        {
+          "old": "last_updated: 2026-10-26",
+          "new": "last_updated: 2026-10-29"
+        }
+      ],
+      "before_sha256": "6811f6302c731366c5608d5e092ae2609546538323b3d1d7a13c437007d4950d",
+      "after_sha256": "8fe1c3f0dabf6383ea1e06975fda38d0dec5d7a06e3caa8a10a16e3df5b000aa"
+    },
+    {
+      "source": "05 Источники/asset-registry.yml",
+      "changes": [
+        {
+          "old": "\"06 Практика/14 Собрать минимальный inference engine.md\"]",
+          "new": "\"06 Практика/14 Собрать минимальный inference engine.md\", \"06 Практика/14b Планировщик запросов и KV-память.md\"]"
+        }
+      ],
+      "before_sha256": "62bdaaec94f6cf5c0b4b2dcc3fe277b8bfd31d71b783bbcdc38a0573a666cf96",
+      "after_sha256": "9cffd3f37a7142f6843b147a1608890abff55a295ea874ea8f5e2de4b3aee858"
+    }
+  ]
+}

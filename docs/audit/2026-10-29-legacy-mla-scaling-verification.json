@@ -1,0 +1,180 @@
+{
+  "date": "2026-10-29",
+  "status": "comparison-verified-locally-not-published",
+  "scope": "Reconcile the complete archival MLA and Scaling Laws notes with their whole canonical owners. Existing explanations retained; no textbook, asset, code, translation or navigation changes in this pass.",
+  "chapters": [
+    {
+      "source": "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md",
+      "route": "textbook/modern-llm/mla-kv-compression",
+      "wholeTextRead": true,
+      "lines": 768,
+      "pythonFences": 4,
+      "figures": 5,
+      "changed": false
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "route": "textbook/pretraining/scaling-laws",
+      "wholeTextRead": true,
+      "lines": 1396,
+      "pythonFences": 2,
+      "figures": 26,
+      "changed": false
+    }
+  ],
+  "artifactHashes": {
+    "docs/audit/2026-10-29-legacy-notes-review.json": "435edff6964e5c6940540d72f9331d8a5e0ebaddd37a1c76a4f3cba49487c5c5",
+    "docs/audit/2026-10-29-release-completion-plan.md": "f12affa3c866a631106e19b4216ff5871218a2aeeea5bf11e16414679f328e2e",
+    "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md": "aa2789b8788eda6efa42c4a31100734867554b63e02d32484996ad9dbb6f5e5f",
+    "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md": "472401f6f3bf906cc8b23f29a5ff206cb8c083da3f20ac5654249eaee61aef69",
+    "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md": "016059980cfd4582d7786c3bf09a1c6c513f4ad6c19e39df0202c5fe06b667c7",
+    "publishing/tools/check_mla_examples.py": "865a6f34c8e04ecc46e2e2570beb09b377862901c304e8f0d4ff494508950ffb",
+    "publishing/tools/check_scaling_examples.py": "bb261253a919eabd5689628358f843057811de7ec3268ea9adbdadb4b1f887c2",
+    "docs/audit/2026-10-22-mla.md": "0786e8b9fe36279f553bb6affabc45ea572498e0ec0ab880e0b3d9fc89080d66",
+    "docs/audit/2026-10-23-scaling.md": "9dc13389d28fbc6576853259015976d356daec060f723ac1d2179f2825b2bfdd",
+    "docs/audit/evidence/2026-10-29-legacy-mla-scaling/mla-mobile-rope.png": "0e0257a74b9db7f550fbee9142dd362e6d9ebd6ae898388b01a7d2a48bbfa286",
+    "docs/audit/evidence/2026-10-29-legacy-mla-scaling/scaling-desktop-porian.png": "a35a24679fe4f8add98dd351df163102c57670ad7702c0e40cd26ccdd59b4349",
+    "docs/audit/evidence/2026-10-29-legacy-mla-scaling/scaling-mobile-mup.png": "d787593fce1ad9502f3e1670e429c9720cfaf3a17d44ef6d132aa83c8e6a7c93"
+  },
+  "decisions": "Detailed retained mechanisms, exact canonical headings and rejected claims are saved in the MLA and Scaling Laws decisions of docs/audit/2026-10-29-legacy-notes-review.json.",
+  "primarySourceComparison": {
+    "mla": {
+      "freshSections": "DeepSeek-V2 arXiv 2405.04434v5, sections 2.1.1–2.1.4, Appendix C and Appendix D.1–D.2/Table 8/Table 9.",
+      "url": "https://arxiv.org/html/2405.04434v5",
+      "checked": "Latent K/V projections, query-compression motivation, RoPE obstruction, separately cached positional key, appendix equations and scoped dense/MoE ablations."
+    },
+    "scaling": {
+      "retainedReview": "docs/audit/2026-10-23-scaling.md",
+      "previousChapterSha256": "a2953c0e6343ee9ee34a7ba82d77f3bb441ef14f560f23acfd2d526d409422fb",
+      "currentChapterSha256": "472401f6f3bf906cc8b23f29a5ff206cb8c083da3f20ac5654249eaee61aef69",
+      "deltaJournal": "docs/audit/2026-10-29-reader-route-navigation.json",
+      "delta": "One next-chapter link now points to the post-training module. Reversing this exact recorded change restores the previous SHA-256. No mathematical or explanatory change.",
+      "freshPrimaryRereadClaim": false
+    }
+  },
+  "explanationReview": {
+    "mla": "Key and value absorption are derived separately; a worked two-position equality and an equal-latent/different-position RoPE counterexample precede the full implementation. Cache memory, arithmetic, TP replication and empirical quality are not conflated.",
+    "scaling": "The existing owner develops joint model/data loss, constrained optimum, three Chinchilla methods, interpolation/projection examples, repeated-data limits, schedule and optimizer confounds, width transfer and training-plus-inference cost. The archive adds no absent worked mechanism.",
+    "archiveCacheCounterexample": {
+      "elementsPerToken": 1966080,
+      "batch": 32,
+      "sequenceLength": 100000,
+      "bytesPerElement": 2,
+      "totalBytes": 12582912000000,
+      "decimalTB": 12.582912,
+      "excludedClaim": "Tens of gigabytes under these stated dimensions."
+    },
+    "languageAndStyle": "No prose rewrite or new translation. Necessary terminology, reasoning, examples, caveats, citations and original figures remain unchanged."
+  },
+  "executedChecks": [
+    {
+      "command": "uv run --offline --with torch==2.14.1 --with numpy==2.3.5 python publishing/tools/check_mla_examples.py",
+      "result": "PASS at the recorded current SHA; all four actual fences, independent batched outputs/all gradients, 16 sequence partitions x two cache layouts, negative controls and pinned DeepSeek-V3 naive/absorb bodies.",
+      "maxOriginalCodeFP32Error": 4.470348358154297e-8,
+      "log": "/var/tmp/bookvar-legacy-mla-cpu-20261029.log"
+    },
+    {
+      "command": "python3 publishing/tools/check_scaling_examples.py",
+      "exitCode": 0,
+      "result": "Both actual fences, displayed arithmetic, 17 invalid projection inputs, 10 rejected interpolation inputs, Huber/optimum examples, WSD 430/700B, DeepSeek example, 39 source-table values, 1.2T inference break-even, figure hashes/dimensions and original-source copies passed."
+    },
+    {
+      "check": "Scaling navigation delta reversal",
+      "result": "Exact previous chapter SHA restored in memory; no file rewritten."
+    }
+  ],
+  "visualReview": {
+    "surface": "Existing root preview http://127.0.0.1:4330; no site input changed in this pass.",
+    "desktop": {
+      "viewport": [
+        1280,
+        900
+      ],
+      "documentClientWidth": 1265,
+      "documentScrollWidth": 1265,
+      "mla": {
+        "figuresLoaded": 5,
+        "katexErrors": 0,
+        "personallyInspectedViewerFigures": 5
+      },
+      "scaling": {
+        "figuresLoaded": 26,
+        "katexErrors": 0,
+        "personallyInspectedViewerFigures": [
+          "porian-figure1",
+          "deepseek-hyperparameter-fits",
+          "optimizer-extrapolation-failure"
+        ]
+      }
+    },
+    "mobile": {
+      "viewport": [
+        360,
+        800
+      ],
+      "documentClientWidth": 345,
+      "documentScrollWidth": 345,
+      "mla": {
+        "katexErrors": 0,
+        "displayMath": 24,
+        "formulaOverflows": 0,
+        "tables": 3,
+        "tableOverflows": 0,
+        "originalFigure": "DeepSeek positional branch inspected at 3x with panning available."
+      },
+      "scaling": {
+        "katexErrors": 0,
+        "displayMath": 28,
+        "formulaOverflows": 0,
+        "tables": 10,
+        "tableOverflows": 0,
+        "originalFigure": "mup-coordinates panel inspected at 3x; original labels and width axis readable."
+      }
+    },
+    "historicalReviewReuse": "The prior complete 26-figure scaling review is retained at the exactly restored explanatory revision. This pass does not claim a second fresh inspection of all 26 figures.",
+    "screenshots": [
+      "docs/audit/evidence/2026-10-29-legacy-mla-scaling/mla-mobile-rope.png",
+      "docs/audit/evidence/2026-10-29-legacy-mla-scaling/scaling-desktop-porian.png",
+      "docs/audit/evidence/2026-10-29-legacy-mla-scaling/scaling-mobile-mup.png"
+    ],
+    "restored": "Viewer closed; temporary viewport reset; own tab left on the scaling chapter."
+  },
+  "preservation": {
+    "unchangedArchiveNotes": 31,
+    "unchangedPreviousArtifactPins": 31,
+    "previousReceipt": "docs/audit/2026-10-29-legacy-grpo-rlvr-verification.json",
+    "expectedMutableAuditPins": [
+      "docs/audit/2026-10-29-legacy-notes-review.json",
+      "docs/audit/2026-10-29-release-completion-plan.md"
+    ],
+    "priorReceiptsRewritten": false
+  },
+  "additionalReadingNotAccepted": {
+    "source": "Concepts/Training/Pre-training.md",
+    "sourceFullyRead": true,
+    "canonicalCollectionChapterFullyRead": true,
+    "ntpReadRange": "Lines 1–205 only; remaining text not claimed read.",
+    "remaining": "Remaining NTP text, complete distributed owner and explicit disposition of unique corpus-release facts/historical mixtures. No acceptance inferred from links or dataset names."
+  },
+  "counts": {
+    "total": 31,
+    "sourceFullRead": 23,
+    "reconciled": 21,
+    "readInProgress": 2,
+    "unread": 8,
+    "canonicalWholeReads": 26
+  },
+  "rights": "No new material imported. Existing needs-confirmation records for prior paper/course figures and the earlier DeepSeekMath release-rights item remain unresolved; this comparison does not authorize their publication.",
+  "publication": {
+    "commit": false,
+    "push": false,
+    "deploy": false,
+    "mainChanged": false
+  },
+  "notRun": [
+    "Fresh full unit/output/build suite: no publication inputs changed in this pass; previous successful checks remain historical.",
+    "Fresh Pages-base visual pass for these unchanged chapters.",
+    "Released model checkpoints, model training, real scaling-law fitting, quality benchmarks, GPU timing or distributed execution."
+  ],
+  "remainingOverall": "Ten archival notes remain unaccepted; then full conceptual route review and dev/Pages release checks. Interactive scheduler remains accepted locally."
+}

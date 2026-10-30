@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-30",
+  "scope": "Three editorial corrections after whole-chapter reading: remove a false separate FFN reference, state the distributed specialist prerequisites, and remove an obsolete count of NumPy examples. Code, mathematical displays, figures and source excerpts are unchanged; no translation is created.",
+  "files": [
+    {
+      "source": "00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md",
+      "changes": [
+        {
+          "old": "Краткие формулы собраны отдельно в\n[[02 Areas/ML & DL/01 Справочник/FFN и MoE/Dense FFN и gated activations|справочнике по FFN и вентильным активациям]].\n\n**Назад:** [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/04 RoPE|RoPE]].",
+          "new": "**Назад:** [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/04 RoPE|RoPE]]."
+        },
+        {
+          "old": "last_updated: 2026-10-27",
+          "new": "last_updated: 2026-10-30"
+        }
+      ],
+      "before_sha256": "50f2528d8a0cba6231692f81353c6817f2626aa54945aa51a0b6e14aeccbffc3",
+      "after_sha256": "ab9b6430788c2f530bfa1cfc991db50aa488c9d2a11fe6b0d0fd7e3fb2bf9496"
+    },
+    {
+      "source": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+      "changes": [
+        {
+          "old": "позиции по-прежнему абсолютные. Все четыре блока NumPy в главе можно\nвыполнить последовательно в одном сеансе:",
+          "new": "позиции по-прежнему абсолютные. Примеры NumPy в главе можно\nвыполнить последовательно в одном сеансе:"
+        },
+        {
+          "old": "last_updated: 2026-10-29",
+          "new": "last_updated: 2026-10-30"
+        }
+      ],
+      "before_sha256": "c15d27a0f6565299948cf7c3aa0005428743735058ff8d9998707bced97c1b85",
+      "after_sha256": "258d15855652ecacc9321b3d15651531e7c5776656e3548510977fe4572c7507"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md",
+      "changes": [
+        {
+          "old": "Предыдущая [[43 Scaling laws|глава о масштабировании]] связывала качество\nс размером модели и объёмом обучения. Здесь тот же вычислительный бюджет\nрассматривается со стороны исполнения. Формы тензоров и стоимость отдельных\nслоёв выведены в [[02 Areas/ML & DL/00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE|арифметике Transformer]].",
+          "new": "> [!note] Prerequisites\n> The chapter\n> [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость|Transformer tensor shapes and resources]]\n> derives parameter counts, gradients and activation memory. Layer costs are\n> developed further in\n> [[02 Areas/ML & DL/00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE|Transformer and MoE arithmetic]].\n> [[43 Scaling laws|Scaling laws]] is a separate core-course chapter on allocating\n> a training budget between model size and training tokens."
+        },
+        {
+          "old": "last_updated: 2026-10-28",
+          "new": "last_updated: 2026-10-30"
+        }
+      ],
+      "before_sha256": "7fc54afeb6889923cf35893e40f4b9f02964b734b7dc40b5eea0f10b41659e01",
+      "after_sha256": "bdf9e94e3e46118e48fa55e7998a8a6b33a11f8593777796919e85befd6ce566"
+    }
+  ]
+}

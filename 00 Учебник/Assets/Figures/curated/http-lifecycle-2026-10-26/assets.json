@@ -1,0 +1,31 @@
+[
+  {
+    "id": "curated-http-vllm-engine-bf641ddd64c2",
+    "asset": "00 Учебник/Assets/Figures/curated/http-lifecycle-2026-10-26/vllm-llm-engine.png",
+    "author": "vLLM contributors",
+    "source_url": "https://github.com/vllm-project/vllm/blob/b8b302cde434df8c9289a2b465406b47ebab1c2d/docs/design/arch_overview.md#llm-engine",
+    "source_image_url": "https://raw.githubusercontent.com/vllm-project/vllm/b8b302cde434df8c9289a2b465406b47ebab1c2d/docs/assets/design/arch_overview/llm_engine.excalidraw.png",
+    "commit": "b8b302cde434df8c9289a2b465406b47ebab1c2d",
+    "source_asset": "05 Источники/Originals/edls-http-2026-10-26/vllm-llm-engine.png",
+    "source_asset_sha256": "bf641ddd64c294e72fdd50243603ca15e8d19827104add4a71c77cb93dc2d73b",
+    "sha256": "bf641ddd64c294e72fdd50243603ca15e8d19827104add4a71c77cb93dc2d73b",
+    "dimensions_px": [
+      1874,
+      1178
+    ],
+    "source_page_snapshot": "05 Источники/Originals/edls-http-2026-10-26/vllm-architecture.md",
+    "source_page_sha256": "8f75acf566551a276c9546b61fe9461d79824632e62f8d05609ba7f840b67a43",
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/vllm-project/vllm/blob/b8b302cde434df8c9289a2b465406b47ebab1c2d/LICENSE",
+    "license_evidence": "05 Источники/Originals/edls-http-2026-10-26/vllm-LICENSE.txt",
+    "license_evidence_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original PNG from pinned v0.11.0 documentation; no crop, redraw, translation, resampling or recompression. Historical LLMEngine/AsyncLLMEngine interface overview, not a current V1 process-placement claim.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-26",
+    "used_in": [
+      "06 Практика/14a HTTP streaming и жизненный цикл запроса.md"
+    ]
+  }
+]

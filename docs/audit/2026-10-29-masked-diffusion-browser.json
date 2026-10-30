@@ -1,0 +1,278 @@
+{
+  "date": "2026-10-29",
+  "chapterSha256": "f8877b751c12f83d4fbe6b8b281f3bc65045125e03244907ceab1e2c14672569",
+  "scope": "Observed in the in-app browser: 8 routes at two viewport sizes. This is not a new whole-book audit.",
+  "records": [
+    {
+      "route": "/textbook/pretraining/masked-diffusion-language-models/",
+      "viewport": {
+        "width": 360,
+        "height": 800,
+        "clientWidth": 345,
+        "scrollWidth": 345
+      },
+      "mathErrors": 0,
+      "displayMathCount": 8,
+      "overflowingMath": 0,
+      "figureCount": 4,
+      "unloadedFigures": 0,
+      "newChapterLinkCount": 0,
+      "fallbackNotice": false
+    },
+    {
+      "route": "/en/textbook/pretraining/masked-diffusion-language-models/",
+      "viewport": {
+        "width": 360,
+        "height": 800,
+        "clientWidth": 345,
+        "scrollWidth": 345
+      },
+      "mathErrors": 0,
+      "displayMathCount": 8,
+      "overflowingMath": 0,
+      "figureCount": 4,
+      "unloadedFigures": 0,
+      "newChapterLinkCount": 1,
+      "fallbackNotice": true
+    },
+    {
+      "route": "/textbook/",
+      "viewport": {
+        "width": 360,
+        "height": 800,
+        "clientWidth": 345,
+        "scrollWidth": 345
+      },
+      "mathErrors": 0,
+      "displayMathCount": 0,
+      "overflowingMath": 0,
+      "figureCount": 0,
+      "unloadedFigures": 0,
+      "newChapterLinkCount": 1,
+      "fallbackNotice": false
+    },
+    {
+      "route": "/en/textbook/",
+      "viewport": {
+        "width": 360,
+        "height": 800,
+        "clientWidth": 345,
+        "scrollWidth": 345
+      },
+      "mathErrors": 0,
+      "displayMathCount": 0,
+      "overflowingMath": 0,
+      "figureCount": 0,
+      "unloadedFigures": 0,
+      "newChapterLinkCount": 1,
+      "fallbackNotice": false
+    },
+    {
+      "route": "/reference/",
+      "viewport": {
+        "width": 360,
+        "height": 800,
+        "clientWidth": 345,
+        "scrollWidth": 345
+      },
+      "mathErrors": 0,
+      "displayMathCount": 0,
+      "overflowingMath": 0,
+      "figureCount": 0,
+      "unloadedFigures": 0,
+      "newChapterLinkCount": 1,
+      "fallbackNotice": false
+    },
+    {
+      "route": "/en/reference/",
+      "viewport": {
+        "width": 360,
+        "height": 800,
+        "clientWidth": 345,
+        "scrollWidth": 345
+      },
+      "mathErrors": 0,
+      "displayMathCount": 0,
+      "overflowingMath": 0,
+      "figureCount": 0,
+      "unloadedFigures": 0,
+      "newChapterLinkCount": 1,
+      "fallbackNotice": false
+    },
+    {
+      "route": "/textbook/pretraining/mae-masked-autoencoders/",
+      "viewport": {
+        "width": 360,
+        "height": 800,
+        "clientWidth": 345,
+        "scrollWidth": 345
+      },
+      "mathErrors": 0,
+      "displayMathCount": 2,
+      "overflowingMath": 0,
+      "figureCount": 3,
+      "unloadedFigures": 0,
+      "newChapterLinkCount": 1,
+      "fallbackNotice": false
+    },
+    {
+      "route": "/en/textbook/pretraining/mae-masked-autoencoders/",
+      "viewport": {
+        "width": 360,
+        "height": 800,
+        "clientWidth": 345,
+        "scrollWidth": 345
+      },
+      "mathErrors": 0,
+      "displayMathCount": 2,
+      "overflowingMath": 0,
+      "figureCount": 3,
+      "unloadedFigures": 0,
+      "newChapterLinkCount": 1,
+      "fallbackNotice": true
+    },
+    {
+      "route": "/textbook/pretraining/masked-diffusion-language-models/",
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "clientWidth": 1265,
+        "scrollWidth": 1265
+      },
+      "mathErrors": 0,
+      "displayMathCount": 8,
+      "overflowingMath": 0,
+      "figureCount": 4,
+      "unloadedFigures": 0,
+      "newChapterLinkCount": 0,
+      "fallbackNotice": false
+    },
+    {
+      "route": "/en/textbook/pretraining/masked-diffusion-language-models/",
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "clientWidth": 1265,
+        "scrollWidth": 1265
+      },
+      "mathErrors": 0,
+      "displayMathCount": 8,
+      "overflowingMath": 0,
+      "figureCount": 4,
+      "unloadedFigures": 0,
+      "newChapterLinkCount": 1,
+      "fallbackNotice": true
+    },
+    {
+      "route": "/textbook/",
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "clientWidth": 1265,
+        "scrollWidth": 1265
+      },
+      "mathErrors": 0,
+      "displayMathCount": 0,
+      "overflowingMath": 0,
+      "figureCount": 0,
+      "unloadedFigures": 0,
+      "newChapterLinkCount": 1,
+      "fallbackNotice": false
+    },
+    {
+      "route": "/en/textbook/",
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "clientWidth": 1265,
+        "scrollWidth": 1265
+      },
+      "mathErrors": 0,
+      "displayMathCount": 0,
+      "overflowingMath": 0,
+      "figureCount": 0,
+      "unloadedFigures": 0,
+      "newChapterLinkCount": 1,
+      "fallbackNotice": false
+    },
+    {
+      "route": "/reference/",
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "clientWidth": 1265,
+        "scrollWidth": 1265
+      },
+      "mathErrors": 0,
+      "displayMathCount": 0,
+      "overflowingMath": 0,
+      "figureCount": 0,
+      "unloadedFigures": 0,
+      "newChapterLinkCount": 1,
+      "fallbackNotice": false
+    },
+    {
+      "route": "/en/reference/",
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "clientWidth": 1265,
+        "scrollWidth": 1265
+      },
+      "mathErrors": 0,
+      "displayMathCount": 0,
+      "overflowingMath": 0,
+      "figureCount": 0,
+      "unloadedFigures": 0,
+      "newChapterLinkCount": 1,
+      "fallbackNotice": false
+    },
+    {
+      "route": "/textbook/pretraining/mae-masked-autoencoders/",
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "clientWidth": 1265,
+        "scrollWidth": 1265
+      },
+      "mathErrors": 0,
+      "displayMathCount": 2,
+      "overflowingMath": 0,
+      "figureCount": 3,
+      "unloadedFigures": 0,
+      "newChapterLinkCount": 1,
+      "fallbackNotice": false
+    },
+    {
+      "route": "/en/textbook/pretraining/mae-masked-autoencoders/",
+      "viewport": {
+        "width": 1280,
+        "height": 800,
+        "clientWidth": 1265,
+        "scrollWidth": 1265
+      },
+      "mathErrors": 0,
+      "displayMathCount": 2,
+      "overflowingMath": 0,
+      "figureCount": 3,
+      "unloadedFigures": 0,
+      "newChapterLinkCount": 1,
+      "fallbackNotice": true
+    }
+  ],
+  "viewer": {
+    "desktopOriginalsInspected": [
+      "mdlm-overview.png",
+      "block-diffusion-overview.svg",
+      "remasking-overview.svg",
+      "remasking-loop.svg"
+    ],
+    "mobileFitInspected": true,
+    "mobileZoomInspected": "2x",
+    "evidenceDirectory": "docs/audit/evidence/2026-10-29-masked-diffusion",
+    "notes": [
+      "Zoomed image panning uses a scrollable viewer; the page itself does not overflow.",
+      "The EN route reuses the canonical English body and still carries the existing generic untranslated-content notice. No separate translation file was created."
+    ]
+  }
+}

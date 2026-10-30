@@ -1,64 +1,20 @@
 ---
 title: Reinforcement Learning from Human Feedback
-aliases: [RLHF]
+aliases:
+  - RLHF
 type: concept
-status: canonical
-last_updated: 2026-07-16
+status: redirect
+last_updated: '2026-10-29'
 primary_sources:
-  - https://arxiv.org/abs/1706.03741
-  - https://arxiv.org/abs/2203.02155
+  - 'https://arxiv.org/abs/1706.03741'
+  - 'https://arxiv.org/abs/2203.02155'
+canonical_topic: 00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md
 ---
+# Reinforcement Learning from Human Feedback
 
-# Reinforcement Learning from Human Feedback (RLHF)
+Полное объяснение: [[00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM|Градиент стратегии и PPO для языковых моделей]].
 
-**RLHF** использует человеческие предпочтения как сигнал для оптимизации политики. Классическая последовательность стадий:
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/instructgpt/chatgpt-training-pipeline.png]]
-
-*Три стадии InstructGPT: обучение по демонстрациям, сбор сравнений и обучение
-модели награды, затем PPO на награде с ограничением относительно SFT-модели.
-Источник: Long Ouyang et al., [Training language models to follow instructions
-with human feedback, Figure 2](https://arxiv.org/abs/2203.02155).*
-
-Из схемы видно, что человеческая разметка не поступает прямо в PPO. Сначала она
-сжимается в функцию $r_\phi(x,y)$, и уже её ошибки становятся частью среды, в
-которой оптимизируется политика.
-
-Политика максимизирует оценку обученной модели награды, обычно со штрафом за отклонение от опорной политики:
-
-$$
-\max_\pi\;\mathbb E_{x\sim D}\left[
-\mathbb E_{y\sim\pi(\cdot|x)}r_\phi(x,y)
--\beta D_{KL}\!\left(\pi(\cdot|x)\,\|\,\pi_{ref}(\cdot|x)\right)
-\right].
-$$
-
-$D$ — распределение обучающих запросов, $y$ — целый ответ, сэмплированный
-из текущей политики, $r_\phi$ — оценка модели награды, $\pi_{ref}$ —
-фиксированная опорная политика, а $\beta>0$ задаёт цену отклонения от неё.
-Условный KL усредняется сначала по ответам при данном запросе, затем по
-запросам. Эквивалентный вклад одного сэмпла:
-$r_\phi(x,y)-\beta\log[\pi(y|x)/\pi_{ref}(y|x)]$.
-
-Например, если награда ответа равна $2$, его вероятность выросла с $0.1$
-до $0.2$, а $\beta=0.5$, вклад равен $2-0.5\log2\approx1.653$.
-При $\beta=1$ он равен $1.307$: та же награда меньше оправдывает изменение
-политики. Логарифмический член отдельного ответа может быть отрицательным;
-неотрицательность относится к KL — ожиданию по всему распределению.
-Это [базовая KL-регуляризованная задача](https://arxiv.org/html/2305.18290#S3),
-а не полный рецепт InstructGPT, где также исследуется примесь
-предобучающей функции потерь.
-
-KL-штраф сдерживает отклонение политики, но не гарантирует защиты от эксплуатации ошибок RM. RLHF может улучшать полезность и следование инструкциям; при этом предпочтения субъективны, модель награды несовершенна, а обучение с новыми генерациями затратно и может быть нестабильно.
-
-Термин иногда используют широко для всего дообучения по предпочтениям, но строго [[02 Areas/ML & DL/01 Справочник/Post-training/DPO|DPO]] не запускает цикл RL и не обучает явную модель награды. [[02 Areas/ML & DL/01 Справочник/Post-training/RLVR|RLVR]] использует программно проверяемые награды вместо или вместе с человеческой обратной связью.
-
-## Подробнее
-
-Policy gradient, PPO, clipping и KL-штраф применительно к языковой модели
-разобраны в главе [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM|Policy gradient и PPO для LLM]].
-
-## Источники
-
-- [Deep RL from Human Preferences](https://arxiv.org/abs/1706.03741)
-- [InstructGPT](https://arxiv.org/abs/2203.02155)
+<!-- Compatibility anchors for existing Obsidian and web links. -->
+<span id="reinforcement-learning-from-human-feedback-rlhf" aria-hidden="true"></span>
+<span id="подробнее" aria-hidden="true"></span>
+<span id="источники" aria-hidden="true"></span>

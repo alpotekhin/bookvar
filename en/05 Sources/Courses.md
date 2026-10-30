@@ -4,7 +4,7 @@ type: source-note
 status: active
 locale: en
 translation_of: "05 Источники/Курсы.md"
-last_updated: 2026-09-15
+last_updated: 2026-10-26
 last_verified: 2026-09-15
 ---
 
@@ -44,11 +44,11 @@ the optional safety/RLHF supplement inside Assignment 5. The schedule also recor
 sessions without published official artifacts. The material is already linked
 to textbook sections, not merely stored for future use.
 
-The coverage ledger contains 807 semantic units: 557 integrated, 24 already
-covered, 21 assignment-contract-only, 151 source-only, and 54 excluded.
+The coverage ledger contains 811 semantic units: 557 integrated, 27 already
+covered, 21 assignment-contract-only, 150 source-only, and 56 excluded.
 Of the 557 integrated units, 373 come from assignment material and 184 from
-lectures. The separate visual ledger has 159 records: 73 integrated,
-9 already covered, 45 source-only, and 32 excluded. These are bookkeeping
+lectures. The separate visual ledger has 159 records: 70 integrated,
+9 already covered, 48 source-only, and 32 excluded. These are bookkeeping
 categories, not a count of fully reviewed chapters or individual figures.
 
 Multi-token prediction is now integrated into the
@@ -74,17 +74,16 @@ Bookvar practice: [[06 Практика/20 Собрать языковую мо�
 [Official course](https://rdi.berkeley.edu/adv-llm-agents/sp25)
 
 The collection covers 12 meetings, 13 slide PDFs, recording metadata, and
-37 reading records. The 140 integrated units include 105 slide-derived units
+37 reading records. The 143 integrated units include 108 slide-derived units
 and 35 reading catalogue entries; the latter are links and descriptions, not
-mirrored papers. Another 6 units are already covered, 38 remain source-only,
-and 28 are excluded. Of 161 visual records, 47 are integrated, 87 source-only,
+mirrored papers. Another 6 units are already covered, 35 remain source-only,
+and 28 are excluded. Of 161 visual records, 49 are integrated, 85 source-only,
 and 27 excluded. A visual record may describe several slides.
 
 xGen and GenS are explained in [[00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели|video models]],
 and ESCHER in [[00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery|scientific discovery]].
 Remaining source-only material includes recording metadata, course
-administration, and Plan–Sequence–Learn: robotics needs motion-planning and
-low-level-control foundations beyond the current web/GUI agent chapters. A page
+administration. A page
 explicitly marked confidential in lecture 6 is excluded from reuse.
 
 Bookvar practice: [[06 Практика/25 Воспроизводимо оценить и red-team компьютерного агента|evaluate a computer-use agent]],

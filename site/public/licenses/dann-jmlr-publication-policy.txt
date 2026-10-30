@@ -1,0 +1,18 @@
+# JMLR publication policy checked 2026-10-28
+
+Official source: https://jmlr.org/author-info.html#publication
+
+The publication section states:
+
+> When a paper is accepted, authors must sign an agreement granting a CC-by license to the public
+
+The same paragraph states that copyright remains with the author.
+The journal policy names CC-by but does not identify its version. The 2016
+DANN PDF credits its authors. We record the publisher's CC-by policy,
+not an invented CC BY 4.0 notice on the PDF or a separately inspected
+author-signed agreement. The figure attribution identifies the authors,
+article, original figure/page and extraction change.
+
+The web browser source was read through the Publication section. A terminal
+download of the policy stopped at 16037/22728 bytes; that incomplete HTML
+is not used as the permission evidence or a complete source-page snapshot.

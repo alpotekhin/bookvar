@@ -1,0 +1,12 @@
+---
+import FallbackContentNotice from '@astrojs/starlight/components/FallbackContentNotice.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const path = Astro.url.pathname.slice(base.length);
+// BookPageTitle owns textbook edition status, including partial editions.
+// Native-English originals also need no translation warning even when served
+// through Starlight's root-locale fallback. Other sections keep its notice.
+const textbookEnglish = path.startsWith('/en/textbook/');
+---
+
+{!textbookEnglish && <FallbackContentNotice />}

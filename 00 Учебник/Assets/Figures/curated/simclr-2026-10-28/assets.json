@@ -1,0 +1,172 @@
+[
+  {
+    "id": "curated-simclr-framework-73cf008f0647",
+    "asset": "00 Учебник/Assets/Figures/curated/simclr-2026-10-28/framework.png",
+    "author": "Ting Chen, Simon Kornblith, Mohammad Norouzi and Geoffrey Hinton",
+    "source_url": "https://proceedings.mlr.press/v119/chen20j.html",
+    "source_image_url": "https://proceedings.mlr.press/v119/chen20j/chen20j.pdf#page=2",
+    "source_asset": "05 Источники/Originals/simclr-2026-10-28/chen20j.pdf",
+    "source_asset_sha256": "cc620e511bafe8b4b11ca3415f6d7bcf127a05818087bfa49905de3a2e50bc2d",
+    "sha256": "73cf008f064794d536e82e06c8ea1678f78f3a6621b5e0a93a4496fc7165573b",
+    "source_page_snapshot": "05 Источники/Originals/simclr-2026-10-28/chen20j.html",
+    "source_page_sha256": "f806c96d346d58ea697ce8f5a8994fcec66fd173d179548c9582266e8a372614",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/simclr-2026-10-28/pmlr-license-agreement.html",
+    "license_evidence_sha256": "ced0f527a4e850322a654edde2210b36efd7aabff1192b6edd1d6c764424bc15",
+    "public_license_copy": "site/public/licenses/simclr-PMLR-CC-BY-4.0.txt",
+    "derivation": "pdf-page-render-crop",
+    "source_page": 2,
+    "render_dpi": 400,
+    "crop_box_px": [
+      1735,
+      350,
+      2985,
+      1180
+    ],
+    "render_page_size_px": [
+      3400,
+      4400
+    ],
+    "dimensions_px": [
+      1250,
+      830
+    ],
+    "modifications": "Complete original figure extracted at 400 dpi from the publisher PDF. Retains all panels, labels, arrows, axes and legends; excludes paper body and running header. No redraw, translation or bitmap upscaling.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений.md",
+      "00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder.md"
+    ]
+  },
+  {
+    "id": "curated-simclr-crop-views-b38e24483dea",
+    "asset": "00 Учебник/Assets/Figures/curated/simclr-2026-10-28/crop-views.png",
+    "author": "Ting Chen, Simon Kornblith, Mohammad Norouzi and Geoffrey Hinton",
+    "source_url": "https://proceedings.mlr.press/v119/chen20j.html",
+    "source_image_url": "https://proceedings.mlr.press/v119/chen20j/chen20j.pdf#page=3",
+    "source_asset": "05 Источники/Originals/simclr-2026-10-28/chen20j.pdf",
+    "source_asset_sha256": "cc620e511bafe8b4b11ca3415f6d7bcf127a05818087bfa49905de3a2e50bc2d",
+    "sha256": "b38e24483dea86df1c7ef775cbf5d8ad29d41bb6a0116a50431126eb8c849eee",
+    "source_page_snapshot": "05 Источники/Originals/simclr-2026-10-28/chen20j.html",
+    "source_page_sha256": "f806c96d346d58ea697ce8f5a8994fcec66fd173d179548c9582266e8a372614",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/simclr-2026-10-28/pmlr-license-agreement.html",
+    "license_evidence_sha256": "ced0f527a4e850322a654edde2210b36efd7aabff1192b6edd1d6c764424bc15",
+    "public_license_copy": "site/public/licenses/simclr-PMLR-CC-BY-4.0.txt",
+    "derivation": "pdf-page-render-crop",
+    "source_page": 3,
+    "render_dpi": 400,
+    "crop_box_px": [
+      1735,
+      350,
+      2985,
+      940
+    ],
+    "render_page_size_px": [
+      3400,
+      4400
+    ],
+    "dimensions_px": [
+      1250,
+      590
+    ],
+    "modifications": "Complete original figure extracted at 400 dpi from the publisher PDF. Retains all panels, labels, arrows, axes and legends; excludes paper body and running header. No redraw, translation or bitmap upscaling.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений.md"
+    ]
+  },
+  {
+    "id": "curated-simclr-augmentations-fcca5e8050e7",
+    "asset": "00 Учебник/Assets/Figures/curated/simclr-2026-10-28/augmentations.png",
+    "author": "Ting Chen, Simon Kornblith, Mohammad Norouzi and Geoffrey Hinton",
+    "source_url": "https://proceedings.mlr.press/v119/chen20j.html",
+    "source_image_url": "https://proceedings.mlr.press/v119/chen20j/chen20j.pdf#page=4",
+    "source_asset": "05 Источники/Originals/simclr-2026-10-28/chen20j.pdf",
+    "source_asset_sha256": "cc620e511bafe8b4b11ca3415f6d7bcf127a05818087bfa49905de3a2e50bc2d",
+    "sha256": "fcca5e8050e7c00364ecc4a838721bf7049f957709ab5d8aab75efc190d45969",
+    "source_page_snapshot": "05 Источники/Originals/simclr-2026-10-28/chen20j.html",
+    "source_page_sha256": "f806c96d346d58ea697ce8f5a8994fcec66fd173d179548c9582266e8a372614",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/simclr-2026-10-28/pmlr-license-agreement.html",
+    "license_evidence_sha256": "ced0f527a4e850322a654edde2210b36efd7aabff1192b6edd1d6c764424bc15",
+    "public_license_copy": "site/public/licenses/simclr-PMLR-CC-BY-4.0.txt",
+    "derivation": "pdf-page-render-crop",
+    "source_page": 4,
+    "render_dpi": 400,
+    "crop_box_px": [
+      320,
+      350,
+      3010,
+      1485
+    ],
+    "render_page_size_px": [
+      3400,
+      4400
+    ],
+    "dimensions_px": [
+      2690,
+      1135
+    ],
+    "modifications": "Complete original figure extracted at 400 dpi from the publisher PDF. Retains all panels, labels, arrows, axes and legends; excludes paper body and running header. No redraw, translation or bitmap upscaling. Photograph credited in the original caption to Von.grzanka under CC-BY; that attribution is retained adjacent to the figure.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений.md",
+      "00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований.md"
+    ]
+  },
+  {
+    "id": "curated-simclr-projection-head-1143afd57070",
+    "asset": "00 Учебник/Assets/Figures/curated/simclr-2026-10-28/projection-head.png",
+    "author": "Ting Chen, Simon Kornblith, Mohammad Norouzi and Geoffrey Hinton",
+    "source_url": "https://proceedings.mlr.press/v119/chen20j.html",
+    "source_image_url": "https://proceedings.mlr.press/v119/chen20j/chen20j.pdf#page=6",
+    "source_asset": "05 Источники/Originals/simclr-2026-10-28/chen20j.pdf",
+    "source_asset_sha256": "cc620e511bafe8b4b11ca3415f6d7bcf127a05818087bfa49905de3a2e50bc2d",
+    "sha256": "1143afd570703e28b849ef4d22aaf6a04d6fb64e8d89ed75f920bb56433cdc13",
+    "source_page_snapshot": "05 Источники/Originals/simclr-2026-10-28/chen20j.html",
+    "source_page_sha256": "f806c96d346d58ea697ce8f5a8994fcec66fd173d179548c9582266e8a372614",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/simclr-2026-10-28/pmlr-license-agreement.html",
+    "license_evidence_sha256": "ced0f527a4e850322a654edde2210b36efd7aabff1192b6edd1d6c764424bc15",
+    "public_license_copy": "site/public/licenses/simclr-PMLR-CC-BY-4.0.txt",
+    "derivation": "pdf-page-render-crop",
+    "source_page": 6,
+    "render_dpi": 400,
+    "crop_box_px": [
+      440,
+      1035,
+      1440,
+      1610
+    ],
+    "render_page_size_px": [
+      3400,
+      4400
+    ],
+    "dimensions_px": [
+      1000,
+      575
+    ],
+    "modifications": "Complete original figure extracted at 400 dpi from the publisher PDF. Retains all panels, labels, arrows, axes and legends; excludes paper body and running header. No redraw, translation or bitmap upscaling.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений.md"
+    ]
+  }
+]

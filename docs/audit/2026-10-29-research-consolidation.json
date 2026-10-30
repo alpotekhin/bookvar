@@ -1,0 +1,420 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-29",
+  "scope": "All eight published research overview pages; _index.md is parent-owned and unchanged by this agent.",
+  "readMethod": "All eight overview pages read in full; edited passages and surrounding final text reviewed. Main explanation links checked against existing canonical files and exact headings. Prior architecture canonical chapters were read in full in architecture consolidation; this task does not claim a fresh full reading of all training, inference and agent chapters or every cited paper.",
+  "entries": [
+    {
+      "page": "03 Исследовательские линии/Agentic learning.md",
+      "decision": "keep",
+      "rationale": "Разделяет prompting, изменение контекста, обучение весов и накопление внешних навыков. Сохранены сравнения источников траекторий, история исследований, проверяемые результаты Aguvis/InSTA и исходная схема ReAct.",
+      "changed": true,
+      "beforeSha256": "091a405c0590786a00bf42d0252cd720c3141bdc813bb3ae75948f9209a990b7",
+      "afterSha256": "4fb082cc7cd9c2f1fa5b31ba2e9a68f196ceae1d68814dd5105eb04a72ee0f53",
+      "verifiedMainExplanationLinks": [
+        {
+          "source": "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
+          "heading": null
+        }
+      ],
+      "figuresRetained": [
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-65-68/react-patterns.png"
+      ],
+      "retainedHeadingAliases": [
+        {
+          "oldHeading": "Что именно теперь обучают",
+          "newHeading": "Данные, обновление и обратная связь",
+          "anchor": "что-именно-теперь-обучают"
+        },
+        {
+          "oldHeading": "Независимые оси вместо лестницы",
+          "newHeading": "Происхождение траектории и объект обновления",
+          "anchor": "независимые-оси-вместо-лестницы"
+        }
+      ],
+      "externalSectionsChecked": [
+        "https://arxiv.org/abs/2210.03629 — abstract; prompting-режим уточнён, отсутствие fine-tuning во всей статье не утверждается"
+      ],
+      "uniqueContentForParent": []
+    },
+    {
+      "page": "03 Исследовательские линии/RLHF → DPO → RLVR.md",
+      "decision": "keep",
+      "rationale": "Сопоставляет происхождение обратной связи, алгоритм обновления и наличие новых генераций. Сохранены история, две исходные схемы и таблица режимов; удалён вторичный список однострочных определений.",
+      "changed": true,
+      "beforeSha256": "536ad9e8847178a4c4924381f745f92467f400835cc6c96f5c81f7a42031db6f",
+      "afterSha256": "57ec725516d15bbee9966be9f82f8da76fbf45e3b46a545ae0656727a878a25d",
+      "verifiedMainExplanationLinks": [
+        {
+          "source": "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/12 Post-training и Alignment/05 DPO.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+          "heading": null
+        }
+      ],
+      "figuresRetained": [
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/instructgpt/chatgpt-training-pipeline.png",
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/dpo/dpo-pipeline.png"
+      ],
+      "retainedHeadingAliases": [
+        {
+          "oldHeading": "Проблема, которую решает вся линия",
+          "newHeading": "От человеческих сравнений к модели награды",
+          "anchor": "проблема-которую-решает-вся-линия"
+        },
+        {
+          "oldHeading": "DeepSeek-R1 как важный узел",
+          "newHeading": "R1-Zero и многостадийный рецепт R1",
+          "anchor": "deepseek-r1-как-важный-узел"
+        },
+        {
+          "oldHeading": "Сравнение",
+          "newHeading": "Как совместить стадии в одном рецепте",
+          "anchor": "сравнение"
+        }
+      ],
+      "externalSectionsChecked": [],
+      "uniqueContentForParent": []
+    },
+    {
+      "page": "03 Исследовательские линии/Reasoning и test-time compute.md",
+      "decision": "keep",
+      "rationale": "Сравнивает бюджеты и правила выбора ответа; сохраняет историю CoT/self-consistency/search/R1 и отличие pass@k от качества выбранного ответа. Алгоритмические примеры остаются в основной главе.",
+      "changed": true,
+      "beforeSha256": "d38568f39f5e16f5c0fe1821440100881852ef89461a97427a725c99bc25d222",
+      "afterSha256": "ffa32506e0b85529955362f22c0c16369649c210b5888f322d45b26be96dec26",
+      "verifiedMainExplanationLinks": [
+        {
+          "source": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
+          "heading": "6. Длинное рассуждение и последовательное исправление"
+        },
+        {
+          "source": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
+          "heading": "4. Self-consistency"
+        },
+        {
+          "source": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
+          "heading": "4. Self-consistency"
+        },
+        {
+          "source": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
+          "heading": "7. Поиск по промежуточным состояниям"
+        }
+      ],
+      "figuresRetained": [
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/test-time-compute/snell-prm-search-methods.png"
+      ],
+      "retainedHeadingAliases": [
+        {
+          "oldHeading": "Training-time связь",
+          "newHeading": "Связь с обучением политики",
+          "anchor": "training-time-связь"
+        },
+        {
+          "oldHeading": "2024–2025: reasoning policies и проверяемые награды",
+          "newHeading": "2024–2025: обучение рассуждению с проверяемой наградой",
+          "anchor": "20242025-reasoning-policies-и-проверяемые-награды"
+        },
+        {
+          "oldHeading": "Trade-offs",
+          "newHeading": "Ограничения дополнительного бюджета",
+          "anchor": "trade-offs"
+        }
+      ],
+      "externalSectionsChecked": [],
+      "uniqueContentForParent": []
+    },
+    {
+      "page": "03 Исследовательские линии/Sparse и MoE-модели.md",
+      "decision": "keep",
+      "rationale": "История от noisy top-k к Switch, Mixtral и DeepSeek; условия сравнения полных/активных параметров и специализации. Уточнены активации versus перемещение весов и auxiliary-loss-free versus sequence loss.",
+      "changed": true,
+      "beforeSha256": "7a23fb41697468d6917324057d8bb85b3f70ba7975d64d6738d420b6f0a4ead2",
+      "afterSha256": "2bd46e8013c9a5e23bad070cb1667b1317f07d1c1e1885c6f1712347a47a4685",
+      "verifiedMainExplanationLinks": [
+        {
+          "source": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+          "heading": null
+        }
+      ],
+      "figuresRetained": [
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/modern-37-40-moe/mixtral-smoe-layer.png"
+      ],
+      "retainedHeadingAliases": [
+        {
+          "oldHeading": "Зачем разреживать вычисление",
+          "newHeading": "От шумной маршрутизации к top-1",
+          "anchor": "зачем-разреживать-вычисление"
+        }
+      ],
+      "externalSectionsChecked": [
+        "https://arxiv.org/html/2401.04088v1#S2.F1 — Figure 1 / §2.1",
+        "https://arxiv.org/html/2401.04088v1#S5 — Routing analysis и Figures 7–8"
+      ],
+      "uniqueContentForParent": []
+    },
+    {
+      "page": "03 Исследовательские линии/Альтернативы полному attention и stateful sequence models.md",
+      "decision": "keep",
+      "rationale": "Сравнивает формы памяти, гибридные семейства и контракт состояния сервера. Убраны неподтверждённые рейтинги зрелости и прогноз победителя; датированный срез явно отделён от текущей матрицы функций движка.",
+      "changed": true,
+      "beforeSha256": "f9e54e95e7b31a899df30eb21cb860779ff8f46a3e15233a746d00b2493a142f",
+      "afterSha256": "71270b064baefbc6899faf537a29fac66d1ff6537f0c511250a25e44546e6c30",
+      "verifiedMainExplanationLinks": [
+        {
+          "source": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+          "heading": "Как сервер хранит и восстанавливает состояние"
+        }
+      ],
+      "figuresRetained": [],
+      "retainedHeadingAliases": [
+        {
+          "oldHeading": "Scheduled hybrids",
+          "newHeading": "Чередование разных типов слоя",
+          "anchor": "scheduled-hybrids"
+        },
+        {
+          "oldHeading": "Parallel hybrids",
+          "newHeading": "Параллельные ветви внутри слоя",
+          "anchor": "parallel-hybrids"
+        },
+        {
+          "oldHeading": "Transformer отвечает сжатием архива",
+          "newHeading": "Сжатое и разреженное attention",
+          "anchor": "transformer-отвечает-сжатием-архива"
+        },
+        {
+          "oldHeading": "Production evidence ladder",
+          "newHeading": "Что подтверждает готовность реализации",
+          "anchor": "production-evidence-ladder"
+        },
+        {
+          "oldHeading": "Срез зрелости на 1 сентября 2026",
+          "newHeading": "Срез опубликованных реализаций на 1 сентября 2026",
+          "anchor": "срез-зрелости-на-1-сентября-2026"
+        },
+        {
+          "oldHeading": "Где Transformer действительно рискует",
+          "newHeading": "Какие нагрузки сравнивать",
+          "anchor": "где-transformer-действительно-рискует"
+        }
+      ],
+      "externalSectionsChecked": [
+        "https://arxiv.org/html/2603.15569v1 — §4.1, Table 3 (до 1.5B); abstract/introduction",
+        "https://github.com/state-spaces/mamba — официальный README с Mamba-3",
+        "https://docs.vllm.ai/en/latest/models/supported_models/ — просмотрен как текущий указатель, не доказательство запуска всех функций"
+      ],
+      "uniqueContentForParent": []
+    },
+    {
+      "page": "03 Исследовательские линии/Длинный контекст.md",
+      "decision": "keep",
+      "rationale": "Сопоставляет память сегментов, разреженность, позиционное масштабирование и оценку использования длинного окна. Это карта подходов и протоколов оценки, не повтор вывода RoPE.",
+      "changed": true,
+      "beforeSha256": "fd53dd9f16723c80535cc37e94f1b13b1de541c61946e52451de25198c95ff70",
+      "afterSha256": "ccd114be9049d7b6ab910825afbf2e4cb4fcce61c093a0fb8c401d3c49d9a457",
+      "verifiedMainExplanationLinks": [
+        {
+          "source": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/07 Анатомия современной LLM/04 RoPE.md",
+          "heading": null
+        }
+      ],
+      "figuresRetained": [
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-37-40-audit/longformer-attention-patterns.png",
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-37-40-audit/lost-in-the-middle-figure-1.png"
+      ],
+      "retainedHeadingAliases": [
+        {
+          "oldHeading": "Почему длина окна не является способностью",
+          "newHeading": "Память сегментов, разреженные связи и новые позиции",
+          "anchor": "почему-длина-окна-не-является-способностью"
+        }
+      ],
+      "externalSectionsChecked": [],
+      "uniqueContentForParent": []
+    },
+    {
+      "page": "03 Исследовательские линии/Синтетические данные и дистилляция.md",
+      "decision": "keep",
+      "rationale": "История и сравнение логитов, целевых последовательностей, отбора траекторий и рекурсивных данных. Сохранён конвейер Lambert, таблица режимов и точная ссылка на R1 v1.",
+      "changed": true,
+      "beforeSha256": "68373c14949d90afe924ab8bc1fdd2e208c7e39f7e0f69b572ba02000700a60f",
+      "afterSha256": "8b572fa085a41a3e8c2bfa911cc81dcd00254a63cd567ec242af06b35eee5b01",
+      "verifiedMainExplanationLinks": [
+        {
+          "source": "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md",
+          "heading": null
+        }
+      ],
+      "figuresRetained": [
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/post-training-courses/distillation-data-pipeline.png"
+      ],
+      "retainedHeadingAliases": [
+        {
+          "oldHeading": "Фабрика данных",
+          "newHeading": "Отбор и смешивание",
+          "anchor": "фабрика-данных"
+        },
+        {
+          "oldHeading": "Практический quality gate",
+          "newHeading": "Что должно быть известно о синтетической выборке",
+          "anchor": "практический-quality-gate"
+        }
+      ],
+      "externalSectionsChecked": [
+        "https://arxiv.org/html/2501.12948v1#S2.SS4 — исходная v1 используется как исторически закреплённое описание, а не автоматически заменяется свежим релизом"
+      ],
+      "uniqueContentForParent": []
+    },
+    {
+      "page": "03 Исследовательские линии/Эффективный attention.md",
+      "decision": "keep",
+      "rationale": "Сравнивает четыре независимые оси: алгоритм исполнения, число KV-голов, латентное представление и изменение оператора внимания. Выводы и код перенаправлены к полным главам; сравнительная таблица и две схемы сохранены.",
+      "changed": true,
+      "beforeSha256": "5a62fb7ace6426a63d23b38e9d654f787bef79e6709a77985f80ed6366444a98",
+      "afterSha256": "2036442c4c6574ab2023a615679cde1ec9a7fe44d686a049dc3cf11e5fe47cd0",
+      "verifiedMainExplanationLinks": [
+        {
+          "source": "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md",
+          "heading": null
+        },
+        {
+          "source": "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md",
+          "heading": null
+        }
+      ],
+      "figuresRetained": [
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/topics-53-59-source-first/flashattention-tiling.png",
+        "02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-35-36/cs336-mha-gqa-mqa-mla.png"
+      ],
+      "retainedHeadingAliases": [
+        {
+          "oldHeading": "Три источника стоимости",
+          "newHeading": "Какие ограничения менялись",
+          "anchor": "три-источника-стоимости"
+        }
+      ],
+      "externalSectionsChecked": [
+        "https://crfm.stanford.edu/2023/07/17/flash2.html — FlashAttention Recap, Fewer non-matmul FLOPs, Better Parallelism, Better Work Partitioning"
+      ],
+      "uniqueContentForParent": []
+    }
+  ],
+  "validation": {
+    "pages": 8,
+    "imagesRetained": 10,
+    "mainExplanationLinksChecked": 38,
+    "allDirectTargetsAndExactHeadingsExist": true,
+    "allOriginalFigureEmbedsPreserved": true,
+    "styleReview": "Removed generic thesis introductions, unsupported maturity rankings and universal conclusions; preserved necessary terminology, historical comparisons, tables, limitations and attribution. Checklist used as editorial guidance, not as proof of factual completeness.",
+    "modelFreshness": "last_verified dates preserved. Historical September 2026 implementation table explicitly labelled dated. No sweep to latest model releases.",
+    "publication": "No commit, push, deployment or full publisher build performed by this agent; parent must validate the combined revision."
+  },
+  "notesForParent": [
+    "The previous Sparse/MoE caption attributed Mixtral Figure 1 to a different HF image and linked routing analysis to §4; corrected to Jiang et al., Figure 1, §5, CC BY 4.0.",
+    "Stateful serving constraints already have corresponding canonical material in the main sequence-model chapter (§Как сервер хранит и восстанавливает состояние); direct link added. No training/inference chapter edited in this subtask.",
+    "Fresh whole-paper verification of all older numerical claims (e.g. Aguvis/InSTA) was not repeated; retained version-pinned claims and their existing chapter/source links, without promoting last_verified."
+  ]
+}

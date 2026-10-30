@@ -1,0 +1,970 @@
+---
+title: Позиционная информация в Transformer
+type: textbook-chapter
+status: canonical
+last_updated: 2026-10-21
+source_unit_id:
+  - lecture-03-rope-derivation
+previous: "[[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров]]"
+next: "[[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/03 Полный Transformer]]"
+primary_sources:
+  - https://arxiv.org/abs/1706.03762
+  - https://arxiv.org/abs/1803.02155
+  - https://jmlr.org/papers/v21/20-074.html
+  - https://arxiv.org/abs/2104.09864
+  - https://arxiv.org/abs/2108.12409
+  - https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_03.pdf
+---
+
+# Позиционная информация в Transformer
+
+Если разбивать фразы на отдельные слова, `John loves Mary` и `Mary loves John`
+имеют одинаковый набор токенов, но описывают разные отношения.
+Для **полного немаскированного** self-attention
+без позиционных признаков перестановка строк входа так же переставляет
+Q/K/V и выходы. Формально $F(PX)=PF(X)$ для матрицы перестановки $P$.
+Это эквивариантность, а не неизменность выходной матрицы: содержание
+каждой строки меняет адрес вместе со своим токеном.
+
+Причинная маска запрещает позиции $i$ читать ключи $j>i$ и при этом
+сама создаёт асимметрию. Если переставить токены, но сохранить прежнюю
+треугольную маску, множество доступных предшественников изменится;
+прежнее равенство уже не обязано выполняться. Маска не добавляет явную
+метрическую кодировку расстояния, но может дать сети неявный позиционный
+сигнал. В causal NoPE исследовали выученные позиционные признаки
+([Haviv et al.](https://aclanthology.org/2022.findings-emnlp.99/),
+[Kazemnejad et al.](https://arxiv.org/abs/2305.19466)). Для произвольной
+маски эквивариантность восстанавливается лишь при согласованной перестановке
+её строк и столбцов: $M\mapsto PMP^\top$. Padding mask исключает
+недействительные позиции, но не заменяет выбранный позиционный механизм.
+
+Равенство для немаскированного внимания можно проверить по шагам.
+При перестановке строк $Q'=PQ$, $K'=PK$, $V'=PV$:
+
+$$
+\begin{aligned}
+S'&=PSP^\top,\\
+A'&=PAP^\top,\\
+Z'&=A'V'=PAV=PZ.
+\end{aligned}
+$$
+
+Softmax нормирует каждую строку по ключам, поэтому перестановка запросов
+переносит строки весов, а перестановка ключей — их столбцы.
+У модели нет отдельного признака «первый» или «третий»:
+токен сохраняет своё представление с тем же набором соседей.
+
+Для причинной маски контрпример получается даже без обучаемых оценок.
+Пусть значения равны $(1,3,7)$, а каждый запрос усредняет доступный префикс.
+Выходы равны $(1,2,11/3)$. После разворота входа получаются
+$(7,5,11/3)$, а разворот прежних выходов дал бы $(11/3,2,1)$.
+Разные множества предшественников уже различают позиции.
+Из этого не следует, что такое усреднение восстанавливает точные
+расстояния или решает произвольную задачу с порядком слов.
+
+Разные позиционные методы удобно сравнивать по месту, в котором они изменяют
+Transformer:
+
+1. **до первого слоя:** к эмбеддингу токена прибавляется абсолютный вектор;
+2. **в оценке связи:** к $q_i k_j^\top$ добавляется слагаемое, зависящее от
+   относительного смещения $j-i$;
+3. **перед вычислением оценки:** запрос и ключ преобразуются так, чтобы их скалярное
+   произведение зависело от $j-i$.
+
+## Отправная точка: где position входит в attention
+
+Для одной головы внимания до добавления позиционной информации используем
+строки $x_i\in\mathbb R^{1\times d_{model}}$, $q_i,k_i\in\mathbb R^{1\times d_h}$.
+Матрицы $W_Q,W_K$ имеют форму $d_{model}\times d_h$; в этом разделе
+ширина value также равна $d_h$:
+
+$$
+\begin{aligned}
+q_i&=x_iW_Q,\\
+k_j&=x_jW_K,\\
+v_j&=x_jW_V,
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+s_{ij}&=\frac{q_i k_j^\top}{\sqrt{d_h}}+M_{ij},\\
+a_{ij}&=\operatorname{softmax}_j(s_{ij}),\\
+z_i&=\sum_j a_{ij}v_j.
+\end{aligned}
+$$
+
+$M_{ij}$ обозначает causal или padding mask. Все рассматриваемые ниже методы
+можно описать как изменение $x_i$, $s_{ij}$ либо самих $q_i,k_j$.
+В реализации эти операции могут находиться в разных модулях:
+сложение векторов — рядом с таблицей эмбеддингов, относительный bias — рядом
+с матрицей оценок, поворот RoPE — после проекций Q/K.
+
+## Абсолютные позиции: адрес каждой строки
+
+### Обучаемая таблица
+
+Самый прямой способ — хранить матрицу
+$P\in\mathbb R^{T_{max}\times d_{model}}$. Для токена $t_i$ в первый слой подаётся
+
+$$
+h_i^{(0)}=e(t_i)+P_i.
+$$
+
+Именно так поступают BERT и ранние GPT. Позиция $i$ получает отдельный
+обучаемый вектор $P_i$, такой же размерности, как эмбеддинг токена.
+Для батча `[B,T,d]` с одинаковой нумерацией от 0 до T−1 берутся первые
+`T` строк таблицы `[T_max,d]` и прибавляются к каждому примеру.
+Если нумерация различается, строки выбираются по явным индексам позиций.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_positional_encoding_vectors.png]]
+
+*К эмбеддингам Je, suis и étudiant прибавляются позиционные векторы.
+В первый блок и его проекции $W_Q$, $W_K$, $W_V$ поступает уже сумма
+содержания и позиции.
+Источник: Jay Alammar, [The Illustrated
+Transformer](https://jalammar.github.io/illustrated-transformer/), лицензия
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*
+
+Таблица содержит $T_{max}d_{model}$ параметров. Градиент от каждого
+использования строки $P_i$ складывается с градиентами от той же позиции
+в других примерах. Если строка выделена в памяти, но ни разу не участвовала
+в обучении, её числа существуют, однако полезная позиционная геометрия
+для неё не выучена.
+
+Позиции за размером таблицы — другая проблема. При $T_{max}=2048$
+строки $P_{4096}$ вообще нет. Расширение таблицы, интерполяция и обучение
+добавленных строк меняют модель; возможность создать больший тензор
+сама по себе не обучает новые позиции.
+
+Рассмотрим два эмбеддинга $e_A=(2,0)$, $e_B=(0,1)$ и позиции
+$P_0=(0,1)$, $P_1=(1,0)$. Входы attention станут
+$h_0=(2,1)$ и $h_1=(1,1)$. При единичных проекциях Q/K
+скалярное произведение запроса 0 и ключа 1 равно 3.
+Его можно разложить на четыре слагаемых:
+
+$$
+\begin{aligned}
+h_0h_1^\top
+&=e_Ae_B^\top+e_AP_1^\top\\
+&\quad+P_0e_B^\top+P_0P_1^\top\\
+&=0+2+1+0=3.
+\end{aligned}
+$$
+
+Позиция меняет не только сравнение двух позиционных векторов.
+Появились также сравнения содержания одного токена с позицией другого.
+После деления на $\sqrt2$ оценки запроса 0 равны
+$(5/\sqrt2,3/\sqrt2)$, веса — примерно $(0.804430,0.195570)$.
+Если V тоже является единичной проекцией, выход равен $(1.804430,1)$.
+
+```python
+import math
+import torch
+from torch import nn
+
+dtype = torch.float64
+e = torch.tensor([[2., 0.], [0., 1.]], dtype=dtype, requires_grad=True)
+P = nn.Parameter(torch.tensor([[0., 1.], [1., 0.],
+                               [0., 0.], [0., 0.]], dtype=dtype))
+h = e + P[:2]
+# Identity Q/K/V projections isolate the effect of adding positions.
+scores = h @ h.T / math.sqrt(2)
+weights = scores.softmax(-1)
+z = weights @ h
+print("positioned inputs:", h.detach().tolist())
+print("scaled scores:", scores.detach().tolist())
+print("first output:", z[0].detach().tolist())
+torch.testing.assert_close(scores[0, 1],
+                           torch.tensor(3 / math.sqrt(2), dtype=dtype))
+
+loss = z[0].square().mean()
+loss.backward()
+assert torch.isfinite(e.grad).all() and torch.isfinite(P.grad).all()
+assert torch.count_nonzero(P.grad[2:]) == 0
+assert torch.count_nonzero(P.grad[:2]) > 0
+```
+
+В таблице примера четыре строки, но используются только первые две.
+Проверка backward показывает нулевой градиент у двух неиспользованных строк.
+Это учебный слой с единичными проекциями, без dropout и нормализации;
+дополнительные операции конкретной архитектуры разбираются дальше.
+
+Для относительного расстояния возникает дополнительная задача.
+Отношение «ключ на три позиции левее» в
+паре $(i,j)$ должно быть выучено через сочетание двух абсолютных векторов
+$P_i,P_j$. При сдвиге того же фрагмента текста вправо модель видит другую пару
+адресов, хотя относительная структура фразы не изменилась.
+
+### Синусоидальное кодирование
+
+В исходном Transformer вместо обучаемой таблицы использовались фиксированные
+синусы и косинусы:
+
+$$
+\begin{aligned}
+PE_{i,2k}&=\sin\left(i/10000^{2k/d}\right),\\
+PE_{i,2k+1}&=\cos\left(i/10000^{2k/d}\right).
+\end{aligned}
+$$
+
+Как и обучаемый вектор, $PE_i$ прибавляется к эмбеддингу токена. Различие состоит
+в происхождении вектора: формула не добавляет параметров и позволяет вычислить
+код для любого целого $i$. В §3.5 Vaswani et al. сообщают о близких
+результатах фиксированного и обучаемого вариантов на своей задаче перевода;
+это не сравнение качества всех моделей на произвольных длинах.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-25-31/d2l-sinusoidal-curves.svg]]
+
+*Координаты 6–9 при ширине кодирования 32, показанные на 60 позициях.
+Координаты 6 и 7 колеблются быстрее, чем 8 и 9; внутри каждой пары
+синус и косинус сдвинуты по фазе. Источник: Zhang et al., [Dive into Deep Learning,
+§11.6](https://d2l.ai/chapter_attention-mechanisms-and-transformers/self-attention-and-positional-encoding.html),
+лицензия [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-audit-25-31/d2l-positional-heatmap.svg]]
+
+*Тот же сигнал в матричном виде: строки — 60 позиций, столбцы — 32 координаты.
+Слева фаза быстро меняется от строки к строке; справа на том же диапазоне
+виден лишь небольшой участок медленного колебания. Источник: Zhang et al.,
+[Dive into Deep Learning,
+§11.6](https://d2l.ai/chapter_attention-mechanisms-and-transformers/self-attention-and-positional-encoding.html),
+лицензия [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).*
+
+При $d=4$ частоты равны 1 и 0.01 радиана на позицию.
+Позиция 0 имеет код $(0,1,0,1)$.
+В позиции 1 первая пара равна примерно $(0.841471,0.540302)$,
+вторая — $(0.010000,0.999950)$.
+За один шаг быстрая пара заметно поворачивается, медленная почти не меняется.
+Поэтому один и тот же индекс представлен несколькими масштабами.
+
+Для одной пары обозначим столбец синуса и косинуса через $c_i$.
+Формулы сложения углов дают
+
+$$
+c_i=\begin{bmatrix}\sin(i\omega)\\\cos(i\omega)\end{bmatrix},
+\qquad
+c_{i+r}=U_r c_i,
+$$
+
+$$
+U_r=\begin{bmatrix}
+\cos(r\omega)&\sin(r\omega)\\
+-\sin(r\omega)&\cos(r\omega)
+\end{bmatrix}.
+$$
+
+Матрица $U_r$ зависит от сдвига $r$, но не от исходной позиции $i$.
+В ней знак синуса отличается от стандартного поворота столбца
+$(x,y)$, потому что координаты здесь упорядочены как $(\sin,\cos)$.
+
+```python
+import math
+import torch
+
+def sinusoidal(positions, d, base=10000.):
+    if d <= 0 or d % 2 or base <= 1:
+        raise ValueError("positive even d and base > 1 required")
+    positions = torch.as_tensor(positions, dtype=torch.float64)
+    frequency = base ** (-torch.arange(0, d, 2, dtype=torch.float64) / d)
+    angles = positions[..., None] * frequency
+    return torch.stack((angles.sin(), angles.cos()), dim=-1).flatten(-2)
+
+P = sinusoidal(torch.arange(3), 4)
+print("sinusoidal rows:", P.tolist())
+torch.testing.assert_close(P[0], torch.tensor([0., 1., 0., 1.],
+                                              dtype=torch.float64))
+torch.testing.assert_close(P.square().sum(-1),
+                           torch.full((3,), 2., dtype=torch.float64))
+# For the [sin, cos] coordinate order, a shift acts by this matrix on columns.
+delta, frequency = 3., 1.
+c, s = math.cos(delta * frequency), math.sin(delta * frequency)
+U = torch.tensor([[c, s], [-s, c]], dtype=torch.float64)
+torch.testing.assert_close(U @ P[1, :2], sinusoidal([4], 4)[0, :2])
+print("one-position PE dot product:", (P[0] @ P[1]).item())
+```
+
+У каждой пары сумма квадратов равна единице, поэтому
+$\|PE_i\|^2=d/2$.
+Скалярное произведение двух чистых позиционных кодов имеет вид
+
+$$
+PE_iPE_j^\top=
+\sum_{k=0}^{d/2-1}\cos\bigl((i-j)\omega_k\bigr).
+$$
+
+Оно зависит только от разности индексов.
+Однако attention получает сумму содержания и позиции и применяет
+обучаемые проекции. Четыре слагаемых из предыдущего примера
+никуда не исчезают: свойство чистых PE не делает весь attention
+автоматически инвариантным к общему сдвигу.
+
+Формулу можно вычислить за пределами обучающей длины, но это не гарантирует
+качество на новых расстояниях. Модель видит новые сочетания фаз и новые
+множества ключей. Позднее это ограничение нужно отличать от физического
+лимита обучаемой таблицы.
+
+## Относительные представления Shaw: расстояние становится частью связи
+
+Shaw, Uszkoreit и Vaswani предложили кодировать не адреса $i$ и $j$ по
+отдельности, а направленное смещение $j-i$. Один из вариантов оценки связи имеет
+вид
+
+$$
+s_{ij}=\frac{q_i(k_j+a^K_{ij})^\top}{\sqrt{d_h}},
+$$
+
+а выход
+
+$$
+z_i=\sum_j a_{ij}(v_j+a^V_{ij}).
+$$
+
+Здесь $a^K_{ij}$ и $a^V_{ij}$ выбираются из обучаемых таблиц по смещению,
+ограниченному порогом $k$:
+
+$$
+\operatorname{clip}(j-i,k)=\max(-k,\min(k,j-i)).
+$$
+
+Расстояния дальше $k$ получают общий класс. Первое дополнительное слагаемое
+меняет **вес связи**: запрос сравнивается не только с содержанием ключа, но и с
+типом относительного положения. Второе меняет **передаваемое сообщение**:
+одинаковое значение может внести различный вклад в зависимости от направления и
+дальности связи.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/positions-2026-10-21/shaw-relative-figure1.png]]
+
+*На схеме связи $x_2\to x_1$, $x_2\to x_4$ и $x_4\to x_n$
+получают представления смещений $-1$, $2$ и крайнего класса $k$.
+Источник: Shaw et al.,
+[Self-Attention with Relative Position Representations, рис. 1](https://aclanthology.org/N18-2074.pdf#page=3),
+CC BY 4.0. Сохранены полный рисунок и исходная подпись.*
+
+Например, при $k=2$ запрос в позиции 4 различает ключи в позициях 3 и 4 как
+смещения $-1$ и $0$, а позиции 0, 1 и 2 все попадают в дальний левый класс
+$-2$. Если одинаково сдвинуть оба индекса на десять позиций,
+классы расстояний не изменятся. При тех же входящих Q/K/V и маске
+внимания это сохраняет вычисление связи.
+
+Для численного примера возьмём немаскированное внимание:
+запрос стоит в позиции 2, ключи — в 1, 2 и 4, а $k=1$.
+Классы смещений равны $(-1,0,1)$: последний ключ попал в крайний правый класс.
+Пусть скалярный запрос равен 1, все ключи равны 2,
+а относительные добавки к ключам — $(0,1,-1)$.
+Оценки получаются $(2,3,1)$, веса — примерно
+$(0.244728,0.665241,0.090031)$.
+
+Для значений $(10,20,30)$ и относительных добавок $(1,0,-2)$
+взвешиваются сообщения $(11,20,28)$.
+Выход равен примерно $18.517688$.
+Изменение относительного ключа меняет вес,
+изменение относительного значения — число, передаваемое по выбранной связи.
+
+```python
+import torch
+
+dtype = torch.float64
+query_position = 2
+key_positions = torch.tensor([1, 2, 4])
+clip_distance = 1
+relative = (key_positions - query_position).clamp(-clip_distance, clip_distance)
+# Table order is [-1, 0, +1]; scalar head dimension is 1.
+key_table = torch.tensor([0., 1., -1.], dtype=dtype, requires_grad=True)
+value_table = torch.tensor([1., 0., -2.], dtype=dtype, requires_grad=True)
+indices = relative + clip_distance
+q = torch.tensor(1., dtype=dtype)
+k = torch.tensor([2., 2., 2.], dtype=dtype)
+v = torch.tensor([10., 20., 30.], dtype=dtype)
+scores = q * (k + key_table[indices])
+weights = scores.softmax(-1)
+messages = v + value_table[indices]
+z = weights @ messages
+print("clipped offsets:", relative.tolist())
+print("Shaw weights:", weights.detach().tolist())
+print("Shaw messages:", messages.detach().tolist(), "output:", z.item())
+torch.testing.assert_close(scores, torch.tensor([2., 3., 1.], dtype=dtype))
+z.backward()
+# For this scalar head: dz/d(relative value) = attention weight.
+torch.testing.assert_close(value_table.grad, weights.detach())
+expected_key_grad = q * weights.detach() * (messages.detach() - z.detach())
+torch.testing.assert_close(key_table.grad, expected_key_grad)
+```
+
+Для этого скалярного случая производная по относительному значению
+равна весу связи. Производная по относительному ключу равна
+$q\,a_{ij}(v_j+a^V_{ij}-z_i)$.
+Обе формулы проверены через backward.
+
+В наивной реализации для каждой пары создаётся отдельный вектор,
+то есть промежуточный тензор размера $T_qT_kd_h$.
+В §3.3 Shaw et al. разделяют оценку на обычное произведение Q/K
+и вклад относительных представлений, переиспользуя их между примерами
+и, при выбранном sharing, между головами.
+Таблицы содержат по $2k+1$ векторов, а не отдельные параметры для всех пар.
+Политика sharing и материализация промежуточных тензоров — отдельные
+решения реализации.
+
+## T5 relative position bias: один скаляр на bucket и голову
+
+В T5 позиционный сигнал self-attention encoder и decoder задаётся
+обучаемой скалярной добавкой для каждой головы:
+
+$$
+\begin{aligned}
+s_{ij}^{(h)}&=q_i^{(h)}(k_j^{(h)})^\top\\
+&\quad+b_h\bigl(\operatorname{bucket}(j-i)\bigr)+M_{ij}.
+\end{aligned}
+$$
+
+В [закреплённой реализации T5](https://github.com/huggingface/transformers/blob/8cb5963cc22174954e7dca2c0a3320b7dc2f4edc/src/transformers/models/t5/modeling_t5.py#L529-L562)
+Q/K перемножаются без дополнительного деления на $\sqrt{d_h}$;
+инициализация проекций учитывает этот выбор. Здесь приведён именно вариант T5.
+Добавить относительный bias можно и к обычному scaled attention,
+но численный масштаб такой конфигурации будет другим.
+
+В отличие от Shaw, позиционное представление — одно число,
+а не вектор ширины головы. Оно меняет softmax, но не V.
+У разных голов разные числа для одного класса расстояний.
+В [статье T5, §2.1](https://jmlr.org/papers/volume21/20-074/20-074.pdf#page=5)
+параметры разделяются между слоями.
+В указанном коде encoder и decoder имеют свои таблицы;
+внутри каждого стека рассчитанный bias передаётся следующим слоям.
+Cross-attention не получает такую обучаемую таблицу расстояний.
+
+Для 32 buckets и максимального расстояния 128 границы различаются:
+
+- в causal decoder все 32 класса отданы текущей и прошлым позициям:
+  расстояния 0–15 кодируются точно, затем используются логарифмические интервалы;
+- в двунаправленном encoder по 16 классов отведено каждому направлению:
+  внутри каждого направления точны расстояния 0–7.
+  Для положительного $j-i$ добавляется смещение номера класса 16.
+
+Нулевое смещение имеет номер 0.
+Функция causal-bucket возвращает 0 и для будущих позиций:
+их запрещает отдельная причинная маска, а не номер bucket.
+
+| Модуль расстояния | Decoder | Encoder: прошлое | Encoder: будущее на той же дистанции |
+| ---: | ---: | ---: | ---: |
+| 0 | 0 | 0 | 0 |
+| 1 | 1 | 1 | 17 |
+| 8 | 8 | 8 | 24 |
+| 16 | 16 | 10 | 26 |
+| 32 | 21 | 12 | 28 |
+| 64 | 26 | 14 | 30 |
+| 128 | 31 | 15 | 31 |
+| 512 | 31 | 15 | 31 |
+
+Большие интервалы получаются из логарифма отношения расстояния к границе
+точной области, после чего номер ограничивается последним классом.
+Код ниже адаптирует
+[функцию из Transformers v4.57.1](https://github.com/huggingface/transformers/blob/8cb5963cc22174954e7dca2c0a3320b7dc2f4edc/src/transformers/models/t5/modeling_t5.py#L400-L446)
+(Apache-2.0). Вместо вычисления неиспользуемого $\log0$
+малые расстояния в логарифмической ветви временно ограничены снизу.
+Номера buckets от этого не меняются.
+
+```python
+import math
+import torch
+from torch import nn
+
+# Bucket mapping adapted from Mesh TensorFlow/T5/Hugging Face (Apache-2.0).
+# Copyright 2018 Mesh TensorFlow authors, T5 Authors and HuggingFace Inc. team.
+def t5_bucket(relative_position, bidirectional=True,
+              num_buckets=32, max_distance=128):
+    if num_buckets < 4 or (bidirectional and num_buckets % 2):
+        raise ValueError("invalid bucket count")
+    relative_position = torch.as_tensor(relative_position, dtype=torch.long)
+    buckets_per_direction = num_buckets // 2 if bidirectional else num_buckets
+    exact = buckets_per_direction // 2
+    if max_distance <= exact:
+        raise ValueError("max_distance must exceed the exact range")
+    if bidirectional:
+        direction = (relative_position > 0).long() * buckets_per_direction
+        distance = relative_position.abs()
+    else:
+        direction = torch.zeros_like(relative_position)
+        distance = (-relative_position).clamp_min(0)
+    # Clamp only the unused logarithmic branch at small distances.
+    large = exact + (
+        torch.log(distance.clamp_min(exact).float() / exact)
+        / math.log(max_distance / exact) * (buckets_per_direction - exact)
+    ).long()
+    large = large.clamp_max(buckets_per_direction - 1)
+    return direction + torch.where(distance < exact, distance, large)
+
+distance = torch.tensor([0, 1, 7, 8, 15, 16, 32, 64, 128, 512])
+print("causal buckets:", t5_bucket(-distance, False).tolist())
+print("encoder past:", t5_bucket(-distance, True).tolist())
+print("encoder future:", t5_bucket(distance, True).tolist())
+
+relative = -torch.tensor([1, 128, 512])
+bucket_ids = t5_bucket(relative, False)
+table = nn.Embedding(32, 2, dtype=torch.float64)
+with torch.no_grad():
+    table.weight.zero_()
+    table.weight[31] = torch.tensor([-1., 1.], dtype=torch.float64)
+# Shape [Tk,H] -> [H,Tk]; all content logits are zero.
+bias = table(bucket_ids).T
+weights = bias.softmax(-1)
+values = torch.tensor([10., 20., 100.], dtype=torch.float64)
+z = weights @ values
+print("T5 two-head weights:", weights.detach().tolist())
+print("T5 two-head outputs:", z.detach().tolist())
+z.sum().backward()
+assert torch.isfinite(table.weight.grad).all()
+expected_far = (weights[:, 1:] * (values[1:] - z[:, None])).sum(-1)
+torch.testing.assert_close(table.weight.grad[31], expected_far)
+```
+
+В последнем примере ключи находятся на расстояниях 1, 128 и 512,
+а оценки содержания равны нулю.
+Первая голова имеет bias $-1$ для bucket 31 и получает веса примерно
+$(0.576117,0.211942,0.211942)$.
+Вторая имеет bias $+1$ для того же класса и сильнее учитывает оба дальних ключа.
+
+Расстояния 128 и 512 получают одинаковую позиционную добавку.
+Если оценки содержания различаются, их итоговые веса всё равно могут отличаться.
+Огрубление относится к одному bias, а не к способности всей многослойной сети
+использовать дальние сведения.
+Параметры одного bucket получают сумму градиентов от всех попавших в него пар.
+Для одного запроса и скалярного выхода эта сумма имеет вид
+$\sum_{j\in b} a_{ij}(v_j-z_i)$; её проверяет пример.
+
+Одна таблица имеет $32H$ параметров.
+Для decoder и encoder это две отдельные таблицы, если оба стека
+используют этот механизм и одинаковое число голов.
+
+<a id="rope-relative-position-derivation"></a>
+
+## RoPE: позиция как поворот query и key
+
+В предыдущих схемах позиция добавлялась к эмбеддингу либо к оценке связи.
+RoPE преобразует уже спроецированные Q/K:
+каждая пара координат поворачивается на угол, пропорциональный позиции.
+V остаётся без поворота.
+
+Для одного и того же содержания требуется сохранить оценку связи
+при общем сдвиге обоих индексов. На
+[слайдах 30–35 CS336 Lecture 3](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_03.pdf#page=30)
+это требование ведёт от смешанных слагаемых абсолютных кодов
+к общей геометрии поворотов.
+Если оба вектора повернуть дополнительно на одинаковый угол,
+их взаимное скалярное произведение сохранится.
+
+Для столбца из двух координат стандартный поворот равен
+
+$$
+R_i(\theta)=
+\begin{bmatrix}
+\cos(i\theta)&-\sin(i\theta)\\
+\sin(i\theta)& \cos(i\theta)
+\end{bmatrix}.
+$$
+
+Наши состояния записаны строками, поэтому
+
+$$
+q_i'=q_iR_i^\top,\qquad k_j'=k_jR_j^\top.
+$$
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/positions-2026-10-21/roformer-figure1.png]]
+
+*Вверху одна пара координат вращается на угол $m\theta_1$.
+Внизу тот же приём применяется к нескольким парам с разными частотами.
+Источник: Su et al.,
+[RoFormer v5, рис. 1](https://arxiv.org/pdf/2104.09864v5#page=5),
+CC BY-NC-ND 4.0. Рисунок и исходная подпись воспроизведены без изменения
+содержания.*
+
+Подставим преобразованные строки в скалярное произведение:
+
+$$
+\begin{aligned}
+q_i'(k_j')^\top
+&=q_iR_i^\top R_jk_j^\top\\
+&=q_iR_{j-i}k_j^\top.
+\end{aligned}
+$$
+
+Во второй строке использованы $R_i^\top=R_{-i}$
+и правило сложения углов $R_{-i}R_j=R_{j-i}$.
+После сдвига обоих индексов на $c$ разность
+$(j+c)-(i+c)$ остаётся прежней.
+
+Это свойство фиксированных входящих Q/K и согласованной маски.
+Если к тексту добавлены новые предшественники, изменятся контекст
+и представления токенов; это уже не просто замена двух индексов.
+Утверждение также не означает, что RoPE восстанавливает произвольное
+расстояние по одному числу.
+
+### Маленький численный пример RoPE
+
+Возьмём $q=(1,2)$, $k=(3,4)$ и для иллюстрации
+$\theta=\pi/2$.
+Запрос стоит в позиции $i=2$, ключ — в $j=1$:
+
+1. Запрос поворачивается на $180^\circ$: $q'=(-1,-2)$.
+2. Ключ поворачивается на $90^\circ$: $k'=(-4,3)$.
+3. Скалярное произведение равно $4-6=-2$.
+4. В относительной форме $R_{j-i}=R_{-1}$,
+   $R_{-1}k^\top=(4,-3)^\top$,
+   поэтому $qR_{-1}k^\top=4-6=-2$.
+
+До вращения произведение было равно 11.
+Нормы при этом сохранились: $\|q'\|^2=5$, $\|k'\|^2=25$.
+Если ошибиться знаком и вращать оба вектора в противоположную сторону,
+получится $+2$, а не $-2$.
+Такой пример замечает ошибку, которую скрывали бы нулевой ответ
+или одинаковые Q/K.
+
+Для головы ширины $d_h$ используются $d_h/2$ пар.
+Для нумерации $r=0,\ldots,d_h/2-1$ частоты равны
+
+$$
+\theta_r=\operatorname{base}^{-2r/d_h}.
+$$
+
+При $d_h=4$ и base 10000 первая частота равна 1,
+вторая — 0.01 радиана на позицию.
+Скалярное произведение складывает вклады всех пар;
+повороты сохраняют норму каждой пары и всего вектора.
+Эта норма не является мерой расстояния до запроса.
+
+Не нужно строить большую блочно-диагональную матрицу.
+Для пары $(u,v)$ и угла $\varphi$ вычисляются две координаты:
+
+$$
+\begin{aligned}
+u'&=u\cos\varphi-v\sin\varphi,\\
+v'&=u\sin\varphi+v\cos\varphi.
+\end{aligned}
+$$
+
+Это реализация из §3.4.2 RoFormer.
+Для записи строками $q_i'=q_iR_i^\top$ обратный проход даёт
+$G_{q_i}=G_{q_i'}R_i$: применяется обратное к прямому преобразование.
+Сама операция RoPE не добавляет обучаемых параметров.
+Проекции Q/K по-прежнему обучаются.
+
+В следующем коде вращается вся голова с соседними парами координат.
+Позиции могут быть общими `[T]` либо полностью совпадать с ведущими осями
+входа. Для `[B,H,T,D]` разные позиции примеров передаются как `[B,H,T]`,
+например через `position_ids[:,None,:].expand(-1,H,-1)`.
+Неявное сопоставление `[B,T]` с осью голов здесь запрещено.
+
+```python
+import math
+import torch
+import torch.nn.functional as F
+
+def apply_rope(x, positions, base=10000.):
+    # x: [...,T,D]. Positions: [T] or exactly x.shape[:-1].
+    if not x.is_floating_point() or x.ndim < 2:
+        raise ValueError("x must be floating point [...,T,D]")
+    d = x.shape[-1]
+    if d <= 0 or d % 2 or base <= 1:
+        raise ValueError("positive even rotary width and base > 1 required")
+    positions = torch.as_tensor(positions, device=x.device)
+    if positions.shape not in [(x.shape[-2],), x.shape[:-1]]:
+        raise ValueError("positions must be [T] or match every leading axis")
+    angle_dtype = torch.float64 if x.dtype == torch.float64 else torch.float32
+    frequency = base ** (
+        -torch.arange(0, d, 2, device=x.device, dtype=angle_dtype) / d)
+    angles = positions.to(angle_dtype)[..., None] * frequency
+    c, s = angles.cos(), angles.sin()
+    even, odd = x[..., 0::2], x[..., 1::2]
+    rotated = torch.stack((even*c - odd*s, even*s + odd*c), dim=-1)
+    return rotated.flatten(-2).to(x.dtype)
+
+torch.set_num_threads(1)
+torch.manual_seed(31)
+B, H, T, D = 2, 3, 4, 4
+q, k, v = [torch.randn(B, H, T, D, dtype=torch.float64, requires_grad=True)
+           for _ in range(3)]
+positions = torch.arange(T)
+qr = apply_rope(q, positions)
+kr = apply_rope(k, positions)
+torch.testing.assert_close(qr.square().sum(-1), q.square().sum(-1))
+torch.testing.assert_close(
+    qr @ kr.transpose(-2, -1),
+    apply_rope(q, positions + 5) @ apply_rope(k, positions + 5).transpose(-2, -1))
+
+allowed = positions[None, :] <= positions[:, None]
+out = F.scaled_dot_product_attention(qr, kr, v, attn_mask=allowed, dropout_p=0.)
+# Cache contains keys already rotated at positions 0,1,2,3.
+last_allowed = positions[None, :] <= positions[-1:]
+cached = F.scaled_dot_product_attention(
+    apply_rope(q[..., -1:, :], positions[-1:]), kr, v,
+    attn_mask=last_allowed, dropout_p=0.)
+torch.testing.assert_close(cached, out[..., -1:, :])
+wrong = F.scaled_dot_product_attention(
+    apply_rope(q[..., -1:, :], torch.tensor([0])), kr, v,
+    attn_mask=last_allowed, dropout_p=0.)
+print("full-versus-cache error:", (cached-out[..., -1:, :]).abs().max().item())
+print("reset-position error:", (wrong-cached).abs().max().item())
+assert not torch.allclose(wrong, cached)
+
+out.square().mean().backward()
+for tensor in (q, k, v):
+    assert tensor.grad is not None and torch.isfinite(tensor.grad).all()
+```
+
+Полный проход и чтение последнего запроса из cache дают один и тот же выход.
+Повторное присвоение запросу позиции 0 меняет его относительные углы
+с уже сохранёнными ключами. В самом cache находятся ключи,
+которые уже были повёрнуты: вращать их второй раз не нужно.
+Смысл позиции и причинное правило доступа остаются отдельными условиями.
+
+У реализации есть ещё два независимых выбора:
+
+- **Порядок пар.** Здесь пары соседние: $(0,1),(2,3)$.
+  В варианте `rotate_half` при ширине 4 пары могут быть $(0,2),(1,3)$.
+  Один и тот же механизм можно записать в обоих порядках,
+  если согласованно переставить координаты и выходы проекций Q/K.
+  Просто заменить функцию поворота в готовом checkpoint недостаточно.
+- **Вращаемая ширина.** Можно повернуть только чётную часть головы
+  и оставить остальные координаты без изменений.
+  Например, у $(a,b,c,d)$ поворачивается $(a,b)$, а $(c,d)$ сохраняется.
+  Это отдельная конфигурация; приведённый код вращает все D координат.
+
+RoPE также не задаёт монотонного штрафа дальним ключам.
+У стандартной первой пары частота $\theta_0=1$.
+При $q=k=(1,0)$ произведения для расстояний 0, 3 и 6 равны
+соответственно 1, $\cos3\approx-0.989992$ и $\cos6\approx0.960170$.
+Дальний ключ может иметь более высокую оценку, чем промежуточный.
+В §3.4.3 RoFormer рассматриваются суммы вкладов разных частот
+и оценка их дальнего поведения; её нельзя читать как гарантию,
+что любой конкретный attention score убывает на каждом шаге.
+
+## ALiBi: линейный штраф за дальность
+
+Attention with Linear Biases добавляет к оценкам головы фиксированный
+линейный штраф за расстояние до прошлого ключа.
+Позиционные векторы к входу не прибавляются, Q/K не поворачиваются:
+
+$$
+\begin{gathered}
+s_{ij}^{(h)}
+=\frac{q_i^{(h)}(k_j^{(h)})^\top}{\sqrt{d_h}}-m_h(i-j),\\
+j\le i.
+\end{gathered}
+$$
+
+Здесь $m_h>0$ — заранее заданный наклон, а не обучаемый параметр.
+При одинаковом содержании дальний ключ получает меньшую оценку.
+Разные наклоны создают разную силу предпочтения близких ключей;
+это не гарантирует заранее определённую специализацию голов.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/positions-2026-10-21/alibi-original.jpeg]]
+
+*К матрице оценок содержания прибавляется матрица отрицательных расстояний,
+умноженная на наклон головы. Будущие позиции закрывает причинная маска;
+линейный bias сам по себе их не запрещает.
+Источник: Press, Smith, Lewis,
+[репозиторий ALiBi](https://github.com/ofirpress/attention_with_linear_biases/blob/4b92f28a005ead2567abe2359f633e73e08f3833/README.md),
+[MIT](https://github.com/ofirpress/attention_with_linear_biases/blob/4b92f28a005ead2567abe2359f633e73e08f3833/LICENSE).
+Исходный JPEG сохранён без изменений.*
+
+Возьмём запрос в позиции 5 и три одинаковые оценки содержания `2.0` для ключей
+4, 3 и 1. При $m_h=0.25$:
+
+| key $j$ | расстояние $5-j$ | bias | итоговый logit |
+|---:|---:|---:|---:|
+| 4 | 1 | $-0.25$ | 1.75 |
+| 3 | 2 | $-0.50$ | 1.50 |
+| 1 | 4 | $-1.00$ | 1.00 |
+
+Softmax даёт примерно $(0.444214,0.345954,0.209832)$.
+Для значений $(10,20,100)$ выход равен $32.344406$.
+Отношение весов ближайшего и самого дальнего ключа равно
+$\exp(0.25\cdot(4-1))=\exp(0.75)$.
+Одинаковая оценка содержания сокращается в отношении экспонент.
+
+В [исходной реализации](https://github.com/ofirpress/attention_with_linear_biases/blob/4b92f28a005ead2567abe2359f633e73e08f3833/fairseq/models/transformer.py#L742-L762)
+для восьми голов наклоны равны $2^{-1},2^{-2},\ldots,2^{-8}$.
+Это геометрическая, а не равномерная шкала.
+Для числа голов, не равного степени двойки, код дополняет ближайшую
+меньшую шкалу частью более плотной.
+
+```python
+import math
+import torch
+
+def alibi_slopes(n):
+    if not isinstance(n, int) or n <= 0:
+        raise ValueError("positive integer head count required")
+    def power_of_two(count):
+        start = 2 ** (-2 ** -(math.log2(count) - 3))
+        return [start * start**i for i in range(count)]
+    if math.log2(n).is_integer():
+        return power_of_two(n)
+    lower = 2 ** math.floor(math.log2(n))
+    return power_of_two(lower) + alibi_slopes(2*lower)[0::2][:n-lower]
+
+slopes = torch.tensor(alibi_slopes(8), dtype=torch.float64)
+m = slopes[1]  # 0.25
+query_position = 5
+key_positions = torch.tensor([4, 3, 1])
+bias = -m * (query_position - key_positions)
+content = torch.full((3,), 2., dtype=torch.float64)
+weights = (content + bias).softmax(-1)
+values = torch.tensor([10., 20., 100.], dtype=torch.float64)
+print("eight ALiBi slopes:", slopes.tolist())
+print("ALiBi weights:", weights.tolist(), "output:", (weights @ values).item())
+torch.testing.assert_close(weights[0] / weights[2], torch.exp(3*m))
+
+# Remove a row-wise constant, keeping exactly the same causal softmax.
+positions = torch.arange(5)
+distance = positions[:, None] - positions[None, :]
+allowed = distance >= 0
+relative_bias = -slopes[:, None, None] * distance
+column_bias = slopes[:, None, None] * positions[None, None, :]
+content = torch.arange(25, dtype=torch.float64).reshape(1, 5, 5) / 7
+full = (content + relative_bias).masked_fill(~allowed, -torch.inf)
+compact = (content + column_bias).masked_fill(~allowed, -torch.inf)
+torch.testing.assert_close(full.softmax(-1), compact.softmax(-1))
+print("relative-bias and column-bias attention agree")
+```
+
+Вторая проверка объясняет, почему реализация авторов может хранить
+добавку, зависящую только от ключевого индекса.
+Равенство $-m_h(i-j)=m_hj-m_hi$ выделяет константу строки $-m_hi$.
+Она сокращается при softmax, поэтому при той же причинной маске
+можно оставить $m_hj$. Это сохраняет веса и не превращает ALiBi
+в абсолютную позиционную таблицу.
+
+В [статье, §3](https://ofir.io/train_short_test_long.pdf#page=5)
+bias добавляется после масштабирования скалярного произведения.
+Делить сам линейный штраф ещё раз на $\sqrt{d_h}$ не следует.
+
+Линейная функция определена на любой дистанции.
+Эксперименты ALiBi проверяют обучение на коротком и применение
+на более длинном контексте; это эмпирический результат конкретных
+настроек, а не гарантия для всех задач.
+При большой дистанции штраф может подавить нужный дальний ключ,
+поэтому одной технической возможности продолжить матрицу недостаточно.
+
+## Один пример, шесть разных вмешательств
+
+Пусть запрос стоит в позиции $i=5$, ключ — в $j=2$, то есть $j-i=-3$.
+
+- **learned absolute:** в первый слой вошли $e(t_5)+P_5$ и $e(t_2)+P_2$;
+  расстояние должно проявиться через обученные проекции;
+- **sinusoidal:** туда же вошли $e(t_5)+PE_5$ и $e(t_2)+PE_2$, но векторы
+  получены фиксированной формулой;
+- **Shaw relative:** к $k_2$ при вычислении связи добавился вектор класса
+  $\operatorname{clip}(-3,k)$; при полном варианте позиционный вектор добавится и к $v_2$;
+- **T5 bias:** в logit головы добавился один скаляр bucket, содержащего $-3$;
+- **RoPE:** $q_5$ и $k_2$ повернулись отдельно, а их dot product содержит
+  относительный поворот $R_{-3}$;
+- **ALiBi:** в causal decoder из logit вычтен штраф $3m_h$.
+
+## Сравнение методов
+
+| Метод | Где меняется вычисление | Параметры позиции | Относительное расстояние | За пределами обучающей длины |
+|---|---|---:|---|---|
+| Learned absolute | $x_i\leftarrow e(t_i)+P_i$ до первого слоя | $T_{max}d$ | Только неявно через $P_i,P_j$ | Неиспользованные строки не обучены; за размером таблицы строк нет |
+| Sinusoidal | $x_i\leftarrow e(t_i)+PE_i$ до первого слоя | 0 | Может быть извлечено из пар фаз | Формула определена, качество не гарантировано |
+| Shaw relative | Вектор $a^K_{ij}$ в score, иногда $a^V_{ij}$ в message | Таблицы relative vectors | Явно, обычно с clipping | Дальние расстояния сливаются в крайний класс |
+| T5 bias | Скаляр bucket bias в logits каждой головы | Число buckets × $H$ на стек | Явно и bucketed | Новые дистанции попадают в грубые дальние buckets |
+| RoPE | Поворот $Q,K$ в каждом слое внимания | 0 | Возникает в скалярном произведении | Формула определена; качество расширения проверяется отдельно |
+| ALiBi | Фиксированный линейный bias в logits | 0 | Явно через расстояние | Функция продолжается линейно; возможен сильный дальний штраф |
+
+Позиционный метод входит в обученную архитектуру.
+Замена обучаемой таблицы на RoPE меняет входы проекций и их оценки,
+даже если все формы тензоров совпадают.
+Существующие веса не становятся весами другой позиционной модели
+из-за замены одного класса в коде.
+
+## Экстраполяция: что именно следует проверять
+
+«Метод поддерживает длину 128K» может означать лишь то, что код не падает. Для
+оценки нужны как минимум четыре независимых свойства:
+
+1. **локальное качество:** перплексия и метрики целевых задач на длинах,
+   встречавшихся при обучении;
+2. **использование расстояния:** извлечение фактов и синтетические задачи
+   с ответом в разных частях контекста;
+3. **устойчивость генерации:** отсутствие деградации, повторов и потери
+   инструкции при генерации длинного ответа;
+4. **вычислительная осуществимость:** память KV-cache и стоимость attention,
+   которые позиционный метод сам по себе не уменьшает.
+
+Для RoPE различаются как минимум два преобразования:
+масштабирование индексов $i\mapsto i/s$ и изменение base.
+Первое делит все частоты на $s$.
+Второе изменяет их по-разному: при $d_h=4$
+переход base от 10000 к 40000 меняет $(1,0.01)$ на $(1,0.005)$,
+а деление индекса на 4 даёт эффективные частоты $(0.25,0.0025)$.
+Это не взаимозаменяемые настройки.
+
+После сжатия индексов расстояние между соседями в фазе тоже уменьшается.
+Совместимость с checkpoint и обучение на длинных данных проверяются отдельно.
+Подробные способы расширения контекста продолжаются в
+[[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание|главе о длинном контексте]].
+
+Если модель с RoPE принимает 128K токенов, это ещё не доказывает, что она
+извлекает информацию одинаково хорошо на 8K и 120K. Один успешный
+needle-in-a-haystack пример также слабее кривой качества по позициям, длинам и
+нескольким типам задач.
+
+## Практические ошибки, которые не видны по shapes
+
+- При генерации с cache новый токен должен получить абсолютный `position_id`,
+  продолжающий уже закэшированные ключи, а не снова ноль.
+- В батче с левыми заполнителями позиции настоящих токенов должны согласовываться
+  с правилом, использованным при обучении; индекс строки тензора не всегда равен `position_id`.
+- Реализации RoPE различаются порядком сопряжённых координат (`rotate_half`,
+  interleaved layout), `base` и scaling. Несовпадение с checkpoint даёт
+  корректные формы и неправильное качество.
+- Режим функции T5 buckets различается для двунаправленного encoder и causal decoder.
+  Нельзя переносить номера классов из одного режима в другой:
+  они по-разному кодируют направления и точные расстояния.
+- Padding mask, causal mask и positional bias складываются с logits, но имеют
+  разные смыслы. Ни один позиционный метод не делает padding невидимым.
+
+## Краткие итоги
+
+В исходном encoder–decoder Transformer синусоидальные коды прибавляются
+к эмбеддингам перед первым слоем. В следующих слоях позиционный сигнал
+проходит через attention, FFN и residual-соединения вместе с остальными признаками.
+Его не требуется заново прибавлять в каждом блоке.
+
+У RoPE поворот применяется в каждом слое к новым проекциям Q/K.
+У T5 и ALiBi позиционная добавка участвует в оценках каждого слоя;
+сами значения V от этой операции не меняются.
+Эти различия задают места операций в полном блоке, который собирается дальше.
+
+## Источники и дальнейшее чтение
+
+- Vaswani et al., [Attention Is All You
+  Need](https://arxiv.org/abs/1706.03762) — sinusoidal positional encoding.
+- Shaw, Uszkoreit, Vaswani, [Self-Attention with Relative Position
+  Representations](https://arxiv.org/abs/1803.02155) — vector-valued relative
+  key/value representations.
+- Raffel et al., [Exploring the Limits of Transfer Learning with a Unified
+  Text-to-Text Transformer](https://jmlr.org/papers/v21/20-074.html) — T5
+  relative position buckets и архитектура модели.
+- Su et al., [RoFormer: Enhanced Transformer with Rotary Position
+  Embedding](https://arxiv.org/abs/2104.09864) — вывод и эксперименты RoPE.
+- Press, Smith, Lewis, [Train Short, Test Long: Attention with Linear Biases
+  Enables Input Length Extrapolation](https://arxiv.org/abs/2108.12409) — ALiBi.
+- Stanford CS224N, [Self-Attention and Transformers lecture
+  notes](https://web.stanford.edu/class/cs224n/readings/cs224n-self-attention-transformers-2023_draft.pdf)
+  — вывод перестановочной эквивариантности и относительные позиции.
+- Zhang et al., [Dive into Deep Learning: Self-Attention and Positional
+  Encoding](https://d2l.ai/chapter_attention-mechanisms-and-transformers/self-attention-and-positional-encoding.html)
+  — исполняемые примеры sinusoidal encoding.
+- Stanford CS336, [Lecture 3, слайды 30–35](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_03.pdf#page=30)
+  — смешанные слагаемые абсолютного кодирования, повороты и место RoPE в слое.
+- Hugging Face, [T5Attention в Transformers v4.57.1](https://github.com/huggingface/transformers/blob/8cb5963cc22174954e7dca2c0a3320b7dc2f4edc/src/transformers/models/t5/modeling_t5.py)
+  — точные buckets, sharing и масштаб оценок.
+- Press et al., [закреплённая реализация ALiBi](https://github.com/ofirpress/attention_with_linear_biases/blob/4b92f28a005ead2567abe2359f633e73e08f3833/fairseq/models/transformer.py#L742-L762)
+  — наклоны голов и сокращение константы строки.
+- Jay Alammar, [The Illustrated
+  Transformer](https://jalammar.github.io/illustrated-transformer/) — визуальное
+  объяснение сложения token и position vectors.
+
+**Назад:** [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров]] ·
+**Дальше:** [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/03 Полный Transformer]].

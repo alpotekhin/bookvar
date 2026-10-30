@@ -1,0 +1,108 @@
+[
+  {
+    "id": "curated-consistency-uda-fixmatch-29b0d5927bde",
+    "asset": "00 Учебник/Assets/Figures/curated/consistency-training-2026-10-29/uda-fixmatch.png",
+    "author": "Po-Wei Huang, Abhinav Ramesh Kashyap, Yanxia Qin, Yajing Yang, Min-Yen Kan",
+    "title": "UDA and FixMatch text-domain training frameworks, original Figure 2",
+    "source_url": "https://aclanthology.org/2022.sdp-1.5/",
+    "source_image_url": "https://aclanthology.org/2022.sdp-1.5.pdf#page=5",
+    "source_asset": "05 Источники/Originals/consistency-training-2026-10-29/huang-2022-lightweight.pdf",
+    "source_asset_sha256": "7c803d203a04eaefc94bc3ed6d4cc9704a12741cdf6dff084e6f7f5909c36327",
+    "source_page": 5,
+    "crop_box_points": [
+      68,
+      65,
+      529,
+      253
+    ],
+    "dimensions_px": [
+      2562,
+      1045
+    ],
+    "sha256": "29b0d5927bde30edaef56c8837abcae5546378e2199c608e0546a61fdec5091e",
+    "bytes": 295739,
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/consistency-training-2026-10-29/acl-copyright.html",
+    "license_evidence_sha256": "c0b0f339f5dc67c243944f2210eafb96447dae36710cdfdc4e2d9a62061894be",
+    "render_dpi": 400,
+    "derivation": "pdf-page-render-crop",
+    "modifications": "Complete original figure and full caption rendered from the native vector PDF, preserving both panels, arrows, labels and margins. Surrounding article body omitted; no redrawing, relabeling, translation or bitmap upscaling.",
+    "metadata_status": "verified",
+    "rights_status": "source-license-verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch.md"
+    ]
+  },
+  {
+    "id": "curated-consistency-smart-e8a71d69e4c9",
+    "asset": "00 Учебник/Assets/Figures/curated/consistency-training-2026-10-29/smart-boundaries.png",
+    "author": "Haoming Jiang, Pengcheng He, Weizhu Chen, Xiaodong Liu, Jianfeng Gao, Tuo Zhao",
+    "title": "SMART original Figure 1, decision boundaries with and without local regularization",
+    "source_url": "https://aclanthology.org/2020.acl-main.197/",
+    "source_image_url": "https://aclanthology.org/2020.acl-main.197.pdf#page=4",
+    "source_asset": "05 Источники/Originals/consistency-training-2026-10-29/smart-acl-2020.pdf",
+    "source_asset_sha256": "ac5db36b575f8cba4d95e5187d1f65dfd8c8fed2967f2fe9b6777d2dc7a5c25b",
+    "source_page": 4,
+    "crop_box_points": [
+      70,
+      64,
+      293,
+      260
+    ],
+    "dimensions_px": [
+      1240,
+      1090
+    ],
+    "sha256": "e8a71d69e4c96ca209a4a898393180a814ed0570dbbc264b31a071ef0399b6b7",
+    "bytes": 116179,
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/consistency-training-2026-10-29/acl-copyright.html",
+    "license_evidence_sha256": "c0b0f339f5dc67c243944f2210eafb96447dae36710cdfdc4e2d9a62061894be",
+    "render_dpi": 400,
+    "derivation": "pdf-page-render-crop",
+    "modifications": "Complete original figure and full caption rendered from the native vector PDF, preserving both panels, arrows, labels and margins. Surrounding article body omitted; no redrawing, relabeling, translation or bitmap upscaling.",
+    "metadata_status": "verified",
+    "rights_status": "source-license-verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md"
+    ]
+  },
+  {
+    "id": "curated-consistency-vat-0285fec32fd6",
+    "asset": "00 Учебник/Assets/Figures/curated/consistency-training-2026-10-29/vat.gif",
+    "author": "Takeru Miyato",
+    "title": "Original VAT animation: Prediction and LDS",
+    "source_url": "https://github.com/takerum/vat_tf/tree/c5125d267531ce0f10b2238cf95604d287de63c8",
+    "source_image_url": "https://raw.githubusercontent.com/takerum/vat_tf/c5125d267531ce0f10b2238cf95604d287de63c8/vat.gif",
+    "commit": "c5125d267531ce0f10b2238cf95604d287de63c8",
+    "source_asset": "05 Источники/Originals/consistency-training-2026-10-29/vat.gif",
+    "source_asset_sha256": "0285fec32fd671d0427ab2342cbe6810a6c4bd8befa85b914a78e302ed7daffb",
+    "license": "MIT",
+    "license_url": "https://github.com/takerum/vat_tf/blob/c5125d267531ce0f10b2238cf95604d287de63c8/LICENSE.md",
+    "license_evidence": "05 Источники/Originals/consistency-training-2026-10-29/vat_tf-LICENSE.md",
+    "license_evidence_sha256": "8563d1383cd57b6185c56e951bf08c716d0a8b957550f9594137cb15b8b2c9aa",
+    "public_license_copy": "site/public/licenses/vat-tf-c5125d2-MIT.txt",
+    "sha256": "0285fec32fd671d0427ab2342cbe6810a6c4bd8befa85b914a78e302ed7daffb",
+    "dimensions_px": [
+      320,
+      180
+    ],
+    "frames": 14,
+    "bytes": 176301,
+    "derivation": "source-gif-copy",
+    "modifications": "Byte-identical complete original 14-frame GIF; no crop, frame removal, recoloring, upscaling or recompression.",
+    "metadata_status": "verified",
+    "rights_status": "source-license-verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch.md"
+    ]
+  }
+]

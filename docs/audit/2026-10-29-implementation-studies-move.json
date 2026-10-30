@@ -1,0 +1,28 @@
+{
+  "entries": [
+    {
+      "source": "01 Справочник/Inference/vLLM — анатомия inference engine.md",
+      "canonicalSource": "05 Источники/Implementation studies/Inside vLLM.md",
+      "decision": "alias",
+      "sourceSha256": "b266c24285d2f32df73ef1895e937ca94966474bf8a1118cdb15d4da2ae775dc",
+      "canonicalSha256": "9662caac4b2f93ca1ea095bf473982c94dda7ab499222d4688838a03f34b070c",
+      "notes": "Original case-study content retained in the source library; only metadata type and trailing blank lines changed."
+    },
+    {
+      "source": "01 Справочник/Inference/SGLang и RadixAttention.md",
+      "canonicalSource": "05 Источники/Implementation studies/SGLang and RadixAttention.md",
+      "decision": "alias",
+      "sourceSha256": "3ce29e8fc7670c33f3345ac04688764b077f0abc3793c1c52ed3cfbdcb8f6f94",
+      "canonicalSha256": "4c996adeec1d4173bd245a2bef78cb4258499496f925fa6043207f602ad3c25e",
+      "notes": "Original case-study content retained in the source library; only metadata type and trailing blank lines changed."
+    },
+    {
+      "source": "01 Справочник/Inference/Triton и GPU kernels.md",
+      "canonicalSource": "05 Источники/Implementation studies/Triton GPU kernels.md",
+      "decision": "alias",
+      "sourceSha256": "c4ac642d23b610cbf4f4232b6757bd51e3b67e38b632d4adebeea80fe8868628",
+      "canonicalSha256": "a5b2dd913b00d54e9efbbe1ca52e4970db262483cefa26d77bf906980fe1f978",
+      "notes": "Original case-study content retained in the source library; only metadata type and trailing blank lines changed."
+    }
+  ]
+}

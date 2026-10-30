@@ -1,0 +1,33 @@
+[
+  {
+    "id": "curated-tensorflow-original-graph-5d32f2184844",
+    "asset": "00 Учебник/Assets/Figures/curated/tensorflow-export-2026-10-27/two-layer-network.png",
+    "sha256": "5d32f2184844da9cb18c6f0965001b64e217e232624e4d0825a28bc6843f0e08",
+    "author": "The TensorFlow Authors",
+    "source_url": "https://github.com/tensorflow/docs/blob/9beed83c5fe8e4ccb742762394b084cd9e2bf2e0/site/en/guide/intro_to_graphs.ipynb",
+    "source_image_url": "https://raw.githubusercontent.com/tensorflow/docs/9beed83c5fe8e4ccb742762394b084cd9e2bf2e0/site/en/guide/images/intro_to_graphs/two-layer-network.png",
+    "commit": "9beed83c5fe8e4ccb742762394b084cd9e2bf2e0",
+    "source_asset": "05 Источники/Originals/tensorflow-export-2026-10-27/two-layer-network.png",
+    "source_asset_sha256": "5d32f2184844da9cb18c6f0965001b64e217e232624e4d0825a28bc6843f0e08",
+    "source_page_snapshot": "05 Источники/Originals/tensorflow-export-2026-10-27/intro_to_graphs.ipynb",
+    "source_page_sha256": "8761dceb5b816282511ebc913239e57954731d9b4862d8e2d6c980fa9ced2683",
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/tensorflow/docs/blob/9beed83c5fe8e4ccb742762394b084cd9e2bf2e0/LICENSE",
+    "license_evidence": "05 Источники/Originals/tensorflow-export-2026-10-27/docs-LICENSE.txt",
+    "license_evidence_sha256": "0cc546c0590cfaaa9b6e4a978a4906c5ba78a1e1e71b5b5e11281f591078d395",
+    "public_license_copy": "site/public/licenses/tensorflow-docs-9beed83c-Apache-2.0.txt",
+    "dimensions_px": [
+      826,
+      1003
+    ],
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original TensorBoard screenshot, byte-identical; no crop, redraw, translation or relabeling. Some names are abbreviated in the upstream image. The guide's two-layer network is explicitly distinguished from the chapter's scalar program.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-27",
+    "used_in": [
+      "00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow.md"
+    ]
+  }
+]

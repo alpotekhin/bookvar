@@ -1,0 +1,102 @@
+{
+  "date": "2026-10-29",
+  "scope": "Existing English index and inference physics chapter",
+  "checks": {
+    "physics": "publishing/tools/check_english_physics_parity.py: five actual Markdown programs, independent transfer ledger, 16 routing cases, unequal ranks, attention and latency arithmetic passed",
+    "navigation": "14 reading-path and index tests passed; obsolete textbook ordinals removed in both locales without editing source titles",
+    "render": "Pending integrated build and browser inspection; this journal does not claim visual completion"
+  },
+  "entries": [
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md",
+      "route": "textbook/inference/llm-inference-physics",
+      "status": "current",
+      "before_sha256": "5f8049f6f734373ea4ad2c15611ed4e2215e5cc6da4db52a5a39709e2e3490e9",
+      "after_sha256": "d87da76554c6fe72e35b7af5b05ea375f84cae8e5930698b6750c0a483302638",
+      "canonical": "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+      "canonical_sha256": "dcdc7f9712614b5342b15d03cba1beb7f641ea72b27fe6ee04730ad70fd66bdc",
+      "en_body_read": true,
+      "canonical_full_body_read": true,
+      "review_scope": "Full English and canonical pair read; explanations, executable examples, and original figures reconciled.",
+      "before_lines": 203,
+      "after_lines": 589,
+      "before_figure_count": 3,
+      "figure_count": 8,
+      "figures": [
+        "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/naive-inference.webp",
+        "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/cached-inference.webp",
+        "00 Учебник/Assets/Figures/curated/ml-systems/harvard/performance/prefill-vs-decode-roofline.svg",
+        "00 Учебник/Assets/Figures/curated/inference-serving/vllm-roofline.png",
+        "00 Учебник/Assets/Figures/curated/mbu-review-2026-10/jax-batch-scaling-latency.png",
+        "00 Учебник/Assets/Figures/curated/mbu-review-2026-10/jax-batch-scaling-throughput.png",
+        "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/paged-attention-fragmentation.png",
+        "00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png"
+      ],
+      "outstanding_expansions": [],
+      "previous_review": {
+        "path": "en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md",
+        "route": "textbook/inference/llm-inference-physics",
+        "status": "partial",
+        "before_sha256": "fb18a0eada8a1b658ea585191a996aaa97b551f4f784b3b9984ea6aba664e19b",
+        "after_sha256": "5f8049f6f734373ea4ad2c15611ed4e2215e5cc6da4db52a5a39709e2e3490e9",
+        "canonical": "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+        "canonical_sha256": "dcdc7f9712614b5342b15d03cba1beb7f641ea72b27fe6ee04730ad70fd66bdc",
+        "en_body_read": true,
+        "canonical_full_body_read": false,
+        "review_scope": "Full EN body; canonical chapter mapping and asset inventory; not complete source-by-source parity.",
+        "before_lines": 203,
+        "after_lines": 206,
+        "before_figure_count": 3,
+        "figure_count": 3,
+        "figures": [
+          "00 Учебник/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png",
+          "00 Учебник/Assets/Figures/curated/inference-serving/vllm-roofline.png",
+          "00 Учебник/Assets/Figures/curated/topics-53-59-source-first/paged-attention-fragmentation.png"
+        ],
+        "outstanding_expansions": [
+          "Extended roofline/bandwidth examples and four additional canonical figures."
+        ]
+      },
+      "before_render_sha256": "b565dab6ce636acdfbc6445986a319585bd4306ccafa932eba21efb07f9821f4",
+      "render_reflow": "docs/audit/2026-10-29-en-parity-render-reflow.json"
+    },
+    {
+      "path": "en/00 Textbook/_index.md",
+      "route": "textbook/index",
+      "status": "current",
+      "before_sha256": "ca98d27df73b4b1255b4a64e077864708a4acf55412298909dea7ef93c9a2d41",
+      "after_sha256": "f93f7c6724113637dd42500f31248c065275ad7c4f873b3055c243ee5714a3f7",
+      "canonical": "00 Учебник/_index.md",
+      "canonical_sha256": "084840b0f41d9ebfc0fa596d9d6e77cec7acdc2f59a6d7337ab9da06680549aa",
+      "en_body_read": true,
+      "canonical_full_body_read": true,
+      "review_scope": "Full English and canonical pair read; explanations, executable examples, and original figures reconciled.",
+      "before_lines": 106,
+      "after_lines": 331,
+      "before_figure_count": 0,
+      "figure_count": 0,
+      "figures": [],
+      "outstanding_expansions": [],
+      "previous_review": {
+        "path": "en/00 Textbook/_index.md",
+        "route": "textbook/index",
+        "status": "partial",
+        "before_sha256": "7d955f342bba8ef92ed9e02435428b26d82517793bdd5c8f182a960f68da6da9",
+        "after_sha256": "ca98d27df73b4b1255b4a64e077864708a4acf55412298909dea7ef93c9a2d41",
+        "canonical": "00 Учебник/_index.md",
+        "canonical_sha256": "084840b0f41d9ebfc0fa596d9d6e77cec7acdc2f59a6d7337ab9da06680549aa",
+        "en_body_read": true,
+        "canonical_full_body_read": false,
+        "review_scope": "Full EN body; canonical chapter mapping and asset inventory; not complete source-by-source parity.",
+        "before_lines": 106,
+        "after_lines": 122,
+        "before_figure_count": 0,
+        "figure_count": 0,
+        "figures": [],
+        "outstanding_expansions": [
+          "Core-versus-independent-module contents structure still follows the older 14-part English outline; fallback/reconciliation limitations are now explicit."
+        ]
+      }
+    }
+  ]
+}

@@ -9,17 +9,52 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`slides/vol1/00_course_overview/00_course_overview.tex`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static slide archive
+> Text and equations retain the original language. Layout wrappers are simplified;
+> speaker notes are separate, and original SVGs are not redrawn or cropped.
+> Unsupported TeX remains visible and is listed beside the affected slide.
+> This archive is not a checked transcript or a finished Bookvar chapter.
 
 # VOL1 Slides — Course Overview
 
 ## Readable slide sequence
 
+## Course Overview
+
+[Original slide 1](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L63)
+
+The Physics of AI Engineering
+
 ## Visual Language
 
-{
+[Original slide 2](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L69)
+
+Throughout this course, colors carry meaning:
+
+**Blue** — Compute / Processing
+
+GPU ops, forward/backward pass, inference
+
+**Green** — Data / Memory
+
+Data flow, caches, healthy paths
+
+**Orange** — Routing / Scheduling
+
+Load balancers, batch windows
+
+**Red** — Error / Cost / Bottleneck
+
+Loss, decode phase, waste
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [1 min]
 % -- LINK: This is the first slide students see. Before any content, establish
 % the visual grammar so color carries meaning throughout the semester.
@@ -40,37 +75,47 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 %
 % -- FLEX: [CORE] Show on Day 1 and again briefly on Day 2.
 % IF SHORT: Display the slide but do not narrate---students can read the cards.
-}
+```
 
-Throughout this course, colors carry meaning:
-
-{0.3cm}
-[T]
-  
-    {mlsyscard}{computestroke}
-    **Blue** --- Compute / Processing\\
-    { GPU ops, forward/backward pass, inference}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{datastroke}
-    **Green** --- Data / Memory\\
-    { Data flow, caches, healthy paths}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{routingstroke}
-    **Orange** --- Routing / Scheduling\\
-    { Load balancers, batch windows}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{errorstroke}
-    **Red** --- Error / Cost / Bottleneck\\
-    { Loss, decode phase, waste}
-    {mlsyscard}
+</details>
 
 ## How to Read This Textbook
 
-{
+[Original slide 3](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L123)
+
+**Two-volume structure:**
+
+**Volume I** (this course):
+
+Single-machine systems, 1–8 GPUs, shared memory
+
+**Volume II** (follow-on):
+
+Distributed systems, multi-node, fleet-scale
+
+**Four Parts in Volume I:**
+
+1. **Foundations of ML Systems** — frameworks & physics
+2. **Development and Training** — data, training, architectures
+3. **Optimization and Acceleration** — compression & hardware
+4. **Deployment and Operations** — serving, ops, ethics
+
+**Lighthouse Models**
+
+Five models recur in every chapter:
+
+- ResNet-50 (compute-bound)
+- GPT-2/Llama (memory-BW-bound)
+- MobileNetV2 (latency-bound)
+- DLRM (memory capacity-bound)
+- KWS (power-bound)
+
+Same concept, different constraint regime.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: Students just learned the visual language. This slide orients them
 % to the textbook structure they will use all semester.
@@ -91,47 +136,26 @@ Throughout this course, colors carry meaning:
 %
 % -- FLEX: [CORE] Orientation slide for Day 1.
 % IF SHORT: Show for 60 seconds, highlight the four parts only.
-}
+```
 
-[T]
-  
-    **Two-volume structure:**
-
-    {0.1cm}
-    {computestroke}{**Volume I**} (this course):\\
-    { Single-machine systems, 1--8 GPUs, shared memory}
-
-    {0.1cm}
-    {datastroke}{**Volume II**} (follow-on):\\
-    { Distributed systems, multi-node, fleet-scale}
-
-    {0.15cm}
-    **Four Parts in Volume I:**
-    {0pt}
-- { **Foundations of ML Systems** --- frameworks & physics}
-- { **Development and Training** --- data, training, architectures}
-- { **Optimization and Acceleration** --- compression & hardware}
-- { **Deployment and Operations** --- serving, ops, ethics}
-    
-  
-  
-    {0.1cm}
-    {mlsyscard}{crimson}
-    **Lighthouse Models**\\[0.1cm]
-    { Five models recur in every chapter:}
-    {0pt}
-- { ResNet-50 (compute-bound)}
-- { GPT-2/Llama (memory-BW-bound)}
-- { MobileNetV2 (latency-bound)}
-- { DLRM (memory capacity-bound)}
-- { KWS (power-bound)}
-    
-    { Same concept, different constraint regime.}
-    {mlsyscard}
+</details>
 
 ## Welcome
 
-{
+[Original slide 4](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L192)
+
+Introduction to Machine Learning Systems
+
+Volume I: Foundations for Single-Machine ML Systems
+
+**“The Physics of AI Engineering”**
+
+AI is not magic — it is infrastructure, and infrastructure has laws.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: Students are arriving on Day 1 with varying backgrounds. Start with
 % what they all share: most have trained a model but few have deployed one.
@@ -153,23 +177,35 @@ Throughout this course, colors carry meaning:
 %
 % -- FLEX: [CORE] Sets the emotional contract for the semester.
 % IF SHORT: Cut the hand-raise; just state the training-deployment gap directly.
-}
+```
 
-{0.8cm}
-{ Introduction to Machine Learning Systems}
-
-{0.4cm}
-{ Volume I: Foundations for Single-Machine ML Systems}
-
-{0.6cm}
-{{crimson}{**``The Physics of AI Engineering''**}}
-
-{0.6cm}
-{ AI is not magic --- it is infrastructure, and infrastructure has laws.}
+</details>
 
 ## The Gap Between ML Research and Production
 
-{
+[Original slide 5](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L236)
+
+A Kaggle notebook is not a production system:
+
+- **60–85%** of ML projects fail to reach production
+- 90% of engineering time goes to data + infrastructure
+- Model code is $\approx$**5%** of a production system
+
+The bottleneck is **systems**, not algorithms.
+
+|  | **Research** | **Production** |
+| --- | --- | --- |
+| Data | Static set | Shifting stream |
+| Hardware | Given GPU | Fleet of tiers |
+| Success | Accuracy | Accuracy + SLA |
+| Lifespan | One paper | Years |
+
+Source on slide: Paleyes et al., ACM Computing Surveys 2022
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- LINK: Students just heard ``this is a systems course, not an algorithms
 % course.'' This slide gives the quantitative evidence for WHY.
@@ -186,48 +222,30 @@ Throughout this course, colors carry meaning:
 %
 % -- WARN: Students assume failures are algorithmic (``bad model''). Correct
 % framing: the bottleneck is infrastructure---data pipelines, serving, monitoring.
-% IF STUCK: Point to the ``90% of time goes to data + infrastructure'' bullet.
+% IF STUCK: Point to the ``90\% of time goes to data + infrastructure'' bullet.
 %
 % -- FLEX: [CORE] This slide motivates the entire semester.
 % IF AHEAD: ``What percentage of engineering time goes to the model itself?''
-}
+```
 
-[T]
-  
-    A Kaggle notebook is not a production system:
-
-    {0.15cm}
-    {0pt}
-- **60--85%** of ML projects fail to reach production
-- 90% of engineering time goes to data + infrastructure
-- Model code is $$**5%** of a production system
-    
-
-    {0.15cm}
-    {mlsyscard}{errorstroke}
-    The bottleneck is **systems**, not algorithms.
-    {mlsyscard}
-  
-  
-    {0.15cm}
-    {}{1.15}
-    {tabular}{@{}l@{{4pt}}l@{{4pt}}l@{}}
-      
-      & **Research** & **Production** \\
-      
-      Data       & Static set   & Shifting stream \\
-      Hardware   & Given GPU    & Fleet of tiers \\
-      Success    & Accuracy     & Accuracy + SLA \\
-      Lifespan   & One paper    & Years \\
-      
-    {tabular}
-  
-
-{Paleyes et al., ACM Computing Surveys 2022}
+</details>
 
 ## The 5% Problem
 
-{
+[Original slide 6](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L296)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/00_course_overview/images/five-percent-overview.svg]]
+
+Harvard Edge ML Systems Book contributors, [five-percent-overview.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/images/five-percent-overview.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+This course teaches the **95%** — the systems engineering that makes ML work.
+
+Source on slide: Sculley et al., NeurIPS 2015
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: The previous slide said ``the bottleneck is systems.'' This diagram
 % shows exactly what those systems look like.
@@ -242,33 +260,55 @@ Throughout this course, colors carry meaning:
 % is that neither is the model.
 %
 % -- WARN: Students equate ``ML'' with ``the model.'' Correct framing: the
-% model is 5%; the other 95% is systems engineering that determines whether
+% model is 5\%; the other 95\% is systems engineering that determines whether
 % the model ever reaches a user.
 %
 % -- FLEX: [CORE] Foundational mental model for the course.
 % IF SHORT: Skip the question; just narrate the diagram for 90 seconds.
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
-
-{five-percent-overview.pdf}
-
-{0.1cm}
-{ This course teaches the **95%** --- the systems engineering that makes ML work.}
-{Sculley et al., NeurIPS 2015}
+</details>
 
 ## Why ML Systems Are Different
 
-{
+[Original slide 7](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L333)
+
+**Traditional software:**
+
+- Code bug $\to$ crash (loud failure)
+- Stack trace in milliseconds
+- Debugging: trace the code
+- Fixed code stays fixed
+
+A function that computed correctly yesterday
+computes correctly today.
+
+**ML systems:**
+
+- Data bug $\to$ wrong prediction (silent failure)
+- No exception, no alert
+- Debugging: trace the *data*
+- Model silently decays as world changes
+
+Sentiment model: 94% on test set $\to$
+78–82% in production as users adopt new slang.
+**Code unchanged.**
+
+**Implication:** You cannot test your way to reliability. You must *monitor* it.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
-% -- LINK: The 5% diagram showed that the bottleneck is systems. This slide
+% -- LINK: The 5\% diagram showed that the bottleneck is systems. This slide
 % explains *why* systems engineering for ML is genuinely different from
 % traditional software engineering.
 %
 % -- NARRATE: ``When a traditional program has a bug, it crashes. You get a
 % stack trace in milliseconds. When an ML system has a bug, it keeps running,
 % returns predictions, and looks healthy---while silently becoming wrong.
-% A sentiment model trained on last year's data drops from 94% to 78--82%
+% A sentiment model trained on last year's data drops from 94\% to 78--82\%
 % accuracy in production as users adopt new slang and context. No exception
 % thrown. No alert. The code executes correctly. The problem is in the data.''
 %
@@ -285,51 +325,42 @@ Throughout this course, colors carry meaning:
 %
 % -- FLEX: [CORE] The foundational argument for why this course exists.
 % IF SHORT: State the silent/loud contrast in one sentence and move on.
-}
+```
 
-[T]
-  
-    **Traditional software:**
+</details>
 
-    {0.08cm}
-    {0pt}
-- Code bug $$ crash (loud failure)
-- Stack trace in milliseconds
-- Debugging: trace the code
-- Fixed code stays fixed
-    
+## Software 2.0 — Weights Are the New Source Code
 
-    {0.1cm}
-    {mlsyscard}{computestroke}
-    { A function that computed correctly yesterday
-    computes correctly today.}
-    {mlsyscard}
-  
-  
-    **ML systems:**
+[Original slide 8](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L406)
 
-    {0.08cm}
-    {0pt}
-- Data bug $$ wrong prediction (silent failure)
-- No exception, no alert
-- Debugging: trace the *data*
-- Model silently decays as world changes
-    
+**Software 1.0**
 
-    {0.05cm}
-    {mlsyscard}{errorstroke}
-    { Sentiment model: 94% on test set $$
-    78--82% in production as users adopt new slang.
-    **Code unchanged.**}
-    {mlsyscard}
-  
+**Program**: explicit instructions
 
-{0.05cm}
-{Implication:}{You cannot test your way to reliability. You must *monitor* it.}
+**Bug**: trace to a line of code
 
-## Software 2.0 --- Weights Are the New Source Code
+**Update**: edit the source file
 
-{
+**Test**: deterministic paths
+
+**Software 2.0**
+
+**Program**: learned weights
+
+**Bug**: trace to the training data
+
+**Update**: retrain on new data
+
+**Test**: monitor production distributions
+
+**Systems consequence:** A GPT-4-class model has $\sim$1.8T parameters. The “program” is 3.6 TB of weights. Debugging means auditing the data pipeline, not the Python code.
+
+Source on slide: Karpathy, 2017
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: The previous slide showed that ML systems fail through data bugs,
 % not code bugs. This slide explains *why*---the program logic lives in
@@ -354,41 +385,35 @@ Throughout this course, colors carry meaning:
 % discipline exists because those weights are produced by, and sensitive to,
 % the data pipeline, the training infrastructure, and the serving environment.
 %
-% -- FLEX: [CORE] The paradigm-shift framing that motivates the 95% problem.
+% -- FLEX: [CORE] The paradigm-shift framing that motivates the 95\% problem.
 % IF SHORT: State the weights-as-source-code analogy and move to the next slide.
-}
+```
 
-[T]
-  
-    {mlsyscard}{computestroke}
-    **Software 1.0**\\[0.1cm]
-    {
-    **Program**: explicit instructions\\
-    **Bug**: trace to a line of code\\
-    **Update**: edit the source file\\
-    **Test**: deterministic paths\\
-    }
-    {mlsyscard}
-  
-  
-    {mlsyscard}{errorstroke}
-    **Software 2.0**\\[0.1cm]
-    {
-    **Program**: learned weights\\
-    **Bug**: trace to the training data\\
-    **Update**: retrain on new data\\
-    **Test**: monitor production distributions\\
-    }
-    {mlsyscard}
-  
-
-{0.2cm}
-{Systems consequence:}{A GPT-4-class model has $$1.8T parameters. The ``program'' is 3.6 TB of weights. Debugging means auditing the data pipeline, not the Python code.}
-{Karpathy, 2017}
+</details>
 
 ## The Bitter Lesson: Scale Beats Expertise
 
-{
+[Original slide 9](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L468)
+
+**Pattern across 70 years of AI:**
+
+- **1950s–70s:** Symbolic AI — logic rules, expert knowledge
+- **1980s–90s:** Feature engineering — human-crafted representations
+- **2000s–10s:** Statistical ML — learned features, manual tuning
+- **2012–now:** Deep learning + massive compute **win**
+
+**The Lesson:** “General methods that leverage computation consistently outperform approaches that encode human expertise.” — Sutton, 2019
+
+**Systems implication:** If scale determines AI progress, then the systems that move compute efficiently—data pipelines, training infrastructure, hardware optimization—are the limiting factor.
+
+**This course teaches how to build those systems.**
+
+Source on slide: Sutton, “The Bitter Lesson,” 2019
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: Software 2.0 told us that behavior comes from data and scale,
 % not from hand-coded logic. The Bitter Lesson explains *why* this pattern
@@ -417,38 +442,41 @@ Throughout this course, colors carry meaning:
 % -- FLEX: [CORE] The historical and motivational argument for the whole course.
 % IF SHORT: State the two-line version: ``Scale beats expertise. Systems
 % engineering is what makes scale possible.''
-}
+```
 
-[T]
-  
-    **Pattern across 70 years of AI:**
+</details>
 
-    {0.08cm}
-    {0pt}
-- **1950s--70s:** Symbolic AI --- logic rules, expert knowledge
-- **1980s--90s:** Feature engineering --- human-crafted representations
-- **2000s--10s:** Statistical ML --- learned features, manual tuning
-- **2012--now:** Deep learning + massive compute {computestroke}{**win**}
-    
+## The Core Thesis
 
-    {0.08cm}
-    {The Lesson:}{``General methods that leverage computation consistently outperform approaches that encode human expertise.'' --- Sutton, 2019}
-  
-  
-    {0.08cm}
-    {mlsyscard}{crimson}
-    { **Systems implication:** If scale determines AI progress, then the systems that move compute efficiently---data pipelines, training infrastructure, hardware optimization---are the limiting factor.
+[Original slide 10](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L534)
 
-    {0.08cm}
-    **This course teaches how to build those systems.**}
-    {mlsyscard}
-  
+Constraints drive architecture.
 
-{Sutton, ``The Bitter Lesson,'' 2019}
+You don't choose a Transformer because it's trendy —
+
+you choose it because of how it parallelizes on real silicon.
 
 ## AI Is Infrastructure
 
-{
+[Original slide 11](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L540)
+
+**Physical laws govern ML systems:**
+
+- **Memory bandwidth** limits how fast data reaches the processor
+- **Power budget** limits where a model can run
+- **Speed of light** limits latency over distance
+- **Thermodynamics** limits compute per rack
+
+**Implication:** Physics, not elegance, determines what ships.
+
+**Example:** GPT-4 costs $\sim$&#36;100M to train — moving 1.8T parameters through memory thousands of times costs that much in electricity and silicon time.
+
+**Example:** A self-driving car cannot call the cloud — speed of light adds 50+ ms. Physics forces the model onto the edge.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- LINK: The Core Thesis focus slide just said ``constraints drive
 % architecture.'' This slide names the four specific physical constraints.
@@ -464,46 +492,33 @@ Throughout this course, colors carry meaning:
 %
 % -- ENGAGE: ``Why can't we run GPT-4 on a smartphone?'' Cold-call one student.
 % Expected: ``not enough memory.'' Deepen: ``How much memory does it need?
-% 3.6 TB at FP16 (1.8T params $×$ 2 bytes). A phone has 8 GB.
+% 3.6 TB at FP16 (1.8T params $\times$ 2 bytes). A phone has 8 GB.
 % That is a 450x gap---physics, not software.''
 %
 % -- WARN: Students think hardware limitations are temporary (``next year's chip
 % will fix it''). Correct framing: these are physical laws, not engineering gaps.
-% Memory bandwidth grows  20%/yr; compute demand grows 7x faster than Moore's Law.
+% Memory bandwidth grows ~20\%/yr; compute demand grows 7x faster than Moore's Law.
 %
 % -- FLEX: [CORE] Philosophical anchor for the course.
 % IF AHEAD: ``Which constraint is hardest to overcome with engineering?''
-}
+```
 
-[T]
-  
-    **Physical laws govern ML systems:**
-
-    {0.1cm}
-    {0pt}
-- {computestroke}{**Memory bandwidth**} limits how fast data reaches the processor
-- {routingstroke}{**Power budget**} limits where a model can run
-- {errorstroke}{**Speed of light**} limits latency over distance
-- {datastroke}{**Thermodynamics**} limits compute per rack
-    
-
-    {0.05cm}
-    {Implication:}{Physics, not elegance, determines what ships.}
-  
-  
-    {0.1cm}
-    {mlsyscard}{crimson}
-    { **Example:** GPT-4 costs $$\$100M to train --- moving 1.8T parameters through memory thousands of times costs that much in electricity and silicon time.}
-    {mlsyscard}
-
-    {0.1cm}
-    {mlsyscard}{datastroke}
-    { **Example:** A self-driving car cannot call the cloud --- speed of light adds 50+ ms. Physics forces the model onto the edge.}
-    {mlsyscard}
+</details>
 
 ## Three Analytical Frameworks
 
-{
+[Original slide 12](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L603)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/00_course_overview/images/frameworks-overview.svg]]
+
+Harvard Edge ML Systems Book contributors, [frameworks-overview.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/images/frameworks-overview.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+Three tools you will use in **every chapter** of this course.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: Students now know that physical constraints drive architecture.
 % These three frameworks are the tools for reasoning about those constraints.
@@ -523,19 +538,42 @@ Throughout this course, colors carry meaning:
 %
 % -- FLEX: [CORE] Preview only---do not go deep. Chapter 1 covers each.
 % IF SHORT: Just name the three frameworks and move on (60 seconds).
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
+</details>
 
-{frameworks-overview.pdf}
+## The D$\bullet$A$\bullet$M Taxonomy
 
-{0.1cm}
-{ Three tools you will use in **every chapter** of this course.}
+[Original slide 13](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L635)
 
-## Frame 11
+Every ML system has three interdependent axes:
 
-{The {} Taxonomy}
-{
+**Data** — Volume, quality, distribution
+
+How much data, how fast can we move it?
+
+**Algorithm** — Architecture, operation count
+
+How many FLOPs, what parallelism pattern?
+
+**Machine** — Hardware throughput, memory
+
+What silicon, what memory hierarchy?
+
+**Key:** Optimizing one axis shifts pressure to another.
+
+| **Axis** | **Variable** | **Unit** |
+| --- | --- | --- |
+| Data | $D_{\text{vol}}$, $BW$ | GB, GB/s |
+| Algorithm | $O$ | FLOPs |
+| Machine | $R_{\text{peak}}$ | FLOP/s |
+
+**Diagnostic:** “Which axis is the bottleneck?” answers most ML systems design questions.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: The previous diagram named D-A-M as one of three frameworks.
 % Now we unpack it briefly.
@@ -556,50 +594,38 @@ Throughout this course, colors carry meaning:
 %
 % -- FLEX: [CORE] But keep it brief---Chapter 1 goes deep.
 % IF SHORT: Show the slide for 60 seconds, skip the engage question.
-}
+```
 
-[T]
-  
-    Every ML system has three interdependent axes:
-
-    {0.2cm}
-    {datastroke}{**Data**} --- Volume, quality, distribution\\
-    { How much data, how fast can we move it?}
-
-    {0.1cm}
-    {computestroke}{**Algorithm**} --- Architecture, operation count\\
-    { How many FLOPs, what parallelism pattern?}
-
-    {0.1cm}
-    {routingstroke}{**Machine**} --- Hardware throughput, memory\\
-    { What silicon, what memory hierarchy?}
-
-    {0.15cm}
-    {Key:}{Optimizing one axis shifts pressure to another.}
-  
-  
-    {0.3cm}
-    {}{1.2}
-    {
-    {tabular}{@{}lll@{}}
-      
-      **Axis** & **Variable** & **Unit** \\
-      
-      Data      & $D_{{vol}}$, $BW$ & GB, GB/s \\
-      Algorithm & $O$ & FLOPs \\
-      Machine   & $R_{{peak}}$ & FLOP/s \\
-      
-    {tabular}
-    }
-
-    {0.2cm}
-    {mlsyscard}{crimson}
-    { **Diagnostic:** ``Which axis is the bottleneck?'' answers most ML systems design questions.}
-    {mlsyscard}
+</details>
 
 ## The Iron Law of ML Systems
 
-{
+[Original slide 14](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L703)
+
+$$
+T_{\text{total}} = \underbrace{\dfrac{D_{\text{vol}}}{BW}}_{\text{Data}} +
+\underbrace{\dfrac{O}{R_{\text{peak}} \cdot \eta}}_{\text{Compute}} +
+\underbrace{L_{\text{lat}}}_{\text{Overhead}}
+$$
+
+**Data** $\frac{D_{\text{vol}}}{BW}$
+
+Bytes / (Bytes/s) = **s**
+
+**Compute** $\frac{O}{R_p \cdot \eta}$
+
+FLOPs / (FLOPs/s) = **s**
+
+**Overhead** $L_{\text{lat}}$
+
+Orchestration tax = **s**
+
+**Key insight:** Every term resolves to **seconds**. The **slowest term dominates**.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: D-A-M tells you where the bottleneck is. The Iron Law quantifies
 % how long each axis takes in seconds.
@@ -619,37 +645,36 @@ Throughout this course, colors carry meaning:
 %
 % -- FLEX: [CORE] Preview only---worked examples come in Chapter 1.
 % IF SHORT: State the equation, emphasize ``slowest term dominates,'' move on.
-}
+```
 
-$$T_{{total}} = {{D_{{vol}}}{BW}}_{{Data}} +
-{{O}{R_{{peak}}  }}_{{Compute}} +
-{L_{{lat}}}_{{Overhead}}$$
-
-{0.1cm}
-[T]
-  
-    
-    {datastroke}{**Data**} ${D_{{vol}}}{BW}$\\[0.05cm]
-    { Bytes / (Bytes/s) = **s**}
-  
-  
-    
-    {computestroke}{**Compute**} ${O}{R_p  }$\\[0.05cm]
-    { FLOPs / (FLOPs/s) = **s**}
-  
-  
-    
-    {errorstroke}{**Overhead**} $L_{{lat}}$\\[0.05cm]
-    { Orchestration tax = **s**}
-  
-
-{0.15cm}
-
-{Key insight:}{Every term resolves to **seconds**. The **slowest term dominates**.}
+</details>
 
 ## The Degradation Equation
 
-{
+[Original slide 15](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L756)
+
+$$
+\text{Accuracy}(t) \approx \text{Accuracy}_0 - \lambda \cdot \mathcal{D}(P_t \lVert P_0)
+$$
+
+| $\text{Accuracy}(t)$ | Accuracy at time $t$ |
+| --- | --- |
+| $\text{Accuracy}_0$ | Accuracy at deployment |
+| $\lambda$ | Model sensitivity to drift |
+| $\mathcal{D}(\cdot\lVert\cdot)$ | Distribution divergence |
+
+**Key:** No code changed. The *world* changed.
+
+**Example:**
+
+Recommendation system: 85% accuracy at launch $\to$ 79.2% after 6 months. No bugs — just user behavior shift.
+
+**Engineering response:** Set retraining triggers when $A(t)$ crosses a threshold.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: The Iron Law measures performance at a point in time. The
 % Degradation Equation measures how performance decays over time.
@@ -659,7 +684,7 @@ $$T_{{total}} = {{D_{{vol}}}{BW}}_{{Data}} +
 % to distribution shift---an architecture-dependent constant. D is the
 % divergence measure (KL, total variation, or Wasserstein) quantifying how
 % far live data has drifted from training data. Look at the example: a
-% recommendation system starts at 85% and drops to 79.2% in 6 months.
+% recommendation system starts at 85\% and drops to 79.2\% in 6 months.
 % No code changed. No bugs. The world changed.
 % The engineering response: set a retraining trigger at a threshold.''
 %
@@ -673,90 +698,100 @@ $$T_{{total}} = {{D_{{vol}}}{BW}}_{{Data}} +
 %
 % -- FLEX: [CORE] Third framework preview.
 % IF SHORT: Show equation, state the rec-system example, move on.
-}
+```
 
-$${Accuracy}(t)  {Accuracy}_0 -   {D}(P_t  P_0)$$
-
-{0.15cm}
-[T]
-  
-    {
-    {tabular}{@{}ll@{}}
-      ${Accuracy}(t)$    & Accuracy at time $t$ \\
-      ${Accuracy}_0$     & Accuracy at deployment \\
-      $$               & Model sensitivity to drift \\
-      ${D}()$ & Distribution divergence \\
-    {tabular}
-    }
-
-    {0.15cm}
-    {Key:}{No code changed. The *world* changed.}
-  
-  
-    {mlsyscard}{errorstroke}
-    **Example:**\\[0.1cm]
-    { Recommendation system: 85% accuracy at launch $$ 79.2% after 6 months. No bugs --- just user behavior shift.\\[0.1cm]
-    **Engineering response:** Set retraining triggers when $A(t)$ crosses a threshold.}
-    {mlsyscard}
+</details>
 
 ## Exercise: When to Retrain?
 
-{
+[Original slide 16](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L813)
+
+When Does the Alarm Fire?
+
+A fraud detector has:
+
+- $A_0 = 94\%$ accuracy at deployment
+- Drift rate: $\alpha \cdot \Delta(t) \approx 1\%$ per month
+- Retraining trigger: $A(t) < 90\%$
+
+**When does it cross the 90% threshold?**
+
+(60 seconds — then compare with a neighbor)
+
+**Solution:**
+
+$A(t) = 0.94 - 0.01t$
+
+Month 1: 93%
+
+Month 2: 92%
+
+Month 3: 91%
+
+**Month 4: 90%** $\leftarrow$ trigger
+
+Retrain by month 3–4 to stay above SLA.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- LINK: The Degradation Equation just introduced
-% ${Accuracy}(t)  {Accuracy}_0 -   {D}$.
+% $\text{Accuracy}(t) \approx \text{Accuracy}_0 - \lambda \cdot \mathcal{D}$.
 % This exercise applies it with concrete numbers.
 %
-% -- NARRATE: ``A fraud detector starts at 94% accuracy. It drifts at
-% $ = 0.03$ per month with $$ growing linearly at 0.33 per month.
-% The retraining trigger is 90%. When does it fire?'' Give students 60 seconds.
+% -- NARRATE: ``A fraud detector starts at 94\% accuracy. It drifts at
+% $\alpha = 0.03$ per month with $\Delta$ growing linearly at 0.33 per month.
+% The retraining trigger is 90\%. When does it fire?'' Give students 60 seconds.
 %
 % -- ENGAGE: Students calculate individually, then compare with a neighbor.
-% Expected answer: $0.94 - 0.03 × 0.33 × t = 0.90$. Solving:
-% $0.04 = 0.01 × t$, so $t  4$ months.
+% Expected answer: $0.94 - 0.03 \times 0.33 \times t = 0.90$. Solving:
+% $0.04 = 0.01 \times t$, so $t \approx 4$ months.
 %
-% -- WARN: Students may forget that $$ grows over time. Correct framing:
+% -- WARN: Students may forget that $\Delta$ grows over time. Correct framing:
 % drift is cumulative---each month the distribution moves further from training.
 % IF STUCK: ``What is $A(t)$ at month 1? Month 2? See the pattern?''
 %
 % -- FLEX: [CORE] First quantitative exercise of the course.
 % IF SHORT: Show the problem, reveal the answer after 30 seconds, move on.
-}
+```
 
-[T]
-  
-    { When Does the Alarm Fire?}
-
-    {0.2cm}
-    A fraud detector has:
-    {0pt}
-- $A_0 = 94%$ accuracy at deployment
-- Drift rate: $  (t)  1%$ per month
-- Retraining trigger: $A(t) < 90%$
-    
-
-    {0.15cm}
-    **When does it cross the 90% threshold?**
-
-    {{midgray}{(60 seconds --- then compare with a neighbor)}}
-  
-  
-    
-    {mlsyscard}{errorstroke}
-    **Solution:**\\[0.1cm]
-    {
-    $A(t) = 0.94 - 0.01t$\\[0.1cm]
-    Month 1: 93%\\
-    Month 2: 92%\\
-    Month 3: 91%\\
-    {errorstroke}{**Month 4: 90%**} $$ trigger\\[0.1cm]
-    Retrain by month 3--4 to stay above SLA.
-    }
-    {mlsyscard}
+</details>
 
 ## Predict: Which Constraint?
 
-{[2 min]
+[Original slide 17](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L873)
+
+Think–Write–Share
+
+A voice assistant must respond in under 200 ms.
+
+**What physical constraint dominates?**
+
+Memory
+
+ Bandwidth
+
+Compute
+
+ Throughput
+
+Network
+
+ Latency
+
+Power
+
+ Budget
+
+Write your answer. Then turn to a neighbor.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: Students just learned the Iron Law and the D·A·M taxonomy.
 % This exercise applies that vocabulary before seeing the lighthouse models.
 %
@@ -776,28 +811,42 @@ $${Accuracy}(t)  {Accuracy}_0 -   {D}(P_t  P_0)$$
 %
 % -- FLEX: [CORE] First active learning moment. Prime for lighthouses.
 % IF SHORT: Skip the neighbor discussion; cold-call one student immediately.
-}
+```
 
-{0.8cm}
-{ Think--Write--Share}
-
-{0.6cm}
-{ A voice assistant must respond in under 200 ms.\\[0.2cm]
-**What physical constraint dominates?**}
-
-{0.4cm}
-[c]
-   Memory\\ Bandwidth
-   Compute\\ Throughput
-   Network\\ Latency
-   Power\\ Budget
-
-{0.5cm}
-{{lightgray}{Write your answer. Then turn to a neighbor.}}
+</details>
 
 ## From Diagnostic Tools to Patients
 
-{
+[Original slide 18](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L918)
+
+Frameworks are diagnostic tools.
+
+Lighthouses are the patients we diagnose.
+
+**D$\bullet$A$\bullet$M**
+
+*Where* is the
+
+bottleneck?
+
+**Iron Law**
+
+*How long* does
+
+it take?
+
+**Degradation**
+
+*When* will
+
+it fail?
+
+$\downarrow$ **Apply these tools to five lighthouse models** $\downarrow$
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [1 min]
 % -- LINK: Students just learned three analytical frameworks (D-A-M, Iron Law,
 % Degradation Equation). This bridge slide connects them to the lighthouse
@@ -818,36 +867,25 @@ $${Accuracy}(t)  {Accuracy}_0 -   {D}(P_t  P_0)$$
 %
 % -- FLEX: [CORE] Essential bridge. Keep to 60 seconds.
 % IF SHORT: State the analogy in one sentence and move on.
-}
+```
 
-{0.6cm}
-{ Frameworks are diagnostic tools.\\[0.3cm]
-Lighthouses are the patients we diagnose.}
-
-{0.5cm}
-[c]
-  
-    
-    {datastroke}{{{}}}\\[0.1cm]
-    { *Where* is the\?}
-  
-  
-    
-    {computestroke}{**Iron Law**}\\[0.1cm]
-    { *How long* does\ take?}
-  
-  
-    
-    {errorstroke}{**Degradation**}\\[0.1cm]
-    { *When* will\ fail?}
-  
-
-{0.5cm}
-{ $$ **Apply these tools to five lighthouse models** $$}
+</details>
 
 ## Five Lighthouse Models
 
-{[3 min]
+[Original slide 19](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L975)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/00_course_overview/images/lighthouse-models.svg]]
+
+Harvard Edge ML Systems Book contributors, [lighthouse-models.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/images/lighthouse-models.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+Five models, five bottlenecks — your **systems detectives** for the semester.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min]
 % -- LINK: Students just saw the three analytical frameworks. The lighthouses
 % are the five patients we will diagnose with those frameworks all semester.
 %
@@ -864,43 +902,53 @@ Lighthouses are the patients we diagnose.}
 % -- WARN: Students will try to memorize which model maps to which
 % bottleneck rather than understanding *why* the mapping follows from the
 % architecture. The goal is not memorization---it is the reasoning pattern:
-% architecture $$ arithmetic intensity $$ dominant Iron Law term.
+% architecture $\to$ arithmetic intensity $\to$ dominant Iron Law term.
 %
 % -- FLEX: [CORE] Essential for the whole course.
 % IF SHORT: Name the five models and their bottleneck label only (30 seconds each).
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
-
-{lighthouse-models.pdf}
-
-{0.1cm}
-{ Five models, five bottlenecks --- your **systems detectives** for the semester.}
+</details>
 
 ## Lighthouse Models: Quick Reference
 
-{[2 min] Compact table for reference. Students will see these numbers
-repeatedly. Emphasize: same Iron Law equation, different dominant term.}
+[Original slide 20](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L1008)
 
-{}{1.2}
-{tabular}{@{}lp{2cm}lp{4cm}@{}}
-  
-  **Lighthouse** & **Bottleneck** & **Iron Law** & **Systems Question** \\
-  
-  **ResNet-50**    & {computestroke}{Compute}  & $O/R_p$ & Is arithmetic fast enough? \\
-  **GPT-2/Llama**  & {datastroke}{Memory-BW}   & $D/BW$  & Can memory feed the accelerator? \\
-  **MobileNetV2**  & {routingstroke}{Latency}  & $L_{{lat}}$ & Can it meet real-time deadlines? \\
-  **DLRM**         & {datastroke}{Mem.\ Capacity} & $D/BW$  & Do terabyte-scale embedding tables fit in memory? \\
-  **KWS**          & {errorstroke}{Power}      & $P × T$ & Can it run on a coin-cell battery? \\
-  
-{tabular}
+| **Lighthouse** | **Bottleneck** | **Iron Law** | **Systems Question** |
+| --- | --- | --- | --- |
+| **ResNet-50** | Compute | $O/R_p$ | Is arithmetic fast enough? |
+| **GPT-2/Llama** | Memory-BW | $D/BW$ | Can memory feed the accelerator? |
+| **MobileNetV2** | Latency | $L_{\text{lat}}$ | Can it meet real-time deadlines? |
+| **DLRM** | Mem. Capacity | $D/BW$ | Do terabyte-scale embedding tables fit in memory? |
+| **KWS** | Power | $P \times T$ | Can it run on a coin-cell battery? |
 
-{0.15cm}
-{ Same equation, different dominant term. Each lighthouse tests a different constraint regime.}
+Same equation, different dominant term. Each lighthouse tests a different constraint regime.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Compact table for reference. Students will see these numbers
+repeatedly. Emphasize: same Iron Law equation, different dominant term.
+```
+
+</details>
 
 ## Sixteen Chapters, Four Parts
 
-{[3 min]
+[Original slide 21](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L1035)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/00_course_overview/images/course-roadmap.svg]]
+
+Harvard Edge ML Systems Book contributors, [course-roadmap.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/images/course-roadmap.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Foundations** $\to$ **Development & Training** $\to$ **Optimization & Acceleration** $\to$ **Deployment & Operations** — each part builds on the previous.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min]
 % -- LINK: Students just saw the three frameworks and five lighthouses.
 % This slide shows where each tool fits across the sixteen chapters.
 %
@@ -920,241 +968,299 @@ repeatedly. Emphasize: same Iron Law equation, different dominant term.}
 %
 % -- FLEX: [CORE] Orientation. Keep to 3 minutes.
 % IF SHORT: Walk the four parts only (30 seconds each), skip the engage question.
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
-
-{course-roadmap.pdf}
-
-{0.1cm}
-{ **Foundations** $$ **Development & Training** $$ **Optimization & Acceleration** $$ **Deployment & Operations** --- each part builds on the previous.}
+</details>
 
 ## The Deployment Spectrum
 
-{[2 min] The gap between Cloud (H100, 80 GB) and TinyML (384 KB) is about
-$10^5×$ in memory and $10^6×$ in compute---5 to 6 orders of magnitude,
+[Original slide 22](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L1067)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/00_course_overview/images/deployment-spectrum.svg]]
+
+Harvard Edge ML Systems Book contributors, [deployment-spectrum.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/images/deployment-spectrum.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+$10^5\!\times$ memory, $10^6\!\times$ compute — you cannot “just shrink” a cloud model.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] The gap between Cloud (H100, 80 GB) and TinyML (384 KB) is about
+$10^5\times$ in memory and $10^6\times$ in compute---5 to 6 orders of magnitude,
 not nine. You cannot ``shrink'' a cloud model to the edge --- each tier requires
 fundamentally different engineering. This is the physical reality
-that drives every design decision in the course.}
+that drives every design decision in the course.
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
-
-{deployment-spectrum.pdf}
-
-{0.1cm}
-{ $10^5\!×$ memory, $10^6\!×$ compute --- you cannot ``just shrink'' a cloud model.}
+</details>
 
 ## Quick Check
 
-{[0.5 min] Micro-retrieval. Give students 30 seconds to recall.
-This distributed practice improves retention (Roediger & Karpicke, 2006).}
+[Original slide 23](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L1083)
 
- Quick check --- no peeking.\\[0.5cm]
- Which physical constraint prevents running GPT-4 on a smartphone?\\[0.3cm]
-{ 30 seconds --- then we continue.}
+Quick check — no peeking.
+
+ Which physical constraint prevents running GPT-4 on a smartphone?
+
+30 seconds — then we continue.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[0.5 min] Micro-retrieval. Give students 30 seconds to recall.
+This distributed practice improves retention (Roediger \& Karpicke, 2006).
+```
+
+</details>
 
 ## Discussion: Where Does It Run?
 
-{[3 min] Turn-and-talk. Students discuss in pairs for 90 seconds.
+[Original slide 24](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L1096)
+
+Turn and Talk (90 seconds)
+
+A hospital wants to deploy a model that detects
+
+pneumonia from chest X-rays in real time.
+
+**Where on the deployment spectrum should it run?**
+
+**Cloud**
+
+700 W
+
+**Edge**
+
+15–40 W
+
+**Mobile**
+
+3–5 W
+
+**TinyML**
+
+100 mW
+
+What physical constraints drive your decision?
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] Turn-and-talk. Students discuss in pairs for 90 seconds.
 This connects deployment spectrum to real decisions. Cold-call 2--3 pairs.
-Multiple right answers exist --- the point is the reasoning, not the answer.}
+Multiple right answers exist --- the point is the reasoning, not the answer.
+```
 
-{0.5cm}
-{ Turn and Talk {midgray}{(90 seconds)}}
-
-{0.4cm}
-{ A hospital wants to deploy a model that detects\\
-pneumonia from chest X-rays in real time.\\[0.2cm]
-**Where on the deployment spectrum should it run?**}
-
-{0.35cm}
-[c]
-  {computestroke}{**Cloud**}\\700 W
-  {datastroke}{**Edge**}\\15--40 W
-  {routingstroke}{**Mobile**}\\3--5 W
-  {errorstroke}{**TinyML**}\\100 mW
-
-{0.2cm}
-{{lightgray}{What physical constraints drive your decision?}}
+</details>
 
 ## What You'll Be Able To Do
 
-{[2 min] Concrete, measurable skills. These are the course-level learning
-outcomes. Students should feel motivated --- these are real engineering skills.}
+[Original slide 25](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L1127)
 
 By the end of this course, you will be able to:
 
-{0.08cm}
-{0pt}
-- **Explain** why computational scale outperforms hand-coded expertise (the Bitter Lesson) and why ML systems fail silently
-- **Apply** the {} Taxonomy to diagnose bottlenecks: data-bound, compute-bound, or machine-bound?
-- **Calculate** memory budgets --- can this model fit on this device?
-- **Design** serving pipelines with latency and throughput targets
-- **Evaluate** hardware trade-offs across the deployment spectrum
-- **Compress** models using quantization, pruning, and distillation
-- **Monitor** production systems --- detect drift before users do
-- **Make** principled design decisions grounded in physics, not hype
+1. **Explain** why computational scale outperforms hand-coded expertise (the Bitter Lesson) and why ML systems fail silently
+2. **Apply** the D$\bullet$A$\bullet$M Taxonomy to diagnose bottlenecks: data-bound, compute-bound, or machine-bound?
+3. **Calculate** memory budgets — can this model fit on this device?
+4. **Design** serving pipelines with latency and throughput targets
+5. **Evaluate** hardware trade-offs across the deployment spectrum
+6. **Compress** models using quantization, pruning, and distillation
+7. **Monitor** production systems — detect drift before users do
+8. **Make** principled design decisions grounded in physics, not hype
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Concrete, measurable skills. These are the course-level learning
+outcomes. Students should feel motivated --- these are real engineering skills.
+```
+
+</details>
 
 ## Prerequisites
 
-{[2 min] Be honest about what students need. This is a systems course ---
-we assume OS and architecture basics. If students lack linear algebra,
-recommend a refresher in week 1.}
+[Original slide 26](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L1148)
 
-[T]
-  
-    **Required background:**
+**Required background:**
 
-    {0.1cm}
-    {0pt}
-- **Operating systems** --- processes, memory, I/O
-- **Computer architecture** --- caches, pipelines
-- **Data structures** --- complexity analysis
-- **Linear algebra** --- matrix multiply, norms
-- **Probability** --- distributions, Bayes' rule
-    
-  
-  
-    **Helpful but not required:**
+- **Operating systems** — processes, memory, I/O
+- **Computer architecture** — caches, pipelines
+- **Data structures** — complexity analysis
+- **Linear algebra** — matrix multiply, norms
+- **Probability** — distributions, Bayes' rule
 
-    {0.1cm}
-    {0pt}
+**Helpful but not required:**
+
 - PyTorch or TensorFlow experience
 - Systems programming (C/C++)
 - Cloud computing basics
 - Prior ML coursework
-    
 
-    {0.05cm}
-    {mlsyscard}{datastroke}
-    { **Note:** We teach ML concepts as needed. No ML expertise required to start.}
-    {mlsyscard}
+**Note:** We teach ML concepts as needed. No ML expertise required to start.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Be honest about what students need. This is a systems course ---
+we assume OS and architecture basics. If students lack linear algebra,
+recommend a refresher in week 1.
+```
+
+</details>
 
 ## Course Logistics
 
-{[3 min] Instructor should confirm grading breakdown, office hours,
-collaboration policy, late policy, and resources for the current term.}
+[Original slide 27](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L1187)
 
-[T]
-  
-    **Grading** {(adjust per term)}
+**Grading** (adjust per term)
 
-    {0.1cm}
-    {
-    {}{1.2}
-    {tabular}{@{}lr@{}}
-      
-      **Component** & **Weight** \\
-      
-      Problem Sets (5)        & 30% \\
-      Labs (4)                & 20% \\
-      Midterm Exam            & 20% \\
-      Final Project           & 25% \\
-      Participation           & 5% \\
-      
-    {tabular}
-    }
-  
-  
-    **Resources**
+| **Component** | **Weight** |
+| --- | --- |
+| Problem Sets (5) | 30% |
+| Labs (4) | 20% |
+| Midterm Exam | 20% |
+| Final Project | 25% |
+| Participation | 5% |
 
-    {0.1cm}
-    {1pt}
-- { **Textbook**: *ML Systems*, Vol. I}
-- { **Office hours**: See course site}
-- { **Discussion forum**: See course site}
-- { **Hardware labs**: Arduino, Raspberry Pi}
-    
+**Resources**
 
-    {0.15cm}
-    {mlsyscard}{routingstroke}
-    { **Collaboration policy:** Discuss concepts freely. Write your own solutions. Cite all sources.}
-    {mlsyscard}
+- **Textbook**: *ML Systems*, Vol. I
+- **Office hours**: See course site
+- **Discussion forum**: See course site
+- **Hardware labs**: Arduino, Raspberry Pi
 
-## Why Does GPT-4 Cost \$100M to Train?
+**Collaboration policy:** Discuss concepts freely. Write your own solutions. Cite all sources.
 
-{[3 min] Compelling worked example. Walk through the back-of-envelope
-calculation. The point: these are not magic numbers --- they follow from
-the Iron Law. This is the kind of reasoning you will learn.
-Ask: ``Where does the \$100M go?''}
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] Instructor should confirm grading breakdown, office hours,
+collaboration policy, late policy, and resources for the current term.
+```
+
+</details>
+
+## Why Does GPT-4 Cost &#36;100M to Train?
+
+[Original slide 28](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L1236)
 
 **A back-of-envelope calculation:**
 
-{0.05cm}
-{}{1.05}
-{tabular}{@{}llr@{}}
-  
-  **Factor** & **Estimate** & **Source** \\
-  
-  Parameters          & $$1.8 trillion & Architecture choice \\
-  Training FLOPs      & $ 2 × 10^{25}$ & $ 6 × N × D_{{tokens}}$ \\
-  Hardware            & $$25,000 H100 GPUs & $R_{{peak}}$ per chip \\
-  Training time       & $$90 days & $O / (R_{{peak}}    N_{{GPUs}})$ \\
-  Electricity         & $$50 GWh & Power $×$ time \\
-  
-  **Total cost** & **$$\$100M** & Hardware + energy + ops \\
-  
-{tabular}
+| **Factor** | **Estimate** | **Source** |
+| --- | --- | --- |
+| Parameters | $\sim$1.8 trillion | Architecture choice |
+| Training FLOPs | $\sim 2 \times 10^{25}$ | $\approx 6 \times N \times D_{\text{tokens}}$ |
+| Hardware | $\sim$25,000 H100 GPUs | $R_{\text{peak}}$ per chip |
+| Training time | $\sim$90 days | $O / (R_{\text{peak}} \cdot \eta \cdot N_{\text{GPUs}})$ |
+| Electricity | $\sim$50 GWh | Power $\times$ time |
+| **Total cost** | **$\sim$&#36;100M** | Hardware + energy + ops |
 
-{0.05cm}
-{mlsyscard}{crimson}
-{ **Every number traces back to the Iron Law.** The cost follows from physics. This course teaches you to derive these numbers.}
-{mlsyscard}
+**Every number traces back to the Iron Law.** The cost follows from physics. This course teaches you to derive these numbers.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] Compelling worked example. Walk through the back-of-envelope
+calculation. The point: these are not magic numbers --- they follow from
+the Iron Law. This is the kind of reasoning you will learn.
+Ask: ``Where does the \$100M go?''
+```
+
+</details>
 
 ## What If You Had to Run It on a Phone?
 
-{[2 min] Dramatic contrast. GPT-4 needs 3.6 TB of memory at FP16
-(1.8 trillion parameters $×$ 2 bytes/param). A phone has 8 GB.
-That is a 450$×$ gap. Compression, quantization,
+[Original slide 29](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L1268)
+
+**GPT-4 at half precision (FP16):**
+Model size $\sim$3.6 TB. Phone RAM: 8 GB. **Gap: 450$\times$.**
+
+**How do we close the gap?**
+
+- **Quantization** — FP32 $\to$ INT4 (8$\times$ smaller)
+- **Pruning** — remove redundant weights
+- **Distillation** — train a smaller model
+
+Part III of this course teaches all three.
+
+| **Tier** | **RAM** | **Gap** |
+| --- | --- | --- |
+| Cloud (H100) | 80 GB | 45$\times$ |
+| Edge (Orin) | 32 GB | 112$\times$ |
+| Mobile | 8 GB | 450$\times$ |
+| TinyML | 384 KB | 9.4M$\times$ |
+
+You cannot “just deploy” a model. The deployment spectrum forces trade-offs at every tier.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Dramatic contrast. GPT-4 needs 3.6 TB of memory at FP16
+(1.8 trillion parameters $\times$ 2 bytes/param). A phone has 8 GB.
+That is a 450$\times$ gap. Compression, quantization,
 distillation --- these are the tools of Part III (Optimization and Acceleration).
-Leave this as a teaser --- ``We will solve this problem.''}
+Leave this as a teaser --- ``We will solve this problem.''
+```
 
-[T]
-  
-    **GPT-4 at half precision (FP16):**
-    Model size $$3.6 TB. Phone RAM: 8 GB. {errorstroke}{**Gap: 450$×$.**}
-
-    {0.05cm}
-    **How do we close the gap?**
-    {0pt}
-- {computestroke}{**Quantization**} --- FP32 $$ INT4 (8$×$ smaller)
-- {datastroke}{**Pruning**} --- remove redundant weights
-- {routingstroke}{**Distillation**} --- train a smaller model
-    
-    Part III of this course teaches all three.
-  
-  
-    {}{1.0}
-    {tabular}{@{}lrr@{}}
-      
-      **Tier** & **RAM** & **Gap** \\
-      
-      Cloud (H100)   & 80 GB  & 45$×$ \\
-      Edge (Orin)    & 32 GB  & 112$×$ \\
-      Mobile         & 8 GB   & 450$×$ \\
-      TinyML         & 384 KB & 9.4M$×$ \\
-      
-    {tabular}
-
-    {0.05cm}
-    {mlsyscard}{errorstroke}
-    You cannot ``just deploy'' a model. The deployment spectrum forces trade-offs at every tier.
-    {mlsyscard}
+</details>
 
 ## Muddiest Point
 
-{[1 min] One-minute paper. Collect responses (physical or digital).
-Use responses to open the NEXT lecture with targeted clarification.
-Angelo & Cross (1993) --- powerful diagnostic tool.}
+[Original slide 30](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L1313)
 
- One-minute paper\\[0.5cm]
- Write down the **muddiest point** from today's lecture.\\[0.2cm]
-{ What concept was most confusing or unclear?}\\[0.5cm]
-{{midgray}{(Hand in on your way out --- or submit digitally)}}
+One-minute paper
+
+ Write down the **muddiest point** from today's lecture.
+
+What concept was most confusing or unclear?
+
+(Hand in on your way out — or submit digitally)
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[1 min] One-minute paper. Collect responses (physical or digital).
+Use responses to open the NEXT lecture with targeted clarification.
+Angelo \& Cross (1993) --- powerful diagnostic tool.
+```
+
+</details>
 
 ## Fallacies and Pitfalls
 
-{
+[Original slide 31](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L1326)
+
+**Fallacy:** *Better algorithms automatically produce better systems.*
+
+A state-of-the-art Vision Transformer achieves 1–2% higher accuracy than
+ResNet-50 but requires 4$\times$ the FLOPs and 3$\times$ the memory bandwidth.
+In production, a model that is 1% more accurate but violates latency requirements
+has effectively zero utility.
+
+**Fallacy:** *High benchmark accuracy means the system is production-ready.*
+
+A sentiment model achieving 94% accuracy on curated test data drops to
+78–82% in production as users employ slang, emojis, and context absent from benchmarks.
+Distribution shift causes real-world degradation even when code is unchanged.
+
+**Pitfall:** *Treating ML systems as traditional software that happens to include a model.*
+
+Traditional bugs produce stack traces within milliseconds; ML systems can silently
+degrade 10–15% over 3–6 months before anyone notices. CI/CD alone is not enough.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- LINK: Students have now seen the five frameworks and five lighthouses.
 % Before retrieval practice, surface the three most common Day 1 misconceptions
@@ -1170,52 +1276,52 @@ Angelo & Cross (1993) --- powerful diagnostic tool.}
 % -- WARN: Students who came from ML research courses will push back hardest
 % on Fallacy 2 (benchmark accuracy does not equal production readiness).
 % That is healthy---let them push back and name the counter-evidence
-% (94% $$ 78--82% is from the chapter; not invented).
+% (94\% $\to$ 78--82\% is from the chapter; not invented).
 %
 % -- FLEX: [CORE] Required element---every chapter deck includes this.
 % IF SHORT: Read Fallacies 1 and 2 only; skip Pitfall 3.
-}
+```
 
-**Fallacy:** *Better algorithms automatically produce better systems.*
-
-{ A state-of-the-art Vision Transformer achieves 1--2% higher accuracy than
-ResNet-50 but requires 4$×$ the FLOPs and 3$×$ the memory bandwidth.
-In production, a model that is 1% more accurate but violates latency requirements
-has effectively zero utility.}
-
-{0.1cm}
-**Fallacy:** *High benchmark accuracy means the system is production-ready.*
-
-{ A sentiment model achieving 94% accuracy on curated test data drops to
-78--82% in production as users employ slang, emojis, and context absent from benchmarks.
-Distribution shift causes real-world degradation even when code is unchanged.}
-
-{0.1cm}
-**Pitfall:** *Treating ML systems as traditional software that happens to include a model.*
-
-{ Traditional bugs produce stack traces within milliseconds; ML systems can silently
-degrade 10--15% over 3--6 months before anyone notices. CI/CD alone is not enough.}
+</details>
 
 ## What Were the Key Ideas?
 
-{[2 min] Retrieval practice. Students write for 90 seconds, no notes.
+[Original slide 32](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L1373)
+
+Close your notes.
+
+Write down the **4 most important ideas** from today.
+
+90 seconds — no peeking.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Retrieval practice. Students write for 90 seconds, no notes.
 Walk around the room. Do NOT show the next slide yet.
 %
 % -- FLEX: [CORE] First retrieval practice moment. Wait the full 90 seconds.
-}
+```
 
-{1.5cm}
-{ Close your notes.}
-
-{0.8cm}
-{ Write down the **4 most important ideas** from today.}
-
-{0.8cm}
-{{midgray}{90 seconds --- no peeking.}}
+</details>
 
 ## Key Takeaways (1/2)
 
-{[1 min] Reveal first half. Walk through each bullet. Emphasize that every idea
+[Original slide 33](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L1392)
+
+- **Software 2.0:** Weights are the new source code. Debugging moves from code to data.
+- **Silent vs. loud failure:** ML systems degrade without crashing. Monitoring is not optional.
+- **Bitter Lesson:** Scale beats hand-coded expertise. Systems that move compute efficiently determine AI progress.
+- **Constraints drive architecture.** AI is infrastructure with physical laws — not magic.
+- **The 5% problem:** Model code is 5% of production. The other 95% is systems engineering.
+- **D$\bullet$A$\bullet$M Taxonomy:** Data, Algorithm, Machine are interdependent. “Which is the bottleneck?”
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[1 min] Reveal first half. Walk through each bullet. Emphasize that every idea
 introduced today will recur throughout the semester.
 %
 % -- ENGAGE: Ask students to compare what they wrote in the retrieval-practice
@@ -1226,124 +1332,121 @@ introduced today will recur throughout the semester.
 % -- WARN: If students recall fewer than 4 items, do NOT rush to show this
 % slide---that defeats the retrieval practice. Give them the full 90 seconds
 % first, then reveal as a check, not a rescue.
-}
+```
 
-{1pt}
-- **Software 2.0:** Weights are the new source code. Debugging moves from code to data.
-- **Silent vs.\ loud failure:** ML systems degrade without crashing. Monitoring is not optional.
-- **Bitter Lesson:** Scale beats hand-coded expertise. Systems that move compute efficiently determine AI progress.
-- **Constraints drive architecture.** AI is infrastructure with physical laws --- not magic.
-- **The 5% problem:** Model code is 5% of production. The other 95% is systems engineering.
-- {{} Taxonomy:} Data, Algorithm, Machine are interdependent. ``Which is the bottleneck?''
+</details>
 
 ## Key Takeaways (2/2)
 
-{[1 min] Reveal second half. Connect all takeaways back to the course arc.
-These frameworks and models recur in every chapter.}
+[Original slide 34](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L1418)
 
-{1pt}
-- **Iron Law:** $T = D/BW + O/(R_p  ) + L$. Slowest term dominates.
-- **Degradation Eq.:** ${Accuracy}(t)  {Accuracy}_0 -   {D}(P_t P_0)$. Models fail silently as distributions drift.
-- **Five Lighthouses:** ResNet-50, GPT-2/Llama, MobileNetV2, DLRM, KWS --- each isolates a bottleneck.
-- **Deployment Spectrum:** Cloud to TinyML spans $10^5$--$10^6\!×$ memory/compute. Different engineering per tier.
-- **Course structure:** Foundations $$ Development & Training $$ Optimization & Acceleration $$ Deployment & Operations.
+- **Iron Law:** $T = D/BW + O/(R_p \cdot \eta) + L$. Slowest term dominates.
+- **Degradation Eq.:** $\text{Accuracy}(t) \approx \text{Accuracy}_0 - \lambda \cdot \mathcal{D}(P_t\lVert P_0)$. Models fail silently as distributions drift.
+- **Five Lighthouses:** ResNet-50, GPT-2/Llama, MobileNetV2, DLRM, KWS — each isolates a bottleneck.
+- **Deployment Spectrum:** Cloud to TinyML spans $10^5$–$10^6\!\times$ memory/compute. Different engineering per tier.
+- **Course structure:** Foundations $\to$ Development & Training $\to$ Optimization & Acceleration $\to$ Deployment & Operations.
 
-## Next Lecture: Chapter 1 --- Introduction
+<details>
+<summary>Original speaker notes (TeX)</summary>
 
-{[1 min] Forward hook. Chapter 1 goes deep on the D-A-M taxonomy,
+```tex
+[1 min] Reveal second half. Connect all takeaways back to the course arc.
+These frameworks and models recur in every chapter.
+```
+
+</details>
+
+## Next Lecture: Chapter 1 — Introduction
+
+[Original slide 35](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L1433)
+
+**Chapter 1: Introduction**
+
+The Physics of AI Engineering
+
+**D$\bullet$A$\bullet$M Taxonomy**
+
+Deep dive into all three axes
+
+**Iron Law**
+
+Worked examples with real hardware
+
+**Degradation**
+
+Why models fail silently
+
+**Read:** Chapter 1 of the textbook before next class.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[1 min] Forward hook. Chapter 1 goes deep on the D-A-M taxonomy,
 the Iron Law with worked examples, and the five lighthouse models.
-Assign pre-reading if applicable.}
+Assign pre-reading if applicable.
+```
 
-{0.5cm}
-{*Chapter 1: Introduction**}
-
-{0.3cm}
-{ The Physics of AI Engineering}
-
-{0.5cm}
-[T]
-  
-    
-    {datastroke}{{{} Taxonomy}}\\[0.1cm]
-    { Deep dive into all three axes}
-  
-  
-    
-    {computestroke}{**Iron Law**}\\[0.1cm]
-    { Worked examples with real hardware}
-  
-  
-    
-    {errorstroke}{**Degradation**}\\[0.1cm]
-    { Why models fail silently}
-  
-
-{0.5cm}
-{**Read:** Chapter 1 of the textbook before next class.}
+</details>
 
 ## Backup: Iron Law Quick Calculation
 
-{
+[Original slide 36](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L1476)
+
+**Example: Voice assistant keyword detection on Arduino Nicla**
+
+| **Term** | **Variables** | **Calculation** | **Time** |
+| --- | --- | --- | --- |
+| Data | 16 KB audio, 50 MB/s | $16\text{K}/50\text{M}$ | **0.32 ms** |
+| Compute | 6M FLOPs, 0.5 GF, $\eta$=0.3 | $6\text{M}/(0.15\text{G})$ | **40 ms** |
+| Overhead | Wake-up + preprocess | — | **2 ms** |
+|  |  | $T_{\text{total}}$ | **42.3 ms** |
+
+**Diagnosis:** Compute-bound. But power is the real constraint: 0.5 mW budget means duty cycling.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- NARRATE: Use if students want to see a concrete Iron Law application.
 % Walk through the voice assistant example: data loading, compute, and
 % orchestration overhead.
 %
 % -- FLEX: [OPTIONAL] Backup for students who want more practice.
-}
+```
 
-**Example: Voice assistant keyword detection on Arduino Nicla**
-
-{0.15cm}
-{}{1.15}
-{
-{tabular}{@{}llll@{}}
-  
-  **Term** & **Variables** & **Calculation** & **Time** \\
-  
-  {datastroke}{Data}    & 16 KB audio, 50 MB/s & $16{K}/50{M}$ & **0.32 ms** \\
-  {computestroke}{Compute} & 6M FLOPs, 0.5 GF, $$=0.3 & $6{M}/(0.15{G})$ & **40 ms** \\
-  {errorstroke}{Overhead} & Wake-up + preprocess & --- & **2 ms** \\
-  
-  & & $T_{{total}}$ & **42.3 ms** \\
-  
-{tabular}
-}
-
-{0.15cm}
-**Diagnosis:** Compute-bound. But power is the real constraint: 0.5 mW budget means duty cycling.
+</details>
 
 ## Backup: Degradation Equation Month-by-Month
 
-{
+[Original slide 37](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/00_course_overview/00_course_overview.tex#L1508)
+
+**Fraud detector degradation timeline:**
+
+| **Month** | $\Delta(P)$ | $\alpha \cdot \Delta$ | $A(t)$ | **Status** |
+| --- | --- | --- | --- | --- |
+| 0 | 0.00 | 0.0% | 94.0% | Deployed |
+| 1 | 0.33 | 1.0% | 93.0% | Normal |
+| 2 | 0.67 | 2.0% | 92.0% | Normal |
+| 3 | 1.00 | 3.0% | 91.0% | Watch |
+| 4 | 1.33 | 4.0% | 90.0% | **Retrain trigger** |
+| 6 | 2.00 | 6.0% | 88.0% | SLA violation |
+
+**Key:** Retrain at month 3–4. Waiting until month 6 means 2 months of SLA violations.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- NARRATE: Use if students struggled with the retraining exercise.
 % Walk through the full table showing accuracy at each month.
 %
 % -- FLEX: [OPTIONAL] Scaffolding for the quantitative exercise.
-}
+```
 
-**Fraud detector degradation timeline:**
-
-{0.15cm}
-{}{1.15}
-{
-{tabular}{@{}lrrrl@{}}
-  
-  **Month** & $(P)$ & $  $ & $A(t)$ & **Status** \\
-  
-  0 & 0.00 & 0.0% & 94.0% & Deployed \\
-  1 & 0.33 & 1.0% & 93.0% & Normal \\
-  2 & 0.67 & 2.0% & 92.0% & Normal \\
-  3 & 1.00 & 3.0% & 91.0% & {routingstroke}{Watch} \\
-  4 & 1.33 & 4.0% & {errorstroke}{90.0%} & {errorstroke}{**Retrain trigger**} \\
-  6 & 2.00 & 6.0% & 88.0% & SLA violation \\
-  
-{tabular}
-}
-
-{0.15cm}
-**Key:** Retrain at month 3--4. Waiting until month 6 means 2 months of SLA violations.
+</details>
 
 ## Complete original Beamer source
 

@@ -1,0 +1,66 @@
+[
+  {
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md"
+    ],
+    "id": "curated-distillation-gkd-kl-6c30cdeb8088",
+    "asset": "00 Учебник/Assets/Figures/curated/distillation-2026-10-25/gkd-forward-reverse-kl.svg",
+    "author": "Rishabh Agarwal et al.",
+    "source_url": "https://arxiv.org/abs/2306.13649v3",
+    "source_image_url": "https://arxiv.org/html/2306.13649v3/reverse_forward_kl.svg",
+    "source_asset": "00 Учебник/Assets/Figures/curated/distillation-2026-10-25/gkd-forward-reverse-kl.svg",
+    "source_asset_sha256": "6c30cdeb8088cb3bfed0685a09097fa0d63297426932b7231efa99ab33ee8b4b",
+    "sha256": "6c30cdeb8088cb3bfed0685a09097fa0d63297426932b7231efa99ab33ee8b4b",
+    "source_page_snapshot": "05 Источники/Originals/distillation-2026-10-25/gkd-v3.html",
+    "source_page_sha256": "1e720c7c46f27b317c9bbad01ca7fec9fdced3bd1539a09602e070338da9a324",
+    "license_evidence": "05 Источники/Originals/distillation-2026-10-25/gkd-v3.html",
+    "license_evidence_sha256": "1e720c7c46f27b317c9bbad01ca7fec9fdced3bd1539a09602e070338da9a324",
+    "derivation": "source-svg-copy",
+    "modifications": "None; complete original SVG, byte-for-byte. Three panels and shared legend retained; no crop, redraw, conversion or relabeling."
+  },
+  {
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md"
+    ],
+    "id": "curated-distillation-kim-rush-ae594f021145",
+    "asset": "00 Учебник/Assets/Figures/curated/distillation-2026-10-25/kim-rush-three-approaches.png",
+    "author": "Yoon Kim and Alexander M. Rush",
+    "source_url": "https://aclanthology.org/D16-1139/",
+    "source_asset": "05 Источники/Papers/Source PDFs/kim-rush-sequence-kd-2016.pdf",
+    "source_asset_sha256": "1d1c2ed4290dd151096d2edc83f5211c077edd227de587f7c5b7519a9e0cb504",
+    "source_download_url": "https://arxiv.org/pdf/1606.07947v3",
+    "sha256": "ae594f02114520f5af889187b62070ab4f0eb3c71924ed55a3c68db35b9473d0",
+    "source_page": 3,
+    "source_printed_page": 1319,
+    "render_dpi": 300,
+    "render_page_size_px": [
+      2550,
+      3300
+    ],
+    "crop_box_px": [
+      280,
+      280,
+      2270,
+      1360
+    ],
+    "dimensions_px": [
+      1990,
+      1080
+    ],
+    "license_evidence": "05 Источники/Originals/distillation-2026-10-25/NOTICE.md",
+    "license_evidence_sha256": "f1f7749b41ce36020ab46df35e977090190c29c556549fbc7b160c2e56721bec",
+    "license_scope": "The published EMNLP 2016 Figure 1 is covered by the ACL Anthology CC BY 4.0 notice. The preserved arXiv v3 PDF is the visual source, not relicensed wholesale.",
+    "derivation": "pdf-page-render-crop",
+    "modifications": "Poppler 300 dpi, physical page 3, crop [280,280,2270,1360]. Complete three-panel Figure 1 and original English caption; no redraw, translation or relabeling."
+  }
+]

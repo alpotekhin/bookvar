@@ -9,17 +9,49 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol2/lab_05_dist_train.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol2/lab_05_dist_train.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL2 Lab — Dist Train
 
 ## Readable lab narrative
 
-**Scenario.** {v2_05_lens['scenario']}
+This lab is primarily executable code; use the complete source below.
 
-**Track constraint lens.** Model/update workload: **{v2_05_lens['model_name']}**. Training location: **{v2_05_lens['training_location']}**. Natural failure: **{v2_05_lens['failure_mode']}**.
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+Commit to a structured prediction before using the instrument.
+
+---
+
+# V2-05 Distributed Training: The Parallelism Puzzle
+
+---
+
+**Chapter invariant.** Distributed training trades compute for communication, memory, synchronization, and convergence cost. For **⟨value 1⟩**, you are acting as the ⟨value 2⟩ deciding: ⟨value 3⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v2_05_profile.label}' `
+- value_2: ` f"{v2_05_lens['stakeholder']}" `
+- value_3: ` f"{v2_05_lens['decision_frame']}" `
+
+---
+
+**Scenario.** ⟨value 1⟩
+
+**Track constraint lens.** Model/update workload: **⟨value 2⟩**. Training location: **⟨value 3⟩**. Natural failure: **⟨value 4⟩**.
 
 **Concept sequence.**
 
@@ -28,21 +60,108 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 3. Part C: batch size and optimizer state change memory, convergence, and step time.
 4. Part D: a distributed training plan must satisfy time, memory, communication, and evidence constraints.
 
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_05_lens['scenario']}" `
+- value_2: ` f"{v2_05_lens['model_name']}" `
+- value_3: ` f"{v2_05_lens['training_location']}" `
+- value_4: ` f"{v2_05_lens['failure_mode']}" `
+
+---
+
+## Part A - Concept Module: Parallelism Moves The Binding Amount
+
+---
+
+**Scenario.** The ⟨value 1⟩ tries **⟨value 2⟩** for **⟨value 3⟩**. The decision is not whether more devices exist; it is which amount becomes binding after the split.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_05_lens['stakeholder']}" `
+- value_2: ` f"{_part_a['label']}" `
+- value_3: ` f"{v2_05_lens['model_name']}" `
+
+---
+
+## Part B - Concept Module: Scaling Efficiency Falls When Overhead Dominates
+
+---
+
+**Scenario.** The team asks whether **⟨value 1⟩ accelerators** on **⟨value 2⟩** still buy useful work for ⟨value 3⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_part_b['n_gpus']}" `
+- value_2: ` f"{_part_b['network_label']}" `
+- value_3: ` f'{v2_05_profile.label}' `
+
+---
+
+## Part C - Concept Module: Batch And Optimizer State Couple Memory, Convergence, And Step Time
+
+---
+
+**Scenario.** The strategy now needs an optimizer setup. Per-device batch **⟨value 1⟩**, accumulation **⟨value 2⟩**, and **⟨value 3⟩** create a global batch of **⟨value 4⟩**.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_part_c['batch_per_device']}" `
+- value_2: ` f"{_part_c['accumulation']}" `
+- value_3: ` f"{_part_c['sharding_label']}" `
+- value_4: ` f"{_part_c['global_batch']:,}" `
+
+---
+
+## Part D - Concept Module: Training Plan Guardrails
+
+---
+
+**Scenario.** The final plan must pass time, memory, communication, and evidence guardrails. ⟨value 1⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_05_lens['report_prompt']}" `
+
+---
+
+## Synthesis - Distributed Training Memo
+
+---
+
+**Status:** ⟨value 1⟩. Complete all predictions and checkpoints before final submission.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_status}' `
+
 ---
 
 **Memo draft**
 
-`…`
+⟨value 1⟩
 
 **Evidence to cite**
 
-- Selected plan: **{_part_d['candidate_label']}**
-- Binding bottleneck: **`…`**
-- Rejected alternative: **{v2_05_lens['rejected_alternative']}**
-- Memory per device: **{_part_c['memory_gb']:.1f} GB**
-- Scaling efficiency: **{v2_05_pct(_part_b['efficiency'], 1)}**
-- Critical-batch ratio: **{_part_c['batch_ratio']:.2f}x**
-- V2-06 implication: **{v2_05_lens['collective_implication']}**
+- Selected plan: **⟨value 2⟩**
+- Binding bottleneck: **⟨value 3⟩**
+- Rejected alternative: **⟨value 4⟩**
+- Memory per device: **⟨value 5⟩ GB**
+- Scaling efficiency: **⟨value 6⟩**
+- Critical-batch ratio: **⟨value 7⟩x**
+- V2-06 implication: **⟨value 8⟩**
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_memo}' `
+- value_2: ` f"{_part_d['candidate_label']}" `
+- value_3: ` f'{_binding}' `
+- value_4: ` f"{v2_05_lens['rejected_alternative']}" `
+- value_5: ` f"{_part_c['memory_gb']:.1f}" `
+- value_6: ` f"{v2_05_pct(_part_b['efficiency'], 1)}" `
+- value_7: ` f"{_part_c['batch_ratio']:.2f}" `
+- value_8: ` f"{v2_05_lens['collective_implication']}" `
+
+</details>
 
 ## Complete original Marimo source
 

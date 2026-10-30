@@ -9,78 +9,108 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`slides/vol1/04_data_engineering/04_data_engineering.tex`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static slide archive
+> Text and equations retain the original language. Layout wrappers are simplified;
+> speaker notes are separate, and original SVGs are not redrawn or cropped.
+> Unsupported TeX remains visible and is listed beside the affected slide.
+> This archive is not a checked transcript or a finished Bookvar chapter.
 
 # VOL1 Slides — Data Engineering
 
 ## Readable slide sequence
 
+## Data Engineering
+
+[Original slide 1](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L62)
+
+Data Is the Source Code of ML Systems
+
 ## Learning Objectives
 
-{
+[Original slide 2](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L67)
+
+1. Explain how **Data Cascades** propagate errors and apply the **Four Pillars framework**
+2. Evaluate **data acquisition strategies** using cost–quality trade-offs
+3. Compare **batch vs. streaming** ingestion and **ETL vs. ELT** patterns
+4. Implement **training-serving consistency** through idempotent transformations and **drift detection**
+5. Build **data labeling systems** balancing accuracy, throughput, cost, and quality control
+6. Evaluate **storage architectures** and file formats for ML workloads, including **feature store** concepts
+7. Identify **Data Debt** categories and apply systematic debugging
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
-% -- LINK: This chapter opens with the statistic that 60--80% of ML effort
+% -- LINK: This chapter opens with the statistic that 60--80\% of ML effort
 % is data-related (computed from the chapter's own LEGO cell). This slide
-% sets the learning contract: the chapter dives into that 60--80% of effort.
+% sets the learning contract: the chapter dives into that 60--80\% of effort.
 %
-% -- NARRATE: Walk through objectives. ``Data engineering consumes 60--80%
-% of ML project effort, yet most courses spend 80% of time on models.
+% -- NARRATE: Walk through objectives. ``Data engineering consumes 60--80\%
+% of ML project effort, yet most courses spend 80\% of time on models.
 % This chapter corrects that imbalance.''
 % Ask: ``Who here has spent more time cleaning data than training models?''
 %
 % -- FLEX: [CORE] Sets the learning contract for the chapter.
 % IF SHORT: Display objectives, highlight the Four Pillars and drift detection.
-}
-- Explain how **Data Cascades** propagate errors and apply the **Four Pillars framework**
-- Evaluate **data acquisition strategies** using cost--quality trade-offs
-- Compare **batch vs.\ streaming** ingestion and **ETL vs.\ ELT** patterns
-- Implement **training-serving consistency** through idempotent transformations and **drift detection**
-- Build **data labeling systems** balancing accuracy, throughput, cost, and quality control
-- Evaluate **storage architectures** and file formats for ML workloads, including **feature store** concepts
-- Identify **Data Debt** categories and apply systematic debugging
+```
+
+</details>
 
 ## Visual Language
 
-{
+[Original slide 3](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L96)
+
+Throughout this course, colors carry meaning:
+
+**Blue** — Compute / Processing
+
+GPU ops, forward/backward pass, inference
+
+**Green** — Data / Memory
+
+Data flow, caches, healthy paths
+
+**Orange** — Routing / Scheduling
+
+Load balancers, batch windows
+
+**Red** — Error / Cost / Bottleneck
+
+Loss, decode phase, waste
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [0.5 min]
 % -- NARRATE: ``Quick color reminder. Blue = compute, green = data, orange =
 % routing, red = cost or bottleneck. Today's chapter is dominated by green---
 % data is the protagonist.''
 %
 % -- FLEX: [CORE] Brief reminder. 15 seconds by Chapter 4.
-}
+```
 
-Throughout this course, colors carry meaning:
-
-{0.3cm}
-[T]
-  
-    {mlsyscard}{computestroke}
-    **Blue** --- Compute / Processing\\
-    { GPU ops, forward/backward pass, inference}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{datastroke}
-    **Green** --- Data / Memory\\
-    { Data flow, caches, healthy paths}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{routingstroke}
-    **Orange** --- Routing / Scheduling\\
-    { Load balancers, batch windows}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{errorstroke}
-    **Red** --- Error / Cost / Bottleneck\\
-    { Loss, decode phase, waste}
-    {mlsyscard}
+</details>
 
 ## The Dataset Compilation Metaphor
 
-{
+[Original slide 4](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L141)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/04_data_engineering/images/ch04-dataset-compiler.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch04-dataset-compiler.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/images/ch04-dataset-compiler.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Key insight:** Deleting a row of training data = deleting a line of code. Retraining = recompiling.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- LINK: Chapter 3's SW 2.0 framing said ``data is source code.'' This
 % slide makes that metaphor concrete and actionable.
@@ -104,18 +134,35 @@ Throughout this course, colors carry meaning:
 % -- FLEX: [CORE] Foundational metaphor for the chapter.
 % IF SHORT: State the metaphor and the ``deleting a row = deleting a line of
 % code'' insight. (60 seconds)
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
-
-{ch04-dataset-compiler.pdf}
-
-{0.1cm}
-{Key insight:}{Deleting a row of training data = deleting a line of code. Retraining = recompiling.}
+</details>
 
 ## Data Cascades: Upstream Errors Amplify
 
-{
+[Original slide 5](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L177)
+
+**The failure pattern:**
+
+- Bad data at collection $\to$ silent propagation
+- Errors amplify through every pipeline stage
+- 4-week median time to discovery
+- Often requires **complete system rebuild**
+
+**Example:** A zip code field changed from integer to string. Leading zeros lost. The model rejected all applicants from affected regions — *silently*.
+
+| **Traditional SW** | **ML Data** |
+| --- | --- |
+| Compile error | Silent degradation |
+| Crashes loudly | Degrades silently |
+| Debug code | Debug pipeline |
+
+Source on slide: Sambasivan et al., “Everyone Wants to Do the Model Work,” CHI 2021
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- LINK: The compilation metaphor said datasets need debugging. Data
 % Cascades show what happens when bugs go undetected.
@@ -142,54 +189,34 @@ Throughout this course, colors carry meaning:
 %
 % -- FLEX: [CORE] Motivates the Four Pillars framework.
 % IF AHEAD: ``How would you design a test that catches the zip code bug?''
-}
+```
 
-[T]
-  
-    **The failure pattern:**
-    {0pt}
-- Bad data at collection $$ silent propagation
-- Errors amplify through every pipeline stage
-- 4-week median time to discovery
-- Often requires **complete system rebuild**
-    
-
-    {0.1cm}
-    {mlsyscard}{errorstroke}
-    { **Example:** A zip code field changed from integer to string. Leading zeros lost. The model rejected all applicants from affected regions --- *silently*.}
-    {mlsyscard}
-  
-  
-    {0.2cm}
-    {}{1.15}
-    {
-    {tabular}{@{}ll@{}}
-      
-      **Traditional SW** & **ML Data** \\
-      
-      Compile error    & Silent degradation \\
-      Crashes loudly   & Degrades silently \\
-      Debug code       & Debug pipeline \\
-      
-    {tabular}
-    }
-  
-
-{Sambasivan et al., ``Everyone Wants to Do the Model Work,'' CHI 2021}
+</details>
 
 ## The Energy-Movement Invariant
 
-{
+[Original slide 6](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L247)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/04_data_engineering/images/ch04-energy-movement.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch04-energy-movement.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/images/ch04-energy-movement.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Systems Implication:** Pruning 50% of training data eliminates the *most expensive* stages of the pipeline.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- LINK: Data Cascades showed that data quality matters. This slide shows
 % that data MOVEMENT is the dominant physical cost---not computation.
 %
 % -- NARRATE: ``Horowitz 2014. Moving a bit from DRAM to the processor costs
-% 170$×$ more energy than a floating-point multiply. Moving it from
-% flash costs 1,000$×$ more. This is the physics behind the Iron Law's
+% 170$\times$ more energy than a floating-point multiply. Moving it from
+% flash costs 1,000$\times$ more. This is the physics behind the Iron Law's
 % data term. The engineering implication: deduplication---removing redundant
 % data before it moves---is the highest-leverage optimization you can make.
-% Pruning 50% of training data eliminates the most expensive stages of the
+% Pruning 50\% of training data eliminates the most expensive stages of the
 % pipeline: movement, not computation.''
 %
 % -- ENGAGE: ``If computation costs 1 unit of energy and DRAM access costs
@@ -199,34 +226,59 @@ Throughout this course, colors carry meaning:
 %
 % -- WARN: Students assume compute is the expensive part because GPUs are
 % marketed on TFLOPS. Correct framing: data movement dominates energy by
-% 100--1,000$×$. Optimizing compute while ignoring data movement is
+% 100--1,000$\times$. Optimizing compute while ignoring data movement is
 % like tuning the engine while ignoring that you are hauling 10 tons of
 % unnecessary cargo.
 %
 % -- FLEX: [CORE] Physical foundation for data engineering decisions.
-% IF SHORT: State the 170$×$ number and the deduplication implication.
-}
+% IF SHORT: State the 170$\times$ number and the deduplication implication.
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
-
-{ch04-energy-movement.pdf}
-
-{0.15cm}
-{Systems Implication:}{Pruning 50% of training data eliminates the *most expensive* stages of the pipeline.}
+</details>
 
 ## Data Gravity: Move Compute, Not Data
 
-{
+[Original slide 7](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L285)
+
+**Data Gravity = Movement Cost**
+
+A 1 PB dataset on a 10 Gbps link:
+
+- **Wire time:** $\sim$days (physics, fixed)
+- **Egress cost:** $\sim$&#36;90K (at &#36;0.09/GB)
+- **Engineering time:** 6–9 months
+  
+  (pipeline re-validation, schema migration, lineage)
+
+**Rule:** For PB-scale data, **move compute to data**.
+
+For GB-scale data, **move data to compute**.
+
+| **Scale** | **Architecture** |
+| --- | --- |
+| GB dataset | Move data to GPU |
+| TB dataset | Colocate storage/GPU |
+| PB dataset | Lakehouse: Spark on storage |
+| PB+ mesh | Decentralized Data Mesh |
+
+**Fallacy:** “Moving a PB is just a bandwidth problem.”
+
+Wire cost $\ll$ engineering cost.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- LINK: The Energy-Movement Invariant showed that moving bits costs
-% 100--1,000$×$ more than computing. Data Gravity extends that
+% 100--1,000$\times$ more than computing. Data Gravity extends that
 % principle to between-datacenter movement: when datasets reach PB scale,
 % the cost of physically moving the data exceeds the cost of running
 % compute on it.
 %
 % -- NARRATE: ``The chapter defines data gravity as movement cost: a function
 % of volume and bandwidth. A 1 PB dataset on a 10 Gbps link takes days of
-% wire time and costs $$\$90K in egress fees at cloud rates. That single
+% wire time and costs $\sim$\$90K in egress fees at cloud rates. That single
 % number changes every architectural decision: instead of moving data to the
 % compute, you move the compute to the data. This is why Lakehouse architectures
 % (Spark on the storage node) exist and why cloud vendors colocate storage
@@ -247,53 +299,42 @@ Throughout this course, colors carry meaning:
 %
 % -- FLEX: [CORE] Named chapter principle with quantitative anchor.
 % IF SHORT: State the \$90K/1 PB figure and the `move compute to data' rule.
-}
+```
 
-[T]
-  
-    **Data Gravity = Movement Cost**
-
-    {0.15cm}
-    {
-    A 1 PB dataset on a 10 Gbps link:
-    {0pt}
-- **Wire time:** $$days (physics, fixed)
-- **Egress cost:** $$\$90K (at \$0.09/GB)
-- **Engineering time:** 6--9 months\\
-      { (pipeline re-validation, schema migration, lineage)}
-    
-    }
-
-    {0.1cm}
-    {mlsyscard}{datastroke}
-    { **Rule:** For PB-scale data, **move compute to data**.\\
-    For GB-scale data, **move data to compute**.}
-    {mlsyscard}
-  
-  
-    {0.1cm}
-    {}{1.15}
-    {
-    {tabular}{@{}ll@{}}
-      
-      **Scale** & **Architecture** \\
-      
-      GB dataset & Move data to GPU \\
-      TB dataset & Colocate storage/GPU \\
-      PB dataset & Lakehouse: Spark on storage \\
-      PB+ mesh  & Decentralized Data Mesh \\
-      
-    {tabular}
-    }
-    {0.1cm}
-    {mlsyscard}{errorstroke}
-    { **Fallacy:** ``Moving a PB is just a bandwidth problem.''\\[0.05cm]
-    Wire cost $$ engineering cost.}
-    {mlsyscard}
+</details>
 
 ## The Feeding Problem: GPU Starvation
 
-{
+[Original slide 8](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L366)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/04_data_engineering/images/ch04-feeding-problem.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch04-feeding-problem.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/images/ch04-feeding-problem.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**The mismatch:**
+
+**A100 GPU capacity**
+
+40K images/sec $\to$ needs 23 GB/s
+
+**Standard cloud disk**
+
+250 MB/s actual throughput
+
+**Feeding Tax:** $>$98% GPU idle time.
+
+Iron Law: $T_{\text{step}} = \max(T_{\text{compute}}, T_{\text{io}})$
+
+The Data Term dominates.
+
+**Formal limit:**
+
+$\text{Throughput} = \min(\text{Compute}, \text{Supply Rate})$
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- LINK: Data Gravity showed the between-datacenter movement cost.
 % The Feeding Problem shows the within-datacenter I/O bottleneck that
@@ -301,59 +342,60 @@ Throughout this course, colors carry meaning:
 %
 % -- NARRATE: ``An A100 can process 40K images per second, but a standard
 % cloud disk delivers only 250 MB/s. At 600 KB per image, that is only 417
-% images per second---the GPU sits over 98% idle. This is the Iron Law's
-% data term dominating: $T_{{step}} = (T_{{compute}},
-% T_{{io}})$. Adding more GPUs yields zero speedup because the bottleneck
+% images per second---the GPU sits over 98\% idle. This is the Iron Law's
+% data term dominating: $T_{\text{step}} = \max(T_{\text{compute}},
+% T_{\text{io}})$. Adding more GPUs yields zero speedup because the bottleneck
 % is storage, not compute.''
 %
 % -- ENGAGE: ``If you have \$10K to spend, should you buy another GPU or
 % faster storage?'' Give 15 seconds. Cold-call one student.
 % Expected: faster storage---the system is I/O-bound, so another GPU yields
-% 0% speedup. NVMe at 7 GB/s would feed the GPU 11,667 images/sec, a
-% 28$×$ improvement over the 250 MB/s disk.
+% 0\% speedup. NVMe at 7 GB/s would feed the GPU 11,667 images/sec, a
+% 28$\times$ improvement over the 250 MB/s disk.
 %
 % -- WARN: Students default to ``buy more GPUs'' for training speedup.
-% Correct framing: if the Feeding Tax exceeds 50%, storage is the
-% bottleneck. Profile $T_{{io}}$ vs.\ $T_{{compute}}$ before
+% Correct framing: if the Feeding Tax exceeds 50\%, storage is the
+% bottleneck. Profile $T_{\text{io}}$ vs.\ $T_{\text{compute}}$ before
 % purchasing hardware.
-% IF STUCK: ``What are the units of 40K images/sec $×$ 600 KB/image?
+% IF STUCK: ``What are the units of 40K images/sec $\times$ 600 KB/image?
 % That is 23 GB/s. Can a 250 MB/s disk deliver that?''
 %
 % -- FLEX: [CORE] Connects Iron Law to practical infrastructure decisions.
 % IF AHEAD: ``How does data format affect the Feeding Tax?'' (Answer: Parquet
-% is 10$×$ smaller than CSV---same data, 10$×$ less I/O.)
-}
+% is 10$\times$ smaller than CSV---same data, 10$\times$ less I/O.)
+```
 
-[T]
-  
-    {ch04-feeding-problem.pdf}
-  
-  
-    **The mismatch:**
-
-    {0.1cm}
-    {computestroke}{**A100 GPU capacity**}\\
-    40K images/sec $$ needs 23 GB/s
-
-    {0.08cm}
-    {errorstroke}{**Standard cloud disk**}\\
-    250 MB/s actual throughput
-
-    {0.1cm}
-    {mlsyscard}{errorstroke}
-    { **Feeding Tax:** $>$98% GPU idle time.\\[0.03cm]
-    Iron Law: $T_{{step}} = (T_{{compute}}, T_{{io}})$\\[0.03cm]
-    The {datastroke}{Data Term} dominates.}
-    {mlsyscard}
-    {0.06cm}
-    {mlsyscard}{datastroke}
-    { **Formal limit:**\\[0.03cm]
-    ${Throughput} = ({Compute}, {Supply Rate})$}
-    {mlsyscard}
+</details>
 
 ## Your Turn: Calculate the Feeding Tax
 
-{
+[Original slide 9](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L431)
+
+Diagnose the I/O Bottleneck
+
+A training pipeline processes:
+
+- 2,000 images/sec at 250 KB each
+- Storage delivers 100 MB/s
+
+**Calculate:** (1) Required bandwidth, (2) Feeding tax, (3) Dominant Iron Law term.
+
+(90 seconds — then compare with a neighbor)
+
+**Solution:**
+
+Required: $2000 \times 250\text{KB} = 500$ MB/s
+
+Disk: 100 MB/s
+
+Tax: $1 - 100/500 =$ **80%**
+
+**Data-bound!** Fix: faster storage.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [4 min]
 % -- LINK: The Feeding Problem showed GPU starvation qualitatively. This
 % exercise quantifies it.
@@ -363,54 +405,43 @@ Throughout this course, colors carry meaning:
 %
 % -- ENGAGE: PEER INSTRUCTION PROTOCOL:
 % 1. Present problem (30s). 2. Individual work (60s).
-% 3. If 30--70% correct: pair discussion (90s), then re-vote.
-% 4. Reveal: Required BW = 2,000 images/sec $×$ 250 KB = 500 MB/s.
-% Disk provides 100 MB/s. Feeding Tax = $1 - 100/500 = 80%$. System is
+% 3. If 30--70\% correct: pair discussion (90s), then re-vote.
+% 4. Reveal: Required BW = 2,000 images/sec $\times$ 250 KB = 500 MB/s.
+% Disk provides 100 MB/s. Feeding Tax = $1 - 100/500 = 80\%$. System is
 % I/O-bound. The fix is faster storage (NVMe, parallel readers), not a
 % faster GPU.
 %
 % -- WARN: Students will calculate the required bandwidth correctly but forget
 % to compare it to the actual disk throughput. Correct framing: the Feeding
-% Tax is the fraction of time the GPU is idle waiting for data. 80% means
-% the GPU does useful work only 20% of the time.
-% IF STUCK: ``What are the units of 2,000 $×$ 250 KB? Convert to MB/s.
+% Tax is the fraction of time the GPU is idle waiting for data. 80\% means
+% the GPU does useful work only 20\% of the time.
+% IF STUCK: ``What are the units of 2,000 $\times$ 250 KB? Convert to MB/s.
 % Now compare to 100 MB/s.''
 %
 % -- FLEX: [CORE] First hands-on calculation for the chapter.
 % IF SHORT: Skip pair discussion; go straight to reveal.
-}
+```
 
-[T]
-  
-    { Diagnose the I/O Bottleneck}
-
-    {0.1cm}
-    A training pipeline processes:
-    {0pt}
-- 2,000 images/sec at 250 KB each
-- Storage delivers 100 MB/s
-    
-
-    {0.1cm}
-    **Calculate:** (1) Required bandwidth, (2) Feeding tax, (3) Dominant Iron Law term.
-
-    {{midgray}{(90 seconds --- then compare with a neighbor)}}
-  
-  
-    
-    {mlsyscard}{datastroke}
-    **Solution:**\\[0.05cm]
-    {
-    Required: $2000 × 250{KB} = 500$ MB/s\\
-    Disk: 100 MB/s\\
-    Tax: $1 - 100/500 = $ **80%**\\[0.05cm]
-    {datastroke}{**Data-bound!**} Fix: faster storage.
-    }
-    {mlsyscard}
+</details>
 
 ## Predict: What Makes a Reliable Data System?
 
-{
+[Original slide 10](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L497)
+
+Think–Write–Share
+
+A zip code field changes from integer to string.
+
+Your ML model silently rejects all applicants from a region.
+
+**What system properties would have prevented this?**
+
+Write down 3–4 properties. (60 seconds)
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [4 min]
 % -- LINK: Data Cascades and the Feeding Problem showed what goes wrong. This
 % prediction exercise asks students to reason about prevention before seeing
@@ -432,22 +463,24 @@ Throughout this course, colors carry meaning:
 %
 % -- FLEX: [CORE] Prediction exercise scaffolds the Four Pillars reveal.
 % IF SHORT: Cut turn-and-talk; go straight to cold-call after 60 seconds.
-}
+```
 
-{1.2cm}
-{ Think--Write--Share}
-
-{0.6cm}
-{ A zip code field changes from integer to string.\\
-Your ML model silently rejects all applicants from a region.\\[0.3cm]
-**What system properties would have prevented this?**}
-
-{0.6cm}
-{ Write down 3--4 properties. {midgray}{(60 seconds)}}
+</details>
 
 ## The Four Pillars Framework
 
-{
+[Original slide 11](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L536)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/04_data_engineering/images/ch04-four-pillars.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch04-four-pillars.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/images/ch04-four-pillars.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Framework:** Every pipeline decision is evaluated against all four pillars simultaneously.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- LINK: Students just predicted system properties for reliable data. The
 % Four Pillars formalize their intuition.
@@ -472,35 +505,49 @@ Your ML model silently rejects all applicants from a region.\\[0.3cm]
 % -- FLEX: [CORE] Organizing framework for all data engineering decisions.
 % IF SHORT: Show the diagram, name the four pillars, state their
 % interdependence.
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
-
-{ch04-four-pillars.pdf}
-
-{0.1cm}
-{Framework:}{Every pipeline decision is evaluated against all four pillars simultaneously.}
+</details>
 
 ## Four Pillars: Trade-off Tensions
 
-{
+[Original slide 12](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L573)
+
+**Quality $\leftrightarrow$ Scalability**
+
+Stricter schema validation catches more errors but reduces pipeline throughput. A 100% label review catches all errors but costs 10–50$\times$ more.
+
+**Reliability $\leftrightarrow$ Governance**
+
+Redundant data copies improve fault tolerance but multiply the governance surface. Each copy must be versioned, access-controlled, and tracked.
+
+**Scalability $\leftrightarrow$ Quality**
+
+Web scraping scales to billions but requires elaborate cleaning. Curated datasets are high-quality but cap at thousands.
+
+**The engineering discipline:** Navigate these tensions systematically, not ad hoc. Every decision shifts the balance.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- LINK: The Four Pillars are interdependent. This slide shows the specific
 % tensions between them.
 %
 % -- NARRATE: ``Concrete tension examples. Quality vs.\ Scalability: stricter
 % schema validation catches more errors but reduces pipeline throughput. A
-% 100% label review catches all errors but costs 10--50$×$ more than
+% 100\% label review catches all errors but costs 10--50$\times$ more than
 % spot-checking. Reliability vs.\ Governance: redundant data copies improve
 % fault tolerance but multiply the governance surface---each copy must be
 % versioned, access-controlled, and tracked. Scalability vs.\ Quality: web
 % scraping scales to billions but requires elaborate cleaning. Curated
 % datasets are high-quality but cap at thousands.''
 %
-% -- ENGAGE: ``Your team has a budget for either 100% label review OR
-% 10$×$ more data with spot-checking. Which do you choose?'' Give 15
+% -- ENGAGE: ``Your team has a budget for either 100\% label review OR
+% 10$\times$ more data with spot-checking. Which do you choose?'' Give 15
 % seconds.
-% Expected: depends on the task. Medical imaging: 100% review (high stakes).
+% Expected: depends on the task. Medical imaging: 100\% review (high stakes).
 % Web search: more data with spot-checking (error-tolerant). The point: there
 % is no universal answer---the Four Pillars framework structures the trade-off.
 %
@@ -511,29 +558,28 @@ Your ML model silently rejects all applicants from a region.\\[0.3cm]
 %
 % -- FLEX: [OPTIONAL] Deepens the trade-off understanding.
 % IF SHORT: State the Quality vs.\ Scalability tension and move on.
-}
+```
 
-[T]
-  
-    **Quality $$ Scalability**\\[0.1cm]
-    { Stricter schema validation catches more errors but reduces pipeline throughput. A 100% label review catches all errors but costs 10--50$×$ more.}
+</details>
 
-    {0.2cm}
-    **Reliability $$ Governance**\\[0.1cm]
-    { Redundant data copies improve fault tolerance but multiply the governance surface. Each copy must be versioned, access-controlled, and tracked.}
-  
-  
-    **Scalability $$ Quality**\\[0.1cm]
-    { Web scraping scales to billions but requires elaborate cleaning. Curated datasets are high-quality but cap at thousands.}
+## Lighthouse: DLRM vs. KWS — Scalability Pillar (1/2)
 
-    {0.2cm}
-    {mlsyscard}{crimson}
-    { **The engineering discipline:** Navigate these tensions systematically, not ad hoc. Every decision shifts the balance.}
-    {mlsyscard}
+[Original slide 13](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L627)
 
-## Lighthouse: DLRM vs.\ KWS --- Scalability Pillar (1/2)
+**Same Four Pillars. Different binding constraint.**
 
-{
+|  | **KWS (our lighthouse)** | **DLRM (recommendation)** |
+| --- | --- | --- |
+| **Data scale** | 23M samples, 736 GB | Billion+ users/items, TB/PB |
+| **Pillar stress** | Quality + compute | Scalability = memory capacity |
+| **Bottleneck** | Labeling throughput | Sparse embedding lookups |
+| **Architecture** | Streaming pipeline | Embedding table sharding |
+| **Fix** | AI-assisted labeling | Higher-BW memory, sharding |
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: The Four Pillars framework said every pipeline decision is
 % evaluated against all four pillars simultaneously. This slide grounds
@@ -562,29 +608,22 @@ Your ML model silently rejects all applicants from a region.\\[0.3cm]
 % -- FLEX: [OPTIONAL] Lighthouse anchor for the Scalability pillar.
 % IF SHORT: State the contrast: KWS = compute/quality bound; DLRM =
 % memory capacity/sparse-access bound. (30 seconds)
-}
+```
 
-{center}
-**Same Four Pillars. Different binding constraint.**
-{center}
+</details>
 
-{0.1cm}
-{}{1.05}
-{tabular}{@{}lp{3.5cm}p{3.5cm}@{}}
-  
-  & **KWS (our lighthouse)** & **DLRM (recommendation)** \\
-  
-  **Data scale** & 23M samples, 736 GB & Billion+ users/items, TB/PB \\
-  **Pillar stress** & Quality + compute & Scalability = memory capacity \\
-  **Bottleneck** & Labeling throughput & Sparse embedding lookups \\
-  **Architecture** & Streaming pipeline & Embedding table sharding \\
-  **Fix** & AI-assisted labeling & Higher-BW memory, sharding \\
-  
-{tabular}
+## Lighthouse: DLRM vs. KWS — Scalability Pillar (2/2)
 
-## Lighthouse: DLRM vs.\ KWS --- Scalability Pillar (2/2)
+[Original slide 14](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L680)
 
-{
+**Systems lesson:** For recommendation systems, the Scalability pillar binds first—TB-scale embedding tables exceed single-GPU memory and stress sparse-access bandwidth, not compute.
+
+**Diagnostic question:** When a team says “our training is slow,” ask *which* Iron Law term dominates before recommending a hardware upgrade.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [1 min]
 % -- LINK: The comparison table showed the two archetypes side by side.
 % This slide draws out the systems lesson.
@@ -596,24 +635,32 @@ Your ML model silently rejects all applicants from a region.\\[0.3cm]
 %
 % -- ENGAGE: ``If the DLRM team buys higher-bandwidth HBM3 memory instead
 % of more GPU FLOPs, which Iron Law term improves?''
-% Expected: the Data Term ($D_{{vol}}/BW$)---higher BW reduces the
+% Expected: the Data Term ($D_{\text{vol}}/BW$)---higher BW reduces the
 % sparse embedding lookup cost that is the binding constraint.
 %
 % -- FLEX: [OPTIONAL] Systems lesson for the Scalability pillar.
 % IF SHORT: Read the insight aloud and move on. (20 seconds)
-}
+```
 
-{0.5cm}
-{Systems lesson:}{For recommendation systems, the Scalability pillar binds first---TB-scale embedding tables exceed single-GPU memory and stress sparse-access bandwidth, not compute.}
-
-{0.4cm}
-{mlsyscard}{datastroke}
-{ **Diagnostic question:** When a team says ``our training is slow,'' ask *which* Iron Law term dominates before recommending a hardware upgrade.}
-{mlsyscard}
+</details>
 
 ## Data Acquisition Strategies
 
-{
+[Original slide 15](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L715)
+
+|  | **Curated** | **Crowdsource** | **Web Scrape** | **Synthetic** |
+| --- | --- | --- | --- | --- |
+| **Scale** | 1K–10M | 10K–100M | 1M–1B+ | Unlimited |
+| **Quality** | High | Medium | Low (noisy) | Medium |
+| **Cost** | Low (reuse) | Medium | Low (infra) | Medium |
+| **Risk** | Overfitting | Annotator bias | Legal, noise | Model collapse |
+
+**KWS:** Curated Speech Commands (baseline) + crowdsourced MSWC (50 languages) + synthetic TTS (rare accents) + web-scraped noise. No single source suffices.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- LINK: The Four Pillars framework structures pipeline decisions. Data
 % acquisition is the first decision: where does data come from?
@@ -640,34 +687,49 @@ Your ML model silently rejects all applicants from a region.\\[0.3cm]
 % -- FLEX: [CORE] Foundational decision for any ML project.
 % IF SHORT: Show the table, state the KWS example. Skip the medical imaging
 % question.
-}
+```
 
-{}{1.05}
-{tabular}{@{}lp{2cm}p{2cm}p{2cm}p{2cm}@{}}
-  
-  & **Curated** & **Crowdsource** & **Web Scrape** & **Synthetic** \\
-  
-  **Scale**   & 1K--10M & 10K--100M & 1M--1B+ & Unlimited \\
-  **Quality** & High & Medium & Low (noisy) & Medium \\
-  **Cost**    & Low (reuse) & Medium & Low (infra) & Medium \\
-  **Risk**    & Overfitting & Annotator bias & Legal, noise & Model collapse \\
-  
-{tabular}
-
-{0.1cm}
-{mlsyscard}{datastroke}
-{ **KWS:** Curated Speech Commands (baseline) + crowdsourced MSWC (50 languages) + synthetic TTS (rare accents) + web-scraped noise. No single source suffices.}
-{mlsyscard}
+</details>
 
 ## Labeling: The Serial Bottleneck
 
-{
+[Original slide 16](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L765)
+
+**The cost hierarchy:**
+
+| **Label Type** | **Cost / Example** |
+| --- | --- |
+| Classification (crowd) | &#36;0.01–0.10 |
+| Bounding box | &#36;0.10–1.00 |
+| Segmentation mask | &#36;1–10 |
+| Expert (medical) | &#36;10–100 |
+
+**The 1,000$\times$ Rule:** Labeling costs 1,000–3,000$\times$ more than model training compute.
+
+**KWS Scale:**
+
+23M samples $\times$ 10 sec each
+
+= 65,000 hours
+
+= **32 person-years**
+
+Budget: &#36;150K
+
+Timeline: 6 months
+
+**Solution:** AI-assisted labeling + consensus for ambiguous cases only.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- LINK: Acquisition provides raw data. Labeling converts it into training
 % signal---and it is the most expensive stage.
 %
 % -- NARRATE: ``Labeling is the serial bottleneck in any ML pipeline. The
-% 1,000$×$ Rule: labeling costs 1,000--3,000$×$ more than model
+% 1,000$\times$ Rule: labeling costs 1,000--3,000$\times$ more than model
 % training compute. Look at the cost hierarchy: a simple classification label
 % costs \$0.01--0.10, but a medical expert annotation costs \$10--100 per
 % example. For KWS: 23M samples at 10 seconds each equals 65,000 hours of
@@ -682,51 +744,35 @@ Your ML model silently rejects all applicants from a region.\\[0.3cm]
 % latency, and expert annotations cannot be parallelized at all.
 %
 % -- WARN: Students think labeling is a solved problem with enough money.
-% Correct framing: the 1,000$×$ Rule means labeling dominates the
+% Correct framing: the 1,000$\times$ Rule means labeling dominates the
 % budget even for well-funded teams. AI-assisted labeling is essential for
 % scale, but introduces its own biases.
 %
 % -- FLEX: [CORE] Quantitative grounding for labeling costs.
-% IF SHORT: State the 1,000$×$ Rule and the KWS scale numbers.
-}
+% IF SHORT: State the 1,000$\times$ Rule and the KWS scale numbers.
+```
 
-[T]
-  
-    **The cost hierarchy:**
-    {0.1cm}
-    {}{1.15}
-    {
-    {tabular}{@{}lr@{}}
-      
-      **Label Type** & **Cost / Example** \\
-      
-      Classification (crowd)     & \$0.01--0.10 \\
-      Bounding box               & \$0.10--1.00 \\
-      Segmentation mask          & \$1--10 \\
-      Expert (medical)           & \$10--100 \\
-      
-    {tabular}
-    }
+</details>
 
-    {0.15cm}
-    {The 1,000$×$ Rule:}{Labeling costs 1,000--3,000$×$ more than model training compute.}
-  
-  
-    {mlsyscard}{routingstroke}
-    **KWS Scale:**\\[0.1cm]
-    {
-    23M samples $×$ 10 sec each\\
-    = 65,000 hours\\
-    = **32 person-years**\\[0.1cm]
-    Budget: \$150K\\
-    Timeline: 6 months\\[0.1cm]
-    **Solution:** AI-assisted labeling + consensus for ambiguous cases only.
-    }
-    {mlsyscard}
+## Pipeline Architecture: ETL vs. ELT
 
-## Pipeline Architecture: ETL vs.\ ELT
+[Original slide 17](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L838)
 
-{
+|  | **ETL (Extract-Transform-Load)** | **ELT (Extract-Load-Transform)** |
+| --- | --- | --- |
+| **Transform** | Before storage | After storage (on query) |
+| **Storage** | Clean, smaller | Raw, larger |
+| **Flexibility** | Schema changes are hard | Schema-on-read is easy |
+| **Governance** | Easier (structured) | Harder (data swamp risk) |
+| **ML Use** | Feature engineering | Exploratory, training |
+| **Cost** | Higher engineering upfront | Higher storage, lower eng. |
+
+**The trade-off:** ETL reduces storage footprint at the expense of higher engineering overhead during schema changes. ELT preserves raw data for flexibility but risks “data swamps” without governance.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: Data acquisition and labeling produce raw data. Pipeline
 % architecture determines how that data flows to the model.
@@ -751,30 +797,48 @@ Your ML model silently rejects all applicants from a region.\\[0.3cm]
 %
 % -- FLEX: [CORE] Architectural decision for any ML pipeline.
 % IF SHORT: Show the table, emphasize the trade-off row.
-}
+```
 
-{}{1.1}
-{tabular}{@{}lll@{}}
-  
-  & **ETL (Extract-Transform-Load)** & **ELT (Extract-Load-Transform)** \\
-  
-  **Transform**  & Before storage           & After storage (on query) \\
-  **Storage**     & Clean, smaller           & Raw, larger \\
-  **Flexibility** & Schema changes are hard   & Schema-on-read is easy \\
-  **Governance**  & Easier (structured)       & Harder (data swamp risk) \\
-  **ML Use**      & Feature engineering       & Exploratory, training \\
-  **Cost**        & Higher engineering upfront & Higher storage, lower eng. \\
-  
-{tabular}
+</details>
 
-{0.1cm}
-{mlsyscard}{computestroke}
-{ **The trade-off:** ETL reduces storage footprint at the expense of higher engineering overhead during schema changes. ELT preserves raw data for flexibility but risks ``data swamps'' without governance.}
-{mlsyscard}
+## Batch vs. Streaming Ingestion
 
-## Batch vs.\ Streaming Ingestion
+[Original slide 18](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L888)
 
-{
+**Batch Ingestion**
+
+**When:** Periodic, high-volume
+
+**Latency:** Minutes to hours
+
+**Use:** Training data, feature eng.
+
+**Tools:** Spark, Airflow, dbt
+
+**Pro:** Simple, high throughput
+
+**Con:** Stale data between runs
+
+**Stream Ingestion**
+
+**When:** Continuous, real-time
+
+**Latency:** Seconds to minutes
+
+**Use:** Feature serving, monitoring
+
+**Tools:** Kafka, Flink, Kinesis
+
+**Pro:** Fresh data, low latency
+
+**Con:** Complex, expensive ops
+
+**Most ML systems use both:** Batch for training pipelines, streaming for serving features.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: ETL vs.\ ELT addressed the transform pattern. Batch vs.\ streaming
 % addresses the ingestion timing.
@@ -800,42 +864,46 @@ Your ML model silently rejects all applicants from a region.\\[0.3cm]
 % -- FLEX: [OPTIONAL] Important but can be compressed.
 % IF SHORT: ``Batch for training, streaming for serving. Most systems use
 % both.'' (30 seconds)
-}
+```
 
-[T]
-  
-    {mlsyscard}{computestroke}
-    **Batch Ingestion**\\[0.1cm]
-    {
-    **When:** Periodic, high-volume\\
-    **Latency:** Minutes to hours\\
-    **Use:** Training data, feature eng.\\
-    **Tools:** Spark, Airflow, dbt\\[0.05cm]
-    **Pro:** Simple, high throughput\\
-    **Con:** Stale data between runs
-    }
-    {mlsyscard}
-  
-  
-    {mlsyscard}{routingstroke}
-    **Stream Ingestion**\\[0.1cm]
-    {
-    **When:** Continuous, real-time\\
-    **Latency:** Seconds to minutes\\
-    **Use:** Feature serving, monitoring\\
-    **Tools:** Kafka, Flink, Kinesis\\[0.05cm]
-    **Pro:** Fresh data, low latency\\
-    **Con:** Complex, expensive ops
-    }
-    {mlsyscard}
-  
-
-{0.15cm}
-{{Most ML systems use both:}{Batch for training pipelines, streaming for serving features.}}
+</details>
 
 ## Quality Through Validation Gates
 
-{
+[Original slide 19](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L952)
+
+**Two validation layers:**
+
+**1. Schema Validation** (*structural*)
+
+Type checks, range constraints, null detection.
+
+Catches: format errors, missing fields.
+
+Misses: semantically wrong but valid data.
+
+**2. Statistical Monitoring** (*distributional*)
+
+PSI, KL divergence, feature distributions.
+
+Catches: drift, subtle corruption, bias shifts.
+
+Requires: historical baseline to compare against.
+
+**War Story:**
+
+15% of LiDAR labels misaligned by 10–20 cm at a self-driving company.
+
+Every record was *structurally valid*.
+
+Persisted for 3 months.
+
+Only statistical monitoring caught it.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- LINK: Pipeline architecture moves data. Validation gates ensure data
 % quality at every stage.
@@ -844,7 +912,7 @@ Your ML model silently rejects all applicants from a region.\\[0.3cm]
 % errors: wrong types, missing fields, out-of-range values. But the zip code
 % bug passed schema validation---`7102' is a valid string. Statistical
 % monitoring catches distributional errors: PSI, KL divergence, feature
-% distribution shifts. The self-driving car example: 15% of LiDAR labels
+% distribution shifts. The self-driving car example: 15\% of LiDAR labels
 % were misaligned by 10--20 cm. Every record was structurally valid. The
 % misalignment persisted for 3 months. Only statistical monitoring---
 % comparing label distributions to historical baselines---caught it.''
@@ -861,36 +929,24 @@ Your ML model silently rejects all applicants from a region.\\[0.3cm]
 %
 % -- FLEX: [CORE] Two-layer validation is non-negotiable.
 % IF SHORT: State the two layers and the LiDAR example.
-}
+```
 
-[T]
-  
-    **Two validation layers:**
-
-    {0.15cm}
-    {datastroke}{**1. Schema Validation**} (*structural*)\\
-    { Type checks, range constraints, null detection.\\
-    Catches: format errors, missing fields.\\
-    Misses: semantically wrong but valid data.}
-
-    {0.15cm}
-    {computestroke}{**2. Statistical Monitoring**} (*distributional*)\\
-    { PSI, KL divergence, feature distributions.\\
-    Catches: drift, subtle corruption, bias shifts.\\
-    Requires: historical baseline to compare against.}
-  
-  
-    {mlsyscard}{errorstroke}
-    **War Story:**\\[0.1cm]
-    { 15% of LiDAR labels misaligned by 10--20 cm at a self-driving company.\\[0.05cm]
-    Every record was *structurally valid*.\\[0.05cm]
-    Persisted for 3 months.\\[0.05cm]
-    Only statistical monitoring caught it.}
-    {mlsyscard}
+</details>
 
 ## Three Types of Distribution Drift
 
-{
+[Original slide 20](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L1015)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/04_data_engineering/images/ch04-drift-types.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch04-drift-types.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/images/ch04-drift-types.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Key:** Concept drift is the most dangerous — rules change but detection requires ground truth labels that arrive late.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- LINK: Validation gates catch errors at pipeline time. Distribution drift
 % is the failure mode that develops AFTER deployment---the Degradation
@@ -919,18 +975,33 @@ Your ML model silently rejects all applicants from a region.\\[0.3cm]
 %
 % -- FLEX: [CORE] Essential for understanding monitoring requirements.
 % IF SHORT: Name the three types, state that concept drift is hardest.
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
-
-{ch04-drift-types.pdf}
-
-{0.1cm}
-{Key:}{Concept drift is the most dangerous --- rules change but detection requires ground truth labels that arrive late.}
+</details>
 
 ## War Story: COVID-19 Broke Every Model
 
-{
+[Original slide 21](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L1056)
+
+**March 2020: All three drift types at once.**
+
+| **Domain** | **What Broke** | **Drift** |
+| --- | --- | --- |
+| Credit risk | Default patterns | Concept |
+| Fraud | +300% online vol. | Covariate |
+| Medical | Protocol changes | All three |
+| Supply chain | Demand inversion | Concept |
+
+**Key lesson**
+
+COVID made the invisible visible. Smaller shifts happen constantly: holidays, elections, product launches, competitor actions.
+
+**Every model drifts. The question is when, not whether.**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [4 min]
 % -- LINK: Distribution drift was described abstractly. COVID-19 is the most
 % dramatic real-world example of simultaneous covariate and concept drift.
@@ -938,10 +1009,10 @@ Your ML model silently rejects all applicants from a region.\\[0.3cm]
 % -- NARRATE: ``March 2020. Every ML model trained on pre-pandemic data broke
 % simultaneously. Credit risk models: default patterns changed overnight as
 % governments issued stimulus. Fraud detection: online transaction volume
-% surged 300%, making previously rare patterns common. Medical imaging:
+% surged 300\%, making previously rare patterns common. Medical imaging:
 % hospital protocols changed, patient demographics shifted. Supply chain:
-% demand patterns inverted---toilet paper demand spiked 700%, airline demand
-% dropped 96%. This was not one type of drift---it was all three at once.
+% demand patterns inverted---toilet paper demand spiked 700\%, airline demand
+% dropped 96\%. This was not one type of drift---it was all three at once.
 % Covariate (inputs changed), label (class frequencies changed), and concept
 % (the mapping itself changed).''
 %
@@ -955,37 +1026,24 @@ Your ML model silently rejects all applicants from a region.\\[0.3cm]
 %
 % -- FLEX: [CORE] Makes drift concrete and memorable.
 % IF SHORT: State ``every model broke'' and name 2 examples. (60 seconds)
-}
+```
 
-[T]
-  
-    **March 2020: All three drift types at once.**
-
-    {0.1cm}
-    {
-    {}{1.1}
-    {tabular}{@{}lll@{}}
-      
-      **Domain** & **What Broke** & **Drift** \\
-      
-      Credit risk   & Default patterns & Concept \\
-      Fraud         & +300% online vol. & Covariate \\
-      Medical       & Protocol changes & All three \\
-      Supply chain  & Demand inversion & Concept \\
-      
-    {tabular}
-    }
-  
-  
-    {mlsyscard}{errorstroke}
-    **Key lesson**\\[0.1cm]
-    { COVID made the invisible visible. Smaller shifts happen constantly: holidays, elections, product launches, competitor actions.\\[0.1cm]
-    **Every model drifts. The question is when, not whether.**}
-    {mlsyscard}
+</details>
 
 ## Training-Serving Skew
 
-{
+[Original slide 22](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L1115)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/04_data_engineering/images/ch04-training-serving-skew.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch04-training-serving-skew.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/images/ch04-training-serving-skew.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Non-negotiable:** Any transform applied during training must be applied *identically* during serving.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- LINK: Drift happens over time. Training-serving skew happens at the
 % moment of deployment---a mismatch between how features are computed
@@ -993,7 +1051,7 @@ Your ML model silently rejects all applicants from a region.\\[0.3cm]
 %
 % -- NARRATE: ``Training-serving skew is the number one cause of ML
 % deployment failures. Different normalization in training vs.\ serving causes
-% 20--40% accuracy drop, silently. 30--40% of initial deployments at Uber
+% 20--40\% accuracy drop, silently. 30--40\% of initial deployments at Uber
 % suffered this. The mechanism: during training, you compute features in a
 % batch pipeline with Python. During serving, you compute the same features
 % in a real-time pipeline with Java. The implementations differ subtly---
@@ -1015,35 +1073,65 @@ Your ML model silently rejects all applicants from a region.\\[0.3cm]
 % providing a single computation path for both training and serving.
 %
 % -- FLEX: [CORE] Non-negotiable engineering requirement.
-% IF SHORT: State the 30--40% Uber statistic and the four solutions.
-}
+% IF SHORT: State the 30--40\% Uber statistic and the four solutions.
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
-
-{ch04-training-serving-skew.pdf}
-
-{0.1cm}
-
-{Non-negotiable:}{Any transform applied during training must be applied *identically* during serving.}
+</details>
 
 ## Quick Check
 
-{
+[Original slide 23](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L1159)
+
+Quick check — no peeking.
+
+ Name two types of distribution drift and which is hardest to detect.
+
+30 seconds — then we continue.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [1 min]
 % -- NARRATE: ``Quick recall---no peeking. Name two types of distribution
 % drift and which is hardest to detect. 30 seconds.''
 %
 % -- FLEX: [CORE] Micro-retrieval. Answer: covariate, label, concept. Concept
 % drift is hardest (requires ground truth labels that arrive late).
-}
+```
 
- Quick check --- no peeking.\\[0.5cm]
- Name two types of distribution drift and which is hardest to detect.\\[0.3cm]
-{ 30 seconds --- then we continue.}
+</details>
 
 ## Discussion: Which Drift Type Is Hardest?
 
-{
+[Original slide 24](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L1178)
+
+Turn and Talk (90 seconds)
+
+A fraud detection model worked perfectly at launch.
+
+Six months later, loss rates have doubled.
+
+No code has changed. No data format errors.
+
+**Which type of drift is this? How would you detect it?**
+
+Covariate
+
+ Shift
+
+Label
+
+ Shift
+
+Concept
+
+ Drift
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [4 min]
 % -- LINK: Students just recalled the three drift types. This discussion
 % applies them to a real scenario.
@@ -1070,37 +1158,45 @@ Your ML model silently rejects all applicants from a region.\\[0.3cm]
 %
 % -- FLEX: [CORE] Synthesis exercise for drift concepts.
 % IF SHORT: Do a show-of-hands poll: ``Covariate? Label? Concept?''
-}
+```
 
-{0.5cm}
-{ Turn and Talk {midgray}{(90 seconds)}}
+</details>
 
-{0.4cm}
-{ A fraud detection model worked perfectly at launch.\\
-Six months later, loss rates have doubled.\\
-No code has changed. No data format errors.\\[0.2cm]
-**Which type of drift is this? How would you detect it?**}
+## The Degradation Equation
 
-{0.4cm}
-[c]
-   Covariate\\ Shift
-   Label\\ Shift
-   Concept\\ Drift
+[Original slide 25](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L1227)
+
+$A(t) = A_0 - \alpha \cdot \Delta(P_{\text{train}},\; P_{\text{live}}(t))$
+
+ Drift detection (PSI, KL divergence) operationalizes this equation
+
+into monitoring infrastructure
 
 ## ML Storage Hierarchy
 
-{
+[Original slide 26](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L1237)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/04_data_engineering/images/ch04-storage-hierarchy.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch04-storage-hierarchy.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/images/ch04-storage-hierarchy.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Iron Law connection:** Storage hierarchy directly sets $D_{\text{vol}}/BW$ — the Data Term.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- LINK: Drift detection requires monitoring infrastructure. Storage
 % architecture determines how fast that infrastructure can access data.
 %
 % -- NARRATE: ``Each storage tier optimizes for a different access pattern.
-% The 50$×$ speed gap between NVMe and S3 determines whether your team
+% The 50$\times$ speed gap between NVMe and S3 determines whether your team
 % iterates daily or weekly. KWS example: 736 GB on S3 costs \$17/month, on
 % NVMe costs \$74--221/month. But S3 loads in 2 hours while NVMe loads in
-% 2.5 minutes. That 50$×$ throughput gap is the binding constraint on
+% 2.5 minutes. That 50$\times$ throughput gap is the binding constraint on
 % iteration velocity---the Iteration Tax from Ch3 in physical form. Choose
-% storage tier by the Iron Law's data term: $D_{{vol}}/BW$.''
+% storage tier by the Iron Law's data term: $D_{\text{vol}}/BW$.''
 %
 % -- ENGAGE: ``If your team iterates daily and each iteration starts with a
 % 2-hour data load from S3, how much time is wasted per week?'' Give 10
@@ -1109,23 +1205,33 @@ No code has changed. No data format errors.\\[0.2cm]
 %
 % -- WARN: Students choose storage by cost alone. Correct framing: storage
 % cost must be weighed against iteration velocity. A \$200/month NVMe upgrade
-% that saves 10 engineering hours/week at \$100/hour pays for itself 200$×$
+% that saves 10 engineering hours/week at \$100/hour pays for itself 200$\times$
 % over.
 %
 % -- FLEX: [CORE] Connects storage to Iron Law and iteration velocity.
-% IF SHORT: State the 50$×$ gap and the iteration velocity implication.
-}
+% IF SHORT: State the 50$\times$ gap and the iteration velocity implication.
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
+</details>
 
-{ch04-storage-hierarchy.pdf}
+## Storage Systems: Database vs. Warehouse vs. Lake
 
-{0.1cm}
-{Iron Law connection:}{Storage hierarchy directly sets $D_{{vol}}/BW$ --- the Data Term.}
+[Original slide 27](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L1274)
 
-## Storage Systems: Database vs.\ Warehouse vs.\ Lake
+|  | **Database (OLTP)** | **Warehouse (OLAP)** | **Data Lake** |
+| --- | --- | --- | --- |
+| **Optimized for** | High IOPS, low latency | High throughput scans | Capacity, flexibility |
+| **Data type** | Structured | Structured | Any (schema-on-read) |
+| **ML use** | Feature serving | Feature engineering | Training, raw storage |
+| **Access** | Point lookups (ms) | Columnar scans (s) | Sequential reads |
+| **Risk** | Scaling limits | Schema rigidity | “Data swamp” |
 
-{
+**Mature ML organizations use all three:** Databases for real-time serving, warehouses for curated analytics, and data lakes for petabyte-scale raw data. The wrong system for a workload creates order-of-magnitude performance penalties.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: The storage hierarchy addressed physical tiers. This slide
 % addresses logical architectures for different access patterns.
@@ -1146,39 +1252,34 @@ No code has changed. No data format errors.\\[0.2cm]
 %
 % -- WARN: Students use one storage system for everything. Correct framing:
 % each system is optimized for a specific access pattern. Using a data lake
-% for point lookups or a database for bulk scans creates 10--100$×$
+% for point lookups or a database for bulk scans creates 10--100$\times$
 % performance penalties.
 %
 % -- FLEX: [OPTIONAL] Reference slide.
 % IF SHORT: Show the table without detailed narration. (30 seconds)
-}
+```
 
-{}{1.1}
-{tabular}{@{}lp{2.5cm}p{2.5cm}p{2.5cm}@{}}
-  
-  & **Database (OLTP)** & **Warehouse (OLAP)** & **Data Lake** \\
-  
-  **Optimized for** & High IOPS, low latency & High throughput scans & Capacity, flexibility \\
-  **Data type**     & Structured              & Structured            & Any (schema-on-read) \\
-  **ML use**        & Feature serving         & Feature engineering   & Training, raw storage \\
-  **Access**        & Point lookups (ms)      & Columnar scans (s)    & Sequential reads \\
-  **Risk**          & Scaling limits           & Schema rigidity       & ``Data swamp'' \\
-  
-{tabular}
-
-{0.15cm}
-{mlsyscard}{routingstroke}
-{ **Mature ML organizations use all three:** Databases for real-time serving, warehouses for curated analytics, and data lakes for petabyte-scale raw data. The wrong system for a workload creates order-of-magnitude performance penalties.}
-{mlsyscard}
+</details>
 
 ## Data Debt: The Hidden Iceberg
 
-{
+[Original slide 28](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L1324)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/04_data_engineering/images/ch04-data-debt-categories.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch04-data-debt-categories.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/images/ch04-data-debt-categories.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Key:** Unlike code debt (slower development), data debt causes *lower accuracy* even when code is perfect.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- LINK: Storage systems hold data. Data Debt describes the hidden cost of
 % poorly managed data that accumulates silently over time.
 %
-% -- NARRATE: ``65--95% of ML failures trace to data, not models. Four
+% -- NARRATE: ``65--95\% of ML failures trace to data, not models. Four
 % categories of hidden debt: Freshness debt (stale data), Quality debt
 % (errors, noise, bias), Schema debt (undocumented format changes),
 % Documentation debt (no one knows what a feature means). Unlike code debt
@@ -1188,29 +1289,45 @@ No code has changed. No data format errors.\\[0.2cm]
 %
 % -- ENGAGE: ``Your team has perfect model code but 6-month-old training
 % data. What is the expected accuracy impact?'' Give 10 seconds.
-% Expected: 5--15% degradation (the Degradation Equation with $
-% × $ accumulating over 6 months). The exact number depends on
+% Expected: 5--15\% degradation (the Degradation Equation with $\alpha
+% \times \Delta$ accumulating over 6 months). The exact number depends on
 % the domain, but the direction is always down.
 %
 % -- WARN: Students focus on code quality and ignore data quality. Correct
-% framing: 65--95% of failures come from data. Allocating 80% of quality
-% engineering to code and 20% to data is backwards given the failure
+% framing: 65--95\% of failures come from data. Allocating 80\% of quality
+% engineering to code and 20\% to data is backwards given the failure
 % distribution.
 %
 % -- FLEX: [CORE] Motivates sustained data engineering investment.
-% IF SHORT: State the 65--95% statistic and the four categories.
-}
+% IF SHORT: State the 65--95\% statistic and the four categories.
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
-
-{ch04-data-debt-categories.pdf}
-
-{0.1cm}
-{Key:}{Unlike code debt (slower development), data debt causes *lower accuracy* even when code is perfect.}
+</details>
 
 ## Fallacies
 
-{
+[Original slide 29](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L1366)
+
+**Fallacy:** *More data always improves model performance.*
+
+Beyond a threshold, test loss follows a power law: 10$\times$ more data often reduces error by $<$1 percentage point, while costs scale linearly. Smart selection outperforms naive accumulation.
+
+**Fallacy:** *Moving a petabyte to the cloud is just a bandwidth problem.*
+
+Wire time at 10 Gbps: $\sim$3 weeks (physics). Engineering cost—pipeline re-validation, schema migration, lineage updates: **6–9 months** of human time. Data gravity makes compute-to-data the right architecture.
+
+**Fallacy:** *High training accuracy indicates production readiness.*
+
+Training-serving skew, distribution drift, and coverage gaps cause 99% validation accuracy to fail in deployment.
+
+**Fallacy:** *Synthetic data can fully replace real-world collection.*
+
+Synthetic data inherits generator biases. A KWS system trained on synthesized speech fails on real accents and background noise. Combine real data for coverage with synthetic for scale.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- LINK: The chapter covered data cascades, physics of data movement, Four
 % Pillars, acquisition, labeling, pipeline design, drift, and data debt.
@@ -1218,141 +1335,181 @@ No code has changed. No data format errors.\\[0.2cm]
 %
 % -- NARRATE: ``Four misconceptions (the chapter lists four). First: `more
 % data always helps'---beyond a threshold, test loss follows a power law.
-% 10$×$ more data often reduces error by less than 1 pp. Second:
+% 10$\times$ more data often reduces error by less than 1 pp. Second:
 % `moving a PB to the cloud is just a bandwidth problem'---the wire cost
 % (3 weeks at 10 Gbps) is the cheap part; re-validating pipelines and
 % migrating schemas takes 6--9 months of human time. This is data gravity
 % in action. Third: `high training accuracy = production ready'---
-% training-serving skew, drift, and coverage gaps cause 99% validation
+% training-serving skew, drift, and coverage gaps cause 99\% validation
 % accuracy to fail in deployment. Fourth: `synthetic replaces real
 % data'---synthetic inherits generator biases.''
 %
 % -- FLEX: [CORE] Corrects the most common data engineering misconceptions.
 % IF SHORT: Cover the first and third fallacies.
-}
+```
 
-**Fallacy:** *More data always improves model performance.*\\
-Beyond a threshold, test loss follows a power law: 10$×$ more data often reduces error by $<$1 percentage point, while costs scale linearly. Smart selection outperforms naive accumulation.
-
-{0.1cm}
-**Fallacy:** *Moving a petabyte to the cloud is just a bandwidth problem.*\\
-Wire time at 10 Gbps: $$3 weeks (physics). Engineering cost---pipeline re-validation, schema migration, lineage updates: **6--9 months** of human time. Data gravity makes compute-to-data the right architecture.
-
-{0.1cm}
-**Fallacy:** *High training accuracy indicates production readiness.*\\
-Training-serving skew, distribution drift, and coverage gaps cause 99% validation accuracy to fail in deployment.
-
-{0.1cm}
-**Fallacy:** *Synthetic data can fully replace real-world collection.*\\
-Synthetic data inherits generator biases. A KWS system trained on synthesized speech fails on real accents and background noise. Combine real data for coverage with synthetic for scale.
+</details>
 
 ## Pitfalls (1/2)
 
-{
+[Original slide 30](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L1406)
+
+**Pitfall:** *Treating data preprocessing as a one-time task.*
+
+Data distributions drift continuously. A pipeline validated at launch degrades silently. Production systems require continuous monitoring (PSI, KL divergence) and automated retraining triggers.
+
+**Pitfall:** *Ignoring data serialization cost.*
+
+Teams optimize GPU kernels while loading JSON or CSV. Text formats are $\geq$10$\times$ slower to decode than Parquet/Arrow—the CPU becomes the bottleneck and an H100 idles at single-digit TFLOP/s. Fix: convert to Parquet once; every downstream job reads columnar.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [1 min]
 % -- LINK: Fallacies named misconceptions. Pitfalls name operational mistakes.
 %
 % -- NARRATE: ``First two pitfalls. Treating preprocessing as one-time---
 % drift makes it continuous. Ignoring serialization cost---teams optimize
-% GPU kernels while loading JSON/CSV; text formats are 10$×$+ slower to
+% GPU kernels while loading JSON/CSV; text formats are 10$\times$+ slower to
 % decode than Parquet/Arrow, so the CPU becomes the bottleneck and the H100
 % idles at single-digit utilization.''
 %
 % -- FLEX: [CORE] Operational lessons.
 % IF SHORT: Name both pitfalls and continue.
-}
+```
 
-**Pitfall:** *Treating data preprocessing as a one-time task.*\\[0.1cm]
-{ Data distributions drift continuously. A pipeline validated at launch degrades silently. Production systems require continuous monitoring (PSI, KL divergence) and automated retraining triggers.}
-
-{0.3cm}
-**Pitfall:** *Ignoring data serialization cost.*\\[0.1cm]
-{ Teams optimize GPU kernels while loading JSON or CSV. Text formats are $$10$×$ slower to decode than Parquet/Arrow---the CPU becomes the bottleneck and an H100 idles at single-digit TFLOP/s. Fix: convert to Parquet once; every downstream job reads columnar.}
+</details>
 
 ## Pitfalls (2/2)
 
-{
+[Original slide 31](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L1431)
+
+**Pitfall:** *Ignoring training-serving skew until deployment.*
+
+Feature computation differences are the leading cause of ML deployment failures. Feature stores and consistency contracts should be architectural requirements from day one.
+
+**Pitfall:** *Neglecting data versioning until model debugging requires it.*
+
+Without versioned snapshots, teams cannot determine whether regression stems from labeling changes, schema errors, or genuine drift. Organizations that defer versioning report 2–4$\times$ longer debugging cycles.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [1 min]
 % -- LINK: Two more operational pitfalls.
 %
 % -- NARRATE: ``Third: ignoring training-serving skew until deployment---
 % feature computation differences are the leading cause of failures. Fourth:
-% neglecting data versioning---without snapshots, debugging takes 2--4$×$
+% neglecting data versioning---without snapshots, debugging takes 2--4$\times$
 % longer.''
 %
 % -- FLEX: [CORE] Operational lessons, continued.
 % IF SHORT: Cover training-serving skew pitfall; versioning can be brief.
-}
+```
 
-**Pitfall:** *Ignoring training-serving skew until deployment.*\\[0.1cm]
-{ Feature computation differences are the leading cause of ML deployment failures. Feature stores and consistency contracts should be architectural requirements from day one.}
-
-{0.3cm}
-**Pitfall:** *Neglecting data versioning until model debugging requires it.*\\[0.1cm]
-{ Without versioned snapshots, teams cannot determine whether regression stems from labeling changes, schema errors, or genuine drift. Organizations that defer versioning report 2--4$×$ longer debugging cycles.}
+</details>
 
 ## Muddiest Point
 
-{
+[Original slide 32](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L1456)
+
+One-minute paper
+
+ Write down the **muddiest point** from today's lecture.
+
+What concept was most confusing or unclear?
+
+(Hand in on your way out — or submit digitally)
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [1 min]
 % -- NARRATE: ``One-minute paper. Write down the one concept from today that
 % was most confusing. I will open the next lecture by addressing the top
 % muddiest points.''
 %
-% -- FLEX: [CORE] Diagnostic tool (Angelo & Cross, 1993). Never skip.
-}
+% -- FLEX: [CORE] Diagnostic tool (Angelo \& Cross, 1993). Never skip.
+```
 
- One-minute paper\\[0.5cm]
- Write down the **muddiest point** from today's lecture.\\[0.2cm]
-{ What concept was most confusing or unclear?}\\[0.5cm]
-{{midgray}{(Hand in on your way out --- or submit digitally)}}
+</details>
 
 ## What Were the Key Ideas?
 
-{
+[Original slide 33](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L1474)
+
+Close your notes.
+
+Write down the **4 most important concepts** from today.
+
+90 seconds — no peeking.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- NARRATE: ``Close your notes. Write down the 4 most important concepts
 % from today. 90 seconds, no peeking.'' Walk around the room.
 % Do NOT show the next slide yet.
 %
 % -- FLEX: [CORE] Retrieval practice. Never skip.
-}
+```
 
-{1.5cm}
-{ Close your notes.}
-
-{0.8cm}
-{ Write down the **4 most important concepts** from today.}
-
-{0.8cm}
-{{midgray}{90 seconds --- no peeking.}}
+</details>
 
 ## Key Takeaways
 
-{
+[Original slide 34](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L1496)
+
+- **Data is source code**: Datasets must be versioned, tested, debugged. Deleting a row = deleting a line of code.
+- **Data cascades**: Upstream errors amplify through every stage. Four Pillars (Quality, Reliability, Scalability, Governance) organize prevention.
+- **Energy-movement invariant**: Moving a bit costs 100–1,000$\times$ more than computing. Deduplication is the highest-leverage optimization.
+- **Training-serving consistency**: Non-negotiable. Feature stores and shared code prevent the #1 deployment failure.
+- **Drift detection**: Degradation Equation ($A(t) = A_0 - \alpha \cdot \Delta$) operationalized through PSI and KL monitoring.
+- **Storage hierarchy**: 50$\times$ NVMe vs. S3 speed gap determines daily vs. weekly iteration. Choose by $D_{\text{vol}}/BW$.
+- **Data debt compounds**: 65–95% of ML failures trace to data. Allocate sustained engineering capacity.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [2 min]
 % -- NARRATE: ``Reveal time. Walk through each bullet. Emphasize quantitative
-% anchors: 60--80% effort in data, over 98% GPU idle from feeding tax,
-% 1,000$×$ labeling cost, 65--95% of failures trace to data,
-% 50$×$ NVMe vs.\ S3 speed gap.''
+% anchors: 60--80\% effort in data, over 98\% GPU idle from feeding tax,
+% 1,000$\times$ labeling cost, 65--95\% of failures trace to data,
+% 50$\times$ NVMe vs.\ S3 speed gap.''
 %
 % -- FLEX: [CORE] Summary slide.
 % IF SHORT: Hit data-as-code, feeding tax, training-serving consistency,
 % and drift detection.
-}
+```
 
-{0pt}
-- **Data is source code**: Datasets must be versioned, tested, debugged. Deleting a row = deleting a line of code.
-- **Data cascades**: Upstream errors amplify through every stage. Four Pillars (Quality, Reliability, Scalability, Governance) organize prevention.
-- **Energy-movement invariant**: Moving a bit costs 100--1,000$×$ more than computing. Deduplication is the highest-leverage optimization.
-- **Training-serving consistency**: Non-negotiable. Feature stores and shared code prevent the \#1 deployment failure.
-- **Drift detection**: Degradation Equation ($A(t) = A_0 -   $) operationalized through PSI and KL monitoring.
-- **Storage hierarchy**: 50$×$ NVMe vs.\ S3 speed gap determines daily vs.\ weekly iteration. Choose by $D_{{vol}}/BW$.
-- **Data debt compounds**: 65--95% of ML failures trace to data. Allocate sustained engineering capacity.
+</details>
 
 ## References
 
-{
+[Original slide 35](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L1522)
+
+**Sambasivan+21** Sambasivan et al. “Everyone Wants to Do the Model Work, Not the Data Work.” CHI 2021.
+
+**Sculley+15** Sculley et al. “Hidden Technical Debt in ML Systems.” NeurIPS 2015.
+
+**Horowitz14** M. Horowitz. “Computing's Energy Problem.” ISSCC 2014.
+
+**Hestness+17** Hestness et al. “Deep Learning Scaling is Predictable, Empirically.” 2017.
+
+**Polyzotis+18** Polyzotis et al. “Data Lifecycle Challenges in Production ML.” SIGMOD 2018.
+
+**Northcutt+21** Northcutt et al. “Pervasive Label Errors in Test Sets.” NeurIPS 2021.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [1 min]
 % -- NARRATE: ``Six canonical references. Sambasivan for data cascades.
 % Sculley for hidden technical debt. Horowitz for the energy-movement
@@ -1360,18 +1517,30 @@ Synthetic data inherits generator biases. A KWS system trained on synthesized sp
 % Northcutt for pervasive label errors.''
 %
 % -- FLEX: [OPTIONAL] Show briefly.
-}
+```
 
-{Sambasivan+21}{Sambasivan et al. ``Everyone Wants to Do the Model Work, Not the Data Work.'' CHI 2021.}
-{Sculley+15}{Sculley et al. ``Hidden Technical Debt in ML Systems.'' NeurIPS 2015.}
-{Horowitz14}{M. Horowitz. ``Computing's Energy Problem.'' ISSCC 2014.}
-{Hestness+17}{Hestness et al. ``Deep Learning Scaling is Predictable, Empirically.'' 2017.}
-{Polyzotis+18}{Polyzotis et al. ``Data Lifecycle Challenges in Production ML.'' SIGMOD 2018.}
-{Northcutt+21}{Northcutt et al. ``Pervasive Label Errors in Test Sets.'' NeurIPS 2021.}
+</details>
 
 ## Next Lecture: Neural Network Computation
 
-{
+[Original slide 36](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L1543)
+
+The dataset compiler has produced its output:
+
+a clean, versioned, optimized training set.
+
+A compiled binary does nothing until it runs on hardware.
+
+What happens when data meets computation?
+
+Neurons, weights, gradients, and the math of learning.
+
+**Next:** Ch5 — Neural Network Computation
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [1 min]
 % -- LINK: This chapter built the dataset compiler. The next chapter runs
 % the compiled dataset on hardware.
@@ -1383,85 +1552,64 @@ Synthetic data inherits generator biases. A KWS system trained on synthesized sp
 %
 % -- FLEX: [CORE] Forward hook. Assign pre-reading if applicable.
 % IF SHORT: ``Next class: Neural Network Computation. Read Chapter 5.''
-}
+```
 
-{0.3cm}
-{ The dataset compiler has produced its output:}\\[0.1cm]
-{ a clean, versioned, optimized training set.}
+</details>
 
-{0.4cm}
-{ A compiled binary does nothing until it runs on hardware.}
+## Backup: ImageNet Loading — SSD vs. HDD
 
-{0.4cm}
+[Original slide 37](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L1585)
 
-{mlsyscard}{crimson}
+**Exercise: ImageNet (150 GB) one-epoch load time**
 
-{ What happens when data meets computation?}\\[0.15cm]
-{ Neurons, weights, gradients, and the math of learning.}
-{mlsyscard}
+| **Storage** | **Bandwidth** | **Load Time** | **vs. Training** |
+| --- | --- | --- | --- |
+| NVMe SSD | 3.5 GB/s | **43 seconds** | $\ll$ training time |
+| SATA SSD | 550 MB/s | **4.5 minutes** | $\approx$ training time |
+| HDD | 200 MB/s | **12.5 minutes** | $\gg$ training time |
 
-{0.2cm}
-{**Next:** Ch5 --- Neural Network Computation}
+**Key:** On HDD, 12.5 min loading vs. $\sim$3 min training per epoch = **80% Feeding Tax**. NVMe eliminates the I/O bottleneck entirely. At 1 TB+ datasets, even NVMe becomes the bottleneck.
 
-## Backup: ImageNet Loading --- SSD vs.\ HDD
+<details>
+<summary>Original speaker notes (TeX)</summary>
 
-{
+```tex
 % [3 min]
 % -- NARRATE: Use as an additional exercise. ImageNet is 150 GB. NVMe SSD
 % reads at 3.5 GB/s. HDD reads at 200 MB/s. Calculate epoch load time for
 % each. At what dataset size does storage become the training bottleneck?
 %
 % -- FLEX: [OPTIONAL] Additional quantitative exercise.
-}
+```
 
-**Exercise: ImageNet (150 GB) one-epoch load time**
-
-{0.15cm}
-{}{1.15}
-{
-{tabular}{@{}lrrr@{}}
-  
-  **Storage** & **Bandwidth** & **Load Time** & **vs.\ Training** \\
-  
-  NVMe SSD & 3.5 GB/s & **43 seconds** & $$ training time \\
-  SATA SSD & 550 MB/s & **4.5 minutes** & $$ training time \\
-  HDD      & 200 MB/s & **12.5 minutes** & $$ training time \\
-  
-{tabular}
-}
-
-{0.15cm}
-**Key:** On HDD, 12.5 min loading vs.\ $$3 min training per epoch = **80% Feeding Tax**. NVMe eliminates the I/O bottleneck entirely. At 1 TB+ datasets, even NVMe becomes the bottleneck.
+</details>
 
 ## Backup: PSI Drift Detection Walkthrough
 
-{
+[Original slide 38](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/04_data_engineering/04_data_engineering.tex#L1615)
+
+**Population Stability Index (PSI):** $\text{PSI} = \sum (p_i - q_i) \times \ln(p_i / q_i)$
+
+| **Bin** | $q_i$ (train) | $p_i$ (live) | $p_i - q_i$ | $(p_i - q_i) \ln(p_i/q_i)$ |
+| --- | --- | --- | --- | --- |
+| Low | 0.30 | 0.25 | $-$0.05 | 0.009 |
+| Medium | 0.50 | 0.45 | $-$0.05 | 0.006 |
+| High | 0.20 | 0.30 | +0.10 | 0.041 |
+| **PSI** |  |  |  | **0.056** |
+
+PSI $< 0.1$: no significant shift. PSI $0.1$–$0.2$: investigate. PSI $> 0.2$: **retrain**.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % [3 min]
 % -- NARRATE: Use if students want a worked PSI example with real numbers.
 %
 % -- FLEX: [OPTIONAL] Backup slide for quantitative depth on drift detection.
-}
+```
 
-**Population Stability Index (PSI):** ${PSI} =  (p_i - q_i) × (p_i / q_i)$
-
-{0.15cm}
-{}{1.15}
-{
-{tabular}{@{}lrrrr@{}}
-  
-  **Bin** & $q_i$ (train) & $p_i$ (live) & $p_i - q_i$ & $(p_i - q_i) (p_i/q_i)$ \\
-  
-  Low    & 0.30 & 0.25 & $-$0.05 & 0.009 \\
-  Medium & 0.50 & 0.45 & $-$0.05 & 0.006 \\
-  High   & 0.20 & 0.30 & +0.10  & 0.041 \\
-  
-  **PSI** & & & & **0.056** \\
-  
-{tabular}
-}
-
-{0.15cm}
-PSI $< 0.1$: no significant shift. PSI $0.1$--$0.2$: investigate. PSI $> 0.2$: **retrain**.
+</details>
 
 ## Complete original Beamer source
 

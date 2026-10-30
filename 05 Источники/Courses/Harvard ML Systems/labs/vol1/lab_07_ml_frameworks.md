@@ -9,15 +9,73 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol1/lab_07_ml_frameworks.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol1/lab_07_ml_frameworks.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL1 Lab — Ml Frameworks
 
 ## Readable lab narrative
 
 This lab is primarily executable code; use the complete source below.
+
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+**Prediction checkpoint:** choose an option before treating the evidence as a decision.
+
+---
+
+**Prediction vs actual:** you picked **⟨value 1⟩**; the instrument shows **⟨value 2⟩**. ⟨value 3⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_predicted}' `
+- value_2: ` f'{_actual}' `
+- value_3: ` f'{_body}' `
+
+---
+
+**⟨value 1⟩:** ⟨value 2⟩ **Mitigation:** ⟨value 3⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{title}' `
+- value_2: ` f'{detail}' `
+- value_3: ` f'{mitigation}' `
+
+---
+
+**Release gate:** ⟨value 1⟩. Blocking issue: ⟨value 2⟩. Next action: ⟨value 3⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v1_07_release_result['status']}" `
+- value_2: ` f'{_release_issue_text}' `
+- value_3: ` f"{v1_07_release_result['action']}" `
+
+---
+
+Use the synthesis recommendation below after completing Parts A-D.
+
+---
+
+## Download Report
+
+---
+
+This V1-07 runtime deployment recommendation is generated locally from the selected track, structured predictions, manipulation controls, and computed evidence.
+
+</details>
 
 ## Complete original Marimo source
 

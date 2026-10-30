@@ -1,0 +1,49 @@
+bash: warning: setlocale: LC_ALL: cannot change locale (C.UTF-8): Bad file descriptor
+
+ RUN  v4.1.10 /Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/publishing
+
+ ❯ tests/check-built-links.test.ts (7 tests | 2 failed) 17ms
+     × rejects host-root links that would leave the project on GitHub Pages 3ms
+     × resolves relative and fragment links using the publication base, not the domain root 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/check-built-links.test.ts > findBrokenBuiltLinks > rejects host-root links that would leave the project on GitHub Pages
+AssertionError: expected [] to include '/ -> outside publication base /bookva…'
+ ❯ tests/check-built-links.test.ts:50:20
+     48|   it('rejects host-root links that would leave the project on GitHub P…
+     49|     const errors = await findBrokenBuiltLinks(fixture('<a href="/targe…
+     50|     expect(errors).toContain('/ -> outside publication base /bookvar: …
+       |                    ^
+     51|     expect(errors).toContain('/ -> outside publication base /bookvar: …
+     52|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/check-built-links.test.ts > findBrokenBuiltLinks > resolves relative and fragment links using the publication base, not the domain root
+AssertionError: expected [ '/ -> missing route /elsewhere/' ] to deeply equal []
+
+- Expected
++ Received
+
+- []
++ [
++   "/ -> missing route /elsewhere/",
++ ]
+
+ ❯ tests/check-built-links.test.ts:55:57
+     53|   it('resolves relative and fragment links using the publication base,…
+     54|     const dist = fixture('<a href="target/#existing">target</a><a href…
+     55|     await expect(findBrokenBuiltLinks(dist, '/bookvar')).resolves.toEq…
+       |                                                         ^
+     56|   });
+     57|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 5 passed (7)
+   Start at  15:07:40
+   Duration  148ms (transform 15ms, setup 0ms, import 21ms, tests 17ms, environment 0ms)
+

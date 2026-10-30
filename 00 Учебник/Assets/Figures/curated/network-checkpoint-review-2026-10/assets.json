@@ -1,0 +1,44 @@
+[
+  {
+    "id": "curated-network-checkpoint-openhackathons-rdma-9dc56a7b95b6",
+    "asset": "00 Учебник/Assets/Figures/curated/network-checkpoint-review-2026-10/openhackathons-gpudirect-rdma.png",
+    "author": "OpenACC-Standard.org, in collaboration with NVIDIA Corporation",
+    "source_url": "https://github.com/openhackathons-org/nways_multi_gpu/blob/bc2a5887505bba17672882b3ec7a62c04ecf0d24/labs/CFD/English/C/images/gpudirect_rdma.png",
+    "source_image_url": "https://raw.githubusercontent.com/openhackathons-org/nways_multi_gpu/bc2a5887505bba17672882b3ec7a62c04ecf0d24/labs/CFD/English/C/images/gpudirect_rdma.png",
+    "commit": "bc2a5887505bba17672882b3ec7a62c04ecf0d24",
+    "sha256": "9dc56a7b95b6a48732bdee06b63937c793486c2304b08a40a75d346d2a4838d6",
+    "source_asset_sha256": "9dc56a7b95b6a48732bdee06b63937c793486c2304b08a40a75d346d2a4838d6",
+    "license": "CC BY 4.0",
+    "license_url": "https://github.com/openhackathons-org/nways_multi_gpu/blob/bc2a5887505bba17672882b3ec7a62c04ecf0d24/labs/CFD/English/C/jupyter_notebook/mpi/cuda_aware.ipynb",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "pinned-upstream-repository",
+    "modifications": "none; byte-for-byte original 1726 x 517 transparent PNG. Explicit CC BY 4.0 teaching-material license in the source notebook; separate software LICENSE is not used. Full CC BY 4.0 legal text and attribution retained alongside asset.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-14",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints.md"
+    ]
+  },
+  {
+    "id": "curated-network-checkpoint-pytorch-async-4abf122a9cd4",
+    "asset": "00 Учебник/Assets/Figures/curated/network-checkpoint-review-2026-10/pytorch-async-checkpoint-flow.png",
+    "author": "Lucas Pasqualin, Less Wright, Iris Zhang, Chien-Chin Huang, Swaminathan Sundararaman, Saransh Gupta, Raghu Ganti; PyTorch contributors",
+    "source_url": "https://github.com/pytorch/pytorch.github.io/blob/d1050dad1fe8ff2b28e1672d6b9f3eaa33e91320/assets/images/reducing-checkpointing-times/fg3.png",
+    "source_image_url": "https://raw.githubusercontent.com/pytorch/pytorch.github.io/d1050dad1fe8ff2b28e1672d6b9f3eaa33e91320/assets/images/reducing-checkpointing-times/fg3.png",
+    "commit": "d1050dad1fe8ff2b28e1672d6b9f3eaa33e91320",
+    "sha256": "4abf122a9cd4a80a26569e8fc82728ba29bffbdd27483fffbc685cbfc314d2a6",
+    "source_asset_sha256": "4abf122a9cd4a80a26569e8fc82728ba29bffbdd27483fffbc685cbfc314d2a6",
+    "license": "BSD-3-Clause",
+    "license_copy": "00 Учебник/Assets/Figures/curated/network-checkpoint-review-2026-10/LICENSE-pytorch-BSD-3-Clause.txt",
+    "public_license_copy": "site/public/licenses/pytorch-website-d1050dad-BSD-3-Clause.txt",
+    "license_url": "https://github.com/pytorch/pytorch.github.io/blob/d1050dad1fe8ff2b28e1672d6b9f3eaa33e91320/LICENSE",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "pinned-upstream-repository",
+    "modifications": "none; byte-for-byte original 1600 x 286 PNG. Full website-repository BSD-3-Clause copyright notice and NOTICE retained alongside asset. Shows the 2024 blocking-staging plus asynchronous-persistence workflow, not arbitrary current stager configurations.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-14",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints.md"
+    ]
+  }
+]

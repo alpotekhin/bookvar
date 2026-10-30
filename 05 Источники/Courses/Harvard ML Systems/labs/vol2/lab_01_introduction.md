@@ -9,9 +9,18 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol2/lab_01_introduction.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol2/lab_01_introduction.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL2 Lab — Introduction
 
@@ -29,7 +38,7 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 Capacity alone is linear:
 
-$$ Capacity_`…` = N * Capacity_`…` $$
+$$ Capacity_{fleet} = N * Capacity_{unit} $$
 
 The coordination surface grows faster in this introductory model:
 
@@ -37,7 +46,7 @@ $$ CoordinationIndex = N * log_2(N) $$
 
 Fleet health compounds the per-unit survival probability:
 
-$$ P(healthy fleet) = p_`…`^`…` $$
+$$ P(healthy fleet) = p_{unit}^{N} $$
 
 The chapter claim is not that these simple equations are the final simulator.
 The claim is that the unit changed: the report must carry fleet amounts.
@@ -48,11 +57,11 @@ The single-unit question is an amount check, not a preference:
 
 $$ StateGB = ParamsB * bytesPerParam $$
 
-$$ Units_`…` = ceil(StateGB / UnitBudgetGB) $$
+$$ Units_{memory} = ceil(StateGB / UnitBudgetGB) $$
 
-$$ Units_`…` = ceil(Demand / UnitCapacity) $$
+$$ Units_{demand} = ceil(Demand / UnitCapacity) $$
 
-$$ Units_`…` = max(Units_`…`, Units_`…`) $$
+$$ Units_{required} = max(Units_{memory}, Units_{demand}) $$
 
 When required units exceed one, distribution is no longer optional. The
 remaining design question is which form of distribution matches the binding
@@ -62,7 +71,7 @@ amount.
 
 The chapter's fleet law decomposes each distributed step:
 
-$$ T_`…`(N) = T_`…`/N + T_`…`(N) + T_`…`(N) - T_`…` $$
+$$ T_{step}(N) = T_{compute}/N + T_{comm}(N) + T_{sync}(N) - T_{overlap} $$
 
 The diagnostic rule is to optimize the dominant term:
 
@@ -77,15 +86,170 @@ communication above 40% or goodput below 75% deserves immediate action.
 
 For independent components, the fleet-level interruption clock shrinks with N:
 
-$$ MTBF_`…` = MTBF_`…` / N $$
+$$ MTBF_{system} = MTBF_{component} / N $$
 
 The probability of at least one event during a window t is:
 
-$$ P(event before t) = 1 - exp(-t / MTBF_`…`) $$
+$$ P(event before t) = 1 - exp(-t / MTBF_{system}) $$
 
 This is why the chapter says failure becomes steady state. The design target is
 not perfect hardware; it is recovery speed, checkpoint quality, and blast-radius
 control.
+
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+**Chapter invariant:** scale changes the unit of analysis from a single machine to a fleet. Coordination, communication, capacity, and failure cadence become first-order amounts.
+
+---
+
+### Track selector
+
+---
+
+Commit to a structured prediction before treating the evidence as complete.
+
+---
+
+Prediction check: correct. The measured result is **⟨value 1⟩**.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{labels[actual]}' `
+
+---
+
+Prediction check: you chose **⟨value 1⟩**, but the measured result is **⟨value 2⟩**. Update the memo around the measured amount.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{labels.get(predicted, predicted)}' `
+- value_2: ` f'{labels[actual]}' `
+
+---
+
+**Boundary reached:** ⟨value 1⟩ must be managed as a fleet. Health is ⟨value 2⟩ and coordination pressure is ⟨value 3⟩x the track threshold.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_01_lens['scale_unit']}" `
+- value_2: ` f"{v2_01_fmt_pct(v2_01_a['health'])}" `
+- value_3: ` f"{v2_01_a['coord_pressure']:.2f}" `
+
+---
+
+The current point is inside the introductory fleet envelope, but the unit of analysis is still the fleet.
+
+---
+
+### Prediction
+
+---
+
+### Manipulation
+
+---
+
+### Evidence
+
+---
+
+### Checkpoint
+
+---
+
+**Single-unit violation:** ⟨value 1⟩ cannot carry this amount. The smallest distributed envelope is ⟨value 2⟩ units, binding on **⟨value 3⟩**. A plausible track move is to ⟨value 4⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_01_lens['single_unit']}" `
+- value_2: ` f"{v2_01_fmt_count(v2_01_b['required_units'])}" `
+- value_3: ` f"{v2_01_b['binding']}" `
+- value_4: ` f"{v2_01_lens['part_b_action']}" `
+
+---
+
+This specific amount still fits one unit, but the capacity calculation is now explicit.
+
+---
+
+### Prediction
+
+---
+
+### Manipulation
+
+---
+
+### Evidence
+
+---
+
+### Checkpoint
+
+---
+
+**C3 red state:** communication share is ⟨value 1⟩ and goodput is ⟨value 2⟩. The next lever must target the dominant term, not the most familiar component.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_01_fmt_pct(v2_01_c['comm_fraction'])}" `
+- value_2: ` f"{v2_01_fmt_pct(v2_01_c['goodput'])}" `
+
+---
+
+The current C3 envelope is green by the introductory traffic-light thresholds.
+
+---
+
+### Prediction
+
+---
+
+### Manipulation
+
+---
+
+### Evidence
+
+---
+
+### Checkpoint
+
+---
+
+**Routine-failure boundary:** this fleet expects ⟨value 1⟩ ⟨value 2⟩ events per day. Manual response is no longer an architecture.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_01_d['failures_per_day']:.2f}" `
+- value_2: ` f"{v2_01_lens['failure_event']}" `
+
+---
+
+The selected failure domain remains below the routine-failure threshold.
+
+---
+
+### Prediction
+
+---
+
+### Manipulation
+
+---
+
+### Evidence
+
+---
+
+### Checkpoint
+
+---
+
+A complete fleet memo names the unit, the selected operating envelope, the binding amount, the C3 bottleneck, the recovery policy, and the next infrastructure question.
+
+</details>
 
 ## Complete original Marimo source
 

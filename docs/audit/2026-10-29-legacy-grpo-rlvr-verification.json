@@ -1,0 +1,457 @@
+{
+  "date": "2026-10-29",
+  "status": "verified-locally-not-published",
+  "scope": "Full GRPO/RLVR archive comparison, original complete GRPO explanation retained; missing tool-reward mechanisms integrated into the existing RLVR chapter. No parallel course route or new translation.",
+  "chapters": [
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "sha256": "7173f3bbdb587d32f8d2f04c5663164c132563b6966ce7543ccc613f4e007e1a",
+      "wholeTextRead": true,
+      "lines": 1344,
+      "pythonFences": 11,
+      "figures": 8,
+      "proseChanged": false
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
+      "sha256": "e47cc4f42c05c58f9ff84aaba765cf21e6ad80f8c658efa159ea510ff5ff5828",
+      "wholeTextReadBeforeAndAfter": true,
+      "lines": 1205,
+      "pythonFences": 6,
+      "figures": 6,
+      "language": "Existing Russian preserved; new detailed block in English; both web locales use the same canonical content, EN explicitly remains fallback."
+    }
+  ],
+  "artifactHashes": {
+    "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md": "e47cc4f42c05c58f9ff84aaba765cf21e6ad80f8c658efa159ea510ff5ff5828",
+    "05 Источники/asset-registry.yml": "c16a61338cd633322456ff000ba6ae080019d0382f841e1fd98bf1ea9586bd88",
+    "publishing/tools/topic-consolidation-baseline.mjs": "c8e291a5fb7a893f23989d0d1442fb7f93be36f3ebe4db7a7042724eb5b28d0e",
+    "publishing/tools/topic_consolidation_baseline.py": "08a807c569de69a12374db4d663412ab57f4c21b7caecbf8e139c94b9ae3a5f2",
+    "publishing/tests/constitutional-ai.test.ts": "b029b736707a109f4a9f45bc78472e102a383ed7018cb624aaec22defacd69a9",
+    "publishing/tests/inference-mbu.test.ts": "9c67f49a2be333d7777e090cf78d7ac8a67570e2bc212c2802c1e424d8f1a435",
+    "publishing/tools/check_rlvr_examples.py": "9a9d00b322ecfd8fb325c930a8001fce82878796f986557e0f4a1a5a903d934f",
+    "publishing/tests/site-output.test.ts": "ef079b96f81b42fdc74ba502bea5090730a2bc96015073007027196988467908",
+    "Concepts/Training/GRPO.md": "d9ef78345403abaac74b315dee091199a2c750e70652936b455aa9db2dc1bc55",
+    "Concepts/Training/RLVR.md": "16e44366ba81a677e062875451c4c71254568f958f6af938ba582581ff1046b4",
+    "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md": "7173f3bbdb587d32f8d2f04c5663164c132563b6966ce7543ccc613f4e007e1a",
+    "00 Учебник/Assets/Figures/curated/toolrl/assets.json": "34ed2be545a963d470ff4b9d053817a45d859df9a8986db7ae8b8c0950ca10b4",
+    "00 Учебник/Assets/Figures/curated/toolrl/reward-design.png": "3b079ec73e494f9a3475539be37fd716bdb91e94b970054716b806c096421ad7",
+    "publishing/tools/check_grpo_examples.py": "043c3bc8b119a239628a0e6529fc571b29c54eece3f7a53fc0f4ec33bf74a811",
+    "publishing/tools/check_tool_reward_examples.py": "e174efa39640f08e1ba560c995192acba3a785153aa44f426d57e786a6afd803",
+    "publishing/tests/tool-rewards.test.ts": "47245873606415dd58b4912623f96a826c713ef04854e4a003130309be307a9c",
+    "site/public/licenses/toolrl-8cee13ec-Apache-2.0.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "docs/audit/2026-10-29-tool-rewards-additions.json": "61486b8c85c5b0b7e7c63509898acf4955f7e81b7c0d46ed66b8979eefa62af1",
+    "docs/audit/2026-10-29-release-completion-plan.md": "ac65bb6403032d85a4a1de276e53cfdfda82aa3afb69a1957f3aff5d261c839c",
+    "docs/audit/2026-10-29-legacy-notes-review.json": "152268636b64f9e567cb97bc2f05782a63774924aaafd266755f9ffccbbbebba",
+    "05 Источники/Originals/tool-rewards-2026-10-29/LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "05 Источники/Originals/tool-rewards-2026-10-29/README.md": "55a78db8ac20f8116d1bb7b88acf1d5307ec9fc47fa7f035bf250ed1443a2648",
+    "05 Источники/Originals/tool-rewards-2026-10-29/ToolRL-reward.png": "3b079ec73e494f9a3475539be37fd716bdb91e94b970054716b806c096421ad7",
+    "05 Источники/Originals/tool-rewards-2026-10-29/manifest.json": "b3bbdd67c1a313bea4059e930beb56826b313adeb610c36146f2a74a516b1266",
+    "05 Источники/Originals/tool-rewards-2026-10-29/verl__utils__reward_score__rlla.py": "2ba68ec7e5e824a0ca73f5d0ac6eff2d8c7e94fcbd71f08296d345578590122d",
+    "docs/audit/evidence/2026-10-29-tool-rewards/pages-desktop-in-chapter.png": "45cb228d8d40d29248a1ef2a441b970a35d2c124bae129ea3e174fce1b37e4f2",
+    "docs/audit/evidence/2026-10-29-tool-rewards/pages-mobile-arithmetic-en.png": "6618ea0252724a2d49c44c0ca9534e634ffda215b1499af20cbcb77a21363774",
+    "docs/audit/evidence/2026-10-29-tool-rewards/pages-mobile-en.png": "f49655fe13eebdc47c4dfdd499732802bdfaaffb93baaf82a27ac230b2303a73",
+    "docs/audit/evidence/2026-10-29-tool-rewards/root-desktop-in-chapter.png": "45cb228d8d40d29248a1ef2a441b970a35d2c124bae129ea3e174fce1b37e4f2",
+    "docs/audit/evidence/2026-10-29-tool-rewards/root-desktop-original.png": "52a59841077b350d354ccd3725e1c643b7115133f876b3111e1c543f1be71f57",
+    "docs/audit/evidence/2026-10-29-tool-rewards/root-mobile-en.png": "f49655fe13eebdc47c4dfdd499732802bdfaaffb93baaf82a27ac230b2303a73",
+    "docs/audit/evidence/2026-10-29-tool-rewards/root-mobile-original-left-en.png": "88285cdb1f5d312bf53b1092db71d515b61744956ed2e176eb3f6f1c58cb275c",
+    "docs/audit/evidence/2026-10-29-tool-rewards/root-mobile-original-right-en.png": "6c832f113df55c879d8463fbae9ecb9cfd466db9d571530dd845f8ed33809a29"
+  },
+  "sourceComparison": {
+    "unchangedExplanations": [
+      {
+        "report": "docs/audit/2026-10-25-grpo.md",
+        "scope": "Current GRPO chapter SHA equals the accepted 1344-line revision. Entire chapter read this turn, all 11 actual CPU fences executed again; no claim that every previously read primary paper/course was freshly reread."
+      },
+      {
+        "report": "docs/audit/2026-10-24-rlvr.md",
+        "scope": "Earlier 990-line RLVR explanation retained byte-for-byte after reversing only the new content journal. Previous source comparison covers Tulu 3, Stanford A5, parser, metrics and original figures."
+      }
+    ],
+    "newSources": "05 Источники/Originals/tool-rewards-2026-10-29/manifest.json",
+    "freshPrimarySections": [
+      "DeepSeekMath v3 §4.1.1–4.1.4 and Algorithm 1: token ratio, repeated updates, process rewards and changing RM/reference.",
+      "ToolRL v1 §3.1–3.4 and the pinned complete rlla.py: format/correctness separation; repeated names; parameter keys and equal values; paper optimal matching versus greedy implementation.",
+      "ASTRA v1 §3.1 RL Infrastructure and Adaptive Batch Filling, §3.2.2, §4.2: isolated rollouts, F1, filtering and reported ablations. No ASTRA paper image copied.",
+      "Tool-N1 v2 §4.1–4.3, §5.1 and §5.3.2/Table 3: binary structured matching, single-step segmentation, instruction-tuned starts and scoped recipe comparison."
+    ]
+  },
+  "explanationReview": [
+    {
+      "mechanism": "Original GRPO",
+      "retained": "Within-prompt group advantages, signed token clipping, KL expectation versus semigradient, process advantage, EOS/PAD, microbatches, group baseline bias, MaxRL finite-sample behavior, stale rollouts, GSPO, R1/Kimi/Qwen stages.",
+      "evidence": "Complete current chapter read; all 11 fences plus independent tests; first archival sequence-ratio and memory claims rejected."
+    },
+    {
+      "mechanism": "Decomposed tool rewards",
+      "example": "ORD→SFO ground truth versus ORD→LAX prediction: name 1 + parameter keys 1 + one value 1 gives raw 3/4, correctness 1.5 and default formatted total 2.5 versus exact total 4.",
+      "limits": "The published helper handles one gold and one predicted call, not global multi-call matching, arbitrary sandbox execution or semantic task success."
+    },
+    {
+      "mechanism": "Matching discrepancy",
+      "example": "Actual isolated ToolRL functions yield 3/7 versus 15/7 when candidate order changes in a constructed repeated-name case.",
+      "limits": "Pinned greedy code is not the paper's optimal assignment. Variant environment flags are explicitly disabled in the comparison."
+    },
+    {
+      "mechanism": "Binary alternative",
+      "example": "Tool-N1 requires both specified format and structured exact tool-call match. The same wrong-destination call earns zero.",
+      "limits": "Previous multi-turn data can be context for single-step prediction; no invented full online trajectory-RL claim."
+    },
+    {
+      "mechanism": "Completion/call-count reward",
+      "example": "Four-task fixture: two solved/two calls ≈0.667; four/four ≈1; four/eight ≈0.667. Explicit zero handling and single-subtask-per-call restriction.",
+      "limits": "Counts do not measure latency, risk, tokens or money; multi-subtask calls require different accounting."
+    },
+    {
+      "mechanism": "Refusal and missing specification",
+      "example": "Constructed authorization flag and calendar-state checker distinguish unauthorized writes from preserving state and requesting permission.",
+      "limits": "No claim that arbitrary natural-language safety is formally decidable; all-zero labels omit a distinction rather than proving that RLVR cannot reward refusal."
+    }
+  ],
+  "decisions": [
+    {
+      "source": "Concepts/Training/GRPO.md",
+      "sourceSha256": "d9ef78345403abaac74b315dee091199a2c750e70652936b455aa9db2dc1bc55",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+        "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md"
+      ],
+      "findings": [
+        "Do not transfer the fixed four-equal-size-model or 25-percent-memory-saving rule: critic size, optimizer state, reward implementation and placement change the accounting.",
+        "The archival objective uses a sequence likelihood ratio where the original token-level GRPO needs token indices and response-length normalization. Equal group rewards remove the centered reward advantage, not necessarily the KL gradient.",
+        "Reasoning self-correction examples and fixed-benchmark results must not become guarantees of stability, exploration, or universal superiority over PPO. The full canonical GRPO owner still needs comparison.",
+        "Complete 1344-line GRPO owner read; all 11 actual fences passed. Original explanation retained; missing tool-reward accounting now lives in the RLVR owner.",
+        "Existing DeepSeekMath PPO/GRPO figure permission remains a separate release-rights item."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-29-legacy-grpo-rlvr-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+            "anchors": [
+              "grpo-estimator",
+              "grpo-normalizations",
+              "offpolicy-ratios",
+              "gspo",
+              "reasoning-case-studies"
+            ]
+          },
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
+            "anchors": [
+              "agent-reward-design"
+            ]
+          }
+        ],
+        "excludedClaims": [
+          "Universal 25-percent memory/compute saving from four equal-sized live models.",
+          "The archive sequence ratio equals original token GRPO; GRPO always uses one update.",
+          "Zero reward variance always removes auxiliary gradients; universal PPO superiority/stability.",
+          "Self-correction phrases prove a new internal algorithm; fixed benchmark captions establish general gains.",
+          "Kimi is only original GRPO plus generic mirror descent; named variants establish full mechanisms.",
+          "Adaptive filling drops a supported fixed 15–25 percent refusal share."
+        ],
+        "currentCanonicalRevision": "7173f3bbdb587d32f8d2f04c5663164c132563b6966ce7543ccc613f4e007e1a",
+        "scopeLimits": "Content reconciliation and CPU/root/Pages checks. No model benchmark, new translation, full course reproduction or live release. Existing GRPO figure permission remains separately open."
+      }
+    },
+    {
+      "source": "Concepts/Training/RLVR.md",
+      "sourceSha256": "16e44366ba81a677e062875451c4c71254568f958f6af938ba582581ff1046b4",
+      "sourceFullRead": true,
+      "comparisonStatus": "reconciled",
+      "canonicalFullReads": [
+        "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
+        "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md"
+      ],
+      "findings": [
+        "Full archive and complete 1205-line RLVR owner read, together with the full GRPO owner.",
+        "Added English worked explanations of decomposed ToolRL matching, binary Tool-N1 checking, completion/call-count reward, refusal and filtering, with the complete original licensed ToolRL figure.",
+        "All six actual RLVR fences passed; new checks include 72 comparisons to actual scoring code and 408 F1 calculations. Paper optimal matching differs from the greedy pinned code.",
+        "Tool-N1 segments multi-turn source data into single-step prediction records; its results do not prove full online multi-turn trajectory optimization."
+      ],
+      "decision": {
+        "status": "reconciled",
+        "evidence": "docs/audit/2026-10-29-legacy-grpo-rlvr-verification.json",
+        "canonicalTargets": [
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
+            "anchors": [
+              "rlvr-contract",
+              "parser-vs-verifier",
+              "verifier-audit",
+              "agent-reward-design"
+            ]
+          },
+          {
+            "source": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+            "anchors": [
+              "grpo-estimator"
+            ]
+          }
+        ],
+        "excludedClaims": [
+          "Deterministic verifiers eliminate hacking/error; one unique answer is required; refusals cannot be rewarded.",
+          "No reward model implies KL can be dropped; uniform rewards force zero total gradient for every optimizer.",
+          "ToolRL uses only discrete component scores or the released greedy matching is optimal.",
+          "Cold start means no previous instruction tuning; Tool-N1 proves online multi-turn RL; SFT is universally harmful.",
+          "Unsupported fixed 15–25 percent refusal rate; complete synthetic coverage of production; DPO cannot use verified pairs."
+        ],
+        "currentCanonicalRevision": "e47cc4f42c05c58f9ff84aaba765cf21e6ad80f8c658efa159ea510ff5ff5828",
+        "scopeLimits": "Content reconciliation and CPU/root/Pages checks. No model benchmark, new translation, full course reproduction or live release. Existing GRPO figure permission remains separately open."
+      }
+    }
+  ],
+  "executedChecks": {
+    "grpoCpu": {
+      "result": "passed",
+      "pythonFences": 11,
+      "finiteGroupCases": 1740,
+      "log": "/var/tmp/bookvar-legacy-grpo-cpu-20261029.log"
+    },
+    "rlvrCpu": {
+      "result": "passed",
+      "pythonFences": 6,
+      "passAtKCases": 5200,
+      "log": "/var/tmp/bookvar-legacy-rlvr-cpu-20261029.log"
+    },
+    "newToolExamples": {
+      "result": "passed",
+      "publishedFences": 2,
+      "pinnedCodeComparisons": 72,
+      "f1Cases": 408,
+      "modelCalls": 0,
+      "environmentActions": 0,
+      "log": "/var/tmp/bookvar-tool-rewards-cpu-20261029.log"
+    },
+    "unit": {
+      "result": "passed",
+      "files": 132,
+      "tests": 840,
+      "log": "/var/tmp/bookvar-tool-rewards-unit-final-20261029.log"
+    },
+    "targeted": {
+      "result": "passed",
+      "files": 5,
+      "tests": 171,
+      "log": "/var/tmp/bookvar-tool-rewards-targeted-20261029.log"
+    },
+    "rootBuild": {
+      "result": "passed",
+      "pages": 2006,
+      "seconds": 34.61,
+      "log": "/var/tmp/bookvar-tool-rewards-root-final-20261029.log"
+    },
+    "rootOutput": {
+      "result": "passed",
+      "tests": 172,
+      "log": "/var/tmp/bookvar-tool-rewards-output-final-20261029.log"
+    },
+    "rootLinks": {
+      "result": "passed",
+      "broken": 0,
+      "log": "/var/tmp/bookvar-tool-rewards-root-links-20261029.log"
+    },
+    "pagesBuild": {
+      "result": "passed",
+      "base": "/bookvar",
+      "pages": 2006,
+      "log": "/var/tmp/bookvar-tool-rewards-pages-20261029.log"
+    },
+    "pagesLinks": {
+      "result": "passed",
+      "broken": 0,
+      "log": "/var/tmp/bookvar-tool-rewards-pages-links-20261029.log"
+    },
+    "rootDerivedRestored": {
+      "result": "passed",
+      "log": "/var/tmp/bookvar-tool-rewards-root-derived-restore-20261029.log"
+    },
+    "scopedDiffCheck": "passed",
+    "fixedInitialFailures": [
+      "Asset provenance schema required a separately retained pinned original and a source-raster-copy derivation; supplied a hard-linked byte-identical source, without duplicating disk storage or weakening validation.",
+      "Inference MBU historical lock now reverses the exact separately reviewed RLVR addition before checking its original SHA; accepted SHA not changed.",
+      "Output test updated from four to six actual examples and adds checks for the new mechanism, anchor, original image and public license."
+    ]
+  },
+  "visualReview": {
+    "surface": "Actual in-app browser, static preview of final built chapter.",
+    "rootDesktop": {
+      "viewport": [
+        1280,
+        900
+      ],
+      "clientWidth": 1265,
+      "scrollWidth": 1265,
+      "katexErrors": 0,
+      "loadedImages": 6,
+      "fullOriginalViewerInspected": true
+    },
+    "rootMobileEn": {
+      "viewport": [
+        360,
+        800
+      ],
+      "clientWidth": 345,
+      "scrollWidth": 345,
+      "katexErrors": 0,
+      "displayMath": 12,
+      "displayMathWidths": [
+        313,
+        313
+      ],
+      "tables": 4,
+      "tableWidths": [
+        313,
+        313
+      ],
+      "originalViewerZoom": "4×",
+      "leftAndRightPanelsInspected": true,
+      "thumbnailAloneIsNotReadable": true
+    },
+    "pagesDesktop": {
+      "viewport": [
+        1280,
+        900
+      ],
+      "clientWidth": 1265,
+      "scrollWidth": 1265,
+      "katexErrors": 0,
+      "allImagesLoaded": true
+    },
+    "pagesMobileEn": {
+      "viewport": [
+        360,
+        800
+      ],
+      "clientWidth": 345,
+      "scrollWidth": 345,
+      "katexErrors": 0,
+      "newImageLoaded": true,
+      "licenseHref": "/bookvar/licenses/toolrl-8cee13ec-Apache-2.0.txt",
+      "arithmeticScreenshotInspected": true
+    },
+    "evidenceDirectory": "docs/audit/evidence/2026-10-29-tool-rewards",
+    "screenshots": 8,
+    "limits": "New figure and changed section inspected this turn. Unchanged GRPO and earlier RLVR figure explanations retain their prior source/visual receipts; not claimed as fresh viewport inspection of all old figures."
+  },
+  "preservation": {
+    "archivalFilesPreserved": 31,
+    "contentJournal": "docs/audit/2026-10-29-tool-rewards-additions.json",
+    "currentCounts": {
+      "total": 31,
+      "sourceFullRead": 20,
+      "reconciled": 19,
+      "readInProgress": 1,
+      "unread": 11,
+      "canonicalWholeReads": 23
+    },
+    "meaning": "These counts describe legacy-note reconciliation, not readiness of all textbook chapters."
+  },
+  "supportFileChanges": [
+    {
+      "source": "publishing/tools/topic-consolidation-baseline.mjs",
+      "changes": [
+        {
+          "old": "",
+          "new": "  '2026-10-29-tool-rewards-additions.json',\n"
+        }
+      ],
+      "after_sha256": "c8e291a5fb7a893f23989d0d1442fb7f93be36f3ebe4db7a7042724eb5b28d0e",
+      "before_sha256": "d9b659209ad887702bd608a35a74593edc19ee999b817dcda228a0ce7d638365"
+    },
+    {
+      "source": "publishing/tools/topic_consolidation_baseline.py",
+      "changes": [
+        {
+          "old": "",
+          "new": "    '2026-10-29-tool-rewards-additions.json',\n"
+        }
+      ],
+      "after_sha256": "08a807c569de69a12374db4d663412ab57f4c21b7caecbf8e139c94b9ae3a5f2",
+      "before_sha256": "6befc36d60db53c2960eb08b4294ce31d8350159cff36278815c93b5f5691ea4"
+    },
+    {
+      "source": "publishing/tests/constitutional-ai.test.ts",
+      "changes": [
+        {
+          "old": "      const text = read(row.source).toString();\n      expect(hash(text)).toBe(row.after_sha256);\n      let restored = text;\n      for(const c of [...row.changes].reverse()) {\n        expect(restored.split(c.new)).toHaveLength(2);\n        restored = restored.replace(c.new,()=>c.old);\n      }\n      expect(hash(restored)).toBe(row.before_sha256);\n      expect(beforeTopicConsolidation(text,row.source,root,\n        '2026-10-29-structured-dropout-additions.json')).toBe(restored);\n      expect(()=>beforeTopicConsolidation(text+'\\nUnreviewed edit.',row.source,root,\n",
+          "new": "      const live = read(row.source).toString();\n      const text = beforeTopicConsolidation(live,row.source,root,\n        '2026-10-29-constitutional-ai-additions.json');\n      expect(hash(text)).toBe(row.after_sha256);\n      let restored = text;\n      for(const c of [...row.changes].reverse()) {\n        expect(restored.split(c.new)).toHaveLength(2);\n        restored = restored.replace(c.new,()=>c.old);\n      }\n      expect(hash(restored)).toBe(row.before_sha256);\n      expect(beforeTopicConsolidation(live,row.source,root,\n        '2026-10-29-structured-dropout-additions.json')).toBe(restored);\n      expect(()=>beforeTopicConsolidation(live+'\\nUnreviewed edit.',row.source,root,\n"
+        }
+      ],
+      "after_sha256": "b029b736707a109f4a9f45bc78472e102a383ed7018cb624aaec22defacd69a9",
+      "before_sha256": "68cceb1f31d40f529d91847b39582ef3fb7df560d5a2109d0c63aeec31e6a08c"
+    },
+    {
+      "source": "publishing/tests/inference-mbu.test.ts",
+      "changes": [
+        {
+          "old": "\nconst root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');\nconst chapter = '00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md';\nconst archive = '05 Источники/Originals/mbu-2026-10-26';\nconst assets = '00 Учебник/Assets/Figures/curated/mbu-review-2026-10';\nconst read = (path: string) => readFile(join(root, path), 'utf8');\nconst sha = (bytes: string | Buffer) => createHash('sha256').update(bytes).digest('hex');\n\ndescribe('Inference MBU explanation', () => {\n  it('preserves the full accepted chapter outside the bounded addition', async () => {\n    let text = beforeMathReflow(await read(chapter), chapter);\n    text = text.replace(/<!-- BEGIN REVIEW: MBU 2026-10-26 -->[\\s\\S]*?<!-- END REVIEW: MBU 2026-10-26 -->\\n\\n/, '')\n      .replace('last_updated: 2026-10-26', 'last_updated: 2026-10-14')\n      .replace('last_verified: 2026-10-26', 'last_verified: 2026-10-14')\n      .replace('source_language: mixed\\n', '');\n    expect(sha(text)).toBe('6c459a9f5153b9eaaa35e437411bb14f4301b2e49d251c6abbe278c0c4257fd5');\n  });\n\n  it('retains the entire original Appendix A, changing only heading depth and figure includes', async () => {\n    const source = await read(`${archive}/jax-inference.md`);\n    const original = ('### Appendix A:' + source.split('### Appendix A:')[1].split('### Appendix B:')[0]).trim();\n    const text = await read(chapter);\n    const actual = text.split('<!-- BEGIN SOURCE: JAX inference Appendix A -->')[1]\n      .split('<!-- END SOURCE: JAX inference Appendix A -->')[0].trim();\n    const expected = original.replace('### Appendix A:', '#### Appendix A:')\n      .replace(/{% include figure\\.liquid path=\"assets\\/img\\/batch-scaling-(latency|throughput)\\.png\" class=\"img-fluid img-small\" %}/g,\n        '![[02 Areas/ML & DL/' + assets + '/jax-batch-scaling-$1.png]]');\n    expect(actual).toBe(expected);\n  });\n\n  it('pins sources, complete original PNGs and all license copies', async () => {\n    const refs = JSON.parse(await read(`${archive}/references.json`));\n    for (const source of refs.sources)\n      expect(sha(await readFile(join(root, archive, source.file))), source.file).toBe(source.sha256);\n    for (const figure of refs.figures) {\n      const png = await readFile(join(root, assets, figure.file));\n      expect(sha(png)).toBe(figure.sha256);\n      expect([png.readUInt32BE(16), png.readUInt32BE(20)]).toEqual(figure.dimensions);\n    }\n    const license = await read(`${archive}/jax-LICENSE-MIT.txt`);\n    expect(await read(`${assets}/LICENSE-MIT.txt`)).toBe(license);\n    expect(await read('site/public/licenses/jax-scaling-book-MIT.txt')).toBe(license);\n  });\n\n  it('leaves accepted PPO, DPO, RLVR and GRPO untouched', async () => {\n    const files = {\n      '04 Policy gradient и PPO для LLM.md': '29efb9a8c255c1b04abdcedc5c696f659a20ef45010572fe59093429698fcae5',\n      '05 DPO.md': 'fd7a08d5813a5427b74a943d8a57f00978877b8edce13ac1027ccc04cf172c06',\n      '06 RLVR и verifiers.md': '7b8b6d68960196ce4dd0c59fe047f974decd60b187f95b3acda55076b73efbba',\n      '07 GRPO и DeepSeek-R1.md': '7173f3bbdb587d32f8d2f04c5663164c132563b6966ce7543ccc613f4e007e1a'\n    };\n    for (const [file, expected] of Object.entries(files))\n      expect(sha(await readFile(join(root, '00 Учебник/12 Post-training и Alignment', file)))).toBe(expected);\n",
+          "new": "import { beforeTopicConsolidation } from '../tools/topic-consolidation-baseline.mjs';\n\nconst root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');\nconst chapter = '00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md';\nconst archive = '05 Источники/Originals/mbu-2026-10-26';\nconst assets = '00 Учебник/Assets/Figures/curated/mbu-review-2026-10';\nconst read = (path: string) => readFile(join(root, path), 'utf8');\nconst sha = (bytes: string | Buffer) => createHash('sha256').update(bytes).digest('hex');\n\ndescribe('Inference MBU explanation', () => {\n  it('preserves the full accepted chapter outside the bounded addition', async () => {\n    let text = beforeMathReflow(await read(chapter), chapter);\n    text = text.replace(/<!-- BEGIN REVIEW: MBU 2026-10-26 -->[\\s\\S]*?<!-- END REVIEW: MBU 2026-10-26 -->\\n\\n/, '')\n      .replace('last_updated: 2026-10-26', 'last_updated: 2026-10-14')\n      .replace('last_verified: 2026-10-26', 'last_verified: 2026-10-14')\n      .replace('source_language: mixed\\n', '');\n    expect(sha(text)).toBe('6c459a9f5153b9eaaa35e437411bb14f4301b2e49d251c6abbe278c0c4257fd5');\n  });\n\n  it('retains the entire original Appendix A, changing only heading depth and figure includes', async () => {\n    const source = await read(`${archive}/jax-inference.md`);\n    const original = ('### Appendix A:' + source.split('### Appendix A:')[1].split('### Appendix B:')[0]).trim();\n    const text = await read(chapter);\n    const actual = text.split('<!-- BEGIN SOURCE: JAX inference Appendix A -->')[1]\n      .split('<!-- END SOURCE: JAX inference Appendix A -->')[0].trim();\n    const expected = original.replace('### Appendix A:', '#### Appendix A:')\n      .replace(/{% include figure\\.liquid path=\"assets\\/img\\/batch-scaling-(latency|throughput)\\.png\" class=\"img-fluid img-small\" %}/g,\n        '![[02 Areas/ML & DL/' + assets + '/jax-batch-scaling-$1.png]]');\n    expect(actual).toBe(expected);\n  });\n\n  it('pins sources, complete original PNGs and all license copies', async () => {\n    const refs = JSON.parse(await read(`${archive}/references.json`));\n    for (const source of refs.sources)\n      expect(sha(await readFile(join(root, archive, source.file))), source.file).toBe(source.sha256);\n    for (const figure of refs.figures) {\n      const png = await readFile(join(root, assets, figure.file));\n      expect(sha(png)).toBe(figure.sha256);\n      expect([png.readUInt32BE(16), png.readUInt32BE(20)]).toEqual(figure.dimensions);\n    }\n    const license = await read(`${archive}/jax-LICENSE-MIT.txt`);\n    expect(await read(`${assets}/LICENSE-MIT.txt`)).toBe(license);\n    expect(await read('site/public/licenses/jax-scaling-book-MIT.txt')).toBe(license);\n  });\n\n  it('preserves accepted post-training chapters before separately reviewed additions', async () => {\n    const files = {\n      '04 Policy gradient и PPO для LLM.md': '29efb9a8c255c1b04abdcedc5c696f659a20ef45010572fe59093429698fcae5',\n      '05 DPO.md': 'fd7a08d5813a5427b74a943d8a57f00978877b8edce13ac1027ccc04cf172c06',\n      '06 RLVR и verifiers.md': '7b8b6d68960196ce4dd0c59fe047f974decd60b187f95b3acda55076b73efbba',\n      '07 GRPO и DeepSeek-R1.md': '7173f3bbdb587d32f8d2f04c5663164c132563b6966ce7543ccc613f4e007e1a'\n    };\n    for (const [file, expected] of Object.entries(files)) {\n      const source = '00 Учебник/12 Post-training и Alignment/' + file;\n      const text = beforeTopicConsolidation(await read(source), source, root,\n        '2026-10-29-constitutional-ai-additions.json');\n      expect(sha(text)).toBe(expected);\n    }\n"
+        }
+      ],
+      "after_sha256": "9c67f49a2be333d7777e090cf78d7ac8a67570e2bc212c2802c1e424d8f1a435",
+      "before_sha256": "c8154a6738dc524d5cc72d37aa45ee372dc569d66612d33cd12724890abc3c0d"
+    },
+    {
+      "source": "publishing/tools/check_rlvr_examples.py",
+      "changes": [
+        {
+          "old": "    assert len(blocks) == 4, \"execute every published Python fence\"\n",
+          "new": "    assert len(blocks) == 6, \"execute every published Python fence\"\n"
+        }
+      ],
+      "after_sha256": "9a9d00b322ecfd8fb325c930a8001fce82878796f986557e0f4a1a5a903d934f",
+      "before_sha256": "401d017b97d8af96ab4d5a779f9bbf827839b24112df459bd13cf32a93175ce3"
+    },
+    {
+      "source": "publishing/tests/site-output.test.ts",
+      "before_sha256": "4ab19485eecdd9d9760b6d2964e3a19588544bf4e2c334f406b8cb2f074cd82a",
+      "changes": [
+        {
+          "old": "    expect(html.match(/<pre data-language=\"python\"/g)).toHaveLength(4);\n    for (const value of ['ascent_gradient', 'updated_reward', 'log_failure', 'include_stop_str_in_output',\n      '0.13125', '0.488', 'allow_set_relation_comp', 'градиентный подъём']) expect(text).toContain(value);",
+          "new": "    expect(html.match(/<pre data-language=\"python\"/g)).toHaveLength(6);\n    for (const value of ['ascent_gradient', 'updated_reward', 'log_failure', 'include_stop_str_in_output',\n      '0.13125', '0.488', 'allow_set_relation_comp', 'градиентный подъём',\n      'single_tool_reward', 'completion_efficiency_reward', 'greedily consumes']) expect(text).toContain(value);\n    expect(html).toContain('id=\"agent-reward-design\"');\n    expect(html).toContain('/licenses/toolrl-8cee13ec-Apache-2.0.txt');\n    expect(html).toMatch(/<img[^>]+src=\"[^\"]*toolrl\\/reward-design\\.png\"/);"
+        }
+      ],
+      "after_sha256": "ef079b96f81b42fdc74ba502bea5090730a2bc96015073007027196988467908"
+    }
+  ],
+  "historicalPinReview": {
+    "constitutionalAi": {
+      "total": 20,
+      "unchanged": 19,
+      "restored": 1
+    },
+    "note": "Previous receipt left unchanged. Separately pinned support deltas restore their preceding bytes exactly."
+  },
+  "styleReview": "Full final chapter reread. no-ai-slop applied with technical exceptions: preserved mathematical explanation, meaningful contrasts, examples, caveats and figures; no style score or AI-authorship inference.",
+  "warnings": [
+    "Existing PromQL/toc highlighting fallbacks and unrelated KaTeX warnings remain in whole-book build logs; current affected page has zero KaTeX errors.",
+    "Existing third-party PDF closepath diagnostics in asset tests do not imply a failure of the passing tests.",
+    "The old DeepSeekMath PPO/GRPO image retains its pre-existing needs-confirmation permission status; this report does not infer figure rights from a code license."
+  ],
+  "remainingWithinThisContentComparison": [],
+  "remainingReleaseRights": [
+    "Confirm permission or select an authorized replacement for the pre-existing DeepSeekMath PPO/GRPO Figure 4 before release."
+  ],
+  "remainingOverall": [
+    "12 legacy notes, including one read-in-progress; complete conceptual route audit; release diff/identity/fresh origin/CI/rights checks; commit/push dev and verified Pages deployment."
+  ],
+  "publication": {
+    "commit": false,
+    "push": false,
+    "deploy": false,
+    "mainChanged": false
+  },
+  "notTested": [
+    "LLM quality, full GRPOTrainer training, GPU/performance, arbitrary generated-code sandbox correctness, entire courses reproduced."
+  ],
+  "cleanup": {
+    "temporaryPagesPreview": "Stopped only own PIDs 72453/72430 and removed only own generated /var/tmp/bookvar-tool-rewards-pages-20261029 after checks.",
+    "retained": "Canonical originals, complete PNG, source/license evidence, screenshots and main http://127.0.0.1:4330 preview.",
+    "viewport": "Reset; own tab marked as deliverable at the updated canonical chapter."
+  }
+}

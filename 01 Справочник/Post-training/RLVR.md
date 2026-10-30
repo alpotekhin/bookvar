@@ -1,56 +1,23 @@
 ---
 title: Reinforcement Learning with Verifiable Rewards
-aliases: [RLVR, Reinforcement Learning from Verifiable Rewards]
+aliases:
+  - RLVR
+  - Reinforcement Learning from Verifiable Rewards
 type: concept
-status: canonical
-last_updated: 2026-07-16
+status: redirect
+last_updated: '2026-10-29'
 primary_sources:
-  - https://arxiv.org/abs/2501.12948
+  - 'https://arxiv.org/abs/2501.12948'
+canonical_topic: 00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md
 ---
+# Reinforcement Learning with Verifiable Rewards
 
-# Reinforcement Learning with Verifiable Rewards (RLVR)
+Полное объяснение: [[00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers|RLVR — обучение по проверяемой награде]].
 
-**RLVR** оптимизирует политику языковой модели с помощью [[02 Areas/ML & DL/01 Справочник/Post-training/Verifiable Reward|проверяемой награды]]: тестов, проверки ответа по эталону, системы проверки формальных доказательств или среды.
-
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/post-training-courses/rlvr-feedback-loop.png]]
-
-*Полный цикл RLVR: политика порождает ответы, проверяющая программа возвращает числовую награду,
-после чего алгоритм RL обновляет политику и цикл повторяется. Источник: Nathan
-Lambert, [RLHF & Post-Training, lecture 5, slide
-8](https://rlhfbook.com/teach/course/lec5-chap7/#/7).*
-
-Проверяющая программа и алгоритм обновления на рисунке разделены намеренно. Проверяемая
-награда задаёт обратную связь, но не предписывает GRPO, PPO или иной конкретный
-метод оптимизации.
-
-## Чем отличается от RLHF
-
-| | RLHF | RLVR |
-|---|---|---|
-| Источник сигнала | человеческие предпочтения → обычно RM | программная/средовая проверка |
-| Масштабирование | требует разметки или модели предпочтений | проверку можно автоматизировать; стоимость зависит от проверяющей программы и среды |
-| Хорошо подходит | субъективные качества | математика, код, формальные и задачи с инструментами |
-| Главный риск | эксплуатация ошибок модели награды | эксплуатация ошибок проверки или среды |
-
-Автоматическая проверка устраняет необходимость вручную размечать каждый новый ответ, но не делает цикл бесплатным. Сравнение короткого числового ответа обычно проще, чем запуск тестов программы или длительной симуляции. Бюджет включает и генерацию траекторий, и их проверку, а при ошибках — повторы и тайм-ауты. В [DeepSeek-R1, §2.2.2](https://arxiv.org/html/2501.12948v1#S2.SS2.SSS2) числовые ответы и исполнение тестов — разные проверяющие процедуры, а не свидетельство одинаковой цены.
-
-RLVR — способ задания сигнала награды, а не конкретный алгоритм. [[02 Areas/ML & DL/01 Справочник/Post-training/GRPO|GRPO]] — один из возможных способов обновлять политику.
-
-## Что может выучиться
-
-Исследуя разные решения, политика может находить более длинные стратегии, самопроверку и способы декомпозиции без разметки каждого шага рассуждения. Однако длинный текст рассуждения не доказывает ни его правильности, ни верности описания внутреннего процесса модели; успех на задачах с проверяемым ответом не гарантирует перенос на открытые.
-
-## Дизайн системы
-
-Нужно фиксировать распределение задач, способ сэмплирования, процедуру проверки и дополнительные компоненты награды. Затем — порядок усложнения задач, алгоритм обновления и регуляризацию, защиту от попадания тестовых примеров в обучение и протокол оценки. Новая работа о RLVR обычно меняет эти компоненты обучения, а не архитектуру Transformer.
-
-## Подробнее
-
-Цикл генерации и обновления, требования к проверяющей программе и типичные способы эксплуатации
-награды рассматриваются в главе [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers|RLVR и verifiers]].
-
-## Источники
-
-- [DeepSeek-R1](https://arxiv.org/abs/2501.12948)
-- [OpenAI: Learning to reason with LLMs](https://openai.com/index/learning-to-reason-with-llms/)
-- [[02 Areas/ML & DL/Papers/DeepSeek-R1 Reasoning via RL|Paper note: DeepSeek-R1]]
+<!-- Compatibility anchors for existing Obsidian and web links. -->
+<span id="reinforcement-learning-with-verifiable-rewards-rlvr" aria-hidden="true"></span>
+<span id="чем-отличается-от-rlhf" aria-hidden="true"></span>
+<span id="что-может-выучиться" aria-hidden="true"></span>
+<span id="дизайн-системы" aria-hidden="true"></span>
+<span id="подробнее" aria-hidden="true"></span>
+<span id="источники" aria-hidden="true"></span>

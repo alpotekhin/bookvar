@@ -1,0 +1,22 @@
+Harvard University and the ML Systems contributors
+Data Selection, web edition retrieved on 2026-10-28
+https://mlsysbook.ai/vol1/09_data_selection/09_data_selection.html
+
+The saved web edition states:
+© 2024-2026 Harvard University. Licensed under CC BY-NC-ND 4.0
+https://creativecommons.org/licenses/by-nc-nd/4.0/
+
+Bookvar reproduces the complete original Figure 4 (Selection Inequality),
+Figure 11 (Distributed Coreset Selection Architecture), and Figure 3
+(Illustrative Diminishing Returns of Data) unchanged as attributed objects
+in a collection. No cropping, redrawing, translation of labels, resampling,
+or other changes to their bytes have been made. CSS display sizing and the
+image viewer do not change the distributed source files.
+
+The adaptation of the older archived QMD uses its separately preserved
+CC BY-NC-SA 4.0 license at commit 2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd.
+That older license is not used to relicense the web-edition image files.
+
+Evidence and image hashes:
+05 Источники/Originals/selection-engineering-2026-10-28/web-2026-10-28.html
+00 Учебник/Assets/Figures/curated/selection-engineering-2026-10-28/assets.json

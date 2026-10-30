@@ -1,0 +1,96 @@
+[
+  {
+    "id": "curated-bert-objectives-1add71c0a3c2",
+    "asset": "00 Учебник/Assets/Figures/curated/bert-objectives-2026-10-29/spanbert-boundary-objective.png",
+    "author": "Mandar Joshi, Danqi Chen, Yinhan Liu, Daniel S. Weld, Luke Zettlemoyer, Omer Levy",
+    "title": "SpanBERT span-boundary objective, original Figure 1",
+    "source_url": "https://aclanthology.org/2020.tacl-1.5/",
+    "source_image_url": "https://www.cs.princeton.edu/~danqic/papers/tacl2020.pdf#page=2",
+    "source_asset": "05 Источники/Originals/bert-objectives-2026-10-29/spanbert-author.pdf",
+    "source_asset_sha256": "86bad382bd3ba3bb1cae16636da6867a5846e10f7d881516af0e1ccd67a5925b",
+    "source_page": 2,
+    "source_printed_page": 65,
+    "source_page_snapshot": "05 Источники/Originals/bert-objectives-2026-10-29/spanbert-author.pdf",
+    "source_page_sha256": "86bad382bd3ba3bb1cae16636da6867a5846e10f7d881516af0e1ccd67a5925b",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/bert-objectives-2026-10-29/spanbert-author.pdf",
+    "license_evidence_sha256": "86bad382bd3ba3bb1cae16636da6867a5846e10f7d881516af0e1ccd67a5925b",
+    "copyright": "Copyright 2020 Association for Computational Linguistics",
+    "derivation": "pdf-page-render-crop",
+    "render_dpi": 288,
+    "render_page_size_px": [
+      2380,
+      3368
+    ],
+    "crop_box_px": [
+      280,
+      180,
+      2120,
+      1150
+    ],
+    "dimensions_px": [
+      1840,
+      970
+    ],
+    "width": 1840,
+    "height": 970,
+    "bytes": 157464,
+    "sha256": "1add71c0a3c2291faae8e87466905d82e129c89a3fe874b9a22b7536bb2b95e9",
+    "modifications": "Unchanged PDF raster crop of the complete original figure and English caption. Only surrounding page material removed; no redraw, translation, relabeling or rescaling.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md",
+      "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md"
+    ]
+  },
+  {
+    "id": "curated-bert-objectives-be2494e1a024",
+    "asset": "00 Учебник/Assets/Figures/curated/bert-objectives-2026-10-29/spanbert-span-lengths.png",
+    "author": "Mandar Joshi, Danqi Chen, Yinhan Liu, Daniel S. Weld, Luke Zettlemoyer, Omer Levy",
+    "title": "SpanBERT sampled span-length distribution, original Figure 2",
+    "source_url": "https://aclanthology.org/2020.tacl-1.5/",
+    "source_image_url": "https://www.cs.princeton.edu/~danqic/papers/tacl2020.pdf#page=3",
+    "source_asset": "05 Источники/Originals/bert-objectives-2026-10-29/spanbert-author.pdf",
+    "source_asset_sha256": "86bad382bd3ba3bb1cae16636da6867a5846e10f7d881516af0e1ccd67a5925b",
+    "source_page": 3,
+    "source_printed_page": 66,
+    "source_page_snapshot": "05 Источники/Originals/bert-objectives-2026-10-29/spanbert-author.pdf",
+    "source_page_sha256": "86bad382bd3ba3bb1cae16636da6867a5846e10f7d881516af0e1ccd67a5925b",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/bert-objectives-2026-10-29/spanbert-author.pdf",
+    "license_evidence_sha256": "86bad382bd3ba3bb1cae16636da6867a5846e10f7d881516af0e1ccd67a5925b",
+    "copyright": "Copyright 2020 Association for Computational Linguistics",
+    "derivation": "pdf-page-render-crop",
+    "render_dpi": 288,
+    "render_page_size_px": [
+      2380,
+      3368
+    ],
+    "crop_box_px": [
+      1210,
+      205,
+      2120,
+      1090
+    ],
+    "dimensions_px": [
+      910,
+      885
+    ],
+    "width": 910,
+    "height": 885,
+    "bytes": 58782,
+    "sha256": "be2494e1a024c6e7de135f0de896e1a2f2fc3108776a3fa51292e20f2410c7ac",
+    "modifications": "Unchanged PDF raster crop of the complete original figure and English caption. Only surrounding page material removed; no redraw, translation, relabeling or rescaling.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md",
+      "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md"
+    ]
+  }
+]

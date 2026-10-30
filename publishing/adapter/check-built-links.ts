@@ -67,12 +67,18 @@ export async function findBrokenBuiltLinks(
   }));
   const byRoute = new Map(pages.map((page) => [page.route, page]));
   const errors: string[] = [];
+  const base = publicationBasePath.trim().replace(/^\/+|\/+$/g, '');
+  const prefix = base ? '/' + base : '';
 
   for (const page of pages) {
     const navigableHtml = withoutNonNavigableMarkup(page.html);
     for (const href of [...attributeValues(navigableHtml, 'href'), ...attributeValues(navigableHtml, 'src')]) {
-      if (/^(?:https?:|mailto:|tel:|javascript:)/i.test(href)) continue;
-      const url = new URL(href, `https://handbook.invalid${page.route}`);
+      if (/^(?:https?:|mailto:|tel:|javascript:|\/\/)/i.test(href)) continue;
+      const url = new URL(href, `https://handbook.invalid${prefix}${page.route}`);
+      if (prefix && url.pathname !== prefix && !url.pathname.startsWith(prefix + '/')) {
+        errors.push(`${page.route} -> outside publication base ${prefix}: ${url.pathname}`);
+        continue;
+      }
       const pathname = withoutPublicationBase(url.pathname, publicationBasePath);
       if (/^\/(?:_astro|assets|pagefind)(?:\/|$)/.test(pathname) || /\.[a-z0-9]+$/i.test(pathname)) {
         const filePath = decodeURIComponent(pathname);

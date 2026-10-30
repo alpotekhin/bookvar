@@ -1,0 +1,34 @@
+[
+  {
+    "id": "curated-workflow-feedback-ae5afe218654",
+    "asset": "00 Учебник/Assets/Figures/curated/workflow-feedback-2026-10-26/feedback-timescales.svg",
+    "author": "Vijay Janapa Reddi and contributors",
+    "source_url": "https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/ml_workflow/ml_workflow.qmd#L2131",
+    "source_image_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/45ecc8d82fcae70c149cdce550d3b3d3411df913/book/quarto/contents/vol1/ml_workflow/images/svg/ml_workflow_feedback_timescales.svg",
+    "commit": "45ecc8d82fcae70c149cdce550d3b3d3411df913",
+    "source_asset": "05 Источники/Originals/workflow-feedback-2026-10-26/feedback-timescales.svg",
+    "source_asset_sha256": "ae5afe218654f1895e8b24b4cd4903fc8985c2bcacfcb285cae9e333c2cb9879",
+    "sha256": "ae5afe218654f1895e8b24b4cd4903fc8985c2bcacfcb285cae9e333c2cb9879",
+    "source_page_snapshot": "05 Источники/Originals/ml-workflow-2026-10-20/harvard-ml-workflow.qmd",
+    "source_page_sha256": "25c7e8255c6db5c96c8906fcd759063803aac278d83f33f849c1f61e302d98bd",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/mlops-2026-10-20/harvard-LICENSE.md",
+    "license_evidence_sha256": "b6f4689d6fccf48d82d0871a3b994a122427fcb0b278971f6ba008be44e2c926",
+    "derivation": "source-svg-copy",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-26",
+    "source_viewbox": [
+      0,
+      0,
+      72.63,
+      99.9
+    ],
+    "modifications": "Complete original SVG, no crop, redraw, translation or geometry change. CSS display width only: up to 20rem. Durations are illustrative, not response deadlines or measured accuracy.",
+    "used_in": [
+      "00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow.md"
+    ]
+  }
+]

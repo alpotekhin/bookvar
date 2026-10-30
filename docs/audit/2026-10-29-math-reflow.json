@@ -1,0 +1,110 @@
+{
+  "scope": "Exact display-math reflow only. Full chapters read before changes; mathematical tokens, prose, examples, source excerpts and figures preserved. This is layout verification, not a new source review.",
+  "files": [
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+      "before": "fd960c1e11d964376d977525988d7753f351fde4443cbe57b294a91d5a4d63f6",
+      "after": "dcdc7f9712614b5342b15d03cba1beb7f641ea72b27fe6ee04730ad70fd66bdc",
+      "changes": [
+        {
+          "old": "U=XW_{\\text{up}},\\qquad G=XW_{\\text{gate}},\\qquad\nH=\\operatorname{SiLU}(G)\\odot U,\\qquad Y=HW_{\\text{down}}.",
+          "new": "\\begin{aligned}\nU&=XW_{\\text{up}},\\\\\nG&=XW_{\\text{gate}},\\\\\nH&=\\operatorname{SiLU}(G)\\odot U,\\\\\nY&=HW_{\\text{down}}.\n\\end{aligned}"
+        },
+        {
+          "old": "M_{\\text{MLP,fused}}=4Nd+4Nd_{ff}+6dd_{ff},\\qquad\nI_{\\text{MLP,fused}}=\n\\frac{3Nd d_{ff}}{2Nd+2Nd_{ff}+3d d_{ff}}.",
+          "new": "\\begin{aligned}\nM_{\\text{MLP,fused}}&=4Nd+4Nd_{ff}+6dd_{ff},\\\\\nI_{\\text{MLP,fused}}&=\n\\frac{3Nd d_{ff}}{2Nd+2Nd_{ff}+3d d_{ff}}.\n\\end{aligned}"
+        },
+        {
+          "old": "M_{attn,MHA}=2bBd(S+T),\\qquad\nI_{attn,MHA}=\\frac{2ST}{b(S+T)}.",
+          "new": "\\begin{aligned}\nM_{attn,MHA}&=2bBd(S+T),\\\\\nI_{attn,MHA}&=\\frac{2ST}{b(S+T)}.\n\\end{aligned}"
+        },
+        {
+          "old": "P\\approx 2Vd+L\\left(3dd_{ff}+2dH_qd_h+2dH_{kv}d_h\\right),",
+          "new": "\\begin{aligned}\nP&\\approx 2Vd+L\\bigl(3dd_{ff}+2dH_qd_h\\\\\n&\\qquad{}+2dH_{kv}d_h\\bigr),\n\\end{aligned}"
+        },
+        {
+          "old": "M_{KV,1}=2bLSH_{kv}d_h=838\\,860\\,800\\ \\text{байт}.",
+          "new": "\\begin{aligned}\nM_{KV,1}&=2bLSH_{kv}d_h\\\\\n&=838\\,860\\,800\\ \\text{байт}.\n\\end{aligned}"
+        },
+        {
+          "old": "\\operatorname{TTFT}=T_{front}+T_{queue}+T_{schedule}+T_{prefill}+T_{sample,1}.",
+          "new": "\\begin{aligned}\n\\operatorname{TTFT}&=T_{front}+T_{queue}+T_{schedule}\\\\\n&\\qquad{}+T_{prefill}+T_{sample,1}.\n\\end{aligned}"
+        },
+        {
+          "old": "M_{\\text{MLP,separate}}=6Nd+12Nd_{ff}+6dd_{ff}.",
+          "new": "\\begin{aligned}\nM_{\\text{MLP,separate}}&=6Nd+12Nd_{ff}\\\\\n&\\qquad{}+6dd_{ff}.\n\\end{aligned}"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+      "before": "98b6a0fddd6b6d7b7136bf1b3a9eacc32d6334f182f59bd4218b99e1c3652add",
+      "after": "15ba654d059b1ccd35bd07c6b041e405bef2f99d74ee03f672c205263b7589a1",
+      "changes": [
+        {
+          "old": "S=\\frac{QK^\\top}{\\sqrt d},\\qquad P=\\operatorname{softmax}(S),\\qquad O=PV.",
+          "new": "\\begin{aligned}\nS&=\\frac{QK^\\top}{\\sqrt d},\\\\\nP&=\\operatorname{softmax}(S),\\\\\nO&=PV.\n\\end{aligned}"
+        },
+        {
+          "old": "m_A=\\max_{j\\in A}s_j,\\qquad\n\\ell_A=\\sum_{j\\in A}e^{s_j-m_A},\\qquad\nu_A=\\sum_{j\\in A}e^{s_j-m_A}v_j.",
+          "new": "\\begin{aligned}\nm_A&=\\max_{j\\in A}s_j,\\\\\n\\ell_A&=\\sum_{j\\in A}e^{s_j-m_A},\\\\\nu_A&=\\sum_{j\\in A}e^{s_j-m_A}v_j.\n\\end{aligned}"
+        },
+        {
+          "old": "\\ell'=e^{m_A-m'}\\ell_A+e^{m_B-m'}\\ell_B,\n\\qquad\nu'=e^{m_A-m'}u_A+e^{m_B-m'}u_B.",
+          "new": "\\begin{aligned}\n\\ell'&=e^{m_A-m'}\\ell_A+e^{m_B-m'}\\ell_B,\\\\\nu'&=e^{m_A-m'}u_A+e^{m_B-m'}u_B.\n\\end{aligned}"
+        },
+        {
+          "old": "D_i=\\sum_jP_{ij}dP_{ij}\n=\\sum_jP_{ij}\\sum_aG_{ia}V_{ja}\n=\\sum_aG_{ia}\\underbrace{\\sum_jP_{ij}V_{ja}}_{O_{ia}}\n=\\sum_aO_{ia}G_{ia}.",
+          "new": "\\begin{aligned}\nD_i&=\\sum_jP_{ij}dP_{ij}\\\\\n&=\\sum_jP_{ij}\\sum_aG_{ia}V_{ja}\\\\\n&=\\sum_aG_{ia}\\underbrace{\\sum_jP_{ij}V_{ja}}_{O_{ia}}\\\\\n&=\\sum_aO_{ia}G_{ia}.\n\\end{aligned}"
+        },
+        {
+          "old": "S_{ij}=Q_iK_j^\\top/\\sqrt d,\\qquad\nP_{ij}=\\exp(S_{ij}-L_i[:,\\mathrm{None}]).",
+          "new": "\\begin{aligned}\nS_{ij}&=Q_iK_j^\\top/\\sqrt d,\\\\\nP_{ij}&=\\exp(S_{ij}-L_i[:,\\mathrm{None}]).\n\\end{aligned}"
+        },
+        {
+          "old": "dK_j\\mathrel{+}=dS_{ij}^\\top Q_i/\\sqrt d,\\qquad\ndQ_i\\mathrel{+}=dS_{ij}K_j/\\sqrt d.",
+          "new": "\\begin{aligned}\ndK_j&\\mathrel{+}=dS_{ij}^\\top Q_i/\\sqrt d,\\\\\ndQ_i&\\mathrel{+}=dS_{ij}K_j/\\sqrt d.\n\\end{aligned}"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+      "before": "f37fde233004b02c54a0ae0f85f3ac7623ff52455681189d3e2ca8a8a9d48ccb",
+      "after": "d6054dd0ad83840c6328be92241f51454cc2dc9911321140b8705be7920452bd",
+      "changes": [
+        {
+          "old": "q_i=\\operatorname{clip}\\left(\\operatorname{round}(w_i/s),\n-q_{\\max},q_{\\max}\\right),\\qquad \\hat w_i=sq_i.",
+          "new": "\\begin{aligned}\nq_i&=\\operatorname{clip}\\bigl(\\operatorname{round}(w_i/s),\\\\\n&\\qquad{}-q_{\\max},q_{\\max}\\bigr),\\\\\n\\hat w_i&=sq_i.\n\\end{aligned}"
+        },
+        {
+          "old": "(-1,0,1,2)\\longrightarrow(0,5,10,15)\n\\longrightarrow(-1,0,1,2).",
+          "new": "\\begin{aligned}\n(-1,0,1,2)&\\longrightarrow(0,5,10,15)\\\\\n&\\longrightarrow(-1,0,1,2).\n\\end{aligned}"
+        },
+        {
+          "old": "q_i=\\operatorname{clip}(\\operatorname{round}(w_i/s)+z,q_{\\min},q_{\\max}),\n\\qquad \\hat w_i=s(q_i-z).",
+          "new": "\\begin{aligned}\nq_i&=\\operatorname{clip}\\bigl(\\operatorname{round}(w_i/s)+z,\\\\\n&\\qquad{}q_{\\min},q_{\\max}\\bigr),\\\\\n\\hat w_i&=s(q_i-z).\n\\end{aligned}"
+        },
+        {
+          "old": "s=\\frac{b-a}{q_{\\max}-q_{\\min}},\\qquad\nz=\\operatorname{clip}\\left(\\operatorname{round}(q_{\\min}-a/s),\nq_{\\min},q_{\\max}\\right).",
+          "new": "\\begin{aligned}\ns&=\\frac{b-a}{q_{\\max}-q_{\\min}},\\\\\nz&=\\operatorname{clip}\\bigl(\\operatorname{round}(q_{\\min}-a/s),\\\\\n&\\qquad{}q_{\\min},q_{\\max}\\bigr).\n\\end{aligned}"
+        },
+        {
+          "old": "X=\\begin{pmatrix}1&1\\\\1&2\\end{pmatrix},\\qquad\nw=\\begin{pmatrix}0.4\\\\0.35\\end{pmatrix},\\qquad\ny=Xw=\\begin{pmatrix}0.75\\\\1.10\\end{pmatrix}.",
+          "new": "\\begin{aligned}\nX&=\\begin{pmatrix}1&1\\\\1&2\\end{pmatrix},\\\\\nw&=\\begin{pmatrix}0.4\\\\0.35\\end{pmatrix},\\\\\ny&=Xw=\\begin{pmatrix}0.75\\\\1.10\\end{pmatrix}.\n\\end{aligned}"
+        },
+        {
+          "old": "XW=(XD^{-1})(DW),\\qquad D=\\operatorname{diag}(s_1,\\ldots,s_d),\\quad s_j>0.",
+          "new": "\\begin{gathered}\nXW=(XD^{-1})(DW),\\\\\nD=\\operatorname{diag}(s_1,\\ldots,s_d),\\quad s_j>0.\n\\end{gathered}"
+        },
+        {
+          "old": "q_i=\\arg\\min_{k\\in\\{0,\\ldots,15\\}}|w_i/s-C_k|,\\qquad\n\\hat w_i=sC_{q_i}.",
+          "new": "\\begin{aligned}\nq_i&=\\arg\\min_{k\\in\\{0,\\ldots,15\\}}|w_i/s-C_k|,\\\\\n\\hat w_i&=sC_{q_i}.\n\\end{aligned}"
+        },
+        {
+          "old": "R=\\frac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\qquad\nxR=(9/\\sqrt2,7/\\sqrt2).",
+          "new": "\\begin{aligned}\nR&=\\frac1{\\sqrt2}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix},\\\\\nxR&=(9/\\sqrt2,7/\\sqrt2).\n\\end{aligned}"
+        }
+      ]
+    }
+  ]
+}

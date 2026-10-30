@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-29",
+  "scope": "Two bounded additions; acceptance in the linked review, not inferred from hashes.",
+  "files": [
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+      "marker": "image-dedup",
+      "before_sha256": "9faea940fc8c743a46dd4c128518ea1b0cf2065f8bfa3db39e3bd6fb8f83b6f8",
+      "after_sha256": "b614c77415a2209e0ec017b94fa11ea7a22aca3de0532c9f21d7f76f1609425f",
+      "block_sha256": "cdb261b2459295709ca23f0bbfd68146dcf396ab03274fc52d81cd8bac767175",
+      "lines": 1207,
+      "added_lines": 267,
+      "new_programs": 3,
+      "frontmatter_changes": [
+        {
+          "old": "last_updated: 2026-10-23",
+          "new": "last_updated: 2026-10-29"
+        },
+        {
+          "old": "last_verified: 2026-10-23",
+          "new": "last_verified: 2026-10-29"
+        }
+      ],
+      "review": "docs/audit/2026-10-29-selection-gaps.md"
+    },
+    {
+      "source": "00 Учебник/02 Рекомендательные системы/03 Ranking и нейронные рекомендательные модели.md",
+      "marker": "cold-ids",
+      "before_sha256": "86e293dab73545f32be8b908ab0b8a663e9b247f454223c93f44427e50e1f1cb",
+      "after_sha256": "50a59283ee0867710665f414954291080304333961a107b6418e360e3f759bf1",
+      "block_sha256": "0eb8089ada7a9903fd89d2897dd963416ce191417217a1839cb8a4967f05e988",
+      "lines": 1593,
+      "added_lines": 288,
+      "new_programs": 4,
+      "frontmatter_changes": [
+        {
+          "old": "last_updated: 2026-10-26",
+          "new": "last_updated: 2026-10-29"
+        }
+      ],
+      "review": "docs/audit/2026-10-29-selection-gaps.md"
+    }
+  ]
+}

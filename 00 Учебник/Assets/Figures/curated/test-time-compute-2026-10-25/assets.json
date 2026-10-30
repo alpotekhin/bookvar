@@ -1,0 +1,58 @@
+[
+  {
+    "id": "curated-ttc-usc-fed9bdb8739a",
+    "asset": "00 Учебник/Assets/Figures/curated/test-time-compute-2026-10-25/usc-workflow.png",
+    "author": "Xinyun Chen et al.",
+    "source_url": "https://arxiv.org/abs/2311.17311v1",
+    "source_image_url": "https://arxiv.org/html/2311.17311v1/figs/usc.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/test-time-compute-2026-10-25/usc-workflow.png",
+    "source_asset_sha256": "fed9bdb8739a8817279c8d1678516ba348339af451f843019033b81ef329dc17",
+    "sha256": "fed9bdb8739a8817279c8d1678516ba348339af451f843019033b81ef329dc17",
+    "source_page_snapshot": "05 Источники/Originals/test-time-compute-2026-10-25/usc-v1.html",
+    "source_page_sha256": "f45c699bedf95dcd4a77ff5df07c73a38b7228a39cb1fdef833ee01e670a5f19",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/test-time-compute-2026-10-25/usc-v1.html",
+    "license_evidence_sha256": "f45c699bedf95dcd4a77ff5df07c73a38b7228a39cb1fdef833ee01e670a5f19",
+    "dimensions_px": [
+      933,
+      181
+    ],
+    "modifications": "None; complete original PNG copied byte-for-byte. All panels, labels and scales retained; no crop, resizing, redraw or translation.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "source-raster-copy",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md"
+    ]
+  },
+  {
+    "id": "curated-ttc-snell-ratio-eaac91cacfb3",
+    "asset": "00 Учебник/Assets/Figures/curated/test-time-compute-2026-10-25/snell-sequential-parallel-ratio.png",
+    "author": "Charlie Snell, Jaehoon Lee, Kelvin Xu, Aviral Kumar",
+    "source_url": "https://arxiv.org/abs/2408.03314v1",
+    "source_image_url": "https://arxiv.org/html/2408.03314v1/revisions_varing_ratio_and_with_difficulty.png",
+    "source_asset": "00 Учебник/Assets/Figures/curated/test-time-compute-2026-10-25/snell-sequential-parallel-ratio.png",
+    "source_asset_sha256": "eaac91cacfb34c2d846e1f2a85f697b7d716f11f4576bfad4c4b37ae606ec3ae",
+    "sha256": "eaac91cacfb34c2d846e1f2a85f697b7d716f11f4576bfad4c4b37ae606ec3ae",
+    "source_page_snapshot": "05 Источники/Originals/test-time-compute-2026-10-25/snell-v1.html",
+    "source_page_sha256": "a9b93ce1d687a53f5e4348f81434234d17b0bf44541ecbb3a5e5551984e9cd02",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/test-time-compute-2026-10-25/snell-v1.html",
+    "license_evidence_sha256": "a9b93ce1d687a53f5e4348f81434234d17b0bf44541ecbb3a5e5551984e9cd02",
+    "dimensions_px": [
+      2034,
+      710
+    ],
+    "modifications": "None; complete original PNG copied byte-for-byte. All panels, labels and scales retained; no crop, resizing, redraw or translation.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "source-raster-copy",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md"
+    ]
+  }
+]

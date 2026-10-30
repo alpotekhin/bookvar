@@ -1,0 +1,103 @@
+{
+  "date": "2026-10-29",
+  "scope": "Coconut added inside the existing TTC chapter; reference terms in two existing chapters and generated RU/EN subject indexes. Every preceding file restored byte-for-byte.",
+  "files": [
+    {
+      "source": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
+      "before_sha256": "a5f87fca761675e036bc3368a1cb00e3feca573daa1bc64eb86d557a0ff93bef",
+      "after_sha256": "c25a11e993cbcd37387d64003c575b2448c4979b828a7819b4f59a8cd4f5b99d",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-25\nlast_verified: 2026-10-25\n",
+          "new": "last_updated: 2026-10-29\nlast_verified: 2026-10-29\nsource_language: mixed\nreference_terms:\n  - label: Coconut — непрерывные скрытые состояния\n    label_en: Coconut — continuous hidden-state feedback\n    anchor: coconut-continuous-thought\n"
+        },
+        {
+          "old": "",
+          "new": "  - https://arxiv.org/html/2412.06769v3\n  - https://github.com/facebookresearch/coconut/tree/27273cb8cca4bb763c041a63b036d0c3b7cbbb48\n"
+        },
+        {
+          "old": "",
+          "new": "<a id=\"coconut-continuous-thought\"></a>\n### Coconut: feeding a hidden state back instead of choosing a word\n\nIn a text chain of thought, the model produces a hidden state, maps it\nto vocabulary logits, selects a token, and looks up that token's embedding\nfor the next position. Coconut changes the connection between successive\npositions: during a latent interval, the previous last-layer hidden state\nitself becomes the next input embedding. The next position still requires\na model pass. It does not require choosing a vocabulary item.\n\n![[00 Учебник/Assets/Figures/curated/coconut-2026-10-29/coconut.png|Coconut: token embedding feedback compared with continuous hidden-state feedback]]\n\n*Shibo Hao et al., [Coconut, original repository diagram](https://github.com/facebookresearch/coconut/blob/27273cb8cca4bb763c041a63b036d0c3b7cbbb48/assets/coconut.png).\nThe left panel feeds a selected word back through the embedding table.\nThe right panel feeds a last-layer state directly into the next position\nbetween the two boundary markers. Complete original PNG; repository\n[MIT notice](/licenses/coconut-27273cb8-MIT.txt).*\n\nThe paper uses `<bot>` and `<eot>` to mark the beginning and end of\nthe latent interval. The released code names them `<|start-latent|>` and\n`<|end-latent|>`. Its `<|latent|>` token identifies a position whose\nordinary embedding must be replaced. Feeding the unchanged embedding\nof that placeholder would instead implement repeated discrete pause tokens.\n\nSuppose the question and beginning marker produce the state $h_0$.\nThe first latent position receives $u_1=h_0$. The Transformer processes\nthis new position with causal attention to the existing prefix and\nproduces $h_1$. The second latent position receives $u_2=h_1$.\nAfter the chosen number of latent positions, the end marker receives\nits ordinary token embedding and language generation resumes.\n\nWriting $F_\\theta$ for the last-position output of the causal Transformer,\nthe recurrence is\n\n$$\n\\begin{aligned}\nu_1&=h_0,\\\\\nu_{j+1}&=F_\\theta(Q,\\mathrm{bot},u_1,\\ldots,u_j).\n\\end{aligned}\n$$\n\nHere $Q$ denotes the question embeddings. Every latent vector has the same\nwidth as an input embedding; in the paper the returned hidden states\nhave passed the model's final normalization. Positions and causal attention\nare still needed. A latent step is an extra sequence position, not an\nextra Transformer layer and not a modification of the prompt alone.\n\nThe released [`Coconut.forward`](https://github.com/facebookresearch/coconut/blob/27273cb8cca4bb763c041a63b036d0c3b7cbbb48/coconut.py#L38-L185)\nreplaces the embedding at each latent position with the preceding\nlast-layer hidden state. It keeps an offset when earlier positions\nhave already been processed through a KV cache. An off-by-one error\nwould feed a different position's state into the recurrence.\n\n#### Learning the latent interval\n\nA normal pretrained model has not necessarily learned to use its final\nhidden states as future input embeddings. The original Coconut recipe\ntherefore starts from examples with written reasoning and gradually removes\nearly reasoning steps while adding latent positions. Weights change during\nthis training. After training, inference can vary the latent budget\nwithout changing those weights.\n\nFor three annotated reasoning steps $r_1,r_2,r_3$ and two latent positions\nper removed step, the schedule has the following form. Boundary markers\nare omitted from the table but remain in the actual input.\n\n| Training stage | Visible reasoning after the question | Latent positions before that text |\n|---|---|---|\n| 0 | $r_1,r_2,r_3$, answer | 0 |\n| 1 | $r_2,r_3$, answer | 2 |\n| 2 | $r_3$, answer | 4 |\n| 3 | answer | 6 |\n\nA reasoning step is an annotated piece of text and can contain several\ntokens. Replacing one step with two vectors is not the same as replacing\ntwo tokens with two vectors. The parameter $c$ specifies latent positions\nper removed step; the remaining text still uses the model's tokenizer.\n\nIn [`get_cot_latent_dataset`](https://github.com/facebookresearch/coconut/blob/27273cb8cca4bb763c041a63b036d0c3b7cbbb48/dataset.py#L232-L325),\nthe question, latent positions and both boundary markers receive label\n`-100`. The surviving reasoning suffix, answer and EOS retain their\ntoken targets. The causal LM loss compares each target with the logits\nat the preceding position. Ignoring a target does not remove that position\nfrom the context.\n\nFor example, after stage 1 the input contains the question, the start\nmarker, two latent positions, the end marker, $r_2$, $r_3$ and the answer.\nThe model is supervised on $r_2$, $r_3$ and the answer, including EOS.\nIt is not given a target vector for either latent position and is not\nrequired to reconstruct the removed sentence $r_1$. Later token losses\ntrain the hidden-state recurrence through back-propagation.\n\nThe paper resets optimizer state between curriculum stages. The pinned\n`run.py` reconstructs AdamW at **every epoch** when `reset_optimizer`\nis enabled, even if several epochs share one stage. Reproducing this\nrevision requires keeping that distinction; the prose schedule alone\ndoes not specify the complete training run.\n\n#### A worked feedback calculation\n\nThe following small calculation isolates the feedback connection.\nIt is a two-dimensional linear recurrence, not a Transformer and not a\ntrained reasoning model. Let the initial state be $(0.75,0.25)$ and let\n\n$$\nA(a)=\n\\begin{pmatrix}\na&1\\\\\n1&-a\n\\end{pmatrix}.\n$$\n\nAt $a=1$, direct state feedback gives $(1,0.5)$ after the first update\nand $(1.5,0.5)$ after the second. Now introduce two discrete tokens with\nembeddings $(1,0)$ and $(0,1)$ and choose the larger state coordinate\nas the next token. That discrete path selects the first token, processes\n$(1,0)$ and obtains $(1,1)$. With a fixed first-token tie break it obtains\n$(1,1)$ again. The continuous and discrete paths already differ before\nany claim about task quality.\n\nA toy two-class readout of the final coordinates gives probability\n$\\operatorname{sigmoid}(1)\\approx0.7311$ to the first class on the latent\npath and 0.5 on the discrete path. Neither probability is an accuracy.\nThey show how selecting a vocabulary item changes the state passed onward.\n\nThe code also checks the training gradient. For two continuous updates,\nthe logit difference is $(a^2+1)/2$. The derivative of the first-class\nnegative log-likelihood at $a=1$ is therefore\n$\\operatorname{sigmoid}(1)-1$. Freezing the first state while differentiating\nthe second update gives a different derivative. This models the error\nintroduced by detaching a latent state during training.\n\n```python\nimport math\n\n\ndef coconut_linear_step(state, a):\n    x, y = state\n    return (a * x + y, x - a * y)\n\n\ndef coconut_toy_loss(a, freeze_first=False):\n    h0 = (0.75, 0.25)\n    h1 = coconut_linear_step(h0, 1.0 if freeze_first else a)\n    h2 = coconut_linear_step(h1, a)\n    return math.log1p(math.exp(h2[1] - h2[0]))\n\n\ndef coconut_stage(question, steps, answer, stage, thoughts_per_step=2):\n    if type(stage) is not int or not 0 <= stage <= len(steps):\n        raise ValueError(\"stage must select a prefix of reasoning steps\")\n    if type(thoughts_per_step) is not int or thoughts_per_step < 1:\n        raise ValueError(\"thoughts_per_step must be a positive integer\")\n    prefix = (list(question) + [\"<bot>\"]\n              + [\"<latent>\"] * (stage * thoughts_per_step) + [\"<eot>\"])\n    suffix = [token for step in steps[stage:] for token in step]\n    suffix += list(answer) + [\"<eos>\"]\n    return prefix + suffix, [-100] * len(prefix) + suffix\n\n\nh0 = (0.75, 0.25)\nh1 = coconut_linear_step(h0, 1.0)\nh2 = coconut_linear_step(h1, 1.0)\nassert h1 == (1.0, 0.5) and h2 == (1.5, 0.5)\nhard_state = h0\nfor _ in range(2):\n    embedding = (1.0, 0.0) if hard_state[0] >= hard_state[1] else (0.0, 1.0)\n    hard_state = coconut_linear_step(embedding, 1.0)\nassert hard_state == (1.0, 1.0)\n\neps = 1e-6\ngradient = (coconut_toy_loss(1 + eps) - coconut_toy_loss(1 - eps)) / (2 * eps)\ndetached = (coconut_toy_loss(1 + eps, True)\n            - coconut_toy_loss(1 - eps, True)) / (2 * eps)\nexpected = 1 / (1 + math.exp(-1)) - 1\nassert math.isclose(gradient, expected, abs_tol=1e-9)\nassert math.isclose(detached, 1.5 * expected, abs_tol=1e-9)\n\ntokens, labels = coconut_stage([\"Q\"], [[\"r1a\", \"r1b\"], [\"r2\"], [\"r3\"]],\n                              [\"A\"], stage=1)\nassert tokens == [\"Q\", \"<bot>\", \"<latent>\", \"<latent>\", \"<eot>\", \"r2\", \"r3\", \"A\", \"<eos>\"]\nassert labels == [-100] * 5 + [\"r2\", \"r3\", \"A\", \"<eos>\"]\n```\n\nThe packing function demonstrates the stated curriculum and label boundary.\nIt deliberately leaves out the source implementation's stage randomization,\nmaximum-stage padding and distributed batching. It is not a replacement\nfor the released training data pipeline.\n\n#### Latent steps still cost computation\n\nWith $n$ latent positions, the released forward method makes $n+1$\nbackbone calls: one call for the prefix, sequential calls needed to form\nthe latent inputs, and a final call for the surviving language suffix.\nKV caching can avoid recomputing an unchanged prefix; it does not make\nthe dependent latent updates parallel. The reference backbone also computes\nvocabulary logits at intermediate positions even when they are not used\nto select tokens.\n\nThe pinned `generate` supports batch size 1. After its initial latent\nforward pass, the text-generation loop passes the complete accumulated\nembedding sequence to the backbone again, rather than maintaining a\nserving engine's incremental text KV cache. Timing that implementation\nagainst optimized autoregressive serving would conflate the reasoning\nmethod with implementation choices.\n\nThe original study uses a fixed latent length for most reported inference,\nrather than interpreting every hidden state as an automatically chosen\nstopping decision. More latent positions can be tested on the same trained\nweights, but a budget outside the training distribution is not guaranteed\nto improve the answer.\n\nThe paper's tree-search interpretation comes from probing possible next\nconcepts on ProsQA. The released forward loop contains no explicit BFS\nqueue, exhaustive branch expansion or completeness guarantee. A state can\nsupport several alternative continuations without being a list of\nindependently verified paths. This differs from the explicit frontier\nmaintained by Tree of Thoughts above.\n\nResults also depend on the task. In [Table 1 of the pinned paper](https://arxiv.org/html/2412.06769v3#S5),\nCoconut improves on text CoT on ProsQA but is below it on GSM8K;\na pause-token curriculum is a strong control on ProsQA. Those experiments\ndo not establish that hidden-state feedback is universally more accurate,\nor that printing fewer words always uses fewer FLOPs.\n\n\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA.md",
+      "before_sha256": "f8877b751c12f83d4fbe6b8b281f3bc65045125e03244907ceab1e2c14672569",
+      "after_sha256": "401aacb0a16c68950e0b68d7ed130b8d8412c750d43d75c679f32f4d9d66f278",
+      "changes": [
+        {
+          "old": "",
+          "new": "reference_terms:\n  - label: Block Diffusion — блочная генерация и KV-cache\n    label_en: Block Diffusion — block generation and KV caching\n    anchor: block-diffusion-and-kv\n  - label: ReMDM — повторное маскирование\n    label_en: ReMDM — remasking and refinement\n    anchor: remasking-and-refinement\n"
+        }
+      ]
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "before_sha256": "9df3a1d877ea29904fa895dc390b2a8d818c82c74990f3585ed7c7e83ccab03f",
+      "after_sha256": "21d116974f7a347085bb7dbe6625d25f8017a3b14cbb1ca5eef3a6a087119d58",
+      "changes": [
+        {
+          "old": "",
+          "new": "  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#block-diffusion-and-kv|Block Diffusion — блочная генерация и KV-cache]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#remasking-and-refinement|ReMDM — повторное маскирование]]\n"
+        },
+        {
+          "old": "",
+          "new": "  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#coconut-continuous-thought|Coconut — непрерывные скрытые состояния]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "before_sha256": "ca74126ae806ea03f1b52a13bdb44570b7c41437a76629a8d5d3300d36960a79",
+      "after_sha256": "ab220413eb9d335f9663556777dca27d8caa96736a2ecaace26d053acb0a3fbb",
+      "changes": [
+        {
+          "old": "EN marks a separate English text; other links open the canonical-language chapter.\n",
+          "new": "EN marks a reviewed English edition; EN original marks a chapter written in English. Other links open the canonical-language text.\n"
+        },
+        {
+          "old": "- [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований|Data augmentation: Mixup, CutMix, and transformation policies]]\n",
+          "new": "- [[00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований|Data augmentation: Mixup, CutMix, and transformation policies]] · **EN original**\n"
+        },
+        {
+          "old": "- [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор|GAN and DCGAN: generator and discriminator]]\n",
+          "new": "- [[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор|GAN and DCGAN: generator and discriminator]] · **EN original**\n"
+        },
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров|Active learning: requesting labels]]\n- [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений|Contrastive pre-training: SimCLR]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров|Active learning: requesting labels]] · **EN original**\n- [[00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений|Contrastive pre-training: SimCLR]] · **EN original**\n"
+        },
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества|Data selection: cost, shards, and quality checks]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества|Data selection: cost, shards, and quality checks]] · **EN original**\n"
+        },
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting|Example selection: EL2N, GraNd, and forgetting]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting|Example selection: EL2N, GraNd, and forgetting]] · **EN original**\n"
+        },
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding|Geometric selection: k-center, coresets, and herding]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding|Geometric selection: k-center, coresets, and herding]] · **EN original**\n"
+        },
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей|MAE: reconstructing masked patches]]\n- [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA|Masked diffusion: MDLM and LLaDA]]\n- [[00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder|MoCo: the queue and momentum encoder]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей|MAE: reconstructing masked patches]] · **EN original**\n- [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA|Masked diffusion: MDLM and LLaDA]] · **EN original**\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#block-diffusion-and-kv|Block Diffusion — block generation and KV caching]]\n  - [[00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA#remasking-and-refinement|ReMDM — remasking and refinement]]\n- [[00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder|MoCo: the queue and momentum encoder]] · **EN original**\n"
+        },
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch|Partial labels: pseudo-labeling and FixMatch]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch|Partial labels: pseudo-labeling and FixMatch]] · **EN original**\n"
+        },
+        {
+          "old": "- [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции|Synthetic images and sim-to-real transfer]]\n",
+          "new": "- [[00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции|Synthetic images and sim-to-real transfer]] · **EN original**\n"
+        },
+        {
+          "old": "",
+          "new": "  - [[00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute#coconut-continuous-thought|Coconut — continuous hidden-state feedback]]\n"
+        }
+      ]
+    }
+  ]
+}
+

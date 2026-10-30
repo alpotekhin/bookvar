@@ -9,17 +9,44 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`slides/vol1/05_nn_computation/05_nn_computation.tex`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static slide archive
+> Text and equations retain the original language. Layout wrappers are simplified;
+> speaker notes are separate, and original SVGs are not redrawn or cropped.
+> Unsupported TeX remains visible and is listed beside the affected slide.
+> This archive is not a checked transcript or a finished Bookvar chapter.
 
 # VOL1 Slides — Nn Computation
 
 ## Readable slide sequence
 
+## Neural Network Computation
+
+[Original slide 1](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L67)
+
+The Math Behind the Model
+
 ## Learning Objectives
 
-{[1 min]
+[Original slide 2](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L72)
+
+1. Explain how the shift from **rules to arithmetic** creates a 1,092$\times$ compute explosion
+2. Describe **neuron**, **layer**, **weight**, **bias**, and **activation function** as workloads
+3. Compare **activation functions** (sigmoid, tanh, ReLU, softmax) for hardware cost and numerical stability
+4. Explain **forward propagation** as a chain of matrix multiplications
+5. Explain **backpropagation** and why it costs $\sim$2$\times$ the forward pass
+6. Calculate **training memory** (weights + gradients + optimizer + activations)
+7. Trace the complete **inference pipeline** and identify non-model latency
+8. Connect neural computation to the **D$\bullet$A$\bullet$M taxonomy**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[1 min]
 % -- LINK: Prior chapters established the Iron Law and DAM taxonomy.
 % This chapter reveals what neural networks actually compute inside those terms.
 
@@ -38,21 +65,37 @@ measurable skill you can demonstrate.''
 
 % -- FLEX: [CORE] Never skip objectives---they set the contract for the lecture.
 % IF SHORT: Read only the bolded terms, skip the full sentence for each.
-}
+```
 
-{0pt}
-- Explain how the shift from **rules to arithmetic** creates a 1,092$×$ compute explosion
-- Describe **neuron**, **layer**, **weight**, **bias**, and **activation function** as workloads
-- Compare **activation functions** (sigmoid, tanh, ReLU, softmax) for hardware cost and numerical stability
-- Explain **forward propagation** as a chain of matrix multiplications
-- Explain **backpropagation** and why it costs $$2$×$ the forward pass
-- Calculate **training memory** (weights + gradients + optimizer + activations)
-- Trace the complete **inference pipeline** and identify non-model latency
-- Connect neural computation to the {{} taxonomy}
+</details>
 
 ## Visual Language
 
-{[0.5 min]
+[Original slide 3](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L108)
+
+Throughout this course, colors carry meaning:
+
+**Blue** — Compute / Processing
+
+GPU ops, forward/backward pass, inference
+
+**Green** — Data / Memory
+
+Data flow, caches, healthy paths
+
+**Orange** — Routing / Scheduling
+
+Load balancers, batch windows
+
+**Red** — Error / Cost / Bottleneck
+
+Loss, decode phase, waste
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[0.5 min]
 % -- NARRATE: Point to each card in turn.
 ``Blue means compute---any time a GPU is doing arithmetic. Green means data
 or memory---bytes moving through the system. Orange means scheduling or
@@ -61,37 +104,34 @@ identical in every diagram across the entire course.''
 
 % -- FLEX: [OPTIONAL] Students internalize colors through exposure, not memorization.
 % IF SHORT: Show for 15 seconds and move on; the colors reinforce themselves.
-}
+```
 
-Throughout this course, colors carry meaning:
-
-{0.3cm}
-[T]
-  
-    {mlsyscard}{computestroke}
-    **Blue** --- Compute / Processing\\
-    { GPU ops, forward/backward pass, inference}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{datastroke}
-    **Green** --- Data / Memory\\
-    { Data flow, caches, healthy paths}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{routingstroke}
-    **Orange** --- Routing / Scheduling\\
-    { Load balancers, batch windows}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{errorstroke}
-    **Red** --- Error / Cost / Bottleneck\\
-    { Loss, decode phase, waste}
-    {mlsyscard}
+</details>
 
 ## Why Hardware Matters for Neural Computation
 
-{[1 min]
+[Original slide 4](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L155)
+
+Original figure reference: ` nvidia-gpu-die.jpg `.
+
+NVIDIA GPU die shot
+
+**Neural computation is physical computation.**
+
+Every operation maps to silicon:
+
+- **Tensor Cores**: Dense MatMul at peak throughput
+- **CUDA Cores**: Element-wise ops (ReLU, add)
+- **HBM Controllers**: Weight and activation traffic
+- **L2 Cache**: Reuse between layers
+
+The die layout determines what is fast (dense MatMul: 80–95% util.) and what is slow (random access: $<$10%).
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[1 min]
 % -- LINK: Students learned the Iron Law and DAM taxonomy in earlier chapters.
 % This slide grounds the transition from abstract equations to physical silicon.
 
@@ -110,37 +150,48 @@ is fast (dense MatMul) and what is slow (random memory access).''
 
 % -- FLEX: [OPTIONAL] Sets the visual tone for the chapter.
 % IF SHORT: Show for 20 seconds with one sentence; move to the Silicon Contract.
-}
+```
 
-[T]
-  
-    
-    {nvidia-gpu-die.jpg}
+</details>
 
-    {0.05cm}
-    { NVIDIA GPU die shot}
-  
-  
-    
-    **Neural computation is physical computation.**
+<details>
+<summary>Projection limits for this slide</summary>
 
-    {0.1cm}
-    Every operation maps to silicon:
-    {0pt}
-- **Tensor Cores**: Dense MatMul at peak throughput
-- **CUDA Cores**: Element-wise ops (ReLU, add)
-- **HBM Controllers**: Weight and activation traffic
-- **L2 Cache**: Reuse between layers
-    
+- [nvidia-gpu-die.jpg](https://raw.githubusercontent.com/harvard-edge/cs249r_book/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/images/nvidia-gpu-die.jpg): raster source link retained; individual provenance not established.
 
-    {0.05cm}
-    {mlsyscard}{crimson}
-    { The die layout determines what is fast (dense MatMul: 80--95% util.) and what is slow (random access: $<$10%).}
-    {mlsyscard}
+</details>
 
 ## The Silicon Contract
 
-{[2 min]
+[Original slide 5](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L207)
+
+The **Iron Law** (Ch 1) decomposes performance:
+
+$$
+T = \frac{D_{\text{vol}}}{BW} + \frac{O}{R_{\text{peak}} \cdot \eta} + L_{\text{lat}}
+$$
+
+Neural networks define *what* fills those terms:
+
+- **O**: matrix multiplications
+- **D**: weight + activation traffic
+- **L**: pipeline overhead
+
+**Key:** The “bug” in neural networks is rarely a syntax error—it is a numerical instability.
+
+**From Logic to Arithmetic**
+
+Rule-based: ` if-then-else `
+
+Neural net: massive **multiply-accumulate**
+
+The shift changes everything: bugs become gradient explosions, saturating activations, memory exhaustion.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: The Iron Law (Ch1) decomposed performance into D, O, and L terms.
 % Students know the formula but not what fills each term. This slide connects
 % the abstract equation to the concrete operators inside a neural network.
@@ -163,39 +214,45 @@ ANALOGY: ``The Iron Law is the utility bill; this chapter opens the meter.''
 % -- FLEX: [CORE] This slide sets the chapter thesis---never skip.
 % IF AHEAD: ``Can you name a specific numerical instability you have seen?''
 % IF SHORT: Skip the analogy, keep the equation walkthrough.
-}
+```
 
-[T]
-  
-    The **Iron Law** (Ch 1) decomposes performance:
-
-    {0.1cm}
-    $$T = {D_{{vol}}}{BW} + {O}{R_{{peak}}  } + L_{{lat}}$$
-
-    {0.1cm}
-    Neural networks define *what* fills those terms:
-
-    {0.1cm}
-    {0pt}
-- {computestroke}{**O**}: matrix multiplications
-- {datastroke}{**D**}: weight + activation traffic
-- {errorstroke}{**L**}: pipeline overhead
-    
-
-    {0.1cm}
-    {Key:}{The ``bug'' in neural networks is rarely a syntax error---it is a numerical instability.}
-  
-  
-    {mlsyscard}{crimson}
-    **From Logic to Arithmetic**\\[0.1cm]
-    { Rule-based: {if-then-else}\\
-    Neural net: massive **multiply-accumulate**\\[0.1cm]
-    The shift changes everything: bugs become gradient explosions, saturating activations, memory exhaustion.}
-    {mlsyscard}
+</details>
 
 ## War Story: Ariane 5 Flight 501 (1996)
 
-{[2 min]
+[Original slide 6](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L267)
+
+**Context**
+
+Ariane 5 reused inertial guidance software from Ariane 4, including
+a floating-point conversion whose valid range matched Ariane 4's slower
+horizontal velocity.
+
+**Failure**
+
+Ariane 5's faster motion drove the conversion outside its protected
+range. The exception handler shut down guidance data rather than
+recovering—no valid fallback existed.
+
+**Consequence**
+
+40 seconds after launch the rocket veered off course,
+broke apart, and exploded. Total loss: &#36;370 million.
+
+**Systems lesson**
+
+Numerical ranges and reuse assumptions are part of the
+systems contract. A computation can be syntactically correct and physically
+invalid. In ML: a low-precision overflow produces Inf or NaN that
+propagates silently—the code runs, the math fails.
+
+Source on slide: ESA Inquiry Board Report on Ariane 5 Flight 501, 1996
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: The Silicon Contract warned that bugs in neural networks are
 % silent numerical failures---not Python exceptions. This story makes that
 % viscerally concrete before we see what drives the compute explosion.
@@ -226,47 +283,25 @@ and the damage propagates silently.''
 % -- FLEX: [CORE] This story anchors the ``bugs are silent'' thesis.
 % IF SHORT: Read the Consequence and Systems Lesson only (30 seconds).
 % IF AHEAD: ``Name a specific ML operation where this overflow occurs.''
-}
+```
 
-[T]
-  
-    {mlsyscard}{errorstroke}
-    **Context**\\[0.03cm]
-    { Ariane 5 reused inertial guidance software from Ariane 4, including
-    a floating-point conversion whose valid range matched Ariane 4's slower
-    horizontal velocity.}
-    {mlsyscard}
-
-    {0.08cm}
-    {mlsyscard}{errorstroke}
-    **Failure**\\[0.03cm]
-    { Ariane 5's faster motion drove the conversion outside its protected
-    range. The exception handler shut down guidance data rather than
-    recovering---no valid fallback existed.}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{crimson}
-    **Consequence**\\[0.03cm]
-    { 40 seconds after launch the rocket veered off course,
-    broke apart, and exploded. Total loss: \$370 million.}
-    {mlsyscard}
-
-    {0.08cm}
-    {mlsyscard}{datastroke}
-    **Systems lesson**\\[0.03cm]
-    { Numerical ranges and reuse assumptions are part of the
-    systems contract. A computation can be syntactically correct and physically
-    invalid. In ML: a low-precision overflow produces Inf or NaN that
-    propagates silently---the code runs, the math fails.}
-    {mlsyscard}
-  
-
-{ESA Inquiry Board Report on Ariane 5 Flight 501, 1996}
+</details>
 
 ## Three Paradigms, One Digit
 
-{[2 min]
+[Original slide 7](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L340)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/05_nn_computation/images/ch05-three-paradigms.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch05-three-paradigms.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/images/ch05-three-paradigms.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Pattern:** Each paradigm buys representation power at exponential systems cost.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: The Silicon Contract slide introduced the Iron Law terms.
 % Now we see what happens when you move from rule-based to neural: the
 % same 28x28 digit triggers 1,092x more operations.
@@ -287,18 +322,29 @@ That is a 1,092x compute explosion for the same input.''
 % -- FLEX: [CORE] The 1,092x number is the chapter's anchor.
 % IF AHEAD: ``At what point does the accuracy gain stop justifying the cost?''
 % IF SHORT: Just emphasize the 1,092x ratio and move on.
-}
+```
 
-% --- Full-width image ---
-
-{ch05-three-paradigms.pdf}
-
-{0.1cm}
-{Pattern:}{Each paradigm buys representation power at exponential systems cost.}
+</details>
 
 ## The Compute Explosion in Numbers
 
-{[2 min]
+[Original slide 8](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L373)
+
+| **Paradigm** | **Method** | **Operations** | **Memory** | **Hardware** |
+| --- | --- | --- | --- | --- |
+| Rule-Based | Pixel thresholds | $\sim$100 | 784 B | Any CPU |
+| Classical ML | HOG + SVM | $\sim$8,000 | $\sim$2 KB | CPU + SIMD |
+| Neural Net | 784-128-64-10 MLP | **109,184 MACs** | **$\sim$427 KB** | GPU / Accel. |
+
+**Compute:** 1,092$\times$ increase (logic $\to$ matrix arithmetic).
+
+**Memory:** 546$\times$ increase (784 B $\to$ 427 KB, exceeds L1 cache).
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: The three-paradigms diagram showed the qualitative shift.
 % This table adds the quantitative evidence students need to reason precisely.
 
@@ -318,29 +364,31 @@ every inference forces memory traffic.''
 
 % -- FLEX: [OPTIONAL] The table reinforces the diagram.
 % IF SHORT: Point to the 1,092x and 546x numbers, skip row-by-row walkthrough.
-}
+```
 
-{}{1.2}
-{
-{tabular}{@{}llrrr@{}}
-  
-  **Paradigm** & **Method** & **Operations** & **Memory** & **Hardware** \\
-  
-  Rule-Based    & Pixel thresholds     & $$100        & 784 B   & Any CPU \\
-  Classical ML  & HOG + SVM            & $$8,000      & $$2 KB  & CPU + SIMD \\
-  Neural Net    & 784-128-64-10 MLP    & **109,184 MACs** & **$$427 KB** & GPU / Accel. \\
-  
-{tabular}
-}
-
-{0.1cm}
-{Compute:}{1,092$×$ increase (logic $$ matrix arithmetic).}
-
-{Memory:}{546$×$ increase (784 B $$ 427 KB, exceeds L1 cache).}
+</details>
 
 ## Predict: What Is a Neuron Computing?
 
-{[2 min]
+[Original slide 9](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L418)
+
+Think–Write–Share
+
+A neural network with 784 inputs and 128 neurons
+
+needs 100,352 multiply-accumulate operations.
+
+**What is each neuron computing?**
+
+Write your answer in one equation. (60 seconds)
+
+Turn to a neighbor and compare.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: Students just saw 109,184 MACs but do not yet know what a MAC is.
 % This prediction primes them to discover the neuron equation themselves.
 
@@ -358,25 +406,25 @@ Write one equation that explains what each neuron computes.''
 % -- FLEX: [CORE] Prediction before reveal is the highest-leverage active
 % learning moment. Never skip.
 % IF SHORT: Reduce to 30 seconds writing, skip neighbor comparison.
-}
+```
 
-{0.6cm}
-{ Think--Write--Share}
-
-{0.4cm}
-{ A neural network with 784 inputs and 128 neurons\\
-needs 100,352 multiply-accumulate operations.\\[0.2cm]
-**What is each neuron computing?**}
-
-{0.4cm}
-{ Write your answer in one equation. {midgray}{(60 seconds)}}
-
-{0.3cm}
-{{lightgray}{Turn to a neighbor and compare.}}
+</details>
 
 ## Anatomy of a Neuron
 
-{[3 min]
+[Original slide 10](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L460)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/05_nn_computation/images/ch05-neuron-anatomy.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch05-neuron-anatomy.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/images/ch05-neuron-anatomy.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Key:** $y = f\bigl(\sum_{i=1}^{N} x_i w_i + b\bigr)$ — N MACs per neuron, M$\times$N MACs per layer.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min]
 % -- LINK: Students just predicted the neuron equation. Now reveal and
 % validate their answers against the actual formula.
 
@@ -398,67 +446,88 @@ ANALOGY: ``A neuron is a dot product with a switch on the end.''
 % -- FLEX: [CORE] The neuron equation is foundational for every later slide.
 % IF AHEAD: ``What happens if we remove the activation function f?''
 % (Answer: the entire network collapses to a single linear transformation.)
-}
+```
 
-% --- Full-width image ---
-
-{ch05-neuron-anatomy.pdf}
-
-{0.1cm}
-{Key:}{$y = f(_{i=1}^{N} x_i w_i + b)$ --- N MACs per neuron, M$×$N MACs per layer.}
+</details>
 
 ## Why Depth Matters
 
-{[2 min] Compositionality: complex patterns decompose into simpler ones.
+[Original slide 11](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L494)
+
+**Hierarchical decomposition:**
+
+- **Layer 1**: Edge detectors (vertical, horizontal, diagonal)
+- **Layer 2**: Shape combos (“7” top stroke + downstroke)
+- **Layer 3**: Complete digit patterns
+
+**Parameter reuse**: same edge detectors serve all digits.
+
+Deep: 100K params represent patterns needing millions in a shallow net.
+
+|  | **Trade-off** |
+| --- | --- |
+| **Deeper** | More expressive, slower, gradient risk |
+| **Wider** | More parallel, less expressive |
+
+10 layers $\times$ 100 neurons = same params as 2 layers $\times$ 500 neurons, but very different compute profiles.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Compositionality: complex patterns decompose into simpler ones.
 Layer 1 learns edges, Layer 2 combines into shapes, Layer 3 into digits.
 The exponential advantage: L layers can represent functions requiring
 exponentially more neurons in a single layer.
-Common error: students think ``deeper = always better.''}
+Common error: students think ``deeper = always better.''
+```
 
-[T]
-  
-    **Hierarchical decomposition:**
-    {0pt}
-- **Layer 1**: Edge detectors (vertical, horizontal, diagonal)
-- **Layer 2**: Shape combos (``7'' top stroke + downstroke)
-- **Layer 3**: Complete digit patterns
-    
-
-    {0.1cm}
-    **Parameter reuse**: same edge detectors serve all digits.\\
-    Deep: 100K params represent patterns needing millions in a shallow net.
-  
-  
-    {}{1.15}
-    {tabular}{@{}lp{3cm}@{}}
-      
-      & **Trade-off** \\
-      
-      **Deeper** & More expressive, slower, gradient risk \\
-      **Wider**  & More parallel, less expressive \\
-      
-    {tabular}
-
-    {0.1cm}
-    10 layers $×$ 100 neurons = same params as 2 layers $×$ 500 neurons, but very different compute profiles.
+</details>
 
 ## MNIST Architecture: 784-128-64-10
 
-{[3 min] Walk through the MNIST running example. Key insight: Layer 1
-contains 92% of all parameters and MACs. 427 KB exceeds L1 cache.
+[Original slide 12](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L533)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/05_nn_computation/images/ch05-mnist-architecture.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch05-mnist-architecture.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/images/ch05-mnist-architecture.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Systems insight:** 427 KB exceeds L1 cache ($\sim$64 KB)—every inference forces memory traffic.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] Walk through the MNIST running example. Key insight: Layer 1
+contains 92\% of all parameters and MACs. 427 KB exceeds L1 cache.
 This is a small network---imagine GPT-scale!
-Ask: ``Which layer would you optimize first?''}
+Ask: ``Which layer would you optimize first?''
+```
 
-% --- Full-width image ---
-
-{ch05-mnist-architecture.pdf}
-
-{0.1cm}
-{Systems insight:}{427 KB exceeds L1 cache ($$64 KB)---every inference forces memory traffic.}
+</details>
 
 ## Activation Functions: Math Meets Silicon
 
-{[3 min]
+[Original slide 13](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L552)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/05_nn_computation/images/ch05-activation-functions.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch05-activation-functions.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/images/ch05-activation-functions.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+| **Function** | **Formula** | **FLOPs/elem** | **Transistors** | **Gradient** | **Used In** |
+| --- | --- | --- | --- | --- | --- |
+| **Sigmoid** | $1/(1+e^{-z})$ | $\sim$7 | $\sim$2,500 | $\leq 0.25$ | Legacy |
+| **Tanh** | $(e^z - e^{-z})/(e^z + e^{-z})$ | $\sim$7 | $\sim$2,500 | $\leq 1.0$ | RNNs |
+| **ReLU** | $\max(0, z)$ | **1** | **$\sim$50** | 0 or 1 | CNNs |
+| **GELU** | $z \cdot \Phi(z)$ | $\sim$14 | $\sim$5K | smooth | Transformers |
+
+**Engineering choice:** ReLU dominates because $\max(0,x)$ is 50$\times$ cheaper than $e^{-z}$ on silicon (50 vs. 2,500 transistors).
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min]
 % -- LINK: Students just saw the MNIST architecture. Activations are the
 % nonlinear switches between layers---their cost determines hardware efficiency.
 
@@ -479,32 +548,43 @@ silicon cost gap drove the industry shift from sigmoid to ReLU.''
 
 % -- FLEX: [CORE] Activation cost comparison is quantitative and foundational.
 % IF SHORT: Focus on the ReLU vs sigmoid cost gap; skip GELU detail.
-}
+```
 
-% --- Full-width image ---
-
-{ch05-activation-functions.pdf}
-
-{0.05cm}
-
-{}{1.0}
-{tabular}{@{}llrrll@{}}
-  
-  **Function** & **Formula** & **FLOPs/elem** & **Transistors** & **Gradient** & **Used In** \\
-  
-  **Sigmoid** & $1/(1+e^{-z})$ & $$7 & $$2,500 & $ 0.25$ & Legacy \\
-  **Tanh** & $(e^z - e^{-z})/(e^z + e^{-z})$ & $$7 & $$2,500 & $ 1.0$ & RNNs \\
-  {datastroke}{**ReLU**} & $(0, z)$ & {datastroke}{**1**} & {datastroke}{**$$50**} & 0 or 1 & CNNs \\
-  **GELU** & $z  (z)$ & $$14 & $$5K & smooth & Transformers \\
-  
-{tabular}
-
-{0.05cm}
-{Engineering choice:}{ReLU dominates because $(0,x)$ is 50$×$ cheaper than $e^{-z}$ on silicon (50 vs.\ 2,500 transistors).}
+</details>
 
 ## The Transistor Tax
 
-{[2 min]
+[Original slide 14](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L600)
+
+**Principle (chapter-coined):**
+
+Selecting Sigmoid over ReLU increases the silicon “price” of an
+activation by **50$\times$**.
+
+- ReLU: single comparator $\approx$ 50 transistors, 1 cycle
+- Sigmoid: floating-point exp $\approx$ 2,500 transistors, 20–40 cycles
+
+**Implication:** ReLU is a **density optimization**—hardware can pack 50$\times$ more neurons per watt and per mm$^2$.
+
+This is why the deep learning era shifted from “biologically
+plausible” Sigmoid to “silicon-efficient” ReLU.
+
+|  | **Transistors** | **Cycles** |
+| --- | --- | --- |
+| Sigmoid | $\sim$2,500 | 20–40 |
+| Tanh | $\sim$2,500 | 20–40 |
+| **ReLU** | **$\sim$50** | **1** |
+| **Tax ratio** | **50$\times$** | **20–40$\times$** |
+
+At 1 billion activations/second, paying the sigmoid tax consumes
+50$\times$ more activation-logic silicon—area that could instead hold
+more tensor cores.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: The activation cost table just showed raw numbers. This slide
 % names the chapter's coined principle and frames the ReLU shift as a
 % silicon-density optimization---not just a gradient stability win.
@@ -537,216 +617,200 @@ ReLU removed the toll.''
 % IF AHEAD: ``What does the transistor tax imply for GELU in Transformers?''
 % (Answer: Transformers can afford the GELU tax because their compute-bound
 % MatMul workloads dominate---activation cost is a small fraction of total.)
-}
+```
 
-[T]
-  
-    **Principle (chapter-coined):**
-
-    {0.08cm}
-    Selecting Sigmoid over ReLU increases the silicon ``price'' of an
-    activation by **50$×$**.
-
-    {0.1cm}
-    {1pt}
-- ReLU: single comparator $$ 50 transistors, 1 cycle
-- Sigmoid: floating-point exp $$ 2,500 transistors, 20--40 cycles
-    
-
-    {0.08cm}
-    {Implication:}{ReLU is a **density optimization**---hardware can pack 50$×$ more neurons per watt and per mm$^2$.}
-
-    {0.08cm}
-    { This is why the deep learning era shifted from ``biologically
-    plausible'' Sigmoid to ``silicon-efficient'' ReLU.}
-  
-  
-    {0.1cm}
-    {}{1.1}
-    {
-    {tabular}{@{}lrr@{}}
-      
-      & **Transistors** & **Cycles** \\
-      
-      Sigmoid & $$2,500 & 20--40 \\
-      Tanh    & $$2,500 & 20--40 \\
-      {datastroke}{**ReLU**} & {datastroke}{**$$50**} & {datastroke}{**1**} \\
-      
-      **Tax ratio** & **50$×$** & **20--40$×$** \\
-      
-    {tabular}
-    }
-
-    {0.15cm}
-    {mlsyscard}{crimson}
-    { At 1 billion activations/second, paying the sigmoid tax consumes
-    50$×$ more activation-logic silicon---area that could instead hold
-    more tensor cores.}
-    {mlsyscard}
+</details>
 
 ## Vanishing Gradients: The Depth Ceiling
 
-{[2 min] Sigmoid gradient peaks at 0.25. Through 20 layers:
-$0.25^{20}  10^{-12}$---effectively zero. ReLU gradient is 1 for
+[Original slide 15](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L686)
+
+**Why sigmoid kills deep networks:**
+
+Sigmoid max gradient: $\sigma'(z) = 0.25$
+
+After $L$ layers (chain rule):
+
+$$
+\prod_{l=1}^{L} \sigma'(z_l) \leq 0.25^L
+$$
+
+At $L = 20$: $0.25^{20} \approx 10^{-12}$
+
+Gradients vanish to zero. Loss plateaus. Learning becomes **mathematically impossible**.
+
+**ReLU solves this:**
+
+| **Activation** | **Gradient** |
+| --- | --- |
+| Sigmoid | $\leq 0.25$ |
+| Tanh | $\leq 1.0$ |
+| **ReLU** | **1 or 0** |
+
+ReLU gradient = 1 for positive inputs $\to$ no decay through layers.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Sigmoid gradient peaks at 0.25. Through 20 layers:
+$0.25^{20} \approx 10^{-12}$---effectively zero. ReLU gradient is 1 for
 positive inputs. This is why deep networks became tractable with ReLU.
 Common error: students think vanishing gradients are a ``bug'' rather than
-a mathematical consequence of activation choice.}
+a mathematical consequence of activation choice.
+```
 
-[T]
-  
-    **Why sigmoid kills deep networks:**
-
-    {0.15cm}
-    Sigmoid max gradient: $'(z) = 0.25$
-
-    {0.1cm}
-    After $L$ layers (chain rule):
-    $$_{l=1}^{L} '(z_l)  0.25^L$$
-
-    {0.1cm}
-    At $L = 20$: $0.25^{20}  10^{-12}$
-
-    {0.15cm}
-    {mlsyscard}{errorstroke}
-    { Gradients vanish to zero. Loss plateaus. Learning becomes **mathematically impossible**.}
-    {mlsyscard}
-  
-  
-    {0.2cm}
-    **ReLU solves this:**
-
-    {0.1cm}
-    {
-    {}{1.15}
-    {tabular}{@{}lr@{}}
-      
-      **Activation** & **Gradient** \\
-      
-      Sigmoid & $ 0.25$ \\
-      Tanh    & $ 1.0$ \\
-      {datastroke}{**ReLU**} & {datastroke}{**1 or 0**} \\
-      
-    {tabular}
-    }
-
-    {0.15cm}
-    { ReLU gradient = 1 for positive inputs $$ no decay through layers.}
+</details>
 
 ## Training Memory Breakdown
 
-{[3 min] This is the ``why 80 GB GPUs'' slide. Walk through:
+[Original slide 16](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L738)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/05_nn_computation/images/ch05-training-memory.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch05-training-memory.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/images/ch05-training-memory.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Key:** Inference needs only weights; training adds gradients, optimizer state, and activations.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] This is the ``why 80 GB GPUs'' slide. Walk through:
 Inference needs only weights (427 KB for MNIST, 28 GB for GPT-7B).
-Training adds gradients (1$×$), Adam state (2$×$), activations.
-Total: $$4$×$ more memory. At GPT-7B scale: 84+ GB before activations.
-Ask: ``What happens if your model needs 90 GB but your GPU has 80 GB?''}
+Training adds gradients (1$\times$), Adam state (2$\times$), activations.
+Total: $\sim$4$\times$ more memory. At GPT-7B scale: 84+ GB before activations.
+Ask: ``What happens if your model needs 90 GB but your GPU has 80 GB?''
+```
 
-% --- Full-width image ---
+</details>
 
-{ch05-training-memory.pdf}
+## The Training Loop
 
-{0.1cm}
-{Key:}{Inference needs only weights; training adds gradients, optimizer state, and activations.}
+[Original slide 17](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L758)
+
+Forward Pass $\to$ Loss $\to$ Backpropagation $\to$ Weight Update
+
+ $\hat{y} = f(x; \theta)$   $\mathcal{L} = \text{CrossEntropy}(\hat{y}, y)$   $\theta \leftarrow \theta - \alpha \nabla_\theta \mathcal{L}$
 
 ## Forward Pass: Prediction
 
-{[3 min] Walk through the forward pass layer by layer.
-Input (784) $$ Linear + ReLU (128) $$ Linear + ReLU (64) $$ Linear + Softmax (10).
+[Original slide 18](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L763)
+
+**Layer-by-layer computation:**
+
+| **Layer** | **Operation** | **MACs** |
+| --- | --- | --- |
+| $784\!\times\!128$ | $\text{ReLU}(\mathbf{x}\mathbf{W}^{(1)}\!+\!\mathbf{b}^{(1)})$ | 100,352 |
+| $128\!\times\!64$ | $\text{ReLU}(\mathbf{A}^{(1)}\mathbf{W}^{(2)}\!+\!\mathbf{b}^{(2)})$ | 8,192 |
+| $64\!\times\!10$ | $\text{Softmax}(\mathbf{A}^{(2)}\mathbf{W}^{(3)}\!+\!\mathbf{b}^{(3)})$ | 640 |
+|  | **Total** | **109,184** |
+
+**92% of MACs** are in Layer 1
+
+The first layer dominates because it connects *every* input pixel to *every* neuron.
+
+**GEMM:** Over 90% of neural network FLOPs are dense matrix multiplications.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] Walk through the forward pass layer by layer.
+Input (784) $\to$ Linear + ReLU (128) $\to$ Linear + ReLU (64) $\to$ Linear + Softmax (10).
 Each linear layer is a matrix multiplication. The entire forward pass is a chain
 of GEMM + activation. This is why GPUs dominate: GEMM is their sweet spot.
-Ask: ``How many FLOPs for the forward pass of MNIST?''}
+Ask: ``How many FLOPs for the forward pass of MNIST?''
+```
 
-[T]
-  
-    **Layer-by-layer computation:**
-
-    {0.1cm}
-    {
-    {}{1.1}
-    {tabular}{@{}llr@{}}
-      
-      **Layer** & **Operation** & **MACs** \\
-      
-      $784\!×\!128$ & ${ReLU}({x}{W}^{(1)}\!+\!{b}^{(1)})$ & 100,352 \\
-      $128\!×\!64$  & ${ReLU}({A}^{(1)}{W}^{(2)}\!+\!{b}^{(2)})$ & 8,192 \\
-      $64\!×\!10$   & ${Softmax}({A}^{(2)}{W}^{(3)}\!+\!{b}^{(3)})$ & 640 \\
-      
-      & **Total** & **109,184** \\
-      
-    {tabular}
-    }
-  
-  
-    {0.2cm}
-    {mlsyscard}{computestroke}
-    **92% of MACs** are in Layer 1\\[0.1cm]
-    { The first layer dominates because it connects *every* input pixel to *every* neuron.}
-    {mlsyscard}
-
-    {0.15cm}
-    {GEMM:}{Over 90% of neural network FLOPs are dense matrix multiplications.}
+</details>
 
 ## Loss Functions: Measuring Error
 
-{[2 min] Cross-entropy loss for classification. Key properties:
+[Original slide 19](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L805)
+
+**Cross-Entropy Loss** (classification):
+
+$$
+\mathcal{L} = -\sum_{c=1}^{C} y_c \log(\hat{y}_c)
+$$
+
+For MNIST ($C = 10$): true label is one-hot,
+
+so only one term survives: $\mathcal{L} = -\log(\hat{y}_{\text{true}})$
+
+A confident *wrong* prediction ($\hat{y}_{\text{true}} \to 0$) produces $\mathcal{L} \to \infty$—strong gradient signal exactly where needed.
+
+| $\hat{y}_{\text{true}}$ | Loss |
+| --- | --- |
+| 0.90 | 0.105 |
+| 0.50 | 0.693 |
+| 0.10 | **2.303** |
+| 0.01 | **4.605** |
+
+Wrong $\to$ huge loss $\to$ large gradient $\to$ fast correction.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Cross-entropy loss for classification. Key properties:
 (1) penalizes confident wrong predictions heavily (log goes to infinity),
 (2) gradient is strongest near the decision boundary where it matters most.
 Contrast with MSE which gives weak gradients near 0 and 1.
-If short: just show the formula and the ``confident wrong = infinite penalty'' insight.}
+If short: just show the formula and the ``confident wrong = infinite penalty'' insight.
+```
 
-[T]
-  
-    **Cross-Entropy Loss** (classification):
-
-    {0.1cm}
-    $${L} = -_{c=1}^{C} y_c ({y}_c)$$
-
-    {0.1cm}
-    For MNIST ($C = 10$): true label is one-hot,\\
-    so only one term survives: ${L} = -({y}_{{true}})$
-
-    {0.15cm}
-    {mlsyscard}{errorstroke}
-    { A confident *wrong* prediction (${y}_{{true}}  0$) produces ${L}  $---strong gradient signal exactly where needed.}
-    {mlsyscard}
-  
-  
-    {0.2cm}
-    {}{1.15}
-    {
-    {tabular}{@{}lr@{}}
-      
-      ${y}_{{true}}$ & Loss \\
-      
-      0.90 & 0.105 \\
-      0.50 & 0.693 \\
-      0.10 & {errorstroke}{**2.303**} \\
-      0.01 & {errorstroke}{**4.605**} \\
-      
-    {tabular}
-    }
-
-    {0.1cm}
-    { Wrong $$ huge loss $$ large gradient $$ fast correction.}
+</details>
 
 ## Forward and Backward Pass
 
-{[3 min] The central computational diagram. Forward: N ops (one MatMul
-per layer). Backward: $$2N ops (3 gradients per layer: dW, db, dA).
-Total training cost: $$3N per sample. Activations must be cached during
+[Original slide 20](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L852)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/05_nn_computation/images/ch05-forward-backward.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch05-forward-backward.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/images/ch05-forward-backward.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Key distinction:** Backprop *computes* gradients; gradient descent *applies* updates—they are not the same.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] The central computational diagram. Forward: N ops (one MatMul
+per layer). Backward: $\sim$2N ops (3 gradients per layer: dW, db, dA).
+Total training cost: $\sim$3N per sample. Activations must be cached during
 forward for use in backward---this is why training needs more memory.
 Ask: ``Why can't we just recompute activations instead of storing them?''
-(Answer: we can---gradient checkpointing, covered in later chapters.)}
+(Answer: we can---gradient checkpointing, covered in later chapters.)
+```
 
-% --- Full-width image ---
-
-{ch05-forward-backward.pdf}
-
-{0.1cm}
-{Key distinction:}{Backprop *computes* gradients; gradient descent *applies* updates---they are not the same.}
+</details>
 
 ## Backprop Memory Accounting: MNIST MLP
 
-{[3 min]
+[Original slide 21](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L869)
+
+**Memory accounting for MNIST MLP (784-128-64-10), batch=1, FP32:**
+
+| **Component** | **What** | **Elements** | **Bytes** | **Scaling** |
+| --- | --- | --- | --- | --- |
+| Weights (Layer 1) | $784 \times 128 + 128$ | 100,480 | 401,920 | Fixed |
+| Weights (Layer 2) | $128 \times 64 + 64$ | 8,256 | 33,024 | Fixed |
+| Weights (Layer 3) | $64 \times 10 + 10$ | 650 | 2,600 | Fixed |
+| **Total weights** |  | **109,386** | **$\sim$427 KB** | Fixed |
+| Gradients (all) | Same shape as weights | 109,386 | $\sim$427 KB | Fixed |
+| Activations (fwd) | $128 + 64 + 10$ | 202 | 808 B | $\times$ batch |
+| **Training total** | batch=1 |  | **$\sim$855 KB** |  |
+| **Training total** | batch=32 |  | **$\sim$880 KB** |  |
+
+**Scaling rule:** Activations scale with batch size. At MNIST scale, weights dominate. At GPT scale, activations are 73% of memory.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min]
 % -- LINK: Students just saw the forward/backward diagram. This slide makes
 % the memory cost concrete with exact numbers for the MNIST 4-layer MLP.
 
@@ -757,7 +821,7 @@ Across all layers: 808 bytes of activations. Backward pass needs these
 activations plus the gradients for each weight matrix. Total: 427 KB
 weights plus 427 KB gradients plus 808 bytes activations. At batch 32,
 activations scale to 25 KB---still small. But at GPT-2 scale, activations
-dominate at 73% of total memory.''
+dominate at 73\% of total memory.''
 
 % -- ENGAGE: ``What happens to activation memory if we double the batch
 % size from 32 to 64?'' Give 10 seconds.
@@ -769,221 +833,242 @@ dominate at 73% of total memory.''
 
 % -- FLEX: [CORE] Concrete memory accounting prepares students for Ch8.
 % IF SHORT: Show the table; emphasize the batch-size scaling rule.
-}
+```
 
-{}{1.05}
-**Memory accounting for MNIST MLP (784-128-64-10), batch=1, FP32:**
-
-{0.1cm}
-{tabular}{@{}llrrr@{}}
-  
-  **Component** & **What** & **Elements** & **Bytes** & **Scaling** \\
-  
-  Weights (Layer 1) & $784 × 128 + 128$ & 100,480 & 401,920 & Fixed \\
-  Weights (Layer 2) & $128 × 64 + 64$ & 8,256 & 33,024 & Fixed \\
-  Weights (Layer 3) & $64 × 10 + 10$ & 650 & 2,600 & Fixed \\
-  
-  **Total weights** & & **109,386** & **$$427 KB** & Fixed \\
-  Gradients (all) & Same shape as weights & 109,386 & $$427 KB & Fixed \\
-  Activations (fwd) & $128 + 64 + 10$ & 202 & 808 B & $×$ batch \\
-  
-  **Training total** & batch=1 & & **$$855 KB** & \\
-  **Training total** & batch=32 & & **$$880 KB** & \\
-  
-{tabular}
-
-{0.1cm}
-
-{Scaling rule:}{Activations scale with batch size. At MNIST scale, weights dominate. At GPT scale, activations are 73% of memory.}
+</details>
 
 ## Quick Check
 
-{[0.5 min] Micro-retrieval. Give students 30 seconds to recall.
-This distributed practice improves retention (Roediger & Karpicke, 2006).}
+[Original slide 22](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L923)
 
- Quick check --- no peeking.\\[0.5cm]
- How much more memory does training require compared to inference, and why?\\[0.3cm]
-{ 30 seconds --- then we continue.}
+Quick check — no peeking.
+
+ How much more memory does training require compared to inference, and why?
+
+30 seconds — then we continue.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[0.5 min] Micro-retrieval. Give students 30 seconds to recall.
+This distributed practice improves retention (Roediger \& Karpicke, 2006).
+```
+
+</details>
 
 ## Gradient Descent: The Update Rule
 
-{[2 min] Simple formula: $   -   {L}$.
-Learning rate $$ is the single most important hyperparameter.
+[Original slide 23](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L935)
+
+**Weight update:**
+
+$$
+\theta^{(t+1)} = \theta^{(t)} - \alpha \cdot \nabla_\theta \mathcal{L}
+$$
+
+| $\theta$ | All weights and biases |
+| --- | --- |
+| $\alpha$ | Learning rate |
+| $\nabla_\theta \mathcal{L}$ | Gradient from backprop |
+
+**Critical:** $\alpha$ too large $\to$ divergence. $\alpha$ too small $\to$ stagnation.
+
+**Optimizer memory cost:**
+
+| **Optimizer** | **Memory** |
+| --- | --- |
+| SGD | 1$\times$ params |
+| Momentum | 2$\times$ params |
+| **Adam** | **3$\times$ params** |
+
+Adam stores first *and* second moment estimates per parameter. For 7B params in FP32: **56 GB** optimizer state alone.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Simple formula: $\theta \leftarrow \theta - \alpha \nabla \mathcal{L}$.
+Learning rate $\alpha$ is the single most important hyperparameter.
 Too large: overshoots and diverges. Too small: stuck in local minima.
-Adam maintains per-parameter rates (3$×$ memory cost).
-If short: focus on the learning rate sensitivity, skip Adam details.}
+Adam maintains per-parameter rates (3$\times$ memory cost).
+If short: focus on the learning rate sensitivity, skip Adam details.
+```
 
-[T]
-  
-    **Weight update:**
-    $$^{(t+1)} = ^{(t)} -   _ {L}$$
-
-    {0.1cm}
-    {
-    {tabular}{@{}ll@{}}
-      $$ & All weights and biases \\
-      $$ & Learning rate \\
-      $_ {L}$ & Gradient from backprop \\
-    {tabular}
-    }
-
-    {0.15cm}
-    {Critical:}{$$ too large $$ divergence. $$ too small $$ stagnation.}
-  
-  
-    {0.1cm}
-    **Optimizer memory cost:**
-
-    {0.1cm}
-    {
-    {}{1.15}
-    {tabular}{@{}lr@{}}
-      
-      **Optimizer** & **Memory** \\
-      
-      SGD   & 1$×$ params \\
-      Momentum & 2$×$ params \\
-      **Adam** & **3$×$ params** \\
-      
-    {tabular}
-    }
-
-    {0.15cm}
-    { Adam stores first *and* second moment estimates per parameter. For 7B params in FP32: **56 GB** optimizer state alone.}
+</details>
 
 ## Your Turn: Training Memory Budget
 
-{[3 min] Give students 90 seconds. Answer: Weights = 1M $×$ 4B = 4 MB.
+[Original slide 24](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L986)
+
+Calculate Training Memory
+
+A network has 1 million parameters in FP32 (4 bytes each). You use the Adam optimizer.
+
+**Calculate** the minimum memory for:
+
+1. Weights
+2. Gradients
+3. Adam optimizer state
+4. Total (excluding activations)
+
+(90 seconds—then compare with a neighbor)
+
+**Solution:**
+
+Weights: $10^6 \times 4$ = **4 MB**
+
+Gradients: $10^6 \times 4$ = **4 MB**
+
+Adam ($m + v$): $2 \times 4$ = **8 MB**
+
+Total: **16 MB** (4$\times$ inference)
+
+$+$ activations (batch-dependent)
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] Give students 90 seconds. Answer: Weights = 1M $\times$ 4B = 4 MB.
 Gradients = 4 MB. Adam = 8 MB. Total = 16 MB minimum.
-Activations add more depending on batch size. The 4$×$ rule holds.
+Activations add more depending on batch size. The 4$\times$ rule holds.
 If the GPU has 4 GB, the model fits with room to spare for activations.
 PEER INSTRUCTION PROTOCOL:
 1. Present problem (30s). 2. Individual vote (60s).
-3. If 30-70% correct: pair discussion (90s), then re-vote.
-4. Reveal and explain.}
+3. If 30-70\% correct: pair discussion (90s), then re-vote.
+4. Reveal and explain.
+```
 
-[T]
-  
-    { Calculate Training Memory}
-
-    {0.15cm}
-    A network has 1 million parameters in FP32 (4 bytes each). You use the Adam optimizer.
-
-    {0.1cm}
-    **Calculate** the minimum memory for:
-    {0pt}
-- Weights
-- Gradients
-- Adam optimizer state
-- Total (excluding activations)
-    
-
-    {{midgray}{(90 seconds---then compare with a neighbor)}}
-  
-  
-    
-    {mlsyscard}{computestroke}
-    **Solution:**\\[0.05cm]
-    {
-    Weights: $10^6 × 4$ = **4 MB**\\
-    Gradients: $10^6 × 4$ = **4 MB**\\
-    Adam ($m + v$): $2 × 4$ = **8 MB**\\[0.05cm]
-    Total: **16 MB** (4$×$ inference)\\[0.05cm]
-    {computestroke}{$+$ activations (batch-dependent)}
-    }
-    {mlsyscard}
+</details>
 
 ## Batch Size: A Systems Lever
 
-{[2 min] Batch size is not just a statistical choice---it is a systems
+[Original slide 25](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L1032)
+
+**Dual purpose of batching:**
+
+- **Statistical**: averages noise across examples
+- **Systems**: saturates parallel hardware
+
+GPUs process 32 inputs with nearly the same latency as 1—MatMul parallelizes across the batch dimension.
+
+**Trade-off:** Doubling batch $\approx$ doubles activation memory—a hardware-memory decision.
+
+| **Batch** | **GPU Util.** | **Memory** |
+| --- | --- | --- |
+| 1 | Very low | Minimal |
+| 32 | Moderate | 32$\times$ act. |
+| 256 | Near peak | 256$\times$ act. |
+
+MNIST batch=1: AI $\sim$0.5 FLOPs/byte (memory-bound). Batch=256: AI $\sim$128 (compute-bound).
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Batch size is not just a statistical choice---it is a systems
 decision. Larger batches: better GPU utilization (matrix parallelism),
 more stable gradients, but more memory. Smaller batches: noisier gradients,
 less memory, potentially better generalization.
 The key insight: batch size moves you along the roofline from memory-bound
-to compute-bound.}
+to compute-bound.
+```
 
-[T]
-  
-    **Dual purpose of batching:**
-    {0pt}
-- **Statistical**: averages noise across examples
-- **Systems**: saturates parallel hardware
-    
+</details>
 
-    {0.1cm}
-    { GPUs process 32 inputs with nearly the same latency as 1---MatMul parallelizes across the batch dimension.}
+## Training vs. Inference: Two Contracts
 
-    {0.1cm}
-    {Trade-off:}{Doubling batch $$ doubles activation memory---a hardware-memory decision.}
-  
-  
-    {
-    {}{1.1}
-    {tabular}{@{}lll@{}}
-      
-      **Batch** & **GPU Util.** & **Memory** \\
-      
-      1   & Very low    & Minimal \\
-      32  & Moderate    & 32$×$ act. \\
-      256 & Near peak   & 256$×$ act. \\
-      
-    {tabular}
-    }
+[Original slide 26](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L1080)
 
-    {0.1cm}
-    { MNIST batch=1: AI $$0.5 FLOPs/byte (memory-bound). Batch=256: AI $$128 (compute-bound).}
+|  | **Training** | **Inference** |
+| --- | --- | --- |
+| **Pass** | Forward + backward | Forward only |
+| **Batch** | Large, fixed | Variable, often 1 |
+| **Memory** | W + grad + optim + act | Weights only |
+| **Optimize** | Throughput (samples/s) | Latency (ms) |
+| **Hardware** | 400–700 W GPU cluster | 2–40 W edge/mobile |
+| **Precision** | FP32 / mixed | INT8 / FP16 |
+| **Duration** | Hours to weeks | Milliseconds |
 
-## Training vs.\ Inference: Two Contracts
+**The Silicon Contract shifts**: training bargains for throughput on high-power hardware; inference bargains for latency on constrained devices.
 
-{[2 min] Training optimizes throughput (large batches, hours of compute).
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Training optimizes throughput (large batches, hours of compute).
 Inference optimizes latency (single samples, milliseconds). Same architecture,
 completely different resource profiles. Training: 400--700 W GPUs with cooling.
 Inference: 2--4 W mobile chips, edge devices.
-Ask: ``Why does inference need only half the memory?''}
+Ask: ``Why does inference need only half the memory?''
+```
 
-{}{1.1}
-{
-{tabular}{@{}lll@{}}
-  
-  & **Training** & **Inference** \\
-  
-  **Pass**      & Forward + backward   & Forward only \\
-  **Batch**     & Large, fixed          & Variable, often 1 \\
-  **Memory**    & W + grad + optim + act & Weights only \\
-  **Optimize**  & Throughput (samples/s) & Latency (ms) \\
-  **Hardware**  & 400--700 W GPU cluster & 2--40 W edge/mobile \\
-  **Precision** & FP32 / mixed           & INT8 / FP16 \\
-  **Duration**  & Hours to weeks         & Milliseconds \\
-  
-{tabular}
-}
-
-{0.1cm}
-{mlsyscard}{crimson}
-{ **The Silicon Contract shifts**: training bargains for throughput on high-power hardware; inference bargains for latency on constrained devices.}
-{mlsyscard}
+</details>
 
 ## The Complete Inference Pipeline
 
-{[3 min] Most important operational slide. The model is 36% of total
-latency---pre/post-processing are 64%. At 55 ms total, we exceed a 50 ms
+[Original slide 27](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L1112)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/05_nn_computation/images/ch05-inference-pipeline.svg]]
+
+Harvard Edge ML Systems Book contributors, [ch05-inference-pipeline.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/images/ch05-inference-pipeline.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Key:** The model is not the system—the complete pipeline determines user experience.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] Most important operational slide. The model is 36\% of total
+latency---pre/post-processing are 64\%. At 55 ms total, we exceed a 50 ms
 budget despite 20 ms inference. Teams that optimize only model inference
 miss the majority of latency.
 Ask: ``If you could cut inference to 10 ms, would you meet the budget?''
-(Answer: still 45 ms total, which is barely under.)}
+(Answer: still 45 ms total, which is barely under.)
+```
 
-% --- Full-width image ---
-
-{ch05-inference-pipeline.pdf}
-
-{0.1cm}
-{Key:}{The model is not the system---the complete pipeline determines user experience.}
+</details>
 
 ## Your Turn: MobileNetV2 Inference Analysis
 
-{[3 min]
+[Original slide 28](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L1130)
+
+Diagnose the Bottleneck
+
+**MobileNetV2**: 300M MACs, batch=1
+
+**H100**: 989 TFLOPS (FP16), 3.35 TB/s HBM3
+
+**Calculate:**
+
+1. Theoretical inference time from peak TFLOPS
+2. Arithmetic intensity (FLOPs/byte)
+3. Is MobileNetV2 compute-bound or memory-bound?
+
+(60 seconds — then compare with a neighbor)
+
+**Solution:**
+
+Peak: $300\text{M} / 989\text{T} =$ **0.3 $\mu$s**
+
+Actual: $\sim$**30 $\mu$s** (100$\times$ slower!)
+
+AI $\approx 2$ FLOPs/byte
+
+H100 ridge: 295 FLOPs/byte
+
+**Deeply memory-bound:**
+
+GPU starves waiting for data.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min]
 % -- LINK: Students just saw the inference pipeline and that the model is
-% only 36% of total latency. This exercise tests whether they can diagnose
+% only 36\% of total latency. This exercise tests whether they can diagnose
 % the compute vs memory bottleneck for a real model.
 
 % -- NARRATE: Present the problem (30s). Individual work (60s).
@@ -991,9 +1076,9 @@ Ask: ``If you could cut inference to 10 ms, would you meet the budget?''
 What is the theoretical inference time? Why is actual time 100x slower?''
 
 % -- ENGAGE: Students calculate individually (60s), then compare.
-% Theoretical: 300M MACs / 989 TFLOPS = 0.3 $$s. Actual:  30 $$s.
-% The gap: MobileNetV2 has arithmetic intensity  2 FLOPs/byte. The H100
-% ridge point is  295 FLOPs/byte. MobileNetV2 is deeply memory-bound---
+% Theoretical: 300M MACs / 989 TFLOPS = 0.3 $\mu$s. Actual: ~30 $\mu$s.
+% The gap: MobileNetV2 has arithmetic intensity ~2 FLOPs/byte. The H100
+% ridge point is ~295 FLOPs/byte. MobileNetV2 is deeply memory-bound---
 % the GPU waits for data, not math.
 
 % -- WARN: Students will divide FLOPs by peak throughput and declare victory.
@@ -1004,283 +1089,372 @@ What is the theoretical inference time? Why is actual time 100x slower?''
 % -- FLEX: [CORE] This exercise connects inference to the roofline model.
 % IF AHEAD: ``What batch size would make MobileNetV2 compute-bound on H100?''
 % IF SHORT: Show the solution immediately; emphasize the memory-bound insight.
-}
+```
 
-[T]
-  
-    { Diagnose the Bottleneck}
-
-    {0.15cm}
-    **MobileNetV2**: 300M MACs, batch=1\\
-    **H100**: 989 TFLOPS (FP16), 3.35 TB/s HBM3
-
-    {0.1cm}
-    **Calculate:**
-    {0pt}
-- Theoretical inference time from peak TFLOPS
-- Arithmetic intensity (FLOPs/byte)
-- Is MobileNetV2 compute-bound or memory-bound?
-    
-
-    {{midgray}{(60 seconds --- then compare with a neighbor)}}
-  
-  
-    
-    {mlsyscard}{errorstroke}
-    **Solution:**\\[0.05cm]
-    {
-    Peak: $300{M} / 989{T} = $ **0.3 $$s**\\
-    Actual: $$**30 $$s** (100$×$ slower!)\\[0.05cm]
-    AI $ 2$ FLOPs/byte\\
-    H100 ridge: 295 FLOPs/byte\\[0.05cm]
-    {errorstroke}{**Deeply memory-bound:**}\\
-    GPU starves waiting for data.
-    }
-    {mlsyscard}
+</details>
 
 ## USPS: A Real Deployment Story
 
-{[3 min] Ground the theory in a real deployment. The USPS digit
-recognition system (LeNet, 1990s) processed handwritten ZIP codes at
-1,000 digits/second with $<$1% error rate. $$9% uncertain cases
-routed to human operators. The complete pipeline: scanner $$ segmentation $$
-normalization $$ LeNet inference $$ confidence check $$ routing.
-Ask: ``What would happen without the confidence threshold?''}
+[Original slide 29](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L1193)
 
-[T]
-  
-    **USPS Digit Recognition (1990s):**
-    {0pt}
+**USPS Digit Recognition (1990s):**
+
 - **Task**: Read ZIP codes from mail
 - **Model**: LeNet (early CNN)
 - **Throughput**: 1,000 digits/second
 - **Rejection**: $<$1% error rate
-- **Human fallback**: $$9% uncertain cases
-    
+- **Human fallback**: $\sim$9% uncertain cases
 
-    {0.1cm}
-    {Systems lesson:}{The confidence threshold was more important than the model accuracy.}
-  
-  
-    {0.1cm}
-    **Complete pipeline:**
+**Systems lesson:** The confidence threshold was more important than the model accuracy.
 
-    {0.1cm}
-    {
-    1. Scanner captures image\\
-    2. Segment individual digits\\
-    3. Normalize ($28×28$)\\
-    4. LeNet forward pass\\
-    5. {errorstroke}{**Confidence check**}\\
-    6. Route (machine vs.\ human)
-    }
+**Complete pipeline:**
 
-    {0.1cm}
-    {mlsyscard}{routingstroke}
-    { Domain experts set the threshold based on economics, not accuracy metrics.}
-    {mlsyscard}
-  
+1. Scanner captures image
 
-{LeCun et al., ``Gradient-Based Learning,'' Proc. IEEE, 1998}
+2. Segment individual digits
 
-## Frame 28
+3. Normalize ($28\times28$)
 
-{Neural Computation Through the D{0.04em}{$$}A{0.04em}{$$}M Lens}
-{[3 min] Connect everything back to the Ch1 framework.
+4. LeNet forward pass
+
+5. **Confidence check**
+
+6. Route (machine vs. human)
+
+Domain experts set the threshold based on economics, not accuracy metrics.
+
+Source on slide: LeCun et al., “Gradient-Based Learning,” Proc. IEEE, 1998
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] Ground the theory in a real deployment. The USPS digit
+recognition system (LeNet, 1990s) processed handwritten ZIP codes at
+1,000 digits/second with $<$1\% error rate. $\sim$9\% uncertain cases
+routed to human operators. The complete pipeline: scanner $\to$ segmentation $\to$
+normalization $\to$ LeNet inference $\to$ confidence check $\to$ routing.
+Ask: ``What would happen without the confidence threshold?''
+```
+
+</details>
+
+## Neural Computation Through the D$\bullet$A$\bullet$M Lens
+
+[Original slide 30](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L1244)
+
+| **Axis** | **Neural Computation Connection** | **Iron Law** |
+| --- | --- | --- |
+| **Algorithm** | Architecture (layers, neurons, activations), forward + backward pass, ReLU vs. sigmoid (50$\times$ silicon cost) | $O$ term |
+| **Data** | 60K labeled MNIST images, batch composition, data quality determines learning success | $D_{\text{vol}}/BW$ |
+| **Machine** | GEMM $\to$ GPU parallelism, 427 KB $>$ L1 cache, Adam 3$\times$ memory drives GPU capacity | $R_{\text{peak}} \cdot \eta$ |
+
+**Diagnostic:** When performance stalls, ask *where* in D$\cdot$A$\cdot$M is the flow blocked? The USPS system succeeded because all three aligned: LeNet matched the task (A), diverse handwriting captured variation (D), specialized hardware met latency (M).
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] Connect everything back to the Ch1 framework.
 Algorithm: forward/backward pass, activation choice, architecture.
 Data: labeled examples, batch composition, data quality.
 Machine: matrix hardware, memory hierarchy, power envelope.
 The USPS system succeeded because all three aligned.
-Ask: ``For MNIST on a modern GPU, which DAM axis is the bottleneck?''}
+Ask: ``For MNIST on a modern GPU, which DAM axis is the bottleneck?''
+```
 
-{}{1.1}
-{tabular}{@{}lp{6.5cm}l@{}}
-  
-  **Axis** & **Neural Computation Connection** & **Iron Law** \\
-  
-  {computestroke}{**Algorithm**} & Architecture (layers, neurons, activations), forward + backward pass, ReLU vs.\ sigmoid (50$×$ silicon cost) & $O$ term \\
-  {datastroke}{**Data**} & 60K labeled MNIST images, batch composition, data quality determines learning success & $D_{{vol}}/BW$ \\
-  {routingstroke}{**Machine**} & GEMM $$ GPU parallelism, 427 KB $>$ L1 cache, Adam 3$×$ memory drives GPU capacity & $R_{{peak}}  $ \\
-  
-{tabular}
-
-{0.15cm}
-{mlsyscard}{crimson}
-{ **Diagnostic:** When performance stalls, ask *where* in D$$A$$M is the flow blocked? The USPS system succeeded because all three aligned: LeNet matched the task (A), diverse handwriting captured variation (D), specialized hardware met latency (M).}
-{mlsyscard}
+</details>
 
 ## Discussion: Where Is the Bottleneck?
 
-{[3 min] Turn-and-talk. The answer depends on the scenario.
-MNIST on GPU: memory-bound (arithmetic intensity $$0.5, GPU barely used).
+[Original slide 31](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L1272)
+
+Turn and Talk (90 seconds)
+
+Your team trains MNIST (109K MACs, 427 KB weights)
+
+on an H100 GPU (989 TFLOPS, 3.35 TB/s bandwidth).
+
+**Which D$\bullet$A$\bullet$M axis is the bottleneck? Why?**
+
+**Data**
+
+Memory traffic?
+
+**Algorithm**
+
+Not enough ops?
+
+**Machine**
+
+Overkill?
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min] Turn-and-talk. The answer depends on the scenario.
+MNIST on GPU: memory-bound (arithmetic intensity $\sim$0.5, GPU barely used).
 MNIST on CPU: likely fine (427 KB fits in cache, 109K ops trivial).
 GPT-7B training: compute-bound (massive MatMuls saturate GPU).
 GPT-7B inference: memory-bandwidth bound (autoregressive decoding).
-Cold-call 2--3 pairs.}
+Cold-call 2--3 pairs.
+```
 
-{0.8cm}
-{ Turn and Talk {midgray}{(90 seconds)}}
-
-{0.6cm}
-{ Your team trains MNIST (109K MACs, 427 KB weights)\\
-on an H100 GPU (989 TFLOPS, 3.35 TB/s bandwidth).\\[0.3cm]
-{Which {} axis is the bottleneck? Why?}}
-
-{0.6cm}
-[c]
-  {datastroke}{**Data**}\\{ Memory traffic?}
-  {computestroke}{**Algorithm**}\\{ Not enough ops?}
-  {routingstroke}{**Machine**}\\{ Overkill?}
+</details>
 
 ## Fallacies
 
-{[2 min] Four common misconceptions with quantitative evidence.
-Focus on the ``black box'' fallacy and the ``deeper = better'' fallacy.}
+[Original slide 32](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L1302)
 
-**Fallacy:** *Neural networks are ``black boxes'' that cannot be understood.*\\
-Activation visualization, saliency maps, and ablation studies make networks interpretable. Teams expecting line-by-line debugging waste 2--4 weeks.
+**Fallacy:** *Neural networks are “black boxes” that cannot be understood.*
 
-{0.05cm}
-**Fallacy:** *Deep learning eliminates the need for domain expertise.*\\
-USPS succeeded because postal engineers set confidence thresholds based on economics. Without domain knowledge: 40% manual routing instead of $$9%.
+Activation visualization, saliency maps, and ablation studies make networks interpretable. Teams expecting line-by-line debugging waste 2–4 weeks.
 
-{0.05cm}
-**Fallacy:** *Deeper networks are always more accurate.*\\
-Beyond 152 layers, ResNet showed negligible improvement. EfficientNet: balanced scaling beats depth-only by 2--3 points at the same FLOP cost.
+**Fallacy:** *Deep learning eliminates the need for domain expertise.*
 
-{0.05cm}
-**Fallacy:** *More compute automatically means faster training.*\\
-MNIST arithmetic intensity $$0.5 FLOPs/byte (memory-bound). A \$200 CPU matches a \$10,000 GPU for memory-bound workloads.
+USPS succeeded because postal engineers set confidence thresholds based on economics. Without domain knowledge: 40% manual routing instead of $\sim$9%.
+
+**Fallacy:** *Deeper networks are always more accurate.*
+
+Beyond 152 layers, ResNet showed negligible improvement. EfficientNet: balanced scaling beats depth-only by 2–3 points at the same FLOP cost.
+
+**Fallacy:** *More compute automatically means faster training.*
+
+MNIST arithmetic intensity $\sim$0.5 FLOPs/byte (memory-bound). A &#36;200 CPU matches a &#36;10,000 GPU for memory-bound workloads.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Four common misconceptions with quantitative evidence.
+Focus on the ``black box'' fallacy and the ``deeper = better'' fallacy.
+```
+
+</details>
 
 ## Pitfalls
 
-{[2 min] Three operational pitfalls. If short: cover just the first two.}
+[Original slide 33](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L1324)
 
-**Pitfall:** *Using neural networks for problems solvable with simpler methods.*\\
-Logistic regression training in 10 ms often matches a neural network requiring 2 hours when data has $<$1,000 examples. 95% accuracy from a neural net rarely justifies 100--1,000$×$ longer training over 94% from logistic regression.
+**Pitfall:** *Using neural networks for problems solvable with simpler methods.*
 
-{0.15cm}
-**Pitfall:** *Deploying research models without system constraints.*\\
-Production imposes latency budgets (50--100 ms end-to-end), memory limits (2--4 GB edge), and concurrent loads (100--1,000 RPS). A 20 ms model fails its 50 ms budget when pre/post-processing adds 35 ms.
+Logistic regression training in 10 ms often matches a neural network requiring 2 hours when data has $<$1,000 examples. 95% accuracy from a neural net rarely justifies 100–1,000$\times$ longer training over 94% from logistic regression.
 
-{0.15cm}
-**Pitfall:** *Training without analyzing data distribution.*\\
-A fraud detector with 99:1 class imbalance achieves 99% accuracy by always predicting ``not fraud'' while catching zero fraud cases. Cross-entropy optimizes average-case, ignoring rare critical classes.
+**Pitfall:** *Deploying research models without system constraints.*
+
+Production imposes latency budgets (50–100 ms end-to-end), memory limits (2–4 GB edge), and concurrent loads (100–1,000 RPS). A 20 ms model fails its 50 ms budget when pre/post-processing adds 35 ms.
+
+**Pitfall:** *Training without analyzing data distribution.*
+
+A fraud detector with 99:1 class imbalance achieves 99% accuracy by always predicting “not fraud” while catching zero fraud cases. Cross-entropy optimizes average-case, ignoring rare critical classes.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Three operational pitfalls. If short: cover just the first two.
+```
+
+</details>
 
 ## Muddiest Point
 
-{[1 min] One-minute paper. Collect responses (physical or digital).
-Use responses to open the NEXT lecture with targeted clarification.
-Angelo & Cross (1993) --- powerful diagnostic tool.}
+[Original slide 34](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L1342)
 
- One-minute paper\\[0.5cm]
- Write down the **muddiest point** from today's lecture.\\[0.2cm]
-{ What concept was most confusing or unclear?}\\[0.5cm]
-{{midgray}{(Hand in on your way out --- or submit digitally)}}
+One-minute paper
+
+ Write down the **muddiest point** from today's lecture.
+
+What concept was most confusing or unclear?
+
+(Hand in on your way out — or submit digitally)
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[1 min] One-minute paper. Collect responses (physical or digital).
+Use responses to open the NEXT lecture with targeted clarification.
+Angelo \& Cross (1993) --- powerful diagnostic tool.
+```
+
+</details>
 
 ## What Were the Key Ideas?
 
-{[2 min] Retrieval practice. Students write 90 seconds, no notes.
-Do NOT show next slide yet. Walk around the room.}
+[Original slide 35](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L1355)
 
-{1.5cm}
-{ Close your notes.}
+Close your notes.
 
-{0.8cm}
-{ Write down the **4 most important concepts** from today.}
+Write down the **4 most important concepts** from today.
 
-{0.8cm}
-{{midgray}{90 seconds---no peeking.}}
+90 seconds—no peeking.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Retrieval practice. Students write 90 seconds, no notes.
+Do NOT show next slide yet. Walk around the room.
+```
+
+</details>
 
 ## Key Takeaways
 
-{[2 min] Reveal. Walk through each bullet. Emphasize quantitative
-anchors: 1,092$×$, 50$×$ transistor gap (ReLU vs.\ sigmoid), 3$×$ Adam memory,
-92% in Layer 1, 36% model vs 64% pipeline.}
+[Original slide 36](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L1371)
 
-{0pt}
-- **1,092$×$ compute explosion**: Same digit, rule-based to neural net. Arithmetic replaces logic.
-- **MAC is the atom**: $y = f( x_i w_i + b)$. M$×$N MACs = one matrix multiply per layer.
-- **Activation choice = hardware decision**: ReLU 50$×$ cheaper than sigmoid (50 vs.\ 2,500 transistors). Vanishing gradients ($0.25^{20}  10^{-12}$) killed deep sigmoid nets.
-- **Training costs $$3$×$ forward**: Backprop computes gradients ($$2N); gradient descent applies updates.
-- **Training memory = 4$×$ inference**: Weights + gradients + Adam + activations. GPT-7B: 84+ GB before activations.
+- **1,092$\times$ compute explosion**: Same digit, rule-based to neural net. Arithmetic replaces logic.
+- **MAC is the atom**: $y = f(\sum x_i w_i + b)$. M$\times$N MACs = one matrix multiply per layer.
+- **Activation choice = hardware decision**: ReLU 50$\times$ cheaper than sigmoid (50 vs. 2,500 transistors). Vanishing gradients ($0.25^{20} \approx 10^{-12}$) killed deep sigmoid nets.
+- **Training costs $\sim$3$\times$ forward**: Backprop computes gradients ($\sim$2N); gradient descent applies updates.
+- **Training memory = 4$\times$ inference**: Weights + gradients + Adam + activations. GPT-7B: 84+ GB before activations.
 - **The model is not the system**: Pre/post = 64% of pipeline latency. Optimizing only inference misses the majority.
-- **D$$A$$M governs success**: Algorithm defines ops, data drives learning, machine executes. All three must align.
+- **D$\cdot$A$\cdot$M governs success**: Algorithm defines ops, data drives learning, machine executes. All three must align.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Reveal. Walk through each bullet. Emphasize quantitative
+anchors: 1,092$\times$, 50$\times$ transistor gap (ReLU vs.\ sigmoid), 3$\times$ Adam memory,
+92\% in Layer 1, 36\% model vs 64\% pipeline.
+```
+
+</details>
 
 ## References
 
-{[1 min] Point students to canonical papers.}
+[Original slide 37](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L1389)
 
-{LeCun+98}{LeCun et al. ``Gradient-Based Learning Applied to Document Recognition.'' Proc. IEEE, 1998.}
-{LeCun+15}{LeCun, Bengio, & Hinton. ``Deep Learning.'' Nature, 2015.}
-{Dalal+05}{Dalal & Triggs. ``Histograms of Oriented Gradients for Human Detection.'' CVPR, 2005.}
-{Nair+10}{Nair & Hinton. ``Rectified Linear Units Improve Restricted Boltzmann Machines.'' ICML, 2010.}
-{Kingma+15}{Kingma & Ba. ``Adam: A Method for Stochastic Optimization.'' ICLR, 2015.}
-{Rumelhart+86}{Rumelhart, Hinton, & Williams. ``Learning Representations by Back-Propagating Errors.'' Nature, 1986.}
+**LeCun+98** LeCun et al. “Gradient-Based Learning Applied to Document Recognition.” Proc. IEEE, 1998.
+
+**LeCun+15** LeCun, Bengio, & Hinton. “Deep Learning.” Nature, 2015.
+
+**Dalal+05** Dalal & Triggs. “Histograms of Oriented Gradients for Human Detection.” CVPR, 2005.
+
+**Nair+10** Nair & Hinton. “Rectified Linear Units Improve Restricted Boltzmann Machines.” ICML, 2010.
+
+**Kingma+15** Kingma & Ba. “Adam: A Method for Stochastic Optimization.” ICLR, 2015.
+
+**Rumelhart+86** Rumelhart, Hinton, & Williams. “Learning Representations by Back-Propagating Errors.” Nature, 1986.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[1 min] Point students to canonical papers.
+```
+
+</details>
 
 ## Next Lecture: Network Architectures
 
-{[1 min] Forward hook. Fully connected networks treat every input
+[Original slide 38](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L1402)
+
+Spatial
+
+Images have local structure. Nearby pixels matter; distant ones do not.
+
+Sequential
+
+Text has order. Word meaning depends on context and position.
+
+Temporal
+
+Time series has dynamics. Past patterns predict future states.
+
+Fully connected networks are *structurally blind*.
+
+**How do specialized architectures exploit problem structure?**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[1 min] Forward hook. Fully connected networks treat every input
 independently---images have spatial locality, text has sequences, time
 series has temporal dynamics. Specialized architectures encode this
 structure directly. The question: how do you trade universal flexibility
-for efficiency?}
+for efficiency?
+```
 
-[c]
-  
-    
-    {mlsyscard}{computestroke}
-    
-    { Spatial}\\[0.1cm]
-    { Images have local structure. Nearby pixels matter; distant ones do not.}
-    {mlsyscard}
-  
-  
-    
-    {mlsyscard}{datastroke}
-    
-    { Sequential}\\[0.1cm]
-    { Text has order. Word meaning depends on context and position.}
-    {mlsyscard}
-  
-  
-    
-    {mlsyscard}{routingstroke}
-    
-    { Temporal}\\[0.1cm]
-    { Time series has dynamics. Past patterns predict future states.}
-    {mlsyscard}
-  
-
-{0.3cm}
-
-{ Fully connected networks are *structurally blind*.\\[0.1cm]
-**How do specialized architectures exploit problem structure?**}
+</details>
 
 ## Backup: MAC Calculation for a Full Layer
 
-{[2 min] Use for additional depth or if students need alternative explanation.
+[Original slide 39](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L1450)
+
+Use if students want to verify the MNIST MAC count.
+
+small Layer 1 ($784 \times 128$): $784 \times 128 = 100{,}352$ MACs.
+
+ Layer 2 ($128 \times 64$): $128 \times 64 = 8{,}192$ MACs.
+
+ Layer 3 ($64 \times 10$): $64 \times 10 = 640$ MACs.
+
+ Total: $109{,}184$ MACs. Layer 1 = 92% of total.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Use for additional depth or if students need alternative explanation.
 % -- NARRATE: Walk layer by layer through the MAC count.
 % -- FLEX: [OPTIONAL] Use if students ask ``where does 109,184 come from?''
-}
+```
 
-Use if students want to verify the MNIST MAC count.\ Layer 1 ($784 × 128$): $784 × 128 = 100{,}352$ MACs.\\ Layer 2 ($128 × 64$): $128 × 64 = 8{,}192$ MACs.\\ Layer 3 ($64 × 10$): $64 × 10 = 640$ MACs.\\ Total: $109{,}184$ MACs. Layer 1 = 92% of total.
+</details>
 
 ## Backup: Gradient Checkpointing Preview
 
-{[2 min] Use for additional depth or if students need alternative explanation.
+[Original slide 40](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L1459)
+
+Use if students ask “can we recompute activations instead of storing them?”
+
+small Yes — gradient checkpointing saves activations only at $\sqrt{L}$ layer boundaries. Recomputes the rest during backward pass.
+
+ Trade: $\sim$33% more compute for up to 10$\times$ memory reduction.
+
+ Covered in detail in the Training chapter.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Use for additional depth or if students need alternative explanation.
 % -- NARRATE: Explain the compute-memory trade-off for checkpointing.
 % -- FLEX: [OPTIONAL] Use if students ask about recomputing activations.
-}
+```
 
-Use if students ask ``can we recompute activations instead of storing them?''\ Yes --- gradient checkpointing saves activations only at ${L}$ layer boundaries. Recomputes the rest during backward pass.\\ Trade: $$33% more compute for up to 10$×$ memory reduction.\\ Covered in detail in the Training chapter.
+</details>
 
 ## Backup: The 2012 ImageNet Moment
 
-{[2 min]
+[Original slide 41](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L1468)
+
+**War Story: How Neural Computation Changed an Industry**
+
+In 2012, AlexNet won ImageNet with 15.3% error (vs. 26.2% for the runner-up). The compute budget: 2 GTX 580 GPUs training for 5–6 days.
+
+| **Year** | **Model** | **Error** | **GPU-Days** |
+| --- | --- | --- | --- |
+| 2011 | SIFT + SVM | 26.2% | 0 (CPU only) |
+| 2012 | AlexNet | 15.3% | $\sim$12 |
+| 2015 | ResNet-152 | 3.6% | $\sim$200 |
+| 2020 | ViT-L/16 | 1.8% | $\sim$2,500 |
+
+Every 10$\times$ improvement in error required $\sim$100$\times$ more compute. The 1,092$\times$ explosion was just the beginning.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- NARRATE: War story connecting neural computation to industry impact.
 % Use when students question ``why does this matter?''
-% Walk the table row by row: each 10x accuracy gain required  100x more compute.
+% Walk the table row by row: each 10x accuracy gain required ~100x more compute.
 % The 1,092x explosion in Chapter 5 is not the end of the story---it was the start.
 
 % -- ENGAGE: ``Why did error drop 11 points in one year (2011 to 2012)?''
@@ -1288,61 +1462,38 @@ Use if students ask ``can we recompute activations instead of storing them?''\ Y
 % not just a bigger model.]
 
 % -- FLEX: [OPTIONAL] Motivational backup for skeptical audiences.
-}
+```
 
-**War Story: How Neural Computation Changed an Industry**
-
-{0.1cm}
-In 2012, AlexNet won ImageNet with 15.3% error (vs.\ 26.2% for the runner-up). The compute budget: 2 GTX 580 GPUs training for 5--6 days.
-
-{0.05cm}
-
-{}{1.05}
-{tabular}{@{}lrrr@{}}
-  
-  **Year** & **Model** & **Error** & **GPU-Days** \\
-  
-  2011 & SIFT + SVM & 26.2% & 0 (CPU only) \\
-  2012 & AlexNet & 15.3% & $$12 \\
-  2015 & ResNet-152 & 3.6% & $$200 \\
-  2020 & ViT-L/16 & 1.8% & $$2,500 \\
-  
-{tabular}
-
-{0.05cm}
-
-{mlsyscard}{crimson}
-{ Every 10$×$ improvement in error required $$100$×$ more compute. The 1,092$×$ explosion was just the beginning.}
-{mlsyscard}
+</details>
 
 ## Backup: Numerical Instability Zoo
 
-{[2 min]
+[Original slide 42](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/05_nn_computation/05_nn_computation.tex#L1508)
+
+| **Symptom** | **Cause** | **Layer** | **Fix** |
+| --- | --- | --- | --- |
+| Loss $\to$ NaN | Gradient overflow | Any | Gradient clipping, BF16 |
+| Loss plateaus | Vanishing gradients | Deep sigmoid | Switch to ReLU |
+| Weights $\to$ 0 | Dead neurons | ReLU layers | Leaky ReLU, lower LR |
+| Loss oscillates | LR too high | Optimizer | Reduce $\alpha$ by 10$\times$ |
+| OOM crash | Activation memory | Large batch | Reduce batch, checkpointing |
+
+**Debugging rule**: Neural network bugs are silent—the code runs, the math fails. Always monitor loss curves and gradient norms during training.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- NARRATE: Reference table for common training failures.
 % Use when students encounter NaN/Inf during assignments.
 % Walk the table: each row is a symptom-cause-fix triple.
 % Emphasize: bugs are silent---the code runs, the math fails (Ariane 5 redux).
 
 % -- FLEX: [OPTIONAL] Debugging reference for lab sessions.
-}
+```
 
-{}{1.05}
-{tabular}{@{}lllp{4cm}@{}}
-  
-  **Symptom** & **Cause** & **Layer** & **Fix** \\
-  
-  Loss $$ NaN & Gradient overflow & Any & Gradient clipping, BF16 \\
-  Loss plateaus & Vanishing gradients & Deep sigmoid & Switch to ReLU \\
-  Weights $$ 0 & Dead neurons & ReLU layers & Leaky ReLU, lower LR \\
-  Loss oscillates & LR too high & Optimizer & Reduce $$ by 10$×$ \\
-  OOM crash & Activation memory & Large batch & Reduce batch, checkpointing \\
-  
-{tabular}
-
-{0.1cm}
-{mlsyscard}{errorstroke}
-{ **Debugging rule**: Neural network bugs are silent---the code runs, the math fails. Always monitor loss curves and gradient norms during training.}
-{mlsyscard}
+</details>
 
 ## Complete original Beamer source
 

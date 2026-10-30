@@ -1,0 +1,197 @@
+{
+  "verified_at": "2026-10-19",
+  "used_in": "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+  "assets": [
+    {
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "last_verified": "2026-10-19",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md"
+      ],
+      "id": "curated-spec-leviathan-generation-0014d0d86549",
+      "asset": "00 Учебник/Assets/Figures/curated/speculative-review-2026-10/leviathan-generation.png",
+      "author": "Yaniv Leviathan, Matan Kalman, Yossi Matias",
+      "title": "Speculative decoding, Figure 1: token acceptance example",
+      "width": 2624,
+      "height": 657,
+      "sha256": "0014d0d865498feb7553c4e478a0355b24db0b1b20c353223f8df0bec044fc4e",
+      "source_url": "https://arxiv.org/src/2211.17192v2",
+      "source_asset": "raw/papers/speculative-2211.17192v2/figure1.png",
+      "source_archive": "raw/papers/speculative-2211.17192v2/source.tar.gz",
+      "source_archive_sha256": "d1bb88f5562a94c2a294d69c63915e6eede23181a53c9f4951800aa57d2a7d60",
+      "source_member": "figure1.png",
+      "license_evidence": "https://arxiv.org/abs/2211.17192v2",
+      "derivation": "source-raster-copy",
+      "modifications": "Copied unchanged from the versioned author archive."
+    },
+    {
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "last_verified": "2026-10-19",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md"
+      ],
+      "id": "curated-spec-leviathan-timeline-cf52d8699301",
+      "asset": "00 Учебник/Assets/Figures/curated/speculative-review-2026-10/leviathan-timeline.png",
+      "author": "Yaniv Leviathan, Matan Kalman, Yossi Matias",
+      "title": "Speculative decoding, Figure 5: encoder-decoder time trace",
+      "width": 3000,
+      "height": 548,
+      "sha256": "cf52d86993010de8bded6f85dc2c7efee41b9bca17bb35f5f6d5a36576c97ce3",
+      "source_url": "https://arxiv.org/src/2211.17192v2",
+      "source_asset": "05 Источники/Papers/Source PDFs/speculative-leviathan-2211.17192v2-figure5.pdf",
+      "source_asset_sha256": "17a9fd8509191cf30bfb8e7f199456169a5ffe2c3fba40594d358af154b6820c",
+      "source_archive": "raw/papers/speculative-2211.17192v2/source.tar.gz",
+      "source_archive_sha256": "d1bb88f5562a94c2a294d69c63915e6eede23181a53c9f4951800aa57d2a7d60",
+      "source_member": "trace_diagram.pdf",
+      "source_page": 1,
+      "crop_box_px": [
+        0,
+        0,
+        3000,
+        548
+      ],
+      "render_page_size_px": [
+        3000,
+        548
+      ],
+      "license_evidence": "https://arxiv.org/abs/2211.17192v2",
+      "derivation": "pdf-page-render-crop",
+      "modifications": "Full-page Poppler render; no content cropped or redrawn."
+    },
+    {
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "last_verified": "2026-10-19",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md"
+      ],
+      "id": "curated-spec-chen-lookahead-01fecc8b77ad",
+      "asset": "00 Учебник/Assets/Figures/curated/speculative-review-2026-10/chen-lookahead.png",
+      "author": "Charlie Chen, Sebastian Borgeaud, Geoffrey Irving, Jean-Baptiste Lespiau, Laurent Sifre, John Jumper",
+      "title": "Speculative sampling, Figure 1: lookahead trade-off",
+      "width": 3000,
+      "height": 1261,
+      "sha256": "01fecc8b77ad17cf579ec574260f40eeadeaf7e4e1127668f05ca8c35f197a79",
+      "source_url": "https://arxiv.org/src/2302.01318v1",
+      "source_asset": "05 Источники/Papers/Source PDFs/speculative-chen-2302.01318v1-figure1.pdf",
+      "source_asset_sha256": "15fed5984e567b90b9ccae5b41ec8b17b3d008b0e5feb57eec10c14294c80e60",
+      "source_archive": "raw/papers/speculative-2302.01318v1/source.tar.gz",
+      "source_archive_sha256": "8da5ef0fe41fd0a3a95c6b42d0df558331ec80c5647b6df6c229938363ae12fb",
+      "source_member": "figures/speculative_sampling_results_2.pdf",
+      "source_page": 1,
+      "crop_box_px": [
+        0,
+        0,
+        3000,
+        1261
+      ],
+      "render_page_size_px": [
+        3000,
+        1261
+      ],
+      "license_evidence": "https://arxiv.org/abs/2302.01318v1",
+      "derivation": "pdf-page-render-crop",
+      "modifications": "Full-page Poppler render of the final figure selected in speculative_sampling.tex; no content cropped or redrawn."
+    },
+    {
+      "license": "Apache-2.0",
+      "license_url": "https://github.com/SafeAILab/EAGLE/blob/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/LICENSE",
+      "metadata_status": "verified",
+      "provenance_confirmation": "pinned-upstream-repository",
+      "last_verified": "2026-10-19",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md"
+      ],
+      "id": "curated-spec-eagle-feature-tree-7536383a14b7",
+      "asset": "00 Учебник/Assets/Figures/curated/speculative-review-2026-10/eagle-feature-tree.png",
+      "author": "Yuhui Li, Fangyun Wei, Chao Zhang, Hongyang Zhang",
+      "title": "EAGLE feature drafting and tree construction",
+      "width": 2073,
+      "height": 900,
+      "sha256": "7536383a14b792b4131e1a918fc25c5357e5c186511702dc9ea9a76927db35f0",
+      "source_url": "https://github.com/SafeAILab/EAGLE/blob/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/figs/fig1.png",
+      "source_image_url": "https://raw.githubusercontent.com/SafeAILab/EAGLE/cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b/figs/fig1.png",
+      "commit": "cb7e0841fe0c206c6ed74a197ad5e2a1f13f5a2b",
+      "license_copy": "site/public/licenses/eagle-cb7e0841-Apache-2.0.txt",
+      "derivation": "source-raster-copy",
+      "modifications": "Copied unchanged from the official repository; no crop, resize or redrawing."
+    },
+    {
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "last_verified": "2026-10-19",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md"
+      ],
+      "id": "curated-spec-eagle2-tree-mask-7d83e9589f0a",
+      "asset": "00 Учебник/Assets/Figures/curated/speculative-review-2026-10/eagle2-tree-mask.png",
+      "author": "Yuhui Li, Fangyun Wei, Chao Zhang, Hongyang Zhang",
+      "title": "EAGLE-2 Figure 7: expansion, reranking and tree mask",
+      "width": 1000,
+      "height": 1790,
+      "sha256": "7d83e9589f0a45d6facf97837c75134dd8a03e59fb7d59e6ff0f6f45d4d14365",
+      "source_url": "https://aclanthology.org/2024.emnlp-main.422.pdf",
+      "source_asset": "05 Источники/Papers/Source PDFs/eagle2-emnlp-2024.pdf",
+      "source_asset_sha256": "922fb0ff609792d6a50e43d35c45edb69a3194f4b69b1f87176c65d04ab65cad",
+      "source_page": 5,
+      "crop_box_px": [
+        1160,
+        520,
+        2160,
+        2310
+      ],
+      "render_page_size_px": [
+        2263,
+        3200
+      ],
+      "license_evidence": "https://aclanthology.org/2024.emnlp-main.422/",
+      "derivation": "pdf-page-render-crop",
+      "modifications": "Poppler render of the published ACL PDF, cropped to the complete Figure 7 artwork; surrounding prose and caption excluded, no artwork redrawn."
+    },
+    {
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "metadata_status": "verified",
+      "provenance_confirmation": "source-license-verified",
+      "last_verified": "2026-10-19",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md"
+      ],
+      "id": "curated-spec-eagle-shifted-input-7ebaaa392d1b",
+      "asset": "00 Учебник/Assets/Figures/curated/speculative-review-2026-10/eagle-shifted-input.png",
+      "author": "Yuhui Li, Fangyun Wei, Chao Zhang, Hongyang Zhang",
+      "title": "EAGLE ICML Figure 6: shifted token/feature input",
+      "width": 700,
+      "height": 655,
+      "sha256": "7ebaaa392d1b3dac4653fcfe6249626c628ac310e72987b97e943430bf03545f",
+      "source_url": "https://proceedings.mlr.press/v235/li24bt.html",
+      "source_asset": "05 Источники/Papers/Source PDFs/eagle1-pmlr-2024.pdf",
+      "source_asset_sha256": "260141e3e3942ac5797be5bd537aca30b9033d457e61e647fe119322ec9958f7",
+      "source_page": 4,
+      "crop_box_px": [
+        1370,
+        265,
+        2070,
+        920
+      ],
+      "render_page_size_px": [
+        2473,
+        3200
+      ],
+      "license_evidence": "https://proceedings.mlr.press/pmlr-license-agreement.pdf",
+      "derivation": "pdf-page-render-crop",
+      "modifications": "Poppler render of the published ICML 2024 PDF, cropped to the complete Figure 6 artwork; surrounding paper text excluded, no diagram elements redrawn or translated."
+    }
+  ]
+}
+

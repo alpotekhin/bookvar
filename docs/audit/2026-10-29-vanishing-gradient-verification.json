@@ -1,0 +1,225 @@
+{
+  "date": "2026-10-29",
+  "status": "reconciled-existing-explanations",
+  "scope": "Semantic reconciliation of Concepts/Training/Vanishing Gradient.md against the actual canonical owners. No chapter prose, code, image, index, translation or publication route was changed.",
+  "artifactHashes": {
+    "Concepts/Training/Vanishing Gradient.md": "00d64033654378d0e3d5b2d955ec1dbd25873bcba14fa00f1d668dd7eee0a853",
+    "00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT.md": "9e7990cd4670623c0f8b4cc78fc233d30dfca3696143dee5ad01f87f2fa136b4",
+    "00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md": "019c8f6a0270bcdb4f282ade039108c289f5d7d391dde779e664fd046fa61435",
+    "00 Учебник/01 Основы нейронных сетей/02 Функции активации.md": "467efffdbfaad2a74bb9e31ff86fed9553cc0478664407efd34d2c678e4b7696",
+    "00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md": "c0afc59f36af36d3616792c6dc8873cdee8ce419fa8cf0db000698f2393283f4",
+    "00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md": "9a72e3c171518af749c26271e183bf35c55d2f98f76a146cf93c8d8404efa02d",
+    "00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md": "8795146abe1f9c7a8de8a232c958aae472e3788d963f99aba557b90690fee2c0",
+    "05 Источники/Originals/rnn-bptt-2026-10-21/d2l-bptt.md": "fb24d5bc9a0f7a6847143f2e5af445bfa0acce2573a8d62bf981fc2986776448",
+    "05 Источники/Originals/initialization-normalization-2026-10-21/d2l-init.md": "0a53effb2fa59ca8b6edb6d3c46a7b35b40e5117ad96393f7ff84602342d9448",
+    "05 Источники/Originals/initialization-normalization-2026-10-21/d2l-resnet.md": "64325be1880bac5ed388512412877b9fae653e4c967789c93319a4a91a316ed5",
+    "publishing/tools/check_rnn_bptt_examples.py": "0f8714bbce0a80eef00ac135a48db31ef40056a1bccdf955da9ad9140de81dc0",
+    "publishing/tools/check_norm_examples.py": "330d637dabbc3fc33c8b853ab40ab5ea01f305d88e3ba5498ab62ff013e32ce6",
+    "publishing/tools/check_activation_examples.py": "df8f204f37c958476ecd73a529cdaed98c6e55b1de7d0fe6cb79e6e35bb0bb29",
+    "publishing/tools/check_lstm_gru_examples.py": "65b5cdd4d6e68ac73a06e44dc02c9e3bff5912711a0880ca3ff4623dc31fdb3b",
+    "publishing/tools/check_precision_examples.py": "4b3ba7ef41e4c20c815cdc66c039da3fa58651069ed7437fe3fa1b690713ac46"
+  },
+  "freshWholeReads": [
+    {
+      "source": "00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT.md",
+      "pythonBlocks": 6,
+      "figures": 6
+    },
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md",
+      "pythonBlocks": 3,
+      "figures": 3
+    },
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/02 Функции активации.md",
+      "pythonBlocks": 3,
+      "figures": 8
+    }
+  ],
+  "reusedWholeReads": [
+    {
+      "source": "00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md",
+      "sha256": "c0afc59f36af36d3616792c6dc8873cdee8ce419fa8cf0db000698f2393283f4",
+      "qualification": "Previously read in full for this same active reconciliation; exact current revision verified. Not counted as a fresh whole-chapter read."
+    },
+    {
+      "source": "00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md",
+      "sha256": "9a72e3c171518af749c26271e183bf35c55d2f98f76a146cf93c8d8404efa02d",
+      "qualification": "Previously read in full for this same active reconciliation; exact current revision verified. Not counted as a fresh whole-chapter read."
+    },
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md",
+      "sha256": "8795146abe1f9c7a8de8a232c958aae472e3788d963f99aba557b90690fee2c0",
+      "qualification": "Previously read in full for this same active reconciliation; exact current revision verified. Not counted as a fresh whole-chapter read."
+    }
+  ],
+  "primarySections": [
+    {
+      "source": "05 Источники/Originals/rnn-bptt-2026-10-21/d2l-bptt.md",
+      "url": "https://d2l.ai/chapter_recurrent-neural-networks/bptt.html",
+      "read": "Complete chapter, including general gradient recursion, full/fixed/random truncation, detailed linear RNN backward and original diagrams.",
+      "comparison": "Canonical owner gives a full nonlinear tanh backward, explicitly distinguishes the source's simplified linear example and retains the original diagrams. It also separates truncating a gradient from resetting a state."
+    },
+    {
+      "source": "05 Источники/Originals/initialization-normalization-2026-10-21/d2l-init.md",
+      "url": "https://d2l.ai/chapter_multilayer-perceptrons/numerical-stability-and-init.html",
+      "read": "Complete chapter, including vanishing/exploding products, symmetry and Xavier derivation.",
+      "comparison": "Canonical owner keeps the derivation's independence and moment assumptions; it explicitly shows the incompatible fan_in/fan_out requirements when widths differ."
+    },
+    {
+      "source": "05 Источники/Originals/initialization-normalization-2026-10-21/d2l-resnet.md",
+      "url": "https://d2l.ai/chapter_convolutional-modern/resnet.html#residual-blocks",
+      "read": "Introduction, Function Classes and the entire Residual Blocks section through the two shape examples, lines 1–288.",
+      "comparison": "Canonical owner preserves both original block diagrams, distinguishes identity and projection skips, accounts for the activation after addition and computes both gradient paths."
+    }
+  ],
+  "mechanismCoverage": [
+    {
+      "source": "00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT.md",
+      "headings": [
+        "Обратный проход на тех же трёх шагах",
+        "Общая формула для языковой модели",
+        "Почему далёкие зависимости трудно обучать",
+        "Передать состояние, отсоединить историю"
+      ],
+      "workedCases": [
+        "Manual dL/dw=.2533642027283495 and dL/dv=.5389161748923231 checked against autograd and finite differences.",
+        "At zero states, derivative w^100 for w=.8,1,1.1; ordered noncommuting matrix Jacobians and an upper norm bound that is not a lower bound.",
+        "Detach keeps h3=.654413 but changes recurrent-weight gradient to .13234801386407055; reset changes the forward state."
+      ]
+    },
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md",
+      "headings": [
+        "Xavier: согласование прямого и обратного проходов",
+        "He: поправка на ReLU",
+        "Почему backward нормализации связывает признаки",
+        "Как складываются градиенты",
+        "Pre-norm и post-norm"
+      ],
+      "workedCases": [
+        "Xavier 4->16 scales forward second moment by .4 and backward by 1.6; exact preservation is not guaranteed.",
+        "F(x)=-x cancels the identity; a projection skip contributes J_P, not I.",
+        "With zero branch and x=(1,2,3), pre-norm passes incoming gradient directly; post-norm LayerNorm returns approximately (.2041,-.4082,.2041)."
+      ]
+    },
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/02 Функции активации.md",
+      "headings": [
+        "Sigmoid",
+        "ReLU",
+        "GELU",
+        "SiLU / Swish"
+      ],
+      "workedCases": [
+        "Ten sigmoid derivatives at zero multiply to (1/4)^10.",
+        "A negative ReLU on one example is not a proof of permanent inactivity.",
+        "GELU/SiLU have negative slopes and isolated zero derivatives at their minima."
+      ]
+    },
+    {
+      "source": "00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md",
+      "coverage": "Direct LSTM cell-state path, products of forget gates, saturation and other Jacobian paths; no arbitrary-length constant-gradient guarantee."
+    },
+    {
+      "source": "00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md",
+      "coverage": "Representability, arithmetic rounding, master weights, loss scaling and FP16/BF16 ranges; analytic sensitivity is a separate issue."
+    }
+  ],
+  "excludedClaims": [
+    "2^-50 is below FP32 representability; it is exactly representable. An update may nevertheless be rounded away when subtracted from a much larger parameter.",
+    "I+J_F guarantees a gradient norm of at least one, or residual connections universally prevent vanishing.",
+    "The recurrent weight's spectral radius alone characterizes every trajectory of a nonlinear tanh RNN, or universal 10–20-step / six-layer limits hold.",
+    "A forget gate approximately one preserves a constant signal over any length; normalization prevents saturation or ensures well-conditioned derivatives for every input.",
+    "One negative ReLU input permanently kills a neuron; GELU/SiLU have nonzero derivatives everywhere; initialization exactly preserves all finite-network activation and gradient variances.",
+    "BF16 solves analytic vanishing, the issue is architecturally solved, or a long RL horizon / many diffusion sampling steps automatically create BPTT through those steps."
+  ],
+  "namedArchitectureLimit": "The archival names DenseNet, U-Net and Highway Networks are a list of related skip-connection designs, not explanations. This acceptance does not declare a complete treatment of each architecture or promote that list to a separate course.",
+  "executedChecks": [
+    {
+      "command": "uv run --offline --with torch==2.14.1 --with numpy==2.3.5 python publishing/tools/check_rnn_bptt_examples.py",
+      "result": "PASS: 6 live Python blocks, complete tiny-LM training, manual and all-step BPTT, detach/reset, clipping, original figures, 216 projection/gradient cases, 48 batched reductions and 64 dependency grids.",
+      "log": "/var/tmp/bookvar-vanishing-rnn-20261029.log"
+    },
+    {
+      "command": "uv run --offline --with torch==2.14.1 --with numpy==2.3.5 --with scipy python publishing/tools/check_norm_examples.py",
+      "result": "PASS: 3 live blocks; symmetry, initializers, moments, normalization axes/modes/VJPs, overflow, zero-projection learning and pre/post Jacobians.",
+      "log": "/var/tmp/bookvar-vanishing-norm-20261029.log"
+    },
+    {
+      "command": "uv run --offline --with torch==2.14.1 --with numpy==2.3.5 --with scipy python publishing/tools/check_activation_examples.py",
+      "result": "PASS: 3 live blocks, local derivatives, minima, dead/leaky ReLU, GELU approximation, SwiGLU and source SVGs.",
+      "log": "/var/tmp/bookvar-vanishing-activation-20261029.log"
+    },
+    {
+      "command": "uv run --offline --with torch==2.14.1 --with numpy==2.3.5 python publishing/tools/check_lstm_gru_examples.py",
+      "result": "PASS: complete LSTM/GRU mechanisms and all eleven unchanged original images.",
+      "log": "/var/tmp/bookvar-vanishing-lstm-20261029.log"
+    },
+    {
+      "command": "uv run --offline --with torch==2.14.1 --with numpy==2.3.5 python publishing/tools/check_precision_examples.py",
+      "result": "PASS: NumPy/CPU examples, rounding, sums, master weights, loss scaling and weighted gradients. CUDA AMP snippet parsed, not executed.",
+      "log": "/var/tmp/bookvar-vanishing-precision-20261029.log"
+    }
+  ],
+  "independentCounterexamples": {
+    "log": "/var/tmp/bookvar-vanishing-counterexamples-20261029.log",
+    "results": [
+      "FP32 represents 2^-50 exactly as 8.881784197001252e-16, but float32(1)-float32(2^-50) equals float32(1).",
+      "Autograd returns zero through x+(-x). Matrices diag(2,0) and diag(0,2) both have operator norm 2 but zero product.",
+      "For W=[[2,2],[-2,-2]], h=(0,sqrt(.99)) and bias=atanh(h)-W h, h is a stationary tanh state. W has spectral radius 0, while diag(1-h^2) W has spectral radius 1.98. This excludes the archival general nonlinear spectral-radius claim."
+    ]
+  },
+  "visualReview": {
+    "surface": "Existing root preview, not a fresh Pages deployment.",
+    "desktop": {
+      "viewport": [
+        1280,
+        900
+      ],
+      "clientWidth": 1265,
+      "scrollWidth": 1265,
+      "observed": "RNN sensitivity table, full original D2L BPTT diagram in viewer and original activation graph.",
+      "katexErrors": 0
+    },
+    "mobile": {
+      "viewport": [
+        360,
+        800
+      ],
+      "clientWidth": 345,
+      "scrollWidth": 345,
+      "observed": "Residual Jacobian explanation in the explicitly labelled EN canonical-language fallback.",
+      "katexErrors": 0
+    },
+    "loadedFigures": {
+      "rnn": 6,
+      "normalization": 3,
+      "activations": 8
+    },
+    "evidence": [
+      {
+        "path": "docs/audit/evidence/2026-10-29-vanishing-gradient/desktop-activation-original.png",
+        "sha256": "68c37f1829410a8eeb2daadc0caba11879952413358a2d8e02b7ee7a4c870829"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-vanishing-gradient/desktop-original-bptt.png",
+        "sha256": "6a6c0e910ae45e5dcefc912adc38900f2868f55c64946fbbc24c040f9747139b"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-vanishing-gradient/desktop-rnn-jacobians.png",
+        "sha256": "13c4600ccd30f8b56fc7fa9bc3d4eb6adf837c89bba1832f21de02c2c443f7bb"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-vanishing-gradient/mobile-residual-gradients-en-fallback.png",
+        "sha256": "213d7251ba5205210d36b6d56d6d80b3126a903643d1ff0a3cce321731185ea0"
+      }
+    ]
+  },
+  "styleReview": "No new chapter prose was synthesized or translated. Full existing explanations were read instead of replacing them with short definitions; no-ai-slop and academic qualifications retained.",
+  "remainingWithinThisNote": [],
+  "notClaimed": [
+    "This audit is not a new translation, chapter rewrite, GPU benchmark or new Pages build.",
+    "The remaining 19 archival notes, conceptual-route audit and dev/Pages release are not complete."
+  ]
+}

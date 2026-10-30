@@ -1,0 +1,161 @@
+{
+  "date": "2026-10-29",
+  "status": "reconciled-existing-explanation",
+  "scope": "Full archival DPO note compared with its complete 1266-line canonical owner. No chapter prose or figures were rewritten.",
+  "artifactHashes": {
+    "Concepts/Training/DPO.md": "8ddf8990c301a7e07014e53b934685f92706230c2b9736e25fb1c3cf47bf09c5",
+    "00 Учебник/12 Post-training и Alignment/05 DPO.md": "fd7a08d5813a5427b74a943d8a57f00978877b8edce13ac1027ccc04cf172c06",
+    "publishing/tools/check_dpo_examples.py": "035acf18333a35f5f0347219a92d38f67fd70b6cbaa268f9867251526cdadf84",
+    "docs/audit/2026-10-24-dpo.md": "718a34619c803d87e91cf45763511a2012eafe4f69c1f266514cf0fb25a0fd63",
+    "00 Учебник/Assets/Figures/curated/dpo/fig1.png": "af51c080272561bcb736aef8b56c1ef220465f89b8ad3bf045014922941e89c4",
+    "00 Учебник/Assets/Figures/curated/dpo/dpo-pipeline.png": "81be2a401be590362dbddde1478e67d756374e2607b1c2460c651035c8255cd2",
+    "00 Учебник/Assets/Figures/curated/dpo/fig3.png": "6172e63442528043d50e428b147874b6ceb058e9d451748403ccc1d6946c92ed",
+    "00 Учебник/Assets/Figures/curated/dpo/fig4.png": "c664c0d557ebd4d9e496a83e0e034a928580b29ce07e7097329e203771031675",
+    "00 Учебник/Assets/Figures/curated/dpo-review-2026-09/reward-kl-frontier.png": "bed21d4dfd6d6e5ead0de54c36d5b9fcd6bc34a4446f677a1d3fe3de53ab1285",
+    "00 Учебник/Assets/Figures/curated/berkeley-agents-2025/reasoning-posttraining-memory/m02-p74-irpo-loop.png": "ea49f00c0fb306663bf4589df21713c170928b889a45c869c4052c4745c1cc1a",
+    "00 Учебник/Assets/Figures/curated/dpo-2026-10-24/tulu-preference-pipeline.png": "4d272a5aa3e2e5d7ac1eb34e59539e4b0f8c648d4f47ca320a26de835c1b8f50",
+    "00 Учебник/Assets/Figures/curated/dpo-2026-10-24/tulu-prompt-policy-ablations.png": "a8756c745e770eee2e1a5094171644ec9c84e8d8342dd36dc91b8a02a5058361",
+    "docs/audit/evidence/2026-10-29-legacy-dpo/desktop-original-pipeline.png": "7324bbf0902696aa10291be08058f6c43e4a47d6475b7a139def1ae46602104a",
+    "docs/audit/evidence/2026-10-29-legacy-dpo/mobile-derivation-en-fallback.png": "03e92934fde588888e17408e58b5f80e34e1ebfaaee50f9b2a80ddd47f4a031b"
+  },
+  "chapter": {
+    "source": "00 Учебник/12 Post-training и Alignment/05 DPO.md",
+    "sha256": "fd7a08d5813a5427b74a943d8a57f00978877b8edce13ac1027ccc04cf172c06",
+    "wholeTextRead": true,
+    "pythonBlocks": 6,
+    "figures": 5
+  },
+  "mechanismCoverage": [
+    {
+      "sections": [
+        "2. Вероятность целого ответа",
+        "4. Задача RLHF с ограничением по KL-дивергенции",
+        "5. Выражаем скрытую награду через языковую модель"
+      ],
+      "anchors": [
+        "dpo-rhf-objective",
+        "dpo-derivation"
+      ],
+      "retained": "Full sequence log probability, constrained variational derivation, positive reference support/finite partition, inverse mapping and cancellation of a prompt-dependent reward shift."
+    },
+    {
+      "sections": [
+        "6. Что именно сравнивает функция потерь DPO",
+        "7. Что означает коэффициент β"
+      ],
+      "retained": "Relative log-ratio margin, weighted gradient, equal-policy initialization, shared-parameter caveat, exact two-response normalization/recovered reward and distinct beta effects."
+    },
+    {
+      "sections": [
+        "8. Данные и порядок вычислений",
+        "9. Откуда берётся опорная модель"
+      ],
+      "anchors": [
+        "dpo-dataflow"
+      ],
+      "retained": "Shifted gather, prompt/PAD versus EOS masking, frozen reference/cache conditions, actual tiny-Llama AdamW step and 24 padding comparisons."
+    },
+    {
+      "sections": [
+        "10. DPO и PPO: общая постановка, разные способы обучения"
+      ],
+      "anchors": [
+        "dpo-offline-boundary"
+      ],
+      "retained": "CS336 HH task, data collection versus optimization, memory implementation versus functional roles and controlled data/algorithm/RM/prompt comparisons."
+    },
+    {
+      "sections": [
+        "11. Iterative Reasoning Preference Optimization",
+        "12. Tülu 3: данные, нормировка по длине и место DPO в обучении"
+      ],
+      "retained": "Full existing IRPO cycle, cyclic pairing, reference reset and DPO+NLL; Tulu pair construction and LN-DPO objective are preserved rather than abbreviated."
+    },
+    {
+      "sections": [
+        "14. Характерные ошибки и ограничения",
+        "15. Диагностика обучения",
+        "16. Варианты DPO"
+      ],
+      "anchors": [
+        "dpo-failures"
+      ],
+      "retained": "Both probabilities may fall, KL sampling distribution matters, finite-data/label/judge biases, and worked IPO/SimPO/ORPO/KTO/online distinctions."
+    }
+  ],
+  "sourceComparison": [
+    {
+      "url": "https://arxiv.org/html/2305.18290v3",
+      "read": "Fresh complete Sections 3 and 4 and Section 5.1 including the equivalence-class theorem/proof sketch.",
+      "result": "Analytic change of variables does not remove preference data or establish a universal practical-optimization guarantee."
+    },
+    {
+      "receipt": "docs/audit/2026-10-24-dpo.md",
+      "sameChapterSha256": "fd7a08d5813a5427b74a943d8a57f00978877b8edce13ac1027ccc04cf172c06",
+      "reused": "The unchanged chapter's existing full source comparison for CS336, pinned implementation, IRPO, Tulu and variants is retained. It is not represented as a fresh reading of every course slide."
+    }
+  ],
+  "excludedClaims": [
+    "DPO removes preference collection as well as separate RM fitting and PPO.",
+    "An exact ideal reward reparameterization implies exact equivalence of finite-data, parameterized DPO training to an actual PPO run, without assumptions on the preference model, support or normalization.",
+    "The adaptive logistic weight guarantees prevention of degeneration or monotonically raises every chosen response's actual probability.",
+    "Beta is a learning rate, fixes a hard KL bound, or induces one universal monotone relation to per-step gradient size.",
+    "Two/four functional roles imply two/four equally sized live GPU replicas; fixed-reference log probabilities cannot be cached.",
+    "Unscoped historical win rates or IMDb sentiment frontiers establish universal DPO superiority, OOD generalization or model-family adoption.",
+    "IPO/SimPO/ORPO/KTO and online variants are only hyperparameter changes preserving standard DPO's exact objective."
+  ],
+  "executedChecks": [
+    {
+      "command": "uv run --offline --with torch==2.14.1 --with numpy==2.3.5 --with transformers==4.57.1 python publishing/tools/check_dpo_examples.py",
+      "log": "/var/tmp/bookvar-legacy-dpo-cpu-20261029.log",
+      "result": "PASS all 6 fences, 3632-parameter tiny Llama, causal shift/EOS/padding, frozen reference, 999-policy variational-identity grid, variant calculations and one optimizer step.",
+      "lossBefore": 0.6931471824645996,
+      "lossAfter": 0.6890337467193604,
+      "maxPaddingError": 0.0000019073486328125
+    },
+    {
+      "log": "/var/tmp/bookvar-legacy-dpo-counterexample-20261029.log",
+      "result": "Two normalized policies (.4,.4,.2) and (.2,.1,.7) have decreasing chosen and rejected probabilities but improving DPO loss. This is an objective counterexample, not a claim that one specific optimizer step produced that transition."
+    }
+  ],
+  "sourceFigureDisposition": "All five canonical source figures retained and loaded. Legacy pipeline and extra plot files remain byte-for-byte present. The current frontier is explicitly the IMDb sentiment experiment, not a universal task-independent comparison.",
+  "visualReview": {
+    "desktop": {
+      "viewport": [
+        1280,
+        900
+      ],
+      "clientWidth": 1265,
+      "scrollWidth": 1265,
+      "katexErrors": 0,
+      "imagesLoaded": 5,
+      "observed": "Full original RLHF/DPO two-panel pipeline inspected in viewer."
+    },
+    "mobile": {
+      "viewport": [
+        360,
+        800
+      ],
+      "clientWidth": 345,
+      "scrollWidth": 345,
+      "katexErrors": 0,
+      "observed": "Inverse-reward equations and numerical normalization case inspected in explicitly labelled EN fallback."
+    },
+    "evidence": [
+      {
+        "path": "docs/audit/evidence/2026-10-29-legacy-dpo/desktop-original-pipeline.png",
+        "sha256": "7324bbf0902696aa10291be08058f6c43e4a47d6475b7a139def1ae46602104a"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-legacy-dpo/mobile-derivation-en-fallback.png",
+        "sha256": "03e92934fde588888e17408e58b5f80e34e1ebfaaee50f9b2a80ddd47f4a031b"
+      }
+    ]
+  },
+  "styleReview": "Entire current chapter read; its complete causal derivations, cases and figures are retained. No new synthetic overview or translation.",
+  "remainingWithinThisNote": [],
+  "notClaimed": [
+    "No language-quality benchmark, GPU performance run, fresh translation, universal algorithm ranking or model-family adoption verification.",
+    "No new DPO prose or DPO figures; its existing same-hash explanation is accepted."
+  ]
+}

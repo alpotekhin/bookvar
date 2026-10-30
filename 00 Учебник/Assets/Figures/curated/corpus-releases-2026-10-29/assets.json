@@ -1,0 +1,32 @@
+[
+  {
+    "id": "curated-roots-oscar-filtered-eb44fc2443cc",
+    "asset": "00 Учебник/Assets/Figures/curated/corpus-releases-2026-10-29/roots-oscar-filtered.png",
+    "author": "Hugo Laurençon and co-authors",
+    "source_url": "https://arxiv.org/abs/2303.03915v1",
+    "figure_url": "https://arxiv.org/html/2303.03915v1#S3.F3",
+    "source_image_url": "https://arxiv.org/html/2303.03915v1/figures/oscar_filtered.png",
+    "source_asset": "05 Источники/Originals/corpus-releases-2026-10-29/roots-oscar-filtered-original.png",
+    "source_asset_sha256": "eb44fc2443ccac7e3b57a138ba64f626b82d0330261c4e22da64e99042a2309e",
+    "sha256": "eb44fc2443ccac7e3b57a138ba64f626b82d0330261c4e22da64e99042a2309e",
+    "dimensions_px": [
+      1552,
+      279
+    ],
+    "source_page_snapshot": "05 Источники/Originals/corpus-releases-2026-10-29/roots-v1.html",
+    "source_page_sha256": "d6e88092ba128f23106b222f408005d9f7554e6a7ba4843133977d0cb9676ae0",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/corpus-releases-2026-10-29/roots-v1.html",
+    "license_evidence_sha256": "d6e88092ba128f23106b222f408005d9f7554e6a7ba4843133977d0cb9676ae0",
+    "modifications": "None; complete original Figure 3 PNG copied byte-for-byte, all five language panels, filter names, axes and percentages retained; no crop, redraw, recoloring or upscaling.",
+    "metadata_status": "verified",
+    "rights_status": "source-license-verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "source-raster-copy",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md"
+    ]
+  }
+]

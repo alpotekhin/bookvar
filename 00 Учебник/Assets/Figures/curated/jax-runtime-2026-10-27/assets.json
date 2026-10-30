@@ -1,0 +1,33 @@
+[
+  {
+    "id": "curated-jax-psum-ab23d21957be",
+    "asset": "00 Учебник/Assets/Figures/curated/jax-runtime-2026-10-27/psum.png",
+    "sha256": "ab23d21957bed8ff35f25b068861d691d28668b94170c630a2ceb750fb1d3914",
+    "author": "The JAX Authors",
+    "source_url": "https://github.com/jax-ml/jax/blob/dc4af684446e65ee98eee8090e1ff6f8211473fb/docs/201/shard-map.md#psum",
+    "source_image_url": "https://raw.githubusercontent.com/jax-ml/jax/dc4af684446e65ee98eee8090e1ff6f8211473fb/docs/_static/shard_map_01_illustration_of_a_psum_computation.png",
+    "commit": "dc4af684446e65ee98eee8090e1ff6f8211473fb",
+    "source_asset": "05 Источники/Originals/jax-runtime-2026-10-27/psum.png",
+    "source_asset_sha256": "ab23d21957bed8ff35f25b068861d691d28668b94170c630a2ceb750fb1d3914",
+    "source_page_snapshot": "05 Источники/Originals/jax-runtime-2026-10-27/shard-map.md",
+    "source_page_sha256": "c66395b93edefec264a02dcc7840500a4ea943424206801c07b4041af7238046",
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/jax-ml/jax/blob/dc4af684446e65ee98eee8090e1ff6f8211473fb/LICENSE",
+    "license_evidence": "05 Источники/Originals/jax-runtime-2026-10-27/LICENSE.txt",
+    "license_evidence_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "public_license_copy": "site/public/licenses/jax-dc4af684-Apache-2.0.txt",
+    "dimensions_px": [
+      1941,
+      918
+    ],
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original PNG, byte-identical; no crop, redraw, translation or relabeling. It represents column-wise all-reduce inputs/results, not an algorithm schedule or GPU measurement.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-27",
+    "used_in": [
+      "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md"
+    ]
+  }
+]

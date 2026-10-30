@@ -1,0 +1,256 @@
+{
+  "date": "2026-10-30",
+  "status": "comparison-verified-locally-not-published",
+  "scope": "The last of 31 legacy notes reconciled into the canonical evaluation owner. General reading-route review and dev/Pages release remain open.",
+  "goalTurnClassification": "progress: 30 to 31 reconciled archive notes; does not establish whole-textbook completion.",
+  "chapter": {
+    "path": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+    "sha256": "910967cba1670d0c65864123b958547b420ca059eb38b7302ad0968436e0f952",
+    "lines": 1565,
+    "reading": "The complete prior 1113-line owner was read before editing. All added mechanisms and integration passages were reviewed at the current revision. Exact reversal preserves the prior text. This is not a second whole-final-chapter reading.",
+    "priorWholeReadSha256": "50fc2e140ed82af09da1b935d37c27f90bc48998cf2a0c5628e703eac70a582c"
+  },
+  "explanationReview": {
+    "sources": "Papineni 2002 §§1–6 and Examples 1–4; Post 2018 §§1–4, Tables 1–2 and Figure 1; BERTScore v3 §2 and complete §3; Stanford CS224N w25 A3 §2(c), pp. 6–7; complete pinned sacreBLEU BLEU, chrF and helper source modules. Exact partial README/utils and abstract-only scopes in the source manifest.",
+    "workedExamples": "5/6, 3/5, 2/4, 1/3 gives 53.7284965911771; corpus 73.48889200874657 versus mean sentence 50; exp-smoothed 31.94715521231363; chrF 75.22123893805309; source matrix weighted recall 0.753398417835311.",
+    "reasoning": "Per-segment reference clipping, tied closest length, reference addition lowering brevity penalty, observed zero matches versus absent orders, corpus statistics before final ratios, precision/recall aggregation and many-to-one contextual matching.",
+    "style": "no-ai-slop/eval applied with academic qualifications. Existing RU exposition and all original captions retained; new English explanation remains English in both routes.",
+    "preservation": "Four-file exact journal; no earlier chapter passage, code or figure replaced. Legacy note immutable.",
+    "limitations": "Archive comparison, complete prior-owner reading plus reviewed journaled additions, CPU arithmetic and local root visual acceptance. No second full reading of every unchanged final paragraph, no machine-translation benchmark, installed sacreBLEU public API/tokenizer, BERT encoder, current leaderboard, fresh Pages-base build, commit, push or deployment. Full METEOR/BLEURT/COMET treatments are not claimed."
+  },
+  "checks": {
+    "currentCPU": {
+      "status": "passed",
+      "command": "LC_ALL=C LANG=C uv run --offline --with numpy python publishing/tools/check_bleu_reconciliation_examples.py",
+      "pythonFences": 12,
+      "nativeCoreCases": 7688,
+      "installedSacreBLEU": false,
+      "publicTokenizerCLI": false,
+      "bertEncoder": false
+    },
+    "targeted": {
+      "status": "passed",
+      "files": 4,
+      "tests": 13,
+      "log": "/var/tmp/bookvar-bleu-targeted-accepted-20261030.log"
+    },
+    "assetMetadataNegative": {
+      "status": "passed",
+      "tests": 1,
+      "log": "/var/tmp/bookvar-bleu-asset-negative-20261030.log"
+    },
+    "wholeRegistry": {
+      "status": "passed-isolated",
+      "tests": 1,
+      "durationSeconds": 51.49,
+      "log": "/var/tmp/bookvar-bleu-asset-isolated-20261030.log",
+      "limitation": "An earlier combined run timed out in the integration test. Other 170 tests passed. Isolated original integration assertions then passed; trace removed and timeout unchanged. Cause of the earlier delay is unestablished. No claim of a fresh full unit run."
+    },
+    "rootBuild": {
+      "status": "passed",
+      "pages": 2006,
+      "log": "/var/tmp/bookvar-bleu-root-accepted-20261030.log"
+    },
+    "output": {
+      "status": "passed",
+      "tests": 176,
+      "log": "/var/tmp/bookvar-bleu-output-20261030.log"
+    },
+    "links": {
+      "status": "passed",
+      "broken": 0,
+      "log": "/var/tmp/bookvar-bleu-links-20261030.log"
+    },
+    "diffCheck": {
+      "status": "passed",
+      "scope": "Affected chapter, registry, indices, tests and helpers, not all inherited worktree edits."
+    },
+    "pagesBase": {
+      "status": "deferred-to-final-release"
+    },
+    "fullUnit": {
+      "status": "not-rerun-on-final-revision"
+    }
+  },
+  "visual": {
+    "desktop": {
+      "viewports": [
+        [
+          1280,
+          720
+        ],
+        [
+          1440,
+          1000
+        ]
+      ],
+      "checked": "BLEU count table and source-figure context; 2× viewer matrix readable."
+    },
+    "mobile": {
+      "viewport": [
+        390,
+        844
+      ],
+      "documentClientAndScroll": [
+        375,
+        375
+      ],
+      "katexErrors": 0,
+      "figuresLoaded": 15,
+      "checked": "BLEU formulas and table, BERTScore gathered precision/recall/F1; wide full figure fits the article and requires the working viewer for fine labels. At 3× the matrix is legible; horizontal pan observed from scrollLeft 376 to 703."
+    },
+    "english": {
+      "status": "explicit-canonical-language-fallback-not-English-edition",
+      "checked": "Same new English section, original figure, localized viewer labels and mobile chrF route.",
+      "openIssue": "Two separate fallback notices remain; fix in general route/UI pass."
+    },
+    "savedScreenshots": [
+      {
+        "path": "docs/audit/evidence/2026-10-30-bleu-reconciliation/desktop-bertscore-viewer-2x.png",
+        "sha256": "252a39fd78351237c847561f75907db8235712c070a497ea83249a7fe5a7e0c2"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-30-bleu-reconciliation/desktop-bleu-counts.png",
+        "sha256": "2d3b15c8a3b78a45d68b6f007862659645b0130c6929db9b98f0a7591ba57196"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-30-bleu-reconciliation/en-bertscore-fallback.png",
+        "sha256": "52a6688f78040f46da980e49eedf53b74fe4f397964bdfad78766cf325fc1905"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-30-bleu-reconciliation/en-mobile-chrf.png",
+        "sha256": "565cd08088464f1797cb154bf7d51e8625244f9c4cd7349d6fa662f00c1fd409"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-30-bleu-reconciliation/mobile-bertscore-formulas.png",
+        "sha256": "800f9e796024f9b571121ee631429c1a6dc05f2b4396ed9eeda2c7447fa5c0ae"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-30-bleu-reconciliation/mobile-bertscore-inline.png",
+        "sha256": "7b830651be71d6df933d2381e6753984d6415dd2b521c61d383c706e24910a34"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-30-bleu-reconciliation/mobile-bertscore-viewer-3x.png",
+        "sha256": "6d1d5fdd68de44eb6f9248ca06bdd1cdbbafe8213427c26d79348afdf93733cb"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-30-bleu-reconciliation/mobile-bertscore-viewer-pan.png",
+        "sha256": "c4ca39c846f1104de1c1e7d20e0b1ffba46e5a44fe6e44724b1e034d7bab4a0b"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-30-bleu-reconciliation/mobile-bleu-example.png",
+        "sha256": "93c800bf4c3460b0425543d9ec511a76165967c3759793923f6f0216dd0f2e9c"
+      }
+    ],
+    "limits": "Not every pre-existing figure was visually re-reviewed at all zooms. No fresh Pages-base or remote deployment QA.",
+    "browser": "Agent-owned tab 17; original user RLVR tab left untouched. Prior agent tab 16 held a network-error page blocked from navigation; a clean local QA tab was created without changing network/security settings. Viewport reset and viewer closed."
+  },
+  "sourcePacket": "05 Источники/Originals/bleu-reconciliation-2026-10-30/manifest.json",
+  "network": "Direct local PDF/public requests and uv package retrieval failed. Connector source snapshots and web-read PDF sections were used; Papineni/Post PDFs not downloaded or hashed. No service, VPN or security setting changed.",
+  "artifactPins": [
+    {
+      "path": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "sha256": "910967cba1670d0c65864123b958547b420ca059eb38b7302ad0968436e0f952"
+    },
+    {
+      "path": "Concepts/Evaluation/BLEU Score.md",
+      "sha256": "d432707ef676024e1f9b8f639f9d1df3b2d327e1207fd8cf14cb40b2d9a67988"
+    },
+    {
+      "path": "docs/audit/2026-10-30-bleu-reconciliation-additions.json",
+      "sha256": "ecacdf7c4b1b80da9e2a0f0093d3b93303cf18ca376b05b82ebbde24312428c2"
+    },
+    {
+      "path": "publishing/tests/bleu-reconciliation.test.ts",
+      "sha256": "5b9a21fea93db2fc4cc1fff869e160262e5492dd19213069b506fce72e600c54"
+    },
+    {
+      "path": "publishing/tools/check_bleu_reconciliation_examples.py",
+      "sha256": "376626c7e4ed1c3d796084092651bbab1138752cdcebfcd3195164e01d824a31"
+    },
+    {
+      "path": "publishing/tests/asset-registry.test.ts",
+      "sha256": "9dfe15cae940cb2c2d352fe9dbc4447152d38337d555b52636d4d3b8ef73f1ac"
+    },
+    {
+      "path": "publishing/tests/site-output.test.ts",
+      "sha256": "4200d95f2f655899d685b5dcf7835826050ac1f1f95c1c39f70a2da4cb12e495"
+    },
+    {
+      "path": "publishing/tools/topic-consolidation-baseline.mjs",
+      "sha256": "0ccf183894db666031b6e456269a26ab714c2db1b6168323967c7e7fe4d5d08f"
+    },
+    {
+      "path": "publishing/tools/topic_consolidation_baseline.py",
+      "sha256": "ec78476830ef2e84055b6f50972a4398cf9dc21793fe6c49fdbd871c24c48830"
+    },
+    {
+      "path": "05 Источники/Originals/bleu-reconciliation-2026-10-30/manifest.json",
+      "sha256": "1d347e778e415ce99576fbef943779a319337edb20c774d00384facc45879be4"
+    },
+    {
+      "path": "05 Источники/Originals/bleu-reconciliation-2026-10-30/README.md",
+      "sha256": "173abba72dd21b5e8ab953e8759dab0720c2c5a286881b37e355b792713571c0"
+    },
+    {
+      "path": "05 Источники/asset-registry.yml",
+      "sha256": "6cab3d62201b2f89c25846c716feb1c339c340c2bffbc92d0b0d79a0716b1a08"
+    },
+    {
+      "path": "01 Справочник/_index.md",
+      "sha256": "17d66017655b9022e629a47f8807c3683c06db9c0ba790f7894a3d4d3e769dac"
+    },
+    {
+      "path": "en/01 Reference/_index.md",
+      "sha256": "2f5b2d8827e7298e502d4301b2dfbcc57f9b49b47b1ce7dcb3e6365eabe927b1"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-bleu-reconciliation/desktop-bertscore-viewer-2x.png",
+      "sha256": "252a39fd78351237c847561f75907db8235712c070a497ea83249a7fe5a7e0c2"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-bleu-reconciliation/desktop-bleu-counts.png",
+      "sha256": "2d3b15c8a3b78a45d68b6f007862659645b0130c6929db9b98f0a7591ba57196"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-bleu-reconciliation/en-bertscore-fallback.png",
+      "sha256": "52a6688f78040f46da980e49eedf53b74fe4f397964bdfad78766cf325fc1905"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-bleu-reconciliation/en-mobile-chrf.png",
+      "sha256": "565cd08088464f1797cb154bf7d51e8625244f9c4cd7349d6fa662f00c1fd409"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-bleu-reconciliation/mobile-bertscore-formulas.png",
+      "sha256": "800f9e796024f9b571121ee631429c1a6dc05f2b4396ed9eeda2c7447fa5c0ae"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-bleu-reconciliation/mobile-bertscore-inline.png",
+      "sha256": "7b830651be71d6df933d2381e6753984d6415dd2b521c61d383c706e24910a34"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-bleu-reconciliation/mobile-bertscore-viewer-3x.png",
+      "sha256": "6d1d5fdd68de44eb6f9248ca06bdd1cdbbafe8213427c26d79348afdf93733cb"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-bleu-reconciliation/mobile-bertscore-viewer-pan.png",
+      "sha256": "c4ca39c846f1104de1c1e7d20e0b1ffba46e5a44fe6e44724b1e034d7bab4a0b"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-bleu-reconciliation/mobile-bleu-example.png",
+      "sha256": "93c800bf4c3460b0425543d9ec511a76165967c3759793923f6f0216dd0f2e9c"
+    }
+  ],
+  "remaining": [
+    "General conceptual reading-route review and source/reference metadata alignment",
+    "Duplicate EN fallback notices and locale-preserving links",
+    "Source-specific reproduction gaps for earlier MTP/PPO figures",
+    "Fresh frozen unit and Pages-base checks, origin/dev reconciliation, scoped author-correct dev commit/push and verified Pages deployment"
+  ],
+  "release": {
+    "committed": false,
+    "pushed": false,
+    "deployed": false,
+    "mainChanged": false
+  }
+}

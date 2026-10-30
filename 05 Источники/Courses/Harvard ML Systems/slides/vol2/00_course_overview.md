@@ -9,17 +9,54 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`slides/vol2/00_course_overview/00_course_overview.tex`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static slide archive
+> Text and equations retain the original language. Layout wrappers are simplified;
+> speaker notes are separate, and original SVGs are not redrawn or cropped.
+> Unsupported TeX remains visible and is listed beside the affected slide.
+> This archive is not a checked transcript or a finished Bookvar chapter.
 
 # VOL2 Slides — Course Overview
 
 ## Readable slide sequence
 
+## ML Systems at Scale
+
+[Original slide 1](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L63)
+
+The Fleet Is the Computer
+
 ## Welcome to Volume II
 
-{
+[Original slide 2](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L70)
+
+**Machine Learning Systems at Scale**
+
+Volume I taught you how *one machine* runs ML.
+
+Volume II teaches you how *thousands of machines* coordinate to train and serve the world's largest models.
+
+**The Fleet Is the Computer**
+
+No single GPU trains GPT-4. No single server serves
+a billion users. The *fleet* — thousands of accelerators connected
+by network fabric — is the unit of design.
+
+|  | **Vol I** | **Vol II** |
+| --- | --- | --- |
+| Scope | 1 machine | 1,000+ machines |
+| Bus | PCIe/NVLink | IB/Ethernet |
+| Memory | Shared | Distributed |
+| Failure | Rare event | Daily certainty |
+| API | DataParallel | torch.distributed |
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 Volume I taught the single-machine mental model: one node, 1--8 GPUs,
@@ -51,46 +88,24 @@ restarting one node in a 1,000-node synchronized training job.
 IF AHEAD: Ask what specific Vol I concept they found most surprising;
 connect it to the fleet version.
 IF SHORT: Skip the hand-raise, go straight to the table walkthrough.
-}
+```
 
-[T]
-  
-    **Machine Learning Systems at Scale**
-
-    {0.2cm}
-    Volume I taught you how *one machine* runs ML.
-
-    {0.1cm}
-    Volume II teaches you how *thousands of machines* coordinate to train and serve the world's largest models.
-
-    {0.2cm}
-    {mlsyscard}{crimson}
-    **The Fleet Is the Computer**\\[0.1cm]
-    { No single GPU trains GPT-4. No single server serves
-    a billion users. The *fleet* --- thousands of accelerators connected
-    by network fabric --- is the unit of design.}
-    {mlsyscard}
-  
-  
-    {0.3cm}
-    {}{1.2}
-    {
-    {tabular}{@{}lll@{}}
-      
-      & **Vol I** & **Vol II** \\
-      
-      Scope   & 1 machine     & 1,000+ machines \\
-      Bus     & PCIe/NVLink   & IB/Ethernet \\
-      Memory  & Shared        & Distributed \\
-      Failure & Rare event    & Daily certainty \\
-      API     & DataParallel  & torch.distributed \\
-      
-    {tabular}
-    }
+</details>
 
 ## From Single Node to Fleet
 
-{
+[Original slide 3](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L149)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/00_course_overview/images/single-to-fleet.svg]]
+
+Harvard Edge ML Systems Book contributors, [single-to-fleet.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/images/single-to-fleet.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Key shift:** The network is the bus, and **failure is a statistical certainty**.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 The Welcome slide introduced the fleet concept verbally. This diagram
@@ -120,20 +135,34 @@ toll booth --- the booth is the node boundary.
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] This diagram anchors the entire course narrative.
 IF AHEAD: ``At what fleet size does the probability of zero failures
-during a 1-hour training window drop below 50%?''
+during a 1-hour training window drop below 50\%?''
 IF SHORT: Point to the diagram, read the insight callout, move on.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{single-to-fleet.pdf}
-
-{0.1cm}
-{Key shift:}{The network is the bus, and **failure is a statistical certainty**.}
+</details>
 
 ## Why Scale Changes Everything
 
-{
+[Original slide 4](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L193)
+
+**Communication Dominates**
+
+At 10,000 GPUs, AllReduce takes longer than the forward pass. The network is the bottleneck, not the accelerator.
+
+**Failure is Routine**
+
+10,000 GPUs $\times$ 50,000h MTBF = one failure every 5 hours. Checkpointing and recovery are first-class concerns.
+
+**Behavior Emerges**
+
+Stragglers, hot spots, and cascading failures. No single component determines system behavior.
+
+**Bottom line:** Scale is not “more of the same” — it is a **qualitative** change in engineering.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 The previous diagram showed the physical transition. This slide names
@@ -165,38 +194,41 @@ barrier timeout, which triggers checkpoint, which stalls all 10,000 GPUs.
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] These three categories structure the entire course.
 IF AHEAD: ``Can you think of a fourth qualitative change at scale?''
-(Answer: cost --- 1% inefficiency at 10,000 GPUs is millions of dollars.)
+(Answer: cost --- 1\% inefficiency at 10,000 GPUs is millions of dollars.)
 IF SHORT: Read the three card titles and the bottom-line callout, skip
 the analogy.
-}
+```
 
-[T]
-  
-    {mlsyscard}{computestroke}
-    **Communication Dominates**\\[0.1cm]
-    { At 10,000 GPUs, AllReduce takes longer than the forward pass. The network is the bottleneck, not the accelerator.}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{errorstroke}
-    **Failure is Routine**\\[0.1cm]
-    { 10,000 GPUs $×$ 50,000h MTBF = one failure every 5 hours. Checkpointing and recovery are first-class concerns.}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{routingstroke}
-    **Behavior Emerges**\\[0.1cm]
-    { Stragglers, hot spots, and cascading failures. No single component determines system behavior.}
-    {mlsyscard}
-  
-
-{0.2cm}
-
-{Bottom line:}{Scale is not ``more of the same'' --- it is a **qualitative** change in engineering.}
+</details>
 
 ## The Three Walls: Why Scale Keeps Changing the Constraint
 
-{
+[Original slide 5](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L262)
+
+**Memory Wall**
+
+*Vol I regime:* HBM bandwidth bounds single-device throughput. Fixed by silicon physics.
+
+**Part I** addresses accelerator design, HBM, and PCIe/NVLink hierarchy.
+
+**Network Wall**
+
+*Vol II regime:* Bisection bandwidth bounds fleet throughput. Topology determines fate.
+
+**Parts I–II** address network fabrics, collective communication, and fault tolerance.
+
+**Energy Wall**
+
+*Planetary regime:* Power budgets and carbon constraints cap fleet size and utilization.
+
+**Part IV** addresses sustainability, governance, and responsible fleet operation.
+
+**Through-line:** The binding constraint **shifts** as you scale — from silicon to network to energy. Each shift demands new engineering.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 The previous slide named three qualitative changes at scale. This slide
@@ -239,39 +271,24 @@ IF AHEAD: ``At what fleet size does the Energy Wall become more
 constraining than the Network Wall? What physical quantity determines
 the crossover?''
 IF SHORT: Name the three walls, state which Part addresses each, move on.
-}
+```
 
-[T]
-  
-    {mlsyscard}{computestroke}
-    **Memory Wall**\\
-    { *Vol I regime:* HBM bandwidth bounds single-device throughput. Fixed by silicon physics.}\\[0.1cm]
-    { **Part I** addresses accelerator design, HBM, and PCIe/NVLink hierarchy.}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{datastroke}
-    **Network Wall**\\
-    { *Vol II regime:* Bisection bandwidth bounds fleet throughput. Topology determines fate.}\\[0.1cm]
-    { **Parts I--II** address network fabrics, collective communication, and fault tolerance.}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{errorstroke}
-    **Energy Wall**\\
-    { *Planetary regime:* Power budgets and carbon constraints cap fleet size and utilization.}\\[0.1cm]
-    { **Part IV** addresses sustainability, governance, and responsible fleet operation.}
-    {mlsyscard}
-  
+</details>
 
-{0.2cm}
+## The C<sup>3</sup> Taxonomy: Compute, Communication, Coordination
 
-{Through-line:}{The binding constraint **shifts** as you scale --- from silicon to network to energy. Each shift demands new engineering.}
+[Original slide 6](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L343)
 
-## Frame 5
+![[Assets/Sources/Harvard ML Systems/slides/vol2/00_course_overview/images/c3-taxonomy.svg]]
 
-{The {} Taxonomy: Compute, Communication, Coordination}
-{
+Harvard Edge ML Systems Book contributors, [c3-taxonomy.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/images/c3-taxonomy.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Diagnostic:** “Is the fleet bottlenecked on Compute, Communication, or Coordination?”
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 The previous slide named three qualitative changes at scale. The C3
@@ -306,19 +323,29 @@ IF AHEAD: ``Can a problem be bottlenecked on two C's simultaneously?
 Give an example.'' (Yes: gradient compression reduces Communication but
 adds Compute overhead for encode/decode.)
 IF SHORT: Show diagram, ask the 30-second stall question, move on.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
+</details>
 
-{c3-taxonomy.pdf}
+## C<sup>3</sup> in Practice
 
-{0.1cm}
-{Diagnostic:}{``Is the fleet bottlenecked on {computestroke}{Compute}, {datastroke}{Communication}, or {routingstroke}{Coordination}?''}
+[Original slide 7](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L390)
 
-## Frame 6
+| **Symptom** | **C<sup>3</sup> Axis** | **Root Cause** | **Response** |
+| --- | --- | --- | --- |
+| Low GPU utilization | Compute | Memory-bound kernels | Operator fusion, FlashAttention |
+| Throughput plateau | Communication | AllReduce saturated | Gradient compression, overlap |
+| Periodic 30s stalls | Coordination | Sync checkpointing | Async checkpointing |
+| Throughput variance | Coordination | Straggler nodes | Straggler mitigation |
+| Gradient staleness | Communication | Network congestion | Traffic engineering, ECMP |
+| Scheduling delays | Coordination | Resource fragmentation | Gang scheduling, preemption |
 
-{{} in Practice}
-{
+**Pattern:** Diagnosis precedes optimization. Always ask “which C?” before tuning.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 The previous slide defined C3 abstractly. This table maps real fleet
@@ -349,33 +376,35 @@ IF STUCK: Ask which rows would NOT be helped by doubling GPU TFLOPS.
 [OPTIONAL] The C3 concept was introduced on the previous slide.
 IF SHORT: Show the table briefly, read the insight callout, move on.
 IF AHEAD: Ask students to propose a 7th row with a novel symptom.
-}
+```
 
-{}{1.15}
-{tabular}{@{}llll@{}}
-  
-  **Symptom** & {{} Axis} & **Root Cause** & **Response** \\
-  
-  Low GPU utilization       & {computestroke}{Compute}       & Memory-bound kernels    & Operator fusion, FlashAttention \\
-  Throughput plateau        & {datastroke}{Communication}    & AllReduce saturated     & Gradient compression, overlap \\
-  Periodic 30s stalls       & {routingstroke}{Coordination}  & Sync checkpointing      & Async checkpointing \\
-  Throughput variance       & {routingstroke}{Coordination}  & Straggler nodes         & Straggler mitigation \\
-  Gradient staleness        & {datastroke}{Communication}    & Network congestion      & Traffic engineering, ECMP \\
-  Scheduling delays         & {routingstroke}{Coordination}  & Resource fragmentation  & Gang scheduling, preemption \\
-  
-{tabular}
-
-{0.15cm}
-{Pattern:}{Diagnosis precedes optimization. Always ask ``which C?'' before tuning.}
+</details>
 
 ## Predict: Where Is the Bottleneck?
 
-{
+[Original slide 8](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L445)
+
+Think–Write–Share
+
+You are training a 70B parameter model across 4,096 GPUs.
+
+Training throughput is 40% of theoretical peak.
+
+Which C<sup>3</sup> axis is most likely the bottleneck?
+
+Write your answer and one reason why. (60 seconds)
+
+Compare with a neighbor — do you agree?
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [4 min]
 % -- NARRATE: What to SAY while showing this slide
 Read the scenario aloud. ``You are training a 70B model across 4,096
-GPUs. Throughput is only 40% of theoretical peak. Which C3 axis is
-most likely the bottleneck?'' Emphasize: 40% means 60% of silicon
+GPUs. Throughput is only 40\% of theoretical peak. Which C3 axis is
+most likely the bottleneck?'' Emphasize: 40\% means 60\% of silicon
 is doing nothing useful.
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
@@ -383,7 +412,7 @@ Give 60 seconds for individual writing. Then 30 seconds of pair
 discussion. Cold-call 2--3 students. Expected answer: Communication ---
 at 4,096 GPUs, AllReduce overhead for 70B parameters (140 GB gradients)
 is massive. Some students will say Compute (kernel inefficiency) ---
-acknowledge it but redirect: at 40% peak with 4,096 GPUs, the
+acknowledge it but redirect: at 40\% peak with 4,096 GPUs, the
 Communication term is almost certainly dominant.
 
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
@@ -391,25 +420,24 @@ Communication term is almost certainly dominant.
 predict-before-reveal pattern for the entire course.
 IF SHORT: Reduce to 30 seconds writing, skip pair discussion, cold-call
 one student.
-}
+```
 
-{0.8cm}
-{ Think--Write--Share}
-
-{0.4cm}
-{ You are training a 70B parameter model across 4,096 GPUs.\\
-Training throughput is 40% of theoretical peak.}
-
-{0.4cm}
-{ Which {} axis is most likely the bottleneck?\\[0.1cm]
-Write your answer and one reason why. {midgray}{(60 seconds)}}
-
-{0.3cm}
-{{lightgray}{Compare with a neighbor --- do you agree?}}
+</details>
 
 ## The Fleet Stack: Four Layers
 
-{
+[Original slide 9](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L490)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/00_course_overview/images/fleet-stack.svg]]
+
+Harvard Edge ML Systems Book contributors, [fleet-stack.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/images/fleet-stack.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Design principle:** Each layer builds on the one below — production systems require **all four**.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 C3 diagnoses WHERE the bottleneck is. The Fleet Stack organizes HOW the
@@ -445,18 +473,27 @@ to a layer.
 IF AHEAD: ``Which layer do you think has the highest dollar-cost of
 getting wrong?''
 IF SHORT: Name the four layers, read the insight callout, move on.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{fleet-stack.pdf}
-
-{0.1cm}
-{Design principle:}{Each layer builds on the one below --- production systems require **all four**.}
+</details>
 
 ## Fleet Stack: What Each Layer Teaches
 
-{
+[Original slide 10](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L538)
+
+| **Layer** | **You Will Learn To...** | **Key Skills** |
+| --- | --- | --- |
+| **Infrastructure** | Reason about cluster hardware | GPU selection, InfiniBand topology, storage hierarchy |
+| **Distributed ML** | Design parallel training | DP/TP/PP, collective ops, fault-tolerant training |
+| **Deployment** | Serve models at scale | Inference optimization, fleet scheduling, SLAs |
+| **Governance** | Build responsible systems | Security, sustainability, fairness at fleet scale |
+
+Most courses stop at Layer 2. This course covers all four — production ML fails when *any* layer is neglected.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 The previous slide showed the Fleet Stack as a diagram. This table
@@ -488,28 +525,26 @@ cannot deploy in Europe. That is infrastructure.''
 IF SHORT: Skip this slide entirely --- the diagram carries the message.
 IF AHEAD: Ask which layer they think is most under-invested at real
 companies.
-}
+```
 
-{}{1.15}
-{tabular}{@{}lp{4cm}p{5.5cm}@{}}
-  
-  **Layer** & **You Will Learn To...** & **Key Skills** \\
-  
-  {computestroke}{**Infrastructure**} & Reason about cluster hardware & GPU selection, InfiniBand topology, storage hierarchy \\
-  {datastroke}{**Distributed ML**} & Design parallel training & DP/TP/PP, collective ops, fault-tolerant training \\
-  {routingstroke}{**Deployment**} & Serve models at scale & Inference optimization, fleet scheduling, SLAs \\
-  {errorstroke}{**Governance**} & Build responsible systems & Security, sustainability, fairness at fleet scale \\
-  
-{tabular}
-
-{0.1cm}
-{mlsyscard}{crimson}
-{ Most courses stop at Layer 2. This course covers all four --- production ML fails when *any* layer is neglected.}
-{mlsyscard}
+</details>
 
 ## 17 Chapters in Four Parts
 
-{
+[Original slide 11](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L597)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/00_course_overview/images/course-roadmap.svg]]
+
+Harvard Edge ML Systems Book contributors, [course-roadmap.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/images/course-roadmap.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Compute** constraints in Part I & II  | 
+**Communication** in Part II & III  | 
+**Coordination** in Part III & IV
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 The Fleet Stack named four layers. This roadmap maps those layers to
@@ -542,20 +577,24 @@ before pouring the foundation.''
 IF SHORT: Show the diagram, name the four parts, move on.
 IF AHEAD: Ask students to predict which part will be most relevant
 to their career goals.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{course-roadmap.pdf}
-
-{0.1cm}
-{ {computestroke}{**Compute**} constraints in Part I & II \;\;
-{datastroke}{**Communication**} in Part II & III \;\;
-{routingstroke}{**Coordination**} in Part III & IV}
+</details>
 
 ## The Numbers That Define Fleet Scale
 
-{
+[Original slide 12](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L644)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/00_course_overview/images/scale-numbers.svg]]
+
+Harvard Edge ML Systems Book contributors, [scale-numbers.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/images/scale-numbers.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Implication:** At fleet scale, the “happy path” is the exception, not the rule.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 The roadmap showed the course structure. This slide grounds it in
@@ -590,18 +629,22 @@ IF AHEAD: ``Calculate the fleet MTBF for 25,000 GPUs with 50,000h
 per-GPU MTBF.'' (Answer: 2 hours --- matching the chapter's own
 canonical worked example.)
 IF SHORT: Highlight the failure rate number and the bottom-line callout.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{scale-numbers.pdf}
-
-{0.1cm}
-{Implication:}{At fleet scale, the ``happy path'' is the exception, not the rule.}
+</details>
 
 ## The Warehouse-Scale Computer
 
-{
+[Original slide 13](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L691)
+
+Original figure reference: ` ../02_compute_infrastructure/images/gpu-cluster-datacenter.jpg `.
+
+**Physical reality:** 100 MW of power, liquid cooling per rack, and a network fabric with more bandwidth than a small country's internet.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min]
 % -- LINK: Scale Numbers gave abstract numbers; this photo makes them visceral
 Students just saw 10,000 GPUs and 100 MW on a slide. This photo shows what
@@ -616,30 +659,47 @@ of racks you see here are connected by a network fabric whose aggregate
 bisection bandwidth exceeds the entire internet bandwidth of many
 countries. This is NOT a server room. It is a warehouse-scale computer,
 and the engineering that keeps it running is what this course is about.
-The $100\,{MW}$ figure on the previous slide corresponds to
+The $100\,\text{MW}$ figure on the previous slide corresponds to
 approximately \$3.6M per month in electricity alone --- before hardware
-amortization, cooling infrastructure, or operations. Every 1% of
+amortization, cooling infrastructure, or operations. Every 1\% of
 utilization lost is real money at this scale.''
 
 % -- ENGAGE: Specific question for THIS slide
 ``What is the monthly electricity bill for a 100 MW datacenter at \$0.05/kWh?''
-Give 15 seconds. Answer: 100,000 kW $×$ 720 hours $×$ \$0.05 = \$3.6M/month.
+Give 15 seconds. Answer: 100,000 kW $\times$ 720 hours $\times$ \$0.05 = \$3.6M/month.
 
 % -- WARN: Students underestimate physical constraints. Power delivery, cooling,
 and floor space are often the binding constraints --- not GPU availability.
 
 % -- FLEX: [CORE] Grounds the abstract numbers in physical reality.
 IF SHORT: Show the photo, state the power number, move on.
-}
+```
 
-{../02_compute_infrastructure/images/gpu-cluster-datacenter.jpg}
+</details>
 
-{0.1cm}
-{Physical reality:}{100 MW of power, liquid cooling per rack, and a network fabric with more bandwidth than a small country's internet.}
+<details>
+<summary>Projection limits for this slide</summary>
+
+- [../02_compute_infrastructure/images/gpu-cluster-datacenter.jpg](https://raw.githubusercontent.com/harvard-edge/cs249r_book/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/02_compute_infrastructure/images/gpu-cluster-datacenter.jpg): raster source link retained; individual provenance not established.
+
+</details>
 
 ## Quick Check
 
-{
+[Original slide 14](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L732)
+
+Quick Check
+
+If one GPU fails once per year,
+
+how often does a 10,000-GPU cluster fail?
+
+15 seconds — then I will cold-call.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min]
 % -- NARRATE: What to SAY while showing this slide
 Read the question aloud: ``If one GPU fails once per year, how often
@@ -650,20 +710,28 @@ Answer: approximately once per hour (10,000 failures/year divided by
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] This cements the failure-rate intuition before moving on.
 IF SHORT: Ask, pause 10 seconds, give the answer, move on.
-}
+```
 
-{1.0cm}
-{ Quick Check}
-
-{0.6cm}
-{ If one GPU fails once per year,\ often does a 10,000-GPU cluster fail?}
-
-{0.5cm}
-{{midgray}{15 seconds --- then I will cold-call.}}
+</details>
 
 ## Learning Outcomes
 
-{
+[Original slide 15](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L764)
+
+By the end of this course, you will be able to:
+
+1. **Explain** the three fundamental walls (memory, network, energy) and apply them to diagnose scaling bottlenecks
+2. **Analyze** the Iron Law of Scale to quantify the coordination tax in multi-node clusters
+3. **Design** distributed training pipelines using data, tensor, and pipeline parallelism
+4. **Calculate** communication costs for collective operations across cluster topologies
+5. **Reason** about fault tolerance: checkpointing strategies, MTBF analysis, recovery time
+6. **Apply** the Fleet Stack framework and C<sup>3</sup> taxonomy to diagnose fleet-scale bottlenecks
+7. **Apply** the Six Systems Engineering Principles to design, scale, and govern production ML systems
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 The roadmap and scale numbers established what the course covers and
@@ -699,85 +767,97 @@ me how it changes the architecture of a checkpointing system.''
 syllabus.
 IF SHORT: Skim the list, emphasize outcomes 1, 2, and 7, move on.
 IF AHEAD: Ask students to rank the outcomes by difficulty.
-}
+```
 
-By the end of this course, you will be able to:
-
-{0.1cm}
-{0pt}
-- **Explain** the three fundamental walls (memory, network, energy) and apply them to diagnose scaling bottlenecks
-- **Analyze** the Iron Law of Scale to quantify the coordination tax in multi-node clusters
-- **Design** distributed training pipelines using data, tensor, and pipeline parallelism
-- **Calculate** communication costs for collective operations across cluster topologies
-- **Reason** about fault tolerance: checkpointing strategies, MTBF analysis, recovery time
-- **Apply** the Fleet Stack framework and {} taxonomy to diagnose fleet-scale bottlenecks
-- **Apply** the Six Systems Engineering Principles to design, scale, and govern production ML systems
+</details>
 
 ## Your Turn: How Many GPUs to Train GPT-4?
 
-{
+[Original slide 16](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L820)
+
+Fermi Estimate: GPT-4 Training Fleet
+
+GPT-4 required $\sim 2 \times 10^{25}$ FLOPs of compute.
+
+You have a cluster of H100 GPUs.
+
+**Estimate:**
+
+1. How many GPU-days of compute?
+2. How many GPUs for a 90-day training run?
+
+(90 seconds — napkin math only)
+
+**Hints:**
+
+- H100 peak: 1,000 TFLOPS (FP16)
+- Realistic MFU: $\sim$50%
+- Seconds per day: 86,400
+
+**Answer:** $\sim$465K GPU-days.
+
+90-day run $\to$ $\sim$5,000 H100s.
+
+Reported: $\sim$25K A100s (lower MFU).
+
+**MFU is the hidden variable!**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [5 min]
 % -- LINK: Learning outcomes promised quantitative reasoning; this exercise
 delivers it immediately. Students apply Fermi estimation to fleet-scale ML.
 
 % -- NARRATE: What to SAY while showing this slide
 ``This is a napkin-math exercise. No calculators. You have the hints on the
-right. 90 seconds.'' After pause: ``GPT-4 reportedly used $$2 $×$ 10$^{25}$
-FLOPs. Each H100 delivers $$1,000 TFLOPS (FP16) at $$50% MFU = 500 TFLOPS
-effective. Per day: 500 $×$ 10$^{12}$ $×$ 86,400 = 4.3 $×$ 10$^{19}$
-FLOPs/GPU-day. Total GPU-days: 2 $×$ 10$^{25}$ / 4.3 $×$ 10$^{19}$
-$$ 465,000 GPU-days. For a 90-day run: $$5,000 GPUs. For 30 days:
-$$15,000 GPUs. Reported: $$25,000 A100s (MFU was lower).''
+right. 90 seconds.'' After pause: ``GPT-4 reportedly used $\sim$2 $\times$ 10$^{25}$
+FLOPs. Each H100 delivers $\sim$1,000 TFLOPS (FP16) at $\sim$50\% MFU = 500 TFLOPS
+effective. Per day: 500 $\times$ 10$^{12}$ $\times$ 86,400 = 4.3 $\times$ 10$^{19}$
+FLOPs/GPU-day. Total GPU-days: 2 $\times$ 10$^{25}$ / 4.3 $\times$ 10$^{19}$
+$\approx$ 465,000 GPU-days. For a 90-day run: $\sim$5,000 GPUs. For 30 days:
+$\sim$15,000 GPUs. Reported: $\sim$25,000 A100s (MFU was lower).''
 
 % -- ENGAGE: This IS the active learning moment.
 After revealing: ``What assumptions dominated your error? Most students
-underestimate MFU loss. Real clusters achieve 30--50% MFU, not 100%.''
+underestimate MFU loss. Real clusters achieve 30--50\% MFU, not 100\%.''
 
 % -- WARN: Students will use peak TFLOPS and get an answer 2--3x too low.
 The MFU correction is the key lesson: peak performance is a fiction.
 
 % -- FLEX: [CORE] This exercise sets the quantitative tone for the course.
 IF SHORT: Give 60 seconds instead of 90, walk through the solution quickly.
-}
+```
 
-[T]
-  
-    { Fermi Estimate: GPT-4 Training Fleet}
-
-    {0.15cm}
-    GPT-4 required $$$2 × 10^{25}$ FLOPs of compute.\\
-    You have a cluster of H100 GPUs.
-
-    {0.15cm}
-    **Estimate:**
-    {1pt}
-- How many GPU-days of compute?
-- How many GPUs for a 90-day training run?
-    
-
-    {0.1cm}
-    {{midgray}{(90 seconds --- napkin math only)}}
-  
-  
-    **Hints:**
-    {0pt}
-- { H100 peak: 1,000 TFLOPS (FP16)}
-- { Realistic MFU: $$50%}
-- { Seconds per day: 86,400}
-    
-
-    {0.15cm}
-    
-    {mlsyscard}{computestroke}
-    { **Answer:** $$465K GPU-days.\\
-    90-day run $$ $$5,000 H100s.\\
-    Reported: $$25K A100s (lower MFU).\\[0.05cm]
-    {computestroke}{**MFU is the hidden variable!**}}
-    {mlsyscard}
+</details>
 
 ## Visual Language
 
-{
+[Original slide 17](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L886)
+
+Throughout this course, colors carry meaning:
+
+**Blue** — Compute / Processing
+
+GPU ops, forward/backward pass, inference
+
+**Green** — Data / Memory
+
+Data flow, caches, healthy paths
+
+**Orange** — Routing / Scheduling
+
+Load balancers, batch windows
+
+**Red** — Error / Cost / Bottleneck
+
+Loss, decode phase, waste
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [0.5 min]
 % -- LINK: What prior concept connects to this slide
 The Fermi exercise used color-coded hint cards. Students have already
@@ -796,44 +876,45 @@ Students sometimes use red for ``error message'' in their own diagrams
 where the course convention is red for ``cost / bottleneck.'' These are
 not the same: a slow AllReduce is red even when no error has occurred.
 Reinforce: red = expensive, not just broken.
-IF STUCK: ``If a rack switch is routing 90% of its traffic through one
+IF STUCK: ``If a rack switch is routing 90\% of its traffic through one
 link, that link is red --- even if nothing has failed yet.''
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Reference slide for the color system.
 IF SHORT: Skip entirely --- students will absorb the colors through
 exposure.
-}
+```
 
-Throughout this course, colors carry meaning:
-
-{0.3cm}
-[T]
-  
-    {mlsyscard}{computestroke}
-    **Blue** --- Compute / Processing\\
-    { GPU ops, forward/backward pass, inference}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{datastroke}
-    **Green** --- Data / Memory\\
-    { Data flow, caches, healthy paths}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{routingstroke}
-    **Orange** --- Routing / Scheduling\\
-    { Load balancers, batch windows}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{errorstroke}
-    **Red** --- Error / Cost / Bottleneck\\
-    { Loss, decode phase, waste}
-    {mlsyscard}
+</details>
 
 ## A Taste of What's Coming
 
-{
+[Original slide 18](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L947)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/00_course_overview/images/course-progression.svg]]
+
+Harvard Edge ML Systems Book contributors, [course-progression.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/images/course-progression.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**What can go wrong:**
+
+- GPU dies every 4h — restart from scratch?
+- AllReduce across 25K GPUs: 500ms/step
+- Rack switch fails — 128 GPUs go dark
+- Power budget limits to 80% utilization
+
+**What this course teaches:**
+
+- **Part I:** The Fleet (Ch 1–4)
+- **Part II:** Distributed ML (Ch 5–8)
+- **Part III:** Deployment (Ch 9–12)
+- **Part IV:** Governance (Ch 13–17)
+
+Every failure mode above is a **chapter in this course**.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min]
 % -- LINK: The learning outcomes listed abstract skills. This visual roadmap shows
 the four-part progression and makes it concrete with a frontier training scenario.
@@ -873,41 +954,46 @@ with five failure modes.''
 IF AHEAD: ``What is the dollar cost of 4 hours of 25,000 idle H100s
 at \$3/GPU-hour?'' (Answer: \$300K wasted per failure event.)
 IF SHORT: Point to the diagram, name the four parts, move on.
-}
+```
 
-% --- Layout: FULL-WIDTH visual roadmap ---
-
-{course-progression.pdf}
-
-{0.05cm}
-
-[T]
-  
-    **What can go wrong:**
-    {0pt}
-- GPU dies every 4h --- restart from scratch?
-- AllReduce across 25K GPUs: 500ms/step
-- Rack switch fails --- 128 GPUs go dark
-- Power budget limits to 80% utilization
-    
-  
-  
-    **What this course teaches:**
-    {0pt}
-- {computestroke}{**Part I:**} The Fleet (Ch 1--4)
-- {datastroke}{**Part II:**} Distributed ML (Ch 5--8)
-- {routingstroke}{**Part III:**} Deployment (Ch 9--12)
-- {errorstroke}{**Part IV:**} Governance (Ch 13--17)
-    
-  
-
-{0.03cm}
-
-{ Every failure mode above is a **chapter in this course**.}
+</details>
 
 ## Discussion: What Breaks First?
 
-{
+[Original slide 19](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L1024)
+
+Turn and Talk (90 seconds)
+
+Your startup just raised &#36;100M to train a foundation model.
+
+You buy 10,000 H100 GPUs and connect them with InfiniBand.
+
+**What breaks first?**
+
+Network
+
+ Fabric
+
+GPU
+
+ Failures
+
+Software
+
+ Stack
+
+Cooling /
+
+ Power
+
+Your
+
+ Budget
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [5 min]
 % -- LINK: What prior concept connects to this slide
 The scenario slide listed five failure modes. This discussion forces
@@ -941,27 +1027,35 @@ interactive slide in the deck.
 IF SHORT: Reduce to 60-second pairs, cold-call one pair.
 IF AHEAD: After discussion, ask: ``What would you monitor to detect
 the failure before it happens?''
-}
+```
 
-{0.8cm}
-{ Turn and Talk {midgray}{(90 seconds)}}
-
-{0.5cm}
-{ Your startup just raised \$100M to train a foundation model.\\
-You buy 10,000 H100 GPUs and connect them with InfiniBand.\\[0.3cm]
-**What breaks first?**}
-
-{0.5cm}
-[c]
-   Network\\ Fabric
-   GPU\\ Failures
-   Software\\ Stack
-   Cooling /\\ Power
-   Your\\ Budget
+</details>
 
 ## Prerequisites
 
-{
+[Original slide 20](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L1085)
+
+**Required:**
+
+- **Vol I** or equivalent ML systems foundation
+- Single-GPU training and inference experience
+- PyTorch proficiency (` torch.nn `, ` DataLoader `)
+- Basic linear algebra and probability
+- Linux command line and SSH
+
+**Helpful but not required:**
+
+- Distributed systems concepts (consensus, RPC)
+- Networking basics (TCP/IP, bandwidth, latency)
+- Cluster job schedulers (Slurm, Kubernetes)
+- CUDA programming
+
+We will introduce distributed systems concepts as needed throughout the course.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 The course content and motivation are established. Now students need to
@@ -979,7 +1073,7 @@ chapters, but it is not required.''
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
 Ask: ``Raise your hand if you are comfortable explaining what AllReduce
-does.'' The fraction of hands up calibrates how much Ch. 5--6 review
+does.'' The fraction of hands up calibrates how much Ch.~5--6 review
 is needed.
 
 % -- WARN: What students will get wrong on THIS topic
@@ -995,34 +1089,39 @@ IF SHORT: Name the top 3 required skills, mention the ``helpful but not
 required'' list exists, move on.
 IF AHEAD: Ask a student with cluster experience to share one surprising
 lesson from their first multi-node job.
-}
+```
 
-[T]
-  
-    **Required:**
-    {1pt}
-- **Vol I** or equivalent ML systems foundation
-- Single-GPU training and inference experience
-- PyTorch proficiency ({torch.nn}, {DataLoader})
-- Basic linear algebra and probability
-- Linux command line and SSH
-    
-  
-  
-    **Helpful but not required:**
-    {1pt}
-- Distributed systems concepts (consensus, RPC)
-- Networking basics (TCP/IP, bandwidth, latency)
-- Cluster job schedulers (Slurm, Kubernetes)
-- CUDA programming
-    
-
-    {0.15cm}
-    {{midgray}{We will introduce distributed systems concepts as needed throughout the course.}}
+</details>
 
 ## Relationship to Volume I
 
-{
+[Original slide 21](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L1150)
+
+**Vol I: The Machine**
+
+- Single node, 1–8 GPUs
+- PCIe / NVLink within one box
+- Shared memory model
+- ` torch.nn.DataParallel `
+- Iron Law: $T = D/BW + O/R + L$
+
+**Vol II: The Fleet**
+
+- Multi-node, 10,000+ GPUs
+- InfiniBand / Ethernet fabric
+- Message passing model
+- ` torch.distributed `
+- C<sup>3</sup>: Compute + Comm + Coord
+
+**Iron Law of Scale:**
+$T_{\text{step}}(N) = T_{\text{compute}}/N + T_{\text{comm}}(N) + T_{\text{sync}}(N) - T_{\text{overlap}}$
+
+**Scope, not depth.** Vol II adds communication and coordination terms to the Iron Law.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min]
 % -- LINK: What prior concept connects to this slide
 Prerequisites established what students need. This slide addresses the
@@ -1035,10 +1134,10 @@ InfiniBand, message passing, torch.distributed, C3.'' Then the key
 message: ``The distinction is SCOPE, not DEPTH. Vol I went deep on one
 machine. Vol II goes wide across the fleet. Both are equally rigorous.''
 Point to the crimson card: ``Here is the fleet-level version of the Iron
-Law. Where Vol I had just $T_{{total}} = D/BW + O/(R  ) +
-L_{{lat}}$, Vol II has four terms. The new terms are $T_{{comm}}$
-and $T_{{sync}}$ --- the communication and coordination taxes that
-only appear when you cross the node boundary. $T_{{overlap}}$ is the
+Law. Where Vol I had just $T_{\text{total}} = D/BW + O/(R \cdot \eta) +
+L_{\text{lat}}$, Vol II has four terms. The new terms are $T_{\text{comm}}$
+and $T_{\text{sync}}$ --- the communication and coordination taxes that
+only appear when you cross the node boundary. $T_{\text{overlap}}$ is the
 efficiency gain when you hide communication behind computation.
 This single equation is the organizing spine of the entire volume.''
 
@@ -1046,13 +1145,13 @@ This single equation is the organizing spine of the entire volume.''
 Ask: ``What Vol I concept do you think will change most at fleet scale?''
 Cold-call. Any answer works --- use it to preview how that concept
 evolves. ``The memory wall'' becomes the ``network wall.'' The compute term
-gets divided by $N$, but $T_{{comm}}$ and $T_{{sync}}$ grow as $N$
+gets divided by $N$, but $T_{\text{comm}}$ and $T_{\text{sync}}$ grow as $N$
 grows.
 
 % -- WARN: What students will get wrong on THIS topic
 Students will assume Vol II content is ``harder.'' It is not --- it is
-different. Also warn: many students will assume $T_{{comm}}$ is just
-$T_{{sync}}$ with extra steps. They are distinct: Communication is
+different. Also warn: many students will assume $T_{\text{comm}}$ is just
+$T_{\text{sync}}$ with extra steps. They are distinct: Communication is
 moving bytes (AllReduce, gradient sync); Coordination is making decisions
 (barrier management, checkpointing, straggler mitigation).
 IF STUCK: ``Think of it as learning to fly after learning to drive.
@@ -1063,50 +1162,29 @@ Different skills, not harder skills.''
 IF SHORT: Read the crimson card at the bottom, name the four Iron Law
 terms, move on.
 IF AHEAD: Ask: ``Which term dominates at 10,000 GPUs for a 70B model?''
-(Answer: $T_{{comm}}$ --- gradient volumes are hundreds of GB.)
-}
+(Answer: $T_{\text{comm}}$ --- gradient volumes are hundreds of GB.)
+```
 
-[T]
-  
-    {mlsyscard}{computestroke}
-    **Vol I: The Machine**\\[0.05cm]
-    {
-    {0pt}
-- Single node, 1--8 GPUs
-- PCIe / NVLink within one box
-- Shared memory model
-- {torch.nn.DataParallel}
-- Iron Law: $T = D/BW + O/R + L$
-    
-    }
-    {mlsyscard}
-  
-  
-    {mlsyscard}{datastroke}
-    **Vol II: The Fleet**\\[0.05cm]
-    {
-    {0pt}
-- Multi-node, 10,000+ GPUs
-- InfiniBand / Ethernet fabric
-- Message passing model
-- {torch.distributed}
-- {}: Compute + Comm + Coord
-    
-    }
-    {mlsyscard}
-  
-
-{0.06cm}
-
-{mlsyscard}{crimson}
-{**Iron Law of Scale:**
-$T_{{step}}(N) = T_{{compute}}/N + T_{{comm}}(N) + T_{{sync}}(N) - T_{{overlap}}$\\[0.03cm]
-**Scope, not depth.** Vol II adds communication and coordination terms to the Iron Law.}
-{mlsyscard}
+</details>
 
 ## What Changes at 1,000 GPUs?
 
-{
+[Original slide 22](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L1237)
+
+| **Dimension** | **1–8 GPUs (Vol I)** | **1,000+ GPUs (Vol II)** |
+| --- | --- | --- |
+| **Interconnect** | NVLink: 900 GB/s | InfiniBand: 50 GB/s (18$\times$ slower) |
+| **Memory model** | Shared memory | Message passing (explicit sync) |
+| **Failure rate** | MTBF $\sim$years | MTBF $\sim$hours (routine) |
+| **Debugging** | ` nvidia-smi `, profiler | Distributed tracing, fleet telemetry |
+| **Cost driver** | GPU hardware (&#36;) | Operations + idle time (&#36;&#36;&#36;) |
+
+**Key insight:** Fleet-scale is not “more of the same.” Each row is a **qualitative** shift that demands new abstractions.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: Vol I comparison showed the two scopes; this slide bridges them
 by naming the specific qualitative shifts that occur at fleet scale.
@@ -1127,29 +1205,30 @@ each shift introduces qualitatively new failure modes and design patterns.
 
 % -- FLEX: [CORE] This is the bridge from Vol I to Vol II.
 IF SHORT: Name all five, spend time on the failure rate shift only.
-}
+```
 
-{}{1.3}
-{
-{tabular}{@{}lll@{}}
-  
-  **Dimension** & **1--8 GPUs (Vol I)** & **1,000+ GPUs (Vol II)** \\
-  
-  **Interconnect** & NVLink: 900 GB/s & InfiniBand: 50 GB/s (18$×$ slower) \\
-  **Memory model** & Shared memory & Message passing (explicit sync) \\
-  **Failure rate** & MTBF $$years & MTBF $$hours (routine) \\
-  **Debugging** & {nvidia-smi}, profiler & Distributed tracing, fleet telemetry \\
-  **Cost driver** & GPU hardware (\$) & Operations + idle time (\$\$\$) \\
-  
-{tabular}
-}
-
-{0.2cm}
-{Key insight:}{Fleet-scale is not ``more of the same.'' Each row is a **qualitative** shift that demands new abstractions.}
+</details>
 
 ## Fallacies
 
-{
+[Original slide 23](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L1287)
+
+**Fallacy:** *Fleet-scale ML is just single-node ML with more GPUs.*
+
+At 1,000 GPUs, communication consumes 30–40% of iteration time. Failure recovery, not model architecture, dominates engineering effort. Qualitatively different.
+
+**Fallacy:** *You need distributed systems experience before taking this course.*
+
+Vol I foundations (memory hierarchy, profiling, single-GPU training) are the real prerequisites. Distributed concepts (consensus, AllReduce) are taught from scratch.
+
+**Fallacy:** *Governance chapters are “soft” — the real course is infrastructure.*
+
+Calculating carbon footprint per training run, auditing data provenance, and designing privacy-preserving pipelines require the same quantitative rigor as sizing a network fabric.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- NARRATE: Three common misconceptions about fleet-scale ML courses.
 Read each fallacy, then deliver the quantitative rebuttal.
@@ -1158,41 +1237,51 @@ how much single-node experience transfers to fleet engineering.
 
 % -- FLEX: [CORE] Fallacies set expectations before the course begins.
 IF SHORT: Cover the first two fallacies, skip the third.
-}
+```
 
-**Fallacy:** *Fleet-scale ML is just single-node ML with more GPUs.*\\
-{ At 1,000 GPUs, communication consumes 30--40% of iteration time. Failure recovery, not model architecture, dominates engineering effort. Qualitatively different.}
-
-{0.15cm}
-**Fallacy:** *You need distributed systems experience before taking this course.*\\
-{ Vol I foundations (memory hierarchy, profiling, single-GPU training) are the real prerequisites. Distributed concepts (consensus, AllReduce) are taught from scratch.}
-
-{0.15cm}
-**Fallacy:** *Governance chapters are ``soft'' --- the real course is infrastructure.*\\
-{ Calculating carbon footprint per training run, auditing data provenance, and designing privacy-preserving pipelines require the same quantitative rigor as sizing a network fabric.}
+</details>
 
 ## Pitfalls
 
-{
+[Original slide 24](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L1313)
+
+**Pitfall:** *Skipping the napkin math.*
+
+Every design decision in this course starts with a back-of-envelope calculation. A 2-minute Fermi estimate prevents weeks of wasted GPU time. Build the habit from day one.
+
+**Pitfall:** *Treating peak TFLOPS as achievable throughput.*
+
+Real clusters achieve 30–50% of peak (MFU). Designing for peak means under-provisioning by 2–3$\times$.
+
+**Pitfall:** *Optimizing components in isolation.*
+
+A faster GPU without a faster network increases idle time. A faster network without better scheduling wastes bandwidth. Fleet engineering is co-design.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- NARRATE: Three operational mistakes students make early in the course.
 % -- FLEX: [CORE] IF SHORT: Cover the first pitfall only.
-}
+```
 
-**Pitfall:** *Skipping the napkin math.*\\
-{ Every design decision in this course starts with a back-of-envelope calculation. A 2-minute Fermi estimate prevents weeks of wasted GPU time. Build the habit from day one.}
-
-{0.15cm}
-**Pitfall:** *Treating peak TFLOPS as achievable throughput.*\\
-{ Real clusters achieve 30--50% of peak (MFU). Designing for peak means under-provisioning by 2--3$×$.}
-
-{0.15cm}
-**Pitfall:** *Optimizing components in isolation.*\\
-{ A faster GPU without a faster network increases idle time. A faster network without better scheduling wastes bandwidth. Fleet engineering is co-design.}
+</details>
 
 ## Muddiest Point
 
-{
+[Original slide 25](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L1337)
+
+What was the **muddiest point** today?
+
+Write down the concept you found **most confusing**.
+
+Anonymous. One sentence. Submit before you leave.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- NARRATE: What to SAY while showing this slide
 ``Before we close, I want to know what confused you most. Write one
@@ -1209,20 +1298,24 @@ honest, specific confusions rather than anodyne ones.
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Closes the feedback loop --- essential for adaptive teaching.
 IF SHORT: Reduce to ``write one word on a slip of paper.''
-}
+```
 
-{1.0cm}
-{ What was the **muddiest point** today?}
-
-{0.8cm}
-{ Write down the concept you found **most confusing**.}
-
-{0.5cm}
-{{midgray}{Anonymous. One sentence. Submit before you leave.}}
+</details>
 
 ## What Were the Key Ideas?
 
-{
+[Original slide 26](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L1369)
+
+Close your notes.
+
+Write down the **3 most important ideas** from today.
+
+90 seconds — no peeking.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- NARRATE: What to SAY while showing this slide
 ``Close your notes. 90 seconds. Write down the 3 most important ideas
@@ -1234,20 +1327,26 @@ learning happens.
 [CORE] Retrieval practice is the highest-impact learning technique
 (Rosenshine). Never skip.
 IF SHORT: Reduce to 60 seconds.
-}
+```
 
-{1.5cm}
-{ Close your notes.}
-
-{0.8cm}
-{ Write down the **3 most important ideas** from today.}
-
-{0.8cm}
-{{midgray}{90 seconds --- no peeking.}}
+</details>
 
 ## Key Takeaways
 
-{
+[Original slide 27](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L1396)
+
+- **The fleet is the computer:** The unit of design is thousands of coordinated accelerators.
+- **Three Walls:** Memory $\to$ Network $\to$ Energy — the binding constraint shifts as scale grows.
+- **Iron Law of Scale:** $T_{\text{step}}(N) = T_{\text{compute}}/N + T_{\text{comm}}(N) + T_{\text{sync}}(N) - T_{\text{overlap}}$.
+- **C<sup>3</sup> framework:** Every bottleneck maps to Compute, Communication, or Coordination.
+- **Fleet Stack:** Four layers — Infrastructure, Distributed ML, Deployment, Governance.
+- **Failure math:** 10,000 GPUs $\times$ 50,000h MTBF = one failure every 5 hours.
+- **Scope, not depth:** Vol II is not “harder” than Vol I — it is *wider*. Equally rigorous.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: What prior concept connects to this slide
 Students just attempted recall. This slide reveals the answers and
@@ -1259,7 +1358,7 @@ fleet is the computer --- thousands of accelerators as one unit. Scale
 is qualitative --- not just more, but fundamentally different. Three
 Walls --- memory, network, energy; the binding constraint shifts as you
 scale. Iron Law of Scale ---
-$T_{{step}}(N) = T_{{compute}}/N + T_{{comm}} + T_{{sync}} - T_{{overlap}}$.
+$T_{\text{step}}(N) = T_{\text{compute}}/N + T_{\text{comm}} + T_{\text{sync}} - T_{\text{overlap}}$.
 C3 framework --- every bottleneck maps to Compute, Communication, or
 Coordination. Fleet Stack --- four layers from infrastructure to
 governance. Failure math --- one failure every 5 hours at 10,000 GPUs.
@@ -1268,20 +1367,28 @@ Scope not depth --- Vol II is wider, not harder.''
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Consolidation slide.
 IF SHORT: Read just the first three bullets.
-}
+```
 
-{0pt}
-- **The fleet is the computer:** The unit of design is thousands of coordinated accelerators.
-- **Three Walls:** Memory $$ Network $$ Energy --- the binding constraint shifts as scale grows.
-- **Iron Law of Scale:** $T_{{step}}(N) = T_{{compute}}/N + T_{{comm}}(N) + T_{{sync}}(N) - T_{{overlap}}$.
-- {{} framework:} Every bottleneck maps to Compute, Communication, or Coordination.
-- **Fleet Stack:** Four layers --- Infrastructure, Distributed ML, Deployment, Governance.
-- **Failure math:** 10,000 GPUs $×$ 50,000h MTBF = one failure every 5 hours.
-- **Scope, not depth:** Vol II is not ``harder'' than Vol I --- it is *wider*. Equally rigorous.
+</details>
 
 ## References
 
-{
+[Original slide 28](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L1433)
+
+**Verbraeken+20** Verbraeken et al. “A Survey on Distributed ML.” ACM Computing Surveys, 2020.
+
+**Narayanan+21** Narayanan et al. “Efficient Large-Scale Language Model Training on GPU Clusters.” SC 2021.
+
+**Jiang+24** Jiang et al. “MegaScale: Scaling Model Training to 10,000+ GPUs.” NSDI 2024.
+
+**Dean12** J. Dean. “Large-Scale Distributed Systems for Training Neural Networks.” NIPS 2012.
+
+**P&H21** Patterson & Hennessy. *Comp. Arch.: A Quantitative Approach*. 6th ed.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min]
 % -- NARRATE: What to SAY while showing this slide
 ``These five references are the foundational readings for the course.
@@ -1292,17 +1399,42 @@ origin. Patterson and Hennessy is the pedagogical model we follow.''
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Reference slide.
 IF SHORT: Skip verbal walkthrough --- students can read it.
-}
+```
 
-{Verbraeken+20}{Verbraeken et al. ``A Survey on Distributed ML.'' ACM Computing Surveys, 2020.}
-{Narayanan+21}{Narayanan et al. ``Efficient Large-Scale Language Model Training on GPU Clusters.'' SC 2021.}
-{Jiang+24}{Jiang et al. ``MegaScale: Scaling Model Training to 10,000+ GPUs.'' NSDI 2024.}
-{Dean12}{J. Dean. ``Large-Scale Distributed Systems for Training Neural Networks.'' NIPS 2012.}
-{P&H21}{Patterson & Hennessy. *Comp.\ Arch.: A Quantitative Approach*. 6th ed.}
+</details>
 
 ## Next Lecture: The Distributed Landscape
 
-{
+[Original slide 29](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L1456)
+
+Chapter 1: Introduction to Fleet-Scale ML
+
+How do 10,000 GPUs coordinate to train one model?
+
+**Compute**
+
+What hardware?
+
+Which accelerators?
+
+**Communication**
+
+What topology?
+
+How fast?
+
+**Coordination**
+
+What breaks?
+
+How to recover?
+
+**The fleet is the computer. Let's understand the hardware.**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min]
 % -- LINK: What prior concept connects to this slide
 Today established why scale matters and introduced C3 and the Fleet
@@ -1320,88 +1452,67 @@ Coordination --- the C3 lens applied to hardware.
 % -- FLEX: [CORE] or [OPTIONAL] + contingency
 [CORE] Forward hook that creates anticipation.
 IF SHORT: Read the central question and move on.
-}
+```
 
-{0.5cm}
-{ Chapter 1: Introduction to Fleet-Scale ML}
-
-{0.5cm}
-{ How do 10,000 GPUs coordinate to train one model?}
-
-{0.3cm}
-[c]
-  
-    
-    {computestroke}{**Compute**}\\[0.1cm]
-    { What hardware?\ accelerators?}
-  
-  
-    
-    {datastroke}{**Communication**}\\[0.1cm]
-    { What topology?\ fast?}
-  
-  
-    
-    {routingstroke}{**Coordination**}\\[0.1cm]
-    { What breaks?\ to recover?}
-  
-
-{0.4cm}
-{**The fleet is the computer. Let's understand the hardware.**}
+</details>
 
 ## Backup: Fleet Scale Quick Reference
 
-{
+[Original slide 30](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L1513)
+
+**Key Fleet-Scale Numbers (reference for problem sets):**
+
+| **Metric** | **Value** |
+| --- | --- |
+| H100 peak TFLOPS (FP16 sparse) | 1,979 |
+| H100 HBM bandwidth | 3,350 GB/s |
+| NVLink 4.0 (intra-node) | 900 GB/s |
+| InfiniBand NDR (inter-node) | 400 Gbps = 50 GB/s |
+| Typical fleet MFU | 30–50% |
+| Per-GPU MTBF (typical) | 50,000–100,000 h |
+| 10K-GPU fleet MTBF | 5–10 h |
+| GPT-3 gradient tensor (FP16) | $\sim$350 GB |
+| GPT-3 Ring AllReduce traffic | $\sim$700 GB |
+| GPT-4 training compute | $\sim$2 $\times$ 10$^{25}$ FLOPs |
+
+See textbook Appendix A for the complete hardware constants table.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- NARRATE: Backup slide with the key numbers students need for problem sets.
 Show if students ask for a reference card during exercises.
 % -- FLEX: [OPTIONAL] Only show if requested.
-}
+```
 
-**Key Fleet-Scale Numbers (reference for problem sets):**
-
-{0.1cm}
-{}{1.05}
-{tabular}{@{}lr@{}}
-  
-  **Metric** & **Value** \\
-  
-  H100 peak TFLOPS (FP16 sparse) & 1,979 \\
-  H100 HBM bandwidth & 3,350 GB/s \\
-  NVLink 4.0 (intra-node) & 900 GB/s \\
-  InfiniBand NDR (inter-node) & 400 Gbps = 50 GB/s \\
-  Typical fleet MFU & 30--50% \\
-  Per-GPU MTBF (typical) & 50,000--100,000 h \\
-  10K-GPU fleet MTBF & 5--10 h \\
-  GPT-3 gradient tensor (FP16) & $$350 GB \\
-  GPT-3 Ring AllReduce traffic & $$700 GB \\
-  GPT-4 training compute & $$2 $×$ 10$^{25}$ FLOPs \\
-  
-{tabular}
-
-{0.08cm}
-{ See textbook Appendix A for the complete hardware constants table.}
+</details>
 
 ## Backup: Prerequisite Self-Assessment
 
-{
-[3 min]
-% -- NARRATE: Use if students want to check their readiness before next lecture.
-% -- FLEX: [OPTIONAL] Hand out as a take-home diagnostic.
-}
+[Original slide 31](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/00_course_overview/00_course_overview.tex#L1548)
 
 **Can you answer these Vol I review questions?**
 
-{0.15cm}
-{2pt}
-- What is the arithmetic intensity of a matrix multiply $C = AB$ where $A$ is $M × K$ and $B$ is $K × N$?
-- A model has 7B parameters in FP16. How much memory for inference? For training with Adam?
-- What does {torch.nn.DataParallel} replicate across GPUs: the model, the data, or both?
-- Your GPU profile shows 80% of time in memory transfers. Is this workload compute-bound or memory-bound?
-- What is Amdahl's Law? If 10% of your code is serial, what is the maximum speedup with 1,000 GPUs?
+1. What is the arithmetic intensity of a matrix multiply $C = AB$ where $A$ is $M \times K$ and $B$ is $K \times N$?
+2. A model has 7B parameters in FP16. How much memory for inference? For training with Adam?
+3. What does ` torch.nn.DataParallel ` replicate across GPUs: the model, the data, or both?
+4. Your GPU profile shows 80% of time in memory transfers. Is this workload compute-bound or memory-bound?
+5. What is Amdahl's Law? If 10% of your code is serial, what is the maximum speedup with 1,000 GPUs?
 
-{0.1cm}
-{ If you cannot answer 4 of 5, review Vol I Chapters 1--4 before next lecture.}
+If you cannot answer 4 of 5, review Vol I Chapters 1–4 before next lecture.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min]
+% -- NARRATE: Use if students want to check their readiness before next lecture.
+% -- FLEX: [OPTIONAL] Hand out as a take-home diagnostic.
+```
+
+</details>
 
 ## Complete original Beamer source
 

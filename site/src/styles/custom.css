@@ -54,6 +54,13 @@ body {
   min-width: 0;
 }
 
+/* Wrapped list links need one continuous touch target, including line gaps. */
+.sl-markdown-content li > a {
+  display: inline-block;
+  max-width: 100%;
+}
+
+
 .sl-markdown-content .katex-display,
 .sl-markdown-content pre,
 .sl-markdown-content table {
@@ -77,8 +84,34 @@ body {
   padding-bottom: 0.25rem;
 }
 
+/* KaTeX defaults to 1.21em. On a narrow phone, keep display formulas close
+   to the surrounding text size; long expressions retain their local scroller.
+   Do not scale figures or inline math with this rule. */
+@media (max-width: 25rem) {
+  .sl-markdown-content .katex-display > .katex {
+    font-size: 1.05em;
+  }
+}
+
 .sl-markdown-content table {
   display: block;
+}
+
+/* Keep the source lineage table readable; scroll it instead of crushing columns. */
+.sl-markdown-content table:has(#feature-lineage-table) th,
+.sl-markdown-content table:has(#feature-lineage-table) td,
+.sl-markdown-content table:has(#gpu-sharing-boundaries) th,
+.sl-markdown-content table:has(#gpu-sharing-boundaries) td {
+  min-width: 10rem;
+}
+
+.sl-markdown-content table:has(#mig-profile-slices) th,
+.sl-markdown-content table:has(#mig-profile-slices) td {
+  min-width: 8rem;
+}
+.sl-markdown-content table:has(#mig-profile-slices) th:first-child,
+.sl-markdown-content table:has(#mig-profile-slices) td:first-child {
+  min-width: 12rem;
 }
 
 .sl-markdown-content img {
@@ -87,6 +120,30 @@ body {
   max-width: 100%;
   height: auto;
   margin-inline: auto;
+}
+
+/* A tall source panel should not grow to the full article width. */
+.sl-markdown-content img[src$='/gpt1-figure1-block.png'] {
+  width: min(100%, 20rem);
+}
+
+/* Keep words intact in headings; long formulas and identifiers may still wrap. */
+.sl-markdown-content :is(h2, h3, h4) {
+  hyphens: none;
+  overflow-wrap: break-word;
+}
+
+/* Keep the worked cost tables readable on phones; use the existing table
+   scroller rather than squeezing a policy into a few characters per line. */
+.sl-markdown-content table:has([id^="finops-"]) th,
+.sl-markdown-content table:has([id^="finops-"]) td {
+  min-width: 7rem;
+}
+.sl-markdown-content table:has(#finops-allocation) th:first-child,
+.sl-markdown-content table:has(#finops-allocation) td:first-child,
+.sl-markdown-content table:has(#finops-unit-cost) th:first-child,
+.sl-markdown-content table:has(#finops-unit-cost) td:first-child {
+  min-width: 14rem;
 }
 
 /* Paper figures often have transparent backgrounds and black labels/arrows.
@@ -129,12 +186,139 @@ body {
   text-transform: uppercase;
 }
 
+/* Preserve the original Lloyd-step SVGs while giving their small print
+   dimensions a readable, responsive display size. */
+.sl-markdown-content img[src*='/curated/classical-ml-clustering/lloyd-step-'] {
+  width: min(100%, 28rem);
+}
+
+/* D2L's original seq2seq SVGs use print dimensions. Set a responsive
+   reading size without changing the artwork or its viewBox. */
+.sl-markdown-content img[src*='/curated/seq2seq-2026-10-21/'],
+.sl-markdown-content img[src$='/d2l-recurrent/seq2seq.svg'],
+.sl-markdown-content img[src$='/d2l-recurrent/seq2seq-attention.svg'] {
+  width: min(100%, 38rem);
+}
+
+.sl-markdown-content img[src$='/seq2seq-2026-10-21/s2s-prob1.svg'],
+.sl-markdown-content img[src$='/seq2seq-2026-10-21/s2s-prob2.svg'] {
+  width: min(100%, 24rem);
+}
+
+/* D2L's portrait diagram uses small print units; scale its intact vectors. */
+.sl-markdown-content img[src$='/gan-dcgan-2026-10-28/gan.svg'] {
+  width: min(100%, 22rem);
+  height: auto;
+}
+
+/* The original scatter diagram uses TeX print units; keep its bytes unchanged. */
+.sl-markdown-content img[src$='/indexed-movement-2026-10-27/scatter-add.svg'] {
+  width: min(100%, 28rem);
+  height: auto;
+}
+
+/* Harvard's diagrams use small print dimensions; scale the intact vectors. */
+.sl-markdown-content img[src$='/28c3ef541fd4ed95724389fad083bb720b229e40.svg'],
+.sl-markdown-content img[src$='/755a01d61fa04f057cd25ccea73187a7b8a8d769.svg'],
+.sl-markdown-content img[src$='/c6d3e77bf90984ccd1a0aa0e731ead3ded0c3e64.svg'],
+.sl-markdown-content img[src$='/844618e87a09fb654cbccb727a9bef56c88aabea.svg'],
+.sl-markdown-content img[src$='/serving-operations-2026-10-29/power-measurement-boundaries.svg'],
+.sl-markdown-content img[src$='/serving-operations-2026-10-29/mlops-stack-layers.svg'],
+.sl-markdown-content img[src$='/tensor-factorization-2026-10-29/harvard-cp.svg'],
+.sl-markdown-content img[src$='/frameworks-native-2026-10-27/device-placement-dimensions.svg'],
+.sl-markdown-content img[src$='/selection-engineering-2026-10-28/distributed-selection.svg'] {
+  width: min(100%, 40rem);
+  height: auto;
+}
+
+/* Keep this full timeline's labels legible; pan without changing source geometry. */
+.sl-markdown-content a:has(> img[src$='/tf-data-2026-10-28/cached-dataset.svg']) {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  padding-block: 0.25rem 0.75rem;
+  border: 1px solid var(--sl-color-gray-5);
+  scrollbar-width: thin;
+}
+.sl-markdown-content img[src$='/tf-data-2026-10-28/cached-dataset.svg'] {
+  width: 76.5rem;
+  max-width: none;
+  height: auto;
+  margin: 0;
+}
+
+/* These complete portrait SVGs need a reading size, not full-column stretching. */
+.sl-markdown-content img[src$='/recommender-evaluation-2026-10-25/precision-recall.svg'],
+.sl-markdown-content img[src$='/recommender-evaluation-2026-10-25/diversity.svg'] {
+  width: min(100%, 22rem);
+  height: auto;
+}
+
+/* Keep a tensor shape together; the table itself can scroll on narrow screens. */
+.sl-markdown-content:has(img[src*='/curated/seq2seq-2026-10-21/']) table code {
+  white-space: nowrap;
+}
+
+/* Original recurrent-attention diagrams keep their aspect ratio at reading size. */
+.sl-markdown-content img[src*='/curated/attention-translation-2026-10-21/'] {
+  width: min(100%, 38rem);
+}
+
+/* Source self-attention artwork keeps its original aspect ratio. */
+.sl-markdown-content img[src*='/curated/self-attention-2026-10-21/'] {
+  width: min(100%, 38rem);
+}
+
+/* Keep tall source diagrams readable without enlarging them past the page view. */
+.sl-markdown-content img[src$='/llama-2026-10-22/cs336-model-overview.png'],
+.sl-markdown-content img[src$='/llama-2026-10-22/cs336-prenorm-block.png'],
+.sl-markdown-content:has(img[src$='/llama-2026-10-22/cs336-model-overview.png'])
+  img[src$='/source-first-32-34/cs336-silu-vs-relu.png'] {
+  width: min(100%, 30rem);
+}
+
 /* Harvard's margin figures carry intentionally tiny intrinsic dimensions.
    In a full-width Bookvar chapter they need an explicit responsive reading
    size; source SVG bytes remain untouched. */
 .sl-markdown-content img[src*='/curated/ml-systems/harvard/'],
 .sl-markdown-content img[src*='/curated/ml-systems/bookvar/'] {
   width: min(100%, 36rem);
+}
+
+/* Original Harvard compression figures use print-sized SVG dimensions.
+   Enlarge these five existing assets without changing their source bytes. */
+.sl-markdown-content img[src$='/5b8ca5d44a1556b84569cdc9156a94c4b1500e92.svg'],
+.sl-markdown-content img[src$='/fc4813524b57d9439c3a0b9101f2c1f2a79382c3.svg'],
+.sl-markdown-content img[src$='/4000264baf2311c2b61ca0ddd3fcedaa9d047ed3.svg'],
+.sl-markdown-content img[src$='/dcbd6535b09a28528559354f928838baaae7644b.svg'],
+.sl-markdown-content img[src$='/708770dcb60d00ea7f382f39d15b3206ba6ccb1f.svg'] {
+  width: min(100%, 36rem);
+  background-color: #fff;
+}
+
+/* Keep the complete tall source figure readable without enlarging it past the page height. */
+.sl-markdown-content img[src$='/speculative-review-2026-10/eagle2-tree-mask.png'],
+.sl-markdown-content img[src$='/speculative-review-2026-10/eagle-shifted-input.png'] {
+  width: min(100%, 28rem);
+}
+
+/* This original margin SVG is vector artwork, not a 99 px bitmap. */
+.sl-markdown-content img[src$='/mlops-review-2026-10/harvard-dependency.svg'],
+.sl-markdown-content img[src$='/edge-review-2026-10/harvard-stragglers.svg'] {
+  width: min(100%, 28rem);
+  height: auto;
+}
+
+/* Keep this small original bitmap at native size instead of upscaling it. */
+.sl-markdown-content img[src$='/micro-runtime-2026-10-27/model-buffer-and-arena.png'] {
+  width: min(100%, 271px);
+  height: auto;
+}
+
+/* Native vector sizing for readable minute-to-quarter labels. */
+.sl-markdown-content img[src$='/workflow-feedback-2026-10-26/feedback-timescales.svg'] {
+  width: min(100%, 20rem);
+  height: auto;
 }
 
 .sl-markdown-content img[src$='/data/data_engineering_storage_latency_hierarchy.svg'] {
@@ -149,6 +333,28 @@ body {
 .sl-markdown-content img[src$='/Assets/Figures/curated/attention-review-2026-09/mha-mla-projections.svg'] {
   width: min(100%, 48rem);
   height: auto;
+}
+
+@media (max-width: 40rem) {
+  /* Keep complete source slides and the two SimCSE panels readable. The link
+     is a local horizontal scroller; activating it still opens the original. */
+  .sl-markdown-content a:has(> img[src*='/source-first-60-64/dpr-']),
+  .sl-markdown-content a:has(> img[src$='/embeddings-review-2026-10/simcse.png']) {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    contain: inline-size;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .sl-markdown-content img[src*='/source-first-60-64/dpr-'],
+  .sl-markdown-content img[src$='/embeddings-review-2026-10/simcse.png'] {
+    width: 42rem;
+    max-width: none;
+    margin-inline: 0;
+  }
 }
 
 /* Legacy reference pages can still contain Mermaid diagrams. Keep them

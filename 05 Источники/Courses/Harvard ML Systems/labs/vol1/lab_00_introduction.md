@@ -9,102 +9,73 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol1/lab_00_introduction.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol1/lab_00_introduction.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL1 Lab — Introduction
 
 ## Readable lab narrative
 
-<div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-                    padding: 36px 44px; border-radius: 16px; color: white;
-                    box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
-            <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em;
-                        color: #475569; text-transform: uppercase; margin-bottom: 10px;">
-                Machine Learning Systems · Volume I · Lab 00
-            </div>
-            <h1 style="margin: 0 0 10px 0; font-size: 2.4rem; font-weight: 900;
-                       color: #f8fafc; line-height: 1.1; letter-spacing: -0.02em;">
-                {lab_metadata.title}
-            </h1>
-            <p style="margin: 0 0 20px 0; font-size: 1.05rem; color: #94a3b8;
-                      max-width: 620px; line-height: 1.65;">
-                This orientation shows how the lab sequence works: choose a track,
-                learn the repeated workflow, and see how later labs adapt the same
-                concept to your selected context.
-            </p>
-            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                <span style="background: rgba(99,102,241,0.15); color: #a5b4fc;
-                             padding: 5px 14px; border-radius: 20px; font-size: 0.8rem;
-                             font-weight: 600; border: 1px solid rgba(99,102,241,0.25);">
-                    Orientation · Track Choice · Interface Tour
-                </span>
-                <span style="background: rgba(16,185,129,0.15); color: #6ee7b7;
-                             padding: 5px 14px; border-radius: 20px; font-size: 0.8rem;
-                             font-weight: 600; border: 1px solid rgba(16,185,129,0.25);">
-                    Lab v{lab_metadata.lab_version}
-                </span>
-                <span style="background: rgba(245,158,11,0.15); color: #fcd34d;
-                             padding: 5px 14px; border-radius: 20px; font-size: 0.8rem;
-                             font-weight: 600; border: 1px solid rgba(245,158,11,0.25);">
-                    Local report artifact
-                </span>
-            </div>
-        </div>
-
----
-
 ## Part A - Deployed Behavior, Not Isolated Models
 
-        **Scenario.** A model demo works in a notebook. Your lab lead asks whether
-        it is ready to become a deployed ML system. The first mistake is to answer
-        using only the model score.
+**Scenario.** A model demo works in a notebook. Your lab lead asks whether
+it is ready to become a deployed ML system. The first mistake is to answer
+using only the model score.
 
-        These labs are not a second textbook and they are not a quiz bank. They are a
-        repeated way to practice systems thinking around machine learning: make a
-        prediction, inspect deployed evidence, name the constraint, and write the
-        decision you would defend.
+These labs are not a second textbook and they are not a quiz bank. They are a
+repeated way to practice systems thinking around machine learning: make a
+prediction, inspect deployed evidence, name the constraint, and write the
+decision you would defend.
 
 ---
 
 **Consequence.** Notebook success is not deployment success. The chapter's
-        opening claim is that ML systems have a physics: learned behavior must move
-        through memory, consume energy, meet latency windows, and survive a real
-        operating context.
+opening claim is that ML systems have a physics: learned behavior must move
+through memory, consume energy, meet latency windows, and survive a real
+operating context.
 
-        Lab 00 only orients you to that pattern. Lab 01 is where the first technical
-        diagnosis begins.
+Lab 00 only orients you to that pattern. Lab 01 is where the first technical
+diagnosis begins.
 
 ---
 
 Chapter 1 frames ML systems as data-shaped behavior running under
-            physical constraint. Part A turns that claim into the first lab habit:
-            do not stop at the model; ask what deployed behavior the system must
-            prove.
+physical constraint. Part A turns that claim into the first lab habit:
+do not stop at the model; ask what deployed behavior the system must
+prove.
 
 ---
 
 ## Part B - A Track Is An Operating Envelope
 
-        **Scenario.** Four students study the same MLSys concept, but each one has
-        to defend the result to a different stakeholder. The answer should not sound
-        the same for a phone app, a wearable firmware update, a safety-critical
-        vehicle, and a cloud service.
+**Scenario.** Four students study the same MLSys concept, but each one has
+to defend the result to a different stakeholder. The answer should not sound
+the same for a phone app, a wearable firmware update, a safety-critical
+vehicle, and a cloud service.
 
-        A track is the operating envelope you carry through the labs. It changes
-        the story, device, stakeholder, primary metrics, guardrails, likely failure
-        mode, and report framing. It does **not** change the chapter concept
-        everyone is learning.
+A track is the operating envelope you carry through the labs. It changes
+the story, device, stakeholder, primary metrics, guardrails, likely failure
+mode, and report framing. It does **not** change the chapter concept
+everyone is learning.
 
-        You can think of it as four students solving the same kind of problem
-        under four different sets of constraints:
+You can think of it as four students solving the same kind of problem
+under four different sets of constraints:
 
 ---
 
 **Consequence.** If a track only changes the label, it is not doing useful
-        work. The track should change what constraint pushes back when the same
-        idea is deployed.
+work. The track should change what constraint pushes back when the same
+idea is deployed.
 
 ---
 
@@ -113,117 +84,247 @@ Chapter 1 frames ML systems as data-shaped behavior running under
 
 ---
 
-Select **all** that should change because of the track:
-
----
-
 **Part B prediction.** When you choose a track, which parts of
     later labs should change automatically?
 
 ---
 
-Select **all** that should change because of the track:
-
----
-
 If every track taught a different idea, students could not compare notes.
-    The track should change the concrete material: device, workload, metric,
-    guardrail, stakeholder, and report. The underlying concept stays common.
+The track should change the concrete material: device, workload, metric,
+guardrail, stakeholder, and report. The underlying concept stays common.
 
 ---
 
 ## The Four Canonical Tracks
 
-        The course supports four canonical tracks. You will choose one as your
-        recurring operating envelope. Later labs will change the story, stakeholder,
-        constraints, metrics, failure mode, and report frame from that choice while
-        keeping the core concept shared.
+The course supports four canonical tracks. You will choose one as your
+recurring operating envelope. Later labs will change the story, stakeholder,
+constraints, metrics, failure mode, and report frame from that choice while
+keeping the core concept shared.
 
 ---
 
 ## Part C - The Repeated Lab Ritual
 
-        **Scenario.** A later lab opens with a stakeholder case and a system that
-        is not yet defensible. You do not start by tuning randomly. You first make
-        a structured prediction, then use the controls to create evidence.
+**Scenario.** A later lab opens with a stakeholder case and a system that
+is not yet defensible. You do not start by tuning randomly. You first make
+a structured prediction, then use the controls to create evidence.
 
-        Starting from Lab 01, every lab follows the same rhythm: read a case,
-        make a prediction, manipulate a small number of controls, inspect the
-        evidence, choose a decision, and write the report you would defend.
+Starting from Lab 01, every lab follows the same rhythm: read a case,
+make a prediction, manipulate a small number of controls, inspect the
+evidence, choose a decision, and write the report you would defend.
 
-        Before you begin Lab 01, spend two minutes with the tour below. The goal
-        is only to recognize the pattern. The technical vocabulary arrives later,
-        one lab at a time.
+Before you begin Lab 01, spend two minutes with the tour below. The goal
+is only to recognize the pattern. The technical vocabulary arrives later,
+one lab at a time.
 
 ---
 
 **Lab rhythm** — later labs repeat the same learning loop.
 
-        The technical topic changes from lab to lab, but the student move stays
-        familiar: read the case, make a prediction, move the controls, inspect the
-        evidence, decide, and explain.
+The technical topic changes from lab to lab, but the student move stays
+familiar: read the case, make a prediction, move the controls, inspect the
+evidence, decide, and explain.
 
 ---
 
 **Controls change evidence.** A radio button that asks for your prediction only
-        records your expectation. Sliders and dropdowns are the controls that
-        change plots, tables, and status cards.
+records your expectation. Sliders and dropdowns are the controls that
+change plots, tables, and status cards.
 
 ---
 
 **Predict first, then test.**
 
-        Many labs ask for an initial answer before you move a control. That
-        answer is a learning checkpoint. It should not make the chart jump.
+Many labs ask for an initial answer before you move a control. That
+answer is a learning checkpoint. It should not make the chart jump.
 
 ---
 
 Being wrong is useful here. The lab is asking you to notice how evidence
-        changes your mind, not to already know the answer.
+changes your mind, not to already know the answer.
 
 ---
 
 **Optional details** keep the main page readable.
 
-        Later labs sometimes include a formula, a definition, or a short reference.
-        Those details live behind expandable sections so you can open them when
-        you need them and keep reading when you do not.
+Later labs sometimes include a formula, a definition, or a short reference.
+Those details live behind expandable sections so you can open them when
+you need them and keep reading when you do not.
 
 ---
 
 A later lab might explain a metric in one paragraph, show the
-            equation behind it, or name the chapter section that introduced it.
-            The main task still stays visible above the detail.
+equation behind it, or name the chapter section that introduced it.
+The main task still stays visible above the detail.
 
 ---
 
 ## Part D - Choose An Operating Envelope For The Ledger
 
-        You have now seen what a track does. For the rest of Volume I, you will
-        carry one deployment context as your primary learning lens. Every student
-        learns the same concepts; the track changes the concrete story and evidence.
+You have now seen what a track does. For the rest of Volume I, you will
+carry one deployment context as your primary learning lens. Every student
+learns the same concepts; the track changes the concrete story and evidence.
 
-        **Scenario.** Future labs need to know which stakeholder and operating
-        envelope to load before they can choose defaults. This is why Lab 00 saves
-        the track in the local Design Ledger instead of treating it as a temporary
-        page setting.
+**Scenario.** Future labs need to know which stakeholder and operating
+envelope to load before they can choose defaults. This is why Lab 00 saves
+the track in the local Design Ledger instead of treating it as a temporary
+page setting.
 
-        **This is not a career choice.** It is a way to keep the examples coherent
-        from lab to lab. Later labs will read this choice from the local Design
-        Ledger and adapt narrative, device assumptions, metrics, guardrails,
-        failure modes, and report framing automatically.
+**This is not a career choice.** It is a way to keep the examples coherent
+from lab to lab. Later labs will read this choice from the local Design
+Ledger and adapt narrative, device assumptions, metrics, guardrails,
+failure modes, and report framing automatically.
 
 ---
 
 1. Which track (☁️ Cloud Fleet, 📱 iPhone, 🚕 RoboTaxi, or 💍 Oura Ring) did you choose, and what constraint will that track keep bringing back?
 
-    2. Why is a model that works in a notebook not automatically a deployed ML system?
+2. Why is a model that works in a notebook not automatically a deployed ML system?
 
-    3. What is the recurring order of work in later labs: what case do you read, what prediction do you make, what controls do you manipulate, what evidence do you inspect, what decision do you defend, and what report do you produce?
+3. What is the recurring order of work in later labs: what case do you read, what prediction do you make, what controls do you manipulate, what evidence do you inspect, what decision do you defend, and what report do you produce?
 
-    4. How will your selected track change the meaning of later quantities such as latency, energy, memory, cost, utilization, or carbon?
+4. How will your selected track change the meaning of later quantities such as latency, energy, memory, cost, utilization, or carbon?
 
-    *If you cannot answer all four from memory, revisit the track cards and interface orientation.*
+*If you cannot answer all four from memory, revisit the track cards and interface orientation.*
+
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+<div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            padding: 36px 44px; border-radius: 16px; color: white;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
+    <div style="font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em;
+                color: #475569; text-transform: uppercase; margin-bottom: 10px;">
+        Machine Learning Systems · Volume I · Lab 00
+    </div>
+    <h1 style="margin: 0 0 10px 0; font-size: 2.4rem; font-weight: 900;
+               color: #f8fafc; line-height: 1.1; letter-spacing: -0.02em;">
+        ⟨value 1⟩
+    </h1>
+    <p style="margin: 0 0 20px 0; font-size: 1.05rem; color: #94a3b8;
+              max-width: 620px; line-height: 1.65;">
+        This orientation shows how the lab sequence works: choose a track,
+        learn the repeated workflow, and see how later labs adapt the same
+        concept to your selected context.
+    </p>
+    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <span style="background: rgba(99,102,241,0.15); color: #a5b4fc;
+                     padding: 5px 14px; border-radius: 20px; font-size: 0.8rem;
+                     font-weight: 600; border: 1px solid rgba(99,102,241,0.25);">
+            Orientation · Track Choice · Interface Tour
+        </span>
+        <span style="background: rgba(16,185,129,0.15); color: #6ee7b7;
+                     padding: 5px 14px; border-radius: 20px; font-size: 0.8rem;
+                     font-weight: 600; border: 1px solid rgba(16,185,129,0.25);">
+            Lab v⟨value 2⟩
+        </span>
+        <span style="background: rgba(245,158,11,0.15); color: #fcd34d;
+                     padding: 5px 14px; border-radius: 20px; font-size: 0.8rem;
+                     font-weight: 600; border: 1px solid rgba(245,158,11,0.25);">
+            Local report artifact
+        </span>
+    </div>
+</div>
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{lab_metadata.title}' `
+- value_2: ` f'{lab_metadata.lab_version}' `
+
+---
+
+---
+
+---
+
+_Select an answer to continue._
+
+---
+
+---
+
+---
+
+Select **all** that should change because of the track:
+
+---
+
+Select **all** that should change because of the track:
+
+---
+
+**Track rule of thumb:** the track should change the narrative and constraints, but it should not change what concept the lab teaches.
+
+---
+
+---
+
+---
+
+**Track choice is a learning lens.** You are not choosing a career path. You are choosing which deployment constraints you will keep returning to as each new ML systems idea is introduced.
+
+---
+
+---
+
+---
+
+The point of Lab 00 is orientation. You should leave knowing what role your track plays and how a later lab page asks you to work.
+
+---
+
+**Example control**
+
+---
+
+Use predictions to learn from surprise. Use controls to create the evidence you will reason from.
+
+---
+
+You do not need every detail at once. Open details when they help you answer the current question.
+
+---
+
+_Complete the orientation checks above to unlock your track selection._
+
+---
+
+---
+
+---
+
+_Select your deployment context above._
+
+---
+
+---
+
+---
+
+**Design Ledger initialized** — track: ⟨value 1⟩. Your track pre-loads hardware defaults and scenario constraints in every lab from Lab 01 onward. Proceed to **Lab 01: ML Introduction**.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{track_display_label(_track_profile)}' `
+
+---
+
+---
+
+---
+
+_Complete the orientation checks and choose your track to unlock the local report._
+
+---
+
+## Download Report
+
+---
+
+Your Lab 00 orientation report is generated locally from the current track choice and completed orientation checks.
+
+</details>
 
 ## Complete original Marimo source
 

@@ -2,7 +2,7 @@
 title: Практика
 type: practice
 status: active
-last_updated: 2026-09-15
+last_updated: 2026-10-29
 ---
 
 # Практика
@@ -33,12 +33,15 @@ last_updated: 2026-09-15
 | [[02 Areas/ML & DL/06 Практика/10 Измерить checkpointing и offload|Checkpointing и offload]] | Transformer training | Pareto-график memory–time |
 | [[02 Areas/ML & DL/06 Практика/11 Разрезать Transformer по TP и SP|Tensor и sequence parallelism]] | Collectives, tensor shapes | Sharded block и ledger коммуникаций |
 | [[02 Areas/ML & DL/06 Практика/12 Собрать и проверить FSDP|Собрать FSDP]] | DDP, optimizer states | FSDP run, memory snapshots и переносимый checkpoint |
-| [[02 Areas/ML & DL/06 Практика/13 Оптимизировать один Transformer step|Оптимизировать Transformer step]] | Profiling, AMP, attention | Проверенная серия оптимизаций и итоговая ведомость |
+| [[02 Areas/ML & DL/06 Практика/13 Оптимизировать один Transformer step|Оптимизировать Transformer step]] | Profiling, AMP, attention, интервалы и мощность теста | Серия оптимизаций, проверка эффекта, отдельный расчёт serving-мощности и отчёт с ограничениями |
 | [[02 Areas/ML & DL/06 Практика/14 Собрать минимальный inference engine|Минимальный inference engine]] | KV-cache, batching | Scheduler, prefill/decode и SLO-графики |
+| [[02 Areas/ML & DL/06 Практика/14a HTTP streaming и жизненный цикл запроса|HTTP streaming и жизненный цикл запроса]] | Практика 14, asyncio и HTTP | Работающий token-ID API, проверенные отмена/timeout, terminal events и освобождение состояния |
+| [[02 Areas/ML & DL/06 Практика/14b Планировщик запросов и KV-память|Интерактивный планировщик и KV-память]] | Prefill, decode, KV-cache | Изменяемая нагрузка, расписание по шагам и видимое выделение блоков |
 | [[02 Areas/ML & DL/06 Практика/15 Реализовать W8A8 и SmoothQuant|W8A8 и SmoothQuant]] | Quantization basics | Калибровка, accuracy и kernel-level benchmark |
 | [[02 Areas/ML & DL/06 Практика/16 Проверить speculative decoding и rollback KV|Speculative decoding]] | Sampling, KV-cache | Корректный acceptance и rollback cache |
-| [[02 Areas/ML & DL/06 Практика/17 Развернуть наблюдаемый ML сервис|Наблюдаемый ML-сервис]] | HTTP, Docker, metrics | Контейнер, dashboard и load-test |
+| [[02 Areas/ML & DL/06 Практика/17 Развернуть наблюдаемый ML сервис|Наблюдаемый ML-сервис]] | HTTP, Docker, metrics, gRPC, SLO | EDLS-сервис и метрики; Harvard: расчёты canary, бюджетов и инцидента; контейнер и load-test остаются отдельным экспериментом |
 | [[02 Areas/ML & DL/06 Практика/18 Harvard ML Systems — интерактивные design labs|Harvard ML Systems design labs]] | Вычислительные основы и системное мышление | Prediction, sweep, artifact и design ledger |
+| [[02 Areas/ML & DL/06 Практика/18a Сравнить архитектуры по ресурсным ограничениям|Выбор архитектуры по ограничениям]] | Формы тензоров, память, операции, SLO | Полный разбор Lab 06: пять ограничений, исходный график, границы sweep и сравнение правил выбора |
 | [[02 Areas/ML & DL/06 Практика/19 Найти автомобильный номер в видеопотоке|Найти автомобильный номер в видеопотоке]] | Detection, tracking, OCR | Track-level ALPR pipeline с evidence и end-to-end метриками |
 | [[02 Areas/ML & DL/06 Практика/20 Собрать языковую модель с нуля|Собрать языковую модель с нуля]] | BPE, Transformer, оптимизация | Проверяемая модель от tokenizer до генерации |
 | [[02 Areas/ML & DL/06 Практика/21 Профилировать и ускорить Transformer kernel|Профилировать и ускорить Transformer kernel]] | PyTorch profiler, Triton | Проверка корректности, профиль выполнения и сравнение скорости |
@@ -49,7 +52,13 @@ last_updated: 2026-09-15
 | [[02 Areas/ML & DL/06 Практика/26 Поиск доказательства в Lean с verifier|Найти доказательство в Lean с verifier]] | Формальная логика, Lean basics | Проверяемая proof-search траектория и разбор ошибок |
 | [[02 Areas/ML & DL/06 Практика/27 Проверяемый научный поиск на символьной регрессии|Проверяемый научный поиск]] | Регрессия, search, held-out data | Символьная гипотеза, независимая проверка и журнал поиска |
 
-Первая интерактивная лаборатория уже доступна на сайте. Работы 06–17 используют
+The [[06 Практика/20 Собрать языковую модель с нуля#nanogpt-worked-reference|worked nanoGPT reference]]
+runs the original preparer, trainer and sampler on a tiny local CPU fixture,
+with a checked optimizer/checkpoint boundary and the author's original loss plot.
+
+На сайте доступны интерактивные лаборатории причинного внимания и планирования
+запросов. Вторая показывает prefill/decode, заполнение KV-блоков и остановку
+при нехватке памяти. Работы 06–17 используют
 полностью импортированные оригинальные лекции, notebooks и homework EDLS: ссылки
 внутри каждой работы ведут не на краткий пересказ, а на исходный учебный
 материал. Работа 18 связывает 34 оригинальные Harvard Marimo labs с каноническими

@@ -21,8 +21,10 @@ describe('publication workflow policy', () => {
     const workflow = readFileSync(resolve(root, '.github/workflows/verify.yml'), 'utf8');
 
     expect(publishing.scripts['test:unit']).toBe('vitest run --exclude tests/site-output.test.ts');
+    expect(publishing.scripts['test:publication']).toBe('vitest run --config vitest.publication.config.ts');
     expect(publishing.scripts['test:output']).toBe('vitest run tests/site-output.test.ts');
-    expect(workflow.indexOf('pnpm --dir publishing test:unit'))
+    expect(workflow.indexOf('pnpm --dir publishing test:publication')).toBeGreaterThan(0);
+    expect(workflow.indexOf('pnpm --dir publishing test:publication'))
       .toBeLessThan(workflow.indexOf('pnpm --dir site build'));
     expect(workflow.indexOf('pnpm --dir site build'))
       .toBeLessThan(workflow.indexOf('pnpm --dir publishing test:output'));
@@ -58,23 +60,39 @@ describe('publication workflow policy', () => {
     expect(css).toMatch(/\.source-attribution\s*\{[^}]*max-width:\s*100%[^}]*overflow-wrap:\s*anywhere/s);
   });
 
-  it('places pinned course hubs only under Источники → Курсы and preserves textbook concept navigation', () => {
+  it('gives original seq2seq SVGs responsive reading sizes without cropping them', () => {
+    const css = readFileSync(resolve(root, 'site/src/styles/custom.css'), 'utf8');
+    expect(css).toMatch(/img\[src\*='\/curated\/seq2seq-2026-10-21\/'\][^}]*width:\s*min\(100%, 38rem\)/s);
+    expect(css).toMatch(/img\[src\$='\/seq2seq-2026-10-21\/s2s-prob2.svg'\][^}]*width:\s*min\(100%, 24rem\)/s);
+    expect(css).toMatch(/img\[src\$='\/d2l-recurrent\/seq2seq-attention.svg'\][^}]*width:\s*min\(100%, 38rem\)/s);
+    expect(css).toMatch(/\.sl-markdown-content:has\(img\[src\*='\/curated\/seq2seq-2026-10-21\/'\]\) table code\s*\{\s*white-space:\s*nowrap;/);
+  });
+
+  it('gives self-attention source diagrams a responsive reading size', () => {
+    const css = readFileSync(resolve(root, 'site/src/styles/custom.css'), 'utf8');
+    expect(css).toMatch(/img\[src\*='\/curated\/self-attention-2026-10-21\/'\]\s*\{\s*width:\s*min\(100%, 38rem\);/);
+  });
+
+  it('gives recurrent-attention source diagrams a responsive reading size', () => {
+    const css = readFileSync(resolve(root, 'site/src/styles/custom.css'), 'utf8');
+    expect(css).toMatch(/img\[src\*='\/curated\/attention-translation-2026-10-21\/'\]\s*\{\s*width:\s*min\(100%, 38rem\);/);
+  });
+
+  it('keeps original courses in the library rather than parallel textbook navigation', () => {
     const manifest = loadManifest(resolve(root, 'publishing/navigation.yml'));
     const sources = manifest.sections.find((section) => section.id === 'sources');
     const textbook = manifest.sections.find((section) => section.id === 'textbook');
-    const courses = sources?.sidebar?.find((item) => item.label === 'Курсы');
-    const courseItems = courses && 'items' in courses
-      ? courses.items.filter((item): item is Extract<PublicationSidebarItem, { route: string }> => 'route' in item)
-      : [];
+    const flatten = (items: PublicationSidebarItem[]): string[] => items.flatMap(item =>
+      'route' in item ? [item.route] : flatten(item.items));
+    const libraryRoutes = flatten(sources?.sidebar ?? []);
     const hubRoutes = [
       'sources/courses/stanford-cs336-spring-2026/index',
       'sources/courses/berkeley-advanced-llm-agents-spring-2025/index'
     ];
 
-    expect(courseItems.map((item) => item.route)).toEqual([
-      'sources/kursy',
-      ...hubRoutes
-    ]);
+    expect(libraryRoutes).toContain('sources/kursy');
+    expect(libraryRoutes.filter(route => hubRoutes.includes(route))).toEqual([]);
+    expect(sources?.pages.filter(page => hubRoutes.includes(page.route))).toHaveLength(2);
     expect(textbook?.pages.some((page) => hubRoutes.includes(page.route))).toBe(false);
     expect(textbook?.sidebar?.some((item) => 'route' in item && hubRoutes.includes(item.route))).toBe(false);
     expect(textbook?.pages.some((page) => page.route === 'textbook/transformer/self-attention')).toBe(true);
@@ -101,8 +119,9 @@ describe('publication workflow policy', () => {
     }
   });
 
-  it('links the source library index to both pinned course hubs', () => {
+  it('links the library to the complete course catalogue and retains both pinned course hubs there', () => {
     const sourceIndex = readFileSync(resolve(root, '05 Источники/_index.md'), 'utf8');
+    const catalogue = readFileSync(resolve(root, '05 Источники/Курсы.md'), 'utf8');
     const navigation = YAML.parse(readFileSync(resolve(root, 'publishing/navigation.yml'), 'utf8')) as {
       sections: Array<{ pages: Array<{ source: string; route: string }> }>;
     };
@@ -116,11 +135,12 @@ describe('publication workflow policy', () => {
 
     for (const hub of hubs) {
       expect(routes.get(hub), hub).toBeDefined();
-      expect(sourceIndex, hub).toContain(`[[02 Areas/ML & DL/${hub.slice(0, -'.md'.length)}`);
+      expect(catalogue, hub).toContain(hub.slice(0, -'.md'.length));
     }
+    expect(sourceIndex).toContain('[[05 Источники/Курсы|');
   });
 
-  it('offers both named courses on the homepage and puts reading before audit details', () => {
+  it('offers one textbook, a topic reference and a library; course hubs put reading before audit details', () => {
     const homepage = readFileSync(resolve(root, 'site/src/content/docs/index.md'), 'utf8');
     const manifest = loadManifest(resolve(root, 'publishing/navigation.yml'));
     const publishedSources = new Set(manifest.sections.flatMap((section) => section.pages.map((page) => page.source)));
@@ -128,9 +148,12 @@ describe('publication workflow policy', () => {
       ['Stanford CS336', 'stanford-cs336-spring-2026', 'Stanford CS336 Spring 2026'],
       ['Berkeley Advanced LLM Agents', 'berkeley-advanced-llm-agents-spring-2025', 'Berkeley Advanced LLM Agents Spring 2025']
     ];
+    expect(homepage).toContain('href="./textbook/"');
+    expect(homepage).toContain('href="./reference/"');
+    expect(homepage).toContain('href="./sources/"');
+    expect(homepage).not.toContain('id="university-courses"');
     for (const [name, route, folder] of courses) {
-      expect(homepage).toContain(name);
-      expect(homepage).toContain(`href="./sources/courses/${route}/"`);
+      expect(homepage).not.toContain(`href="./sources/courses/${route}/"`);
       expect(homepage).not.toContain(`href="./sources/courses/${route}/index/"`);
       const hub = readFileSync(resolve(root, `05 Источники/Courses/${folder}/_index.md`), 'utf8');
       expect(hub.indexOf('## Где читать тему')).toBeGreaterThan(0);
@@ -150,6 +173,44 @@ describe('publication workflow policy', () => {
     for (let number = 1; number <= 12; number += 1) {
       expect(berkeley).toContain(`<a id="meeting-${String(number).padStart(2, '0')}"></a>`);
     }
+  });
+
+  it('keeps reader-facing Stanford coverage counts consistent with both current ledgers', () => {
+    const courseRoot = resolve(root, '05 Источники/Courses/Stanford CS336 Spring 2026');
+    const countLedger = (name: string) => {
+      const rows = JSON.parse(readFileSync(resolve(courseRoot, name), 'utf8')).rows as
+        Array<{ disposition: string; source_object?: string }>;
+      const count = (status: string) => rows.filter(row => row.disposition === status).length;
+      return { total: rows.length, integrated: count('integrated'),
+        covered: count('covered-existing'), contract: count('contract-only'),
+        sourceOnly: count('source-only'), excluded: count('excluded'),
+        assignments: rows.filter(row => row.disposition === 'integrated' &&
+          row.source_object?.startsWith('assignment')).length };
+    };
+    const coverage = countLedger('coverage.yml');
+    const visuals = countLedger('visuals.yml');
+    const ru = readFileSync(resolve(root, '05 Источники/Курсы.md'), 'utf8');
+    const en = readFileSync(resolve(root, 'en/05 Sources/Courses.md'), 'utf8');
+    const numbers = (text: string, pattern: RegExp) => {
+      const match = text.match(pattern);
+      expect(match, pattern.source).not.toBeNull();
+      return match!.slice(1).map(Number);
+    };
+    const semanticCounts = [coverage.total, coverage.integrated, coverage.covered,
+      coverage.contract, coverage.sourceOnly, coverage.excluded];
+    const visualCounts = [visuals.total, visuals.integrated, visuals.covered,
+      visuals.sourceOnly, visuals.excluded];
+    expect(numbers(ru, /Из (\d+) записей покрытия (\d+) имеют статус `integrated`, (\d+) — `covered-existing`,\s*(\d+) — `contract-only`, (\d+) — `source-only`, (\d+) — `excluded`/))
+      .toEqual(semanticCounts);
+    expect(numbers(en, /coverage ledger contains (\d+) semantic units: (\d+) integrated, (\d+) already\s*covered, (\d+) assignment-contract-only, (\d+) source-only, and (\d+) excluded/))
+      .toEqual(semanticCounts);
+    expect(numbers(ru, /реестр содержит (\d+) визуальных записей: (\d+) `integrated`,\s*(\d+) `covered-existing`, (\d+) `source-only`, (\d+) `excluded`/))
+      .toEqual(visualCounts);
+    expect(numbers(en, /visual ledger has (\d+) records: (\d+) integrated,\s*(\d+) already covered, (\d+) source-only, and (\d+) excluded/))
+      .toEqual(visualCounts);
+    expect(numbers(en, /Of the (\d+) integrated units, (\d+) come from assignment material and (\d+) from/))
+      .toEqual([coverage.integrated, coverage.assignments,
+        coverage.integrated - coverage.assignments]);
   });
 
   it('uses stable Stanford lecture anchors in both course overviews and preserves old heading links', () => {

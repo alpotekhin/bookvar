@@ -1,0 +1,821 @@
+{
+  "schema": 1,
+  "date": "2026-10-29",
+  "scope": "Seven existing English multimodal chapters",
+  "before_evidence": "Captured after_sha256/line/figure values from the earlier 2026-10-29-english-reconciliation.json before this pass; that central ledger is not modified by this checker.",
+  "verification": {
+    "python": "3.14.3 (main, Mar  3 2026, 15:46:55) [Clang 21.1.4 ]",
+    "executable": "/Users/aleksan.potekhin/.cache/uv/builds-v0/.tmpz3XG1Q/bin/python",
+    "chapter_pairs_full_read": 7,
+    "published_python_executed": 75,
+    "canonical_ast_parity": true,
+    "all_canonical_native_figures_retained": true,
+    "display_delimiters_and_explicit_aliases": "passed",
+    "original_english_rubric_retained": true,
+    "gpu_or_trained_model_inference": "not run; numerical/teaching checks only",
+    "build_and_visual_qa": "parent-owned integrated checks; not claimed by this report",
+    "prose_acceptance": "Full human-style source-pair reconciliation recorded by topics; token/figure/code counts alone are not evidence of prose quality."
+  },
+  "totals": {
+    "current": 7,
+    "before_figures": 29,
+    "after_figures": 50
+  },
+  "entries": [
+    {
+      "path": "en/00 Textbook/16 Multimodal Models/64 Multimodal models.md",
+      "canonical": "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md",
+      "before_sha256": "52e4bfaa209330e09233ae75609bde1b6ceb844069cb6c378c39095ca48e4ac1",
+      "after_sha256": "3e13eee9fec248a67604c7cf97897a088975a93d7f6031e0c4a86aaa22c7b4ab",
+      "canonical_sha256": "26464f4cb33c2b281c72e63e1870157e0a41a23807c4eca7c2b79f542000608d",
+      "status": "current",
+      "before_lines": 157,
+      "after_lines": 533,
+      "before_figure_count": 3,
+      "figure_count": 6,
+      "figures": [
+        "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/siglip-parallelism.png",
+        "00 Учебник/Assets/Figures/curated/vision-encoders-review-2026-10/clip-objectives.png",
+        "00 Учебник/Assets/Figures/curated/vision-encoders-review-2026-10/clip-zero-shot-linear-probe.png",
+        "00 Учебник/Assets/Figures/curated/vision-encoders-review-2026-10/siglip-batch-size.png",
+        "00 Учебник/Assets/Figures/curated/vlm-2026/clip-figure1-training-and-zero-shot.png",
+        "00 Учебник/Assets/Figures/curated/vlm-2026/vit-figure1-patch-sequence.png"
+      ],
+      "canonical_python_blocks": 6,
+      "python_blocks": 6,
+      "executions": [
+        {
+          "block": 1,
+          "sha256": "e2eb0740331e8f3867b76cc06c930ba8b80091a06a14c743b0f670dd44d1917c",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 2,
+          "sha256": "1b19201652850103e8aaa92c497b03676d5603f8ad220a53175497443cd1f4b2",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 3,
+          "sha256": "642d4d562827fa53ab9c26ab67f75b060276b42b89143d65abf22e0cd1035077",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 4,
+          "sha256": "f03f88368f53ce1b856ba5030af47e37dc3824c55743ebe5b78fbc9035e6ef03",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 5,
+          "sha256": "aefe096419f44bb0eddb694aeefaf27143a9456102fd36be9349e67faf19b6d2",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 6,
+          "sha256": "36f2b0bdee21fe066807aeea83a849bbcfb3164fb968734e201fca6f842c892e",
+          "status": "passed",
+          "returncode": 0
+        }
+      ],
+      "canonical_code_ast_multiset_equal": true,
+      "en_full_body_read": true,
+      "canonical_full_body_read": true,
+      "substantive_topics_reconciled": [
+        "Patch ordering and convolution equivalence; projection information loss",
+        "CLS, permutation equivariance, position embeddings and complete ViT block",
+        "Resize/crop geometry and CLIP dual-encoder implementations",
+        "Symmetric contrastive loss, scale, false negatives and generation distinction",
+        "Prompt ensembles, candidate-set probabilities, linear probes and fine-tuning",
+        "SigLIP objective, bias, normalization, blocked/distributed computation",
+        "Winoground diagnostics and controlled occlusion limitations"
+      ],
+      "canonical_explicit_aliases": [],
+      "retained_aliases": [
+        "две-задачи-понять-чужую-модальность-и-породить-её",
+        "1-изображение-как-тензор",
+        "3-от-классификации-к-общему-пространству-изображения-и-текста",
+        "clip-и-siglip-две-формы-контрастивного-обучения"
+      ],
+      "outstanding_substantive_omissions": [],
+      "before_render_sha256": "6c3de4da21b1efa89a05eaf2e6feef5f37121aba8ce1eb94ad8b7bf4c6fe3129",
+      "render_reflow": "docs/audit/2026-10-29-en-parity-render-reflow.json"
+    },
+    {
+      "path": "en/00 Textbook/16 Multimodal Models/64a Connectors and fusion.md",
+      "canonical": "00 Учебник/16 Multimodal Models/64a Connectors и fusion.md",
+      "before_sha256": "d4d776a62bf126b27dff06587e19e709e023d0e56bf8226fe222c304de2551dd",
+      "after_sha256": "f5882df05aa71cff14b047ee434d24b35c4ce44b387220a0e7b860d20a9a5d3a",
+      "canonical_sha256": "5df467640b95eb59a8e5fdc45d7e72fecd15e703ca52011481ae8c480f43f341",
+      "status": "current",
+      "before_lines": 148,
+      "after_lines": 409,
+      "before_figure_count": 5,
+      "figure_count": 7,
+      "figures": [
+        "00 Учебник/Assets/Figures/curated/connectors-review-2026-10/blip2-attention-masks.png",
+        "00 Учебник/Assets/Figures/curated/connectors-review-2026-10/blip2-llm-connection.png",
+        "00 Учебник/Assets/Figures/curated/connectors-review-2026-10/blip2-qformer.png",
+        "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision.png",
+        "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/qwen3-vl.png",
+        "00 Учебник/Assets/Figures/curated/vlm-2026/flamingo-figure3-architecture.png",
+        "00 Учебник/Assets/Figures/curated/vlm-2026/llava-figure1-projector.png"
+      ],
+      "canonical_python_blocks": 6,
+      "python_blocks": 6,
+      "executions": [
+        {
+          "block": 1,
+          "sha256": "13a1b6aa1afb8c0e193fd7b7ec9a200203ef1e74df9cbabbaa5c8d9f3f17cf01",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 2,
+          "sha256": "22dca0cde94dc2d5e3133b8b8cf0c7862ff1a60f7af66212b4cf9a4ec4cae17d",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 3,
+          "sha256": "77e1814a8d376e461d660e4f584ff6c1440291e50f968339502101551b9aefcf",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 4,
+          "sha256": "5d560eb93514d1aeaba06c01d2e6faa29414a17cba453575a9ae72323d683dac",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 5,
+          "sha256": "9a221335e71f2da76f391bcb3c2903633d4f824aec2dafe7db35479decef6df5",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 6,
+          "sha256": "d336ef5872c7ea07c992f4551773350afacabd68c1541bcab3a162413c7a07a3",
+          "status": "passed",
+          "returncode": 0
+        }
+      ],
+      "canonical_code_ast_multiset_equal": true,
+      "en_full_body_read": true,
+      "canonical_full_body_read": true,
+      "substantive_topics_reconciled": [
+        "Linear and MLP projector parameter counts and visual-prefix insertion",
+        "Shifted labels, causal access, prefill/first-token cache timing and memory",
+        "OneVision changes beyond the connector",
+        "BLIP-2 learned queries, ITC/ITM/ITG masks and stage-two OPT/T5 interfaces",
+        "Flamingo zero gates, last-image masks and cross-attention cache",
+        "Perceiver latent-inclusive K/V and weighted numerical example",
+        "Qwen3-VL merger/DeepStack visual-mask additions and frozen-module gradients"
+      ],
+      "canonical_explicit_aliases": [],
+      "retained_aliases": [
+        "2-llava-линейная-проекция-и-единая-последовательность",
+        "от-llava-к-llava-onevision-что-изменилось-кроме-projector",
+        "6-early-fusion-и-deep-fusion"
+      ],
+      "outstanding_substantive_omissions": [],
+      "before_render_sha256": "3c6db05312e0e21b5b653fa549b4a07d3e8e68f4f2bb2fc37027f4d5f6634056",
+      "render_reflow": "docs/audit/2026-10-29-en-parity-render-reflow.json"
+    },
+    {
+      "path": "en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md",
+      "canonical": "00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md",
+      "before_sha256": "c091d7da862133c3da7ad4d923e853ace16c47cc7190c86c34307506377a80a1",
+      "after_sha256": "a570a03c487c9f6bb89977abb8607e68d2ce5b616daa00b3bac863954a4f5de4",
+      "canonical_sha256": "aa23f1104f3a83d91bc759f207ab809ebf018b9946f44a022c761fc3e9e81258",
+      "status": "current",
+      "before_lines": 126,
+      "after_lines": 420,
+      "before_figure_count": 5,
+      "figure_count": 6,
+      "figures": [
+        "00 Учебник/Assets/Figures/curated/resolution-review-2026-10/pixtral-vision-packing.png",
+        "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision-anyres.png",
+        "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/qwen2-vl-architecture.png",
+        "00 Учебник/Assets/Figures/curated/vlm-2026/internvl25-figure2-dynamic-tiles.png",
+        "00 Учебник/Assets/Figures/curated/vlm-2026/molmo-figure5-image-tokenization.png",
+        "00 Учебник/Assets/Figures/curated/vlm-2026/qwen2vl-figure3-mrope.png"
+      ],
+      "canonical_python_blocks": 9,
+      "python_blocks": 9,
+      "executions": [
+        {
+          "block": 1,
+          "sha256": "71244548a7efa6d4572c1307edaa00c654a13fd9b7471d6e8faf140194506689",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 2,
+          "sha256": "3ff2d56086a91769ede195cc7fa021d71af409ca0736695886cc35b3b4067038",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 3,
+          "sha256": "aa8a7f47b643c283749f1b5f386e166307987a54bca6efecdc21b11ba9e1457d",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 4,
+          "sha256": "eea864af7fd48a6480cd9b2eb365d85d37b77632ebfa271ce30bcff203ef1c2d",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 5,
+          "sha256": "e00d571097304027e190c94f3efec6d9330c13346618335b55ebd8922b1df0a0",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 6,
+          "sha256": "309974258dadf4a1597961b2236df48db9ebd72aba75d2d06fd3dcecdf902012",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 7,
+          "sha256": "0d7a13d492556862ecff31583ab04a5096901e9ad73e6c7ac8b1dfaa93d6a1d6",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 8,
+          "sha256": "48d2b028c6795941da00dcdbb9b4d68a1f4217d7237a02400603b07cbe904282",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 9,
+          "sha256": "9077f4b297637ea17aba239a1d102e46138de636d1edb5a7cffc895a58d64aff",
+          "status": "passed",
+          "returncode": 0
+        }
+      ],
+      "canonical_code_ast_multiset_equal": true,
+      "en_full_body_read": true,
+      "canonical_full_body_read": true,
+      "substantive_topics_reconciled": [
+        "Resolution scaling, stretch/letterbox/crop geometry and encoder/LLM cost",
+        "Molmo overlapping margins, pooling and 580-position assembled example",
+        "AnyRes canvas selection, spatial permutation, separators and area budget",
+        "InternVL size-dependent grid selection and reversible pixel unshuffle",
+        "Qwen smart_resize and Pixtral packed-image isolation/row delimiters",
+        "Compression mechanisms and controlled quality comparisons",
+        "MRoPE coordinates versus cache indices; rotary algebra and frequency layouts",
+        "Coordinate inversion and diagnostic controls; Qwen2.5-VL window/full attention"
+      ],
+      "canonical_explicit_aliases": [],
+      "retained_aliases": [
+        "anyres-глобальный-кадр-и-локальные-плитки",
+        "qwen2-vl-native-resolution-merger-и-mrope",
+        "6-почему-одной-позиции-в-последовательности-недостаточно",
+        "где-теряется-информация-crop-tiling-merge-и-фиксированный-budget"
+      ],
+      "outstanding_substantive_omissions": [],
+      "before_render_sha256": "47ff0e008a05ae6afae77ddbf3104984ee1146e28dd1148491ebf4175c455795",
+      "render_reflow": "docs/audit/2026-10-29-en-parity-render-reflow.json"
+    },
+    {
+      "path": "en/00 Textbook/16 Multimodal Models/64c Training VLMs — alignment, instruction tuning, and data.md",
+      "canonical": "00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md",
+      "before_sha256": "e6edcea86fd0bf36b43ef4766bf654360222e4aa1dbafae5ec2c16e578e22094",
+      "after_sha256": "03af54d2d4fbce4863a67e2072d4e00dd888be0c2c092bb724f030acd0adbaa4",
+      "canonical_sha256": "12e614a8be23e31ed608433c64be1f4b049c39af27cb9d4092080576a902921d",
+      "status": "current",
+      "before_lines": 178,
+      "after_lines": 438,
+      "before_figure_count": 8,
+      "figure_count": 8,
+      "figures": [
+        "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-gen.png",
+        "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision-training.png",
+        "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision-transfer-s1.png",
+        "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision-transfer-s2.png",
+        "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/qwen-vl-stages.png",
+        "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/qwen3-vl-pretraining.png",
+        "00 Учебник/Assets/Figures/curated/vlm-2026/internvl25-figure4-training-pipeline.png",
+        "00 Учебник/Assets/Figures/curated/vlm-2026/molmo-figure1-data-and-capabilities.png"
+      ],
+      "canonical_python_blocks": 8,
+      "python_blocks": 8,
+      "executions": [
+        {
+          "block": 1,
+          "sha256": "fb05b7650f1b8df52922e8e1504fb3ebdb7dd51655b23a5d448f15630b165789",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 2,
+          "sha256": "0676622f579a753821a3d8daf9808633ff9d9ea8b7ce2c76182bf1beb8188cc0",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 3,
+          "sha256": "ba45ffa797ff998fec5b8d2ed12a08c127b04804d034e05a0cf385e74494d459",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 4,
+          "sha256": "472e8c057a17fe87f061b77fa7f16daa0d3b6e956411fab5b0c5abcc30ec1af9",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 5,
+          "sha256": "e6bea8ea5e8e6c53dca77adddeabae609f2a438f67cf6ee7a7a8131528949f4b",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 6,
+          "sha256": "23897362d4e6fb033e6e8fae519c4487e7297ef77ed7684584631fc429604482",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 7,
+          "sha256": "c8d52d15e79d1349e0d9d8cde806afa26e5ab3bf9acbadbc26edcb5236e745eb",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 8,
+          "sha256": "eaeebf94fa635781b9ede9cd45a0a24f5c14215432343b2813f7b9c3de6370ee",
+          "status": "passed",
+          "returncode": 0
+        }
+      ],
+      "canonical_code_ast_multiset_equal": true,
+      "en_full_body_read": true,
+      "canonical_full_body_read": true,
+      "substantive_topics_reconciled": [
+        "Stage-specific datasets and objectives; teacher forcing and projector SGD step",
+        "InternVL/Molmo freeze and per-component optimizer schedules",
+        "Shifted labels, multimodal packing and shared-image independent annotations",
+        "PixMo collection, teacher visibility, filtering and source-document splits",
+        "Dataset sampling versus token mass and target-length loss normalization",
+        "LLaVA/OneVision/Qwen curricula, exposure counts and inconsistent summary counts",
+        "Original transfer illustrations with independently corrected arithmetic",
+        "Visual verifiers, SAPO/version limits, response/logit distillation and KL"
+      ],
+      "canonical_explicit_aliases": [
+        "qwen3-vl-четыре-длины-pre-training-и-post-training"
+      ],
+      "retained_aliases": [
+        "5-какие-данные-создают-какие-способности",
+        "llava-и-onevision-как-два-конкретных-curriculum",
+        "какие-способности-переносятся-между-сценариями",
+        "qwen-vl-почему-меняются-и-данные-и-замороженные-модули",
+        "qwen3-vl-четыре-длины-pre-training-и-post-training"
+      ],
+      "outstanding_substantive_omissions": [],
+      "before_render_sha256": "f77dfcd29d6788cdf9116363714e6ce0c7c1fb1830b6be96fa0d090ad097dc6d",
+      "render_reflow": "docs/audit/2026-10-29-en-parity-render-reflow.json"
+    },
+    {
+      "path": "en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding.md",
+      "canonical": "00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md",
+      "before_sha256": "c01b425c50b16a7fc48cdd69bcd0f264a799cd50af515743a16d19febf13e38b",
+      "after_sha256": "843a0776cafc3d9ed8c49acbb8a2ae654a9846c154dfdbf43cc2e338d5b44ee3",
+      "canonical_sha256": "b2e3e923347babfafb3344252e55952c999287fe9fc51a19ad11965d4933f259",
+      "status": "current",
+      "before_lines": 132,
+      "after_lines": 486,
+      "before_figure_count": 2,
+      "figure_count": 6,
+      "figures": [
+        "00 Учебник/Assets/Figures/curated/documents-review-2026-10/donut-overview.png",
+        "00 Учебник/Assets/Figures/curated/documents-review-2026-10/layoutlmv3-objectives.png",
+        "00 Учебник/Assets/Figures/curated/documents-review-2026-10/pix2struct-screenshot-parsing.png",
+        "00 Учебник/Assets/Figures/curated/documents-review-2026-10/pix2struct-variable-resolution.png",
+        "00 Учебник/Assets/Figures/curated/vlm-2026/pix2struct-figure1-tasks.png",
+        "00 Учебник/Assets/Figures/curated/vlm-2026/qwen2vl-figure11-dense-ocr.png"
+      ],
+      "canonical_python_blocks": 12,
+      "python_blocks": 12,
+      "executions": [
+        {
+          "block": 1,
+          "sha256": "1e309da4a8d8318de225f34f1104249f2096d3d56a44bd0981e8aff6291edc1a",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 2,
+          "sha256": "a803b45f5035496e562e4bc89f6f902c4190c0dd0c1e76dedb92993609556d4e",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 3,
+          "sha256": "8956e60fb9dfea84803a23dec04f0018869b4bf542d65aa3f9462a014980571b",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 4,
+          "sha256": "4c2eef26fffcc2567bcf8cb67f5eb9583794f3d04c1b90d87168859c37482c38",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 5,
+          "sha256": "3098b03a18f9b95a345e0a3f9f47be620cb96d4872c6ec6dea253bd62f9c552a",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 6,
+          "sha256": "516415845892ab836b9e050bb98cdfc181bddb061190ee368e1620e202814cdd",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 7,
+          "sha256": "a4c09a181fbed56b0253d96c8991be8f661e49a7aa4e1d8a7d5055792d476cf3",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 8,
+          "sha256": "4d4ced390c0a5d926a98b0f1ed53daa4c48b97a1c54f468f2ae277e546992a52",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 9,
+          "sha256": "65a0627a0f1551c57ad034bb42ba6ffe76051edf34a071b3919b6cdf57148070",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 10,
+          "sha256": "029bae474a6e7a4c52c7c09d86c3fb94562b652e596d03e4c7e6fe112c537167",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 11,
+          "sha256": "fc7f2fc1b2becfa97eaac1e6731657c42f67ae3701652d932d42049c594b46c9",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 12,
+          "sha256": "44acd0c3822379b1682f7bba40e5191ec22426883b5c2c67848d5917fc738f98",
+          "status": "passed",
+          "returncode": 0
+        }
+      ],
+      "canonical_code_ast_multiset_equal": true,
+      "en_full_body_read": true,
+      "canonical_full_body_read": true,
+      "substantive_topics_reconciled": [
+        "Detection, recognition, reading order, field semantics and evidence identifiers",
+        "LayoutLMv3 MLM/MIM/WPA, Donut serialization/data, Pix2Struct subtree curriculum",
+        "Document targets in Qwen2.5/3-VL and preserved original figures",
+        "Resolution, table headers/decimal arithmetic and linear/logarithmic chart scales",
+        "Point instances, model coordinate units, homogeneous transforms and PDF origins",
+        "CER/WER/ANLS/IoU/field F1 with normalization and edge cases",
+        "Intervention expectations, extracted versus calculated values and calibrated acceptance"
+      ],
+      "canonical_explicit_aliases": [],
+      "retained_aliases": [],
+      "outstanding_substantive_omissions": [],
+      "before_render_sha256": "fcc390a2d7555568d52ef9a37f124201cf1cea0384357cc410f5be069d605e8b",
+      "render_reflow": "docs/audit/2026-10-29-en-parity-render-reflow.json"
+    },
+    {
+      "path": "en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md",
+      "canonical": "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md",
+      "before_sha256": "618c6a3a2467ffd66fa858d6be40a77bef818e16817cda3bbd11b01d85550d44",
+      "after_sha256": "bf2322845969a44a679c0dfa2afccabe1c5985ca7ee06be2d865dbef333f6200",
+      "canonical_sha256": "cb9d70037a4ead20d49d9883ec0182e7eed038bd4bc1a579f2599cc71bd8bf42",
+      "status": "current",
+      "before_lines": 206,
+      "after_lines": 608,
+      "before_figure_count": 4,
+      "figure_count": 10,
+      "figures": [
+        "00 Учебник/Assets/Figures/curated/omni-review-2026-10/gens-frame-selection.png",
+        "00 Учебник/Assets/Figures/curated/omni-review-2026-10/mimi-split-rvq.png",
+        "00 Учебник/Assets/Figures/curated/omni-review-2026-10/moshi-duplex-streams.png",
+        "00 Учебник/Assets/Figures/curated/omni-review-2026-10/moshi-rq-transformer.png",
+        "00 Учебник/Assets/Figures/curated/omni-review-2026-10/qwen25omni-block-attention.png",
+        "00 Учебник/Assets/Figures/curated/omni-review-2026-10/qwen3omni-architecture.png",
+        "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision-modalities.png",
+        "00 Учебник/Assets/Figures/curated/vlm-2026/imagebind-figure1-capabilities.png",
+        "00 Учебник/Assets/Figures/curated/vlm-2026/qwen25omni-figure2-thinker-talker.png",
+        "00 Учебник/Assets/Figures/curated/vlm-2026/qwen25omni-figure3-tmrope.png"
+      ],
+      "canonical_python_blocks": 17,
+      "python_blocks": 17,
+      "executions": [
+        {
+          "block": 1,
+          "sha256": "800daff70cb3af9fc91b1c766f6e959936eeb698cdac87f63437fe04df57c9d8",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 2,
+          "sha256": "7c3313990a8b89ab09a41c4ae7985b3351a2099dda33c07fa61166e6b62d73b5",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 3,
+          "sha256": "773556441783256964feb7a9048959c39a836b0fd42aeb7b7fcde10ad15c56f9",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 4,
+          "sha256": "a86716b52bbf3af5aac599ada001d11c79fe96638e90b24af83c331d8b9de385",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 5,
+          "sha256": "0968184f07f62e04b9d9d2d580b715e9962cee6d58bae9dac88783fd1911ac82",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 6,
+          "sha256": "51f9b3ab0ba5f5ada541e0c4502027010bfd886f75b74294828f8ed0e65d690e",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 7,
+          "sha256": "c90292bcd5445d1403c1771a7c130cb1bea9713ddc7e12f791960961ee0f918a",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 8,
+          "sha256": "d6e66ef74e88bfe27bb06014d90966dd513d93ce36ac5c743eb014967f0133ab",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 9,
+          "sha256": "273878802827c4d35beeb5820f888e229b1ad82aae23a2140c372762b3fcf7e3",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 10,
+          "sha256": "194d1ff95b5136179bba2ecc5a32de584da62ed1f4201168b9948772b995f959",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 11,
+          "sha256": "e14aa945458eded9652a4ee69cbb7d09d883362e649d4f145334237f3b459b56",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 12,
+          "sha256": "14d3579be379fedf205be4a70b69ebcf699a171765e17cca314c4c7dcb1acb07",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 13,
+          "sha256": "fad94a7664a057df62c8ee2201acafd9690a4f66c4439b4b7bba7fed8cc7a8ef",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 14,
+          "sha256": "5a34f7731beb4c89ee9b27ae1cce5358532ef4a78eee70fefac3920d48d7c216",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 15,
+          "sha256": "1f4ecfc38544c07007398f6f3224e2b1159d3c9445048805eb3465021c44dc06",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 16,
+          "sha256": "27e3316684afa27ba1d6e9affdbc046bc28bd28d8fa1a0d10c8faf28569c4c76",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 17,
+          "sha256": "f7cac987102676ce10124ebb67bb19fe3bd0f3a11dd381431d5d9eed2b9f727e",
+          "status": "passed",
+          "returncode": 0
+        }
+      ],
+      "canonical_code_ast_multiset_equal": true,
+      "en_full_body_read": true,
+      "canonical_full_body_read": true,
+      "substantive_topics_reconciled": [
+        "Sampling aliasing, OneVision budgets, xGen memory and GenS windows/selection costs",
+        "Presentation timestamps and model-specific temporal-position contracts",
+        "STFT/mel features, RVQ, Mimi split branches and codec bitrate accounting",
+        "Cascaded streaming versus direct audio and ImageBind retrieval",
+        "40/80-ms audiovisual alignment and controlled soundtrack interventions",
+        "Qwen2.5/3-Omni Talker conditions, MTP and waveform decoders",
+        "Moshi temporal/depth factorization, Inner Monologue, delayed acoustics and duplex",
+        "Lookahead masks, causal chunk equivalence, RTF/deadlines and audible interruption",
+        "Temporal IoU, noise SNR, matched media budgets and service boundaries"
+      ],
+      "canonical_explicit_aliases": [
+        "1-от-видеофайла-до-visual-tokens",
+        "3-от-waveform-до-признаков-и-дискретных-аудиотокенов",
+        "4-cascade-и-end-to-end-speech-model",
+        "7-streaming-меняет-причинный-контракт",
+        "9-матрица-оценивания",
+        "gens-question-aware-frame-selection",
+        "xgen-video-temporal-compression"
+      ],
+      "retained_aliases": [
+        "1-от-видеофайла-до-visual-tokens",
+        "один-интерфейс-для-изображения-набора-изображений-и-видео",
+        "timestamp-token-и-temporal-position--разные-сигналы",
+        "xgen-video-temporal-compression",
+        "gens-question-aware-frame-selection",
+        "3-от-waveform-до-признаков-и-дискретных-аудиотокенов",
+        "4-cascade-и-end-to-end-speech-model",
+        "7-streaming-меняет-причинный-контракт",
+        "9-матрица-оценивания"
+      ],
+      "outstanding_substantive_omissions": []
+    },
+    {
+      "path": "en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving.md",
+      "canonical": "00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md",
+      "before_sha256": "31c9b97170ea855f2c47f8e94f7d2f4680a4731bf09aef95c478a16e8901f4c2",
+      "after_sha256": "6e4cfae4a2fd9c4c6d67620f80f0a907b11bb8f8c50b7f22ea080976e40b267e",
+      "canonical_sha256": "7158736c550f13fbe8deca537fc369ef87c94a38586dae167fbdc78d215e625a",
+      "status": "current",
+      "before_lines": 134,
+      "after_lines": 562,
+      "before_figure_count": 2,
+      "figure_count": 7,
+      "figures": [
+        "00 Учебник/Assets/Figures/curated/vlm-2026/cs231n-lecture16-winoground.png",
+        "00 Учебник/Assets/Figures/curated/vlm-2026/molmo-figure11-openness.png",
+        "00 Учебник/Assets/Figures/curated/vlm-evaluation-review-2026-10/chair-caption-errors.png",
+        "00 Учебник/Assets/Figures/curated/vlm-evaluation-review-2026-10/epd-stage-interference.png",
+        "00 Учебник/Assets/Figures/curated/vlm-evaluation-review-2026-10/epd-system-architecture.png",
+        "00 Учебник/Assets/Figures/curated/vlm-evaluation-review-2026-10/mmvet-integrated-capabilities.png",
+        "00 Учебник/Assets/Figures/curated/vlm-evaluation-review-2026-10/pope-question-construction.png"
+      ],
+      "canonical_python_blocks": 17,
+      "python_blocks": 17,
+      "executions": [
+        {
+          "block": 1,
+          "sha256": "666005da5feec4e2bfb246303256d924cf399f5d6b439cb89f7eddfb0fa6128e",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 2,
+          "sha256": "124bf8ade83242f80d2918f90819385627fe7ad6469d0d1564392ca258a94466",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 3,
+          "sha256": "f39fb0264d679a519077b5636c274b79de2efd486714fea6475cfd9753f94555",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 4,
+          "sha256": "31b1be986fcff8a53d70064becf1f59b698f626dc2fcf15251537cb71a3fcef5",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 5,
+          "sha256": "d6dc162486f20741d54edbf5bf1c0253f8b64edfa025ef7e20b3e6b5cd591350",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 6,
+          "sha256": "e5ba455eaf5879d6ee35970b1460abe40ea8e830f5a271b59d348169ae799d71",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 7,
+          "sha256": "ee7b84a0d839b313910bdea1b22a46f92c4227dc0853484b3ecffd6689c152fa",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 8,
+          "sha256": "6c1078c30a3d370790c50640149847592f82c68b6265c7704fc724912b4fe8a9",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 9,
+          "sha256": "9284c3a15da382c147f056e64c744446791b59d0d443432b5a36c29b5e755920",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 10,
+          "sha256": "75f4a507848d5831e65613cd1e046d27f47ea70f615dfbee20c85fe15a378e69",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 11,
+          "sha256": "9495222c39daa20dfe1fd85c8431f5f56dc4eeea7bc4f324ae457c4fda0d800c",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 12,
+          "sha256": "d64bfecb1c96658a1b4a19da51d8842654d19818cd42a3c03b81e3b56bdb7d26",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 13,
+          "sha256": "4059f1bfefb3c8448905d30ec2bf1830c1892457beb2c8aabd26cea36f136dcd",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 14,
+          "sha256": "a6b7e85ec7dd6f0cf36c08704d8b5df5530d3a87129ed94e71dc0edea588ab1c",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 15,
+          "sha256": "a022173dbc156d7fc086c90271d9c17bc22b367ddfea8bccecb9698f549a96a7",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 16,
+          "sha256": "0019868287a0f5adf335a1811fd2dc155b0a54cc941ece9b0b57b9c1037e1563",
+          "status": "passed",
+          "returncode": 0
+        },
+        {
+          "block": 17,
+          "sha256": "482a3068ae14a81835a607fa560f77a18d0ef1859ab179e1436ae6e805b73446",
+          "status": "passed",
+          "returncode": 0
+        }
+      ],
+      "canonical_code_ast_multiset_equal": true,
+      "en_full_body_read": true,
+      "canonical_full_body_read": true,
+      "substantive_topics_reconciled": [
+        "MM-Vet integrated capabilities and micro/macro category weighting",
+        "Winoground strict scores/random baseline; POPE parsing and CHAIR limitations",
+        "Paired counterfactuals, original MM-Vet rubric and judge evidence boundaries",
+        "MMStar image dependence/leakage proxies and historical openness table",
+        "Media request processing, expanded visual positions and cache tensor accounting",
+        "Client TTFT, critical paths, head-of-line blocking and fairness",
+        "EPD stage placement, transfer lifetimes, independent fragments and resource allocation",
+        "Processor/encoder/prefix identity, UUID trust scope and security controls",
+        "Selective risk/coverage and directly counted quality-and-deadline intersection"
+      ],
+      "canonical_explicit_aliases": [
+        "2-как-winoground-изолирует-композиционность",
+        "4-проверка-причинной-опоры-на-изображение"
+      ],
+      "retained_aliases": [
+        "2-как-winoground-изолирует-композиционность",
+        "4-проверка-причинной-опоры-на-изображение"
+      ],
+      "outstanding_substantive_omissions": [],
+      "before_render_sha256": "60cd1ee654cd9e25cccf145bc64ef64d4fe9833606371afe46d170bd0680baf9",
+      "render_reflow": "docs/audit/2026-10-29-en-parity-render-reflow.json"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-29",
+  "scope": "Three additive explanations; not acceptance of complete Harvard source units",
+  "chapters": [
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md",
+      "label": "energy",
+      "before_sha256": "633f22fd09c7fe64a86d67b05cba487d18f7f48d20e254b89e2c94677b758f53",
+      "after_sha256": "1d453c6e9f77e4aee10c81305bc406fe0bf3a50e69fc4edd22748a555e5a0b9c",
+      "block_sha256": "d2fdf193beac81fd6ab31a6f52fd2c8aa7d0310010b9b60ad46d1c999b198a48",
+      "new_python_blocks": 1,
+      "anchor": "energy-per-result-measurement-boundary-and-time-window",
+      "qa_reflow": {
+        "previous_after_sha256": "7d6721f480716c85339847b25c40702530542de5662a047e255c123dd1e8f83e",
+        "previous_block_sha256": "fb79e66d0825cf4446dc0da2c14393d92d88deef655b8868636caaa38aae2093",
+        "reason": "Parent browser QA: bounded mobile display-math reflow; for retraining also write USD outside math to avoid escaped-dollar parser errors. Formulas, code and source excerpts unchanged."
+      }
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning.md",
+      "label": "fanout",
+      "before_sha256": "fe7405160f9e099363282a671ffa2f6d8ccee7507b9c9654c1939a4d2a99674f",
+      "after_sha256": "8a34dd525150ef3b95896e969444ff40456aefd0e897522cbeb5ca446f4a7ea1",
+      "block_sha256": "22d5408c02973e9ae7464570f28a1ae3bae3c99c5716190b8e7f1a24d32450bd",
+      "new_python_blocks": 2,
+      "anchor": "fan-out-stragglers-and-hedged-requests"
+    },
+    {
+      "source": "00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md",
+      "label": "readiness",
+      "before_sha256": "cec102f93b2e1314a9aa80cb5d36421b465a49eb7083fd2c92cb08597d9ab007",
+      "after_sha256": "ca96579eca2868ecd99f35dc26a2120db56a35e186f00909188384fb20d8fa58",
+      "block_sha256": "729ba2d6f4b6547b30dbb02bceaf5894599772f7e6c22d1a68b0dd201119939a",
+      "new_python_blocks": 1,
+      "anchor": "ml-test-score-check-the-four-areas-separately"
+    }
+  ]
+}

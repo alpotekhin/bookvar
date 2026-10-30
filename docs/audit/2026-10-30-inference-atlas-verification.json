@@ -1,0 +1,566 @@
+{
+  "date": "2026-10-30",
+  "classification": "progress",
+  "scope": "Finish the selected inference/evaluation/atlas reading-route pass. This is not a fresh whole-book/source-completeness acceptance, GPU benchmark or release.",
+  "requestedOutcome": "One sequential textbook with a canonical mechanism owner, a derived reference index, source catalogs outside the reading path, original source visuals, and a verified dev/Pages release.",
+  "freshWholeReads": {
+    "canonicalOwners": [
+      {
+        "path": "00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md",
+        "route": "textbook/inference/serving-engines",
+        "sha256": "fee6d97ff4f17a23b48f6b3a73e7311d7699f1da456c414094d4ba934062f255",
+        "lines": 791
+      }
+    ],
+    "atlasDocuments": [
+      {
+        "path": "02 Атлас моделей/Timeline.md",
+        "route": "models/timeline",
+        "sha256": "5a8daa46227b3599523b721bf4e17dd7e2f12ff052eb25bef3f1b2e71054fd15",
+        "lines": 167
+      },
+      {
+        "path": "02 Атлас моделей/_index.md",
+        "route": "models/index",
+        "sha256": "1a08660ffc2fdada88d6f0f77bbcba14658e4c55919710e6d1777f264d68f189",
+        "lines": 110
+      },
+      {
+        "path": "02 Атлас моделей/Семейства/BERT.md",
+        "route": "models/families/bert",
+        "sha256": "086f4557ce4896c8545713fd0558fcf81a38a8eea268a135a7a4375fbc45dc0a",
+        "lines": 67
+      },
+      {
+        "path": "02 Атлас моделей/Семейства/Baichuan.md",
+        "route": "models/semeystva/baichuan",
+        "sha256": "99af86120004adbef9736b25cf8b6bb581a355affbe9a281d7656069fe2e5ad8",
+        "lines": 60
+      },
+      {
+        "path": "02 Атлас моделей/Семейства/Command R.md",
+        "route": "models/semeystva/command-r",
+        "sha256": "123c11470430ad02d5a3d630514e9874fbeeec73512aebfb0b2b32fc4d343af1",
+        "lines": 63
+      },
+      {
+        "path": "02 Атлас моделей/Семейства/DBRX.md",
+        "route": "models/semeystva/dbrx",
+        "sha256": "4cd03c25e2a63992d5d231d71bdd462f68a42227fbdaf0b088408eeb6fc7c391",
+        "lines": 60
+      },
+      {
+        "path": "02 Атлас моделей/Семейства/DeepSeek.md",
+        "route": "models/families/deepseek",
+        "sha256": "ec05306c5d3d3aa5e61b59b2fc31e52863c6a169fbc57a5eb1998ef5d1886b92",
+        "lines": 190
+      },
+      {
+        "path": "02 Атлас моделей/Семейства/Falcon.md",
+        "route": "models/semeystva/falcon",
+        "sha256": "b1fe97f3c79c38e4994e8a31247ea04d3b9273fad35bd6c8d019ba666e9a7c65",
+        "lines": 57
+      },
+      {
+        "path": "02 Атлас моделей/Семейства/GLM.md",
+        "route": "models/semeystva/glm",
+        "sha256": "4ca018ae5dea8caf5bbb5e45de151cc88593d693049663b665839a9e9583ca30",
+        "lines": 102
+      },
+      {
+        "path": "02 Атлас моделей/Семейства/GPT.md",
+        "route": "models/families/gpt",
+        "sha256": "c8d4bf29c6e5178eec5330010554e531263d08b1f8f1d9e1fcc62e3be7e8211e",
+        "lines": 72
+      },
+      {
+        "path": "02 Атлас моделей/Семейства/Gemma.md",
+        "route": "models/semeystva/gemma",
+        "sha256": "d34c185e00448f4c1a1a5d671226c8f4543b293f2c0637d539c3def02745af1b",
+        "lines": 77
+      },
+      {
+        "path": "02 Атлас моделей/Семейства/InternLM.md",
+        "route": "models/semeystva/internlm",
+        "sha256": "a8cb615eee8afa6ebb4bc5884ab64cd87dbcf4c0276b096a534ffb5971a6a862",
+        "lines": 59
+      },
+      {
+        "path": "02 Атлас моделей/Семейства/Jamba.md",
+        "route": "models/semeystva/jamba",
+        "sha256": "07b7e26d28d8079ec03a0f27d3f469923716b53a9058269f62cd03db5cd6b734",
+        "lines": 54
+      },
+      {
+        "path": "02 Атлас моделей/Семейства/Kimi.md",
+        "route": "models/semeystva/kimi",
+        "sha256": "31c59fab9bc2bcf51f75aa3e9dc7c66fe0ad0b8b426dacb3ec95ca0fd0aab807",
+        "lines": 112
+      },
+      {
+        "path": "02 Атлас моделей/Семейства/Llama.md",
+        "route": "models/semeystva/llama",
+        "sha256": "0a44e132213ba0ff7c9dde6e4515a3abbfdb43aa0fc562cc293bdba3d7916802",
+        "lines": 88
+      },
+      {
+        "path": "02 Атлас моделей/Семейства/Mamba.md",
+        "route": "models/semeystva/mamba",
+        "sha256": "04048691661f1e749cd20e39dee3fa3348c9bf19f04b208f6b7e2b5d7d3d1828",
+        "lines": 56
+      },
+      {
+        "path": "02 Атлас моделей/Семейства/Mistral и Mixtral.md",
+        "route": "models/semeystva/mistral-i-mixtral",
+        "sha256": "2bac58066e1784bcdb23fbeffdb42e100ad462fd352f085c62f1701c61c044f6",
+        "lines": 82
+      },
+      {
+        "path": "02 Атлас моделей/Семейства/Nemotron.md",
+        "route": "models/semeystva/nemotron",
+        "sha256": "4974a082b255198dfaeb03d8fbb40ad44fc2b0fca1a8693c2ead5ad306576409",
+        "lines": 71
+      },
+      {
+        "path": "02 Атлас моделей/Семейства/Phi.md",
+        "route": "models/semeystva/phi",
+        "sha256": "4d3c9ed77a7625651d4b39d87cb24fe8efbd28d9b2d5f24f1e8a5ea8ed953e57",
+        "lines": 77
+      },
+      {
+        "path": "02 Атлас моделей/Семейства/Qwen.md",
+        "route": "models/semeystva/qwen",
+        "sha256": "d69f26dc7cf69300ff7310e69e958a9954326b7cae834eef739615e3a02d4c84",
+        "lines": 162
+      },
+      {
+        "path": "02 Атлас моделей/Семейства/RWKV.md",
+        "route": "models/semeystva/rwkv",
+        "sha256": "79ed28daea561a203296fd2f19e7c9d6e80008e3d62b8079c52d4b0936966dbe",
+        "lines": 63
+      },
+      {
+        "path": "02 Атлас моделей/Семейства/RetNet.md",
+        "route": "models/semeystva/retnet",
+        "sha256": "80b91e5e9feb38b27cefb98038be2188c44d3fa0bdb7a5cba16510d5ca2e54fb",
+        "lines": 58
+      },
+      {
+        "path": "02 Атлас моделей/Семейства/T5.md",
+        "route": "models/families/t5",
+        "sha256": "b580dc9d2110c6f542b44b868332b243a3db8ce05752e7c59ecddf6035507378",
+        "lines": 72
+      },
+      {
+        "path": "02 Атлас моделей/Семейства/Yi.md",
+        "route": "models/semeystva/yi",
+        "sha256": "5e2932bc6e485aeabe0e9c46a7ffd9af99305a54f96fe50fa7b623737dad3a3e",
+        "lines": 51
+      },
+      {
+        "path": "02 Атлас моделей/Семейства/Мультимодальные семейства.md",
+        "route": "models/families/multimodal",
+        "sha256": "58c0ad07918bef4e5d00ccbd7b3a93962585cde3b2f62ddf91f1b96b98f2086e",
+        "lines": 123
+      },
+      {
+        "path": "02 Атлас моделей/Сравнения/Карта архитектурных линий.md",
+        "route": "models/sravneniya/karta-arhitekturnyh-liniy",
+        "sha256": "954574f99992b9640b7e3daf55686eeca2253008e35779795500c2e344b99443",
+        "lines": 73
+      },
+      {
+        "path": "02 Атлас моделей/Сравнения/Перенос vision encoder между VLM.md",
+        "route": "models/sravneniya/perenos-vision-encoder-mezhdu-vlm",
+        "sha256": "0e1bacdc9a5c466e73b5396db928f5e006fa3db60a3ae002bb840ec87d6e4f33",
+        "lines": 42
+      },
+      {
+        "path": "02 Атлас моделей/Сравнения/Сравнение семейств.md",
+        "route": "models/sravneniya/sravnenie-semeystv",
+        "sha256": "49bb690cfd70b1a7883ee9f80d47005a316a608ac380562a0bb3c0f0af1eaebd",
+        "lines": 57
+      }
+    ],
+    "limits": "All 28 atlas texts read, including 23 family cards, three comparisons, index and timeline. Inherited figure permissions and every source of every card were not newly accepted."
+  },
+  "reusedReads": {
+    "evidence": "docs/audit/2026-10-30-reading-route-review.json",
+    "addedReusedOwners": 10,
+    "selection": "Nine remaining inference owners and evaluation. Later exact full-read receipts supersede the mismatching older quantization and PD receipts. Model-compression and fanout/hedging additions were read afresh with exact prior-owner reconstruction.",
+    "evaluation": "Current owner/checker/source packet and figures match the BLEU receipt; five non-content infrastructure/index pins have since changed under separate route work. This is not a blanket revalidation of that old receipt."
+  },
+  "factualChanges": [
+    {
+      "journal": "docs/audit/2026-10-30-atlas-gqa-label-additions.json",
+      "finding": "GQA example wrongly generalized across Llama 2 sizes.",
+      "resolution": "Use released Llama 2 70B as the concrete example; keep all four figures.",
+      "primary": "https://arxiv.org/html/2307.09288v2#S2.T1"
+    },
+    {
+      "journal": "docs/audit/2026-10-30-atlas-release-label-additions.json",
+      "finding": "Falcon 2 was combined with Falcon 3 as 1B–10B; the per-checkpoint training budget was obscured.",
+      "resolution": "Separate 11B Falcon 2, 1B–10B Falcon 3, the 7B 14T training and 10B 2T continuation.",
+      "primary": [
+        "https://huggingface.co/tiiuae/falcon-11B",
+        "https://huggingface.co/tiiuae/Falcon3-7B-Base",
+        "https://huggingface.co/tiiuae/Falcon3-10B-Base"
+      ]
+    }
+  ],
+  "checkerRepair": {
+    "files": [
+      "publishing/tools/check_serving_decisions_examples.py",
+      "publishing/tools/check_serving_operations_completion.py"
+    ],
+    "initialFailure": "Both compared an old preserved hash with raw current navigation metadata. The mismatch was diagnosed, not hidden by changing expected hashes.",
+    "resolution": "Restore only journaled topic/navigation changes for historical contracts, then execute the actual current chapter programs. Regression rejects unrecorded edits.",
+    "directRepairedRuns": "Both executed to terminal exit 0 in the preceding segment of this same goal turn; decisions ran 19 current MLOps programs, operations ran 8 benchmark, 12 queue and 19 MLOps programs.",
+    "regression": "publishing/tests/serving-review-revisions.test.ts"
+  },
+  "cpu": {
+    "groups": [
+      {
+        "scripts": [
+          "check_serving_engine_examples.py",
+          "check_serving_source_excerpts.py",
+          "check_flashattention_examples.py"
+        ],
+        "exit_code": 0,
+        "command": "LC_ALL=C LANG=C uv run --offline --with torch==2.14.1 --with numpy==2.3.5 --with pillow --with scipy --with beautifulsoup4 python -c 'import subprocess,sys; commands=[\"check_serving_engine_examples.py\",\"check_serving_source_excerpts.py\",\"check_flashattention_examples.py\"]; [subprocess.run([sys.executable, '\\''publishing/tools/'\\''+name], check=True) for name in commands]'",
+        "output": "Installed 15 packages in 751ms\nPASS Markdown block and independent scalar reference; max error 2.220e-16\nPASS request isolation; wrong global causal mask leaks across both boundaries\nPASS offset guards and NHD/HND permutation; relabel/reshape control fails\nPASS stipulated prefill/decode token-versus-KV accounting\nCPU-only mathematical checks passed; no engine/GPU/performance claim.\nPASS vllm-processes: 524 unchanged text/code tokens\nPASS vllm-worker-model: 146 unchanged text/code tokens\nPASS vllm-weight-loading: 242 unchanged text/code tokens\nPASS sglang-radix: 247 unchanged text/code tokens\nPASS sglang-overlap: 164 unchanged text/code tokens\nPASS tensorrt-architecture: 672 unchanged text/code tokens\nPASS flashinfer-ragged: 249 unchanged text/code tokens\nPASS flashinfer-mask: 231 unchanged text/code tokens\nPASS flashinfer-pages: 567 unchanged text/code tokens\nPASS flashinfer-faq: 55 unchanged text/code tokens\nPASS 10 source excerpts, 3097 unchanged text/code tokens, 7 original figures\nOnly markup normalized; no upstream engine/GPU benchmark executed.\n{\n  \"status\": \"PASS\",\n  \"torch\": \"2.14.1\",\n  \"device\": \"cpu\",\n  \"executed_markdown_blocks\": 1,\n  \"matrix_cases\": 40,\n  \"shapes\": [\n    [\n      1,\n      1\n    ],\n    [\n      5,\n      3\n    ],\n    [\n      7,\n      5\n    ],\n    [\n      13,\n      8\n    ],\n    [\n      17,\n      4\n    ]\n  ],\n  \"tilings\": [\n    [\n      1,\n      1\n    ],\n    [\n      4,\n      3\n    ],\n    [\n      8,\n      5\n    ],\n    [\n      32,\n      32\n    ]\n  ],\n  \"causal\": [\n    false,\n    true\n  ],\n  \"numerical_examples\": {\n    \"square_mib\": 128.0,\n    \"qkvo_mib\": 4.0,\n    \"lse_kib\": 32.0,\n    \"intermediate_traffic_mib\": 512.0,\n    \"query_tasks\": 512,\n    \"pipeline_extra_kib\": 16.0,\n    \"online_rows\": [\n      [\n        1.5,\n        25.0,\n        16.666666666666668\n      ],\n      [\n        1.75,\n        52.5,\n        30.0\n      ]\n    ],\n    \"rescale\": 0.5,\n    \"backward_example\": {\n      \"output\": 29.999999999999996,\n      \"rows\": [\n        [\n          0.14285714285714285,\n          0.14285714285714285,\n          -2.857142857142857\n        ],\n        [\n          0.2857142857142857,\n          0.2857142857142857,\n          -2.857142857142857\n        ],\n        [\n          0.5714285714285714,\n          0.5714285714285714,\n          5.714285714285714\n        ]\n      ],\n      \"score_gradient_sum\": 7.105427357601002e-15\n    }\n  },\n  \"maximum_absolute_errors\": {\n    \"output\": 5.551115123125783e-16,\n    \"lse\": 4.440892098500626e-16,\n    \"autograd\": 1.1102230246251565e-15,\n    \"recomputed_backward\": 1.1102230246251565e-15,\n    \"D_identity\": 8.881784197001252e-16,\n    \"sdpa_math\": 3.3306690738754696e-16,\n    \"orthogonal_scores\": 2.6645352591003757e-15,\n    \"fp32_output\": 3.5762786865234375e-07,\n    \"fp32_lse\": 2.384185791015625e-07\n  },\n  \"source_excerpt\": {\n    \"scope\": \"Complete Compiler reordering and Register pressure paragraphs in Section 3.2\",\n    \"source_sha256\": \"d1bc9097a831db81620d76cf5003dcb17de094c7b912d12e5f6d22d47e504cc1\"\n  },\n  \"double_tolerance\": {\n    \"atol\": 2e-11,\n    \"rtol\": 2e-10\n  },\n  \"gradcheck\": {\n    \"cases\": 2,\n    \"eps\": 1e-06,\n    \"atol\": 2e-06,\n    \"rtol\": 0.0002\n  },\n  \"negative_control\": {\n    \"observed\": 26.0,\n    \"correct\": 30.0,\n    \"rejected\": true\n  },\n  \"gpu_execution\": \"NOT RUN\",\n  \"benchmark\": \"NOT RUN\"\n}\n"
+      },
+      {
+        "scripts": [
+          "check_quantization_examples.py",
+          "check_kv_compression_examples.py",
+          "check_model_compression_examples.py",
+          "check_systems_completion_examples.py"
+        ],
+        "exit_code": 0,
+        "command": "LC_ALL=C LANG=C uv run --offline --with torch==2.14.1 --with numpy==2.3.5 --with pillow --with scipy --with beautifulsoup4 python -c 'import subprocess,sys; commands=[\"check_quantization_examples.py\",\"check_kv_compression_examples.py\",\"check_model_compression_examples.py\",\"check_systems_completion_examples.py\"]; [subprocess.run([sys.executable, '\\''publishing/tools/'\\''+name], check=True) for name in commands]'",
+        "output": "Installed 15 packages in 761ms\n{\n  \"status\": \"PASS\",\n  \"device\": \"CPU\",\n  \"executed_markdown_blocks\": [\n    \"quant-symmetric\",\n    \"quant-int4-packing\",\n    \"quant-gptq-step\",\n    \"quant-awq-step\",\n    \"quant-smoothquant-step\",\n    \"quant-rotation\"\n  ],\n  \"symmetric_random_groups\": 1750,\n  \"all_int4_pairs\": 256,\n  \"least_squares_cases\": 400,\n  \"equivalent_transform_cases\": 400,\n  \"scaling_not_universally_better\": {\n    \"improved\": 23,\n    \"worsened\": 377\n  },\n  \"ste_true_local_derivative\": 0.0,\n  \"dq_bits_per_weight\": 4.126953125,\n  \"sources\": {\n    \"unchanged_sources\": 5,\n    \"exact_excerpts\": 2\n  },\n  \"figures\": {\n    \"new_figure_hashes\": 4,\n    \"chapter_embeds\": 6,\n    \"qlora_render\": \"full original figure reproduced byte-for-byte\"\n  },\n  \"gpu_execution\": \"NOT RUN\",\n  \"model_quality\": \"NOT MEASURED\",\n  \"benchmark\": \"NOT RUN\"\n}\n{\n  \"status\": \"PASS\",\n  \"device\": \"CPU\",\n  \"executed_markdown_blocks\": [\n    \"kv-memory\",\n    \"kv-quantization-axes\",\n    \"kv-residual\",\n    \"kv-quantized-memory\",\n    \"kv-snapkv\",\n    \"kv-transfer\",\n    \"kv-prefix-reuse\"\n  ],\n  \"quantization_group_axis_bit_cases\": 4000,\n  \"residual_state_steps\": 4096,\n  \"eviction_error_identities\": 400,\n  \"pooling_cases\": 600,\n  \"pipeline_cases\": 200,\n  \"sources\": {\n    \"source_hashes\": 10,\n    \"exact_excerpts\": 2\n  },\n  \"figures\": {\n    \"new_figures\": 4,\n    \"total_embeds\": 6,\n    \"full_pdf_rerenders\": 2\n  },\n  \"gpu_execution\": \"NOT RUN\",\n  \"model_quality\": \"NOT MEASURED\",\n  \"benchmark\": \"NOT RUN\"\n}\n{\n  \"displayed_python_blocks\": 17,\n  \"wanda_trials\": 300,\n  \"structured_trials\": 400,\n  \"svd_trials\": 400,\n  \"gradient_trials\": 150,\n  \"source_hashes\": 9,\n  \"exact_excerpts\": 2,\n  \"total_figures\": 12,\n  \"unchanged_source_svgs\": 5,\n  \"new_vector_pdf_rerenders\": 1\n}\n{\n  \"displayed_programs\": [\n    \"hardware-systolic\",\n    \"hardware-stationary-traffic\",\n    \"compression-pruning-schedule\",\n    \"compression-nas-relaxation\",\n    \"compression-early-exit\",\n    \"compression-compound-scaling\",\n    \"compression-bn-folding\",\n    \"compression-binary-dot\"\n  ],\n  \"systolic_shapes\": 216,\n  \"early_exit_masks\": 256,\n  \"binary_vectors\": 240,\n  \"bounded_restorations\": 2,\n  \"scope\": \"CPU arithmetic and exact text preservation; no hardware performance or accuracy claim\"\n}\n"
+      },
+      {
+        "scripts": [
+          "check_speculative_examples.py",
+          "check_distributed_inference_examples.py",
+          "check_pd_serving_examples.py",
+          "check_inference_benchmark_examples.py",
+          "check_queueing_capacity_examples.py"
+        ],
+        "exit_code": 0,
+        "command": "LC_ALL=C LANG=C uv run --offline --with torch==2.14.1 --with numpy==2.3.5 --with pillow --with scipy --with beautifulsoup4 python -c 'import subprocess,sys; commands=[\"check_speculative_examples.py\",\"check_distributed_inference_examples.py\",\"check_pd_serving_examples.py\",\"check_inference_benchmark_examples.py\",\"check_queueing_capacity_examples.py\"]; [subprocess.run([sys.executable, '\\''publishing/tools/'\\''+name], check=True) for name in commands]'",
+        "output": "Installed 15 packages in 761ms\n{\n  \"displayed_python_blocks\": 7,\n  \"exact_sequence_probabilities\": 243,\n  \"probability_mass_trials\": 502,\n  \"greedy_trials\": 500,\n  \"tree_attention_trials\": 300,\n  \"reranking_trees\": 300,\n  \"source_hashes\": 17,\n  \"exact_excerpts\": 2,\n  \"figures\": 8,\n  \"new_assets\": 6,\n  \"pdf_rerenders\": 4\n}\n{\n  \"chapter_blocks\": 8,\n  \"randomized_checks\": {\n    \"tp\": 800,\n    \"swiglu\": 800,\n    \"sp\": 800,\n    \"softmax_merge\": 500,\n    \"ep\": 300,\n    \"pipeline\": 96,\n    \"kv_permutation\": 200\n  },\n  \"source_snapshots\": 5,\n  \"figures\": 11,\n  \"source_svg_viewport_crop\": 1,\n  \"scope\": \"CPU algebra only; no measured GPU or serving performance\"\n}\n{\n  \"chapter_blocks\": 10,\n  \"cpu_cases\": {\n    \"latencies\": 200,\n    \"kv_layout\": 1363,\n    \"layer_transfer\": 500,\n    \"token_policy\": 300,\n    \"routing\": 200,\n    \"reservation\": 500,\n    \"queue\": 300,\n    \"cpp\": 400,\n    \"handoff\": 400\n  },\n  \"source_snapshots\": 8,\n  \"exact_source_excerpts\": 1,\n  \"figure_hashes\": 6,\n  \"reproduced_pdf_crops\": 3,\n  \"scope\": \"CPU references and source fidelity only; no measured serving performance\"\n}\n{\n  \"chapter_blocks\": 7,\n  \"cpu_cases\": {\n    \"timestamps\": 300,\n    \"cohorts\": 300,\n    \"quantiles\": 1500,\n    \"client_queue\": 300,\n    \"context_work\": 500,\n    \"phase_accounting\": 300,\n    \"burn_rate\": 300\n  },\n  \"source_snapshots\": 17,\n  \"figures\": 5,\n  \"reproduced_pdf_crops\": 1,\n  \"unchanged_licensed_figures\": 3,\n  \"scope\": \"CPU arithmetic and source fidelity only; no measured serving performance\"\n}\n{\n  \"chapter_blocks\": 10,\n  \"cpu_cases\": {\n    \"finite_queue_area\": 300,\n    \"service_variability\": 300,\n    \"batch_formation\": 300,\n    \"replica_routing\": 300,\n    \"kv_reservations\": 300,\n    \"workload_flows\": 300,\n    \"replica_reserve\": 300,\n    \"burst_recovery\": 300,\n    \"deadline_budget\": 300,\n    \"retries\": 300\n  },\n  \"sources\": 10,\n  \"figures\": 5,\n  \"reproduced_pdf_crops\": 2,\n  \"unchanged_originals\": 3,\n  \"scope\": \"CPU/source checks only; no GPU benchmark or autoscaler run\"\n}\n"
+      }
+    ],
+    "uniqueProgramsInTenInferenceOwners": 78,
+    "limits": "Counts exclude unexecuted GPU/runtime snippets and duplicate executions. MLOps programs exercised by shared checkers are not counted as additional inference programs. No GPU, model-quality, throughput or latency benchmark."
+  },
+  "checks": {
+    "unit": {
+      "exit_code": 0,
+      "tests": 903,
+      "files": 146,
+      "durationSeconds": 73.2
+    },
+    "root": [
+      {
+        "dir": "site",
+        "args": [
+          "run",
+          "check"
+        ],
+        "exit": 0,
+        "ms": 16003,
+        "stdout": "\n> precheck\n> pnpm content:build\n\n\n> check\n> astro check\n\n13:38:28 [content] Syncing content\n13:38:33 [content] Synced content\n13:38:33 [types] Generated 5.76s\n13:38:33 [check] Getting diagnostics for Astro files in /Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/site...\n\u001b[96msrc/content.config.ts\u001b[0m:\u001b[93m10\u001b[0m:\u001b[93m26\u001b[0m - \u001b[93mwarning\u001b[0m\u001b[90m ts(6385): \u001b[0m'z' is deprecated.\n\n\u001b[7m10\u001b[0m     translationReviewed: z.string().optional(),\n\u001b[7m  \u001b[0m \u001b[93m                         ~\u001b[0m\n\u001b[96msrc/content.config.ts\u001b[0m:\u001b[93m9\u001b[0m:\u001b[93m20\u001b[0m - \u001b[93mwarning\u001b[0m\u001b[90m ts(6385): \u001b[0m'z' is deprecated.\n\n\u001b[7m9\u001b[0m     canonicalHref: z.string().optional(),\n\u001b[7m \u001b[0m \u001b[93m                   ~\u001b[0m\n\u001b[96msrc/content.config.ts\u001b[0m:\u001b[93m8\u001b[0m:\u001b[93m24\u001b[0m - \u001b[93mwarning\u001b[0m\u001b[90m ts(6385): \u001b[0m'z' is deprecated.\n\n\u001b[7m8\u001b[0m     translationStatus: z.enum(['current', 'partial', 'canonical']).optional(),\n\u001b[7m \u001b[0m \u001b[93m                       ~\u001b[0m\n\u001b[96msrc/content.config.ts\u001b[0m:\u001b[93m7\u001b[0m:\u001b[93m21\u001b[0m - \u001b[93mwarning\u001b[0m\u001b[90m ts(6385): \u001b[0m'z' is deprecated.\n\n\u001b[7m7\u001b[0m     sourceLanguage: z.enum(['en', 'ru', 'mixed']).optional(),\n\u001b[7m \u001b[0m \u001b[93m                    ~\u001b[0m\n\u001b[96msrc/content.config.ts\u001b[0m:\u001b[93m6\u001b[0m:\u001b[93m78\u001b[0m - \u001b[93mwarning\u001b[0m\u001b[90m ts(6385): \u001b[0m'z' is deprecated.\n\n\u001b[7m6\u001b[0m   docs: defineCollection({ loader: docsLoader(), schema: docsSchema({extend: z.object({\n\u001b[7m \u001b[0m \u001b[93m                                                                             ~\u001b[0m\n\u001b[96msrc/content.config.ts\u001b[0m:\u001b[93m1\u001b[0m:\u001b[93m28\u001b[0m - \u001b[93mwarning\u001b[0m\u001b[90m ts(6385): \u001b[0m'z' is deprecated.\n\n\u001b[7m1\u001b[0m import { defineCollection, z } from 'astro:content';\n\u001b[7m \u001b[0m \u001b[93m                           ~\u001b[0m\n\nResult (22 files): \n- 0 errors\n- 0 warnings\n- 6 hints\n\n",
+        "stderr": "$ pnpm --dir ../publishing build\n$ tsx adapter/build.ts\n"
+      },
+      {
+        "dir": "site",
+        "args": [
+          "run",
+          "build"
+        ],
+        "exit": 0,
+        "ms": 39355,
+        "stdout": "/en/sources/papers/recall-efficient-sequence-models/index.html (+2ms) \n13:39:09   ├─ /en/sources/papers/retnet/index.html (+8ms) \n13:39:10   ├─ /en/sources/papers/retrieval-augmented-generation-for-knowledge-intensive-nlp-tasks/index.html (+3ms) \n13:39:10   ├─ /en/sources/papers/revisiting-few-sample-bert-fine-tuning/index.html (+3ms) \n13:39:10   ├─ /en/sources/papers/roberta/index.html (+2ms) \n13:39:10   ├─ /en/sources/papers/rwkv/index.html (+3ms) \n13:39:10   ├─ /en/sources/papers/self-consistency/index.html (+2ms) \n13:39:10   ├─ /en/sources/papers/self-instruct/index.html (+3ms) \n13:39:10   ├─ /en/sources/papers/self-rag/index.html (+2ms) \n13:39:10   ├─ /en/sources/papers/speculative-decoding/index.html (+3ms) \n13:39:10   ├─ /en/sources/papers/swe-data-pipelines/index.html (+2ms) \n13:39:10   ├─ /en/sources/papers/t5/index.html (+2ms) \n13:39:10   ├─ /en/sources/papers/toolformer/index.html (+3ms) \n13:39:10   ├─ /en/sources/papers/toolrl/index.html (+2ms) \n13:39:10   ├─ /en/sources/papers/tree-of-thoughts/index.html (+2ms) \n13:39:10   ├─ /en/sources/papers/ttt-e2e/index.html (+2ms) \n13:39:10   ├─ /en/sources/papers/ttt-layers/index.html (+2ms) \n13:39:10   ├─ /en/sources/papers/xgrammar/index.html (+2ms) \n13:39:10   ├─ /en/sources/registry/index.html (+8ms) \n13:39:10   ├─ /en/sources/source-maps/complete-source-coverage/index.html (+3ms) \n13:39:10   ├─ /en/sources/source-maps/efficient-dl-systems-transfer/index.html (+2ms) \n13:39:10   ├─ /en/sources/source-maps/harvard-ml-systems-transfer/index.html (+3ms) \n13:39:10   ├─ /en/sources/source-maps/hse-ml-course/index.html (+2ms) \n13:39:10   ├─ /en/sources/source-maps/llms-practical-guide/index.html (+2ms) \n13:39:10   ├─ /en/sources/source-maps/ml-systems-bookvar-gaps/index.html (+3ms) \n13:39:10   ├─ /en/sources/stanford-cs230-cheatsheets/index.html (+3ms) \n13:39:10   ├─ /en/sources/visual-materials-licenses/index.html (+2ms) \n13:39:10 ✓ Completed in 7.20s.\n\n13:39:10 [build] ✓ Completed in 21.15s.\n13:39:10 [starlight:pagefind] Building search index with Pagefind...\n13:39:12 [starlight:pagefind] Found 2011 HTML files.\n13:39:13 [build] Waiting for integration \"@astrojs/starlight\", hook \"astro:build:done\"...\n13:39:14 [starlight:pagefind] Finished building search index in 4.77s.\n13:39:14 [@astrojs/sitemap] `sitemap-index.xml` created at `dist`\n13:39:14 [build] 2007 page(s) built in 32.05s\n13:39:14 [build] Complete!\n",
+        "stderr": "$ pnpm --dir ../publishing build\n$ tsx adapter/build.ts\n"
+      },
+      {
+        "dir": "publishing",
+        "args": [
+          "run",
+          "test:output"
+        ],
+        "exit": 0,
+        "ms": 7666,
+        "stdout": "\n> test:output\n> vitest run tests/site-output.test.ts\n\n\n RUN  v4.1.10 /Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/publishing\n\n\n Test Files  1 passed (1)\n      Tests  183 passed (183)\n   Start at  13:39:15\n   Duration  7.24s (transform 96ms, setup 0ms, import 124ms, tests 7.00s, environment 0ms)\n\n",
+        "stderr": ""
+      },
+      {
+        "dir": "publishing",
+        "args": [
+          "run",
+          "check:links"
+        ],
+        "exit": 0,
+        "ms": 2309,
+        "stdout": "\n> check:links\n> tsx adapter/check-built-links.ts\n\nBuilt link check passed: 0 broken internal routes, fragments, or files.\n",
+        "stderr": ""
+      },
+      {
+        "dir": "publishing",
+        "args": [
+          "run",
+          "check:topics"
+        ],
+        "exit": 0,
+        "ms": 735,
+        "stdout": "\n> check:topics\n> tsx tools/sync-topic-index.ts --check\n\n{\"mode\":\"check\",\"topics\":152,\"indexes\":[\"01 Справочник/_index.md\",\"en/01 Reference/_index.md\"]}\n",
+        "stderr": ""
+      }
+    ],
+    "diffCheck": "Scoped git diff --check passed for changed owners and checker/helpers."
+  },
+  "visualQa": {
+    "routes": [
+      "/models/sravneniya/karta-arhitekturnyh-liniy/",
+      "/models/semeystva/llama/",
+      "/textbook/modern-llm/mha-mqa-gqa/",
+      "/models/semeystva/falcon/",
+      "/en/models/semeystva/falcon/"
+    ],
+    "observed": [
+      "Map's qualified GQA link, actual map→Llama→full GQA owner clicks.",
+      "All four map originals loaded; the MHA/GQA/MQA/MLA original inspected fitted and at 1.5× with caption attribution.",
+      "Desktop map document width/scrollWidth 1265/1265; mobile 360/360 at viewport 375×812. Wide tables have their own horizontal scroll.",
+      "Correct Falcon 2 and 3 rows rendered on root desktop and EN mobile. Canonical Russian body remains explicitly untranslated in EN; no translation authored.",
+      "Zero KaTeX errors in the inspected map/Falcon pages; the Falcon-H1 article figure loaded. Empty hidden lightbox placeholder is not an article image."
+    ],
+    "screenshots": [
+      "docs/audit/evidence/2026-10-30-inference-atlas/map-original-viewer-desktop.png",
+      "docs/audit/evidence/2026-10-30-inference-atlas/map-mobile.png",
+      "docs/audit/evidence/2026-10-30-inference-atlas/falcon-desktop.png",
+      "docs/audit/evidence/2026-10-30-inference-atlas/falcon-en-mobile.png"
+    ],
+    "limits": "Not visual acceptance of every inherited illustration in all atlas cards or all 152 chapter owners."
+  },
+  "style": "no-ai-slop SKILL.md and eval.md read in full. Only supported factual table/label corrections authored; existing explanations, mathematical derivations, code, captions and original figures preserved.",
+  "publication": {
+    "commit": false,
+    "push": false,
+    "pagesDeploy": false,
+    "mainChanged": false
+  },
+  "remaining": [
+    "Confirm/replace the specifically unresolved copied GPT-3 Figure 2.1/Table 2.1 and GRPO paper comparison; source-link-only MTP/Toolformer/EAGLE objects remain explicit visual gaps rather than invented diagrams.",
+    "Review the full scoped dirty diff, verify author and fresh origin/dev, perform physical /bookvar checks and required frozen release checks, commit/push only authorized dev and verify Pages."
+  ],
+  "pins": [
+    {
+      "path": "02 Атлас моделей/Timeline.md",
+      "sha256": "5a8daa46227b3599523b721bf4e17dd7e2f12ff052eb25bef3f1b2e71054fd15"
+    },
+    {
+      "path": "02 Атлас моделей/_index.md",
+      "sha256": "1a08660ffc2fdada88d6f0f77bbcba14658e4c55919710e6d1777f264d68f189"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/BERT.md",
+      "sha256": "086f4557ce4896c8545713fd0558fcf81a38a8eea268a135a7a4375fbc45dc0a"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Baichuan.md",
+      "sha256": "99af86120004adbef9736b25cf8b6bb581a355affbe9a281d7656069fe2e5ad8"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Command R.md",
+      "sha256": "123c11470430ad02d5a3d630514e9874fbeeec73512aebfb0b2b32fc4d343af1"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/DBRX.md",
+      "sha256": "4cd03c25e2a63992d5d231d71bdd462f68a42227fbdaf0b088408eeb6fc7c391"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/DeepSeek.md",
+      "sha256": "ec05306c5d3d3aa5e61b59b2fc31e52863c6a169fbc57a5eb1998ef5d1886b92"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Falcon.md",
+      "sha256": "b1fe97f3c79c38e4994e8a31247ea04d3b9273fad35bd6c8d019ba666e9a7c65"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/GLM.md",
+      "sha256": "4ca018ae5dea8caf5bbb5e45de151cc88593d693049663b665839a9e9583ca30"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/GPT.md",
+      "sha256": "c8d4bf29c6e5178eec5330010554e531263d08b1f8f1d9e1fcc62e3be7e8211e"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Gemma.md",
+      "sha256": "d34c185e00448f4c1a1a5d671226c8f4543b293f2c0637d539c3def02745af1b"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/InternLM.md",
+      "sha256": "a8cb615eee8afa6ebb4bc5884ab64cd87dbcf4c0276b096a534ffb5971a6a862"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Jamba.md",
+      "sha256": "07b7e26d28d8079ec03a0f27d3f469923716b53a9058269f62cd03db5cd6b734"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Kimi.md",
+      "sha256": "31c59fab9bc2bcf51f75aa3e9dc7c66fe0ad0b8b426dacb3ec95ca0fd0aab807"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Llama.md",
+      "sha256": "0a44e132213ba0ff7c9dde6e4515a3abbfdb43aa0fc562cc293bdba3d7916802"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Mamba.md",
+      "sha256": "04048691661f1e749cd20e39dee3fa3348c9bf19f04b208f6b7e2b5d7d3d1828"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Mistral и Mixtral.md",
+      "sha256": "2bac58066e1784bcdb23fbeffdb42e100ad462fd352f085c62f1701c61c044f6"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Nemotron.md",
+      "sha256": "4974a082b255198dfaeb03d8fbb40ad44fc2b0fca1a8693c2ead5ad306576409"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Phi.md",
+      "sha256": "4d3c9ed77a7625651d4b39d87cb24fe8efbd28d9b2d5f24f1e8a5ea8ed953e57"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Qwen.md",
+      "sha256": "d69f26dc7cf69300ff7310e69e958a9954326b7cae834eef739615e3a02d4c84"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/RWKV.md",
+      "sha256": "79ed28daea561a203296fd2f19e7c9d6e80008e3d62b8079c52d4b0936966dbe"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/RetNet.md",
+      "sha256": "80b91e5e9feb38b27cefb98038be2188c44d3fa0bdb7a5cba16510d5ca2e54fb"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/T5.md",
+      "sha256": "b580dc9d2110c6f542b44b868332b243a3db8ce05752e7c59ecddf6035507378"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Yi.md",
+      "sha256": "5e2932bc6e485aeabe0e9c46a7ffd9af99305a54f96fe50fa7b623737dad3a3e"
+    },
+    {
+      "path": "02 Атлас моделей/Семейства/Мультимодальные семейства.md",
+      "sha256": "58c0ad07918bef4e5d00ccbd7b3a93962585cde3b2f62ddf91f1b96b98f2086e"
+    },
+    {
+      "path": "02 Атлас моделей/Сравнения/Карта архитектурных линий.md",
+      "sha256": "954574f99992b9640b7e3daf55686eeca2253008e35779795500c2e344b99443"
+    },
+    {
+      "path": "02 Атлас моделей/Сравнения/Перенос vision encoder между VLM.md",
+      "sha256": "0e1bacdc9a5c466e73b5396db928f5e006fa3db60a3ae002bb840ec87d6e4f33"
+    },
+    {
+      "path": "02 Атлас моделей/Сравнения/Сравнение семейств.md",
+      "sha256": "49bb690cfd70b1a7883ee9f80d47005a316a608ac380562a0bb3c0f0af1eaebd"
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md",
+      "sha256": "fee6d97ff4f17a23b48f6b3a73e7311d7699f1da456c414094d4ba934062f255"
+    },
+    {
+      "path": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "sha256": "910967cba1670d0c65864123b958547b420ca059eb38b7302ad0968436e0f952"
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+      "sha256": "15ba654d059b1ccd35bd07c6b041e405bef2f99d74ee03f672c205263b7589a1"
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+      "sha256": "70bd3d2b286af4c5b04150e0a27bf527bd18de4ac6f829d2b7eaeb437f010d17"
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md",
+      "sha256": "bfd74b11578aa6caa0782a30e9456000e853e41fcca697f395dddea055eba218"
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md",
+      "sha256": "abfc32486bfbccb7475c316da89c0dd235c3628572db0121d7b6165aca4ec886"
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+      "sha256": "32085af4415e2aa3904eded4a14c42e7ced65c81d4288c42af4a5d099ff597ad"
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md",
+      "sha256": "7219c5e6fdef1ca9cd3fa92c50097cfe77a6ad664afa3ac43e9e6d8c117d7625"
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/58a2 Раздельное обслуживание prefill и decode.md",
+      "sha256": "7973703ca7ec77248f0fdc77321e7c5f9805164d182508234fb5c49c3e86a13d"
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md",
+      "sha256": "1d453c6e9f77e4aee10c81305bc406fe0bf3a50e69fc4edd22748a555e5a0b9c"
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning.md",
+      "sha256": "8a34dd525150ef3b95896e969444ff40456aefd0e897522cbeb5ca446f4a7ea1"
+    },
+    {
+      "path": "publishing/tools/check_serving_decisions_examples.py",
+      "sha256": "2d1b6627b4541e9239265899f9d7ea19a3b90603446485410726ab2c15fc6206"
+    },
+    {
+      "path": "publishing/tools/check_serving_operations_completion.py",
+      "sha256": "8d1ba8c8e389a8dca861287c21eeeb31913bded544cbdabbb675684e2ea6a53e"
+    },
+    {
+      "path": "publishing/tools/topic-consolidation-baseline.mjs",
+      "sha256": "ae3633a5d03462ae1fdb970a0fac820655b0e1b44a4dcc99f3bff123563e0e57"
+    },
+    {
+      "path": "publishing/tools/topic_consolidation_baseline.py",
+      "sha256": "632a0396366655f6bc54fefab4cc988163204579cfb670bc87d08043d631afb0"
+    },
+    {
+      "path": "publishing/tests/serving-review-revisions.test.ts",
+      "sha256": "b34202d69f1e4e98f4e2e3c7783131db9a6e522b196749393fdc1ae4f6faca7b"
+    },
+    {
+      "path": "publishing/tests/atlas-gqa-label.test.ts",
+      "sha256": "40638903096046084e3613daba3fd4ec02d9bf507164bcaea1f6ff82c298dbb1"
+    },
+    {
+      "path": "docs/audit/2026-10-30-atlas-gqa-label-additions.json",
+      "sha256": "3052f1c02ace1cfda23eec77a095893d4bba115c189bd8e230c1074d578fef25"
+    },
+    {
+      "path": "docs/audit/2026-10-30-atlas-release-label-additions.json",
+      "sha256": "f5f66a7c5429d7c5dacb3b118287e6b38ac5d103802ef8849635fc46ab774372"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-inference-atlas/map-original-viewer-desktop.png",
+      "sha256": "5a3a848594528b826192c9828713631d42b8514372a4af6e2372a1469fb260d9"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-inference-atlas/map-mobile.png",
+      "sha256": "e0682aa900c1637eea26830b2ad0a46853aa0d96a590da23aae286fc5108fe6d"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-inference-atlas/falcon-desktop.png",
+      "sha256": "ba5d71db985b9b1b7ce39526dbeaefd76fbe16ef0ef918856ff378eddd2d7805"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-inference-atlas/falcon-en-mobile.png",
+      "sha256": "2316ea0d418f3bba79690d4c103ab77ddb327487c2161d5cbc3524baec8217ad"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+Autoencoder and VAE source assets, verified 2026-10-26
+
+uva-autoencoder.svg
+Copyright (c) 2020 Phillip Lippe.
+Original: https://raw.githubusercontent.com/phlippe/uvadlc_notebooks/c7d9e18f42fee53bc8925f08ec2358371b1e9200/docs/tutorial_notebooks/tutorial9/autoencoder_visualization.svg
+Full unmodified SVG. MIT permission from pinned LICENSE.md applies to the
+notebook's associated documentation. Public license: uva-c7d9e18f-MIT.txt.
+
+transpose-convolution.gif
+Vincent Dumoulin and Francesco Visin, A guide to convolution arithmetic.
+Original: https://raw.githubusercontent.com/vdumoulin/conv_arithmetic/af6f818b0bb396c26da79899554682a8a499101d/gif/padding_strides_transposed.gif
+Full unmodified 25-frame animation, 395 x 449.
+The pinned README explicitly covers both code and images under its license.
+Public license: conv-arithmetic-af6f818b-MIT.txt. Its copyright line is copied
+as supplied by the source; no missing author name has been invented.
+
+Source code reproduced in the chapter:
+UvA Encoder and Decoder, notebook c7d9e18f42fee53bc8925f08ec2358371b1e9200.
+MIT notice: uva-c7d9e18f-MIT.txt.
+PyTorch VAE and loss_function, examples acc295dc7b90714f1bf47f06004fc19a7fe235c4.
+Copyright (c) 2017, Pytorch contributors. All rights reserved.
+BSD 3-Clause notice: pytorch-examples-acc295dc-BSD-3-Clause.txt.
+
+Existing illustrations were not redrawn or newly licensed:
+VAE_blocks.png, wikipedia + sebastian nguyen / Wikimedia Commons,
+https://commons.wikimedia.org/wiki/File:VAE_blocks.png
+CC BY-SA 4.0, https://creativecommons.org/licenses/by-sa/4.0/
+Unmodified PNG, SHA1 71619f1a1018681b581f2f2c0a40d9878bfa0ab7.
+
+Three legacy images hosted by Lilian Weng remain permission-unconfirmed.
+The reparameterization diagram is attributed by Weng to Diederik P. Kingma,
+NIPS 2015 workshop, slide 12. Hosting does not transfer authorship or provide
+a blanket redistribution license. No new rights claim is made here.

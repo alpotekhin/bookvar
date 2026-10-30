@@ -1,0 +1,31 @@
+[
+  {
+    "id": "curated-edls-neural-hf-kv-cache-44931e339df5",
+    "asset": "00 Учебник/Assets/Figures/curated/edls-neural-kv-2026-10-26/hf-kv-cache.png",
+    "author": "Rémi Ouazan Reboul, Arthur Zucker, Luc Georges / Hugging Face",
+    "source_url": "https://huggingface.co/blog/continuous_batching#kv-cache",
+    "source_image_url": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/c8c3cf72b3b724ce734259e4a086d30618a9198b/blog/continuous_batching/kv_cache.png",
+    "commit": "c8c3cf72b3b724ce734259e4a086d30618a9198b",
+    "source_asset": "00 Учебник/Assets/Figures/curated/edls-neural-kv-2026-10-26/hf-kv-cache.png",
+    "source_asset_sha256": "44931e339df5ebc418385dcb1880a75da44eeeaf5c4ae3a6aab853d8916bd680",
+    "sha256": "44931e339df5ebc418385dcb1880a75da44eeeaf5c4ae3a6aab853d8916bd680",
+    "dimensions_px": [
+      1348,
+      466
+    ],
+    "source_page_snapshot": "05 Источники/Originals/inference-practice-2026-10-26/hf-continuous-batching.md",
+    "source_page_sha256": "2a0f647d8a09056d5775611237c5d9b1242b113f9179f8405566760213b7a605",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/scheduling-2026-10-25/hf-images-README.md",
+    "license_evidence_sha256": "5e6a73b7ff47813e90e2ed21d14807256b2e89fa55e5075ec69fdf01cde801ce",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original PNG bytes, token labels, head-suppressed diagram and legend retained. No crop, redraw, translation, resampling or recompression.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-26",
+    "used_in": [
+      "06 Практика/14 Собрать минимальный inference engine.md"
+    ]
+  }
+]

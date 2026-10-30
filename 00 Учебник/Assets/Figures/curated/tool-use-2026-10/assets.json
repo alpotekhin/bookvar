@@ -1,0 +1,77 @@
+[
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/tool-use-2026-10/react-hotpotqa-primary.png",
+    "source_asset": "05 Источники/Originals/tool-use-2026-10-20/react.pdf",
+    "source_page": 2,
+    "source_page_snapshot": "05 Источники/Originals/tool-use-2026-10-20/react-page-02.png",
+    "crop_box_px": [
+      550,
+      410,
+      2555,
+      1265
+    ],
+    "render_page_size_px": [
+      3091,
+      4000
+    ],
+    "label": "Figure 1(1)",
+    "author": "Shunyu Yao et al.",
+    "source_url": "https://arxiv.org/abs/2210.03629v3",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/tool-use-2026-10-20/react-abstract.html",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Complete numbered panel from original Figure 1; the other numbered panel, shared caption and surrounding article text excluded. No redraw, translation or edits within the panel.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md"
+    ],
+    "sha256": "8c5057223d4c527352a4d3088342bd6437fb43651a9de01090ebd2cf1f2f69c6",
+    "source_asset_sha256": "f285b0971ae4a790e402fb93966bed3adde2cf0a04977d08b2b40d6ab0cace69",
+    "source_page_sha256": "9787598622237cc186d701bcc46152f2ab726c582ca331dbd61e6e85a4b5ef96",
+    "license_evidence_sha256": "dc39550159e139ddd3e88224a75bd153ba71d55684dddb4bcf2d74262f93a0a5",
+    "width": 2005,
+    "height": 855,
+    "id": "curated-tool-use-react-hotpotqa-primary-8c5057223d4c"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/tool-use-2026-10/react-alfworld-primary.png",
+    "source_asset": "05 Источники/Originals/tool-use-2026-10-20/react.pdf",
+    "source_page": 2,
+    "source_page_snapshot": "05 Источники/Originals/tool-use-2026-10-20/react-page-02.png",
+    "crop_box_px": [
+      550,
+      1285,
+      2555,
+      2045
+    ],
+    "render_page_size_px": [
+      3091,
+      4000
+    ],
+    "label": "Figure 1(2)",
+    "author": "Shunyu Yao et al.",
+    "source_url": "https://arxiv.org/abs/2210.03629v3",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/tool-use-2026-10-20/react-abstract.html",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Complete numbered panel from original Figure 1; the other numbered panel, shared caption and surrounding article text excluded. No redraw, translation or edits within the panel.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md"
+    ],
+    "sha256": "74967d232e38e628bbdf4aa9227200652fc46f0fb51c40325348f0e5317af0d8",
+    "source_asset_sha256": "f285b0971ae4a790e402fb93966bed3adde2cf0a04977d08b2b40d6ab0cace69",
+    "source_page_sha256": "9787598622237cc186d701bcc46152f2ab726c582ca331dbd61e6e85a4b5ef96",
+    "license_evidence_sha256": "dc39550159e139ddd3e88224a75bd153ba71d55684dddb4bcf2d74262f93a0a5",
+    "width": 2005,
+    "height": 760,
+    "id": "curated-tool-use-react-alfworld-primary-74967d232e38"
+  }
+]
+

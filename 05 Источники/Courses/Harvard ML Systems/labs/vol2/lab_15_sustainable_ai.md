@@ -9,15 +9,100 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol2/lab_15_sustainable_ai.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol2/lab_15_sustainable_ai.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL2 Lab — Sustainable Ai
 
 ## Readable lab narrative
 
 This lab is primarily executable code; use the complete source below.
+
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+**⟨value 1⟩**  
+⟨value 2⟩  
+
+Recovery path: ⟨value 3⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{title}' `
+- value_2: ` f'{detail}' `
+- value_3: ` f'{recovery}' `
+
+---
+
+**Boundary recovered: ⟨value 1⟩**  
+Current settings pass. Watch: ⟨value 2⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{title}' `
+- value_2: ` f'{detail}' `
+
+---
+
+**Scenario:** ⟨value 1⟩ is asked to approve ⟨value 2⟩ for ⟨value 3⟩. The decision cannot rely on model quality alone; it needs an amount stack.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_15_packet['stakeholder']}" `
+- value_2: ` f"{v2_15_packet['service_name']}" `
+- value_3: ` f"{v2_15_packet['track_label']}" `
+
+---
+
+**Scenario:** operations wants to run ⟨value 1⟩ at higher utilization. You must decide whether region, schedule, or demand governance changes the carbon bill without breaking service.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_15_packet['workload_unit']}" `
+
+---
+
+**Scenario:** a review board asks which mitigation should be attached to ⟨value 1⟩. You must name the guardrail that can reject it.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_15_packet['service_name']}" `
+
+---
+
+**Scenario:** launch review requires a selected policy, rejected alternative, residual risk, and the V2-16 responsibility implication for ⟨value 1⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_15_packet['track_label']}" `
+
+---
+
+**Synthesis memo:** Use `⟨value 1⟩`. Binding amount from Part A is `⟨value 2⟩`; current policy guardrail is `⟨value 3⟩`. Reject `⟨value 4⟩`. V2-16 implication: ⟨value 5⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{launch_policy['label']}" `
+- value_2: ` f"{part_a['binding']}" `
+- value_3: ` f"{launch_policy['binding']}" `
+- value_4: ` f"{rejected['label']}" `
+- value_5: ` f"{v2_15_packet['v2_16_implication']}" `
+
+---
+
+## Download Report
+
+</details>
 
 ## Complete original Marimo source
 

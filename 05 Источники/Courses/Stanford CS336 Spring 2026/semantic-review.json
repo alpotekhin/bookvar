@@ -58,6 +58,34 @@
           "line_end": 183
         },
         {
+          "semantic_id": "fp4-block-scaling",
+          "kind": "mechanism",
+          "title": "FP4 E2M1 values, block scales, and NVFP4 pretraining",
+          "line_start": 174,
+          "line_end": 183
+        },
+        {
+          "semantic_id": "tensor-device-placement",
+          "kind": "worked-example",
+          "title": "CPU tensors, device transfer, and direct device allocation",
+          "line_start": 184,
+          "line_end": 201
+        },
+        {
+          "semantic_id": "einops-named-axes",
+          "kind": "worked-example",
+          "title": "Named-axis contraction, reduction, and head split/merge",
+          "line_start": 202,
+          "line_end": 278
+        },
+        {
+          "semantic_id": "flop-units",
+          "kind": "mechanism",
+          "title": "Floating-point operation counts versus operations per second",
+          "line_start": 279,
+          "line_end": 288
+        },
+        {
           "semantic_id": "gradient-accumulation-example",
           "kind": "worked-example",
           "title": "Gradient accumulation and activation-checkpointing example",

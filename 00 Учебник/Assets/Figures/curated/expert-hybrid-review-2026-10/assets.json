@@ -1,0 +1,86 @@
+[
+  {
+    "id": "curated-expert-hybrid-edls-tensor-5118bb2f4945",
+    "asset": "00 Учебник/Assets/Figures/curated/expert-hybrid-review-2026-10/edls-moe-tensor-parallel.png",
+    "author": "Efficient DL Systems course authors",
+    "source_url": "https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week06_dl_arithmetic/lecture.pdf",
+    "source_download_url": "https://raw.githubusercontent.com/mryab/efficient-dl-systems/e632aa89ca9e6638d52e1b686095e7442faffbb0/week06_dl_arithmetic/lecture.pdf",
+    "commit": "e632aa89ca9e6638d52e1b686095e7442faffbb0",
+    "source_asset": "05 Источники/Papers/Source PDFs/edls-week06-e632aa89.pdf",
+    "source_asset_sha256": "64b6f4285f9fe9bc62bf8293f3585eb26e738d493723b22c2301c58a5a191215",
+    "source_page": 129,
+    "sha256": "5118bb2f49454b22504c4915a2b9bedf002b4215c3764a16a6744939b5b32e08",
+    "render_page_size_px": [
+      2400,
+      1350
+    ],
+    "crop_box_px": [
+      70,
+      230,
+      2240,
+      1220
+    ],
+    "license": "MIT",
+    "license_url": "https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/LICENSE",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Rendered PDF page 129 at 2400 x 1350 px, cropped [70,230,2240,1220] to 2170 x 990 px. Presentation title and outer margins excluded; full diagram retained without redraw or translation. Complete license and NOTICE retained alongside asset.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-13",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism.md"
+    ]
+  },
+  {
+    "id": "curated-expert-hybrid-edls-expert-f74a6f8fd2d8",
+    "asset": "00 Учебник/Assets/Figures/curated/expert-hybrid-review-2026-10/edls-moe-expert-parallel.png",
+    "author": "Efficient DL Systems course authors",
+    "source_url": "https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week06_dl_arithmetic/lecture.pdf",
+    "source_download_url": "https://raw.githubusercontent.com/mryab/efficient-dl-systems/e632aa89ca9e6638d52e1b686095e7442faffbb0/week06_dl_arithmetic/lecture.pdf",
+    "commit": "e632aa89ca9e6638d52e1b686095e7442faffbb0",
+    "source_asset": "05 Источники/Papers/Source PDFs/edls-week06-e632aa89.pdf",
+    "source_asset_sha256": "64b6f4285f9fe9bc62bf8293f3585eb26e738d493723b22c2301c58a5a191215",
+    "source_page": 130,
+    "sha256": "f74a6f8fd2d83d702bb21082fd6b17bd730dbfbdaab96b6e2b21af239eefc7ce",
+    "render_page_size_px": [
+      2400,
+      1350
+    ],
+    "crop_box_px": [
+      70,
+      230,
+      2240,
+      1220
+    ],
+    "license": "MIT",
+    "license_url": "https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/LICENSE",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Rendered PDF page 130 at 2400 x 1350 px, cropped [70,230,2240,1220] to 2170 x 990 px. Presentation title and outer margins excluded; full diagram retained without redraw or translation. Complete license and NOTICE retained alongside asset.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-13",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism.md"
+    ]
+  },
+  {
+    "id": "curated-expert-hybrid-mcore-capacity-d5200aa91f34",
+    "asset": "00 Учебник/Assets/Figures/curated/expert-hybrid-review-2026-10/mcore-token-capacity.png",
+    "author": "NVIDIA CORPORATION",
+    "source_url": "https://github.com/NVIDIA/Megatron-LM/blob/4b4acac9a1d28ea6829c8d4f566d75698a21249d/docs/images/moe/token_drop.png",
+    "source_image_url": "https://raw.githubusercontent.com/NVIDIA/Megatron-LM/4b4acac9a1d28ea6829c8d4f566d75698a21249d/docs/images/moe/token_drop.png",
+    "commit": "4b4acac9a1d28ea6829c8d4f566d75698a21249d",
+    "sha256": "d5200aa91f34f4a09b6f5cce988dea53586e30965f3b4cecf3cc878c83ee2206",
+    "source_asset_sha256": "d5200aa91f34f4a09b6f5cce988dea53586e30965f3b4cecf3cc878c83ee2206",
+    "license": "BSD-3-Clause",
+    "license_url": "https://github.com/NVIDIA/Megatron-LM/blob/4b4acac9a1d28ea6829c8d4f566d75698a21249d/LICENSE",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "pinned-upstream-repository",
+    "modifications": "none; byte-for-byte original 3104 x 1510 PNG. Complete source LICENSE and NOTICE retained alongside asset; historical flag spelling explained in chapter.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-13",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism.md"
+    ]
+  }
+]

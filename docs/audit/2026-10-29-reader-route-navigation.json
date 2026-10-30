@@ -1,0 +1,614 @@
+{
+  "scope": "Navigation-only replacements; explanation, code, sources and figures unchanged. Not a chapter explanation acceptance.",
+  "files": [
+    {
+      "source": "00 Учебник/01 Классическое машинное обучение/01 Задача обучения и predictive pipeline.md",
+      "route": "textbook/classical-ml/predictive-pipeline",
+      "before": "d55bf79cebb3935586a10b0e0c7333b5bd530db02b117939e9d8378fdb98b06a",
+      "after": "9251873332d9ad4e751c5df2b989794bde0b638f1225f481a2b0ad51fe866075",
+      "changes": [
+        {
+          "old": "Предыдущая глава:\n[[00 Учебник/00 Математические и ML-основания/06 Переобучение, регуляризация и оценивание|Переобучение и регуляризация]].",
+          "new": "Предыдущая глава:\n[[02 Areas/ML & DL/00 Учебник/01 Классическое машинное обучение/00 Карта модуля|Карта модуля и источники]].",
+          "kind": "labelled link"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/01 Классическое машинное обучение/06 Кластеризация и её ограничения.md",
+      "route": "textbook/classical-ml/clustering",
+      "before": "1826fc4c334c652242a1159979a78a675d9dbc88c4e11e05e727653345d64425",
+      "after": "4a09c7bd9dab975e556ee7eb44ae18a84adbf45061f274e6aedd6bac7ad77455",
+      "changes": [
+        {
+          "old": "← [[05 Оценивание, кросс-валидация и выбор порога|Оценивание и cross-validation]] ·",
+          "new": "← [[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]] ·",
+          "kind": "arrow links"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features.md",
+      "route": "textbook/classical-ml/kernels-svm-rff",
+      "before": "4dc53d15cd93d78d0f58bc6a1139bb79ddd6e01f869fe35ccc9852e30213c53a",
+      "after": "99280edf9b5259f46e5f8d797410aad56da0bf726be38c54ac5a404fc375811f",
+      "changes": [
+        {
+          "old": "**Дальше:** [[00 Учебник/01 Основы нейронных сетей/01 Нейрон и MLP|Нейрон и многослойный перцептрон]]",
+          "new": "К модулям: [[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]]",
+          "kind": "labelled link"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор.md",
+      "route": "textbook/neural-networks/gan-dcgan",
+      "before": "a55940b1d05c1544877d2779656b388a769edb0fdd07996f2275865f8aa86c98",
+      "after": "30f6c8d2da4c7fcf3607ef4649eb74e077286b5e1e538c18e7cad6dee3791874",
+      "changes": [
+        {
+          "old": "**Следующая глава:** [[02 Areas/ML & DL/00 Учебник/02 Представление текста и токенизация/01 Представление текста числами|Представление текста числами]]",
+          "new": "**Следующая глава:** [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений|Diffusion, latent diffusion и flow matching]]",
+          "kind": "labelled link"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/02 Представление текста и токенизация/01 Представление текста числами.md",
+      "route": "textbook/text-representation/numerical-representation",
+      "before": "13a2450b7ade2184d98145e26631b9391a55d4bc7f73e63257ddaf4865fe0c6d",
+      "after": "a61f0506c18437b6e580e01f3d547f477b91c09eefea52b1695e580aca119a1f",
+      "changes": [
+        {
+          "old": "**Назад:** [[02 Areas/ML & DL/00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор|GAN и DCGAN — генератор и дискриминатор]].",
+          "new": "**Назад:** [[02 Areas/ML & DL/00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet|CNN — от свёртки до ResNet]].",
+          "kind": "labelled link"
+        },
+        {
+          "old": "previous: \"[[02 Areas/ML & DL/00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор]]\"",
+          "new": "previous: \"[[02 Areas/ML & DL/00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet|CNN — от свёртки до ResNet]]\"",
+          "kind": "metadata"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/07 Анатомия современной LLM/04 RoPE.md",
+      "route": "textbook/modern-llm/rope",
+      "before": "ba35ac3e1747815c726bfa3e50d9484ec9b9aeccf399ca53d34badb426556cdc",
+      "after": "6de4b7919032e51d0ce74e0c4b39ae7ce08982ba3ee9dad4dd0009d440254bde",
+      "changes": [
+        {
+          "old": "next: \"[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость]]\"",
+          "new": "next: \"[[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating|Dense FFN — расширение размерности и SwiGLU]]\"",
+          "kind": "metadata"
+        },
+        {
+          "old": "**Далее:** [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость|Формы, параметры и стоимость Transformer]].",
+          "new": "**Далее:** [[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating|Dense FFN — расширение размерности и SwiGLU]].",
+          "kind": "labelled link"
+        },
+        {
+          "old": "|предыдущей главе о decoder block]]",
+          "new": "|главе о decoder block]]",
+          "kind": "reader-route prose transition"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "route": "textbook/modern-llm/transformer-shapes-resources",
+      "before": "d83455cb1573c6506a8c776811759b126440f5472ccdcada294b859f531a2776",
+      "after": "867688bdeef1319da44e68875af62f33338eb304336829ee1c2990655547b50e",
+      "changes": [
+        {
+          "old": "next: \"[[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA]]\"",
+          "new": "next: \"[[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training|Данные и предобучение]]\"",
+          "kind": "metadata"
+        },
+        {
+          "old": "**Назад:** [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/04 RoPE|RoPE]].",
+          "new": "**Назад:** [[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating|Dense FFN — расширение размерности и SwiGLU]].",
+          "kind": "labelled link"
+        },
+        {
+          "old": "**Далее:** [[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA|MHA, MQA и GQA]].",
+          "new": "**Далее:** [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training|Данные и предобучение]].",
+          "kind": "labelled link"
+        },
+        {
+          "old": "previous: \"[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/04 RoPE]]\"",
+          "new": "previous: \"[[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating|Dense FFN — расширение размерности и SwiGLU]]\"",
+          "kind": "metadata"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md",
+      "route": "textbook/modern-llm/mha-mqa-gqa",
+      "before": "bfc1a46b5282ae224d05366a4140fe9c0be3d623a8dd8913d530f827c56922a4",
+      "after": "c442a81b9e09fe55aedc225cb3e5d3d7fa91b3db13eb80a9fdefed28a5c5c571",
+      "changes": [
+        {
+          "old": "**Назад:** [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость|Формы, параметры и стоимость Transformer]].",
+          "new": "К модулям: [[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]].",
+          "kind": "labelled link"
+        },
+        {
+          "old": "previous: \"[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость]]\"",
+          "new": "previous: \"[[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]]\"",
+          "kind": "metadata"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+      "route": "textbook/modern-llm/long-context",
+      "before": "0fcd1b1baf51030bd41c3cfb54a7871b753b25f5da7edda6b6c1a56c32ed013a",
+      "after": "0e7850191277c2721d260077c3b098279ccecf39ceb37be42525f482826485cc",
+      "changes": [
+        {
+          "old": "next: \"[[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating]]\"",
+          "new": "next: \"[[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving|Mixture of Experts — routing, capacity и serving]]\"",
+          "kind": "metadata"
+        },
+        {
+          "old": "**Дальше:** [[01 Dense FFN — token-wise вычисление, expansion и gating|полносвязный блок Transformer]].",
+          "new": "**Дальше:** [[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving|Mixture of Experts — routing, capacity и serving]].",
+          "kind": "labelled link"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md",
+      "route": "textbook/modern-llm/dense-ffn",
+      "before": "861b4a9b9724ef3efb0446f09ae522b8117a71758c693dca64c5258c819a5b6a",
+      "after": "50f2528d8a0cba6231692f81353c6817f2626aa54945aa51a0b6e14aeccbffc3",
+      "changes": [
+        {
+          "old": "next: \"[[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving]]\"",
+          "new": "next: \"[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость|Transformer с нуля — формы, параметры и стоимость]]\"",
+          "kind": "metadata"
+        },
+        {
+          "old": "**Назад:** [[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание|Длинный контекст]].",
+          "new": "**Назад:** [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/04 RoPE|RoPE]].",
+          "kind": "labelled link"
+        },
+        {
+          "old": "**Дальше:** [[02 Mixture of Experts — routing, capacity и serving|Mixture of Experts]].",
+          "new": "**Дальше:** [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость|Transformer с нуля — формы, параметры и стоимость]].",
+          "kind": "labelled link"
+        },
+        {
+          "old": "previous: \"[[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание]]\"",
+          "new": "previous: \"[[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/04 RoPE|RoPE]]\"",
+          "kind": "metadata"
+        },
+        {
+          "old": "|следующая глава о Mixture of Experts]]",
+          "new": "|глава о Mixture of Experts в углублённом модуле]]",
+          "kind": "reader-route prose transition"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "route": "textbook/moe/mixture-of-experts",
+      "before": "f6f6110b23ed5defba31c16a5332e5d0bfb5f7190b0ecfc1b0d7cd42e9524042",
+      "after": "9df758b69b1d720bbb8942594442f5c6e45071d70b28f740793fb57de2fd746c",
+      "changes": [
+        {
+          "old": "**Назад:** [[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating|Dense FFN и SwiGLU]].",
+          "new": "**Назад:** [[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание|Длинный контекст — расширение, разреженность и оценивание]].",
+          "kind": "labelled link"
+        },
+        {
+          "old": "previous: \"[[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating]]\"",
+          "new": "previous: \"[[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание|Длинный контекст — расширение, разреженность и оценивание]]\"",
+          "kind": "metadata"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+      "route": "textbook/modern-llm/sequence-model-alternatives",
+      "before": "4f78170b76794b013076afc363b9df813563ac0df59e0465bd0d1c74633bb803",
+      "after": "319d399b9c2d1ce4c929e386dc900800304fd916b4b97695dc99385b6ad32956",
+      "changes": [
+        {
+          "old": "next: \"[[02 Areas/ML & DL/00 Учебник/10 ML Systems/01 Модель как часть системы]]\"",
+          "new": "next: \"[[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]]\"",
+          "kind": "metadata"
+        },
+        {
+          "old": "**Дальше:** [[02 Areas/ML & DL/00 Учебник/10 ML Systems/01 Модель как часть системы|Модель как часть системы.]]",
+          "new": "К модулям: [[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]]",
+          "kind": "labelled link"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/10 ML Systems/01 Модель как часть системы.md",
+      "route": "textbook/ml-systems/model-as-part-of-system",
+      "before": "c958fbd61b171e67163951269d76375e26376e7a54c69d76b4e3ad24c7b6676d",
+      "after": "eb51bcc5c98e9e2dc9ce0afed7f14315965a8abcdff0e176e6094d5943d40764",
+      "changes": [
+        {
+          "old": "← [[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры|Mamba, RWKV, RetNet и гибридные архитектуры]] ·",
+          "new": "← [[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]] ·",
+          "kind": "arrow links"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "route": "textbook/ml-systems/gpu-kernels-triton",
+      "before": "8826db488145077e23c59f37abb23d42e66afe4d57688bd30f109d521817ea08",
+      "after": "4f91303abdcf74c72659509470b5064f28c5cbed2d53a0b7abd60128d4c1f3e1",
+      "changes": [
+        {
+          "old": "[[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training|Данные и предобучение]] →",
+          "new": "[[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]] →",
+          "kind": "arrow next"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+      "route": "textbook/pretraining/data-and-pretraining",
+      "before": "894d8164aa820d76f7fd2196753e0aec3e995e6a203516650afc3541e2a38edc",
+      "after": "b76bc6bdfbfcd06494c87accc8bc380eb9b019bd73d1d23c710653d251c8759f",
+      "changes": [
+        {
+          "old": "**Назад:** [[02 Areas/ML & DL/00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению|GPU kernels и Triton]].",
+          "new": "**Назад:** [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость|Transformer с нуля — формы, параметры и стоимость]].",
+          "kind": "labelled link"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+      "route": "textbook/pretraining/dedup-pii-corpus-quality",
+      "before": "bb41bfeacf3a7a33b41af695d3679a1b33d8061fa78a35c2c3b9da369216a2cc",
+      "after": "9faea940fc8c743a46dd4c128518ea1b0cf2065f8bfa3db39e3bd6fb8f83b6f8",
+      "changes": [
+        {
+          "old": "**Дальше:** [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting|Отбор обучающих примеров — EL2N, GraNd и forgetting]].",
+          "new": "**Дальше:** [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/42 Next-token prediction|Целевая функция предобучения]].",
+          "kind": "labelled link"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting.md",
+      "route": "textbook/pretraining/data-selection-scores",
+      "before": "77c2b1dd27626e40bb33f9cfcd204b5744fd72575fc82ac736961047c90f9a6a",
+      "after": "4457573c808536ae88f021c72f3d8be98d9ba9866b7f2b23af99da5c322acff2",
+      "changes": [
+        {
+          "old": "**Предыдущая глава:** [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса|Дедупликация, PII и контроль качества корпуса]]",
+          "new": "К модулям: [[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]]",
+          "kind": "labelled link"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch.md",
+      "route": "textbook/pretraining/semi-supervised-fixmatch",
+      "before": "48ca69139d0f48425b995970e1113eacc53dd39dcb66c67cbd4390facbbcb1a2",
+      "after": "87493321b47bf9ae7838121bc0e1c8644e045e99371f2951f8a54bc8ebee7f1e",
+      "changes": [
+        {
+          "old": "**Следующая глава:** [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений|Контрастивное предобучение — SimCLR и проверка представлений]]",
+          "new": "**Следующая глава:** [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества|Отбор данных: стоимость, шарды и проверка качества]]",
+          "kind": "labelled link"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений.md",
+      "route": "textbook/pretraining/simclr-representations",
+      "before": "4b371ae35466962a0c3bf6ed9daad1004a70ee70a9c3217fe2c53ace1dccbfb2",
+      "after": "7a606b0fc23dfc68ac35130688f35dd0beea13df3fb2c6d36baffb967e566ac9",
+      "changes": [
+        {
+          "old": "**Предыдущая глава:** [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch|Обучение с частичной разметкой — pseudo-labeling и FixMatch]]",
+          "new": "К модулям: [[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]]",
+          "kind": "labelled link"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей.md",
+      "route": "textbook/pretraining/mae-masked-autoencoders",
+      "before": "6cfa1df55e37e02515ce19faefd57f77dcaa9aed2cb4bb913b199b956cc83b64",
+      "after": "fc3b1decc3a776759290e96c3253d4a0bba8c09f87239651a779313eb69d69a0",
+      "changes": [
+        {
+          "old": "**Следующая глава:** [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества|Отбор данных — стоимость, шарды и проверка качества]]",
+          "new": "К модулям: [[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]]",
+          "kind": "labelled link"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества.md",
+      "route": "textbook/pretraining/selection-engineering-evaluation",
+      "before": "c1f958a0143ee05efa1ec4f6d58e5ebb5d0822cd500edd407cb95cce6ee48175",
+      "after": "1a5082192c91d9da9d8b69faf39de8beeddb224e7446b6b09b7061bb72619e2c",
+      "changes": [
+        {
+          "old": "**Предыдущая глава:** [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей|Masked autoencoders — MAE и восстановление патчей]]",
+          "new": "**Предыдущая глава:** [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch|Частичная разметка: pseudo-labeling и FixMatch]]",
+          "kind": "labelled link"
+        },
+        {
+          "old": "**Следующая глава:** [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/42 Next-token prediction|Целевая функция предобучения]]",
+          "new": "**Следующая глава:** [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы|Синтетические данные и учебные программы]]",
+          "kind": "labelled link"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md",
+      "route": "textbook/pretraining/next-token-objective",
+      "before": "c200aa127c6ce1ebb37cf95b34faa82479ae601d1b43579f591247348f8e6527",
+      "after": "aca814c431df4b4d489ac98e4f147b85ba6f600eb41463c1b3ae4b6f7d9f3f3f",
+      "changes": [
+        {
+          "old": "**Предыдущая глава:** [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества|Отбор данных — стоимость, шарды и проверка качества]].",
+          "new": "**Предыдущая глава:** [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса|Дедупликация, PII и контроль качества корпуса]].",
+          "kind": "labelled link"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "route": "textbook/pretraining/scaling-laws",
+      "before": "a2953c0e6343ee9ee34a7ba82d77f3bb441ef14f560f23acfd2d526d409422fb",
+      "after": "472401f6f3bf906cc8b23f29a5ff206cb8c083da3f20ac5654249eaee61aef69",
+      "changes": [
+        {
+          "old": "Следующая: [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md]].",
+          "new": "Следующая: [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники|Карта post-training и источники]].",
+          "kind": "labelled link"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md",
+      "route": "textbook/pretraining/distributed-systems",
+      "before": "732257fa15ab9d21f4c28ec94b07c0d9f945a6a975de38960a66cd9afcaa86ac",
+      "after": "7fc54afeb6889923cf35893e40f4b9f02964b734b7dc40b5eea0f10b41659e01",
+      "changes": [
+        {
+          "old": "← [[43 Scaling laws]] · Далее: [[44a Processes, collectives и DDP]]",
+          "new": "← [[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]] · Далее: [[44a Processes, collectives и DDP]]",
+          "kind": "arrow links"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration.md",
+      "route": "textbook/pretraining/fault-tolerance-orchestration",
+      "before": "1d9f922994ef80300a2f796e620f1b66ad9faa80c66c97689731cdf46909900e",
+      "after": "6476737a39c6ee04ba0e578ab21c60be64c47d8f80d9946c161cea4eaceb812a",
+      "changes": [
+        {
+          "old": "← [[44g Network, storage и distributed checkpoints]] · Далее: [[01 SFT и instruction data]]",
+          "new": "← [[44g Network, storage и distributed checkpoints]] · Далее: [[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]]",
+          "kind": "arrow links"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
+      "route": "textbook/reasoning/test-time-compute",
+      "before": "55b6041548e938466d2e5ca0e75a4de1280d03625ff8438cdd4fc1da812f4f2c",
+      "after": "a5f87fca761675e036bc3368a1cb00e3feca573daa1bc64eb86d557a0ff93bef",
+      "changes": [
+        {
+          "old": "next:\n  - \"[[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы]]\"",
+          "new": "next: \"[[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена|Декодирование и выбор следующего токена]]\"",
+          "kind": "metadata"
+        },
+        {
+          "old": "Следующая глава: [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы|Синтетические данные и учебные программы]].",
+          "new": "Следующая глава: [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена|Декодирование и выбор следующего токена]].",
+          "kind": "labelled link"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md",
+      "route": "textbook/pretraining/synthetic-data-curricula",
+      "before": "df616fb7536981209a3fdef659003fb3f5b336c1983132f75f7d126b95fc3dd4",
+      "after": "2e465a3a4ccb11a00417f80da1f910b2b691d946a90281410d6f61c6d398abd7",
+      "changes": [
+        {
+          "old": "next:\n  - \"[[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции]]\"",
+          "new": "next: \"[[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]]\"",
+          "kind": "metadata"
+        },
+        {
+          "old": "Предыдущая глава: [[02 Areas/ML & DL/00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute|Вычисления во время ответа]].",
+          "new": "Предыдущая глава: [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества|Отбор данных: стоимость, шарды и проверка качества]].",
+          "kind": "labelled link"
+        },
+        {
+          "old": "Следующая: [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции|Синтетические изображения и перенос из симуляции]].",
+          "new": "К модулям: [[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]].",
+          "kind": "labelled link"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции.md",
+      "route": "textbook/pretraining/synthetic-images-sim-to-real",
+      "before": "63368115b8d0dd1f51ba8d16950b572be3fa57b08c491953fdf175ba5c85957a",
+      "after": "ffcc175ff7dcf3852f6d64ab9458033aa339bd4c30f38f55f3f87611af1cf5fc",
+      "changes": [
+        {
+          "old": "**Предыдущая глава:** [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы|Синтетические данные и учебные программы]]",
+          "new": "**Предыдущая глава:** [[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений|Diffusion, latent diffusion и flow matching]]",
+          "kind": "labelled link"
+        },
+        {
+          "old": "**Следующая глава:** [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена|Декодирование и выбор следующего токена]]",
+          "new": "К модулям: [[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]]",
+          "kind": "labelled link"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md",
+      "route": "textbook/inference/decoding",
+      "before": "affadbaec14be05ea9a9dcb7f14195bbac8e8fecdd82975c5ea600eb9441e7b5",
+      "after": "cb53484debaf97e673ff30e804afc4d9941b94e6d87eebc8cae78bdda05685a0",
+      "changes": [
+        {
+          "old": "next:\n  - \"[[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline]]\"",
+          "new": "next: \"[[02 Areas/ML & DL/00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация|Оценивание моделей и контаминация]]\"",
+          "kind": "metadata"
+        },
+        {
+          "old": "Предыдущая глава: [[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы|Синтетические данные и учебные программы]].",
+          "new": "Предыдущая глава: [[02 Areas/ML & DL/00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute|Test-time compute]].",
+          "kind": "labelled link"
+        },
+        {
+          "old": "Следующая: [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline|Физика LLM inference: prefill, decode и roofline]].",
+          "new": "Следующая: [[02 Areas/ML & DL/00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация|Оценивание моделей и контаминация]].",
+          "kind": "labelled link"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning.md",
+      "route": "textbook/inference/queueing-capacity-planning",
+      "before": "bbfb1d67720cfe7b264c57c8d754fa0ebb147925cfd25e9ba4e66a63f3603c74",
+      "after": "fe7405160f9e099363282a671ffa2f6d8ccee7507b9c9654c1939a4d2a99674f",
+      "changes": [
+        {
+          "old": "**Следующая глава:** [[02 Areas/ML & DL/00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow|Жизненный цикл ML-системы]]",
+          "new": "К модулям: [[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]]",
+          "kind": "labelled link"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow.md",
+      "route": "textbook/deployment/ml-workflow",
+      "before": "82d43f96fb0bfee7d0d7c2efd5a1f669008b87d4b3bad92daf5a59b2d5cad569",
+      "after": "0cf7ea888bc50e50aac7ee6010e1f9cccb9b86b96ceebdc6fdcf5eb646754045",
+      "changes": [
+        {
+          "old": "← [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning|Queueing и capacity planning]]",
+          "new": "← [[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]]",
+          "kind": "arrow links"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment.md",
+      "route": "textbook/deployment/edge-federated",
+      "before": "8f10fda46877de9a593fb29200c2511d6727e4431f75f1e7b5c5283e7010cd8d",
+      "after": "332675caa594f38a7edcab337cda5fcfa7d4bb03422cd3dcee11557e6b398527",
+      "changes": [
+        {
+          "old": "← [[02 MLOps]] · Далее: [[02 Areas/ML & DL/00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация|Оценивание моделей и контаминация]]",
+          "new": "← [[02 MLOps]] · Далее: [[02 Areas/ML & DL/00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация|Несбалансированная классификация]]",
+          "kind": "arrow links"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "route": "textbook/evaluation/models-contamination",
+      "before": "1419dfe53d7757c15dd949996f46e62494eb9abcb2275a768c639b7f1ed91ba3",
+      "after": "0d8ef23274a1bb810bcda99140d872759cc4bbcfb09eacc4b98ffe4a359f343b",
+      "changes": [
+        {
+          "old": "← [[02 Areas/ML & DL/00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment|Edge и federated deployment]]",
+          "new": "← [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена|Декодирование и выбор следующего токена]]",
+          "kind": "arrow links"
+        },
+        {
+          "old": "· Далее: [[02 Areas/ML & DL/00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация|Несбалансированная классификация]]",
+          "new": "\nОсновной курс завершён. Выберите [[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|углублённый модуль]].\nДля работы с редкими классами есть отдельная глава\n[[02 Areas/ML & DL/00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация|«Несбалансированная классификация»]].",
+          "kind": "reader-route prose transition"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация.md",
+      "route": "textbook/evaluation/imbalanced-classification",
+      "before": "b085573248c2f429ff33e32a0a8f966be654fd1eced56c584b754dde1f54eb24",
+      "after": "c77a62281611a651c965c3cdd4640e5893bb1867ef47340cad336aea2ac84e14",
+      "changes": [
+        {
+          "old": "← [[02 Areas/ML & DL/00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация|Оценивание моделей и контаминация]]",
+          "new": "← [[02 Areas/ML & DL/00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment|Edge и federated deployment]]",
+          "kind": "arrow links"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning.md",
+      "route": "textbook/retrieval/embeddings-metric-learning",
+      "before": "ddf06790a50b026ab2480f28b12360453e881ad945895277a86bfe9c71a5caf3",
+      "after": "bc9d7e31337190371294760004dbb10b113fedfdb161aeda2a790631d699d1fd",
+      "changes": [
+        {
+          "old": "Предыдущая глава: [[59a Responsible systems|ответственные ML-системы]].",
+          "new": "К модулям: [[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]].",
+          "kind": "labelled link"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md",
+      "route": "textbook/rag/full-pipeline",
+      "before": "baa2a0a300a82cbcf90f389b233bd028f619ec47153c08a1201d9bbf099fddca",
+      "after": "b2407b3b34253edcb522a7ab550c506ef5c900c353162ce848b045d44e7a5183",
+      "changes": [
+        {
+          "old": "next:\n  - \"[[00 Учебник/16 Multimodal Models/64 Мультимодальные модели]]\"",
+          "new": "next: \"[[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]]\"",
+          "kind": "metadata"
+        },
+        {
+          "old": "Далее:\n[[00 Учебник/16 Multimodal Models/64 Мультимодальные модели|Мультимодальные модели]].",
+          "new": "К модулям: [[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]].",
+          "kind": "labelled link"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md",
+      "route": "textbook/multimodal/models",
+      "before": "ce73d11a3e9031a4e0df882b56dd5cf9695de3550d1e736027eac23bd375730c",
+      "after": "26464f4cb33c2b281c72e63e1870157e0a41a23807c4eca7c2b79f542000608d",
+      "changes": [
+        {
+          "old": "Назад:\n[[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер|RAG]].",
+          "new": "К модулям: [[02 Areas/ML & DL/00 Учебник/_index#Углублённые модули|Выбрать углублённый модуль]].",
+          "kind": "labelled link"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md",
+      "before": "136cde481f65d808db9505969c6ef7fb8fee15fda1c760ebaf74b4d4d28b2b7f",
+      "after": "20589edbe6fc64ed15613741a63640af224a243c73e8df211b9a2b860cbd6d9f",
+      "changes": [
+        {
+          "old": "[[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE|Следующая глава]]\nменяет обучающую цель: сеть восстанавливает вход вместо предсказания класса.",
+          "new": "[[00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE|Глава об автоэнкодерах]]\nв отдельном модуле меняет обучающую цель: сеть восстанавливает вход вместо\nпредсказания класса. Основной курс продолжается\n[[00 Учебник/02 Представление текста и токенизация/01 Представление текста числами|представлением текста числами]]:\nкак получить числовой вход для модели, если исходные данные — слова.",
+          "kind": "reader-route prose transition"
+        }
+      ]
+    }
+  ],
+  "skipped": []
+}

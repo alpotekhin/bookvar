@@ -1,0 +1,3 @@
+bash: warning: setlocale: LC_ALL: cannot change locale (C.UTF-8): Bad file descriptor
+$ tsx adapter/check-built-links.ts
+Built link check passed: 0 broken internal routes, fragments, or files.

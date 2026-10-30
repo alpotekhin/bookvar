@@ -22,13 +22,13 @@
     "coverage_by_disposition": {
       "covered-existing": 6,
       "excluded": 28,
-      "integrated": 140,
-      "source-only": 38
+      "integrated": 143,
+      "source-only": 35
     },
     "visuals_by_disposition": {
       "excluded": 27,
-      "integrated": 47,
-      "source-only": 87
+      "integrated": 49,
+      "source-only": 85
     }
   },
   "reading_distribution": [
@@ -49,13 +49,13 @@
     "coverage": {
       "covered-existing": 6,
       "excluded": 28,
-      "integrated": 140,
-      "source-only": 38
+      "integrated": 143,
+      "source-only": 35
     },
     "visuals": {
       "excluded": 27,
-      "integrated": 47,
-      "source-only": 87
+      "integrated": 49,
+      "source-only": 85
     }
   },
   "decks": [

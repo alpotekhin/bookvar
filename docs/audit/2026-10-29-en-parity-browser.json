@@ -1,0 +1,3453 @@
+{
+  "date": "2026-10-29",
+  "scope": "All 29 existing EN textbook routes at two viewport widths; browser-observed DOM geometry and image loading, plus selected screenshot inspection.",
+  "build_log": "/var/tmp/bookvar-en-parity-build-reflow-20261029.log",
+  "screenshots": [
+    "/var/tmp/bookvar-en-molmo-final-20261029.png",
+    "/var/tmp/bookvar-en-molmo-mobile-20261029.png",
+    "/var/tmp/bookvar-en-molmo-mobile-zoom-20261029.png",
+    "/var/tmp/bookvar-en-tp-final-20261029.png",
+    "/var/tmp/bookvar-en-pd-final-20261029.png"
+  ],
+  "manual_review": [
+    "Molmo complete image and caption at desktop/mobile; viewer fit, 2x zoom, horizontal pan available and close-to-text",
+    "Harvard tensor parallelism: complete two panels and source qualifications on desktop",
+    "Splitwise layer transfer: both panels, labels, caption and original excerpt on desktop"
+  ],
+  "limits": [
+    "All-page DOM checks do not replace semantic inspection of every original figure.",
+    "The generic original-language text search matched the benchmarking source-list wording; that was not an edition-notice."
+  ],
+  "rows": [
+    {
+      "route": "textbook/transformer/self-attention",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 313,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/self-attention-2026-10-21/self-attention-output.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/attention/transformer_self_attention_vectors.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/attention/self-attention-matrix-calculation-2.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 313,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/self-attention-2026-10-21/cnn-rnn-self-attention.svg"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Self-attention from the inside — Q, K, V",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/05 Attention and Transformer/02 Self-Attention — Q, K, V.md",
+      "source_sha256": "4d1a59e709af0a3852871e6bad8588b207e603b46d36a48b7b3ff97617ceef8c"
+    },
+    {
+      "route": "textbook/transformer/masking-heads-shapes",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-audit-15-24/causal-mask-detailed.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-audit-15-24/qkv-for-heads.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-audit-15-24/transformer_attention_heads_qkv.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-audit-15-24/transformer_attention_heads_z.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-audit-15-24/transformer_attention_heads_weight_matrix_o.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Masking, multi-head attention, and tensor shapes",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/05 Attention and Transformer/03 Masking, multi-head attention, and tensor shapes.md",
+      "source_sha256": "64bbbd9085a4c30083a2f77df49316bc13087083d43f720ec7937ae781154e9d"
+    },
+    {
+      "route": "textbook/transformer/positional-information",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/attention-is-all-you-need/transformer_positional_encoding_vectors.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-audit-25-31/d2l-sinusoidal-curves.svg"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 285.0234375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-audit-25-31/d2l-positional-heatmap.svg"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/positions-2026-10-21/shaw-relative-figure1.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/positions-2026-10-21/roformer-figure1.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/positions-2026-10-21/alibi-original.jpeg"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Positional information in Transformers",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/05 Attention and Transformer/04 Positional information.md",
+      "source_sha256": "8e2fa5500c85ba4d850b91a22bb404b7dffcbed02c595bf87c8e875a36917090"
+    },
+    {
+      "route": "textbook/transformer/full-transformer",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/attention-is-all-you-need/Transformer_encoder.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/attention-is-all-you-need/transformer_resideual_layer_norm_2.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/attention-is-all-you-need/The_transformer_encoder_decoder_stack.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/full-transformer-2026-10-21/transformer_resideual_layer_norm_3.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/attention-is-all-you-need/transformer_decoder_output_softmax.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/attention-is-all-you-need/transformer_decoding_2.gif"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/gpt-30/gpt-2-transformer-xl-bert-3.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Building the Transformer — from the original block to BERT, GPT, and LLaMA",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/05 Attention and Transformer/05 The complete Transformer.md",
+      "source_sha256": "64ee4c1d8984515c3baca3f9ccfd2086cc3a9a53364ebc07204eb23a87e16106"
+    },
+    {
+      "route": "textbook/transformer/encoder-decoder-patterns",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure3.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/bert/BERT-language-modeling-masked-lm.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/architecture-patterns-2026-10-21/bert-figure4.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure4.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure1.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure2.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Three Transformer architectural patterns",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/01 Three architectural patterns.md",
+      "source_sha256": "d2104d394673c898c019becd49fa2337f01ae82abf694ac03ea3fabdbb4212a2"
+    },
+    {
+      "route": "textbook/models/bert-roberta-deberta",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/bert/bert-base-bert-large-encoders.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/bert-family-2026-10-22/bert-figure2.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/bert/BERT-language-modeling-masked-lm.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/bert/bert-next-sentence-prediction.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/bert-family-2026-10-22/bert-figure1.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/architecture-patterns-2026-10-21/bert-figure4.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/bert/bert-feature-extraction-contextualized-embeddings.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "BERT, RoBERTa, and DeBERTa",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md",
+      "source_sha256": "888b25e8db26b37c2d2fcecc366d21744b88ba8ba229df0365c18794529847c5"
+    },
+    {
+      "route": "textbook/models/gpt-1",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 313,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-audit-25-31/gpt1-figure1-block.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 295,
+          "renderedWidth": 294.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-audit-25-31/gpt1-figure1.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-audit-25-31/gpt1-figure2-transfer.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-audit-25-31/gpt1-figure2-zero-shot.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "GPT-1 — generative pre-training",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training.md",
+      "source_sha256": "4aff198f47b6d6e13167d8394d82a25a887b41b51977121a17acf29dda51a5ef"
+    },
+    {
+      "route": "textbook/models/gpt-2",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/gpt-30/gpt2-sizes-hyperparameters-3.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/gpt2-2026-10-22/gpt2-input-embedding-positional-encoding-3.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/gpt-30/gpt2-transformer-block-vectors-2.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/gpt2-2026-10-22/gpt2-output-projection-2.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/gpt-30/gpt2-autoregression-2.gif"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/gpt2-2026-10-22/gpt2-self-attention-qkv-3-2.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "GPT-2 — zero-shot through language",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language.md",
+      "source_sha256": "6b248051dd87cc3c58521cdcba0021fe3630ffe8aa0125c728dd821bf6cefbb8"
+    },
+    {
+      "route": "textbook/models/gpt-3",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/gpt-3-paper/zero-one-few-shot-vs-finetuning.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/gpt3-2026-10-22/10-gpt3-fine-tuning.gif"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/gpt3-2026-10-22/tokens-through-stack-frame-385.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/gpt3-2026-10-22/07-gpt3-processing-transformer-blocks.gif"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/gpt3-2026-10-22/context-window-frame-229.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 313,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/gpt-3-paper/model-sizes-table-2-1.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "GPT-3 — scaling and in-context learning",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning.md",
+      "source_sha256": "48ccbfcdfa89f81c1da3aadf80bff4c8e2ba716b67089f28269bfcd3f362e609"
+    },
+    {
+      "route": "textbook/models/t5",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure1.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure4.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure3.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/t5-2026-10-22/t5-figure2-spans.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/t5-2026-10-22/t5-figure5-objectives.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/t5-2026-10-22/t5-figure6-repeated-data.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "T5 — text-to-text Transformer",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md",
+      "source_sha256": "0e5c05aa03151e24da5ef6735bcd5525a0c4ea5029b4e9414993b190d7395192"
+    },
+    {
+      "route": "textbook/inference/decoding",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/hf-greedy_search.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/hf-beam_search.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/hf-sampling_search.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/hf-sampling_search_with_temp.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/hf-top_k_sampling.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/hf-top_p_sampling.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Decoding and next-token selection",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/14 Inference and optimization/54 Decoding and next-token selection.md",
+      "source_sha256": "7b280782736d3f81e8d1eb6b31cc87a4541ca0e01df911efd25ea5f8779aab42"
+    },
+    {
+      "route": "textbook/inference/kv-cache-batching-pagedattention",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/attention-review-2026-09/prefill-decode.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9609375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/paged-attention-fragmentation.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/paged-attention-blocks.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/paged-attention-logical.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/paged-attention-sharing.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/paged-attention-copy-on-write.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "KV cache, batching, and PagedAttention",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/14 Inference and optimization/55 KV cache batching and PagedAttention.md",
+      "source_sha256": "d047e0427087b06e98e92811923d5a19d23179c7593fd5b059b178ed8e392509"
+    },
+    {
+      "route": "textbook/inference/llm-inference-physics",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/naive-inference.webp"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/cached-inference.webp"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 313,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/ml-systems/harvard/performance/prefill-vs-decode-roofline.svg"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/inference-serving/vllm-roofline.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/mbu-review-2026-10/jax-batch-scaling-latency.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/mbu-review-2026-10/jax-batch-scaling-throughput.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9609375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/paged-attention-fragmentation.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "The physics of LLM inference: prefill, decode, and roofline",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md",
+      "source_sha256": "d87da76554c6fe72e35b7af5b05ea375f84cae8e5930698b6750c0a483302638"
+    },
+    {
+      "route": "textbook/inference/scheduling",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/anyscale-static-batching.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/scheduling-2026-10-25/hf-dynamic-batching.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/inference-advanced/physics-scheduling/gordic-chunked-prefill.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/scheduling-2026-10-25/hf-continuous-batching.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/inference-scheduling-review-2026-10/vllm-prefix-cache-overview.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/inference-scheduling-review-2026-10/vllm-prefix-release-shared-blocks.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/inference-scheduling-review-2026-10/sglang-radix-tree-original.jpg"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Scheduling: continuous batching, chunked prefill, and prefix caching",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/14 Inference and optimization/55b Scheduling — continuous batching, chunked prefill, and prefix caching.md",
+      "source_sha256": "aa4debaa5cc7f8c5f99a3cac50073270d8e1613a8a75a4178e60f881f04aab96"
+    },
+    {
+      "route": "textbook/inference/serving-engines",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/serving-engines-review-2026-10/vllm-v1-processes-tp4.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/serving-originals-2026-10/vllm-tp2-dp4.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9296875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/serving-originals-2026-10/sglang-overlap-scheduler.jpg"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/serving-engines-review-2026-10/tensorrt-llm-pyexecutor.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/serving-engines-review-2026-10/flashinfer-ragged.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/serving-originals-2026-10/flashinfer-mask-layout.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/serving-originals-2026-10/flashinfer-page-layout.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Serving engines — vLLM, SGLang, TensorRT-LLM, and FlashInfer",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/14 Inference and optimization/55c Serving engines — vLLM, SGLang, TensorRT-LLM, and FlashInfer.md",
+      "source_sha256": "ffc56a229cf5766a222b9588ecbf551d2ed01588078b2686648f0ffa25e43423"
+    },
+    {
+      "route": "textbook/inference/flashattention",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/flashattention-tiling.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/flashattention2-partitioning.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/flashattention-review-2026-10/fa3-pingpong-original.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.96875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/flashattention-review-2026-10/fa3-gemm-softmax-original.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "FlashAttention: exact attention with less memory traffic",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/14 Inference and optimization/56 FlashAttention.md",
+      "source_sha256": "6b8db3db140edaba6e45847a03bd61961aeff4a009d8f66533bde7cf0fe4652c"
+    },
+    {
+      "route": "textbook/inference/quantization",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/hf-quantization-rounding.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/quantization-review-2026-10/hf-weight-packing.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/awq-schema.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/quantization-review-2026-10/smoothquant-intuition.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/quantization-review-2026-10/smoothquant-migrate.jpg"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 313,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/quantization-review-2026-10/qlora-training-original.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Quantizing language models",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md",
+      "source_sha256": "b5f15380d0673e04036b240169923ea5ca8de7eee487cb4565fd374579014774"
+    },
+    {
+      "route": "textbook/inference/speculative-decoding",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/speculative-review-2026-10/leviathan-generation.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/speculative-review-2026-10/leviathan-timeline.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-algorithm.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/speculative-review-2026-10/chen-lookahead.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-results.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 313,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/speculative-review-2026-10/eagle-shifted-input.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/speculative-review-2026-10/eagle-feature-tree.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 313,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/speculative-review-2026-10/eagle2-tree-mask.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Speculative decoding",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md",
+      "source_sha256": "e1e621c0b87a693931e6796f7eb10b5e9617c620946381249bd985031e0e47bd"
+    },
+    {
+      "route": "textbook/inference/distributed-inference",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/distributed-serving-2026/nccl-allgather.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/distributed-serving-2026/nccl-reducescatter.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/distributed-serving-2026/nccl-allreduce.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/distributed-serving-2026/nccl-alltoall.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 313,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/ml-systems/harvard/distributed/tensor-parallel-split.svg"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/tensor-sequence-review-2026-10/hf-attention-tp.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/distributed-inference-review-2026-10/harvard-pipeline-panels.svg"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/tensor-sequence-review-2026-10/hf-tp-sp-regions.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/distributed-serving-2026/megatron-context-parallel-overview.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/expert-hybrid-review-2026-10/edls-moe-expert-parallel.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/expert-hybrid-review-2026-10/edls-moe-tensor-parallel.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Parallelism and collective communication in LLM inference",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md",
+      "source_sha256": "91dbf85d69db6a4389b9a23c5978eb61f9b5c5e8343da50bc494c73345435629"
+    },
+    {
+      "route": "textbook/inference/disaggregated-serving",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/distributed-serving-2026/distserve-fig2-prefill-decode-interference.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/distributed-serving-2026/distserve-fig6-runtime-architecture.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/pd-serving-review-2026-10/splitwise-architecture.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/pd-serving-review-2026-10/splitwise-layer-transfer.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/pd-serving-review-2026-10/splitwise-provisioning.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/distributed-serving-2026/mooncake-figure1-architecture.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 313,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/distributed-serving-2026/dynamo-architecture.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Disaggregated prefill and decode serving",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/14 Inference and optimization/58a2 Disaggregated prefill and decode serving.md",
+      "source_sha256": "3a4dd8e20f7f3c4e45bf0361010773b6fe13d554bc85f5ffb7db2048a5b9ebb5"
+    },
+    {
+      "route": "textbook/inference/benchmarking-slo",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": true,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/inference-benchmark-review-2026-10/mlperf-loadgen.svg"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/inference-benchmark-review-2026-10/distserve-figure1-original.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 313,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/serving-operations-2026-10-29/power-measurement-boundaries.svg"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/inference-benchmark-review-2026-10/sre-burn-budget.webp"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/inference-benchmark-review-2026-10/sre-alert-windows.webp"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Benchmarking, SLOs, and LLM inference operations",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md",
+      "source_sha256": "bceaa1e5f7ce1f6463baaac8772ce9cb831ce21e6e19a2afd6a7b31c5b9d6fb4"
+    },
+    {
+      "route": "textbook/multimodal/models",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/vit-figure1-patch-sequence.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/clip-figure1-training-and-zero-shot.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vision-encoders-review-2026-10/clip-objectives.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vision-encoders-review-2026-10/clip-zero-shot-linear-probe.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/multimodal/siglip-parallelism.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vision-encoders-review-2026-10/siglip-batch-size.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "From images to visual tokens: ViT and CLIP",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/16 Multimodal Models/64 Multimodal models.md",
+      "source_sha256": "3e13eee9fec248a67604c7cf97897a088975a93d7f6031e0c4a86aaa22c7b4ab"
+    },
+    {
+      "route": "textbook/multimodal/connectors-fusion",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/llava-figure1-projector.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/connectors-review-2026-10/blip2-qformer.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/connectors-review-2026-10/blip2-attention-masks.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/connectors-review-2026-10/blip2-llm-connection.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/flamingo-figure3-architecture.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/multimodal/qwen3-vl.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Connecting a vision encoder to an LLM",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/16 Multimodal Models/64a Connectors and fusion.md",
+      "source_sha256": "f5882df05aa71cff14b047ee434d24b35c4ce44b387220a0e7b860d20a9a5d3a"
+    },
+    {
+      "route": "textbook/multimodal/visual-tokenization-resolution",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/molmo-figure5-image-tokenization.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/internvl25-figure2-dynamic-tiles.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.96875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision-anyres.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/multimodal/qwen2-vl-architecture.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/resolution-review-2026-10/pixtral-vision-packing.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/qwen2vl-figure3-mrope.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Resolution, tiling, and spatial positions",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md",
+      "source_sha256": "a570a03c487c9f6bb89977abb8607e68d2ce5b616daa00b3bac863954a4f5de4"
+    },
+    {
+      "route": "textbook/multimodal/training-data",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/internvl25-figure4-training-pipeline.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/molmo-figure1-data-and-capabilities.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-gen.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision-training.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision-transfer-s1.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision-transfer-s2.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/multimodal/qwen-vl-stages.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.953125,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/multimodal/qwen3-vl-pretraining.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Training VLMs: alignment, instruction tuning, and data",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/16 Multimodal Models/64c Training VLMs — alignment, instruction tuning, and data.md",
+      "source_sha256": "03af54d2d4fbce4863a67e2072d4e00dd888be0c2c092bb724f030acd0adbaa4"
+    },
+    {
+      "route": "textbook/multimodal/documents-ocr-grounding",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/qwen2vl-figure11-dense-ocr.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/documents-review-2026-10/layoutlmv3-objectives.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.96875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/documents-review-2026-10/donut-overview.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9609375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/documents-review-2026-10/pix2struct-screenshot-parsing.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/pix2struct-figure1-tasks.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/documents-review-2026-10/pix2struct-variable-resolution.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Documents, OCR, and visual grounding",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding.md",
+      "source_sha256": "843a0776cafc3d9ed8c49acbb8a2ae654a9846c154dfdbf43cc2e338d5b44ee3"
+    },
+    {
+      "route": "textbook/multimodal/video-audio-omni",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision-modalities.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/omni-review-2026-10/gens-frame-selection.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/qwen25omni-figure3-tmrope.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/omni-review-2026-10/mimi-split-rvq.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/qwen25omni-figure2-thinker-talker.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 313,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/omni-review-2026-10/qwen3omni-architecture.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/omni-review-2026-10/moshi-rq-transformer.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/omni-review-2026-10/moshi-duplex-streams.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/omni-review-2026-10/qwen25omni-block-attention.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/imagebind-figure1-capabilities.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Video, audio, and omni models",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md",
+      "source_sha256": "bf2322845969a44a679c0dfa2afccabe1c5985ca7ee06be2d865dbef333f6200"
+    },
+    {
+      "route": "textbook/multimodal/evaluation-serving",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-evaluation-review-2026-10/mmvet-integrated-capabilities.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/cs231n-lecture16-winoground.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-evaluation-review-2026-10/pope-question-construction.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-evaluation-review-2026-10/chair-caption-errors.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/molmo-figure11-openness.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-evaluation-review-2026-10/epd-stage-interference.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 313,
+          "renderedWidth": 312.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-evaluation-review-2026-10/epd-system-architecture.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Evaluation, failure modes, and VLM serving",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving.md",
+      "source_sha256": "6e4cfae4a2fd9c4c6d67620f80f0a907b11bb8f8c50b7f22ea080976e40b267e"
+    },
+    {
+      "route": "textbook/index",
+      "width": 360,
+      "docWidth": 345,
+      "fallback": false,
+      "images": [],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Machine Learning and Language Models",
+      "viewWidth": 345,
+      "wideMath": [],
+      "path": "en/00 Textbook/_index.md",
+      "source_sha256": "f93f7c6724113637dd42500f31248c065275ad7c4f873b3055c243ee5714a3f7"
+    },
+    {
+      "route": "textbook/transformer/self-attention",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 608,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/self-attention-2026-10-21/self-attention-output.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/attention/transformer_self_attention_vectors.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/attention/self-attention-matrix-calculation-2.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 608,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/self-attention-2026-10-21/cnn-rnn-self-attention.svg"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Self-attention from the inside — Q, K, V",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/05 Attention and Transformer/02 Self-Attention — Q, K, V.md",
+      "source_sha256": "4d1a59e709af0a3852871e6bad8588b207e603b46d36a48b7b3ff97617ceef8c"
+    },
+    {
+      "route": "textbook/transformer/masking-heads-shapes",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-audit-15-24/causal-mask-detailed.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-audit-15-24/qkv-for-heads.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-audit-15-24/transformer_attention_heads_qkv.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-audit-15-24/transformer_attention_heads_z.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-audit-15-24/transformer_attention_heads_weight_matrix_o.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Masking, multi-head attention, and tensor shapes",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/05 Attention and Transformer/03 Masking, multi-head attention, and tensor shapes.md",
+      "source_sha256": "64bbbd9085a4c30083a2f77df49316bc13087083d43f720ec7937ae781154e9d"
+    },
+    {
+      "route": "textbook/transformer/positional-information",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/attention-is-all-you-need/transformer_positional_encoding_vectors.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 507.296875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-audit-25-31/d2l-sinusoidal-curves.svg"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 285.0234375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-audit-25-31/d2l-positional-heatmap.svg"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/positions-2026-10-21/shaw-relative-figure1.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/positions-2026-10-21/roformer-figure1.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/positions-2026-10-21/alibi-original.jpeg"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Positional information in Transformers",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/05 Attention and Transformer/04 Positional information.md",
+      "source_sha256": "8e2fa5500c85ba4d850b91a22bb404b7dffcbed02c595bf87c8e875a36917090"
+    },
+    {
+      "route": "textbook/transformer/full-transformer",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/attention-is-all-you-need/Transformer_encoder.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/attention-is-all-you-need/transformer_resideual_layer_norm_2.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/attention-is-all-you-need/The_transformer_encoder_decoder_stack.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/full-transformer-2026-10-21/transformer_resideual_layer_norm_3.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/attention-is-all-you-need/transformer_decoder_output_softmax.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/attention-is-all-you-need/transformer_decoding_2.gif"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/gpt-30/gpt-2-transformer-xl-bert-3.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Building the Transformer — from the original block to BERT, GPT, and LLaMA",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/05 Attention and Transformer/05 The complete Transformer.md",
+      "source_sha256": "64ee4c1d8984515c3baca3f9ccfd2086cc3a9a53364ebc07204eb23a87e16106"
+    },
+    {
+      "route": "textbook/transformer/encoder-decoder-patterns",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure3.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/bert/BERT-language-modeling-masked-lm.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/architecture-patterns-2026-10-21/bert-figure4.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure4.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure1.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure2.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Three Transformer architectural patterns",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/01 Three architectural patterns.md",
+      "source_sha256": "d2104d394673c898c019becd49fa2337f01ae82abf694ac03ea3fabdbb4212a2"
+    },
+    {
+      "route": "textbook/models/bert-roberta-deberta",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/bert/bert-base-bert-large-encoders.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/bert-family-2026-10-22/bert-figure2.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/bert/BERT-language-modeling-masked-lm.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/bert/bert-next-sentence-prediction.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/bert-family-2026-10-22/bert-figure1.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/architecture-patterns-2026-10-21/bert-figure4.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/bert/bert-feature-extraction-contextualized-embeddings.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "BERT, RoBERTa, and DeBERTa",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md",
+      "source_sha256": "888b25e8db26b37c2d2fcecc366d21744b88ba8ba229df0365c18794529847c5"
+    },
+    {
+      "route": "textbook/models/gpt-1",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 320,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-audit-25-31/gpt1-figure1-block.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 599,
+          "renderedWidth": 598.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-audit-25-31/gpt1-figure1.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-audit-25-31/gpt1-figure2-transfer.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/source-audit-25-31/gpt1-figure2-zero-shot.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "GPT-1 — generative pre-training",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training.md",
+      "source_sha256": "4aff198f47b6d6e13167d8394d82a25a887b41b51977121a17acf29dda51a5ef"
+    },
+    {
+      "route": "textbook/models/gpt-2",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/gpt-30/gpt2-sizes-hyperparameters-3.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/gpt2-2026-10-22/gpt2-input-embedding-positional-encoding-3.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/gpt-30/gpt2-transformer-block-vectors-2.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/gpt2-2026-10-22/gpt2-output-projection-2.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/gpt-30/gpt2-autoregression-2.gif"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/gpt2-2026-10-22/gpt2-self-attention-qkv-3-2.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "GPT-2 — zero-shot through language",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language.md",
+      "source_sha256": "6b248051dd87cc3c58521cdcba0021fe3630ffe8aa0125c728dd821bf6cefbb8"
+    },
+    {
+      "route": "textbook/models/gpt-3",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/gpt-3-paper/zero-one-few-shot-vs-finetuning.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/gpt3-2026-10-22/10-gpt3-fine-tuning.gif"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/gpt3-2026-10-22/tokens-through-stack-frame-385.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/gpt3-2026-10-22/07-gpt3-processing-transformer-blocks.gif"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/gpt3-2026-10-22/context-window-frame-229.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 617,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/gpt-3-paper/model-sizes-table-2-1.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "GPT-3 — scaling and in-context learning",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning.md",
+      "source_sha256": "48ccbfcdfa89f81c1da3aadf80bff4c8e2ba716b67089f28269bfcd3f362e609"
+    },
+    {
+      "route": "textbook/models/t5",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure1.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure4.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/architecture-patterns-2026-10-21/t5-figure3.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/t5-2026-10-22/t5-figure2-spans.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/t5-2026-10-22/t5-figure5-objectives.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/t5-2026-10-22/t5-figure6-repeated-data.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "T5 — text-to-text Transformer",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md",
+      "source_sha256": "0e5c05aa03151e24da5ef6735bcd5525a0c4ea5029b4e9414993b190d7395192"
+    },
+    {
+      "route": "textbook/inference/decoding",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 600,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/hf-greedy_search.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 600,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/hf-beam_search.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/hf-sampling_search.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/hf-sampling_search_with_temp.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/hf-top_k_sampling.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/hf-top_p_sampling.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Decoding and next-token selection",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/14 Inference and optimization/54 Decoding and next-token selection.md",
+      "source_sha256": "7b280782736d3f81e8d1eb6b31cc87a4541ca0e01df911efd25ea5f8779aab42"
+    },
+    {
+      "route": "textbook/inference/kv-cache-batching-pagedattention",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/attention-review-2026-09/prefill-decode.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9609375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/paged-attention-fragmentation.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/paged-attention-blocks.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/paged-attention-logical.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/paged-attention-sharing.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/paged-attention-copy-on-write.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "KV cache, batching, and PagedAttention",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/14 Inference and optimization/55 KV cache batching and PagedAttention.md",
+      "source_sha256": "d047e0427087b06e98e92811923d5a19d23179c7593fd5b059b178ed8e392509"
+    },
+    {
+      "route": "textbook/inference/llm-inference-physics",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/naive-inference.webp"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/inference-evaluation/cached-inference.webp"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 576,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/ml-systems/harvard/performance/prefill-vs-decode-roofline.svg"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 579,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/inference-serving/vllm-roofline.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/mbu-review-2026-10/jax-batch-scaling-latency.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/mbu-review-2026-10/jax-batch-scaling-throughput.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9609375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/paged-attention-fragmentation.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "The physics of LLM inference: prefill, decode, and roofline",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md",
+      "source_sha256": "d87da76554c6fe72e35b7af5b05ea375f84cae8e5930698b6750c0a483302638"
+    },
+    {
+      "route": "textbook/inference/scheduling",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/anyscale-static-batching.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/scheduling-2026-10-25/hf-dynamic-batching.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/inference-advanced/physics-scheduling/gordic-chunked-prefill.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/scheduling-2026-10-25/hf-continuous-batching.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/inference-scheduling-review-2026-10/vllm-prefix-cache-overview.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/inference-scheduling-review-2026-10/vllm-prefix-release-shared-blocks.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/inference-scheduling-review-2026-10/sglang-radix-tree-original.jpg"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Scheduling: continuous batching, chunked prefill, and prefix caching",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/14 Inference and optimization/55b Scheduling — continuous batching, chunked prefill, and prefix caching.md",
+      "source_sha256": "aa4debaa5cc7f8c5f99a3cac50073270d8e1613a8a75a4178e60f881f04aab96"
+    },
+    {
+      "route": "textbook/inference/serving-engines",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/serving-engines-review-2026-10/vllm-v1-processes-tp4.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/serving-originals-2026-10/vllm-tp2-dp4.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.953125,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/serving-originals-2026-10/sglang-overlap-scheduler.jpg"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/serving-engines-review-2026-10/tensorrt-llm-pyexecutor.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/serving-engines-review-2026-10/flashinfer-ragged.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/serving-originals-2026-10/flashinfer-mask-layout.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/serving-originals-2026-10/flashinfer-page-layout.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Serving engines — vLLM, SGLang, TensorRT-LLM, and FlashInfer",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/14 Inference and optimization/55c Serving engines — vLLM, SGLang, TensorRT-LLM, and FlashInfer.md",
+      "source_sha256": "ffc56a229cf5766a222b9588ecbf551d2ed01588078b2686648f0ffa25e43423"
+    },
+    {
+      "route": "textbook/inference/flashattention",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/flashattention-tiling.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/flashattention2-partitioning.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.96875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/flashattention-review-2026-10/fa3-pingpong-original.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/flashattention-review-2026-10/fa3-gemm-softmax-original.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "FlashAttention: exact attention with less memory traffic",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/14 Inference and optimization/56 FlashAttention.md",
+      "source_sha256": "6b8db3db140edaba6e45847a03bd61961aeff4a009d8f66533bde7cf0fe4652c"
+    },
+    {
+      "route": "textbook/inference/quantization",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/hf-quantization-rounding.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/quantization-review-2026-10/hf-weight-packing.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.96875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/awq-schema.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/quantization-review-2026-10/smoothquant-intuition.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/quantization-review-2026-10/smoothquant-migrate.jpg"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 617,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/quantization-review-2026-10/qlora-training-original.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Quantizing language models",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md",
+      "source_sha256": "b5f15380d0673e04036b240169923ea5ca8de7eee487cb4565fd374579014774"
+    },
+    {
+      "route": "textbook/inference/speculative-decoding",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/speculative-review-2026-10/leviathan-generation.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/speculative-review-2026-10/leviathan-timeline.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-algorithm.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/speculative-review-2026-10/chen-lookahead.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/topics-53-59-source-first/speculative-sampling-results.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 448,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/speculative-review-2026-10/eagle-shifted-input.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/speculative-review-2026-10/eagle-feature-tree.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 448,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/speculative-review-2026-10/eagle2-tree-mask.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Speculative decoding",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md",
+      "source_sha256": "e1e621c0b87a693931e6796f7eb10b5e9617c620946381249bd985031e0e47bd"
+    },
+    {
+      "route": "textbook/inference/distributed-inference",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/distributed-serving-2026/nccl-allgather.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/distributed-serving-2026/nccl-reducescatter.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/distributed-serving-2026/nccl-allreduce.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/distributed-serving-2026/nccl-alltoall.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 576,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/ml-systems/harvard/distributed/tensor-parallel-split.svg"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.96875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/tensor-sequence-review-2026-10/hf-attention-tp.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/distributed-inference-review-2026-10/harvard-pipeline-panels.svg"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/tensor-sequence-review-2026-10/hf-tp-sp-regions.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/distributed-serving-2026/megatron-context-parallel-overview.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/expert-hybrid-review-2026-10/edls-moe-expert-parallel.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/expert-hybrid-review-2026-10/edls-moe-tensor-parallel.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Parallelism and collective communication in LLM inference",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md",
+      "source_sha256": "91dbf85d69db6a4389b9a23c5978eb61f9b5c5e8343da50bc494c73345435629"
+    },
+    {
+      "route": "textbook/inference/disaggregated-serving",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/distributed-serving-2026/distserve-fig2-prefill-decode-interference.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/distributed-serving-2026/distserve-fig6-runtime-architecture.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/pd-serving-review-2026-10/splitwise-architecture.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/pd-serving-review-2026-10/splitwise-layer-transfer.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/pd-serving-review-2026-10/splitwise-provisioning.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/distributed-serving-2026/mooncake-figure1-architecture.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 617,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/distributed-serving-2026/dynamo-architecture.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Disaggregated prefill and decode serving",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/14 Inference and optimization/58a2 Disaggregated prefill and decode serving.md",
+      "source_sha256": "3a4dd8e20f7f3c4e45bf0361010773b6fe13d554bc85f5ffb7db2048a5b9ebb5"
+    },
+    {
+      "route": "textbook/inference/benchmarking-slo",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": true,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/inference-benchmark-review-2026-10/mlperf-loadgen.svg"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/inference-serving/vllm-latency_diagram.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/inference-benchmark-review-2026-10/distserve-figure1-original.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 617,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/serving-operations-2026-10-29/power-measurement-boundaries.svg"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/inference-benchmark-review-2026-10/sre-burn-budget.webp"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/inference-benchmark-review-2026-10/sre-alert-windows.webp"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Benchmarking, SLOs, and LLM inference operations",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md",
+      "source_sha256": "bceaa1e5f7ce1f6463baaac8772ce9cb831ce21e6e19a2afd6a7b31c5b9d6fb4"
+    },
+    {
+      "route": "textbook/multimodal/models",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/vit-figure1-patch-sequence.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/clip-figure1-training-and-zero-shot.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vision-encoders-review-2026-10/clip-objectives.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vision-encoders-review-2026-10/clip-zero-shot-linear-probe.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/multimodal/siglip-parallelism.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vision-encoders-review-2026-10/siglip-batch-size.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "From images to visual tokens: ViT and CLIP",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/16 Multimodal Models/64 Multimodal models.md",
+      "source_sha256": "3e13eee9fec248a67604c7cf97897a088975a93d7f6031e0c4a86aaa22c7b4ab"
+    },
+    {
+      "route": "textbook/multimodal/connectors-fusion",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/llava-figure1-projector.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/connectors-review-2026-10/blip2-qformer.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/connectors-review-2026-10/blip2-attention-masks.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/connectors-review-2026-10/blip2-llm-connection.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/flamingo-figure3-architecture.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/multimodal/qwen3-vl.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Connecting a vision encoder to an LLM",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/16 Multimodal Models/64a Connectors and fusion.md",
+      "source_sha256": "f5882df05aa71cff14b047ee434d24b35c4ce44b387220a0e7b860d20a9a5d3a"
+    },
+    {
+      "route": "textbook/multimodal/visual-tokenization-resolution",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/molmo-figure5-image-tokenization.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/internvl25-figure2-dynamic-tiles.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision-anyres.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/multimodal/qwen2-vl-architecture.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/resolution-review-2026-10/pixtral-vision-packing.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.96875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/qwen2vl-figure3-mrope.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Resolution, tiling, and spatial positions",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md",
+      "source_sha256": "a570a03c487c9f6bb89977abb8607e68d2ce5b616daa00b3bac863954a4f5de4"
+    },
+    {
+      "route": "textbook/multimodal/training-data",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/internvl25-figure4-training-pipeline.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/molmo-figure1-data-and-capabilities.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-gen.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision-training.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision-transfer-s1.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision-transfer-s2.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/multimodal/qwen-vl-stages.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/multimodal/qwen3-vl-pretraining.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Training VLMs: alignment, instruction tuning, and data",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/16 Multimodal Models/64c Training VLMs — alignment, instruction tuning, and data.md",
+      "source_sha256": "03af54d2d4fbce4863a67e2072d4e00dd888be0c2c092bb724f030acd0adbaa4"
+    },
+    {
+      "route": "textbook/multimodal/documents-ocr-grounding",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/qwen2vl-figure11-dense-ocr.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/documents-review-2026-10/layoutlmv3-objectives.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/documents-review-2026-10/donut-overview.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/documents-review-2026-10/pix2struct-screenshot-parsing.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/pix2struct-figure1-tasks.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/documents-review-2026-10/pix2struct-variable-resolution.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Documents, OCR, and visual grounding",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding.md",
+      "source_sha256": "843a0776cafc3d9ed8c49acbb8a2ae654a9846c154dfdbf43cc2e338d5b44ee3"
+    },
+    {
+      "route": "textbook/multimodal/video-audio-omni",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/stanford-cs336-2026/multimodal/llava-onevision-modalities.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/omni-review-2026-10/gens-frame-selection.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/qwen25omni-figure3-tmrope.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/omni-review-2026-10/mimi-split-rvq.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/qwen25omni-figure2-thinker-talker.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 617,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/omni-review-2026-10/qwen3omni-architecture.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/omni-review-2026-10/moshi-rq-transformer.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/omni-review-2026-10/moshi-duplex-streams.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/omni-review-2026-10/qwen25omni-block-attention.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/imagebind-figure1-capabilities.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Video, audio, and omni models",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md",
+      "source_sha256": "bf2322845969a44a679c0dfa2afccabe1c5985ca7ee06be2d865dbef333f6200"
+    },
+    {
+      "route": "textbook/multimodal/evaluation-serving",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-evaluation-review-2026-10/mmvet-integrated-capabilities.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/cs231n-lecture16-winoground.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9765625,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-evaluation-review-2026-10/pope-question-construction.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-evaluation-review-2026-10/chair-caption-errors.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-2026/molmo-figure11-openness.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.984375,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-evaluation-review-2026-10/epd-stage-interference.png"
+        },
+        {
+          "fit": "fill",
+          "loaded": true,
+          "parentWidth": 617,
+          "renderedWidth": 616.9921875,
+          "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/vlm-evaluation-review-2026-10/epd-system-architecture.png"
+        }
+      ],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Evaluation, failure modes, and VLM serving",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving.md",
+      "source_sha256": "6e4cfae4a2fd9c4c6d67620f80f0a907b11bb8f8c50b7f22ea080976e40b267e"
+    },
+    {
+      "route": "textbook/index",
+      "width": 1280,
+      "docWidth": 1265,
+      "fallback": false,
+      "images": [],
+      "mathErrors": [],
+      "partial": false,
+      "title": "Machine Learning and Language Models",
+      "viewWidth": 1265,
+      "wideMath": [],
+      "path": "en/00 Textbook/_index.md",
+      "source_sha256": "f93f7c6724113637dd42500f31248c065275ad7c4f873b3055c243ee5714a3f7"
+    }
+  ]
+}

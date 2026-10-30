@@ -1,0 +1,66 @@
+[
+  {
+    "id": "curated-hardware-tpu-load-weights-36e7807b43e6",
+    "asset": "00 Учебник/Assets/Figures/curated/hardware-completion-2026-10-29/tpu-load-weights.gif",
+    "title": "TPU loading parameters from HBM into the matrix multiplication unit",
+    "author": "Google Cloud",
+    "source_url": "https://docs.cloud.google.com/tpu/docs/system-architecture-tpu-vm",
+    "source_image_url": "https://docs.cloud.google.com/static/tpu/docs/images/image4_5pfb45w.gif",
+    "source_asset": "05 Источники/Originals/hardware-reconciliation-2026-10-29/image4_5pfb45w.gif",
+    "source_asset_sha256": "36e7807b43e6164dca487ed5a0190b8ebcaa0d5a090de46ea0ae3e56daa3fe87",
+    "sha256": "36e7807b43e6164dca487ed5a0190b8ebcaa0d5a090de46ea0ae3e56daa3fe87",
+    "source_page_snapshot": "05 Источники/Originals/hardware-reconciliation-2026-10-29/google-tpu-architecture.html",
+    "source_page_sha256": "dc35c2b885f9697fdfe5528efd90401765c47c91964ca50cea9c9a8f8c42c107",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/hardware-reconciliation-2026-10-29/google-tpu-architecture.html",
+    "license_evidence_sha256": "dc35c2b885f9697fdfe5528efd90401765c47c91964ca50cea9c9a8f8c42c107",
+    "derivation": "source-gif-copy",
+    "dimensions_px": [
+      640,
+      269
+    ],
+    "frames": 103,
+    "modifications": "Complete original Google Cloud animation retained byte-for-byte, including all frames. No crop, redraw, relabeling, resampling, recompression or static-thumbnail replacement.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md"
+    ],
+    "visual_review": "Pending integrated page review by parent; byte identity, format, dimensions and frame count checked separately."
+  },
+  {
+    "id": "curated-hardware-tpu-dataflow-67330da41937",
+    "asset": "00 Учебник/Assets/Figures/curated/hardware-completion-2026-10-29/tpu-dataflow.gif",
+    "title": "TPU systolic-array input and partial-sum dataflow",
+    "author": "Google Cloud",
+    "source_url": "https://docs.cloud.google.com/tpu/docs/system-architecture-tpu-vm",
+    "source_image_url": "https://docs.cloud.google.com/static/tpu/docs/images/image1_2pdcvle.gif",
+    "source_asset": "05 Источники/Originals/hardware-reconciliation-2026-10-29/image1_2pdcvle.gif",
+    "source_asset_sha256": "67330da4193789f70c33a36d42460212aef1f91c9ed1f9226434c2e3f30efb25",
+    "sha256": "67330da4193789f70c33a36d42460212aef1f91c9ed1f9226434c2e3f30efb25",
+    "source_page_snapshot": "05 Источники/Originals/hardware-reconciliation-2026-10-29/google-tpu-architecture.html",
+    "source_page_sha256": "dc35c2b885f9697fdfe5528efd90401765c47c91964ca50cea9c9a8f8c42c107",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/hardware-reconciliation-2026-10-29/google-tpu-architecture.html",
+    "license_evidence_sha256": "dc35c2b885f9697fdfe5528efd90401765c47c91964ca50cea9c9a8f8c42c107",
+    "derivation": "source-gif-copy",
+    "dimensions_px": [
+      640,
+      269
+    ],
+    "frames": 267,
+    "modifications": "Complete original Google Cloud animation retained byte-for-byte, including all frames. No crop, redraw, relabeling, resampling, recompression or static-thumbnail replacement.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md"
+    ],
+    "visual_review": "Pending integrated page review by parent; byte identity, format, dimensions and frame count checked separately."
+  }
+]

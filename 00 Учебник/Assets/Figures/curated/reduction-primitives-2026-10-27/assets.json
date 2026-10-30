@@ -1,0 +1,28 @@
+[
+  {
+    "id": "curated-reduction-flogr-ca079d087b8e",
+    "asset": "00 Учебник/Assets/Figures/curated/reduction-primitives-2026-10-27/binomial-tree.gif",
+    "author": "Flogr",
+    "source_url": "https://commons.wikimedia.org/w/index.php?title=File:Binomial_tree.gif&oldid=824382071",
+    "source_image_url": "https://upload.wikimedia.org/wikipedia/commons/e/ee/Binomial_tree.gif",
+    "source_asset": "05 Источники/Originals/reduction-primitives-2026-10-27/binomial-tree.gif",
+    "source_asset_sha256": "ca079d087b8e9a7d4f61cf91d3d64323eb1ebeb5c8992b4c0d8c3f790de1ee8a",
+    "sha256": "ca079d087b8e9a7d4f61cf91d3d64323eb1ebeb5c8992b4c0d8c3f790de1ee8a",
+    "dimensions_px": [901, 512],
+    "frames": 4,
+    "frame_duration_ms": 1500,
+    "source_page_snapshot": "05 Источники/Originals/reduction-primitives-2026-10-27/commons-binomial-description.html",
+    "source_page_sha256": "a0de1cbda699bcfe5c02da1975886d2b596a96bfc004a9d31192d026304c788f",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/reduction-primitives-2026-10-27/commons-binomial-description.html",
+    "license_evidence_sha256": "a0de1cbda699bcfe5c02da1975886d2b596a96bfc004a9d31192d026304c788f",
+    "derivation": "source-gif-copy",
+    "modifications": "Complete original GIF copied byte-for-byte; all four frames and their 1500 ms durations retained. No crop, redraw, relabelling, resampling or recompression.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-27",
+    "used_in": ["00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md"]
+  }
+]

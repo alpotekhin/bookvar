@@ -2,8 +2,9 @@
 title: RLVR — обучение по проверяемой награде
 type: textbook-chapter
 status: canonical
-last_updated: 2026-09-21
-last_verified: 2026-09-21
+last_updated: 2026-10-29
+last_verified: 2026-10-29
+source_language: mixed
 aliases:
   - Reinforcement learning with verifiable rewards
 prerequisites:
@@ -11,6 +12,9 @@ prerequisites:
 next:
   - "[[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1]]"
 primary_sources:
+  - https://arxiv.org/abs/2505.00024
+  - https://arxiv.org/abs/2504.13958
+  - https://arxiv.org/abs/2601.21558
   - https://arxiv.org/abs/2110.14168
   - https://arxiv.org/abs/2305.20050
   - https://arxiv.org/abs/2411.15124
@@ -41,7 +45,9 @@ verifiable rewards*). В отличие от SFT, здесь не требует
 условие существенно: проверяющая программа умеет распознать успех, но сама по
 себе не объясняет модели, как его достичь.
 
-## Главное различие
+<a id="главное-различие"></a>
+
+## Награда и алгоритм обновления
 
 <!-- source_unit_id: meeting-04-slides-rlvr-method -->
 
@@ -65,9 +71,10 @@ RLVR критерий правильности задан вне обучаем�
 
 *Модель получает запрос, генерирует ответ и получает награду только после
 проверки. Затем её параметры обновляются, и следующий набор ответов уже
-порождает изменившаяся модель. На рисунке положительная награда обозначена
-$\gamma$; это не коэффициент дисконтирования. Внизу записан шаг минимизации
-функции потерь; далее в тексте $J$ обозначает максимизируемую цель.
+порождает изменившаяся модель. На исходной схеме $\gamma$ задаёт положительную
+награду, а $\alpha$ — размер шага. Знак «плюс» в нижней формуле обозначает
+градиентный подъём по $J$. В формулах главы $\alpha$ будет обозначать масштаб
+награды, как в основном тексте статьи Tülu 3.
 Nathan Lambert et al.,
 [Tülu 3, рисунок 18](https://arxiv.org/html/2411.15124v5#S6.F18), 2024,
 версия v5 от 14 апреля 2025; CC BY 4.0. Оригинал без изменений.*
@@ -103,16 +110,17 @@ Nathan Lambert et al.,
 }
 ```
 
-Рассмотрим четыре возможных ответа. Многоточие в таблице сокращает несколько
-строк рассуждения; `FINAL: ...` во всех трёх форматных ответах занимает
-отдельную последнюю строку. Это учебные примеры, а не журнал запуска модели.
+Рассмотрим четыре возможных ответа. В таблице указана только последняя строка;
+предшествующее рассуждение пока не оценивается. Обозначим правильность через
+$r_c$, а соблюдение формата через $r_f$. Это учебные примеры, а не журнал
+запуска модели.
 
-| ответ | извлечённое значение | награда за ответ | формат |
-|---|---:|---:|---:|
-| $y_1$: `3x=12 ... FINAL: 4` | 4 | 1 | 1 |
-| $y_2$: `3x=12 ... Ответ 4` | — | 0 | 0 |
-| $y_3$: `x=(18-6)/3 ... FINAL: 4.0` | 4.0 | 1 | 1 |
-| $y_4$: `x=18/3+6 ... FINAL: 12` | 12 | 0 | 1 |
+| Последняя строка | Число | $(r_c,r_f)$ |
+|---|---:|---:|
+| $y_1$: `FINAL: 4` | 4 | (1,1) |
+| $y_2$: `Ответ 4` | — | (0,0) |
+| $y_3$: `FINAL: 4.0` | 4.0 | (1,1) |
+| $y_4$: `FINAL: 12` | 12 | (0,1) |
 
 ### Ручной расчёт награды
 
@@ -199,7 +207,7 @@ $$
 \begin{aligned}
 J(\theta)
 &=\mathbb E_{x\sim D,\ y\sim\pi_\theta(\cdot|x)}[R(x,y)]\\
-&\quad-\beta\,\mathbb E_{x\sim D}
+&-\beta\,\mathbb E_{x\sim D}
 D_{\mathrm{KL}}\!\left(
 \pi_\theta(\cdot|x)\|\pi_{\mathrm{ref}}(\cdot|x)
 \right).
@@ -223,9 +231,11 @@ $\pi_{\mathrm{ref}}$ фиксирует поведение до данного �
 используется тождество
 
 $$
-\nabla_\theta\mathbb E_{y\sim\pi_\theta}[R(x,y)]
-=\mathbb E_{y\sim\pi_\theta}
+\begin{aligned}
+&\nabla_\theta\mathbb E_{y\sim\pi_\theta}[R(x,y)]\\
+&\quad=\mathbb E_{y\sim\pi_\theta}
 \left[R(x,y)\nabla_\theta\log\pi_\theta(y|x)\right].
+\end{aligned}
 $$
 
 Награда в правой части — уже вычисленное число. Производная берётся от
@@ -237,7 +247,7 @@ $\sum_t\log\pi_\theta(y_t|x,y_{<t})$. Поэтому одна итоговая �
 ограничивают размер обновления. Вывод подробно разобран в
 [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM|главе о градиенте стратегии и PPO]].
 
-Важное следствие: программа проверки не обязана объяснять ошибку. Если один
+Программа проверки не обязана объяснять ошибку. Если один
 путь рассуждения чаще приводит к положительной награде, его вероятность может
 расти и при единственном бите обратной связи. Однако конечная награда не
 разделяет полезные и бесполезные шаги *внутри одного успешного ответа*.
@@ -349,6 +359,69 @@ assert numeric_reward("FINAL: 12", Decimal("4")) == {
 вместе с новой спецификацией формата и тестами. Иначе одна и та же строка может
 получать разную награду до и после незаметного изменения программы.
 
+### Как награда меняет вероятности ответов
+
+Вернёмся к четырём ответам на уравнение. Пусть пока каждый из них выбирается
+с вероятностью $1/4$. Средняя награда равна
+$(1.1+0+1.1+0.1)/4=0.575$. Для этого конечного примера можно перебрать все
+ответы и вычислить градиент без шума выборки. Если $z_i$ — логит ответа,
+$p_i=\operatorname{softmax}(z)_i$, то
+
+$$
+\frac{\partial\mathbb E[R]}{\partial z_i}
+=p_i(R_i-\mathbb E[R]).
+$$
+
+Для двух верных ответов производная равна $0.25(1.1-0.575)=0.13125$.
+Для нераспознанного ответа она равна $-0.14375$, для форматного неверного —
+$-0.11875$. Последний имеет положительную награду 0.1, но уступает текущему
+среднему, поэтому его вероятность при таком обновлении уменьшается.
+
+```python
+import torch
+
+completions = [
+    "3x = 12\nFINAL: 4",
+    "3x = 12\nОтвет 4",
+    "x = (18 - 6) / 3\nFINAL: 4.0",
+    "x = 18 / 3 + 6\nFINAL: 12",
+]
+rewards = torch.tensor([
+    numeric_reward(y, Decimal("4"))["total"] for y in completions
+], dtype=torch.float64)
+logits = torch.zeros(4, dtype=torch.float64, requires_grad=True)
+probabilities = logits.softmax(-1)
+mean_reward = (probabilities.detach() * rewards).sum()
+advantages = rewards - mean_reward
+# Точное ожидание REINFORCE для четырёх исходов, не случайная выборка.
+rlvr_loss = -(probabilities.detach() * advantages * logits.log_softmax(-1)).sum()
+rlvr_loss.backward()
+ascent_gradient = -logits.grad.detach().clone()
+torch.testing.assert_close(
+    ascent_gradient,
+    torch.tensor([0.13125, -0.14375, 0.13125, -0.11875], dtype=torch.float64),
+)
+with torch.no_grad():
+    logits.add_(0.1 * ascent_gradient)
+    updated_probabilities = logits.softmax(-1)
+    updated_reward = (updated_probabilities * rewards).sum()
+print([round(x, 6) for x in updated_probabilities.tolist()])
+print(f"expected reward: {mean_reward.item():.6f} -> {updated_reward.item():.6f}")
+```
+
+После шага вероятности равны примерно $(0.253281,0.246411,0.253281,0.247027)$,
+а ожидаемая награда повышается с 0.575 до 0.581921. Это изменение вероятностей
+уже известных четырёх исходов, без появления нового решения.
+
+В большой языковой модели отдельного логита для каждого полного ответа нет:
+его вероятность складывается из вероятностей токенов. Перебрать все ответы
+тоже невозможно, поэтому ожидание оценивают по сгенерированным попыткам.
+Этот код проверяет переход от конкретных строк через награду к обновлению;
+он не обучает языковую модель и не заменяет PPO или GRPO. Вычитание среднего
+здесь не меняет точный градиент, поскольку перебраны все исходы и веса
+вероятностей отсоединены от графа. Среднее по конечному случайному пакету
+требует отдельного анализа базового уровня, как в главе о PPO.
+
 ## Виды проверяющих программ
 
 ### Точная и символьная проверка математики
@@ -369,6 +442,14 @@ SymPy и сравнение с эталоном. Библиотека подде
 неполной записи LaTeX. Такая терпимость полезна при оценке ответов, но в
 обучении каждое послабление меняет множество строк, за которые выдаётся
 положительная награда.
+
+Порядок аргументов также входит в контракт. В Math-Verify вызывают
+`verify(gold, prediction)`, а не наоборот. Например, эталон $1<x<2$ и ответ
+$(1,2)$ принимаются по умолчанию, но перестановка этих представлений может
+дать отказ. Такая асимметрия не позволяет получить награду простым повторением
+неразрешённого неравенства из условия. Направление сравнения и флаг
+`allow_set_relation_comp` описаны в
+[FAQ Math-Verify](https://github.com/huggingface/Math-Verify#why-is-verify-function-not-symmetric).
 
 Для приближённого числового ответа заранее задают условие, например
 $|\hat a-a^*|\le\varepsilon_{\mathrm{abs}}+
@@ -435,6 +516,217 @@ $|\hat a-a^*|\le\varepsilon_{\mathrm{abs}}+
 окружение и разрешённые аксиомы фиксируют вне генерируемого ответа. Заглушки,
 новые допущения и отключение проверки не должны приниматься как доказательство.
 
+<!-- BEGIN REVIEW: tool rewards 2026-10-29 -->
+
+<a id="agent-reward-design"></a>
+
+## Tool-call matching and task completion
+
+A correct API name, a correct argument and a completed task provide different
+feedback. Suppose the requested action is to check a fare from ORD to SFO.
+The call `Get_Price(loc_1="ORD", loc_2="LAX")` uses the right function and the
+right departure airport, but asks about the wrong destination. An exact-match
+reward treats it like a completely unrelated call. A decomposed reward can
+credit the fields that match while still withholding full credit.
+
+### ToolRL: compare the function and its arguments
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/toolrl/reward-design.png]]
+
+*Cheng Qian et al., ToolRL.
+[Original repository illustration](https://github.com/qiancheng0/ToolRL/blob/8cee13ec0ca72f0461da372a93a6fd8140dbb840/assets/reward.png),
+Apache 2.0; the full 6696 × 2365 image is retained without changes.
+The upper part separates format from correctness. The lower part compares
+function names, parameter names and values for two candidate outputs.
+The [license is included with the site](/licenses/toolrl-8cee13ec-Apache-2.0.txt).
+Open the original to read the individual fields.*
+
+The released
+[reward implementation](https://github.com/qiancheng0/ToolRL/blob/8cee13ec0ca72f0461da372a93a6fd8140dbb840/verl/utils/reward_score/rlla.py)
+first compares the lists of function names. Its `match_score` counts repeated
+names: two calls to `Get_Price` and one call to `Get_Price` have intersection
+size 1 and union size 2, not two identical sets of names.
+
+For matching calls, the implementation adds the Jaccard score of their
+parameter names and the number of equal values under the same keys. The raw
+score is then rescaled to the configured interval. In the default
+correctness range, a raw score `S` becomes
+
+$$
+\begin{aligned}
+S_{\max}&=1+|G|+\sum_{g\in G}|\operatorname{keys}(g)|,\\
+R_{\mathrm{correct}}&=6\,\frac{S}{S_{\max}}-3.
+\end{aligned}
+$$
+
+Here `G` is the list of ground-truth calls, not a GRPO group size.
+For one expected call with two parameters, the maximum is `1 + 1 + 2 = 4`.
+The incorrect-destination call earns 1 for its function name, 1 for its
+parameter-name set and 1 for the departure value: `S=3` and
+`R_correct=1.5`. An exact call earns 3. A completely different function earns
+−3, even if its arguments happen to contain the same strings.
+
+The following code handles only one expected call and one predicted call,
+with ordinary JSON scalar values. It exposes the arithmetic without
+implementing the multi-call assignment problem.
+
+```python
+def single_tool_reward(gold, predicted):
+    gold_args, predicted_args = gold["parameters"], predicted["parameters"]
+    if gold["name"] != predicted["name"]:
+        return -3.0
+    gkeys, pkeys = set(gold_args), set(predicted_args)
+    union = gkeys | pkeys
+    key_score = len(gkeys & pkeys) / len(union) if union else 1.0
+    value_score = sum(
+        k in predicted_args and predicted_args[k] == v
+        for k, v in gold_args.items()
+    )
+    raw = 1.0 + key_score + value_score
+    maximum = 2 + len(gold_args)
+    return 6 * raw / maximum - 3
+
+fare_gold = {
+    "name": "Get_Price",
+    "parameters": {"loc_1": "ORD", "loc_2": "SFO"},
+}
+fare_wrong_destination = {
+    "name": "Get_Price",
+    "parameters": {"loc_1": "ORD", "loc_2": "LAX"},
+}
+assert single_tool_reward(fare_gold, fare_gold) == 3.0
+assert single_tool_reward(fare_gold, fare_wrong_destination) == 1.5
+assert single_tool_reward(fare_gold, {"name": "Delete", "parameters": {}}) == -3.0
+print("correctness:", single_tool_reward(fare_gold, fare_wrong_destination))
+```
+
+Format contributes a separate 0 or 1 in the default code; the optional length
+reward is off unless enabled. A correctly formatted wrong-destination call
+therefore receives `1 + 1.5 = 2.5`, versus 4 for a correctly formatted exact
+call. This is partial feedback, not a certificate that the requested task
+succeeded. Tracking the success rate separately prevents a rising average
+reward from concealing errors in destinations or other critical arguments.
+
+For several calls, matching itself needs verification.
+[ToolRL §3.3](https://arxiv.org/html/2504.13958v1#S3.SS3) describes an optimal
+assignment, whereas the pinned code greedily consumes one unused prediction
+per ground-truth call. With repeated function names, the first local choice
+can prevent a better overall assignment. Reordering candidates can then
+change the implemented reward. An experiment must identify which procedure
+it ran; the paper's formula and a repository function are not interchangeable.
+
+Matching against one annotated call sequence also penalizes valid alternatives
+unless the evaluator explicitly allows them. A different route through an API
+can reach the same final state. Conversely, matching every annotated field
+cannot establish compliance with a requirement that the annotation omitted.
+For state-changing tasks, final-state checks and action-policy checks remain
+necessary.
+
+Binary matching is another choice. In
+[Tool-N1 §4.1–4.3](https://arxiv.org/html/2505.00024v2#S4.SS3), an answer earns
+1 only when the required tags and the function's name and argument-value
+dictionary are correct. Reordering dictionary keys is allowed. Our
+wrong-destination example therefore earns 0, not partial credit.
+Multi-turn source trajectories are split into single-step prediction records
+with the preceding interaction supplied as context; this is not full online
+optimization of a newly executed trajectory.
+
+The choice of initialization is empirical too. In
+[Tool-N1 §5.3.2, Table 3](https://arxiv.org/html/2505.00024v2#S5.SS3.SSS2),
+the 5,518-instance comparison reports averages of 83.17 for SFT followed by
+RL and 83.24 for RL alone under its data allocations. This small reported
+difference does not establish that SFT generally harms tool learning.
+Both recipes start from an already instruction-tuned model.
+
+### Partial completion and unnecessary calls
+
+ASTRA uses verified subtask completion and a trajectory-level F1-style reward.
+For `n` required subtasks, `s` completed subtasks and `c` calls,
+
+$$
+\begin{aligned}
+r&=s/n,\qquad p=s/(c+\epsilon),\\
+F_1&=\frac{2pr}{p+r}.
+\end{aligned}
+$$
+
+Its reported recall-only and precision-only ablations exhibit different
+over-calling and under-calling failures. These are results of that experiment,
+not guarantees that F1 stabilizes every agent. The authors also omit KL and
+entropy bonuses, filter groups with degenerate reward variance, and buffer
+surplus usable samples for subsequent batches. See
+[ASTRA §3.1, §3.2.2 and §4.2](https://arxiv.org/html/2601.21558v1#S3.SS1).
+
+Consider a constructed task with four independent checks, each obtainable by
+one call. Completing two checks with two calls has recall 0.5, precision 1
+and F1 ≈ 0.667. Completing all four with four calls earns 1. Completing the
+same four with eight calls leaves recall at 1 but lowers precision to 0.5
+and F1 to about 0.667.
+
+For `s>0`, substitution reduces the expression to
+`2s / (n + c + epsilon)`. When `s=0`, define the reward as zero rather than
+evaluate `0/0`. The code below enforces the example's one-subtask-per-call
+assumption. It is not a general implementation of the ASTRA environment.
+
+```python
+def completion_efficiency_reward(required, solved, calls, eps=1e-8):
+    if any(type(x) is not int for x in (required, solved, calls)):
+        raise ValueError("counts must be integers")
+    if not (required > 0 and 0 <= solved <= required and calls >= solved):
+        raise ValueError("require positive task size and solved <= calls")
+    if not 0 < eps < float("inf"):
+        raise ValueError("eps must be finite and positive")
+    return 2 * solved / (required + calls + eps) if solved else 0.0
+
+efficient_partial = completion_efficiency_reward(4, 2, 2)
+efficient_complete = completion_efficiency_reward(4, 4, 4)
+redundant_complete = completion_efficiency_reward(4, 4, 8)
+assert efficient_complete > efficient_partial
+assert efficient_complete > redundant_complete
+assert completion_efficiency_reward(4, 0, 0) == 0.0
+print([round(x, 6) for x in
+       (efficient_partial, efficient_complete, redundant_complete)])
+```
+
+The denominator measures calls, not wall time, tokens, money or risk.
+Replacing one cheap call with one expensive call leaves this reward
+unchanged. A call that solves several subtasks would violate the example's
+assumption and could make the quantity called precision exceed 1. The
+subtask accounting and permitted tool semantics must therefore be specified
+before using the formula.
+
+### Refusal, missing information and group filtering
+
+A task need not have one unique accepted answer. A verifier can accept
+several valid programs, routes or final states. It can also reward stopping
+without an action when an externally specified condition makes execution
+impermissible or impossible.
+
+For example, a synthetic calendar task can expose an explicit
+`authorized=false` flag to the environment. The evaluator checks that no
+write occurred and that the agent requested authorization. A successful
+unauthorized write receives zero; preserving the state and requesting
+permission receives one. This constructed rule is verifiable because
+authorization and state changes have specified representations. It does
+not establish that a program can decide arbitrary natural-language safety
+questions.
+
+If both actions instead receive zero, the reward supplies no distinction
+between them. A group-centred algorithm cannot recover that missing
+distinction. Filtering identical-reward groups removes their relative
+reward contribution regardless of whether the task was easy, impossible or
+poorly specified; it does not intrinsically prohibit learning refusals.
+The filtered fraction and the evaluation of unsolvable and unauthorized
+tasks must be reported separately.
+
+Finally, an executable training environment can model only some production
+failures. Evaluation should separately cover timeouts, rate limits,
+pagination, permissions, changing state and irreversible side effects.
+The availability of a training-time verifier also says nothing about which
+checks will be available when a deployed agent answers a new request.
+
+<!-- END REVIEW: tool rewards 2026-10-29 -->
+
 ## Проверка результата и проверка хода решения
 
 Проверка конечного результата присваивает всей цепочке из тысяч токенов один
@@ -483,7 +775,7 @@ KL, при этом могут продолжать менять модель. �
 вероятность смешанной группы равна
 
 $$
-P(\text{both outcomes})=1-p^G-(1-p)^G.
+P_{\mathrm{mix}}=1-p^G-(1-p)^G.
 $$
 
 При $p=0.5,G=4$ получаем 0.875. При $p=0.01$ — лишь 0.0394:
@@ -518,14 +810,15 @@ Open-R1 действительно содержит
 ### Проверка оценщика до первого обновления модели
 
 В Stanford CS336 Assignment 5 ответ должен завершаться размеченным фрагментом
-вроде `<answer>...</answer>`. Для диагностики нужны две отдельные величины:
+вроде `<answer>...</answer>`. Для диагностики нужны две отдельные величины.
+В формуле $f=r_{format}$ — флаг успешного разбора:
 
 $$
 \begin{aligned}
 r_{format}&=\mathbf 1[\operatorname{parse}(y)\ \text{успешен}],\\
 r_{answer}&=\begin{cases}
-\mathbf 1[\operatorname{verify}(\hat a,a^*)],&r_{format}=1,\\
-0,&r_{format}=0.
+\mathbf 1[\operatorname{verify}(\hat a,a^*)],&f=1,\\
+0,&f=0.
 \end{cases}
 \end{aligned}
 $$
@@ -539,14 +832,39 @@ $$
 постановки допустимы, но отвечают разным целям и не должны описываться как
 одна функция награды.
 
+В [Assignment 5, §3.2–3.4](https://github.com/stanford-cs336/assignment5-alignment/blob/main/cs336_spring2026_assignment5_alignment.pdf)
+до первого обновления сравнивают три запроса: только вопрос с требованием
+`\boxed{}`, zero-shot `r1_zero` и его вариант с тремя разобранными примерами.
+Это меняет исходную вероятность успеха и соблюдения формата при тех же весах.
+Несколько показанных решений не превращают такую оценку в SFT: они остаются
+частью входного текста, градиент по ним не вычисляется.
+
+Запрос `r1_zero` уже заканчивается открывающим `<think>`. Поэтому сгенерированная
+часть должна закрыть его и выдать `<answer>...</answer>`. В сохранённой версии
+`r1_zero_reward_fn` ищет буквальную подстроку `</think> <answer>` с одним
+пробелом: замена пробела переводом строки даёт нулевой `format_reward`, даже
+если теги выглядят разумно. Это особенность данной реализации, не правило
+XML и не свойство RLVR. Для `question_only` используется другая функция,
+которая извлекает `\boxed{...}`. Применить первый оценщик ко второму формату
+означало бы измерять несоответствие шаблонов вместо способности решать задачу.
+
+В упражнении используется температура 1.0, top-p=1.0 и предел 512 токенов.
+Для `r1_zero` генерация останавливается на `</answer>`; настройка
+`include_stop_str_in_output=True` сохраняет закрывающий тег в строке,
+передаваемой оценщику. Если удалить тег на стороне сервера, корректный ответ
+получит нулевую награду за формат. Для `question_only` этот stop не задают.
+У GSM8K исходная запись содержит решение и `#### answer`: оценщику передают
+часть после `####`, а не весь текст решения. Эти условия нужно зафиксировать
+до сравнения результатов, включая версию самой программы проверки.
+
 До обучения собирают таблицу ручной проверки как минимум с четырьмя исходами:
 
-| ответ | разбор | проверка | что произошло |
-|---|---:|---:|---|
-| корректный и извлечённый | 1 | 1 | обычный положительный пример |
-| корректный, но не извлечённый | 0 | — | потеря правильного ответа при разборе |
-| неверный, но принятый | 1 | 1 | ложное принятие проверяющей программой |
-| извлечённый и отвергнутый | 1 | 0 | неверный ответ или ошибка сравнения эквивалентных записей |
+| Ответ | Разбор, проверка и причина |
+|---|---|
+| Корректный и извлечённый | Разбор 1, проверка 1. Обычный положительный пример. |
+| Корректный, но не извлечённый | Разбор 0, проверка не вызвана. Правильный ответ потерян при разборе. |
+| Неверный, но принятый | Разбор 1, проверка 1. Ложное принятие проверяющей программой. |
+| Извлечённый и отвергнутый | Разбор 1, проверка 0. Неверный ответ или ошибка сравнения эквивалентных записей. |
 
 В журнале сохраняют исходную строку, извлечённый ответ, эталон, версии
 программ разбора и проверки, а также обе составляющие награды. Пограничные случаи
@@ -610,7 +928,7 @@ $$
 | обобщение | новые генераторы задач, сложность вне распределения, ухудшения других способностей |
 | система | токены в секунду, задержка проверки, стоимость одного подтверждённого успеха |
 
-Для честного сравнения pass@1 до и после обучения нужно зафиксировать шаблон
+При сравнении pass@1 до и после обучения нужно зафиксировать шаблон
 запроса, температуру, предел длины и версию проверяющей программы.
 
 ### Одна попытка и несколько попыток
@@ -642,6 +960,39 @@ $1-\binom83/\binom{10}3=1-56/120\approx0.5333$. Сначала эту велич
 числитель принимается равным нулю. Вывод и реализация приведены у Chen et al.
 в [Evaluating Large Language Models Trained on Code, раздел 2.1](https://arxiv.org/abs/2107.03374).
 
+Для вычисления не нужны огромные биномиальные коэффициенты. Отношение можно
+записать произведением; множители удобно суммировать в логарифмах.
+`expm1` сохраняет точность, когда вероятность успеха близка к нулю.
+
+```python
+import math
+
+def pass_at_k(n: int, c: int, k: int) -> float:
+    if any(type(v) is not int for v in (n, c, k)):
+        raise ValueError("n, c and k must be integers")
+    if not (n >= 1 and 0 <= c <= n and 1 <= k <= n):
+        raise ValueError("require n >= 1, 0 <= c <= n and 1 <= k <= n")
+    if c == 0:
+        return 0.0
+    if n - c < k:
+        return 1.0
+    log_failure = math.fsum(math.log1p(-k / i) for i in range(n - c + 1, n + 1))
+    return -math.expm1(log_failure)
+
+estimated_pass3 = pass_at_k(10, 2, 3)
+assert math.isclose(estimated_pass3, 8 / 15)
+assert pass_at_k(10, 0, 3) == 0.0
+assert pass_at_k(10, 8, 3) == 1.0
+print(f"pass@3: {estimated_pass3:.6f}")
+```
+
+Усреднение по задачам и ошибка подстановки эмпирического $\hat p=c/n$ — две
+разные проблемы. Даже для одной задачи при конечном $n$ выражение
+$1-(1-c/n)^k$ смещено. В нашем примере оно даёт $1-0.8^3=0.488$ вместо
+0.5333. Несмещённость комбинаторной оценки означает совпадение её ожидания
+с истинным pass@$k$ при повторном независимом сборе $n$ ответов; она не
+устраняет статистическую неопределённость одного набора генераций.
+
 В отчёте также нужна доля ответов, обрезанных по пределу длины. Увеличение
 лимита может улучшить pass@1 без изменения весов, а уменьшение — уничтожить
 итоговую строку с ответом в уже почти законченном решении. Такой эффект
@@ -664,19 +1015,20 @@ $1-\binom83/\binom{10}3=1-56/120\approx0.5333$. Сначала эту велич
 за успешный ответ использовалась положительная награда, масштабированная
 коэффициентом $\alpha=10$.
 
-Это проверенные детали конкретной работы 2024 года, а не универсальная
-настройка RLVR. Разделы 6 и E статьи фиксируют состав эксперимента; здесь
-используется [версия v5 от 14 апреля 2025 года](https://arxiv.org/abs/2411.15124v5).
+Состав смеси и выбор награды описаны в разделе 6
+[Tülu 3 v5 от 14 апреля 2025 года](https://arxiv.org/abs/2411.15124v5).
+Эти настройки относятся к экспериментам Tülu 3, а не к RLVR вообще.
 
-![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rlvr-review-2026-09/tulu-rlvr-training-curves.png]]
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rlvr-2026-10-24/tulu-rlvr-full-figure19.png]]
 
 *Три независимых семейства запусков: GSM8K, MATH и инструкции с проверяемыми
 ограничениями. В каждом ряду слева показана обучающая награда, в центре — KL к
 исходной модели, справа — длина ответа; цвета соответствуют четырём значениям
-коэффициента KL. Nathan Lambert et al.,
-[Tülu 3, рисунок 19, верхние три ряда](https://arxiv.org/pdf/2411.15124v5#page=33).
-CC BY 4.0. Фрагмент исходной страницы; все девять панелей и общая легенда
-сохранены, нижние три оценочные панели не включены.*
+коэффициента KL. Нижний ряд связывает KL с результатами на отложенных задачах
+и средним качеством по тестам. Nathan Lambert et al.,
+[Tülu 3, рисунок 19 целиком](https://arxiv.org/pdf/2411.15124v5#page=33).
+CC BY 4.0. Все двенадцать панелей, легенда и английская подпись сохранены;
+кадрирование вокруг рисунка из PDF при 400 dpi, без перерисовки.*
 
 В верхнем ряду награда на GSM8K повышается при всех четырёх значениях $\beta$,
 а величина KL заметно различается. Поэтому больший отход от исходной модели
@@ -700,9 +1052,9 @@ KL-штраф ($\beta=0.01$) сопровождается самой высок�
 et al., [Tülu 3, рисунок 19, нижняя правая панель](https://arxiv.org/pdf/2411.15124v5#page=33).
 CC BY 4.0. Исходный файл рисунка без изменений.*
 
-Эта панель особенно важна: по одной обучающей награде из предыдущего рисунка
-можно было бы предпочесть запуск с самым слабым ограничением. По общей
-оценке вывод иной. В приложении B.4 авторы также показывают ответы, которые
+По одной обучающей награде можно было бы предпочесть запуск с самым слабым
+ограничением, но средняя оценка на тестах у него ниже. В приложении B.4
+авторы также показывают ответы, которые
 выполняют формальные ограничения, но теряют осмысленное содержание. Такие
 примеры демонстрируют неполноту выбранного критерия: проверка числа пунктов
 не обязана оценивать полезность написанного.
@@ -716,6 +1068,16 @@ CC BY 4.0. Исходный файл рисунка без изменений.*
 модели награды. Её оценки при этом **не добавляли** к проверяемой награде в
 основном варианте. Инициализация весов и источник обратной связи — разные роли.
 
+В рецепте Tülu 3 также отключают dropout, чтобы один ответ при неизменных
+весах имел одинаковые logp во время генерации и повторного прохода PPO.
+Иначе отношение вероятностей может отличаться от единицы ещё до обновления.
+Преимущества центрируют и нормируют, запросы перемешивают между повторными
+проходами. Награда $+10$ за подтверждённую правильность дополняется штрафом
+$-10$ за отсутствие EOS. Поэтому средняя обучающая награда зависит также от
+того, завершает ли модель ответы, а не только от сравнения конечных чисел.
+Это настройки [Tülu 3, §6.2 и Table 21](https://arxiv.org/html/2411.15124v5#S6.SS2),
+а не обязательные компоненты любого RLVR.
+
 ![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rlvr-review-2026-09/tulu-value-initialization.png]]
 
 *Сравнение инициализации функции ценности из SFT-модели и из модели награды.
@@ -726,11 +1088,28 @@ CC BY 4.0. Исходный файл рисунка без изменений.*
 CC BY 4.0. Оригинал без изменений.*
 
 В этой абляции инициализация из модели награды давала более сильные результаты,
-но и у неё рост KL не обеспечивал монотонного улучшения. В другой абляции
-проверяли именно добавление оценок RM к награде; это не дало преимущества перед
-чистой проверяемой наградой в выбранной настройке. Не следует переносить такой
-результат на все возможные смеси наград: здесь проверена одна модель, данные и
-семейство гиперпараметров.
+но и у неё рост KL не обеспечивал монотонного улучшения. В легенде исходного
+графика альтернатива RM называется SFT; в описании списка экспериментов §6.2
+сказано anchored DPO. Подпись здесь следует самому графику; по этой
+несогласованности нельзя установить происхождение каждой сохранённой версии.
+
+В другой абляции к проверяемой награде добавляли оценки RM. Это отдельное
+изменение: начальные веса функции ценности из RM использовали в обоих случаях.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/rlvr-2026-10-24/tulu-rlvr-reward-mixing.png]]
+
+*Треугольники — только проверяемая награда; квадраты и ромбы — добавление
+оценки RM. Сплошные линии и левая шкала показывают GSM8K, пунктир и правая
+шкала — среднее качество. В обеих группах функция ценности инициализирована
+из RM. Nathan Lambert et al.,
+[Tülu 3, Figure 22](https://arxiv.org/html/2411.15124v5#S6.F22), CC BY 4.0.
+Полный исходный PNG без изменений.*
+
+Лучший показанный результат GSM8K получен без добавления оценок RM. Но среднее
+качество ведёт себя иначе: у варианта с RM крайняя правая точка выше остальных
+своей серии. Поэтому рисунок не подтверждает, что чистая награда лучше по всем
+метрикам и при любом KL. Здесь проверены конкретные данные, модель и набор
+настроек; выбирать вариант нужно по заранее заданным отложенным оценкам.
 
 Отдельно меняли начальную **генерирующую** модель. Старт после SFT иногда
 позволял достигнуть той же обучающей награды, что и старт после DPO, но ценой
@@ -739,12 +1118,12 @@ CC BY 4.0. Оригинал без изменений.*
 
 Масштаб модели также менял картину. Итоговая таблица 23 даёт следующие оценки:
 
-| Размер | Этап | GSM8K | MATH | IFEval |
-|---|---|---:|---:|---:|
-| 8B | после DPO | 84.3 | 42.0 | 81.1 |
-| 8B | после RLVR | 87.6 | 43.7 | 82.4 |
-| 70B | после DPO | 93.5 | 62.3 | 82.6 |
-| 70B | после RLVR | 93.5 | 63.0 | 83.2 |
+| Модель, этап | GSM8K | MATH | IFEval |
+|---|---:|---:|---:|
+| 8B, DPO | 84.3 | 42.0 | 81.1 |
+| 8B, RLVR | 87.6 | 43.7 | 82.4 |
+| 70B, DPO | 93.5 | 62.3 | 82.6 |
+| 70B, RLVR | 93.5 | 63.0 | 83.2 |
 
 *Числа в процентах перенесены из
 [Tülu 3, таблица 23](https://arxiv.org/html/2411.15124v5#S6.T23);
@@ -824,9 +1203,3 @@ CC BY 4.0. Оригинал без изменений.*
 - DeepSeek-AI, 2025 — [DeepSeek-R1](https://arxiv.org/abs/2501.12948).
 - Chen et al., 2021 — [Evaluating Large Language Models Trained on Code](https://arxiv.org/abs/2107.03374):
   оценка правильности программ и вывод pass@k.
-
-Проверяемая награда делает обратную связь воспроизводимой, но не снимает
-вопроса о том, что именно измеряется. Уравнение, набор тестов и формальное
-ограничение задают разные критерии успеха. Полезность RLVR определяется не
-только способностью модели повысить эту оценку, но и тем, насколько выбранная
-проверка соответствует задаче, ради которой модель обучали.

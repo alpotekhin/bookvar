@@ -1,0 +1,334 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-29",
+  "scope": "Resolve the DeepSeek-V4 CSA/HCA and RetNet theory integration candidates recorded in the atlas consolidation audit.",
+  "application": "Exact literal replacements, not regex replacement templates. Apply changes in array order with exactly one old occurrence. Reverse in reverse order with exactly one new occurrence. JavaScript MUST use replace(old, () => new) and replace(new, () => old), since LaTeX contains literal $$.",
+  "lineageOrder": {
+    "forward": [
+      "2026-10-29-atlas-consolidation-additions.json",
+      "2026-10-29-architecture-integration-additions.json"
+    ],
+    "reverse": [
+      "2026-10-29-architecture-integration-additions.json",
+      "2026-10-29-atlas-consolidation-additions.json"
+    ],
+    "note": "The original atlas/research audits remain dated historical reports. This record closes their two explicit integration candidates; parent historical tests should restore the old revision through these records before checking old SHA assertions."
+  },
+  "files": [
+    {
+      "source": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+      "before_sha256": "319d399b9c2d1ce4c929e386dc900800304fd916b4b97695dc99385b6ad32956",
+      "after_sha256": "783cab0ddb3b947eecd310c420898a0acf1ff6a7088e45f98ef1176de4ba4aea",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-23",
+          "new": "last_updated: 2026-10-29"
+        },
+        {
+          "old": "## RetNet: три эквивалентных формы retention\n\nМеханизм retention в RetNet можно вычислять тремя способами:\n\n1. параллельно — при обучении;\n2. рекуррентно — при генерации по одному токену;\n3. рекуррентно по блокам — при работе с длинными последовательностями.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/retnet-figure3-hq.png]]\n\n*Две формы вычисления retention: параллельная слева и рекуррентная справа.\nИсточник: Yutao Sun et al., [Retentive Network, Figure 3](https://arxiv.org/abs/2307.08621).*\n\nВ упрощённой записи рекуррентное состояние — матрица накопленных внешних произведений:\n\n$$\nS_t=\\gamma S_{t-1}+k_t^\\top v_t,\\qquad y_t=q_tS_t.\n$$\n\nЗдесь $q_t,k_t,v_t$ записаны строками, а $S_t$ имеет размер\n$d_k\\times d_v$. Для скалярного примера\n$q_t=k_t=1$, $\\gamma=0.5$, $S_0=0$ и тех же значений $(2,4,8)$ получаются\n$y_1=2$, $y_2=5$, $y_3=10.5$. В отличие от WKV выше, в этом упрощённом retention\nнет деления на накопленную сумму экспоненциальных весов и отдельного бонуса\nтекущей позиции. Полный RetNet дополнительно содержит позиционное преобразование,\nнормировку и вентиль; этот расчёт сравнивает только оператор памяти.\n\nРазные головы используют разные коэффициенты затухания $\\gamma$, создавая\nнесколько временных масштабов. Блочная форма обрабатывает взаимодействия внутри\nфрагмента параллельно, а между фрагментами передаёт состояние. Это позволяет\nуравновесить пропускную способность и задержку.\n\nБлочная форма особенно полезна как инженерный компромисс:\n\n```text\nвнутри блока → параллельные матричные операции\nмежду блоками → рекуррентное состояние\n```\n\nТаким образом, выбор не сводится к противопоставлению полностью параллельного\nTransformer и полностью последовательной RNN.",
+          "new": "## RetNet: три эквивалентных формы retention\n\nМеханизм retention в RetNet можно вычислять тремя способами:\n\n1. параллельно — при обучении;\n2. рекуррентно — при генерации по одному токену;\n3. рекуррентно по блокам — при работе с длинными последовательностями.\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/retnet-dual-form.png]]\n\n*Две формы вычисления retention: параллельная слева и рекуррентная справа.\nИсточник: Yutao Sun et al., [Retentive Network, Figure 3](https://arxiv.org/abs/2307.08621).*\n\nВ упрощённой записи рекуррентное состояние — матрица накопленных внешних произведений:\n\n$$\nS_t=\\gamma S_{t-1}+k_t^\\top v_t,\\qquad y_t=q_tS_t.\n$$\n\nЗдесь $q_t,k_t,v_t$ записаны строками, а $S_t$ имеет размер\n$d_k\\times d_v$. Для скалярного примера\n$q_t=k_t=1$, $\\gamma=0.5$, $S_0=0$ и тех же значений $(2,4,8)$ получаются\n$y_1=2$, $y_2=5$, $y_3=10.5$. В отличие от WKV выше, в этом упрощённом retention\nнет деления на накопленную сумму экспоненциальных весов и отдельного бонуса\nтекущей позиции. Полный RetNet дополнительно содержит позиционное преобразование,\nнормировку и вентиль; этот расчёт сравнивает только оператор памяти.\n\n### Позиции: от вращения к относительному расстоянию\n\nВ упрощённой формуле выше позиционные преобразования опущены. В\n[исходной статье, §2.1, Eq. 4–6](https://arxiv.org/html/2307.08621v1#S2.SS1)\nони включены в запросы и ключи. Для вывода удобно записать вращения пар\nвещественных координат в комплексной форме. Пусть $q_t^0,k_t^0$ — строки\nдо вращения, а $\\theta$ — вектор частот:\n\n$$\nQ_t=q_t^0\\odot e^{it\\theta},\\qquad\nK_t=k_t^0\\odot e^{-it\\theta}.\n$$\n\nОтрицательный знак уже задаёт комплексно-сопряжённую фазу ключа.\nЕсли вместо $K_t$ использовать обозначение\n$k_t=k_t^0\\odot e^{it\\theta}$, та же запись состояния имеет вид\n$S_t=\\gamma S_{t-1}+\\bar k_t^\\top v_t$.\nСопрягать $K_t$ ещё раз не нужно. При $S_0=0$ развёртка даёт\n\n$$\n\\begin{aligned}\nS_t&=\\sum_{j=1}^t\\gamma^{t-j}K_j^\\top v_j,\\\\\ny_t&=Q_tS_t\n=\\sum_{j=1}^t\\gamma^{t-j}(Q_tK_j^\\top)v_j.\n\\end{aligned}\n$$\n\nВ произведении $Q_tK_j^\\top$ фазовый множитель равен\n$e^{i(t-j)\\theta}$: положение входит через расстояние между запросом\nи записью. В вещественной реализации это вращения двумерных пар и обычное\nскалярное произведение. Комплексная запись объясняет позиционный множитель,\nа не требует комплексного типа для всех тензоров модели.\n\nДля одной пары с частотой $\\pi/2$, единичными исходными запросами и ключами,\n$\\gamma=1/2$ и значениями $(2,4,8)$ вещественные запросы и ключи равны\n$(0,1)$, $(-1,0)$, $(0,-1)$. На третьем шаге вклад первой записи равен\n$\\tfrac14\\cos(\\pi)\\cdot2=-0.5$, второй —\n$\\tfrac12\\cos(\\pi/2)\\cdot4=0$, текущей — 8. Выход равен 7.5, а не 10.5\nиз примера без вращений. Вес retention может быть отрицательным:\nэто не вероятность после softmax.\n\n### Граница блока: что именно передаётся дальше\n\nПусть блок начинается после позиции $a$ и содержит $b$ токенов.\n$S_a$ — уже накопленное состояние, а $r=1,\\ldots,b$ — позиция внутри\nнового блока. Раскрывая ту же рекурсию, получаем\n\n$$\n\\begin{aligned}\nS_{a+r}\n &=\\gamma^rS_a+\n   \\sum_{i=1}^{r}\\gamma^{r-i}K_{a+i}^\\top v_{a+i},\\\\\ny_{a+r}\n &=\\gamma^rQ_{a+r}S_a+\n   \\sum_{i=1}^{r}\\gamma^{r-i}\n        (Q_{a+r}K_{a+i}^\\top)v_{a+i},\\\\\nS_{a+b}\n &=\\gamma^bS_a+\n   \\sum_{i=1}^{b}\\gamma^{b-i}K_{a+i}^\\top v_{a+i}.\n\\end{aligned}\n$$\n\nПервая часть выхода читает пришедшее состояние; вторая связывает позиции\nвнутри блока. Последняя строка готовит состояние для следующего блока.\nМножитель $\\gamma^b$ относится к старому состоянию, а новая запись\nв начале блока затухает $b-1$ раз. Просто прибавить все новые внешние\nпроизведения без этих степеней нельзя.\n\nВ скалярном примере $(2,4,8)$ после первых двух токенов $S_2=5$.\nБлок из одного оставшегося токена даёт $S_3=0.5\\cdot5+8=10.5$.\nЕсли же первые два токена считать одним блоком из нулевого состояния,\nего выходное состояние равно $0.5\\cdot2+4=5$.\nГраница не меняет результат, пока сохраняются степени затухания\nи абсолютные позиции вращения. Здесь состояние означает буквально\n$S_a$ из токенной рекурсии Eq. 6, без дополнительной нормировки.\nЕсли реализация хранит нормированный тензор и отдельный масштаб,\nперед продолжением нужно восстановить то же значение состояния.\n\nНиже проверяются параллельная матрица, токенная рекурсия и блоки.\nЗдесь Q/K уже содержат вещественные позиционные вращения.\nНормировка голов, вентиль и выходные проекции полного RetNet не включены.\n\n~~~python\ndef retention_three_forms(q, k, v, gamma, block_size, initial=None):\n    T = len(q)\n    if T < 1 or block_size < 1 or not 0 < gamma < 1:\n        raise ValueError(\"nonempty input, positive block and 0 < gamma < 1 required\")\n    S0 = np.zeros((k.shape[1], v.shape[1])) if initial is None else initial.copy()\n    row, col = np.arange(T)[:, None], np.arange(T)[None, :]\n    decay = np.where(col <= row, gamma ** np.maximum(row-col, 0), 0.)\n    parallel = ((q @ k.T) * decay) @ v\n    parallel += gamma ** np.arange(1, T+1)[:, None] * (q @ S0)\n    state, recurrent = S0.copy(), []\n    for qt, kt, vt in zip(q, k, v):\n        state = gamma * state + np.outer(kt, vt)\n        recurrent.append(qt @ state)\n    recurrent_state = state.copy()\n    state, blocked = S0.copy(), []\n    for start in range(0, T, block_size):\n        Q, K, V = q[start:start+block_size], k[start:start+block_size], v[start:start+block_size]\n        b = len(Q)\n        r, i = np.arange(b)[:, None], np.arange(b)[None, :]\n        D = np.where(i <= r, gamma ** np.maximum(r-i, 0), 0.)\n        inner = ((Q @ K.T) * D) @ V\n        cross = gamma ** np.arange(1, b+1)[:, None] * (Q @ state)\n        blocked.append(inner + cross)\n        tail = gamma ** np.arange(b-1, -1, -1)\n        state = gamma ** b * state + K.T @ (tail[:, None] * V)\n    return parallel, np.array(recurrent), np.concatenate(blocked), recurrent_state, state\n\nangles_ret = np.arange(1, 4) * np.pi / 2\nq_ret = k_ret = np.column_stack((np.cos(angles_ret), np.sin(angles_ret)))\nv_ret = np.array([[2.], [4.], [8.]])\nforms_ret = retention_three_forms(q_ret, k_ret, v_ret, .5, block_size=2)\nfor result_ret in forms_ret[:3]:\n    np.testing.assert_allclose(result_ret[:, 0], [2., 4., 7.5], atol=1e-14)\nnp.testing.assert_allclose(forms_ret[3], forms_ret[4], atol=1e-14)\n~~~\n\nДля независимых блоков нельзя начинать вращения снова с позиции 1:\nсостояние уже содержит ключи прежних абсолютных позиций. Ненулевое\nначальное состояние также нельзя отбросить; в параллельной форме ему\nсоответствует отдельное слагаемое $\\gamma^tQ_tS_0$.\n\nРазные головы используют разные коэффициенты затухания $\\gamma$, создавая\nнесколько временных масштабов. Блочная форма обрабатывает взаимодействия внутри\nфрагмента параллельно, а между фрагментами передаёт состояние. Это позволяет\nуравновесить пропускную способность и задержку.\n\nБлочная форма особенно полезна как инженерный компромисс:\n\n```text\nвнутри блока → параллельные матричные операции\nмежду блоками → рекуррентное состояние\n```\n\nТаким образом, выбор не сводится к противопоставлению полностью параллельного\nTransformer и полностью последовательной RNN."
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+      "before_sha256": "0e7850191277c2721d260077c3b098279ccecf39ceb37be42525f482826485cc",
+      "after_sha256": "c15d27a0f6565299948cf7c3aa0005428743735058ff8d9998707bced97c1b85",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-23",
+          "new": "last_updated: 2026-10-29"
+        },
+        {
+          "old": "  - https://arxiv.org/abs/2306.15595",
+          "new": "  - https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/89d501aed998d33fa4f4702102ec1bb2331e10f6/DeepSeek_V4.pdf\n  - https://arxiv.org/abs/2306.15595"
+        },
+        {
+          "old": "<a id=\"recurrence-compression-и-retrieval\"></a>",
+          "new": "<a id=\"compressed-sparse-attention-csa-hca\"></a>\n## CSA и HCA: сжать позиции, затем выбрать записи\n\nDSA уменьшает число прочитанных записей, но сохраняет KV-представления\nкаждой позиции. В CSA и HCA группы входных позиций сначала превращаются\nв сжатые записи. CSA затем выбирает часть таких записей индексатором;\nHCA сильнее сжимает историю и читает весь получившийся набор.\n\nНиже сохранён английский разбор с формулировками из опубликованного отчёта\nDeepSeek-V4. Это два конкретных устройства attention, не общее свойство\nвсех sparse-моделей. Параметры Pro/Flash и изменения между релизами\nостаются в [[02 Атлас моделей/Семейства/DeepSeek#deepseek-v4-csa-hca|атласе DeepSeek]].\n\nИсточник: DeepSeek-AI, [DeepSeek-V4 technical report, §§2.3.1–2.3.3,\npp. 9–13](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/89d501aed998d33fa4f4702102ec1bb2331e10f6/DeepSeek_V4.pdf).\nВерсия PDF зафиксирована по репозиторию от 6 мая 2026 года; его\n[MIT License](/licenses/deepseek-v4-89d501ae-MIT.txt) сохранена вместе\nс источником. Это разбор исходного V4, не всех последующих обновлений API.\n\n### Compressed Sparse Attention: compress, select, attend\n\n![[00 Учебник/Assets/Figures/curated/cs336-residuals-2026-10-29/deepseek-v4-csa.png]]\n\n*DeepSeek-AI, Figure 3: CSA. Оригинальный рисунок из отчёта, сохранённый\nтакже в [CS336 Lecture 10](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/deepseek-v4-attention.png).\nПодписи и элементы не изменены. Слева проходит отдельная ветвь\nнедавних несжатых токенов; пунктиром выделен индексатор.*\n\n<!-- source-excerpt: deepseek-v4-csa-indexer -->\n> The core architecture of CSA is illustrated in Figure 3, which first compresses\n> the KV cache of each $m$ tokens into one entry, and then applies DeepSeek\n> Sparse Attention for further acceleration.\n>\n> After obtaining the compressed KV entries $C^{\\mathrm{Comp}}$, CSA applies\n> the DSA strategy to select top-k compressed KV entries for core attention.\n> First, CSA performs the same compression operation used for\n> $C^{\\mathrm{Comp}}$ to get compressed indexer keys\n> $K^{I\\mathrm{Comp}}\\in\\mathbb R^{\\frac n m\\times c_I}$, where $c_I$ is the\n> indexer head dimension.\n<!-- /source-excerpt -->\n\n**Reading the compressor.** The report uses two projections of the input\nstates, $C^a=HW^a_{KV}$ and $C^b=HW^b_{KV}$, and two corresponding weight\nprojections $Z^a=HW^a_Z$, $Z^b=HW^b_Z$. Compressed entry $i$ combines the\ncurrent group of $m$ tokens from branch $a$ and the preceding group from\nbranch $b$. For each feature coordinate, a softmax normalizes the learned\nweights over those $2m$ positions; their weighted values are then summed.\nThe first entry has no preceding group, so that half is masked and padded.\nEntries overlap, but a new entry is produced once per $m$ new tokens, not\nonce per $2m$ tokens. Compression here is learned weighted pooling over\npositions, not quantization and not copying a single representative token.\n\nThe smaller indexer computes a score for each available compressed entry:\n\n$$\nI_{t,s}=\\sum_{h=1}^{n_I}w^I_{t,h}\\,\n\\operatorname{ReLU}\\!\\left(q^I_{t,h}\\cdot K^{I\\mathrm{Comp}}_s\\right).\n$$\n\nThe main attention reads the top-$k$ entries selected by these scores.\nSelection does not delete the remaining pool: a later query may select\ndifferent entries. Therefore $k$ bounds the long-range entries read by the\nmain attention for a query, not the total cache stored for the sequence.\nThe indexer still has its own compressed keys, scores and computation.\n\n<!-- source-excerpt: deepseek-v4-shared-kv -->\n> After selecting the sparse KV entries, CSA then performs core attention in a\n> Multi-Query Attention (MQA) manner, where each compressed KV entry in\n> $\\mathcal C_t^{\\mathrm{SprsComp}}$ serves as both attention key and value.\n<!-- /source-excerpt -->\n\nOne entry is thus reused across query heads **and** as both K and V. This\ndiffers from ordinary MQA, which shares one K head and one V head but need\nnot make their vectors identical. The concatenated head outputs are also\nlarge, so V4 first projects separate groups of heads into lower-dimensional\nintermediate vectors and then projects their concatenation to the model\nwidth. The grouped output projection is separate from KV compression.\n\n### Heavily Compressed Attention: read the whole smaller pool\n\n![[00 Учебник/Assets/Figures/curated/cs336-residuals-2026-10-29/deepseek-v4-hca.png]]\n\n*DeepSeek-AI, Figure 4, PDF p. 11, тот же отчёт и MIT License.\nИз страницы извлечён весь рисунок при 300 dpi; удалены только поля и\nокружающий текст. В HCA нет ни Lightning Indexer, ни top-k selector.*\n\n<!-- source-excerpt: deepseek-v4-hca -->\n> The core architecture of HCA is illustrated in Figure 4, which compresses\n> the KV cache in a heavier manner, but does not employ sparse attention.\n>\n> By and large, the compression strategy of HCA is similar to that of CSA,\n> but employs a larger compression rate $m'\\ (\\gg m)$ and does not perform\n> overlapped compression.\n<!-- /source-excerpt -->\n\n**Reading equations (20)–(23).** HCA computes $C=HW_{KV}$ and $Z=HW_Z$.\nFor every non-overlapping group of $m'$ positions, it normalizes $Z+B$\nacross positions, independently for each coordinate. If $S_j$ is the\nresulting weight vector, compressed entry $i$ is\n\n$$\nC_i^{\\mathrm{Comp}}=\n\\sum_{j=m'i}^{m'(i+1)-1} S_j\\odot C_j.\n$$\n\nThe query attends to all causally available entries in this smaller pool.\nThere is no top-$k$ stage. CSA keeps a less compressed history and searches\nit; HCA reads a more compressed history without searching. Neither operation\nrecovers all the information in the original per-token states exactly.\n\n### Why both branches retain a local window\n\n<!-- source-excerpt: deepseek-v4-local-window -->\n> In order to strictly preserve causality in CSA and HCA, each query attends\n> to only preceding compressed KV blocks. Consequently, a query cannot\n> access information from other tokens within its own compressed block.\n> Meanwhile, recent tokens usually possess greater relevance to the query\n> token in language modeling. For these reasons, we introduce a supplementary\n> attention branch to both CSA and HCA in a sliding window manner, for better\n> modeling of local dependencies. To be specific, for each query token, we\n> additionally produce $n_{\\mathrm{win}}$ uncompressed KV entries corresponding\n> to the recent $n_{\\mathrm{win}}$ tokens. In the core attention of CSA and HCA,\n> these KV entries in the sliding window will be used along with the\n> compressed KV entries.\n<!-- /source-excerpt -->\n\nThe two figures show concatenation **before** core attention: local and\nlong-range entries contribute to the same attention computation. A block\nmust not expose future tokens through its pooled representation. An\nunfinished block therefore needs separate temporary state until its entry\ncan be completed. A cache implementation must preserve that state when\nprefill is chunked or a request is resumed.\n\n### Example: coordinate-wise pooling and a causal block boundary\n\nTake four KV rows $(1,10),(3,30),(5,50),(7,70)$ and a CSA stride $m=2$.\nFor the second compressed entry, branch $a$ contributes rows 2–3 and branch\n$b$ contributes rows 0–1 of its own projection. These are different learned\nprojections, even when they originate from the same input positions.\n\nFor one feature coordinate, let the four pooling logits be\n$(0,0,\\ln3,\\ln3)$. Their weights are $(1/8,1/8,3/8,3/8)$.\nFor the other coordinate, let all four logits be zero, giving four weights\nof $1/4$. If branch $b$ starts with $(2,20),(4,40)$, the resulting entry is\n\n$$\nC_1^{\\mathrm{Comp}}=\n\\left(\\frac{5+7+3\\cdot2+3\\cdot4}{8},\n      \\frac{50+70+20+40}{4}\\right)\n=(3.75,45).\n$$\n\nThe weights are normalized across positions **separately for each feature**.\nThey are not one scalar weight shared by all coordinates of a token.\nFor the first entry, the preceding branch is masked: rows $(1,10),(3,30)$\nalone give $(2,20)$ when their logits are zero.\nHCA with $m'=4$ and zero logits instead gives one non-overlapping entry\n$(4,40)$. These are deliberately small, specified tensors, not activations\nmeasured from a trained V4.\n\nWith zero-based token positions, CSA entry $i$ may be read only when\n$i<\\lfloor t/m\\rfloor$. At query $t=3$, entry 1 is still forbidden even\nif a batched computation has already formed it from positions 2 and 3.\nAt $t=4$, both entries 0 and 1 are available. The local window supplies\nrecent uncompressed entries, including those not accessible through a\ncompleted preceding block.\n\n~~~python\ndef pool_position_groups(values_a, logits_a, stride, values_b=None, logits_b=None):\n    # logits include the learned within-group positional bias.\n    if stride < 1:\n        raise ValueError(\"positive stride required\")\n    if (values_b is None) != (logits_b is None):\n        raise ValueError(\"both overlap-branch tensors are required\")\n    pooled = []\n    for i in range(len(values_a) // stride):\n        lo, hi = i * stride, (i+1) * stride\n        values, logits = values_a[lo:hi], logits_a[lo:hi]\n        if values_b is not None and i > 0:\n            values = np.concatenate((values, values_b[lo-stride:lo]), axis=0)\n            logits = np.concatenate((logits, logits_b[lo-stride:lo]), axis=0)\n        weights = np.exp(logits - logits.max(axis=0, keepdims=True))\n        weights /= weights.sum(axis=0, keepdims=True)\n        pooled.append((weights * values).sum(axis=0))\n    return np.array(pooled).reshape(-1, values_a.shape[1])\n\nkv_a_pool = np.array([[1., 10.], [3., 30.], [5., 50.], [7., 70.]])\nkv_b_pool = np.array([[2., 20.], [4., 40.], [6., 60.], [8., 80.]])\nza_pool = np.zeros_like(kv_a_pool)\nzb_pool = np.column_stack((np.full(4, np.log(3.)), np.zeros(4)))\ncsa_pool = pool_position_groups(kv_a_pool, za_pool, 2, kv_b_pool, zb_pool)\nhca_pool = pool_position_groups(kv_a_pool, za_pool, 4)\nnp.testing.assert_allclose(csa_pool, [[2., 20.], [3.75, 45.]])\nnp.testing.assert_allclose(hca_pool, [[4., 40.]])\nassert len(csa_pool[:3//2]) == 1  # query 3 cannot read its own compressed group\nassert len(csa_pool[:4//2]) == 2\n\n# At query 4 the indexer selects CSA entry 1; HCA reads its whole one-entry pool.\n# A two-token local window is concatenated before one main-attention softmax.\nlocal_pool = np.array([[7., 70.], [9., 90.]])\ncsa_keys = np.concatenate((csa_pool[[1]], local_pool), axis=0)\nhca_keys = np.concatenate((hca_pool, local_pool), axis=0)\nquery_pool = np.zeros((1, 2))\ncsa_out = attention(query_pool, csa_keys, csa_keys, np.ones((1, 3), dtype=bool))\nhca_out = attention(query_pool, hca_keys, hca_keys, np.ones((1, 3), dtype=bool))\nnp.testing.assert_allclose(csa_out, [[19.75/3, 205./3]])\nnp.testing.assert_allclose(hca_out, [[20./3, 200./3]])\n~~~\n\nThe zero query makes the three main-attention weights equal. This isolates\nwhich entries are read; it does not reproduce V4's trained projections,\nquery/KV RMSNorm, partial RoPE, sink or grouped output projection. Computing\nseparate normalized local and long-range outputs and then adding them would\nuse a different denominator.\n\n### Shared K/V, output rotation and the sink\n\nPartial RoPE applies to the final 64 coordinates of each 512-dimensional\nquery/KV vector. Because a KV entry also acts as the value, the attention\noutput would otherwise carry absolute-position rotation; the report applies\nan inverse-position rotation to the corresponding output coordinates.\nRMSNorm of queries/KV, a per-head learnable sink logit and the grouped output\nprojection complete the attention block. They are not additional reductions\nof the number of cached positions.\n\nFor the rotary coordinates, the inverse output rotation follows directly\nfrom linearity. If entry $j$ is stored as $R_jc_j$, the weighted output is\n$\\sum_j a_{tj}R_jc_j$. Applying $R_{-t}$ gives\n\n$$\nR_{-t}\\sum_j a_{tj}R_jc_j\n =\\sum_j a_{tj}R_{j-t}c_j.\n$$\n\nThe output therefore contains relative rather than uncorrected absolute\nrotations. The rotation changes coordinates, not the number of pool entries.\n\nThe per-head sink logit $z'_h$ enters the denominator but has no nonzero\nvalue vector. For ordinary logits $z_{t,j}$, Eq. 27 gives\n\n$$\na_{t,j}=\\frac{\\exp z_{t,j}}\n{\\sum_r\\exp z_{t,r}+\\exp z'_h}.\n$$\n\nThe weights assigned to real entries may now sum to less than one.\nFor two zero logits and a zero sink logit they sum to $2/3$, not 1.\nThe main-attention example above intentionally excludes this extra term;\notherwise its equal real-entry weights would be $1/4$ rather than $1/3$.\n\nCSA and HCA reduce the number of long-range positions stored, but neither\ncreates a fixed-size recurrent state: their pools still grow approximately\nas $n/m$ and $n/m'$. CSA additionally stores compressed indexer keys.\nThe sliding window, overlapping compressor state and incomplete group tail\nare separate parts of the cache. A top-$k$ cap bounds selected reads, not\nthe total pool. Concrete V4 layer counts and the distinction between decoder\nand MTP layers are recorded in the\n[[02 Атлас моделей/Семейства/DeepSeek#deepseek-v4-csa-hca|DeepSeek release card]].\n\n<a id=\"recurrence-compression-и-retrieval\"></a>"
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/DeepSeek.md",
+      "before_sha256": "a90e01407a465aa43b8ceb8af17cd2f739197cc33aaad9dc53aaf804233f051f",
+      "after_sha256": "ec05306c5d3d3aa5e61b59b2fc31e52863c6a169fbc57a5eb1998ef5d1886b92",
+      "changes": [
+        {
+          "old": "<!-- BEGIN REVIEW: CS336 V4 attention 2026-10-29 -->\n<a id=\"deepseek-v4-csa-hca\"></a>\n\n## DeepSeek-V4: compression across token positions\n\nВ V4 сохраняются MoE и multi-token prediction, но внимание уже нельзя\nописать как MLA из V2/V3 с новым индексатором. В [официальной конфигурации\nPro](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/b5968e9190ef611bbf34a7229255be88a0e937c1/config.json)\nуказана одна общая KV-голова и чередование коэффициентов сжатия 4 и 128.\nНиже сохранены английские объяснения из технического отчёта; формулы\nперенабраны в LaTeX. Дополнения с расчётами обозначены отдельно.\n\nИсточник: DeepSeek-AI, [DeepSeek-V4 technical report, §§2.3.1–2.3.3,\npp. 9–13](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/89d501aed998d33fa4f4702102ec1bb2331e10f6/DeepSeek_V4.pdf).\nВерсия PDF зафиксирована по репозиторию от 6 мая 2026 года; его\n[MIT License](/licenses/deepseek-v4-89d501ae-MIT.txt) сохранена вместе\nс источником. Это разбор исходного V4, не всех последующих обновлений API.\n\n### Compressed Sparse Attention: compress, select, attend\n\n![[00 Учебник/Assets/Figures/curated/cs336-residuals-2026-10-29/deepseek-v4-csa.png]]\n\n*DeepSeek-AI, Figure 3: CSA. Оригинальный рисунок из отчёта, сохранённый\nтакже в [CS336 Lecture 10](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/images/deepseek-v4-attention.png).\nПодписи и элементы не изменены. Слева проходит отдельная ветвь\nнедавних несжатых токенов; пунктиром выделен индексатор.*\n\n<!-- source-excerpt: deepseek-v4-csa-indexer -->\n> The core architecture of CSA is illustrated in Figure 3, which first compresses\n> the KV cache of each $m$ tokens into one entry, and then applies DeepSeek\n> Sparse Attention for further acceleration.\n>\n> After obtaining the compressed KV entries $C^{\\mathrm{Comp}}$, CSA applies\n> the DSA strategy to select top-k compressed KV entries for core attention.\n> First, CSA performs the same compression operation used for\n> $C^{\\mathrm{Comp}}$ to get compressed indexer keys\n> $K^{I\\mathrm{Comp}}\\in\\mathbb R^{\\frac n m\\times c_I}$, where $c_I$ is the\n> indexer head dimension.\n<!-- /source-excerpt -->\n\n**Reading the compressor.** The report uses two projections of the input\nstates, $C^a=HW^a_{KV}$ and $C^b=HW^b_{KV}$, and two corresponding weight\nprojections $Z^a=HW^a_Z$, $Z^b=HW^b_Z$. Compressed entry $i$ combines the\ncurrent group of $m$ tokens from branch $a$ and the preceding group from\nbranch $b$. For each feature coordinate, a softmax normalizes the learned\nweights over those $2m$ positions; their weighted values are then summed.\nThe first entry has no preceding group, so that half is masked and padded.\nEntries overlap, but a new entry is produced once per $m$ new tokens, not\nonce per $2m$ tokens. Compression here is learned weighted pooling over\npositions, not quantization and not copying a single representative token.\n\nThe smaller indexer computes a score for each available compressed entry:\n\n$$\nI_{t,s}=\\sum_{h=1}^{n_I}w^I_{t,h}\\,\n\\operatorname{ReLU}\\!\\left(q^I_{t,h}\\cdot K^{I\\mathrm{Comp}}_s\\right).\n$$\n\nThe main attention reads the top-$k$ entries selected by these scores.\nSelection does not delete the remaining pool: a later query may select\ndifferent entries. Therefore $k$ bounds the long-range entries read by the\nmain attention for a query, not the total cache stored for the sequence.\nThe indexer still has its own compressed keys, scores and computation.\n\n<!-- source-excerpt: deepseek-v4-shared-kv -->\n> After selecting the sparse KV entries, CSA then performs core attention in a\n> Multi-Query Attention (MQA) manner, where each compressed KV entry in\n> $\\mathcal C_t^{\\mathrm{SprsComp}}$ serves as both attention key and value.\n<!-- /source-excerpt -->\n\nOne entry is thus reused across query heads **and** as both K and V. This\ndiffers from ordinary MQA, which shares one K head and one V head but need\nnot make their vectors identical. The concatenated head outputs are also\nlarge, so V4 first projects separate groups of heads into lower-dimensional\nintermediate vectors and then projects their concatenation to the model\nwidth. The grouped output projection is separate from KV compression.\n\n### Heavily Compressed Attention: read the whole smaller pool\n\n![[00 Учебник/Assets/Figures/curated/cs336-residuals-2026-10-29/deepseek-v4-hca.png]]\n\n*DeepSeek-AI, Figure 4, PDF p. 11, тот же отчёт и MIT License.\nИз страницы извлечён весь рисунок при 300 dpi; удалены только поля и\nокружающий текст. В HCA нет ни Lightning Indexer, ни top-k selector.*\n\n<!-- source-excerpt: deepseek-v4-hca -->\n> The core architecture of HCA is illustrated in Figure 4, which compresses\n> the KV cache in a heavier manner, but does not employ sparse attention.\n>\n> By and large, the compression strategy of HCA is similar to that of CSA,\n> but employs a larger compression rate $m'\\ (\\gg m)$ and does not perform\n> overlapped compression.\n<!-- /source-excerpt -->\n\n**Reading equations (20)–(23).** HCA computes $C=HW_{KV}$ and $Z=HW_Z$.\nFor every non-overlapping group of $m'$ positions, it normalizes $Z+B$\nacross positions, independently for each coordinate. If $S_j$ is the\nresulting weight vector, compressed entry $i$ is\n\n$$\nC_i^{\\mathrm{Comp}}=\n\\sum_{j=m'i}^{m'(i+1)-1} S_j\\odot C_j.\n$$\n\nThe query attends to all causally available entries in this smaller pool.\nThere is no top-$k$ stage. CSA keeps a less compressed history and searches\nit; HCA reads a more compressed history without searching. Neither operation\nrecovers all the information in the original per-token states exactly.\n\n### Why both branches retain a local window\n\n<!-- source-excerpt: deepseek-v4-local-window -->\n> In order to strictly preserve causality in CSA and HCA, each query attends\n> to only preceding compressed KV blocks. Consequently, a query cannot\n> access information from other tokens within its own compressed block.\n> Meanwhile, recent tokens usually possess greater relevance to the query\n> token in language modeling. For these reasons, we introduce a supplementary\n> attention branch to both CSA and HCA in a sliding window manner, for better\n> modeling of local dependencies. To be specific, for each query token, we\n> additionally produce $n_{\\mathrm{win}}$ uncompressed KV entries corresponding\n> to the recent $n_{\\mathrm{win}}$ tokens. In the core attention of CSA and HCA,\n> these KV entries in the sliding window will be used along with the\n> compressed KV entries.\n<!-- /source-excerpt -->\n\nThe two figures show concatenation **before** core attention: local and\nlong-range entries contribute to the same attention computation. A block\nmust not expose future tokens through its pooled representation. An\nunfinished block therefore needs separate temporary state until its entry\ncan be completed. A cache implementation must preserve that state when\nprefill is chunked or a request is resumed.\n\n### A cache-count example, not a latency prediction\n\nAt $n=1\\,048\\,576$ tokens and a completed-block boundary, the nominal CSA\npool has $n/4=262\\,144$ entries; the HCA pool has $n/128=8192$. The published\nPro configuration has `index_topk=1024`, `sliding_window=128`,\n`head_dim=512`, and `index_head_dim=128`. A saturated CSA query reads up to\n1024 compressed entries plus its local window. An HCA query reads all 8192\ncompressed entries plus that window. Thus HCA can read more entries per\nquery while storing a much smaller long-range pool.\n\nThese are counts of logical main-attention entries for one layer, not full\ncache bytes. The indexer, overlap/tail state, numeric formats, alignment and\nlayer schedule still matter. In particular, selecting 1024 entries does not\nmean storing only 1024. The published Pro configuration lists 62 compression\nrates for 61 decoder layers **plus one MTP layer**. The decoder has 30 CSA\nlayers and 31 HCA layers; the final zero rate belongs to the sliding-only MTP\nlayer. Counting that last entry as a decoder layer would give the wrong\narchitecture. The assignment of layer indices is explicit in the\n[official implementation](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/b5968e9190ef611bbf34a7229255be88a0e937c1/inference/model.py#L782-L793).\n\nPartial RoPE applies to the final 64 coordinates of each 512-dimensional\nquery/KV vector. Because a KV entry also acts as the value, the attention\noutput would otherwise carry absolute-position rotation; the report applies\nan inverse-position rotation to the corresponding output coordinates.\nRMSNorm of queries/KV, a per-head learnable sink logit and the grouped output\nprojection complete the attention block. They are not additional reductions\nof the number of cached positions.\n\nFor the other V4 changes, §2.2 gives the mHC residual update\n$X_{l+1}=B_lX_l+C_l\\mathcal F_l(A_lX_l)$: $B_l$ is constrained to be doubly\nstochastic, rather than an unrestricted mixing matrix. §2.4 applies Muon to\nmost matrix parameters while retaining AdamW for embeddings, the prediction\nhead, RMSNorm weights and selected mHC parameters. These are separate\nchanges to residual propagation and optimization, not effects of CSA/HCA.\n\nThe authors' relative FLOP/cache estimates depend on the baseline, context\nlength and storage formats. They are not measured latency on this machine.\n<!-- END REVIEW: CS336 V4 attention 2026-10-29 -->",
+          "new": "<a id=\"deepseek-v4-csa-hca\"></a>\n\n## DeepSeek-V4: compression across token positions\n\nV4 заменяет MLA из V2/V3 чередованием CSA и HCA. В\n[закреплённой конфигурации Pro](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/b5968e9190ef611bbf34a7229255be88a0e937c1/config.json)\nуказаны одна общая KV-голова и коэффициенты сжатия 4 и 128.\nЭто особенности исходного V4; из них нельзя выводить устройство\nпоследующих закрытых API-обновлений.\n\n<a id=\"compressed-sparse-attention-compress-select-attend\"></a>\n<a id=\"heavily-compressed-attention-read-the-whole-smaller-pool\"></a>\n<a id=\"why-both-branches-retain-a-local-window\"></a>\n\nПолный разбор перенесён в\n[[00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание#compressed-sparse-attention-csa-hca|главу о CSA и HCA]]:\nтам сохранены оригинальные Figures 3–4, английские source excerpts,\nпоэлементные веса компрессора, shared-KV attention, причинная граница\nблока и численный пример. Здесь остаются конфигурация и отличия релиза.\n\nИсточник этих механизмов и чисел: DeepSeek-AI,\n[DeepSeek-V4 technical report, §§2.3.1–2.3.3, pp. 9–13](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/89d501aed998d33fa4f4702102ec1bb2331e10f6/DeepSeek_V4.pdf).\nВерсия PDF закреплена по репозиторию от 6 мая 2026 года;\n[MIT License](/licenses/deepseek-v4-89d501ae-MIT.txt) сохранена локально.\n\n### A cache-count example, not a latency prediction\n\nAfter a prefix of $n=1\\,048\\,576$ tokens at a completed-block boundary, the\nnext query has position $t=n$ in zero-based indexing. Its available CSA\npool has $n/4=262\\,144$ entries; the HCA pool has $n/128=8192$. The published\nPro configuration has `index_topk=1024`, `sliding_window=128`,\n`head_dim=512`, and `index_head_dim=128`. A saturated CSA query reads up to\n1024 compressed entries plus its local window. An HCA query reads all 8192\ncompressed entries plus that window. Thus HCA can read more entries per\nquery while storing a much smaller long-range pool.\n\nThese are counts of logical main-attention entries for one layer, not full\ncache bytes. The indexer, overlap/tail state, numeric formats, alignment and\nlayer schedule still matter. In particular, selecting 1024 entries does not\nmean storing only 1024. The published Pro configuration lists 62 compression\nrates for 61 decoder layers **plus one MTP layer**. The decoder has 30 CSA\nlayers and 31 HCA layers; the final zero rate belongs to the sliding-only MTP\nlayer. Counting that last entry as a decoder layer would give the wrong\narchitecture. The assignment of layer indices is explicit in the\n[official implementation](https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/b5968e9190ef611bbf34a7229255be88a0e937c1/inference/model.py#L782-L793).\n\nFor this configuration, top-$k$ caps selected reads, not the total cache stored.\nPartial RoPE covers the final 64 of 512 query/KV coordinates; query/KV RMSNorm,\nthe inverse output rotation, a learnable sink logit and the grouped output\nprojection are described in the linked mechanism section.\n\nFor the other V4 changes, §2.2 gives the mHC residual update\n$X_{l+1}=B_lX_l+C_l\\mathcal F_l(A_lX_l)$: $B_l$ is constrained to be doubly\nstochastic, rather than an unrestricted mixing matrix. §2.4 applies Muon to\nmost matrix parameters while retaining AdamW for embeddings, the prediction\nhead, RMSNorm weights and selected mHC parameters. These are separate\nchanges to residual propagation and optimization, not effects of CSA/HCA.\n\nThe authors' relative FLOP/cache estimates depend on the baseline, context\nlength and storage formats. They are not measured latency on this machine."
+        }
+      ]
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/RetNet.md",
+      "before_sha256": "4d62cc4b8ada6e8c7b5f6cad54734a9caa082c04beb253a534a87d5ede73e87e",
+      "after_sha256": "80b91e5e9feb38b27cefb98038be2188c44d3fa0bdb7a5cba16510d5ca2e54fb",
+      "changes": [
+        {
+          "old": "---\ntitle: \"RetNet\"\ntype: model-family\norganization: Microsoft Research\nfirst_release: 2023\nlatest_verified_release: RetNet\nlast_verified: 2026-08-06\narchitecture_base: retention network\nmodalities: [sequence]\nstatus: research\n---\n\n# RetNet\n\nRetNet — опубликованная архитектурная линия, а не последовательность широко распространённых чат-моделей. Её задача — совместить параллельное обучение на GPU с рекуррентным декодированием постоянной памяти. Для этого self-attention заменяется операцией *retention*, которую можно записать в трёх вычислительно эквивалентных формах.\n\n## Один оператор, три режима\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/retnet-dual-form.png]]\n\n*Рисунок: Sun et al., [Retentive Network](https://arxiv.org/abs/2307.08621), Figure 3; локальная копия. Слева показано параллельное вычисление последовательности, справа — то же накопление как рекуррентное состояние.*\n\nВ параллельной форме retention строит взаимодействия позиций матрично, поэтому обучение использует ускорители подобно Transformer. В рекуррентной форме вклад прошлого сворачивается в состояние: на каждом шаге оно затухает и пополняется произведением текущих ключа и значения. В блочно-рекуррентной форме (chunkwise-recurrent) последовательность делится на блоки: внутри блока вычисления параллельны, между блоками передаётся состояние. Это компромисс для длинного контекста и prefill.\n\nЕсли позиционные вращения включить в $q_t,k_t\\in\\mathbb C^{d_k}$, то одну голову можно записать как\n$$\nS_t=\\gamma S_{t-1}+\\bar k_t v_t^\\top,\\qquad\ny_t=q_t^\\top S_t,\\qquad S_0=0,\n$$\nгде $v_t\\in\\mathbb R^{d_v}$, $S_t\\in\\mathbb C^{d_k\\times d_v}$, $\\bar k_t$ — комплексно-сопряжённый ключ, а $0<\\gamma<1$ — затухание. Развёртка даёт $y_t=\\sum_{i=1}^{t}\\gamma^{t-i}(q_t^\\top\\bar k_i)v_i^\\top$: это тот же оператор в параллельной форме, до нормализации и затворов полного блока. Для блока длины $b$ входящее состояние переносится с множителем $\\gamma^b$, а новые внешние произведения прибавляются с соответствующими степенями $\\gamma$. Поэтому граница блока не меняет математическую операцию.\n\nВ скалярном случае без вращений, при $q=k=1$, $\\gamma=1/2$ и значениях $(2,4,8)$, состояния равны $(2,5,10.5)$. Параллельная сумма на третьем шаге даёт то же $2/4+4/2+8=10.5$; при разбиении после второго шага получаем $0.5\\cdot5+8$. Разбор трёх форм — в [[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#RetNet: три эквивалентных формы retention|главе о retention]].\n\nОперация отличается от softmax-attention двумя решениями. Вклад позиции явно экспоненциально затухает с расстоянием. Относительное положение кодируется комплексным вращением, благодаря которому параллельная запись допускает рекуррентное преобразование. Несколько скоростей затухания образуют multi-scale retention: разные головы удерживают информацию на разных временных масштабах.\n\n## Блок, обучение и данные\n\nRetNet-блок состоит из multi-scale retention и FFN с остаточными соединениями и нормализацией. Это авторегрессионная языковая модель: она обучается предсказывать следующий токен. Архитектура меняет способ переноса информации по последовательности, но не определяет корпус, токенизатор или alignment. В исходной работе проверялись модели до 6.7B параметров и scaling laws; готовой универсальной линейки instruct-чекпойнтов уровня Llama авторы не выпускали.\n\n## Цена постоянной памяти\n\nПри пошаговом выводе RetNet не хранит KV-cache длины `L`, поэтому память состояния постоянна, а вычисление следующего токена не растёт вместе с контекстом. Но прошлое сжато: Transformer может сопоставить запрос с конкретным старым ключом, тогда как retention должен заранее сохранить сигнал в агрегате. Отсюда различие между асимптотикой и качеством retrieval. Успешный тест на длинной последовательности не следует автоматически из `O(1)` памяти.\n\nПрактическую скорость сравнивают при одинаковых аппаратуре, длинах входа и выхода, размере пакета и точности; для Transformer фиксируют также реализацию внимания и управление KV-кэшем. Наличие рекуррентной формы не доказывает, что любой сервис RetNet окажется быстрее оптимизированного Transformer.\n\n## Статус линии\n\nКарточка описывает исходную статью 2023 года и её реализацию в UniLM; последующие производные и продуктовые релизы не входят в этот обзор. RetNet следует изучать как ясный архитектурный мост между attention и recurrence, а не как активно обновляемое семейство продуктов.\n\n## Источники\n\n- [Retentive Network](https://arxiv.org/abs/2307.08621) — paper и рисунки.\n- [Microsoft Research publication](https://www.microsoft.com/en-us/research/?p=958491) — официальный обзор.\n- [Reference implementation](https://github.com/microsoft/unilm/tree/master/retnet) — три режима вычисления.\n",
+          "new": "---\ntitle: \"RetNet\"\ntype: model-family\norganization: Microsoft Research\nfirst_release: 2023\nlatest_verified_release: RetNet\nlast_verified: 2026-08-06\narchitecture_base: retention network\nmodalities: [sequence]\nstatus: research\n---\n\n# RetNet\n\nRetNet — опубликованная в 2023 году исследовательская архитектура,\nне линейка постоянно обновляемых чат-моделей. Статья сопоставляет её с\nTransformer при параллельном обучении и рекуррентном декодировании.\nКонтекст хранится в матричном состоянии, а не в списке K/V каждой позиции.\n\n## Исходная модель и эксперимент\n\n![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/retnet-dual-form.png]]\n\n*Sun et al., [Retentive Network, Figure 3](https://arxiv.org/html/2307.08621v1#S2.SS1).\nОригинальная схема параллельной и рекуррентной форм. Одна и та же операция\nвычисляется разными способами; рисунок не сравнивает два набора весов.*\n\nВ исходной работе проверены модели до 6.7B параметров. RetNet-блок\nсочетает multi-scale retention и FFN, остаточные связи и нормировку.\nМодель обучается предсказывать следующий токен; выбор retention сам\nпо себе не задаёт токенизатор, корпус или instruction tuning.\n\nПолный механизм находится в\n[[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#RetNet: три эквивалентных формы retention|основной главе о retention]].\nТам выведены комплексные позиционные множители и их вещественная реализация,\nпараллельная сумма, перенос состояния между блоками и проверяемый пример\nравенства трёх форм. Эти формулы не образуют отдельную версию RetNet\nи поэтому не повторяются в карточке релиза.\n\n## Границы результатов\n\nПамять состояния при пошаговом выводе не растёт с числом прочитанных\nтокенов, но сжатие не гарантирует точного извлечения любого давнего факта.\nПрактическую скорость сравнивают при одинаковых аппаратуре, длинах\nвхода и выхода, размере пакета и точности; для Transformer фиксируют\nтакже реализацию внимания и управление KV-кэшем. Рекуррентная форма\nне доказывает, что любой сервис RetNet окажется быстрее оптимизированного\nTransformer.\n\nКарточка описывает исходную статью и её реализацию в UniLM. Последующие\nпроизводные и продуктовые релизы не входят в этот обзор; здесь не\nустанавливается отсутствие более поздних моделей.\n\n## Источники\n\n- [Retentive Network, v1, §§2–3](https://arxiv.org/html/2307.08621v1) — механизм и условия экспериментов.\n- [Microsoft Research publication](https://www.microsoft.com/en-us/research/?p=958491) — официальный обзор.\n- [Reference implementation](https://github.com/microsoft/unilm/tree/master/retnet) — параллельный, рекуррентный и блочный режимы.\n"
+        }
+      ]
+    },
+    {
+      "source": "publishing/tools/check_sequence_examples.py",
+      "before_sha256": "2af71b0463e6b3ab0aa18481fa66c349bb291999f0fa27856c0dcd448ccb2117",
+      "after_sha256": "d8bf56a72284ce69cbbd7372147fb09c2a2ba013d79c54b0c00db139d58042e1",
+      "changes": [
+        {
+          "old": "assert len(blocks) == 5",
+          "new": "assert len(blocks) == 6"
+        },
+        {
+          "old": "print('PASS five published blocks', hashlib.sha256(FILE.read_bytes()).hexdigest())",
+          "new": "print('PASS six published blocks', hashlib.sha256(FILE.read_bytes()).hexdigest())"
+        },
+        {
+          "old": "print('PASS RWKV-4/RetNet, rotation, endpoint weighting, memory and accepted-prefix rollback')\n",
+          "new": "print('PASS RWKV-4/RetNet, rotation, endpoint weighting, memory and accepted-prefix rollback')\n\n# RetNet: independently verify rotated keys, all block sizes, initial state and tail.\nq0_ret = rng.normal(size=(7, 2))\nk0_ret = rng.normal(size=(7, 2))\nv0_ret = rng.normal(size=(7, 3))\nphase_ret = np.exp(1j * np.arange(1, 8) * .7)\nqc_ret = (q0_ret[:, 0] + 1j*q0_ret[:, 1]) * phase_ret\nkc_ret = (k0_ret[:, 0] + 1j*k0_ret[:, 1]) * phase_ret\nQ_ret = np.column_stack((qc_ret.real, qc_ret.imag))\nK_ret = np.column_stack((kc_ret.real, kc_ret.imag))\nS0_ret = rng.normal(size=(2, 3))\ngamma_ret = .57\nmanual_ret, state_ret = [], S0_ret.copy()\nfor t in range(7):\n    state_ret = gamma_ret*state_ret + np.outer(K_ret[t], v0_ret[t])\n    manual_ret.append([\n        sum(Q_ret[t, j]*state_ret[j, d] for j in range(2))\n        for d in range(3)\n    ])\nfor block_size in range(1, 9):\n    forms_ret = ns['retention_three_forms'](\n        Q_ret, K_ret, v0_ret, gamma_ret, block_size, S0_ret\n    )\n    for output in forms_ret[:3]:\n        np.testing.assert_allclose(output, manual_ret, atol=2e-14)\n    np.testing.assert_allclose(forms_ret[3], state_ret, atol=2e-14)\n    np.testing.assert_allclose(forms_ret[4], state_ret, atol=2e-14)\n\ncomplex_state_ret = S0_ret[0] - 1j*S0_ret[1]\ncomplex_out_ret, wrong_out_ret = [], []\nwrong_state_ret = complex_state_ret.copy()\nfor t in range(7):\n    complex_state_ret = gamma_ret*complex_state_ret + kc_ret[t].conjugate()*v0_ret[t]\n    complex_out_ret.append((qc_ret[t]*complex_state_ret).real)\n    wrong_state_ret = gamma_ret*wrong_state_ret + kc_ret[t]*v0_ret[t]\n    wrong_out_ret.append((qc_ret[t]*wrong_state_ret).real)\nnp.testing.assert_allclose(complex_out_ret, manual_ret, atol=2e-14)\nassert not np.allclose(wrong_out_ret, manual_ret)\n# Completing a block offline must not expose its future values to earlier rows.\nfor cut in range(1, 7):\n    changed_v_ret = v0_ret.copy()\n    changed_v_ret[cut:] += 100\n    changed_ret = ns['retention_three_forms'](\n        Q_ret, K_ret, changed_v_ret, gamma_ret, 3, S0_ret\n    )\n    for output in changed_ret[:3]:\n        np.testing.assert_allclose(output[:cut], np.array(manual_ret)[:cut], atol=2e-14)\nbad_tail_ret = gamma_ret**7*S0_ret + K_ret.T @ v0_ret\nassert not np.allclose(bad_tail_ret, state_ret)\nprint('PASS RetNet complex/real equivalence, 8 block sizes, nonzero state, tail and future controls')\n"
+        }
+      ]
+    },
+    {
+      "source": "publishing/tools/check_long_context_examples.py",
+      "before_sha256": "707087d3fe91d41e8230d5b87f3d97cb66ed65a576d5827c049da972894bdaec",
+      "after_sha256": "58e4078955f1ef0bb782013bb678b7ea437d36a8321125b297a74abe5239fa19",
+      "changes": [
+        {
+          "old": "\"\"\"Execute the four published NumPy blocks; independently check masks and cache.\"\"\"",
+          "new": "\"\"\"Execute five published NumPy blocks; independently check masks, cache and pooling.\"\"\""
+        },
+        {
+          "old": "assert len(blocks) == 4",
+          "new": "assert len(blocks) == 5"
+        },
+        {
+          "old": "    else:\n        np.testing.assert_array_equal(ns['index_scores'], [1,1,.5,3,2.5,0])\n        np.testing.assert_array_equal(ns['selected'], [3,4])\n        assert math.isclose(ns['sparse'].item(), 8)\n        assert math.isclose(ns['full'].item(), 212/16)\n",
+          "new": "    elif i == 4:\n        np.testing.assert_array_equal(ns['index_scores'], [1,1,.5,3,2.5,0])\n        np.testing.assert_array_equal(ns['selected'], [3,4])\n        assert math.isclose(ns['sparse'].item(), 8)\n        assert math.isclose(ns['full'].item(), 212/16)\n    else:\n        np.testing.assert_allclose(ns['csa_pool'], [[2.,20.],[3.75,45.]])\n        np.testing.assert_allclose(ns['hca_pool'], [[4.,40.]])\n        np.testing.assert_allclose(ns['csa_out'], [[19.75/3,205/3]])\n        np.testing.assert_allclose(ns['hca_out'], [[20/3,200/3]])\n"
+        },
+        {
+          "old": "print('chapter SHA256',hashlib.sha256(CHAPTER.read_bytes()).hexdigest())\n",
+          "new": "print('chapter SHA256',hashlib.sha256(CHAPTER.read_bytes()).hexdigest())\n\n# CSA/HCA: an independent scalar reference normalizes across positions per feature.\ndef scalar_pool(values_a, logits_a, stride, values_b=None, logits_b=None):\n    rows = []\n    for i in range(len(values_a)//stride):\n        result = []\n        for d in range(values_a.shape[1]):\n            pairs = [(float(logits_a[j,d]), float(values_a[j,d]))\n                     for j in range(i*stride, (i+1)*stride)]\n            if values_b is not None and i > 0:\n                pairs += [(float(logits_b[j,d]), float(values_b[j,d]))\n                          for j in range((i-1)*stride, i*stride)]\n            largest = max(score for score, _ in pairs)\n            weights = [math.exp(score-largest) for score, _ in pairs]\n            result.append(sum(w*value for w, (_, value) in zip(weights, pairs))/sum(weights))\n        rows.append(result)\n    return np.array(rows).reshape(-1, values_a.shape[1])\n\na_pool, b_pool = rng.normal(size=(7,3)), rng.normal(size=(7,3))\nza_pool, zb_pool = rng.normal(size=(7,3)), rng.normal(size=(7,3))\nfor stride in (1,2,3,8):\n    for overlap in (False, True):\n        b_arg, z_arg = (b_pool, zb_pool) if overlap else (None, None)\n        actual = ns['pool_position_groups'](a_pool, za_pool, stride, b_arg, z_arg)\n        expected = scalar_pool(a_pool, za_pool, stride, b_arg, z_arg)\n        np.testing.assert_allclose(actual, expected, atol=2e-14)\n        for prefix in range(1,8):\n            short = ns['pool_position_groups'](\n                a_pool[:prefix], za_pool[:prefix], stride,\n                None if b_arg is None else b_arg[:prefix],\n                None if z_arg is None else z_arg[:prefix]\n            )\n            np.testing.assert_allclose(short, actual[:prefix//stride], atol=2e-14)\n        for query in range(7):\n            changed_a = a_pool.copy()\n            changed_b = b_pool.copy()\n            changed_a[query+1:] += 100\n            changed_b[query+1:] -= 200\n            altered = ns['pool_position_groups'](\n                changed_a, za_pool, stride,\n                changed_b if overlap else None, zb_pool if overlap else None\n            )\n            # A query reads only complete preceding groups, not its own group.\n            np.testing.assert_allclose(\n                altered[:query//stride], actual[:query//stride], atol=2e-14\n            )\n# The first overlapped entry must not silently add zero-valued padding to its denominator.\nfirst_pool = ns['pool_position_groups'](\n    np.array([[1.,10.],[3.,30.]]), np.zeros((2,2)), 2,\n    np.zeros((2,2)), np.zeros((2,2))\n)\nnp.testing.assert_allclose(first_pool, [[2.,20.]])\nassert not np.allclose(first_pool, [[1.,10.]])\n# Two separately normalized branches do not equal concatenation before one softmax.\nlocal = np.array([[7.,70.],[9.,90.]])\nlong = np.array([[3.75,45.]])\nq = np.zeros((1,2))\ncombined = ns['attention'](q, np.concatenate((long,local)),\n                            np.concatenate((long,local)), np.ones((1,3),bool))\nseparate = (ns['attention'](q,long,long,np.ones((1,1),bool))\n            + ns['attention'](q,local,local,np.ones((1,2),bool)))\nassert not np.allclose(combined, separate)\nassert math.isclose(2/(2+math.exp(0)), 2/3)\n# Inverse output rotation is linear; this does not assert anything about trained logits.\ndef rotation_pool(angle):\n    return np.array([[math.cos(angle), -math.sin(angle)],\n                     [math.sin(angle), math.cos(angle)]])\nvalues_pool = rng.normal(size=(3,2))\nweights_pool = np.array([.2,.3,.5])\npositions_pool = np.array([0.,2.,5.])\nquery_position_pool = 6.\nleft_pool = rotation_pool(-query_position_pool) @ sum(\n    w*(rotation_pool(pos) @ value)\n    for w,pos,value in zip(weights_pool, positions_pool, values_pool)\n)\nright_pool = sum(\n    w*(rotation_pool(pos-query_position_pool) @ value)\n    for w,pos,value in zip(weights_pool, positions_pool, values_pool)\n)\nnp.testing.assert_allclose(left_pool, right_pool, atol=1e-14)\nassert 1048576//4 == 262144 and 1048576//128 == 8192\nassert 1024+128 == 1152 and 8192+128 == 8320\nprint('PASS CSA/HCA scalar pooling, padding, prefix/tail, causality, shared softmax and rotation')\n"
+        }
+      ]
+    }
+  ],
+  "fullRead": {
+    "method": "Both full canonical chapters were read before edits, in consecutive ranges; truncated output near 1460–1500 was reread. Both family pages had been read fully in atlas pass and were compared again before moving their mechanism sections.",
+    "sources": [
+      {
+        "source": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+        "linesBefore": 955
+      },
+      {
+        "source": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+        "linesBefore": 1743
+      },
+      {
+        "source": "02 Атлас моделей/Семейства/DeepSeek.md",
+        "linesBefore": 300
+      },
+      {
+        "source": "02 Атлас моделей/Семейства/RetNet.md",
+        "linesBefore": 54
+      },
+      {
+        "source": "publishing/tools/check_sequence_examples.py",
+        "linesBefore": 180
+      },
+      {
+        "source": "publishing/tools/check_long_context_examples.py",
+        "linesBefore": 131
+      }
+    ],
+    "englishCounterparts": {
+      "status": "absent; no translation created",
+      "checks": [
+        "Inventory en/00 Textbook contains no corresponding 08/09 chapter files.",
+        "Filename and canonical-source/content searches for long-context, Mamba, RetNet and the RU canonical chapter paths yielded only indices/cross-references, not existing English counterparts."
+      ]
+    }
+  },
+  "sourceSections": [
+    {
+      "source": "05 Источники/Architecture/DeepSeek V4 2026-10-29/DeepSeek_V4.pdf",
+      "sha256": "8a03dadae71894de1515da33e296f0df1dbeed3e7f4bf0badd087f9af77f29e9",
+      "bytes": 4480407,
+      "upstream": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/89d501aed998d33fa4f4702102ec1bb2331e10f6/DeepSeek_V4.pdf",
+      "read": "PDF pp. 9–13, §§2.3.1–2.3.3: Eq.9–27 and original Figures3–4; nearby §2.3 introduction and opening efficiency discussion also inspected.",
+      "license": "site/public/licenses/deepseek-v4-89d501ae-MIT.txt",
+      "licenseSha256": "f2c6c602815669d292889e5be8c802f2ed950653b77999b1584e8e6aed25d040",
+      "licenseRead": "full MIT notice read; existing notice retained; no new license claim for unrelated assets."
+    },
+    {
+      "source": "https://arxiv.org/html/2307.08621v1#S2.SS1",
+      "read": "RetNet §2.1 Eq.4–7, Figure3 and parallel/recurrent/chunk forms; §§2.2–2.3 and §3.1 inspected for full-block caveats and original model scope.",
+      "derivationBoundary": "New block equations are explicitly derived from the literal token-state recurrence Eq.6. They retain every gamma power, rather than mixing raw state with an unspecified normalized implementation state."
+    }
+  ],
+  "resolutions": [
+    {
+      "candidate": "DeepSeek-V4 CSA/HCA",
+      "status": "resolved",
+      "mainExplanation": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md#compressed-sparse-attention-csa-hca",
+      "moved": [
+        "Both original diagrams and their attribution/license links.",
+        "Four original English source-excerpt blocks, preserved byte-for-byte.",
+        "Overlapped CSA pooling, compressed indexer keys, shared K/V and grouped output projection.",
+        "HCA non-overlapping pooling, causal block availability, local window, inverse output rotation and sink."
+      ],
+      "added": [
+        "Coordinate-wise pooling example with unequal per-coordinate weights.",
+        "Published NumPy example for CSA/HCA pooling, initial padding exclusion, causal group boundary and local/pool shared softmax.",
+        "Explicit inverse-output-rotation and sink-denominator equations."
+      ],
+      "familyRetains": [
+        "Pro compression rates, head/window/top-k sizes and exact decoder/MTP counts.",
+        "Cache-count example now explicitly refers to next query after a completed prefix boundary.",
+        "Release-specific mHC/Muon/AdamW discussion and pinned sources.",
+        "Preserved old subsection anchors and direct link to the full mechanism."
+      ],
+      "originalSourceExcerptsPreserved": {
+        "count": 4,
+        "identical": true
+      }
+    },
+    {
+      "candidate": "RetNet complex and chunkwise derivation",
+      "status": "resolved",
+      "mainExplanation": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md#RetNet: три эквивалентных формы retention",
+      "moved": [
+        "Conjugated positional key and equivalent notation.",
+        "Parallel unrolling and explicit gamma^b transport at a block boundary.",
+        "Scalar 2/5/10.5 example remains in the main chapter."
+      ],
+      "added": [
+        "Clarified negative key phase versus double conjugation.",
+        "Real rotary-pair example with outputs 2,4,7.5.",
+        "Exact block outputs, weighted final-state update and nonzero-initial-state term.",
+        "Published parallel/recurrent/chunkwise NumPy verification and independent tests."
+      ],
+      "familyRetains": [
+        "Original research/model scope and 6.7B experiment boundary.",
+        "Original Figure3 as a compact architecture reference.",
+        "Limits of constant memory and fair speed comparison, without a second full derivation."
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/cs336-residuals-2026-10-29/deepseek-v4-csa.png",
+      "action": "existing embed moved from DeepSeek card to long-context explanation",
+      "figure": "DeepSeek-V4 Figure 3",
+      "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/89d501aed998d33fa4f4702102ec1bb2331e10f6/DeepSeek_V4.pdf#page=9",
+      "sha256": "ac355c5907c7cc2710b4a8d980fe88d58d13e5a273404cbb4bc9cf9a71bdd8bd",
+      "bytes": 135518,
+      "visualInspection": "view_image: all source-diagram labels and elements visible; no asset bytes edited"
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/cs336-residuals-2026-10-29/deepseek-v4-hca.png",
+      "action": "existing embed moved from DeepSeek card to long-context explanation",
+      "figure": "DeepSeek-V4 Figure 4",
+      "source": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/89d501aed998d33fa4f4702102ec1bb2331e10f6/DeepSeek_V4.pdf#page=11",
+      "sha256": "5f873f1426027f2cf003c954eee7c92d56304e94a64e51453fba4215851f2a56",
+      "bytes": 57687,
+      "visualInspection": "view_image: all source-diagram labels and elements visible; no asset bytes edited"
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/curated/atlas-remainder-official/retnet-dual-form.png",
+      "action": "existing complete Figure 3 used in main explanation; family card retains its existing embed",
+      "figure": "RetNet Figure 3",
+      "source": "https://arxiv.org/html/2307.08621v1#S2.SS1",
+      "sha256": "4a0b1ec822e392e6e4f6187d2be5cf21d2fed51e39335450fe3b0547f37ea99e",
+      "bytes": 63632,
+      "visualInspection": "view_image: all source-diagram labels and elements visible; no asset bytes edited"
+    },
+    {
+      "asset": "00 Учебник/Assets/Figures/retnet-figure3-hq.png",
+      "action": "file retained unchanged; main explanation now uses cleaner existing complete Figure 3 instead of crop containing a clipped neighboring paragraph",
+      "figure": "RetNet Figure 3",
+      "source": "https://arxiv.org/html/2307.08621v1#S2.SS1",
+      "sha256": "284318d2547e818c7c134fd322da23479cf2710eb041fcef620c48f45a042ad2",
+      "bytes": 93737,
+      "visualInspection": "view_image: all source-diagram labels and elements visible; no asset bytes edited"
+    }
+  ],
+  "assetsCreated": [],
+  "assetsDeleted": [],
+  "verification": {
+    "exactRoundTrip": {
+      "files": 6,
+      "operations": 14,
+      "forward": true,
+      "reverse": true,
+      "sha256VerifiedOnDisk": true
+    },
+    "atlasCompanion": {
+      "file": "docs/audit/2026-10-29-atlas-consolidation-additions.json",
+      "files": 22,
+      "operations": 42,
+      "allBeforeHashesRestored": true
+    },
+    "sequenceExamples": {
+      "command": "/Users/aleksan.potekhin/.cache/uv/archive-v0/j5rpRmtreFP2Eh3XABiIQ/bin/python publishing/tools/check_sequence_examples.py",
+      "result": "PASS",
+      "publishedBlocks": 6,
+      "independentChecks": [
+        "All previous selective/SSD/delta/TTT examples remain checked.",
+        "RetNet complex/real equality.",
+        "8 block lengths, including incomplete tail.",
+        "Nonzero initial state.",
+        "Wrong-conjugation and wrong-tail negative controls.",
+        "Future-value interventions."
+      ]
+    },
+    "longContextExamples": {
+      "command": "/Users/aleksan.potekhin/.cache/uv/archive-v0/j5rpRmtreFP2Eh3XABiIQ/bin/python publishing/tools/check_long_context_examples.py",
+      "result": "PASS",
+      "publishedBlocks": 5,
+      "independentChecks": [
+        "All previous mask/cache/CLA/DSA/scaling checks retained.",
+        "Scalar coordinate-wise CSA/HCA reference across strides 1,2,3,8.",
+        "First-group padding exclusion, prefix/tail handling and no future-group leakage.",
+        "Joint-softmax versus separately normalized branch negative control.",
+        "Inverse output rotation, sink normalization and V4 entry counts."
+      ]
+    },
+    "math": {
+      "counts": {
+        "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md": {
+          "display": 18,
+          "inline": 217
+        },
+        "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md": {
+          "display": 34,
+          "inline": 326
+        }
+      },
+      "errors": [],
+      "standaloneSingleDollarLines": 0,
+      "note": "KaTeX parse is checked together with display delimiter sanity; parsing alone is not visual QA."
+    },
+    "linksAndFigures": {
+      "checkedQualifiedWikilinks": 38,
+      "missingTargets": 0,
+      "missingAnchors": 0,
+      "missingFigureFiles": 0,
+      "method": "code fences stripped to avoid treating NumPy nested lists as wikilinks"
+    },
+    "diffCheck": "git diff --check passed for all six changed files",
+    "notClaimed": [
+      "Browser/site rendering of the parent's combined revision.",
+      "GPU kernel speed or model-quality benchmarking.",
+      "Freshness of every other model release.",
+      "New English translation."
+    ]
+  },
+  "contentIntegrationRemaining": [],
+  "handoff": [
+    "Parent should append current asset used_in entries; another worker was notified of final embed locations.",
+    "Parent should chain this exact ledger with atlas-consolidation-additions.json in historical SHA preservation helpers.",
+    "Parent should build and visually inspect the combined publication revision."
+  ]
+}

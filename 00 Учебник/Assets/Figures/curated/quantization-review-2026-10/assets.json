@@ -1,0 +1,108 @@
+{
+  "verified_at": "2026-10-19",
+  "used_in": "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+  "assets": [
+    {
+      "id": "curated-quantization-hf-packing-1ba2c975cb63",
+      "asset": "00 Учебник/Assets/Figures/curated/quantization-review-2026-10/hf-weight-packing.png",
+      "author": "Hugging Face Team",
+      "title": "Quantization concepts: INT4 weight packing",
+      "source_url": "https://huggingface.co/datasets/huggingface/documentation-images/blob/2dd75e791509da38222ecbd3bfaa2b44ac658ef4/transformers/weight_packing.png",
+      "source_image_url": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/2dd75e791509da38222ecbd3bfaa2b44ac658ef4/transformers/weight_packing.png",
+      "commit": "2dd75e791509da38222ecbd3bfaa2b44ac658ef4",
+      "license": "CC BY-NC-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+      "license_evidence": "https://huggingface.co/datasets/huggingface/documentation-images/raw/2dd75e791509da38222ecbd3bfaa2b44ac658ef4/README.md",
+      "sha256": "1ba2c975cb6391b42d0d460b700788753a9178c17003f895870dd931b033b0c3",
+      "width": 1726,
+      "height": 1032,
+      "derivation": "source-raster-copy",
+      "provenance_confirmation": "pinned-upstream-repository",
+      "modifications": "Copied unchanged; no crop, resizing or redrawing.",
+      "metadata_status": "verified",
+      "last_verified": "2026-10-19",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md"
+      ]
+    },
+    {
+      "id": "curated-quantization-smoothquant-intuition-54ff002e8de4",
+      "asset": "00 Учебник/Assets/Figures/curated/quantization-review-2026-10/smoothquant-intuition.png",
+      "author": "Guangxuan Xiao, Ji Lin, Mickael Seznec, Hao Wu, Julien Demouth, Song Han",
+      "title": "SmoothQuant intuition",
+      "source_url": "https://github.com/mit-han-lab/smoothquant/blob/c61476d728e42ae0d8a35e7e78494edcac3237b5/figures/intuition.png",
+      "commit": "c61476d728e42ae0d8a35e7e78494edcac3237b5",
+      "license": "MIT",
+      "license_url": "https://github.com/mit-han-lab/smoothquant/blob/c61476d728e42ae0d8a35e7e78494edcac3237b5/LICENSE",
+      "sha256": "54ff002e8de45b53fc6d5210c8f88537c4f645184c52e7a61684a33d12c99f01",
+      "width": 1934,
+      "height": 400,
+      "derivation": "source-raster-copy",
+      "provenance_confirmation": "pinned-upstream-repository",
+      "modifications": "Copied unchanged; no crop, resizing or redrawing.",
+      "metadata_status": "verified",
+      "last_verified": "2026-10-19",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md"
+      ]
+    },
+    {
+      "id": "curated-quantization-smoothquant-migrate-561e562cd216",
+      "asset": "00 Учебник/Assets/Figures/curated/quantization-review-2026-10/smoothquant-migrate.jpg",
+      "author": "Guangxuan Xiao, Ji Lin, Mickael Seznec, Hao Wu, Julien Demouth, Song Han",
+      "title": "SmoothQuant activation and weight distributions",
+      "source_url": "https://github.com/mit-han-lab/smoothquant/blob/c61476d728e42ae0d8a35e7e78494edcac3237b5/figures/migrate.jpg",
+      "commit": "c61476d728e42ae0d8a35e7e78494edcac3237b5",
+      "license": "MIT",
+      "license_url": "https://github.com/mit-han-lab/smoothquant/blob/c61476d728e42ae0d8a35e7e78494edcac3237b5/LICENSE",
+      "sha256": "561e562cd216a66bbae6ab739241d0e0c6b09d12d71bb9183b73b914e1f7e1ed",
+      "width": 2690,
+      "height": 808,
+      "derivation": "source-raster-copy",
+      "provenance_confirmation": "pinned-upstream-repository",
+      "modifications": "Copied unchanged; no crop, resizing or redrawing.",
+      "metadata_status": "verified",
+      "last_verified": "2026-10-19",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md"
+      ]
+    },
+    {
+      "id": "curated-quantization-qlora-5035d5990255",
+      "asset": "00 Учебник/Assets/Figures/curated/quantization-review-2026-10/qlora-training-original.png",
+      "author": "Tim Dettmers, Artidoro Pagnoni, Ari Holtzman, Luke Zettlemoyer",
+      "title": "QLoRA Figure 1: memory and gradient flow",
+      "source_url": "https://arxiv.org/src/2305.14314v1",
+      "source_asset": "05 Источники/Papers/Source PDFs/qlora-2305.14314v1-figure1.pdf",
+      "source_asset_sha256": "453b30dc72b3d8f88b315c75424459aabde5e515c40f17f834ae2b282625c640",
+      "source_member": "figures/qlora.pdf",
+      "source_archive": "raw/papers/qlora-2305.14314v1/source.tar.gz",
+      "source_archive_sha256": "7bcd63377e69047ba1794497328338408edacbffab04ceb3ba63e95cd06fb198",
+      "source_page": 1,
+      "crop_box_px": [
+        0,
+        0,
+        2000,
+        875
+      ],
+      "render_page_size_px": [
+        2000,
+        875
+      ],
+      "license": "CC BY 4.0",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "license_evidence": "https://arxiv.org/html/2305.14314v1",
+      "sha256": "5035d5990255985976069eb59ee2833c7f99605d9a7d79b70e3e9e4b8c4df595",
+      "width": 2000,
+      "height": 875,
+      "derivation": "pdf-page-render-crop",
+      "provenance_confirmation": "source-license-verified",
+      "modifications": "Full-page Poppler render at 250 DPI of the author-supplied standalone vector figure PDF; crop box is the whole figure page. No source content removed, no redrawing.",
+      "metadata_status": "verified",
+      "last_verified": "2026-10-19",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md"
+      ]
+    }
+  ]
+}

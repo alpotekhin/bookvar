@@ -1,0 +1,125 @@
+[
+  {
+    "id": "curated-autodiff-baydin-figure4-ac0e98f651cb",
+    "asset": "00 Учебник/Assets/Figures/curated/autodiff-2026-10-27/baydin-figure4-graph.png",
+    "sha256": "ac0e98f651cb52ee49a95b749f132dd50017a6935cab95b83290aa5472a29e66",
+    "dimensions_px": [
+      2476,
+      1015
+    ],
+    "author": "Atılım Güneş Baydin, Barak A. Pearlmutter, Alexey Andreyevich Radul, Jeffrey Mark Siskind",
+    "source_url": "https://jmlr.org/papers/volume18/17-468/17-468.pdf#page=9",
+    "source_image_url": "https://gbaydin.github.io/assets/pdf/baydin-2018-ad-machinelearning.pdf",
+    "source_asset": "05 Источники/Originals/frameworks-2026-10-27/baydin-jmlr-17-468.pdf",
+    "source_asset_sha256": "93eb2f7025ea098c18a65b428ac991dfacec2de56618c4e25c6a22b9cf443c59",
+    "source_page_snapshot": "05 Источники/Originals/frameworks-2026-10-27/baydin-jmlr-17-468.pdf",
+    "source_page_sha256": "93eb2f7025ea098c18a65b428ac991dfacec2de56618c4e25c6a22b9cf443c59",
+    "source_page": 9,
+    "render_dpi": 400,
+    "render_page_size_px": [
+      3400,
+      4400
+    ],
+    "crop_box_px": [
+      464,
+      513,
+      2940,
+      1528
+    ],
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/frameworks-2026-10-27/baydin-license-page1.txt",
+    "license_evidence_sha256": "33eb70919ada8c4f316e6cfc2036e7019b2966dc3d2c63b1eb9907fcb1991ca5",
+    "derivation": "pdf-page-render-crop",
+    "metadata_status": "verified",
+    "rights_status": "source-license-verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-27",
+    "modifications": "Full original graph/table and complete English caption retained; only surrounding page text/margins excluded. Rendered from vector PDF at 400 dpi with no redraw, relabeling, recoloring or translation.",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md"
+    ]
+  },
+  {
+    "id": "curated-autodiff-baydin-table2-a0a58069cbab",
+    "asset": "00 Учебник/Assets/Figures/curated/autodiff-2026-10-27/baydin-table2-forward.png",
+    "sha256": "a0a58069cbabacd69c703ff10a26da46a98f617a806e95e8ff70d2f03d01c7d6",
+    "dimensions_px": [
+      2476,
+      1237
+    ],
+    "author": "Atılım Güneş Baydin, Barak A. Pearlmutter, Alexey Andreyevich Radul, Jeffrey Mark Siskind",
+    "source_url": "https://jmlr.org/papers/volume18/17-468/17-468.pdf#page=10",
+    "source_image_url": "https://gbaydin.github.io/assets/pdf/baydin-2018-ad-machinelearning.pdf",
+    "source_asset": "05 Источники/Originals/frameworks-2026-10-27/baydin-jmlr-17-468.pdf",
+    "source_asset_sha256": "93eb2f7025ea098c18a65b428ac991dfacec2de56618c4e25c6a22b9cf443c59",
+    "source_page_snapshot": "05 Источники/Originals/frameworks-2026-10-27/baydin-jmlr-17-468.pdf",
+    "source_page_sha256": "93eb2f7025ea098c18a65b428ac991dfacec2de56618c4e25c6a22b9cf443c59",
+    "source_page": 10,
+    "render_dpi": 400,
+    "render_page_size_px": [
+      3400,
+      4400
+    ],
+    "crop_box_px": [
+      464,
+      547,
+      2940,
+      1784
+    ],
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/frameworks-2026-10-27/baydin-license-page1.txt",
+    "license_evidence_sha256": "33eb70919ada8c4f316e6cfc2036e7019b2966dc3d2c63b1eb9907fcb1991ca5",
+    "derivation": "pdf-page-render-crop",
+    "metadata_status": "verified",
+    "rights_status": "source-license-verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-27",
+    "modifications": "Full original graph/table and complete English caption retained; only surrounding page text/margins excluded. Rendered from vector PDF at 400 dpi with no redraw, relabeling, recoloring or translation.",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md"
+    ]
+  },
+  {
+    "id": "curated-autodiff-baydin-table3-f482aa473381",
+    "asset": "00 Учебник/Assets/Figures/curated/autodiff-2026-10-27/baydin-table3-reverse.png",
+    "sha256": "f482aa4733819b79e30487422eaba00c758be05025826fe5c412dd66a596277c",
+    "dimensions_px": [
+      2476,
+      1543
+    ],
+    "author": "Atılım Güneş Baydin, Barak A. Pearlmutter, Alexey Andreyevich Radul, Jeffrey Mark Siskind",
+    "source_url": "https://jmlr.org/papers/volume18/17-468/17-468.pdf#page=13",
+    "source_image_url": "https://gbaydin.github.io/assets/pdf/baydin-2018-ad-machinelearning.pdf",
+    "source_asset": "05 Источники/Originals/frameworks-2026-10-27/baydin-jmlr-17-468.pdf",
+    "source_asset_sha256": "93eb2f7025ea098c18a65b428ac991dfacec2de56618c4e25c6a22b9cf443c59",
+    "source_page_snapshot": "05 Источники/Originals/frameworks-2026-10-27/baydin-jmlr-17-468.pdf",
+    "source_page_sha256": "93eb2f7025ea098c18a65b428ac991dfacec2de56618c4e25c6a22b9cf443c59",
+    "source_page": 13,
+    "render_dpi": 400,
+    "render_page_size_px": [
+      3400,
+      4400
+    ],
+    "crop_box_px": [
+      464,
+      547,
+      2940,
+      2090
+    ],
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/frameworks-2026-10-27/baydin-license-page1.txt",
+    "license_evidence_sha256": "33eb70919ada8c4f316e6cfc2036e7019b2966dc3d2c63b1eb9907fcb1991ca5",
+    "derivation": "pdf-page-render-crop",
+    "metadata_status": "verified",
+    "rights_status": "source-license-verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-27",
+    "modifications": "Full original graph/table and complete English caption retained; only surrounding page text/margins excluded. Rendered from vector PDF at 400 dpi with no redraw, relabeling, recoloring or translation.",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md"
+    ]
+  }
+]

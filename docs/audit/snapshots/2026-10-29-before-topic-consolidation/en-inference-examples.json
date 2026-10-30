@@ -1,0 +1,147 @@
+{
+  "status": "pass",
+  "checker_sha256": "ae2de4aa1ea639f85f9d31e959d7cb4d569dc8f56f57cfe44752becfccba1106",
+  "versions": {
+    "torch": "2.14.1",
+    "transformers": "4.57.1",
+    "numpy": "2.3.5",
+    "tokenizers": "0.22.2"
+  },
+  "chapters": [
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/54 Decoding and next-token selection.md",
+      "sha256": "7b280782736d3f81e8d1eb6b31cc87a4541ca0e01df911efd25ea5f8779aab42",
+      "python_blocks": 6,
+      "executed_blocks_one_based": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "not_executed_blocks_one_based": [],
+      "stdout": [
+        "0.5 [[0.5390835579514826, 0.3032345013477088, 0.13477088948787064, 0.021563342318059293, 0.001347708894878707]]",
+        "1.0 [[0.4, 0.3, 0.2, 0.08, 0.020000000000000004]]",
+        "2.0 [[0.3082659119969099, 0.2669661109101021, 0.2179769167816705, 0.13786070687421167, 0.06893035343710585]]",
+        "top-k=2 [[0.5714285714285714, 0.4285714285714285, 0.0, 0.0, 0.0]]",
+        "top-p=0.8 [[0.4444444444444444, 0.33333333333333326, 0.2222222222222222, 0.0, 0.0]]",
+        "min-p=0.15 [[0.4081632653061225, 0.30612244897959184, 0.20408163265306126, 0.0816326530612245, 0.0]]",
+        "[[1.0, 0.0, 0.0, 0.0, 0.0]]",
+        "[[0.5714285714285714, 0.4285714285714285, 0.0, 0.0, 0.0]]",
+        "[[-2.0, 1.6666666666666667, 0.5, -0.6, 1.0]]",
+        "[[-2.0, 2.0, 0.5, -0.6, 1.0]]",
+        "greedy [[1, 4, 5, 0, 6, 0, 7]]",
+        "EOS [[1, 4, 5, 0]]",
+        "beam scores [-3.006812810897827, -3.0177268981933594]",
+        "sampling [[1, 4, 5, 1, 5, 2, 2], [1, 4, 5, 1, 1, 0, 1], [1, 4, 5, 3, 4, 6, 0]]"
+      ]
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/55 KV cache batching and PagedAttention.md",
+      "sha256": "d047e0427087b06e98e92811923d5a19d23179c7593fd5b059b178ed8e392509",
+      "python_blocks": 5,
+      "executed_blocks_one_based": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "not_executed_blocks_one_based": [],
+      "stdout": []
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/55b Scheduling — continuous batching, chunked prefill, and prefix caching.md",
+      "sha256": "aa4debaa5cc7f8c5f99a3cac50073270d8e1613a8a75a4178e60f881f04aab96",
+      "python_blocks": 6,
+      "executed_blocks_one_based": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "not_executed_blocks_one_based": [],
+      "stdout": []
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/55c Serving engines — vLLM, SGLang, TensorRT-LLM, and FlashInfer.md",
+      "sha256": "ffc56a229cf5766a222b9588ecbf551d2ed01588078b2686648f0ffa25e43423",
+      "python_blocks": 7,
+      "executed_blocks_one_based": [
+        6,
+        7
+      ],
+      "not_executed_blocks_one_based": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "stdout": [
+        "Request boundaries preserved; a global causal mask gives different outputs."
+      ]
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/56 FlashAttention.md",
+      "sha256": "6b8db3db140edaba6e45847a03bd61961aeff4a009d8f66533bde7cf0fe4652c",
+      "python_blocks": 2,
+      "executed_blocks_one_based": [
+        1
+      ],
+      "not_executed_blocks_one_based": [
+        2
+      ],
+      "stdout": [
+        "30.0"
+      ]
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md",
+      "sha256": "b5f15380d0673e04036b240169923ea5ca8de7eee487cb4565fd374579014774",
+      "python_blocks": 6,
+      "executed_blocks_one_based": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "not_executed_blocks_one_based": [],
+      "stdout": []
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md",
+      "sha256": "e1e621c0b87a693931e6796f7eb10b5e9617c620946381249bd985031e0e47bd",
+      "python_blocks": 7,
+      "executed_blocks_one_based": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "not_executed_blocks_one_based": [],
+      "stdout": []
+    }
+  ],
+  "executed_python_blocks": 33,
+  "independent_checks": {
+    "attention_output_lse_gradient_cases": 36,
+    "int4_pairs": 256,
+    "residual_distributions": 102,
+    "qat_ste_update": true
+  },
+  "limitations": [
+    "Serving source fragments 1–5 require pinned runtime/GPU objects and were not run.",
+    "FlashAttention block 2 is a CUDA-only diagnostic and was not run.",
+    "CPU correctness is not a latency, throughput, quality or GPU validation."
+  ]
+}

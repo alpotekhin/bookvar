@@ -1,0 +1,130 @@
+[
+  {
+    "id": "curated-gan-gan-f51dc373c89a",
+    "asset": "00 Учебник/Assets/Figures/curated/gan-dcgan-2026-10-28/gan.svg",
+    "author": "Aston Zhang, Zachary C. Lipton, Mu Li and Alexander J. Smola",
+    "source_url": "https://d2l.ai/chapter_generative-adversarial-networks/gan.html#fig-gan",
+    "source_image_url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/gan.svg",
+    "source_asset": "05 Источники/Originals/gan-dcgan-2026-10-28/d2l/gan.svg",
+    "source_asset_sha256": "f51dc373c89a89a620cef10e9712e991bd1c23dd4c62cbd698e56740caad1d5b",
+    "sha256": "f51dc373c89a89a620cef10e9712e991bd1c23dd4c62cbd698e56740caad1d5b",
+    "source_viewbox": [
+      0,
+      0,
+      132,
+      154
+    ],
+    "source_page_snapshot": "05 Источники/Originals/gan-dcgan-2026-10-28/d2l/gan.md",
+    "source_page_sha256": "b21af3c808d49ccd4ee184385d31e025b9d65249802c76905d6285d222acb9f6",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/data-augmentation-2026-10-28/d2l/LICENSE",
+    "license_evidence_sha256": "a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c",
+    "public_license_copy": "site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt",
+    "derivation": "source-svg-copy",
+    "modifications": "Complete original SVG copied byte-for-byte. No crop, translated labels, redraw or recompression. Native architecture diagram is pinned to the source commit; web output plots are pinned by referring HTML and exact image bytes, not claimed to be reproduced by a local random seed.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор.md"
+    ]
+  },
+  {
+    "id": "curated-gan-gaussian-data-d572fe806140",
+    "asset": "00 Учебник/Assets/Figures/curated/gan-dcgan-2026-10-28/gaussian-data.svg",
+    "author": "Aston Zhang, Zachary C. Lipton, Mu Li and Alexander J. Smola",
+    "source_url": "https://d2l.ai/chapter_generative-adversarial-networks/gan.html#generate-some-real-data",
+    "source_image_url": "https://d2l.ai/_images/output_gan_bc32f8_31_1.svg",
+    "source_asset": "05 Источники/Originals/gan-dcgan-2026-10-28/d2l/gaussian-data.svg",
+    "source_asset_sha256": "d572fe806140592e1a0f8af965df9ccda076bc75fd5e93c818f00178c407cadc",
+    "sha256": "d572fe806140592e1a0f8af965df9ccda076bc75fd5e93c818f00178c407cadc",
+    "source_viewbox": [
+      0,
+      0,
+      321.310425,
+      226.237508
+    ],
+    "source_page_snapshot": "05 Источники/Originals/gan-dcgan-2026-10-28/d2l/gan-web.html",
+    "source_page_sha256": "09eb53789fe3b2d6650ca3c060521b20430436efd8c737f0e75306b3c98a3b4d",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/data-augmentation-2026-10-28/d2l/LICENSE",
+    "license_evidence_sha256": "a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c",
+    "public_license_copy": "site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt",
+    "derivation": "source-svg-copy",
+    "modifications": "Complete original SVG copied byte-for-byte. No crop, translated labels, redraw or recompression. Native architecture diagram is pinned to the source commit; web output plots are pinned by referring HTML and exact image bytes, not claimed to be reproduced by a local random seed.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор.md"
+    ]
+  },
+  {
+    "id": "curated-gan-gaussian-training-c1688624166f",
+    "asset": "00 Учебник/Assets/Figures/curated/gan-dcgan-2026-10-28/gaussian-training.svg",
+    "author": "Aston Zhang, Zachary C. Lipton, Mu Li and Alexander J. Smola",
+    "source_url": "https://d2l.ai/chapter_generative-adversarial-networks/gan.html#training",
+    "source_image_url": "https://d2l.ai/_images/output_gan_bc32f8_105_1.svg",
+    "source_asset": "05 Источники/Originals/gan-dcgan-2026-10-28/d2l/gaussian-training.svg",
+    "source_asset_sha256": "c1688624166f2eb43b85a70c3762fa6ac4f74cf73fb3e18224d5d5d8cef6b401",
+    "sha256": "c1688624166f2eb43b85a70c3762fa6ac4f74cf73fb3e18224d5d5d8cef6b401",
+    "source_viewbox": [
+      0,
+      0,
+      463.302083,
+      411.037516
+    ],
+    "source_page_snapshot": "05 Источники/Originals/gan-dcgan-2026-10-28/d2l/gan-web.html",
+    "source_page_sha256": "09eb53789fe3b2d6650ca3c060521b20430436efd8c737f0e75306b3c98a3b4d",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/data-augmentation-2026-10-28/d2l/LICENSE",
+    "license_evidence_sha256": "a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c",
+    "public_license_copy": "site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt",
+    "derivation": "source-svg-copy",
+    "modifications": "Complete original SVG copied byte-for-byte. No crop, translated labels, redraw or recompression. Native architecture diagram is pinned to the source commit; web output plots are pinned by referring HTML and exact image bytes, not claimed to be reproduced by a local random seed.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор.md"
+    ]
+  },
+  {
+    "id": "curated-gan-leaky-relu-848a59ec1929",
+    "asset": "00 Учебник/Assets/Figures/curated/gan-dcgan-2026-10-28/leaky-relu.svg",
+    "author": "Aston Zhang, Zachary C. Lipton, Mu Li and Alexander J. Smola",
+    "source_url": "https://d2l.ai/chapter_generative-adversarial-networks/dcgan.html#discriminator",
+    "source_image_url": "https://d2l.ai/_images/output_dcgan_2541de_114_0.svg",
+    "source_asset": "05 Источники/Originals/gan-dcgan-2026-10-28/d2l/leaky-relu.svg",
+    "source_asset_sha256": "848a59ec192959be721f8a706c587f2adc8b79cc4c815a2d9d01e40210eccf31",
+    "sha256": "848a59ec192959be721f8a706c587f2adc8b79cc4c815a2d9d01e40210eccf31",
+    "source_viewbox": [
+      0,
+      0,
+      340.116231,
+      249.140625
+    ],
+    "source_page_snapshot": "05 Источники/Originals/gan-dcgan-2026-10-28/d2l/dcgan-web.html",
+    "source_page_sha256": "66e8f16e1dc259928ba572e756fed81222f2c08d761637ffa47d83d508459a96",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/data-augmentation-2026-10-28/d2l/LICENSE",
+    "license_evidence_sha256": "a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c",
+    "public_license_copy": "site/public/licenses/d2l-23d7a5a-CC-BY-SA-4.0.txt",
+    "derivation": "source-svg-copy",
+    "modifications": "Complete original SVG copied byte-for-byte. No crop, translated labels, redraw or recompression. Native architecture diagram is pinned to the source commit; web output plots are pinned by referring HTML and exact image bytes, not claimed to be reproduced by a local random seed.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор.md"
+    ]
+  }
+]

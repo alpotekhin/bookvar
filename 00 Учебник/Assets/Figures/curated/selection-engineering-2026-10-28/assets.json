@@ -1,0 +1,126 @@
+[
+  {
+    "id": "curated-selection-engineering-selection-inequality-0bf8c01cae14",
+    "asset": "00 Учебник/Assets/Figures/curated/selection-engineering-2026-10-28/selection-inequality.png",
+    "author": "Harvard University and the ML Systems contributors",
+    "source_url": "https://mlsysbook.ai/vol1/09_data_selection/09_data_selection.html#fig-selection-inequality",
+    "source_image_url": "https://mlsysbook.ai/vol1/09_data_selection/09_data_selection_files/figure-html/cell-9-output-1.png",
+    "source_asset": "05 Источники/Originals/selection-engineering-2026-10-28/selection-inequality.png",
+    "source_asset_sha256": "0bf8c01cae14cbde4a57aa17015537706c839cc7bee5be1c6310e141cc1d35c2",
+    "sha256": "0bf8c01cae14cbde4a57aa17015537706c839cc7bee5be1c6310e141cc1d35c2",
+    "source_page_snapshot": "05 Источники/Originals/selection-engineering-2026-10-28/web-2026-10-28.html",
+    "source_page_sha256": "9f31e8439bd840b3f6993851089acd305b230070bdd4fd6474c68fa39192f09e",
+    "license": "CC BY-NC-ND 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "license_evidence": "05 Источники/Originals/selection-engineering-2026-10-28/web-2026-10-28.html",
+    "license_evidence_sha256": "9f31e8439bd840b3f6993851089acd305b230070bdd4fd6474c68fa39192f09e",
+    "public_license_copy": "site/public/licenses/harvard-data-selection-web-2026-10-28.txt",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original web-edition image copied byte-for-byte, without crop, redraw, translated labels, upscaling or recompression. Reproduced unchanged as an attributed object in a collection. The live web edition has a distinct CC BY-NC-ND 4.0 notice; the older QMD snapshot license is not used to relicense these image bytes.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества.md"
+    ],
+    "dimensions_px": [
+      3394,
+      2233
+    ]
+  },
+  {
+    "id": "curated-selection-engineering-distributed-selection-4b00bd46c5d5",
+    "asset": "00 Учебник/Assets/Figures/curated/selection-engineering-2026-10-28/distributed-selection.svg",
+    "author": "Harvard University and the ML Systems contributors",
+    "source_url": "https://mlsysbook.ai/vol1/09_data_selection/09_data_selection.html#fig-distributed-coreset-architecture",
+    "source_image_url": "https://mlsysbook.ai/vol1/09_data_selection/09_data_selection_files/mediabag/7814b3b3ed5d90390bfbce9c55c615cb4ce0ab34.svg",
+    "source_asset": "05 Источники/Originals/selection-engineering-2026-10-28/distributed-selection.svg",
+    "source_asset_sha256": "4b00bd46c5d58c272e24fcb998580fe0c8bf1fa4f89a06c8667efc84ad49f12c",
+    "sha256": "4b00bd46c5d58c272e24fcb998580fe0c8bf1fa4f89a06c8667efc84ad49f12c",
+    "source_page_snapshot": "05 Источники/Originals/selection-engineering-2026-10-28/web-2026-10-28.html",
+    "source_page_sha256": "9f31e8439bd840b3f6993851089acd305b230070bdd4fd6474c68fa39192f09e",
+    "license": "CC BY-NC-ND 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "license_evidence": "05 Источники/Originals/selection-engineering-2026-10-28/web-2026-10-28.html",
+    "license_evidence_sha256": "9f31e8439bd840b3f6993851089acd305b230070bdd4fd6474c68fa39192f09e",
+    "public_license_copy": "site/public/licenses/harvard-data-selection-web-2026-10-28.txt",
+    "derivation": "source-svg-copy",
+    "modifications": "Complete original web-edition image copied byte-for-byte, without crop, redraw, translated labels, upscaling or recompression. Reproduced unchanged as an attributed object in a collection. The live web edition has a distinct CC BY-NC-ND 4.0 notice; the older QMD snapshot license is not used to relicense these image bytes.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества.md"
+    ],
+    "source_viewbox": [
+      0,
+      0,
+      354.23468,
+      143.04933
+    ]
+  },
+  {
+    "id": "curated-selection-engineering-performance-data-033f5554b7a0",
+    "asset": "00 Учебник/Assets/Figures/curated/selection-engineering-2026-10-28/performance-data.png",
+    "author": "Harvard University and the ML Systems contributors",
+    "source_url": "https://mlsysbook.ai/vol1/09_data_selection/09_data_selection.html#fig-ppd-curve",
+    "source_image_url": "https://mlsysbook.ai/vol1/09_data_selection/09_data_selection_files/figure-html/cell-7-output-1.png",
+    "source_asset": "05 Источники/Originals/selection-engineering-2026-10-28/performance-data.png",
+    "source_asset_sha256": "033f5554b7a0efd0d48986b06e374f00cfa5dd30f61ba5b022b6c8f93ab52d21",
+    "sha256": "033f5554b7a0efd0d48986b06e374f00cfa5dd30f61ba5b022b6c8f93ab52d21",
+    "source_page_snapshot": "05 Источники/Originals/selection-engineering-2026-10-28/web-2026-10-28.html",
+    "source_page_sha256": "9f31e8439bd840b3f6993851089acd305b230070bdd4fd6474c68fa39192f09e",
+    "license": "CC BY-NC-ND 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "license_evidence": "05 Источники/Originals/selection-engineering-2026-10-28/web-2026-10-28.html",
+    "license_evidence_sha256": "9f31e8439bd840b3f6993851089acd305b230070bdd4fd6474c68fa39192f09e",
+    "public_license_copy": "site/public/licenses/harvard-data-selection-web-2026-10-28.txt",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original web-edition image copied byte-for-byte, without crop, redraw, translated labels, upscaling or recompression. Reproduced unchanged as an attributed object in a collection. The live web edition has a distinct CC BY-NC-ND 4.0 notice; the older QMD snapshot license is not used to relicense these image bytes.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества.md"
+    ],
+    "dimensions_px": [
+      3391,
+      2257
+    ]
+  },
+  {
+    "id": "curated-selection-engineering-selection-decision-tree-ab3d0407cfba",
+    "asset": "00 Учебник/Assets/Figures/curated/selection-engineering-2026-10-28/selection-decision-tree.svg",
+    "author": "Harvard University and the ML Systems contributors",
+    "source_url": "https://mlsysbook.ai/vol1/09_data_selection/09_data_selection.html#fig-technique-decision-tree",
+    "source_image_url": "https://mlsysbook.ai/vol1/09_data_selection/09_data_selection_files/mediabag/b2825c9b2882876c73ca143f11dee18937d2c870.svg",
+    "source_asset": "05 Источники/Originals/selection-engineering-2026-10-28/selection-decision-tree.svg",
+    "source_asset_sha256": "ab3d0407cfbae771637bd61169b783284b6c2cc3b502db7e846b79cad6eacd63",
+    "sha256": "ab3d0407cfbae771637bd61169b783284b6c2cc3b502db7e846b79cad6eacd63",
+    "source_page_snapshot": "05 Источники/Originals/selection-engineering-2026-10-28/web-2026-10-28.html",
+    "source_page_sha256": "9f31e8439bd840b3f6993851089acd305b230070bdd4fd6474c68fa39192f09e",
+    "license": "CC BY-NC-ND 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "license_evidence": "05 Источники/Originals/selection-engineering-2026-10-28/web-2026-10-28.html",
+    "license_evidence_sha256": "9f31e8439bd840b3f6993851089acd305b230070bdd4fd6474c68fa39192f09e",
+    "public_license_copy": "site/public/licenses/harvard-data-selection-web-2026-10-28.txt",
+    "derivation": "source-svg-copy",
+    "modifications": "Complete original web-edition image copied byte-for-byte, without crop, redraw, translated labels, upscaling or recompression. Reproduced unchanged as an attributed object in a collection. The live web edition has a distinct CC BY-NC-ND 4.0 notice; the older QMD snapshot license is not used to relicense these image bytes.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества.md"
+    ],
+    "source_viewbox": [
+      0,
+      0,
+      761.21869,
+      352.48932
+    ]
+  }
+]

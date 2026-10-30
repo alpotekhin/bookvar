@@ -1,0 +1,147 @@
+[
+  {
+    "id": "curated-zero-bubble-dependency-249d97877ac9",
+    "asset": "00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/dependency.png",
+    "author": "Penghui Qi, Xinyi Wan, Guangxing Huang and Min Lin; Sea AI Lab",
+    "source_url": "https://huggingface.co/spaces/sail/zero-bubble-pipeline-parallellism/blob/34d85332bccf8111db03eed694bbcd10f8231ee4/description2.md",
+    "source_image_url": "https://cdn-uploads.huggingface.co/production/uploads/63510eea0b94548566dad923/8B9thyMiLgysNi_m_O3Qn.png",
+    "commit": "34d85332bccf8111db03eed694bbcd10f8231ee4",
+    "source_asset": "00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/dependency.png",
+    "sha256": "249d97877ac94a178b07524f927409e3e8f34fc1210ca94b25cd3d0870cad959",
+    "source_asset_sha256": "249d97877ac94a178b07524f927409e3e8f34fc1210ca94b25cd3d0870cad959",
+    "dimensions_px": [
+      1144,
+      610
+    ],
+    "source_page_snapshot": "05 Источники/Originals/zero-bubble-2026-10-23/description2.md",
+    "source_page_sha256": "fe5d715bc801d3a34af0a84ff6a8a4c5acd084c8ee92c6244fdd86494b87cef7",
+    "license": "Apache-2.0",
+    "license_url": "https://huggingface.co/spaces/sail/zero-bubble-pipeline-parallellism/blob/34d85332bccf8111db03eed694bbcd10f8231ee4/README.md",
+    "license_evidence": "05 Источники/Originals/zero-bubble-2026-10-23/README.md",
+    "license_evidence_sha256": "ef973e0e1cde4d1ad1e1c8f26ef6e2360c8e7e6f9a99cc2be0f605d5f5e9f7cc",
+    "derivation": "source-raster-copy",
+    "modifications": "None; complete author-published Space image copied byte-for-byte. No crop, redraw, relabeling, translation or upsampling. The asset itself is the retained original, without a duplicate archive.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-23",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism.md"
+    ]
+  },
+  {
+    "id": "curated-zero-bubble-zb1p-a3fafc7065c6",
+    "asset": "00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/zb1p.png",
+    "author": "Penghui Qi, Xinyi Wan, Guangxing Huang and Min Lin; Sea AI Lab",
+    "source_url": "https://huggingface.co/spaces/sail/zero-bubble-pipeline-parallellism/blob/34d85332bccf8111db03eed694bbcd10f8231ee4/description2.md",
+    "source_image_url": "https://cdn-uploads.huggingface.co/production/uploads/63510eea0b94548566dad923/EcTFvbjfM7soUXDYyn1Xu.png",
+    "commit": "34d85332bccf8111db03eed694bbcd10f8231ee4",
+    "source_asset": "00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/zb1p.png",
+    "sha256": "a3fafc7065c66003966de33383461f269cefc94d02ba46f21a1ee5e683636522",
+    "source_asset_sha256": "a3fafc7065c66003966de33383461f269cefc94d02ba46f21a1ee5e683636522",
+    "dimensions_px": [
+      1320,
+      166
+    ],
+    "source_page_snapshot": "05 Источники/Originals/zero-bubble-2026-10-23/description2.md",
+    "source_page_sha256": "fe5d715bc801d3a34af0a84ff6a8a4c5acd084c8ee92c6244fdd86494b87cef7",
+    "license": "Apache-2.0",
+    "license_url": "https://huggingface.co/spaces/sail/zero-bubble-pipeline-parallellism/blob/34d85332bccf8111db03eed694bbcd10f8231ee4/README.md",
+    "license_evidence": "05 Источники/Originals/zero-bubble-2026-10-23/README.md",
+    "license_evidence_sha256": "ef973e0e1cde4d1ad1e1c8f26ef6e2360c8e7e6f9a99cc2be0f605d5f5e9f7cc",
+    "derivation": "source-raster-copy",
+    "modifications": "None; complete author-published Space image copied byte-for-byte. No crop, redraw, relabeling, translation or upsampling. The asset itself is the retained original, without a duplicate archive.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-23",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism.md"
+    ]
+  },
+  {
+    "id": "curated-zero-bubble-zb2p-8bbe08ba2f89",
+    "asset": "00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/zb2p.png",
+    "author": "Penghui Qi, Xinyi Wan, Guangxing Huang and Min Lin; Sea AI Lab",
+    "source_url": "https://huggingface.co/spaces/sail/zero-bubble-pipeline-parallellism/blob/34d85332bccf8111db03eed694bbcd10f8231ee4/description2.md",
+    "source_image_url": "https://cdn-uploads.huggingface.co/production/uploads/63510eea0b94548566dad923/8jFI_rO69BREKqiSFHIOL.png",
+    "commit": "34d85332bccf8111db03eed694bbcd10f8231ee4",
+    "source_asset": "00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/zb2p.png",
+    "sha256": "8bbe08ba2f89d1a00c697494645d72c7ed2b51063085aeec77c2ab0368c17168",
+    "source_asset_sha256": "8bbe08ba2f89d1a00c697494645d72c7ed2b51063085aeec77c2ab0368c17168",
+    "dimensions_px": [
+      1318,
+      200
+    ],
+    "source_page_snapshot": "05 Источники/Originals/zero-bubble-2026-10-23/description2.md",
+    "source_page_sha256": "fe5d715bc801d3a34af0a84ff6a8a4c5acd084c8ee92c6244fdd86494b87cef7",
+    "license": "Apache-2.0",
+    "license_url": "https://huggingface.co/spaces/sail/zero-bubble-pipeline-parallellism/blob/34d85332bccf8111db03eed694bbcd10f8231ee4/README.md",
+    "license_evidence": "05 Источники/Originals/zero-bubble-2026-10-23/README.md",
+    "license_evidence_sha256": "ef973e0e1cde4d1ad1e1c8f26ef6e2360c8e7e6f9a99cc2be0f605d5f5e9f7cc",
+    "derivation": "source-raster-copy",
+    "modifications": "None; complete author-published Space image copied byte-for-byte. No crop, redraw, relabeling, translation or upsampling. The asset itself is the retained original, without a duplicate archive.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-23",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism.md"
+    ]
+  },
+  {
+    "id": "curated-zero-bubble-zbv-28a83d627002",
+    "asset": "00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/zbv.png",
+    "author": "Penghui Qi, Xinyi Wan, Guangxing Huang and Min Lin; Sea AI Lab",
+    "source_url": "https://huggingface.co/spaces/sail/zero-bubble-pipeline-parallellism/blob/34d85332bccf8111db03eed694bbcd10f8231ee4/description2.md",
+    "source_image_url": "https://cdn-uploads.huggingface.co/production/uploads/63510eea0b94548566dad923/VRfjNVXakAU3MQK3h6OKa.png",
+    "commit": "34d85332bccf8111db03eed694bbcd10f8231ee4",
+    "source_asset": "00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/zbv.png",
+    "sha256": "28a83d627002633f670d662903c50dd62e210febb9a98e5ed278ba2845afcd4f",
+    "source_asset_sha256": "28a83d627002633f670d662903c50dd62e210febb9a98e5ed278ba2845afcd4f",
+    "dimensions_px": [
+      1318,
+      352
+    ],
+    "source_page_snapshot": "05 Источники/Originals/zero-bubble-2026-10-23/description2.md",
+    "source_page_sha256": "fe5d715bc801d3a34af0a84ff6a8a4c5acd084c8ee92c6244fdd86494b87cef7",
+    "license": "Apache-2.0",
+    "license_url": "https://huggingface.co/spaces/sail/zero-bubble-pipeline-parallellism/blob/34d85332bccf8111db03eed694bbcd10f8231ee4/README.md",
+    "license_evidence": "05 Источники/Originals/zero-bubble-2026-10-23/README.md",
+    "license_evidence_sha256": "ef973e0e1cde4d1ad1e1c8f26ef6e2360c8e7e6f9a99cc2be0f605d5f5e9f7cc",
+    "derivation": "source-raster-copy",
+    "modifications": "None; complete author-published Space image copied byte-for-byte. No crop, redraw, relabeling, translation or upsampling. The asset itself is the retained original, without a duplicate archive.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-23",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism.md"
+    ]
+  },
+  {
+    "id": "curated-zero-bubble-optimizer-a06373e75641",
+    "asset": "00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/optimizer.png",
+    "author": "Penghui Qi, Xinyi Wan, Guangxing Huang and Min Lin; Sea AI Lab",
+    "source_url": "https://huggingface.co/spaces/sail/zero-bubble-pipeline-parallellism/blob/34d85332bccf8111db03eed694bbcd10f8231ee4/description2.md",
+    "source_image_url": "https://cdn-uploads.huggingface.co/production/uploads/63510eea0b94548566dad923/hRPFqaFxJ20wm2omwyKmO.png",
+    "commit": "34d85332bccf8111db03eed694bbcd10f8231ee4",
+    "source_asset": "00 Учебник/Assets/Figures/curated/zero-bubble-2026-10-23/optimizer.png",
+    "sha256": "a06373e7564166362da11363acab9fb4c40d517d8582e56144fe3a98031a3692",
+    "source_asset_sha256": "a06373e7564166362da11363acab9fb4c40d517d8582e56144fe3a98031a3692",
+    "dimensions_px": [
+      1180,
+      372
+    ],
+    "source_page_snapshot": "05 Источники/Originals/zero-bubble-2026-10-23/description2.md",
+    "source_page_sha256": "fe5d715bc801d3a34af0a84ff6a8a4c5acd084c8ee92c6244fdd86494b87cef7",
+    "license": "Apache-2.0",
+    "license_url": "https://huggingface.co/spaces/sail/zero-bubble-pipeline-parallellism/blob/34d85332bccf8111db03eed694bbcd10f8231ee4/README.md",
+    "license_evidence": "05 Источники/Originals/zero-bubble-2026-10-23/README.md",
+    "license_evidence_sha256": "ef973e0e1cde4d1ad1e1c8f26ef6e2360c8e7e6f9a99cc2be0f605d5f5e9f7cc",
+    "derivation": "source-raster-copy",
+    "modifications": "None; complete author-published Space image copied byte-for-byte. No crop, redraw, relabeling, translation or upsampling. The asset itself is the retained original, without a duplicate archive.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-23",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism.md"
+    ]
+  }
+]

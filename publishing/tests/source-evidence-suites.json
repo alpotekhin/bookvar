@@ -1,0 +1,486 @@
+{
+  "date": "2026-10-30",
+  "scope": "Explicit source-evidence suite classification; no test is deleted or conditionally skipped. test:unit retains the complete suite.",
+  "suites": [
+    {
+      "file": "tests/active-learning.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/adaptive-clipping.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/agent-reconciliation.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/architecture-lab.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/architecture-patterns.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/asset-registry.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/autodiff.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/bert-family.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/bert-objectives.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/bleu-reconciliation.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/coconut-integration.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/collective-destinations.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/confident-learning.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/consistency-training.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/constitutional-ai.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/corpus-releases.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/cuda-graphs.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/data-augmentation.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/data-selection-generated-figures.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/data-selection-scores.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/data-selection-section-map.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/ddp-overlap.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/dlrm.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/edls-deployment-sources.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/edls-http-reference.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/edls-kv-reference.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/edls-metric-receipts.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/feature-stores.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/figure-replacements.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/finops.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/fleet-measurement.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/formal-zeta.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/frameworks-native-figures.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/frameworks-section-map.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/full-transformer.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/gan-dcgan.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/gpt1.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/gpt2.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/gpt3.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/gqa.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/group-equivariance.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/hardware-source-comparison.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/indexed-movement.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/inference-mbu.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/inference-practice.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/jax-runtime.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/jax-transforms.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/llama.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/mae.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/masked-diffusion.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/micro-arena.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/mig-visuals.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/moco.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/model-export.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/module-hooks.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/module-state.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/moe.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/nanogpt-reference.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/nn-native-figures.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/nn-section-map.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/olmo-pretraining.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/ops-scale.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/optimizer-memory.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/peft-fine-tuning.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/performance-practice.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/placement-dimensions.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/planseqlearn.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/platform-resources.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/practice-runtime.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/preference-data.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/reduction-tree.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/retention-finetuning.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/rnn-execution.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/rope.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/selection-engineering.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/selection-gaps.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/semi-extensions.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/semi-supervised.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/sim-to-real.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/simclr.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/small-data-finetuning.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/structured-dropout.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/synthetic-recipes.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/t5.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/tensor-factorization.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/tensorflow-export.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/tf-data-cache.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/tool-rewards.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/torch-compile.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/tot-reconciliation.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/tracing-control.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/training-reconciliation.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/training-step.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/transformer-shapes.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/winograd.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    },
+    {
+      "file": "tests/workflow-feedback.test.ts",
+      "requires": "local-source-snapshots",
+      "reason": "Compares chapter or figure provenance with retained upstream snapshots in 05 Источники/Originals; publication assets are checked independently."
+    }
+  ]
+}

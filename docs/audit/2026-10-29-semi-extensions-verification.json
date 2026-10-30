@@ -1,0 +1,478 @@
+{
+  "date": "2026-10-29",
+  "status": "comparison-verified-locally-not-published",
+  "previousGoalTurnClassification": "progress: Adversarial Training reconciliation accepted and exact remaining scope persisted.",
+  "scope": "Complete reconciliation of the archived Semi-supervised Learning note; preserve the existing single chapter owner and source-native English.",
+  "chapter": {
+    "path": "00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch.md",
+    "sha256": "03a273d68cd2f560cdb13f08b74c090afa792076a460cc39ec04090ac6870935",
+    "lines": 1596,
+    "wholeRead": "Entire final 1596-line chapter reread after the last content correction in four non-truncated chunks: 1–400, 401–800, 801–1200 and 1201–1620/EOF."
+  },
+  "explanationReview": {
+    "sourceComparison": "Selected complete method sections, full relevant ACL pages and named author-code functions read. Source scopes are listed below; full-paper/full-repository review is not claimed.",
+    "noisyStudent": "Clean inference-mode teacher versus noised student; separate training rounds and fixed soft targets; CE equals target entropy at matching predictions while its logit gradient is zero; batch-ratio reduction; filtering/balancing and unique versus repeated entries; iterative-run protocol; distinct 2021 language SSD adaptation.",
+    "mixText": "Discrete IDs versus continuous token-state interpolation; identical state/target coefficient; shared lower-branch gradients and nonlinear upper predictions; sampled layer and folded Beta coefficient; weighted guess before sharpening and ties; differentiable squared-norm margin versus detached targets; stationary uniform prediction; paper/released-code differences in averaging, hinge and loss assembly, and no-grad versus eval.",
+    "daiLe": "Complete-document reconstruction versus prefix LM; shared encoder/decoder LSTM weights and teacher forcing; vocabulary-head disposal, transferred embeddings/recurrent weights and supervised adaptation; full forward sequence versus truncated backward graph; non-universal experiment outcomes and the internal IMDb v1 disagreement.",
+    "assumptions": "Semi-supervised smoothness, cluster/low-density separation and manifold geometry distinguished from class information, using existing circles and graph examples. A label change halfway around a curve is a counterexample to inferring a single class from low-dimensional shape.",
+    "existingContent": "Pseudo-labeling, VAT/UDA, FixMatch, confirmation bias, harmonic graph derivation, label-efficiency and cost examples preserved. The exact journal restores the whole preceding chapter and registry; its narrow FixMatch 'described below' navigation correction is also reversible.",
+    "style": "no-ai-slop SKILL and eval applied with repository technical qualifications. Full derivations, examples, citations and original captions remain; no new translation or definition-only substitute."
+  },
+  "sourcePacket": {
+    "path": "05 Источники/Originals/semi-supervised-extensions-2026-10-29",
+    "sources": [
+      {
+        "file": "mixtext-v1.html",
+        "bytes": 179756,
+        "sha256": "865ce1d681029a6ff4eb14b0af26c33d1ae4cb9bdfd01634988828f168ededd8",
+        "url": "https://arxiv.org/html/2004.12239v1",
+        "readScope": "Complete sections 3–5, including TMix/MixText objectives, label guessing, experimental settings and tables. Compared with final ACL pages 1–7.",
+        "publication": "analysis-only; published figures come from the licensed final ACL PDF"
+      },
+      {
+        "file": "mixtext-acl-2020.pdf",
+        "bytes": 1070395,
+        "sha256": "843ce752f5612b25c255e49c286279bde7fecbe5be5d5986dd79615329991f37",
+        "url": "https://aclanthology.org/2020.acl-main.194.pdf",
+        "readScope": "Complete pages 1–7; full TMix and MixText mechanisms, Figures 1–2 with captions, Table 2 and protocol. Eleven pages parsed; references/last pages not claimed reviewed.",
+        "publication": "source-specific license/evidence retained"
+      },
+      {
+        "file": "mixtext-model.py",
+        "bytes": 7396,
+        "sha256": "8ccf2bb78fa3511b1e45942312ec56ef6c916065256141c7642cef6b238a823f",
+        "url": "https://raw.githubusercontent.com/SALT-NLP/MixText/f17198d98e1bbb012d8e33cd26e228dd43bb4673/code/mixtext.py",
+        "readScope": "Complete 187-line file, including both branches, shared layers, token-state mixing, default masks and mean pooling.",
+        "publication": "source-specific license/evidence retained"
+      },
+      {
+        "file": "mixtext-train.py",
+        "bytes": 17384,
+        "sha256": "2f4e0da45fbcabe1c6700f8f043bb6a3e7a39bdae7584d794865af2458dcc38e",
+        "url": "https://raw.githubusercontent.com/SALT-NLP/MixText/f17198d98e1bbb012d8e33cd26e228dd43bb4673/code/train.py",
+        "readScope": "Complete argument block, train function, linear_rampup and SemiLoss. Unrelated main/validation plumbing not claimed read.",
+        "publication": "source-specific license/evidence retained"
+      },
+      {
+        "file": "mixtext-MIT.txt",
+        "bytes": 1063,
+        "sha256": "44d9ee67aa9f08e55e8ed30995a26ae4d4e2614d3afd6ffba5f3414aa813c68e",
+        "url": "https://raw.githubusercontent.com/SALT-NLP/MixText/f17198d98e1bbb012d8e33cd26e228dd43bb4673/LICENSE",
+        "readScope": "Complete MIT notice; original code attribution retained.",
+        "publication": "source-specific license/evidence retained"
+      },
+      {
+        "file": "noisy-student-v4.html",
+        "bytes": 353215,
+        "sha256": "4389ca2b8c38f12486d5975e8ce17334e99dbdc8de095761334177b0bcb8ef03",
+        "url": "https://arxiv.org/html/1911.04252v4",
+        "readScope": "Complete sections 2–4, including Algorithm 1, Figure 1, dataset filtering, iteration and ablation protocols. Appendix detail not claimed fully read.",
+        "publication": "analysis-only; public chapter uses source URL"
+      },
+      {
+        "file": "noisy-main.py",
+        "bytes": 29252,
+        "sha256": "64009e7a8fbc2d16cace6c0aa73abbac5962d27515ac53dbc12916107297711c",
+        "url": "https://raw.githubusercontent.com/google-research/noisystudent/aac52bf02448f6e45aee6c418f3e588803e4fa43/main.py",
+        "readScope": "cross_entropy and model_fn lines 300–584: teacher inference/stop-gradient, soft/hard targets, reduction, label smoothing and weight decay. Remaining training infrastructure not claimed read.",
+        "publication": "source-specific license/evidence retained"
+      },
+      {
+        "file": "noisy-README.md",
+        "bytes": 3740,
+        "sha256": "356d87751cd7ac8b9f225fe6f2f8efd20dd545765e31cde68f522fd5b08df4f2",
+        "url": "https://raw.githubusercontent.com/google-research/noisystudent/aac52bf02448f6e45aee6c418f3e588803e4fa43/README.md",
+        "readScope": "Complete README, including offline/on-the-fly target paths; no dataset/checkpoint/training command executed.",
+        "publication": "source-specific license/evidence retained"
+      },
+      {
+        "file": "noisy-Apache-2.0.txt",
+        "bytes": 11358,
+        "sha256": "ce757c792c7099940b2f6fbad1443f65b7c9ec629a8b0c84b078071d45b7e7fd",
+        "url": "https://raw.githubusercontent.com/google-research/noisystudent/aac52bf02448f6e45aee6c418f3e588803e4fa43/LICENSE",
+        "readScope": "Original license retained; code is analysed, not imported as a TensorFlow runtime.",
+        "publication": "source-specific license/evidence retained"
+      },
+      {
+        "file": "dai-le-v1.html",
+        "bytes": 109879,
+        "sha256": "2804b2bcf1ec37086d17c1c78bbfa2c7920eca5c13d2ff0ce7776ef9f9acfbdf",
+        "url": "https://arxiv.org/html/1511.01432v1",
+        "readScope": "Complete sections 2–4, including shared encoder/decoder weights, full-sequence forward versus truncated BPTT, transfer and all task tables. IMDb prose/table disagreement noted, not hidden.",
+        "publication": "analysis-only; public chapter uses source URL"
+      },
+      {
+        "file": "google-ssl-blog.html",
+        "bytes": 176813,
+        "sha256": "031ad27f1ad0f37fce71985a6e2a1342e0512a5dfc4b72fb19cc8ad55f35d198",
+        "url": "https://research.google/blog/from-vision-to-language-semi-supervised-learning-in-action-at-scale/",
+        "readScope": "Complete main article by Luong and Hu (2021); distinguishes Noisy Student from the described NLP SSD adaptation. No wholesale reproduction or blog-figure reuse.",
+        "publication": "analysis-only; public chapter uses source URL"
+      },
+      {
+        "file": "noisy-original-figure1.png",
+        "bytes": 329651,
+        "sha256": "a64de79b3342a85d009bfda541ce830b16b60d2cf78ff473fbf54a4dad76a186",
+        "url": "https://arxiv.org/html/1911.04252v4/graph.png",
+        "readScope": "Complete original inspected locally. Analysis copy only; chapter links to the paper figure. No permission inferred from open access.",
+        "publication": "analysis-only; public chapter uses source URL"
+      },
+      {
+        "file": "dai-le-original-figure1.png",
+        "bytes": 15401,
+        "sha256": "7029f468c40cbcfb59df170e5a40f1393f7884d40cca52c3cd97732f174672bc",
+        "url": "https://arxiv.org/html/1511.01432v1/sequenceautoencoder.png",
+        "readScope": "Complete original inspected locally, all WXYZ states and targets. Analysis copy only; chapter links to the original.",
+        "publication": "analysis-only; public chapter uses source URL"
+      }
+    ],
+    "externalReads": [
+      {
+        "url": "https://www.cs.cmu.edu/~zhuxj/tmp/book.pdf#page=12",
+        "sha256": "864d73b72d282a3ef8423764566084398fcb90d7db156ffeedfab4d18dd60180",
+        "documentPages": 104,
+        "readScope": "Complete PDF pages 12–14, covering the full sections 1.2.1–1.2.3 on semi-supervised smoothness, cluster/low-density separation and manifold geometry. Analysis copy downloaded to this run temporary directory only; book not copied into published assets."
+      }
+    ]
+  },
+  "figures": {
+    "published": "Two complete original ACL MixText figures and their captions. 240-dpi PDF crops retain all labels/branches and do not enlarge embedded native rasters. Source PDF, pixel hashes, coordinates and ACL CC BY 4.0 evidence retained.",
+    "sourceNativeDimensions": [
+      [
+        954,
+        880
+      ],
+      [
+        1704,
+        628
+      ]
+    ],
+    "outputDimensions": [
+      [
+        764,
+        851
+      ],
+      [
+        1548,
+        701
+      ]
+    ],
+    "linked": "Noisy Student Figure 1 and Dai–Le Figure 1 were inspected as analysis copies; the chapter keeps direct links. No publication permission inferred from the arXiv distribution license or the blog's open access.",
+    "limits": "Not every source figure is embedded. Earlier historical open-comparison notes remain unchanged; the current ledger and this receipt supersede those pending items."
+  },
+  "executedChecks": [
+    {
+      "kind": "Current CPU",
+      "command": "uv run --offline --with torch==2.14.1 --with numpy==2.3.5 --with pymupdf --with pillow python publishing/tools/check_semi_extensions_examples.py",
+      "result": "exit 0 at final chapter hash; all 14 actual reader programs, 9 independent soft-target CE cases, two original loss-assembly branches, four original encoder traversal/mixing cases with arithmetic layer stubs, 13 source byte/hash checks and two decoded-pixel PDF-render comparisons",
+      "log": "/var/tmp/bookvar-semi-extensions-cpu-accepted-20261029.log"
+    },
+    {
+      "kind": "Prior-mechanism regression",
+      "result": "exit 0; known preceding AT/VAT/UDA programs checked after exact journal rewind. New checker separately executes every current semi-supervised program.",
+      "log": "/var/tmp/bookvar-semi-extensions-prior-cpu-final-20261029.log",
+      "revision": "Before the final structural-assumption paragraph, which changes no code, formulas or prior mechanisms."
+    },
+    {
+      "kind": "Full unit suite at substantive draft",
+      "result": "135 files / 850 tests passed; exit 0",
+      "log": "/var/tmp/bookvar-semi-extensions-unit-20261029.log",
+      "chapterRevision": "c554ac5e1d40ba6d5b7bd0797eedee4e1319d1dd5d5922da04d8d283c1e500b1",
+      "limit": "This full-suite result predates the navigation-wording and structural-assumption additions; it is not represented as a fresh full-suite run on the final hash."
+    },
+    {
+      "kind": "Current targeted tests",
+      "result": "4 files / 13 tests passed; exit 0 on final chapter and journal",
+      "log": "/var/tmp/bookvar-semi-extensions-tests-accepted-20261029.log"
+    },
+    {
+      "kind": "Current generated HTML",
+      "result": "174 tests passed; exit 0; both locales, 14 programs, 22 display formulas, original assets and current section anchors",
+      "log": "/var/tmp/bookvar-semi-extensions-output-accepted-20261029.log"
+    },
+    {
+      "kind": "Current root build",
+      "result": "exit 0; 2006 pages; canonical publisher prepared before final Astro build",
+      "log": "/var/tmp/bookvar-semi-extensions-root-accepted-20261029.log"
+    },
+    {
+      "kind": "Current root links",
+      "result": "exit 0; 0 broken internal links",
+      "log": "/var/tmp/bookvar-semi-extensions-links-accepted-20261029.log"
+    },
+    {
+      "kind": "Preservation and ledger",
+      "result": "All 31 archive source hashes intact; current whole-read hashes match, allowing only the explicitly recorded SFT navigation delta. Exact journal reversal restores both preceding hashes. Counts recomputed: 24 reconciled / 7 unread."
+    },
+    {
+      "kind": "Scoped whitespace",
+      "result": "git diff --check passed for current changed tracked chapter, registry, helpers, tests, ledger and plan."
+    }
+  ],
+  "visualQA": {
+    "desktop": "1280×900. Current root document client/scroll widths 1265/1265; 8 actual images loaded, 14 programs, 22 display formulas and zero KaTeX errors. Both new originals opened at 1× and inspected with complete captions and labels.",
+    "mobile": "360×800. Current root document client/scroll widths 345/345; all 8 actual images loaded and zero KaTeX errors. New formulas fit the 313px content width. MixText framework viewed at 3×; detail readable with an intentional larger-than-viewport zoom and scrolling controls.",
+    "english": "Source-native English chapter inspected on /en/ including the complete Dai–Le section. No missing-translation fallback for this owner; generated HTML tests also confirm both locales.",
+    "existingMathLimit": "The remaining 406px internally scrolling display is the TSA labelled-loss equation, not the FixMatch objective. Earlier receipt wording misidentified that expression; no historical receipt was rewritten. The document itself does not overflow.",
+    "browserObservation": "An existing tab initially retained the prior document after only a hash navigation. The built HTML already contained current anchors; a full browser reload showed the new 14-program, 22-formula revision. Old loaded DOM was not counted as current QA.",
+    "screenshots": [
+      "docs/audit/evidence/2026-10-29-semi-extensions/accepted-desktop-mixtext-original.png",
+      "docs/audit/evidence/2026-10-29-semi-extensions/accepted-en-dai-le.png",
+      "docs/audit/evidence/2026-10-29-semi-extensions/accepted-mobile-assumptions.png",
+      "docs/audit/evidence/2026-10-29-semi-extensions/accepted-mobile-noisy-student.png",
+      "docs/audit/evidence/2026-10-29-semi-extensions/root-desktop-mixtext-original.png",
+      "docs/audit/evidence/2026-10-29-semi-extensions/root-desktop-tmix-original.png",
+      "docs/audit/evidence/2026-10-29-semi-extensions/root-en-dai-le.png",
+      "docs/audit/evidence/2026-10-29-semi-extensions/root-mobile-mixtext-zoom.png"
+    ],
+    "scope": "Current changed mechanisms and source figures checked; no claim to have freshly inspected every unchanged figure in the entire book."
+  },
+  "repairEvidence": [
+    "One corpus-release test originally attempted to rewind an already intermediate revision through a newer journal. It now starts each rewind from the current file, preserving the old expected hashes and negative controls.",
+    "An unsupported local Perl locale caused shasum to fail; a malformed new journal hash was caught by tests and replaced using Node crypto. Exact restoration and all current targeted tests subsequently passed; no guard was weakened."
+  ],
+  "limits": [
+    "CPU toys and selected original functions only. BERT encoder traversal uses arithmetic layer stubs, not a pretrained BERT equivalence test.",
+    "No translation generation, full EfficientNet/BERT/LSTM source training, TensorFlow-1 runtime, GPU timing or benchmark reproduction.",
+    "A fresh /bookvar build for these additions is deferred to the final release gate. No Pages-prefix success or live deployment claimed here.",
+    "Full conceptual-route review, seven archive comparisons and final dev/Pages release remain."
+  ],
+  "archiveCounts": {
+    "total": 31,
+    "sourceFullRead": 24,
+    "reconciled": 24,
+    "readInProgress": 0,
+    "unread": 7,
+    "canonicalWholeReads": 30
+  },
+  "publication": {
+    "branch": "editorial-route-alignment",
+    "head": "75e1870",
+    "commit": false,
+    "push": false,
+    "deploy": false,
+    "demo": "http://127.0.0.1:4330/textbook/pretraining/semi-supervised-fixmatch/#mixtext"
+  },
+  "artifacts": [
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch.md",
+      "sha256": "03a273d68cd2f560cdb13f08b74c090afa792076a460cc39ec04090ac6870935",
+      "bytes": 75540
+    },
+    {
+      "path": "05 Источники/asset-registry.yml",
+      "sha256": "59e51972f97b6e4c72f7902795626643547fcb18ab6c112d0d451079175ed561",
+      "bytes": 1864608
+    },
+    {
+      "path": "05 Источники/Originals/semi-supervised-extensions-2026-10-29/README.md",
+      "sha256": "c4df49dfc1e1d9ca07474f5da6b51f7e07e3925effa3a8ea53025baed97f0659",
+      "bytes": 509
+    },
+    {
+      "path": "05 Источники/Originals/semi-supervised-extensions-2026-10-29/manifest.json",
+      "sha256": "7e00d6452f7cf69af9f612115ce77fca553f7fcd77e69eefa0758c64b222d575",
+      "bytes": 7496
+    },
+    {
+      "path": "05 Источники/Originals/semi-supervised-extensions-2026-10-29/mixtext-v1.html",
+      "sha256": "865ce1d681029a6ff4eb14b0af26c33d1ae4cb9bdfd01634988828f168ededd8",
+      "bytes": 179756
+    },
+    {
+      "path": "05 Источники/Originals/semi-supervised-extensions-2026-10-29/mixtext-acl-2020.pdf",
+      "sha256": "843ce752f5612b25c255e49c286279bde7fecbe5be5d5986dd79615329991f37",
+      "bytes": 1070395
+    },
+    {
+      "path": "05 Источники/Originals/semi-supervised-extensions-2026-10-29/mixtext-model.py",
+      "sha256": "8ccf2bb78fa3511b1e45942312ec56ef6c916065256141c7642cef6b238a823f",
+      "bytes": 7396
+    },
+    {
+      "path": "05 Источники/Originals/semi-supervised-extensions-2026-10-29/mixtext-train.py",
+      "sha256": "2f4e0da45fbcabe1c6700f8f043bb6a3e7a39bdae7584d794865af2458dcc38e",
+      "bytes": 17384
+    },
+    {
+      "path": "05 Источники/Originals/semi-supervised-extensions-2026-10-29/mixtext-MIT.txt",
+      "sha256": "44d9ee67aa9f08e55e8ed30995a26ae4d4e2614d3afd6ffba5f3414aa813c68e",
+      "bytes": 1063
+    },
+    {
+      "path": "05 Источники/Originals/semi-supervised-extensions-2026-10-29/noisy-student-v4.html",
+      "sha256": "4389ca2b8c38f12486d5975e8ce17334e99dbdc8de095761334177b0bcb8ef03",
+      "bytes": 353215
+    },
+    {
+      "path": "05 Источники/Originals/semi-supervised-extensions-2026-10-29/noisy-main.py",
+      "sha256": "64009e7a8fbc2d16cace6c0aa73abbac5962d27515ac53dbc12916107297711c",
+      "bytes": 29252
+    },
+    {
+      "path": "05 Источники/Originals/semi-supervised-extensions-2026-10-29/noisy-README.md",
+      "sha256": "356d87751cd7ac8b9f225fe6f2f8efd20dd545765e31cde68f522fd5b08df4f2",
+      "bytes": 3740
+    },
+    {
+      "path": "05 Источники/Originals/semi-supervised-extensions-2026-10-29/noisy-Apache-2.0.txt",
+      "sha256": "ce757c792c7099940b2f6fbad1443f65b7c9ec629a8b0c84b078071d45b7e7fd",
+      "bytes": 11358
+    },
+    {
+      "path": "05 Источники/Originals/semi-supervised-extensions-2026-10-29/dai-le-v1.html",
+      "sha256": "2804b2bcf1ec37086d17c1c78bbfa2c7920eca5c13d2ff0ce7776ef9f9acfbdf",
+      "bytes": 109879
+    },
+    {
+      "path": "05 Источники/Originals/semi-supervised-extensions-2026-10-29/google-ssl-blog.html",
+      "sha256": "031ad27f1ad0f37fce71985a6e2a1342e0512a5dfc4b72fb19cc8ad55f35d198",
+      "bytes": 176813
+    },
+    {
+      "path": "05 Источники/Originals/semi-supervised-extensions-2026-10-29/noisy-original-figure1.png",
+      "sha256": "a64de79b3342a85d009bfda541ce830b16b60d2cf78ff473fbf54a4dad76a186",
+      "bytes": 329651
+    },
+    {
+      "path": "05 Источники/Originals/semi-supervised-extensions-2026-10-29/dai-le-original-figure1.png",
+      "sha256": "7029f468c40cbcfb59df170e5a40f1393f7884d40cca52c3cd97732f174672bc",
+      "bytes": 15401
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/semi-supervised-extensions-2026-10-29/assets.json",
+      "sha256": "fc9cf90254326ad9eda46255aa0f7c5f5eb849b757c7368792cd6e2dec199a31",
+      "bytes": 3795
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/semi-supervised-extensions-2026-10-29/NOTICE.md",
+      "sha256": "66ec55c8485cbc4364038873d44b57b0952f21ca6fb0425a358e4d3e9070530e",
+      "bytes": 502
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/semi-supervised-extensions-2026-10-29/tmix-original.png",
+      "sha256": "2005dce4603291c3db6148064def75188f9e60c0158faeb9fe9ddda68c8a699a",
+      "bytes": 107566
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/semi-supervised-extensions-2026-10-29/mixtext-original.png",
+      "sha256": "e0203895b58fa453cf067b28873afa85500d945e5e143694d23f28404006296e",
+      "bytes": 231896
+    },
+    {
+      "path": "publishing/tools/check_semi_extensions_examples.py",
+      "sha256": "7340a56aec54e6e7d060f1a12149dc5f5745e94d2204d6b66b1a8f44ef3a8d09",
+      "bytes": 7766
+    },
+    {
+      "path": "publishing/tools/prepare_semi_extensions_figures.py",
+      "sha256": "f32683901232d00fa246930f46e751ff19e41fc77f29215821bf0502685d4ab4",
+      "bytes": 1393
+    },
+    {
+      "path": "publishing/tools/check_consistency_training_examples.py",
+      "sha256": "9f4322fb020a5a0ebb5c31c1fb7cdd027693594a0dfff3a176a17eb576044b01",
+      "bytes": 9398
+    },
+    {
+      "path": "publishing/tools/check_semi_supervised_examples.py",
+      "sha256": "272dec143791489ade131d1caff8701c5c1db32cc3ea13d1e44438e68a7799e2",
+      "bytes": 6675
+    },
+    {
+      "path": "publishing/tools/topic-consolidation-baseline.mjs",
+      "sha256": "d103dc372022cd626ad9648e2b4c58dd50b83e5d3d083391a9dd9b949a9a10c4",
+      "bytes": 2750
+    },
+    {
+      "path": "publishing/tools/topic_consolidation_baseline.py",
+      "sha256": "f6526e4f4ae13b04ee53bb3f6120fc63cda47c059f4b68cd639213f0d238ed6d",
+      "bytes": 2861
+    },
+    {
+      "path": "publishing/tests/semi-extensions.test.ts",
+      "sha256": "6b1239e18acf53118945a4688925720f953ad0be56f0c9f6fee4f7d0d4c2842c",
+      "bytes": 3443
+    },
+    {
+      "path": "publishing/tests/consistency-training.test.ts",
+      "sha256": "16ce66a84e359d1e3cc1f6c6780ebf77ca59970092e4073b4fce0b18b91745e4",
+      "bytes": 4603
+    },
+    {
+      "path": "publishing/tests/semi-supervised.test.ts",
+      "sha256": "ff9bef13c303a929cf694359a2d8c7c7c33924bb264a28513bfe230b6b7d8d6c",
+      "bytes": 4406
+    },
+    {
+      "path": "publishing/tests/corpus-releases.test.ts",
+      "sha256": "82916f031228cf5e3a0e8ac20f94bb1f3c75c638ab94e985cdb2d02d9426cf24",
+      "bytes": 3490
+    },
+    {
+      "path": "publishing/tests/site-output.test.ts",
+      "sha256": "4a3dd231665b8e80bc4aa2208a551235510c668605313f9ac175e3d18f34a618",
+      "bytes": 223496
+    },
+    {
+      "path": "publishing/tests/asset-registry.test.ts",
+      "sha256": "6ee09637d647bc63ec403e405b77a65044ee149103012f865bb25f09c2b189ab",
+      "bytes": 571283
+    },
+    {
+      "path": "docs/audit/2026-10-29-semi-extensions-additions.json",
+      "sha256": "d176fe2291404ad7814bb279817570cdb5b5ab53eeb7221dde8c0080abc44b5d",
+      "bytes": 31531
+    },
+    {
+      "path": "docs/audit/2026-10-29-legacy-notes-review.json",
+      "sha256": "d0f031f34f4ac8335e8d2b8133a8e408521d8721f14cbc81925ad59986470cdd",
+      "bytes": 115928
+    },
+    {
+      "path": "docs/audit/2026-10-29-release-completion-plan.md",
+      "sha256": "bcf2fb1c90d322f5e5933331d0f2aacee87d599333e6d05aeaddf8794d66660a",
+      "bytes": 27671
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-semi-extensions/accepted-desktop-mixtext-original.png",
+      "sha256": "6d0caceeb40a0fbeaa9726fcbf462aefb20fd205c9fae36b86a2a8d4bf0bccbc",
+      "bytes": 98959
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-semi-extensions/accepted-en-dai-le.png",
+      "sha256": "ac45f985cf30b391dc9fdd7f7467e75999309e53593fbb1a4656a26401259c81",
+      "bytes": 157666
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-semi-extensions/accepted-mobile-assumptions.png",
+      "sha256": "7af0acaccb8ae73d99e835f55c90a1abd6c8ae2c3ae2db63c0286c8fcb0a2703",
+      "bytes": 47833
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-semi-extensions/accepted-mobile-noisy-student.png",
+      "sha256": "cc947872d1f1dbf9e4c365fdff757a1ab73f414061af8fb0240eafe73e0227c5",
+      "bytes": 48209
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-semi-extensions/root-desktop-mixtext-original.png",
+      "sha256": "6d0caceeb40a0fbeaa9726fcbf462aefb20fd205c9fae36b86a2a8d4bf0bccbc",
+      "bytes": 98959
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-semi-extensions/root-desktop-tmix-original.png",
+      "sha256": "726c70b5f88c9547b0ea1990755b2df9d43c26f895c577106814746ea346e899",
+      "bytes": 71785
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-semi-extensions/root-en-dai-le.png",
+      "sha256": "f1d7789dc601c253b233a2179446db8bbac60b1616113df958829be73be6bcc2",
+      "bytes": 152305
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-semi-extensions/root-mobile-mixtext-zoom.png",
+      "sha256": "117c4f8c5792e334e89e423b4be0099e0f8892f6e059d42e131b558fb7bbbeb5",
+      "bytes": 40021
+    }
+  ]
+}

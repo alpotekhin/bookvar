@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-29",
+  "source": "00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md",
+  "before_sha256": "ca96579eca2868ecd99f35dc26a2120db56a35e186f00909188384fb20d8fa58",
+  "after_sha256": "16e7174177cbe112cc35562f557554368f4d23eb3bc74e5651ac70a6ea4360bb",
+  "blocks": [
+    {
+      "label": "retraining",
+      "sha256": "d790b9f04e85c12520b38eddd04fb79e81de199be338556758b52cd12b5495f0",
+      "lines": 157
+    },
+    {
+      "label": "experiment",
+      "sha256": "437f3682da48f33120ded6913099295e31ae1a96717c916f5a84e520c15f2776",
+      "lines": 140
+    }
+  ],
+  "new_python_blocks": 2,
+  "qa_reflow": {
+    "previous_after_sha256": "191d96ab6b81d25153691ecc9879fff97810f84ffffe7f5ae60f79afcdd18c57",
+    "previous_block_sha256": "862783918b2ca956682c2665a5f39ca8648a6e43723d190a73bdc19870afd01a",
+    "reason": "Parent browser QA: bounded mobile display-math reflow; for retraining also write USD outside math to avoid escaped-dollar parser errors. Formulas, code and source excerpts unchanged."
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "new_assets": [
+    {
+      "id": "curated-vllm-prefix-cache-overview-44f3000fcd73",
+      "asset": "00 Учебник/Assets/Figures/curated/inference-scheduling-review-2026-10/vllm-prefix-cache-overview.png",
+      "author": "vLLM contributors",
+      "source_url": "https://github.com/vllm-project/vllm/blob/23fbc2ec2f7219888bfc76cf987381f501151971/docs/assets/design/prefix_caching/overview.png",
+      "source_download_url": "https://raw.githubusercontent.com/vllm-project/vllm/23fbc2ec2f7219888bfc76cf987381f501151971/docs/assets/design/prefix_caching/overview.png",
+      "source_image_url": "https://github.com/vllm-project/vllm/blob/23fbc2ec2f7219888bfc76cf987381f501151971/docs/assets/design/prefix_caching/overview.png",
+      "commit": "23fbc2ec2f7219888bfc76cf987381f501151971",
+      "sha256": "44f3000fcd73ec08ad66183ca8b3e0901e4b52044cf501f19fa8839391ac4e6a",
+      "dimensions": [
+        743,
+        331
+      ],
+      "license": "Apache-2.0",
+      "license_url": "https://github.com/vllm-project/vllm/blob/23fbc2ec2f7219888bfc76cf987381f501151971/LICENSE",
+      "license_copy": "00 Учебник/Assets/Figures/curated/inference-scheduling-review-2026-10/LICENSE-vllm-Apache-2.0.txt",
+      "license_sha256": "c95bae1d1ce0235ecccd3560b772ec1efb97f348a79f0fbe0a634f0c2ccefe2c",
+      "license_evidence": "Original documentation image in the vLLM repository governed by its root Apache License 2.0. Repository tree checked at pinned commit: no nearer license or NOTICE for docs/assets/design/prefix_caching. Full root license retained locally.",
+      "derivation": "source-raster-copy",
+      "modifications": "None. Original PNG bytes retained, including transparency, native resolution and all labels. No crop, recoloring, redraw or translation.",
+      "provenance_confirmation": "pinned-upstream-repository",
+      "rights_status": "source-license-verified",
+      "metadata_status": "verified",
+      "last_verified": "2026-10-14",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md"
+      ],
+      "review_note": "Block pool, free queue, cache-key map and request block references. Personally inspected original; black labels require a light background. White-container site inspection is parent-owned.",
+      "source_page_url": "https://github.com/vllm-project/vllm/blob/23fbc2ec2f7219888bfc76cf987381f501151971/docs/design/prefix_caching.md"
+    },
+    {
+      "id": "curated-vllm-prefix-release-shared-blocks-12043b8bd2b1",
+      "asset": "00 Учебник/Assets/Figures/curated/inference-scheduling-review-2026-10/vllm-prefix-release-shared-blocks.png",
+      "author": "vLLM contributors",
+      "source_url": "https://github.com/vllm-project/vllm/blob/23fbc2ec2f7219888bfc76cf987381f501151971/docs/assets/design/prefix_caching/example-time-5.png",
+      "source_download_url": "https://raw.githubusercontent.com/vllm-project/vllm/23fbc2ec2f7219888bfc76cf987381f501151971/docs/assets/design/prefix_caching/example-time-5.png",
+      "source_image_url": "https://github.com/vllm-project/vllm/blob/23fbc2ec2f7219888bfc76cf987381f501151971/docs/assets/design/prefix_caching/example-time-5.png",
+      "commit": "23fbc2ec2f7219888bfc76cf987381f501151971",
+      "sha256": "12043b8bd2b1bf7a03d6b5a2723c66276f6e18ae45aa29b3d7824e31c7a8035e",
+      "dimensions": [
+        844,
+        301
+      ],
+      "license": "Apache-2.0",
+      "license_url": "https://github.com/vllm-project/vllm/blob/23fbc2ec2f7219888bfc76cf987381f501151971/LICENSE",
+      "license_copy": "00 Учебник/Assets/Figures/curated/inference-scheduling-review-2026-10/LICENSE-vllm-Apache-2.0.txt",
+      "license_sha256": "c95bae1d1ce0235ecccd3560b772ec1efb97f348a79f0fbe0a634f0c2ccefe2c",
+      "license_evidence": "Original documentation image in the vLLM repository governed by its root Apache License 2.0. Repository tree checked at pinned commit: no nearer license or NOTICE for docs/assets/design/prefix_caching. Full root license retained locally.",
+      "derivation": "source-raster-copy",
+      "modifications": "None. Original PNG bytes retained, including transparency, native resolution and all labels. No crop, recoloring, redraw or translation.",
+      "provenance_confirmation": "pinned-upstream-repository",
+      "rights_status": "source-license-verified",
+      "metadata_status": "verified",
+      "last_verified": "2026-10-14",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md"
+      ],
+      "review_note": "After Request 0 finishes, blocks 4, 3, 2 enter the free queue; blocks 0, 1 remain used by Request 1. Personally inspected original; black labels require a light background. White-container site inspection is parent-owned.",
+      "source_page_url": "https://github.com/vllm-project/vllm/blob/23fbc2ec2f7219888bfc76cf987381f501151971/docs/design/prefix_caching.md"
+    },
+    {
+      "id": "curated-sglang-radix-tree-original-408a78d48a1e",
+      "asset": "00 Учебник/Assets/Figures/curated/inference-scheduling-review-2026-10/sglang-radix-tree-original.jpg",
+      "author": "LMSYS Org / SGLang authors",
+      "source_url": "https://github.com/lm-sys/lm-sys.github.io/blob/88c036dd1a78c8f2525782f98ee4493a63d7a532/public/images/blog/sglang/radix_attn_preview.jpg",
+      "source_page_url": "https://www.lmsys.org/blog/2024-01-17-sglang/",
+      "source_download_url": "https://raw.githubusercontent.com/lm-sys/lm-sys.github.io/88c036dd1a78c8f2525782f98ee4493a63d7a532/public/images/blog/sglang/radix_attn_preview.jpg",
+      "commit": "88c036dd1a78c8f2525782f98ee4493a63d7a532",
+      "sha256": "408a78d48a1efcd4cec9fb6b10969730adaff8b4672821d10f8bdec5b62b2b80",
+      "dimensions": [
+        3212,
+        3208
+      ],
+      "license": "MIT",
+      "license_url": "https://github.com/lm-sys/lm-sys.github.io/blob/88c036dd1a78c8f2525782f98ee4493a63d7a532/LICENSE",
+      "license_copy": "00 Учебник/Assets/Figures/curated/inference-scheduling-review-2026-10/LICENSE-LMSYS-MIT.txt",
+      "license_sha256": "324daad511da8c35aed6a4cffb7fbc0cae10295eca9f42086b5bbc806e017014",
+      "license_evidence": "Official LMSYS website/blog repository LICENSE contains MIT grants with Copyright (c) 2023 LMSYS Org and Copyright (c) 2022 LAION AI. Both notices and complete license texts retained. This is the original site preview JPEG, not the arXiv PDF, and attribution/license is not inferred from the separate SGLang code repository.",
+      "provenance_confirmation": "pinned-upstream-repository",
+      "rights_status": "source-license-verified",
+      "metadata_status": "verified",
+      "derivation": "source-raster-copy",
+      "modifications": "None. Original preview JPEG bytes retained, including all white margins, labels and branches. No crop, redraw, translation, recoloring or resizing.",
+      "last_verified": "2026-10-14",
+      "used_in": [
+        "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md"
+      ],
+      "review_note": "Personally inspected native original: one complete tree with new request i, shared prefixes, j/k/l branches and two evicted leaves. Readable original author-selected subset instead of the dense nine-panel paper figure. White margins remain; parent performs final site inspection."
+    }
+  ],
+  "used_in_changes": [
+    {
+      "id": "curated-harvard-harvard-inference-continuous-batching-svg-6f53babd6257",
+      "remove": [
+        "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md"
+      ],
+      "add": [
+        "docs/audit/2026-10-14-inference-scheduling.md"
+      ],
+      "review_note": "Original advertises 0% wasted while drawing idle rows; removed from quantitative chapter to avoid an unsupported guarantee."
+    },
+    {
+      "id": "curated-vllm-forward-pass-a1b2c3d4e503",
+      "remove": [
+        "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md"
+      ],
+      "add": [
+        "docs/audit/2026-10-14-inference-scheduling.md"
+      ],
+      "review_note": "Very tall forward-pass diagram replaced by explicit packed-row example; context bookkeeping must not be mistaken for recomputed model input."
+    },
+    {
+      "id": "curated-vllm-prefix-one-a1b2c3d4e504",
+      "remove": [
+        "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md"
+      ],
+      "add": [
+        "docs/audit/2026-10-14-inference-scheduling.md"
+      ],
+      "review_note": "Replaced by official licensed vLLM cache structures plus executable hash-chain example."
+    },
+    {
+      "id": "curated-vllm-prefix-two-a1b2c3d4e505",
+      "remove": [
+        "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md"
+      ],
+      "add": [
+        "docs/audit/2026-10-14-inference-scheduling.md"
+      ],
+      "review_note": "Replaced by official licensed vLLM lifecycle example."
+    },
+    {
+      "id": "curated-vllm-prefix-three-a1b2c3d4e506",
+      "remove": [
+        "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md"
+      ],
+      "add": [
+        "docs/audit/2026-10-14-inference-scheduling.md"
+      ],
+      "review_note": "Replaced by explicit reference-count and full-block reuse explanation; no original file removed."
+    }
+  ]
+}

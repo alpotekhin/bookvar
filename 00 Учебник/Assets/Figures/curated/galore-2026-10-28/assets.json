@@ -1,0 +1,96 @@
+[
+  {
+    "id": "curated-galore-galore-code-box-3e390fe0e3ff",
+    "asset": "00 Учебник/Assets/Figures/curated/galore-2026-10-28/galore_code_box.png",
+    "author": "Jiawei Zhao, Zhenyu Zhang, Beidi Chen, Zhangyang Wang, Anima Anandkumar and Yuandong Tian",
+    "source_url": "https://github.com/jiaweizzhao/GaLore/blob/2cc66f88cce189e505affbb91042a8e77f5bf4e9/README.md",
+    "source_image_url": "https://raw.githubusercontent.com/jiaweizzhao/GaLore/2cc66f88cce189e505affbb91042a8e77f5bf4e9/imgs/galore_code_box.png",
+    "commit": "2cc66f88cce189e505affbb91042a8e77f5bf4e9",
+    "source_asset": "05 Источники/Originals/galore-2026-10-28/galore_code_box.png",
+    "source_asset_sha256": "3e390fe0e3ffd2e0b7fcf467666be5a6f6a15a584afec40e4555d7d4dc73a392",
+    "sha256": "3e390fe0e3ffd2e0b7fcf467666be5a6f6a15a584afec40e4555d7d4dc73a392",
+    "source_page_snapshot": "05 Источники/Originals/galore-2026-10-28/README-source.md",
+    "source_page_sha256": "db105d403d37cd9a43eb60e708f5322b2b5fc4c9dfedef0acc8902ebdbadcfba",
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/jiaweizzhao/GaLore/blob/2cc66f88cce189e505affbb91042a8e77f5bf4e9/LICENSE",
+    "license_evidence": "05 Источники/Originals/galore-2026-10-28/LICENSE",
+    "license_evidence_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "public_license_copy": "site/public/licenses/galore-2cc66f88-Apache-2.0.txt",
+    "dimensions_px": [
+      3114,
+      1298
+    ],
+    "derivation": "source-raster-copy",
+    "modifications": "Complete pinned original, byte-for-byte. No crop, redraw, translated labels, geometry changes or recompression. Adjacent text explains projection and update conventions; the subspace drawing is conceptual, not a measured loss surface.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md"
+    ]
+  },
+  {
+    "id": "curated-galore-subspace-learning-ed5a375d1dc1",
+    "asset": "00 Учебник/Assets/Figures/curated/galore-2026-10-28/subspace_learning.png",
+    "author": "Jiawei Zhao, Zhenyu Zhang, Beidi Chen, Zhangyang Wang, Anima Anandkumar and Yuandong Tian",
+    "source_url": "https://github.com/jiaweizzhao/GaLore/blob/2cc66f88cce189e505affbb91042a8e77f5bf4e9/README.md",
+    "source_image_url": "https://raw.githubusercontent.com/jiaweizzhao/GaLore/2cc66f88cce189e505affbb91042a8e77f5bf4e9/imgs/subspace_learning.png",
+    "commit": "2cc66f88cce189e505affbb91042a8e77f5bf4e9",
+    "source_asset": "05 Источники/Originals/galore-2026-10-28/subspace_learning.png",
+    "source_asset_sha256": "ed5a375d1dc12393467d8cc6fad9a6ef5399e857759318fc5c24f8aef0cce691",
+    "sha256": "ed5a375d1dc12393467d8cc6fad9a6ef5399e857759318fc5c24f8aef0cce691",
+    "source_page_snapshot": "05 Источники/Originals/galore-2026-10-28/README-source.md",
+    "source_page_sha256": "db105d403d37cd9a43eb60e708f5322b2b5fc4c9dfedef0acc8902ebdbadcfba",
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/jiaweizzhao/GaLore/blob/2cc66f88cce189e505affbb91042a8e77f5bf4e9/LICENSE",
+    "license_evidence": "05 Источники/Originals/galore-2026-10-28/LICENSE",
+    "license_evidence_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+    "public_license_copy": "site/public/licenses/galore-2cc66f88-Apache-2.0.txt",
+    "dimensions_px": [
+      855,
+      794
+    ],
+    "derivation": "source-raster-copy",
+    "modifications": "Complete pinned original, byte-for-byte. No crop, redraw, translated labels, geometry changes or recompression. Adjacent text explains projection and update conventions; the subspace drawing is conceptual, not a measured loss surface.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md"
+    ]
+  }
+,
+{
+  "id": "curated-galore-memory-breakdown-3c395fe582f0",
+  "asset": "00 Учебник/Assets/Figures/curated/galore-2026-10-28/memory_breakdown.svg",
+  "author": "Jiawei Zhao, Zhenyu Zhang, Beidi Chen, Zhangyang Wang, Anima Anandkumar and Yuandong Tian",
+  "source_url": "https://arxiv.org/html/2403.03507v2#S1.F1",
+  "source_image_url": "https://arxiv.org/html/2403.03507v2/memory_breakdown.svg",
+  "source_asset": "05 Источники/Originals/galore-2026-10-28/memory_breakdown.svg",
+  "source_asset_sha256": "3c395fe582f012f4f47780105693631a864aadf309a79b6a4ea6ed866d7f974f",
+  "sha256": "3c395fe582f012f4f47780105693631a864aadf309a79b6a4ea6ed866d7f974f",
+  "source_page_snapshot": "05 Источники/Originals/galore-2026-10-28/galore-2403.03507v2.html",
+  "source_page_sha256": "f72886bd6203a74be66cca17d6810811bdb228bf22589a2ff91fb3bb1fa55eb4",
+  "license": "CC-BY-4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "license_evidence": "05 Источники/Originals/galore-2026-10-28/arxiv-abs-v2.html",
+  "license_evidence_sha256": "17ea79ba6a8857197fa02d4753cb22bf34e1497c95704e566467bb8f0c1d176a",
+  "viewbox": [
+    0,
+    0,
+    587.04,
+    304.08
+  ],
+  "derivation": "source-svg-copy",
+  "modifications": "Complete original Figure 1 from arXiv v2, byte-for-byte. No crop, redraw, translated labels or geometry changes. The original English caption and footnote are retained; estimates, token-batch units and per-layer-update assumptions are explained separately.",
+  "metadata_status": "verified",
+  "provenance_confirmation": "source-license-verified",
+  "rights_status": "source-license-verified",
+  "last_verified": "2026-10-28",
+  "used_in": [
+    "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md"
+  ]
+}
+]

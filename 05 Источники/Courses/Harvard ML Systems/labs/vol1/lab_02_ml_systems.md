@@ -9,21 +9,69 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol1/lab_02_ml_systems.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol1/lab_02_ml_systems.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL1 Lab — Ml Systems
 
 ## Readable lab narrative
 
-**Reading connection.** This lab uses the chapter's ML systems invariant:
-            deployment is constrained by physical amounts before preference. The active
-            scenario is: {v1_02_variant.workload_summary}
+This lab is primarily executable code; use the complete source below.
 
-            **Current source profile.** Hardware: `{v1_02_deployment.hardware_ref}`.
-            Model: `{v1_02_deployment.model_ref}`. Workload knob:
-            `{v1_02_deployment.workload_knob}` in `{v1_02_deployment.workload_unit}`.
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+**Reading connection.** This lab uses the chapter's ML systems invariant:
+deployment is constrained by physical amounts before preference. The active
+scenario is: ⟨value 1⟩
+
+**Current source profile.** Hardware: `⟨value 2⟩`.
+Model: `⟨value 3⟩`. Workload knob:
+`⟨value 4⟩` in `⟨value 5⟩`.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_02_variant.workload_summary}' `
+- value_2: ` f'{v1_02_deployment.hardware_ref}' `
+- value_3: ` f'{v1_02_deployment.model_ref}' `
+- value_4: ` f'{v1_02_deployment.workload_knob}' `
+- value_5: ` f'{v1_02_deployment.workload_unit}' `
+
+---
+
+Select your first-wall prediction to unlock Part A evidence.
+
+---
+
+Select your speedup prediction to unlock the latency waterfall.
+
+---
+
+Select the tightest track to unlock the cross-envelope comparison.
+
+---
+
+Select the placement you expect to survive before opening the design review.
+
+---
+
+## Download Report
+
+---
+
+This memo is generated locally from your locked predictions, track profile, and computed deployment evidence.
+
+</details>
 
 ## Complete original Marimo source
 

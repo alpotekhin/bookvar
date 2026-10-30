@@ -1,0 +1,230 @@
+[
+  {
+    "id": "curated-sim-to-real-camera-sampling-rendering-0-5dfb723f55aa",
+    "asset": "00 Учебник/Assets/Figures/curated/sim-to-real-2026-10-28/camera_sampling_rendering_0.jpg",
+    "author": "DLR-RM and BlenderProc contributors",
+    "source_url": "https://github.com/DLR-RM/BlenderProc/blob/76bd8b82ee19489843578ff045298642197bf883/examples/basics/camera_sampling/README.md",
+    "source_image_url": "https://raw.githubusercontent.com/DLR-RM/BlenderProc/76bd8b82ee19489843578ff045298642197bf883/images/camera_sampling_rendering_0.jpg",
+    "commit": "76bd8b82ee19489843578ff045298642197bf883",
+    "source_asset": "05 Источники/Originals/sim-to-real-2026-10-28/blenderproc/camera_sampling_rendering_0.jpg",
+    "source_asset_sha256": "5dfb723f55aac7f84cdde36fd417b0bfd5c06cd5175758898f97add7f390280d",
+    "sha256": "5dfb723f55aac7f84cdde36fd417b0bfd5c06cd5175758898f97add7f390280d",
+    "source_page_snapshot": "05 Источники/Originals/sim-to-real-2026-10-28/blenderproc/examples_basics_camera_sampling_README.md",
+    "source_page_sha256": "bbde0b6da58d41d8b081d58da8d144c43989c1f6c47ee057b542567eb78f20d7",
+    "license": "GPL-3.0",
+    "license_url": "https://github.com/DLR-RM/BlenderProc/blob/76bd8b82ee19489843578ff045298642197bf883/LICENSE",
+    "license_evidence": "05 Источники/Originals/sim-to-real-2026-10-28/blenderproc/LICENSE",
+    "license_evidence_sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+    "public_license_copy": "site/public/licenses/blenderproc-76bd8b8-GPL-3.0.txt",
+    "derivation": "source-jpeg-copy",
+    "dimensions_px": [
+      1039,
+      1039
+    ],
+    "modifications": "Complete original repository JPEG copied byte-for-byte. No crop, redraw, translated panels, resampling or recompression. Saved author output, not a local Blender render. No blanket license for unrelated externally loaded meshes or texture datasets is asserted.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции.md"
+    ]
+  },
+  {
+    "id": "curated-sim-to-real-camera-sampling-rendering-1-4d86aded5c64",
+    "asset": "00 Учебник/Assets/Figures/curated/sim-to-real-2026-10-28/camera_sampling_rendering_1.jpg",
+    "author": "DLR-RM and BlenderProc contributors",
+    "source_url": "https://github.com/DLR-RM/BlenderProc/blob/76bd8b82ee19489843578ff045298642197bf883/examples/basics/camera_sampling/README.md",
+    "source_image_url": "https://raw.githubusercontent.com/DLR-RM/BlenderProc/76bd8b82ee19489843578ff045298642197bf883/images/camera_sampling_rendering_1.jpg",
+    "commit": "76bd8b82ee19489843578ff045298642197bf883",
+    "source_asset": "05 Источники/Originals/sim-to-real-2026-10-28/blenderproc/camera_sampling_rendering_1.jpg",
+    "source_asset_sha256": "4d86aded5c64408e81bd545d81dfeeb624cc09ea625c8bbbb57df364d6a79a00",
+    "sha256": "4d86aded5c64408e81bd545d81dfeeb624cc09ea625c8bbbb57df364d6a79a00",
+    "source_page_snapshot": "05 Источники/Originals/sim-to-real-2026-10-28/blenderproc/examples_basics_camera_sampling_README.md",
+    "source_page_sha256": "bbde0b6da58d41d8b081d58da8d144c43989c1f6c47ee057b542567eb78f20d7",
+    "license": "GPL-3.0",
+    "license_url": "https://github.com/DLR-RM/BlenderProc/blob/76bd8b82ee19489843578ff045298642197bf883/LICENSE",
+    "license_evidence": "05 Источники/Originals/sim-to-real-2026-10-28/blenderproc/LICENSE",
+    "license_evidence_sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+    "public_license_copy": "site/public/licenses/blenderproc-76bd8b8-GPL-3.0.txt",
+    "derivation": "source-jpeg-copy",
+    "dimensions_px": [
+      1039,
+      1039
+    ],
+    "modifications": "Complete original repository JPEG copied byte-for-byte. No crop, redraw, translated panels, resampling or recompression. Saved author output, not a local Blender render. No blanket license for unrelated externally loaded meshes or texture datasets is asserted.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции.md"
+    ]
+  },
+  {
+    "id": "curated-sim-to-real-material-randomizer-rendering-7dfe671010e1",
+    "asset": "00 Учебник/Assets/Figures/curated/sim-to-real-2026-10-28/material_randomizer_rendering.jpg",
+    "author": "DLR-RM and BlenderProc contributors",
+    "source_url": "https://github.com/DLR-RM/BlenderProc/blob/76bd8b82ee19489843578ff045298642197bf883/examples/advanced/material_randomizer/README.md",
+    "source_image_url": "https://raw.githubusercontent.com/DLR-RM/BlenderProc/76bd8b82ee19489843578ff045298642197bf883/images/material_randomizer_rendering.jpg",
+    "commit": "76bd8b82ee19489843578ff045298642197bf883",
+    "source_asset": "05 Источники/Originals/sim-to-real-2026-10-28/blenderproc/material_randomizer_rendering.jpg",
+    "source_asset_sha256": "7dfe671010e190e14111d3d0510e6647d8f822b55ee25b9f01c6cf54e6e19488",
+    "sha256": "7dfe671010e190e14111d3d0510e6647d8f822b55ee25b9f01c6cf54e6e19488",
+    "source_page_snapshot": "05 Источники/Originals/sim-to-real-2026-10-28/blenderproc/examples_advanced_material_randomizer_README.md",
+    "source_page_sha256": "16cf0609f7c1c0c9b5ae9153ae18004f4601fe2aa2757021b243fd20b0b2c1eb",
+    "license": "GPL-3.0",
+    "license_url": "https://github.com/DLR-RM/BlenderProc/blob/76bd8b82ee19489843578ff045298642197bf883/LICENSE",
+    "license_evidence": "05 Источники/Originals/sim-to-real-2026-10-28/blenderproc/LICENSE",
+    "license_evidence_sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+    "public_license_copy": "site/public/licenses/blenderproc-76bd8b8-GPL-3.0.txt",
+    "derivation": "source-jpeg-copy",
+    "dimensions_px": [
+      512,
+      512
+    ],
+    "modifications": "Complete original repository JPEG copied byte-for-byte. No crop, redraw, translated panels, resampling or recompression. Saved author output, not a local Blender render. No blanket license for unrelated externally loaded meshes or texture datasets is asserted.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции.md"
+    ]
+  },
+  {
+    "id": "curated-sim-to-real-material-randomizer-rendering-switched-22b61dcb76bc",
+    "asset": "00 Учебник/Assets/Figures/curated/sim-to-real-2026-10-28/material_randomizer_rendering_switched.jpg",
+    "author": "DLR-RM and BlenderProc contributors",
+    "source_url": "https://github.com/DLR-RM/BlenderProc/blob/76bd8b82ee19489843578ff045298642197bf883/examples/advanced/material_randomizer/README.md",
+    "source_image_url": "https://raw.githubusercontent.com/DLR-RM/BlenderProc/76bd8b82ee19489843578ff045298642197bf883/images/material_randomizer_rendering_switched.jpg",
+    "commit": "76bd8b82ee19489843578ff045298642197bf883",
+    "source_asset": "05 Источники/Originals/sim-to-real-2026-10-28/blenderproc/material_randomizer_rendering_switched.jpg",
+    "source_asset_sha256": "22b61dcb76bc8cf53e383849a36fa1eb045dace4a4e2b39113f2d118e5480ee6",
+    "sha256": "22b61dcb76bc8cf53e383849a36fa1eb045dace4a4e2b39113f2d118e5480ee6",
+    "source_page_snapshot": "05 Источники/Originals/sim-to-real-2026-10-28/blenderproc/examples_advanced_material_randomizer_README.md",
+    "source_page_sha256": "16cf0609f7c1c0c9b5ae9153ae18004f4601fe2aa2757021b243fd20b0b2c1eb",
+    "license": "GPL-3.0",
+    "license_url": "https://github.com/DLR-RM/BlenderProc/blob/76bd8b82ee19489843578ff045298642197bf883/LICENSE",
+    "license_evidence": "05 Источники/Originals/sim-to-real-2026-10-28/blenderproc/LICENSE",
+    "license_evidence_sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+    "public_license_copy": "site/public/licenses/blenderproc-76bd8b8-GPL-3.0.txt",
+    "derivation": "source-jpeg-copy",
+    "dimensions_px": [
+      512,
+      512
+    ],
+    "modifications": "Complete original repository JPEG copied byte-for-byte. No crop, redraw, translated panels, resampling or recompression. Saved author output, not a local Blender render. No blanket license for unrelated externally loaded meshes or texture datasets is asserted.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции.md"
+    ]
+  },
+  {
+    "id": "curated-sim-to-real-semantic-segmentation-rendering-0-2115a875e1fb",
+    "asset": "00 Учебник/Assets/Figures/curated/sim-to-real-2026-10-28/semantic_segmentation_rendering_0.jpg",
+    "author": "DLR-RM and BlenderProc contributors",
+    "source_url": "https://github.com/DLR-RM/BlenderProc/blob/76bd8b82ee19489843578ff045298642197bf883/examples/basics/semantic_segmentation/README.md",
+    "source_image_url": "https://raw.githubusercontent.com/DLR-RM/BlenderProc/76bd8b82ee19489843578ff045298642197bf883/images/semantic_segmentation_rendering_0.jpg",
+    "commit": "76bd8b82ee19489843578ff045298642197bf883",
+    "source_asset": "05 Источники/Originals/sim-to-real-2026-10-28/blenderproc/semantic_segmentation_rendering_0.jpg",
+    "source_asset_sha256": "2115a875e1fb484b30df060eb49d85fd48cb8c618328c0af496046a13a88eaee",
+    "sha256": "2115a875e1fb484b30df060eb49d85fd48cb8c618328c0af496046a13a88eaee",
+    "source_page_snapshot": "05 Источники/Originals/sim-to-real-2026-10-28/blenderproc/examples_basics_semantic_segmentation_README.md",
+    "source_page_sha256": "0ce7b7dfad79dd74a3bba2fd58c420e04e9e5a67c249d57a851328d856807a82",
+    "license": "GPL-3.0",
+    "license_url": "https://github.com/DLR-RM/BlenderProc/blob/76bd8b82ee19489843578ff045298642197bf883/LICENSE",
+    "license_evidence": "05 Источники/Originals/sim-to-real-2026-10-28/blenderproc/LICENSE",
+    "license_evidence_sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+    "public_license_copy": "site/public/licenses/blenderproc-76bd8b8-GPL-3.0.txt",
+    "derivation": "source-jpeg-copy",
+    "dimensions_px": [
+      1039,
+      1039
+    ],
+    "modifications": "Complete original repository JPEG copied byte-for-byte. No crop, redraw, translated panels, resampling or recompression. Saved author output, not a local Blender render. No blanket license for unrelated externally loaded meshes or texture datasets is asserted.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции.md"
+    ]
+  },
+  {
+    "id": "curated-sim-to-real-semantic-segmentation-rendering-1-f7880252e2b1",
+    "asset": "00 Учебник/Assets/Figures/curated/sim-to-real-2026-10-28/semantic_segmentation_rendering_1.jpg",
+    "author": "DLR-RM and BlenderProc contributors",
+    "source_url": "https://github.com/DLR-RM/BlenderProc/blob/76bd8b82ee19489843578ff045298642197bf883/examples/basics/semantic_segmentation/README.md",
+    "source_image_url": "https://raw.githubusercontent.com/DLR-RM/BlenderProc/76bd8b82ee19489843578ff045298642197bf883/images/semantic_segmentation_rendering_1.jpg",
+    "commit": "76bd8b82ee19489843578ff045298642197bf883",
+    "source_asset": "05 Источники/Originals/sim-to-real-2026-10-28/blenderproc/semantic_segmentation_rendering_1.jpg",
+    "source_asset_sha256": "f7880252e2b13aeb53169d79307aebd592060047933f683e3c82d3dc7c3992a3",
+    "sha256": "f7880252e2b13aeb53169d79307aebd592060047933f683e3c82d3dc7c3992a3",
+    "source_page_snapshot": "05 Источники/Originals/sim-to-real-2026-10-28/blenderproc/examples_basics_semantic_segmentation_README.md",
+    "source_page_sha256": "0ce7b7dfad79dd74a3bba2fd58c420e04e9e5a67c249d57a851328d856807a82",
+    "license": "GPL-3.0",
+    "license_url": "https://github.com/DLR-RM/BlenderProc/blob/76bd8b82ee19489843578ff045298642197bf883/LICENSE",
+    "license_evidence": "05 Источники/Originals/sim-to-real-2026-10-28/blenderproc/LICENSE",
+    "license_evidence_sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+    "public_license_copy": "site/public/licenses/blenderproc-76bd8b8-GPL-3.0.txt",
+    "derivation": "source-jpeg-copy",
+    "dimensions_px": [
+      1039,
+      1039
+    ],
+    "modifications": "Complete original repository JPEG copied byte-for-byte. No crop, redraw, translated panels, resampling or recompression. Saved author output, not a local Blender render. No blanket license for unrelated externally loaded meshes or texture datasets is asserted.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции.md"
+    ]
+  },
+  {
+    "id": "curated-sim-to-real-dann-architecture-da9796841e2d",
+    "asset": "00 Учебник/Assets/Figures/curated/sim-to-real-2026-10-28/dann-architecture.png",
+    "author": "Yaroslav Ganin, Evgeniya Ustinova, Hana Ajakan, Pascal Germain, Hugo Larochelle, Francois Laviolette, Mario Marchand and Victor Lempitsky",
+    "source_url": "https://jmlr.org/papers/v17/15-239.html",
+    "source_image_url": "https://jmlr.org/papers/volume17/15-239/15-239.pdf#page=12",
+    "source_asset": "05 Источники/Originals/sim-to-real-2026-10-28/dann-15-239.pdf",
+    "source_asset_sha256": "801be7cae7acf3ec0df604d40e6129cb9f594e09e6891370b3f7bd2ebef40403",
+    "sha256": "da9796841e2d4514d1a3845b515efd07566f313c2aedc833acc103e748c870ea",
+    "source_page_snapshot": "05 Источники/Originals/sim-to-real-2026-10-28/dann-journal.html",
+    "source_page_sha256": "3832d227cf511e555939faf6a7fcc6db879224e5a5ccb387dcb6ca10c7a9e919",
+    "license": "CC BY (version unspecified in JMLR publication policy)",
+    "license_url": "https://jmlr.org/author-info.html#publication",
+    "license_evidence": "05 Источники/Originals/sim-to-real-2026-10-28/jmlr-license-evidence.md",
+    "license_evidence_sha256": "53a030fa303fa00aa8d7a6b7147a5c1079e4a6527b6cc48911c69893cd270722",
+    "public_license_copy": "site/public/licenses/dann-jmlr-publication-policy.txt",
+    "derivation": "pdf-page-render-crop",
+    "source_page": 12,
+    "render_dpi": 400,
+    "crop_box_px": [
+      640,
+      470,
+      2840,
+      1410
+    ],
+    "render_page_size_px": [
+      3400,
+      4400
+    ],
+    "dimensions_px": [
+      2200,
+      940
+    ],
+    "modifications": "Complete original Figure 1 diagram extracted from publisher PDF at 400 dpi. Retains all branches, labels, gradients and legend; excludes article caption/body/header. No redraw, translation or bitmap upscaling. The journal policy specifies CC-by without a version; no invented PDF CC BY 4.0 notice or inspected author-signed agreement is claimed.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции.md"
+    ]
+  }
+]

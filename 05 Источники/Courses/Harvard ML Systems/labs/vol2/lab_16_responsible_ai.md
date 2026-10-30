@@ -9,37 +9,22 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol2/lab_16_responsible_ai.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol2/lab_16_responsible_ai.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL2 Lab — Responsible Ai
 
 ## Readable lab narrative
-
-## Part A: Harm Becomes a Measurable Obligation
-
-**Scenario.** You are reviewing `{v2_16_packet["track_label"]}` deployment for
-**{v2_16_packet["stakeholder"]}**. The release cannot rely on aggregate quality;
-it must name who can be harmed, what amount is unacceptable, and what evidence
-will prove the obligation is being met.
-
-**Concept.** Responsible AI starts by converting stakeholder harm into a
-measurable deployment gate. A fairness metric with no stakeholder, threshold, or
-owner is only a label.
-
----
-
-The lab converts harm into an amount:
-
-`affected_units = events_per_day * exposure_share * max(0, observed_gap - allowed_gap) * severity`.
-
-For this track, `events_per_day = {v2_16_packet['events_per_day']:,}` and the
-target gap is `{v2_16_packet['target_gap_pp']:.1f} pp`. This follows the
-chapter's claim that fairness and accountability must become verifiable system
-properties, not generic principles.
-
----
 
 ## Part B: Responsible Evidence Consumes Capacity
 
@@ -50,24 +35,6 @@ package that still fits the track's technical and governance guardrails.
 **Concept.** Responsible AI overhead is an amount system: fairness monitoring,
 explanation, privacy, and human review reduce risk while adding latency, cost,
 energy, and release delay.
-
----
-
-The chapter reports that real-time fairness monitoring adds about 10-20 ms,
-approximate explanations add tens to hundreds of percent, privacy controls add
-training and evidence cost, and human review adds routing capacity.
-
-The notebook-local model combines:
-
-`latency = base_latency + monitoring_ms + explanation_ms + privacy_ms + review_ms`
-
-`cost_factor = 1 + monitoring + explanation + privacy + review terms`
-
-`residual_gap = observed_gap - monitoring_relief - review_relief - privacy_relief`
-
-The result is track-specific because `{v2_16_packet['track_label']}` has a
-`{v2_16_packet['latency_slo_ms']:.1f} ms` latency SLO and a
-`{v2_16_packet['release_delay_limit_days']:.1f} day` release-delay limit.
 
 ---
 
@@ -116,6 +83,135 @@ The release condition is a conjunction:
 Technical gates check latency and cost. Governance gates check audit confidence,
 blind spots, and residual ownership. This follows the chapter's fallacy warning:
 one fairness metric or one dashboard does not make a fleet accountable.
+
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+**Pass.** ⟨value 1⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{success_text}' `
+
+---
+
+## Part A: Harm Becomes a Measurable Obligation
+
+**Scenario.** You are reviewing `⟨value 1⟩` deployment for
+**⟨value 2⟩**. The release cannot rely on aggregate quality;
+it must name who can be harmed, what amount is unacceptable, and what evidence
+will prove the obligation is being met.
+
+**Concept.** Responsible AI starts by converting stakeholder harm into a
+measurable deployment gate. A fairness metric with no stakeholder, threshold, or
+owner is only a label.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_16_packet['track_label']}" `
+- value_2: ` f"{v2_16_packet['stakeholder']}" `
+
+---
+
+Select a prediction to unlock the stakeholder obligation model.
+
+---
+
+The lab converts harm into an amount:
+
+`affected_units = events_per_day * exposure_share * max(0, observed_gap - allowed_gap) * severity`.
+
+For this track, `events_per_day = ⟨value 1⟩` and the
+target gap is `⟨value 2⟩ pp`. This follows the
+chapter's claim that fairness and accountability must become verifiable system
+properties, not generic principles.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_16_packet['events_per_day']:,}" `
+- value_2: ` f"{v2_16_packet['target_gap_pp']:.1f}" `
+
+---
+
+**Correct.** A metric becomes responsible only after a stakeholder harm and threshold make it actionable.
+
+---
+
+**Revise the prior.** Aggregate quality and metric names do not say who is harmed or how much harm is allowed.
+
+---
+
+Select a prediction to unlock the overhead frontier.
+
+---
+
+The chapter reports that real-time fairness monitoring adds about 10-20 ms,
+approximate explanations add tens to hundreds of percent, privacy controls add
+training and evidence cost, and human review adds routing capacity.
+
+The notebook-local model combines:
+
+`latency = base_latency + monitoring_ms + explanation_ms + privacy_ms + review_ms`
+
+`cost_factor = 1 + monitoring + explanation + privacy + review terms`
+
+`residual_gap = observed_gap - monitoring_relief - review_relief - privacy_relief`
+
+The result is track-specific because `⟨value 1⟩` has a
+`⟨value 2⟩ ms` latency SLO and a
+`⟨value 3⟩ day` release-delay limit.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_16_packet['track_label']}" `
+- value_2: ` f"{v2_16_packet['latency_slo_ms']:.1f}" `
+- value_3: ` f"{v2_16_packet['release_delay_limit_days']:.1f}" `
+
+---
+
+**Correct.** Responsible evidence can be necessary and still violate another budget.
+
+---
+
+**Revise the prior.** Stronger controls are not automatically deployable when they break the track envelope.
+
+---
+
+Select a prediction to unlock the audit coverage model.
+
+---
+
+**Correct.** Accountability depends on coverage, labels, slice depth, and escalation ownership.
+
+---
+
+**Revise the prior.** A dashboard without coverage and response authority is evidence without action.
+
+---
+
+Select a prediction to unlock the policy scorecard.
+
+---
+
+**Correct.** A responsible policy must pass simultaneous technical and governance gates.
+
+---
+
+**Revise the prior.** The most aggressive mitigation, best document, or highest utility score can still fail another guardrail.
+
+---
+
+## Synthesis: Responsible Fleet Memo
+
+---
+
+The memo carries one selected policy, a rejected alternative, the binding amount, the residual obligation, and the implication for V2-17 fleet synthesis.
+
+---
+
+## Download Report
+
+</details>
 
 ## Complete original Marimo source
 

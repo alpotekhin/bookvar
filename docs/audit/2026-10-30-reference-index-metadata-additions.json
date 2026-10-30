@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-30",
+  "scope": "Chapter-owned reference terms and one stable clipping anchor; retain all explanatory text, code and figures. Move the Transformer dropout subentry under its actual owner in both indices. The complete Transformer English body is unchanged; its canonical revision pin is advanced only across the proven canonical metadata-only delta.",
+  "files": [
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация.md",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-29\nsource_language: mixed\n",
+          "new": "last_updated: 2026-10-30\nsource_language: mixed\nreference_terms:\n  - label: DropConnect\n    label_en: DropConnect\n    anchor: dropconnect\n  - label: Stochastic depth / DropPath\n    label_en: Stochastic depth / DropPath\n    anchor: stochastic-depth\n"
+        }
+      ],
+      "before_sha256": "1222738b2a9031a13e03c913e51a4d92f5e9ee0ca97f4211f776401fd08bb1de",
+      "after_sha256": "d68027e53fdf5a60f41b9fb7c15c7cebdfc0726c5c1129ab08f1312797490902"
+    },
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-29\nsource_language: mixed\n",
+          "new": "last_updated: 2026-10-30\nsource_language: mixed\nreference_terms:\n  - label: Ограничение нормы градиента\n    label_en: Gradient norm clipping\n    anchor: gradient-norm-clipping\n  - label: Adaptive Gradient Clipping — AGC\n    label_en: Adaptive Gradient Clipping — AGC\n    anchor: agc-unitwise\n  - label: AutoClip — порог по истории градиентов\n    label_en: AutoClip — gradient-history thresholds\n    anchor: autoclip\n"
+        },
+        {
+          "old": "\n## Ограничение нормы градиента\n",
+          "new": "\n<a id=\"gradient-norm-clipping\"></a>\n\n## Ограничение нормы градиента\n"
+        }
+      ],
+      "before_sha256": "449c86d3567e8a21e72e76c16e4fde9cc96bc16bd63c6c40d11d507d869f4616",
+      "after_sha256": "6bcadba24fff88dceadf61dc300e1e1e991cb21fda546acfa38ef345b47c106c"
+    },
+    {
+      "source": "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-29\nsource_language: mixed\n",
+          "new": "last_updated: 2026-10-30\nsource_language: mixed\nreference_terms:\n  - label: Attention, residual and embedding dropout\n    label_en: Attention, residual and embedding dropout\n    anchor: transformer-dropout\n"
+        }
+      ],
+      "before_sha256": "cfbac98aa756dd964e8e7a30f11c9d5c108bc5b87c6f63d4fa446bf15cc5dba7",
+      "after_sha256": "1ffb968f9bc3b562b3065f1b059c12e9e9c0b41f78176f2e6d6e5c303f6e52b5"
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-29\n",
+          "new": "last_updated: 2026-10-30\n"
+        },
+        {
+          "old": "  - [[00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация#stochastic-depth|Stochastic depth / DropPath]]\n  - [[00 Учебник/05 Attention и Transformer/03 Полный Transformer#transformer-dropout|Attention, residual and embedding dropout]]\n",
+          "new": "  - [[00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация#stochastic-depth|Stochastic depth / DropPath]]\n"
+        },
+        {
+          "old": "  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#Ограничение нормы градиента|Ограничение нормы градиента]]",
+          "new": "  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#gradient-norm-clipping|Ограничение нормы градиента]]"
+        },
+        {
+          "old": "- [[00 Учебник/05 Attention и Transformer/03 Полный Transformer|Собираем Transformer — от блока к BERT, GPT и LLaMA]]\n",
+          "new": "- [[00 Учебник/05 Attention и Transformer/03 Полный Transformer|Собираем Transformer — от блока к BERT, GPT и LLaMA]]\n  - [[00 Учебник/05 Attention и Transformer/03 Полный Transformer#transformer-dropout|Attention, residual and embedding dropout]]\n"
+        }
+      ],
+      "before_sha256": "17d66017655b9022e629a47f8807c3683c06db9c0ba790f7894a3d4d3e769dac",
+      "after_sha256": "190c7d3b35daa28a8903567d597bc9d69712708f852d107b349d0a25ed6e1ef6"
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-29\n",
+          "new": "last_updated: 2026-10-30\n"
+        },
+        {
+          "old": "  - [[00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация#stochastic-depth|Stochastic depth / DropPath]]\n  - [[00 Учебник/05 Attention и Transformer/03 Полный Transformer#transformer-dropout|Attention, residual and embedding dropout]]\n",
+          "new": "  - [[00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация#stochastic-depth|Stochastic depth / DropPath]]\n"
+        },
+        {
+          "old": "  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#Ограничение нормы градиента|Gradient norm clipping]]",
+          "new": "  - [[00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения#gradient-norm-clipping|Gradient norm clipping]]"
+        },
+        {
+          "old": "- [[00 Учебник/05 Attention и Transformer/03 Полный Transformer|The complete encoder–decoder Transformer]] · **EN**\n",
+          "new": "- [[00 Учебник/05 Attention и Transformer/03 Полный Transformer|The complete encoder–decoder Transformer]] · **EN**\n  - [[00 Учебник/05 Attention и Transformer/03 Полный Transformer#transformer-dropout|Attention, residual and embedding dropout]]\n"
+        }
+      ],
+      "before_sha256": "2f5b2d8827e7298e502d4301b2dfbcc57f9b49b47b1ce7dcb3e6365eabe927b1",
+      "after_sha256": "0c5222b2c8ef4f9e227e04013ac60a9ad74c0c25cd479ace082947949a9da384"
+    },
+    {
+      "source": "en/00 Textbook/05 Attention and Transformer/05 The complete Transformer.md",
+      "changes": [
+        {
+          "old": "canonical_revision: \"cfbac98aa756dd964e8e7a30f11c9d5c108bc5b87c6f63d4fa446bf15cc5dba7\"\n",
+          "new": "canonical_revision: \"1ffb968f9bc3b562b3065f1b059c12e9e9c0b41f78176f2e6d6e5c303f6e52b5\"\n"
+        },
+        {
+          "old": "last_updated: 2026-10-29\n",
+          "new": "last_updated: 2026-10-30\n"
+        }
+      ],
+      "before_sha256": "8de30b0b1870b46b6b80f7c650efc14dd91aca4791fd655fae9220d11511b63b",
+      "after_sha256": "9c36cb572ff16ceb2c5210f35ae30f752840e8b28a33cf6dcf4aa9ac76ed1838"
+    }
+  ]
+}

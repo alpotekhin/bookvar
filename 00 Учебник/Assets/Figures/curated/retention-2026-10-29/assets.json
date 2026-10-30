@@ -1,0 +1,88 @@
+[
+  {
+    "author": "Xuhong Li, Yves Grandvalet, Franck Davoine",
+    "source_url": "https://proceedings.mlr.press/v80/li18a.html",
+    "source_image_url": "https://proceedings.mlr.press/v80/li18a/li18a.pdf#page=6",
+    "source_asset": "05 Источники/Originals/retention-2026-10-29/li18a.pdf",
+    "source_asset_sha256": "da898e24defa977a5d38eeaab61da0e08b7cdbc358476b23ff1a28b5de666db0",
+    "source_page": 6,
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/peft-2026-10-29/pmlr-license-agreement.pdf",
+    "license_evidence_sha256": "3a3eac0ebdded57660c12c59028c5429b6d2b328be2c6fde534a104438444c31",
+    "copyright": "Copyright 2018 the authors; ICML 2018, PMLR 80:2825-2834",
+    "derivation": "pdf-page-render-crop",
+    "render_dpi": 288,
+    "render_page_size_px": [
+      2448,
+      3168
+    ],
+    "modifications": "Complete original plot/table with English caption cropped from PDF page 6 at 288 dpi. Surrounding page text removed; no redraw, relabeling, translation or resizing.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md"
+    ],
+    "id": "curated-retention-37ee7a43639c",
+    "asset": "00 Учебник/Assets/Figures/curated/retention-2026-10-29/l2sp-target-comparison.png",
+    "title": "Original Figure 2: target-task accuracies across regularizers and source datasets",
+    "width": 985,
+    "height": 1240,
+    "dimensions_px": [
+      985,
+      1240
+    ],
+    "crop_box_px": [
+      205,
+      710,
+      1190,
+      1950
+    ],
+    "bytes": 139142,
+    "sha256": "37ee7a43639cb4abda0d3ad54b63c18d89ce0dff7a09ad4d9bcec2236c33bcf1"
+  },
+  {
+    "author": "Xuhong Li, Yves Grandvalet, Franck Davoine",
+    "source_url": "https://proceedings.mlr.press/v80/li18a.html",
+    "source_image_url": "https://proceedings.mlr.press/v80/li18a/li18a.pdf#page=6",
+    "source_asset": "05 Источники/Originals/retention-2026-10-29/li18a.pdf",
+    "source_asset_sha256": "da898e24defa977a5d38eeaab61da0e08b7cdbc358476b23ff1a28b5de666db0",
+    "source_page": 6,
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/peft-2026-10-29/pmlr-license-agreement.pdf",
+    "license_evidence_sha256": "3a3eac0ebdded57660c12c59028c5429b6d2b328be2c6fde534a104438444c31",
+    "copyright": "Copyright 2018 the authors; ICML 2018, PMLR 80:2825-2834",
+    "derivation": "pdf-page-render-crop",
+    "render_dpi": 288,
+    "render_page_size_px": [
+      2448,
+      3168
+    ],
+    "modifications": "Complete original plot/table with English caption cropped from PDF page 6 at 288 dpi. Surrounding page text removed; no redraw, relabeling, translation or resizing.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md"
+    ],
+    "id": "curated-retention-e344b0d6cb6c",
+    "asset": "00 Учебник/Assets/Figures/curated/retention-2026-10-29/l2sp-retention.png",
+    "title": "Original Table 3: accuracy lost on the source task after fine-tuning",
+    "width": 975,
+    "height": 575,
+    "dimensions_px": [
+      975,
+      575
+    ],
+    "crop_box_px": [
+      1220,
+      730,
+      2195,
+      1305
+    ],
+    "bytes": 120851,
+    "sha256": "e344b0d6cb6ce3feb7e5a601fdd13517b8dc9e0e3beda52ef8d68053b90fed25"
+  }
+]

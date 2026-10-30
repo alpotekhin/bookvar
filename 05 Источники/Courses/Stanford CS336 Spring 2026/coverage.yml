@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "semantic_review_sha256": "831a84f95b2a72bfc6eb4749092e7d6c0181c8988b46d794072a5deece0de53e",
+  "semantic_review_sha256": "250bd1d1a7f73d26ce805846d506b4cf6c87aeef045d5c373699f199d958ccc1",
   "rows": [
     {
       "id": "coverage-lecture-01-section-4-cs336-language-models-from-scratch-spring-2026",
@@ -928,11 +928,37 @@
       "primary_sources": [
         "lecture-02"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
-      "destination_anchor": "lecture-02",
-      "reason": "FP4 at trace steps 111–117 is explained in 00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md#fp4-mxfp4-и-nvfp4 and #общая-шкала-связывает-соседние-значения, with authored EN parity. The encompassing source unit also includes CPU/GPU transfer, einops and FLOPs at steps 119–188; those are not dispositioned by this FP4 follow-through, so the whole unit remains source-only.",
-      "evidence": "Lectures/repository/var/traces/lecture_02.json#steps=111-188:semantic=section-111-fp4; reviewed title: fp4"
+      "disposition": "excluded",
+      "reason": "This heading-generated umbrella spans FP4 and three unrelated functions at trace steps 111–188. Its complete teaching content is represented by four separately bounded units: lecture-02-fp4-block-scaling, lecture-02-tensor-device-placement, lecture-02-einops-named-axes, and lecture-02-flop-units. Excluded only as a duplicate umbrella, not as omitted knowledge; the CPU/GPU figure retains its separate source-only decision.",
+      "evidence": "Lectures/repository/lecture_02.py#L174-L288; the four contiguous reviewed line ranges cover the source bodies responsible for trace steps 111–188. Review: docs/audit/2026-10-26-cs336-device-placement.md."
+    },
+    {
+      "id": "coverage-lecture-02-fp4-block-scaling",
+      "source_object": "lecture-02",
+      "source_unit": "lecture-02-fp4-block-scaling",
+      "source_location": "Lectures/repository/var/traces/lecture_02.json#steps=111-117:lines=174-183:semantic=fp4-block-scaling",
+      "kind": "mechanism",
+      "title": "FP4 E2M1 values, block scales, and NVFP4 pretraining",
+      "primary_sources": [
+        "lecture-02"
+      ],
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+      "destination_anchor": "fp4-mxfp4-и-nvfp4"
+    },
+    {
+      "id": "coverage-lecture-02-tensor-device-placement",
+      "source_object": "lecture-02",
+      "source_unit": "lecture-02-tensor-device-placement",
+      "source_location": "Lectures/repository/var/traces/lecture_02.json#steps=121-129:lines=184-201:semantic=tensor-device-placement",
+      "kind": "worked-example",
+      "title": "CPU tensors, device transfer, and direct device allocation",
+      "primary_sources": [
+        "lecture-02"
+      ],
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "destination_anchor": "torch-device-placement"
     },
     {
       "id": "coverage-lecture-02-figure-step-125-rendering-1",
@@ -949,6 +975,34 @@
       "destination_anchor": "lecture-02",
       "reason": "Reviewed and preserved at exact trace scope; this low-precision or evolving deep-network sequence belongs to a later systems treatment and is not flattened into Task 1.",
       "evidence": "Lectures/repository/var/traces/lecture_02.json#step=125:rendering=1; reviewed title: cpu gpu"
+    },
+    {
+      "id": "coverage-lecture-02-einops-named-axes",
+      "source_object": "lecture-02",
+      "source_unit": "lecture-02-einops-named-axes",
+      "source_location": "Lectures/repository/var/traces/lecture_02.json#steps=139-175:lines=202-278:semantic=einops-named-axes",
+      "kind": "worked-example",
+      "title": "Named-axis contraction, reduction, and head split/merge",
+      "primary_sources": [
+        "lecture-02"
+      ],
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md",
+      "destination_anchor": "einops-attention-shapes"
+    },
+    {
+      "id": "coverage-lecture-02-flop-units",
+      "source_object": "lecture-02",
+      "source_unit": "lecture-02-flop-units",
+      "source_location": "Lectures/repository/var/traces/lecture_02.json#steps=184-189:lines=279-288:semantic=flop-units",
+      "kind": "mechanism",
+      "title": "Floating-point operation counts versus operations per second",
+      "primary_sources": [
+        "lecture-02"
+      ],
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "compute-accounting"
     },
     {
       "id": "coverage-lecture-02-section-189-intuitions",
@@ -2691,7 +2745,7 @@
       "disposition": "source-only",
       "destination": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
       "destination_anchor": "lecture-10",
-      "reason": "Retained as a time-sensitive architecture note until the dedicated DeepSeek lineage chapter verifies the released model and primary technical report.",
+      "reason": "Heterogeneous heading umbrella: trace steps 274–279 cover CSA/HCA, 280–284 summarize cache alternatives, and 288–310 cover quantization. CSA/HCA is explained in the long-context chapter, quantization mechanisms in the full quantization chapter, and the diffusion mention now links to the dedicated masked-diffusion chapter. Keep the umbrella source-only rather than claiming that one destination covers every step. See docs/audit/2026-10-29-masked-diffusion.md and the earlier lecture10 boundary map.",
       "evidence": "Lectures/repository/var/traces/lecture_10.json#steps=274-310:semantic=section-274-deepseek-v4-attention"
     },
     {
@@ -4396,9 +4450,9 @@
       "primary_sources": [
         "lecture-17"
       ],
-      "disposition": "integrated",
-      "destination": "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md",
-      "destination_anchor": "3-как-изображение-становится-дискретными-кодами"
+      "disposition": "excluded",
+      "reason": "Course-only VQ overview replaced in chapter 64h by original VQ-VAE Figure 1 linked from primary-paper HTML; archived course diagram is not claimed to be a primary-paper figure.",
+      "evidence": "Lectures/repository/lecture_17.py#L283"
     },
     {
       "id": "coverage-assignment-01-course-policy-and-setup",
@@ -5292,7 +5346,8 @@
       ],
       "disposition": "integrated",
       "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
-      "destination_anchor": "parameter-accounting"
+      "destination_anchor": "memory-accounting",
+      "evidence": "2026-10-22: integrated state-memory accounting, activation lifetimes, accumulation and MFU assumptions. This does not claim solutions for deliverables 035-038 (activation formula, GPT-2 XL capacity, AdamW update FLOPs and H100 training-time exercise); those remain source-only. See docs/audit/2026-10-22-transformer-shapes.md."
     },
     {
       "id": "coverage-assignment-01-deliverable-adamw-accounting-035",
@@ -11630,5 +11685,5 @@
       "evidence": "Assignments/assignment5-alignment/tests/test_data.py#L55"
     }
   ],
-  "editorial_overlay_sha256": "680b401c418b4be5375a046726670c7bc77c8d97de5dcfb3ecaa4e5c938a3dce"
+  "editorial_overlay_sha256": "c84c0d698fec824fe5e216488b5ae2612200c4b417cb90709c693d5771b405c3"
 }

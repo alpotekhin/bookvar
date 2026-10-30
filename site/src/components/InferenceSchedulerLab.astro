@@ -1,0 +1,292 @@
+<section class="scheduler-lab" data-scheduler-lab aria-labelledby="scheduler-lab-title">
+  <header>
+    <p class="eyebrow">Интерактивная практика · без GPU</p>
+    <h2 id="scheduler-lab-title">Запросы, итерации и KV-память</h2>
+    <p>Меняйте длины запросов и бюджет, затем выполняйте расписание по шагам. Внизу видны новые вычисления и блоки, которые запросы удерживают между шагами.</p>
+  </header>
+
+  <div class="scenarios" role="group" aria-label="Готовые нагрузки">
+    <button type="button" data-scenario="queue">Разные длины ответов</button>
+    <button type="button" data-scenario="long">Длинный промпт</button>
+    <button type="button" data-scenario="memory">Не хватает KV</button>
+  </div>
+
+  <div class="settings">
+    <label for="scheduler-budget">Новых входных токенов за шаг <output id="scheduler-budget-value">4</output>
+      <input id="scheduler-budget" type="range" min="1" max="32" value="4" />
+    </label>
+    <label for="scheduler-slots">Одновременно активных запросов <output id="scheduler-slots-value">2</output>
+      <input id="scheduler-slots" type="range" min="1" max="6" value="2" />
+    </label>
+    <label for="scheduler-blocks">Всего KV-блоков <output id="scheduler-blocks-value">8</output>
+      <input id="scheduler-blocks" type="range" min="1" max="24" value="8" />
+    </label>
+    <label for="scheduler-block-size">Токенов в блоке
+      <select id="scheduler-block-size"><option>1</option><option>2</option><option selected>4</option><option>8</option></select>
+    </label>
+    <label for="scheduler-admission">Допуск новых запросов
+      <select id="scheduler-admission"><option value="continuous">На каждой итерации</option><option value="cohort">После завершения всей группы</option></select>
+    </label>
+    <label class="check"><input id="scheduler-chunked" type="checkbox" checked /> Делить prefill на части</label>
+  </div>
+
+  <details class="request-editor">
+    <summary>Запросы · приход задан номером шага</summary>
+    <div class="table-scroll">
+      <table class="editor-table">
+        <thead><tr><th scope="col">ID</th><th scope="col">Приход</th><th scope="col">Промпт</th><th scope="col">Новых токенов</th><th scope="col"><span class="sr-only">Удалить запрос</span></th></tr></thead>
+        <tbody id="scheduler-requests"></tbody>
+      </table>
+    </div>
+    <button type="button" id="scheduler-add">Добавить запрос</button>
+    <p class="hint">Изменение нагрузки или настроек начинает опыт заново. Максимум шесть запросов; длины заданы токенами, а не символами.</p>
+  </details>
+
+  <div class="actions" role="group" aria-label="Выполнение расписания">
+    <button type="button" id="scheduler-back">Шаг назад</button>
+    <button type="button" id="scheduler-step" class="primary">Следующий шаг</button>
+    <button type="button" id="scheduler-run">До завершения</button>
+    <button type="button" id="scheduler-reset">Начать заново</button>
+  </div>
+  <p id="scheduler-status" class="status" aria-live="polite"></p>
+  <p id="scheduler-error" class="error" role="alert" hidden></p>
+
+  <div class="metrics" aria-label="Состояние опыта">
+    <div><span>Завершено</span><strong id="scheduler-completed">0 / 4</strong></div>
+    <div><span>Выдано токенов</span><strong id="scheduler-emitted">0</strong></div>
+    <div><span>Текущая KV-память</span><strong id="scheduler-resident">0 MiB</strong></div>
+    <div><span>Пик KV-блоков</span><strong id="scheduler-peak">0 / 8</strong></div>
+  </div>
+
+  <h3>Что вычислялось на каждой итерации</h3>
+  <p class="hint">P — токены промпта; D — один ранее выданный токен, который теперь проходит через модель; +1 — новый токен на выходе. Числа над столбцами — номера шагов, не миллисекунды.</p>
+  <div class="table-scroll timeline-scroll" tabindex="0" aria-label="Прокручиваемая история вычислений">
+    <table id="scheduler-timeline" class="timeline-table" aria-label="Расписание prefill и decode"></table>
+  </div>
+
+  <div class="memory-heading">
+    <h3>Кому принадлежат KV-блоки</h3>
+    <label for="scheduler-memory-view">Показать
+      <select id="scheduler-memory-view"><option value="during">во время последнего forward</option><option value="after">после освобождения завершённых запросов</option></select>
+    </label>
+  </div>
+  <p id="scheduler-memory-summary" class="hint"></p>
+  <div id="scheduler-memory" class="memory-grid" aria-label="Физические KV-блоки"></div>
+  <p class="hint">Одна ячейка — одна позиция KV. Незаполненный хвост выделенного блока остаётся занят этим запросом. Завершение освобождает блоки только после forward; последний предсказанный токен в KV ещё не записан.</p>
+
+  <h3>Состояния запросов</h3>
+  <div class="table-scroll"><table id="scheduler-state" class="state-table" aria-label="Прогресс и время первого токена"></table></div>
+  <p class="limits">Это дискретный симулятор, не запуск LLM. Все итерации считаются одинаковыми по времени. Он не предсказывает tokens/s и не реализует вытеснение, prefix sharing или offload: при нехватке памяти может остановиться. Формула байтов использует условную GQA-модель: 32 слоя, 8 KV-голов, размер головы 128, два байта на K/V.</p>
+  <noscript><p>Для интерактивных элементов нужен JavaScript. Ниже остаются полный разбор примера и ссылки на оригинальные материалы.</p></noscript>
+</section>
+
+<script>
+  import {
+    cacheBlocks, createScheduler, defaultSchedulerRequests, defaultSchedulerSettings,
+    KV_BYTES_PER_TOKEN, runScheduler, schedulerFinished, schedulerStalled, stepScheduler,
+    type RequestSpec, type SchedulerSettings,
+  } from '../lib/inference-scheduler';
+
+  const lab = document.querySelector<HTMLElement>('[data-scheduler-lab]')!;
+  const element = <T extends HTMLElement>(id: string) => lab.querySelector<T>('#scheduler-' + id)!;
+  const budget = element<HTMLInputElement>('budget');
+  const slots = element<HTMLInputElement>('slots');
+  const blocks = element<HTMLInputElement>('blocks');
+  const blockSize = element<HTMLSelectElement>('block-size');
+  const admission = element<HTMLSelectElement>('admission');
+  const chunked = element<HTMLInputElement>('chunked');
+  const memoryView = element<HTMLSelectElement>('memory-view');
+  let specs: RequestSpec[] = defaultSchedulerRequests.map(request => ({ ...request }));
+  let state = createScheduler(specs, defaultSchedulerSettings);
+  let valid = true;
+
+  const color = (id: string) => (id.charCodeAt(0) - 65) % 6;
+  const mib = (bytes: number) => (bytes / 2 ** 20).toLocaleString('ru-RU', { maximumFractionDigits: 2 });
+  const countWithWord = (value: number, forms: [string, string, string]) => {
+    const last = value % 10, lastTwo = value % 100;
+    const form = lastTwo >= 11 && lastTwo <= 14 ? 2 : last === 1 ? 0 : last >= 2 && last <= 4 ? 1 : 2;
+    return `${value} ${forms[form]}`;
+  };
+  const configuration = (): SchedulerSettings => ({
+    tokenBudget: Number(budget.value), maxRunning: Number(slots.value),
+    totalBlocks: Number(blocks.value), blockSize: Number(blockSize.value),
+    chunkedPrefill: chunked.checked, admission: admission.value as SchedulerSettings['admission'],
+  });
+  function readSpecs(): RequestSpec[] {
+    return [...element<HTMLTableSectionElement>('requests').querySelectorAll<HTMLTableRowElement>('tr')].map(row => ({
+      id: row.dataset.request!,
+      arrival: Number(row.querySelector<HTMLInputElement>('[data-field="arrival"]')!.value || NaN),
+      prompt: Number(row.querySelector<HTMLInputElement>('[data-field="prompt"]')!.value || NaN),
+      output: Number(row.querySelector<HTMLInputElement>('[data-field="output"]')!.value || NaN),
+    }));
+  }
+  function renderEditor() {
+    element('requests').innerHTML = specs.map(request => `<tr data-request="${request.id}">
+      <th scope="row"><span class="request-tag color-${color(request.id)}">${request.id}</span></th>
+      ${(['arrival', 'prompt', 'output'] as const).map(field => `<td><input type="number" min="${field === 'arrival' ? 0 : 1}" max="${field === 'prompt' ? 64 : 32}" value="${request[field]}" data-field="${field}" aria-label="${{ arrival: 'Приход', prompt: 'Промпт', output: 'Новых токенов' }[field]} ${request.id}" /></td>`).join('')}
+      <td><button type="button" data-remove="${request.id}" aria-label="Удалить ${request.id}" ${specs.length === 1 ? 'disabled' : ''}>×</button></td></tr>`).join('');
+    element<HTMLButtonElement>('add').disabled = specs.length >= 6;
+  }
+  function resetFromInputs() {
+    try {
+      const nextSpecs = readSpecs();
+      state = createScheduler(nextSpecs, configuration());
+      specs = nextSpecs;
+      valid = true;
+      element('error').hidden = true;
+    } catch {
+      valid = false;
+      element('error').hidden = false;
+      element('error').textContent = 'Проверьте поля: приход — целое от 0 до 32, промпт — от 1 до 64, новых токенов — от 1 до 32.';
+    }
+    render();
+  }
+  function render() {
+    for (const [name, input] of [['budget', budget], ['slots', slots], ['blocks', blocks]] as const)
+      element(name + '-value').textContent = input.value;
+    const finished = schedulerFinished(state), stalled = schedulerStalled(state);
+    element<HTMLButtonElement>('step').disabled = !valid || finished || stalled;
+    element<HTMLButtonElement>('run').disabled = !valid || finished || stalled;
+    element<HTMLButtonElement>('back').disabled = !valid || state.tick === 0;
+    const latest = state.history.at(-1);
+    element('completed').textContent = `${state.requests.filter(row => row.phase === 'finished').length} / ${state.requests.length}`;
+    element('emitted').textContent = String(state.requests.reduce((n, row) => n + row.emitted, 0));
+    const owned = state.requests.reduce((n, row) => n + row.blocks.length, 0);
+    element('resident').textContent = `${mib(owned * state.settings.blockSize * KV_BYTES_PER_TOKEN)} MiB`;
+    element('peak').textContent = `${state.peakBlocks} / ${state.settings.totalBlocks}`;
+    element('status').textContent = stalled
+      ? latest!.waits.some(wait => wait.reason === 'whole-prompt')
+        ? 'Расписание остановилось: целый промпт не помещается в бюджет шага. Включите деление prefill или увеличьте бюджет.'
+        : 'Расписание остановилось: для следующего KV нет свободного блока. Увеличьте память или уменьшите число активных запросов.'
+      : finished ? `Все запросы завершены за ${countWithWord(state.tick, ['шаг', 'шага', 'шагов'])}. Блоки освобождены.`
+      : latest ? `Выполнен шаг ${latest.tick}. Вычислено входных токенов: ${latest.usedBudget} из ${state.settings.tokenBudget}.${latest.released.length ? ' Завершены: ' + latest.released.join(', ') + '.' : ''}`
+      : 'Сначала запустите один шаг. Prefill сразу выдаёт первый токен ответа.';
+    element('status').classList.toggle('stalled', stalled);
+
+    const history = state.history;
+    element('timeline').innerHTML = `<thead><tr><th scope="col">Запрос</th>${history.length ? history.map(row => `<th scope="col">${row.tick}</th>`).join('') : '<th scope="col">Шагов пока нет</th>'}</tr></thead><tbody>${state.requests.map(request => `<tr><th scope="row"><span class="request-tag color-${color(request.id)}">${request.id}</span></th>${history.length ? history.map(row => {
+      const work = row.work.find(item => item.id === request.id);
+      const label = work ? `${work.phase === 'prefill' ? 'P' + work.tokens : 'D'}${work.emitted ? ' +1' : ''}` : '—';
+      return `<td class="${work?.phase ?? 'idle'}" title="${work ? `${work.tokens} входных, ${work.emitted} выходных токенов` : 'Запрос не вычислялся'}">${label}</td>`;
+    }).join('') : '<td>—</td>'}</tr>`).join('')}</tbody>`;
+
+    const memory = memoryView.value === 'during' && latest ? latest.memoryDuring : cacheBlocks(state);
+    const usedBlocks = memory.filter(block => block.owner !== null).length;
+    const actual = memory.reduce((n, block) => n + block.used, 0);
+    element('memory-summary').textContent = `${memoryView.value === 'during' && latest ? 'Forward шага ' + latest.tick : 'Текущее состояние'}: выделено ${countWithWord(usedBlocks, ['блок', 'блока', 'блоков'])} × ${countWithWord(state.settings.blockSize, ['позиция', 'позиции', 'позиций'])}; заполнено ${actual}, занято хвостами ${usedBlocks * state.settings.blockSize - actual}. Выделенный объём: ${mib(usedBlocks * state.settings.blockSize * KV_BYTES_PER_TOKEN)} MiB.`;
+    element('memory').innerHTML = memory.map(block => `<div class="memory-block ${block.owner ? 'color-' + color(block.owner) : 'free'}">
+      <span class="block-number">Физический ${block.index}</span><strong>${block.owner ? `${block.owner} · KV ${block.logicalIndex}` : 'Свободен'}</strong>
+      <div class="token-cells" aria-label="${block.used} из ${state.settings.blockSize} позиций записано">${Array.from({ length: state.settings.blockSize }, (_, i) => `<span class="${i < block.used ? 'filled' : 'empty'}">${i < block.used ? '●' : '·'}</span>`).join('')}</div>
+      <small>${block.owner ? `${block.used} / ${state.settings.blockSize}` : 'не выделен'}</small></div>`).join('');
+
+    element('state').innerHTML = `<thead><tr><th scope="col">ID</th><th scope="col">Состояние</th><th scope="col">Промпт</th><th scope="col">Ответ</th><th scope="col">KV сейчас</th><th scope="col">TTFT, шагов</th></tr></thead><tbody>${state.requests.map(request => {
+      const phase = request.phase === 'queued' ? request.arrival > state.tick ? 'ещё не поступил' : 'в очереди'
+        : ({ prefill: 'prefill', decode: 'decode', finished: 'завершён' } as Record<string, string>)[request.phase];
+      return `<tr><th scope="row">${request.id}</th><td>${phase}</td><td>${request.prefilled} / ${request.prompt}</td><td>${request.emitted} / ${request.output}</td><td>${request.cached}</td><td>${request.firstTokenAt === null ? '—' : request.firstTokenAt - request.arrival}</td></tr>`;
+    }).join('')}</tbody>`;
+  }
+
+  function scenario(name: string) {
+    const config = { ...defaultSchedulerSettings };
+    specs = defaultSchedulerRequests.map(request => ({ ...request }));
+    if (name === 'long') specs = [{ id: 'A', arrival: 0, prompt: 2, output: 4 }, { id: 'B', arrival: 0, prompt: 12, output: 2 }];
+    if (name === 'memory') {
+      specs = [{ id: 'A', arrival: 0, prompt: 4, output: 3 }, { id: 'B', arrival: 0, prompt: 4, output: 3 }];
+      config.totalBlocks = 2;
+      config.tokenBudget = 8;
+    }
+    budget.value = String(config.tokenBudget); slots.value = String(config.maxRunning);
+    blocks.value = String(config.totalBlocks); blockSize.value = String(config.blockSize);
+    admission.value = config.admission; chunked.checked = config.chunkedPrefill;
+    renderEditor(); resetFromInputs();
+  }
+  lab.addEventListener('input', event => {
+    if (event.target === memoryView) render();
+    else resetFromInputs();
+  });
+  element('step').addEventListener('click', () => { state = stepScheduler(state); render(); });
+  element('run').addEventListener('click', () => { state = runScheduler(state); render(); });
+  element('reset').addEventListener('click', resetFromInputs);
+  element('back').addEventListener('click', () => {
+    const ticks = state.tick - 1;
+    state = createScheduler(specs, configuration());
+    for (let i = 0; i < ticks; i++) state = stepScheduler(state);
+    render();
+  });
+  element('add').addEventListener('click', () => {
+    specs = readSpecs();
+    const id = [...'ABCDEF'].find(candidate => specs.every(request => request.id !== candidate))!;
+    if (specs.length >= 6) return;
+    specs.push({ id, arrival: 0, prompt: 2, output: 2 });
+    renderEditor(); resetFromInputs();
+  });
+  element('requests').addEventListener('click', event => {
+    const id = (event.target as HTMLElement).closest<HTMLButtonElement>('[data-remove]')?.dataset.remove;
+    if (!id || specs.length < 2) return;
+    specs = readSpecs().filter(request => request.id !== id);
+    renderEditor(); resetFromInputs();
+  });
+  lab.querySelectorAll<HTMLButtonElement>('[data-scenario]').forEach(button => button.addEventListener('click', () => scenario(button.dataset.scenario!)));
+  renderEditor(); render();
+  lab.dataset.initialized = 'true';
+</script>
+
+<style>
+  .scheduler-lab { margin-block: 1.5rem 3rem; padding: clamp(1rem, 3vw, 2rem); border: 1px solid var(--sl-color-gray-4); border-radius: .8rem; background: var(--sl-color-bg); min-width: 0; }
+  .scheduler-lab header p { max-width: 72ch; }
+  .scheduler-lab .eyebrow { color: var(--sl-color-accent-high); font-size: .8rem; font-weight: 700; letter-spacing: .04em; }
+  .scheduler-lab h2 { margin-top: .4rem; }
+  .scheduler-lab h3 { font-size: 1.1rem; margin-top: 1.6rem; }
+  .settings { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-block: 1.3rem; }
+  .settings label { display: grid; align-content: start; gap: .5rem; font-size: .85rem; margin: 0; }
+  .settings output { font-size: 1.3rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+  input[type=range] { width: 100%; accent-color: var(--sl-color-accent); }
+  .scheduler-lab :global(select), .scheduler-lab :global(input[type=number]) { border: 1px solid var(--sl-color-gray-4); border-radius: .3rem; background: var(--sl-color-bg); color: var(--sl-color-text); font: inherit; padding: .35rem; min-width: 0; margin: 0; }
+  select { width: 100%; max-width: 100%; }
+  .settings .check { display: flex; align-items: center; align-self: center; gap: .55rem; }
+  .scenarios, .actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-block: 1rem; }
+  .scheduler-lab :global(button) { border: 1px solid var(--sl-color-gray-4); border-radius: .4rem; padding: .5rem .7rem; font: inherit; font-size: .85rem; color: var(--sl-color-text); background: var(--sl-color-gray-6); cursor: pointer; min-height: 2.5rem; margin: 0; }
+  .scheduler-lab :global(button:disabled) { opacity: .45; cursor: default; }
+  .scheduler-lab .primary { color: var(--sl-color-black); background: var(--sl-color-accent-high); font-weight: 700; }
+  button:focus-visible, select:focus-visible, input:focus-visible, .table-scroll:focus-visible { outline: 2px solid var(--sl-color-accent); outline-offset: 3px; }
+  .request-editor { border-block: 1px solid var(--sl-color-gray-5); padding-block: .7rem; }
+  summary { cursor: pointer; font-weight: 600; }
+  .table-scroll { position: relative; max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+  .scheduler-lab table { display: table; width: 100%; border-collapse: collapse; margin-block: .7rem; font-size: .85rem; }
+  .scheduler-lab :global(th), .scheduler-lab :global(td) { padding: .5rem; border-bottom: 1px solid var(--sl-color-gray-5); text-align: left; white-space: nowrap; }
+  .editor-table :global(input) { width: 4.5rem; min-height: 2.5rem; }
+  .editor-table :global(button) { padding: .2rem .6rem; }
+  .scheduler-lab :global(.request-tag) { display: inline-block; min-width: 1.8rem; padding: .15rem .4rem; border: 1px solid var(--sl-color-gray-4); border-radius: .25rem; font-weight: 700; text-align: center; }
+  .hint, .limits { font-size: .82rem; color: var(--sl-color-gray-2); line-height: 1.6; }
+  .status { padding: .8rem 1rem; background: var(--sl-color-gray-6); border-left: 3px solid var(--sl-color-accent); border-radius: .25rem; font-size: .9rem; }
+  .status.stalled { border-color: #d69c25; }
+  .error { color: var(--sl-color-red-high); }
+  .metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .6rem; margin-block: 1.2rem; }
+  .metrics div { border: 1px solid var(--sl-color-gray-5); border-radius: .5rem; padding: .8rem; margin: 0; }
+  .metrics span { display: block; color: var(--sl-color-gray-2); font-size: .75rem; }
+  .metrics strong { display: block; font-size: 1.2rem; font-variant-numeric: tabular-nums; }
+  .timeline-table :global(th), .timeline-table :global(td) { min-width: 3.8rem; text-align: center; border: 1px solid var(--sl-color-gray-5); }
+  .timeline-table :global(th:first-child) { position: sticky; left: 0; background: var(--sl-color-bg); }
+  .timeline-table :global(td.prefill) { background: color-mix(in srgb, #2598c9 18%, var(--sl-color-bg)); }
+  .timeline-table :global(td.decode) { background: color-mix(in srgb, #bd9243 20%, var(--sl-color-bg)); }
+  .timeline-table :global(td.idle) { color: var(--sl-color-gray-3); }
+  .memory-heading { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: .6rem; }
+  .memory-heading label { font-size: .8rem; max-width: 100%; }
+  .memory-heading select { display: block; margin-top: .35rem; }
+  .memory-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr)); gap: .5rem; }
+  .memory-grid :global(.memory-block) { min-width: 0; border: 1px solid var(--sl-color-gray-4); border-radius: .4rem; padding: .6rem; margin: 0; }
+  .memory-grid :global(.block-number), .memory-grid :global(small) { display: block; font-size: .68rem; color: var(--sl-color-gray-2); }
+  .memory-grid :global(strong) { display: block; font-size: .85rem; margin-block: .3rem; }
+  .memory-grid :global(.token-cells) { display: flex; gap: 2px; margin-block: .5rem; }
+  .memory-grid :global(.token-cells span) { flex: 1; text-align: center; border: 1px solid var(--sl-color-gray-4); font-size: .65rem; }
+  .memory-grid :global(.filled) { background: color-mix(in srgb, currentColor 25%, transparent); }
+  .scheduler-lab :global(.color-0) { background: color-mix(in srgb, #358aaf 20%, var(--sl-color-bg)); }
+  .scheduler-lab :global(.color-1) { background: color-mix(in srgb, #b68a39 22%, var(--sl-color-bg)); }
+  .scheduler-lab :global(.color-2) { background: color-mix(in srgb, #8880cb 20%, var(--sl-color-bg)); }
+  .scheduler-lab :global(.color-3) { background: color-mix(in srgb, #55a18a 20%, var(--sl-color-bg)); }
+  .scheduler-lab :global(.color-4) { background: color-mix(in srgb, #bd759b 20%, var(--sl-color-bg)); }
+  .scheduler-lab :global(.color-5) { background: color-mix(in srgb, #898c91 20%, var(--sl-color-bg)); }
+  .limits { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--sl-color-gray-5); }
+  @media (max-width: 55rem) { .settings { grid-template-columns: repeat(2, minmax(0, 1fr)); } .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 28rem) { .settings { grid-template-columns: 1fr; } .metrics strong { font-size: 1rem; } .memory-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+</style>

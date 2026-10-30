@@ -1,0 +1,64 @@
+[
+  {
+    "id": "curated-harvard-data-selection-pretraining-amortization-c93a906fb355",
+    "asset": "00 Учебник/Assets/Figures/curated/harvard-data-selection-2026-10-28/pretraining-amortization.png",
+    "author": "Harvard University and the ML Systems contributors",
+    "source_url": "https://mlsysbook.ai/vol1/09_data_selection/09_data_selection.html#fig-amortization-comparison",
+    "source_image_url": "https://mlsysbook.ai/vol1/09_data_selection/09_data_selection_files/figure-html/cell-20-output-1.png",
+    "source_asset": "05 Источники/Originals/data-selection-reconciliation-2026-10-28/generated/fig-amortization-comparison.png",
+    "source_asset_sha256": "c93a906fb3551eaefcd763fad6501b48762637cb0bc20ed4d0e63d7da4e43566",
+    "sha256": "c93a906fb3551eaefcd763fad6501b48762637cb0bc20ed4d0e63d7da4e43566",
+    "source_page_snapshot": "05 Источники/Originals/selection-engineering-2026-10-28/web-2026-10-28.html",
+    "source_page_sha256": "9f31e8439bd840b3f6993851089acd305b230070bdd4fd6474c68fa39192f09e",
+    "license": "CC BY-NC-ND 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "license_evidence": "05 Источники/Originals/selection-engineering-2026-10-28/web-2026-10-28.html",
+    "license_evidence_sha256": "9f31e8439bd840b3f6993851089acd305b230070bdd4fd6474c68fa39192f09e",
+    "public_license_copy": "site/public/licenses/harvard-data-selection-web-2026-10-28.txt",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original web-edition image copied byte-for-byte, without crop, redraw, translated labels, upscaling or recompression. Reproduced unchanged as an attributed object in a collection. The live web edition has a distinct CC BY-NC-ND 4.0 notice; the older QMD snapshot license is not used to relicense these image bytes.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch.md"
+    ],
+    "dimensions_px": [
+      3658,
+      2219
+    ]
+  },
+  {
+    "id": "curated-harvard-data-selection-optimization-stack-c60797d3a177",
+    "asset": "00 Учебник/Assets/Figures/curated/harvard-data-selection-2026-10-28/optimization-stack.svg",
+    "author": "Harvard University and the ML Systems contributors",
+    "source_url": "https://mlsysbook.ai/vol1/09_data_selection/09_data_selection.html#fig-optimization-stack",
+    "source_image_url": "https://mlsysbook.ai/vol1/09_data_selection/09_data_selection_files/mediabag/b305a964be352e997129c31ee23444ffcbcdf411.svg",
+    "source_asset": "05 Источники/Originals/data-selection-reconciliation-2026-10-28/generated/fig-optimization-stack.svg",
+    "source_asset_sha256": "c60797d3a177519453b8ec03a4c9c36f5e0fc99744c57ae96db11dcd97c24bb1",
+    "sha256": "c60797d3a177519453b8ec03a4c9c36f5e0fc99744c57ae96db11dcd97c24bb1",
+    "source_page_snapshot": "05 Источники/Originals/selection-engineering-2026-10-28/web-2026-10-28.html",
+    "source_page_sha256": "9f31e8439bd840b3f6993851089acd305b230070bdd4fd6474c68fa39192f09e",
+    "license": "CC BY-NC-ND 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "license_evidence": "05 Источники/Originals/selection-engineering-2026-10-28/web-2026-10-28.html",
+    "license_evidence_sha256": "9f31e8439bd840b3f6993851089acd305b230070bdd4fd6474c68fa39192f09e",
+    "public_license_copy": "site/public/licenses/harvard-data-selection-web-2026-10-28.txt",
+    "derivation": "source-svg-copy",
+    "modifications": "Complete original web-edition image copied byte-for-byte, without crop, redraw, translated labels, upscaling or recompression. Reproduced unchanged as an attributed object in a collection. The live web edition has a distinct CC BY-NC-ND 4.0 notice; the older QMD snapshot license is not used to relicense these image bytes.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества.md"
+    ],
+    "source_viewbox": [
+      0,
+      0,
+      686.95599,
+      230.756
+    ]
+  }
+]

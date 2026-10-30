@@ -9,9 +9,18 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol2/lab_06_collective_communication.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol2/lab_06_collective_communication.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL2 Lab — Collective Communication
 
@@ -19,9 +28,95 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 **Recommended Reading** - Volume II, Chapter 6: Collective Communication.
 
-                    Focus on alpha-beta cost models, Ring and Tree AllReduce, topology-aware
-                    hierarchical communication, gradient compression, error feedback, and
-                    communication-computation overlap.
+Focus on alpha-beta cost models, Ring and Tree AllReduce, topology-aware
+hierarchical communication, gradient compression, error feedback, and
+communication-computation overlap.
+
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+Commit to a prediction before opening the instrument.
+
+---
+
+## Part A - Concept Module: Ring And Tree Costs Bind Different Alpha/Beta Terms
+
+---
+
+**Scenario.** ⟨value 1⟩ must choose a first-pass collective for **⟨value 2⟩ ⟨value 3⟩** moving a **⟨value 4⟩ GB ⟨value 5⟩** over **⟨value 6⟩**.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v2_06_variant.stakeholder}' `
+- value_2: ` f'{_n}' `
+- value_3: ` f"{v2_06_lens['participant_name']}" `
+- value_4: ` f'{_payload:.4g}' `
+- value_5: ` f"{v2_06_lens['payload_name']}" `
+- value_6: ` f"{_terms['fabric_label']}" `
+
+---
+
+## Part B - Concept Module: Topology Changes Which Collective Is Feasible Or Dominant
+
+---
+
+**Scenario.** The Part A amount now has to run through the selected track topology: **⟨value 1⟩**. Test whether local grouping, fabric, and topology assumptions change the winning collective.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_06_lens['topology_label']}" `
+
+---
+
+## Part C - Concept Module: Overlap And Compression Hide Communication With Risk
+
+---
+
+**Scenario.** The design now tries to reduce exposed time for **⟨value 1⟩**. Compression shrinks the payload; overlap hides only communication that has useful work beside it.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_part_c['selected_label']}" `
+
+---
+
+## Part D - Concept Module: Communication Plan Guardrails
+
+---
+
+**Scenario.** The final design review must satisfy exposed step-time, topology, and ⟨value 1⟩ guardrails for ⟨value 2⟩. ⟨value 3⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_06_lens['optimization_guardrail_label']}" `
+- value_2: ` f'{v2_06_profile.label}' `
+- value_3: ` f"{v2_06_lens['decision_frame']}" `
+
+---
+
+## Synthesis - Collective Communication Design Review
+
+---
+
+**Selected algorithm/topology/optimization:** ⟨value 1⟩ on ⟨value 2⟩ with local group ⟨value 3⟩; ⟨value 4⟩.
+
+**Binding term or guardrail:** ⟨value 5⟩.
+
+**Rejected alternative:** flat ring with aggressive compression and optimistic overlap (blocked by ⟨value 6⟩).
+
+**V2-07 reliability implication:** ⟨value 7⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_selected['selected_label']}" `
+- value_2: ` f"{_selected['fabric_label']}" `
+- value_3: ` f"{_selected['local_group']}" `
+- value_4: ` f'{_selected_optimization}' `
+- value_5: ` f"{_selected['binding_guardrail']}" `
+- value_6: ` f"{_rejected['binding_guardrail']}" `
+- value_7: ` f"{v2_06_lens['reliability_implication']}" `
+
+</details>
 
 ## Complete original Marimo source
 

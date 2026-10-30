@@ -1,0 +1,95 @@
+[
+  {
+    "id": "curated-collective-scatter-41aa1a57a36a",
+    "asset": "00 Учебник/Assets/Figures/curated/collective-destinations-2026-10-27/scatter.png",
+    "author": "Séb Arnold and PyTorch Tutorials contributors",
+    "source_url": "https://github.com/pytorch/tutorials/blob/c8ccbbf7fcb8cb71adda1b957bd6bab50e29c2e6/intermediate_source/dist_tuto.rst",
+    "source_image_url": "https://raw.githubusercontent.com/pytorch/tutorials/c8ccbbf7fcb8cb71adda1b957bd6bab50e29c2e6/_static/img/distributed/scatter.png",
+    "commit": "c8ccbbf7fcb8cb71adda1b957bd6bab50e29c2e6",
+    "source_asset": "05 Источники/Originals/collective-destinations-2026-10-27/scatter.png",
+    "source_asset_sha256": "41aa1a57a36a1533676a3425284bfb5bc55d5d819bc371dc45cd4bb0fefa72b1",
+    "sha256": "41aa1a57a36a1533676a3425284bfb5bc55d5d819bc371dc45cd4bb0fefa72b1",
+    "dimensions_px": [
+      959,
+      416
+    ],
+    "source_page_snapshot": "05 Источники/Originals/collective-destinations-2026-10-27/dist_tuto.rst",
+    "source_page_sha256": "67a81fefa390ddb25d151095ecab656f22361a7e2d3aa7e0352ef69f94bfc9ad",
+    "license": "BSD-3-Clause",
+    "license_url": "https://github.com/pytorch/tutorials/blob/c8ccbbf7fcb8cb71adda1b957bd6bab50e29c2e6/LICENSE",
+    "license_evidence": "05 Источники/Originals/collective-destinations-2026-10-27/LICENSE",
+    "license_evidence_sha256": "5703fcbe2d5dfcc48d486d26e4b9d2e48255c24602e1bd0270b60b8978116f86",
+    "public_license_copy": "site/public/licenses/pytorch-tutorials-c8ccbbf-BSD-3-Clause.txt",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original PNG copied byte-for-byte; no crop, redraw, relabelling, translation or recompression. Upper/lower ranks are before/after states, not different processes. Diagram shows logical delivery, not measured network timing or mandatory physical topology.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-27",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md"
+    ]
+  },
+  {
+    "id": "curated-collective-gather-7280d97d339a",
+    "asset": "00 Учебник/Assets/Figures/curated/collective-destinations-2026-10-27/gather.png",
+    "author": "Séb Arnold and PyTorch Tutorials contributors",
+    "source_url": "https://github.com/pytorch/tutorials/blob/c8ccbbf7fcb8cb71adda1b957bd6bab50e29c2e6/intermediate_source/dist_tuto.rst",
+    "source_image_url": "https://raw.githubusercontent.com/pytorch/tutorials/c8ccbbf7fcb8cb71adda1b957bd6bab50e29c2e6/_static/img/distributed/gather.png",
+    "commit": "c8ccbbf7fcb8cb71adda1b957bd6bab50e29c2e6",
+    "source_asset": "05 Источники/Originals/collective-destinations-2026-10-27/gather.png",
+    "source_asset_sha256": "7280d97d339aee4e27eec068f2afd4797c183c5429adc6d649086a94de2ef0d3",
+    "sha256": "7280d97d339aee4e27eec068f2afd4797c183c5429adc6d649086a94de2ef0d3",
+    "dimensions_px": [
+      958,
+      417
+    ],
+    "source_page_snapshot": "05 Источники/Originals/collective-destinations-2026-10-27/dist_tuto.rst",
+    "source_page_sha256": "67a81fefa390ddb25d151095ecab656f22361a7e2d3aa7e0352ef69f94bfc9ad",
+    "license": "BSD-3-Clause",
+    "license_url": "https://github.com/pytorch/tutorials/blob/c8ccbbf7fcb8cb71adda1b957bd6bab50e29c2e6/LICENSE",
+    "license_evidence": "05 Источники/Originals/collective-destinations-2026-10-27/LICENSE",
+    "license_evidence_sha256": "5703fcbe2d5dfcc48d486d26e4b9d2e48255c24602e1bd0270b60b8978116f86",
+    "public_license_copy": "site/public/licenses/pytorch-tutorials-c8ccbbf-BSD-3-Clause.txt",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original PNG copied byte-for-byte; no crop, redraw, relabelling, translation or recompression. Upper/lower ranks are before/after states, not different processes. Diagram shows logical delivery, not measured network timing or mandatory physical topology.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-27",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md"
+    ]
+  },
+  {
+    "id": "curated-collective-all-gather-637db0ff9288",
+    "asset": "00 Учебник/Assets/Figures/curated/collective-destinations-2026-10-27/all_gather.png",
+    "author": "Séb Arnold and PyTorch Tutorials contributors",
+    "source_url": "https://github.com/pytorch/tutorials/blob/c8ccbbf7fcb8cb71adda1b957bd6bab50e29c2e6/intermediate_source/dist_tuto.rst",
+    "source_image_url": "https://raw.githubusercontent.com/pytorch/tutorials/c8ccbbf7fcb8cb71adda1b957bd6bab50e29c2e6/_static/img/distributed/all_gather.png",
+    "commit": "c8ccbbf7fcb8cb71adda1b957bd6bab50e29c2e6",
+    "source_asset": "05 Источники/Originals/collective-destinations-2026-10-27/all_gather.png",
+    "source_asset_sha256": "637db0ff9288c02809e1d961b22cd72c47cfbc317730f13276a85db2b4a10a0b",
+    "sha256": "637db0ff9288c02809e1d961b22cd72c47cfbc317730f13276a85db2b4a10a0b",
+    "dimensions_px": [
+      957,
+      429
+    ],
+    "source_page_snapshot": "05 Источники/Originals/collective-destinations-2026-10-27/dist_tuto.rst",
+    "source_page_sha256": "67a81fefa390ddb25d151095ecab656f22361a7e2d3aa7e0352ef69f94bfc9ad",
+    "license": "BSD-3-Clause",
+    "license_url": "https://github.com/pytorch/tutorials/blob/c8ccbbf7fcb8cb71adda1b957bd6bab50e29c2e6/LICENSE",
+    "license_evidence": "05 Источники/Originals/collective-destinations-2026-10-27/LICENSE",
+    "license_evidence_sha256": "5703fcbe2d5dfcc48d486d26e4b9d2e48255c24602e1bd0270b60b8978116f86",
+    "public_license_copy": "site/public/licenses/pytorch-tutorials-c8ccbbf-BSD-3-Clause.txt",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original PNG copied byte-for-byte; no crop, redraw, relabelling, translation or recompression. Upper/lower ranks are before/after states, not different processes. Diagram shows logical delivery, not measured network timing or mandatory physical topology.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-27",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md"
+    ]
+  }
+]

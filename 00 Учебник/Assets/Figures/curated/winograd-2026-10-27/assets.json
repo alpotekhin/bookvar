@@ -1,0 +1,40 @@
+[
+  {
+    "id": "curated-winograd-dolz-workflow-02aac832003e",
+    "asset": "00 Учебник/Assets/Figures/curated/winograd-2026-10-27/dolz-workflow.png",
+    "sha256": "02aac832003e02853c6bf66ff50f9cca0e5df18d5f896efe69a7f7a8688b8e65",
+    "author": "Manuel F. Dolz, Héctor Martínez, Adrián Castelló, Pedro Alonso-Jordá and Enrique S. Quintana-Ortí",
+    "source_url": "https://link.springer.com/article/10.1007/s11227-023-05088-4/figures/1",
+    "source_image_url": "https://link.springer.com/content/pdf/10.1007/s11227-023-05088-4.pdf",
+    "source_asset": "05 Источники/Originals/winograd-2026-10-27/dolz-2023.pdf",
+    "source_asset_sha256": "c71022d1c7bdfef9e423974f82c6ea407e45a304c83e5d45f6b7992a68841536",
+    "source_page": 4,
+    "source_page_snapshot": "05 Источники/Originals/winograd-2026-10-27/dolz-figure1.html",
+    "source_page_sha256": "95034ccf4e79e277b27fa76318a315405a2a2624a92e7c150e86aba04835e2c6",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/winograd-2026-10-27/dolz-2023.html",
+    "license_evidence_sha256": "d222380091c1765c7c28b6ef6e393f0522c11c5154a1f9aacf1687bef616ba10",
+    "derivation": "source-pdf-render",
+    "render_dpi": 400,
+    "crop_box_px": [
+      572,
+      305,
+      1867,
+      1583
+    ],
+    "dimensions_px": [
+      1295,
+      1278
+    ],
+    "renderer": "publishing/tools/render_winograd_source_figure.py",
+    "modifications": "Complete original Figure 1 rendered at 400 dpi from physical PDF page 4. Crop excludes page body and caption; the exact caption is reproduced adjacent. No redrawing, translated labels, data or geometry changes. Adjacent explanation distinguishes the source's input-size tile-axis notation from the valid-output tile count used in the worked example.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-27",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md"
+    ]
+  }
+]

@@ -1,0 +1,102 @@
+[
+  {
+    "id": "curated-cnn-conv-multi-in-f75f5ed4cdc6",
+    "asset": "00 Учебник/Assets/Figures/curated/cnn-2026-10-26/conv-multi-in.svg",
+    "author": "Aston Zhang, Zachary C. Lipton, Mu Li, Alexander J. Smola",
+    "source_url": "https://d2l.ai/chapter_convolutional-neural-networks/channels.html",
+    "source_image_url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/conv-multi-in.svg",
+    "commit": "23d7a5aecceee57d1292c56e90cce307f183bb0a",
+    "source_asset": "00 Учебник/Assets/Figures/curated/cnn-2026-10-26/conv-multi-in.svg",
+    "source_asset_sha256": "f75f5ed4cdc666d5813ea08ac2e81b5a8796d67e91efd7071db7d412565a1d22",
+    "sha256": "f75f5ed4cdc666d5813ea08ac2e81b5a8796d67e91efd7071db7d412565a1d22",
+    "source_page_snapshot": "05 Источники/Originals/cnn-2026-10-26/d2l-channels.md",
+    "source_page_sha256": "3c2cc261f2351a373861af2582104addb9013bb0d222013af6d16b0749fc49dc",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/initialization-normalization-2026-10-21/d2l-LICENSE.txt",
+    "license_evidence_sha256": "a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c",
+    "derivation": "source-svg-copy",
+    "modifications": "Complete original SVG copied byte-for-byte from the pinned D2L repository. No crop, translation, relabeling, redraw or rasterization.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-26",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md"
+    ]
+  },
+  {
+    "id": "curated-cnn-conv-1x1-2eaab1b9c265",
+    "asset": "00 Учебник/Assets/Figures/curated/cnn-2026-10-26/conv-1x1.svg",
+    "author": "Aston Zhang, Zachary C. Lipton, Mu Li, Alexander J. Smola",
+    "source_url": "https://d2l.ai/chapter_convolutional-neural-networks/channels.html",
+    "source_image_url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/conv-1x1.svg",
+    "commit": "23d7a5aecceee57d1292c56e90cce307f183bb0a",
+    "source_asset": "00 Учебник/Assets/Figures/curated/cnn-2026-10-26/conv-1x1.svg",
+    "source_asset_sha256": "2eaab1b9c265704fdd1f2ab3b0ebc7c9188155f0a9dfcbfb4feb2d45be27bf44",
+    "sha256": "2eaab1b9c265704fdd1f2ab3b0ebc7c9188155f0a9dfcbfb4feb2d45be27bf44",
+    "source_page_snapshot": "05 Источники/Originals/cnn-2026-10-26/d2l-channels.md",
+    "source_page_sha256": "3c2cc261f2351a373861af2582104addb9013bb0d222013af6d16b0749fc49dc",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/initialization-normalization-2026-10-21/d2l-LICENSE.txt",
+    "license_evidence_sha256": "a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c",
+    "derivation": "source-svg-copy",
+    "modifications": "Complete original SVG copied byte-for-byte from the pinned D2L repository. No crop, translation, relabeling, redraw or rasterization.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-26",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md"
+    ]
+  },
+  {
+    "id": "curated-cnn-pooling-12643b8bcd70",
+    "asset": "00 Учебник/Assets/Figures/curated/cnn-2026-10-26/pooling.svg",
+    "author": "Aston Zhang, Zachary C. Lipton, Mu Li, Alexander J. Smola",
+    "source_url": "https://d2l.ai/chapter_convolutional-neural-networks/pooling.html",
+    "source_image_url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/pooling.svg",
+    "commit": "23d7a5aecceee57d1292c56e90cce307f183bb0a",
+    "source_asset": "00 Учебник/Assets/Figures/curated/cnn-2026-10-26/pooling.svg",
+    "source_asset_sha256": "12643b8bcd701e3ace01ab0726e674b967771a297ee34629f2911e5a84e1612c",
+    "sha256": "12643b8bcd701e3ace01ab0726e674b967771a297ee34629f2911e5a84e1612c",
+    "source_page_snapshot": "05 Источники/Originals/cnn-2026-10-26/d2l-pooling.md",
+    "source_page_sha256": "57b031b5fe27e3b398ebc5857506e8034f2df2b47a8f2351a9e4ed22019d2d89",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/initialization-normalization-2026-10-21/d2l-LICENSE.txt",
+    "license_evidence_sha256": "a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c",
+    "derivation": "source-svg-copy",
+    "modifications": "Complete original SVG copied byte-for-byte from the pinned D2L repository. No crop, translation, relabeling, redraw or rasterization.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-26",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md"
+    ]
+  },
+  {
+    "id": "curated-cnn-vgg-c0fb4a2104bb",
+    "asset": "00 Учебник/Assets/Figures/curated/cnn-2026-10-26/vgg.svg",
+    "author": "Aston Zhang, Zachary C. Lipton, Mu Li, Alexander J. Smola",
+    "source_url": "https://d2l.ai/chapter_convolutional-modern/vgg.html",
+    "source_image_url": "https://raw.githubusercontent.com/d2l-ai/d2l-en/23d7a5aecceee57d1292c56e90cce307f183bb0a/img/vgg.svg",
+    "commit": "23d7a5aecceee57d1292c56e90cce307f183bb0a",
+    "source_asset": "00 Учебник/Assets/Figures/curated/cnn-2026-10-26/vgg.svg",
+    "source_asset_sha256": "c0fb4a2104bb382aa00caa3b2f3ab18435724618259e23624335e325ec5568c3",
+    "sha256": "c0fb4a2104bb382aa00caa3b2f3ab18435724618259e23624335e325ec5568c3",
+    "source_page_snapshot": "05 Источники/Originals/cnn-2026-10-26/d2l-vgg.md",
+    "source_page_sha256": "c27ef2b630bab632e4090da38f0377f26e5642ab686f4d3ba4b79a4b934d0bfa",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/initialization-normalization-2026-10-21/d2l-LICENSE.txt",
+    "license_evidence_sha256": "a39a4b3d0f411a8217b7c6dd35dc8b06003784ce32d3593d0d2d780a7e9c2f8c",
+    "derivation": "source-svg-copy",
+    "modifications": "Complete original SVG copied byte-for-byte from the pinned D2L repository. No crop, translation, relabeling, redraw or rasterization.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-26",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md"
+    ]
+  }
+]

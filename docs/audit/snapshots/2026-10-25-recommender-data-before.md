@@ -1,0 +1,335 @@
+---
+title: Задача рекомендации, данные и pipeline
+type: textbook-chapter
+status: canonical
+last_updated: 2026-07-31
+---
+
+# Задача рекомендации, данные и pipeline
+
+Рекомендательная система выбирает не абстрактно «похожий объект», а конкретное
+действие в конкретный момент: какие фильмы показать на главной, какие товары
+допустить до ranking или какое уведомление отправить. До выбора модели нужно
+определить единицу такого решения, наблюдаемый сигнал и момент, относительно
+которого прошлое отделяется от будущего.
+
+## Сначала определить событие и решение
+
+Таблица взаимодействий не является готовой разметкой. Просмотр фильма,
+добавление товара в корзину и пропуск трека означают разные вещи. Даже клик
+не всегда выражает предпочтение: пользователь мог открыть объект случайно,
+искать негативную информацию или быстро закрыть страницу.
+
+**Explicit feedback** — rating, like/dislike или другой сигнал, который
+пользователь сообщает намеренно. **Implicit feedback** — наблюдаемое действие:
+клик, просмотр, покупка, dwell time. Explicit feedback ближе к заявленному
+отношению, но редок и подвержен selection bias. Implicit feedback массовый, но
+неоднозначный. Отсутствие события не является отрицательной меткой: пользователь
+мог никогда не увидеть объект.
+
+До выбора модели следует записать:
+
+- единицу решения: item, slate, session или notification;
+- candidate universe и правила доступности;
+- положительный сигнал и окно атрибуции;
+- способ получения negatives;
+- горизонт прогноза;
+- ограничения: latency, inventory, policy, diversity.
+
+## Четыре разные задачи
+
+### Rating prediction
+
+Для наблюдаемых пар $(u,i)\in\mathcal K$ модель прогнозирует численную оценку
+$\hat r_{ui}$. Типичная функция потерь:
+
+$$
+\mathcal L_{\mathrm{MSE}}
+=\frac{1}{|\mathcal K|}
+\sum_{(u,i)\in\mathcal K}(r_{ui}-\hat r_{ui})^2.
+$$
+
+Такая постановка естественна для MovieLens, но современная лента чаще не
+показывает ratings и требует top-$K$ ranking.
+
+### Top-$K$ recommendation
+
+Для каждого пользователя система выбирает $K$ объектов из каталога. Здесь
+важен относительный порядок. Модель может выдавать score $s(u,i)$, после чего
+объекты сортируются. Для большого каталога scoring всех items слишком дорог,
+поэтому pipeline обычно разделяют на retrieval и ranking.
+
+### CTR или response prediction
+
+Модель оценивает
+
+$$
+\hat p_{uic}=P(y=1\mid u,i,c),
+$$
+
+где контекст $c$ включает позицию, устройство, время, запрос и поверхность
+продукта. В логах наблюдается результат прежней policy показа, поэтому
+простое обучение на кликах воспроизводит её selection и position bias.
+
+### Next-item prediction
+
+Вместо агрегированной матрицы используется последовательность
+$(i_1,\ldots,i_t)$. Цель — следующий объект $i_{t+1}$ или множество событий в
+следующем окне. Такая постановка нужна, когда краткосрочное намерение важнее
+долгосрочного профиля.
+
+## Двухступенчатый serving
+
+В каталоге из миллионов объектов полный ranking на каждом запросе невозможен.
+Практический pipeline устроен так:
+
+1. retrieval возвращает сотни или тысячи candidates;
+2. ranking применяет более дорогую модель;
+3. post-ranking учитывает diversity, business rules и policy constraints;
+4. logger сохраняет candidates, scores, positions, exposure и response.
+
+Логировать только клики недостаточно. Без impression и candidate logs нельзя
+отличить «пользователь отверг item» от «item не был доступен модели».
+
+На практике речь идёт не просто о двух моделях, а о последовательном сужении
+пространства решений:
+
+| Стадия | Типичный масштаб | Допустимая стоимость на item | Что может быть потеряно |
+|---|---:|---|---|
+| Доступный каталог | $10^6$–$10^8$ | фильтр по индексу | новые или временно недоступные items |
+| Candidate generation | $10^3$–$10^4$ | dot product, ANN, простые правила | relevant item из-за низкого retrieval recall |
+| Ranking | $10^2$–$10^3$ | богатые cross-features и DNN | правильный порядок внутри candidates |
+| Re-ranking | $10$–$10^2$ | slate-level constraints | relevance ради diversity, fairness или inventory |
+| Serving | $K$ показов | cache, fallback, deadline | весь treatment при timeout или ошибке |
+
+Числа здесь задают порядок величины, а не универсальную конфигурацию. Главный
+инвариант — логировать вход и выход каждой стадии. Тогда падение final metric
+можно разложить на candidate recall, качество ranker, действие filters и
+фактическую доставку slate пользователю.
+
+## Split должен имитировать будущее
+
+Случайный split взаимодействий часто переносит поздние события пользователя в
+train, а ранние — в test. Модель получает информацию из будущего. Для
+реалистичного offline protocol используют:
+
+- **chronological split** по глобальной временной границе;
+- **leave-last-one-out**: последнее событие каждого пользователя — test;
+- **rolling window** для оценки стабильности во времени;
+- user/item holdout для отдельного измерения cold start.
+
+При разделении необходимо сохранять train-only fitting всех статистик,
+vocabulary и negative sampler. Иначе popularity, item frequencies или
+normalization уже содержат test information.
+
+### Worked example временного split
+
+Пусть у пользователя есть события:
+
+| Время | Item | Действие |
+|---|---|---|
+| 10:00 | A | view |
+| 10:05 | B | view |
+| 10:11 | C | purchase |
+| 10:40 | D | view |
+
+При leave-last-one-out история `[A,B,C]` образует train, `D` — test target.
+Модель не должна видеть статистику, посчитанную с учётом `D`. Если же случайно
+поместить `B` в test, а `C` и `D` оставить в train, задача перестаёт имитировать
+прогноз будущего.
+
+Глобальная временная граница проверяет реальный deployment shift, но создаёт
+новых users и items. Leave-one-out гарантирует test event для активных users,
+однако легче production-задачи и исключает пользователей с одной записью.
+Поэтому разумный отчёт содержит оба среза: warm-start ranking и отдельный
+cold-start protocol.
+
+Ограничение leave-last-one-out видно уже на двух пользователях. У Ани
+события датированы 1 и 3 сентября, у Бориса — 4 и 5 сентября.
+Последние события 3-го и 5-го попадут в test, остальные 1-го и 4-го — в train.
+Для предсказания Ане 3 сентября общие item embeddings и popularity уже
+могут использовать взаимодействие Бориса 4 сентября. Внутри каждой истории
+порядок сохранён, но глобальной хронологической гарантии нет.
+
+Поэтому такой split — warm-start benchmark с пользовательскими границами,
+а не полный replay развертывания. Глобальный cutoff 2 сентября исключил бы
+обе поздние записи Бориса из обучения и сделал бы его новым пользователем.
+Альтернатива — переобучать/восстанавливать все общие параметры и статистики
+as-of каждого момента оценки, что намного дороже. Train-only fitting в
+следующем коде соблюдает его split, но сам по себе не решает этот
+межпользовательский временной эффект.
+
+| Временная область | Разрешено использовать | Запрещено использовать |
+|---|---|---|
+| До cutoff | события, availability, признаки и статистики, уже доступные к cutoff | исправленные задним числом или поздно доставленные поля, если их не было в момент решения |
+| Label window | только построение target после зафиксированного observation time | обновление embeddings, popularity или vocabulary |
+| Test/replay | candidates и каталог, действительно доступные в момент запроса | современное состояние каталога и будущие interactions |
+
+Эта таблица важнее выбора конкретной функции `train_test_split`: leakage чаще
+возникает не в строках interactions, а в feature join, negative sampler или
+item availability snapshot.
+
+```python
+events = events.sort_values(["user_id", "timestamp"])
+test = events.groupby("user_id").tail(1)
+train = events.drop(test.index)
+
+# Fit statistics strictly on train.
+item_popularity = train.groupby("item_id").size()
+known_users = set(train.user_id)
+known_items = set(train.item_id)
+```
+
+Это схема, а не универсальная функция: для session recommendation граница
+проводится между sessions, а для каталога с меняющейся доступностью дополнительно
+нужно восстановить items available at test time.
+
+## Как строятся negatives
+
+Для observed positive $(u,i^+)$ требуется определить, с чем его сравнивать.
+
+**Exposed negative** — item был показан, но response не наступил в заданном
+окне. Такой negative ближе к продуктовой задаче, однако зависит от position и
+прежней policy.
+
+**Unexposed sampled negative** выбирается из каталога. Он помогает обучению
+retrieval, но отсутствие события не доказывает неприязнь.
+
+**In-batch negative** использует positive items других пользователей. Метод
+эффективен, но один и тот же item может быть релевантен нескольким users; кроме
+того, sampling distribution определяется batch construction.
+
+Один pointwise batch можно записать так:
+
+```python
+for user, positive in positives:
+    negatives = sampler(user, k=4)
+    yield (user, positive, 1)
+    for item in negatives:
+        yield (user, item, 0)
+```
+
+В experiment report обязательно указывают sampler, число negatives и
+исключение прежних positives. Иначе loss и ranking metrics невоспроизводимы.
+
+![[Assets/Sources/Dive into Deep Learning — Recommender Systems/rec-ranking.svg]]
+
+*Pairwise ranking в представлении D2L: один positive item должен получить score
+выше sampled negative для того же пользователя. Следует смотреть на разность
+двух scores — именно её увеличивает BPR, а не на попытку присвоить каждому item
+абсолютно «правильную» оценку. Источник: Zhang et al., [Dive into Deep Learning:
+Personalized Ranking](https://d2l.ai/chapter_recommender-systems/ranking.html),
+лицензия [CC BY-SA 4.0](https://github.com/d2l-ai/d2l-en/blob/master/LICENSE-SUMMARY).*
+
+## Candidate generation — часть задачи
+
+Пусть каталог содержит $10^7$ items, а ranker обрабатывает $10^3$ candidates.
+Даже идеальный ranker не вернёт relevant item, если retrieval его потерял.
+Поэтому end-to-end recall раскладывается:
+
+$$
+P(\text{relevant in final top-}K)
+=P(\text{in candidates})
+P(\text{top-}K\mid\text{in candidates}).
+$$
+
+Первый множитель измеряет candidate recall, второй — качество ranker на
+доступном множестве. Улучшать только второй бессмысленно, если candidate recall
+низок.
+
+Candidates часто объединяют из нескольких каналов:
+
+- collaborative nearest items;
+- two-tower ANN retrieval;
+- popular/recent by segment;
+- content similarity;
+- editorial inventory;
+- exploration candidates.
+
+После объединения нужны deduplication и provenance: для каждого candidate
+полезно знать generator, исходный score и rank.
+
+## Data contract
+
+Перед обучением фиксируют:
+
+```text
+observation_time < label_window_start <= label_window_end
+feature_event_time <= observation_time
+feature_available_at <= observation_time
+item_available(observation_time) == true
+```
+
+Первое условие отделяет features от будущего target. Два следующих разделяют
+время описываемого события и время фактической доступности его обработанного
+значения системе. Последнее исключает рекомендации объектов, которые
+невозможно было показать. Нарушение этих условий может дать offline improvement,
+которое не воспроизводится online.
+
+Например, покупка случилась в 10:00, решение о показе принято в 10:05,
+но событие поступило в 10:07, а агрегат обновился в 10:08. Проверка
+`event_time <= 10:05` пропустила бы будущую для системы информацию.
+Для агрегата `available_at=10:08`, поэтому он недоступен в replay на 10:05.
+`ingested_at` полезен, но недостаточен, если между получением и вычислением
+признака есть задержка. При поздних исправлениях нужны версии значений и
+as-of join по доступности версии, а не современное значение со старой датой.
+
+## Baseline раньше архитектуры
+
+Пошаговый расчёт global mean, user bias, item bias и matrix factorization
+приведён в notebook [Linux Foundation Recommenders — Baseline recommender deep
+dive](https://github.com/recommenders-team/recommenders/blob/main/examples/02_model_collaborative_filtering/baseline_deep_dive.ipynb).
+
+Минимальный набор:
+
+- random;
+- most popular;
+- global mean для ratings;
+- global mean + user bias + item bias;
+- recent/popular-by-segment.
+
+Сложная модель полезна только если превосходит baseline на том же split,
+candidate set и наборе пользователей. Иначе улучшение может объясняться
+другими negatives или более лёгким test protocol.
+
+### Bias baseline как проверка dataset
+
+Для ratings:
+
+$$
+\hat r_{ui}=\mu+b_u+b_i.
+$$
+
+Если сложная модель едва превосходит его, latent interactions дают мало
+дополнительной информации. Если даже baseline показывает неправдоподобно
+высокое качество, следует искать leakage или дубликаты.
+
+Для ranking аналогом служит popularity:
+
+$$
+s(u,i)=\log(1+\mathrm{count}_{train}(i)).
+$$
+
+Его нужно оценивать не только в среднем, но и на users с короткой историей.
+Персонализированная модель часто выигрывает на активных users, но проигрывает
+надёжному popularity fallback для cold users.
+
+## Типичные ошибки постановки
+
+- Считать все пропуски отрицательными.
+- Делать random split временных взаимодействий.
+- Вычислять popularity и vocabulary до split.
+- Сравнивать модели на разных candidate sets.
+- Удалять cold users из отчёта без отдельной метрики.
+- Логировать clicks, но не impressions и positions.
+- Оптимизировать CTR, не учитывая downstream purchase, satisfaction или
+  повторные визиты.
+
+Эти ошибки нельзя исправить архитектурой. Сначала строится проверяемый dataset и
+evaluation contract, затем выбирается модель.
+
+## Практика и первоисточники
+
+- [[05 Источники/Courses/Dive into Deep Learning — Recommender Systems/recsys-intro|D2L — Overview of Recommender Systems]] — основные постановки и термины.
+- [[05 Источники/Courses/Dive into Deep Learning — Recommender Systems/movielens|D2L — The MovieLens Dataset]] — формат данных и варианты split.
+- [[05 Источники/Courses/Linux Foundation Recommenders/examples/01_prepare_data/data_split.ipynb|Linux Foundation Recommenders — Data splitting techniques]] — random, chronological и stratified splitting в исполняемом notebook.

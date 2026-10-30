@@ -1,0 +1,38 @@
+[
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/positions-2026-10-21/roformer-figure1.png",
+    "sha256": "b1a65eb5e30f1510dce571cedb548b98c1db5c5e57ca04112b856f931a0d2591",
+    "source_asset": "05 Источники/Originals/positional-information-2026-10-21/roformer-v5.pdf",
+    "source_asset_sha256": "e9a481fbe1c8a20b7b1fa566b13102a1896c7829fa9a8b4c80528452a5ddaf79",
+    "source_page": 5, "render_dpi": 360, "render_page_size_px": [3060,3960],
+    "crop_box_px": [705,2010,2375,3075]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/rope-2026-10-22/roformer-decay.png",
+    "sha256": "5f51f86a9e04a38beedd0b5d9e063c978a71be8d8ecb12d5364bb91c9e6a4b90",
+    "source_asset": "05 Источники/Originals/positional-information-2026-10-21/roformer-v5.pdf",
+    "source_asset_sha256": "e9a481fbe1c8a20b7b1fa566b13102a1896c7829fa9a8b4c80528452a5ddaf79",
+    "source_page": 8, "render_dpi": 360, "render_page_size_px": [3060,3960],
+    "crop_box_px": [690,330,2360,1335]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/rope-2026-10-22/pi-extrapolation.png",
+    "sha256": "1d942ecfe17a10ad1c7c89ad20bd063726ef2b68f482be201d2f39f57dbfd130",
+    "source_asset": "05 Источники/Originals/rope-2026-10-22/position-interpolation-v2.pdf",
+    "source_asset_sha256": "890702e3170e5b8e2fb55552bd86cd99b0aa4ddbb3670ae8c351faa575cfaf09",
+    "source_page": 4, "render_dpi": 360, "render_page_size_px": [3060,3960],
+    "crop_box_px": [520,380,2550,1610]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/long-context-review-2026-09/position-interpolation.png",
+    "sha256": "0e698e0187f69b78e38cd443b44db1b55b675d8d8bd328e7567168b189e1f111",
+    "source_asset": "05 Источники/Originals/rope-2026-10-22/pi-original-figure1.png",
+    "source_asset_sha256": "0e698e0187f69b78e38cd443b44db1b55b675d8d8bd328e7567168b189e1f111"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/long-context-review-2026-09/yarn-method-summary.png",
+    "sha256": "016d62666f893299512ef8c85a74dd8031c482747fb4e667d9154ca9d6487aaf",
+    "source_asset": "05 Источники/Originals/rope-2026-10-22/yarn-original-summary.png",
+    "source_asset_sha256": "016d62666f893299512ef8c85a74dd8031c482747fb4e667d9154ca9d6487aaf"
+  }
+]

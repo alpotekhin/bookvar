@@ -23,6 +23,7 @@ export interface PublicationSidebarPage {
 export interface PublicationSidebarGroup {
   label: string;
   labelEn?: string;
+  readingPath?: string;
   items: PublicationSidebarItem[];
 }
 
@@ -176,10 +177,16 @@ export function loadManifest(path: string): PublicationManifest {
             sidebarRoutes.add(route);
             return { label: labelText, ...(labelEn ? { labelEn } : {}), route };
           }
-          exactKeys(item, ['label', 'items', ...(labelEn ? ['label_en'] : [])], itemLabel);
+          const readingPath = 'reading_path' in item
+            ? text(item.reading_path, `${itemLabel}.reading_path`) : undefined;
+          if (readingPath && !/^[a-z][a-z0-9-]*$/.test(readingPath)) {
+            throw new Error(`Invalid reading path: ${readingPath}`);
+          }
+          exactKeys(item, ['label', 'items', ...(labelEn ? ['label_en'] : []), ...(readingPath ? ['reading_path'] : [])], itemLabel);
           return {
             label: labelText,
             ...(labelEn ? { labelEn } : {}),
+            ...(readingPath ? { readingPath } : {}),
             items: parseSidebarItems(item.items, `${itemLabel}.items`)
           };
         });

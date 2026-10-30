@@ -1,0 +1,64 @@
+[
+  {
+    "id": "curated-semdedup-intro-dc2676e1da7d",
+    "asset": "00 Учебник/Assets/Figures/curated/image-id-selection-2026-10-29/semdedup-intro.png",
+    "sha256": "dc2676e1da7db3ed5d10d6de80c7308f62723b7a946b555869753954258f4c11",
+    "dimensions_px": [
+      2330,
+      912
+    ],
+    "author": "Amro Abbas, Kushal Tirumala, Daniel Simig, Surya Ganguli, Ari S. Morcos",
+    "source_url": "https://github.com/facebookresearch/SemDeDup/blob/6b4194511202c29b0e1ac8c730996777449ea2a4/intro_fig.png",
+    "source_image_url": "https://raw.githubusercontent.com/facebookresearch/SemDeDup/6b4194511202c29b0e1ac8c730996777449ea2a4/intro_fig.png",
+    "commit": "6b4194511202c29b0e1ac8c730996777449ea2a4",
+    "source_asset": "05 Источники/Originals/image-id-selection-2026-10-29/semdedup-intro.png",
+    "source_asset_sha256": "dc2676e1da7db3ed5d10d6de80c7308f62723b7a946b555869753954258f4c11",
+    "source_page_snapshot": "05 Источники/Originals/image-id-selection-2026-10-29/semdedup-README.md",
+    "source_page_sha256": "3030a6378ebc7f7d221d76bf114f79c647f6d3b4bf7c1b5be9e04f4d73d0a538",
+    "license": "CC BY-NC 4.0",
+    "license_url": "https://github.com/facebookresearch/SemDeDup/blob/6b4194511202c29b0e1ac8c730996777449ea2a4/LICENSE",
+    "license_evidence": "05 Источники/Originals/image-id-selection-2026-10-29/semdedup-LICENSE",
+    "license_evidence_sha256": "bc8f60ee50544b2dd70b4bc90e22de503aa23b317d284046a479811f2e06f396",
+    "public_license_copy": "site/public/licenses/semdedup-CC-BY-NC-4.0.txt",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original PNG copied byte-for-byte. No crop, redraw, relabeling, translation or recompression.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "pinned-upstream-repository",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md"
+    ]
+  },
+  {
+    "id": "curated-torchrec-zch-dataflow-014316d43fc1",
+    "asset": "00 Учебник/Assets/Figures/curated/image-id-selection-2026-10-29/torchrec-zch-dataflow.png",
+    "sha256": "014316d43fc1b37c830d36ad5b3056f0767ebaba73410ce22e778438d5f56ed4",
+    "dimensions_px": [
+      7351,
+      2336
+    ],
+    "author": "Meta Platforms, Inc. and affiliates",
+    "source_url": "https://github.com/meta-pytorch/torchrec/blob/36ae8ed89ac78e34a18ab00a08b93afe19410b55/examples/zch/docs/mpzch_module_dataflow.png",
+    "source_image_url": "https://raw.githubusercontent.com/meta-pytorch/torchrec/36ae8ed89ac78e34a18ab00a08b93afe19410b55/examples/zch/docs/mpzch_module_dataflow.png",
+    "commit": "36ae8ed89ac78e34a18ab00a08b93afe19410b55",
+    "source_asset": "05 Источники/Originals/image-id-selection-2026-10-29/torchrec-zch-dataflow.png",
+    "source_asset_sha256": "014316d43fc1b37c830d36ad5b3056f0767ebaba73410ce22e778438d5f56ed4",
+    "source_page_snapshot": "05 Источники/Originals/image-id-selection-2026-10-29/torchrec-zch-README.md",
+    "source_page_sha256": "fa9342429f7b91b0aec2aba31e92e585c8839efe80fc305b4bf4b43ac1b2eeb3",
+    "license": "BSD-3-Clause",
+    "license_url": "https://github.com/meta-pytorch/torchrec/blob/36ae8ed89ac78e34a18ab00a08b93afe19410b55/LICENSE",
+    "license_evidence": "05 Источники/Originals/dlrm-2026-10-26/torchrec-LICENSE",
+    "license_evidence_sha256": "7b4128b5b7ffac73983ee114969a486efc32e1237df0266797f86ac2f6c30384",
+    "public_license_copy": "site/public/licenses/torchrec-BSD-3-Clause.txt",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original PNG copied byte-for-byte. No crop, redraw, relabeling, translation or recompression.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "pinned-upstream-repository",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/02 Рекомендательные системы/03 Ranking и нейронные рекомендательные модели.md"
+    ]
+  }
+]

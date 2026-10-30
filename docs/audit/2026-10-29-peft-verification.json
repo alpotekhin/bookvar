@@ -1,0 +1,261 @@
+{
+  "date": "2026-10-29",
+  "scope": "Fine-tuning/PEFT chapter and its publication integration only. This does not accept the whole textbook or all 31 archived notes.",
+  "status": "verified-locally-not-published",
+  "temporaryBuildCleanup": "After matching the recorded chapter HTML hash, the dedicated Pages preview was stopped and only /var/tmp/bookvar-peft-pages-20261029 was removed. Its HTML hashes remain historical verification evidence; the normal root preview, chapter, original source packet and screenshots remain available.",
+  "canonicalMarkdown": "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md",
+  "routes": [
+    "/textbook/post-training/fine-tuning-peft/",
+    "/en/textbook/post-training/fine-tuning-peft/"
+  ],
+  "sourceLanguage": "English original shared by both routes; no translation or fallback claim",
+  "sha256": {
+    "00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md": "f106f7531bcd882e829bf126b4d556ef4b3c499deb89ea8ad6965a7e1e1e14b3",
+    "publishing/tools/check_peft_examples.py": "95e4b356d65310420ae23cdc17c3447268a973e87b3f848ecccdae99ab975231",
+    "publishing/tests/peft-fine-tuning.test.ts": "26a0ac13a646cdba41c2bef9c149793dd9df88b2ac47cc32ecda8ddd505a6399",
+    "publishing/tests/asset-registry.test.ts": "07a55e636156e179d43ae8d8abec0337de6dfed29474f8ae1132c8ef6f83147a",
+    "publishing/tests/site-output.test.ts": "64d9cc1979d5780f4295812f2bb7eb655c3b17aa2ad7de625da1ab6890ac00d3",
+    "publishing/navigation.yml": "cef166a943d3ff72cec4410bee9eb320990a834efd0ba8fc9b9b2bc7c1187cb1",
+    "00 Учебник/_index.md": "c6b73441468617524d453765d73be44bb66c4c68015269af0bb455df65040183",
+    "en/00 Textbook/_index.md": "26b06dc7dfa3efd78eda3c4e2fee81677bd9c5132f5eac07938acae9832e1551",
+    "00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники.md": "f9687ff3244da4519af4daa7912a3f36ebffcd612195b8349507bb82cb0ba9f4",
+    "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md": "3afbb8b75a2866dc5d493a929e0354aa3d1fa141cbdbdd82f0c866a5f387d872",
+    "05 Источники/asset-registry.yml": "e8dd55038dffabf8dd64bbdb094013b03b35aaddcb07eeb83f2e8b2b5663dc30",
+    "01 Справочник/_index.md": "fe4a91802ec3e6ee4c37ee678618dd216c2ba7a0f96d381bb6ad63cef409bef4",
+    "en/01 Reference/_index.md": "92885ce2732f7a9752d909f5f2ed7a4729ede6787cdbb5c117e3ab4ba9465cdf",
+    "00 Учебник/Assets/Figures/curated/peft-2026-10-29/houlsby-adapter.png": "6ffea276f84b38e57c4ac45cdfdf07e856885a696d944b25d2ee5c697e19431c",
+    "00 Учебник/Assets/Figures/curated/peft-2026-10-29/lora-animated.gif": "398088f0cf9b564859a3fcb5b66002b070bf60d0001f69ae561d1a1a17bf4773",
+    "00 Учебник/Assets/Figures/curated/peft-2026-10-29/lora-merge.png": "4313422c5f2755897fb8ddfc5b99251358f679647ec0f2d120a3f1ff060defe7",
+    "00 Учебник/Assets/Figures/curated/peft-2026-10-29/prompt-tuning.png": "f8e55f300e76b69cfd48c146bd71e9f40d4173c610fdb3c0562f369689a88908",
+    "00 Учебник/Assets/Figures/curated/peft-2026-10-29/prefix-tuning.png": "097897ac636473f8434692b0db5fbbc10395ec014b1e5ee136a501bd6aa1e86c",
+    "00 Учебник/Assets/Figures/curated/quantization-review-2026-10/qlora-training-original.png": "5035d5990255985976069eb59ee2833c7f99605d9a7d79b70e3e9e4b8c4df595",
+    "docs/audit/evidence/2026-10-29-peft/observations.json": "2e85ebac9a962840d212965cff7b2f33e4a477f9d11d3b704d1b6cf0a0a4622d",
+    "site/dist/textbook/post-training/fine-tuning-peft/index.html": "48ac6320dcaf5f7ba75919342d2993b2919e871c556bb8321c2441f0ff73104f",
+    "site/dist/en/textbook/post-training/fine-tuning-peft/index.html": "3c62dca960c2741c790fc8643a709b030f8a1b32bc2cf4d486a4be698f37ad94",
+    "/var/tmp/bookvar-peft-pages-20261029/textbook/post-training/fine-tuning-peft/index.html": "2d884b04c30d92b4ea25b6b9ebda969654af52a81f5585b1e14818ade911546d",
+    "/var/tmp/bookvar-peft-pages-20261029/en/textbook/post-training/fine-tuning-peft/index.html": "e4eb6b7777807f8d6f08ecc890a535c8776d0118e6478aaac7343f28fd831d2f"
+  },
+  "explanationReview": {
+    "fullChapterRead": true,
+    "finalDeltaAfterFullRead": "One broken cross-link was corrected to the actual PagedAttention chapter. The explanation and all eight code fences remained unchanged.",
+    "sourceComparisons": [
+      {
+        "mechanism": "Full/partial tuning and bottleneck adapters",
+        "source": "Houlsby et al., Introduction and sections 2/2.1",
+        "url": "https://proceedings.mlr.press/v97/houlsby19a.html",
+        "preserved": "Feature extraction versus changed representations, two adapter placements, trained normalization/head caveat, down/nonlinearity/up/residual, parameter count.",
+        "example": "Binary classifier p=0.26894 with head and representation gradients; d=768,m=64 gives 99136 parameters per adapter; h=(2,-1,0,3) becomes (2,-0.8,0,3)."
+      },
+      {
+        "mechanism": "LoRA factorization, initialization, gradients and rank",
+        "source": "Hu et al., sections 4 and 7; Table 5; HF PEFT Initialization",
+        "url": "https://arxiv.org/html/2106.09685v2",
+        "preserved": "Low-rank update versus full-rank base, shapes and scale, zero-B/nonzero-A gradient sequence, historical fixed-budget projection comparison, not a universal rank recipe.",
+        "example": "First SGD update takes loss 1 to 0.81; random-matrix derivative checks agree to 4.45e-16; zero-zero factors do not learn."
+      },
+      {
+        "mechanism": "LoRA merge and adapter checkpoints",
+        "source": "HF PEFT LoRA / Post-Training at fee923eb6e0382236478e4259bc69f4aeaab6813",
+        "url": "https://github.com/huggingface/peft/blob/fee923eb6e0382236478e4259bc69f4aeaab6813/docs/source/package_reference/lora.md",
+        "preserved": "Exact licensed excerpt, scaled linear merge, eval/dropout and quantized rounding limits, base revision contract and multi-adapter runtime costs.",
+        "example": "Merged/unmerged outputs match at 1e-12; negative controls detect wrong scaling, repeated merge and factor-sum cross terms."
+      },
+      {
+        "mechanism": "QLoRA",
+        "source": "Dettmers et al., sections 2–4, Figure 1; original TeX section 3",
+        "url": "https://arxiv.org/html/2305.14314v1",
+        "preserved": "Original storage-versus-compute paragraph and figure, fixed quantized base gradient path, NF4/double quantization/paged optimizer roles, qualified Guanaco result.",
+        "example": "Scale overhead 0.126953125 bits/weight, 3.031005859375 decimal GB saved for 65B; 175B raw four-bit weights require 87.5 GB. Full NF4 derivation remains in the linked quantization chapter."
+      },
+      {
+        "mechanism": "Prompt tuning",
+        "source": "Lester et al., sections 2–3; complete HF Prompt Tuning reference",
+        "url": "https://aclanthology.org/2021.emnlp-main.243/",
+        "preserved": "Learned input vectors, frozen base, sequence/mask contract and T5 LM-adaptation context. Source quotation remains English.",
+        "example": "Zero soft prompt changes attention normalization; output (0.66976155,0) and nonzero prompt gradient; 20x4096=81920 values."
+      },
+      {
+        "mechanism": "Prefix tuning",
+        "source": "Li and Liang, sections 3–4.3; complete HF Prefix Tuning reference",
+        "url": "https://aclanthology.org/2021.acl-long.353/",
+        "preserved": "Independent per-layer states/KV, MLP reparameterization and materialization, decoder versus encoder-decoder qualification; original figure retained.",
+        "example": "Independent key/value prefix gives (0.66976155,0.66047690); gradients reach both; direct KV count 1310720 values for the specified GQA configuration."
+      }
+    ],
+    "style": "Full text checked against no-ai-slop and project academic-writing qualifications. Source quotations were not rewritten. Concrete mechanisms, intermediate calculations, limits and attributions retained.",
+    "chapterGapsWithinDeclaredScope": [],
+    "notClaimed": "No full-model fine-tuning, GPU QLoRA run, serving benchmark, universal hyperparameter recipe or comprehensive catalogue of every PEFT variant."
+  },
+  "cpu": {
+    "chapter_sha256": "f106f7531bcd882e829bf126b4d556ef4b3c499deb89ea8ad6965a7e1e1e14b3",
+    "torch": "2.14.1",
+    "published_python_fences": 8,
+    "independent_gradient_max_error": 4.440892098500626e-16,
+    "soft_prompt_output": [
+      0.6697615493266569,
+      0
+    ],
+    "prefix_output": [
+      0.6697615493266569,
+      0.6604769013466861
+    ],
+    "adapter_parameters": 4194304,
+    "saved_scale_gb_65b": 3.031005859375,
+    "negative_controls": [
+      "both factors zero",
+      "detached frozen upper layer",
+      "wrong merge scaling",
+      "double merge",
+      "zero prefix is not identity",
+      "factor sum cross terms"
+    ],
+    "scope": "Small CPU algebra/gradient examples, not full-model tuning or GPU QLoRA"
+  },
+  "checks": {
+    "publisher": {
+      "files": 125,
+      "tests": 812,
+      "passed": true,
+      "log": "/var/tmp/bookvar-peft-unit-final-20261029.log"
+    },
+    "site": {
+      "files": 6,
+      "tests": 89,
+      "passed": true,
+      "log": "/var/tmp/bookvar-peft-site-test-20261029.log"
+    },
+    "output": {
+      "tests": 171,
+      "passed": true,
+      "log": "/var/tmp/bookvar-peft-output-20261029.log"
+    },
+    "types": {
+      "errors": 0,
+      "warnings": 0,
+      "hints": 6,
+      "log": "/var/tmp/bookvar-peft-site-check-20261029.log"
+    },
+    "root": {
+      "pages": 2006,
+      "brokenLinks": 0,
+      "buildLog": "/var/tmp/bookvar-peft-root-build-20261029.log",
+      "linkLog": "/var/tmp/bookvar-peft-links-20261029.log"
+    },
+    "pages": {
+      "base": "/bookvar",
+      "pages": 2006,
+      "brokenLinks": 0,
+      "buildLog": "/var/tmp/bookvar-peft-pages-build-20261029.log",
+      "linkLog": "/var/tmp/bookvar-peft-pages-links-20261029.log",
+      "liveDeployment": false
+    },
+    "servedLicense": {
+      "url": "http://127.0.0.1:62819/bookvar/licenses/peft-fee923eb-Apache-2.0.txt",
+      "status": 200,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "equalsArchive": true
+    },
+    "scopedDiffCheck": "Passed for edited publication files; whole inherited worktree still reports source-authored trailing whitespace in Harvard original labs/slides. Those originals were not reformatted.",
+    "validationRepairs": [
+      "Unique IDs for new original-image records; original legacy IDs retained.",
+      "Main-route/subject/native-English counts updated for the added chapter; current counts 64/152/16.",
+      "Historical course and EN acceptance receipts preserved; only the exact new PEFT journal is reversed for their old revision.",
+      "Broken PagedAttention link corrected; output-image count excludes the empty viewer placeholder.",
+      "Custom Pages link checker rerun from publishing so the installed tsx loader resolves; no assertion weakened."
+    ]
+  },
+  "provenance": {
+    "metadata": "00 Учебник/Assets/Figures/curated/peft-2026-10-29/assets.json",
+    "figures": 6,
+    "newFigures": 5,
+    "reusedFigure": "Original QLoRA Figure 1 from the existing reviewed quantization packet",
+    "imageCopies": "Four original HF rasters retain all pixels/GIF frames, pinned to 861b6c920fe27492d35256c39f266592a518d50c, CC BY-NC-SA 4.0.",
+    "paperCrop": "Houlsby Figure 2 retains both complete panels from PDF p.3; exact crop and PMLR CC BY 4.0 evidence are in the registry.",
+    "sourceExcerpts": "Four HF excerpts pinned to fee923eb6e0382236478e4259bc69f4aeaab6813, Apache-2.0, plus licensed Houlsby/QLoRA excerpts. Surrounding added examples are labelled in the source section."
+  },
+  "browser": {
+    "observations": "docs/audit/evidence/2026-10-29-peft/observations.json",
+    "viewports": [
+      "1280x900 (client 1265)",
+      "360x800 (client 345)"
+    ],
+    "observed": "All six figures visually inspected on desktop and mobile; natural aspect ratios retained. GIF changes frames in the viewer. QLoRA zoom controls operate on mobile. Root and /bookvar routes, English native text, previous/next links and served license checked.",
+    "mobileReadability": "Wide comparison figures have small labels at the default 313px content width; their full-resolution originals can be opened and zoomed, with horizontal scrolling confined to the viewer.",
+    "screenshots": [
+      {
+        "path": "docs/audit/evidence/2026-10-29-peft/desktop-adapter.png",
+        "sha256": "e6a3f5e6d99cc2ae0d6afe41dcc3128afa5927cbc4bc7798eb6a43ddcab1ad48"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-peft/desktop-lora-animation-viewer.png",
+        "sha256": "1a027f8ef44c28b6954c0a9f871c06e88c8fbcfbb2c0af0641dd982d5cfb6b54"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-peft/desktop-lora.png",
+        "sha256": "82a060a0c6ddfceed0de7dad58e468412d6b91d78d69496704f3e1b15bba1a11"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-peft/desktop-merge.png",
+        "sha256": "2f338679ad72aadf34c292fc624c783613565abdd020cbaa31e6bfcdd99589a1"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-peft/desktop-prefix.png",
+        "sha256": "e041e08d2c50acd6482fc37609e22a5952e783a6f6c127881f55ed2464364ba1"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-peft/desktop-qlora.png",
+        "sha256": "d317d5c6bccae1a559df708dc20fb2564334b02e3791677eb93912df45a94839"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-peft/desktop-soft-prompt.png",
+        "sha256": "6eada13540efc8662633cdd6351c64defbecddf5e9243848509e4fbe8823f0b3"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-peft/mobile-adapter.png",
+        "sha256": "c10f5b57749f4404e7f7892c4c3ac0febc4f759ae27692fa1774c512993b4360"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-peft/mobile-english.png",
+        "sha256": "1ee55882c1a3689d6c8b0e8344f8d86fe715d5bf0d01c3930a56a8621fce5ecb"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-peft/mobile-lora.png",
+        "sha256": "4e2ef3c16aaef8322d77c1b1eb660aae30dfdb8c3d302a5f79ec7f62199789df"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-peft/mobile-merge.png",
+        "sha256": "d33766c5ad41431587d0336ce9a76d28ed58c10de7486440291405f274a9f590"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-peft/mobile-prefix.png",
+        "sha256": "a712b1a12f0cdb365c2ce789d476bc9b3430bdea1457cd79b58cfa7fe495b91c"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-peft/mobile-qlora-zoom.png",
+        "sha256": "e6209b2b45dca7bcdd3c9aa335aafe879449099f07697d16d3ad2e914cd9e075"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-peft/mobile-qlora.png",
+        "sha256": "4d80b850e2a649f884dd8ce327cbac291946f7b067e8696a7a454908e8a062ef"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-peft/mobile-soft-prompt.png",
+        "sha256": "361ba9a6473efd85c722e34d8040b6e5eab89426ec9cda72ebc203b1264a75b8"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-peft/pages-english-desktop.png",
+        "sha256": "a0d1aa7c745ba4751f15f8dc9fbfea08d03ed652330d81ca81e0ce8ebb41e54a"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-peft/pages-mobile.png",
+        "sha256": "a712b1a12f0cdb365c2ce789d476bc9b3430bdea1457cd79b58cfa7fe495b91c"
+      }
+    ]
+  },
+  "remainingWholeGoal": [
+    "Finish semantic dispositions of all 31 legacy notes; 15 source notes have now been fully read. The new PEFT explanation does not by itself mark all related archive entries accepted.",
+    "Next confirmed explanatory gap: small-data encoder fine-tuning stability, reinitialization and intermediate-task transfer; distinct from causal-LM SFT and PEFT.",
+    "Complete the end-to-end conceptual sequence review.",
+    "Review the whole release diff and publish to dev/Pages under the user's configured identity; no commit, push or live deploy in this pass."
+  ]
+}

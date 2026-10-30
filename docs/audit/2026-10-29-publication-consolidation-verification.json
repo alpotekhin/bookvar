@@ -1,0 +1,1043 @@
+{
+  "date": "2026-10-29",
+  "scope": "Local publication consolidation; no commit, push or public deployment",
+  "navigationSha256": "2bae2aacac9ccbae3edcd188a10604ec13793be0f1621168e99f34536565d2cb",
+  "registrySha256": "d0a16bc12c2aaa7e71ddafda87833de0e71c0752e63d4a6e747b792da2ab5103",
+  "currentSourceFiles": 232,
+  "currentSourceDrift": [],
+  "checks": [
+    {
+      "id": "publisher-unit",
+      "status": "pass",
+      "result": "119 files, 773 tests",
+      "log": "docs/audit/evidence/2026-10-29-publication/publisher-unit.log",
+      "sha256": "efff3867f80026863ac84777a7c1fcb323e8768997add39371ce39b30bb43ac9"
+    },
+    {
+      "id": "site-tests",
+      "status": "pass",
+      "result": "5 files, 69 tests",
+      "log": "docs/audit/evidence/2026-10-29-publication/site-tests.log",
+      "sha256": "47866af7fca7d15a44ba624b40733c53dfff18fe73a571fa34e9544c4851f839"
+    },
+    {
+      "id": "astro-types",
+      "status": "pass",
+      "result": "0 errors, 0 warnings, 5 hints",
+      "log": "docs/audit/evidence/2026-10-29-publication/astro-types.log",
+      "sha256": "bf6b7a8a30e9ba8402fb531e75d7282a955ddcf1bba7af6c992f65cdb9ab1ad0"
+    },
+    {
+      "id": "root-build",
+      "status": "pass",
+      "result": "2001 pages",
+      "log": "docs/audit/evidence/2026-10-29-publication/root-build.log",
+      "sha256": "b540b672b7b1137d042e537f36bf10865687f7075a5d01f5c3f39205bcbb765d"
+    },
+    {
+      "id": "pages-build",
+      "status": "pass",
+      "result": "2001 pages at /bookvar",
+      "log": "docs/audit/evidence/2026-10-29-publication/pages-build.log",
+      "sha256": "e636dcd96804219516777200f355b536f817dfdfcdee88d76ab4933f4abeae5e"
+    },
+    {
+      "id": "output-tests",
+      "status": "pass",
+      "result": "165 tests",
+      "log": "docs/audit/evidence/2026-10-29-publication/output-tests.log",
+      "sha256": "048733e26fe8454d1a3ec99465412febdecd709e6cfb9c87cdbe558dc60c0364"
+    },
+    {
+      "id": "root-links",
+      "status": "pass",
+      "result": "0 broken internal routes, fragments or files",
+      "log": "docs/audit/evidence/2026-10-29-publication/root-links.log",
+      "sha256": "f65af58172a1b10a58f8cb0c2d32dcf65f41b5e1100e42172d24765f77696a26"
+    },
+    {
+      "id": "pages-links",
+      "status": "pass",
+      "result": "0 broken internal routes, fragments or files at /bookvar",
+      "log": "docs/audit/evidence/2026-10-29-publication/pages-links.log",
+      "sha256": "8f25523ad4532cfdf3783db36146fea0a61de246812a901dcbdcd7c85da6a8e6"
+    },
+    {
+      "id": "topic-index",
+      "status": "pass",
+      "result": "150 subjects in both indexes",
+      "log": "docs/audit/evidence/2026-10-29-publication/topic-index.log",
+      "sha256": "3a00ad4a6a8ac8b50795a72473b5674e124302f8fc3d50c96d40e701640f31d3"
+    },
+    {
+      "id": "source-coverage",
+      "status": "pass",
+      "result": "210 rows, 59 destinations",
+      "log": "docs/audit/evidence/2026-10-29-publication/source-coverage.log",
+      "sha256": "564c1a8379e01223a628e179dc0daa9d271fe7cfa5509c406e39245b8c491206"
+    },
+    {
+      "id": "course-ingestion",
+      "status": "pass",
+      "result": "Stanford CS336 and Berkeley",
+      "log": "docs/audit/evidence/2026-10-29-publication/course-ingestion.log",
+      "sha256": "f0dc3945cbbcb179104a96bdff0aa186763f03d30fe494e99195cd6dcc225d46"
+    },
+    {
+      "id": "scoped-diff",
+      "status": "pass",
+      "result": "No whitespace errors outside preserved Harvard source originals",
+      "log": "docs/audit/evidence/2026-10-29-publication/scoped-diff.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "browser": {
+    "artifact": "docs/audit/2026-10-29-publication-consolidation-browser.json",
+    "sha256": "9221c6630c8233e69733bf6d8f453e330be6025a150f03086a267291fd3e941a",
+    "summary": {
+      "routes": 235,
+      "viewportChecks": 470,
+      "horizontalOverflow": 0,
+      "mathErrorPages": 0,
+      "unloadedImagePages": 0,
+      "unexpectedTitles": 0
+    },
+    "redirects": 49,
+    "pagesPathRoutes": 5
+  },
+  "sources": [
+    {
+      "source": "00 Учебник/_index.md",
+      "sha256": "77c731156c8e87c5183cf3ac34232e60de047d08e222b14c92b9b7345fa76dfb"
+    },
+    {
+      "source": "en/00 Textbook/_index.md",
+      "sha256": "5c06b0a02d3de8f2ca0f936328a527bc4111b999531c335baba56ff0f7f1e048"
+    },
+    {
+      "source": "00 Учебник/00 Как пользоваться учебником.md",
+      "sha256": "a2da81f5b96b1869ac354996604b2c61e848785d7ad1664b42c2a04723809990"
+    },
+    {
+      "source": "00 Учебник/00 Математические и ML-основания/01 Векторы, матрицы и тензоры.md",
+      "sha256": "7764790a11f7cbf12fbb9e662d62d56bd94ad8d39863a8995423f29161ff6ebb"
+    },
+    {
+      "source": "00 Учебник/00 Математические и ML-основания/02 Производная и градиент.md",
+      "sha256": "6839e2febcb38fb71c8d870c1ab8afb50c47e93e1aef6ad351b7b302579dfb08"
+    },
+    {
+      "source": "00 Учебник/00 Математические и ML-основания/03 Вероятность, правдоподобие и логарифм.md",
+      "sha256": "f658322dcd6ebd32a9d888aa3f612bfd9821e8adc04bdeffc813b1ebc10c6505"
+    },
+    {
+      "source": "00 Учебник/00 Математические и ML-основания/04 Функции потерь.md",
+      "sha256": "801ed9e1eb605d4ffe25cfbf8347734fea8963c05bc0c044c0d41071ad152531"
+    },
+    {
+      "source": "00 Учебник/00 Математические и ML-основания/05 Train, validation и test.md",
+      "sha256": "f5cf270d3ea334c77c7d09402ef6dd80d4e1ef6def27de5f1d52c0e79b54187c"
+    },
+    {
+      "source": "00 Учебник/00 Математические и ML-основания/06 Переобучение, регуляризация и оценивание.md",
+      "sha256": "e1efdca476a16e47475fc763bc9a64c5524fdca74add685ba9d5dc8dd335e7c2"
+    },
+    {
+      "source": "00 Учебник/01 Классическое машинное обучение/00 Карта модуля.md",
+      "sha256": "ba973a9b69b13cd5e2080937faa034ef5950266e1eec232867c45b5fb3402433"
+    },
+    {
+      "source": "00 Учебник/01 Классическое машинное обучение/01 Задача обучения и predictive pipeline.md",
+      "sha256": "9251873332d9ad4e751c5df2b989794bde0b638f1225f481a2b0ad51fe866075"
+    },
+    {
+      "source": "00 Учебник/01 Классическое машинное обучение/02 Линейная регрессия и классификация.md",
+      "sha256": "75f92f4704376d7989fcc9be6ac71d53566a4aa8032851798960430a63f4914a"
+    },
+    {
+      "source": "00 Учебник/01 Классическое машинное обучение/03 Деревья решений.md",
+      "sha256": "cd7ead3663bb14c0c95cf325d5c2ddb90adb703c4106557c7f62134f406c1d83"
+    },
+    {
+      "source": "00 Учебник/01 Классическое машинное обучение/04 Bagging, random forest и gradient boosting.md",
+      "sha256": "4ed341f212c55bf58c407433d9f12459ae5bfdef3c3aba7a1d784b033fd87ebb"
+    },
+    {
+      "source": "00 Учебник/01 Классическое машинное обучение/05 Оценивание, кросс-валидация и выбор порога.md",
+      "sha256": "c1c725e2074ccde8ecda865accdddf2c94232df190c66ed327e9148406c01a77"
+    },
+    {
+      "source": "00 Учебник/01 Классическое машинное обучение/06 Кластеризация и её ограничения.md",
+      "sha256": "4a09c7bd9dab975e556ee7eb44ae18a84adbf45061f274e6aedd6bac7ad77455"
+    },
+    {
+      "source": "00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian.md",
+      "sha256": "6184d698155c4e8571f256ffbc4f013d91cf1e5451d67db9109ccb5643d27b34"
+    },
+    {
+      "source": "00 Учебник/01 Классическое машинное обучение/07 PCA, t-SNE и UMAP.md",
+      "sha256": "0487fe879457379241a0fa9565ec8cac5eb51280ae820e50a02dc3896a929e5d"
+    },
+    {
+      "source": "00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM.md",
+      "sha256": "c02a1bd7955b8920a1842f89d34827cd126a90400cd65e45b49e8ca933c20a3d"
+    },
+    {
+      "source": "00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features.md",
+      "sha256": "99280edf9b5259f46e5f8d797410aad56da0bf726be38c54ac5a404fc375811f"
+    },
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/01 Нейрон и MLP.md",
+      "sha256": "17e763a94b26580e6c4d015c6ab092c1d33d57a9f6c77e34a598fdc27379507b"
+    },
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/02 Функции активации.md",
+      "sha256": "467efffdbfaad2a74bb9e31ff86fed9553cc0478664407efd34d2c678e4b7696"
+    },
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md",
+      "sha256": "8795146abe1f9c7a8de8a232c958aae472e3788d963f99aba557b90690fee2c0"
+    },
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "sha256": "b9a3d638815bb981cedc989003a9ac0cc6ec3314a849c4bf2c57c0940a5ffa84"
+    },
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md",
+      "sha256": "019c8f6a0270bcdb4f282ade039108c289f5d7d391dde779e664fd046fa61435"
+    },
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация.md",
+      "sha256": "e30be3213d51d1f0276b560422ec1ee116ef8b5112339053871636e86d5aa742"
+    },
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований.md",
+      "sha256": "d35a256a67948d010ba6a0e3feae9a3d3d2c7856d47be695f9570c8750d3ddd7"
+    },
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md",
+      "sha256": "20589edbe6fc64ed15613741a63640af224a243c73e8df211b9a2b860cbd6d9f"
+    },
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE.md",
+      "sha256": "0fa503dade5bacee4bf88d40a4aa799474328586332fe92fc6a28538dca9b4fd"
+    },
+    {
+      "source": "00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор.md",
+      "sha256": "30f6c8d2da4c7fcf3607ef4649eb74e077286b5e1e538c18e7cad6dee3791874"
+    },
+    {
+      "source": "00 Учебник/02 Представление текста и токенизация/01 Представление текста числами.md",
+      "sha256": "a61f0506c18437b6e580e01f3d547f477b91c09eefea52b1695e580aca119a1f"
+    },
+    {
+      "source": "00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель.md",
+      "sha256": "032dc6d57c8399255ec427be82cf59fd2fe30885f218abe7083a5596901ef8ea"
+    },
+    {
+      "source": "00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction.md",
+      "sha256": "9e7e0016e68745cfb491d3018beb2d91b81b631a6d1995b36ad3a2e03d2ba695"
+    },
+    {
+      "source": "00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md",
+      "sha256": "53dba94646abb1903ae0ca729e6caea54b99b9c6a5a4a9fb63ede9dda7df1bab"
+    },
+    {
+      "source": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "sha256": "fa5261a3994721e92f48c82dae8992e55c0ccc805dc795648ce61b7407d29ebe"
+    },
+    {
+      "source": "00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT.md",
+      "sha256": "9e7990cd4670623c0f8b4cc78fc233d30dfca3696143dee5ad01f87f2fa136b4"
+    },
+    {
+      "source": "00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md",
+      "sha256": "c0afc59f36af36d3616792c6dc8873cdee8ce419fa8cf0db000698f2393283f4"
+    },
+    {
+      "source": "00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора.md",
+      "sha256": "f8f44caa2a641441cedbc99c9419de2bbb2ce2567585e2ccde65e48c5f02535b"
+    },
+    {
+      "source": "00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer.md",
+      "sha256": "b3cf9833d7001011b01a49ab0f310ad9f65e5cfdc82b771510e11bed6ade1b62"
+    },
+    {
+      "source": "00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md",
+      "sha256": "270146832ba9d5f349939f802663643786563c05fd88bb0271633fcfce0baba7"
+    },
+    {
+      "source": "en/00 Textbook/05 Attention and Transformer/02 Self-Attention — Q, K, V.md",
+      "sha256": "063b46c84e216fe5665cba49d32162b84b35c3964472dff410c2b5a04ee920c0"
+    },
+    {
+      "source": "00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md",
+      "sha256": "9306be89c604c905489000ffcebffb32e16161f66e07540005d0f394097c0fd5"
+    },
+    {
+      "source": "en/00 Textbook/05 Attention and Transformer/03 Masking, multi-head attention, and tensor shapes.md",
+      "sha256": "64bbbd9085a4c30083a2f77df49316bc13087083d43f720ec7937ae781154e9d"
+    },
+    {
+      "source": "00 Учебник/05 Attention и Transformer/04 Позиционная информация.md",
+      "sha256": "897a19c428e9ef20a6c651e981eb32d905d6f72a616907c2ea2e20fa1842451a"
+    },
+    {
+      "source": "en/00 Textbook/05 Attention and Transformer/04 Positional information.md",
+      "sha256": "8e2fa5500c85ba4d850b91a22bb404b7dffcbed02c595bf87c8e875a36917090"
+    },
+    {
+      "source": "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md",
+      "sha256": "8bda8af63d82960da7d5849e132be647542b90d4a9a9daca05ff5a0f2e66d356"
+    },
+    {
+      "source": "en/00 Textbook/05 Attention and Transformer/05 The complete Transformer.md",
+      "sha256": "64ee4c1d8984515c3baca3f9ccfd2086cc3a9a53364ebc07204eb23a87e16106"
+    },
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md",
+      "sha256": "a99819704bcdd1ff795c39a2240b8c32331fded5b1372c302f69e381d123d6e8"
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/01 Three architectural patterns.md",
+      "sha256": "d2104d394673c898c019becd49fa2337f01ae82abf694ac03ea3fabdbb4212a2"
+    },
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md",
+      "sha256": "fa3595eca44cec1269db1425337a04773d132d2dd685432d1b12518a15ae19b4"
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md",
+      "sha256": "888b25e8db26b37c2d2fcecc366d21744b88ba8ba229df0365c18794529847c5"
+    },
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md",
+      "sha256": "318e040db226fabac04ba6576bf629775600e4626a03e2ac7ce0a4ec16967499"
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training.md",
+      "sha256": "4aff198f47b6d6e13167d8394d82a25a887b41b51977121a17acf29dda51a5ef"
+    },
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md",
+      "sha256": "ce717410045dd566b798820440ef49db532c1204d6d0bed6b54cfec1247f6c8d"
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language.md",
+      "sha256": "6b248051dd87cc3c58521cdcba0021fe3630ffe8aa0125c728dd821bf6cefbb8"
+    },
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md",
+      "sha256": "76ed87ea2ca9e9c2bc82b7926eb95de9313d0b11c8ce14ab95ab13313e19875a"
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning.md",
+      "sha256": "48ccbfcdfa89f81c1da3aadf80bff4c8e2ba716b67089f28269bfcd3f362e609"
+    },
+    {
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md",
+      "sha256": "1bced617c9985be26919d79c4d01a87e4d0a3087d59e65d2e200fd2f84608dfc"
+    },
+    {
+      "source": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md",
+      "sha256": "0e5c05aa03151e24da5ef6735bcd5525a0c4ea5029b4e9414993b190d7395192"
+    },
+    {
+      "source": "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md",
+      "sha256": "76213c88dc1a17d2ea09ca1c5b607f53e5d7e6210cb44dbb9d69f9809bcb9e4e"
+    },
+    {
+      "source": "00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md",
+      "sha256": "fd2e197230ab5e39e1cb7c678415801ea510b1025dbe2a03f60b58021bcea703"
+    },
+    {
+      "source": "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md",
+      "sha256": "ba4dde89572fa4c17be5addc0bde7ea24bbffb300120d15467c2282fb120ced6"
+    },
+    {
+      "source": "00 Учебник/07 Анатомия современной LLM/04 RoPE.md",
+      "sha256": "6de4b7919032e51d0ce74e0c4b39ae7ce08982ba3ee9dad4dd0009d440254bde"
+    },
+    {
+      "source": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "sha256": "867688bdeef1319da44e68875af62f33338eb304336829ee1c2990655547b50e"
+    },
+    {
+      "source": "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md",
+      "sha256": "c442a81b9e09fe55aedc225cb3e5d3d7fa91b3db13eb80a9fdefed28a5c5c571"
+    },
+    {
+      "source": "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md",
+      "sha256": "aa2789b8788eda6efa42c4a31100734867554b63e02d32484996ad9dbb6f5e5f"
+    },
+    {
+      "source": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+      "sha256": "c15d27a0f6565299948cf7c3aa0005428743735058ff8d9998707bced97c1b85"
+    },
+    {
+      "source": "00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md",
+      "sha256": "50f2528d8a0cba6231692f81353c6817f2626aa54945aa51a0b6e14aeccbffc3"
+    },
+    {
+      "source": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "sha256": "9df758b69b1d720bbb8942594442f5c6e45071d70b28f740793fb57de2fd746c"
+    },
+    {
+      "source": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+      "sha256": "783cab0ddb3b947eecd310c420898a0acf1ff6a7088e45f98ef1176de4ba4aea"
+    },
+    {
+      "source": "00 Учебник/10 ML Systems/01 Модель как часть системы.md",
+      "sha256": "eb51bcc5c98e9e2dc9ce0afed7f14315965a8abcdff0e176e6094d5943d40764"
+    },
+    {
+      "source": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "sha256": "d700f60713f8d39ff010f0c7f7daeaa2aa3a0c1b3125ef63aad0858e29f9db1c"
+    },
+    {
+      "source": "00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md",
+      "sha256": "ee3b591a0085982c18c2ae691889e38f2f624b505cb2a414520c947c1f57323b"
+    },
+    {
+      "source": "00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md",
+      "sha256": "2d49342ee5b2998d93980151ff95f2fdbf5a464c1cbb6911f9e7c3c4dce0cafa"
+    },
+    {
+      "source": "00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md",
+      "sha256": "9a72e3c171518af749c26271e183bf35c55d2f98f76a146cf93c8d8404efa02d"
+    },
+    {
+      "source": "00 Учебник/10 ML Systems/06 Data pipeline, padding и packing.md",
+      "sha256": "5f2a58816bfc82f2ccb0e43cea2a4bdbae1d22d8aae17d0fb36f82a2baac2917"
+    },
+    {
+      "source": "00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md",
+      "sha256": "f6fdc8028d115f4026643fc090bc843f2fdd8ddfc97207332681bca22e672a80"
+    },
+    {
+      "source": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "sha256": "4f91303abdcf74c72659509470b5064f28c5cbed2d53a0b7abd60128d4c1f3e1"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+      "sha256": "b76bc6bdfbfcd06494c87accc8bc380eb9b019bd73d1d23c710653d251c8759f"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+      "sha256": "016059980cfd4582d7786c3bf09a1c6c513f4ad6c19e39df0202c5fe06b667c7"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+      "sha256": "b614c77415a2209e0ec017b94fa11ea7a22aca3de0532c9f21d7f76f1609425f"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting.md",
+      "sha256": "18aa3e0c623deceaf7bd475e03f045c7a5e5e8b68ccc7921297e106fa4b04fe4"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров.md",
+      "sha256": "f74660cc1515d21e0e423e2e2ee232fdb641765a7b8a43cd8aa4424dfc8c19e6"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding.md",
+      "sha256": "ed07daa1b7b286ad7e49739e8baa0c3e59223cb195062fe4240dbe4eba70e65a"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch.md",
+      "sha256": "87493321b47bf9ae7838121bc0e1c8644e045e99371f2951f8a54bc8ebee7f1e"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений.md",
+      "sha256": "7a606b0fc23dfc68ac35130688f35dd0beea13df3fb2c6d36baffb967e566ac9"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder.md",
+      "sha256": "b1436d67484c43e8ab9b4cb93754c6100ce0ead0997da342e9752d318266963d"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей.md",
+      "sha256": "fc3b1decc3a776759290e96c3253d4a0bba8c09f87239651a779313eb69d69a0"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества.md",
+      "sha256": "1a5082192c91d9da9d8b69faf39de8beeddb224e7446b6b09b7061bb72619e2c"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md",
+      "sha256": "aca814c431df4b4d489ac98e4f147b85ba6f600eb41463c1b3ae4b6f7d9f3f3f"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "sha256": "472401f6f3bf906cc8b23f29a5ff206cb8c083da3f20ac5654249eaee61aef69"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md",
+      "sha256": "7fc54afeb6889923cf35893e40f4b9f02964b734b7dc40b5eea0f10b41659e01"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "sha256": "e1e9b7999ca10a61e9a48a24484f704b13cb7918cede4d5ba050b06876cbc8db"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload.md",
+      "sha256": "3fe01a82c9a8f60a417d7e3eacce59dac608cd767944af5d85db5ab549be1f5e"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism.md",
+      "sha256": "19a681a8a334905e3c2b65b66757b4dcff58086e7c2e4c48a3717882767da30a"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism.md",
+      "sha256": "f622f710aff96bc0bbc4c4ae604e9a66d91db015c3c10428f35bc9c5280b0c33"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md",
+      "sha256": "183de5525e52384c034fc3996acbd74d20dad9a64560f7a65f24406c15da0ac8"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism.md",
+      "sha256": "ccead0e7d311931c46e98b85b48cf1cf5a4864ead1dafacc5a8042e33128672b"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints.md",
+      "sha256": "d1fb604523c2e2b84e124fca81d47aafc06f2939def36a9e07853eef85eb975a"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration.md",
+      "sha256": "6476737a39c6ee04ba0e578ab21c60be64c47d8f80d9946c161cea4eaceb812a"
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники.md",
+      "sha256": "80a3471b7cdc616e09ba13fb458f092920bb1edc9a39664de8ce31480e469f8d"
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md",
+      "sha256": "dea0e616abf368f5a008701d203ac7cbb70d5346dd7b57e1b97c5e50416fe1c1"
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+      "sha256": "226ab215d706e0af02b48c2d5631887e62614ac89a61be12054175a0edda09b7"
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/02 Preference data.md",
+      "sha256": "e24409a09129f2b7ba6f01d6a85f45879f1cbab2dec4c099267c5e11d934dffa"
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
+      "sha256": "ae8ad7536eb7463667bbe8a5983fc54008e92079e775ea49ca481a12d3bb570e"
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md",
+      "sha256": "29efb9a8c255c1b04abdcedc5c696f659a20ef45010572fe59093429698fcae5"
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/05 DPO.md",
+      "sha256": "fd7a08d5813a5427b74a943d8a57f00978877b8edce13ac1027ccc04cf172c06"
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
+      "sha256": "7b8b6d68960196ce4dd0c59fe047f974decd60b187f95b3acda55076b73efbba"
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "sha256": "7173f3bbdb587d32f8d2f04c5663164c132563b6966ce7543ccc613f4e007e1a"
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md",
+      "sha256": "94becb658274ac9476ba8bb06c904b25ec6a71d5fe60e3453cb2884f186ad7b4"
+    },
+    {
+      "source": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
+      "sha256": "a5f87fca761675e036bc3368a1cb00e3feca573daa1bc64eb86d557a0ff93bef"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md",
+      "sha256": "2e465a3a4ccb11a00417f80da1f910b2b691d946a90281410d6f61c6d398abd7"
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции.md",
+      "sha256": "ffcc175ff7dcf3852f6d64ab9458033aa339bd4c30f38f55f3f87611af1cf5fc"
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md",
+      "sha256": "cb53484debaf97e673ff30e804afc4d9941b94e6d87eebc8cae78bdda05685a0"
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/54 Decoding and next-token selection.md",
+      "sha256": "7b280782736d3f81e8d1eb6b31cc87a4541ca0e01df911efd25ea5f8779aab42"
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+      "sha256": "dcdc7f9712614b5342b15d03cba1beb7f641ea72b27fe6ee04730ad70fd66bdc"
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md",
+      "sha256": "d87da76554c6fe72e35b7af5b05ea375f84cae8e5930698b6750c0a483302638"
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+      "sha256": "42438233617da20ba81611806b40ed450beaf6506e90ec181e2d43ac92580832"
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/55 KV cache batching and PagedAttention.md",
+      "sha256": "9a9325ba453932424faf0f55ccf07f6e05658ad40ca3c14bc7c14797877710f8"
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md",
+      "sha256": "3256c046c7c117b55a8532fdf20a713eb575723327fa9c75839c55b24b582847"
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/55b Scheduling — continuous batching, chunked prefill, and prefix caching.md",
+      "sha256": "aa4debaa5cc7f8c5f99a3cac50073270d8e1613a8a75a4178e60f881f04aab96"
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md",
+      "sha256": "fee6d97ff4f17a23b48f6b3a73e7311d7699f1da456c414094d4ba934062f255"
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/55c Serving engines — vLLM, SGLang, TensorRT-LLM, and FlashInfer.md",
+      "sha256": "ffc56a229cf5766a222b9588ecbf551d2ed01588078b2686648f0ffa25e43423"
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+      "sha256": "15ba654d059b1ccd35bd07c6b041e405bef2f99d74ee03f672c205263b7589a1"
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/56 FlashAttention.md",
+      "sha256": "6b8db3db140edaba6e45847a03bd61961aeff4a009d8f66533bde7cf0fe4652c"
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+      "sha256": "70bd3d2b286af4c5b04150e0a27bf527bd18de4ac6f829d2b7eaeb437f010d17"
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md",
+      "sha256": "f68e67a364332742b98b7edc36265178d74361bafa8d03a08fd41f4935161ff9"
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md",
+      "sha256": "bfd74b11578aa6caa0782a30e9456000e853e41fcca697f395dddea055eba218"
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md",
+      "sha256": "abfc32486bfbccb7475c316da89c0dd235c3628572db0121d7b6165aca4ec886"
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+      "sha256": "32085af4415e2aa3904eded4a14c42e7ced65c81d4288c42af4a5d099ff597ad"
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md",
+      "sha256": "5551a7a64f565703434ffcfa8fe57b06cbd78448de7791921dc06b0460821f55"
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md",
+      "sha256": "7219c5e6fdef1ca9cd3fa92c50097cfe77a6ad664afa3ac43e9e6d8c117d7625"
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md",
+      "sha256": "91dbf85d69db6a4389b9a23c5978eb61f9b5c5e8343da50bc494c73345435629"
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/58a2 Раздельное обслуживание prefill и decode.md",
+      "sha256": "7973703ca7ec77248f0fdc77321e7c5f9805164d182508234fb5c49c3e86a13d"
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/58a2 Disaggregated prefill and decode serving.md",
+      "sha256": "3a4dd8e20f7f3c4e45bf0361010773b6fe13d554bc85f5ffb7db2048a5b9ebb5"
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md",
+      "sha256": "1d453c6e9f77e4aee10c81305bc406fe0bf3a50e69fc4edd22748a555e5a0b9c"
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md",
+      "sha256": "bceaa1e5f7ce1f6463baaac8772ce9cb831ce21e6e19a2afd6a7b31c5b9d6fb4"
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning.md",
+      "sha256": "8a34dd525150ef3b95896e969444ff40456aefd0e897522cbeb5ca446f4a7ea1"
+    },
+    {
+      "source": "00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow.md",
+      "sha256": "0cf7ea888bc50e50aac7ee6010e1f9cccb9b86b96ceebdc6fdcf5eb646754045"
+    },
+    {
+      "source": "00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md",
+      "sha256": "e7cfbc4f4fd01784dbb52ee6dc3a3636c389a796a973603fbbea16b0b00e1711"
+    },
+    {
+      "source": "00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment.md",
+      "sha256": "c5505f93fc2e94051abe3220664683c3c39ffd7d5d2ea7acbf13a9885d8e5c77"
+    },
+    {
+      "source": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+      "sha256": "b9dc519d8a0c8c04c157f4e96a4ad4c0dc1549273588d9b4d0d54cf282603131"
+    },
+    {
+      "source": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+      "sha256": "36dce79e4885a8b9f7bd7a9134e4d1def07e6273652fc5d755d61633f2037209"
+    },
+    {
+      "source": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "sha256": "50fc2e140ed82af09da1b935d37c27f90bc48998cf2a0c5628e703eac70a582c"
+    },
+    {
+      "source": "00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация.md",
+      "sha256": "ddcb9f7feab72f812c048739963969aa7631ab92779c409a80062805d97f4c42"
+    },
+    {
+      "source": "00 Учебник/18 Evaluation и методология/59a Responsible systems.md",
+      "sha256": "b0f72ba4a3322be3f20efdb35950fecb65482cd4fdea8e414d5947ab46f72ce5"
+    },
+    {
+      "source": "00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning.md",
+      "sha256": "bc9d7e31337190371294760004dbb10b113fedfdb161aeda2a790631d699d1fd"
+    },
+    {
+      "source": "00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid.md",
+      "sha256": "c2f49438a49ecdf7aac70a44605763ebdcf3311781fb4b10c4514470ceab25bc"
+    },
+    {
+      "source": "00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction.md",
+      "sha256": "5d7522f493395addabf8cac39a95b6cc4ef0c8c134f5afa13ac488d5059657c6"
+    },
+    {
+      "source": "00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md",
+      "sha256": "b2407b3b34253edcb522a7ab550c506ef5c900c353162ce848b045d44e7a5183"
+    },
+    {
+      "source": "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md",
+      "sha256": "26464f4cb33c2b281c72e63e1870157e0a41a23807c4eca7c2b79f542000608d"
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64 Multimodal models.md",
+      "sha256": "3e13eee9fec248a67604c7cf97897a088975a93d7f6031e0c4a86aaa22c7b4ab"
+    },
+    {
+      "source": "00 Учебник/16 Multimodal Models/64a Connectors и fusion.md",
+      "sha256": "5df467640b95eb59a8e5fdc45d7e72fecd15e703ca52011481ae8c480f43f341"
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64a Connectors and fusion.md",
+      "sha256": "f5882df05aa71cff14b047ee434d24b35c4ce44b387220a0e7b860d20a9a5d3a"
+    },
+    {
+      "source": "00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md",
+      "sha256": "aa23f1104f3a83d91bc759f207ab809ebf018b9946f44a022c761fc3e9e81258"
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md",
+      "sha256": "a570a03c487c9f6bb89977abb8607e68d2ce5b616daa00b3bac863954a4f5de4"
+    },
+    {
+      "source": "00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md",
+      "sha256": "12e614a8be23e31ed608433c64be1f4b049c39af27cb9d4092080576a902921d"
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64c Training VLMs — alignment, instruction tuning, and data.md",
+      "sha256": "03af54d2d4fbce4863a67e2072d4e00dd888be0c2c092bb724f030acd0adbaa4"
+    },
+    {
+      "source": "00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md",
+      "sha256": "b2e3e923347babfafb3344252e55952c999287fe9fc51a19ad11965d4933f259"
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding.md",
+      "sha256": "843a0776cafc3d9ed8c49acbb8a2ae654a9846c154dfdbf43cc2e338d5b44ee3"
+    },
+    {
+      "source": "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md",
+      "sha256": "cb9d70037a4ead20d49d9883ec0182e7eed038bd4bc1a579f2599cc71bd8bf42"
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md",
+      "sha256": "bf2322845969a44a679c0dfa2afccabe1c5985ca7ee06be2d865dbef333f6200"
+    },
+    {
+      "source": "00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md",
+      "sha256": "7158736c550f13fbe8deca537fc369ef87c94a38586dae167fbdc78d215e625a"
+    },
+    {
+      "source": "en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving.md",
+      "sha256": "6e4cfae4a2fd9c4c6d67620f80f0a907b11bb8f8c50b7f22ea080976e40b267e"
+    },
+    {
+      "source": "00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений.md",
+      "sha256": "d91e82d6d90ea7ee513416230b0decdc09590652246d4af2d09f280f33e62912"
+    },
+    {
+      "source": "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md",
+      "sha256": "f477e17e2449b1abcc3890c585ced5c012c0c9efe6ac143943d8f769ddf9a1e6"
+    },
+    {
+      "source": "00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля.md",
+      "sha256": "34c04e8466c39d903039c20e7e19c882392641ba3b216979d9cc604ab1f24925"
+    },
+    {
+      "source": "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md",
+      "sha256": "11f04eb1b91f53a7c3dd57cdec9b405169e46c4a6b471b2e9a7fe42dca963366"
+    },
+    {
+      "source": "00 Учебник/17 Tools и Agents/66 Agent harness и context engineering.md",
+      "sha256": "b1dc2ab03d0cd12acfa3c66ff0060800299b10846cb962767c7ec51f0a1a1e49"
+    },
+    {
+      "source": "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
+      "sha256": "a56e872d7bc7c103d498d71df5f640c64b484acbd817f0ce0a217dc691aec2c4"
+    },
+    {
+      "source": "00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md",
+      "sha256": "ce59940e3047ddfe46c48be6e87bfcc021bfe84812accabc8aaf7ae1871e0b1a"
+    },
+    {
+      "source": "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
+      "sha256": "76fa7ccbe709235d43b1efd523317a9922df77e81191811b659716c0071d689c"
+    },
+    {
+      "source": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
+      "sha256": "a81cede17e8726c611b8455d35bc296a917d4d3012632a73214ea00b6a6841fe"
+    },
+    {
+      "source": "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md",
+      "sha256": "39e6d762bb108263ad69b74c16ca29627e5f1a68818f18c136a5b5b12ac111c8"
+    },
+    {
+      "source": "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md",
+      "sha256": "4e02810a117d85f34c408737e0a9cdfed1fe356015b02277163f80cda9470b59"
+    },
+    {
+      "source": "00 Учебник/02 Рекомендательные системы/00 Карта модуля.md",
+      "sha256": "dcd33730cc0e127d94301bd87f3e3af5c2d8df1aaa44cb5219a1b7e010b41ebc"
+    },
+    {
+      "source": "00 Учебник/02 Рекомендательные системы/01 Задача рекомендации, данные и pipeline.md",
+      "sha256": "a60abdfb139e2bff0879dbcf0ea7be6db0300d86abbcd77eaa1081fd4bb2286d"
+    },
+    {
+      "source": "00 Учебник/02 Рекомендательные системы/02 Collaborative filtering и matrix factorization.md",
+      "sha256": "992403d10e0fd4bba8e1fb36ecce40414f6bcae1e89d1548c4f38cdc203874dd"
+    },
+    {
+      "source": "00 Учебник/02 Рекомендательные системы/03 Ranking и нейронные рекомендательные модели.md",
+      "sha256": "50a59283ee0867710665f414954291080304333961a107b6418e360e3f759bf1"
+    },
+    {
+      "source": "00 Учебник/02 Рекомендательные системы/04 Последовательные рекомендации и признаки.md",
+      "sha256": "13ce0edd316d5a868933dc4e44723d2b7e5bee7b709b5a25754289bbc23ea9dd"
+    },
+    {
+      "source": "00 Учебник/02 Рекомендательные системы/05 Оценивание и эксплуатация.md",
+      "sha256": "4e62789f0cfbd8a2e6482c4d523ba0c653a7d3533d2ad0d28c2cec1a8bef3b87"
+    },
+    {
+      "source": "02 Атлас моделей/_index.md",
+      "sha256": "1a08660ffc2fdada88d6f0f77bbcba14658e4c55919710e6d1777f264d68f189"
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/GPT.md",
+      "sha256": "c8d4bf29c6e5178eec5330010554e531263d08b1f8f1d9e1fcc62e3be7e8211e"
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/BERT.md",
+      "sha256": "086f4557ce4896c8545713fd0558fcf81a38a8eea268a135a7a4375fbc45dc0a"
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/T5.md",
+      "sha256": "b580dc9d2110c6f542b44b868332b243a3db8ce05752e7c59ecddf6035507378"
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/DeepSeek.md",
+      "sha256": "ec05306c5d3d3aa5e61b59b2fc31e52863c6a169fbc57a5eb1998ef5d1886b92"
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Llama.md",
+      "sha256": "0a44e132213ba0ff7c9dde6e4515a3abbfdb43aa0fc562cc293bdba3d7916802"
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Qwen.md",
+      "sha256": "d69f26dc7cf69300ff7310e69e958a9954326b7cae834eef739615e3a02d4c84"
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/GLM.md",
+      "sha256": "4ca018ae5dea8caf5bbb5e45de151cc88593d693049663b665839a9e9583ca30"
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Kimi.md",
+      "sha256": "31c59fab9bc2bcf51f75aa3e9dc7c66fe0ad0b8b426dacb3ec95ca0fd0aab807"
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Mistral и Mixtral.md",
+      "sha256": "2bac58066e1784bcdb23fbeffdb42e100ad462fd352f085c62f1701c61c044f6"
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Gemma.md",
+      "sha256": "d34c185e00448f4c1a1a5d671226c8f4543b293f2c0637d539c3def02745af1b"
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Phi.md",
+      "sha256": "6fa68bf8655ac51edb124bc80779df107534b0425c863f37c1552e7c571adf28"
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Falcon.md",
+      "sha256": "4558710667de04eb5d12a963e6d507774be92ba46c285ddf3611be39151a1128"
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Yi.md",
+      "sha256": "5e2932bc6e485aeabe0e9c46a7ffd9af99305a54f96fe50fa7b623737dad3a3e"
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/InternLM.md",
+      "sha256": "a8cb615eee8afa6ebb4bc5884ab64cd87dbcf4c0276b096a534ffb5971a6a862"
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Baichuan.md",
+      "sha256": "99af86120004adbef9736b25cf8b6bb581a355affbe9a281d7656069fe2e5ad8"
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Nemotron.md",
+      "sha256": "fa8be6b0486bb2778fb0c2af872ebdb7c65c518af1fa6f7f88bdb96c5ee76888"
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Command R.md",
+      "sha256": "123c11470430ad02d5a3d630514e9874fbeeec73512aebfb0b2b32fc4d343af1"
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/DBRX.md",
+      "sha256": "4cd03c25e2a63992d5d231d71bdd462f68a42227fbdaf0b088408eeb6fc7c391"
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Jamba.md",
+      "sha256": "07b7e26d28d8079ec03a0f27d3f469923716b53a9058269f62cd03db5cd6b734"
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Mamba.md",
+      "sha256": "04048691661f1e749cd20e39dee3fa3348c9bf19f04b208f6b7e2b5d7d3d1828"
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/RWKV.md",
+      "sha256": "79ed28daea561a203296fd2f19e7c9d6e80008e3d62b8079c52d4b0936966dbe"
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/RetNet.md",
+      "sha256": "80b91e5e9feb38b27cefb98038be2188c44d3fa0bdb7a5cba16510d5ca2e54fb"
+    },
+    {
+      "source": "02 Атлас моделей/Семейства/Мультимодальные семейства.md",
+      "sha256": "58c0ad07918bef4e5d00ccbd7b3a93962585cde3b2f62ddf91f1b96b98f2086e"
+    },
+    {
+      "source": "02 Атлас моделей/Сравнения/Карта архитектурных линий.md",
+      "sha256": "df0a7a22b4329129d19bae0f01b2c317d1a95dbc307db8e79f5bb1fca50430d7"
+    },
+    {
+      "source": "02 Атлас моделей/Сравнения/Сравнение семейств.md",
+      "sha256": "49bb690cfd70b1a7883ee9f80d47005a316a608ac380562a0bb3c0f0af1eaebd"
+    },
+    {
+      "source": "02 Атлас моделей/Сравнения/Перенос vision encoder между VLM.md",
+      "sha256": "0e1bacdc9a5c466e73b5396db928f5e006fa3db60a3ae002bb840ec87d6e4f33"
+    },
+    {
+      "source": "02 Атлас моделей/Timeline.md",
+      "sha256": "5a8daa46227b3599523b721bf4e17dd7e2f12ff052eb25bef3f1b2e71054fd15"
+    },
+    {
+      "source": "01 Справочник/_index.md",
+      "sha256": "b07f987e1e59e8472c9d186c7749dcf5ed0de997da06d1321d8c2cac354b753f"
+    },
+    {
+      "source": "en/01 Reference/_index.md",
+      "sha256": "9a55087492559bba61db8923f304a2b3d6979e057a3c8d837ac7b8e6238cc729"
+    },
+    {
+      "source": "01 Справочник/Agents/Agent mechanisms.md",
+      "sha256": "5b8a8cd16793f3f811076a7c2ee28c9e6374e07cb22ea9ce7e84f6f701f16df6"
+    },
+    {
+      "source": "03 Исследовательские линии/_index.md",
+      "sha256": "68245f927d0f79095642a3ed4834607a705292739ac613f83a35c92c07b1aaf2"
+    },
+    {
+      "source": "03 Исследовательские линии/RLHF → DPO → RLVR.md",
+      "sha256": "57ec725516d15bbee9966be9f82f8da76fbf45e3b46a545ae0656727a878a25d"
+    },
+    {
+      "source": "03 Исследовательские линии/Reasoning и test-time compute.md",
+      "sha256": "ffa32506e0b85529955362f22c0c16369649c210b5888f322d45b26be96dec26"
+    },
+    {
+      "source": "03 Исследовательские линии/Синтетические данные и дистилляция.md",
+      "sha256": "8b572fa085a41a3e8c2bfa911cc81dcd00254a63cd567ec242af06b35eee5b01"
+    },
+    {
+      "source": "03 Исследовательские линии/Длинный контекст.md",
+      "sha256": "ccd114be9049d7b6ab910825afbf2e4cb4fcce61c093a0fb8c401d3c49d9a457"
+    },
+    {
+      "source": "03 Исследовательские линии/Альтернативы полному attention и stateful sequence models.md",
+      "sha256": "71270b064baefbc6899faf537a29fac66d1ff6537f0c511250a25e44546e6c30"
+    },
+    {
+      "source": "05 Источники/_index.md",
+      "sha256": "eca40ce7038d8eb868d7895da64a06c2e237ba905cea0ce4ded51e063cbd40b1"
+    },
+    {
+      "source": "05 Источники/Implementation studies/Inside vLLM.md",
+      "sha256": "9662caac4b2f93ca1ea095bf473982c94dda7ab499222d4688838a03f34b070c"
+    },
+    {
+      "source": "05 Источники/Implementation studies/SGLang and RadixAttention.md",
+      "sha256": "4c996adeec1d4173bd245a2bef78cb4258499496f925fa6043207f602ad3c25e"
+    },
+    {
+      "source": "05 Источники/Implementation studies/Triton GPU kernels.md",
+      "sha256": "a5b2dd913b00d54e9efbbe1ca52e4970db262483cefa26d77bf906980fe1f978"
+    },
+    {
+      "source": "03 Исследовательские линии/Эффективный attention.md",
+      "sha256": "2036442c4c6574ab2023a615679cde1ec9a7fe44d686a049dc3cf11e5fe47cd0"
+    },
+    {
+      "source": "03 Исследовательские линии/Sparse и MoE-модели.md",
+      "sha256": "2bd46e8013c9a5e23bad070cb1667b1317f07d1c1e1885c6f1712347a47a4685"
+    },
+    {
+      "source": "03 Исследовательские линии/Agentic learning.md",
+      "sha256": "4fb082cc7cd9c2f1fa5b31ba2e9a68f196ceae1d68814dd5105eb04a72ee0f53"
+    },
+    {
+      "source": "05 Источники/Курсы.md",
+      "sha256": "8e5261449194c569ce4ff9a075a447f477773df512ce6bda02ac49ef50bb9fd1"
+    },
+    {
+      "source": "en/05 Sources/Courses.md",
+      "sha256": "4298c1d5c0694a8fd29e48cfb0c77bde094b806b8c4d573b2716504ddace54a5"
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
+      "sha256": "ccc5413eb9399c7a109ed5ac06f8aa55b324e7b46928d1c0d7e784d7f9e01017"
+    },
+    {
+      "source": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "sha256": "eb9383272dca691fcfcdcf97558a9a27c91d8e1747624fe3744ed9204f486d38"
+    },
+    {
+      "source": "04 Вопросы/_index.md",
+      "sha256": "e5fedebd0cce25eb46a039fa8d497be469f4bbe4074d70ba472c821817ee6c00"
+    },
+    {
+      "source": "en/04 Questions/_index.md",
+      "sha256": "fe903ca9ea15268510e5c214f39df7521f612cf1987fa5c35bbd88b926bbef14"
+    },
+    {
+      "source": "06 Практика/_index.md",
+      "sha256": "6811f6302c731366c5608d5e092ae2609546538323b3d1d7a13c437007d4950d"
+    }
+  ],
+  "limits": [
+    "Old Harvard labs/slides whitespace remains unchanged; full diff output is separately retained.",
+    "Existing partial English coverage and source asset permission uncertainties remain explicit.",
+    "This receipt validates saved local artifacts, not GitHub Actions or a deployed endpoint."
+  ]
+}

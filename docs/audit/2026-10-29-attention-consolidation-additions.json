@@ -1,0 +1,31 @@
+{
+  "scope": "Figure-only transfer from the reference; reversible to the previously reviewed chapter revisions.",
+  "files": [
+    {
+      "source": "00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md",
+      "before_sha256": "073f6e573481b59e93f2a2bee4bdd2e86c7ab5e1c9091764e9c506bfd18acc3c",
+      "after_sha256": "270146832ba9d5f349939f802663643786563c05fd88bb0271633fcfce0baba7",
+      "changes": [
+        {
+          "old": "",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_self-attention_visualization.png]]\n\n*Визуализация внимания к позиции `it`: линии соединяют её с позициями\nисточника, а их толщина показывает веса внимания. Это encoder self-attention,\nпоэтому доступны и правые соседи. Jay Alammar,\n[The Illustrated Transformer, Self-Attention at a High Level](https://jalammar.github.io/illustrated-transformer/),\n[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*\n\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/05 Attention and Transformer/02 Self-Attention — Q, K, V.md",
+      "before_sha256": "4d1a59e709af0a3852871e6bad8588b207e603b46d36a48b7b3ff97617ceef8c",
+      "after_sha256": "063b46c84e216fe5665cba49d32162b84b35c3964472dff410c2b5a04ee920c0",
+      "changes": [
+        {
+          "old": "",
+          "new": "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/attention-is-all-you-need/transformer_self-attention_visualization.png]]\n\n*Attention to the position `it`: lines connect it to source positions, with\nline width showing attention weights. This is encoder self-attention, so\npositions to the right are available too. Jay Alammar,\n[The Illustrated Transformer, Self-Attention at a High Level](https://jalammar.github.io/illustrated-transformer/),\n[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).*\n\n"
+        },
+        {
+          "old": "canonical_revision: \"073f6e573481b59e93f2a2bee4bdd2e86c7ab5e1c9091764e9c506bfd18acc3c\"",
+          "new": "canonical_revision: \"270146832ba9d5f349939f802663643786563c05fd88bb0271633fcfce0baba7\""
+        }
+      ]
+    }
+  ]
+}

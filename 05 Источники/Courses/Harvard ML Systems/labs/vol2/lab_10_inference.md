@@ -9,9 +9,18 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol2/lab_10_inference.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol2/lab_10_inference.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL2 Lab — Inference
 
@@ -19,29 +28,15 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 **Recommended Reading** -- Complete before this lab:
 
-    - The Inference at Scale chapter sections on serving economics and state/KV cache scaling.
-    - The continuous batching section contrasting static padding with iteration-level scheduling.
-    - The serving policy discussion on SLOs, cost/request, quality, and operational guardrails.
-
----
-
-The selected track runs a continuing inference loop. The setup or training budget is
-**{v2_10_fmt_currency(v2_10_inference.setup_cost, v2_10_inference.cost_unit)}**, while each event costs
-**{v2_10_inference.cost_per_event:g} {v2_10_inference.cost_unit}** before optimization.
-
-Commit to both predictions before using the calculator.
+- The Inference at Scale chapter sections on serving economics and state/KV cache scaling.
+- The continuous batching section contrasting static padding with iteration-level scheduling.
+- The serving policy discussion on SLOs, cost/request, quality, and operational guardrails.
 
 ---
 
 For transformer serving, the state term is KV cache. For device tracks, the same
 slot is runtime state such as activation buffers, sensor windows, or local cache.
 The lesson is identical: **weights are only one memory term**.
-
----
-
-{v2_10_track_schedule_note(v2_10_inference.track_id)}
-
-Commit to a scheduling policy before seeing the throughput and SLO-risk table.
 
 ---
 
@@ -56,6 +51,128 @@ single number. It is looking for a feasible policy:
 2. Which term caps concurrency: weights, runtime state/KV cache, or devices?
 3. Why can continuous batching lose when variance, volume, or deadline pressure changes?
 4. Which guardrail is binding in your final serving policy?
+
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+**⟨value 1⟩**  
+⟨value 2⟩  
+
+Recovery path: ⟨value 3⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{title}' `
+- value_2: ` f'{detail}' `
+- value_3: ` f'{recovery}' `
+
+---
+
+**Recovered boundary: ⟨value 1⟩**  
+Current settings pass. Boundary to watch: ⟨value 2⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{title}' `
+- value_2: ` f'{detail}' `
+
+---
+
+The selected track runs a continuing inference loop. The setup or training budget is
+**⟨value 1⟩**, while each event costs
+**⟨value 2⟩ ⟨value 3⟩** before optimization.
+
+Commit to both predictions before using the calculator.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v2_10_fmt_currency(v2_10_inference.setup_cost, v2_10_inference.cost_unit)}' `
+- value_2: ` f'{v2_10_inference.cost_per_event:g}' `
+- value_3: ` f'{v2_10_inference.cost_unit}' `
+
+---
+
+Select both Part A predictions to unlock the cost and phase evidence.
+
+---
+
+### Manipulate the phase amounts and recurring loop
+
+---
+
+Checkpoint saved: recurring cost/event is the lever to carry forward.
+
+---
+
+Cost inversion means the recurring term deserves first-class design attention.
+
+---
+
+Select your state-capacity prediction to unlock Part B.
+
+---
+
+### Manipulate precision, context, and serving-unit memory
+
+---
+
+Checkpoint saved: reduce memory pressure before adding compute-only capacity.
+
+---
+
+The first question is whether the live state term fits beside weights; compute is secondary when memory is binding.
+
+---
+
+⟨value 1⟩
+
+Commit to a scheduling policy before seeing the throughput and SLO-risk table.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v2_10_track_schedule_note(v2_10_inference.track_id)}' `
+
+---
+
+Select your scheduling prediction to unlock Part C.
+
+---
+
+### Manipulate request variance, fill factor, and deadline
+
+---
+
+Checkpoint saved: batching policy is workload- and SLO-dependent.
+
+---
+
+The production rule is conditional: use the simplest policy that satisfies SLO and recovers enough capacity.
+
+---
+
+Select your release-review prediction to unlock Part D.
+
+---
+
+### Tune the release policy
+
+---
+
+Checkpoint saved: the objective is constrained cost minimization under all guardrails.
+
+---
+
+A release design is feasible only when every guardrail passes simultaneously.
+
+---
+
+## Download Report
+
+---
+
+This report is generated locally from the selected track, MLSysIM hardware/model refs, and shared `mlsysbook_labs.inference` calculations.
+
+</details>
 
 ## Complete original Marimo source
 

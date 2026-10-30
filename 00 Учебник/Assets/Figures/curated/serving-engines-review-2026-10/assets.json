@@ -1,0 +1,71 @@
+[
+  {
+    "id": "curated-serving-engines-vllm-v1-processes-tp4-8602fecbabf3",
+    "asset": "00 Учебник/Assets/Figures/curated/serving-engines-review-2026-10/vllm-v1-processes-tp4.png",
+    "author": "vLLM contributors",
+    "source_url": "https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/docs/assets/design/arch_overview/v1_process_architecture_tp4.png",
+    "source_page_url": "https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/docs/design/arch_overview.md",
+    "source_image_url": "https://raw.githubusercontent.com/vllm-project/vllm/db9527a46873454610df6dbedf79a36d6bf1a7f6/docs/assets/design/arch_overview/v1_process_architecture_tp4.png",
+    "commit": "db9527a46873454610df6dbedf79a36d6bf1a7f6",
+    "sha256": "8602fecbabf3b5fb4ceeb831f608dc178d14ec4a686e2f2cff58b1af78f8951d",
+    "source_asset_sha256": "8602fecbabf3b5fb4ceeb831f608dc178d14ec4a686e2f2cff58b1af78f8951d",
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/vllm-project/vllm/blob/db9527a46873454610df6dbedf79a36d6bf1a7f6/LICENSE",
+    "license_copy": "00 Учебник/Assets/Figures/curated/serving-engines-review-2026-10/vllm-LICENSE.txt",
+    "rights_status": "source-license-verified",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "pinned-upstream-repository",
+    "metadata_status": "verified",
+    "modifications": "none; byte-for-byte original 2816 x 1536 PNG; no cropping, recoloring, translation or resampling. Full upstream LICENSE and attribution retained alongside image.",
+    "last_verified": "2026-10-14",
+    "used_in": [
+      "00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md"
+    ]
+  },
+  {
+    "id": "curated-serving-engines-tensorrt-llm-pyexecutor-2083d1860246",
+    "asset": "00 Учебник/Assets/Figures/curated/serving-engines-review-2026-10/tensorrt-llm-pyexecutor.png",
+    "author": "NVIDIA Corporation & affiliates",
+    "source_url": "https://github.com/NVIDIA/TensorRT-LLM/blob/376f7e1bd8ed543f75014309e3fd4b237e9b0e73/docs/source/media/TRTLLM_Architecture_Overview.png",
+    "source_page_url": "https://github.com/NVIDIA/TensorRT-LLM/blob/376f7e1bd8ed543f75014309e3fd4b237e9b0e73/docs/source/developer-guide/overview.md",
+    "source_image_url": "https://raw.githubusercontent.com/NVIDIA/TensorRT-LLM/376f7e1bd8ed543f75014309e3fd4b237e9b0e73/docs/source/media/TRTLLM_Architecture_Overview.png",
+    "commit": "376f7e1bd8ed543f75014309e3fd4b237e9b0e73",
+    "sha256": "2083d1860246bc30cac0e8d2ebab8540a185cc0e76c9b2ad773d2bd73dd28318",
+    "source_asset_sha256": "2083d1860246bc30cac0e8d2ebab8540a185cc0e76c9b2ad773d2bd73dd28318",
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/NVIDIA/TensorRT-LLM/blob/376f7e1bd8ed543f75014309e3fd4b237e9b0e73/LICENSE",
+    "license_copy": "00 Учебник/Assets/Figures/curated/serving-engines-review-2026-10/tensorrt-llm-LICENSE.txt",
+    "rights_status": "source-license-verified",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "pinned-upstream-repository",
+    "metadata_status": "verified",
+    "modifications": "none; byte-for-byte original 1928 x 710 PNG; no cropping, recoloring, translation or resampling. Full upstream LICENSE and attribution retained alongside image.",
+    "last_verified": "2026-10-14",
+    "used_in": [
+      "00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md"
+    ]
+  },
+  {
+    "id": "curated-serving-engines-flashinfer-ragged-efc4f5e9d414",
+    "asset": "00 Учебник/Assets/Figures/curated/serving-engines-review-2026-10/flashinfer-ragged.png",
+    "author": "FlashInfer contributors",
+    "source_url": "https://github.com/flashinfer-ai/web-data/blob/d7cc3d229f23d7c0a81c1e45d8591f4337c18efb/tutorials/ragged.png",
+    "source_page_url": "https://github.com/flashinfer-ai/flashinfer/blob/0b46115d238d29ea2e92c6b9b2cb077d40fbc352/docs/tutorials/kv_layout.rst",
+    "source_image_url": "https://raw.githubusercontent.com/flashinfer-ai/web-data/d7cc3d229f23d7c0a81c1e45d8591f4337c18efb/tutorials/ragged.png",
+    "commit": "d7cc3d229f23d7c0a81c1e45d8591f4337c18efb",
+    "sha256": "efc4f5e9d414679f0bffb3bf3b96956b62c62ecc4eed621aff903e0b23b600d3",
+    "source_asset_sha256": "efc4f5e9d414679f0bffb3bf3b96956b62c62ecc4eed621aff903e0b23b600d3",
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/flashinfer-ai/web-data/blob/d7cc3d229f23d7c0a81c1e45d8591f4337c18efb/LICENSE",
+    "license_copy": "00 Учебник/Assets/Figures/curated/serving-engines-review-2026-10/flashinfer-web-data-LICENSE.txt",
+    "rights_status": "source-license-verified",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "pinned-upstream-repository",
+    "metadata_status": "verified",
+    "modifications": "none; byte-for-byte original 896 x 325 PNG; no cropping, recoloring, translation or resampling. Full upstream LICENSE and attribution retained alongside image.",
+    "last_verified": "2026-10-14",
+    "used_in": [
+      "00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md"
+    ]
+  }
+]

@@ -1,0 +1,29 @@
+---
+import PageTitle from '@astrojs/starlight/components/PageTitle.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const path = Astro.url.pathname.slice(base.length);
+const data = Astro.locals.starlightRoute.entry.data;
+const status = data.translationStatus;
+const english = path.startsWith('/en/') && (path.startsWith('/en/textbook/') || status !== undefined);
+const practice = path.startsWith('/en/practice/');
+const nativeEnglish = data.sourceLanguage === 'en' && status === undefined;
+const canonical = data.canonicalHref ?? `${base}${path.replace(/^\/en\//, '/')}`;
+---
+
+<PageTitle />
+{english && !nativeEnglish && status !== 'current' && (
+  <aside class="edition-notice" aria-label="English edition status">
+    {status === 'partial' ? (
+      <p><strong>Partial English edition.</strong> This chapter has been reviewed, but some expanded explanations, examples and figures are still available only in the canonical chapter.</p>
+    ) : (
+      <p><strong>{practice ? 'Canonical-language exercise.' : 'Canonical-language chapter.'}</strong> This page has no separate English edition yet. Original course excerpts retain their source language.</p>
+    )}
+    <a href={canonical}>{practice ? 'Read the canonical exercise' : 'Read the canonical chapter'}</a>
+  </aside>
+)}
+
+<style>
+  .edition-notice{margin-top:1rem;padding:1rem;border-inline-start:3px solid var(--sl-color-orange);background:var(--sl-color-orange-low);font-size:var(--sl-text-sm)}
+  .edition-notice p{margin:0 0 .5rem}
+</style>

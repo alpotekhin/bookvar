@@ -1,0 +1,86 @@
+[
+  {
+    "id": "curated-confident-learning-figure1-df292eec9dac",
+    "asset": "00 Учебник/Assets/Figures/curated/confident-learning-2026-10-29/figure1-process.png",
+    "sha256": "df292eec9dac7b9970f3b31f1e08fc8e568d9a34509f58c460ba9cfa8715b042",
+    "dimensions_px": [
+      1325,
+      1100
+    ],
+    "author": "Curtis G. Northcutt, Lu Jiang, Isaac L. Chuang",
+    "source_url": "https://jair.org/index.php/jair/article/view/12125",
+    "source_image_url": "https://jair.org/index.php/jair/article/download/12125/26676/26691#page=6",
+    "source_asset": "05 Источники/Originals/confident-learning-2026-10-28/paper-jair-2021.pdf",
+    "source_asset_sha256": "cd662df7dd659bc5dedd9bbef31b1eeea4c06333ae36310e2647b3e7c894f9e9",
+    "source_page_snapshot": "05 Источники/Originals/confident-learning-2026-10-28/paper-jair-2021.pdf",
+    "source_page_sha256": "cd662df7dd659bc5dedd9bbef31b1eeea4c06333ae36310e2647b3e7c894f9e9",
+    "source_page": 6,
+    "render_dpi": 300,
+    "render_page_size_px": [
+      2550,
+      3300
+    ],
+    "crop_box_px": [
+      608,
+      358,
+      1933,
+      1458
+    ],
+    "license": "JAIR License Version 1.0",
+    "license_url": "https://www.jair.org/index.php/jair/oldlicense",
+    "license_evidence": "05 Источники/Originals/confident-learning-2026-10-28/jair-license-v1.html",
+    "license_evidence_sha256": "3687141dcb8326e12638823fa6924a3bdfff98328d5ec5c7a2b0a94984fbb560",
+    "public_license_copy": "site/public/licenses/confident-learning-JAIR-v1.html",
+    "derivation": "pdf-page-render-crop",
+    "modifications": "Complete original figure panel rendered with Poppler; surrounding prose and caption excluded. No relabeling, panel rearrangement, redraw or recoloring. Full bibliographic citation and AI Access Foundation copyright notice adjacent in reader.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting.md"
+    ]
+  },
+  {
+    "id": "curated-confident-learning-figure2-a768fb12330e",
+    "asset": "00 Учебник/Assets/Figures/curated/confident-learning-2026-10-29/figure2-joint-estimation.png",
+    "sha256": "a768fb12330e158f306af3ac7aaa28f0d965324242536ad2e00e08d254fb3289",
+    "dimensions_px": [
+      2725,
+      794
+    ],
+    "author": "Curtis G. Northcutt, Lu Jiang, Isaac L. Chuang",
+    "source_url": "https://jair.org/index.php/jair/article/view/12125",
+    "source_image_url": "https://jair.org/index.php/jair/article/download/12125/26676/26691#page=14",
+    "source_asset": "05 Источники/Originals/confident-learning-2026-10-28/paper-jair-2021.pdf",
+    "source_asset_sha256": "cd662df7dd659bc5dedd9bbef31b1eeea4c06333ae36310e2647b3e7c894f9e9",
+    "source_page_snapshot": "05 Источники/Originals/confident-learning-2026-10-28/paper-jair-2021.pdf",
+    "source_page_sha256": "cd662df7dd659bc5dedd9bbef31b1eeea4c06333ae36310e2647b3e7c894f9e9",
+    "source_page": 14,
+    "render_dpi": 450,
+    "render_page_size_px": [
+      3825,
+      4950
+    ],
+    "crop_box_px": [
+      550,
+      3306,
+      3275,
+      4100
+    ],
+    "license": "JAIR License Version 1.0",
+    "license_url": "https://www.jair.org/index.php/jair/oldlicense",
+    "license_evidence": "05 Источники/Originals/confident-learning-2026-10-28/jair-license-v1.html",
+    "license_evidence_sha256": "3687141dcb8326e12638823fa6924a3bdfff98328d5ec5c7a2b0a94984fbb560",
+    "public_license_copy": "site/public/licenses/confident-learning-JAIR-v1.html",
+    "derivation": "pdf-page-render-crop",
+    "modifications": "Complete original figure panel rendered with Poppler; surrounding prose and caption excluded. No relabeling, panel rearrangement, redraw or recoloring. Full bibliographic citation and AI Access Foundation copyright notice adjacent in reader.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting.md"
+    ]
+  }
+]

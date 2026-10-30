@@ -1,0 +1,204 @@
+{
+  "origin": "http://127.0.0.1:62595",
+  "base": "/bookvar",
+  "server": "ThreadingHTTPServer with no-store; prevents conditional-cache interference during local test",
+  "columns": [
+    "requested",
+    "width",
+    "actualPath",
+    "images",
+    "codeBlocks",
+    "pageOverflow",
+    "unloadedImages",
+    "mathErrors",
+    "overflowingEquations",
+    "fallback",
+    "editionNotice"
+  ],
+  "checks": [
+    [
+      "reference/",
+      360,
+      "/bookvar/reference/",
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      false,
+      false
+    ],
+    [
+      "en/reference/",
+      360,
+      "/bookvar/en/reference/",
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      false,
+      false
+    ],
+    [
+      "textbook/reasoning/test-time-compute/#coconut-continuous-thought",
+      360,
+      "/bookvar/textbook/reasoning/test-time-compute/",
+      13,
+      6,
+      0,
+      0,
+      0,
+      0,
+      false,
+      false
+    ],
+    [
+      "en/textbook/pretraining/masked-diffusion-language-models/",
+      360,
+      "/bookvar/en/textbook/pretraining/masked-diffusion-language-models/",
+      4,
+      5,
+      0,
+      0,
+      0,
+      0,
+      false,
+      false
+    ],
+    [
+      "en/textbook/transformer/full-transformer/",
+      360,
+      "/bookvar/en/textbook/transformer/full-transformer/",
+      7,
+      7,
+      0,
+      0,
+      0,
+      0,
+      false,
+      false
+    ],
+    [
+      "en/practice/causal-self-attention/",
+      360,
+      "/bookvar/practice/causal-self-attention/",
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      false,
+      false
+    ],
+    [
+      "reference/",
+      1280,
+      "/bookvar/reference/",
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      false,
+      false
+    ],
+    [
+      "en/reference/",
+      1280,
+      "/bookvar/en/reference/",
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      false,
+      false
+    ],
+    [
+      "textbook/reasoning/test-time-compute/#coconut-continuous-thought",
+      1280,
+      "/bookvar/textbook/reasoning/test-time-compute/",
+      13,
+      6,
+      0,
+      0,
+      0,
+      0,
+      false,
+      false
+    ],
+    [
+      "en/textbook/pretraining/masked-diffusion-language-models/",
+      1280,
+      "/bookvar/en/textbook/pretraining/masked-diffusion-language-models/",
+      4,
+      5,
+      33,
+      0,
+      0,
+      0,
+      false,
+      false
+    ],
+    [
+      "en/textbook/transformer/full-transformer/",
+      1280,
+      "/bookvar/en/textbook/transformer/full-transformer/",
+      7,
+      7,
+      0,
+      0,
+      0,
+      0,
+      false,
+      false
+    ],
+    [
+      "en/practice/causal-self-attention/",
+      1280,
+      "/bookvar/practice/causal-self-attention/",
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      false,
+      false
+    ]
+  ],
+  "settledRetry": {
+    "path": "/bookvar/en/textbook/pretraining/masked-diffusion-language-models/",
+    "width": 1280,
+    "pageOverflow": 0,
+    "unloadedImages": 0,
+    "mathErrors": 0
+  },
+  "interactions": {
+    "mobileReferenceCoconutClick": true,
+    "viewer": {
+      "image": "http://127.0.0.1:62595/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/coconut-2026-10-29/coconut.png",
+      "open": true,
+      "scale": "1.5×"
+    },
+    "license": {
+      "copyright": true,
+      "mit": true,
+      "url": "http://127.0.0.1:62595/bookvar/licenses/coconut-27273cb8-MIT.txt"
+    }
+  },
+  "screenshots": [
+    "pages-coconut-mobile.png",
+    "pages-coconut-mobile-viewer.png"
+  ],
+  "limits": [
+    "A desktop masked-diffusion snapshot briefly reported 33px overflow during navigation; the settled retry returned zero.",
+    "The earlier simple HTTP server produced inconsistent conditional-cache resource state; final checks use a fresh no-store server."
+  ]
+}

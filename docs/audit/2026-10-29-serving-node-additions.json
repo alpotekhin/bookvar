@@ -1,0 +1,9 @@
+{
+  "date": "2026-10-29",
+  "source": "00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md",
+  "before_sha256": "1125281504c3d757d7c5951325b37ce108accf66979d68cded83949d6750e5e8",
+  "after_sha256": "fee6d97ff4f17a23b48f6b3a73e7311d7699f1da456c414094d4ba934062f255",
+  "block_sha256": "41a90f6dd76cd246b2d1ce28c4b818e6f5741b6f42cef0f75b76898eaac42324",
+  "lines": 180,
+  "new_python_blocks": 1
+}

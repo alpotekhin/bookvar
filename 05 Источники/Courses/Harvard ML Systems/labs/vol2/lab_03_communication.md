@@ -9,9 +9,18 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol2/lab_03_communication.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol2/lab_03_communication.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL2 Lab — Communication
 
@@ -22,6 +31,89 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 - Volume II, Chapter 3: Network Fabrics
 - Focus sections: alpha/beta performance model, switch and topology,
   fabric behavior, congestion control, monitoring, and summary.
+
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+Make the structured prediction first; the evidence below is unlocked after you commit.
+
+---
+
+## Part A - Concept Module: Alpha/Beta Terms Predict Communication Cost
+
+---
+
+**Scenario.** ⟨value 1⟩ must move a **⟨value 2⟩ MB ⟨value 3⟩** over **⟨value 4⟩** before the track budget is exhausted.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v2_03_variant.stakeholder}' `
+- value_2: ` f"{_part_a['payload_mb']:.0f}" `
+- value_3: ` f"{v2_03_lens['payload_name']}" `
+- value_4: ` f"{_part_a['link_label']}" `
+
+---
+
+## Part B - Concept Module: Topology And Bisection Change Feasible Parallel Work
+
+---
+
+**Scenario.** The same payload now scales to **⟨value 1⟩ ⟨value 2⟩**. The question is whether the topology keeps enough cross-sectional bandwidth for parallel work.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_participants}' `
+- value_2: ` f"{v2_03_lens['participant_name']}" `
+
+---
+
+## Part C - Concept Module: Congestion And Placement Make Local Choices Fleet-Wide Bottlenecks
+
+---
+
+**Scenario.** The scheduler chooses **⟨value 1⟩** on **⟨value 2⟩**. Under BSP-style synchronization, the slowest congested path paces the whole fleet.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_part_c['placement_label']}" `
+- value_2: ` f"{_part_c['topology_label']}" `
+
+---
+
+## Part D - Concept Module: Communication Plan Guardrails
+
+---
+
+**Scenario.** The final communication plan must satisfy step-time/SLO, utilization, and topology guardrails for ⟨value 1⟩. ⟨value 2⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v2_03_profile.label}' `
+- value_2: ` f"{v2_03_lens['guardrail_text']}" `
+
+---
+
+## Synthesis - Network Communication Memo
+
+---
+
+**Selected policy:** ⟨value 1⟩ with ⟨value 2⟩.
+
+**Binding network amount:** ⟨value 3⟩.
+
+**Rejected alternative:** raw payload on oversubscribed spread placement (⟨value 4⟩ ms exposed time).
+
+**Carry-forward:** ⟨value 5⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_part_d['topology_label']}" `
+- value_2: ` f"{_part_d['placement_label']}" `
+- value_3: ` f'{_binding_amount}' `
+- value_4: ` f"{_rejected['exposed_ms']:.2f}" `
+- value_5: ` f"{v2_03_lens['collective_implication']}" `
+
+</details>
 
 ## Complete original Marimo source
 

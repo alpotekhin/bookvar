@@ -1,0 +1,19 @@
+bash: warning: setlocale: LC_ALL: cannot change locale (C.UTF-8): Bad file descriptor
+$ vitest run --exclude tests/site-output.test.ts
+
+ RUN  v4.1.10 /Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/publishing
+
+Syntax Error (2491498): No current point in closepath
+Syntax Error (2491498): No current point in closepath
+Syntax Error (2491500): No current point in closepath
+Syntax Error (2491500): No current point in closepath
+Syntax Error (2491502): No current point in closepath
+Syntax Error (2491502): No current point in closepath
+tar: Failed to set default locale
+tar: Failed to set default locale
+
+ Test Files  123 passed (123)
+      Tests  803 passed (803)
+   Start at  15:33:44
+   Duration  72.94s (transform 3.79s, setup 0ms, import 15.74s, tests 120.67s, environment 7ms)
+

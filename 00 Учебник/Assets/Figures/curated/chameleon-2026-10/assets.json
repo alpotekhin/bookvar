@@ -1,0 +1,187 @@
+[
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/chameleon-2026-10/chameleon-architecture.png",
+    "source_asset": "05 Источники/Originals/chameleon-2026-10-20/chameleon.pdf",
+    "source_page": 2,
+    "source_page_snapshot": "05 Источники/Originals/chameleon-2026-10-20/chameleon-page-02.png",
+    "crop_box_px": [
+      340,
+      310,
+      2755,
+      1850
+    ],
+    "label": "Figure 1",
+    "author": "Chameleon Team",
+    "source_url": "https://arxiv.org/abs/2405.09818v2",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/chameleon-2026-10-20/chameleon-abstract.html",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Complete original figure and English caption extracted from a rendered PDF page; unrelated surrounding text excluded. No redraw, label translation or panel edits.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md"
+    ],
+    "sha256": "2e62974803d70f845d6aa66640226c58075df6c5e22ac3544504da6357eed07d",
+    "source_asset_sha256": "a937480c856ba915e93de1419b37c5572cf8e52f6490ce6a05d8aeff389b0d18",
+    "source_page_sha256": "ef249375e4b97c9a5cc4226e7e8659571874aa7e39d2371e97ee95a3cccf1ebe",
+    "license_evidence_sha256": "4eef8307c2e820412ca8c5832db460df4e2c28c34c3d50e9f4b29fee795a41b6",
+    "render_page_size_px": [
+      3091,
+      4000
+    ],
+    "width": 2415,
+    "height": 1540,
+    "id": "curated-chameleon-chameleon-architecture-2e62974803d7"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/chameleon-2026-10/chameleon-mixed-document.png",
+    "source_asset": "05 Источники/Originals/chameleon-2026-10-20/chameleon.pdf",
+    "source_page": 3,
+    "source_page_snapshot": "05 Источники/Originals/chameleon-2026-10-20/chameleon-page-03.png",
+    "crop_box_px": [
+      340,
+      820,
+      2750,
+      3140
+    ],
+    "label": "Figure 2",
+    "author": "Chameleon Team",
+    "source_url": "https://arxiv.org/abs/2405.09818v2",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/chameleon-2026-10-20/chameleon-abstract.html",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Complete original figure and English caption extracted from a rendered PDF page; unrelated surrounding text excluded. No redraw, label translation or panel edits.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md"
+    ],
+    "sha256": "9624b12d49300da310e794f27686539b60f1defbd082b819b4012b3b22e76441",
+    "source_asset_sha256": "a937480c856ba915e93de1419b37c5572cf8e52f6490ce6a05d8aeff389b0d18",
+    "source_page_sha256": "f8d949f877b934d0279d936a9976117ac950d7df69cb46b63247c60f5cefa436",
+    "license_evidence_sha256": "4eef8307c2e820412ca8c5832db460df4e2c28c34c3d50e9f4b29fee795a41b6",
+    "render_page_size_px": [
+      3091,
+      4000
+    ],
+    "width": 2410,
+    "height": 2320,
+    "id": "curated-chameleon-chameleon-mixed-document-9624b12d4930"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/chameleon-2026-10/chameleon-norm-qk-dropout.png",
+    "source_asset": "05 Источники/Originals/chameleon-2026-10-20/chameleon.pdf",
+    "source_page": 6,
+    "source_page_snapshot": "05 Источники/Originals/chameleon-2026-10-20/chameleon-page-06.png",
+    "crop_box_px": [
+      340,
+      320,
+      2750,
+      1185
+    ],
+    "label": "Figure 5",
+    "author": "Chameleon Team",
+    "source_url": "https://arxiv.org/abs/2405.09818v2",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/chameleon-2026-10-20/chameleon-abstract.html",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Complete original figure and English caption extracted from a rendered PDF page; unrelated surrounding text excluded. No redraw, label translation or panel edits.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md"
+    ],
+    "sha256": "1ebbfd43c4c58a8f1cf882bc95b6b25428a4628e25c96b0b4e2bcbc1a43413ec",
+    "source_asset_sha256": "a937480c856ba915e93de1419b37c5572cf8e52f6490ce6a05d8aeff389b0d18",
+    "source_page_sha256": "30c03685bda7db84f0732655d8813ed920e15196a31326b8aab9416be10e219b",
+    "license_evidence_sha256": "4eef8307c2e820412ca8c5832db460df4e2c28c34c3d50e9f4b29fee795a41b6",
+    "render_page_size_px": [
+      3091,
+      4000
+    ],
+    "width": 2410,
+    "height": 865,
+    "id": "curated-chameleon-chameleon-norm-qk-dropout-1ebbfd43c4c5"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/chameleon-2026-10/chameleon-training-ablations.png",
+    "source_asset": "05 Источники/Originals/chameleon-2026-10-20/chameleon.pdf",
+    "source_page": 7,
+    "source_page_snapshot": "05 Источники/Originals/chameleon-2026-10-20/chameleon-page-07.png",
+    "crop_box_px": [
+      340,
+      315,
+      2750,
+      1240
+    ],
+    "label": "Figure 6",
+    "author": "Chameleon Team",
+    "source_url": "https://arxiv.org/abs/2405.09818v2",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/chameleon-2026-10-20/chameleon-abstract.html",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Complete original figure and English caption extracted from a rendered PDF page; unrelated surrounding text excluded. No redraw, label translation or panel edits.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md"
+    ],
+    "sha256": "f17dedc9727df6eb49bad6e5fb2bc805f7ecab4bf5e718d2b6e6951240a04c9a",
+    "source_asset_sha256": "a937480c856ba915e93de1419b37c5572cf8e52f6490ce6a05d8aeff389b0d18",
+    "source_page_sha256": "6d00791e798d84514548d1bdc9663bc5f7b986090651c88d37d721fbf254b409",
+    "license_evidence_sha256": "4eef8307c2e820412ca8c5832db460df4e2c28c34c3d50e9f4b29fee795a41b6",
+    "render_page_size_px": [
+      3091,
+      4000
+    ],
+    "width": 2410,
+    "height": 925,
+    "id": "curated-chameleon-chameleon-training-ablations-f17dedc9727d"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/chameleon-2026-10/chameleon-human-evaluation.png",
+    "source_asset": "05 Источники/Originals/chameleon-2026-10-20/chameleon.pdf",
+    "source_page": 12,
+    "source_page_snapshot": "05 Источники/Originals/chameleon-2026-10-20/chameleon-page-12.png",
+    "crop_box_px": [
+      340,
+      350,
+      2750,
+      1525
+    ],
+    "label": "Figure 9",
+    "author": "Chameleon Team",
+    "source_url": "https://arxiv.org/abs/2405.09818v2",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/chameleon-2026-10-20/chameleon-abstract.html",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Complete original figure and English caption extracted from a rendered PDF page; unrelated surrounding text excluded. No redraw, label translation or panel edits.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-20",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md"
+    ],
+    "sha256": "1e7db16242ec86cb5f4a2ee7f3bd3f156865b19a26f72c0d5f9dc9d3902784d8",
+    "source_asset_sha256": "a937480c856ba915e93de1419b37c5572cf8e52f6490ce6a05d8aeff389b0d18",
+    "source_page_sha256": "649b1833756313e8f26c12f074bc17c930b127742da7d63e914bca20b7c3fbfd",
+    "license_evidence_sha256": "4eef8307c2e820412ca8c5832db460df4e2c28c34c3d50e9f4b29fee795a41b6",
+    "render_page_size_px": [
+      3091,
+      4000
+    ],
+    "width": 2410,
+    "height": 1175,
+    "id": "curated-chameleon-chameleon-human-evaluation-1e7db16242ec"
+  }
+]

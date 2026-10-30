@@ -1,0 +1,64 @@
+[
+  {
+    "id": "curated-modal-active-learning-b39fc6c587bc",
+    "asset": "00 Учебник/Assets/Figures/curated/active-learning-2026-10-28/active-learning.png",
+    "author": "Tivadar Danka and modAL contributors",
+    "source_url": "https://github.com/modAL-python/modAL/blob/bba6f6fd00dbb862b1e09259b78caf6cffa2e755/docs/source/content/overview/modAL-in-a-nutshell.rst",
+    "source_image_url": "https://raw.githubusercontent.com/modAL-python/modAL/bba6f6fd00dbb862b1e09259b78caf6cffa2e755/docs/source/content/overview/img/active-learning.png",
+    "commit": "bba6f6fd00dbb862b1e09259b78caf6cffa2e755",
+    "source_asset": "05 Источники/Originals/active-learning-2026-10-28/modal/active-learning.png",
+    "source_asset_sha256": "b39fc6c587bcc5f6a5914ba36d49721bec155cff06baca58fd527211ff73f732",
+    "sha256": "b39fc6c587bcc5f6a5914ba36d49721bec155cff06baca58fd527211ff73f732",
+    "source_page_snapshot": "05 Источники/Originals/active-learning-2026-10-28/modal/modAL-in-a-nutshell.rst",
+    "source_page_sha256": "339a5a2a8e9c97a9d6612eaf38445b1df91eea907f4dc3b6ee498fca5b06fe4e",
+    "license": "MIT",
+    "license_url": "https://github.com/modAL-python/modAL/blob/bba6f6fd00dbb862b1e09259b78caf6cffa2e755/LICENSE",
+    "license_evidence": "05 Источники/Originals/active-learning-2026-10-28/modal/LICENSE",
+    "license_evidence_sha256": "e9ad97986d03270bf7fdc39826ccfec4cc48357837500c8706a20157f2706c38",
+    "public_license_copy": "site/public/licenses/modal-bba6f6fd-MIT.txt",
+    "dimensions_px": [
+      858,
+      302
+    ],
+    "derivation": "source-raster-copy",
+    "modifications": "Complete pinned original, byte-for-byte. No crop, redraw, translated labels or recompression. Adjacent prose explains the illustrative status and independent evaluation requirement.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров.md"
+    ]
+  },
+  {
+    "id": "curated-modal-motivating-example-5d9c6acd6dad",
+    "asset": "00 Учебник/Assets/Figures/curated/active-learning-2026-10-28/motivating-example.png",
+    "author": "Tivadar Danka and modAL contributors",
+    "source_url": "https://github.com/modAL-python/modAL/blob/bba6f6fd00dbb862b1e09259b78caf6cffa2e755/docs/source/content/overview/modAL-in-a-nutshell.rst",
+    "source_image_url": "https://raw.githubusercontent.com/modAL-python/modAL/bba6f6fd00dbb862b1e09259b78caf6cffa2e755/docs/source/content/overview/img/motivating-example.png",
+    "commit": "bba6f6fd00dbb862b1e09259b78caf6cffa2e755",
+    "source_asset": "05 Источники/Originals/active-learning-2026-10-28/modal/motivating-example.png",
+    "source_asset_sha256": "5d9c6acd6dadcd8eb88f08500a4612b0cf06d78a48378226456be4efdfc8af9e",
+    "sha256": "5d9c6acd6dadcd8eb88f08500a4612b0cf06d78a48378226456be4efdfc8af9e",
+    "source_page_snapshot": "05 Источники/Originals/active-learning-2026-10-28/modal/modAL-in-a-nutshell.rst",
+    "source_page_sha256": "339a5a2a8e9c97a9d6612eaf38445b1df91eea907f4dc3b6ee498fca5b06fe4e",
+    "license": "MIT",
+    "license_url": "https://github.com/modAL-python/modAL/blob/bba6f6fd00dbb862b1e09259b78caf6cffa2e755/LICENSE",
+    "license_evidence": "05 Источники/Originals/active-learning-2026-10-28/modal/LICENSE",
+    "license_evidence_sha256": "e9ad97986d03270bf7fdc39826ccfec4cc48357837500c8706a20157f2706c38",
+    "public_license_copy": "site/public/licenses/modal-bba6f6fd-MIT.txt",
+    "dimensions_px": [
+      3000,
+      3000
+    ],
+    "derivation": "source-raster-copy",
+    "modifications": "Complete pinned original, byte-for-byte. No crop, redraw, translated labels or recompression. Adjacent prose explains the illustrative status and independent evaluation requirement.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-28",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров.md"
+    ]
+  }
+]

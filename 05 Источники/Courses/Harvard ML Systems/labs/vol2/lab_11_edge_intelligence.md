@@ -9,9 +9,18 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol2/lab_11_edge_intelligence.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol2/lab_11_edge_intelligence.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL2 Lab — Edge Intelligence
 
@@ -19,75 +28,39 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 **Recommended Reading** &mdash; Complete before this lab:
 
-    - **Design Constraints** &mdash; the 4-12x resource amplification from gradients,
-      optimizer state, activations, bandwidth, and energy.
-    - **Federated Learning Algorithms** &mdash; FedAvg, non-IID drift, local epochs,
-      update compression, and privacy-preserving aggregation.
-    - **Federated Systems at Scale** &mdash; client scheduling, over-selection,
-      intermittent availability, and stale updates.
-    - **Production Integration** &mdash; monitoring, validation, rollback, compliance,
-      and guardrail policies for adaptive edge systems.
-
----
-
-**Training Memory Breakdown** (`…`M params, batch=`…`, `…`)
-
-```
-Weights       = `…` MB
-Gradients     = `…` MB
-Optimizer     = `…` MB
-Activations   = `…` MB
-Total         = `…` MB (`…`x inference)
-```
-*Source: `mlsysbook_labs.training_memory_breakdown`, using `{v2_11_device.hardware_ref}`.*
+- **Design Constraints** &mdash; the 4-12x resource amplification from gradients,
+  optimizer state, activations, bandwidth, and energy.
+- **Federated Learning Algorithms** &mdash; FedAvg, non-IID drift, local epochs,
+  update compression, and privacy-preserving aggregation.
+- **Federated Systems at Scale** &mdash; client scheduling, over-selection,
+  intermittent availability, and stale updates.
+- **Production Integration** &mdash; monitoring, validation, rollback, compliance,
+  and guardrail policies for adaptive edge systems.
 
 ---
 
 **Formula:**
 $$
-M_{\\text`…`} = M_{\\text`…`} + M_{\\text`…`} + M_{\\text`…`} + M_{\\text`…`}
+M_{\text{train}} = M_{\text{weights}} + M_{\text{grad}} + M_{\text{opt}} + M_{\text{act}}
 $$
 
 **Where:**
-- **$M_{\\text`…`}$**: Model parameters in FP16 = $P \\times 2$ bytes
-- **$M_{\\text`…`}$**: Gradient storage (same size as weights) = $P \\times 2$ bytes
-- **$M_{\\text`…`}$**: Adam stores momentum + variance in FP32 = $P \\times 4 \\times 2$ bytes
-- **$M_{\\text`…`}$**: Activations cached for backward pass, scales with batch size $B$
+- **$M_{\text{weights}}$**: Model parameters in FP16 = $P \times 2$ bytes
+- **$M_{\text{grad}}$**: Gradient storage (same size as weights) = $P \times 2$ bytes
+- **$M_{\text{opt}}$**: Adam stores momentum + variance in FP32 = $P \times 4 \times 2$ bytes
+- **$M_{\text{act}}$**: Activations cached for backward pass, scales with batch size $B$
 
-**Amplification factor** over inference ($M_{\\text`…`} = P \\times 2$):
-
-$$
-\\text`…` = \\frac{M_{\\text`…`}}{M_{\\text`…`}} = 1 + 1 + 4 + \\frac{M_{\\text`…`}}{P \\times 2} \\approx 5\\text{-}9\\times
-$$
-
----
-
-**Formula:**
-$$
-\\theta^{{t+1}} = \\sum_k \\frac{`…`}{`…`}\\theta_k^{{t+1}}
-$$
-
-**Convergence and communication model:**
-$$
-R_{{\\text{`…`}}} \\approx R_{{\\text{`…`}}} \\times \\text{{non-IID penalty}} \\times
-\\text{{compression penalty}} \\times \\text{{privacy penalty}}
-$$
+**Amplification factor** over inference ($M_{\text{inf}} = P \times 2$):
 
 $$
-C_{{\\text{`…`}}} = R_{{\\text{`…`}}} \\times
-N_{{\\text{`…`}}} \\times |\\Delta\\theta|_{{\\text{`…`}}}
+\text{Amplification} = \frac{M_{\text{train}}}{M_{\text{inf}}} = 1 + 1 + 4 + \frac{M_{\text{act}}}{P \times 2} \approx 5\text{-}9\times
 $$
-
-**Current source model:** `mlsysbook_labs.federated_communication` gives the
-non-IID and compression terms from `{v2_11_device.hardware_ref}`. This notebook
-adds a local teaching estimate for secure aggregation overhead (1.10x) and
-privacy-noise round inflation (`…`x).
 
 ---
 
 **Eligibility model:**
 $$
-U = W \\times d \\times c \\times s
+U = W \times d \times c \times s
 $$
 
 where $W$ is candidate update windows/day, $d$ is duty-cycle eligibility,
@@ -95,7 +68,7 @@ $c$ is connectivity availability, and $s$ is execution success for the selected 
 
 **Evidence age:**
 $$
-A_{{\\text{`…`}}} = \\frac{{24}}{`…`}
+A_{\text{evidence}} = \frac{24}{U}
 $$
 
 The chapter's client-scheduling section explains why plugged-in, idle, connected,
@@ -107,10 +80,10 @@ amount carried into the policy guardrails.
 
 **Policy predicate:**
 $$
-\\text{`…`} =
-M \\le M_{{\\max}} \\land E_{{\\text{`…`}}} \\le E_{{\\max}} \\land
-\\varepsilon \\le \\varepsilon_{{\\max}} \\land A_{{\\text{`…`}}} \\le A_{{\\max}} \\land
-Q \\ge Q_{{\\min}}
+\text{launchable} =
+M \le M_{\max} \land E_{\text{day}} \le E_{\max} \land
+\varepsilon \le \varepsilon_{\max} \land A_{\text{evidence}} \le A_{\max} \land
+Q \ge Q_{\min}
 $$
 
 The policy table evaluates that predicate for each candidate policy. The amounts come from:
@@ -124,6 +97,243 @@ The policy table evaluates that predicate for each candidate policy. The amounts
 The production-integration section of the chapter is the source claim: edge
 deployment is a policy bundle with validation, rollback, privacy, and resource
 guards, not a single model artifact.
+
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+### Your Prediction
+
+---
+
+Select your prediction to unlock the memory breakdown.
+
+---
+
+**OOM -- Training infeasible on this device.** Required: ⟨value 1⟩ MB | Available: ⟨value 2⟩ MB. Switch to LoRA or reduce model size.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_total_mb:.2f}' `
+- value_2: ` f'{v2_11_device.available_memory_mb:g}' `
+
+---
+
+Training fits within the ⟨value 1⟩ active memory budget (⟨value 2⟩ MB used, ⟨value 3⟩ MB headroom).
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v2_11_profile.label}' `
+- value_2: ` f'{_total_mb:.2f}' `
+- value_3: ` f'{v2_11_device.available_memory_mb - _total_mb:.2f}' `
+
+---
+
+**Training Memory Breakdown** (⟨value 1⟩M params, batch=⟨value 2⟩, ⟨value 3⟩)
+
+```
+Weights       = ⟨value 4⟩ MB
+Gradients     = ⟨value 5⟩ MB
+Optimizer     = ⟨value 6⟩ MB
+Activations   = ⟨value 7⟩ MB
+Total         = ⟨value 8⟩ MB (⟨value 9⟩x inference)
+```
+*Source: `mlsysbook_labs.training_memory_breakdown`, using `⟨value 10⟩`.*
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_params_m}' `
+- value_2: ` f'{_batch}' `
+- value_3: ` f'{_strategy}' `
+- value_4: ` f'{_weights_mb:.2f}' `
+- value_5: ` f'{_grads_mb:.2f}' `
+- value_6: ` f'{_optim_mb:.2f}' `
+- value_7: ` f'{_activ_mb:.2f}' `
+- value_8: ` f'{_total_mb:.2f}' `
+- value_9: ` f'{_amplification:.1f}' `
+- value_10: ` f'{v2_11_device.hardware_ref}' `
+
+---
+
+**Part A checkpoint:** Carry `⟨value 1⟩` into the policy review. The current local boundary is `⟨value 2⟩` with ⟨value 3⟩ MB of training memory and ⟨value 4⟩x amplification over inference.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_strategy}' `
+- value_2: ` f'{_binding_actual}' `
+- value_3: ` f'{_total_mb:.2f}' `
+- value_4: ` f'{_amplification:.1f}' `
+
+---
+
+### Your Prediction
+
+---
+
+Select your prediction to unlock the federated-update simulator.
+
+---
+
+**Privacy guardrail miss.** Epsilon ⟨value 1⟩ exceeds the ⟨value 2⟩ limit of ⟨value 3⟩. Keeping raw data local is not enough; update privacy must also be bounded.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_epsilon:.1f}' `
+- value_2: ` f'{v2_11_profile.label}' `
+- value_3: ` f"{_threshold['privacy_epsilon']:.1f}" `
+
+---
+
+**Freshness miss.** The stale-aware plan needs ⟨value 1⟩ rounds, above the ⟨value 2⟩-round freshness budget. Reduce local epochs, change compression, or keep the policy local until more representative clients arrive.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_stale_rounds:.0f}' `
+- value_2: ` f'{_freshness_round_limit:.0f}' `
+
+---
+
+**Federated update is inside the teaching envelope.** The plan spends ⟨value 1⟩ stale-aware rounds and ⟨value 2⟩ GB of uploads while satisfying epsilon <= ⟨value 3⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_stale_rounds:.0f}' `
+- value_2: ` f'{_total_comm_mb / 1024:.1f}' `
+- value_3: ` f"{_threshold['privacy_epsilon']:.1f}" `
+
+---
+
+**Part B checkpoint:** Carry `⟨value 1⟩` updates with E=⟨value 2⟩, beta=⟨value 3⟩, epsilon=⟨value 4⟩, and ⟨value 5⟩ stale-aware rounds into the final policy review.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_comm.compression_label}' `
+- value_2: ` f'{_E}' `
+- value_3: ` f'{_beta}' `
+- value_4: ` f'{_epsilon:.1f}' `
+- value_5: ` f'{_stale_rounds:.0f}' `
+
+---
+
+**Formula:**
+$$
+\theta^{t+1} = \sum_k \frac{n_k}{n}\theta_k^{t+1}
+$$
+
+**Convergence and communication model:**
+$$
+R_{\text{edge}} \approx R_{\text{IID}} \times \text{non-IID penalty} \times
+\text{compression penalty} \times \text{privacy penalty}
+$$
+
+$$
+C_{\text{total}} = R_{\text{edge}} \times
+N_{\text{clients}} \times |\Delta\theta|_{\text{compressed}}
+$$
+
+**Current source model:** `mlsysbook_labs.federated_communication` gives the
+non-IID and compression terms from `⟨value 1⟩`. This notebook
+adds a local teaching estimate for secure aggregation overhead (1.10x) and
+privacy-noise round inflation (⟨value 2⟩x).
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v2_11_device.hardware_ref}' `
+- value_2: ` f'{_privacy_multiplier:.2f}' `
+
+---
+
+### Your Prediction
+
+---
+
+*Estimate usable evidence windows per day for ⟨value 1⟩:*
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v2_11_profile.label}' `
+
+---
+
+Enter your prediction to unlock the intermittent-evidence simulator.
+
+---
+
+**Stale evidence failure.** Evidence age is ⟨value 1⟩, above the ⟨value 2⟩ h freshness limit. The policy should defer promotion or improve eligibility before trusting this evidence.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_age_display}' `
+- value_2: ` f"{_result['freshness_limit_hours']:.1f}" `
+
+---
+
+**Fresh enough.** Evidence age is ⟨value 1⟩ against a ⟨value 2⟩ h limit. Your prediction missed by ⟨value 3⟩ usable update windows/day.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_age_display}' `
+- value_2: ` f"{_result['freshness_limit_hours']:.1f}" `
+- value_3: ` f'{_prediction_error:.2f}' `
+
+---
+
+**Part C checkpoint:** `⟨value 1⟩` with ⟨value 2⟩ usable updates/day, ⟨value 3⟩ evidence age, and ⟨value 4⟩% daily ⟨value 5⟩ use.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_result['decision']}" `
+- value_2: ` f"{_result['usable_updates']:.2f}" `
+- value_3: ` f'{_age_display}' `
+- value_4: ` f'{_daily_energy_pct:.2f}' `
+- value_5: ` f'{v2_11_device.energy_budget_label}' `
+
+---
+
+### Your Prediction
+
+---
+
+Select your guardrail prediction to unlock the policy review.
+
+---
+
+**Launchable teaching policy.** Select `⟨value 1⟩` and reject `⟨value 2⟩` because ⟨value 3⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_selected['label']}" `
+- value_2: ` f"{_rejected['label']}" `
+- value_3: ` f"{_rejected['rejected_reason']}" `
+
+---
+
+**Policy not launchable yet.** `⟨value 1⟩` fails ⟨value 2⟩. Use `⟨value 3⟩` or revise earlier controls until all guardrails pass.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_selected['label']}" `
+- value_2: ` f"{', '.join(_selected['failed_guardrails'])}" `
+- value_3: ` f"{_recommended['label']}" `
+
+---
+
+**Part D checkpoint:** Memo decision = `⟨value 1⟩`; binding edge amount = `⟨value 2⟩`; rejected alternative = `⟨value 3⟩`; V2-12 implication = monitor eligibility, rollback, privacy budget, and stale evidence as fleet operations signals.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_recommended['label']}" `
+- value_2: ` f"{_recommended['binding']}" `
+- value_3: ` f"{_rejected['label']}" `
+
+---
+
+## Download Report
+
+---
+
+This V2-11 report is generated locally from the selected track, current controls, computed evidence, final decision, and residual risk.
+
+</details>
 
 ## Complete original Marimo source
 

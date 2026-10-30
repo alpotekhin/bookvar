@@ -1,0 +1,88 @@
+{
+  "date": "2026-10-29",
+  "chapterSha256": "5102f8b7db11f1ce749c7263d75bb124cbeb6ed217e5d6762e10b6f9d96d24b0",
+  "surface": "Actual CUA browser inspection of current root and dedicated /bookvar static builds; no screenshot is a generated mockup.",
+  "views": [
+    {
+      "base": "/",
+      "locale": "ru",
+      "viewport": [
+        1280,
+        900
+      ],
+      "clientWidth": 1265,
+      "scrollWidth": 1265,
+      "katexErrors": 0,
+      "codeBlocks": 18,
+      "contentFigures": 10,
+      "allContentFiguresLoaded": true,
+      "screenshot": "desktop-ewc.png"
+    },
+    {
+      "base": "/",
+      "locale": "ru",
+      "viewport": [
+        1280,
+        900
+      ],
+      "viewer": "Complete original Figure 2 and original caption visible at fit; source attribution retained in scrollable footer.",
+      "screenshot": "desktop-original-viewer.png"
+    },
+    {
+      "base": "/",
+      "locale": "en",
+      "viewport": [
+        360,
+        800
+      ],
+      "clientWidth": 345,
+      "scrollWidth": 345,
+      "katexErrors": 0,
+      "codeBlocks": 18,
+      "contentFigures": 10,
+      "allContentFiguresLoaded": true,
+      "screenshot": "mobile-fisher-en.png",
+      "math": "Long display formulas have their own horizontal scroll; no document overflow."
+    },
+    {
+      "base": "/",
+      "locale": "en",
+      "viewport": [
+        360,
+        800
+      ],
+      "viewer": "Original Table 3 zoomed to 1.5x through UI; horizontal image scrollbar, full source attribution and Close/Zoom/Fit controls observed.",
+      "screenshot": "mobile-table-zoom-en.png"
+    },
+    {
+      "base": "/bookvar",
+      "locale": "ru",
+      "viewport": [
+        360,
+        800
+      ],
+      "clientWidth": 345,
+      "scrollWidth": 345,
+      "katexErrors": 0,
+      "codeBlocks": 18,
+      "contentFigures": 10,
+      "allContentFiguresLoaded": true,
+      "allContentFigureUrlsHavePagesBase": true,
+      "screenshot": "pages-mobile-replay.png"
+    },
+    {
+      "base": "/bookvar",
+      "locale": "en",
+      "viewport": [
+        1280,
+        900
+      ],
+      "screenshot": "pages-desktop-originals-en.png",
+      "visual": "All four original source comparison panels, axes and labels render in the chapter; vertical reading continues to the complete original caption. Original viewer fit was separately inspected."
+    }
+  ],
+  "limitations": [
+    "A hidden, initially empty figure-viewer image is not a failed chapter illustration; checks above use .sl-markdown-content img.",
+    "This is local root/Pages-layout QA, not a successful live GitHub Pages deployment."
+  ]
+}

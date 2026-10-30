@@ -1,0 +1,27 @@
+[
+  {
+    "id": "curated-indexed-scatter-fey-6f3791b14d81",
+    "asset": "00 Учебник/Assets/Figures/curated/indexed-movement-2026-10-27/scatter-add.svg",
+    "author": "Matthias Fey",
+    "source_url": "https://github.com/rusty1s/pytorch_scatter/blob/f514c10f920b5aeed2eb162092f0ad20d3edee52/torch_scatter/scatter.py",
+    "source_image_url": "https://raw.githubusercontent.com/rusty1s/pytorch_scatter/f514c10f920b5aeed2eb162092f0ad20d3edee52/docs/source/_figures/add.svg",
+    "commit": "f514c10f920b5aeed2eb162092f0ad20d3edee52",
+    "source_asset": "05 Источники/Originals/indexed-movement-2026-10-27/scatter-add.svg",
+    "source_asset_sha256": "6f3791b14d81bd96aab6f239f0eb985536996eb5d4941d687638e66bfac3a46f",
+    "sha256": "6f3791b14d81bd96aab6f239f0eb985536996eb5d4941d687638e66bfac3a46f",
+    "source_page_snapshot": "05 Источники/Originals/indexed-movement-2026-10-27/scatter.py",
+    "source_page_sha256": "68b23f27c45bfb37a3fe066c75bd1c3dd711cbf5d8385aa9708f912c6916c3bc",
+    "license": "MIT",
+    "license_url": "https://github.com/rusty1s/pytorch_scatter/blob/f514c10f920b5aeed2eb162092f0ad20d3edee52/LICENSE",
+    "license_evidence": "05 Источники/Originals/indexed-movement-2026-10-27/scatter-LICENSE",
+    "license_evidence_sha256": "7cbd1d9075b9cb3daa771f52d10e1a6b9c4577851f055d002449932fee4d7486",
+    "public_license_copy": "site/public/licenses/pytorch-scatter-f514c10-MIT.txt",
+    "derivation": "source-svg-copy",
+    "modifications": "Complete original SVG copied byte-for-byte; no crop, redraw, translation, relabelling or path changes. CSS gives the print-sized original a responsive reading width without changing its viewBox or aspect ratio.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-27",
+    "used_in": ["00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md"]
+  }
+]

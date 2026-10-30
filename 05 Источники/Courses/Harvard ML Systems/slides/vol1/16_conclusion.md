@@ -9,22 +9,46 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`slides/vol1/16_conclusion/16_conclusion.tex`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static slide archive
+> Text and equations retain the original language. Layout wrappers are simplified;
+> speaker notes are separate, and original SVGs are not redrawn or cropped.
+> Unsupported TeX remains visible and is listed beside the affected slide.
+> This archive is not a checked transcript or a finished Bookvar chapter.
 
 # VOL1 Slides — Conclusion
 
 ## Readable slide sequence
 
+## Conclusion
+
+[Original slide 1](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L65)
+
+The System Is the Model
+
 ## Learning Objectives
 
-{
+[Original slide 2](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L70)
+
+1. Synthesize the **thirteen quantitative invariants** into an integrated framework
+2. Apply the **Conservation of Complexity** meta-principle to trace trade-offs
+3. Trace how **Lighthouse Models** reveal constraint propagation across the stack
+4. Evaluate the **Iron Law** as a prescriptive optimizer, not just a diagnostic
+5. Connect technical foundations, scale engineering, and production reality
+6. Identify how single-node principles extend to **fleet-scale systems**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min]
 % -- LINK: From Ch15's responsible engineering to the capstone synthesis
 Ch15 evaluated systems by who they serve, culminating in the Bias
-Feedback Invariant: $_{{err},g}(n)  _{{err},g}(0)_{{fb}}^n$,
-$_{{fb}}>1$ --- the 13th quantitative invariant, showing that
+Feedback Invariant: $\Delta_{\text{err},g}(n) \approx \Delta_{\text{err},g}(0)\cdot\alpha_{\text{fb}}^n$,
+$\alpha_{\text{fb}}>1$ --- the 13th quantitative invariant, showing that
 errors against subgroups compound each decision cycle when model outputs
 reshape future training data. This lecture synthesizes all thirteen
 invariants and asks: what does it mean to build ML systems well, in
@@ -49,17 +73,36 @@ learning new concepts --- connecting 13 invariants is the capstone skill.
 [CORE] Do not skip --- students need to know this is integration, not new.
 IF AHEAD: ``Which objective will be hardest to demonstrate on an exam?''
 IF SHORT: Read objectives without discussion.
-}
-- Synthesize the **thirteen quantitative invariants** into an integrated framework
-- Apply the **Conservation of Complexity** meta-principle to trace trade-offs
-- Trace how **Lighthouse Models** reveal constraint propagation across the stack
-- Evaluate the **Iron Law** as a prescriptive optimizer, not just a diagnostic
-- Connect technical foundations, scale engineering, and production reality
-- Identify how single-node principles extend to **fleet-scale systems**
+```
+
+</details>
 
 ## Visual Language
 
-{
+[Original slide 3](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L115)
+
+Throughout this course, colors carry meaning:
+
+**Blue** — Compute / Processing
+
+GPU ops, forward/backward pass, inference
+
+**Green** — Data / Memory
+
+Data flow, caches, healthy paths
+
+**Orange** — Routing / Scheduling
+
+Load balancers, batch windows
+
+**Red** — Error / Cost / Bottleneck
+
+Loss, decode phase, waste
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [0.5 min]
 % -- NARRATE: Final reminder of the color system
 ``Last time seeing this slide. By now, these colors should be automatic:
@@ -68,37 +111,36 @@ lecture, all four colors appear together because we synthesize everything.''
 
 % -- FLEX: [OPTIONAL] Students know this by the final lecture
 [OPTIONAL] Spend 15 seconds max. IF SHORT: Skip entirely.
-}
+```
 
-Throughout this course, colors carry meaning:
-
-{0.3cm}
-[T]
-  
-    {mlsyscard}{computestroke}
-    **Blue** --- Compute / Processing\\
-    { GPU ops, forward/backward pass, inference}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{datastroke}
-    **Green** --- Data / Memory\\
-    { Data flow, caches, healthy paths}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{routingstroke}
-    **Orange** --- Routing / Scheduling\\
-    { Load balancers, batch windows}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{errorstroke}
-    **Red** --- Error / Cost / Bottleneck\\
-    { Loss, decode phase, waste}
-    {mlsyscard}
+</details>
 
 ## The System Is the Model
 
-{
+[Original slide 4](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L162)
+
+A model that produces perfect predictions is useless if:
+
+- It receives **corrupted inputs**
+- It cannot be **deployed reliably**
+- It **drifts** without anyone noticing
+
+The *true model* = data pipeline + training infra + serving system + monitoring loop.
+
+**Thesis:** Optimize the system, the model improves.
+
+| **Component** | **Failure Mode** |
+| --- | --- |
+| Data pipeline | Schema drift |
+| Training | Stale features |
+| Compression | Numerical skew |
+| Serving | Latency violation |
+| Monitoring | Silent degradation |
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min]
 % -- LINK: From objectives to the chapter's central thesis
 The objectives promise synthesis. The thesis that organizes it: the
@@ -125,44 +167,28 @@ as a side effect. System-level thinking is the capstone skill.
 [CORE] Every subsequent slide builds on this thesis.
 IF AHEAD: ``Which component-level optimization had the biggest system impact?''
 IF SHORT: State the thesis, show the table, skip the question.
-}
+```
 
-[T]
-  
-    A model that produces perfect predictions is useless if:
-    {0pt}
-- It receives **corrupted inputs**
-- It cannot be **deployed reliably**
-- It **drifts** without anyone noticing
-    
-
-    {0.15cm}
-    {mlsyscard}{crimson}
-    { The *true model* = data pipeline + training infra + serving system + monitoring loop.}
-    {mlsyscard}
-
-    {0.1cm}
-    {Thesis:}{Optimize the system, the model improves.}
-  
-  
-    {}{1.1}
-    {
-    {tabular}{@{}ll@{}}
-      
-      **Component** & **Failure Mode** \\
-      
-      Data pipeline & Schema drift \\
-      Training & Stale features \\
-      Compression & Numerical skew \\
-      Serving & Latency violation \\
-      Monitoring & Silent degradation \\
-      
-    {tabular}
-    }
+</details>
 
 ## Predict: How Many Invariants?
 
-{
+[Original slide 5](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L231)
+
+Think–Write–Share
+
+How many **quantitative invariants** (physical laws,
+
+not best practices) have we encountered across 15 chapters?
+
+Write a number and name as many as you can. (60 seconds)
+
+Turn to a neighbor and compare your lists.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: From the system thesis to the invariants that govern it
 The system is the model. The thirteen invariants are the physical laws
@@ -181,24 +207,24 @@ surprising and motivates the next section.
 % -- FLEX: [CORE] Primes the thirteen-invariants reveal
 [CORE] The gap between guessed and actual creates curiosity.
 IF SHORT: Reduce to 30 seconds, skip neighbor comparison.
-}
+```
 
-{1.0cm}
-{ Think--Write--Share}
-
-{0.6cm}
-{ How many **quantitative invariants** (physical laws,\\
-not best practices) have we encountered across 15 chapters?}
-
-{0.6cm}
-{ Write a number and name as many as you can. {midgray}{(60 seconds)}}
-
-{0.6cm}
-{{lightgray}{Turn to a neighbor and compare your lists.}}
+</details>
 
 ## Thirteen Invariants, Four Phases
 
-{
+[Original slide 6](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L273)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/16_conclusion/images/thirteen-invariants-map.svg]]
+
+Harvard Edge ML Systems Book contributors, [thirteen-invariants-map.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/images/thirteen-invariants-map.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Key:** Four phases form a cycle. Deploy feeds back to Foundations through drift and retraining.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min]
 % -- LINK: From the prediction exercise to the full reveal
 Students guessed 3--5 invariants. The full map shows 13, organized
@@ -228,18 +254,42 @@ through drift and retraining.
 [CORE] Every subsequent slide references this map.
 IF AHEAD: ``Which invariant connects the most to other invariants?''
 IF SHORT: Show the diagram, name the four phases, skip the question.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
+</details>
 
-{thirteen-invariants-map.pdf}
+## Foundations & Build (Invariants 1–4)
 
-{0.1cm}
-{Key:}{Four phases form a cycle. Deploy feeds back to Foundations through drift and retraining.}
+[Original slide 7](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L315)
 
-## Foundations & Build (Invariants 1--4)
+**I: Foundations** — Where complexity originates
 
-{
+**1. Data as Code**
+
+System behavior $\approx f(\text{Data})$. Changing data changes the program.
+
+**2. Data Gravity**
+
+$C_{move}(\text{Data}) \gg C_{move}(\text{Compute})$. Move compute to data.
+
+**Lighthouse:** DLRM is Data Gravity embodied — TB-scale embeddings anchor the architecture.
+
+**II: Build** — How complexity becomes computation
+
+**3. Iron Law**
+
+$T = D_{vol}/BW + O/(R_p \cdot \eta) + L_{lat}$. Three levers.
+
+**4. Silicon Contract**
+
+Every architecture bets on which hardware resource it saturates.
+
+**Lighthouse:** ResNet-50 is compute-bound; GPT-2/Llama is bandwidth-bound. Same equation, different dominant term.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min]
 % -- LINK: From the full map to the first four invariants
 The map showed four phases. This slide details Foundations and Build ---
@@ -267,40 +317,44 @@ dataset changes the model's behavior as fundamentally as changing code.
 [CORE] Pairs with the Optimize and Deploy slide.
 IF AHEAD: ``Can a model switch from compute-bound to bandwidth-bound?''
 IF SHORT: Name the four invariants with one sentence each.
-}
+```
 
-[T]
-  
-    {computestroke}{**I: Foundations**} --- Where complexity originates
+</details>
 
-    {0.15cm}
-    **1. Data as Code**\\
-    { System behavior $ f({Data})$. Changing data changes the program.}
+## Optimize & Deploy (Invariants 5–13)
 
-    {0.1cm}
-    **2. Data Gravity**\\
-    { $C_{move}({Data})  C_{move}({Compute})$. Move compute to data.}
+[Original slide 8](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L380)
 
-    {0.15cm}
-    {Lighthouse:}{DLRM is Data Gravity embodied --- TB-scale embeddings anchor the architecture.}
-  
-  
-    {datastroke}{**II: Build**} --- How complexity becomes computation
+**III: Optimize** — Constraints shape trade-offs
 
-    {0.15cm}
-    **3. Iron Law**\\
-    { $T = D_{vol}/BW + O/(R_p  ) + L_{lat}$. Three levers.}
+**5. Pareto Frontier** — No free improvements
 
-    {0.1cm}
-    **4. Silicon Contract**\\
-    { Every architecture bets on which hardware resource it saturates.}
+**6. Arithmetic Intensity** — Diagnoses bottleneck
 
-    {0.15cm}
-    {Lighthouse:}{ResNet-50 is compute-bound; GPT-2/Llama is bandwidth-bound. Same equation, different dominant term.}
+**7. Energy-Movement** — Data locality dominates
 
-## Optimize & Deploy (Invariants 5--13)
+**8. Amdahl's Law** — Serial fraction caps gains
 
-{
+MobileNetV2 navigates all four: depthwise separable convolutions reshape Pareto; INT8 exploits arithmetic intensity; energy savings respect Energy-Movement; Amdahl's explains preprocessing bottleneck.
+
+**IV: Deploy** — Reality defeats assumptions
+
+**9. Verification Gap** — Statistical testing only
+
+**10. Statistical Drift** — Accuracy erodes over time
+
+**11. Training-Serving Skew** — Subtle divergences
+
+**12. Latency Budget** — P99 is the hard constraint
+
+**13. Bias Feedback** — Errors compound each cycle
+
+DLRM loses revenue if Training-Serving Skew corrupts features. GPT-2/Llama must respect Latency Budget. Bias Feedback: $\Delta_{\text{err},g}(n) \approx \Delta_{\text{err},g}(0) \cdot \alpha_{\text{fb}}^n$, $\alpha_{\text{fb}}>1$ — silent disparity amplification.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [4 min]
 % -- LINK: From Foundations/Build to the second half of the course
 Invariants 1--4 set the problem. Invariants 5--13 constrain solutions
@@ -335,37 +389,36 @@ not a policy choice.
 [CORE] Students must know all 13 for synthesis exercises.
 IF AHEAD: ``Which invariant is most often violated in practice?''
 IF SHORT: Name each invariant with its one-line summary.
-}
+```
 
-[T]
-  
-    {routingstroke}{**III: Optimize**} --- Constraints shape trade-offs
-
-    {0.1cm}
-    **5. Pareto Frontier** --- No free improvements\\
-    **6. Arithmetic Intensity** --- Diagnoses bottleneck\\
-    **7. Energy-Movement** --- Data locality dominates\\
-    **8. Amdahl's Law** --- Serial fraction caps gains
-
-    {0.15cm}
-    { MobileNetV2 navigates all four: depthwise separable convolutions reshape Pareto; INT8 exploits arithmetic intensity; energy savings respect Energy-Movement; Amdahl's explains preprocessing bottleneck.}
-  
-  
-    {errorstroke}{**IV: Deploy**} --- Reality defeats assumptions
-
-    {0.1cm}
-    **9. Verification Gap** --- Statistical testing only\\
-    **10. Statistical Drift** --- Accuracy erodes over time\\
-    **11. Training-Serving Skew** --- Subtle divergences\\
-    **12. Latency Budget** --- P99 is the hard constraint\\
-    **13. Bias Feedback** --- Errors compound each cycle
-
-    {0.1cm}
-    { DLRM loses revenue if Training-Serving Skew corrupts features. GPT-2/Llama must respect Latency Budget. Bias Feedback: $_{{err},g}(n)  _{{err},g}(0)  _{{fb}}^n$, $_{{fb}}>1$ --- silent disparity amplification.}
+</details>
 
 ## The Thirteen Invariants: Quick Reference
 
-{
+[Original slide 9](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L449)
+
+| **#** | **Invariant** | **Equation / Principle** | **Diagnoses** |
+| --- | --- | --- | --- |
+| 1 | Data as Code | $\text{Behavior} \approx f(\text{Data})$ | Why data changes break models |
+| 2 | Data Gravity | $C_{move}(\text{Data}) \gg C_{move}(\text{Compute})$ | Where to place compute |
+| 3 | Iron Law | $T = D/BW + O/(R_p \cdot \eta) + L$ | Which term to optimize |
+| 4 | Silicon Contract | Arch bets on hardware resource | Why accelerators differ |
+| 5 | Pareto Frontier | No free improvements | What you trade for speed |
+| 6 | Arith. Intensity | FLOPs/byte $\to$ bottleneck | Compute- vs memory-bound |
+| 7 | Energy-Movement | $E_{move} \gg E_{compute}$ | Where energy goes |
+| 8 | Amdahl's Law | $S = 1/(f_s + (1-f_s)/N)$ | Why parallel gains cap |
+| 9 | Verification Gap | Statistical testing only | Why testing is insufficient |
+| 10 | Statistical Drift | $A(t) = A_0 - \lambda \cdot \Delta$ | When to retrain |
+| 11 | Train-Serve Skew | Subtle divergences | Silent accuracy loss |
+| 12 | Latency Budget | p99 is the hard constraint | How to size serving |
+| 13 | Bias Feedback | $\Delta_{\text{err},g}(n) \approx \Delta_{\text{err},g}(0) \cdot \alpha_{\text{fb}}^n$ | When subgroup errors compound |
+
+**These are physics, not best practices.** Derived from information theory, queuing theory, and thermodynamics. Valid in 10 years.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: From the invariant deep dive to a photographable reference
 Students just learned all thirteen. This dense reference slide is designed
@@ -376,7 +429,7 @@ to be photographed and used as a study sheet.
 one-line equation or principle and the chapter where we derived it.
 The right column tells you what each invariant diagnoses.'' Point to
 row 13: ``Bias Feedback is the 13th invariant and the bridge to
-Ch. 15. It says errors against subgroups compound. $_{{fb}}>1$
+Ch.~15. It says errors against subgroups compound. $\alpha_{\text{fb}}>1$
 is the signal that silent disparity amplification is underway.''
 Point to the bottom card: ``These are physics, not best practices. They
 will still be valid in 10 years.''
@@ -395,37 +448,32 @@ in the Deploy phase, not an ethical add-on.
 % -- FLEX: [CORE] The definitive reference slide for the course
 [CORE] Students will photograph this. Display for at least 30 seconds.
 IF SHORT: Display without narration, let students photograph it.
-}
+```
 
-{}{0.85}
-{tabular}{@{}rlp{4.4cm}l@{}}
-  
-  **\#** & **Invariant** & **Equation / Principle** & **Diagnoses** \\
-  
-  1 & Data as Code & ${Behavior}  f({Data})$ & Why data changes break models \\
-  2 & Data Gravity & $C_{move}({Data})  C_{move}({Compute})$ & Where to place compute \\
-  3 & Iron Law & $T = D/BW + O/(R_p  ) + L$ & Which term to optimize \\
-  4 & Silicon Contract & Arch bets on hardware resource & Why accelerators differ \\
-  5 & Pareto Frontier & No free improvements & What you trade for speed \\
-  6 & Arith.\ Intensity & FLOPs/byte $$ bottleneck & Compute- vs memory-bound \\
-  7 & Energy-Movement & $E_{move}  E_{compute}$ & Where energy goes \\
-  8 & Amdahl's Law & $S = 1/(f_s + (1-f_s)/N)$ & Why parallel gains cap \\
-  9 & Verification Gap & Statistical testing only & Why testing is insufficient \\
-  10 & Statistical Drift & $A(t) = A_0 -   $ & When to retrain \\
-  11 & Train-Serve Skew & Subtle divergences & Silent accuracy loss \\
-  12 & Latency Budget & p99 is the hard constraint & How to size serving \\
-  13 & Bias Feedback & $_{{err},g}(n)  _{{err},g}(0)  _{{fb}}^n$ & When subgroup errors compound \\
-  
-{tabular}
+</details>
 
-{0.08cm}
-{mlsyscard}{crimson}
-{**These are physics, not best practices.** Derived from information theory, queuing theory, and thermodynamics. Valid in 10 years.}
-{mlsyscard}
+## Conservation of Complexity
+
+[Original slide 10](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L515)
+
+Complexity cannot be destroyed — only moved
+
+between Data, Algorithm, and Machine.
 
 ## Conservation of Complexity in Action
 
-{
+[Original slide 11](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L520)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/16_conclusion/images/conservation-of-complexity.svg]]
+
+Harvard Edge ML Systems Book contributors, [conservation-of-complexity.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/images/conservation-of-complexity.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Rule:** Every optimization is a complexity *transfer*, not a complexity *elimination*.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min]
 % -- LINK: From the thirteen invariants to the meta-principle that unifies them
 The invariants are the laws. Conservation of Complexity is the
@@ -453,18 +501,28 @@ an elimination. Trace the compensating cost before declaring victory.
 [CORE] This is the single most important intellectual contribution.
 IF AHEAD: ``Is there an optimization that truly eliminates complexity?''
 IF SHORT: Show the diagram, state the rule, skip the question.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{conservation-of-complexity.pdf}
-
-{0.1cm}
-{Rule:}{Every optimization is a complexity *transfer*, not a complexity *elimination*.}
+</details>
 
 ## Conservation in Action: INT4 Quantization
 
-{
+[Original slide 12](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L560)
+
+**INT4 Quantization: Where does the complexity go?**
+
+| **Axis** | **Reduced** | **Increased** |
+| --- | --- | --- |
+| **Machine** | Memory: 140 GB $\to$ 35 GB; Throughput: 2$\times$ | — |
+| **Algorithm** | — | Calibration: production data, outlier handling |
+| **Data** | — | Monitor quant error; FP fallback maintained |
+
+**Net complexity:** Unchanged. Memory savings (Machine) transferred to calibration (Algorithm) and monitoring (Data). Every optimization report must include “complexity transferred to.”
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min]
 % -- LINK: From the abstract principle to a concrete worked example
 The previous slide showed Conservation of Complexity with a diagram.
@@ -472,7 +530,7 @@ This slide traces a specific decision --- INT4 quantization --- to show
 exactly where complexity moves.
 
 % -- NARRATE: Walk through the three-column transfer
-``Quantizing to INT4 saves 75% memory and doubles throughput. But where
+``Quantizing to INT4 saves 75\% memory and doubles throughput. But where
 did the complexity go? Column 1: the memory savings are real --- model
 shrinks from 140 GB to 35 GB. Column 2: calibration now requires
 production-representative data, outlier handling, and per-channel vs
@@ -496,30 +554,24 @@ transferred to'' section.
 [CORE] The worked example makes the abstract principle tangible.
 IF AHEAD: ``What optimization truly eliminates complexity?'' (None.)
 IF SHORT: Show the table, state the punchline, move on.
-}
+```
 
-**INT4 Quantization: Where does the complexity go?**
-
-{0.05cm}
-{}{0.95}
-{tabular}{@{}lp{3.5cm}p{3.5cm}@{}}
-  
-  **Axis** & **Reduced** & **Increased** \\
-  
-  {routingstroke}{**Machine**} & Memory: 140 GB $$ 35 GB; Throughput: 2$×$ & --- \\
-  {computestroke}{**Algorithm**} & --- & Calibration: production data, outlier handling \\
-  {datastroke}{**Data**} & --- & Monitor quant error; FP fallback maintained \\
-  
-{tabular}
-
-{0.05cm}
-{mlsyscard}{errorstroke}
-{**Net complexity:** Unchanged. Memory savings (Machine) transferred to calibration (Algorithm) and monitoring (Data). Every optimization report must include ``complexity transferred to.''}
-{mlsyscard}
+</details>
 
 ## Quick Check
 
-{
+[Original slide 13](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L617)
+
+Quick check — no peeking.
+
+ Name the four phases that organize the thirteen quantitative invariants.
+
+30 seconds — then we continue.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min]
 % -- NARRATE: Cue the retrieval exercise
 ``Close your notes. 30 seconds. Name the four phases that organize the
@@ -528,15 +580,24 @@ thirteen invariants.'' [Answer: Foundations, Build, Optimize, Deploy.]
 % -- FLEX: [CORE] Reinforces the four-phase framework before synthesis
 [CORE] Students must recall the framework for the next exercise.
 IF SHORT: Reduce to 15 seconds.
-}
+```
 
- Quick check --- no peeking.\\[0.5cm]
- Name the four phases that organize the thirteen quantitative invariants.\\[0.3cm]
-{ 30 seconds --- then we continue.}
+</details>
 
 ## One Decision, Six Invariants
 
-{
+[Original slide 14](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L637)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/16_conclusion/images/iron-law-retrospective.svg]]
+
+Harvard Edge ML Systems Book contributors, [iron-law-retrospective.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/images/iron-law-retrospective.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Profile first. Optimize second.** Identify the dominant Iron Law term before investing effort.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [4 min]
 % -- LINK: From Conservation of Complexity to a concrete trace
 The meta-principle says complexity transfers. This slide traces one
@@ -567,25 +628,47 @@ Bias Feedback (\#13) is also relevant if the quantized model is deployed
 in a fairness-sensitive context --- extend the trace if time allows.
 IF AHEAD: ``Trace the same six invariants for knowledge distillation.''
 IF SHORT: Show the diagram, name the six invariants, skip the question.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{iron-law-retrospective.pdf}
-
-{0.1cm}
-{**Profile first. Optimize second.** Identify the dominant Iron Law term before investing effort.}
+</details>
 
 ## Your Turn: Trace the Invariants
 
-{
+[Original slide 15](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L681)
+
+Trace the Invariants
+
+A colleague proposes **pruning** a ResNet-50 model to 50% sparsity for mobile deployment.
+
+**Which invariants are affected?**
+
+- Which Iron Law terms change?
+- What does the Pareto Frontier predict?
+- What must you check for Training-Serving Skew?
+
+(90 seconds — then discuss with a neighbor)
+
+**Solution:**
+
+**Iron Law:** Compute term (fewer FLOPs) + Data term (fewer params to load)
+
+**Pareto:** Trading capacity for speed; accuracy drops
+
+**Silicon Contract:** Does hardware exploit sparsity?
+
+**Skew:** Pruned inference path must match training behavior
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [4 min]
 % -- LINK: From the quantization trace to a new optimization decision
 Students saw quantization traced through six invariants. Now they do
 the same for pruning --- a different optimization, same framework.
 
 % -- NARRATE: Walk through the solution after the reveal
-``Pruning to 50% sparsity: Iron Law Compute term shrinks (fewer FLOPs)
+``Pruning to 50\% sparsity: Iron Law Compute term shrinks (fewer FLOPs)
 AND Data term shrinks (fewer parameters to load). Pareto Frontier
 predicts accuracy-speed trade-off. Silicon Contract determines whether
 the hardware can exploit sparsity (sparse tensor cores vs dense). Training-
@@ -593,13 +676,13 @@ Serving Skew: pruned inference path must match training behavior --- if
 you prune post-training, the inference graph differs from training.''
 
 % -- ENGAGE: Peer Instruction Protocol
-Present problem (30s). Individual work (60s). If 30--70% get all four
+Present problem (30s). Individual work (60s). If 30--70\% get all four
 invariants: pair discussion (90s), re-vote. Reveal solution.
 [Expected errors: missing Silicon Contract --- students forget that
 hardware must support sparsity for the optimization to matter.]
 
 % -- WARN: Students assume pruning always helps
-Common error: students prune to 50% and expect 2x speedup. Correct
+Common error: students prune to 50\% and expect 2x speedup. Correct
 framing: if the hardware does not have sparse execution units, the
 pruned model runs at the same speed as the dense model.
 
@@ -607,40 +690,30 @@ pruned model runs at the same speed as the dense model.
 [CORE] This is the exam-level skill: trace a decision through invariants.
 IF AHEAD: ``What if you combine pruning AND quantization?''
 IF SHORT: Show the solution directly, skip peer discussion.
-}
+```
 
-[T]
-  
-    { Trace the Invariants}
-
-    {0.2cm}
-    A colleague proposes **pruning** a ResNet-50 model to 50% sparsity for mobile deployment.
-
-    {0.15cm}
-    **Which invariants are affected?**
-    {0pt}
-- Which Iron Law terms change?
-- What does the Pareto Frontier predict?
-- What must you check for Training-Serving Skew?
-    
-
-    {{midgray}{(90 seconds --- then discuss with a neighbor)}}
-  
-  
-    
-    {mlsyscard}{datastroke}
-    **Solution:**\\[0.1cm]
-    {
-    **Iron Law:** Compute term (fewer FLOPs) + Data term (fewer params to load)\\[0.05cm]
-    **Pareto:** Trading capacity for speed; accuracy drops\\[0.05cm]
-    **Silicon Contract:** Does hardware exploit sparsity?\\[0.05cm]
-    **Skew:** Pruned inference path must match training behavior
-    }
-    {mlsyscard}
+</details>
 
 ## Five Lighthouses, Five Bottlenecks
 
-{
+[Original slide 16](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L751)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/16_conclusion/images/course-journey-timeline.svg]]
+
+Harvard Edge ML Systems Book contributors, [course-journey-timeline.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/images/course-journey-timeline.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+| **Lighthouse** | **Bottleneck** | **Iron Law** | **Key Insight** |
+| --- | --- | --- | --- |
+| ResNet-50 | Compute | $O/R_p$ | Batch size transforms bound |
+| GPT-2/Llama | Memory BW | $D/BW$ | KV-cache dominates serving |
+| MobileNetV2 | Efficiency | All | Pareto across 7 phases |
+| DLRM | Capacity | $D/BW$ | TB embeddings anchor arch. |
+| KWS | Every resource | All | Sub-MB, microwatt budget |
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min]
 % -- LINK: From invariants to the models that embody them
 The invariants are abstract. The Lighthouses make them concrete ---
@@ -667,30 +740,31 @@ governs all five --- different dominant terms.
 [CORE] Students must connect Lighthouses to invariants.
 IF AHEAD: ``Design a sixth Lighthouse for a generative image model.''
 IF SHORT: Show the timeline and table without discussion.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{course-journey-timeline.pdf}
-
-{0.05cm}
-
-{}{0.95}
-{tabular}{@{}llll@{}}
-  
-  **Lighthouse** & **Bottleneck** & **Iron Law** & **Key Insight** \\
-  
-  ResNet-50    & {computestroke}{Compute}  & $O/R_p$ & Batch size transforms bound \\
-  GPT-2/Llama  & {datastroke}{Memory BW}  & $D/BW$  & KV-cache dominates serving \\
-  MobileNetV2  & {routingstroke}{Efficiency} & All    & Pareto across 7 phases \\
-  DLRM         & {errorstroke}{Capacity}   & $D/BW$  & TB embeddings anchor arch. \\
-  KWS          & Every resource & All     & Sub-MB, microwatt budget \\
-  
-{tabular}
+</details>
 
 ## The Cost of a Token
 
-{
+[Original slide 17](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L802)
+
+**Llama-2-70B inference on NVIDIA H100**
+
+| **Quantity** | **Value** | **Calculation** | **Time** |
+| --- | --- | --- | --- |
+| Model size ($D_{vol}$) | 70B $\times$ 2 B = 140 GB |  |  |
+| Compute ($O$) | 2 $\times$ 70B = 140 GFLOPs |  |  |
+| Memory time | 140 GB / 3.35 TB/s | $D_{vol}/BW$ | **41.8 ms** |
+| Compute time | 140 GF / 989 TF | $O/R_p$ | **0.14 ms** |
+
+**Ratio:** Memory time is **$\approx$300$\times$** larger than compute time. Optimizing compute without addressing memory wastes 100% of effort.
+
+**Fix:** Batch users to reuse $D_{vol}$ (increase arith. intensity) **or** quantize to INT4 (reduce $D_{vol}$).
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [4 min]
 % -- LINK: From Lighthouse overview to a detailed Iron Law worked example
 The Lighthouse table said GPT-2/Llama is bandwidth-bound. This slide
@@ -701,12 +775,12 @@ proves it quantitatively with real H100 numbers.
 TB/s = 41.8 ms. Compute: 140 GFLOPs / 989 TFLOPS = 0.14 ms. Ratio:
 memory is 300x larger than compute.'' Point to the error card: ``An
 engineer who optimizes compute kernels without addressing memory wastes
-100% of their effort.'' Then the fix: ``Batch users to amortize the
+100\% of their effort.'' Then the fix: ``Batch users to amortize the
 weight load, or quantize to INT4 to halve the weight size.''
 
 % -- ENGAGE: Identify the fix
 Ask: ``What are two ways to fix this?'' [Expected: batching (increases
-arithmetic intensity) and quantization (reduces D_vol).]
+arithmetic intensity) and quantization (reduces D\_vol).]
 
 % -- WARN: Students optimize compute for bandwidth-bound models
 Common error: students profile FLOPs utilization and optimize compute
@@ -717,37 +791,33 @@ Iron Law tells you which term to optimize BEFORE you start.
 [CORE] The 300x ratio is the most memorable number in the capstone.
 IF AHEAD: ``At what batch size does this model become compute-bound?''
 IF SHORT: Show the table and the 300x ratio, skip the question.
-}
+```
 
-**Llama-2-70B inference on NVIDIA H100**
-
-{0.05cm}
-{}{1.05}
-{
-{tabular}{@{}lllr@{}}
-  
-  **Quantity** & **Value** & **Calculation** & **Time** \\
-  
-  Model size ($D_{vol}$) & 70B $×$ 2 B = 140 GB & & \\
-  Compute ($O$) & 2 $×$ 70B = 140 GFLOPs & & \\
-  
-  {datastroke}{Memory time} & 140 GB / 3.35 TB/s & $D_{vol}/BW$ & **41.8 ms** \\
-  {computestroke}{Compute time} & 140 GF / 989 TF & $O/R_p$ & **0.14 ms** \\
-  
-{tabular}
-}
-
-{0.1cm}
-{mlsyscard}{errorstroke}
-{**Ratio:** Memory time is **$$300$×$** larger than compute time. Optimizing compute without addressing memory wastes 100% of effort.}
-{mlsyscard}
-
-{0.05cm}
-{**Fix:** Batch users to reuse $D_{vol}$ (increase arith.\ intensity) **or** quantize to INT4 (reduce $D_{vol}$).}
+</details>
 
 ## GPT-2: One Model, Sixteen Chapters
 
-{
+[Original slide 18](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L861)
+
+| **Ch** | **Lens** | **GPT-2 Insight** |
+| --- | --- | --- |
+| 1 | Iron Law | 1.5B params: bandwidth-bound at batch=1 |
+| 4 | Data Engineering | WebText: 40 GB curated from 8M web pages |
+| 5 | Computation | Attention: $O(n^2)$ sequence, dominates FLOPs |
+| 6 | Architecture | Transformer: parallel training, sequential decode |
+| 8 | Training | $6 \times 1.5\text{B} \times 300\text{B} = 2.7 \times 10^{18}$ FLOPs |
+| 10 | Compression | DistilGPT-2: 6$\times$ smaller, 97% quality |
+| 11 | Hardware | HBM bandwidth = bottleneck, not TFLOPS |
+| 13 | Serving | KV cache grows per token; continuous batching |
+| 14 | Operations | Drift: distribution shift from user behavior |
+| 15 | Responsibility | carbon boundaries; serving cost |
+
+**Key:** Same model, ten different lenses. **The system is the model** — architecture is 5% of the story.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [4 min]
 % -- LINK: From the Lighthouse overview to a single model traced through the entire course
 The table showed five Lighthouses with their bottlenecks. This slide
@@ -760,7 +830,7 @@ systems thinking becomes mandatory. Ch4: WebText curation, data quality
 determines model quality. Ch5: Transformer attention is O(n\^{}2) in
 sequence length. Ch6: Architecture choice drives the bandwidth-bound
 profile. Ch8: Training cost = 6ND FLOPs, hundreds of GPU-days. Ch10:
-Distillation to DistilGPT-2 (6x smaller, 97% quality). Ch11: Memory
+Distillation to DistilGPT-2 (6x smaller, 97\% quality). Ch11: Memory
 bandwidth is the bottleneck, not compute. Ch13: Continuous batching +
 KV cache management for serving. Ch14: Drift monitoring for production
 deployment. Ch15: Carbon cost of training and inference.''
@@ -775,38 +845,34 @@ multi-lens analysis.]
 % -- WARN: What students will get wrong on THIS topic
 Common error: students think of GPT-2 as a model architecture. Correct
 framing: GPT-2 is a system --- data pipeline + training + compression +
-serving + monitoring. The architecture is 5% of the story.
+serving + monitoring. The architecture is 5\% of the story.
 
 % -- FLEX: [CORE] The culminating Lighthouse journey
 [CORE] This is the single most important synthesis moment.
 IF AHEAD: ``Trace the same journey for MobileNetV2. Where does it differ?''
 IF SHORT: Cover chapters 1, 8, 11, 13 only.
-}
+```
 
-{}{0.85}
-{tabular}{@{}rp{2.6cm}p{5.5cm}@{}}
-  
-  **Ch** & **Lens** & **GPT-2 Insight** \\
-  
-  1  & Iron Law           & 1.5B params: bandwidth-bound at batch=1 \\
-  4  & Data Engineering   & WebText: 40 GB curated from 8M web pages \\
-  5  & Computation        & Attention: $O(n^2)$ sequence, dominates FLOPs \\
-  6  & Architecture       & Transformer: parallel training, sequential decode \\
-  8  & Training           & $6 × 1.5{B} × 300{B} = 2.7 × 10^{18}$ FLOPs \\
-  10 & Compression        & DistilGPT-2: 6$×$ smaller, 97% quality \\
-  11 & Hardware           & HBM bandwidth = bottleneck, not TFLOPS \\
-  13 & Serving            & KV cache grows per token; continuous batching \\
-  14 & Operations         & Drift: distribution shift from user behavior \\
-  15 & Responsibility     & carbon boundaries; serving cost \\
-  
-{tabular}
-
-{0.05cm}
-{Key:}{Same model, ten different lenses. **The system is the model** --- architecture is 5% of the story.}
+</details>
 
 ## Discussion: What Would You Change?
 
-{
+[Original slide 19](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L923)
+
+Turn and Talk (90 seconds)
+
+Knowing what you know now about the thirteen invariants,
+
+**what would you do differently** in a past ML project?
+
+Name the invariant you wish you had applied.
+
+Be specific: which decision, which invariant, which outcome.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min]
 % -- LINK: From worked examples to personal reflection
 Students traced invariants through optimization decisions. Now they
@@ -830,24 +896,29 @@ systems thinking changes how you approach every single-component decision.
 connect abstract invariants to their own experience.
 IF SHORT: Do a show-of-hands: ``How many would change a data decision?
 A compute decision? A deployment decision?''
-}
+```
 
-{0.8cm}
-{ Turn and Talk {midgray}{(90 seconds)}}
-
-{0.6cm}
-{ Knowing what you know now about the thirteen invariants,\\[0.2cm]
-**what would you do differently** in a past ML project?}
-
-{0.6cm}
-{ Name the invariant you wish you had applied.}
-
-{0.6cm}
-{{lightgray}{Be specific: which decision, which invariant, which outcome.}}
+</details>
 
 ## Four Deployment Paradigms
 
-{
+[Original slide 20](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L970)
+
+| **Paradigm** | **Dominant Invariants** | **Key Challenge** | **Lighthouse** |
+| --- | --- | --- | --- |
+| **Cloud** | Iron Law, Silicon Contract | Throughput at scale | ResNet, DLRM |
+| **Edge/Mobile** | Energy-Movement, Pareto | Power & latency budgets | MobileNetV2 |
+| **Gen. AI** | Arith. Intensity, Latency | Memory-bound decoding | GPT-2/Llama |
+| **TinyML** | All thirteen simultaneously | Every byte, every mW | KWS |
+
+What unites these paradigms is not their hardware but their **physics**: the same invariants govern all of them.
+
+**Pattern:** Constraints at the edge catalyze innovation that benefits all tiers.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min]
 % -- LINK: From retrospective to forward-looking paradigms
 Students reflected on past projects. Now we look forward: the same
@@ -873,31 +944,52 @@ term changes. Mastering the framework means mastering all paradigms.
 [OPTIONAL] Students can study the table independently.
 IF SHORT: Show the table, read the crimson card, move on.
 IF AHEAD: ``What new paradigm might emerge in the next 5 years?''
-}
+```
 
-{}{1.0}
-{tabular}{@{}lp{2.8cm}p{2.8cm}l@{}}
-  
-  **Paradigm** & **Dominant Invariants** & **Key Challenge** & **Lighthouse** \\
-  
-  **Cloud**       & Iron Law, Silicon Contract & Throughput at scale         & ResNet, DLRM \\
-  **Edge/Mobile**  & Energy-Movement, Pareto   & Power & latency budgets   & MobileNetV2 \\
-  **Gen.\ AI** & Arith.\ Intensity, Latency & Memory-bound decoding & GPT-2/Llama \\
-  **TinyML**       & All thirteen simultaneously & Every byte, every mW       & KWS \\
-  
-{tabular}
-
-{0.15cm}
-{mlsyscard}{crimson}
-{ What unites these paradigms is not their hardware but their **physics**: the same invariants govern all of them.}
-{mlsyscard}
-
-{0.05cm}
-{{Pattern:}{Constraints at the edge catalyze innovation that benefits all tiers.}}
+</details>
 
 ## Your Turn: Capstone Deployment Analysis
 
-{
+[Original slide 21](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L1023)
+
+Capstone: Deploy Llama-3-8B to Edge
+
+**Target:** Jetson Orin NX
+
+- 32 GB LPDDR5, 102 GB/s bandwidth
+- 100 TOPS (INT8)
+- Power budget: 25 W
+
+**Apply 3 invariants to assess feasibility:**
+
+1. **Iron Law:** Does it fit? How fast?
+2. **Pareto:** What must you trade?
+3. **Latency Budget:** Meets interactive threshold?
+
+(90 seconds — show your work)
+
+**Solution:**
+
+**FP16:** 16 GB (fits), but
+
+$16/102 = 157$ ms/tok = 6.4 tok/s
+
+**Too slow** ($<$20 tok/s)
+
+**INT4:** 4 GB, $4/102 = 39$ ms
+
+= 25.6 tok/s ✓
+
+**TTFT** (512 tok): $\sim$2 s
+
+Acceptable for edge chatbot.
+
+**Verdict:** **Feasible** with INT4.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [5 min]
 % -- LINK: From deployment paradigms to a comprehensive invariant application
 Students have seen all thirteen invariants and four paradigms. This
@@ -911,10 +1003,10 @@ slow for interactive use (need $>$20 tok/s). Step 2: Pareto --- quantize
 to INT4: 4 GB model, 4 GB / 102 GB/s = 39 ms = 25.6 tok/s. Meets
 target. Step 3: Latency Budget --- prefill for 512 tokens at INT4:
 roughly 2 seconds TTFT. Acceptable for edge chatbot.''
-Verdict: **feasible with INT4 quantization**.
+Verdict: \textbf{feasible with INT4 quantization}.
 
 % -- ENGAGE: Peer Instruction Protocol
-Present problem (30s). Individual work (90s). If 30--70% correct:
+Present problem (30s). Individual work (90s). If 30--70\% correct:
 pair discussion (90s), re-vote.
 [Expected errors: forgetting to check if the model fits in memory,
 or not converting FP16 to INT4 before calculating bandwidth time.]
@@ -928,49 +1020,31 @@ speed (bandwidth), and quality (accuracy after quantization).
 [CORE] This is exam-level difficulty and synthesizes the entire course.
 IF AHEAD: ``What if the target device is Arduino Nicla (384 KB SRAM)?''
 IF SHORT: Show the solution directly, skip peer discussion.
-}
+```
 
-[T]
-  
-    { Capstone: Deploy Llama-3-8B to Edge}
-
-    {0.1cm}
-    **Target:** Jetson Orin NX
-    {0pt}
-- 32 GB LPDDR5, 102 GB/s bandwidth
-- 100 TOPS (INT8)
-- Power budget: 25 W
-    
-
-    {0.05cm}
-    **Apply 3 invariants to assess feasibility:**
-    {0pt}
-- **Iron Law:** Does it fit? How fast?
-- **Pareto:** What must you trade?
-- **Latency Budget:** Meets interactive threshold?
-    
-
-    {{midgray}{(90 seconds --- show your work)}}
-  
-  
-    
-    {mlsyscard}{datastroke}
-    **Solution:**\\[0.05cm]
-    {
-    **FP16:** 16 GB (fits), but\\
-    $16/102 = 157$ ms/tok = 6.4 tok/s\\
-    {errorstroke}{**Too slow**} ($<$20 tok/s)\\[0.05cm]
-    **INT4:** 4 GB, $4/102 = 39$ ms\\
-    = 25.6 tok/s {datastroke}{}\\[0.05cm]
-    **TTFT** (512 tok): $$2 s\\
-    Acceptable for edge chatbot.\\[0.05cm]
-    **Verdict:** {datastroke}{**Feasible**} with INT4.
-    }
-    {mlsyscard}
+</details>
 
 ## What Volume II Covers
 
-{
+[Original slide 22](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L1100)
+
+| **Dimension** | **Volume I** | **Volume II** |
+| --- | --- | --- |
+| **Scope** | 1 machine, 1–8 GPUs | Multiple machines, 100s–1000s GPUs |
+| **Interconnect** | PCIe / NVLink (900 GB/s) | InfiniBand / Ethernet (50 GB/s) |
+| **Memory** | Shared (unified address) | Distributed (message passing) |
+| **Parallelism** | ` DataParallel ` | Data + Model + Pipeline parallel |
+| **Failure** | Restart the job | Checkpoint every 10 min |
+| **Orchestration** | Single process | Slurm, Kubernetes, Ray |
+
+**Why fleet scale is qualitatively different:** A 1,000-GPU pool with multi-year per-GPU MTTF has a cluster MTBF measured in *hours*. Failure planning shifts from “if” to “when.”
+
+**Same physics, new variables.** The Iron Law still governs, but $L_{lat}$ now includes network hops, gradient sync, and checkpoint overhead.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min]
 % -- LINK: From single-node paradigms to fleet-scale systems
 Volume I mastered the single node: 1--8 GPUs, shared memory, PCIe/NVLink.
@@ -1004,35 +1078,37 @@ qualitatively different, not just quantitatively larger.
 % -- FLEX: [CORE] Creates anticipation for Volume II
 [CORE] End on this slide before the Wrap-Up to bridge the volumes.
 IF SHORT: Show the table and state the key insight.
-}
+```
 
-{}{0.95}
-{tabular}{@{}lll@{}}
-  
-  **Dimension** & **Volume I** & **Volume II** \\
-  
-  **Scope** & 1 machine, 1--8 GPUs & Multiple machines, 100s--1000s GPUs \\
-  **Interconnect** & PCIe / NVLink (900 GB/s) & InfiniBand / Ethernet (50 GB/s) \\
-  **Memory** & Shared (unified address) & Distributed (message passing) \\
-  **Parallelism** & {DataParallel} & Data + Model + Pipeline parallel \\
-  **Failure** & Restart the job & Checkpoint every 10 min \\
-  **Orchestration** & Single process & Slurm, Kubernetes, Ray \\
-  
-{tabular}
-
-{0.06cm}
-{mlsyscard}{errorstroke}
-{**Why fleet scale is qualitatively different:** A 1,000-GPU pool with multi-year per-GPU MTTF has a cluster MTBF measured in *hours*. Failure planning shifts from ``if'' to ``when.''}
-{mlsyscard}
-
-{0.04cm}
-{mlsyscard}{crimson}
-{**Same physics, new variables.** The Iron Law still governs, but $L_{lat}$ now includes network hops, gradient sync, and checkpoint overhead.}
-{mlsyscard}
+</details>
 
 ## Compound AI Systems
 
-{
+[Original slide 23](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L1164)
+
+**Beyond monolithic models:**
+
+Chain specialized components rather than scaling one model:
+
+- **Retriever** finds relevant information
+- **Reasoner** processes it
+- **Verifier** checks the output
+
+Each component has its own **Silicon Contract** and **Arith. Intensity** profile. Interfaces create natural **monitoring points**.
+
+|  | **Monolithic** | **Compound** |
+| --- | --- | --- |
+| Update | Retrain all | Per-component |
+| Debug | Black box | Inspect steps |
+| Monitor | End-to-end | Per-interface |
+| Optimize | One profile | Per-component |
+
+Source on slide: Zaharia et al., “The Shift to Compound AI Systems,” 2024
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min]
 % -- LINK: From deployment paradigms to architectural evolution
 The paradigms showed different dominant invariants. Compound AI systems
@@ -1062,46 +1138,26 @@ systems find better trade-offs by specializing components.
 [CORE] This connects to Volume II's distributed systems theme.
 IF AHEAD: ``How does Conservation of Complexity apply to compound systems?''
 IF SHORT: Show the table comparison, skip the question.
-}
+```
 
-[T]
-  
-    **Beyond monolithic models:**
-
-    {0.1cm}
-    Chain specialized components rather than scaling one model:
-    {0pt}
-- **Retriever** finds relevant information
-- **Reasoner** processes it
-- **Verifier** checks the output
-    
-
-    {0.1cm}
-    {mlsyscard}{computestroke}
-    { Each component has its own **Silicon Contract** and **Arith.\ Intensity** profile. Interfaces create natural **monitoring points**.}
-    {mlsyscard}
-  
-  
-    {}{1.1}
-    {
-    {tabular}{@{}lll@{}}
-      
-      & **Monolithic** & **Compound** \\
-      
-      Update    & Retrain all   & Per-component \\
-      Debug     & Black box     & Inspect steps \\
-      Monitor   & End-to-end    & Per-interface \\
-      Optimize  & One profile   & Per-component \\
-      
-    {tabular}
-    }
-  
-
-{Zaharia et al., ``The Shift to Compound AI Systems,'' 2024}
+</details>
 
 ## Fallacies (1/2)
 
-{
+[Original slide 24](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L1239)
+
+**Fallacy:** *Systems engineering complexity disappears with better tools.*
+
+Tools abstract complexity; they do not eliminate it. The Conservation of Complexity guarantees that simplifying one interface pushes complexity to another.
+
+**Fallacy:** *Mastering individual components equals mastering the system.*
+
+A data schema change cascades through training, breaks quantization assumptions, and triggers silent accuracy degradation. Integration complexity exceeds the sum of component complexities.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- NARRATE: Read each fallacy with its rebuttal
 ``Fallacy 1: Better tools eliminate complexity. Reality: Conservation of
@@ -1114,42 +1170,62 @@ of parts.''
 % -- FLEX: [CORE] Capstone fallacies synthesize the entire course
 [CORE] Each fallacy references a specific invariant or principle.
 IF SHORT: Cover fallacy 1 only, continue to (2/2).
-}
+```
 
-**Fallacy:** *Systems engineering complexity disappears with better tools.*\\
-{ Tools abstract complexity; they do not eliminate it. The Conservation of Complexity guarantees that simplifying one interface pushes complexity to another.}
-
-{0.2cm}
-**Fallacy:** *Mastering individual components equals mastering the system.*\\
-{ A data schema change cascades through training, breaks quantization assumptions, and triggers silent accuracy degradation. Integration complexity exceeds the sum of component complexities.}
+</details>
 
 ## Fallacies (2/2)
 
-{
+[Original slide 25](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L1265)
+
+**Fallacy:** *More data always improves model quality.*
+
+Diminishing returns set in once a dataset achieves sufficient coverage. Doubling dataset size doubles storage, I/O, and labeling costs while yielding marginal accuracy gains. The Data Gravity Invariant ensures data scale decisions cascade through every downstream system.
+
+**Fallacy:** *A single accuracy metric captures model quality.*
+
+The Pareto Frontier: accuracy, latency, throughput, memory, energy, fairness, cost. A 95% model at 500 ms may be worse than 93% at 50 ms when P99 is the hard constraint.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- NARRATE: Continue with fallacies 3 and 4
 ``Fallacy 3: More data always improves quality. Reality:
 diminishing returns set in once a dataset achieves sufficient coverage;
 Data Gravity means data scale decisions cascade through every downstream
 system.'' ``Fallacy 4: A single accuracy metric captures quality.
-Reality: the Pareto Frontier has seven dimensions. A 95% model at 500 ms
-may be worse than 93% at 50 ms when P99 is the constraint.''
+Reality: the Pareto Frontier has seven dimensions. A 95\% model at 500 ms
+may be worse than 93\% at 50 ms when P99 is the constraint.''
 
 % -- FLEX: [CORE] Completes the fallacies pair
 [CORE] Fallacy 4 (Pareto Frontier) is the most exam-relevant.
 IF SHORT: Cover fallacy 4 only and move to Pitfalls.
-}
+```
 
-**Fallacy:** *More data always improves model quality.*\\
-{ Diminishing returns set in once a dataset achieves sufficient coverage. Doubling dataset size doubles storage, I/O, and labeling costs while yielding marginal accuracy gains. The Data Gravity Invariant ensures data scale decisions cascade through every downstream system.}
-
-{0.2cm}
-**Fallacy:** *A single accuracy metric captures model quality.*\\
-{ The Pareto Frontier: accuracy, latency, throughput, memory, energy, fairness, cost. A 95% model at 500 ms may be worse than 93% at 50 ms when P99 is the hard constraint.}
+</details>
 
 ## Pitfalls
 
-{
+[Original slide 26](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L1291)
+
+**Pitfall:** *Optimizing a single invariant while ignoring the Conservation of Complexity.*
+
+When an optimization reduces latency by 50%, ask where the cost went. Quantization shifts load to accuracy monitoring. Caching trades memory capacity for speed.
+
+**Pitfall:** *Deploying models without automated rollback mechanisms.*
+
+The Statistical Drift Invariant guarantees accuracy degrades over time even without code changes. Without rollback, a silently degrading model continues serving bad predictions until a human notices — a delay measurable in weeks.
+
+**Pitfall:** *Optimizing a single pipeline stage without profiling the full system.*
+
+Amdahl's Law: optimizing inference by 10$\times$ yields only 1.1$\times$ system speedup if data loading accounts for 90% of latency. The Iron Law identifies the dominant term *before* investing effort.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min]
 % -- NARRATE: Read each pitfall with its quantitative evidence
 ``Pitfall 1: Optimizing one invariant while ignoring Conservation of
@@ -1160,27 +1236,31 @@ Invariant guarantees accuracy degrades over time. Without automated
 rollback, a silently degrading model serves bad predictions for weeks.''
 ``Pitfall 3: Optimizing one stage without profiling. Amdahl's Law:
 10x inference speedup yields only 1.1x system speedup if data loading is
-90% of latency.''
+90\% of latency.''
 
 % -- FLEX: [CORE] Capstone pitfalls --- all share a common root
 [CORE] The temptation to reduce a system to its parts.
 IF SHORT: Cover pitfalls 2 and 3 (more quantitative), skip pitfall 1.
-}
+```
 
-**Pitfall:** *Optimizing a single invariant while ignoring the Conservation of Complexity.*\\
-{ When an optimization reduces latency by 50%, ask where the cost went. Quantization shifts load to accuracy monitoring. Caching trades memory capacity for speed.}
-
-{0.1cm}
-**Pitfall:** *Deploying models without automated rollback mechanisms.*\\
-{ The Statistical Drift Invariant guarantees accuracy degrades over time even without code changes. Without rollback, a silently degrading model continues serving bad predictions until a human notices --- a delay measurable in weeks.}
-
-{0.1cm}
-**Pitfall:** *Optimizing a single pipeline stage without profiling the full system.*\\
-{ Amdahl's Law: optimizing inference by 10$×$ yields only 1.1$×$ system speedup if data loading accounts for 90% of latency. The Iron Law identifies the dominant term *before* investing effort.}
+</details>
 
 ## Muddiest Point
 
-{
+[Original slide 27](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L1325)
+
+One-minute paper
+
+ Write down the **muddiest point** from today's lecture.
+
+What concept was most confusing or unclear?
+
+(Hand in on your way out — or submit digitally)
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- NARRATE: Cue the final one-minute paper
 ``Last one-minute paper of the course. Write the muddiest point ---
@@ -1189,16 +1269,24 @@ the concept from the entire semester that remains most confusing.''
 % -- FLEX: [CORE] Final diagnostic --- use for exam review session
 [CORE] Collect responses. Use for exam review or office hours.
 IF SHORT: 30 seconds instead of 60.
-}
+```
 
- One-minute paper\\[0.5cm]
- Write down the **muddiest point** from today's lecture.\\[0.2cm]
-{ What concept was most confusing or unclear?}\\[0.5cm]
-{{midgray}{(Hand in on your way out --- or submit digitally)}}
+</details>
 
 ## What Were the Key Ideas?
 
-{
+[Original slide 28](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L1345)
+
+Close your notes.
+
+Write down the **4 most important ideas** from this entire course.
+
+90 seconds — no peeking.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- NARRATE: Cue the capstone retrieval practice
 ``Close your notes. 90 seconds. Write the 4 most important ideas from
@@ -1209,20 +1297,26 @@ important retrieval moment in the capstone --- students synthesize
 % -- FLEX: [CORE] The highest-stakes retrieval practice of the course
 [CORE] Forces synthesis across all chapters, not just this lecture.
 IF SHORT: Reduce to 60 seconds.
-}
+```
 
-{1.5cm}
-{ Close your notes.}
-
-{0.8cm}
-{ Write down the **4 most important ideas** from this entire course.}
-
-{0.8cm}
-{{midgray}{90 seconds --- no peeking.}}
+</details>
 
 ## Key Takeaways
 
-{
+[Original slide 29](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L1371)
+
+- **Thirteen invariants define ML systems engineering**: From Data as Code through Bias Feedback — physics, not trends.
+- **Conservation of Complexity unifies all thirteen**: Complexity cannot be destroyed; only moved between Data, Algorithm, and Machine.
+- **The system is the model**: Data pipeline + training infra + serving + monitoring = the true model.
+- **The Iron Law is prescriptive**: Profile first, optimize the dominant term. One decision ripples through six invariants.
+- **Every deployment context stresses different invariants**: Same physics, different dominant terms.
+- **Bias Feedback (invariant 13) is a deploy constraint**: $\Delta_{\text{err},g}(n) \approx \Delta_{\text{err},g}(0)\cdot\alpha_{\text{fb}}^n$, $\alpha_{\text{fb}}>1$ — fairness is not a footnote.
+- **Mastering the node prepares you for the fleet**: Principles scale to the Warehouse-Scale Computer.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min]
 % -- LINK: From retrieval practice to the official course summary
 Students wrote their own course summaries. Now compare with the
@@ -1240,20 +1334,30 @@ bullet: ``Volume II awaits.''
 % -- FLEX: [CORE] The definitive course summary
 [CORE] Students photograph this slide. Read each bullet slowly and clearly.
 IF SHORT: Read without elaboration.
-}
+```
 
-{0pt}
-- **Thirteen invariants define ML systems engineering**: From Data as Code through Bias Feedback --- physics, not trends.
-- **Conservation of Complexity unifies all thirteen**: Complexity cannot be destroyed; only moved between Data, Algorithm, and Machine.
-- **The system is the model**: Data pipeline + training infra + serving + monitoring = the true model.
-- **The Iron Law is prescriptive**: Profile first, optimize the dominant term. One decision ripples through six invariants.
-- **Every deployment context stresses different invariants**: Same physics, different dominant terms.
-- **Bias Feedback (invariant 13) is a deploy constraint**: $_{{err},g}(n)  _{{err},g}(0)_{{fb}}^n$, $_{{fb}}>1$ --- fairness is not a footnote.
-- **Mastering the node prepares you for the fleet**: Principles scale to the Warehouse-Scale Computer.
+</details>
 
 ## References
 
-{
+[Original slide 30](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L1405)
+
+**H&P19** Hennessy & Patterson. “A New Golden Age for Computer Architecture.” CACM, 2019.
+
+**Sculley+15** Sculley et al. “Hidden Technical Debt in ML Systems.” NeurIPS, 2015.
+
+**Karpathy17** A. Karpathy. “Software 2.0.” 2017.
+
+**Zaharia+24** Zaharia et al. “The Shift to Compound AI Systems.” 2024.
+
+**Barroso+19** Barroso et al. *The Datacenter as a Computer*. 3rd ed. 2019.
+
+**Sutton19** R. Sutton. “The Bitter Lesson.” 2019.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min]
 % -- NARRATE: Highlight the intellectual foundation
 ``Hennessy and Patterson's 'New Golden Age' paper is the intellectual
@@ -1263,18 +1367,27 @@ a computer --- the bridge to Volume II.''
 
 % -- FLEX: [OPTIONAL] For student self-study and further reading
 [OPTIONAL] Name Hennessy and Patterson, then move to the closing.
-}
+```
 
-{H&P19}{Hennessy & Patterson. ``A New Golden Age for Computer Architecture.'' CACM, 2019.}
-{Sculley+15}{Sculley et al. ``Hidden Technical Debt in ML Systems.'' NeurIPS, 2015.}
-{Karpathy17}{A. Karpathy. ``Software 2.0.'' 2017.}
-{Zaharia+24}{Zaharia et al. ``The Shift to Compound AI Systems.'' 2024.}
-{Barroso+19}{Barroso et al. *The Datacenter as a Computer*. 3rd ed. 2019.}
-{Sutton19}{R. Sutton. ``The Bitter Lesson.'' 2019.}
+</details>
 
-## Next: Volume II --- Orchestrating the Fleet
+## Next: Volume II — Orchestrating the Fleet
 
-{
+[Original slide 31](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L1428)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/16_conclusion/images/node-to-fleet.svg]]
+
+Harvard Edge ML Systems Book contributors, [node-to-fleet.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/images/node-to-fleet.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Same physics. New variables.** The Iron Law spans racks and zones.
+
+*The future of intelligence is not a destiny we will merely witness.
+It is a system we must engineer.* **Go build it well.**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- LINK: From Volume I mastery to the Volume II preview
 Volume I mastered the single node. Volume II orchestrates the fleet ---
@@ -1295,25 +1408,38 @@ reading it. Do not rush to dismiss class.
 % -- FLEX: [CORE] The emotional capstone of the entire course
 [CORE] End with the quote and silence. Do not add commentary after it.
 IF SHORT: Read the slide text. Pause. Dismiss.
-}
+```
 
-% --- Layout: FULL-WIDTH diagram ---
-
-{node-to-fleet.pdf}
-
-{0.05cm}
-{**Same physics. New variables.** The Iron Law spans racks and zones.}
-
-{0.1cm}
-{mlsyscard}{crimson}
-
-{*The future of intelligence is not a destiny we will merely witness.
-It is a system we must engineer.* **Go build it well.**}
-{mlsyscard}
+</details>
 
 ## Backup: The Thirteen Invariants Quick Reference
 
-{
+[Original slide 32](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L1474)
+
+Use as a study reference or exam review.
+
+ 
+
+| **Invariant** | **Key Equation / Principle** |
+| --- | --- |
+| 1. Data as Code | System behavior $\approx f(\text{Data})$ |
+| 2. Data Gravity | $C_{\text{move}}(\text{Data}) \gg C_{\text{move}}(\text{Compute})$ |
+| 3. Iron Law | $T = D/BW + O/(R_p \cdot \eta) + L$ |
+| 4. Silicon Contract | Architecture bets on hardware resource |
+| 5. Pareto Frontier | No free improvements |
+| 6. Arith. Intensity | FLOPs/byte determines bottleneck |
+| 7. Energy-Movement | Moving $\gg$ computing |
+| 8. Amdahl's Law | Serial fraction caps speedup |
+| 9. Verification Gap | Statistical testing only |
+| 10. Statistical Drift | $A(t) = A_0 - \lambda \cdot \Delta$ |
+| 11. Train-Serve Skew | Subtle divergences |
+| 12. Latency Budget | p99 is the hard constraint |
+| 13. Bias Feedback | $\Delta_{\text{err},g}(n) \approx \Delta_{\text{err},g}(0)\cdot\alpha_{\text{fb}}^n$, $\alpha_{\text{fb}}>1$ |
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min]
 % -- NARRATE: Use as a study reference or exam review handout
 Walk through each row only if students request it. The table is
@@ -1323,13 +1449,28 @@ part of the Deploy phase alongside invariants 9--12.
 
 % -- FLEX: [OPTIONAL] Pull for exam review sessions
 [OPTIONAL] Use if students need a compact reference during review.
-}
+```
 
-Use as a study reference or exam review.\\ {tabular}{@{}ll@{}}  **Invariant** & **Key Equation / Principle** \\  1.\ Data as Code & System behavior $ f({Data})$ \\ 2.\ Data Gravity & $C_{{move}}({Data})  C_{{move}}({Compute})$ \\ 3.\ Iron Law & $T = D/BW + O/(R_p  ) + L$ \\ 4.\ Silicon Contract & Architecture bets on hardware resource \\ 5.\ Pareto Frontier & No free improvements \\ 6.\ Arith.\ Intensity & FLOPs/byte determines bottleneck \\ 7.\ Energy-Movement & Moving $$ computing \\ 8.\ Amdahl's Law & Serial fraction caps speedup \\ 9.\ Verification Gap & Statistical testing only \\ 10.\ Statistical Drift & $A(t) = A_0 -   $ \\ 11.\ Train-Serve Skew & Subtle divergences \\ 12.\ Latency Budget & p99 is the hard constraint \\ 13.\ Bias Feedback & $_{{err},g}(n)  _{{err},g}(0)_{{fb}}^n$, $_{{fb}}>1$ \\  {tabular}
+</details>
 
-## Backup: Volume II Preview --- What Changes at Scale
+## Backup: Volume II Preview — What Changes at Scale
 
-{
+[Original slide 33](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/16_conclusion/16_conclusion.tex#L1490)
+
+Use if students ask what Volume II covers.
+
+ Volume I: one machine, 1–8 GPUs, shared memory.
+
+ Volume II: multiple machines, InfiniBand/Ethernet, message passing.
+
+**New challenges:** Gradient synchronization across nodes, fault tolerance (checkpointing every 10 min), data-parallel + model-parallel + pipeline-parallel combinations, Slurm/Kubernetes orchestration.
+
+**Same physics:** The Iron Law still governs. The communication term ($L_{\text{lat}}$) now includes network latency, not just PCIe.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min]
 % -- NARRATE: Preview Volume II scope for curious students
 ``Volume I: one machine, 1--8 GPUs, shared memory. Volume II: multiple
@@ -1339,13 +1480,9 @@ Law still governs, but the communication term now includes network.''
 
 % -- FLEX: [OPTIONAL] Pull if students ask about Volume II
 [OPTIONAL] Use for students continuing to Volume II.
-}
+```
 
-Use if students ask what Volume II covers.\\ Volume I: one machine, 1--8 GPUs, shared memory.\\ Volume II: multiple machines, InfiniBand/Ethernet, message passing.
-
- **New challenges:** Gradient synchronization across nodes, fault tolerance (checkpointing every 10 min), data-parallel + model-parallel + pipeline-parallel combinations, Slurm/Kubernetes orchestration.
-
- **Same physics:** The Iron Law still governs. The communication term ($L_{{lat}}$) now includes network latency, not just PCIe.
+</details>
 
 ## Complete original Beamer source
 

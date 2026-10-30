@@ -1,0 +1,22 @@
+Plan-Seq-Learn: Language Model Guided RL for Solving Long Horizon Robotics Tasks
+Murtaza Dalal, Tarun Chiruvolu, Devendra Singh Chaplot, Ruslan Salakhutdinov
+ICLR 2024; arXiv:2405.01534v1, 2 May 2024
+https://arxiv.org/abs/2405.01534v1
+
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+The arXiv v1 abstract page identifies this as the license for the article.
+
+Reproduced figures: Figure 1 (PSL_fig_1.png), Figure 2 (PSL_method.png),
+Figure D.1 (Sequence_Module.png). The complete original PNG files are copied
+without cropping, relabeling, redrawing, translation or recompression.
+
+Reproduced text: complete prose in sections 3.3, 3.4, 3.5, D.3.1 and B.3,
+and the prose paragraph of section 3.2. Original English retained.
+Changes: HTML converted to Markdown block quotations, inline mathematics
+delimited for rendering, relative reference links made absolute, line wrapping.
+Original wording (including source errors) retained. Editorial comments and
+figure explanations are outside the quotations and are not attributed to authors.
+
+This notice does not apply to other works cited by the paper or to the full
+Berkeley lecture deck. It does not imply author endorsement of Bookvar.

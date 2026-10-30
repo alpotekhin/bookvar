@@ -9,17 +9,42 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`slides/vol2/15_sustainable_ai/15_sustainable_ai.tex`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static slide archive
+> Text and equations retain the original language. Layout wrappers are simplified;
+> speaker notes are separate, and original SVGs are not redrawn or cropped.
+> Unsupported TeX remains visible and is listed beside the affected slide.
+> This archive is not a checked transcript or a finished Bookvar chapter.
 
 # VOL2 Slides — Sustainable Ai
 
 ## Readable slide sequence
 
+## Sustainable AI
+
+[Original slide 1](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L61)
+
+Energy as a First-Class Engineering Constraint
+
 ## Learning Objectives
 
-{
+[Original slide 2](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L66)
+
+1. Explain the **sustainability paradox**: AI compute growth (350,000$\times$) outpaces hardware efficiency gains
+2. Analyze how **Jevons Paradox** causes efficiency improvements to increase total resource consumption
+3. Calculate **PUE** and **lifecycle carbon footprints** across training, inference, and manufacturing phases
+4. Analyze geographic and temporal factors affecting **carbon intensity** across energy grids
+5. Evaluate **pruning, quantization, and distillation** in terms of energy trade-offs
+6. Design **carbon-aware scheduling** strategies for 50–80% emission reductions
+7. Critique **carbon offsets** versus actual emissions reduction strategies
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [2 min] Walk through each objective. ``This chapter treats energy as a hard
 physical constraint --- like memory or bandwidth --- not a corporate
@@ -31,20 +56,35 @@ Ask: ``How many of you have ever checked the carbon footprint of a training run?
 
 % -- FLEX: [CORE] + contingency
 [CORE] Sets the chapter scope. IF SHORT: Read objectives 1, 2, and 5 aloud.
-}
+```
 
-{1pt}
-- Explain the **sustainability paradox**: AI compute growth (350,000$×$) outpaces hardware efficiency gains
-- Analyze how **Jevons Paradox** causes efficiency improvements to increase total resource consumption
-- Calculate **PUE** and **lifecycle carbon footprints** across training, inference, and manufacturing phases
-- Analyze geographic and temporal factors affecting **carbon intensity** across energy grids
-- Evaluate **pruning, quantization, and distillation** in terms of energy trade-offs
-- Design **carbon-aware scheduling** strategies for 50--80% emission reductions
-- Critique **carbon offsets** versus actual emissions reduction strategies
+</details>
 
 ## Energy as a Physical Constraint
 
-{
+[Original slide 3](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L94)
+
+**Chapter thesis:** You cannot buy electricity that does not exist.
+
+AI compute grew 350,000$\times$ in seven years; grid capacity
+and battery density grew $\sim$41%. That gap is not a budget problem — it is physics.
+
+**Grid Capacity**
+
+New connections: 18–24 months. Dublin moratorium through 2028.
+
+**Power Budget**
+
+PUE multiplies every watt. CMOS physics sets the chip-level floor.
+
+**Embodied Carbon**
+
+164 kg CO<sub>2</sub> per H100 before first compute. Lifecycle $\neq$ operational.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Prior chapters treated energy as a cost line item. This chapter treats it as
 a physical constraint like memory or bandwidth --- one you cannot exceed regardless
@@ -52,7 +92,7 @@ of budget.
 
 % -- NARRATE: What to SAY while showing this slide
 [2 min] State the chapter thesis before the data arrives: ``You cannot buy
-electricity that does not exist. AI compute grew 350,000$×$ in seven years;
+electricity that does not exist. AI compute grew 350,000$\times$ in seven years;
 battery density grew 41 percent. That gap is the energy wall.'' Point to each card:
 ``Three physical constraints govern this chapter: grid capacity, hardware power budget,
 and embodied carbon in manufacturing. All three are hard walls.''
@@ -70,37 +110,39 @@ power than its generation and transmission capacity allow, regardless of price.
 % -- FLEX: [CORE] + contingency
 [CORE] Sets the chapter's physical framing. IF SHORT: State the central claim
 (``you cannot buy electricity that does not exist'') and move on.
-}
+```
 
-{mlsyscard}{errorstroke}
-**Chapter thesis:** You cannot buy electricity that does not exist.\\
-{ AI compute grew 350,000$×$ in seven years; grid capacity
-and battery density grew $$41%. That gap is not a budget problem --- it is physics.}
-{mlsyscard}
-
-{0.2cm}
-[T]
-  
-    {mlsyscard}{errorstroke}
-    **Grid Capacity**\\[0.05cm]
-    { New connections: 18--24 months. Dublin moratorium through 2028.}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{computestroke}
-    **Power Budget**\\[0.05cm]
-    { PUE multiplies every watt. CMOS physics sets the chip-level floor.}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{datastroke}
-    **Embodied Carbon**\\[0.05cm]
-    { 164 kg CO{2} per H100 before first compute. Lifecycle $$ operational.}
-    {mlsyscard}
+</details>
 
 ## The Scale of the Problem
 
-{
+[Original slide 4](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L159)
+
+Training a single frontier model:
+
+- **Energy**: 1,287 MWh (GPT-3)
+- **Equivalent**: 122 US homes for one year
+- **Carbon**: 552 metric tons CO<sub>2</sub> (estimate)
+- **Comparison**: 552 transatlantic flights
+
+AI compute grew **350,000$\times$** from 2012–2019.
+
+Hardware efficiency grew only **2–5%/year**.
+
+| **Activity** | **kg CO<sub>2</sub>** |
+| --- | --- |
+| NY–SF flight | 900 |
+| Human (1 year avg) | 5,000 |
+| American (1 year) | 16,400 |
+| US car (lifetime) | 57,150 |
+| **Transformer+NAS estimate** | **284,000** |
+
+Source on slide: Patterson et al., 2021; Strubell et al., 2019
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Ch 14 showed robustness costs compute. This chapter asks: what does all that
 compute cost the planet?
@@ -111,7 +153,7 @@ tonnes CO2 under Patterson et al.'s accounting assumptions.'' Point to the
 table on the right: ``Strubell et al.'s Transformer+NAS estimate is an
 accounting-boundary example, not a per-model training cost.'' Key reveal:
 ``AI compute grew 350,000x from 2012--2019. Hardware
-efficiency grew only 2--5% per year. The gap is physical.''
+efficiency grew only 2--5\% per year. The gap is physical.''
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
 Ask: ``What other industry produces this much carbon from a single product?''
@@ -124,45 +166,24 @@ cloud is more efficient than on-premises but still consumes enormous energy.
 % -- FLEX: [CORE] + contingency
 [CORE] The 350,000x gap is the chapter's motivating number.
 IF SHORT: State the GPT-3 number and the 350,000x gap.
-}
+```
 
-[T]
-  
-    Training a single frontier model:
-    {0pt}
-- **Energy**: 1,287 MWh (GPT-3)
-- **Equivalent**: 122 US homes for one year
-- **Carbon**: 552 metric tons {} (estimate)
-- **Comparison**: 552 transatlantic flights
-    
-
-    {0.15cm}
-    {mlsyscard}{errorstroke}
-    AI compute grew **350,000$×$** from 2012--2019.\\
-    Hardware efficiency grew only **2--5%/year**.
-    {mlsyscard}
-  
-  
-    
-    {}{1.1}
-    {tabular}{@{}lr@{}}
-      
-      **Activity** & {kg {}} \\
-      
-      NY--SF flight      & 900 \\
-      Human (1 year avg) & 5,000 \\
-      American (1 year)  & 16,400 \\
-      US car (lifetime)  & 57,150 \\
-      {errorstroke}{**Transformer+NAS estimate**} & {errorstroke}{**284,000**} \\
-      
-    {tabular}
-  
-
-{Patterson et al., 2021; Strubell et al., 2019}
+</details>
 
 ## The Energy Wall
 
-{
+[Original slide 5](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L223)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/15_sustainable_ai/images/energy-wall.svg]]
+
+Harvard Edge ML Systems Book contributors, [energy-wall.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/images/energy-wall.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**The Sustainability Wall:** AI logic scales exponentially; energy infrastructure scales linearly. The **249,000$\times$ gap** cannot be closed by hardware alone.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The scale numbers showed the gap. This diagram visualizes WHY the gap exists ---
 exponential demand vs.\ linear supply.
@@ -181,32 +202,51 @@ Also accept: the supply curve via renewables. Both are needed.]
 % -- FLEX: [CORE] + contingency
 [CORE] The Energy Wall diagram is the chapter's anchor visual.
 IF SHORT: State ``exponential vs.\ linear'' and the 249,000x gap.
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
-
-{energy-wall.pdf}
-
-{0.15cm}
-{The Sustainability Wall:}{AI logic scales exponentially; energy infrastructure scales linearly. The **249,000$×$ gap** cannot be closed by hardware alone.}
+</details>
 
 ## Datacenter Energy Projections
 
-{
+[Original slide 6](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L254)
+
+**US Datacenter Electricity (LBNL 2024):**
+
+- 2014: 58 TWh (1.7% of US)
+- 2023: 176 TWh (4.4% of US)
+- 2028 (high): 580 TWh (**12% of US**)
+
+AI workloads: 10% $\to$ 30%+ of DC power by 2030.
+
+**Grid capacity** — not budget — is the binding constraint on AI scaling.
+
+| **Sector** | **% Global Power** |
+| --- | --- |
+| Aviation | 2.1% |
+| Data centers | 2% (today) |
+| Data centers | **8%** (2030) |
+| Cement | 4% |
+
+Source on slide: LBNL 2024; OECD 2023
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The Energy Wall showed the physics. This slide shows the infrastructure reality:
 grid capacity is the binding constraint.
 
 % -- NARRATE: What to SAY while showing this slide
 [2 min] Walk through the projections: ``US datacenters: 58 TWh in 2014, 176 TWh
-in 2023, projected high-end of 580 TWh by 2028 --- 12% of US electricity. The
+in 2023, projected high-end of 580 TWh by 2028 --- 12\% of US electricity. The
 full LBNL range is 325--580 TWh; 580 is the high scenario.'' Point to the table:
 ``Datacenters are approaching aviation and cement in global power share.''
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
 Before revealing the 2030 AI share, ask: ``By 2030, do you think AI workloads
-will be 5% or 20% of US datacenter electricity?''
-[Expected: split answers. Reveal: current projections suggest 10--30%+ of
+will be 5\% or 20\% of US datacenter electricity?''
+[Expected: split answers. Reveal: current projections suggest 10--30\%+ of
 datacenter power, depending on the growth trajectory of LLM services.
 Key insight: the uncertainty range itself is the story --- it depends on
 whether efficiency innovations offset demand growth.]
@@ -217,46 +257,36 @@ grid capacity problem --- you cannot buy electricity that does not exist.
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Extends the Energy Wall with concrete projections.
-IF SHORT: State the 12% US electricity projection and move on.
-}
+IF SHORT: State the 12\% US electricity projection and move on.
+```
 
-[T]
-  
-    **US Datacenter Electricity (LBNL 2024):**
-    {0pt}
-- 2014: 58 TWh (1.7% of US)
-- 2023: 176 TWh (4.4% of US)
-- 2028 (high): 580 TWh (**12% of US**)
-    
-
-    {0.15cm}
-    AI workloads: 10% $$ 30%+ of DC power by 2030.
-
-    {0.1cm}
-    {mlsyscard}{crimson}
-    **Grid capacity** --- not budget --- is the binding constraint on AI scaling.
-    {mlsyscard}
-  
-  
-    
-    {}{1.1}
-    {tabular}{@{}lr@{}}
-      
-      **Sector** & **% Global Power** \\
-      
-      Aviation         & 2.1% \\
-      Data centers     & 2% (today) \\
-      Data centers     & **8%** (2030) \\
-      Cement           & 4% \\
-      
-    {tabular}
-  
-
-{LBNL 2024; OECD 2023}
+</details>
 
 ## War Story: When the Grid Became the Bottleneck (2022)
 
-{
+[Original slide 7](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L321)
+
+**Context**: By 2022 Irish datacenters consumed **18%** of
+Ireland's total metered electricity, concentrated in Dublin.
+Grid expansion could not keep pace with demand.
+
+**Failure**: Multiple GW of prospective datacenter load queued
+near Dublin, pushing the local transmission system to its limit.
+Reinforcement timelines stretched into the next decade.
+
+**Consequence**: EirGrid imposed a **moratorium on new grid
+connections** in Dublin through 2028. Location and on-site generation
+now determine what AI capacity can be built — and where.
+
+**Systems lesson**: The fleet cannot scale faster than the grid
+that feeds it. The binding constraint moved from chip to substation.
+
+Source on slide: Ireland Government Statement on Data Centres, 2022; IEA, 2024
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The Datacenter Projections slide showed that grid capacity --- not budget ---
 is the binding constraint on AI scaling. This war story makes that abstract
@@ -288,42 +318,28 @@ as AI datacenter buildout accelerated in 2023--2024.
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Extends the grid-capacity argument with production evidence.
 IF SHORT: State the moratorium fact and the Systems Lesson in one sentence.
-}
+```
 
-[T]
-  
-    {mlsyscard}{errorstroke}
-    **Context**: By 2022 Irish datacenters consumed **18%** of
-    Ireland's total metered electricity, concentrated in Dublin.
-    Grid expansion could not keep pace with demand.
-    {mlsyscard}
-
-    {0.05cm}
-    {mlsyscard}{errorstroke}
-    **Failure**: Multiple GW of prospective datacenter load queued
-    near Dublin, pushing the local transmission system to its limit.
-    Reinforcement timelines stretched into the next decade.
-    {mlsyscard}
-  
-  
-    {mlsyscard}{routingstroke}
-    **Consequence**: EirGrid imposed a **moratorium on new grid
-    connections** in Dublin through 2028. Location and on-site generation
-    now determine what AI capacity can be built --- and where.
-    {mlsyscard}
-
-    {0.05cm}
-    {mlsyscard}{datastroke}
-    **Systems lesson**: The fleet cannot scale faster than the grid
-    that feeds it. The binding constraint moved from chip to substation.
-    {mlsyscard}
-  
-
-{Ireland Government Statement on Data Centres, 2022; IEA, 2024}
+</details>
 
 ## Predict: Where Does the Carbon Hide?
 
-{
+[Original slide 8](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L391)
+
+Think–Write–Share
+
+A model is trained once, then serves 10M queries/day.
+
+**Which phase produces more total CO<sub>2</sub> over one year?**
+
+Write your answer with a rough estimate. (60 seconds)
+
+Turn to a neighbor and compare.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Students saw the scale of training carbon. This prediction tests whether they
 recognize that inference often dominates at production scale.
@@ -341,32 +357,32 @@ within days of deployment at this query volume.]
 % -- FLEX: [CORE] + contingency
 [CORE] First active learning moment. Primes the lifecycle analysis.
 IF SHORT: Reduce writing to 30 seconds; still cold-call 2 students.
-}
+```
 
-{1.0cm}
-{ Think--Write--Share}
-
-{0.5cm}
-{ A model is trained once, then serves 10M queries/day.\\[0.2cm]
-{Which phase produces more total {} over one year?}}
-
-{0.5cm}
-{ Write your answer with a rough estimate. {midgray}{(60 seconds)}}
-
-{0.4cm}
-{{lightgray}{Turn to a neighbor and compare.}}
+</details>
 
 ## Carbon Lifecycle: Three Phases
 
-{
+[Original slide 9](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L432)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/15_sustainable_ai/images/carbon-lifecycle.svg]]
+
+Harvard Edge ML Systems Book contributors, [carbon-lifecycle.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/images/carbon-lifecycle.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Surprise:** At production scale, inference emissions exceed training within **2 days** of deployment.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Most students predicted training dominates. This slide reveals the surprise:
 inference overtakes training within days at production scale.
 
 % -- NARRATE: What to SAY while showing this slide
 [3 min] ``How many of you said training? Most people do.'' Walk through the
-diagram: ``Training: 60--80% of initial carbon. Inference: 15--25%.
-Manufacturing: 5--15%. But at 10M queries/day, inference exceeds training
+diagram: ``Training: 60--80\% of initial carbon. Inference: 15--25\%.
+Manufacturing: 5--15\%. But at 10M queries/day, inference exceeds training
 within 2 days of deployment.''
 
 % -- WARN: What students will get wrong on THIS topic
@@ -375,18 +391,31 @@ framing: at production scale, inference is the dominant sustainability lever.
 
 % -- FLEX: [CORE] + contingency
 [CORE] The ``2 days'' reveal reframes the entire optimization target.
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
-
-{carbon-lifecycle.pdf}
-
-{0.1cm}
-{Surprise:}{At production scale, inference emissions exceed training within **2 days** of deployment.}
+</details>
 
 ## Operational Carbon Calculation
 
-{
+[Original slide 10](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L461)
+
+**Training a 7B model: 64 A100 GPUs, 14 days**
+
+| **Step** | **Calculation** | **Result** |
+| --- | --- | --- |
+| GPU Energy | 64 $\times$ 400W $\times$ 336h | 8,602 kWh |
+| Facility (PUE 1.2) | 8,602 $\times$ 1.2 | 10,322 kWh |
+| US Grid (429 g/kWh) | 10,322 $\times$ 0.429 | **4,428 kg CO<sub>2</sub>** |
+| Quebec (20 g/kWh) | 10,322 $\times$ 0.020 | **206 kg CO<sub>2</sub>** |
+
+**Geographic choice alone**: 21$\times$ difference in emissions.
+
+Same model, same hardware, same training time — only the grid changed.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The lifecycle showed three phases. This worked example calculates operational
 carbon for a real training run, revealing geographic leverage.
@@ -400,39 +429,35 @@ geography alone.''
 
 % -- WARN: What students will get wrong on THIS topic
 Common error: students forget the PUE multiplier. Correct framing: facility
-overhead (cooling, networking) adds 20--58% on top of IT power.
+overhead (cooling, networking) adds 20--58\% on top of IT power.
 
 % -- FLEX: [CORE] + contingency
 [CORE] The 21x geographic multiplier is the chapter's key quantitative anchor.
 IF SHORT: Show the final two rows (US vs.\ Quebec) and state the 21x.
-}
+```
 
-**Training a 7B model: 64 A100 GPUs, 14 days**
+</details>
 
-{0.1cm}
-{}{1.15}
-{
-{tabular}{@{}llll@{}}
-  
-  **Step** & **Calculation** & **Result** \\
-  
-  {computestroke}{GPU Energy}    & 64 $×$ 400W $×$ 336h  & 8,602 kWh \\
-  {routingstroke}{Facility (PUE 1.2)} & 8,602 $×$ 1.2        & 10,322 kWh \\
-  {errorstroke}{US Grid (429 g/kWh)} & 10,322 $×$ 0.429    & {4,428 kg {}} \\
-  {datastroke}{Quebec (20 g/kWh)}    & 10,322 $×$ 0.020    & {206 kg {}} \\
-  
-{tabular}
-}
+## The Carbon Equation
 
-{0.15cm}
-{mlsyscard}{crimson}
-**Geographic choice alone**: 21$×$ difference in emissions.\\
-{ Same model, same hardware, same training time --- only the grid changed.}
-{mlsyscard}
+[Original slide 11](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L509)
+
+$C_{lifecycle} = \underbrace{C_{training}}_{\text{60--80\%}} + \underbrace{C_{inference}}_{\text{15--25\%}} + \underbrace{C_{embodied}}_{\text{5--15\%}}$
 
 ## The Geography of Carbon
 
-{
+[Original slide 12](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L515)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/15_sustainable_ai/images/carbon-geography.svg]]
+
+Harvard Edge ML Systems Book contributors, [carbon-geography.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/images/carbon-geography.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Site selection is the single highest-leverage sustainability intervention.**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The worked example showed 21x from US vs.\ Quebec. This map reveals the full
 40x range across global grids.
@@ -449,19 +474,26 @@ it?'' [Expected: move it --- 40x vs.\ 2--10x from algorithmic optimization.]
 
 % -- FLEX: [CORE] + contingency
 [CORE] The 40x geographic leverage is the chapter's most actionable insight.
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
-
-{carbon-geography.pdf}
-
-{0.1cm}
-
-**Site selection is the single highest-leverage sustainability intervention.**
+</details>
 
 ## Quick Check
 
-{
+[Original slide 13](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L546)
+
+Quick Check
+
+What creates a larger carbon reduction:
+
+optimizing the model or moving it to a clean grid?
+
+15 seconds — then I will cold-call.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The Geography of Carbon slide argued that site selection is the single
 highest-leverage intervention. This quick check tests whether students can
@@ -483,32 +515,43 @@ region.
 [CORE] Micro-retrieval reinforcing the key geographic leverage number.
 IF WRONG: Point back to the Quebec (20 g/kWh) vs.\ Poland coal (820 g/kWh)
 column in the geography slide --- 41x difference, zero algorithmic changes.
-}
+```
 
-{1.0cm}
-{ Quick Check}
-
-{0.6cm}
-{ What creates a larger carbon reduction:\ the model or moving it to a clean grid?}
-
-{0.5cm}
-{{midgray}{15 seconds --- then I will cold-call.}}
+</details>
 
 ## CMOS Power Equation
 
-{
+[Original slide 14](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L589)
+
+$$
+P_{total} = \underbrace{\alpha C V^2 f}_{\text{Dynamic}} + \underbrace{V \cdot I_{leak}}_{\text{Static}}
+$$
+
+| **Param** | **Meaning** |
+| --- | --- |
+| $\alpha$ | Switching activity (CPU: 0.1–0.3, Accel: 0.6–0.8) |
+| $C$ | Load capacitance (scales with transistor count) |
+| $V$ | Supply voltage (**quadratic** — highest lever) |
+| $f$ | Clock frequency (linear) |
+
+**Key:** $V^2$ means 20% voltage reduction saves 36% power. Specialization wins.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Geographic optimization addresses WHERE. Power modeling addresses HOW ---
 grounding efficiency in CMOS physics.
 
 % -- NARRATE: What to SAY while showing this slide
 [3 min] Write the equation on screen. ``The V-squared term is the key lever:
-reducing voltage from 1.0V to 0.8V saves 36% dynamic power. This explains
+reducing voltage from 1.0V to 0.8V saves 36\% dynamic power. This explains
 why specialized accelerators (high alpha, low V) beat CPUs (low alpha, high V)
 on energy efficiency.''
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
-Ask: ``Why does reducing voltage by 20% save 36% power, not 20%?''
+Ask: ``Why does reducing voltage by 20\% save 36\% power, not 20\%?''
 [Expected: because power scales as V-squared --- quadratic, not linear.]
 
 % -- WARN: What students will get wrong on THIS topic
@@ -518,40 +561,45 @@ disproportionate power savings.
 
 % -- FLEX: [CORE] + contingency
 [CORE] The CMOS equation explains WHY quantization and specialization save energy.
-IF SHORT: State the V-squared insight and the 36% example.
-}
+IF SHORT: State the V-squared insight and the 36\% example.
+```
 
-$$P_{total} = { C V^2 f}_{{Dynamic}} + {V  I_{leak}}_{{Static}}$$
-
-{0.05cm}
-{}{1.05}
-{
-{tabular}{@{}ll@{}}
-  
-  **Param** & **Meaning** \\
-  
-  $$ & Switching activity (CPU: 0.1--0.3, Accel: 0.6--0.8) \\
-  $C$      & Load capacitance (scales with transistor count) \\
-  $V$      & Supply voltage (**quadratic** --- highest lever) \\
-  $f$      & Clock frequency (linear) \\
-  
-{tabular}
-}
-
-{0.05cm}
-{Key:}{$V^2$ means 20% voltage reduction saves 36% power. Specialization wins.}
+</details>
 
 ## PUE and WUE: The Full Facility Cost
 
-{
+[Original slide 15](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L638)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/15_sustainable_ai/images/pue-breakdown.svg]]
+
+Harvard Edge ML Systems Book contributors, [pue-breakdown.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/images/pue-breakdown.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+$PUE = P_{\text{total}} / P_{\text{IT}}$ (ideal = 1.0)  
+$WUE = W_{\text{water}} / E_{\text{IT}}$ (L/kWh)
+
+| **Facility** | **PUE** | **2 MW Savings** |
+| --- | --- | --- |
+| Industry avg | 1.58 | — |
+| Google best | 1.08 | 8,409 MWh/yr |
+| Nordic (heat reuse) | <1.0 | exported heat |
+
+**PUE alone hides water.**
+WUE of 1.8 L/kWh $\times$ 10,000 MWh
+= **18 million liters** per training run.
+No single metric is sufficient.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 CMOS physics set the chip-level floor. PUE and WUE show how much the facility adds
 on top --- the cooling tax --- and why a single metric is never enough.
 
 % -- NARRATE: What to SAY while showing this slide
 [2 min] Point to the PUE equation: ``PUE = total facility power / IT equipment
-power. Industry average 1.58 means 37% goes to cooling.'' Point to the table:
-``Google best: 1.08 --- only 8% overhead. For a 2 MW cluster, the gap between
+power. Industry average 1.58 means 37\% goes to cooling.'' Point to the table:
+``Google best: 1.08 --- only 8\% overhead. For a 2 MW cluster, the gap between
 1.58 and 1.08 = 8,400 MWh per year.''
 Then introduce WUE: ``But PUE says nothing about water. A data center with WUE
 of 1.8 L/kWh training a model requiring 10,000 MWh consumes 18 million liters of
@@ -568,40 +616,29 @@ and embodied-carbon amortization are all needed together. No single metric suffi
 [OPTIONAL] Extends the CMOS slide to facility-level.
 IF SHORT: State the PUE formula, the 1.58 vs.\ 1.08 comparison, and the one-line
 WUE insight (``PUE hides water'').
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE + compact summary ---
-
-{pue-breakdown.pdf}
-
-{0.05cm}
-
-[T]
-  
-    $PUE = P_{{total}} / P_{{IT}}$ (ideal = 1.0) 
-    $WUE = W_{{water}} / E_{{IT}}$ (L/kWh)
-    {}{0.9}
-    {tabular}{@{}lrr@{}}
-      
-      **Facility** & **PUE** & **2 MW Savings** \\
-      
-      Industry avg & 1.58 & --- \\
-      Google best  & 1.08 & 8,409 MWh/yr \\
-      Nordic (heat reuse) & {}1.0 & exported heat \\
-      
-    {tabular}
-  
-  
-    {mlsyscard}{errorstroke}
-    { **PUE alone hides water.**
-    WUE of 1.8 L/kWh $×$ 10,000 MWh
-    = **18 million liters** per training run.
-    No single metric is sufficient.}
-    {mlsyscard}
+</details>
 
 ## Energy Per Operation: 4 Orders of Magnitude
 
-{
+[Original slide 16](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L699)
+
+| **Architecture** | **pJ/FLOP** | **Characteristics** |
+| --- | --- | --- |
+| **CPU (general)** | 100 | Low utilization, high flexibility |
+| **GPU (tensor cores)** | 10 | High throughput, parallel |
+| **TPU (systolic)** | 1–2 | Specialized dataflow |
+| **ASIC (INT8)** | 0.1 | Fixed-function, low precision |
+
+**1,000$\times$ efficiency range** across architectures. Choosing the right hardware
+tier for a workload can reduce energy consumption by 100–1,000$\times$ without any
+algorithmic changes.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 CMOS physics explained WHY specialization saves power. This table quantifies
 HOW MUCH across the architecture spectrum.
@@ -615,32 +652,44 @@ sustainability --- no algorithmic changes needed.''
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Reinforces the CMOS physics with concrete numbers.
 IF SHORT: State the 1,000x range and the green card insight.
-}
+```
 
-{}{1.15}
-{
-{tabular}{@{}lrl@{}}
-  
-  **Architecture** & **pJ/FLOP** & **Characteristics** \\
-  
-  **CPU (general)**     & 100   & Low utilization, high flexibility \\
-  **GPU (tensor cores)** & 10   & High throughput, parallel \\
-  **TPU (systolic)**     & 1--2 & Specialized dataflow \\
-  **ASIC (INT8)**        & 0.1  & Fixed-function, low precision \\
-  
-{tabular}
-}
-
-{0.2cm}
-{mlsyscard}{datastroke}
-**1,000$×$ efficiency range** across architectures. Choosing the right hardware
-tier for a workload can reduce energy consumption by 100--1,000$×$ without any
-algorithmic changes.
-{mlsyscard}
+</details>
 
 ## Energy Roofline: Arithmetic Intensity Meets Energy
 
-{
+[Original slide 17](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L740)
+
+**Energy Roofline Model:**
+
+Like the compute roofline, but Y-axis is **FLOPs/Joule** instead of FLOPs/sec.
+
+| **Workload** | **FLOPs/B** | **Regime** |
+| --- | --- | --- |
+| Embedding lookup | 0.1 | **Mem-bound** |
+| Attention (B=1) | 2 | **Transitional** |
+| GEMM (B=256) | 100 | **Compute-bound** |
+
+**Lever:** Move workloads **rightward** (higher AI) to improve energy efficiency.
+
+**Memory-bound = Energy waste**
+
+90%+ of energy moves data, not computes. LLM decode is the worst offender: reads full weights per token.
+
+**Optimization strategies:**
+
+Batching: $\uparrow$ AI by $B\times$
+
+Quantization: $\uparrow$ AI by 2–4$\times$
+
+FlashAttention: $\uparrow$ AI by fusing ops
+
+All shift workloads toward the compute roof.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The energy-per-operation table showed 1,000x across architectures. The energy
 roofline model explains WHY --- it maps workload arithmetic intensity to
@@ -651,7 +700,7 @@ energy efficiency, just as the compute roofline maps to throughput.
 Y-axis is energy efficiency (FLOPs/Joule). Below the bandwidth roof: memory-bound,
 energy wasted moving data. Above: compute-bound, energy goes to useful work.''
 Walk through the three workloads: ``Embedding lookup: 0.1 FLOPs/byte --- deeply
-memory-bound, wasting 90% of energy on data movement. Attention (batch=1):
+memory-bound, wasting 90\% of energy on data movement. Attention (batch=1):
 2 FLOPs/byte --- straddling the roofline. GEMM (batch=256): 100 FLOPs/byte ---
 compute-bound, energy-efficient.''
 
@@ -669,58 +718,67 @@ where you sit on the roofline.
 % -- FLEX: [CORE] + contingency
 [CORE] The energy roofline connects all optimization techniques to physics.
 The Focus Frame that follows shows the three named equations:
-$E_{{total}} = O × E_{{compute}} + D_{{vol}} × E_{{move}}$,
-$E_{{dominant}} = ()$, and
-${AI}_{{crossover}} = E_{{move}} / E_{{compute}}$.
-For GPU: 100 pJ/byte $$ 10 pJ/FLOP = 10 FLOP/byte crossover.
+$E_{\text{total}} = O \times E_{\text{compute}} + D_{\text{vol}} \times E_{\text{move}}$,
+$E_{\text{dominant}} = \max(\ldots)$, and
+$\text{AI}_{\text{crossover}} = E_{\text{move}} / E_{\text{compute}}$.
+For GPU: 100 pJ/byte $\div$ 10 pJ/FLOP = 10 FLOP/byte crossover.
 Ask BEFORE the Focus Frame: ``LLM decode reads the entire weight matrix per token ---
 where does that sit relative to the crossover?'' [Answer: well below 10 FLOP/byte ---
 deeply memory-bound.]
 IF SHORT: Name the three workloads and their positions on the roofline; skip the Focus Frame.
-}
+```
 
-[T]
-  
-    **Energy Roofline Model:**
+</details>
 
-    {0.1cm}
-    { Like the compute roofline, but Y-axis is **FLOPs/Joule** instead of FLOPs/sec.}
+## Energy Roofline: The Physics in Three Equations
 
-    {0.1cm}
-    
-    {}{1.1}
-    {tabular}{@{}lrl@{}}
-      
-      **Workload** & **FLOPs/B** & **Regime** \\
-      
-      Embedding lookup & 0.1  & {errorstroke}{**Mem-bound**} \\
-      Attention (B=1)  & 2    & {routingstroke}{**Transitional**} \\
-      GEMM (B=256)     & 100  & {datastroke}{**Compute-bound**} \\
-      
-    {tabular}
+[Original slide 18](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L824)
 
-    {0.1cm}
-    {Lever:}{Move workloads **rightward** (higher AI) to improve energy efficiency.}
-  
-  
-    {mlsyscard}{errorstroke}
-    **Memory-bound = Energy waste**\\[0.05cm]
-    { 90%+ of energy moves data, not computes. LLM decode is the worst offender: reads full weights per token.}
-    {mlsyscard}
+$E_{\text{total}} = O \times E_{\text{compute}} + D_{\text{vol}} \times E_{\text{move}}$
 
-    {0.1cm}
-    {mlsyscard}{datastroke}
-    **Optimization strategies:**\\[0.05cm]
-    {
-    Batching: $$ AI by $B×$\\
-    Quantization: $$ AI by 2--4$×$\\
-    FlashAttention: $$ AI by fusing ops\\
-    All shift workloads toward the compute roof.}
-    {mlsyscard}
+$E_{\text{dominant}} = \max\!\left(O \times E_{\text{compute}},\; D_{\text{vol}} \times E_{\text{move}}\right)$
+
+$\text{AI}_{\text{crossover}} = \dfrac{E_{\text{move}}}{E_{\text{compute}}}$
+
+ GPU example: $\frac{100\text{ pJ/byte}}{10\text{ pJ/FLOP}} = 10\text{ FLOP/byte crossover}$
 
 ## Your Turn: Lifecycle Carbon Estimation
 
-{
+[Original slide 19](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L837)
+
+Calculate Total Carbon Footprint
+
+**Parameters:**
+
+- 2,048 H100 GPUs, 30 days, 700 W TDP
+- PUE = 1.3, Grid = 400 g CO<sub>2</sub>/kWh
+- Embodied: 1,500 kg CO<sub>2</sub>/chip
+- Hardware lifetime: 3 years
+
+**Calculate**: Operational + Embodied = Total
+
+(90 seconds — then compare with a neighbor)
+
+**Solution:**
+
+Oper: $2048 \times 0.7 \times 1.3 \times 720$h
+
+= 1.34M kWh $\times$ 400g
+
+= **536 tonnes**
+
+Embodied: $\frac{2048 \times 1500}{36}$
+
+= **85 tonnes**
+
+Total = **621 tonnes CO<sub>2</sub>**
+
+Embodied = 14%
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The worked example calculated operational carbon. This exercise adds embodied
 carbon to compute the full lifecycle footprint.
@@ -732,48 +790,28 @@ carbon to compute the full lifecycle footprint.
 
 % -- ENGAGE: Specific question, prediction, or task for THIS slide
 Students must calculate both operational and embodied carbon. Key insight to
-surface: embodied is 14% --- significant, and dominant on clean grids.
+surface: embodied is 14\% --- significant, and dominant on clean grids.
 
 % -- FLEX: [CORE] + contingency
 [CORE] Second active learning moment. IF SHORT: Reduce to 60 seconds.
-}
+```
 
-[T]
-  
-    { Calculate Total Carbon Footprint}
-
-    {0.15cm}
-    **Parameters:**
-    {0pt}
-- 2,048 H100 GPUs, 30 days, 700 W TDP
-- PUE = 1.3, Grid = 400 g {}/kWh
-- Embodied: 1,500 kg {}/chip
-- Hardware lifetime: 3 years
-    
-
-    {0.1cm}
-    **Calculate**: Operational + Embodied = Total
-
-    {{midgray}{(90 seconds --- then compare with a neighbor)}}
-  
-  
-    
-    {mlsyscard}{computestroke}
-    **Solution:**\\[0.1cm]
-    {
-    Oper: $2048 × 0.7 × 1.3 × 720$h\\
-    = 1.34M kWh $×$ 400g\\
-    = **536 tonnes**\\[0.1cm]
-    Embodied: ${2048 × 1500}{36}$\\
-    = **85 tonnes**\\[0.1cm]
-    Total = {621 tonnes {}}\\[0.1cm]
-    {routingstroke}{Embodied = 14%}
-    }
-    {mlsyscard}
+</details>
 
 ## The Optimization Toolkit
 
-{
+[Original slide 20](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L898)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/15_sustainable_ai/images/optimization-stack.svg]]
+
+Harvard Edge ML Systems Book contributors, [optimization-stack.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/images/optimization-stack.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**All techniques reduce terms in:** $P = \alpha C V^2 f + V \cdot I_{leak}$
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The CMOS equation showed P = alpha C V-squared f. This slide connects three
 optimization techniques to the specific terms they reduce.
@@ -787,19 +825,43 @@ when combined --- pruning x quantization x distillation.''
 % -- FLEX: [CORE] + contingency
 [CORE] Maps optimizations to physics. IF SHORT: Name the three techniques and
 their CMOS terms.
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
-
-{optimization-stack.pdf}
-
-{0.15cm}
-
-**All techniques reduce terms in:** $P =  C V^2 f + V  I_{leak}$
+</details>
 
 ## Quantization: The Highest-Leverage Technique
 
-{
+[Original slide 21](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L925)
+
+**Energy savings by precision:**
+
+| **Precision** | **Energy/Op** | **Memory** |
+| --- | --- | --- |
+| FP32 (baseline) | 1$\times$ | 1$\times$ |
+| FP16 / BF16 | 4$\times$ | 2$\times$ |
+| INT8 | 16$\times$ | 4$\times$ |
+| INT4 | 64$\times$ | 8$\times$ |
+
+**Why it works:**
+
+Narrower datapaths reduce $C$ (4$\times$)
+
+Larger noise margins reduce $V$ (2$\times$)
+
+Simpler control reduces logic (2$\times$)
+
+Combined: **6–10$\times$ per operation**
+
+**GPTQ**: 4-bit LLaMA-65B
+
+130 GB $\to$ 32 GB
+
+**Consumer GPU deployment**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The optimization stack showed quantization reduces C and V. This slide quantifies
 the savings across precision levels.
@@ -815,43 +877,48 @@ consumer GPU deployment.''
 % -- FLEX: [CORE] + contingency
 [CORE] Quantization is the highest-leverage single technique.
 IF SHORT: State the INT8 = 16x number and the GPTQ example.
-}
+```
 
-[T]
-  
-    **Energy savings by precision:**
+</details>
 
-    {0.1cm}
-    {}{1.15}
-    {tabular}{@{}lrr@{}}
-      
-      **Precision** & **Energy/Op** & **Memory** \\
-      
-      FP32 (baseline) & 1$×$  & 1$×$ \\
-      FP16 / BF16     & 4$×$  & 2$×$ \\
-      INT8            & 16$×$ & 4$×$ \\
-      INT4            & 64$×$ & 8$×$ \\
-      
-    {tabular}
-  
-  
-    {mlsyscard}{datastroke}
-    **Why it works:**\\[0.05cm]
-    {
-    Narrower datapaths reduce $C$ (4$×$)\\
-    Larger noise margins reduce $V$ (2$×$)\\
-    Simpler control reduces logic (2$×$)\\[0.1cm]
-    Combined: **6--10$×$ per operation**}
-    {mlsyscard}
+## Training vs. Inference Energy
 
-    {0.1cm}
-    **GPTQ**: 4-bit LLaMA-65B\\
-    130 GB $$ 32 GB\\
-    {datastroke}{**Consumer GPU deployment**}
+[Original slide 22](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L981)
 
-## Training vs.\ Inference Energy
+**Training**: One-time burst
 
-{
+1,287 MWh for GPT-3
+
+4.4 tonnes CO<sub>2</sub> (US grid)
+
+**Inference**: Continuous drain
+
+10M queries/day $\times$ 0.001 kWh
+
+= 10,000 kWh/day = 3,650 MWh/year
+
+= 1,566 tonnes CO<sub>2</sub>/year
+
+**The Decode Problem:**
+
+**Prefill** (compute-bound):
+
+High arithmetic intensity $\to$ efficient
+
+**Decode** (bandwidth-bound):
+
+Reads full weights per token $\to$ GPU idles
+
+**10–50$\times$ less energy-efficient**
+
+than batch processing
+
+**Lever:** Optimize inference, not just training.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Quantization optimizes per-operation energy. This slide shows where that
 optimization matters most: inference dominates at production scale.
@@ -871,44 +938,35 @@ queries/day --- inference optimization is the dominant lever.
 % -- FLEX: [CORE] + contingency
 [CORE] Reframes the optimization target from training to inference.
 IF SHORT: State the 2-day crossover and the decode inefficiency.
-}
+```
 
-[T]
-  
-    {mlsyscard}{errorstroke}
-    **Training**: One-time burst\\[0.05cm]
-    { 1,287 MWh for GPT-3\\
-    4.4 tonnes {} (US grid)}
-    {mlsyscard}
-
-    {0.15cm}
-    {mlsyscard}{computestroke}
-    **Inference**: Continuous drain\\[0.05cm]
-    { 10M queries/day $×$ 0.001 kWh\\
-    = 10,000 kWh/day = 3,650 MWh/year\\
-    = 1,566 tonnes {}/year}
-    {mlsyscard}
-  
-  
-    {0.3cm}
-    **The Decode Problem:**
-
-    {0.1cm}
-    {
-    **Prefill** (compute-bound):\\
-    High arithmetic intensity $$ efficient\\[0.1cm]
-    **Decode** (bandwidth-bound):\\
-    Reads full weights per token $$ GPU idles\\[0.1cm]
-    {errorstroke}{**10--50$×$ less energy-efficient**}\\
-    than batch processing
-    }
-
-    {0.1cm}
-    {Lever:}{Optimize inference, not just training.}
+</details>
 
 ## Carbon-Aware Scheduling
 
-{
+[Original slide 23](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L1046)
+
+**Grid carbon intensity varies 100$\times$:**
+
+| **Source** | **g/kWh** | **Regions** |
+| --- | --- | --- |
+| Coal | 820–1,200 | Poland, W. Virginia |
+| Gas | 350–500 | Texas |
+| Solar | 20–50 | California |
+| Hydro | 10–30 | **Quebec** |
+| Nuclear | 5–20 | **France** |
+
+**Two strategies:**
+
+1. **Temporal**: Delay to low-carbon hours
+2. **Geographic**: Route to cleaner grids
+
+Google achieved **40% carbon reduction** by shifting workloads globally. **Zero model changes.**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Geography showed 40x across regions. Carbon-aware scheduling exploits that
 variation dynamically --- shifting jobs in time and space.
@@ -917,53 +975,37 @@ variation dynamically --- shifting jobs in time and space.
 [3 min] Point to the table: ``Coal: 820--1,200 g/kWh. Hydro: 10--30 g/kWh.
 Grid intensity varies 100x.'' Point to the two strategies: ``Temporal: delay
 to low-carbon hours. Geographic: route to cleaner grids.'' Key result:
-``Google achieved 40% carbon reduction by shifting workloads globally.
+``Google achieved 40\% carbon reduction by shifting workloads globally.
 Zero model changes.''
 
 % -- WARN: What students will get wrong on THIS topic
 Common error: students think carbon-aware scheduling requires sacrificing
 latency. Correct framing: batch training jobs are delay-tolerant --- shifting
-by 6--12 hours costs nothing but saves 30--50% carbon.
+by 6--12 hours costs nothing but saves 30--50\% carbon.
 
 % -- FLEX: [CORE] + contingency
 [CORE] Carbon-aware scheduling is the most actionable technique in the chapter.
-IF SHORT: State Google's 40% result and the two strategies.
-}
+IF SHORT: State Google's 40\% result and the two strategies.
+```
 
-[T]
-  
-    **Grid carbon intensity varies 100$×$:**
-
-    {0.05cm}
-    
-    {}{1.0}
-    {tabular}{@{}lrl@{}}
-      
-      **Source** & **g/kWh** & **Regions** \\
-      
-      Coal   & 820--1,200 & Poland, W.\ Virginia \\
-      Gas    & 350--500   & Texas \\
-      Solar  & 20--50     & California \\
-      Hydro  & 10--30     & {datastroke}{**Quebec**} \\
-      Nuclear & 5--20     & {datastroke}{**France**} \\
-      
-    {tabular}
-  
-  
-    **Two strategies:**
-    {0pt}
-- **Temporal**: Delay to low-carbon hours
-- **Geographic**: Route to cleaner grids
-    
-
-    {0.1cm}
-    {mlsyscard}{datastroke}
-    { Google achieved **40% carbon reduction** by shifting workloads globally. **Zero model changes.**}
-    {mlsyscard}
+</details>
 
 ## Discussion: Jevons Paradox
 
-{
+[Original slide 24](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L1106)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol2/15_sustainable_ai/images/jevons-paradox.svg]]
+
+Harvard Edge ML Systems Book contributors, [jevons-paradox.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/images/jevons-paradox.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+Turn and Talk (90 seconds)
+
+**If making AI cheaper increases total consumption, how do we actually reduce emissions?**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Optimization techniques reduce per-query cost. Jevons Paradox asks: does
 cheaper AI actually reduce total consumption?
@@ -983,21 +1025,26 @@ efficiency alone is insufficient without absolute limits.]
 [CORE] Third active learning moment. Jevons Paradox is the chapter's most
 counterintuitive insight.
 IF SHORT: Reduce to 60 seconds discussion.
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
+</details>
 
-{jevons-paradox.pdf}
+## Google's “4 Ms” Framework
 
-{0.1cm}
-{ Turn and Talk {midgray}{(90 seconds)}}
+[Original slide 25](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L1145)
 
-{0.2cm}
-{**If making AI cheaper increases total consumption, how do we actually reduce emissions?**}
+![[Assets/Sources/Harvard ML Systems/slides/vol2/15_sustainable_ai/images/four-ms-framework.svg]]
 
-## Google's ``4 Ms'' Framework
+Harvard Edge ML Systems Book contributors, [four-ms-framework.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/images/four-ms-framework.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
 
-{
+**Combined: 83$\times$ energy, 747$\times$ CO<sub>2</sub>** (Transformer on TPU in clean region)
+
+Source on slide: Patterson et al., “Carbon Emissions and Large Neural Networks,” 2022
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Individual techniques were covered separately. Google's 4 Ms framework shows
 how they multiply together.
@@ -1015,20 +1062,30 @@ Ask: ``Which M has the largest individual impact?'' [Expected: Map (geography)
 % -- FLEX: [CORE] + contingency
 [CORE] The 4 Ms framework is the chapter's actionable summary.
 IF SHORT: State the 747x combined result and name the four Ms.
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
-
-{four-ms-framework.pdf}
-
-{0.1cm}
-
-{Combined: 83$×$ energy, 747$×$ {}} (Transformer on TPU in clean region)
-{Patterson et al., ``Carbon Emissions and Large Neural Networks,'' 2022}
+</details>
 
 ## Quantified Optimization Stack
 
-{
+[Original slide 26](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L1177)
+
+| **Technique** | **CMOS Term** | **Savings** | **Effort** |
+| --- | --- | --- | --- |
+| **Region selection** | — (grid carbon) | **40$\times$** CO<sub>2</sub> | Zero (config) |
+| **Quantization** (INT8) | $C$, $V$ | 4–16$\times$ energy | Low (post-train) |
+| **Pruning** (90%) | $C$ (fewer gates) | 2–5$\times$ energy | Medium (retrain) |
+| **Distillation** (DistilBERT) | All (smaller) | 40% fewer params; 97% acc | High (teacher) |
+| **Transfer learning** | All (skip train) | 20–100$\times$ | Low (fine-tune) |
+| **Hardware selection** | $\alpha$, $V$ | 5–13$\times$ | Medium (procure) |
+| **Extend HW life** (3$\to$5yr) | Embodied | 40% embodied | Organizational |
+
+**These multiply, not add**: Region (40$\times$) $\times$ Hardware (5$\times$) $\times$ Quantization (4$\times$) = **800$\times$** carbon reduction before touching the model architecture.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 The 4 Ms provided the framework. This slide quantifies the percentage savings
 from each technique in the optimization stack --- replacing generic best practices
@@ -1037,8 +1094,8 @@ with measured numbers.
 % -- NARRATE: What to SAY while showing this slide
 [2 min] Walk through the table column by column: ``Region selection: 40x carbon
 reduction, zero model changes. Quantization: 4--16x energy reduction. Pruning:
-2--5x with 90% weight removal. Distillation: DistilBERT retains 97% of BERT
-accuracy with 40% fewer parameters and runs 60% faster --- the lighthouse example
+2--5x with 90\% weight removal. Distillation: DistilBERT retains 97\% of BERT
+accuracy with 40\% fewer parameters and runs 60\% faster --- the lighthouse example
 for inference-time sustainability. Transfer learning: 20--100x vs.\ training from
 scratch.'' Key insight: ``These multiply --- the 747x from Google's 4 Ms comes
 from applying all layers together.''
@@ -1046,31 +1103,41 @@ from applying all layers together.''
 % -- FLEX: [CORE] + contingency
 [CORE] Replaces generic guidelines with quantified optimization stack.
 IF SHORT: Point to the top 3 rows and the multiplicative insight.
-}
+```
 
-{}{1.1}
-{tabular}{@{}llll@{}}
-  
-  **Technique** & **CMOS Term** & **Savings** & **Effort** \\
-  
-  **Region selection**   & --- (grid carbon)  & **40$×$** {}  & Zero (config) \\
-  **Quantization** (INT8) & $C$, $V$          & 4--16$×$ energy & Low (post-train) \\
-  **Pruning** (90%)      & $C$ (fewer gates)  & 2--5$×$ energy  & Medium (retrain) \\
-  **Distillation** (DistilBERT) & All (smaller) & 40% fewer params; 97% acc & High (teacher) \\
-  **Transfer learning**   & All (skip train)   & 20--100$×$     & Low (fine-tune) \\
-  **Hardware selection**   & $$, $V$     & 5--13$×$       & Medium (procure) \\
-  **Extend HW life** (3$$5yr) & Embodied   & 40% embodied       & Organizational \\
-  
-{tabular}
-
-{0.1cm}
-{mlsyscard}{datastroke}
-{ **These multiply, not add**: Region (40$×$) $×$ Hardware (5$×$) $×$ Quantization (4$×$) = **800$×$** carbon reduction before touching the model architecture.}
-{mlsyscard}
+</details>
 
 ## Regulatory Landscape
 
-{
+[Original slide 27](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L1221)
+
+**EU AI Act (2024):**
+
+- Models $> 10^{25}$ FLOPs = “systemic risk”
+- Mandatory energy reporting (train + inference)
+- GPAI violations: up to **3%** of annual turnover or EUR 15M
+- Prohibited-practice violations: up to **7%**
+
+**CSRD:**
+
+- 50,000+ companies must disclose
+- Audited Scope 1, 2, 3 emissions
+- Includes GPU manufacturing carbon
+
+**GHG Protocol Scopes:**
+
+| **Scope** | **Share** |
+| --- | --- |
+| 1 (Direct) | 5–15% |
+| 2 (Grid power) | 60–75% |
+| 3 (Supply chain) | 15–25% |
+
+Companies underreport Scope 3 by **50–70%**.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 Engineering guidelines are voluntary. Regulation makes sustainability mandatory.
 
@@ -1078,111 +1145,102 @@ Engineering guidelines are voluntary. Regulation makes sustainability mandatory.
 [2 min] Point to the left: ``EU AI Act: models over 10 to the 25 FLOPs are
 classified as systemic risk, requiring mandatory energy reporting. For GPAI
 providers who violate energy-reporting obligations, Article 101 permits fines
-up to 3% of annual worldwide turnover or EUR 15 million --- the 7% ceiling
+up to 3\% of annual worldwide turnover or EUR 15 million --- the 7\% ceiling
 applies only to prohibited-practice violations, not to energy-reporting ones.''
 Point to the right: ``CSRD mandates audited Scope 1, 2, 3 emissions for
 50,000+ companies --- including GPU manufacturing carbon.''
-Key point: ``Companies underreport Scope 3 by 50--70%.''
+Key point: ``Companies underreport Scope 3 by 50--70\%.''
 
 % -- WARN: What students will get wrong on THIS topic
 Common error: students assume sustainability reporting is optional or
-aspirational. Also watch for the fine-rate confusion: the 7% cap is for
-prohibited-practice violations; energy-reporting violations face 3%.
+aspirational. Also watch for the fine-rate confusion: the 7\% cap is for
+prohibited-practice violations; energy-reporting violations face 3\%.
 Correct framing: EU fines are cumulative and percentage-based ---
 this is a hard compliance requirement regardless of which rate applies.
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Regulatory context. IF SHORT: State the EU AI Act threshold and
-the 3% GPAI fine (clarifying that 7% is for prohibited-practice violations).
-}
+the 3\% GPAI fine (clarifying that 7\% is for prohibited-practice violations).
+```
 
-[T]
-  
-    **EU AI Act (2024):**
-    {0pt}
-- Models $> 10^{25}$ FLOPs = ``systemic risk''
-- Mandatory energy reporting (train + inference)
-- GPAI violations: up to **3%** of annual turnover or EUR 15M
-- Prohibited-practice violations: up to **7%**
-    
-
-    {0.1cm}
-    **CSRD:**
-    {0pt}
-- 50,000+ companies must disclose
-- Audited Scope 1, 2, 3 emissions
-- Includes GPU manufacturing carbon
-    
-  
-  
-    **GHG Protocol Scopes:**
-
-    {0.1cm}
-    {}{1.1}
-    {tabular}{@{}lr@{}}
-      
-      **Scope** & **Share** \\
-      
-      1 (Direct)     & 5--15% \\
-      2 (Grid power) & 60--75% \\
-      3 (Supply chain) & 15--25% \\
-      
-    {tabular}
-
-    {0.1cm}
-    {mlsyscard}{errorstroke}
-    { Companies underreport Scope 3 by **50--70%**.}
-    {mlsyscard}
+</details>
 
 ## Fallacies
 
-{
+[Original slide 28](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L1295)
+
+**Fallacy:** *Cloud computing automatically makes AI sustainable.*
+
+Geographic region dominates: same training run = 21$\times$ difference (US avg vs Quebec). Default cloud regions waste 20–50$\times$ carbon.
+
+**Fallacy:** *Efficiency improvements reduce total environmental impact.*
+
+Jevons Paradox: GPT-3 became 30$\times$ cheaper per query, triggering 100$\times$ more queries. Net: 3.3$\times$ MORE total energy.
+
+**Fallacy:** *Carbon offsets solve the sustainability problem.*
+
+60–90% of voluntary credits fail to deliver claimed reductions. Direct migration to renewables is 2–3$\times$ cheaper and more effective.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [2 min] Read each fallacy with its quantitative rebuttal. The Jevons Paradox
 fallacy is the most counterintuitive: 30x cheaper triggered 100x more queries
-for 3.3x MORE total energy. The carbon offsets fallacy: 60--90% of voluntary
+for 3.3x MORE total energy. The carbon offsets fallacy: 60--90\% of voluntary
 credits fail to deliver claimed reductions.
 
 % -- FLEX: [CORE] + contingency
 [CORE] Fallacies correct dangerous misconceptions.
 IF SHORT: Read fallacies 2 (Jevons) and 3 (offsets) only.
-}
+```
 
-**Fallacy:** *Cloud computing automatically makes AI sustainable.*\\
-{ Geographic region dominates: same training run = 21$×$ difference (US avg vs Quebec). Default cloud regions waste 20--50$×$ carbon.}
-
-{0.1cm}
-**Fallacy:** *Efficiency improvements reduce total environmental impact.*\\
-{ Jevons Paradox: GPT-3 became 30$×$ cheaper per query, triggering 100$×$ more queries. Net: 3.3$×$ MORE total energy.}
-
-{0.1cm}
-**Fallacy:** *Carbon offsets solve the sustainability problem.*\\
-{ 60--90% of voluntary credits fail to deliver claimed reductions. Direct migration to renewables is 2--3$×$ cheaper and more effective.}
+</details>
 
 ## Pitfalls
 
-{
+[Original slide 29](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L1322)
+
+**Pitfall:** *Focusing only on operational energy while ignoring embodied carbon.*
+
+A single H100 embodies 164 kg CO<sub>2</sub> from manufacturing. On Quebec's clean grid, embodied carbon is **98%** of total emissions. Extending hardware life from 3 to 5 years saves **40%** — larger than most algorithmic optimizations.
+
+**Pitfall:** *Optimizing individual components without lifecycle analysis.*
+
+A model pruned 40% to save training energy but requiring 2$\times$ inference compute increases total emissions if it serves $>$100M queries. Edge deployment saving 60% datacenter energy but requiring 10,000 devices adds 1,500–2,000 kg embodied carbon (10$\times$ cloud training).
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [2 min] Read each pitfall. The first is surprising: on Quebec's clean grid,
-embodied carbon is 98% of total --- manufacturing dominates. Extending hardware
-life from 3 to 5 years saves 40%. The second: a model pruned 40% for training
+embodied carbon is 98\% of total --- manufacturing dominates. Extending hardware
+life from 3 to 5 years saves 40\%. The second: a model pruned 40\% for training
 savings but requiring 2x inference compute increases total emissions at scale.
 
 % -- FLEX: [CORE] + contingency
 [CORE] Pitfalls highlight lifecycle thinking.
 IF SHORT: Cover the first pitfall (embodied carbon) only.
-}
+```
 
-**Pitfall:** *Focusing only on operational energy while ignoring embodied carbon.*\\
-A single H100 embodies 164 kg {} from manufacturing. On Quebec's clean grid, embodied carbon is **98%** of total emissions. Extending hardware life from 3 to 5 years saves **40%** --- larger than most algorithmic optimizations.
-
-{0.15cm}
-**Pitfall:** *Optimizing individual components without lifecycle analysis.*\\
-A model pruned 40% to save training energy but requiring 2$×$ inference compute increases total emissions if it serves $>$100M queries. Edge deployment saving 60% datacenter energy but requiring 10,000 devices adds 1,500--2,000 kg embodied carbon (10$×$ cloud training).
+</details>
 
 ## Muddiest Point
 
-{
+[Original slide 30](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L1348)
+
+What was the **muddiest point** today?
+
+Write down the concept you found **most confusing**.
+
+Anonymous. One sentence. Submit before you leave.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- LINK: What prior concept connects to this slide
 This slide closes the feedback loop on everything covered: Energy Wall and
 Sustainability Wall, PUE/WUE, lifecycle carbon, Jevons Paradox, 4 Ms, and the
@@ -1199,40 +1257,50 @@ Paradox mechanics --- efficiency makes use cheaper, which triggers more use; or
 
 % -- FLEX: [CORE] + contingency
 [CORE] Closes the feedback loop. Do not skip.
-}
+```
 
-{1.0cm}
-{ What was the **muddiest point** today?}
-
-{0.8cm}
-{ Write down the concept you found **most confusing**.}
-
-{0.5cm}
-{{midgray}{Anonymous. One sentence. Submit before you leave.}}
+</details>
 
 ## What Were the Key Ideas?
 
-{
+[Original slide 31](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L1380)
+
+Close your notes.
+
+Write down the **4 most important concepts** from today.
+
+90 seconds — no peeking.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [2 min] ``Close your notes. Write down the 4 most important concepts from today.
 90 seconds, no peeking.'' Walk around the room. Do NOT show next slide yet.
 
 % -- FLEX: [CORE] + contingency
 [CORE] Retrieval practice is the highest-impact learning intervention.
-}
+```
 
-{1.5cm}
-{ Close your notes.}
-
-{0.8cm}
-{ Write down the **4 most important concepts** from today.}
-
-{0.8cm}
-{{midgray}{90 seconds --- no peeking.}}
+</details>
 
 ## Key Takeaways
 
-{
+[Original slide 32](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L1402)
+
+- **Sustainability Paradox**: AI compute grew 350,000$\times$ (2012–2019); hardware efficiency only 2–5%/year. The gap is physical.
+- **Lifecycle Carbon**: Training (60–80%), inference (15–25%), manufacturing (5–15%). Inference exceeds training within days.
+- **Geography dominates**: Site selection creates 40$\times$ emission differences — larger than any algorithmic optimization.
+- **CMOS physics**: $P = \alpha C V^2 f + V I_{leak}$. Quantization and pruning reduce $C$ and $V$ directly.
+- **Jevons Paradox**: Efficiency alone increases total consumption. Requires optimization + carbon budgets.
+- **Google's 4 Ms**: Model + Machine + Mechanization + Map = 747$\times$ CO<sub>2</sub> reduction (multiplicative).
+- **Regulation**: EU AI Act mandates energy reporting for frontier models. Compliance requirement, not optional.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [2 min] Reveal after retrieval. Walk through each bullet, anchoring on numbers:
 350,000x compute growth, 40x geographic leverage, 1,000x hardware range, Jevons
@@ -1240,20 +1308,30 @@ Paradox 3.3x rebound, 747x from Google's 4 Ms combined.
 
 % -- FLEX: [CORE] + contingency
 [CORE] Synthesis slide. IF SHORT: Read bullets 1, 3, and 5.
-}
+```
 
-{0pt}
-- **Sustainability Paradox**: AI compute grew 350,000$×$ (2012--2019); hardware efficiency only 2--5%/year. The gap is physical.
-- **Lifecycle Carbon**: Training (60--80%), inference (15--25%), manufacturing (5--15%). Inference exceeds training within days.
-- **Geography dominates**: Site selection creates 40$×$ emission differences --- larger than any algorithmic optimization.
-- **CMOS physics**: $P =  C V^2 f + V I_{leak}$. Quantization and pruning reduce $C$ and $V$ directly.
-- **Jevons Paradox**: Efficiency alone increases total consumption. Requires optimization + carbon budgets.
-- **Google's 4 Ms**: Model + Machine + Mechanization + Map = 747$×$ {} reduction (multiplicative).
-- **Regulation**: EU AI Act mandates energy reporting for frontier models. Compliance requirement, not optional.
+</details>
 
 ## References
 
-{
+[Original slide 33](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L1426)
+
+**Patterson+21** Patterson et al. “Carbon Emissions and Large Neural Networks.” 2021.
+
+**Patterson+22** Patterson et al. “The Carbon Footprint of Machine Learning Training.” 2022.
+
+**Strubell+19** Strubell et al. “Energy and Policy Considerations for NLP.” ACL 2019.
+
+**Schwartz+20** Schwartz et al. “Green AI.” CACM 2020.
+
+**Hinton+15** Hinton et al. “Distilling the Knowledge in a Neural Network.” 2015.
+
+**Sanh+19** Sanh et al. “DistilBERT.” NeurIPS Workshop 2019.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [1 min] Highlight Patterson+21 and Patterson+22 as the foundational carbon
 accounting papers. Strubell+19 started the conversation; Patterson+21 sharpened
@@ -1261,18 +1339,40 @@ the accounting boundary. Students can photograph.
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Do not read every entry aloud.
-}
+```
 
-{Patterson+21}{Patterson et al. ``Carbon Emissions and Large Neural Networks.'' 2021.}
-{Patterson+22}{Patterson et al. ``The Carbon Footprint of Machine Learning Training.'' 2022.}
-{Strubell+19}{Strubell et al. ``Energy and Policy Considerations for NLP.'' ACL 2019.}
-{Schwartz+20}{Schwartz et al. ``Green AI.'' CACM 2020.}
-{Hinton+15}{Hinton et al. ``Distilling the Knowledge in a Neural Network.'' 2015.}
-{Sanh+19}{Sanh et al. ``DistilBERT.'' NeurIPS Workshop 2019.}
+</details>
 
 ## Next Lecture: Responsible AI
 
-{
+[Original slide 34](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L1447)
+
+Fairness
+
+Bias detection
+
+Equitable outcomes
+
+Governance
+
+Accountability
+
+Transparency
+
+Ethics
+
+Value alignment
+
+Societal impact
+
+A system that is technically sound can still cause social harm.
+
+**From *how to build* the machine to *whom it serves*.**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 [1 min] ``We have ensured the fleet is physically viable. The final question:
 whom does it serve?'' Point to the three cards: fairness, governance, ethics.
@@ -1280,90 +1380,65 @@ whom does it serve?'' Point to the three cards: fairness, governance, ethics.
 
 % -- FLEX: [CORE] + contingency
 [CORE] Forward hook motivates the final content chapter.
-}
+```
 
-[c]
-  
-    
-    {mlsyscard}{computestroke}
-    { Fairness}\\[0.1cm]
-    { Bias detection\ outcomes}
-    {mlsyscard}
-  
-  
-    
-    {mlsyscard}{routingstroke}
-    { Governance}\\[0.1cm]
-    { Accountability\}
-    {mlsyscard}
-  
-  
-    
-    {mlsyscard}{errorstroke}
-    { Ethics}\\[0.1cm]
-    { Value alignment\ impact}
-    {mlsyscard}
-  
-
-{0.3cm}
-
-{ A system that is technically sound can still cause social harm.}\\[0.1cm]
-{{From *how to build* the machine to *whom it serves*.}}
+</details>
 
 ## Backup: Carbon Calculation for Cloud Providers
 
-{
+[Original slide 35](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L1494)
+
+| **Provider** | **Region** | **g CO$_2$/kWh** | **Relative** |
+| --- | --- | --- | --- |
+| AWS | us-east-1 (Virginia) | 380 | 1.0$\times$ |
+| AWS | ca-central-1 (Quebec) | 20 | 0.05$\times$ |
+| GCP | us-central1 (Iowa) | 430 | 1.13$\times$ |
+| GCP | europe-north1 (Finland) | 130 | 0.34$\times$ |
+| Azure | Sweden Central | 30 | 0.08$\times$ |
+
+Same model, same provider: 19$\times$ carbon difference by region choice alone.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 Backup. Per-provider carbon intensity table showing 19x difference by region
 choice within the same cloud provider.
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Only show if students ask about specific cloud regions.
-}
+```
 
-{}{1.15}
-{tabular}{@{}llrr@{}}
-  
-  **Provider** & **Region** & **g CO$_2$/kWh** & **Relative** \\
-  
-  AWS & us-east-1 (Virginia)  & 380 & 1.0$×$ \\
-  AWS & ca-central-1 (Quebec) & 20  & 0.05$×$ \\
-  GCP & us-central1 (Iowa)    & 430 & 1.13$×$ \\
-  GCP & europe-north1 (Finland) & 130 & 0.34$×$ \\
-  Azure & Sweden Central       & 30  & 0.08$×$ \\
-  
-{tabular}
-
-{0.1cm}
-{ Same model, same provider: 19$×$ carbon difference by region choice alone.}
+</details>
 
 ## Backup: Jevons Paradox Extended
 
-{
+[Original slide 36](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol2/15_sustainable_ai/15_sustainable_ai.tex#L1523)
+
+**Jevons Paradox in AI:** Efficiency leads to lower cost leads to higher demand.
+
+| **Year** | **Cost/1K tokens** | **Daily queries** | **Daily energy** |
+| --- | --- | --- | --- |
+| 2023 (GPT-3.5) | &#36;0.06 | 10M | 10,000 kWh |
+| 2024 (GPT-4o) | &#36;0.005 | 500M | 25,000 kWh |
+| 2025 (proj.) | &#36;0.001 | 5B | 50,000 kWh |
+
+60$\times$ cheaper per query, but 5,000$\times$ more queries. Net: 5$\times$ more energy.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 % -- NARRATE: What to SAY while showing this slide
 Backup. Extended Jevons Paradox data: 60x cheaper per query but 5,000x more
 queries yields 5x more total energy by 2025 projections.
 
 % -- FLEX: [OPTIONAL] + contingency
 [OPTIONAL] Only show if the Jevons discussion generated strong engagement.
-}
+```
 
-**Jevons Paradox in AI:** Efficiency leads to lower cost leads to higher demand.
-
-{0.15cm}
-{}{1.15}
-{tabular}{@{}lrrr@{}}
-  
-  **Year** & **Cost/1K tokens** & **Daily queries** & **Daily energy** \\
-  
-  2023 (GPT-3.5) & \$0.06  & 10M    & 10,000 kWh \\
-  2024 (GPT-4o)  & \$0.005 & 500M   & 25,000 kWh \\
-  2025 (proj.)   & \$0.001 & 5B     & 50,000 kWh \\
-  
-{tabular}
-
-{0.1cm}
-{ 60$×$ cheaper per query, but 5,000$×$ more queries. Net: 5$×$ more energy.}
+</details>
 
 ## Complete original Beamer source
 

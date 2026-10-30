@@ -1,0 +1,83 @@
+[
+  {
+    "id": "curated-recommender-eval-precision-ac7c3b4a97da",
+    "asset": "00 Учебник/Assets/Figures/curated/recommender-evaluation-2026-10-25/precision-recall.svg",
+    "author": "Walber; retrieved label revision by Mwarren us",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Precisionrecall.svg",
+    "source_image_url": "https://upload.wikimedia.org/wikipedia/commons/2/26/Precisionrecall.svg",
+    "source_asset": "00 Учебник/Assets/Figures/curated/recommender-evaluation-2026-10-25/precision-recall.svg",
+    "source_asset_sha256": "ac7c3b4a97da543d50faec80aae6854c4c62ba293f47b833145d8b4276337b2b",
+    "sha256": "ac7c3b4a97da543d50faec80aae6854c4c62ba293f47b833145d8b4276337b2b",
+    "dimensions_px": [
+      440,
+      800
+    ],
+    "source_page_snapshot": "05 Источники/Originals/recommender-evaluation-2026-10-25/precision-recall-source.html",
+    "source_page_sha256": "e622162764677fe2ef497e914e7f21b4c5aec85066285f532bc1048a599211e6",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/recommender-evaluation-2026-10-25/precision-recall-source.html",
+    "license_evidence_sha256": "e622162764677fe2ef497e914e7f21b4c5aec85066285f532bc1048a599211e6",
+    "derivation": "source-svg-copy",
+    "modifications": "Original file downloaded through the browser; SHA-1 d6e4f45f7f8f9574ba0a9140689c8313b3e974f5 matches Wikimedia metadata. No crop, redraw, relabeling or translation. Licensed artwork remains CC BY-SA 4.0.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-26",
+    "used_in": [
+      "00 Учебник/02 Рекомендательные системы/05 Оценивание и эксплуатация.md"
+    ]
+  },
+  {
+    "id": "curated-recommender-eval-diversity-86fae1ed74fb",
+    "asset": "00 Учебник/Assets/Figures/curated/recommender-evaluation-2026-10-25/diversity.svg",
+    "author": "Google",
+    "source_url": "https://developers.google.com/machine-learning/recommendation/dnn/re-ranking",
+    "source_image_url": "https://developers.google.com/machine-learning/recommendation/images/Diversity.svg",
+    "source_asset": "00 Учебник/Assets/Figures/curated/recommender-evaluation-2026-10-25/diversity.svg",
+    "source_asset_sha256": "86fae1ed74fbcea7d002493e72289f79a87960db90fc4dc2196643c55ce5ce30",
+    "sha256": "86fae1ed74fbcea7d002493e72289f79a87960db90fc4dc2196643c55ce5ce30",
+    "source_page_snapshot": "05 Источники/Originals/recommender-evaluation-2026-10-25/google-reranking.html",
+    "source_page_sha256": "e760d9ab8eb51fe1c88034cde78de48591adcefb9518339923071b8cd8f061bc",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/recommender-evaluation-2026-10-25/google-reranking.html",
+    "license_evidence_sha256": "e760d9ab8eb51fe1c88034cde78de48591adcefb9518339923071b8cd8f061bc",
+    "derivation": "source-svg-copy",
+    "modifications": "Unmodified full source SVG. No crop, redraw, relabeling, translation or raster conversion.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-26",
+    "used_in": [
+      "00 Учебник/02 Рекомендательные системы/05 Оценивание и эксплуатация.md"
+    ]
+  },
+  {
+    "id": "curated-linux-foundation-recommenders-architecture-202607310001",
+    "asset": "00 Учебник/Assets/Figures/curated/linux-foundation-recommenders-architecture.png",
+    "author": "Recommenders contributors",
+    "source_url": "https://github.com/recommenders-team/recommenders/blob/6232b154548c955315650d58dca6bf1411c56020/examples/05_operationalize/als_movie_o16n.ipynb",
+    "source_image_url": "https://raw.githubusercontent.com/recommenders-team/resources/e76bb39727103e45dd8011b6d0eca2f1aad3c0f7/images/reco-arch.png",
+    "commit": "e76bb39727103e45dd8011b6d0eca2f1aad3c0f7",
+    "source_asset": "05 Источники/Originals/recommender-evaluation-2026-10-25/reco-arch.png",
+    "source_asset_sha256": "9b6ce77521b28be287bc989f53f46cb3830136442cd71167b4e2141ae01cded6",
+    "sha256": "9b6ce77521b28be287bc989f53f46cb3830136442cd71167b4e2141ae01cded6",
+    "dimensions_px": [
+      1324,
+      680
+    ],
+    "license": "MIT",
+    "license_url": "https://github.com/recommenders-team/resources/blob/e76bb39727103e45dd8011b6d0eca2f1aad3c0f7/LICENSE",
+    "license_evidence": "05 Источники/Originals/recommender-mf-2026-10-25/resources-LICENSE.txt",
+    "license_evidence_sha256": "d7ca82f3133a25d7ddd29dfd5f64d5db36df88eb1a0adfaf376adc539f06e59a",
+    "derivation": "source-raster-copy",
+    "modifications": "Existing complete PNG byte-matched to the pinned Recommenders resources original. No crop, redraw or relabeling. MIT evidence is from resources, not inferred from the notebook code license.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-26",
+    "used_in": [
+      "00 Учебник/02 Рекомендательные системы/05 Оценивание и эксплуатация.md"
+    ],
+    "source_page_snapshot": "05 Источники/Courses/Linux Foundation Recommenders/examples/05_operationalize/als_movie_o16n.ipynb.md",
+    "source_page_sha256": "50243c6575f7d391eae502327fe0d3c4c11a311d00d8593ccb43c08d231d3090"
+  }
+]

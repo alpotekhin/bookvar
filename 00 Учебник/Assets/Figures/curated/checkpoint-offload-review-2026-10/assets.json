@@ -1,0 +1,70 @@
+{
+  "new_assets": [
+    {
+      "id": "curated-checkpoint-deepspeed-optimizer-offload-3e31b0a326d6",
+      "asset": "00 Учебник/Assets/Figures/curated/checkpoint-offload-review-2026-10/deepspeed-optimizer-offload.png",
+      "author": "DeepSpeed Team: Guanhua Wang, Masahiro Tanaka, Xiaoxia Wu, Lok Chand Koppaka, Samyam Rajbhandari, Olatunji Ruwase, Yuxiong He",
+      "source_url": "https://github.com/deepspeedai/DeepSpeed/blob/dcd8595c234155a4c70ca9f3cd8c9cbef462cc3c/blogs/deepspeed-offloadpp/images/cpu-offload.png",
+      "source_image_url": "https://raw.githubusercontent.com/deepspeedai/DeepSpeed/dcd8595c234155a4c70ca9f3cd8c9cbef462cc3c/blogs/deepspeed-offloadpp/images/cpu-offload.png",
+      "source_page_url": "https://github.com/deepspeedai/DeepSpeed/blob/dcd8595c234155a4c70ca9f3cd8c9cbef462cc3c/blogs/deepspeed-offloadpp/README.md#twin-flow",
+      "commit": "dcd8595c234155a4c70ca9f3cd8c9cbef462cc3c",
+      "sha256": "3e31b0a326d662ada6f409025696df8c96f6680bb648b694847a1fa2afda8a8f",
+      "dimensions": [
+        546,
+        364
+      ],
+      "license": "Apache-2.0",
+      "license_url": "https://github.com/deepspeedai/DeepSpeed/blob/dcd8595c234155a4c70ca9f3cd8c9cbef462cc3c/LICENSE",
+      "license_copy": "00 Учебник/Assets/Figures/curated/checkpoint-offload-review-2026-10/DeepSpeed-LICENSE.txt",
+      "license_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "modifications": "Original PNG copied byte-for-byte; no crop, redraw, translation, upscale or compositing.",
+      "used_in": [
+        "00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload.md"
+      ],
+      "metadata_status": "verified",
+      "provenance_confirmation": "pinned-upstream-repository",
+      "rights_status": "source-license-verified",
+      "review_note": "Original optimizer-placement schematic. Native labels readable; explains CPUAdam versus FusedAdam, not activation scheduling or measured throughput. Repository THIRD_PARTY_NOTICES.md checked: covers unrelated TorchTitan source code, not this image.",
+      "last_verified": "2026-10-13"
+    }
+  ],
+  "used_in_changes": [
+    {
+      "id": "curated-arithmetic-pytorch-checkpoint-13bc1fead2c8",
+      "add": [
+        "00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload.md"
+      ],
+      "remove": [],
+      "review_note": "Reused without modification in chapter44b: explicitly explains saved boundary versus recomputed region. Earlier chapter10 removal remains valid; current figure was personally inspected."
+    },
+    {
+      "id": "curated-arithmetic-pytorch-selective-checkpoint-14955736f9fe",
+      "add": [
+        "00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload.md"
+      ],
+      "remove": [],
+      "review_note": "Reused without modification in chapter44b: explicit ordinary versus selective saving comparison, matched to executable mm example. Earlier chapter10 removal remains valid."
+    },
+    {
+      "id": "curated-stanford-cs336-systems-l05-p35-5825b9d9ff7a",
+      "add": [
+        "docs/audit/2026-10-13-checkpoint-offload.md"
+      ],
+      "remove": [
+        "00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload.md"
+      ],
+      "review_note": "Removed from reader chapter after visual review. Source contains a truncated line/arrow and low-resolution embedded graph; retained unchanged for provenance. Eight-versus-five tensor memory accesses now explained in prose and Markdown table."
+    },
+    {
+      "id": "curated-stanford-cs336-systems-l05-p36-fe65cf3116e8",
+      "add": [
+        "docs/audit/2026-10-13-checkpoint-offload.md"
+      ],
+      "remove": [
+        "00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload.md"
+      ],
+      "review_note": "Removed with preceding diagram: useful explanation retained as prose/table, clearer original PyTorch diagrams used for AC/SAC. Source file and its existing limited rights record retained unchanged."
+    }
+  ],
+  "rejected_candidates": "Two original-PDF crops were visually inspected and rejected. Not present in Assets; temporary files /tmp/cs336-saved-sigmoids-rejected.png and /tmp/cs336-recomputed-sigmoids-rejected.png are disposable. No new source-license claim for Stanford slides."
+}

@@ -1,0 +1,2911 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-29",
+  "scope": "Full prose-level comparison of one pinned Harvard source chapter; not a benchmark or a claim that all referenced destination chapters were reread.",
+  "source": {
+    "path": "05 Источники/Originals/hardware-reconciliation-2026-10-29/harvard-hw-acceleration.qmd",
+    "sha256": "a2fd4509359f233ec8ffcd7b554db0ddf60ed2dbe08f1a560cf6cb198d32a7a3",
+    "repository": "https://github.com/harvard-edge/cs249r_book",
+    "commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "upstream_path": "book/quarto/contents/vol1/hw_acceleration/hw_acceleration.qmd",
+    "license": "CC-BY-NC-SA-4.0",
+    "full_read": {
+      "ranges": [
+        [
+          1,
+          5935
+        ]
+      ],
+      "scope": "All visible prose, captions, tables and displayed code. Non-published generators and TikZ internals skipped; their figure captions read.",
+      "excluded_hidden_blocks": [
+        [
+          55,
+          97
+        ],
+        [
+          156,
+          229
+        ],
+        [
+          250,
+          332
+        ],
+        [
+          403,
+          459
+        ],
+        [
+          487,
+          605
+        ],
+        [
+          615,
+          639
+        ],
+        [
+          651,
+          723
+        ],
+        [
+          745,
+          780
+        ],
+        [
+          798,
+          817
+        ],
+        [
+          888,
+          926
+        ],
+        [
+          936,
+          1107
+        ],
+        [
+          1129,
+          1162
+        ],
+        [
+          1523,
+          1554
+        ],
+        [
+          1590,
+          1719
+        ],
+        [
+          1745,
+          1956
+        ],
+        [
+          1968,
+          2027
+        ],
+        [
+          2029,
+          2059
+        ],
+        [
+          2090,
+          2182
+        ],
+        [
+          2186,
+          2231
+        ],
+        [
+          2315,
+          2345
+        ],
+        [
+          2412,
+          2498
+        ],
+        [
+          2516,
+          2539
+        ],
+        [
+          2575,
+          2649
+        ],
+        [
+          2653,
+          2666
+        ],
+        [
+          2685,
+          2741
+        ],
+        [
+          2749,
+          2898
+        ],
+        [
+          2908,
+          2950
+        ],
+        [
+          2967,
+          2969
+        ],
+        [
+          2996,
+          3149
+        ],
+        [
+          3159,
+          3162
+        ],
+        [
+          3176,
+          3178
+        ],
+        [
+          3213,
+          3230
+        ],
+        [
+          3304,
+          3363
+        ],
+        [
+          3373,
+          3432
+        ],
+        [
+          3537,
+          3631
+        ],
+        [
+          3697,
+          3756
+        ],
+        [
+          3790,
+          3852
+        ],
+        [
+          3869,
+          3871
+        ],
+        [
+          3887,
+          3947
+        ],
+        [
+          3977,
+          4042
+        ],
+        [
+          4088,
+          4127
+        ],
+        [
+          4148,
+          4211
+        ],
+        [
+          4632,
+          4661
+        ],
+        [
+          4712,
+          4746
+        ],
+        [
+          4812,
+          4873
+        ],
+        [
+          5038,
+          5069
+        ],
+        [
+          5234,
+          5257
+        ],
+        [
+          5301,
+          5333
+        ],
+        [
+          5433,
+          5495
+        ],
+        [
+          5526,
+          5573
+        ],
+        [
+          5577,
+          5622
+        ],
+        [
+          5628,
+          5665
+        ],
+        [
+          5671,
+          5715
+        ],
+        [
+          5725,
+          5775
+        ],
+        [
+          5789,
+          5860
+        ],
+        [
+          5883,
+          5903
+        ]
+      ],
+      "reader": "/var/tmp/bookvar-read-qmd.mjs",
+      "reader_chunks_read": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ]
+    }
+  },
+  "addition": {
+    "source": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+    "marker": "mapping",
+    "before_sha256": "578b2b687fedcc234e8925071ce9071aabffa9c950eb01445cfb86fb9b2db7f1",
+    "after_sha256": "d700f60713f8d39ff010f0c7f7daeaa2aa3a0c1b3125ef63aad0858e29f9db1c",
+    "block_sha256": "e9166507e1cdd19c8b70fee777b76d31024e53b09314c5691b6913de6cd9db1c",
+    "line_count": 286,
+    "review": "Full prior chapter 1–1097 and complete 286-line addition read; parent independently reread new block. No older text or metadata changed."
+  },
+  "destinations": {
+    "model": {
+      "path": "00 Учебник/10 ML Systems/01 Модель как часть системы.md",
+      "route": "textbook/ml-systems/model-as-part-of-system",
+      "heading": "Из чего складывается время ответа",
+      "anchor": "из-чего-складывается-время-ответа",
+      "read_ranges": [
+        [
+          70,
+          215
+        ]
+      ],
+      "read_scope": "only listed full sections; not a whole-chapter audit"
+    },
+    "gpu": {
+      "path": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "route": "textbook/ml-systems/gpu-cuda-memory-hierarchy",
+      "heading": "Как блоки попадают на вычислители",
+      "anchor": "как-блоки-попадают-на-вычислители",
+      "read_ranges": [
+        [
+          1,
+          1097
+        ]
+      ],
+      "read_scope": "full pre-addition chapter plus complete new block"
+    },
+    "simt": {
+      "path": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "route": "textbook/ml-systems/gpu-cuda-memory-hierarchy",
+      "heading": "Почему ветвление внутри warp бывает дорогим",
+      "anchor": "почему-ветвление-внутри-warp-бывает-дорогим",
+      "read_ranges": [
+        [
+          1,
+          1097
+        ]
+      ],
+      "read_scope": "full pre-addition chapter plus complete new block"
+    },
+    "mem": {
+      "path": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "route": "textbook/ml-systems/gpu-cuda-memory-hierarchy",
+      "heading": "Где хранится один элемент",
+      "anchor": "где-хранится-один-элемент",
+      "read_ranges": [
+        [
+          1,
+          1097
+        ]
+      ],
+      "read_scope": "full pre-addition chapter plus complete new block"
+    },
+    "tile": {
+      "path": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "route": "textbook/ml-systems/gpu-cuda-memory-hierarchy",
+      "heading": "Блочное матричное умножение",
+      "anchor": "блочное-матричное-умножение",
+      "read_ranges": [
+        [
+          1,
+          1097
+        ]
+      ],
+      "read_scope": "full pre-addition chapter plus complete new block"
+    },
+    "fringe": {
+      "path": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "route": "textbook/ml-systems/gpu-cuda-memory-hierarchy",
+      "heading": "Неполная плитка: что именно заполняется нулями",
+      "anchor": "неполная-плитка-что-именно-заполняется-нулями",
+      "read_ranges": [
+        [
+          1,
+          1097
+        ]
+      ],
+      "read_scope": "full pre-addition chapter plus complete new block"
+    },
+    "tensor": {
+      "path": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "route": "textbook/ml-systems/gpu-cuda-memory-hierarchy",
+      "heading": "Tensor Cores — другая инструкция для той же алгебры",
+      "anchor": "tensor-cores--другая-инструкция-для-той-же-алгебры",
+      "read_ranges": [
+        [
+          1,
+          1097
+        ]
+      ],
+      "read_scope": "full pre-addition chapter plus complete new block"
+    },
+    "fusion": {
+      "path": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "route": "textbook/ml-systems/gpu-cuda-memory-hierarchy",
+      "heading": "Объединение ядер: не записывать промежуточный массив",
+      "anchor": "объединение-ядер-не-записывать-промежуточный-массив",
+      "read_ranges": [
+        [
+          1,
+          1097
+        ]
+      ],
+      "read_scope": "full pre-addition chapter plus complete new block"
+    },
+    "host": {
+      "path": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "route": "textbook/ml-systems/gpu-cuda-memory-hierarchy",
+      "heading": "Передача данных и асинхронное выполнение",
+      "anchor": "передача-данных-и-асинхронное-выполнение",
+      "read_ranges": [
+        [
+          1,
+          1097
+        ]
+      ],
+      "read_scope": "full pre-addition chapter plus complete new block"
+    },
+    "streams": {
+      "path": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "route": "textbook/ml-systems/gpu-cuda-memory-hierarchy",
+      "heading": "Очереди CUDA и зависимости",
+      "anchor": "очереди-cuda-и-зависимости",
+      "read_ranges": [
+        [
+          1,
+          1097
+        ]
+      ],
+      "read_scope": "full pre-addition chapter plus complete new block"
+    },
+    "systolic": {
+      "path": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "route": "textbook/ml-systems/gpu-cuda-memory-hierarchy",
+      "heading": "A systolic array: keep weights, pass inputs and partial sums",
+      "anchor": "a-systolic-array-keep-weights-pass-inputs-and-partial-sums",
+      "read_ranges": [
+        [
+          1,
+          1097
+        ]
+      ],
+      "read_scope": "full pre-addition chapter plus complete new block"
+    },
+    "stationary": {
+      "path": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "route": "textbook/ml-systems/gpu-cuda-memory-hierarchy",
+      "heading": "Which operand stays local?",
+      "anchor": "which-operand-stays-local",
+      "read_ranges": [
+        [
+          1,
+          1097
+        ]
+      ],
+      "read_scope": "full pre-addition chapter plus complete new block"
+    },
+    "matrix": {
+      "path": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "route": "textbook/ml-systems/gpu-cuda-memory-hierarchy",
+      "heading": "Matrix arithmetic does not execute every part of a layer",
+      "anchor": "matrix-arithmetic-does-not-execute-every-part-of-a-layer",
+      "read_ranges": [
+        [
+          848,
+          1132
+        ]
+      ],
+      "read_scope": "full pre-addition chapter plus complete new block"
+    },
+    "im2col": {
+      "path": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "route": "textbook/ml-systems/gpu-cuda-memory-hierarchy",
+      "heading": "Convolution as a matrix product: the cost of forming patches",
+      "anchor": "convolution-as-a-matrix-product-the-cost-of-forming-patches",
+      "read_ranges": [
+        [
+          848,
+          1132
+        ]
+      ],
+      "read_scope": "full pre-addition chapter plus complete new block"
+    },
+    "layout": {
+      "path": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "route": "textbook/ml-systems/gpu-cuda-memory-hierarchy",
+      "heading": "Logical dimensions and physical tensor layout",
+      "anchor": "logical-dimensions-and-physical-tensor-layout",
+      "read_ranges": [
+        [
+          848,
+          1132
+        ]
+      ],
+      "read_scope": "full pre-addition chapter plus complete new block"
+    },
+    "placement": {
+      "path": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "route": "textbook/ml-systems/gpu-cuda-memory-hierarchy",
+      "heading": "Placement, buffer lifetime and execution order",
+      "anchor": "placement-buffer-lifetime-and-execution-order",
+      "read_ranges": [
+        [
+          848,
+          1132
+        ]
+      ],
+      "read_scope": "full pre-addition chapter plus complete new block"
+    },
+    "unified": {
+      "path": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "route": "textbook/ml-systems/gpu-cuda-memory-hierarchy",
+      "heading": "Unified Memory: a common address does not fix data residency",
+      "anchor": "unified-memory-a-common-address-does-not-fix-data-residency",
+      "read_ranges": [
+        [
+          848,
+          1132
+        ]
+      ],
+      "read_scope": "full pre-addition chapter plus complete new block"
+    },
+    "soc": {
+      "path": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "route": "textbook/ml-systems/gpu-cuda-memory-hierarchy",
+      "heading": "Heterogeneous processors and unsupported operations",
+      "anchor": "heterogeneous-processors-and-unsupported-operations",
+      "read_ranges": [
+        [
+          848,
+          1132
+        ]
+      ],
+      "read_scope": "full pre-addition chapter plus complete new block"
+    },
+    "fleet": {
+      "path": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "route": "textbook/ml-systems/gpu-cuda-memory-hierarchy",
+      "heading": "Package, node and fleet boundaries",
+      "anchor": "package-node-and-fleet-boundaries",
+      "read_ranges": [
+        [
+          848,
+          1132
+        ]
+      ],
+      "read_scope": "full pre-addition chapter plus complete new block"
+    },
+    "roof": {
+      "path": "00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md",
+      "route": "textbook/ml-systems/performance-measurement-roofline",
+      "heading": "Roofline: сколько работы приходится на один байт",
+      "anchor": "roofline-сколько-работы-приходится-на-один-байт",
+      "read_ranges": [
+        [
+          342,
+          637
+        ],
+        [
+          786,
+          867
+        ]
+      ],
+      "read_scope": "only listed full sections; not a whole-chapter audit"
+    },
+    "roofmem": {
+      "path": "00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md",
+      "route": "textbook/ml-systems/performance-measurement-roofline",
+      "heading": "Какую память мы считаем",
+      "anchor": "какую-память-мы-считаем",
+      "read_ranges": [
+        [
+          342,
+          637
+        ]
+      ],
+      "read_scope": "only listed full sections; not a whole-chapter audit"
+    },
+    "gemm": {
+      "path": "00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md",
+      "route": "textbook/ml-systems/performance-measurement-roofline",
+      "heading": "Матричное умножение: размер и повторное использование",
+      "anchor": "матричное-умножение-размер-и-повторное-использование",
+      "read_ranges": [
+        [
+          342,
+          637
+        ]
+      ],
+      "read_scope": "only listed full sections; not a whole-chapter audit"
+    },
+    "scaling": {
+      "path": "00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md",
+      "route": "textbook/ml-systems/performance-measurement-roofline",
+      "heading": "Strong scaling and weak scaling answer different questions",
+      "anchor": "strong-scaling-and-weak-scaling-answer-different-questions",
+      "read_ranges": [
+        [
+          786,
+          867
+        ]
+      ],
+      "read_scope": "only listed full sections; not a whole-chapter audit"
+    },
+    "precision": {
+      "path": "00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md",
+      "route": "textbook/ml-systems/numerical-formats-mixed-precision",
+      "heading": "Почему длинные суммы требуют отдельного внимания",
+      "anchor": "почему-длинные-суммы-требуют-отдельного-внимания",
+      "read_ranges": [
+        [
+          86,
+          286
+        ],
+        [
+          375,
+          408
+        ]
+      ],
+      "read_scope": "only listed full sections; not a whole-chapter audit"
+    },
+    "softmax": {
+      "path": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "route": "textbook/ml-systems/gpu-kernels-triton",
+      "heading": "Разбор алгоритма: softmax одной строки",
+      "anchor": "разбор-алгоритма-softmax-одной-строки",
+      "read_ranges": [
+        [
+          305,
+          451
+        ]
+      ],
+      "read_scope": "only listed full sections; not a whole-chapter audit"
+    },
+    "indexed": {
+      "path": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "route": "textbook/ml-systems/gpu-kernels-triton",
+      "heading": "Indexed gather and scatter",
+      "anchor": "indexed-gather-and-scatter",
+      "read_ranges": [
+        [
+          909,
+          1089
+        ]
+      ],
+      "read_scope": "only listed full sections; not a whole-chapter audit"
+    },
+    "tune": {
+      "path": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "route": "textbook/ml-systems/gpu-kernels-triton",
+      "heading": "Автоматический подбор параметров",
+      "anchor": "автоматический-подбор-параметров",
+      "read_ranges": [
+        [
+          1468,
+          1507
+        ]
+      ],
+      "read_scope": "only listed full sections; not a whole-chapter audit"
+    },
+    "compile": {
+      "path": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "route": "textbook/ml-systems/gpu-kernels-triton",
+      "heading": "torch.compile: graphs, guards and recompilation",
+      "anchor": "torchcompile-graphs-guards-and-recompilation",
+      "read_ranges": [
+        [
+          1712,
+          1979
+        ]
+      ],
+      "read_scope": "only listed full sections; not a whole-chapter audit"
+    },
+    "donation": {
+      "path": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "route": "textbook/ml-systems/gpu-kernels-triton",
+      "heading": "Donation changes buffer ownership",
+      "anchor": "donation-changes-buffer-ownership",
+      "read_ranges": [
+        [
+          2407,
+          2561
+        ]
+      ],
+      "read_scope": "only listed full sections; not a whole-chapter audit"
+    },
+    "collective": {
+      "path": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "route": "textbook/pretraining/processes-collectives-ddp",
+      "heading": "Сколько стоит all-reduce",
+      "anchor": "сколько-стоит-all-reduce",
+      "read_ranges": [
+        [
+          1198,
+          1244
+        ],
+        [
+          1300,
+          1382
+        ]
+      ],
+      "read_scope": "only listed full sections; not a whole-chapter audit"
+    },
+    "tp": {
+      "path": "00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism.md",
+      "route": "textbook/pretraining/tensor-sequence-parallelism",
+      "heading": "Когда увеличение TP перестаёт сокращать время",
+      "anchor": "когда-увеличение-tp-перестаёт-сокращать-время",
+      "read_ranges": [
+        [
+          572,
+          634
+        ]
+      ],
+      "read_scope": "only listed full sections; not a whole-chapter audit"
+    },
+    "sparse": {
+      "path": "00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md",
+      "route": "textbook/inference/model-compression-pruning-distillation-low-rank",
+      "heading": "Формат хранения и 2:4 sparsity",
+      "anchor": "формат-хранения-и-24-sparsity",
+      "read_ranges": [
+        [
+          142,
+          172
+        ],
+        [
+          1362,
+          1405
+        ]
+      ],
+      "read_scope": "only listed full sections; not a whole-chapter audit"
+    },
+    "bn": {
+      "path": "00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md",
+      "route": "textbook/inference/model-compression-pruning-distillation-low-rank",
+      "heading": "Fold BatchNorm into weights before deciding whether to fuse kernels",
+      "anchor": "fold-batchnorm-into-weights-before-deciding-whether-to-fuse-kernels",
+      "read_ranges": [
+        [
+          1362,
+          1405
+        ]
+      ],
+      "read_scope": "only listed full sections; not a whole-chapter audit"
+    },
+    "energy": {
+      "path": "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md",
+      "route": "textbook/inference/benchmarking-slo",
+      "heading": "Energy per result: measurement boundary and time window",
+      "anchor": "energy-per-result-measurement-boundary-and-time-window",
+      "read_ranges": [
+        [
+          599,
+          759
+        ]
+      ],
+      "read_scope": "only listed full sections; not a whole-chapter audit"
+    },
+    "sustained": {
+      "path": "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md",
+      "route": "textbook/inference/benchmarking-slo",
+      "heading": "Sustained operation and the workload matter",
+      "anchor": "sustained-operation-and-the-workload-matter",
+      "read_ranges": [
+        [
+          599,
+          759
+        ]
+      ],
+      "read_scope": "only listed full sections; not a whole-chapter audit"
+    },
+    "cost": {
+      "path": "00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md",
+      "route": "textbook/deployment/mlops",
+      "heading": "FinOps: lifecycle cost and the cost of a useful result",
+      "anchor": "finops-lifecycle-cost-and-the-cost-of-a-useful-result",
+      "read_ranges": [
+        [
+          1884,
+          1968
+        ],
+        [
+          2208,
+          2305
+        ]
+      ],
+      "read_scope": "only listed full sections; not a whole-chapter audit"
+    },
+    "arena": {
+      "path": "00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment.md",
+      "route": "textbook/deployment/edge-federated",
+      "heading": "Lifetimes determine which buffers can share storage",
+      "anchor": "lifetimes-determine-which-buffers-can-share-storage",
+      "read_ranges": [
+        [
+          41,
+          98
+        ],
+        [
+          270,
+          346
+        ],
+        [
+          430,
+          453
+        ],
+        [
+          998,
+          1091
+        ]
+      ],
+      "read_scope": "only listed full sections; not a whole-chapter audit"
+    }
+  },
+  "sections": [
+    {
+      "source_heading": "Hardware Acceleration",
+      "source_anchor": "sec-hardware-acceleration",
+      "source_range": [
+        7,
+        98
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "model",
+        "gpu"
+      ],
+      "comparison": "Workload, end-to-end latency and memory movement introduced with the camera path and CUDA execution; rhetorical overview not duplicated."
+    },
+    {
+      "source_heading": "Acceleration Fundamentals",
+      "source_anchor": "sec-hardware-acceleration-ai-hardware-acceleration-fundamentals-9b28",
+      "source_range": [
+        99,
+        362
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "model",
+        "roof"
+      ],
+      "comparison": "Amdahl's law uses baseline elapsed-time fractions; roofline is a lower bound on time, with overlap assumptions explicit. Universal 90–99% matrix-time and CPU/GPU speedup claims excluded."
+    },
+    {
+      "source_heading": "Hardware Specialization",
+      "source_anchor": "sec-hardware-acceleration-evolution-hardware-specialization-fdb7",
+      "source_range": [
+        363,
+        384
+      ],
+      "status": "inapplicable",
+      "destination_ids": [
+        "matrix",
+        "fleet"
+      ],
+      "comparison": "Historical FPU/GPU chronology and illustrative S-curves are background, not a required execution mechanism. No timeline, mixed-precision trend or normalized growth curve is imported as a measured benchmark. Specialization trade-offs are retained in named destinations."
+    },
+    {
+      "source_heading": "Specialized computing",
+      "source_anchor": "sec-hardware-acceleration-specialized-computing-22ce",
+      "source_range": [
+        385,
+        462
+      ],
+      "status": "inapplicable",
+      "destination_ids": [
+        "matrix",
+        "fleet"
+      ],
+      "comparison": "Historical FPU/GPU chronology and illustrative S-curves are background, not a required execution mechanism. No timeline, mixed-precision trend or normalized growth curve is imported as a measured benchmark. Specialization trade-offs are retained in named destinations."
+    },
+    {
+      "source_heading": "Parallel computing and graphics processing",
+      "source_anchor": "sec-hardware-acceleration-parallel-computing-graphics-processing-4654",
+      "source_range": [
+        463,
+        478
+      ],
+      "status": "inapplicable",
+      "destination_ids": [
+        "matrix",
+        "fleet"
+      ],
+      "comparison": "Historical FPU/GPU chronology and illustrative S-curves are background, not a required execution mechanism. No timeline, mixed-precision trend or normalized growth curve is imported as a measured benchmark. Specialization trade-offs are retained in named destinations."
+    },
+    {
+      "source_heading": "Emergence of domain-specific architectures",
+      "source_anchor": "sec-hardware-acceleration-emergence-domainspecific-architectures-e56e",
+      "source_range": [
+        479,
+        644
+      ],
+      "status": "inapplicable",
+      "destination_ids": [
+        "matrix",
+        "fleet"
+      ],
+      "comparison": "Historical FPU/GPU chronology and illustrative S-curves are background, not a required execution mechanism. No timeline, mixed-precision trend or normalized growth curve is imported as a measured benchmark. Specialization trade-offs are retained in named destinations."
+    },
+    {
+      "source_heading": "The technology S-curve: Why we must shift",
+      "source_anchor": "sec-hardware-acceleration-technology-scurve-must-shift-42e0",
+      "source_range": [
+        645,
+        781
+      ],
+      "status": "inapplicable",
+      "destination_ids": [
+        "matrix",
+        "fleet"
+      ],
+      "comparison": "Historical FPU/GPU chronology and illustrative S-curves are background, not a required execution mechanism. No timeline, mixed-precision trend or normalized growth curve is imported as a measured benchmark. Specialization trade-offs are retained in named destinations."
+    },
+    {
+      "source_heading": "Machine learning hardware specialization",
+      "source_anchor": "sec-hardware-acceleration-machine-learning-hardware-specialization-09c5",
+      "source_range": [
+        782,
+        879
+      ],
+      "status": "added",
+      "destination_ids": [
+        "matrix",
+        "soc"
+      ],
+      "comparison": "Specialization explained through actual operation paths, supported operators and host-side work, not generic utilization ratios."
+    },
+    {
+      "source_heading": "The integration bottleneck",
+      "source_anchor": "sec-hardware-acceleration-integration-bottleneck-ai-needs-specialized-hardware-0b41",
+      "source_range": [
+        880,
+        1122
+      ],
+      "status": "added",
+      "destination_ids": [
+        "matrix",
+        "mem"
+      ],
+      "comparison": "Existing hierarchy plus added matrix/vector/scalar distinction. No generic CPU cache percentage or accelerator energy multiplier accepted."
+    },
+    {
+      "source_heading": "AI Compute Primitives",
+      "source_anchor": "sec-hardware-acceleration-ai-compute-primitives-2c99",
+      "source_range": [
+        1123,
+        1211
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "tile",
+        "softmax"
+      ],
+      "comparison": "Dense MAC and nonlinear stages have worked tensor examples and the actual row-wise reduction dependencies."
+    },
+    {
+      "source_heading": "Vector operations",
+      "source_anchor": "sec-hardware-acceleration-vector-operations-19bf",
+      "source_range": [
+        1212,
+        1263
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "indexed",
+        "softmax"
+      ],
+      "comparison": "Indexed movement, repeated destinations, reductions and masked operations have explicit values and semantics. Incomplete RISC-V loop not presented as runnable."
+    },
+    {
+      "source_heading": "Matrix operations",
+      "source_anchor": "sec-hardware-acceleration-matrix-operations-508d",
+      "source_range": [
+        1264,
+        1267
+      ],
+      "status": "added",
+      "destination_ids": [
+        "im2col",
+        "matrix"
+      ],
+      "comparison": "Explicit im2col/GEMM CPU example; source column-batch QK^T dimensional mistake excluded."
+    },
+    {
+      "source_heading": "Matrix operations in neural networks",
+      "source_anchor": "sec-hardware-acceleration-matrix-operations-neural-networks-527a",
+      "source_range": [
+        1268,
+        1319
+      ],
+      "status": "added",
+      "destination_ids": [
+        "im2col",
+        "matrix"
+      ],
+      "comparison": "Explicit im2col/GEMM CPU example; source column-batch QK^T dimensional mistake excluded."
+    },
+    {
+      "source_heading": "Matrix operations hardware acceleration",
+      "source_anchor": "sec-hardware-acceleration-matrix-operations-hardware-acceleration-514a",
+      "source_range": [
+        1320,
+        1349
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "tensor",
+        "tile"
+      ],
+      "comparison": "Matrix instruction requirements and local reuse; universal 16x16 path and LayerNorm-as-map not imported."
+    },
+    {
+      "source_heading": "Special function units",
+      "source_anchor": "sec-hardware-acceleration-special-function-units-ed00",
+      "source_range": [
+        1350,
+        1353
+      ],
+      "status": "added",
+      "destination_ids": [
+        "matrix",
+        "softmax"
+      ],
+      "comparison": "Nonlinear/reduction work distinguished from matrix peak; source single-cycle SFU numbers are not portable specifications."
+    },
+    {
+      "source_heading": "Nonlinear functions",
+      "source_anchor": "sec-hardware-acceleration-nonlinear-functions-cc93",
+      "source_range": [
+        1354,
+        1382
+      ],
+      "status": "added",
+      "destination_ids": [
+        "matrix",
+        "softmax"
+      ],
+      "comparison": "Nonlinear/reduction work distinguished from matrix peak; source single-cycle SFU numbers are not portable specifications."
+    },
+    {
+      "source_heading": "Hardware implementation of nonlinear functions",
+      "source_anchor": "sec-hardware-acceleration-hardware-implementation-nonlinear-functions-1e39",
+      "source_range": [
+        1383,
+        1425
+      ],
+      "status": "added",
+      "destination_ids": [
+        "matrix",
+        "softmax"
+      ],
+      "comparison": "Nonlinear/reduction work distinguished from matrix peak; source single-cycle SFU numbers are not portable specifications."
+    },
+    {
+      "source_heading": "SFU hardware implementation",
+      "source_anchor": "sec-hardware-acceleration-sfu-hardware-implementation-90ff",
+      "source_range": [
+        1426,
+        1454
+      ],
+      "status": "added",
+      "destination_ids": [
+        "matrix",
+        "softmax"
+      ],
+      "comparison": "Nonlinear/reduction work distinguished from matrix peak; source single-cycle SFU numbers are not portable specifications."
+    },
+    {
+      "source_heading": "Compute Units and Execution Models",
+      "source_anchor": "sec-hardware-acceleration-compute-units-execution-models-f406",
+      "source_range": [
+        1455,
+        1458
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "simt",
+        "gpu"
+      ],
+      "comparison": "SIMT, masks, independent scheduling and occupancy explained with CUDA-specific constraints; low occupancy not diagnosed as memory-bound."
+    },
+    {
+      "source_heading": "Mapping primitives to execution units",
+      "source_anchor": "sec-hardware-acceleration-mapping-primitives-execution-units-ccb6",
+      "source_range": [
+        1459,
+        1468
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "simt",
+        "gpu"
+      ],
+      "comparison": "SIMT, masks, independent scheduling and occupancy explained with CUDA-specific constraints; low occupancy not diagnosed as memory-bound."
+    },
+    {
+      "source_heading": "Evolution from SIMD to SIMT architectures",
+      "source_anchor": "sec-hardware-acceleration-evolution-simd-simt-architectures-e1fd",
+      "source_range": [
+        1469,
+        1520
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "simt",
+        "gpu"
+      ],
+      "comparison": "SIMT, masks, independent scheduling and occupancy explained with CUDA-specific constraints; low occupancy not diagnosed as memory-bound."
+    },
+    {
+      "source_heading": "Tensor Cores",
+      "source_anchor": "sec-hardware-acceleration-tensor-cores-771f",
+      "source_range": [
+        1521,
+        1722
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "tensor",
+        "precision"
+      ],
+      "comparison": "Supported instructions, input vs accumulator precision, TMEM and shape constraints. Pseudo-PTX and mixed-precision vendor growth plot excluded."
+    },
+    {
+      "source_heading": "Processing elements",
+      "source_anchor": "sec-hardware-acceleration-processing-elements-daa1",
+      "source_range": [
+        1723,
+        1732
+      ],
+      "status": "added",
+      "destination_ids": [
+        "matrix",
+        "soc"
+      ],
+      "comparison": "Processing element roles and supported-operator fallback made explicit."
+    },
+    {
+      "source_heading": "N:M structured sparsity mechanics",
+      "source_anchor": "sec-hardware-acceleration-nm-structured-sparsity-mechanics-9a71",
+      "source_range": [
+        1733,
+        1963
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "sparse"
+      ],
+      "comparison": "CSR index bytes, at-most-two nonzeros per valid group, kernel axis/layout contract and no end-to-end 2x promise."
+    },
+    {
+      "source_heading": "Systolic arrays",
+      "source_anchor": "sec-hardware-acceleration-systolic-arrays-6fa8",
+      "source_range": [
+        1964,
+        2232
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "systolic",
+        "stationary",
+        "fringe"
+      ],
+      "comparison": "Full native Google animations, Harvard original systolic figure, tick-by-tick simulator, fill/drain, tile tails and stationary-operand traffic already present in parent addition."
+    },
+    {
+      "source_heading": "The tiling principle: Bridging graph and silicon",
+      "source_anchor": "sec-hardware-acceleration-tiling-principle",
+      "source_range": [
+        2233,
+        2350
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "systolic",
+        "stationary",
+        "fringe"
+      ],
+      "comparison": "Full native Google animations, Harvard original systolic figure, tick-by-tick simulator, fill/drain, tile tails and stationary-operand traffic already present in parent addition."
+    },
+    {
+      "source_heading": "Numerics in AI acceleration",
+      "source_anchor": "sec-hardware-acceleration-numerics-ai-acceleration-f7be",
+      "source_range": [
+        2351,
+        2354
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "precision"
+      ],
+      "comparison": "Input, accumulation, output and master-weight storage differ; executable rounding examples and AMP are detailed."
+    },
+    {
+      "source_heading": "Precision trade-offs",
+      "source_anchor": "sec-hardware-acceleration-precision-tradeoffs-8fa8",
+      "source_range": [
+        2355,
+        2364
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "precision"
+      ],
+      "comparison": "Input, accumulation, output and master-weight storage differ; executable rounding examples and AMP are detailed."
+    },
+    {
+      "source_heading": "Mixed-precision computing",
+      "source_anchor": "sec-hardware-acceleration-mixedprecision-computing-656f",
+      "source_range": [
+        2365,
+        2384
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "precision"
+      ],
+      "comparison": "Input, accumulation, output and master-weight storage differ; executable rounding examples and AMP are detailed."
+    },
+    {
+      "source_heading": "Intra-node interconnects: Scaling the stack",
+      "source_anchor": "sec-hardware-acceleration-interconnects",
+      "source_range": [
+        2385,
+        2401
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "host",
+        "collective",
+        "tp"
+      ],
+      "comparison": "Bandwidth boundary, payload, direction and collective phases explicit; no fixed hardware-wide taper ratio asserted."
+    },
+    {
+      "source_heading": "Cost-performance analysis",
+      "source_anchor": "sec-hardware-acceleration-costperformance-analysis-e925",
+      "source_range": [
+        2402,
+        2548
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "cost",
+        "energy"
+      ],
+      "comparison": "Lifecycle and accepted-result accounting replace the source's mixed-precision purchase-price comparison. Illustrative peak-per-dollar table not imported."
+    },
+    {
+      "source_heading": "AI Memory Systems",
+      "source_anchor": "sec-hardware-acceleration-ai-memory-systems-0057",
+      "source_range": [
+        2549,
+        2554
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "mem",
+        "roofmem",
+        "energy"
+      ],
+      "comparison": "Memory capacity, movement, latency and energy boundaries distinguished. Historical process-specific energy constants not generalized to modern hardware."
+    },
+    {
+      "source_heading": "Understanding the AI memory wall",
+      "source_anchor": "sec-hardware-acceleration-understanding-ai-memory-wall-3ea9",
+      "source_range": [
+        2555,
+        2667
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "mem",
+        "roofmem",
+        "energy"
+      ],
+      "comparison": "Memory capacity, movement, latency and energy boundaries distinguished. Historical process-specific energy constants not generalized to modern hardware."
+    },
+    {
+      "source_heading": "Quantifying the compute-memory performance gap",
+      "source_anchor": "sec-hardware-acceleration-quantifying-computememory-performance-gap-1526",
+      "source_range": [
+        2668,
+        2673
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "mem",
+        "roofmem",
+        "energy"
+      ],
+      "comparison": "Memory capacity, movement, latency and energy boundaries distinguished. Historical process-specific energy constants not generalized to modern hardware."
+    },
+    {
+      "source_heading": "Hardware balance ($I_{\\text{ridge}}$): The paradigm partition",
+      "source_anchor": "sec-hardware-acceleration-hardware-balance",
+      "source_range": [
+        2674,
+        2903
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "roof",
+        "roofmem"
+      ],
+      "comparison": "Ridge point and per-memory-level bounds with complete numerical examples; illustrative temporal trends not treated as measurements."
+    },
+    {
+      "source_heading": "Memory access patterns in ML workloads",
+      "source_anchor": "sec-hardware-acceleration-memory-access-patterns-ml-workloads-a960",
+      "source_range": [
+        2904,
+        3152
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "mem",
+        "roof"
+      ],
+      "comparison": "Correct load/cache/register path and bandwidth lower bound retained. Source mandatory DMA→L2→L1 journey, zero register latency and parameter-count/bandwidth proxy are excluded."
+    },
+    {
+      "source_heading": "Irregular memory access",
+      "source_anchor": "sec-hardware-acceleration-irregular-memory-access-c6ec",
+      "source_range": [
+        3153,
+        3191
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "indexed",
+        "sparse",
+        "gemm"
+      ],
+      "comparison": "Actual indexed/sparse addressing separated from regular dense GEMM. Blanket traditional=regular/ML=irregular comparison excluded."
+    },
+    {
+      "source_heading": "Memory hierarchy",
+      "source_anchor": "sec-hardware-acceleration-memory-hierarchy-1839",
+      "source_range": [
+        3192,
+        3247
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "mem",
+        "tensor"
+      ],
+      "comparison": "Cache vs scratchpad, spills and generation-specific behavior covered; HBM is a DRAM technology, not a universally lower-latency tier than all DRAM."
+    },
+    {
+      "source_heading": "On-chip memory",
+      "source_anchor": "sec-hardware-acceleration-onchip-memory-72d1",
+      "source_range": [
+        3248,
+        3265
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "mem",
+        "tensor"
+      ],
+      "comparison": "Cache vs scratchpad, spills and generation-specific behavior covered; HBM is a DRAM technology, not a universally lower-latency tier than all DRAM."
+    },
+    {
+      "source_heading": "Off-chip memory",
+      "source_anchor": "sec-hardware-acceleration-offchip-memory-ecdb",
+      "source_range": [
+        3266,
+        3277
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "mem",
+        "tensor"
+      ],
+      "comparison": "Cache vs scratchpad, spills and generation-specific behavior covered; HBM is a DRAM technology, not a universally lower-latency tier than all DRAM."
+    },
+    {
+      "source_heading": "Memory bandwidth and architectural trade-offs",
+      "source_anchor": "sec-hardware-acceleration-memory-bandwidth-architectural-tradeoffs-435c",
+      "source_range": [
+        3278,
+        3289
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "roofmem",
+        "host"
+      ],
+      "comparison": "Achieved vs peak bandwidth and interface boundary covered, without confusing large-batch compute saturation with guaranteed peak bandwidth."
+    },
+    {
+      "source_heading": "Host-accelerator communication",
+      "source_anchor": "sec-hardware-acceleration-hostaccelerator-communication-bb7a",
+      "source_range": [
+        3290,
+        3368
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "host",
+        "streams",
+        "collective"
+      ],
+      "comparison": "Host/device transfers, events, DMA overlap and network payload have precise boundary and direction. No universal single-switch topology or bidirectional/per-direction conflation."
+    },
+    {
+      "source_heading": "Node-level interconnect topology",
+      "source_anchor": "sec-hardware-acceleration-nodelevel-interconnect-topology-b45b",
+      "source_range": [
+        3369,
+        3457
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "host",
+        "streams",
+        "collective"
+      ],
+      "comparison": "Host/device transfers, events, DMA overlap and network payload have precise boundary and direction. No universal single-switch topology or bidirectional/per-direction conflation."
+    },
+    {
+      "source_heading": "Transfer optimization",
+      "source_anchor": "sec-hardware-acceleration-transfer-optimization-85a8",
+      "source_range": [
+        3458,
+        3467
+      ],
+      "status": "added",
+      "destination_ids": [
+        "unified",
+        "streams"
+      ],
+      "comparison": "Unified Memory, residency, migration and synchronization added; existing streams/pinned buffers supply the explicit-copy alternative."
+    },
+    {
+      "source_heading": "Model memory pressure",
+      "source_anchor": "sec-hardware-acceleration-model-memory-pressure-f95e",
+      "source_range": [
+        3468,
+        3473
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "gemm",
+        "tile"
+      ],
+      "comparison": "Dense layer's batch reuse and regular streamed access are quantified."
+    },
+    {
+      "source_heading": "Multilayer perceptrons",
+      "source_anchor": "sec-hardware-acceleration-multilayer-perceptrons-0bbc",
+      "source_range": [
+        3474,
+        3481
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "gemm",
+        "tile"
+      ],
+      "comparison": "Dense layer's batch reuse and regular streamed access are quantified."
+    },
+    {
+      "source_heading": "Convolutional neural networks",
+      "source_anchor": "sec-hardware-acceleration-convolutional-neural-networks-3085",
+      "source_range": [
+        3482,
+        3489
+      ],
+      "status": "added",
+      "destination_ids": [
+        "im2col",
+        "stationary"
+      ],
+      "comparison": "Spatial convolution reuse and explicit patch-storage cost added; dataflow choices are per kernel/memory level."
+    },
+    {
+      "source_heading": "Transformer networks",
+      "source_anchor": "sec-hardware-acceleration-transformer-networks-638c",
+      "source_range": [
+        3490,
+        3499
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "softmax",
+        "gemm",
+        "stationary"
+      ],
+      "comparison": "Attention reductions and dense projection intensity distinguished; quadratic score matrix not equated to linear-length KV cache, and no transformer-wide fixed dataflow imposed."
+    },
+    {
+      "source_heading": "Accelerator design implications",
+      "source_anchor": "sec-hardware-acceleration-ml-accelerators-implications-c962",
+      "source_range": [
+        3500,
+        3517
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "softmax",
+        "gemm",
+        "stationary"
+      ],
+      "comparison": "Attention reductions and dense projection intensity distinguished; quadratic score matrix not equated to linear-length KV cache, and no transformer-wide fixed dataflow imposed."
+    },
+    {
+      "source_heading": "Roofline Model",
+      "source_anchor": "sec-hardware-acceleration-roofline-model-42ff",
+      "source_range": [
+        3518,
+        3647
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "roof",
+        "roofmem",
+        "gemm",
+        "softmax"
+      ],
+      "comparison": "Roofline is an inequality and diagnostic bound, not exact achieved performance. Precision and traffic boundary specified."
+    },
+    {
+      "source_heading": "Hardware ridge points",
+      "source_anchor": "sec-hardware-acceleration-hardware-ridge-points-b5b6",
+      "source_range": [
+        3648,
+        3779
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "roof",
+        "roofmem",
+        "gemm",
+        "softmax"
+      ],
+      "comparison": "Roofline is an inequality and diagnostic bound, not exact achieved performance. Precision and traffic boundary specified."
+    },
+    {
+      "source_heading": "Calculating memory bandwidth bounds",
+      "source_anchor": "sec-hardware-acceleration-calculating-memory-bandwidth-bounds-7fc0",
+      "source_range": [
+        3780,
+        4072
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "roof",
+        "gemm",
+        "softmax"
+      ],
+      "comparison": "Complete numerical GEMM and memory-bound examples supersede dynamic Quarto placeholders. LayerNorm reductions are not counted as independent elementwise work."
+    },
+    {
+      "source_heading": "Optimization by intensity regime",
+      "source_anchor": "sec-hardware-acceleration-optimization-intensity-regime-cb3a",
+      "source_range": [
+        4073,
+        4249
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "gemm",
+        "fusion",
+        "softmax"
+      ],
+      "comparison": "Batch changes intensity; fusion changes traffic. Interactive generation can batch, and KV caching does not cure weight bandwidth. No guaranteed speedups imported."
+    },
+    {
+      "source_heading": "Hardware Mapping",
+      "source_anchor": "sec-hardware-acceleration-hardware-mapping-fundamentals-neural-networks-f9a9",
+      "source_range": [
+        4250,
+        4269
+      ],
+      "status": "added",
+      "destination_ids": [
+        "placement",
+        "tile",
+        "arena"
+      ],
+      "comparison": "Placement/allocation/scheduling tied to one tiled kernel and actual buffer lifetime example."
+    },
+    {
+      "source_heading": "Placement and allocation",
+      "source_anchor": "sec-hardware-acceleration-computation-placement-23d2",
+      "source_range": [
+        4270,
+        4273
+      ],
+      "status": "added",
+      "destination_ids": [
+        "placement",
+        "tile",
+        "arena"
+      ],
+      "comparison": "Placement/allocation/scheduling tied to one tiled kernel and actual buffer lifetime example."
+    },
+    {
+      "source_heading": "Computation placement",
+      "source_anchor": "sec-hardware-acceleration-computation-placement-e03f",
+      "source_range": [
+        4274,
+        4291
+      ],
+      "status": "added",
+      "destination_ids": [
+        "placement",
+        "tile",
+        "arena"
+      ],
+      "comparison": "Placement/allocation/scheduling tied to one tiled kernel and actual buffer lifetime example."
+    },
+    {
+      "source_heading": "Memory allocation",
+      "source_anchor": "sec-hardware-acceleration-memory-allocation-faec",
+      "source_range": [
+        4292,
+        4307
+      ],
+      "status": "added",
+      "destination_ids": [
+        "placement",
+        "tile",
+        "arena"
+      ],
+      "comparison": "Placement/allocation/scheduling tied to one tiled kernel and actual buffer lifetime example."
+    },
+    {
+      "source_heading": "Combinatorial complexity",
+      "source_anchor": "sec-hardware-acceleration-combinatorial-complexity-ea33",
+      "source_range": [
+        4308,
+        4323
+      ],
+      "status": "inapplicable",
+      "destination_ids": [
+        "placement",
+        "tune",
+        "stationary"
+      ],
+      "comparison": "Universal combinatorial counts are not justified: candidate loop orders/placements are constrained and not independent. Search trade-offs and concrete stationary-loop examples retained without spurious billion-config optimum claim."
+    },
+    {
+      "source_heading": "Ordering computation and execution",
+      "source_anchor": "sec-hardware-acceleration-ordering-computation-execution-59e5",
+      "source_range": [
+        4324,
+        4348
+      ],
+      "status": "inapplicable",
+      "destination_ids": [
+        "placement",
+        "tune",
+        "stationary"
+      ],
+      "comparison": "Universal combinatorial counts are not justified: candidate loop orders/placements are constrained and not independent. Search trade-offs and concrete stationary-loop examples retained without spurious billion-config optimum claim."
+    },
+    {
+      "source_heading": "Parallelization across processing elements",
+      "source_anchor": "sec-hardware-acceleration-parallelization-across-processing-elements-ee26",
+      "source_range": [
+        4349,
+        4363
+      ],
+      "status": "inapplicable",
+      "destination_ids": [
+        "placement",
+        "tune",
+        "stationary"
+      ],
+      "comparison": "Universal combinatorial counts are not justified: candidate loop orders/placements are constrained and not independent. Search trade-offs and concrete stationary-loop examples retained without spurious billion-config optimum claim."
+    },
+    {
+      "source_heading": "Memory placement and data movement",
+      "source_anchor": "sec-hardware-acceleration-memory-placement-data-movement-b47a",
+      "source_range": [
+        4364,
+        4388
+      ],
+      "status": "inapplicable",
+      "destination_ids": [
+        "placement",
+        "tune",
+        "stationary"
+      ],
+      "comparison": "Universal combinatorial counts are not justified: candidate loop orders/placements are constrained and not independent. Search trade-offs and concrete stationary-loop examples retained without spurious billion-config optimum claim."
+    },
+    {
+      "source_heading": "Mapping search space",
+      "source_anchor": "sec-hardware-acceleration-mapping-search-space-b150",
+      "source_range": [
+        4389,
+        4417
+      ],
+      "status": "inapplicable",
+      "destination_ids": [
+        "placement",
+        "tune",
+        "stationary"
+      ],
+      "comparison": "Universal combinatorial counts are not justified: candidate loop orders/placements are constrained and not independent. Search trade-offs and concrete stationary-loop examples retained without spurious billion-config optimum claim."
+    },
+    {
+      "source_heading": "Dataflow Optimization",
+      "source_anchor": "sec-hardware-acceleration-dataflow-optimization-strategies-ce52",
+      "source_range": [
+        4418,
+        4429
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "stationary",
+        "tile",
+        "fusion"
+      ],
+      "comparison": "Locality, reuse, layout and fusion handled concretely; no claim of covering 90% of optimization decisions."
+    },
+    {
+      "source_heading": "Building blocks of mapping strategies",
+      "source_anchor": "sec-hardware-acceleration-building-blocks-mapping-strategies-4932",
+      "source_range": [
+        4430,
+        4433
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "stationary",
+        "tile",
+        "fusion"
+      ],
+      "comparison": "Locality, reuse, layout and fusion handled concretely; no claim of covering 90% of optimization decisions."
+    },
+    {
+      "source_heading": "Data movement patterns",
+      "source_anchor": "sec-hardware-acceleration-data-movement-patterns-3b06",
+      "source_range": [
+        4434,
+        4466
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "stationary",
+        "tile",
+        "fusion"
+      ],
+      "comparison": "Locality, reuse, layout and fusion handled concretely; no claim of covering 90% of optimization decisions."
+    },
+    {
+      "source_heading": "Weight stationary",
+      "source_anchor": "sec-hardware-acceleration-weight-stationary-156a",
+      "source_range": [
+        4467,
+        4496
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "stationary"
+      ],
+      "comparison": "All three stationary operands compared at the same memory boundary, with exact counts70/56/76. Source pseudocode not substituted for a correct indexed implementation."
+    },
+    {
+      "source_heading": "Output stationary",
+      "source_anchor": "sec-hardware-acceleration-output-stationary-54e5",
+      "source_range": [
+        4497,
+        4521
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "stationary"
+      ],
+      "comparison": "All three stationary operands compared at the same memory boundary, with exact counts70/56/76. Source pseudocode not substituted for a correct indexed implementation."
+    },
+    {
+      "source_heading": "Input stationary",
+      "source_anchor": "sec-hardware-acceleration-input-stationary-6c7b",
+      "source_range": [
+        4522,
+        4548
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "stationary"
+      ],
+      "comparison": "All three stationary operands compared at the same memory boundary, with exact counts70/56/76. Source pseudocode not substituted for a correct indexed implementation."
+    },
+    {
+      "source_heading": "Memory-efficient tensor layouts",
+      "source_anchor": "sec-hardware-acceleration-memoryefficient-tensor-layouts-e250",
+      "source_range": [
+        4549,
+        4558
+      ],
+      "status": "added",
+      "destination_ids": [
+        "layout"
+      ],
+      "comparison": "Original source paragraph plus NCHW/logical-shape/channels-last/permutation example; row-major is not equated with NHWC."
+    },
+    {
+      "source_heading": "Row-major layout",
+      "source_anchor": "sec-hardware-acceleration-rowmajor-layout-741f",
+      "source_range": [
+        4559,
+        4576
+      ],
+      "status": "added",
+      "destination_ids": [
+        "layout"
+      ],
+      "comparison": "Original source paragraph plus NCHW/logical-shape/channels-last/permutation example; row-major is not equated with NHWC."
+    },
+    {
+      "source_heading": "Channel-major layout",
+      "source_anchor": "sec-hardware-acceleration-channelmajor-layout-d6a9",
+      "source_range": [
+        4577,
+        4600
+      ],
+      "status": "added",
+      "destination_ids": [
+        "layout"
+      ],
+      "comparison": "Original source paragraph plus NCHW/logical-shape/channels-last/permutation example; row-major is not equated with NHWC."
+    },
+    {
+      "source_heading": "Comparing row-major and channel-major layouts",
+      "source_anchor": "sec-hardware-acceleration-comparing-rowmajor-channelmajor-layouts-e410",
+      "source_range": [
+        4601,
+        4619
+      ],
+      "status": "added",
+      "destination_ids": [
+        "layout"
+      ],
+      "comparison": "Original source paragraph plus NCHW/logical-shape/channels-last/permutation example; row-major is not equated with NHWC."
+    },
+    {
+      "source_heading": "Kernel fusion",
+      "source_anchor": "sec-hardware-acceleration-kernel-fusion-7faf",
+      "source_range": [
+        4620,
+        4625
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "fusion",
+        "bn",
+        "mem"
+      ],
+      "comparison": "Actual logical reads/writes, register pressure, spills and fixed-statistics BN folding covered. Invalid torch.batch_norm call, training-BN pointwise claim and automatic shared-memory spill excluded."
+    },
+    {
+      "source_heading": "Intermediate memory write",
+      "source_anchor": "sec-hardware-acceleration-intermediate-memory-write-f140",
+      "source_range": [
+        4626,
+        4693
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "fusion",
+        "bn",
+        "mem"
+      ],
+      "comparison": "Actual logical reads/writes, register pressure, spills and fixed-statistics BN folding covered. Invalid torch.batch_norm call, training-BN pointwise claim and automatic shared-memory spill excluded."
+    },
+    {
+      "source_heading": "Kernel fusion for memory efficiency",
+      "source_anchor": "sec-hardware-acceleration-kernel-fusion-memory-efficiency-f227",
+      "source_range": [
+        4694,
+        4758
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "fusion",
+        "bn",
+        "mem"
+      ],
+      "comparison": "Actual logical reads/writes, register pressure, spills and fixed-statistics BN folding covered. Invalid torch.batch_norm call, training-BN pointwise claim and automatic shared-memory spill excluded."
+    },
+    {
+      "source_heading": "Performance benefits and constraints",
+      "source_anchor": "sec-hardware-acceleration-performance-benefits-constraints-1b74",
+      "source_range": [
+        4759,
+        4783
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "fusion",
+        "bn",
+        "mem"
+      ],
+      "comparison": "Actual logical reads/writes, register pressure, spills and fixed-statistics BN folding covered. Invalid torch.batch_norm call, training-BN pointwise claim and automatic shared-memory spill excluded."
+    },
+    {
+      "source_heading": "Memory-efficient tiling strategies",
+      "source_anchor": "sec-hardware-acceleration-memoryefficient-tiling-strategies-9fce",
+      "source_range": [
+        4784,
+        4876
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "tile",
+        "fringe",
+        "stationary"
+      ],
+      "comparison": "Original step-by-step GPU teaching figures, full tail handling, numerical model and storage trade-off preserve tiling mechanism. NumPy slice is not asserted to stage a GPU tile."
+    },
+    {
+      "source_heading": "Tiling fundamentals",
+      "source_anchor": "sec-hardware-acceleration-tiling-fundamentals-e9e6",
+      "source_range": [
+        4877,
+        4884
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "tile",
+        "fringe",
+        "stationary"
+      ],
+      "comparison": "Original step-by-step GPU teaching figures, full tail handling, numerical model and storage trade-off preserve tiling mechanism. NumPy slice is not asserted to stage a GPU tile."
+    },
+    {
+      "source_heading": "Performance benefits of tiling",
+      "source_anchor": "sec-hardware-acceleration-performance-benefits-tiling-e7bd",
+      "source_range": [
+        4885,
+        4912
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "tile",
+        "fringe",
+        "stationary"
+      ],
+      "comparison": "Original step-by-step GPU teaching figures, full tail handling, numerical model and storage trade-off preserve tiling mechanism. NumPy slice is not asserted to stage a GPU tile."
+    },
+    {
+      "source_heading": "Tiling methods",
+      "source_anchor": "sec-hardware-acceleration-tiling-methods-6257",
+      "source_range": [
+        4913,
+        4948
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "tile",
+        "fringe",
+        "stationary"
+      ],
+      "comparison": "Original step-by-step GPU teaching figures, full tail handling, numerical model and storage trade-off preserve tiling mechanism. NumPy slice is not asserted to stage a GPU tile."
+    },
+    {
+      "source_heading": "Tiling challenges and trade-offs",
+      "source_anchor": "sec-hardware-acceleration-tiling-challenges-tradeoffs-e9c9",
+      "source_range": [
+        4949,
+        4974
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "tile",
+        "fringe",
+        "stationary"
+      ],
+      "comparison": "Original step-by-step GPU teaching figures, full tail handling, numerical model and storage trade-off preserve tiling mechanism. NumPy slice is not asserted to stage a GPU tile."
+    },
+    {
+      "source_heading": "Applying mapping strategies to neural networks",
+      "source_anchor": "sec-hardware-acceleration-applying-mapping-strategies-neural-networks-3110",
+      "source_range": [
+        4975,
+        4995
+      ],
+      "status": "added",
+      "destination_ids": [
+        "im2col",
+        "gemm",
+        "softmax",
+        "stationary"
+      ],
+      "comparison": "Convolution, GEMM and attention distinguished at operator level; whole transformers not universally memory-bound or input-stationary."
+    },
+    {
+      "source_heading": "Convolutional neural networks (ResNet-50)",
+      "source_anchor": "sec-hardware-acceleration-convolutional-neural-networks-resnet50-3eb6",
+      "source_range": [
+        4996,
+        5001
+      ],
+      "status": "added",
+      "destination_ids": [
+        "im2col",
+        "gemm",
+        "softmax",
+        "stationary"
+      ],
+      "comparison": "Convolution, GEMM and attention distinguished at operator level; whole transformers not universally memory-bound or input-stationary."
+    },
+    {
+      "source_heading": "Transformer architectures (GPT-2/Llama)",
+      "source_anchor": "sec-hardware-acceleration-transformer-architectures-gpt2llama-dd9a",
+      "source_range": [
+        5002,
+        5008
+      ],
+      "status": "added",
+      "destination_ids": [
+        "im2col",
+        "gemm",
+        "softmax",
+        "stationary"
+      ],
+      "comparison": "Convolution, GEMM and attention distinguished at operator level; whole transformers not universally memory-bound or input-stationary."
+    },
+    {
+      "source_heading": "Multilayer perceptrons (DLRM)",
+      "source_anchor": "sec-hardware-acceleration-multilayer-perceptrons-dlrm-7c0d",
+      "source_range": [
+        5009,
+        5016
+      ],
+      "status": "added",
+      "destination_ids": [
+        "im2col",
+        "gemm",
+        "softmax",
+        "stationary"
+      ],
+      "comparison": "Convolution, GEMM and attention distinguished at operator level; whole transformers not universally memory-bound or input-stationary."
+    },
+    {
+      "source_heading": "Hybrid mapping strategies",
+      "source_anchor": "sec-hardware-acceleration-hybrid-mapping-strategies-3e8c",
+      "source_range": [
+        5017,
+        5028
+      ],
+      "status": "added",
+      "destination_ids": [
+        "placement",
+        "matrix",
+        "soc"
+      ],
+      "comparison": "Layer-specific mapping and heterogeneous execution retained without pretending every runtime adaptively remaps all operators."
+    },
+    {
+      "source_heading": "Compiler Support",
+      "source_anchor": "sec-hardware-acceleration-compiler-support-172e",
+      "source_range": [
+        5029,
+        5074
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "compile",
+        "tune",
+        "bn",
+        "arena"
+      ],
+      "comparison": "Graph lowering, kernel selection, memory planning and scheduling have concrete counterpart sections; illustrative speedup not reproduced as result."
+    },
+    {
+      "source_heading": "ML compiler design",
+      "source_anchor": "sec-hardware-acceleration-compiler-design-differences-ml-workloads-0698",
+      "source_range": [
+        5075,
+        5106
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "compile"
+      ],
+      "comparison": "Captured FX graph vs backend code clarified. Blanket traditional-vs-ML compiler contrast and Keras compile equivalence excluded."
+    },
+    {
+      "source_heading": "ML compilation pipeline",
+      "source_anchor": "sec-hardware-acceleration-ml-compilation-pipeline-7676",
+      "source_range": [
+        5107,
+        5114
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "compile",
+        "bn",
+        "fusion"
+      ],
+      "comparison": "Graph transforms and lowering explained through actual frontend/backend and BN identity; no generic graph rewrite assumed to invent KV cache."
+    },
+    {
+      "source_heading": "Graph optimization",
+      "source_anchor": "sec-hardware-acceleration-graph-optimization-f888",
+      "source_range": [
+        5115,
+        5130
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "compile",
+        "bn",
+        "fusion"
+      ],
+      "comparison": "Graph transforms and lowering explained through actual frontend/backend and BN identity; no generic graph rewrite assumed to invent KV cache."
+    },
+    {
+      "source_heading": "Kernel selection",
+      "source_anchor": "sec-hardware-acceleration-kernel-selection-df01",
+      "source_range": [
+        5131,
+        5156
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "tune",
+        "compile",
+        "precision"
+      ],
+      "comparison": "Heuristic/profile-guided variant choice and precision compatibility covered; no universal heuristic performance gap or automatic runtime quantization."
+    },
+    {
+      "source_heading": "Memory planning",
+      "source_anchor": "sec-hardware-acceleration-memory-planning-fb9f",
+      "source_range": [
+        5157,
+        5172
+      ],
+      "status": "added",
+      "destination_ids": [
+        "placement",
+        "arena",
+        "donation"
+      ],
+      "comparison": "Original buffer-planning paragraph and concrete last-use examples; distinguishes device-memory tensor planning from on-chip tiles."
+    },
+    {
+      "source_heading": "Computation scheduling",
+      "source_anchor": "sec-hardware-acceleration-computation-scheduling-7ccd",
+      "source_range": [
+        5173,
+        5180
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "streams",
+        "tile",
+        "compile"
+      ],
+      "comparison": "Data dependencies and overlap conditions explicit; scheduling does not automatically make a memory-bound kernel compute-bound."
+    },
+    {
+      "source_heading": "Implementation in AI compilers",
+      "source_anchor": "sec-hardware-acceleration-implementation-ai-compilers-ff25",
+      "source_range": [
+        5181,
+        5190
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "streams",
+        "tile",
+        "compile"
+      ],
+      "comparison": "Data dependencies and overlap conditions explicit; scheduling does not automatically make a memory-bound kernel compute-bound."
+    },
+    {
+      "source_heading": "Code generation",
+      "source_anchor": "sec-hardware-acceleration-code-generation-85c8",
+      "source_range": [
+        5191,
+        5196
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "tensor",
+        "compile"
+      ],
+      "comparison": "Backend machine instruction choice and matrix paths covered; source invalid pseudo-PTX not copied."
+    },
+    {
+      "source_heading": "From compilation to runtime",
+      "source_anchor": "sec-hardware-acceleration-compilationruntime-support-0206",
+      "source_range": [
+        5197,
+        5204
+      ],
+      "status": "added",
+      "destination_ids": [
+        "placement",
+        "unified",
+        "soc",
+        "compile"
+      ],
+      "comparison": "Runtime variance, bounded kernel variants, memory residency and thermal limits covered; compile/JIT/runtime responsibilities qualified."
+    },
+    {
+      "source_heading": "Runtime Support",
+      "source_anchor": "sec-hardware-acceleration-runtime-support-f94f",
+      "source_range": [
+        5205,
+        5212
+      ],
+      "status": "added",
+      "destination_ids": [
+        "placement",
+        "unified",
+        "soc",
+        "compile"
+      ],
+      "comparison": "Runtime variance, bounded kernel variants, memory residency and thermal limits covered; compile/JIT/runtime responsibilities qualified."
+    },
+    {
+      "source_heading": "ML runtime architecture",
+      "source_anchor": "sec-hardware-acceleration-runtime-architecture-differences-ml-systems-932e",
+      "source_range": [
+        5213,
+        5262
+      ],
+      "status": "added",
+      "destination_ids": [
+        "placement",
+        "unified",
+        "soc",
+        "compile"
+      ],
+      "comparison": "Runtime variance, bounded kernel variants, memory residency and thermal limits covered; compile/JIT/runtime responsibilities qualified."
+    },
+    {
+      "source_heading": "Dynamic kernel execution",
+      "source_anchor": "sec-hardware-acceleration-dynamic-kernel-execution-33fc",
+      "source_range": [
+        5263,
+        5278
+      ],
+      "status": "added",
+      "destination_ids": [
+        "placement",
+        "unified",
+        "soc",
+        "compile"
+      ],
+      "comparison": "Runtime variance, bounded kernel variants, memory residency and thermal limits covered; compile/JIT/runtime responsibilities qualified."
+    },
+    {
+      "source_heading": "Runtime kernel selection",
+      "source_anchor": "sec-hardware-acceleration-runtime-kernel-selection-1ffe",
+      "source_range": [
+        5279,
+        5288
+      ],
+      "status": "added",
+      "destination_ids": [
+        "placement",
+        "unified",
+        "soc",
+        "compile"
+      ],
+      "comparison": "Runtime variance, bounded kernel variants, memory residency and thermal limits covered; compile/JIT/runtime responsibilities qualified."
+    },
+    {
+      "source_heading": "Kernel scheduling and utilization",
+      "source_anchor": "sec-hardware-acceleration-kernel-scheduling-utilization-99d6",
+      "source_range": [
+        5289,
+        5336
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "streams",
+        "gpu",
+        "collective"
+      ],
+      "comparison": "Correct dependency-aware scheduling and escalation to multi-device execution. Hypothetical GPT-3/FP8 single-H100 runtime not reported as feasible experiment."
+    },
+    {
+      "source_heading": "Multi-Chip Scaling",
+      "source_anchor": "sec-hardware-acceleration-multichip-scaling-c649",
+      "source_range": [
+        5337,
+        5342
+      ],
+      "status": "added",
+      "destination_ids": [
+        "fleet",
+        "tp"
+      ],
+      "comparison": "Package/node/cluster/wafer boundaries distinguished; data/model parallelism mechanisms linked."
+    },
+    {
+      "source_heading": "Multi-chip scaling approaches",
+      "source_anchor": "sec-hardware-acceleration-multichip-scaling-approaches-1b9d",
+      "source_range": [
+        5343,
+        5348
+      ],
+      "status": "added",
+      "destination_ids": [
+        "fleet",
+        "tp"
+      ],
+      "comparison": "Package/node/cluster/wafer boundaries distinguished; data/model parallelism mechanisms linked."
+    },
+    {
+      "source_heading": "Why scaling introduces new constraints",
+      "source_anchor": "sec-hardware-acceleration-scaling-introduces-new-constraints-4d27",
+      "source_range": [
+        5349,
+        5362
+      ],
+      "status": "covered-existing",
+      "destination_ids": [
+        "collective",
+        "tp",
+        "scaling"
+      ],
+      "comparison": "Gradient payload, overlap, scaling and hardware boundaries; fixed-baseline Amdahl not applied to an arbitrary observed communication percentage."
+    },
+    {
+      "source_heading": "Heterogeneous SoC Design",
+      "source_anchor": "sec-hardware-acceleration-heterogeneous-soc-ai-acceleration-b1bb",
+      "source_range": [
+        5363,
+        5376
+      ],
+      "status": "added",
+      "destination_ids": [
+        "soc",
+        "unified",
+        "sustained",
+        "arena"
+      ],
+      "comparison": "Supported operators, fallback boundaries, shared bandwidth, thermal/DVFS limits and real-time interference added. No automatic migration/ML scheduler or safety certification promised."
+    },
+    {
+      "source_heading": "Mobile SoC architecture evolution",
+      "source_anchor": "sec-hardware-acceleration-mobile-soc-architecture-evolution-6ca8",
+      "source_range": [
+        5377,
+        5386
+      ],
+      "status": "added",
+      "destination_ids": [
+        "soc",
+        "unified",
+        "sustained",
+        "arena"
+      ],
+      "comparison": "Supported operators, fallback boundaries, shared bandwidth, thermal/DVFS limits and real-time interference added. No automatic migration/ML scheduler or safety certification promised."
+    },
+    {
+      "source_heading": "Strategies for dynamic workload distribution",
+      "source_anchor": "sec-hardware-acceleration-strategies-dynamic-workload-distribution-a421",
+      "source_range": [
+        5387,
+        5396
+      ],
+      "status": "added",
+      "destination_ids": [
+        "soc",
+        "unified",
+        "sustained",
+        "arena"
+      ],
+      "comparison": "Supported operators, fallback boundaries, shared bandwidth, thermal/DVFS limits and real-time interference added. No automatic migration/ML scheduler or safety certification promised."
+    },
+    {
+      "source_heading": "Power and thermal management",
+      "source_anchor": "sec-hardware-acceleration-power-thermal-management-6c00",
+      "source_range": [
+        5397,
+        5406
+      ],
+      "status": "added",
+      "destination_ids": [
+        "soc",
+        "unified",
+        "sustained",
+        "arena"
+      ],
+      "comparison": "Supported operators, fallback boundaries, shared bandwidth, thermal/DVFS limits and real-time interference added. No automatic migration/ML scheduler or safety certification promised."
+    },
+    {
+      "source_heading": "Automotive heterogeneous AI systems",
+      "source_anchor": "sec-hardware-acceleration-automotive-heterogeneous-ai-systems-deda",
+      "source_range": [
+        5407,
+        5416
+      ],
+      "status": "added",
+      "destination_ids": [
+        "soc",
+        "unified",
+        "sustained",
+        "arena"
+      ],
+      "comparison": "Supported operators, fallback boundaries, shared bandwidth, thermal/DVFS limits and real-time interference added. No automatic migration/ML scheduler or safety certification promised."
+    },
+    {
+      "source_heading": "Software stack challenges",
+      "source_anchor": "sec-hardware-acceleration-software-stack-challenges-255c",
+      "source_range": [
+        5417,
+        5428
+      ],
+      "status": "added",
+      "destination_ids": [
+        "soc",
+        "unified",
+        "sustained",
+        "arena"
+      ],
+      "comparison": "Supported operators, fallback boundaries, shared bandwidth, thermal/DVFS limits and real-time interference added. No automatic migration/ML scheduler or safety certification promised."
+    },
+    {
+      "source_heading": "Hardware Sustainability",
+      "source_anchor": "sec-hardware-acceleration-hardware-sustainability-e902",
+      "source_range": [
+        5429,
+        5519
+      ],
+      "status": "added",
+      "destination_ids": [
+        "fleet",
+        "energy",
+        "cost"
+      ],
+      "comparison": "Operational carbon equation and measurement boundary added; source assumed NPU/CPU fleet efficiency is not a benchmark and embodied emissions remain separate."
+    },
+    {
+      "source_heading": "Fallacies and Pitfalls",
+      "source_anchor": "sec-hardware-acceleration-fallacies-pitfalls-dc1f",
+      "source_range": [
+        5520,
+        5876
+      ],
+      "status": "added",
+      "destination_ids": [
+        "fleet",
+        "roof",
+        "precision",
+        "cost",
+        "scaling"
+      ],
+      "comparison": "Portability source paragraph retained. Workload-matched bounds replace procurement conclusions from peak ratings or illustrative prices."
+    },
+    {
+      "source_heading": "Summary",
+      "source_anchor": "sec-hardware-acceleration-summary-a5f8",
+      "source_range": [
+        5877,
+        5935
+      ],
+      "status": "inapplicable",
+      "destination_ids": [
+        "roof",
+        "mem",
+        "placement"
+      ],
+      "comparison": "Repeated chapter summary, takeaways, book-transition prose and quiz questions excluded from the textbook body; mechanisms and limitations mapped above."
+    }
+  ],
+  "source_excerpts": [
+    {
+      "id": "layout",
+      "source_line": 4551,
+      "normalizations": [
+        "remove index markup"
+      ]
+    },
+    {
+      "id": "buffer-reuse",
+      "source_line": 5169,
+      "normalizations": [
+        "remove bibliography command"
+      ]
+    },
+    {
+      "id": "soc",
+      "source_line": 5379,
+      "normalizations": [
+        "remove index markup",
+        "remove footnote marker"
+      ]
+    },
+    {
+      "id": "portability",
+      "source_line": 5787,
+      "normalizations": []
+    }
+  ],
+  "source_issues": [
+    {
+      "range": [
+        113,
+        115
+      ],
+      "note": "A100 80+ billion transistor claim and generic CPU ratios need independent correction; avoid reproducing as measured facts."
+    },
+    {
+      "range": [
+        137,
+        150
+      ],
+      "note": "Amdahl p is baseline-time accelerated fraction, not universally 90–99% ML matrix multiplication; additive formula assumes no overlap."
+    },
+    {
+      "range": [
+        336,
+        359
+      ],
+      "note": "ResNet/GPT2 p values are constructed assumptions, not hardware benchmarks; bandwidth-bound is not synonym for serial."
+    },
+    {
+      "range": [
+        371,
+        393
+      ],
+      "note": "TPUv1 ratios conditional benchmark, not a proof general-purpose computing ended; historical8087 100x not needed for scope."
+    },
+    {
+      "range": [
+        835,
+        841
+      ],
+      "note": "CPU utilization claim generic; training vs inference priorities depend workload/SLO, not universal latency-only inference."
+    },
+    {
+      "range": [
+        1216,
+        1244
+      ],
+      "note": "RISC-V fragment incomplete illustrative pseudo-ISA, hardcoded32-byteincrement ignores actualvl and no decrement; avoid importing."
+    },
+    {
+      "range": [
+        1303,
+        1309
+      ],
+      "note": "Column-batch Q and K projections then QK^T produce feature-feature not token-token attention. Canonical attention chapter correct."
+    },
+    {
+      "range": [
+        1337,
+        1348
+      ],
+      "note": "Fixed16x16 hardware throughput generic notvalid; LayerNorm not one-to-one elementwise because reduction."
+    },
+    {
+      "range": [
+        1426,
+        1451
+      ],
+      "note": "Single-cycle sigmoid/tanh/SFU table illustrative notGPU guarantee; preserve distinct scalar/vector/tensor/SFU resources without fabricated latency."
+    },
+    {
+      "range": [
+        1487,
+        1495
+      ],
+      "note": "SVE ptrue does not query length; occupancy low does not imply memory-bound; lane divergence details architecture-specific."
+    },
+    {
+      "range": [
+        1570,
+        1576
+      ],
+      "note": "Example MMA instruction pseudo-PTX incomplete/invalid signature; canonical real wmma/ptx example preferable."
+    },
+    {
+      "range": [
+        1733,
+        1741
+      ],
+      "note": "2:4 hardware requires at most two nonzero entries per group, not exactly. Pattern orientation and metadata matter."
+    },
+    {
+      "range": [
+        2065,
+        2078
+      ],
+      "note": "Systolic energy ratio compares uncached naïve DRAM load/store baseline, not CPU/GPU vector unit benchmark."
+    },
+    {
+      "range": [
+        2294,
+        2311
+      ],
+      "note": "Output-stationary streamedA/B example must not be described as same path as weight-stationary TPU diagram. Dataflow not universally immutable."
+    },
+    {
+      "range": [
+        2353,
+        2379
+      ],
+      "note": "FP32→FP16 does not universally double throughput, precision support depends SKU and instruction."
+    },
+    {
+      "range": [
+        2393,
+        2512
+      ],
+      "note": "Mixed hardware/precision lists and prices not apples-to-apples; avoid treating pricing/peak ratios as serving cost measurement."
+    },
+    {
+      "range": [
+        2952,
+        2973
+      ],
+      "note": "Illustrative tensor journey incorrectly implies obligatory DMA→L2→L1 path and zero-nanosecond register latency. Existing CUDA hierarchy sections should override."
+    },
+    {
+      "range": [
+        3157,
+        3188
+      ],
+      "note": "Irregular address access is not synonymous with memory fragmentation; dense fully connected products are regular."
+    },
+    {
+      "range": [
+        3198,
+        3244
+      ],
+      "note": "Generic memory-latency tables are illustrative, not universal device values."
+    },
+    {
+      "range": [
+        3260,
+        3270
+      ],
+      "note": "A100 supports FP32 accumulation and FP64 Tensor Core paths; HBM does not universally have lower latency than DDR."
+    },
+    {
+      "range": [
+        3436,
+        3440
+      ],
+      "note": "Do not compare aggregate bidirectional NVLink to a one-direction PCIe figure or call a switch's aggregate limit 64 GB/s universally."
+    },
+    {
+      "range": [
+        3494,
+        3494
+      ],
+      "note": "The attention score matrix can be quadratic; KV-cache storage grows linearly with sequence length."
+    },
+    {
+      "range": [
+        3533,
+        3533
+      ],
+      "note": "Roofline is an upper bound, not an equality guaranteeing achieved throughput."
+    },
+    {
+      "range": [
+        3879,
+        3879
+      ],
+      "note": "High arithmetic intensity alone does not establish near-peak performance."
+    },
+    {
+      "range": [
+        4071,
+        4082
+      ],
+      "note": "LayerNorm includes a reduction; fusion speedups are not universal constants."
+    },
+    {
+      "range": [
+        4146,
+        4244
+      ],
+      "note": "Interactive generation can batch; KV caching does not eliminate weight-bandwidth cost."
+    },
+    {
+      "range": [
+        4263,
+        4278
+      ],
+      "note": "Traditional compilers also map operations; NVCC is not directly a high-level model compiler, and Transformer execution is not obligatorily adaptive placement."
+    },
+    {
+      "range": [
+        4330,
+        4400
+      ],
+      "note": "Independent factorial configuration counts include illegal dependency orders and coupled decisions; excluded rather than presented as a valid search-space size."
+    },
+    {
+      "range": [
+        4524,
+        4524
+      ],
+      "note": "Tokens are not literally unchanged activations through every layer; dataflow is not exclusive to one model family."
+    },
+    {
+      "range": [
+        4559,
+        4619
+      ],
+      "note": "NHWC is not a definition of row-major storage. Logical axes and physical strides are distinguished in the new checked example."
+    },
+    {
+      "range": [
+        4678,
+        4678
+      ],
+      "note": "Incomplete torch.batch_norm call is not copied as executable code."
+    },
+    {
+      "range": [
+        4757,
+        4765
+      ],
+      "note": "Four buffers versus two is not a fourfold memory reduction; training BatchNorm is not pointwise; register spills are not automatically shared-memory allocations."
+    },
+    {
+      "range": [
+        4891,
+        4939
+      ],
+      "note": "Source tiling pseudocode omits tail handling and has an invalid split multiplication expression; existing checked examples retain boundary masks."
+    },
+    {
+      "range": [
+        4981,
+        4981
+      ],
+      "note": "Transformers are not unconditionally memory-bound."
+    },
+    {
+      "range": [
+        5096,
+        5123
+      ],
+      "note": "Keras compile does not universally imply the same JIT contract as torch.compile; arbitrary graph rewrites do not create correct KV caching."
+    },
+    {
+      "range": [
+        5189,
+        5275
+      ],
+      "note": "Overlap does not necessarily make a workload compute-bound; JIT exists; runtimes do not automatically retile or fuse arbitrary graphs on every call."
+    },
+    {
+      "range": [
+        5335,
+        5353
+      ],
+      "note": "Peak-based GPT-3 timing is hypothetical, not an achievable execution result; observed synchronization percentage is not a fixed baseline serial fraction."
+    },
+    {
+      "range": [
+        5389,
+        5423
+      ],
+      "note": "CPU is not always the best NMS target; NPU/DSP power ordering and ML-based runtime scheduling are not universal platform properties."
+    },
+    {
+      "range": [
+        5503,
+        5514
+      ],
+      "note": "NPU/CPU carbon example assumes energy and workload values rather than measuring them; use declared energy and carbon boundaries."
+    },
+    {
+      "range": [
+        5575,
+        5779
+      ],
+      "note": "CPU utilization alone does not establish faster latency; procurement decisions cannot be based solely on whether one GEMM lies above the ridge."
+    },
+    {
+      "range": [
+        5917,
+        5917
+      ],
+      "note": "The absolute claim that accelerators cannot make bytes cheaper to move ignores memory hierarchy, dataflow and packaging design."
+    }
+  ],
+  "figures": [
+    {
+      "source_id": "fig-iron-law-heatmap",
+      "source_line": 154,
+      "status": "covered-existing",
+      "destination_ids": [
+        "model"
+      ],
+      "reason": "Existing MIT Amdahl slide and a complete timing calculation cover the mechanism; illustrative heatmap not duplicated."
+    },
+    {
+      "source_id": "fig-timeline",
+      "source_line": 401,
+      "status": "inapplicable",
+      "destination_ids": [
+        "matrix"
+      ],
+      "reason": "Historical background, not a missing execution mechanism."
+    },
+    {
+      "source_id": "fig-systems-gap",
+      "source_line": 485,
+      "status": "inapplicable",
+      "destination_ids": [
+        "roof"
+      ],
+      "reason": "Normalized illustrative trend is not a measured comparison."
+    },
+    {
+      "source_id": "fig-tech-s-curve",
+      "source_line": 649,
+      "status": "inapplicable",
+      "destination_ids": [
+        "fleet"
+      ],
+      "reason": "Illustrative historical curve, not a processor benchmark."
+    },
+    {
+      "source_id": "fig-accelerator-anatomy",
+      "source_line": 934,
+      "status": "covered-existing",
+      "destination_ids": [
+        "gpu",
+        "matrix"
+      ],
+      "reason": "Original CS336 GPU architecture figure plus explicit matrix/vector/scalar paths."
+    },
+    {
+      "source_id": "fig-ai-performance",
+      "source_line": 1588,
+      "status": "inapplicable",
+      "destination_ids": [
+        "precision"
+      ],
+      "reason": "Mixed-precision peak numbers do not establish equivalent useful throughput."
+    },
+    {
+      "source_id": "fig-sparse-formats",
+      "source_line": 1743,
+      "status": "covered-existing",
+      "destination_ids": [
+        "sparse"
+      ],
+      "reason": "CSR and 2:4 representation explained in canonical pruning section. Figure not imported; this is conceptual coverage, not a claim to reproduce every source illustration."
+    },
+    {
+      "source_id": "fig-systolic-array",
+      "source_line": 2088,
+      "status": "covered-existing",
+      "destination_ids": [
+        "systolic"
+      ],
+      "reason": "Exact Harvard original SVG already embedded by parent, plus two original Google animations."
+    },
+    {
+      "source_id": "fig-energy-hierarchy",
+      "source_line": 2573,
+      "status": "covered-existing",
+      "destination_ids": [
+        "energy",
+        "mem"
+      ],
+      "reason": "Source historical process-specific energy ratios are not a current hardware benchmark. Energy boundary figure and worked integral retained."
+    },
+    {
+      "source_id": "fig-compute-memory-imbalance",
+      "source_line": 2683,
+      "status": "inapplicable",
+      "destination_ids": [
+        "roof"
+      ],
+      "reason": "Illustrative normalized growth curve replaced by explicit FLOP/byte calculation."
+    },
+    {
+      "source_id": "fig-rising-ridge",
+      "source_line": 2747,
+      "status": "covered-existing",
+      "destination_ids": [
+        "roof",
+        "precision"
+      ],
+      "reason": "Original JAX roofline illustration and precision-specific ridge reasoning already present."
+    },
+    {
+      "source_id": "fig-memory-wall",
+      "source_line": 2994,
+      "status": "inapplicable",
+      "destination_ids": [
+        "roofmem"
+      ],
+      "reason": "Historical trend is not a proxy for actual traffic on a selected memory boundary."
+    },
+    {
+      "source_id": "fig-host-accelerator-data-movement",
+      "source_line": 3302,
+      "status": "covered-existing",
+      "destination_ids": [
+        "host",
+        "streams"
+      ],
+      "reason": "Original NVIDIA single/two-stream figures and dependency-aware execution example already present."
+    },
+    {
+      "source_id": "fig-tiling-diagram",
+      "source_line": 4810,
+      "status": "covered-existing",
+      "destination_ids": [
+        "tile",
+        "fringe"
+      ],
+      "reason": "Original NVIDIA four-step tiled multiplication and Triton grouping figure already present."
+    }
+  ],
+  "verification": {
+    "cpu_examples": [
+      "hardware-im2col",
+      "hardware-layout"
+    ],
+    "scope": "CPU values, convolution identity, addresses, strides and exact text preservation. No GPU/TPU/NPU/migration/energy benchmark.",
+    "visual_review": "pending-parent",
+    "source_figure_review": "Captions and source semantics read; no fresh visual inspection of all source-generated diagrams claimed.",
+    "existing_figures_preserved": true
+  }
+}
+

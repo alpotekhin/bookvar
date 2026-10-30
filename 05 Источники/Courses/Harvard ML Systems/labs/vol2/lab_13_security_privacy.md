@@ -9,120 +9,190 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol2/lab_13_security_privacy.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol2/lab_13_security_privacy.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL2 Lab — Security Privacy
 
 ## Readable lab narrative
 
 ### Scenario
-                You are the {v2_13_packet['stakeholder']}. Before selecting a control, you must
-                model the asset, trust boundary, adversary, and control path for
-                `{v2_13_packet['protected_asset']}`. The first task is to identify which amount
-                is binding: exposed surface, privacy budget, or evidence lineage.
+An auditor or data subject asks which records, logs, checkpoints, and outputs
+still carry their influence. The answer depends on access breadth, retention,
+deletion timing, lineage coverage, and audit sampling, not on access control alone.
+
+---
+
+### Scenario
+The release review needs one security/privacy policy. A policy is valid only
+when privacy budget, latency, utility, evidence, deletion, and residual-risk
+guardrails pass together.
+
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+Commit to the structured prediction first; the instrument is hidden until the prior is explicit.
+
+---
+
+### Scenario
+You are the ⟨value 1⟩. Before selecting a control, you must
+model the asset, trust boundary, adversary, and control path for
+`⟨value 2⟩`. The first task is to identify which amount
+is binding: exposed surface, privacy budget, or evidence lineage.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_13_packet['stakeholder']}" `
+- value_2: ` f"{v2_13_packet['protected_asset']}" `
 
 ---
 
 Threat surface index = sensitive paths x path weight + communication channels x coupling + logging exposure.
 
-                            Current pair channels: `{v2_13_surface_nodes.value} * ({v2_13_surface_nodes.value} - 1) / 2`
-                            = `{v2_13_fmt_number(v2_13_a['pair_channels'])}`.
+Current pair channels: `⟨value 1⟩ * (⟨value 2⟩ - 1) / 2`
+= `⟨value 3⟩`.
 
-                            Privacy spend composes as summed epsilon:
-                            `{v2_13_privacy_accesses.value}` accesses x `{v2_13_packet['epsilon_per_access']:.2f}`
-                            plus logging-path spend = `{v2_13_a['privacy_epsilon']:.2f}` epsilon.
+Privacy spend composes as summed epsilon:
+`⟨value 4⟩` accesses x `⟨value 5⟩`
+plus logging-path spend = `⟨value 6⟩` epsilon.
 
-                            Evidence lineage compares the current logging/evidence score
-                            `{v2_13_fmt_pct(v2_13_a['evidence_score'])}` with the track floor
-                            `{v2_13_fmt_pct(v2_13_packet['evidence_floor'])}`.
+Evidence lineage compares the current logging/evidence score
+`⟨value 7⟩` with the track floor
+`⟨value 8⟩`.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v2_13_surface_nodes.value}' `
+- value_2: ` f'{v2_13_surface_nodes.value}' `
+- value_3: ` f"{v2_13_fmt_number(v2_13_a['pair_channels'])}" `
+- value_4: ` f'{v2_13_privacy_accesses.value}' `
+- value_5: ` f"{v2_13_packet['epsilon_per_access']:.2f}" `
+- value_6: ` f"{v2_13_a['privacy_epsilon']:.2f}" `
+- value_7: ` f"{v2_13_fmt_pct(v2_13_a['evidence_score'])}" `
+- value_8: ` f"{v2_13_fmt_pct(v2_13_packet['evidence_floor'])}" `
 
 ---
 
 ### Scenario
-                The threat model now has to become a control stack. The selected stack must
-                reduce leakage and attacker economics without breaking `{v2_13_packet['ops_unit']}`
-                latency, utility, or governance budgets.
+The threat model now has to become a control stack. The selected stack must
+reduce leakage and attacker economics without breaking `⟨value 1⟩`
+latency, utility, or governance budgets.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_13_packet['ops_unit']}" `
 
 ---
 
 Latency = base inference + compute boundary + output policy + aggregation policy + strength tax.
 
-                            Current latency: `{v2_13_fmt_ms(v2_13_b['latency_ms'])}` against
-                            `{v2_13_fmt_ms(v2_13_packet['latency_limit_ms'])}`.
+Current latency: `⟨value 1⟩` against
+`⟨value 2⟩`.
 
-                            Utility loss grows with privacy noise/output restriction:
-                            `{v2_13_b['utility_loss_pp']:.2f}` percentage points against a
-                            `{v2_13_packet['utility_loss_limit_pp']:.2f}` pp guardrail.
+Utility loss grows with privacy noise/output restriction:
+`⟨value 3⟩` percentage points against a
+`⟨value 4⟩` pp guardrail.
 
-                            Governance overhead counts the evidence items needed to prove the
-                            control remains active after deployment. Protection score is compared
-                            with the track floor because weak controls can pass latency while still
-                            leaving the threat model underdefended.
+Governance overhead counts the evidence items needed to prove the
+control remains active after deployment. Protection score is compared
+with the track floor because weak controls can pass latency while still
+leaving the threat model underdefended.
 
----
+Runtime fields (not evaluated):
 
-### Scenario
-                An auditor or data subject asks which records, logs, checkpoints, and outputs
-                still carry their influence. The answer depends on access breadth, retention,
-                deletion timing, lineage coverage, and audit sampling, not on access control alone.
+- value_1: ` f"{v2_13_fmt_ms(v2_13_b['latency_ms'])}" `
+- value_2: ` f"{v2_13_fmt_ms(v2_13_packet['latency_limit_ms'])}" `
+- value_3: ` f"{v2_13_b['utility_loss_pp']:.2f}" `
+- value_4: ` f"{v2_13_packet['utility_loss_limit_pp']:.2f}" `
 
 ---
 
 Residual exposure is a weighted amount:
 
-                            `0.30 * access_ratio + 0.24 * retention_ratio + 0.24 * deletion_ratio + 0.22 * audit_gap`.
+`0.30 * access_ratio + 0.24 * retention_ratio + 0.24 * deletion_ratio + 0.22 * audit_gap`.
 
-                            Current access model `{v2_13_c['access_label']}` exposes
-                            `{v2_13_c['access_roles']:.0f}` roles. Retention is
-                            `{v2_13_c['retention_days']}` days, deletion window is
-                            `{v2_13_c['deletion_window_days']}` days, and audit score is
-                            `{v2_13_fmt_pct(v2_13_c['audit_score'])}`.
+Current access model `⟨value 1⟩` exposes
+`⟨value 2⟩` roles. Retention is
+`⟨value 3⟩` days, deletion window is
+`⟨value 4⟩` days, and audit score is
+`⟨value 5⟩`.
 
-                            The chapter maturity model treats retention policy and reproducible
-                            control checks as governance evidence: without lineage, deletion and
-                            recovery are claims rather than verifiable controls.
+The chapter maturity model treats retention policy and reproducible
+control checks as governance evidence: without lineage, deletion and
+recovery are claims rather than verifiable controls.
 
----
+Runtime fields (not evaluated):
 
-### Scenario
-                The release review needs one security/privacy policy. A policy is valid only
-                when privacy budget, latency, utility, evidence, deletion, and residual-risk
-                guardrails pass together.
+- value_1: ` f"{v2_13_c['access_label']}" `
+- value_2: ` f"{v2_13_c['access_roles']:.0f}" `
+- value_3: ` f"{v2_13_c['retention_days']}" `
+- value_4: ` f"{v2_13_c['deletion_window_days']}" `
+- value_5: ` f"{v2_13_fmt_pct(v2_13_c['audit_score'])}" `
 
 ---
 
 Policy feasibility is a conjunction:
 
-                            `privacy_ok and latency_ok and utility_ok and evidence_ok and deletion_ok and residual_ok`.
+`privacy_ok and latency_ok and utility_ok and evidence_ok and deletion_ok and residual_ok`.
 
-                            Current selected policy `{v2_13_selected_policy['name']}` has:
-                            epsilon `{v2_13_selected_policy['privacy_epsilon']:.2f}`,
-                            latency `{v2_13_fmt_ms(v2_13_selected_policy['latency_ms'])}`,
-                            utility loss `{v2_13_selected_policy['utility_loss_pp']:.2f}` pp,
-                            evidence `{v2_13_fmt_pct(v2_13_selected_policy['evidence_score'])}`,
-                            deletion `{v2_13_selected_policy['deletion_days']:.0f}` days,
-                            residual risk `{v2_13_selected_policy['residual_risk']:.1f}`.
+Current selected policy `⟨value 1⟩` has:
+epsilon `⟨value 2⟩`,
+latency `⟨value 3⟩`,
+utility loss `⟨value 4⟩` pp,
+evidence `⟨value 5⟩`,
+deletion `⟨value 6⟩` days,
+residual risk `⟨value 7⟩`.
 
-                            This is why a local mechanism cannot be treated as a system guarantee:
-                            one failed predicate invalidates the deployment.
+This is why a local mechanism cannot be treated as a system guarantee:
+one failed predicate invalidates the deployment.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_13_selected_policy['name']}" `
+- value_2: ` f"{v2_13_selected_policy['privacy_epsilon']:.2f}" `
+- value_3: ` f"{v2_13_fmt_ms(v2_13_selected_policy['latency_ms'])}" `
+- value_4: ` f"{v2_13_selected_policy['utility_loss_pp']:.2f}" `
+- value_5: ` f"{v2_13_fmt_pct(v2_13_selected_policy['evidence_score'])}" `
+- value_6: ` f"{v2_13_selected_policy['deletion_days']:.0f}" `
+- value_7: ` f"{v2_13_selected_policy['residual_risk']:.1f}" `
 
 ---
 
 ### Security/Privacy Memo
 
-                    **Report frame:** {v2_13_packet['report_frame']}
+**Report frame:** ⟨value 1⟩
 
-                    **Selected policy:** `{v2_13_selected_policy['name']}`
+**Selected policy:** `⟨value 2⟩`
 
-                    **Binding amount:** ``…``
+**Binding amount:** `⟨value 3⟩`
 
-                    **Residual risk:** `…`
+**Residual risk:** ⟨value 4⟩
 
-                    **Rejected alternative:** `{v2_13_rejected_policy_result['name']}`
+**Rejected alternative:** `⟨value 5⟩`
 
-                    **V2-14 implication:** `…`
+**V2-14 implication:** ⟨value 6⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_13_packet['report_frame']}" `
+- value_2: ` f"{v2_13_selected_policy['name']}" `
+- value_3: ` f'{binding_guardrail}' `
+- value_4: ` f'{residual_risk_text}' `
+- value_5: ` f"{v2_13_rejected_policy_result['name']}" `
+- value_6: ` f'{robustness_text}' `
+
+</details>
 
 ## Complete original Marimo source
 

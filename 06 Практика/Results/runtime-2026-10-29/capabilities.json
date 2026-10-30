@@ -1,0 +1,19 @@
+{
+  "python": "3.14.3",
+  "machine": "arm64",
+  "system": "Darwin",
+  "torch": "2.14.1",
+  "cuda": false,
+  "mps": true,
+  "gloo": true,
+  "text_checkpoint_lab.py": {
+    "exit_code": 1,
+    "message": "CUDA unavailable: no GPU timing, peak-memory, or NCCL result produced.",
+    "result_created": false
+  },
+  "ddp_step_lab.py": {
+    "exit_code": 1,
+    "message": "At least WORLD_SIZE visible NVIDIA GPUs required. No NCCL result produced.",
+    "result_created": false
+  }
+}

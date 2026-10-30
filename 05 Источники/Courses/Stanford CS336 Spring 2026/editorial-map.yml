@@ -1725,9 +1725,29 @@
       "destination_anchor": "training-stability"
     },
     "lecture-02-section-111-fp4": {
-      "disposition": "source-only",
-      "reason": "FP4 at trace steps 111–117 is explained in 00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md#fp4-mxfp4-и-nvfp4 and #общая-шкала-связывает-соседние-значения, with authored EN parity. The encompassing source unit also includes CPU/GPU transfer, einops and FLOPs at steps 119–188; those are not dispositioned by this FP4 follow-through, so the whole unit remains source-only.",
-      "evidence": "Lectures/repository/var/traces/lecture_02.json#steps=111-188:semantic=section-111-fp4; reviewed title: fp4"
+      "disposition": "excluded",
+      "reason": "This heading-generated umbrella spans FP4 and three unrelated functions at trace steps 111–188. Its complete teaching content is represented by four separately bounded units: lecture-02-fp4-block-scaling, lecture-02-tensor-device-placement, lecture-02-einops-named-axes, and lecture-02-flop-units. Excluded only as a duplicate umbrella, not as omitted knowledge; the CPU/GPU figure retains its separate source-only decision.",
+      "evidence": "Lectures/repository/lecture_02.py#L174-L288; the four contiguous reviewed line ranges cover the source bodies responsible for trace steps 111–188. Review: docs/audit/2026-10-26-cs336-device-placement.md."
+    },
+    "lecture-02-fp4-block-scaling": {
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+      "destination_anchor": "fp4-mxfp4-и-nvfp4"
+    },
+    "lecture-02-tensor-device-placement": {
+      "disposition": "integrated",
+      "destination": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "destination_anchor": "torch-device-placement"
+    },
+    "lecture-02-einops-named-axes": {
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md",
+      "destination_anchor": "einops-attention-shapes"
+    },
+    "lecture-02-flop-units": {
+      "disposition": "covered-existing",
+      "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "destination_anchor": "compute-accounting"
     },
     "lecture-02-figure-step-125-rendering-1": {
       "disposition": "source-only",
@@ -2142,7 +2162,8 @@
     "assignment-01-task-adamw-accounting": {
       "disposition": "integrated",
       "destination": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
-      "destination_anchor": "parameter-accounting"
+      "destination_anchor": "memory-accounting",
+      "evidence": "2026-10-22: integrated state-memory accounting, activation lifetimes, accumulation and MFU assumptions. This does not claim solutions for deliverables 035-038 (activation formula, GPT-2 XL capacity, AdamW update FLOPs and H100 training-time exercise); those remain source-only. See docs/audit/2026-10-22-transformer-shapes.md."
     },
     "assignment-01-deliverable-adamw-accounting-035": {
       "disposition": "source-only",
@@ -3982,9 +4003,9 @@
     "destination_anchor": "8-что-даёт-единый-словарь-а-чего-он-не-гарантирует"
   },
   "lecture-17-figure-step-216-rendering-1": {
-    "disposition": "integrated",
-    "destination": "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md",
-    "destination_anchor": "3-как-изображение-становится-дискретными-кодами"
+    "disposition": "excluded",
+    "reason": "Course-only VQ overview replaced in chapter 64h by original VQ-VAE Figure 1 linked from primary-paper HTML; archived course diagram is not claimed to be a primary-paper figure.",
+    "evidence": "Lectures/repository/lecture_17.py#L283"
   }
   },
   "visuals": {
@@ -5389,40 +5410,40 @@
     "disposition": "integrated",
     "destination": "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md",
     "destination_anchor": "4-одна-авторегрессионная-последовательность",
-    "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/chameleon.png",
-    "transformation": "Byte-for-byte copy of the pinned Stanford course asset reproducing the Chameleon architecture figure.",
+    "local_file": "00 Учебник/Assets/Figures/curated/chameleon-2026-10/chameleon-architecture.png",
+    "transformation": "Same original paper figure used in CS336, replaced with a high-resolution complete PDF figure crop and English caption.",
     "caption": "Trace alternating text tokens and image-code tokens through one causal Transformer and back through the image decoder.",
     "rendered_route": "/textbook/multimodal/unified-sequence-chameleon/",
-    "desktop_evidence": "The architecture labels and mixed-token path were inspected at native resolution and remain complete in the desktop article column.",
-    "narrow_evidence": "The figure remains contained on narrow screens and opens at its native resolution.",
-    "reviewer": "Codex Task 8 multimodal integration",
-    "checked_at": "2026-09-07"
+    "desktop_evidence": "Complete primary-paper replacement inspected at 1365x900 in the article; no clipping.",
+    "narrow_evidence": "Replacement inspected at 390x844 and in the 4x image viewer; labels readable after enlargement.",
+    "reviewer": "Bookvar chapter 64h source review",
+    "checked_at": "2026-10-20"
   },
   "lecture-17-visual-figure-step-211-rendering-1": {
     "disposition": "integrated",
     "destination": "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md",
     "destination_anchor": "8-что-даёт-единый-словарь-а-чего-он-не-гарантирует",
-    "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/chameleon-example.png",
-    "transformation": "Byte-for-byte copy of the pinned Stanford course qualitative sample; no crop or redraw.",
+    "local_file": "00 Учебник/Assets/Figures/curated/chameleon-2026-10/chameleon-mixed-document.png",
+    "transformation": "Same original paper figure used in CS336, replaced with a high-resolution complete PDF figure crop and English caption.",
     "caption": "Inspect entity and reference continuity across alternating generated text and image blocks without treating one qualitative sample as a benchmark.",
     "rendered_route": "/textbook/multimodal/unified-sequence-chameleon/",
-    "desktop_evidence": "The complete qualitative sample was inspected at native resolution and is presented without cropping.",
-    "narrow_evidence": "The figure stays within the article column and opens at native resolution so its text can be read.",
-    "reviewer": "Codex Task 8 multimodal integration",
-    "checked_at": "2026-09-07"
+    "desktop_evidence": "Complete primary-paper replacement inspected at 1365x900 in the article; no clipping.",
+    "narrow_evidence": "Replacement inspected at 390x844 and in the 4x image viewer; labels readable after enlargement.",
+    "reviewer": "Bookvar chapter 64h source review",
+    "checked_at": "2026-10-20"
   },
   "lecture-17-visual-figure-step-216-rendering-1": {
-    "disposition": "integrated",
-    "destination": "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md",
-    "destination_anchor": "3-как-изображение-становится-дискретными-кодами",
+    "disposition": "excluded",
     "local_file": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/multimodal/vq-vae.png",
     "transformation": "Byte-for-byte copy of the pinned Stanford CS336 Lecture 17 course diagram; it is not represented as a primary-paper figure.",
     "caption": "Follow a continuous latent vector through nearest-code selection and then through the decoder back to pixels.",
     "rendered_route": "/textbook/multimodal/unified-sequence-chameleon/",
-    "desktop_evidence": "The encoder, codebook lookup, and decoder path were inspected at native resolution and remain legible without clipping.",
-    "narrow_evidence": "The figure remains contained in the article column and opens at native resolution for its smaller labels.",
-    "reviewer": "Codex Task 8 multimodal integration",
-    "checked_at": "2026-09-07"
+    "desktop_evidence": "Course raster withdrawn from canonical chapter; original primary-paper figure used instead.",
+    "narrow_evidence": "Original primary-paper replacement inspected at 390x844 and 4x in the viewer. Archived course-only VQ raster remains excluded.",
+    "reviewer": "Bookvar chapter 64h source review",
+    "checked_at": "2026-10-20",
+    "reason": "Course-only VQ overview replaced in chapter 64h by original VQ-VAE Figure 1 linked from primary-paper HTML; archived course diagram is not claimed to be a primary-paper figure.",
+    "evidence": "Lectures/repository/lecture_17.py#L283"
   }
   }
 }

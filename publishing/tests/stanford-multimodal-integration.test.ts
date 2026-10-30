@@ -3,6 +3,8 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { parse } from 'yaml';
 import { describe, expect, it } from 'vitest';
+import { loadManifest } from '../adapter/manifest.js';
+import { readingPaths } from '../adapter/reading-paths.js';
 
 const root = resolve(import.meta.dirname, '../..');
 const courseRoot = resolve(root, '05 Источники/Courses/Stanford CS336 Spring 2026');
@@ -39,7 +41,7 @@ function sha256(path: string): string {
 }
 
 describe('Stanford CS336 Lecture 17 publication integration', () => {
-  it('closes all ten source units and seven visual decisions', () => {
+  it('records ten source-unit decisions and excludes the replaced course-only VQ diagram', () => {
     const coverage = JSON.parse(readFileSync(resolve(courseRoot, 'coverage.yml'), 'utf8')) as {
       rows: Array<{
         source_object: string;
@@ -47,6 +49,7 @@ describe('Stanford CS336 Lecture 17 publication integration', () => {
         disposition: string;
         destination?: string;
         destination_anchor?: string;
+        reason?: string;
       }>;
     };
     const visuals = JSON.parse(readFileSync(resolve(courseRoot, 'visuals.yml'), 'utf8')) as {
@@ -56,12 +59,18 @@ describe('Stanford CS336 Lecture 17 publication integration', () => {
     const lectureVisuals = visuals.rows.filter(({ source_object }) => source_object === 'lecture-17');
 
     expect(lectureCoverage).toHaveLength(10);
-    expect(lectureCoverage.filter(({ disposition }) => disposition === 'integrated')).toHaveLength(9);
-    expect(lectureCoverage.filter(({ disposition }) => disposition === 'excluded')).toHaveLength(1);
+    expect(lectureCoverage.filter(({ disposition }) => disposition === 'integrated')).toHaveLength(8);
+    expect(lectureCoverage.filter(({ disposition }) => disposition === 'excluded')).toHaveLength(2);
+    const replacedVq = lectureCoverage.find(row => row.source_unit === 'lecture-17-figure-step-216-rendering-1');
+    expect(replacedVq?.reason).toContain('original VQ-VAE Figure 1');
+    const currentChapter = readFileSync(resolve(root,
+      '00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md'), 'utf8');
+    expect(currentChapter).toContain('https://arxiv.org/html/1711.00937v2/figures/Figure1_9.png');
+    expect(currentChapter).not.toContain('multimodal/vq-vae.png]]');
     expect(lectureCoverage.some(({ disposition }) => disposition === 'source-only')).toBe(false);
     expect(lectureVisuals).toHaveLength(7);
-    expect(lectureVisuals.filter(({ disposition }) => disposition === 'integrated')).toHaveLength(6);
-    expect(lectureVisuals.filter(({ disposition }) => disposition === 'excluded')).toHaveLength(1);
+    expect(lectureVisuals.filter(({ disposition }) => disposition === 'integrated')).toHaveLength(5);
+    expect(lectureVisuals.filter(({ disposition }) => disposition === 'excluded')).toHaveLength(2);
     expect(lectureVisuals.some(({ disposition }) => disposition === 'source-only')).toBe(false);
     expect(Object.fromEntries(lectureCoverage.map((row) => [row.source_unit, {
       disposition: row.disposition,
@@ -114,14 +123,14 @@ describe('Stanford CS336 Lecture 17 publication integration', () => {
         destination_anchor: '8-что-даёт-единый-словарь-а-чего-он-не-гарантирует'
       },
       'lecture-17-figure-step-216-rendering-1': {
-        disposition: 'integrated',
-        destination: '00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md',
-        destination_anchor: '3-как-изображение-становится-дискретными-кодами'
+        disposition: 'excluded',
+        destination: undefined,
+        destination_anchor: undefined
       }
     });
   });
 
-  it('publishes 64h once and preserves the 64f to 65 linear order', () => {
+  it('publishes 64h once at the end of the independent multimodal module', () => {
     const navigation = parse(readFileSync(resolve(root, 'publishing/navigation.yml'), 'utf8')) as {
       sections: Array<{
         id: string;
@@ -131,8 +140,9 @@ describe('Stanford CS336 Lecture 17 publication integration', () => {
     };
     const textbook = navigation.sections.find(({ id }) => id === 'textbook')!;
     const pageRoutes = textbook.pages.map(({ route }) => route);
-    const module = textbook.sidebar?.find(({ label }) => label === 'XIII. Мультимодальные модели');
-    const sidebarRoutes = module?.items?.map(({ route }) => route) ?? [];
+    const sidebarRoutes = readingPaths(loadManifest(resolve(root, 'publishing/navigation.yml'))
+      .sections.find(section => section.id === 'textbook')!)
+      .find(path => path.id === 'multimodal')!.routes;
     const expected = [
       'textbook/multimodal/evaluation-serving',
       'textbook/multimodal/diffusion-flow-images',
@@ -145,7 +155,8 @@ describe('Stanford CS336 Lecture 17 publication integration', () => {
     expect(sidebarRoutes.filter((route) => route === multimodalRoute)).toHaveLength(1);
     expect(pageRoutes.slice(pageRoutes.indexOf(expected[0]), pageRoutes.indexOf(expected[0]) + expected.length))
       .toEqual(expected);
-    expect(sidebarRoutes.slice(-3)).toEqual(expected.slice(0, 3));
+    expect(sidebarRoutes.slice(-2)).toEqual([expected[0], multimodalRoute]);
+    expect(sidebarRoutes).not.toContain('textbook/multimodal/diffusion-flow-images');
 
     const moduleMap = readFileSync(
       resolve(root, '00 Учебник/16 Multimodal Models/01 Vision-language и omni models.md'),

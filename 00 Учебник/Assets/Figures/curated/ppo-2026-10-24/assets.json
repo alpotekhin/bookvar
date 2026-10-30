@@ -1,0 +1,28 @@
+[
+  {
+    "id": "curated-ppo-framework-5871236be3cb",
+    "asset": "00 Учебник/Assets/Figures/curated/ppo-2026-10-24/ppo-framework.png",
+    "author": "Nathan Lambert",
+    "source_url": "https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/book/images/ppo_tikz.png",
+    "source_image_url": "https://raw.githubusercontent.com/natolambert/rlhf-book/3f573487c58548c16a548cd5fb8979a0189384c7/book/images/ppo_tikz.png",
+    "source_chapter": "https://rlhfbook.com/c/06-policy-gradients",
+    "source_code": "https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/diagrams/tikz/06-policy-gradients/ppo_tikz.tex",
+    "commit": "3f573487c58548c16a548cd5fb8979a0189384c7",
+    "license": "MIT",
+    "license_url": "https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/LICENSE-CODE",
+    "license_notice": "site/public/licenses/rlhf-book-MIT.txt",
+    "sha256": "5871236be3cbdc8e2c3732304e6384e59b46dbeaa320f349751570d153172bd0",
+    "dimensions_px": [
+      2158,
+      707
+    ],
+    "modifications": "None; complete original PNG copied byte-for-byte from the pinned book repository. No crop, redraw, translation or upsampling. The curated binary is the retained original, without a duplicate.",
+    "derivation": "source-raster-copy",
+    "metadata_status": "verified",
+    "provenance_confirmation": "pinned-upstream-repository",
+    "last_verified": "2026-10-24",
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md"
+    ]
+  }
+]

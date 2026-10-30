@@ -1,0 +1,257 @@
+{
+  "desktop": {
+    "figures": [
+      {
+        "alt": "Original Houlsby adapter architecture and placement",
+        "fit": "fill",
+        "natural": [
+          930,
+          680
+        ],
+        "shown": [
+          616.984375,
+          451.1328125
+        ],
+        "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/peft-2026-10-29/houlsby-adapter.png"
+      },
+      {
+        "alt": "Original Hugging Face animation of the frozen projection and LoRA branch",
+        "fit": "fill",
+        "natural": [
+          600,
+          439
+        ],
+        "shown": [
+          600,
+          439
+        ],
+        "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/peft-2026-10-29/lora-animated.gif"
+      },
+      {
+        "alt": "Original Hugging Face LoRA merging diagram",
+        "fit": "fill",
+        "natural": [
+          1247,
+          528
+        ],
+        "shown": [
+          616.984375,
+          261.2421875
+        ],
+        "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/peft-2026-10-29/lora-merge.png"
+      },
+      {
+        "alt": "Original QLoRA comparison of full fine-tuning, LoRA and QLoRA",
+        "fit": "fill",
+        "natural": [
+          2000,
+          875
+        ],
+        "shown": [
+          617,
+          269.9375
+        ],
+        "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/quantization-review-2026-10/qlora-training-original.png"
+      },
+      {
+        "alt": "Original model-tuning and prompt-tuning comparison",
+        "fit": "fill",
+        "natural": [
+          938,
+          498
+        ],
+        "shown": [
+          616.984375,
+          327.5703125
+        ],
+        "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/peft-2026-10-29/prompt-tuning.png"
+      },
+      {
+        "alt": "Original prefix-tuning architecture comparison",
+        "fit": "fill",
+        "natural": [
+          1188,
+          908
+        ],
+        "shown": [
+          616.9921875,
+          471.578125
+        ],
+        "src": "/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/peft-2026-10-29/prefix-tuning.png"
+      }
+    ],
+    "h1": 1,
+    "katexErrors": 0,
+    "license": "/licenses/peft-fee923eb-Apache-2.0.txt",
+    "scrollWidth": 1265,
+    "url": "http://127.0.0.1:4330/textbook/post-training/fine-tuning-peft/",
+    "width": 1265
+  },
+  "mobile": {
+    "figures": [
+      {
+        "alt": "Original Houlsby adapter architecture and placement",
+        "natural": [
+          930,
+          680
+        ],
+        "shown": [
+          312.9921875,
+          228.859375
+        ]
+      },
+      {
+        "alt": "Original Hugging Face animation of the frozen projection and LoRA branch",
+        "natural": [
+          600,
+          439
+        ],
+        "shown": [
+          312.9921875,
+          229.0078125
+        ]
+      },
+      {
+        "alt": "Original Hugging Face LoRA merging diagram",
+        "natural": [
+          1247,
+          528
+        ],
+        "shown": [
+          312.984375,
+          132.5234375
+        ]
+      },
+      {
+        "alt": "Original QLoRA comparison of full fine-tuning, LoRA and QLoRA",
+        "natural": [
+          2000,
+          875
+        ],
+        "shown": [
+          313,
+          136.9375
+        ]
+      },
+      {
+        "alt": "Original model-tuning and prompt-tuning comparison",
+        "natural": [
+          938,
+          498
+        ],
+        "shown": [
+          312.984375,
+          166.171875
+        ]
+      },
+      {
+        "alt": "Original prefix-tuning architecture comparison",
+        "natural": [
+          1188,
+          908
+        ],
+        "shown": [
+          312.9921875,
+          239.2265625
+        ]
+      }
+    ],
+    "katexErrors": 0,
+    "scrollWidth": 345,
+    "width": 345
+  },
+  "mobileZoom": {
+    "dialogWidth": 0,
+    "docScrollWidth": 360,
+    "label": "Отменить Clear  ",
+    "viewportWidth": 360
+  },
+  "english": {
+    "code": 8,
+    "figures": 6,
+    "h1": 1,
+    "hasFallback": false,
+    "katexErrors": 0,
+    "next": "/en/textbook/post-training/preference-data/",
+    "prev": "/en/textbook/post-training/sft-instruction-data/",
+    "scrollWidth": 345,
+    "url": "http://127.0.0.1:4330/en/textbook/post-training/fine-tuning-peft/#soft-prompts",
+    "width": 345
+  },
+  "pages": {
+    "code": 8,
+    "figures": [
+      {
+        "loaded": true,
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/peft-2026-10-29/houlsby-adapter.png"
+      },
+      {
+        "loaded": true,
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/peft-2026-10-29/lora-animated.gif"
+      },
+      {
+        "loaded": true,
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/peft-2026-10-29/lora-merge.png"
+      },
+      {
+        "loaded": true,
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/quantization-review-2026-10/qlora-training-original.png"
+      },
+      {
+        "loaded": true,
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/peft-2026-10-29/prompt-tuning.png"
+      },
+      {
+        "loaded": true,
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/peft-2026-10-29/prefix-tuning.png"
+      }
+    ],
+    "h1": 1,
+    "hasFallback": false,
+    "katexErrors": 0,
+    "license": "/bookvar/licenses/peft-fee923eb-Apache-2.0.txt",
+    "next": "/bookvar/en/textbook/post-training/preference-data/",
+    "prev": "/bookvar/en/textbook/post-training/sft-instruction-data/",
+    "scrollWidth": 1265,
+    "url": "http://127.0.0.1:62819/bookvar/en/textbook/post-training/fine-tuning-peft/#bottleneck-adapters",
+    "width": 1265
+  },
+  "pagesMobile": {
+    "figures": [
+      {
+        "alt": "Original Houlsby adapter architecture and placement",
+        "loaded": true,
+        "width": 312.9921875
+      },
+      {
+        "alt": "Original Hugging Face animation of the frozen projection and LoRA branch",
+        "loaded": true,
+        "width": 312.9921875
+      },
+      {
+        "alt": "Original Hugging Face LoRA merging diagram",
+        "loaded": true,
+        "width": 312.984375
+      },
+      {
+        "alt": "Original QLoRA comparison of full fine-tuning, LoRA and QLoRA",
+        "loaded": true,
+        "width": 313
+      },
+      {
+        "alt": "Original model-tuning and prompt-tuning comparison",
+        "loaded": true,
+        "width": 312.984375
+      },
+      {
+        "alt": "Original prefix-tuning architecture comparison",
+        "loaded": true,
+        "width": 312.9921875
+      }
+    ],
+    "katexErrors": 0,
+    "scrollWidth": 345,
+    "url": "http://127.0.0.1:62819/bookvar/textbook/post-training/fine-tuning-peft/#prefix-keys-values",
+    "width": 345
+  }
+}

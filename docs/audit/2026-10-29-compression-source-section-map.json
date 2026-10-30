@@ -1,0 +1,746 @@
+{
+  "source": "05 Источники/Originals/model-compression-2026-10-19/harvard-model-compression.qmd",
+  "source_sha256": "7c24e39e4b6a33f0ac578ebfbeb4d10a0f976bf3a15fac155fc1f45104798084",
+  "reading": "All published prose, captions, formulas, tables and displayed code read; hidden figure generators excluded. Source claims requiring correction are enumerated in the paired audit.",
+  "reviewed_on": "2026-10-29",
+  "ranges": [
+    {
+      "start": 1,
+      "end": 414,
+      "topic": "Deployment constraints, memory/latency/energy, Pareto choices",
+      "destination": "Compression: “Четыре разных преобразования”, “Как выбирать метод”; benchmarking. Already explained; generic speed/accuracy ranges are not imported as measurements."
+    },
+    {
+      "start": 415,
+      "end": 1814,
+      "topic": "Masks, units to prune, criteria, one-shot/iterative, LTH, dynamic sparsity",
+      "destination": "Compression: existing mask/Wanda/structured examples plus new “Prune, recover, and reset”. New numerical schedule and initialization comparison."
+    },
+    {
+      "start": 1815,
+      "end": 1828,
+      "topic": "Mask versus deployable artifact",
+      "destination": "Compression: mask versus physically smaller matrices, sparse formats; retained original distinction between efficient architecture and pruning."
+    },
+    {
+      "start": 1829,
+      "end": 2033,
+      "topic": "Teacher/student signal, temperature, KL, training expense",
+      "destination": "Compression: complete temperature/gradient example and “Какие сигналы доступны у языковой модели”. No new duplicate definition."
+    },
+    {
+      "start": 2034,
+      "end": 2414,
+      "topic": "SVD, CP, Tucker, TT, direct execution of factors",
+      "destination": "Compression: SVD and existing expanded tensor-factorization section with executable convolution/TT examples."
+    },
+    {
+      "start": 2415,
+      "end": 2645,
+      "topic": "Search space, nested optimization, RL/evolution/DARTS, search amortization",
+      "destination": "New search section: 27 candidates, continuous versus discrete result, validation/test distinction; existing latency-constrained choice."
+    },
+    {
+      "start": 2646,
+      "end": 3985,
+      "topic": "Precision, memory traffic, energy, numeric formats",
+      "destination": "Quantization: coding/scales/packing and compute paths; numerical-formats chapter; GPU memory hierarchy. Reject automatic speedups and universal low-bit accuracy cliffs."
+    },
+    {
+      "start": 3986,
+      "end": 4917,
+      "topic": "PTQ calibration, zero point, granularity, weights/activations, dynamic scales, QAT/STE",
+      "destination": "Quantization: complete scalar examples, affine formula, metadata overhead, static/dynamic calibration, GPTQ/AWQ/SmoothQuant and QAT. These destination sections were inspected, not merely title-matched."
+    },
+    {
+      "start": 4918,
+      "end": 4987,
+      "topic": "Binary/ternary arithmetic and runtime restrictions",
+      "destination": "New binary-dot-product explanation with agreement table, bit packing, executable XNOR/popcount identity and ternary storage limit."
+    },
+    {
+      "start": 4988,
+      "end": 5076,
+      "topic": "Hardware-aware architecture, compound scaling, operator structure, memory reuse",
+      "destination": "New compound-scaling example; CNN grouped/depthwise section already demonstrates restricted kernels and 432→75 weights; activation checkpointing stays in ML Systems."
+    },
+    {
+      "start": 5077,
+      "end": 5282,
+      "topic": "Fusion and traffic, Conv–BN–ReLU",
+      "destination": "Existing fusion example plus new fixed-statistics BN folding algebra; distinguishes parameter folding, kernel fusion and training-mode BN."
+    },
+    {
+      "start": 5283,
+      "end": 5690,
+      "topic": "Early exits, routing, MoE, overhead/quality",
+      "destination": "New exit-cost and static-batch example; link to full MoE chapter. No arbitrary decoder-layer skipping guarantee."
+    },
+    {
+      "start": 5691,
+      "end": 6859,
+      "topic": "Sparse layouts, block/N:M patterns, metadata and combinations",
+      "destination": "Existing CSR and 2:4 treatment, small dense structured model and sparse-kernel caveats; MoE handles routed blocks."
+    },
+    {
+      "start": 6860,
+      "end": 7178,
+      "topic": "Constraint-led method choice and composition",
+      "destination": "Existing “Как выбирать метод” and validation workflow; no fabricated BERT mobile pipeline numbers."
+    },
+    {
+      "start": 7179,
+      "end": 7382,
+      "topic": "Profiling, Amdahl, layer sensitivity, quality/latency/energy",
+      "destination": "Existing roofline and inference-benchmark chapters, plus new damage-diagnosis paragraph."
+    },
+    {
+      "start": 7383,
+      "end": 8139,
+      "topic": "Tool boundaries, reproducibility, diagnostic plots and pitfalls",
+      "destination": "Existing export/runtime requirements and new diagnostic interpretation. Source checklists, repeated summaries and decorative metaphors are not duplicated."
+    }
+  ],
+  "sections": [
+    {
+      "line": 8,
+      "level": 1,
+      "title": "Model Compression {#sec-model-compression}",
+      "end": 27,
+      "topic": "Deployment constraints, memory/latency/energy, Pareto choices",
+      "destination": "Compression: “Четыре разных преобразования”, “Как выбирать метод”; benchmarking. Already explained; generic speed/accuracy ranges are not imported as measurements."
+    },
+    {
+      "line": 28,
+      "level": 2,
+      "title": "Purpose {.unnumbered .unlisted}",
+      "end": 55,
+      "topic": "Deployment constraints, memory/latency/energy, Pareto choices",
+      "destination": "Compression: “Четыре разных преобразования”, “Как выбирать метод”; benchmarking. Already explained; generic speed/accuracy ranges are not imported as measurements."
+    },
+    {
+      "line": 56,
+      "level": 2,
+      "title": "Optimization Framework {#sec-model-compression-optimization-framework-9e21}",
+      "end": 213,
+      "topic": "Deployment constraints, memory/latency/energy, Pareto choices",
+      "destination": "Compression: “Четыре разных преобразования”, “Как выбирать метод”; benchmarking. Already explained; generic speed/accuracy ranges are not imported as measurements."
+    },
+    {
+      "line": 214,
+      "level": 2,
+      "title": "Deployment Context {#sec-model-compression-deployment-context-0d88}",
+      "end": 234,
+      "topic": "Deployment constraints, memory/latency/energy, Pareto choices",
+      "destination": "Compression: “Четыре разных преобразования”, “Как выбирать метод”; benchmarking. Already explained; generic speed/accuracy ranges are not imported as measurements."
+    },
+    {
+      "line": 235,
+      "level": 3,
+      "title": "Deployment scenarios {#sec-model-compression-deployment-scenarios-70c9}",
+      "end": 347,
+      "topic": "Deployment constraints, memory/latency/energy, Pareto choices",
+      "destination": "Compression: “Четыре разных преобразования”, “Как выбирать метод”; benchmarking. Already explained; generic speed/accuracy ranges are not imported as measurements."
+    },
+    {
+      "line": 348,
+      "level": 3,
+      "title": "Balancing trade-offs {#sec-model-compression-balancing-tradeoffs-6ae3}",
+      "end": 400,
+      "topic": "Deployment constraints, memory/latency/energy, Pareto choices",
+      "destination": "Compression: “Четыре разных преобразования”, “Как выбирать метод”; benchmarking. Already explained; generic speed/accuracy ranges are not imported as measurements."
+    },
+    {
+      "line": 401,
+      "level": 2,
+      "title": "Structural Optimization {#sec-model-compression-structural-optimization-ee93}",
+      "end": 414,
+      "topic": "Deployment constraints, memory/latency/energy, Pareto choices",
+      "destination": "Compression: “Четыре разных преобразования”, “Как выбирать метод”; benchmarking. Already explained; generic speed/accuracy ranges are not imported as measurements."
+    },
+    {
+      "line": 415,
+      "level": 3,
+      "title": "Pruning {#sec-model-compression-pruning-d1cb}",
+      "end": 649,
+      "topic": "Masks, units to prune, criteria, one-shot/iterative, LTH, dynamic sparsity",
+      "destination": "Compression: existing mask/Wanda/structured examples plus new “Prune, recover, and reset”. New numerical schedule and initialization comparison."
+    },
+    {
+      "line": 650,
+      "level": 4,
+      "title": "Target structures {#sec-model-compression-target-structures-1230}",
+      "end": 929,
+      "topic": "Masks, units to prune, criteria, one-shot/iterative, LTH, dynamic sparsity",
+      "destination": "Compression: existing mask/Wanda/structured examples plus new “Prune, recover, and reset”. New numerical schedule and initialization comparison."
+    },
+    {
+      "line": 930,
+      "level": 4,
+      "title": "Unstructured pruning {#sec-model-compression-unstructured-pruning-1c47}",
+      "end": 951,
+      "topic": "Masks, units to prune, criteria, one-shot/iterative, LTH, dynamic sparsity",
+      "destination": "Compression: existing mask/Wanda/structured examples plus new “Prune, recover, and reset”. New numerical schedule and initialization comparison."
+    },
+    {
+      "line": 952,
+      "level": 4,
+      "title": "Structured pruning {#sec-model-compression-structured-pruning-9692}",
+      "end": 1106,
+      "topic": "Masks, units to prune, criteria, one-shot/iterative, LTH, dynamic sparsity",
+      "destination": "Compression: existing mask/Wanda/structured examples plus new “Prune, recover, and reset”. New numerical schedule and initialization comparison."
+    },
+    {
+      "line": 1107,
+      "level": 4,
+      "title": "Dynamic pruning {#sec-model-compression-dynamic-pruning-b794}",
+      "end": 1118,
+      "topic": "Masks, units to prune, criteria, one-shot/iterative, LTH, dynamic sparsity",
+      "destination": "Compression: existing mask/Wanda/structured examples plus new “Prune, recover, and reset”. New numerical schedule and initialization comparison."
+    },
+    {
+      "line": 1119,
+      "level": 4,
+      "title": "Pruning trade-offs {#sec-model-compression-pruning-tradeoffs-fada}",
+      "end": 1134,
+      "topic": "Masks, units to prune, criteria, one-shot/iterative, LTH, dynamic sparsity",
+      "destination": "Compression: existing mask/Wanda/structured examples plus new “Prune, recover, and reset”. New numerical schedule and initialization comparison."
+    },
+    {
+      "line": 1135,
+      "level": 4,
+      "title": "Pruning strategies {#sec-model-compression-pruning-strategies-03f7}",
+      "end": 1138,
+      "topic": "Masks, units to prune, criteria, one-shot/iterative, LTH, dynamic sparsity",
+      "destination": "Compression: existing mask/Wanda/structured examples plus new “Prune, recover, and reset”. New numerical schedule and initialization comparison."
+    },
+    {
+      "line": 1139,
+      "level": 5,
+      "title": "Iterative pruning {#sec-model-compression-iterative-pruning-ee12}",
+      "end": 1353,
+      "topic": "Masks, units to prune, criteria, one-shot/iterative, LTH, dynamic sparsity",
+      "destination": "Compression: existing mask/Wanda/structured examples plus new “Prune, recover, and reset”. New numerical schedule and initialization comparison."
+    },
+    {
+      "line": 1354,
+      "level": 5,
+      "title": "One-shot pruning {#sec-model-compression-oneshot-pruning-12a1}",
+      "end": 1558,
+      "topic": "Masks, units to prune, criteria, one-shot/iterative, LTH, dynamic sparsity",
+      "destination": "Compression: existing mask/Wanda/structured examples plus new “Prune, recover, and reset”. New numerical schedule and initialization comparison."
+    },
+    {
+      "line": 1559,
+      "level": 4,
+      "title": "Lottery ticket hypothesis {#sec-model-compression-lottery-ticket-hypothesis-1b3d}",
+      "end": 1814,
+      "topic": "Masks, units to prune, criteria, one-shot/iterative, LTH, dynamic sparsity",
+      "destination": "Compression: existing mask/Wanda/structured examples plus new “Prune, recover, and reset”. New numerical schedule and initialization comparison."
+    },
+    {
+      "line": 1815,
+      "level": 4,
+      "title": "Pruning in practice {#sec-model-compression-pruning-practice-8059}",
+      "end": 1828,
+      "topic": "Mask versus deployable artifact",
+      "destination": "Compression: mask versus physically smaller matrices, sparse formats; retained original distinction between efficient architecture and pruning."
+    },
+    {
+      "line": 1829,
+      "level": 3,
+      "title": "Knowledge distillation {#sec-model-compression-knowledge-distillation-1842}",
+      "end": 1991,
+      "topic": "Teacher/student signal, temperature, KL, training expense",
+      "destination": "Compression: complete temperature/gradient example and “Какие сигналы доступны у языковой модели”. No new duplicate definition."
+    },
+    {
+      "line": 1992,
+      "level": 4,
+      "title": "Distillation mathematics {#sec-model-compression-distillation-mathematics-4af6}",
+      "end": 2007,
+      "topic": "Teacher/student signal, temperature, KL, training expense",
+      "destination": "Compression: complete temperature/gradient example and “Какие сигналы доступны у языковой модели”. No new duplicate definition."
+    },
+    {
+      "line": 2008,
+      "level": 5,
+      "title": "Efficiency gains and trade-offs {#sec-model-compression-efficiency-gains-tradeoffs-fb5b}",
+      "end": 2033,
+      "topic": "Teacher/student signal, temperature, KL, training expense",
+      "destination": "Compression: complete temperature/gradient example and “Какие сигналы доступны у языковой модели”. No new duplicate definition."
+    },
+    {
+      "line": 2034,
+      "level": 3,
+      "title": "Structured approximations {#sec-model-compression-structured-approximations-4798}",
+      "end": 2086,
+      "topic": "SVD, CP, Tucker, TT, direct execution of factors",
+      "destination": "Compression: SVD and existing expanded tensor-factorization section with executable convolution/TT examples."
+    },
+    {
+      "line": 2087,
+      "level": 4,
+      "title": "Low-rank factorization {#sec-model-compression-lowrank-factorization-955e}",
+      "end": 2141,
+      "topic": "SVD, CP, Tucker, TT, direct execution of factors",
+      "destination": "Compression: SVD and existing expanded tensor-factorization section with executable convolution/TT examples."
+    },
+    {
+      "line": 2142,
+      "level": 4,
+      "title": "Tensor decomposition {#sec-model-compression-tensor-decomposition-5e9e}",
+      "end": 2414,
+      "topic": "SVD, CP, Tucker, TT, direct execution of factors",
+      "destination": "Compression: SVD and existing expanded tensor-factorization section with executable convolution/TT examples."
+    },
+    {
+      "line": 2415,
+      "level": 3,
+      "title": "Neural architecture search {#sec-model-compression-neural-architecture-search-cf12}",
+      "end": 2566,
+      "topic": "Search space, nested optimization, RL/evolution/DARTS, search amortization",
+      "destination": "New search section: 27 candidates, continuous versus discrete result, validation/test distinction; existing latency-constrained choice."
+    },
+    {
+      "line": 2567,
+      "level": 4,
+      "title": "The NAS optimization problem {#sec-model-compression-nas-optimization-problem-7f8e}",
+      "end": 2583,
+      "topic": "Search space, nested optimization, RL/evolution/DARTS, search amortization",
+      "destination": "New search section: 27 candidates, continuous versus discrete result, validation/test distinction; existing latency-constrained choice."
+    },
+    {
+      "line": 2584,
+      "level": 4,
+      "title": "Search space design {#sec-model-compression-search-space-design-62db}",
+      "end": 2591,
+      "topic": "Search space, nested optimization, RL/evolution/DARTS, search amortization",
+      "destination": "New search section: 27 candidates, continuous versus discrete result, validation/test distinction; existing latency-constrained choice."
+    },
+    {
+      "line": 2592,
+      "level": 4,
+      "title": "Search strategies {#sec-model-compression-search-strategies-84ad}",
+      "end": 2615,
+      "topic": "Search space, nested optimization, RL/evolution/DARTS, search amortization",
+      "destination": "New search section: 27 candidates, continuous versus discrete result, validation/test distinction; existing latency-constrained choice."
+    },
+    {
+      "line": 2616,
+      "level": 4,
+      "title": "When to use NAS {#sec-model-compression-use-nas-2b47}",
+      "end": 2623,
+      "topic": "Search space, nested optimization, RL/evolution/DARTS, search amortization",
+      "destination": "New search section: 27 candidates, continuous versus discrete result, validation/test distinction; existing latency-constrained choice."
+    },
+    {
+      "line": 2624,
+      "level": 4,
+      "title": "Architecture examples {#sec-model-compression-architecture-examples-b1ce}",
+      "end": 2645,
+      "topic": "Search space, nested optimization, RL/evolution/DARTS, search amortization",
+      "destination": "New search section: 27 candidates, continuous versus discrete result, validation/test distinction; existing latency-constrained choice."
+    },
+    {
+      "line": 2646,
+      "level": 2,
+      "title": "Quantization and Precision {#sec-model-compression-quantization-precision-cd46}",
+      "end": 2760,
+      "topic": "Precision, memory traffic, energy, numeric formats",
+      "destination": "Quantization: coding/scales/packing and compute paths; numerical-formats chapter; GPU memory hierarchy. Reject automatic speedups and universal low-bit accuracy cliffs."
+    },
+    {
+      "line": 2761,
+      "level": 3,
+      "title": "Precision and energy {#sec-model-compression-precision-energy-cc8e}",
+      "end": 2883,
+      "topic": "Precision, memory traffic, energy, numeric formats",
+      "destination": "Quantization: coding/scales/packing and compute paths; numerical-formats chapter; GPU memory hierarchy. Reject automatic speedups and universal low-bit accuracy cliffs."
+    },
+    {
+      "line": 2884,
+      "level": 4,
+      "title": "Energy costs {#sec-model-compression-energy-costs-d1d5}",
+      "end": 3031,
+      "topic": "Precision, memory traffic, energy, numeric formats",
+      "destination": "Quantization: coding/scales/packing and compute paths; numerical-formats chapter; GPU memory hierarchy. Reject automatic speedups and universal low-bit accuracy cliffs."
+    },
+    {
+      "line": 3032,
+      "level": 3,
+      "title": "The energy dividend: INT8 vs. FP32 reality {#sec-model-compression-energy-dividend}",
+      "end": 3113,
+      "topic": "Precision, memory traffic, energy, numeric formats",
+      "destination": "Quantization: coding/scales/packing and compute paths; numerical-formats chapter; GPU memory hierarchy. Reject automatic speedups and universal low-bit accuracy cliffs."
+    },
+    {
+      "line": 3114,
+      "level": 4,
+      "title": "Performance gains {#sec-model-compression-performance-gains-0656}",
+      "end": 3644,
+      "topic": "Precision, memory traffic, energy, numeric formats",
+      "destination": "Quantization: coding/scales/packing and compute paths; numerical-formats chapter; GPU memory hierarchy. Reject automatic speedups and universal low-bit accuracy cliffs."
+    },
+    {
+      "line": 3645,
+      "level": 3,
+      "title": "Numerical format comparison {#sec-model-compression-numerical-format-comparison-8fa2}",
+      "end": 3787,
+      "topic": "Precision, memory traffic, energy, numeric formats",
+      "destination": "Quantization: coding/scales/packing and compute paths; numerical-formats chapter; GPU memory hierarchy. Reject automatic speedups and universal low-bit accuracy cliffs."
+    },
+    {
+      "line": 3788,
+      "level": 3,
+      "title": "Precision reduction strategies {#sec-model-compression-precision-reduction-strategies-db83}",
+      "end": 3985,
+      "topic": "Precision, memory traffic, energy, numeric formats",
+      "destination": "Quantization: coding/scales/packing and compute paths; numerical-formats chapter; GPU memory hierarchy. Reject automatic speedups and universal low-bit accuracy cliffs."
+    },
+    {
+      "line": 3986,
+      "level": 4,
+      "title": "Post-training quantization {#sec-model-compression-posttraining-quantization-bb5b}",
+      "end": 4040,
+      "topic": "PTQ calibration, zero point, granularity, weights/activations, dynamic scales, QAT/STE",
+      "destination": "Quantization: complete scalar examples, affine formula, metadata overhead, static/dynamic calibration, GPTQ/AWQ/SmoothQuant and QAT. These destination sections were inspected, not merely title-matched."
+    },
+    {
+      "line": 4041,
+      "level": 5,
+      "title": "Calibration {#sec-model-compression-calibration-c650}",
+      "end": 4205,
+      "topic": "PTQ calibration, zero point, granularity, weights/activations, dynamic scales, QAT/STE",
+      "destination": "Quantization: complete scalar examples, affine formula, metadata overhead, static/dynamic calibration, GPTQ/AWQ/SmoothQuant and QAT. These destination sections were inspected, not merely title-matched."
+    },
+    {
+      "line": 4206,
+      "level": 5,
+      "title": "Tuning quantization ranges {#sec-model-compression-tuning-quantization-ranges-439d}",
+      "end": 4291,
+      "topic": "PTQ calibration, zero point, granularity, weights/activations, dynamic scales, QAT/STE",
+      "destination": "Quantization: complete scalar examples, affine formula, metadata overhead, static/dynamic calibration, GPTQ/AWQ/SmoothQuant and QAT. These destination sections were inspected, not merely title-matched."
+    },
+    {
+      "line": 4292,
+      "level": 5,
+      "title": "Granularity {#sec-model-compression-granularity-93b3}",
+      "end": 4620,
+      "topic": "PTQ calibration, zero point, granularity, weights/activations, dynamic scales, QAT/STE",
+      "destination": "Quantization: complete scalar examples, affine formula, metadata overhead, static/dynamic calibration, GPTQ/AWQ/SmoothQuant and QAT. These destination sections were inspected, not merely title-matched."
+    },
+    {
+      "line": 4621,
+      "level": 5,
+      "title": "Weights vs. activations {#sec-model-compression-weights-vs-activations-5efb}",
+      "end": 4687,
+      "topic": "PTQ calibration, zero point, granularity, weights/activations, dynamic scales, QAT/STE",
+      "destination": "Quantization: complete scalar examples, affine formula, metadata overhead, static/dynamic calibration, GPTQ/AWQ/SmoothQuant and QAT. These destination sections were inspected, not merely title-matched."
+    },
+    {
+      "line": 4688,
+      "level": 5,
+      "title": "Static vs. dynamic quantization {#sec-model-compression-static-vs-dynamic-quantization-4791}",
+      "end": 4723,
+      "topic": "PTQ calibration, zero point, granularity, weights/activations, dynamic scales, QAT/STE",
+      "destination": "Quantization: complete scalar examples, affine formula, metadata overhead, static/dynamic calibration, GPTQ/AWQ/SmoothQuant and QAT. These destination sections were inspected, not merely title-matched."
+    },
+    {
+      "line": 4724,
+      "level": 5,
+      "title": "PTQ in practice {#sec-model-compression-ptq-practice-2800}",
+      "end": 4729,
+      "topic": "PTQ calibration, zero point, granularity, weights/activations, dynamic scales, QAT/STE",
+      "destination": "Quantization: complete scalar examples, affine formula, metadata overhead, static/dynamic calibration, GPTQ/AWQ/SmoothQuant and QAT. These destination sections were inspected, not merely title-matched."
+    },
+    {
+      "line": 4730,
+      "level": 4,
+      "title": "Quantization-aware training {#sec-model-compression-quantizationaware-training-4032}",
+      "end": 4827,
+      "topic": "PTQ calibration, zero point, granularity, weights/activations, dynamic scales, QAT/STE",
+      "destination": "Quantization: complete scalar examples, affine formula, metadata overhead, static/dynamic calibration, GPTQ/AWQ/SmoothQuant and QAT. These destination sections were inspected, not merely title-matched."
+    },
+    {
+      "line": 4828,
+      "level": 5,
+      "title": "Training mathematics {#sec-model-compression-training-mathematics-699e}",
+      "end": 4841,
+      "topic": "PTQ calibration, zero point, granularity, weights/activations, dynamic scales, QAT/STE",
+      "destination": "Quantization: complete scalar examples, affine formula, metadata overhead, static/dynamic calibration, GPTQ/AWQ/SmoothQuant and QAT. These destination sections were inspected, not merely title-matched."
+    },
+    {
+      "line": 4842,
+      "level": 5,
+      "title": "Fake quantization nodes and implementation {#sec-model-compression-fake-quantization-nodes-implementation-e822}",
+      "end": 4905,
+      "topic": "PTQ calibration, zero point, granularity, weights/activations, dynamic scales, QAT/STE",
+      "destination": "Quantization: complete scalar examples, affine formula, metadata overhead, static/dynamic calibration, GPTQ/AWQ/SmoothQuant and QAT. These destination sections were inspected, not merely title-matched."
+    },
+    {
+      "line": 4906,
+      "level": 5,
+      "title": "QAT trade-offs {#sec-model-compression-qat-tradeoffs-e8ef}",
+      "end": 4917,
+      "topic": "PTQ calibration, zero point, granularity, weights/activations, dynamic scales, QAT/STE",
+      "destination": "Quantization: complete scalar examples, affine formula, metadata overhead, static/dynamic calibration, GPTQ/AWQ/SmoothQuant and QAT. These destination sections were inspected, not merely title-matched."
+    },
+    {
+      "line": 4918,
+      "level": 3,
+      "title": "Extreme quantization {#sec-model-compression-extreme-quantization-aba4}",
+      "end": 4923,
+      "topic": "Binary/ternary arithmetic and runtime restrictions",
+      "destination": "New binary-dot-product explanation with agreement table, bit packing, executable XNOR/popcount identity and ternary storage limit."
+    },
+    {
+      "line": 4924,
+      "level": 4,
+      "title": "Challenges and limitations {#sec-model-compression-challenges-limitations-a99c}",
+      "end": 4987,
+      "topic": "Binary/ternary arithmetic and runtime restrictions",
+      "destination": "New binary-dot-product explanation with agreement table, bit packing, executable XNOR/popcount identity and ternary storage limit."
+    },
+    {
+      "line": 4988,
+      "level": 2,
+      "title": "Architectural Efficiency {#sec-model-compression-architectural-efficiency-8dd3}",
+      "end": 4993,
+      "topic": "Hardware-aware architecture, compound scaling, operator structure, memory reuse",
+      "destination": "New compound-scaling example; CNN grouped/depthwise section already demonstrates restricted kernels and 432→75 weights; activation checkpointing stays in ML Systems."
+    },
+    {
+      "line": 4994,
+      "level": 3,
+      "title": "Hardware-aware design {#sec-model-compression-hardwareaware-design-c561}",
+      "end": 4997,
+      "topic": "Hardware-aware architecture, compound scaling, operator structure, memory reuse",
+      "destination": "New compound-scaling example; CNN grouped/depthwise section already demonstrates restricted kernels and 432→75 weights; activation checkpointing stays in ML Systems."
+    },
+    {
+      "line": 4998,
+      "level": 4,
+      "title": "Efficient design principles {#sec-model-compression-efficient-design-principles-b015}",
+      "end": 5014,
+      "topic": "Hardware-aware architecture, compound scaling, operator structure, memory reuse",
+      "destination": "New compound-scaling example; CNN grouped/depthwise section already demonstrates restricted kernels and 432→75 weights; activation checkpointing stays in ML Systems."
+    },
+    {
+      "line": 5015,
+      "level": 4,
+      "title": "Scaling optimization {#sec-model-compression-scaling-optimization-6ad9}",
+      "end": 5034,
+      "topic": "Hardware-aware architecture, compound scaling, operator structure, memory reuse",
+      "destination": "New compound-scaling example; CNN grouped/depthwise section already demonstrates restricted kernels and 432→75 weights; activation checkpointing stays in ML Systems."
+    },
+    {
+      "line": 5035,
+      "level": 4,
+      "title": "Computation reduction {#sec-model-compression-computation-reduction-13de}",
+      "end": 5052,
+      "topic": "Hardware-aware architecture, compound scaling, operator structure, memory reuse",
+      "destination": "New compound-scaling example; CNN grouped/depthwise section already demonstrates restricted kernels and 432→75 weights; activation checkpointing stays in ML Systems."
+    },
+    {
+      "line": 5053,
+      "level": 4,
+      "title": "Memory optimization {#sec-model-compression-memory-optimization-8c43}",
+      "end": 5076,
+      "topic": "Hardware-aware architecture, compound scaling, operator structure, memory reuse",
+      "destination": "New compound-scaling example; CNN grouped/depthwise section already demonstrates restricted kernels and 432→75 weights; activation checkpointing stays in ML Systems."
+    },
+    {
+      "line": 5077,
+      "level": 4,
+      "title": "Operator fusion {#sec-model-compression-operator-fusion-ac1d}",
+      "end": 5107,
+      "topic": "Fusion and traffic, Conv–BN–ReLU",
+      "destination": "Existing fusion example plus new fixed-statistics BN folding algebra; distinguishes parameter folding, kernel fusion and training-mode BN."
+    },
+    {
+      "line": 5108,
+      "level": 5,
+      "title": "Convolution-BatchNorm-ReLU fusion {.unnumbered}",
+      "end": 5282,
+      "topic": "Fusion and traffic, Conv–BN–ReLU",
+      "destination": "Existing fusion example plus new fixed-statistics BN folding algebra; distinguishes parameter folding, kernel fusion and training-mode BN."
+    },
+    {
+      "line": 5283,
+      "level": 3,
+      "title": "Adaptive computation methods {#sec-model-compression-adaptive-computation-methods-d164}",
+      "end": 5286,
+      "topic": "Early exits, routing, MoE, overhead/quality",
+      "destination": "New exit-cost and static-batch example; link to full MoE chapter. No arbitrary decoder-layer skipping guarantee."
+    },
+    {
+      "line": 5287,
+      "level": 4,
+      "title": "Dynamic schemes {#sec-model-compression-dynamic-schemes-e9ff}",
+      "end": 5684,
+      "topic": "Early exits, routing, MoE, overhead/quality",
+      "destination": "New exit-cost and static-batch example; link to full MoE chapter. No arbitrary decoder-layer skipping guarantee."
+    },
+    {
+      "line": 5685,
+      "level": 4,
+      "title": "Implementation challenges {#sec-model-compression-implementation-challenges-1184}",
+      "end": 5690,
+      "topic": "Early exits, routing, MoE, overhead/quality",
+      "destination": "New exit-cost and static-batch example; link to full MoE chapter. No arbitrary decoder-layer skipping guarantee."
+    },
+    {
+      "line": 5691,
+      "level": 3,
+      "title": "Sparsity exploitation {#sec-model-compression-sparsity-exploitation-48a6}",
+      "end": 5708,
+      "topic": "Sparse layouts, block/N:M patterns, metadata and combinations",
+      "destination": "Existing CSR and 2:4 treatment, small dense structured model and sparse-kernel caveats; MoE handles routed blocks."
+    },
+    {
+      "line": 5709,
+      "level": 4,
+      "title": "Sparsity types {#sec-model-compression-sparsity-types-793d}",
+      "end": 5718,
+      "topic": "Sparse layouts, block/N:M patterns, metadata and combinations",
+      "destination": "Existing CSR and 2:4 treatment, small dense structured model and sparse-kernel caveats; MoE handles routed blocks."
+    },
+    {
+      "line": 5719,
+      "level": 4,
+      "title": "Sparsity utilization methods {#sec-model-compression-sparsity-utilization-methods-04c3}",
+      "end": 5737,
+      "topic": "Sparse layouts, block/N:M patterns, metadata and combinations",
+      "destination": "Existing CSR and 2:4 treatment, small dense structured model and sparse-kernel caveats; MoE handles routed blocks."
+    },
+    {
+      "line": 5738,
+      "level": 4,
+      "title": "Structured patterns {#sec-model-compression-structured-patterns-c3f4}",
+      "end": 6825,
+      "topic": "Sparse layouts, block/N:M patterns, metadata and combinations",
+      "destination": "Existing CSR and 2:4 treatment, small dense structured model and sparse-kernel caveats; MoE handles routed blocks."
+    },
+    {
+      "line": 6826,
+      "level": 4,
+      "title": "Challenges and limitations {#sec-model-compression-challenges-limitations-975f}",
+      "end": 6841,
+      "topic": "Sparse layouts, block/N:M patterns, metadata and combinations",
+      "destination": "Existing CSR and 2:4 treatment, small dense structured model and sparse-kernel caveats; MoE handles routed blocks."
+    },
+    {
+      "line": 6842,
+      "level": 4,
+      "title": "Combined optimizations {#sec-model-compression-combined-optimizations-99fd}",
+      "end": 6859,
+      "topic": "Sparse layouts, block/N:M patterns, metadata and combinations",
+      "destination": "Existing CSR and 2:4 treatment, small dense structured model and sparse-kernel caveats; MoE handles routed blocks."
+    },
+    {
+      "line": 6860,
+      "level": 2,
+      "title": "Technique Selection {#sec-model-compression-technique-selection-ba16}",
+      "end": 6873,
+      "topic": "Constraint-led method choice and composition",
+      "destination": "Existing “Как выбирать метод” and validation workflow; no fabricated BERT mobile pipeline numbers."
+    },
+    {
+      "line": 6874,
+      "level": 3,
+      "title": "Mapping constraints to techniques {#sec-model-compression-mapping-constraints-techniques-ff2c}",
+      "end": 6889,
+      "topic": "Constraint-led method choice and composition",
+      "destination": "Existing “Как выбирать метод” and validation workflow; no fabricated BERT mobile pipeline numbers."
+    },
+    {
+      "line": 6890,
+      "level": 3,
+      "title": "Decision framework {#sec-model-compression-decision-framework-0d69}",
+      "end": 6903,
+      "topic": "Constraint-led method choice and composition",
+      "destination": "Existing “Как выбирать метод” and validation workflow; no fabricated BERT mobile pipeline numbers."
+    },
+    {
+      "line": 6904,
+      "level": 2,
+      "title": "Optimization Strategies {#sec-model-compression-optimization-strategies-f2f6}",
+      "end": 7178,
+      "topic": "Constraint-led method choice and composition",
+      "destination": "Existing “Как выбирать метод” and validation workflow; no fabricated BERT mobile pipeline numbers."
+    },
+    {
+      "line": 7179,
+      "level": 2,
+      "title": "Efficiency Measurement {#sec-model-compression-efficiency-measurement-2424}",
+      "end": 7182,
+      "topic": "Profiling, Amdahl, layer sensitivity, quality/latency/energy",
+      "destination": "Existing roofline and inference-benchmark chapters, plus new damage-diagnosis paragraph."
+    },
+    {
+      "line": 7183,
+      "level": 3,
+      "title": "Profiling and opportunity analysis {#sec-model-compression-profiling-opportunity-analysis-477f}",
+      "end": 7245,
+      "topic": "Profiling, Amdahl, layer sensitivity, quality/latency/energy",
+      "destination": "Existing roofline and inference-benchmark chapters, plus new damage-diagnosis paragraph."
+    },
+    {
+      "line": 7246,
+      "level": 3,
+      "title": "Measuring optimization effectiveness {#sec-model-compression-measuring-optimization-effectiveness-a3b2}",
+      "end": 7382,
+      "topic": "Profiling, Amdahl, layer sensitivity, quality/latency/energy",
+      "destination": "Existing roofline and inference-benchmark chapters, plus new damage-diagnosis paragraph."
+    },
+    {
+      "line": 7383,
+      "level": 2,
+      "title": "Implementation Tools {#sec-model-compression-implementation-tools-4990}",
+      "end": 7390,
+      "topic": "Tool boundaries, reproducibility, diagnostic plots and pitfalls",
+      "destination": "Existing export/runtime requirements and new diagnostic interpretation. Source checklists, repeated summaries and decorative metaphors are not duplicated."
+    },
+    {
+      "line": 7391,
+      "level": 3,
+      "title": "Model optimization APIs and tools {#sec-model-compression-model-optimization-apis-tools-1849}",
+      "end": 7424,
+      "topic": "Tool boundaries, reproducibility, diagnostic plots and pitfalls",
+      "destination": "Existing export/runtime requirements and new diagnostic interpretation. Source checklists, repeated summaries and decorative metaphors are not duplicated."
+    },
+    {
+      "line": 7425,
+      "level": 3,
+      "title": "Hardware-specific optimization libraries {#sec-model-compression-hardwarespecific-optimization-libraries-3ab1}",
+      "end": 7430,
+      "topic": "Tool boundaries, reproducibility, diagnostic plots and pitfalls",
+      "destination": "Existing export/runtime requirements and new diagnostic interpretation. Source checklists, repeated summaries and decorative metaphors are not duplicated."
+    },
+    {
+      "line": 7431,
+      "level": 3,
+      "title": "Diagnostic visualization {#sec-model-compression-diagnostic-visualization}",
+      "end": 8008,
+      "topic": "Tool boundaries, reproducibility, diagnostic plots and pitfalls",
+      "destination": "Existing export/runtime requirements and new diagnostic interpretation. Source checklists, repeated summaries and decorative metaphors are not duplicated."
+    },
+    {
+      "line": 8009,
+      "level": 2,
+      "title": "Fallacies and Pitfalls {#sec-model-compression-fallacies-pitfalls-1b5e}",
+      "end": 8103,
+      "topic": "Tool boundaries, reproducibility, diagnostic plots and pitfalls",
+      "destination": "Existing export/runtime requirements and new diagnostic interpretation. Source checklists, repeated summaries and decorative metaphors are not duplicated."
+    },
+    {
+      "line": 8104,
+      "level": 2,
+      "title": "Summary {#sec-model-compression-summary-8229}",
+      "end": 8139,
+      "topic": "Tool boundaries, reproducibility, diagnostic plots and pitfalls",
+      "destination": "Existing export/runtime requirements and new diagnostic interpretation. Source checklists, repeated summaries and decorative metaphors are not duplicated."
+    }
+  ]
+}

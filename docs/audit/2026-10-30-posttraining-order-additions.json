@@ -1,0 +1,119 @@
+{
+  "date": "2026-10-30",
+  "scope": "Prerequisite and navigation order: SFT, reward modeling and PPO precede Constitutional AI. Adjacent chapter metadata, both contents and the module route agree; PPO no longer falsely calls DPO the immediately following chapter. Examples, formulas, figures, source excerpts and translations remain intact.",
+  "files": [
+    {
+      "source": "00 Учебник/_index.md",
+      "before_sha256": "c6b73441468617524d453765d73be44bb66c4c68015269af0bb455df65040183",
+      "after_sha256": "94a06ce389fdf27af3290fdaa9447abaeb3aade37ef1ebfb7dcd9c259560557f",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF|Цели alignment, HHH, Constitutional AI и RLAIF]]\n- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/01 SFT и instruction data|SFT и instruction data]]\n- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts|Fine-tuning и PEFT]]\n- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/02 Preference data|Preference data]]\n- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/03 Reward modeling|Reward modeling]]\n- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM|Policy gradient и PPO для LLM]]\n",
+          "new": "- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/01 SFT и instruction data|SFT и instruction data]]\n- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts|Fine-tuning и PEFT]]\n- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/02 Preference data|Preference data]]\n- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/03 Reward modeling|Reward modeling]]\n- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM|Policy gradient и PPO для LLM]]\n- [[00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF|Цели alignment, HHH, Constitutional AI и RLAIF]]\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/_index.md",
+      "before_sha256": "19affe803286bac7fe7d22d69604b87297efb70cdf25eeae656fd8fb62594f11",
+      "after_sha256": "ad1e16af608e8bd815a0b2fa01f79e91d4cb937d333f379783851261544a6816",
+      "changes": [
+        {
+          "old": "- [[00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF|Alignment goals, HHH, Constitutional AI, and RLAIF]]\n- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/01 SFT и instruction data|SFT and instruction data]]\n- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts|Fine-tuning and PEFT]] · **EN original**\n- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/02 Preference data|Preference data]]\n- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/03 Reward modeling|Reward modeling]]\n- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM|Policy gradients and PPO for LLMs]]\n",
+          "new": "- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/01 SFT и instruction data|SFT and instruction data]]\n- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts|Fine-tuning and PEFT]] · **EN original**\n- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/02 Preference data|Preference data]]\n- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/03 Reward modeling|Reward modeling]]\n- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM|Policy gradients and PPO for LLMs]]\n- [[00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF|Alignment goals, HHH, Constitutional AI, and RLAIF]]\n"
+        },
+        {
+          "old": "canonical_revision: \"c6b73441468617524d453765d73be44bb66c4c68015269af0bb455df65040183\"",
+          "new": "canonical_revision: \"94a06ce389fdf27af3290fdaa9447abaeb3aade37ef1ebfb7dcd9c259560557f\""
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники.md",
+      "before_sha256": "f9687ff3244da4519af4daa7912a3f36ebffcd612195b8349507bb82cb0ba9f4",
+      "after_sha256": "25d6cbe387dab1b111cab7f7024be13d28ccf1b96716b451efbcd388a30e4c02",
+      "changes": [
+        {
+          "old": "\n1. [[00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF|Цели alignment, HHH, Constitutional AI и RLAIF]] — какие требования предъявляют к помощнику и как принципы превращаются в обучающие данные.\n2. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/01 SFT и instruction data|SFT и instruction data]] — как демонстрация превращается в response-only loss и как строится обучающая смесь.\n3. [[00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts|Fine-tuning и PEFT]] — какие параметры обновляются: полное и частичное дообучение, adapters, LoRA, QLoRA и обучаемые префиксы.\n4. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/02 Preference data|Preference data]] — откуда берутся chosen/rejected и почему разметка является частью задачи.\n5. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/03 Reward modeling|Reward modeling]] — Bradley–Terry, LLM-as-a-Judge и обучение оценщика.\n6. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM|Policy gradient и PPO]] — on-policy rollouts, value function и KL-ограничение.\n7. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/05 DPO|DPO]] — offline preference optimization и её итеративные варианты.\n8. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers|RLVR и verifiers]] — программно проверяемая награда как контракт среды.\n9. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1|GRPO и DeepSeek-R1]] — групповая относительная оценка и конкретный reasoning recipe.\n10. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/08 Reasoning distillation|Reasoning distillation]] — перенос проверенных траекторий в меньшую модель.\n",
+          "new": "\n1. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/01 SFT и instruction data|SFT и instruction data]] — как демонстрация превращается в response-only loss и как строится обучающая смесь.\n2. [[00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts|Fine-tuning и PEFT]] — какие параметры обновляются: полное и частичное дообучение, adapters, LoRA, QLoRA и обучаемые префиксы.\n3. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/02 Preference data|Preference data]] — откуда берутся chosen/rejected и почему разметка является частью задачи.\n4. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/03 Reward modeling|Reward modeling]] — Bradley–Terry, LLM-as-a-Judge и обучение оценщика.\n5. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM|Policy gradient и PPO]] — on-policy rollouts, value function и KL-ограничение.\n6. [[00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF|Цели alignment, HHH, Constitutional AI и RLAIF]] — какие требования предъявляют к помощнику и как принципы превращаются в обучающие данные.\n7. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/05 DPO|DPO]] — offline preference optimization и её итеративные варианты.\n8. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers|RLVR и verifiers]] — программно проверяемая награда как контракт среды.\n9. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1|GRPO и DeepSeek-R1]] — групповая относительная оценка и конкретный reasoning recipe.\n10. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/08 Reasoning distillation|Reasoning distillation]] — перенос проверенных траекторий в меньшую модель.\n"
+        },
+        {
+          "old": "next: \"[[00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF]]\"",
+          "new": "next: \"[[00 Учебник/12 Post-training и Alignment/01 SFT и instruction data]]\""
+        },
+        {
+          "old": "last_updated: 2026-10-23",
+          "new": "last_updated: 2026-10-30"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md",
+      "before_sha256": "f30129bff3dad6c9888f2be2af5809e58aab0d532deb2675d0d0b6aa3af5cf96",
+      "after_sha256": "961c2b618ae6c9539b12dca8171b945bdb34c30d751d82721989fbb564e0a9c1",
+      "changes": [
+        {
+          "old": "> [!note] Numerical detail\n> The two stages above can be read before SFT. The calculation below uses the\n> pairwise loss derived in\n> [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/03 Reward modeling#bradley-terry|Reward modeling]].\n",
+          "new": "The comparison loss below is derived in\n[[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/03 Reward modeling#bradley-terry|Reward modeling]].\n"
+        },
+        {
+          "old": "last_updated: 2026-10-29",
+          "new": "last_updated: 2026-10-30"
+        },
+        {
+          "old": "category: Training",
+          "new": "category: Training\nprevious: \"[[00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM]]\"\nnext: \"[[00 Учебник/12 Post-training и Alignment/05 DPO]]\""
+        }
+      ]
+    },
+    {
+      "source": "publishing/navigation.yml",
+      "before_sha256": "cef166a943d3ff72cec4410bee9eb320990a834efd0ba8fc9b9b2bc7c1187cb1",
+      "after_sha256": "9added5cc57a5a2c1635853b82d7daef7e919011966dd5f9cf95052a223aa2fe",
+      "changes": [
+        {
+          "old": "      - source: 00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md\n        route: textbook/post-training/alignment-goals\n      - source: 00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md\n        route: textbook/post-training/sft-instruction-data\n      - source: 00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md\n        route: textbook/post-training/fine-tuning-peft\n      - source: 00 Учебник/12 Post-training и Alignment/02 Preference data.md\n        route: textbook/post-training/preference-data\n      - source: 00 Учебник/12 Post-training и Alignment/03 Reward modeling.md\n        route: textbook/post-training/reward-modeling\n      - source: 00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md\n        route: textbook/post-training/ppo\n",
+          "new": "      - source: 00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md\n        route: textbook/post-training/sft-instruction-data\n      - source: 00 Учебник/12 Post-training и Alignment/01a Fine-tuning и PEFT — adapters, LoRA, QLoRA и soft prompts.md\n        route: textbook/post-training/fine-tuning-peft\n      - source: 00 Учебник/12 Post-training и Alignment/02 Preference data.md\n        route: textbook/post-training/preference-data\n      - source: 00 Учебник/12 Post-training и Alignment/03 Reward modeling.md\n        route: textbook/post-training/reward-modeling\n      - source: 00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md\n        route: textbook/post-training/ppo\n      - source: 00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md\n        route: textbook/post-training/alignment-goals\n"
+        },
+        {
+          "old": "              - label: Цели alignment, HHH, Constitutional AI и RLAIF\n                label_en: Alignment goals, HHH, Constitutional AI, and RLAIF\n                route: textbook/post-training/alignment-goals\n              - label: SFT и instruction data\n                route: textbook/post-training/sft-instruction-data\n              - label: Fine-tuning и PEFT\n                label_en: Fine-tuning and PEFT\n                route: textbook/post-training/fine-tuning-peft\n              - label: Preference data\n                route: textbook/post-training/preference-data\n              - label: Reward modeling\n                route: textbook/post-training/reward-modeling\n              - label: Policy gradient и PPO для LLM\n                route: textbook/post-training/ppo\n",
+          "new": "              - label: SFT и instruction data\n                route: textbook/post-training/sft-instruction-data\n              - label: Fine-tuning и PEFT\n                label_en: Fine-tuning and PEFT\n                route: textbook/post-training/fine-tuning-peft\n              - label: Preference data\n                route: textbook/post-training/preference-data\n              - label: Reward modeling\n                route: textbook/post-training/reward-modeling\n              - label: Policy gradient и PPO для LLM\n                route: textbook/post-training/ppo\n              - label: Цели alignment, HHH, Constitutional AI и RLAIF\n                label_en: Alignment goals, HHH, Constitutional AI, and RLAIF\n                route: textbook/post-training/alignment-goals\n"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+      "before_sha256": "3afbb8b75a2866dc5d493a929e0354aa3d1fa141cbdbdd82f0c866a5f387d872",
+      "changes": [
+        {
+          "old": "previous: \"[[00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF]]\"",
+          "new": "previous: \"[[00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники]]\""
+        },
+        {
+          "old": "last_updated: 2026-10-23",
+          "new": "last_updated: 2026-10-30"
+        }
+      ],
+      "after_sha256": "efecdcaba7edd624415ebc10cccb36bc2db67fa7d6b537dba20ae70088355780"
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md",
+      "before_sha256": "29efb9a8c255c1b04abdcedc5c696f659a20ef45010572fe59093429698fcae5",
+      "changes": [
+        {
+          "old": "next:\n  - \"[[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/05 DPO]]\"",
+          "new": "next:\n  - \"[[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF]]\""
+        },
+        {
+          "old": "|следующей главе]]",
+          "new": "|главе о DPO]]"
+        },
+        {
+          "old": "last_updated: 2026-10-24",
+          "new": "last_updated: 2026-10-30"
+        }
+      ],
+      "after_sha256": "b9b058f5652597a9f408c1a908aedefb3d924bb0901fe9bf4274772cc2186a85"
+    }
+  ]
+}

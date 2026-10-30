@@ -1,0 +1,51 @@
+[
+  {
+    "id": "curated-recommender-mf-sar-10ecfb8f5fa6",
+    "asset": "00 Учебник/Assets/Figures/curated/recommender-mf-2026-10-25/sar-schema.svg",
+    "author": "Recommenders contributors",
+    "source_url": "https://github.com/recommenders-team/resources/blob/e76bb39727103e45dd8011b6d0eca2f1aad3c0f7/images/sar_schema.svg",
+    "source_image_url": "https://raw.githubusercontent.com/recommenders-team/resources/e76bb39727103e45dd8011b6d0eca2f1aad3c0f7/images/sar_schema.svg",
+    "commit": "e76bb39727103e45dd8011b6d0eca2f1aad3c0f7",
+    "source_asset": "05 Источники/Originals/recommender-mf-2026-10-25/sar-schema.svg",
+    "source_asset_sha256": "10ecfb8f5fa6b62cbea24d5eca145197fddaa584b11cf0c6c1e7ddc10d71e6f6",
+    "sha256": "10ecfb8f5fa6b62cbea24d5eca145197fddaa584b11cf0c6c1e7ddc10d71e6f6",
+    "source_page_snapshot": "05 Источники/Courses/Linux Foundation Recommenders/examples/02_model_collaborative_filtering/sar_deep_dive.ipynb.md",
+    "source_page_sha256": "8c56ef8dbe13c4205f6cdc72c2ed5f4a4192c9b0686b47ce05cd13d0ac804d1a",
+    "license": "MIT",
+    "license_url": "https://github.com/recommenders-team/resources/blob/e76bb39727103e45dd8011b6d0eca2f1aad3c0f7/LICENSE",
+    "license_evidence": "05 Источники/Originals/recommender-mf-2026-10-25/resources-LICENSE.txt",
+    "license_evidence_sha256": "d7ca82f3133a25d7ddd29dfd5f64d5db36df88eb1a0adfaf376adc539f06e59a",
+    "derivation": "source-svg-copy",
+    "modifications": "Unmodified original SVG; no crop, relabeling, translation or replacement graphics.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/02 Рекомендательные системы/02 Collaborative filtering и matrix factorization.md"
+    ]
+  },
+  {
+    "id": "curated-recommender-mf-objectives-eb5ce3abf87e",
+    "asset": "00 Учебник/Assets/Figures/curated/recommender-mf-2026-10-25/weighted-objectives.svg",
+    "author": "Google",
+    "source_url": "https://developers.google.com/machine-learning/recommendation/collaborative/matrix",
+    "source_image_url": "https://developers.google.com/machine-learning/recommendation/images/UnobservedEntries.svg",
+    "source_asset": "05 Источники/Originals/recommender-mf-2026-10-25/weighted-objectives.svg",
+    "source_asset_sha256": "eb5ce3abf87e0cb4ce5628aff00bf96f25032bc6cd4c86accc4f1871d12f069e",
+    "sha256": "eb5ce3abf87e0cb4ce5628aff00bf96f25032bc6cd4c86accc4f1871d12f069e",
+    "source_page_snapshot": "05 Источники/Originals/recommender-mf-2026-10-25/google-matrix.html",
+    "source_page_sha256": "e81d59dea8cc500267e916dbaddda626ab6e79c890d154295f5611b2d73dec2b",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/recommender-mf-2026-10-25/google-matrix.html",
+    "license_evidence_sha256": "e81d59dea8cc500267e916dbaddda626ab6e79c890d154295f5611b2d73dec2b",
+    "derivation": "source-svg-copy",
+    "modifications": "Unmodified original SVG; no crop, relabeling, translation or replacement graphics.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/02 Рекомендательные системы/02 Collaborative filtering и matrix factorization.md"
+    ]
+  }
+]

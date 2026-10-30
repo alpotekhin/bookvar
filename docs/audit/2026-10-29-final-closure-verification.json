@@ -1,0 +1,386 @@
+{
+  "schema": 1,
+  "checkedAt": "2026-10-29T12:48:03.216Z",
+  "scope": "Local final closure of specified structural and course-residual review; not a new full primary-source or rights audit of the entire book.",
+  "git": {
+    "branch": "editorial-route-alignment",
+    "stage": false,
+    "commit": false,
+    "push": false,
+    "deploy": false
+  },
+  "checks": {
+    "publisher": {
+      "files": 123,
+      "tests": 803
+    },
+    "site": {
+      "files": 5,
+      "tests": 70
+    },
+    "output": {
+      "tests": 170
+    },
+    "types": {
+      "errors": 0,
+      "warnings": 0,
+      "hints": 6
+    },
+    "buildPages": {
+      "root": 2003,
+      "pages": 2003
+    },
+    "brokenInternalLinks": {
+      "root": 0,
+      "pages": 0
+    },
+    "canonicalRevisionMatches": 153,
+    "englishRevisionMatches": 29,
+    "textbookSubjects": 151,
+    "sourceNativeEnglishRoutes": 15,
+    "courseResidualDecisions": 206,
+    "archivedUnpublishedUnchanged": 31,
+    "browser": {
+      "root": 56,
+      "pages": 12,
+      "limitsRecorded": true
+    },
+    "diffCheck": {
+      "exitCode": 0,
+      "excludedOriginals": [
+        "05 Источники/Courses/Harvard ML Systems/labs",
+        "05 Источники/Courses/Harvard ML Systems/slides"
+      ]
+    }
+  },
+  "built": {
+    "root": {
+      "indexHtmlFiles": 2005,
+      "treeSha256": "d2f1177c1f065b955afe7262e673a543a468af62447e4f8084f40f02ada9f243"
+    },
+    "pages": {
+      "indexHtmlFiles": 2005,
+      "treeSha256": "03ff7ff7a864303367d2c49f07bf8838362e22bd1eae0d7345704dd4b0a6b33e"
+    }
+  },
+  "files": [
+    {
+      "path": "publishing/adapter/build.ts",
+      "sha256": "35c5f437a2fcdfd1d1070f59bcbcd8b1c5e383da1cb13f996faa7eef1483af06"
+    },
+    {
+      "path": "publishing/adapter/frontmatter.ts",
+      "sha256": "492bd99a8a3af4e63aa358da4954ae7743446b4e12ad697c2a22037fc8ae84db"
+    },
+    {
+      "path": "publishing/adapter/links.ts",
+      "sha256": "ce69d4696176bec9f6a2b604f958bfd2b7f862a6789559e51b581b20ba1a03dc"
+    },
+    {
+      "path": "publishing/adapter/markdown-prose.ts",
+      "sha256": "5f50669e31a7d8a24d9ab8359b7c7aec280229ae0fe3d58e7a4a691919b6a865"
+    },
+    {
+      "path": "publishing/adapter/publication-links.ts",
+      "sha256": "452aad6076fd05d1ac17de2c3fb272b8978119fa35adc6b024c499c2e83a1b5a"
+    },
+    {
+      "path": "publishing/adapter/check-built-links.ts",
+      "sha256": "aaafdf9424302b37bd1e556ebf0d034308ac05403e45506abc93abf23d836905"
+    },
+    {
+      "path": "publishing/adapter/reference-terms.ts",
+      "sha256": "89f7a73f9b0cb41e93fd70b39a7911a7b7ff29b71ac89abd53f2ca752f3dcec8"
+    },
+    {
+      "path": "publishing/tools/sync-topic-index.ts",
+      "sha256": "88738e9f62e209458677effa806c6c89e107cf5330dc260be9ce50e88cabd684"
+    },
+    {
+      "path": "publishing/tools/check-course-residuals.mjs",
+      "sha256": "7407afcc39e21d7ae429d8d491d4d81490dfc6c55e0014a048bb7246fd972b5a"
+    },
+    {
+      "path": "publishing/tools/check_test_time_compute_examples.py",
+      "sha256": "f8a614e34bd95a338ee81c840cd58902d13e4d23f7eecfe533c9d0d3e7b4f64b"
+    },
+    {
+      "path": "publishing/tools/topic-consolidation-baseline.mjs",
+      "sha256": "6cc409007bf76baa3311ef97e610cffca59ae2224684443c3ab183c17cf9a2a4"
+    },
+    {
+      "path": "publishing/tools/topic_consolidation_baseline.py",
+      "sha256": "3a3a821b6857a32827fb34e93f036010c48a9a31c35f3f886aec668a85900004"
+    },
+    {
+      "path": "site/astro.config.mjs",
+      "sha256": "2be276e1fbd7bfe767244b7168a182413f8369f591af6ae63719ff2838a63493"
+    },
+    {
+      "path": "site/src/content.config.ts",
+      "sha256": "01f951b15ae5ed41d7ecebf200681fca1a79c3a349aa2cefbaaa4be9d7bc9535"
+    },
+    {
+      "path": "site/src/components/BookPageTitle.astro",
+      "sha256": "b422edf0eb68019c1846d812c48a0ef4d3fd1265f6de982510e53d55ebb5c567"
+    },
+    {
+      "path": "site/src/styles/custom.css",
+      "sha256": "a142c56eb3656f3e169950a12e55bb008c89c2939cd49298e24cf270ca2a36bf"
+    },
+    {
+      "path": "publishing/tests/build.test.ts",
+      "sha256": "2f968c8cfb3e6c216ddcb0a96f260d5176fbcf50c973784c5ee308216bf19715"
+    },
+    {
+      "path": "publishing/tests/links.test.ts",
+      "sha256": "3d00d9bf4b5c4d878a6fd9e959cf897a51a8db0ca8ec1bcbb185abe2ff7ca568"
+    },
+    {
+      "path": "publishing/tests/check-built-links.test.ts",
+      "sha256": "77d2ea0d53614318dffc45fb01e9a94ef6b27f2c9f0b0db86603947edd204a62"
+    },
+    {
+      "path": "publishing/tests/reference-terms.test.ts",
+      "sha256": "adec689882a39a63417cf770aa9dcc531341b2e17732434cdfe96cc8732e8292"
+    },
+    {
+      "path": "publishing/tests/course-residuals.test.ts",
+      "sha256": "cbf9e6cec99f6bf38a895d7d83b62a9386aa8baf791313942f861b56877ca8eb"
+    },
+    {
+      "path": "publishing/tests/coconut-integration.test.ts",
+      "sha256": "3bfb71e9f359b0ade922776a933f90362d12b05d02d1dd6e1690295818bd7aad"
+    },
+    {
+      "path": "publishing/tests/masked-diffusion.test.ts",
+      "sha256": "b6eb557c81f5fd84986c84b776ac49c66d49e59a69f048fa18afd97bf6869006"
+    },
+    {
+      "path": "publishing/tests/site-output.test.ts",
+      "sha256": "fa1487fde54ed5beff188cfee0de337db52a82727ff709b701a05c3cfb276980"
+    },
+    {
+      "path": "site/tests/visual-output.test.ts",
+      "sha256": "00feb9a02105630058688474056377dc66b3743d044854438fcb6c363fd8b4de"
+    },
+    {
+      "path": "docs/PUBLISHING.md",
+      "sha256": "78099423c55d1f076dcab81dbb21bc6645bd4d6796772d0a38e7884237dfe14b"
+    },
+    {
+      "path": "docs/audit/2026-10-29-final-closure.md",
+      "sha256": "491261b56e8e01aa2640225dee36d7d446783cbac56ac1619ec52d1251a57976"
+    },
+    {
+      "path": "docs/audit/2026-10-29-final-closure-browser.json",
+      "sha256": "331e444500a64c85db752454bb0894ffad8f219a2fbf1bcd043ce0b5b22f75fd"
+    },
+    {
+      "path": "docs/audit/2026-10-29-final-closure-pages-browser.json",
+      "sha256": "5adff42224bacd52ff8bd0661be117755e47a64257980d241e41414ce62295e1"
+    },
+    {
+      "path": "docs/audit/2026-10-29-final-closure-course-residuals.json",
+      "sha256": "518d5985846fdb7039399ba7cd7842040049d8a0adc5ea9a28984c6833a6001b"
+    },
+    {
+      "path": "docs/audit/2026-10-29-final-closure-ttc-examples.json",
+      "sha256": "96e34fab8b61b6e8926bc99f24158e6a97cec61e7dcf835045d888af96e6dd8c"
+    },
+    {
+      "path": "docs/audit/2026-10-29-final-closure-masked-examples.json",
+      "sha256": "43a5cfacf7a38909f911d73027535182929258253de3c7a357b8bf7567f0974f"
+    },
+    {
+      "path": "docs/audit/2026-10-29-coconut-additions.json",
+      "sha256": "a779e2d49b28ed2b9f67c47253104d38cd084c2ed77e8b2987f9d11d949cca78"
+    },
+    {
+      "path": "docs/audit/2026-10-29-corpus-revisions.json",
+      "sha256": "f375a4adc29812605b294fb79da70c55d959f400e6143346326054984eb47921"
+    },
+    {
+      "path": "docs/audit/2026-10-29-english-reconciliation.json",
+      "sha256": "7ec43e84aefa8606dfd45090a6a0580cd7c983673d3dfbe8b2f07610872c696f"
+    },
+    {
+      "path": "01 Справочник/_index.md",
+      "sha256": "21d116974f7a347085bb7dbe6625d25f8017a3b14cbb1ca5eef3a6a087119d58"
+    },
+    {
+      "path": "en/01 Reference/_index.md",
+      "sha256": "ab220413eb9d335f9663556777dca27d8caa96736a2ecaace26d053acb0a3fbb"
+    },
+    {
+      "path": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
+      "sha256": "c25a11e993cbcd37387d64003c575b2448c4979b828a7819b4f59a8cd4f5b99d"
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA.md",
+      "sha256": "401aacb0a16c68950e0b68d7ed130b8d8412c750d43d75c679f32f4d9d66f278"
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/coconut-2026-10-29/coconut.png",
+      "sha256": "0fefe67dec4ea48ab5cd4ff3b878f18432440f97cc0d9fa60cf41d9de2023055"
+    },
+    {
+      "path": "00 Учебник/Assets/Figures/curated/coconut-2026-10-29/assets.json",
+      "sha256": "b9afdb6ac71f27fedd20c2eeebf89b68f53dcfaab1860b863f12c58af64f4301"
+    },
+    {
+      "path": "05 Источники/Originals/coconut-2026-10-29/sources.json",
+      "sha256": "e5e583071957ddd6ab6fd0dedab9bf31c9990b1219e70227ac950e565c62f553"
+    },
+    {
+      "path": "05 Источники/asset-registry.yml",
+      "sha256": "62bdaaec94f6cf5c0b4b2dcc3fe277b8bfd31d71b783bbcdc38a0573a666cf96"
+    },
+    {
+      "path": "site/public/licenses/coconut-27273cb8-MIT.txt",
+      "sha256": "cf9b17822d1fcd4ff32ccbe14183386fb3adf6f2ff92dc184130823f7fc28173"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/bookvar-final-closure-base-green.log",
+      "sha256": "7c4220e29cd309fab5fcd72dca3c36b447ae195a01472774f19371357a44bccf"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/bookvar-final-closure-base-red.log",
+      "sha256": "e5b9efc4ae3476aa5590b872865869a7bf215c532b0a5e4926bcbf6876e74e6a"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/bookvar-final-closure-code-green.log",
+      "sha256": "4e373ea740ae6c568ac956c771c6d030c96565e8b7a20e576235d63c607c11e3"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/bookvar-final-closure-code-red.log",
+      "sha256": "392e94ea91fb08e923679ae64d464e0f3d6fc83023d7a9a062bec0deecaf1228"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/bookvar-final-closure-course-ingestion.log",
+      "sha256": "f0dc3945cbbcb179104a96bdff0aa186763f03d30fe494e99195cd6dcc225d46"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/bookvar-final-closure-diff-check.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/bookvar-final-closure-lineage.log",
+      "sha256": "47e650ae7ee48847d0f2cae0959c5b7813d3dbbbda36ca806750226c37d12e0b"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/bookvar-final-closure-links.log",
+      "sha256": "f65af58172a1b10a58f8cb0c2d32dcf65f41b5e1100e42172d24765f77696a26"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/bookvar-final-closure-output.log",
+      "sha256": "a7e7f947f94a8fa3e79cf0e519c6d6b65c7140c835d594b6d55e47a8249984f5"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/bookvar-final-closure-pages-build.log",
+      "sha256": "784e7672c29bdc8bec22881069813841b2ec6e31c7dff7717b6ba760f121f797"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/bookvar-final-closure-pages-links.log",
+      "sha256": "c55a30cb52a77d575111f350f666df42792bea17cbe64cefd5714b48c647afbe"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/bookvar-final-closure-residuals.log",
+      "sha256": "c92316e613d604385e19c2fa5dc8757dcf540d9911e9b4fa55a3a2fa80cb3541"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/bookvar-final-closure-root-build.log",
+      "sha256": "c2e705a21879de6eb09ce5db34e6bb7fcda08a9e6c21ff90cda8798ed2ea716c"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/bookvar-final-closure-root-restore.log",
+      "sha256": "87f93725ebb8c5c3dcd4a07cb834db28089ac307083d203fa6c99287b5438c8b"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/bookvar-final-closure-site.log",
+      "sha256": "bb6d654876a936f04b4c6aa670f708a340ad19cadbc1763bd79e9099061bbf4d"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/bookvar-final-closure-source-coverage.log",
+      "sha256": "564c1a8379e01223a628e179dc0daa9d271fe7cfa5509c406e39245b8c491206"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/bookvar-final-closure-topics.log",
+      "sha256": "8378e85d9928265591068deb75f9e397fe0c1485445c727571ff9224018c8d3e"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/bookvar-final-closure-ttc-examples.log",
+      "sha256": "ec19a884fb9ae9e60046a4bfa2fa96da70bd4f22424ab50b63895914021b649c"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/bookvar-final-closure-types.log",
+      "sha256": "975c3ab7fa1e866be7d6a9ebb258837df047cb159f14fac1dfc5e2e5c759393b"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/bookvar-final-closure-unit.log",
+      "sha256": "85c2b4abec5e318b35eb23ddf5ab31136068d99ea7f87aa9b5c9875aeb227a43"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/coconut-desktop-viewer.png",
+      "sha256": "6bee840ec63acf220a1ca1fe2b6ec7c05b11dd4ccf292a20278ac6f26d0ba7c7"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/coconut-desktop.png",
+      "sha256": "95db88e2458cf50012ffb83a8bdc152699dbc814d83acbdb19ef322ae0c65bea"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/coconut-mobile-viewer.png",
+      "sha256": "6193218ec0e0b4a7c4bf5c476bdf9054d29ccc7d2b19abe55324e9eacd0651a1"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/coconut-mobile.png",
+      "sha256": "86ca50d77edf4900f6954dc316d38ba0286c697022ffe5a663b89eb1a91baddd"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/pages-attention-redirect.html",
+      "sha256": "a306d3ac64f996fe8293113e717762d8e5fcd85542c760fe314925e5c6c99b83"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/pages-coconut-mobile-viewer.png",
+      "sha256": "80108e15076caee38eb42274a1cd422a27ffde63ae2d886182f2b97155cbe325"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/pages-coconut-mobile.png",
+      "sha256": "86ca50d77edf4900f6954dc316d38ba0286c697022ffe5a663b89eb1a91baddd"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/pages-full-transformer-en.html",
+      "sha256": "e1cea58cdb850208c15c54beae458aaa6f1c269273f46700e4cfb7603abd1270"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/pages-masked-diffusion-en.html",
+      "sha256": "3706507e3275a2c6cb3b83018be4284c89fbee77042783071cf4122923f3d575"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/pages-reference.html",
+      "sha256": "79d36951280f8da4a33a04f2fd7451ca92fb9ac52c28508242439cab0a890ede"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-29-final-closure/pages-ttc.html",
+      "sha256": "ba2f848d0112dc6563deefb38459eed6042f1480325d25dede5862171ab866d3"
+    }
+  ],
+  "limits": [
+    "No new translations, public deployment, GPU measurements or completed-course-homework claim.",
+    "31 unpublished notes are preserved, not declared semantically integrated.",
+    "Prior figure-rights audit limitations remain; new Coconut image has pinned MIT evidence.",
+    "Two transient browser states and settled retries remain recorded in browser receipts."
+  ],
+  "cleanup": {
+    "temporaryPagesOutputRemoved": true,
+    "ownTestServerPidsStopped": [
+      67295,
+      71630
+    ],
+    "rootGeneratedMarkdownRestored": true,
+    "rootPreviewHttpStatus": 200,
+    "rootPreviewPreserved": true
+  }
+}

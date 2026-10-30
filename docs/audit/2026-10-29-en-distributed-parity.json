@@ -1,0 +1,542 @@
+{
+  "schema": 1,
+  "date": "2026-10-29",
+  "scope": "Two English distributed-inference chapters plus one authorized canonical arithmetic correction",
+  "before_evidence": "Four-file hashes and complete text captured before this pass.",
+  "canonical_correction": {
+    "path": "00 Учебник/14 Inference и оптимизация/58a2 Раздельное обслуживание prefill и decode.md",
+    "before_sha256": "b7b7f12fe4726130c9d5d75697e7cda4d3314216fbb3a8195a474af77cb5efe4",
+    "after_sha256": "7973703ca7ec77248f0fdc77321e7c5f9805164d182508234fb5c49c3e86a13d",
+    "old": "8192 активных и 4096 зарезервированных новый запрос на 4096 позиций уже не",
+    "new": "8192 активных и 4096 зарезервированных новый запрос на 8192 позиций уже не",
+    "reason": "16384 - 8192 - 4096 = 4096: incoming 4096 fits exactly, whereas 8192 does not. Existing <= code unchanged."
+  },
+  "verification": {
+    "python": "3.14.3 (main, Mar  3 2026, 15:46:55) [Clang 21.1.4 ]",
+    "executable": "/Users/aleksan.potekhin/.cache/uv/builds-v0/.tmpTwK3vS/bin/python",
+    "chapter_pairs_full_read": 2,
+    "published_python_executed": 18,
+    "canonical_ast_parity": true,
+    "all_canonical_native_figures_retained": true,
+    "canonical_heading_aliases": 44,
+    "display_delimiters_and_fragment_aliases": "passed",
+    "original_english_excerpt_retained": true,
+    "gpu_or_model_inference": "not run; CPU mathematical and scheduling examples only",
+    "build_and_visual_qa": "parent-owned integrated checks; not claimed by this report",
+    "editorial_review": "Full source-pair reading and mechanism/example/caveat reconciliation; counts are not a prose-quality score."
+  },
+  "totals": {
+    "current": 2,
+    "before_figures": 9,
+    "after_figures": 18
+  },
+  "entries": [
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md",
+      "canonical": "00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md",
+      "before_sha256": "81091952aa4d93f369b484ac83591b19c9165755d2a147b79667da789b50cdc1",
+      "after_sha256": "91dbf85d69db6a4389b9a23c5978eb61f9b5c5e8343da50bc494c73345435629",
+      "canonical_sha256": "7219c5e6fdef1ca9cd3fa92c50097cfe77a6ad664afa3ac43e9e6d8c117d7625",
+      "status": "current",
+      "before_lines": 346,
+      "after_lines": 911,
+      "before_figure_count": 5,
+      "figure_count": 11,
+      "canonical_figure_count": 11,
+      "figures": [
+        "00 Учебник/Assets/Figures/curated/distributed-inference-review-2026-10/harvard-pipeline-panels.svg",
+        "00 Учебник/Assets/Figures/curated/distributed-serving-2026/megatron-context-parallel-overview.png",
+        "00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allgather.png",
+        "00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-allreduce.png",
+        "00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-alltoall.png",
+        "00 Учебник/Assets/Figures/curated/distributed-serving-2026/nccl-reducescatter.png",
+        "00 Учебник/Assets/Figures/curated/expert-hybrid-review-2026-10/edls-moe-expert-parallel.png",
+        "00 Учебник/Assets/Figures/curated/expert-hybrid-review-2026-10/edls-moe-tensor-parallel.png",
+        "00 Учебник/Assets/Figures/curated/ml-systems/harvard/distributed/tensor-parallel-split.svg",
+        "00 Учебник/Assets/Figures/curated/tensor-sequence-review-2026-10/hf-attention-tp.png",
+        "00 Учебник/Assets/Figures/curated/tensor-sequence-review-2026-10/hf-tp-sp-regions.png"
+      ],
+      "python_blocks": 8,
+      "canonical_code_ast_sequence_equal": true,
+      "executions": [
+        {
+          "block": 1,
+          "status": "passed",
+          "sha256": "81788795a4165bb47f18baa778f9e5981f2f72bf280e41a1620afebb744176bd"
+        },
+        {
+          "block": 2,
+          "status": "passed",
+          "sha256": "4397d9fc7bc4111e10e231c53846db776d238854a7e17ffee869f6e1ac4e2a57"
+        },
+        {
+          "block": 3,
+          "status": "passed",
+          "sha256": "48adf7fc4b1ff779cff2f51d4e7bbcd988464283c4e8021a49a2751c81609bc3"
+        },
+        {
+          "block": 4,
+          "status": "passed",
+          "sha256": "4aef5b7179ce4748032461f04d9ad76c3fdeb70817a94685175c20c930b33478"
+        },
+        {
+          "block": 5,
+          "status": "passed",
+          "sha256": "47eb246b20d764137432dfc18ee2b62cf433084b1e3875e4e4985f93c779d641"
+        },
+        {
+          "block": 6,
+          "status": "passed",
+          "sha256": "d93718203f3c8e173ce11ccc04f2fdd1479847c395c855e21f8a57f3815c9e9a"
+        },
+        {
+          "block": 7,
+          "status": "passed",
+          "sha256": "fd6048e55e4ab1d614d8dcf4e83a09748d47fa528f7a5c14b12e1d67383a4741"
+        },
+        {
+          "block": 8,
+          "status": "passed",
+          "sha256": "cd97a75d0105e99a6ed476c0d9b27be2312a48bedb65760ade09aaa97492aba2"
+        }
+      ],
+      "execution_mode": "chapter-ordered blocks sharing a namespace in one fresh CPU subprocess",
+      "canonical_explicit_aliases": [
+        "allgather-из-shards-в-полную-копию",
+        "alltoall-персональная-перестановка-между-всеми-ranks",
+        "граница-этой-главы",
+        "как-выбирать-композицию-dptpppcpep",
+        "как-топология-превращает-алгоритм-в-производительность",
+        "небольшой-пример-чтения-конфигурации"
+      ],
+      "heading_map": [
+        {
+          "canonical_heading": "Параллелизм и коллективные операции в LLM inference",
+          "english_heading": "Parallelism and collective communication in LLM inference",
+          "canonical_fragment": "параллелизм-и-коллективные-операции-в-llm-inference"
+        },
+        {
+          "canonical_heading": "От одного Transformer-блока к группе GPU",
+          "english_heading": "From one Transformer block to a GPU group",
+          "canonical_fragment": "от-одного-transformer-блока-к-группе-gpu"
+        },
+        {
+          "canonical_heading": "Коллективные операции: четыре преобразования размещения",
+          "english_heading": "Collective operations as layout transformations",
+          "canonical_fragment": "коллективные-операции-четыре-преобразования-размещения"
+        },
+        {
+          "canonical_heading": "AllGather: собрать полный тензор из фрагментов",
+          "english_heading": "AllGather: shards become complete copies",
+          "canonical_fragment": "allgather-собрать-полный-тензор-из-фрагментов"
+        },
+        {
+          "canonical_heading": "ReduceScatter: просуммировать и оставить результат разделённым",
+          "english_heading": "ReduceScatter: sum and keep the result sharded",
+          "canonical_fragment": "reducescatter-просуммировать-и-оставить-результат-разделённым"
+        },
+        {
+          "canonical_heading": "AllReduce: полная сумма на каждом rank",
+          "english_heading": "AllReduce: the complete reduction on every rank",
+          "canonical_fragment": "allreduce-полная-сумма-на-каждом-rank"
+        },
+        {
+          "canonical_heading": "AllToAll: передать каждому процессу свой фрагмент",
+          "english_heading": "AllToAll: a different fragment for each destination",
+          "canonical_fragment": "alltoall-передать-каждому-процессу-свой-фрагмент"
+        },
+        {
+          "canonical_heading": "Data parallelism: независимые реплики сервиса",
+          "english_heading": "Data parallelism: independent serving replicas",
+          "canonical_fragment": "data-parallelism-независимые-реплики-сервиса"
+        },
+        {
+          "canonical_heading": "Tensor parallelism: матрица разделена внутри слоя",
+          "english_heading": "Tensor parallelism: partitioning a layer's matrices",
+          "canonical_fragment": "tensor-parallelism-матрица-разделена-внутри-слоя"
+        },
+        {
+          "canonical_heading": "SwiGLU и attention",
+          "english_heading": "SwiGLU and attention",
+          "canonical_fragment": "swiglu-и-attention"
+        },
+        {
+          "canonical_heading": "Почему TP по-разному ведёт себя на prefill и decode",
+          "english_heading": "Why prefill and decode respond differently to TP",
+          "canonical_fragment": "почему-tp-по-разному-ведёт-себя-на-prefill-и-decode"
+        },
+        {
+          "canonical_heading": "Pipeline parallelism: слои разделены по глубине",
+          "english_heading": "Pipeline parallelism: partitioning depth",
+          "canonical_fragment": "pipeline-parallelism-слои-разделены-по-глубине"
+        },
+        {
+          "canonical_heading": "Sequence parallelism и context parallelism — не синонимы",
+          "english_heading": "Sequence parallelism and context parallelism are not synonyms",
+          "canonical_fragment": "sequence-parallelism-и-context-parallelism--не-синонимы"
+        },
+        {
+          "canonical_heading": "Как объединить attention по двум частям KV",
+          "english_heading": "Combining attention over two KV partitions",
+          "canonical_fragment": "как-объединить-attention-по-двум-частям-kv"
+        },
+        {
+          "canonical_heading": "Expert parallelism: параметры распределены, токены движутся",
+          "english_heading": "Expert parallelism: parameters stay, tokens move",
+          "canonical_fragment": "expert-parallelism-параметры-распределены-токены-движутся"
+        },
+        {
+          "canonical_heading": "Топология сети и размещение процессов",
+          "english_heading": "Network topology and process placement",
+          "canonical_fragment": "топология-сети-и-размещение-процессов"
+        },
+        {
+          "canonical_heading": "Группы процессов при сочетании видов параллелизма",
+          "english_heading": "Process groups in hybrid parallelism",
+          "canonical_fragment": "группы-процессов-при-сочетании-видов-параллелизма"
+        },
+        {
+          "canonical_heading": "Расчёт памяти: TP4, TP8 и TP16",
+          "english_heading": "Memory calculation: TP4, TP8, and TP16",
+          "canonical_fragment": "расчёт-памяти-tp4-tp8-и-tp16"
+        },
+        {
+          "canonical_heading": "Как избежать репликации KV сверх числа голов",
+          "english_heading": "Avoiding KV replication beyond the head count",
+          "canonical_fragment": "как-избежать-репликации-kv-сверх-числа-голов"
+        },
+        {
+          "canonical_heading": "Разделение prefill и decode",
+          "english_heading": "Separating prefill from decode",
+          "canonical_fragment": "разделение-prefill-и-decode"
+        },
+        {
+          "canonical_heading": "Практика и первоисточники",
+          "english_heading": "Practice and primary sources",
+          "canonical_fragment": "практика-и-первоисточники"
+        }
+      ],
+      "retained_aliases": [
+        "параллелизм-и-коллективные-операции-в-llm-inference",
+        "от-одного-transformer-блока-к-группе-gpu",
+        "коллективные-операции-четыре-преобразования-размещения",
+        "allgather-из-shards-в-полную-копию",
+        "allgather-собрать-полный-тензор-из-фрагментов",
+        "reducescatter-просуммировать-и-оставить-результат-разделённым",
+        "allreduce-полная-сумма-на-каждом-rank",
+        "alltoall-персональная-перестановка-между-всеми-ranks",
+        "alltoall-передать-каждому-процессу-свой-фрагмент",
+        "alltoall-a-personalized-permutation-among-ranks",
+        "data-parallelism-независимые-реплики-сервиса",
+        "tensor-parallelism-матрица-разделена-внутри-слоя",
+        "swiglu-и-attention",
+        "почему-tp-по-разному-ведёт-себя-на-prefill-и-decode",
+        "pipeline-parallelism-слои-разделены-по-глубине",
+        "sequence-parallelism-и-context-parallelism--не-синонимы",
+        "как-объединить-attention-по-двум-частям-kv",
+        "expert-parallelism-параметры-распределены-токены-движутся",
+        "как-топология-превращает-алгоритм-в-производительность",
+        "топология-сети-и-размещение-процессов",
+        "topology-turns-an-algorithm-into-performance",
+        "как-выбирать-композицию-dptpppcpep",
+        "группы-процессов-при-сочетании-видов-параллелизма",
+        "choosing-a-dptpppcpep-composition",
+        "небольшой-пример-чтения-конфигурации",
+        "расчёт-памяти-tp4-tp8-и-tp16",
+        "как-избежать-репликации-kv-сверх-числа-голов",
+        "граница-этой-главы",
+        "разделение-prefill-и-decode",
+        "практика-и-первоисточники",
+        "sources-and-further-reading"
+      ],
+      "original_english_excerpts": [],
+      "canonical_full_body_read": true,
+      "en_full_body_read": true,
+      "substantive_topics_reconciled": [
+        "Weight placement, group-local rank, full versus partial tensor semantics",
+        "AllGather/ReduceScatter/AllReduce/AllToAll values and ring latency calculation",
+        "Independent dense DP, prefix routing, and attention DP distinction",
+        "TP MLP numerical example, nonlinear placement, single bias/residual addition",
+        "SwiGLU alignment, attention-head TP, GQA limits, HBM versus collectives",
+        "PP schedule, bubble, unequal stages, autoregressive dependency, layer KV",
+        "Token-row SP normalization and AG/RS; CP global masks and KV exchange",
+        "Stable partial-attention merge with denominator weighting and masked partitions",
+        "MoE top-2 dispatch/return, ordering, router weights, padding and network bytes",
+        "Physical paths and hybrid group numbering; EP axes not freely multiplicative",
+        "70B TP4/8/16 capacity arithmetic with GQA replication and stated limits",
+        "KV request-axis sharding, query AllToAll and restored output equality"
+      ],
+      "outstanding_substantive_omissions": []
+    },
+    {
+      "path": "en/00 Textbook/14 Inference and optimization/58a2 Disaggregated prefill and decode serving.md",
+      "canonical": "00 Учебник/14 Inference и оптимизация/58a2 Раздельное обслуживание prefill и decode.md",
+      "before_sha256": "1824786b27b084d16c5dde66ee37cf540e2f3629ff19d704b3df9f2e0731b812",
+      "after_sha256": "3a4dd8e20f7f3c4e45bf0361010773b6fe13d554bc85f5ffb7db2048a5b9ebb5",
+      "canonical_sha256": "7973703ca7ec77248f0fdc77321e7c5f9805164d182508234fb5c49c3e86a13d",
+      "status": "current",
+      "before_lines": 440,
+      "after_lines": 951,
+      "before_figure_count": 4,
+      "figure_count": 7,
+      "canonical_figure_count": 6,
+      "figures": [
+        "00 Учебник/Assets/Figures/curated/distributed-serving-2026/distserve-fig2-prefill-decode-interference.png",
+        "00 Учебник/Assets/Figures/curated/distributed-serving-2026/distserve-fig6-runtime-architecture.png",
+        "00 Учебник/Assets/Figures/curated/distributed-serving-2026/dynamo-architecture.png",
+        "00 Учебник/Assets/Figures/curated/distributed-serving-2026/mooncake-figure1-architecture.png",
+        "00 Учебник/Assets/Figures/curated/pd-serving-review-2026-10/splitwise-architecture.png",
+        "00 Учебник/Assets/Figures/curated/pd-serving-review-2026-10/splitwise-layer-transfer.png",
+        "00 Учебник/Assets/Figures/curated/pd-serving-review-2026-10/splitwise-provisioning.png"
+      ],
+      "python_blocks": 10,
+      "canonical_code_ast_sequence_equal": true,
+      "executions": [
+        {
+          "block": 1,
+          "status": "passed",
+          "sha256": "5ecda9332f30a83ef9451256f87f1910452182e5e92f20fe964ff6a1dbe6f342"
+        },
+        {
+          "block": 2,
+          "status": "passed",
+          "sha256": "8cdc9e14f81f5445ddd95c1e35062758829bfd5a30fdac8af1f14b7a78cbdbed"
+        },
+        {
+          "block": 3,
+          "status": "passed",
+          "sha256": "c9f1b295e61944807fab845960d0d71121fa5ca8ccf8be8af868ecd707c51218"
+        },
+        {
+          "block": 4,
+          "status": "passed",
+          "sha256": "0a948085479f89b80cac9833c05876467c20eb1ab2bb7cf043e080b643277ac3"
+        },
+        {
+          "block": 5,
+          "status": "passed",
+          "sha256": "3fb220a380e827bc540d360b56087bcb944a37b775376b6f652d6c7dc10676d8"
+        },
+        {
+          "block": 6,
+          "status": "passed",
+          "sha256": "69157412ddc5e6e96b56709ee1a2638ac02d97b80474809842db664416fd8d38"
+        },
+        {
+          "block": 7,
+          "status": "passed",
+          "sha256": "da19738f1d2ee695d960b323e6a59b04aa9383afd25b1ab431f67f1598a869c5"
+        },
+        {
+          "block": 8,
+          "status": "passed",
+          "sha256": "c56ba64ba009bc014a076d46ebbaf91c8b3bb817826fde0befd7c6e8d959aba5"
+        },
+        {
+          "block": 9,
+          "status": "passed",
+          "sha256": "620c50a7d404a0a1e94b5da8f084a132303e57eb0280df0f0467d8bf18042649"
+        },
+        {
+          "block": 10,
+          "status": "passed",
+          "sha256": "b70bac71a4d9e3f9144183c0b08661ef5a5d92697a078293df8a3f19dc9891e1"
+        }
+      ],
+      "execution_mode": "chapter-ordered blocks sharing a namespace in one fresh CPU subprocess",
+      "canonical_explicit_aliases": [
+        "distserve-splitwise-и-mooncake-три-исследовательских-акцента",
+        "independent-scaling--не-независимое-управление",
+        "kv-transfer-как-отдельная-стадия-запроса",
+        "routing-вычислительная-нагрузка-встречается-с-locality",
+        "интерференция-в-общем-gpu-pool",
+        "как-идеи-реализованы-в-современных-стеках",
+        "когда-разделение-выгодно",
+        "что-именно-меняет-disaggregation"
+      ],
+      "heading_map": [
+        {
+          "canonical_heading": "Раздельное обслуживание prefill и decode",
+          "english_heading": "Disaggregated prefill and decode serving",
+          "canonical_fragment": "раздельное-обслуживание-prefill-и-decode"
+        },
+        {
+          "canonical_heading": "Один запрос: от очереди до последнего токена",
+          "english_heading": "One request, from admission to the final token",
+          "canonical_fragment": "один-запрос-от-очереди-до-последнего-токена"
+        },
+        {
+          "canonical_heading": "Почему prefill чаще compute-bound",
+          "english_heading": "Why prefill is often compute-bound",
+          "canonical_fragment": "почему-prefill-чаще-compute-bound"
+        },
+        {
+          "canonical_heading": "Почему decode чаще memory-bandwidth-bound",
+          "english_heading": "Why decode is often memory-bandwidth-bound",
+          "canonical_fragment": "почему-decode-чаще-memory-bandwidth-bound"
+        },
+        {
+          "canonical_heading": "Почему новый prefill задерживает активные ответы",
+          "english_heading": "Why a new prefill delays active answers",
+          "canonical_fragment": "почему-новый-prefill-задерживает-активные-ответы"
+        },
+        {
+          "canonical_heading": "Размещение P и D в разных пулах",
+          "english_heading": "Placing P and D in separate pools",
+          "canonical_fragment": "размещение-p-и-d-в-разных-пулах"
+        },
+        {
+          "canonical_heading": "Размер и время передачи KV",
+          "english_heading": "KV transfer size and duration",
+          "canonical_fragment": "размер-и-время-передачи-kv"
+        },
+        {
+          "canonical_heading": "Передача при разных разбиениях",
+          "english_heading": "Different source and destination layouts",
+          "canonical_fragment": "передача-при-разных-разбиениях"
+        },
+        {
+          "canonical_heading": "Push, pull и владение памятью",
+          "english_heading": "Push, pull, and memory ownership",
+          "canonical_fragment": "push-pull-и-владение-памятью"
+        },
+        {
+          "canonical_heading": "Передача по слоям",
+          "english_heading": "Transferring layer by layer",
+          "canonical_fragment": "передача-по-слоям"
+        },
+        {
+          "canonical_heading": "Где заканчивается TTFT при передаче KV",
+          "english_heading": "First-token emission determines the latency ledger",
+          "canonical_fragment": "где-заканчивается-ttft-при-передаче-kv"
+        },
+        {
+          "canonical_heading": "Выбор исполнителей и повторное использование префикса",
+          "english_heading": "Routing and prefix reuse",
+          "canonical_fragment": "выбор-исполнителей-и-повторное-использование-префикса"
+        },
+        {
+          "canonical_heading": "Две связанные очереди и backpressure",
+          "english_heading": "Two coupled queues and backpressure",
+          "canonical_fragment": "две-связанные-очереди-и-backpressure"
+        },
+        {
+          "canonical_heading": "Ранний допуск и физическое резервирование",
+          "english_heading": "Early admission and physical allocation",
+          "canonical_fragment": "ранний-допуск-и-физическое-резервирование"
+        },
+        {
+          "canonical_heading": "Почему проверка только текущей нагрузки запаздывает",
+          "english_heading": "Why current load alone is too late",
+          "canonical_fragment": "почему-проверка-только-текущей-нагрузки-запаздывает"
+        },
+        {
+          "canonical_heading": "Число P- и D-исполнителей",
+          "english_heading": "How many P and D instances?",
+          "canonical_fragment": "число-p--и-d-исполнителей"
+        },
+        {
+          "canonical_heading": "Время выполнения и ожидание в очереди",
+          "english_heading": "Service time versus queue delay",
+          "canonical_fragment": "время-выполнения-и-ожидание-в-очереди"
+        },
+        {
+          "canonical_heading": "Подбор конфигурации по SLO",
+          "english_heading": "Selecting a configuration under SLO constraints",
+          "canonical_fragment": "подбор-конфигурации-по-slo"
+        },
+        {
+          "canonical_heading": "Сравнение систем: DistServe, Splitwise и Mooncake",
+          "english_heading": "Comparing DistServe, Splitwise, and Mooncake",
+          "canonical_fragment": "сравнение-систем-distserve-splitwise-и-mooncake"
+        },
+        {
+          "canonical_heading": "Длинный prefill: части входа и стадии модели",
+          "english_heading": "Long prefill: input chunks and model stages",
+          "canonical_fragment": "длинный-prefill-части-входа-и-стадии-модели"
+        },
+        {
+          "canonical_heading": "Передача запроса в Dynamo и SGLang",
+          "english_heading": "Request handoff in Dynamo and SGLang",
+          "canonical_fragment": "передача-запроса-в-dynamo-и-sglang"
+        },
+        {
+          "canonical_heading": "Как сравнивать общий и раздельный пулы",
+          "english_heading": "Comparing unified and disaggregated service",
+          "canonical_fragment": "как-сравнивать-общий-и-раздельный-пулы"
+        },
+        {
+          "canonical_heading": "Практика и первоисточники",
+          "english_heading": "Practice and primary sources",
+          "canonical_fragment": "практика-и-первоисточники"
+        }
+      ],
+      "retained_aliases": [
+        "раздельное-обслуживание-prefill-и-decode",
+        "один-запрос-от-очереди-до-последнего-токена",
+        "почему-prefill-чаще-compute-bound",
+        "почему-decode-чаще-memory-bandwidth-bound",
+        "интерференция-в-общем-gpu-pool",
+        "почему-новый-prefill-задерживает-активные-ответы",
+        "interference-in-a-shared-gpu-pool",
+        "что-именно-меняет-disaggregation",
+        "размещение-p-и-d-в-разных-пулах",
+        "what-disaggregation-changes",
+        "kv-transfer-как-отдельная-стадия-запроса",
+        "размер-и-время-передачи-kv",
+        "kv-transfer-is-a-first-class-serving-stage",
+        "передача-при-разных-разбиениях",
+        "push-pull-и-владение-памятью",
+        "передача-по-слоям",
+        "где-заканчивается-ttft-при-передаче-kv",
+        "routing-вычислительная-нагрузка-встречается-с-locality",
+        "выбор-исполнителей-и-повторное-использование-префикса",
+        "routing-load-meets-state-locality",
+        "две-связанные-очереди-и-backpressure",
+        "ранний-допуск-и-физическое-резервирование",
+        "почему-проверка-только-текущей-нагрузки-запаздывает",
+        "independent-scaling--не-независимое-управление",
+        "число-p--и-d-исполнителей",
+        "independently-scalable-does-not-mean-independently-controlled",
+        "время-выполнения-и-ожидание-в-очереди",
+        "подбор-конфигурации-по-slo",
+        "distserve-splitwise-и-mooncake-три-исследовательских-акцента",
+        "сравнение-систем-distserve-splitwise-и-mooncake",
+        "splitwise-distserve-and-mooncake-three-complementary-emphases",
+        "длинный-prefill-части-входа-и-стадии-модели",
+        "как-идеи-реализованы-в-современных-стеках",
+        "передача-запроса-в-dynamo-и-sglang",
+        "how-modern-stacks-realize-the-design",
+        "когда-разделение-выгодно",
+        "как-сравнивать-общий-и-раздельный-пулы",
+        "when-separation-pays-off",
+        "практика-и-первоисточники",
+        "sources-and-further-reading"
+      ],
+      "original_english_excerpts": [
+        "splitwise-layer-handoff"
+      ],
+      "canonical_full_body_read": true,
+      "en_full_body_read": true,
+      "substantive_topics_reconciled": [
+        "Prompt KV versus sampled uncached token; continuation state and timestamp boundaries",
+        "Prefill/decode intensity, MLA formula boundary, matched HBM accounting",
+        "Unified scheduling, chunk arithmetic, synchronized MoE interference",
+        "Separate and mixed pools with full-resource accounting",
+        "KV bytes, conditional suffix reuse, TP2-to-TP1 axis restoration",
+        "Push/pull ownership, cancellation and late DMA writes, backend readiness",
+        "Splitwise original excerpt/figure; dependency-correct layer-transfer tail",
+        "P-first versus D-ready TTFT/TTST and first ITL example",
+        "Prefix-chain identity and cache/queue/network routing calculation",
+        "Reservation versus forecast admission, future KV growth and overload",
+        "Versioned SGLang allocation constraints; queue-aware provisioning and 18 GPUs",
+        "M/D/1 TP/PP crossover and assumptions; nine Splitwise percentile constraints",
+        "DistServe failure boundary, Splitwise historical hardware costs, Mooncake CPP",
+        "Causal two-layer chunk equivalence with stage-local KV",
+        "Dynamo v1.5.1 metadata, D prefix deduction limits, failure policy",
+        "Joint per-request SLO goodput and complete-pool cost denominator"
+      ],
+      "outstanding_substantive_omissions": []
+    }
+  ]
+}

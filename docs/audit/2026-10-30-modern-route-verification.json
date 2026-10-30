@@ -1,0 +1,560 @@
+{
+  "date": "2026-10-30",
+  "classification": "progress",
+  "scope": "Eight whole-chapter route reads, three small editorial corrections and course-library placement. Not a completion claim for the textbook or a new translation.",
+  "wholeReads": [
+    {
+      "path": "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md",
+      "route": "textbook/modern-llm/norm-gating-residual",
+      "sha256": "ba4dde89572fa4c17be5addc0bde7ea24bbffb300120d15467c2282fb120ced6",
+      "lines": 718,
+      "read": "Complete saved chapter, frontmatter through all examples, figures/captions, sources and final navigation.",
+      "findings": [
+        "Residual/Jacobian and pre/post-norm examples precede RMS axes, epsilon and gradients. Numerical failure cases and all four published blocks were retained.",
+        "The chapter deepens the already-read modern decoder block; no extra whole-model implementation or missing normalization prerequisite was found."
+      ]
+    },
+    {
+      "path": "00 Учебник/07 Анатомия современной LLM/04 RoPE.md",
+      "route": "textbook/modern-llm/rope",
+      "sha256": "6de4b7919032e51d0ce74e0c4b39ae7ce08982ba3ee9dad4dd0009d440254bde",
+      "lines": 786,
+      "read": "Complete saved chapter, frontmatter through all examples, figures/captions, sources and final navigation.",
+      "findings": [
+        "Absolute Q/K rotations produce relative dot products with an explicit sign check, then pair layouts and absolute cached positions are developed.",
+        "PI, NTK and YaRN are separated. The dynamic-grid example explains why reusing old upper-layer states is not equivalent to recomputation."
+      ]
+    },
+    {
+      "path": "00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md",
+      "route": "textbook/modern-llm/dense-ffn",
+      "sha256": "ab9b6430788c2f530bfa1cfc991db50aa488c9d2a11fe6b0d0fd7e3fb2bf9496",
+      "lines": 844,
+      "read": "Complete preceding chapter revision, including examples, figures/captions, sources and navigation; final changes reviewed as the exact editorial delta.",
+      "findings": [
+        "Position-wise computation starts from a contextual token vector, then derives expansion, SwiGLU, gradients, budgets and TP sums.",
+        "Removed only the false promise of a separate formula reference. The old reference is still a direct compatibility redirect; the detailed FFN/MoE distinction remains."
+      ],
+      "readRevisionBeforeEditorialDelta": "50f2528d8a0cba6231692f81353c6817f2626aa54945aa51a0b6e14aeccbffc3",
+      "linesAtWholeRead": 847,
+      "finalDeltaReview": "The journal restores the precise whole-read revision. Code blocks, mathematical displays, figures and approved source excerpts are byte-identical; no claim of a second complete reread after these small prose/date edits."
+    },
+    {
+      "path": "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md",
+      "route": "textbook/modern-llm/mha-mqa-gqa",
+      "sha256": "c442a81b9e09fe55aedc225cb3e5d3d7fa91b3db13eb80a9fdefed28a5c5c571",
+      "lines": 651,
+      "read": "Complete saved chapter, frontmatter through all examples, figures/captions, sources and final navigation.",
+      "findings": [
+        "The module introduces causal cached attention and group mapping before resource estimates. Shared KV does not imply identical head outputs.",
+        "Logical cache size, physical TP replication and the scope of T5 uptraining experiments are stated; the following MLA chapter has the required group/cache vocabulary."
+      ]
+    },
+    {
+      "path": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "route": "textbook/modern-llm/transformer-shapes-resources",
+      "sha256": "867688bdeef1319da44e68875af62f33338eb304336829ee1c2990655547b50e",
+      "lines": 923,
+      "read": "Complete saved chapter, frontmatter through all examples, figures/captions, sources and final navigation.",
+      "findings": [
+        "Layer shapes lead to unique parameter counts, tied weights, forward/backward FLOPs and the lifetime of training states.",
+        "Accumulation weighting, roofline and MFU/HFU are worked through. The optional ten-page CS336 appendix is retained as an appendix, not another main reading route."
+      ]
+    },
+    {
+      "path": "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md",
+      "route": "textbook/modern-llm/mla-kv-compression",
+      "sha256": "aa2789b8788eda6efa42c4a31100734867554b63e02d32484996ad9dbb6f5e5f",
+      "lines": 768,
+      "read": "Complete saved chapter, frontmatter through all examples, figures/captions, sources and final navigation.",
+      "findings": [
+        "The text derives normalized latent storage and both absorption steps, preserving the original attention scale.",
+        "A counterexample motivates decoupled RoPE. Full/cache operators, gradients, physical replication and the difference between arithmetic and kernel performance are explicit."
+      ]
+    },
+    {
+      "path": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+      "route": "textbook/modern-llm/long-context",
+      "sha256": "258d15855652ecacc9321b3d15651531e7c5776656e3548510977fe4572c7507",
+      "lines": 1215,
+      "read": "Complete preceding chapter revision, including examples, figures/captions, sources and navigation; final changes reviewed as the exact editorial delta.",
+      "findings": [
+        "The problem example precedes context capacity, position generalization, sparse masks/cache and evaluation. Windowed chunking and multi-layer leakage have executable counterexamples.",
+        "CLA, DSA and CSA/HCA are distinguished from a bounded sliding cache. All five NumPy blocks remain; removed the obsolete four-block count."
+      ],
+      "readRevisionBeforeEditorialDelta": "c15d27a0f6565299948cf7c3aa0005428743735058ff8d9998707bced97c1b85",
+      "linesAtWholeRead": 1215,
+      "finalDeltaReview": "The journal restores the precise whole-read revision. Code blocks, mathematical displays, figures and approved source excerpts are byte-identical; no claim of a second complete reread after these small prose/date edits."
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md",
+      "route": "textbook/pretraining/distributed-systems",
+      "sha256": "bdf9e94e3e46118e48fa55e7998a8a6b33a11f8593777796919e85befd6ce566",
+      "lines": 1023,
+      "read": "Complete preceding chapter revision, including examples, figures/captions, sources and navigation; final changes reviewed as the exact editorial delta.",
+      "findings": [
+        "A complete training step introduces the state being replicated or sharded before DDP, collectives, ZeRO/FSDP, TP, PP and EP.",
+        "The TP example computes outputs and all gradients. The FSDP/TP capacity calculation states its assumptions; AMP is a mocked fragment, not a distributed GPU test. Replaced only the stale previous-scaling framing with the actual specialist prerequisites."
+      ],
+      "readRevisionBeforeEditorialDelta": "7fc54afeb6889923cf35893e40f4b9f02964b734b7dc40b5eea0f10b41659e01",
+      "linesAtWholeRead": 1019,
+      "finalDeltaReview": "The journal restores the precise whole-read revision. Code blocks, mathematical displays, figures and approved source excerpts are byte-identical; no claim of a second complete reread after these small prose/date edits."
+    }
+  ],
+  "sourceDocumentReads": [
+    {
+      "path": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
+      "sha256": "ccc5413eb9399c7a109ed5ac06f8aa55b324e7b46928d1c0d7e784d7f9e01017",
+      "lines": 305
+    },
+    {
+      "path": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "sha256": "eb9383272dca691fcfcdcf97558a9a27c91d8e1747624fe3744ed9204f486d38",
+      "lines": 331
+    },
+    {
+      "path": "05 Источники/Курсы.md",
+      "sha256": "8e5261449194c569ce4ff9a075a447f477773df512ce6bda02ac49ef50bb9fd1",
+      "lines": 400
+    },
+    {
+      "path": "05 Источники/_index.md",
+      "sha256": "eca40ce7038d8eb868d7895da64a06c2e237ba905cea0ce4ded51e063cbd40b1",
+      "lines": 39
+    },
+    {
+      "path": "01 Справочник/FFN и MoE/Dense FFN и gated activations.md",
+      "sha256": "8db065a6ec1f01265bd70bc527ac567a44612e24affd19f775519b36ed1cb909",
+      "lines": 31
+    }
+  ],
+  "editorialJournal": "docs/audit/2026-10-30-modern-route-editorial-additions.json",
+  "preservation": "JS and Python reversal recover all three exact preceding hashes and reject unknown prose edits. Code, mathematical displays, original figures and licensed source excerpts remain unchanged. last_verified dates were not advanced for these navigation/prose corrections.",
+  "style": "Read no-ai-slop and eval in full. The edit removes false navigation and an obsolete count; it does not compress explanations, rotate terminology, edit quoted source prose or create replacement illustrations.",
+  "cpuChecks": [
+    {
+      "source": "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md",
+      "script": "check_norm_gating_examples.py",
+      "exitCode": 0,
+      "currentChapterSha256": "ba4dde89572fa4c17be5addc0bde7ea24bbffb300120d15467c2282fb120ced6",
+      "scope": "Published CPU examples and the checker's independent numerical/negative controls; unchanged programs are not a GPU or model-quality benchmark."
+    },
+    {
+      "source": "00 Учебник/07 Анатомия современной LLM/04 RoPE.md",
+      "script": "check_rope_examples.py",
+      "exitCode": 0,
+      "currentChapterSha256": "6de4b7919032e51d0ce74e0c4b39ae7ce08982ba3ee9dad4dd0009d440254bde",
+      "scope": "Published CPU examples and the checker's independent numerical/negative controls; unchanged programs are not a GPU or model-quality benchmark."
+    },
+    {
+      "source": "00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md",
+      "script": "check_ffn_examples.py",
+      "exitCode": 0,
+      "currentChapterSha256": "ab9b6430788c2f530bfa1cfc991db50aa488c9d2a11fe6b0d0fd7e3fb2bf9496",
+      "scope": "Published CPU examples and the checker's independent numerical/negative controls; unchanged programs are not a GPU or model-quality benchmark."
+    },
+    {
+      "source": "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md",
+      "script": "check_gqa_examples.py",
+      "exitCode": 0,
+      "currentChapterSha256": "c442a81b9e09fe55aedc225cb3e5d3d7fa91b3db13eb80a9fdefed28a5c5c571",
+      "scope": "Published CPU examples and the checker's independent numerical/negative controls; unchanged programs are not a GPU or model-quality benchmark."
+    },
+    {
+      "source": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "script": "check_transformer_shapes_examples.py",
+      "exitCode": 0,
+      "currentChapterSha256": "867688bdeef1319da44e68875af62f33338eb304336829ee1c2990655547b50e",
+      "scope": "Published CPU examples and the checker's independent numerical/negative controls; unchanged programs are not a GPU or model-quality benchmark."
+    },
+    {
+      "source": "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md",
+      "script": "check_mla_examples.py",
+      "exitCode": 0,
+      "currentChapterSha256": "aa2789b8788eda6efa42c4a31100734867554b63e02d32484996ad9dbb6f5e5f",
+      "scope": "Four visible examples, independent outputs/all gradients, partitions/layouts and pinned original naive/absorb bodies on CPU. Initial passing output was observed; final session poll had empty stdout."
+    },
+    {
+      "source": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+      "script": "check_long_context_examples.py",
+      "exitCode": 0,
+      "currentChapterSha256": "258d15855652ecacc9321b3d15651531e7c5776656e3548510977fe4572c7507",
+      "scope": "Published CPU examples and the checker's independent numerical/negative controls; unchanged programs are not a GPU or model-quality benchmark."
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md",
+      "script": "check_distributed_overview_examples.py",
+      "exitCode": 0,
+      "currentChapterSha256": "bdf9e94e3e46118e48fa55e7998a8a6b33a11f8593777796919e85befd6ce566",
+      "scope": "Actual TP block and mock AMP order; arithmetic, source figures and group assumptions. No NCCL or distributed process."
+    }
+  ],
+  "checks": {
+    "unit": {
+      "command": "npm run test:unit",
+      "cwd": "publishing",
+      "exitCode": 0,
+      "files": 143,
+      "tests": 890,
+      "durationSeconds": 76.79,
+      "notes": [
+        "Fresh full run after final product edits and the added course-placement tests; no concurrent site build.",
+        "Pinned PDFs emitted six Poppler closepath warnings; tar emitted two locale warnings. No test failures."
+      ]
+    },
+    "output": {
+      "command": "npm run test:output",
+      "cwd": "publishing",
+      "exitCode": 0,
+      "tests": 180,
+      "durationSeconds": 8.6,
+      "notes": [
+        "An earlier new assertion incorrectly rejected the generic Previous navigation label; it was narrowed to the actual obsolete previous-scaling sentence. Product navigation was retained."
+      ]
+    },
+    "rootBuild": {
+      "command": "npm run build",
+      "cwd": "site",
+      "exitCode": 0,
+      "pages": 2006,
+      "durationSeconds": 35.05
+    },
+    "links": {
+      "command": "npm run check:links",
+      "cwd": "publishing",
+      "exitCode": 0,
+      "broken": 0
+    },
+    "topics": {
+      "command": "npm run check:topics",
+      "cwd": "publishing",
+      "exitCode": 0,
+      "topics": 152,
+      "indexes": 2
+    },
+    "courses": {
+      "command": "npm run check:course-ingestion",
+      "cwd": "publishing",
+      "exitCode": 0,
+      "validated": [
+        "Stanford CS336 Spring 2026",
+        "Berkeley Advanced LLM Agents Spring 2025"
+      ],
+      "thematicRows": 17,
+      "tableLinks": 27,
+      "canonicalOwners": 25,
+      "limits": "Canonical target/anchor checks and source-library placement; not all course mechanisms accepted as fully integrated."
+    },
+    "diff": {
+      "command": "git diff --check -- <scoped changed paths>",
+      "exitCode": 0
+    }
+  },
+  "visualQa": {
+    "preview": "http://127.0.0.1:4330/",
+    "desktop": {
+      "viewport": [
+        1280,
+        720
+      ],
+      "documentWidth": 1265,
+      "scrollWidth": 1265
+    },
+    "mobile": {
+      "viewport": [
+        390,
+        844
+      ],
+      "documentWidth": 375,
+      "scrollWidth": 375,
+      "katexErrors": 0,
+      "canonicalEditionNotices": 1
+    },
+    "observed": [
+      "Final prerequisite note visually inspected on root desktop and EN mobile after the final build.",
+      "Keyboard-followed prerequisite links reach root and EN shape/resource chapters, preserving locale.",
+      "Original Harvard placement SVG loaded fully at 617 by 378.0078125 CSS pixels; no cover crop. Mobile viewer shows the complete source and its zoom control changes 1x to 1.5x.",
+      "CS336 table followed to the canonical shape/resource chapter; Berkeley table followed to the Plan-Seq-Learn section in the canonical planning owner."
+    ],
+    "limits": [
+      "Only selected unchanged figures were visually inspected in this pass; all-figure visual acceptance is not inferred.",
+      "The mobile diagram's labels are small at fit width; the tested viewer permits enlargement.",
+      "The visible Plan-Seq-Learn source-transfer preamble remains an open editorial item."
+    ]
+  },
+  "release": {
+    "committed": false,
+    "pushed": false,
+    "deployed": false,
+    "mainChanged": false,
+    "branch": "editorial-route-alignment"
+  },
+  "remaining": [
+    "Pretraining/inference route continuity and remaining atlas/reference transitions.",
+    "Read the current complete planning owner and move editorial provenance out of its Plan-Seq-Learn exposition.",
+    "Resolve sequential-MTP/DeepSeekMath and the explicitly unverified GPT-3 image permissions without silently replacing original instructional figures.",
+    "Fresh physical /bookvar and final release checks, scoped diff/author/origin-dev review, then authorized dev/Pages release."
+  ],
+  "pins": [
+    {
+      "path": "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md",
+      "sha256": "ba4dde89572fa4c17be5addc0bde7ea24bbffb300120d15467c2282fb120ced6",
+      "lines": 718
+    },
+    {
+      "path": "00 Учебник/07 Анатомия современной LLM/04 RoPE.md",
+      "sha256": "6de4b7919032e51d0ce74e0c4b39ae7ce08982ba3ee9dad4dd0009d440254bde",
+      "lines": 786
+    },
+    {
+      "path": "00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md",
+      "sha256": "ab9b6430788c2f530bfa1cfc991db50aa488c9d2a11fe6b0d0fd7e3fb2bf9496",
+      "lines": 844
+    },
+    {
+      "path": "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md",
+      "sha256": "c442a81b9e09fe55aedc225cb3e5d3d7fa91b3db13eb80a9fdefed28a5c5c571",
+      "lines": 651
+    },
+    {
+      "path": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "sha256": "867688bdeef1319da44e68875af62f33338eb304336829ee1c2990655547b50e",
+      "lines": 923
+    },
+    {
+      "path": "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md",
+      "sha256": "aa2789b8788eda6efa42c4a31100734867554b63e02d32484996ad9dbb6f5e5f",
+      "lines": 768
+    },
+    {
+      "path": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+      "sha256": "258d15855652ecacc9321b3d15651531e7c5776656e3548510977fe4572c7507",
+      "lines": 1215
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md",
+      "sha256": "bdf9e94e3e46118e48fa55e7998a8a6b33a11f8593777796919e85befd6ce566",
+      "lines": 1023
+    },
+    {
+      "path": "05 Источники/Courses/Stanford CS336 Spring 2026/_index.md",
+      "sha256": "ccc5413eb9399c7a109ed5ac06f8aa55b324e7b46928d1c0d7e784d7f9e01017",
+      "lines": 305
+    },
+    {
+      "path": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
+      "sha256": "eb9383272dca691fcfcdcf97558a9a27c91d8e1747624fe3744ed9204f486d38",
+      "lines": 331
+    },
+    {
+      "path": "05 Источники/Курсы.md",
+      "sha256": "8e5261449194c569ce4ff9a075a447f477773df512ce6bda02ac49ef50bb9fd1",
+      "lines": 400
+    },
+    {
+      "path": "05 Источники/_index.md",
+      "sha256": "eca40ce7038d8eb868d7895da64a06c2e237ba905cea0ce4ded51e063cbd40b1",
+      "lines": 39
+    },
+    {
+      "path": "01 Справочник/FFN и MoE/Dense FFN и gated activations.md",
+      "sha256": "8db065a6ec1f01265bd70bc527ac567a44612e24affd19f775519b36ed1cb909",
+      "lines": 31
+    },
+    {
+      "path": "publishing/tools/topic-consolidation-baseline.mjs",
+      "sha256": "dc72315a6e51baac9cb138ce5b511b7e27b346f895402e677c3c39688dcffcd5"
+    },
+    {
+      "path": "publishing/tools/topic_consolidation_baseline.py",
+      "sha256": "6c846196123200ccf14a5ea2d4df737a4fbe8a6b073d6f5d957e3530a54a9cc0"
+    },
+    {
+      "path": "publishing/tests/modern-route-editorial.test.ts",
+      "sha256": "b734ff576d044f77471e66ae78853266cae1dcc00963e89bcc939d3289c02551"
+    },
+    {
+      "path": "publishing/tests/course-library-placement.test.ts",
+      "sha256": "01bda497ff62a08f20de15cc6cad4793445732dcef8ffe19d51c7f027b2f69aa"
+    },
+    {
+      "path": "publishing/tests/site-output.test.ts",
+      "sha256": "0ad3205c6f6123b47fcf3fe024eea42841aa2282056556f5c42a6d574c8670e2"
+    },
+    {
+      "path": "docs/audit/2026-10-30-modern-route-editorial-additions.json",
+      "sha256": "a833b333a14b6b438780a945decf7eb39355ae1b20ed51596488dc1e1db3a6db"
+    },
+    {
+      "path": "publishing/navigation.yml",
+      "sha256": "9added5cc57a5a2c1635853b82d7daef7e919011966dd5f9cf95052a223aa2fe"
+    },
+    {
+      "path": "publishing/tools/check_norm_gating_examples.py",
+      "sha256": "de230c48cbc545fe1ab194a408ba15960c42c19cd631b42eeb17bf99514a7574"
+    },
+    {
+      "path": "publishing/tools/check_rope_examples.py",
+      "sha256": "a3730d8c84d10494cc7a3e31ad687ede4cd6b006aabba1e3490f3756dbef3874"
+    },
+    {
+      "path": "publishing/tools/check_ffn_examples.py",
+      "sha256": "551ea9e6102017be70391259df0ec9f8a67438ef461ba9e1407bbc76e19e4720"
+    },
+    {
+      "path": "publishing/tools/check_gqa_examples.py",
+      "sha256": "b4c51301ef43d298ad8e4b81f756cf9f5ad6e8522f89ca7d7389379d1099bd7a"
+    },
+    {
+      "path": "publishing/tools/check_transformer_shapes_examples.py",
+      "sha256": "4ff8eafa480f5973ac8a3d87114ecd359d1f0773e7c62dccdada403204ccd9d8"
+    },
+    {
+      "path": "publishing/tools/check_mla_examples.py",
+      "sha256": "865a6f34c8e04ecc46e2e2570beb09b377862901c304e8f0d4ff494508950ffb"
+    },
+    {
+      "path": "publishing/tools/check_long_context_examples.py",
+      "sha256": "58e4078955f1ef0bb782013bb678b7ea437d36a8321125b297a74abe5239fa19"
+    },
+    {
+      "path": "publishing/tools/check_distributed_overview_examples.py",
+      "sha256": "2c346ef14a20ced7a9ec6e95eec14e6189080e2bfccfdee9d95e9b319546adde"
+    },
+    {
+      "path": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "sha256": "fa5261a3994721e92f48c82dae8992e55c0ccc805dc795648ce61b7407d29ebe",
+      "lines": 814
+    },
+    {
+      "path": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "sha256": "9df758b69b1d720bbb8942594442f5c6e45071d70b28f740793fb57de2fd746c",
+      "lines": 1117
+    },
+    {
+      "path": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+      "sha256": "783cab0ddb3b947eecd310c420898a0acf1ff6a7088e45f98ef1176de4ba4aea",
+      "lines": 1867
+    },
+    {
+      "path": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "sha256": "d700f60713f8d39ff010f0c7f7daeaa2aa3a0c1b3125ef63aad0858e29f9db1c",
+      "lines": 1382
+    },
+    {
+      "path": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "sha256": "4f91303abdcf74c72659509470b5064f28c5cbed2d53a0b7abd60128d4c1f3e1",
+      "lines": 2980
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "sha256": "e1e9b7999ca10a61e9a48a24484f704b13cb7918cede4d5ba050b06876cbc8db",
+      "lines": 1632
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "sha256": "472401f6f3bf906cc8b23f29a5ff206cb8c083da3f20ac5654249eaee61aef69",
+      "lines": 1396
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+      "sha256": "dcdc7f9712614b5342b15d03cba1beb7f641ea72b27fe6ee04730ad70fd66bdc",
+      "lines": 950
+    },
+    {
+      "path": "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+      "sha256": "42438233617da20ba81611806b40ed450beaf6506e90ec181e2d43ac92580832",
+      "lines": 710
+    },
+    {
+      "path": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "sha256": "910967cba1670d0c65864123b958547b420ca059eb38b7302ad0968436e0f952",
+      "lines": 1565
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+      "sha256": "8b00b47bb39ec6d03b8942ae092e6399cc730e98e903bfdab33b5d8890cf99c2",
+      "lines": 1086
+    },
+    {
+      "path": "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+      "sha256": "efecdcaba7edd624415ebc10cccb36bc2db67fa7d6b537dba20ae70088355780",
+      "lines": 857
+    },
+    {
+      "path": "00 Учебник/12 Post-training и Alignment/05 DPO.md",
+      "sha256": "fd7a08d5813a5427b74a943d8a57f00978877b8edce13ac1027ccc04cf172c06",
+      "lines": 1266
+    },
+    {
+      "path": "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
+      "sha256": "e47cc4f42c05c58f9ff84aaba765cf21e6ad80f8c658efa159ea510ff5ff5828",
+      "lines": 1205
+    },
+    {
+      "path": "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md",
+      "sha256": "26464f4cb33c2b281c72e63e1870157e0a41a23807c4eca7c2b79f542000608d",
+      "lines": 950
+    },
+    {
+      "path": "00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md",
+      "sha256": "12e614a8be23e31ed608433c64be1f4b049c39af27cb9d4092080576a902921d",
+      "lines": 866
+    },
+    {
+      "path": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+      "sha256": "b76bc6bdfbfcd06494c87accc8bc380eb9b019bd73d1d23c710653d251c8759f",
+      "lines": 514
+    },
+    {
+      "path": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
+      "sha256": "0828f31f6c72d7d7f37692d171e1a9214f72865e9d0e8bb02420cf399687af03",
+      "lines": 1850
+    },
+    {
+      "path": "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
+      "sha256": "718e68fb6cf58e941e10d76e02acc0761e06a19d8c4bb8496ac6dd3353bcd628",
+      "lines": 1398
+    },
+    {
+      "path": "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
+      "sha256": "76fa7ccbe709235d43b1efd523317a9922df77e81191811b659716c0071d689c",
+      "lines": 1375
+    },
+    {
+      "path": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
+      "sha256": "a81cede17e8726c611b8455d35bc296a917d4d3012632a73214ea00b6a6841fe",
+      "lines": 1516
+    },
+    {
+      "path": "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md",
+      "sha256": "39e6d762bb108263ad69b74c16ca29627e5f1a68818f18c136a5b5b12ac111c8",
+      "lines": 838
+    },
+    {
+      "path": "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md",
+      "sha256": "4e02810a117d85f34c408737e0a9cdfed1fe356015b02277163f80cda9470b59",
+      "lines": 804
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-modern-route/berkeley-to-canonical-planning.png",
+      "sha256": "3d8d4f66cbb98079d17e4d615d6948153c3074617806e232f3b774ba200f4dd0"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-modern-route/distributed-original-placement-desktop.png",
+      "sha256": "446bd4de8249550b65d397b27e59108db821852a69fb505500f144622948e751"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-modern-route/distributed-prerequisites-desktop.png",
+      "sha256": "947384b37a94b46a1b296c48a9e413b0239d4c321134d196c5c1d28936f0fd58"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-modern-route/en-distributed-prerequisites-mobile.png",
+      "sha256": "d0ab72aaa601aa9d0b1e6e691a043b086557eb550aa2f0d0601f2d97c556c7ce"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-modern-route/original-placement-mobile-viewer.png",
+      "sha256": "aeed32453a334b99aa06f28245d001582f9341814650cb5f51d461b4b69a90f8"
+    }
+  ]
+}

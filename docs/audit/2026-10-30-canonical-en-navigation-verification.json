@@ -1,0 +1,339 @@
+{
+  "date": "2026-10-30",
+  "status": "locally-verified-not-published",
+  "scope": "Continue the prerequisite/reading-route audit and repair locale navigation on canonical-language textbook pages. No chapter explanation rewritten and no new translation created.",
+  "branch": "editorial-route-alignment",
+  "headBeforeChanges": "75e1870",
+  "implementation": [
+    "Generate EN interface copies for all textbook pages from their existing canonical Markdown when no authored English counterpart exists.",
+    "Represent untranslated copies as translationStatus=canonical; preserve the explicit root canonical link and distinguish them from current/partial authored editions.",
+    "Localize published body links only when the EN target and exact fragment exist. Preserve query/hash, Pages base, assets, licenses, external URLs and code literals.",
+    "Send the final EN reading-path footer to /en/textbook/#specialist-modules.",
+    "Add two stable Russian-ID compatibility anchors to the English contents without changing its prose or list. After full root/EN contents reading and matching all routes/order, reconcile its canonical revision pin.",
+    "Retain duplicate-notice suppression from the preceding verification; do not replace honest language labeling with an English-edition claim."
+  ],
+  "textbookLanguageCounts": {
+    "totalPages": 154,
+    "authoredEnglishCounterparts": 29,
+    "sourceNativeEnglish": 13,
+    "canonicalLanguageCopiesInEnglishInterface": 112,
+    "newTranslations": 0
+  },
+  "fullChapterReads": [
+    {
+      "path": "00 Учебник/05 Attention и Transformer/04 Позиционная информация.md",
+      "route": "textbook/transformer/positional-information",
+      "sha256": "897a19c428e9ef20a6c651e981eb32d905d6f72a616907c2ea2e20fa1842451a",
+      "lines": 1047,
+      "read": "complete saved chapter, frontmatter through sources and final navigation",
+      "findings": [
+        "Position methods are classified by the changed operation: input sum, score bias, relative key/value or Q/K rotation. Mask asymmetry is distinguished from explicit metric position.",
+        "The ending specifies which signals enter once at the stack input and which enter each attention layer. It supplies the complete-Transformer chapter's prerequisites."
+      ]
+    },
+    {
+      "path": "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md",
+      "route": "textbook/transformer/full-transformer",
+      "sha256": "1ffb968f9bc3b562b3065f1b059c12e9e9c0b41f78176f2e6d6e5c303f6e52b5",
+      "lines": 1195,
+      "read": "complete saved chapter, frontmatter through sources and final navigation",
+      "findings": [
+        "A source/target translation example connects attention, FFN, residual/norm, embeddings/positions, encoder memory, causal decoder, cross-attention, vocabulary logits, masks, loss and generation.",
+        "The modern-LM code is explicitly a comparison, not a reproduction of Transformer Base or a released Llama. Its modern-block follow-up adds GQA, state/cache equivalence and parameter-choice evidence; retain both rather than remove distinct worked examples."
+      ]
+    },
+    {
+      "path": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md",
+      "route": "textbook/transformer/encoder-decoder-patterns",
+      "sha256": "a99819704bcdd1ff795c39a2240b8c32331fded5b1372c302f69e381d123d6e8",
+      "lines": 870,
+      "read": "complete saved chapter, frontmatter through sources and final navigation",
+      "findings": [
+        "Given the preceding block construction, this chapter varies visibility, output heads and training targets independently through MLM, NTP, T5 and UniLM.",
+        "The two-layer indirect-leakage example explains why prefix rows must not read answers. T5 distinguishes a valid PAD-ID decoder start from padded targets. The next specific-model chapter is BERT."
+      ]
+    },
+    {
+      "path": "00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md",
+      "route": "textbook/modern-llm/decoder-block",
+      "sha256": "fd2e197230ab5e39e1cb7c678415801ea510b1025dbe2a03f60b58021bcea703",
+      "lines": 940,
+      "read": "complete saved chapter, frontmatter through sources and final navigation",
+      "findings": [
+        "A fully specified 128-parameter block traces GQA, RoPE, two residual branches and SwiGLU through intermediate values; cached and full passes are compared across two layers.",
+        "This owner substantially extends the complete-Transformer modern preview: separate layer caches, detached-cache gradient counterexample, windows and hyperparameter/config evidence. Its LLaMA prerequisite remains to be checked in sequence."
+      ]
+    }
+  ],
+  "navigationDocumentReads": [
+    {
+      "path": "00 Учебник/_index.md",
+      "sha256": "c6b73441468617524d453765d73be44bb66c4c68015269af0bb455df65040183",
+      "scope": "Full current body read across the two route-review passes."
+    },
+    {
+      "path": "en/00 Textbook/_index.md",
+      "sha256": "19affe803286bac7fe7d22d69604b87297efb70cdf25eeae656fd8fb62594f11",
+      "scope": "Full body read. Topic routes/order and core/specialist division match the root contents; no translation prose edited."
+    }
+  ],
+  "tests": [
+    {
+      "kind": "subject-index generation check",
+      "topics": 152,
+      "indexes": 2,
+      "result": "npm run check:topics exited 0; both subject indices match the chapter metadata."
+    },
+    {
+      "kind": "targeted unit",
+      "files": 8,
+      "passed": 136,
+      "log": "/var/tmp/bookvar-canonical-en-unit-accepted-final-20261030.log"
+    },
+    {
+      "kind": "Pages-prefix adapter cases",
+      "passed": 10,
+      "skipped": 79,
+      "log": "/var/tmp/bookvar-canonical-en-pages-unit-accepted-20261030.log",
+      "limit": "Selected routing fixture tests under /bookvar, not a full physical Pages-base build."
+    },
+    {
+      "kind": "root build",
+      "pages": 2006,
+      "seconds": 33.34,
+      "log": "/var/tmp/bookvar-canonical-en-root-accepted-20261030.log"
+    },
+    {
+      "kind": "built HTML",
+      "passed": 178,
+      "log": "/var/tmp/bookvar-canonical-en-output-accepted-final-20261030.log",
+      "scope": "All 154 root/EN pairs: language status and unexpected locale switches; all 112 canonical copies: media, code and rendered MathML parity."
+    },
+    {
+      "kind": "built internal links",
+      "broken": 0,
+      "log": "/var/tmp/bookvar-canonical-en-links-accepted-20261030.log"
+    },
+    {
+      "kind": "read-only built HTML scan",
+      "htmlScanned": 308,
+      "katexErrorPages": 0,
+      "unexpectedLocaleSwitches": 0,
+      "limit": "Syntax/route inspection, not a visual review of every figure or a factual audit of every formula."
+    }
+  ],
+  "cpuChecks": [
+    {
+      "chapter": "positional-information",
+      "log": "/var/tmp/bookvar-route-positional-cpu-20261030.log",
+      "programs": 6,
+      "result": "All standalone programs and independent position/gradient/cache/ALiBi checks passed."
+    },
+    {
+      "chapter": "full-transformer",
+      "log": "/var/tmp/bookvar-route-transformer-cpu-20261030.log",
+      "programs": 5,
+      "result": "The five original programs passed encoder/decoder gradients, masks/loss/tied weights and modern-LM checks.",
+      "limit": "The separately journaled later dropout program was not re-executed by this checker."
+    },
+    {
+      "chapter": "encoder-decoder-patterns",
+      "log": "/var/tmp/bookvar-route-patterns-cpu-20261030.log",
+      "programs": 4,
+      "result": "MLM/NTP/T5/UniLM mask and target checks passed, including indirect future leakage."
+    },
+    {
+      "chapter": "decoder-block",
+      "log": "/var/tmp/bookvar-route-decoder-block-cpu-final-20261030.log",
+      "programs": 2,
+      "result": "The two dependent chapter programs ran jointly; finite differences, cache accounting, detachment, grouped heads, windows and chunk partitions passed.",
+      "limit": "CPU arithmetic/source replay only, not released-weight quality, a GPU kernel benchmark or full-course transfer."
+    }
+  ],
+  "browser": {
+    "base": "http://127.0.0.1:4330",
+    "observations": [
+      "Keyboard activation of the EN evaluation chapter's ordinary dedup link reached the EN dedup route. Only the explicit canonical-original link retained a root textbook destination.",
+      "EN dedup at 390x844: document width 375/375, all five images loaded, zero KaTeX error nodes, one honest canonical-language notice.",
+      "A hard-coded Markdown link from the EN GPU-memory chapter reached the EN Triton guards section with its exact anchor.",
+      "The compatibility-ID module link and the reading-path footer both reached the EN contents specialist section.",
+      "After the English contents revision pin was reconciled: final desktop and mobile screenshots show zero false edition notices; mobile document width 375/375. Viewport reset after inspection."
+    ],
+    "finalEvidence": [
+      "docs/audit/evidence/2026-10-30-canonical-en-navigation/en-modules-final-desktop.png",
+      "docs/audit/evidence/2026-10-30-canonical-en-navigation/en-modules-final-mobile.png"
+    ],
+    "otherEvidence": [
+      "docs/audit/evidence/2026-10-30-canonical-en-navigation/en-dedup-after-body-link.png",
+      "docs/audit/evidence/2026-10-30-canonical-en-navigation/en-dedup-mobile.png",
+      "docs/audit/evidence/2026-10-30-canonical-en-navigation/en-direct-markdown-to-triton-guard.png"
+    ],
+    "intermediateEvidence": "en-module-selection-via-compatible-anchor.png predates the final revision pin. It proves navigation only, not the final zero-notice state.",
+    "limits": "Actual transitions were verified with keyboard Enter. No new claim about automated mouse click behavior."
+  },
+  "observedFailuresAndLimits": [
+    "TDD before implementation: six expected missing-derived-EN-file failures; implementation repaired the contract.",
+    "One intermediate unit run exposed an old live review-date assertion. It now checks the exact historical restored revision; final 136 tests passed.",
+    "Decoder CPU check initially lacked NumPy. A cached offline NumPy dependency resolved the environment failure without changing the chapter/checker.",
+    "Build retains known plaintext highlighting for promql/toc and KaTeX strict newline warnings. No warning-free build claim.",
+    "This does not close the remaining model/training/inference reading route, Constitutional AI prerequisite order, specialist introduction or course/atlas alignment.",
+    "Full required unit suite and a physical /bookvar build are still release requirements.",
+    "No commit, push, force-push, main change or Pages deployment performed."
+  ],
+  "artifactPins": [
+    {
+      "path": "publishing/adapter/build.ts",
+      "sha256": "fe761acc6eab6561512089fd51c1925e6738a670ea440bd41395f7dd4659c822"
+    },
+    {
+      "path": "publishing/adapter/publication-links.ts",
+      "sha256": "0f72753c4d20c6af871426438e2b7bceb2adcdbec5bde1a42483f723f2d7d067"
+    },
+    {
+      "path": "publishing/tests/build.test.ts",
+      "sha256": "8db2ff2c86b4574da4192e849a3ddfb687551ecbc97a6b601abcebf7a0e5d818"
+    },
+    {
+      "path": "publishing/tests/links.test.ts",
+      "sha256": "3d804106cc6a4db8b8930f724cae0a53c3722a1538b0aca7f248c33714a43200"
+    },
+    {
+      "path": "publishing/tests/english-reconciliation.test.ts",
+      "sha256": "182d1957ba5398c9e0bf36ad67702fd7ffea70388a72b65dc4a71cc5a979902c"
+    },
+    {
+      "path": "publishing/tests/textbook-index.test.ts",
+      "sha256": "bcc45d7c34dc5507c5d70337c484ea43dc37b0d8b57a6068d31efd4cf7a28755"
+    },
+    {
+      "path": "publishing/tests/site-output.test.ts",
+      "sha256": "16df69416956433e6b4930b9ac9960a5bf141472e3caf20b2411fc6cd4fc2eb8"
+    },
+    {
+      "path": "publishing/tools/topic-consolidation-baseline.mjs",
+      "sha256": "f2c895f233053f3465e5bbeaae95bfecb0cddb23ef052220ca5899d801e83e03"
+    },
+    {
+      "path": "publishing/tools/topic_consolidation_baseline.py",
+      "sha256": "d94b32a5d2bc62d7ae44ee24246bd79fa60e2a4eabeb4c9a21e2ab74db2382ab"
+    },
+    {
+      "path": "site/src/content.config.ts",
+      "sha256": "aa9352873309b9846a1e332afad7f0b3bf4a6b6ae0e8891ae5782806634f522c"
+    },
+    {
+      "path": "site/src/components/BookPageTitle.astro",
+      "sha256": "b422edf0eb68019c1846d812c48a0ef4d3fd1265f6de982510e53d55ebb5c567"
+    },
+    {
+      "path": "site/src/components/BookFallbackContentNotice.astro",
+      "sha256": "d01c5c504d765f8b26a56b1b40cf1632ab71f21f12350341f1487e79558b7cfb"
+    },
+    {
+      "path": "publishing/tools/check_positional_examples.py",
+      "sha256": "93793970a13923cea9ad24f0537184b83c938411ccc8d20379b0bf47bd520bf8"
+    },
+    {
+      "path": "publishing/tools/check_full_transformer_examples.py",
+      "sha256": "eef0d1f31bbba88dc0bceabe7e4be09104b1e324f82e285b7ec1cc0bd45ad44d"
+    },
+    {
+      "path": "publishing/tools/check_architecture_examples.py",
+      "sha256": "2d50aa73e9d6c4f2360624ea0c1b8dea406a7184e0e80cba2b6dde0520784209"
+    },
+    {
+      "path": "publishing/tools/check_decoder_block_examples.py",
+      "sha256": "b88ebf917fe1d63fe0091b44020f11cbb9f9b13115d18913a783b17c5b48464f"
+    },
+    {
+      "path": "docs/audit/2026-10-30-locale-navigation-additions.json",
+      "sha256": "7c856320c5ca908f0f070ab4ab53be4c467cc8c6947465c2ed87a2136063a049"
+    },
+    {
+      "path": "00 Учебник/_index.md",
+      "sha256": "c6b73441468617524d453765d73be44bb66c4c68015269af0bb455df65040183"
+    },
+    {
+      "path": "en/00 Textbook/_index.md",
+      "sha256": "19affe803286bac7fe7d22d69604b87297efb70cdf25eeae656fd8fb62594f11"
+    },
+    {
+      "path": "00 Учебник/05 Attention и Transformer/04 Позиционная информация.md",
+      "sha256": "897a19c428e9ef20a6c651e981eb32d905d6f72a616907c2ea2e20fa1842451a"
+    },
+    {
+      "path": "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md",
+      "sha256": "1ffb968f9bc3b562b3065f1b059c12e9e9c0b41f78176f2e6d6e5c303f6e52b5"
+    },
+    {
+      "path": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md",
+      "sha256": "a99819704bcdd1ff795c39a2240b8c32331fded5b1372c302f69e381d123d6e8"
+    },
+    {
+      "path": "00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md",
+      "sha256": "fd2e197230ab5e39e1cb7c678415801ea510b1025dbe2a03f60b58021bcea703"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-canonical-en-navigation/en-dedup-after-body-link.png",
+      "sha256": "e51fcd62738a0a54c046cacfb6b59078d81457bf8d39ad005bb003d1b9d30636"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-canonical-en-navigation/en-dedup-mobile.png",
+      "sha256": "dc1eb56a02b86ba4a7094c45f7b9ab29b4c6ab71aa7300c3cec158f855985f10"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-canonical-en-navigation/en-direct-markdown-to-triton-guard.png",
+      "sha256": "0b732c607d4849354970f8ddba586d07a2d904036d7088e6ebd2a13c1fbde122"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-canonical-en-navigation/en-module-selection-via-compatible-anchor.png",
+      "sha256": "35dee0ee2783fe47cb63f7f61cd59a7aaf52a5a375c9f42add91310db4ba9913"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-canonical-en-navigation/en-modules-final-desktop.png",
+      "sha256": "c8b97f5107ac2a8848dd7f4d00b03ead0730cabe50142fe356012fde5ba75612"
+    },
+    {
+      "path": "docs/audit/evidence/2026-10-30-canonical-en-navigation/en-modules-final-mobile.png",
+      "sha256": "678b0b65b5da095334191cabb3fb60107851cf01052abe58ec1d5a308792711f"
+    }
+  ],
+  "localLogPins": [
+    {
+      "path": "/var/tmp/bookvar-canonical-en-unit-accepted-final-20261030.log",
+      "sha256": "b5dc6a94c7760448bdcbcf157e6696d9d018dcecd225974de433997c9fd356c6"
+    },
+    {
+      "path": "/var/tmp/bookvar-canonical-en-pages-unit-accepted-20261030.log",
+      "sha256": "893f6f9ff29d2177ee91c3adfc278cf0561ad53bd97c4a871eb2cdf433064b89"
+    },
+    {
+      "path": "/var/tmp/bookvar-canonical-en-root-accepted-20261030.log",
+      "sha256": "de95abd2b3bc9053fb89969a39e78e698440790d90914c623450aae3b5ca4025"
+    },
+    {
+      "path": "/var/tmp/bookvar-canonical-en-output-accepted-final-20261030.log",
+      "sha256": "718220b26b8fdc7c0e8d972da4b9f8e098e1701f45098b3a3f4c8c845bde5aa7"
+    },
+    {
+      "path": "/var/tmp/bookvar-canonical-en-links-accepted-20261030.log",
+      "sha256": "0a6cfe6dd185982d57a9608a3e41df2ddb058cd2d4f88d198c1dd423efcc7e9f"
+    },
+    {
+      "path": "/var/tmp/bookvar-route-positional-cpu-20261030.log",
+      "sha256": "e1b07fc31bd554f79b9a6f1e504e9bc89ee6a67499cbc877e0841bc77d9a99b0"
+    },
+    {
+      "path": "/var/tmp/bookvar-route-transformer-cpu-20261030.log",
+      "sha256": "a4831557c89c7fcd47fa34329685f2c697ec36f89d3179823d289298d4ae519d"
+    },
+    {
+      "path": "/var/tmp/bookvar-route-patterns-cpu-20261030.log",
+      "sha256": "e34ff33da4b313ce8f4eb17c6022d6b0af2dea3f9fbd2371e9072de092fc498c"
+    },
+    {
+      "path": "/var/tmp/bookvar-route-decoder-block-cpu-final-20261030.log",
+      "sha256": "75f707899921b948fa0898014f6f918f9b969fb1049d97b4260892cda6782af4"
+    }
+  ]
+}

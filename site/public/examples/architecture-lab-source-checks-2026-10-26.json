@@ -1,0 +1,5123 @@
+{
+  "scope": "Scenario arithmetic from reviewed original helpers; no Marimo, ledger, hardware registry, model, accelerator, benchmark or safety validation",
+  "source_hashes": {
+    "LICENSE-2bd97c5.md": "b6f4689d6fccf48d82d0871a3b994a122427fcb0b278971f6ba008be44e2c926",
+    "architecture-45ecc8d.py": "af2db23e0d799774f0ea7ac9a239cd9348821473f018121ec8f79030a6c8f297",
+    "catalog-45ecc8d.py": "e95c381aac96765c380b8c44617d3398ef736c49c5f60d9593df9cbd9bdba46b",
+    "chapter-2bd97c5.qmd": "64ef2c6bab3a09846bdb089a33c0ee355ee32ecbf291447493708c276f18d9a6",
+    "deck06-45ecc8d.tex": "84dbcefc2446075b7cd0090247d4e4c6cefa1192f39a7c5511893f73cfab7d5a",
+    "lab06-45ecc8d.py": "181ccf098b317f439b3f5ec5a739ba618f31abee400598ad86875b476665f9a6",
+    "style-45ecc8d.py": "ddce8d3eabc20950f4f6d5607978290cbd6d51bef735d82efe2a70d3569070ec",
+    "test-architecture-45ecc8d.py": "4abf0602a1ee302625520d028c20b4d17659a6c13735a1ac7daab6cc66c266f3",
+    "variants-45ecc8d.py": "48fd7cdc02527e53a20e02dcf408c280d8bd3c4cd5098396e710eaadbcf89e94"
+  },
+  "page_sha256": "48c3d043fddf4bd75e57d79dfb7887d39d96bbdc784bd5be985b4c4038c601d8",
+  "checker_sha256": "79e32c4632923e54bf9fb591c276e6092b11d7612a792e655712e9c8d4909ac9",
+  "independent_sweeps": 300,
+  "source_candidates": 12,
+  "executed_printed_blocks": 4,
+  "verbatim_source_excerpts": 1,
+  "local_source_helpers": [
+    "v1_06_track_amount_system",
+    "v1_06_family_topology",
+    "v1_06_budget_ratios",
+    "v1_06_topology_summary",
+    "v1_06_attention_wall",
+    "v1_06_bias_match",
+    "v1_06_bias_frontier",
+    "v1_06_review_summary"
+  ],
+  "source_plot_source_sha256": "7e097ec3195471135814668c6922200e881d85900343569f113c8ae5e40f5461",
+  "wildlife_budget_checks": {
+    "source_literal_constants": {
+      "mnv1_params_m": 4.2,
+      "mnv1_flops_mflops": 569,
+      "mnv2_params_m": 2.2,
+      "mnv2_flops_mflops": 150,
+      "inference_power_mw": 200,
+      "inferences_per_day": 100,
+      "edge_ram_mb": 512,
+      "os_buffers_mb": 50,
+      "activation_channels": 64,
+      "activation_bytes": 4,
+      "target_latency_ms": 500,
+      "edge_int8_tops": 0.002,
+      "accuracy_target_pct": 90,
+      "species_count": 50,
+      "model_budget_mb": 100,
+      "width_mult": 0.75
+    },
+    "partial_memory_bytes": 65045056,
+    "conditional_model_time_s": "3/40",
+    "daily_energy_100_j": "34617/40",
+    "capacity_180_days_wh": "34617/800",
+    "extra_idle_power_w": "1/100; Bookvar assumption, not source measurement",
+    "hardware_measurements": false
+  },
+  "source_slide_arithmetic_findings": {
+    "weight_count_ratio": 111.45578231292517,
+    "gpt2_literal_formula": 86973087744,
+    "gpt3_literal_formula": 356241767399424,
+    "five_images_in_25ms_per_second": 200.0,
+    "materialized_scores_bytes": 34359738368,
+    "kv_cache_bytes": 1073741824
+  },
+  "tracks": {
+    "iphone": {
+      "defaults": {
+        "architecture_story": "A high-accuracy architecture is only shippable if its operators stay on the mobile accelerator fast path.",
+        "workload_label": "camera-frame understanding",
+        "scaling_variable": "image resolution",
+        "scaling_unit": "px",
+        "default_scale": 224.0,
+        "scale_min": 112.0,
+        "scale_max": 448.0,
+        "scale_step": 16.0,
+        "memory_budget_mb": 220.0,
+        "latency_budget_ms": 25.0,
+        "power_budget_w": 4.5,
+        "quality_floor_pct": 86.0,
+        "kernel_support_floor_pct": 85.0,
+        "candidate_architectures": {
+          "mobile_cnn": {
+            "label": "Mobile CNN / inverted residuals",
+            "family": "CNN",
+            "summary": "Locality and weight sharing fit mobile image workloads with broad NPU support.",
+            "params_m": 3.5,
+            "ops_gmac": 0.32,
+            "activation_mb": 16.0,
+            "latency_ms": 8.0,
+            "power_w": 2.1,
+            "quality_pct": 88.5,
+            "kernel_support_pct": 96.0,
+            "scaling_law": "resolution-squared activation and convolution growth",
+            "param_exponent": 0.0,
+            "op_exponent": 2.0,
+            "activation_exponent": 2.0,
+            "latency_exponent": 1.6,
+            "guardrail": "sustained Neural Engine fast path",
+            "validation_requirement": "NPU operator-coverage check plus thermal soak",
+            "residual_risk": "unlisted operators can silently fall back to CPU/GPU paths"
+          },
+          "efficient_transformer": {
+            "label": "Efficient mobile transformer",
+            "family": "Transformer",
+            "summary": "Better global context but tighter kernel and activation margins.",
+            "params_m": 18.0,
+            "ops_gmac": 1.2,
+            "activation_mb": 70.0,
+            "latency_ms": 19.0,
+            "power_w": 3.8,
+            "quality_pct": 90.0,
+            "kernel_support_pct": 86.0,
+            "scaling_law": "resolution and token mixing increase memory pressure",
+            "param_exponent": 0.0,
+            "op_exponent": 2.2,
+            "activation_exponent": 2.1,
+            "latency_exponent": 1.9,
+            "guardrail": "operator support and sustained latency",
+            "validation_requirement": "kernel profiler and battery replay",
+            "residual_risk": "context gains may disappear if attention kernels fall off accelerator"
+          },
+          "desktop_vit": {
+            "label": "Desktop-scale ViT",
+            "family": "Vision Transformer",
+            "summary": "Higher nominal quality, but the resource signature is not mobile-shaped.",
+            "params_m": 86.0,
+            "ops_gmac": 17.0,
+            "activation_mb": 420.0,
+            "latency_ms": 84.0,
+            "power_w": 8.2,
+            "quality_pct": 92.0,
+            "kernel_support_pct": 62.0,
+            "scaling_law": "token count drives attention and activation growth",
+            "param_exponent": 0.0,
+            "op_exponent": 2.4,
+            "activation_exponent": 2.4,
+            "latency_exponent": 2.1,
+            "guardrail": "thermal and memory envelope",
+            "validation_requirement": "reject unless redesigned for mobile kernels",
+            "residual_risk": "quality advantage is unusable under sustained local execution"
+          }
+        },
+        "validation_tests": [
+          "NPU kernel coverage",
+          "sustained thermal soak",
+          "battery replay",
+          "quality regression"
+        ]
+      },
+      "signature": [
+        {
+          "architecture_id": "mobile_cnn",
+          "label": "Mobile CNN / inverted residuals",
+          "family": "CNN",
+          "scale_value": 224.0,
+          "params_m": 3.5,
+          "ops_gmac": 0.32,
+          "activation_mb": 16.0,
+          "latency_ms": 8.0,
+          "power_w": 2.1,
+          "quality_pct": 88.5,
+          "kernel_support_pct": 96.0,
+          "dominant_constraint": "quality guardrail",
+          "feasible": true,
+          "violations": [],
+          "score": 96.18,
+          "next_failure": "quality guardrail is closest to failure at 0.97x budget",
+          "guardrail": "sustained Neural Engine fast path",
+          "validation_requirement": "NPU operator-coverage check plus thermal soak",
+          "residual_risk": "unlisted operators can silently fall back to CPU/GPU paths"
+        },
+        {
+          "architecture_id": "efficient_transformer",
+          "label": "Efficient mobile transformer",
+          "family": "Transformer",
+          "scale_value": 224.0,
+          "params_m": 18.0,
+          "ops_gmac": 1.2,
+          "activation_mb": 70.0,
+          "latency_ms": 19.0,
+          "power_w": 3.8,
+          "quality_pct": 90.0,
+          "kernel_support_pct": 86.0,
+          "dominant_constraint": "kernel support",
+          "feasible": true,
+          "violations": [],
+          "score": 96.88,
+          "next_failure": "kernel support is closest to failure at 0.99x budget",
+          "guardrail": "operator support and sustained latency",
+          "validation_requirement": "kernel profiler and battery replay",
+          "residual_risk": "context gains may disappear if attention kernels fall off accelerator"
+        },
+        {
+          "architecture_id": "desktop_vit",
+          "label": "Desktop-scale ViT",
+          "family": "Vision Transformer",
+          "scale_value": 224.0,
+          "params_m": 86.0,
+          "ops_gmac": 17.0,
+          "activation_mb": 420.0,
+          "latency_ms": 84.0,
+          "power_w": 8.2,
+          "quality_pct": 92.0,
+          "kernel_support_pct": 62.0,
+          "dominant_constraint": "latency",
+          "feasible": false,
+          "violations": [
+            "activation memory 420.00 MB > 220.00 MB",
+            "latency 84.00 ms > 25.00 ms",
+            "power 8.200 W > 4.500 W",
+            "kernel support 62.0% < 85.0%"
+          ],
+          "score": -81.5312349299446,
+          "next_failure": "latency already exceeds budget",
+          "guardrail": "thermal and memory envelope",
+          "validation_requirement": "reject unless redesigned for mobile kernels",
+          "residual_risk": "quality advantage is unusable under sustained local execution"
+        }
+      ],
+      "curve": {
+        "scale_values": [
+          112.0,
+          121.6,
+          131.2,
+          140.8,
+          150.4,
+          160.0,
+          169.6,
+          179.2,
+          188.8,
+          198.4,
+          208.0,
+          217.6,
+          227.2,
+          236.8,
+          246.4,
+          256.0,
+          265.6,
+          275.2,
+          284.8,
+          294.4,
+          304.0,
+          313.6,
+          323.2,
+          332.8,
+          342.4,
+          352.0,
+          361.6,
+          371.2,
+          380.8,
+          390.4,
+          400.0,
+          409.6,
+          419.2,
+          428.8,
+          438.4,
+          448.0
+        ],
+        "points_by_candidate": {
+          "mobile_cnn": [
+            {
+              "scale_value": 112.0,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 2.6390158215457884,
+              "activation_mb": 4.0,
+              "power_w": 0.742462120245875,
+              "feasible": true
+            },
+            {
+              "scale_value": 121.6,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 3.0101412662337768,
+              "activation_mb": 4.715102040816326,
+              "power_w": 0.8399387732788283,
+              "feasible": true
+            },
+            {
+              "scale_value": 131.2,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 3.399282775978383,
+              "activation_mb": 5.488979591836733,
+              "power_w": 0.9413432651573721,
+              "feasible": true
+            },
+            {
+              "scale_value": 140.8,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 3.805900283330344,
+              "activation_mb": 6.321632653061227,
+              "power_w": 1.0465289566671616,
+              "feasible": true
+            },
+            {
+              "scale_value": 150.4,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 4.229506489644139,
+              "activation_mb": 7.213061224489797,
+              "power_w": 1.1553645064901135,
+              "feasible": true
+            },
+            {
+              "scale_value": 160.0,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 4.669658595341726,
+              "activation_mb": 8.16326530612245,
+              "power_w": 1.267731382092775,
+              "feasible": true
+            },
+            {
+              "scale_value": 169.6,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 5.125951755044863,
+              "activation_mb": 9.172244897959184,
+              "power_w": 1.3835219033838448,
+              "feasible": true
+            },
+            {
+              "scale_value": 179.2,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 5.598013818589583,
+              "activation_mb": 10.239999999999998,
+              "power_w": 1.5026376808798585,
+              "feasible": true
+            },
+            {
+              "scale_value": 188.8,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 6.085501048638468,
+              "activation_mb": 11.366530612244897,
+              "power_w": 1.6249883516066024,
+              "feasible": true
+            },
+            {
+              "scale_value": 198.4,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 6.588094592221446,
+              "activation_mb": 12.551836734693879,
+              "power_w": 1.7504905434926359,
+              "feasible": true
+            },
+            {
+              "scale_value": 208.0,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 7.10549754280556,
+              "activation_mb": 13.795918367346939,
+              "power_w": 1.8790670177358917,
+              "feasible": true
+            },
+            {
+              "scale_value": 217.6,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 7.637432470935855,
+              "activation_mb": 15.098775510204081,
+              "power_w": 2.010645951642691,
+              "feasible": true
+            },
+            {
+              "scale_value": 227.2,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 8.18363933102795,
+              "activation_mb": 16.460408163265303,
+              "power_w": 2.1451603336680587,
+              "feasible": true
+            },
+            {
+              "scale_value": 236.8,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 8.743873673312963,
+              "activation_mb": 17.880816326530613,
+              "power_w": 2.2825474490452233,
+              "feasible": true
+            },
+            {
+              "scale_value": 246.4,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 9.317905105711706,
+              "activation_mb": 19.360000000000003,
+              "power_w": 2.4227484392730507,
+              "feasible": true
+            },
+            {
+              "scale_value": 256.0,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 9.905515962199413,
+              "activation_mb": 20.897959183673468,
+              "power_w": 2.565707922359274,
+              "feasible": true
+            },
+            {
+              "scale_value": 265.6,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 10.50650014313877,
+              "activation_mb": 22.494693877551022,
+              "power_w": 2.711373663451267,
+              "feasible": true
+            },
+            {
+              "scale_value": 275.2,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 11.120662099884877,
+              "activation_mb": 24.150204081632648,
+              "power_w": 2.8596962875702125,
+              "feasible": true
+            },
+            {
+              "scale_value": 284.8,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 11.747815941248554,
+              "activation_mb": 25.864489795918374,
+              "power_w": 3.010629027770965,
+              "feasible": true
+            },
+            {
+              "scale_value": 294.4,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 12.387784643532894,
+              "activation_mb": 27.637551020408164,
+              "power_w": 3.164127503300532,
+              "feasible": true
+            },
+            {
+              "scale_value": 304.0,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 13.040399349115285,
+              "activation_mb": 29.469387755102044,
+              "power_w": 3.3201495233110903,
+              "feasible": true
+            },
+            {
+              "scale_value": 313.6,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 13.705498741137944,
+              "activation_mb": 31.360000000000007,
+              "power_w": 3.478654912462575,
+              "feasible": true
+            },
+            {
+              "scale_value": 323.2,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 14.382928483948264,
+              "activation_mb": 33.30938775510204,
+              "power_w": 3.639605355372632,
+              "feasible": true
+            },
+            {
+              "scale_value": 332.8,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 15.07254072060883,
+              "activation_mb": 35.31755102040817,
+              "power_w": 3.802964257373075,
+              "feasible": true
+            },
+            {
+              "scale_value": 342.4,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 15.774193620162604,
+              "activation_mb": 37.38448979591836,
+              "power_w": 3.968696619438535,
+              "feasible": true
+            },
+            {
+              "scale_value": 352.0,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 16.487750968457114,
+              "activation_mb": 39.51020408163265,
+              "power_w": 4.136768925484858,
+              "feasible": true
+            },
+            {
+              "scale_value": 361.6,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 17.213081797252308,
+              "activation_mb": 41.694693877551025,
+              "power_w": 4.307149040507289,
+              "feasible": true
+            },
+            {
+              "scale_value": 371.2,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 17.950060047100223,
+              "activation_mb": 43.93795918367346,
+              "power_w": 4.479806118253652,
+              "feasible": true
+            },
+            {
+              "scale_value": 380.8,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 18.698564260120058,
+              "activation_mb": 46.239999999999995,
+              "power_w": 4.654710517314691,
+              "feasible": false
+            },
+            {
+              "scale_value": 390.4,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 19.458477299324542,
+              "activation_mb": 48.6008163265306,
+              "power_w": 4.831833724669873,
+              "feasible": false
+            },
+            {
+              "scale_value": 400.0,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 20.22968609160139,
+              "activation_mb": 51.02040816326531,
+              "power_w": 5.011148285857958,
+              "feasible": false
+            },
+            {
+              "scale_value": 409.6,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 21.01208139183182,
+              "activation_mb": 53.49877551020409,
+              "power_w": 5.192627741052007,
+              "feasible": false
+            },
+            {
+              "scale_value": 419.2,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 21.805557565949492,
+              "activation_mb": 56.03591836734694,
+              "power_w": 5.37624656641203,
+              "feasible": false
+            },
+            {
+              "scale_value": 428.8,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 22.610012391016895,
+              "activation_mb": 58.631836734693884,
+              "power_w": 5.5619801201678944,
+              "feasible": false
+            },
+            {
+              "scale_value": 438.4,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 23.425346870630378,
+              "activation_mb": 61.286530612244896,
+              "power_w": 5.749804592952952,
+              "feasible": false
+            },
+            {
+              "scale_value": 448.0,
+              "architecture_id": "mobile_cnn",
+              "latency_ms": 24.25146506416637,
+              "activation_mb": 64.0,
+              "power_w": 5.939696961967,
+              "feasible": false
+            }
+          ],
+          "efficient_transformer": [
+            {
+              "scale_value": 112.0,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 5.090923947047393,
+              "activation_mb": 16.32807735189413,
+              "power_w": 1.3435028842544403,
+              "feasible": true
+            },
+            {
+              "scale_value": 121.6,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 5.951907299643242,
+              "activation_mb": 19.406075151200266,
+              "power_w": 1.5198892087902605,
+              "feasible": true
+            },
+            {
+              "scale_value": 131.2,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 6.876329082853532,
+              "activation_mb": 22.763458976350556,
+              "power_w": 1.7033830512371493,
+              "feasible": true
+            },
+            {
+              "scale_value": 140.8,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 7.863708572421317,
+              "activation_mb": 26.40236171292681,
+              "power_w": 1.8937190644453399,
+              "feasible": true
+            },
+            {
+              "scale_value": 150.4,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 8.913602337479201,
+              "activation_mb": 30.324779917314743,
+              "power_w": 2.0906595831725863,
+              "feasible": true
+            },
+            {
+              "scale_value": 160.0,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 10.025599075743994,
+              "activation_mb": 34.53259101234818,
+              "power_w": 2.2939901199774018,
+              "feasible": true
+            },
+            {
+              "scale_value": 169.6,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 11.199315440192661,
+              "activation_mb": 39.02756737543553,
+              "power_w": 2.503515825170767,
+              "feasible": true
+            },
+            {
+              "scale_value": 179.2,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 12.434392619973046,
+              "activation_mb": 43.811388030723194,
+              "power_w": 2.7190586606397438,
+              "feasible": true
+            },
+            {
+              "scale_value": 188.8,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 13.730493505073307,
+              "activation_mb": 48.88564846334105,
+              "power_w": 2.9404551124309948,
+              "feasible": true
+            },
+            {
+              "scale_value": 198.4,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 15.087300309729784,
+              "activation_mb": 54.25186894034294,
+              "power_w": 3.167554316796198,
+              "feasible": true
+            },
+            {
+              "scale_value": 208.0,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 16.50451256122371,
+              "activation_mb": 59.91150162886247,
+              "power_w": 3.4002165082839944,
+              "feasible": true
+            },
+            {
+              "scale_value": 217.6,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 17.98184538324117,
+              "activation_mb": 65.86593673432677,
+              "power_w": 3.6383117220201076,
+              "feasible": true
+            },
+            {
+              "scale_value": 227.2,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 19.519028019284697,
+              "activation_mb": 72.11650783202391,
+              "power_w": 3.881718699018392,
+              "feasible": true
+            },
+            {
+              "scale_value": 236.8,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 21.115802553636865,
+              "activation_mb": 78.66449652846809,
+              "power_w": 4.130323955415166,
+              "feasible": true
+            },
+            {
+              "scale_value": 246.4,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 22.77192279635186,
+              "activation_mb": 85.51113656120235,
+              "power_w": 4.384020985351234,
+              "feasible": true
+            },
+            {
+              "scale_value": 256.0,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 24.487153305548915,
+              "activation_mb": 92.65761742442656,
+              "power_w": 4.642709573792972,
+              "feasible": false
+            },
+            {
+              "scale_value": 265.6,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 26.261268525493104,
+              "activation_mb": 100.1050875914026,
+              "power_w": 4.906295200530864,
+              "feasible": false
+            },
+            {
+              "scale_value": 275.2,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 28.09405202298919,
+              "activation_mb": 107.85465739173684,
+              "power_w": 5.174688520365146,
+              "feasible": false
+            },
+            {
+              "scale_value": 284.8,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 29.98529580777948,
+              "activation_mb": 115.90740159149513,
+              "power_w": 5.44780490739508,
+              "feasible": false
+            },
+            {
+              "scale_value": 294.4,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 31.934799725138635,
+              "activation_mb": 124.26436171601668,
+              "power_w": 5.725564053591438,
+              "feasible": false
+            },
+            {
+              "scale_value": 304.0,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 33.942370910855395,
+              "activation_mb": 132.92654814879805,
+              "power_w": 6.007889613610544,
+              "feasible": false
+            },
+            {
+              "scale_value": 313.6,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 36.00782330039569,
+              "activation_mb": 141.894942034551,
+              "power_w": 6.2947088892179925,
+              "feasible": false
+            },
+            {
+              "scale_value": 323.2,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 38.13097718534351,
+              "activation_mb": 151.17049701024658,
+              "power_w": 6.5859525478171435,
+              "feasible": false
+            },
+            {
+              "scale_value": 332.8,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 40.31165881127669,
+              "activation_mb": 160.75414078442674,
+              "power_w": 6.881554370484611,
+              "feasible": false
+            },
+            {
+              "scale_value": 342.4,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 42.54970001210716,
+              "activation_mb": 170.64677658214862,
+              "power_w": 7.181451025650682,
+              "feasible": false
+            },
+            {
+              "scale_value": 352.0,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 44.84493787663597,
+              "activation_mb": 180.84928447050143,
+              "power_w": 7.485581865163075,
+              "feasible": false
+            },
+            {
+              "scale_value": 361.6,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 47.19721444367239,
+              "activation_mb": 191.3625225776037,
+              "power_w": 7.7938887399655705,
+              "feasible": false
+            },
+            {
+              "scale_value": 371.2,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 49.60637642256737,
+              "activation_mb": 202.187328216286,
+              "power_w": 8.106315833030418,
+              "feasible": false
+            },
+            {
+              "scale_value": 380.8,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 52.072274936432514,
+              "activation_mb": 213.32451892221923,
+              "power_w": 8.422809507521821,
+              "feasible": false
+            },
+            {
+              "scale_value": 390.4,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 54.59476528567049,
+              "activation_mb": 224.77489341502604,
+              "power_w": 8.743318168450246,
+              "feasible": false
+            },
+            {
+              "scale_value": 400.0,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 57.17370672974506,
+              "activation_mb": 236.53923248987002,
+              "power_w": 9.067792136314399,
+              "feasible": false
+            },
+            {
+              "scale_value": 409.6,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 59.80896228537424,
+              "activation_mb": 248.61829984611978,
+              "power_w": 9.39618353142744,
+              "feasible": false
+            },
+            {
+              "scale_value": 419.2,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 62.50039853955131,
+              "activation_mb": 261.012842858922,
+              "power_w": 9.728446167793198,
+              "feasible": false
+            },
+            {
+              "scale_value": 428.8,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 65.24788547598521,
+              "activation_mb": 273.7235932988495,
+              "power_w": 10.064535455541902,
+              "feasible": false
+            },
+            {
+              "scale_value": 438.4,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 68.05129631371548,
+              "activation_mb": 286.7512680042172,
+              "power_w": 10.404408311057722,
+              "feasible": false
+            },
+            {
+              "scale_value": 448.0,
+              "architecture_id": "efficient_transformer",
+              "latency_ms": 70.91050735679737,
+              "activation_mb": 300.09656951016206,
+              "power_w": 10.748023074035522,
+              "feasible": false
+            }
+          ],
+          "desktop_vit": [
+            {
+              "scale_value": 112.0,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 19.593692822272956,
+              "activation_mb": 79.5751197417959,
+              "power_w": 2.899137802864845,
+              "feasible": false
+            },
+            {
+              "scale_value": 121.6,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 23.28729018144032,
+              "activation_mb": 96.93812745573834,
+              "power_w": 3.279760924231615,
+              "feasible": false
+            },
+            {
+              "scale_value": 131.2,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 27.31615077162067,
+              "activation_mb": 116.33094351232248,
+              "power_w": 3.6757213210906907,
+              "feasible": false
+            },
+            {
+              "scale_value": 140.8,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 31.68283405551217,
+              "activation_mb": 137.81624663831306,
+              "power_w": 4.086446402224154,
+              "feasible": false
+            },
+            {
+              "scale_value": 150.4,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 36.389735900777694,
+              "activation_mb": 161.45401648339407,
+              "power_w": 4.5114233110566335,
+              "feasible": false
+            },
+            {
+              "scale_value": 160.0,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 41.43910921481781,
+              "activation_mb": 187.30182317517233,
+              "power_w": 4.950189206267025,
+              "feasible": false
+            },
+            {
+              "scale_value": 169.6,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 46.83308085052264,
+              "activation_mb": 215.41506951515402,
+              "power_w": 5.402323622736918,
+              "feasible": false
+            },
+            {
+              "scale_value": 179.2,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 52.57366563686783,
+              "activation_mb": 245.8471959161306,
+              "power_w": 5.867442372959447,
+              "feasible": false
+            },
+            {
+              "scale_value": 188.8,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 58.66277815600926,
+              "activation_mb": 278.64985558051677,
+              "power_w": 6.345192611035304,
+              "feasible": false
+            },
+            {
+              "scale_value": 198.4,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 65.10224272841153,
+              "activation_mb": 313.87306559101614,
+              "power_w": 6.835248788876006,
+              "feasible": false
+            },
+            {
+              "scale_value": 208.0,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 71.89380195463497,
+              "activation_mb": 351.5653382724249,
+              "power_w": 7.337309307349671,
+              "feasible": false
+            },
+            {
+              "scale_value": 217.6,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 79.03912408119213,
+              "activation_mb": 391.77379622314345,
+              "power_w": 7.851093715938126,
+              "feasible": false
+            },
+            {
+              "scale_value": 227.2,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 86.53980939842869,
+              "activation_mb": 434.5442737006295,
+              "power_w": 8.376340350513372,
+              "feasible": false
+            },
+            {
+              "scale_value": 236.8,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 94.39739583416171,
+              "activation_mb": 479.9214065055834,
+              "power_w": 8.912804324843252,
+              "feasible": false
+            },
+            {
+              "scale_value": 246.4,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 102.61336387344281,
+              "activation_mb": 527.9487120967259,
+              "power_w": 9.460255810494768,
+              "feasible": false
+            },
+            {
+              "scale_value": 256.0,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 111.18914090931187,
+              "activation_mb": 578.6686613480401,
+              "power_w": 10.018478553974308,
+              "feasible": false
+            },
+            {
+              "scale_value": 265.6,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 120.12610510968311,
+              "activation_mb": 632.1227431095824,
+              "power_w": 10.587268590619232,
+              "feasible": false
+            },
+            {
+              "scale_value": 275.2,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 129.4255888700842,
+              "activation_mb": 688.3515225344262,
+              "power_w": 11.16643312289321,
+              "feasible": false
+            },
+            {
+              "scale_value": 284.8,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 139.08888190979417,
+              "activation_mb": 747.3946939756349,
+              "power_w": 11.755789537010434,
+              "feasible": false
+            },
+            {
+              "scale_value": 294.4,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 149.11723405922,
+              "activation_mb": 809.2911291292196,
+              "power_w": 12.355164536697314,
+              "feasible": false
+            },
+            {
+              "scale_value": 304.0,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 159.51185777855764,
+              "activation_mb": 874.078920995095,
+              "power_w": 12.964393376738542,
+              "feasible": false
+            },
+            {
+              "scale_value": 313.6,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 170.2739304414612,
+              "activation_mb": 941.795424142901,
+              "power_w": 13.58331918199672,
+              "feasible": false
+            },
+            {
+              "scale_value": 323.2,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 181.40459641229592,
+              "activation_mb": 1012.477291699401,
+              "power_w": 14.211792340026467,
+              "feasible": false
+            },
+            {
+              "scale_value": 332.8,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 192.9049689413121,
+              "activation_mb": 1086.1605094159165,
+              "power_w": 14.84966995736153,
+              "feasible": false
+            },
+            {
+              "scale_value": 342.4,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 204.77613189857837,
+              "activation_mb": 1162.880427125641,
+              "power_w": 15.496815371140944,
+              "feasible": false
+            },
+            {
+              "scale_value": 352.0,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 217.0191413646017,
+              "activation_mb": 1242.6717878598718,
+              "power_w": 16.15309770903611,
+              "feasible": false
+            },
+            {
+              "scale_value": 361.6,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 229.63502709312445,
+              "activation_mb": 1325.5687548577193,
+              "power_w": 16.818391491504652,
+              "feasible": false
+            },
+            {
+              "scale_value": 371.2,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 242.6247938595432,
+              "activation_mb": 1411.6049366746618,
+              "power_w": 17.492576271276164,
+              "feasible": false
+            },
+            {
+              "scale_value": 380.8,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 255.98942270666305,
+              "activation_mb": 1500.8134105703691,
+              "power_w": 18.17553630570498,
+              "feasible": false
+            },
+            {
+              "scale_value": 390.4,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 269.72987209803125,
+              "activation_mb": 1593.2267443349192,
+              "power_w": 18.86716025823474,
+              "feasible": false
+            },
+            {
+              "scale_value": 400.0,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 283.84707898784404,
+              "activation_mb": 1688.8770166941915,
+              "power_w": 19.56734092573107,
+              "feasible": false
+            },
+            {
+              "scale_value": 409.6,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 298.3419598153437,
+              "activation_mb": 1787.7958364193853,
+              "power_w": 20.275974988869738,
+              "feasible": false
+            },
+            {
+              "scale_value": 419.2,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 313.2154114307064,
+              "activation_mb": 1890.0143602519274,
+              "power_w": 20.99296278313269,
+              "feasible": false
+            },
+            {
+              "scale_value": 428.8,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 328.46831195861944,
+              "activation_mb": 1995.5633097430862,
+              "power_w": 21.718208088274633,
+              "feasible": false
+            },
+            {
+              "scale_value": 438.4,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 344.10152160506067,
+              "activation_mb": 2104.4729870972146,
+              "power_w": 22.451617934387713,
+              "feasible": false
+            },
+            {
+              "scale_value": 448.0,
+              "architecture_id": "desktop_vit",
+              "latency_ms": 360.1158834121945,
+              "activation_mb": 2216.7732900984624,
+              "power_w": 23.19310242291876,
+              "feasible": false
+            }
+          ]
+        },
+        "first_failure_by_candidate": {
+          "mobile_cnn": 380.8,
+          "efficient_transformer": 256.0,
+          "desktop_vit": 112.0
+        }
+      },
+      "topology": {
+        "rows": [
+          {
+            "id": "mobile_cnn",
+            "label": "Mobile CNN / inverted residuals",
+            "family": "CNN",
+            "topology": "sliding-window convolution",
+            "access": "spatial reuse and tiling",
+            "locality": "high locality",
+            "ops_per_mb": 0.02,
+            "memory_pct": 7.2727272727272725,
+            "latency_pct": 32.0,
+            "power_pct": 46.666666666666664,
+            "dominant": "quality guardrail",
+            "feasible": true
+          },
+          {
+            "id": "efficient_transformer",
+            "label": "Efficient mobile transformer",
+            "family": "Transformer",
+            "topology": "all-to-all attention",
+            "access": "gather/reduce over tokens",
+            "locality": "low locality",
+            "ops_per_mb": 0.017142857142857144,
+            "memory_pct": 31.818181818181817,
+            "latency_pct": 76.0,
+            "power_pct": 84.44444444444444,
+            "dominant": "kernel support",
+            "feasible": true
+          },
+          {
+            "id": "desktop_vit",
+            "label": "Desktop-scale ViT",
+            "family": "Vision Transformer",
+            "topology": "all-to-all attention",
+            "access": "gather/reduce over tokens",
+            "locality": "low locality",
+            "ops_per_mb": 0.04047619047619048,
+            "memory_pct": 190.9090909090909,
+            "latency_pct": 336.0,
+            "power_pct": 182.2222222222222,
+            "dominant": "latency",
+            "feasible": false
+          }
+        ],
+        "actual": "kernel",
+        "best_label": "Efficient mobile transformer",
+        "best_topology": "all-to-all attention",
+        "best_access": "gather/reduce over tokens",
+        "best_locality": "low locality",
+        "best_constraint": "kernel support"
+      },
+      "attention": {
+        "attention_id": "desktop_vit",
+        "attention_label": "Desktop-scale ViT",
+        "dominant_amount": "latency",
+        "actual": "latency",
+        "first_failure": "112 px",
+        "status": "fail",
+        "message": "Desktop-scale ViT is governed by latency: activation memory is 420.00 MB against 220.00 MB, latency is 84.00 ms against 25.00 ms, and the first infeasible scale is 112 px. Mitigation: reduce resolution/context, choose mobile-local topology, or prove kernels stay on accelerator.",
+        "scale_value": 224.0,
+        "memory_pct": 190.9090909090909,
+        "latency_pct": 336.0,
+        "power_pct": 182.2222222222222
+      },
+      "bias": {
+        "rows": [
+          {
+            "id": "mobile_cnn",
+            "label": "Mobile CNN / inverted residuals",
+            "family": "CNN",
+            "bias_match": 1.15,
+            "data_need": 86.95652173913044,
+            "quality": 88.5,
+            "deployability": 100.0,
+            "feasible": true,
+            "dominant": "quality guardrail",
+            "score": 106.54347826086956
+          },
+          {
+            "id": "efficient_transformer",
+            "label": "Efficient mobile transformer",
+            "family": "Transformer",
+            "bias_match": 0.92,
+            "data_need": 108.69565217391303,
+            "quality": 90.0,
+            "deployability": 98.26086956521739,
+            "feasible": true,
+            "dominant": "kernel support",
+            "score": 105.8695652173913
+          },
+          {
+            "id": "desktop_vit",
+            "label": "Desktop-scale ViT",
+            "family": "Vision Transformer",
+            "bias_match": 0.75,
+            "data_need": 133.33333333333334,
+            "quality": 92.0,
+            "deployability": 0.0,
+            "feasible": false,
+            "dominant": "latency",
+            "score": 6.333333333333329
+          }
+        ],
+        "best": {
+          "id": "mobile_cnn",
+          "label": "Mobile CNN / inverted residuals",
+          "family": "CNN",
+          "bias_match": 1.15,
+          "data_need": 86.95652173913044,
+          "quality": 88.5,
+          "deployability": 100.0,
+          "feasible": true,
+          "dominant": "quality guardrail",
+          "score": 106.54347826086956
+        },
+        "leaderboard_label": "Desktop-scale ViT",
+        "actual": "local_bias"
+      },
+      "review": {
+        "selected": {
+          "architecture_id": "mobile_cnn",
+          "label": "Mobile CNN / inverted residuals",
+          "family": "CNN",
+          "scale_value": 224.0,
+          "params_m": 3.5,
+          "ops_gmac": 0.32,
+          "activation_mb": 16.0,
+          "latency_ms": 8.0,
+          "power_w": 2.1,
+          "quality_pct": 88.5,
+          "kernel_support_pct": 96.0,
+          "dominant_constraint": "quality guardrail",
+          "feasible": true,
+          "violations": [],
+          "score": 96.18,
+          "next_failure": "quality guardrail is closest to failure at 0.97x budget",
+          "guardrail": "sustained Neural Engine fast path",
+          "validation_requirement": "NPU operator-coverage check plus thermal soak",
+          "residual_risk": "unlisted operators can silently fall back to CPU/GPU paths"
+        },
+        "leaderboard": {
+          "architecture_id": "desktop_vit",
+          "label": "Desktop-scale ViT",
+          "family": "Vision Transformer",
+          "scale_value": 224.0,
+          "params_m": 86.0,
+          "ops_gmac": 17.0,
+          "activation_mb": 420.0,
+          "latency_ms": 84.0,
+          "power_w": 8.2,
+          "quality_pct": 92.0,
+          "kernel_support_pct": 62.0,
+          "dominant_constraint": "latency",
+          "feasible": false,
+          "violations": [
+            "activation memory 420.00 MB > 220.00 MB",
+            "latency 84.00 ms > 25.00 ms",
+            "power 8.200 W > 4.500 W",
+            "kernel support 62.0% < 85.0%"
+          ],
+          "score": -81.5312349299446,
+          "next_failure": "latency already exceeds budget",
+          "guardrail": "thermal and memory envelope",
+          "validation_requirement": "reject unless redesigned for mobile kernels",
+          "residual_risk": "quality advantage is unusable under sustained local execution"
+        },
+        "headroom_pick": {
+          "architecture_id": "mobile_cnn",
+          "label": "Mobile CNN / inverted residuals",
+          "family": "CNN",
+          "scale_value": 224.0,
+          "params_m": 3.5,
+          "ops_gmac": 0.32,
+          "activation_mb": 16.0,
+          "latency_ms": 8.0,
+          "power_w": 2.1,
+          "quality_pct": 88.5,
+          "kernel_support_pct": 96.0,
+          "dominant_constraint": "quality guardrail",
+          "feasible": true,
+          "violations": [],
+          "score": 96.18,
+          "next_failure": "quality guardrail is closest to failure at 0.97x budget",
+          "guardrail": "sustained Neural Engine fast path",
+          "validation_requirement": "NPU operator-coverage check plus thermal soak",
+          "residual_risk": "unlisted operators can silently fall back to CPU/GPU paths"
+        },
+        "headroom": 2.142857142857143,
+        "status": "approve",
+        "kind": "ok",
+        "actual": "headroom",
+        "message": "Approve Mobile CNN / inverted residuals: it has the strongest track headroom among feasible candidates."
+      }
+    },
+    "oura_ring": {
+      "defaults": {
+        "architecture_story": "A tiny architecture must treat the sensor window and activation buffer as first-class hardware constraints.",
+        "workload_label": "always-on biosignal window",
+        "scaling_variable": "sensor window",
+        "scaling_unit": "s",
+        "default_scale": 8.0,
+        "scale_min": 2.0,
+        "scale_max": 24.0,
+        "scale_step": 1.0,
+        "memory_budget_mb": 0.45,
+        "latency_budget_ms": 120.0,
+        "power_budget_w": 0.018,
+        "quality_floor_pct": 80.0,
+        "kernel_support_floor_pct": 80.0,
+        "candidate_architectures": {
+          "streaming_tcn": {
+            "label": "Streaming temporal CNN",
+            "family": "Temporal CNN",
+            "summary": "Causal temporal filters reuse a small buffer and preserve most signal context.",
+            "params_m": 0.05,
+            "ops_gmac": 0.006,
+            "activation_mb": 0.14,
+            "latency_ms": 34.0,
+            "power_w": 0.008,
+            "quality_pct": 82.0,
+            "kernel_support_pct": 91.0,
+            "scaling_law": "window length grows buffer and latency roughly linearly",
+            "param_exponent": 0.0,
+            "op_exponent": 1.0,
+            "activation_exponent": 1.0,
+            "latency_exponent": 1.0,
+            "guardrail": "SRAM streaming buffer",
+            "validation_requirement": "SRAM trace plus battery regression",
+            "residual_risk": "short windows can miss slow physiology changes"
+          },
+          "tiny_cnn": {
+            "label": "Tiny DS-CNN",
+            "family": "Depthwise CNN",
+            "summary": "Depthwise separable filters trade context for compact firmware and predictable kernels.",
+            "params_m": 0.08,
+            "ops_gmac": 0.012,
+            "activation_mb": 0.22,
+            "latency_ms": 55.0,
+            "power_w": 0.012,
+            "quality_pct": 83.0,
+            "kernel_support_pct": 88.0,
+            "scaling_law": "window and channel growth pressure SRAM",
+            "param_exponent": 0.0,
+            "op_exponent": 1.2,
+            "activation_exponent": 1.1,
+            "latency_exponent": 1.1,
+            "guardrail": "flash/SRAM fit",
+            "validation_requirement": "firmware image and OTA payload check",
+            "residual_risk": "feature extraction assumptions become part of the model boundary"
+          },
+          "micro_transformer": {
+            "label": "Micro transformer",
+            "family": "Transformer",
+            "summary": "Useful temporal context, but attention state is too expensive for a ring-class device.",
+            "params_m": 0.45,
+            "ops_gmac": 0.08,
+            "activation_mb": 0.85,
+            "latency_ms": 180.0,
+            "power_w": 0.032,
+            "quality_pct": 86.0,
+            "kernel_support_pct": 68.0,
+            "scaling_law": "attention window has superlinear memory growth",
+            "param_exponent": 0.0,
+            "op_exponent": 2.0,
+            "activation_exponent": 2.0,
+            "latency_exponent": 1.8,
+            "guardrail": "battery and SRAM budget",
+            "validation_requirement": "reject unless attention state is externalized or compressed",
+            "residual_risk": "accuracy gain depends on unavailable memory and power headroom"
+          }
+        },
+        "validation_tests": [
+          "SRAM trace",
+          "firmware/flash fit",
+          "OTA payload check",
+          "battery regression"
+        ]
+      },
+      "signature": [
+        {
+          "architecture_id": "streaming_tcn",
+          "label": "Streaming temporal CNN",
+          "family": "Temporal CNN",
+          "scale_value": 8.0,
+          "params_m": 0.05,
+          "ops_gmac": 0.006,
+          "activation_mb": 0.14,
+          "latency_ms": 34.0,
+          "power_w": 0.008,
+          "quality_pct": 82.0,
+          "kernel_support_pct": 91.0,
+          "dominant_constraint": "quality guardrail",
+          "feasible": true,
+          "violations": [],
+          "score": 89.28,
+          "next_failure": "quality guardrail is closest to failure at 0.98x budget",
+          "guardrail": "SRAM streaming buffer",
+          "validation_requirement": "SRAM trace plus battery regression",
+          "residual_risk": "short windows can miss slow physiology changes"
+        },
+        {
+          "architecture_id": "tiny_cnn",
+          "label": "Tiny DS-CNN",
+          "family": "Depthwise CNN",
+          "scale_value": 8.0,
+          "params_m": 0.08,
+          "ops_gmac": 0.012,
+          "activation_mb": 0.22,
+          "latency_ms": 55.0,
+          "power_w": 0.012,
+          "quality_pct": 83.0,
+          "kernel_support_pct": 88.0,
+          "dominant_constraint": "quality guardrail",
+          "feasible": true,
+          "violations": [],
+          "score": 90.04,
+          "next_failure": "quality guardrail is closest to failure at 0.96x budget",
+          "guardrail": "flash/SRAM fit",
+          "validation_requirement": "firmware image and OTA payload check",
+          "residual_risk": "feature extraction assumptions become part of the model boundary"
+        },
+        {
+          "architecture_id": "micro_transformer",
+          "label": "Micro transformer",
+          "family": "Transformer",
+          "scale_value": 8.0,
+          "params_m": 0.45,
+          "ops_gmac": 0.08,
+          "activation_mb": 0.85,
+          "latency_ms": 180.0,
+          "power_w": 0.032,
+          "quality_pct": 86.0,
+          "kernel_support_pct": 68.0,
+          "dominant_constraint": "activation memory",
+          "feasible": false,
+          "violations": [
+            "activation memory 0.85 MB > 0.45 MB",
+            "latency 180.00 ms > 120.00 ms",
+            "power 0.032 W > 0.018 W",
+            "kernel support 68.0% < 80.0%"
+          ],
+          "score": -2.2854901960784417,
+          "next_failure": "activation memory already exceeds budget",
+          "guardrail": "battery and SRAM budget",
+          "validation_requirement": "reject unless attention state is externalized or compressed",
+          "residual_risk": "accuracy gain depends on unavailable memory and power headroom"
+        }
+      ],
+      "curve": {
+        "scale_values": [
+          2.0,
+          2.6285714285714286,
+          3.257142857142857,
+          3.8857142857142857,
+          4.514285714285714,
+          5.142857142857142,
+          5.771428571428571,
+          6.4,
+          7.0285714285714285,
+          7.6571428571428575,
+          8.285714285714285,
+          8.914285714285715,
+          9.542857142857143,
+          10.17142857142857,
+          10.8,
+          11.428571428571429,
+          12.057142857142857,
+          12.685714285714285,
+          13.314285714285715,
+          13.942857142857143,
+          14.571428571428571,
+          15.2,
+          15.82857142857143,
+          16.457142857142856,
+          17.085714285714285,
+          17.714285714285715,
+          18.34285714285714,
+          18.97142857142857,
+          19.6,
+          20.228571428571428,
+          20.857142857142858,
+          21.485714285714284,
+          22.114285714285714,
+          22.742857142857144,
+          23.37142857142857,
+          24.0
+        ],
+        "points_by_candidate": {
+          "streaming_tcn": [
+            {
+              "scale_value": 2.0,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 8.5,
+              "activation_mb": 0.035,
+              "power_w": 0.002,
+              "feasible": true
+            },
+            {
+              "scale_value": 2.6285714285714286,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 11.17142857142857,
+              "activation_mb": 0.046000000000000006,
+              "power_w": 0.0026285714285714285,
+              "feasible": true
+            },
+            {
+              "scale_value": 3.257142857142857,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 13.842857142857143,
+              "activation_mb": 0.057,
+              "power_w": 0.0032571428571428573,
+              "feasible": true
+            },
+            {
+              "scale_value": 3.8857142857142857,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 16.514285714285712,
+              "activation_mb": 0.068,
+              "power_w": 0.0038857142857142857,
+              "feasible": true
+            },
+            {
+              "scale_value": 4.514285714285714,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 19.185714285714287,
+              "activation_mb": 0.079,
+              "power_w": 0.004514285714285715,
+              "feasible": true
+            },
+            {
+              "scale_value": 5.142857142857142,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 21.857142857142854,
+              "activation_mb": 0.09,
+              "power_w": 0.005142857142857143,
+              "feasible": true
+            },
+            {
+              "scale_value": 5.771428571428571,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 24.52857142857143,
+              "activation_mb": 0.101,
+              "power_w": 0.0057714285714285714,
+              "feasible": true
+            },
+            {
+              "scale_value": 6.4,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 27.200000000000003,
+              "activation_mb": 0.11200000000000002,
+              "power_w": 0.0064,
+              "feasible": true
+            },
+            {
+              "scale_value": 7.0285714285714285,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 29.87142857142857,
+              "activation_mb": 0.12300000000000001,
+              "power_w": 0.007028571428571428,
+              "feasible": true
+            },
+            {
+              "scale_value": 7.6571428571428575,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 32.542857142857144,
+              "activation_mb": 0.134,
+              "power_w": 0.007657142857142858,
+              "feasible": true
+            },
+            {
+              "scale_value": 8.285714285714285,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 35.21428571428571,
+              "activation_mb": 0.145,
+              "power_w": 0.008285714285714285,
+              "feasible": true
+            },
+            {
+              "scale_value": 8.914285714285715,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 37.885714285714286,
+              "activation_mb": 0.15600000000000003,
+              "power_w": 0.008914285714285715,
+              "feasible": true
+            },
+            {
+              "scale_value": 9.542857142857143,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 40.55714285714286,
+              "activation_mb": 0.167,
+              "power_w": 0.009542857142857143,
+              "feasible": true
+            },
+            {
+              "scale_value": 10.17142857142857,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 43.22857142857143,
+              "activation_mb": 0.17800000000000002,
+              "power_w": 0.01017142857142857,
+              "feasible": true
+            },
+            {
+              "scale_value": 10.8,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 45.900000000000006,
+              "activation_mb": 0.18900000000000003,
+              "power_w": 0.0108,
+              "feasible": true
+            },
+            {
+              "scale_value": 11.428571428571429,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 48.57142857142857,
+              "activation_mb": 0.2,
+              "power_w": 0.011428571428571429,
+              "feasible": true
+            },
+            {
+              "scale_value": 12.057142857142857,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 51.24285714285714,
+              "activation_mb": 0.21100000000000002,
+              "power_w": 0.012057142857142857,
+              "feasible": true
+            },
+            {
+              "scale_value": 12.685714285714285,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 53.91428571428571,
+              "activation_mb": 0.222,
+              "power_w": 0.012685714285714285,
+              "feasible": true
+            },
+            {
+              "scale_value": 13.314285714285715,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 56.58571428571429,
+              "activation_mb": 0.23300000000000004,
+              "power_w": 0.013314285714285716,
+              "feasible": true
+            },
+            {
+              "scale_value": 13.942857142857143,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 59.25714285714286,
+              "activation_mb": 0.24400000000000002,
+              "power_w": 0.013942857142857144,
+              "feasible": true
+            },
+            {
+              "scale_value": 14.571428571428571,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 61.92857142857143,
+              "activation_mb": 0.255,
+              "power_w": 0.014571428571428572,
+              "feasible": true
+            },
+            {
+              "scale_value": 15.2,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 64.6,
+              "activation_mb": 0.266,
+              "power_w": 0.0152,
+              "feasible": true
+            },
+            {
+              "scale_value": 15.82857142857143,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 67.27142857142857,
+              "activation_mb": 0.277,
+              "power_w": 0.015828571428571428,
+              "feasible": true
+            },
+            {
+              "scale_value": 16.457142857142856,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 69.94285714285714,
+              "activation_mb": 0.288,
+              "power_w": 0.016457142857142854,
+              "feasible": true
+            },
+            {
+              "scale_value": 17.085714285714285,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 72.61428571428571,
+              "activation_mb": 0.29900000000000004,
+              "power_w": 0.017085714285714287,
+              "feasible": true
+            },
+            {
+              "scale_value": 17.714285714285715,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 75.28571428571429,
+              "activation_mb": 0.31000000000000005,
+              "power_w": 0.017714285714285717,
+              "feasible": true
+            },
+            {
+              "scale_value": 18.34285714285714,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 77.95714285714286,
+              "activation_mb": 0.321,
+              "power_w": 0.018342857142857143,
+              "feasible": false
+            },
+            {
+              "scale_value": 18.97142857142857,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 80.62857142857143,
+              "activation_mb": 0.332,
+              "power_w": 0.018971428571428573,
+              "feasible": false
+            },
+            {
+              "scale_value": 19.6,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 83.30000000000001,
+              "activation_mb": 0.3430000000000001,
+              "power_w": 0.019600000000000003,
+              "feasible": false
+            },
+            {
+              "scale_value": 20.228571428571428,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 85.97142857142856,
+              "activation_mb": 0.35400000000000004,
+              "power_w": 0.02022857142857143,
+              "feasible": false
+            },
+            {
+              "scale_value": 20.857142857142858,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 88.64285714285714,
+              "activation_mb": 0.36500000000000005,
+              "power_w": 0.02085714285714286,
+              "feasible": false
+            },
+            {
+              "scale_value": 21.485714285714284,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 91.3142857142857,
+              "activation_mb": 0.376,
+              "power_w": 0.021485714285714285,
+              "feasible": false
+            },
+            {
+              "scale_value": 22.114285714285714,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 93.98571428571428,
+              "activation_mb": 0.387,
+              "power_w": 0.022114285714285715,
+              "feasible": false
+            },
+            {
+              "scale_value": 22.742857142857144,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 96.65714285714286,
+              "activation_mb": 0.3980000000000001,
+              "power_w": 0.022742857142857145,
+              "feasible": false
+            },
+            {
+              "scale_value": 23.37142857142857,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 99.32857142857142,
+              "activation_mb": 0.40900000000000003,
+              "power_w": 0.02337142857142857,
+              "feasible": false
+            },
+            {
+              "scale_value": 24.0,
+              "architecture_id": "streaming_tcn",
+              "latency_ms": 102.0,
+              "activation_mb": 0.42000000000000004,
+              "power_w": 0.024,
+              "feasible": false
+            }
+          ],
+          "tiny_cnn": [
+            {
+              "scale_value": 2.0,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 11.970070245321706,
+              "activation_mb": 0.04788028098128682,
+              "power_w": 0.0022735748497655973,
+              "feasible": true
+            },
+            {
+              "scale_value": 2.6285714285714286,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 16.167968899247665,
+              "activation_mb": 0.06467187559699066,
+              "power_w": 0.003156000048792144,
+              "feasible": true
+            },
+            {
+              "scale_value": 3.257142857142857,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 20.468413949783272,
+              "activation_mb": 0.0818736557991331,
+              "power_w": 0.0040820416352678945,
+              "feasible": true
+            },
+            {
+              "scale_value": 3.8857142857142857,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 24.853162202486505,
+              "activation_mb": 0.09941264880994603,
+              "power_w": 0.005044734312387044,
+              "feasible": true
+            },
+            {
+              "scale_value": 4.514285714285714,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 29.309718723630738,
+              "activation_mb": 0.11723887489452296,
+              "power_w": 0.0060392097398724925,
+              "feasible": true
+            },
+            {
+              "scale_value": 5.142857142857142,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 33.82895720405257,
+              "activation_mb": 0.1353158288162103,
+              "power_w": 0.007061852049450442,
+              "feasible": true
+            },
+            {
+              "scale_value": 5.771428571428571,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 38.403902763201486,
+              "activation_mb": 0.15361561105280594,
+              "power_w": 0.008109858033576077,
+              "feasible": true
+            },
+            {
+              "scale_value": 6.4,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 43.02904181588886,
+              "activation_mb": 0.17211616726355544,
+              "power_w": 0.009180983997984355,
+              "feasible": true
+            },
+            {
+              "scale_value": 7.0285714285714285,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 47.69990046821536,
+              "activation_mb": 0.19079960187286144,
+              "power_w": 0.010273389095903931,
+              "feasible": true
+            },
+            {
+              "scale_value": 7.6571428571428575,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 52.41277190686808,
+              "activation_mb": 0.20965108762747234,
+              "power_w": 0.01138553286556092,
+              "feasible": true
+            },
+            {
+              "scale_value": 8.285714285714285,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 57.1645320509937,
+              "activation_mb": 0.2286581282039748,
+              "power_w": 0.012516105231902568,
+              "feasible": true
+            },
+            {
+              "scale_value": 8.914285714285715,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 61.952510281062885,
+              "activation_mb": 0.24781004112425153,
+              "power_w": 0.01366397696675215,
+              "feasible": true
+            },
+            {
+              "scale_value": 9.542857142857143,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 66.77439602450197,
+              "activation_mb": 0.2670975840980078,
+              "power_w": 0.014828163587379024,
+              "feasible": true
+            },
+            {
+              "scale_value": 10.17142857142857,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 71.62816952283406,
+              "activation_mb": 0.2865126780913362,
+              "power_w": 0.016007798392129843,
+              "feasible": true
+            },
+            {
+              "scale_value": 10.8,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 76.5120494001363,
+              "activation_mb": 0.30604819760054525,
+              "power_w": 0.017202111892477938,
+              "feasible": true
+            },
+            {
+              "scale_value": 11.428571428571429,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 81.42445220723897,
+              "activation_mb": 0.3256978088289559,
+              "power_w": 0.018410415836327645,
+              "feasible": false
+            },
+            {
+              "scale_value": 12.057142857142857,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 86.36396069335524,
+              "activation_mb": 0.34545584277342095,
+              "power_w": 0.01963209059913192,
+              "feasible": false
+            },
+            {
+              "scale_value": 12.685714285714285,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 91.32929856255281,
+              "activation_mb": 0.36531719425021125,
+              "power_w": 0.020866575092783692,
+              "feasible": false
+            },
+            {
+              "scale_value": 13.314285714285715,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 96.31931013204581,
+              "activation_mb": 0.38527724052818324,
+              "power_w": 0.022113358588651384,
+              "feasible": false
+            },
+            {
+              "scale_value": 13.942857142857143,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 101.33294375267572,
+              "activation_mb": 0.40533177501070283,
+              "power_w": 0.02337197401774737,
+              "feasible": false
+            },
+            {
+              "scale_value": 14.571428571428571,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 106.36923815663498,
+              "activation_mb": 0.4254769526265399,
+              "power_w": 0.02464199242614619,
+              "feasible": false
+            },
+            {
+              "scale_value": 15.2,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 111.42731111100596,
+              "activation_mb": 0.4457092444440238,
+              "power_w": 0.025923018344871148,
+              "feasible": false
+            },
+            {
+              "scale_value": 15.82857142857143,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 116.5063499079841,
+              "activation_mb": 0.4660253996319364,
+              "power_w": 0.02721468589160263,
+              "feasible": false
+            },
+            {
+              "scale_value": 16.457142857142856,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 121.60560333302969,
+              "activation_mb": 0.4864224133321187,
+              "power_w": 0.028516655463892867,
+              "feasible": false
+            },
+            {
+              "scale_value": 17.085714285714285,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 126.72437483335476,
+              "activation_mb": 0.5068974993334191,
+              "power_w": 0.029828610914839793,
+              "feasible": false
+            },
+            {
+              "scale_value": 17.714285714285715,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 131.86201666962833,
+              "activation_mb": 0.5274480666785134,
+              "power_w": 0.031150257125571474,
+              "feasible": false
+            },
+            {
+              "scale_value": 18.34285714285714,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 137.01792487939684,
+              "activation_mb": 0.5480716995175874,
+              "power_w": 0.032481317906614286,
+              "feasible": false
+            },
+            {
+              "scale_value": 18.97142857142857,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 142.19153491550617,
+              "activation_mb": 0.5687661396620247,
+              "power_w": 0.033821534173787096,
+              "feasible": false
+            },
+            {
+              "scale_value": 19.6,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 147.3823178496203,
+              "activation_mb": 0.5895292713984812,
+              "power_w": 0.0351706623547604,
+              "feasible": false
+            },
+            {
+              "scale_value": 20.228571428571428,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 152.58977705179035,
+              "activation_mb": 0.6103591082071613,
+              "power_w": 0.03652847299061617,
+              "feasible": false
+            },
+            {
+              "scale_value": 20.857142857142858,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 157.81344527339837,
+              "activation_mb": 0.6312537810935934,
+              "power_w": 0.037894749503199925,
+              "feasible": false
+            },
+            {
+              "scale_value": 21.485714285714284,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 163.05288207375838,
+              "activation_mb": 0.6522115282950335,
+              "power_w": 0.03926928710418414,
+              "feasible": false
+            },
+            {
+              "scale_value": 22.114285714285714,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 168.30767154099195,
+              "activation_mb": 0.6732306861639678,
+              "power_w": 0.04065189182586517,
+              "feasible": false
+            },
+            {
+              "scale_value": 22.742857142857144,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 173.57742026609665,
+              "activation_mb": 0.6943096810643866,
+              "power_w": 0.04204237965702201,
+              "feasible": false
+            },
+            {
+              "scale_value": 23.37142857142857,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 178.86175553584226,
+              "activation_mb": 0.7154470221433691,
+              "power_w": 0.04344057576984824,
+              "feasible": false
+            },
+            {
+              "scale_value": 24.0,
+              "architecture_id": "tiny_cnn",
+              "latency_ms": 184.16032371559425,
+              "activation_mb": 0.7366412948623771,
+              "power_w": 0.04484631382615862,
+              "feasible": false
+            }
+          ],
+          "micro_transformer": [
+            {
+              "scale_value": 2.0,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 14.84446399619506,
+              "activation_mb": 0.053125,
+              "power_w": 0.004,
+              "feasible": false
+            },
+            {
+              "scale_value": 2.6285714285714286,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 24.27762159143109,
+              "activation_mb": 0.09176530612244899,
+              "power_w": 0.006026909530096251,
+              "feasible": false
+            },
+            {
+              "scale_value": 3.257142857142857,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 35.712214470374455,
+              "activation_mb": 0.14090051020408162,
+              "power_w": 0.00831323788894861,
+              "feasible": false
+            },
+            {
+              "scale_value": 3.8857142857142857,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 49.06345005386991,
+              "activation_mb": 0.20053061224489796,
+              "power_w": 0.01083231532930915,
+              "feasible": false
+            },
+            {
+              "scale_value": 4.514285714285714,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 64.26445150519315,
+              "activation_mb": 0.270655612244898,
+              "power_w": 0.01356433670773104,
+              "feasible": false
+            },
+            {
+              "scale_value": 5.142857142857142,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 81.26032554676856,
+              "activation_mb": 0.35127551020408154,
+              "power_w": 0.01649383664373819,
+              "feasible": false
+            },
+            {
+              "scale_value": 5.771428571428571,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 100.00472356352057,
+              "activation_mb": 0.4423903061224489,
+              "power_w": 0.019608301924776094,
+              "feasible": false
+            },
+            {
+              "scale_value": 6.4,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 120.4576764585147,
+              "activation_mb": 0.544,
+              "power_w": 0.02289733608959785,
+              "feasible": false
+            },
+            {
+              "scale_value": 7.0285714285714285,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 142.58414688188023,
+              "activation_mb": 0.6561045918367346,
+              "power_w": 0.026352121970754386,
+              "feasible": false
+            },
+            {
+              "scale_value": 7.6571428571428575,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 166.35301556034912,
+              "activation_mb": 0.7787040816326531,
+              "power_w": 0.029965057979394184,
+              "feasible": false
+            },
+            {
+              "scale_value": 8.285714285714285,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 191.73634525983334,
+              "activation_mb": 0.9117984693877548,
+              "power_w": 0.033729501927712256,
+              "feasible": false
+            },
+            {
+              "scale_value": 8.914285714285715,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 218.70883031321492,
+              "activation_mb": 1.0553877551020407,
+              "power_w": 0.037639584646506345,
+              "feasible": false
+            },
+            {
+              "scale_value": 9.542857142857143,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 247.24737472352544,
+              "activation_mb": 1.2094719387755102,
+              "power_w": 0.04169007069038258,
+              "feasible": false
+            },
+            {
+              "scale_value": 10.17142857142857,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 277.33076206758943,
+              "activation_mb": 1.374051020408163,
+              "power_w": 0.045876251851748026,
+              "feasible": false
+            },
+            {
+              "scale_value": 10.8,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 308.9393926291028,
+              "activation_mb": 1.549125,
+              "power_w": 0.05019386416684813,
+              "feasible": false
+            },
+            {
+              "scale_value": 11.428571428571429,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 342.0550708511649,
+              "activation_mb": 1.7346938775510203,
+              "power_w": 0.05463902214100085,
+              "feasible": false
+            },
+            {
+              "scale_value": 12.057142857142857,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 376.66083117043013,
+              "activation_mb": 1.9307576530612243,
+              "power_w": 0.059208165853960444,
+              "feasible": false
+            },
+            {
+              "scale_value": 12.685714285714285,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 412.7407936162394,
+              "activation_mb": 2.1373163265306117,
+              "power_w": 0.06389801787259639,
+              "feasible": false
+            },
+            {
+              "scale_value": 13.314285714285715,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 450.28004283294126,
+              "activation_mb": 2.354369897959184,
+              "power_w": 0.06870554774940078,
+              "feasible": false
+            },
+            {
+              "scale_value": 13.942857142857143,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 489.2645257766161,
+              "activation_mb": 2.5819183673469386,
+              "power_w": 0.07362794247115999,
+              "feasible": false
+            },
+            {
+              "scale_value": 14.571428571428571,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 529.680964475083,
+              "activation_mb": 2.8199617346938775,
+              "power_w": 0.0786625816336531,
+              "feasible": false
+            },
+            {
+              "scale_value": 15.2,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 571.5167810669402,
+              "activation_mb": 3.0685,
+              "power_w": 0.08380701641270855,
+              "feasible": false
+            },
+            {
+              "scale_value": 15.82857142857143,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 614.7600329459488,
+              "activation_mb": 3.3275331632653065,
+              "power_w": 0.08905895161618378,
+              "feasible": false
+            },
+            {
+              "scale_value": 16.457142857142856,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 659.3993562943866,
+              "activation_mb": 3.5970612244897953,
+              "power_w": 0.09441623025964946,
+              "feasible": false
+            },
+            {
+              "scale_value": 17.085714285714285,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 705.4239166360327,
+              "activation_mb": 3.8770841836734693,
+              "power_w": 0.0998768202270121,
+              "feasible": false
+            },
+            {
+              "scale_value": 17.714285714285715,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 752.8233653059034,
+              "activation_mb": 4.167602040816327,
+              "power_w": 0.10543880266710032,
+              "feasible": false
+            },
+            {
+              "scale_value": 18.34285714285714,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 801.5878009407336,
+              "activation_mb": 4.468614795918366,
+              "power_w": 0.11110036184609104,
+              "feasible": false
+            },
+            {
+              "scale_value": 18.97142857142857,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 851.7077352563804,
+              "activation_mb": 4.780122448979592,
+              "power_w": 0.11685977622899826,
+              "feasible": false
+            },
+            {
+              "scale_value": 19.6,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 903.1740625066885,
+              "activation_mb": 5.102125000000001,
+              "power_w": 0.12271541060518847,
+              "feasible": false
+            },
+            {
+              "scale_value": 20.228571428571428,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 955.978032120813,
+              "activation_mb": 5.4346224489795905,
+              "power_w": 0.1286657091058393,
+              "feasible": false
+            },
+            {
+              "scale_value": 20.857142857142858,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 1010.1112240984177,
+              "activation_mb": 5.7776147959183675,
+              "power_w": 0.13470918898749126,
+              "feasible": false
+            },
+            {
+              "scale_value": 21.485714285714284,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 1065.5655268089806,
+              "activation_mb": 6.131102040816325,
+              "power_w": 0.14084443507688996,
+              "feasible": false
+            },
+            {
+              "scale_value": 22.114285714285714,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 1122.3331168959783,
+              "activation_mb": 6.495084183673469,
+              "power_w": 0.14707009478932523,
+              "feasible": false
+            },
+            {
+              "scale_value": 22.742857142857144,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 1180.406441031494,
+              "activation_mb": 6.869561224489797,
+              "power_w": 0.15338487364651332,
+              "feasible": false
+            },
+            {
+              "scale_value": 23.37142857142857,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 1239.7781993038454,
+              "activation_mb": 7.254533163265305,
+              "power_w": 0.15978753123140188,
+              "feasible": false
+            },
+            {
+              "scale_value": 24.0,
+              "architecture_id": "micro_transformer",
+              "latency_ms": 1300.4413300515737,
+              "activation_mb": 7.6499999999999995,
+              "power_w": 0.16627687752661222,
+              "feasible": false
+            }
+          ]
+        },
+        "first_failure_by_candidate": {
+          "streaming_tcn": 18.34285714285714,
+          "tiny_cnn": 11.428571428571429,
+          "micro_transformer": 2.0
+        }
+      },
+      "topology": {
+        "rows": [
+          {
+            "id": "streaming_tcn",
+            "label": "Streaming temporal CNN",
+            "family": "Temporal CNN",
+            "topology": "recurrent or causal sequence",
+            "access": "streaming state reuse",
+            "locality": "state locality",
+            "ops_per_mb": 0.04285714285714285,
+            "memory_pct": 31.11111111111111,
+            "latency_pct": 28.333333333333332,
+            "power_pct": 44.44444444444445,
+            "dominant": "quality guardrail",
+            "feasible": true
+          },
+          {
+            "id": "tiny_cnn",
+            "label": "Tiny DS-CNN",
+            "family": "Depthwise CNN",
+            "topology": "sliding-window convolution",
+            "access": "spatial reuse and tiling",
+            "locality": "high locality",
+            "ops_per_mb": 0.05454545454545455,
+            "memory_pct": 48.888888888888886,
+            "latency_pct": 45.83333333333333,
+            "power_pct": 66.66666666666667,
+            "dominant": "quality guardrail",
+            "feasible": true
+          },
+          {
+            "id": "micro_transformer",
+            "label": "Micro transformer",
+            "family": "Transformer",
+            "topology": "all-to-all attention",
+            "access": "gather/reduce over tokens",
+            "locality": "low locality",
+            "ops_per_mb": 0.09411764705882353,
+            "memory_pct": 188.88888888888889,
+            "latency_pct": 150.0,
+            "power_pct": 177.7777777777778,
+            "dominant": "activation memory",
+            "feasible": false
+          }
+        ],
+        "actual": "quality",
+        "best_label": "Tiny DS-CNN",
+        "best_topology": "sliding-window convolution",
+        "best_access": "spatial reuse and tiling",
+        "best_locality": "high locality",
+        "best_constraint": "quality guardrail"
+      },
+      "attention": {
+        "attention_id": "micro_transformer",
+        "attention_label": "Micro transformer",
+        "dominant_amount": "activation memory",
+        "actual": "memory",
+        "first_failure": "2 s",
+        "status": "fail",
+        "message": "Micro transformer is governed by activation memory: activation memory is 0.85 MB against 0.45 MB, latency is 180.00 ms against 120.00 ms, and the first infeasible scale is 2 s. Mitigation: shorten the window, stream state, or reject attention state that spills from SRAM.",
+        "scale_value": 8.0,
+        "memory_pct": 188.88888888888889,
+        "latency_pct": 150.0,
+        "power_pct": 177.7777777777778
+      },
+      "bias": {
+        "rows": [
+          {
+            "id": "streaming_tcn",
+            "label": "Streaming temporal CNN",
+            "family": "Temporal CNN",
+            "bias_match": 1.18,
+            "data_need": 84.74576271186442,
+            "quality": 82.0,
+            "deployability": 100.0,
+            "feasible": true,
+            "dominant": "quality guardrail",
+            "score": 100.22033898305085
+          },
+          {
+            "id": "tiny_cnn",
+            "label": "Tiny DS-CNN",
+            "family": "Depthwise CNN",
+            "bias_match": 1.18,
+            "data_need": 84.74576271186442,
+            "quality": 83.0,
+            "deployability": 100.0,
+            "feasible": true,
+            "dominant": "quality guardrail",
+            "score": 101.22033898305085
+          },
+          {
+            "id": "micro_transformer",
+            "label": "Micro transformer",
+            "family": "Transformer",
+            "bias_match": 0.64,
+            "data_need": 156.25,
+            "quality": 86.0,
+            "deployability": 47.19444444444444,
+            "feasible": false,
+            "dominant": "activation memory",
+            "score": 10.298611111111114
+          }
+        ],
+        "best": {
+          "id": "tiny_cnn",
+          "label": "Tiny DS-CNN",
+          "family": "Depthwise CNN",
+          "bias_match": 1.18,
+          "data_need": 84.74576271186442,
+          "quality": 83.0,
+          "deployability": 100.0,
+          "feasible": true,
+          "dominant": "quality guardrail",
+          "score": 101.22033898305085
+        },
+        "leaderboard_label": "Micro transformer",
+        "actual": "local_bias"
+      },
+      "review": {
+        "selected": {
+          "architecture_id": "streaming_tcn",
+          "label": "Streaming temporal CNN",
+          "family": "Temporal CNN",
+          "scale_value": 8.0,
+          "params_m": 0.05,
+          "ops_gmac": 0.006,
+          "activation_mb": 0.14,
+          "latency_ms": 34.0,
+          "power_w": 0.008,
+          "quality_pct": 82.0,
+          "kernel_support_pct": 91.0,
+          "dominant_constraint": "quality guardrail",
+          "feasible": true,
+          "violations": [],
+          "score": 89.28,
+          "next_failure": "quality guardrail is closest to failure at 0.98x budget",
+          "guardrail": "SRAM streaming buffer",
+          "validation_requirement": "SRAM trace plus battery regression",
+          "residual_risk": "short windows can miss slow physiology changes"
+        },
+        "leaderboard": {
+          "architecture_id": "micro_transformer",
+          "label": "Micro transformer",
+          "family": "Transformer",
+          "scale_value": 8.0,
+          "params_m": 0.45,
+          "ops_gmac": 0.08,
+          "activation_mb": 0.85,
+          "latency_ms": 180.0,
+          "power_w": 0.032,
+          "quality_pct": 86.0,
+          "kernel_support_pct": 68.0,
+          "dominant_constraint": "activation memory",
+          "feasible": false,
+          "violations": [
+            "activation memory 0.85 MB > 0.45 MB",
+            "latency 180.00 ms > 120.00 ms",
+            "power 0.032 W > 0.018 W",
+            "kernel support 68.0% < 80.0%"
+          ],
+          "score": -2.2854901960784417,
+          "next_failure": "activation memory already exceeds budget",
+          "guardrail": "battery and SRAM budget",
+          "validation_requirement": "reject unless attention state is externalized or compressed",
+          "residual_risk": "accuracy gain depends on unavailable memory and power headroom"
+        },
+        "headroom_pick": {
+          "architecture_id": "streaming_tcn",
+          "label": "Streaming temporal CNN",
+          "family": "Temporal CNN",
+          "scale_value": 8.0,
+          "params_m": 0.05,
+          "ops_gmac": 0.006,
+          "activation_mb": 0.14,
+          "latency_ms": 34.0,
+          "power_w": 0.008,
+          "quality_pct": 82.0,
+          "kernel_support_pct": 91.0,
+          "dominant_constraint": "quality guardrail",
+          "feasible": true,
+          "violations": [],
+          "score": 89.28,
+          "next_failure": "quality guardrail is closest to failure at 0.98x budget",
+          "guardrail": "SRAM streaming buffer",
+          "validation_requirement": "SRAM trace plus battery regression",
+          "residual_risk": "short windows can miss slow physiology changes"
+        },
+        "headroom": 2.25,
+        "status": "approve",
+        "kind": "ok",
+        "actual": "headroom",
+        "message": "Approve Streaming temporal CNN: it has the strongest track headroom among feasible candidates."
+      }
+    },
+    "robotaxi": {
+      "defaults": {
+        "architecture_story": "A RoboTaxi model can be accurate on average and still be unsafe if its tail-latency shape is unbounded.",
+        "workload_label": "multi-sensor perception frame",
+        "scaling_variable": "sensor resolution",
+        "scaling_unit": "MP",
+        "default_scale": 2.0,
+        "scale_min": 0.75,
+        "scale_max": 6.0,
+        "scale_step": 0.25,
+        "memory_budget_mb": 512.0,
+        "latency_budget_ms": 30.0,
+        "power_budget_w": 55.0,
+        "quality_floor_pct": 92.0,
+        "kernel_support_floor_pct": 90.0,
+        "candidate_architectures": {
+          "bounded_cnn_detector": {
+            "label": "Bounded CNN detector",
+            "family": "CNN Detector",
+            "summary": "Convolutional detector with predictable kernels and a clear safety replay envelope.",
+            "params_m": 11.0,
+            "ops_gmac": 38.0,
+            "activation_mb": 180.0,
+            "latency_ms": 17.0,
+            "power_w": 34.0,
+            "quality_pct": 92.5,
+            "kernel_support_pct": 95.0,
+            "scaling_law": "sensor resolution grows convolutional feature maps",
+            "param_exponent": 0.0,
+            "op_exponent": 1.8,
+            "activation_exponent": 1.7,
+            "latency_exponent": 1.5,
+            "guardrail": "p99 latency and rare-event replay",
+            "validation_requirement": "p99/p999 replay and rare-hazard recall regression",
+            "residual_risk": "small objects and unusual weather remain data-bound"
+          },
+          "hybrid_vit_detector": {
+            "label": "Hybrid ViT detector",
+            "family": "Hybrid Transformer",
+            "summary": "Adds global context with a narrow tail-latency and activation margin.",
+            "params_m": 45.0,
+            "ops_gmac": 120.0,
+            "activation_mb": 460.0,
+            "latency_ms": 28.0,
+            "power_w": 51.0,
+            "quality_pct": 94.0,
+            "kernel_support_pct": 90.0,
+            "scaling_law": "resolution and token mixing create a steep tail",
+            "param_exponent": 0.0,
+            "op_exponent": 2.1,
+            "activation_exponent": 2.0,
+            "latency_exponent": 1.9,
+            "guardrail": "tail-latency margin",
+            "validation_requirement": "burst sensor replay and fallback drill",
+            "residual_risk": "context modules can stretch p99 under sensor bursts"
+          },
+          "large_multimodal_transformer": {
+            "label": "Large multimodal transformer",
+            "family": "Multimodal Transformer",
+            "summary": "Strong average reasoning signal, but the resource envelope is not vehicle-local bounded.",
+            "params_m": 220.0,
+            "ops_gmac": 410.0,
+            "activation_mb": 1250.0,
+            "latency_ms": 74.0,
+            "power_w": 80.0,
+            "quality_pct": 95.0,
+            "kernel_support_pct": 78.0,
+            "scaling_law": "tokens from multiple sensors drive memory and tail latency",
+            "param_exponent": 0.0,
+            "op_exponent": 2.3,
+            "activation_exponent": 2.2,
+            "latency_exponent": 2.0,
+            "guardrail": "safety latency envelope",
+            "validation_requirement": "reject for local loop unless split behind a safety fallback",
+            "residual_risk": "average quality hides unacceptable rare-event latency"
+          }
+        },
+        "validation_tests": [
+          "rare-event replay",
+          "p99/p999 latency replay",
+          "sensor burst test",
+          "fallback drill"
+        ]
+      },
+      "signature": [
+        {
+          "architecture_id": "bounded_cnn_detector",
+          "label": "Bounded CNN detector",
+          "family": "CNN Detector",
+          "scale_value": 2.0,
+          "params_m": 11.0,
+          "ops_gmac": 38.0,
+          "activation_mb": 180.0,
+          "latency_ms": 17.0,
+          "power_w": 34.0,
+          "quality_pct": 92.5,
+          "kernel_support_pct": 95.0,
+          "dominant_constraint": "quality guardrail",
+          "feasible": true,
+          "violations": [],
+          "score": 100.1,
+          "next_failure": "quality guardrail is closest to failure at 0.99x budget",
+          "guardrail": "p99 latency and rare-event replay",
+          "validation_requirement": "p99/p999 replay and rare-hazard recall regression",
+          "residual_risk": "small objects and unusual weather remain data-bound"
+        },
+        {
+          "architecture_id": "hybrid_vit_detector",
+          "label": "Hybrid ViT detector",
+          "family": "Hybrid Transformer",
+          "scale_value": 2.0,
+          "params_m": 45.0,
+          "ops_gmac": 120.0,
+          "activation_mb": 460.0,
+          "latency_ms": 28.0,
+          "power_w": 51.0,
+          "quality_pct": 94.0,
+          "kernel_support_pct": 90.0,
+          "dominant_constraint": "kernel support",
+          "feasible": true,
+          "violations": [],
+          "score": 101.2,
+          "next_failure": "kernel support already exceeds budget",
+          "guardrail": "tail-latency margin",
+          "validation_requirement": "burst sensor replay and fallback drill",
+          "residual_risk": "context modules can stretch p99 under sensor bursts"
+        },
+        {
+          "architecture_id": "large_multimodal_transformer",
+          "label": "Large multimodal transformer",
+          "family": "Multimodal Transformer",
+          "scale_value": 2.0,
+          "params_m": 220.0,
+          "ops_gmac": 410.0,
+          "activation_mb": 1250.0,
+          "latency_ms": 74.0,
+          "power_w": 80.0,
+          "quality_pct": 95.0,
+          "kernel_support_pct": 78.0,
+          "dominant_constraint": "latency",
+          "feasible": false,
+          "violations": [
+            "activation memory 1250.00 MB > 512.00 MB",
+            "latency 74.00 ms > 30.00 ms",
+            "power 80.000 W > 55.000 W",
+            "kernel support 78.0% < 90.0%"
+          ],
+          "score": -39.41858100233101,
+          "next_failure": "latency already exceeds budget",
+          "guardrail": "safety latency envelope",
+          "validation_requirement": "reject for local loop unless split behind a safety fallback",
+          "residual_risk": "average quality hides unacceptable rare-event latency"
+        }
+      ],
+      "curve": {
+        "scale_values": [
+          0.75,
+          0.9,
+          1.05,
+          1.2,
+          1.35,
+          1.5,
+          1.65,
+          1.8,
+          1.95,
+          2.1,
+          2.25,
+          2.4,
+          2.55,
+          2.7,
+          2.85,
+          3.0,
+          3.15,
+          3.3,
+          3.45,
+          3.6,
+          3.75,
+          3.9,
+          4.05,
+          4.2,
+          4.35,
+          4.5,
+          4.65,
+          4.8,
+          4.95,
+          5.1,
+          5.25,
+          5.4,
+          5.55,
+          5.7,
+          5.85,
+          6.0
+        ],
+        "points_by_candidate": {
+          "bounded_cnn_detector": [
+            {
+              "scale_value": 0.75,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 3.90387427756069,
+              "activation_mb": 33.97235551382977,
+              "power_w": 7.80774855512138,
+              "feasible": true
+            },
+            {
+              "scale_value": 0.9,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 5.131776008362017,
+              "activation_mb": 46.316291493904096,
+              "power_w": 10.263552016724034,
+              "feasible": true
+            },
+            {
+              "scale_value": 1.05,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 6.466776872987037,
+              "activation_mb": 60.192630207984465,
+              "power_w": 12.933553745974073,
+              "feasible": true
+            },
+            {
+              "scale_value": 1.2,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 7.90088602626313,
+              "activation_mb": 75.53176456475838,
+              "power_w": 15.80177205252626,
+              "feasible": true
+            },
+            {
+              "scale_value": 1.35,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 9.427674521057673,
+              "activation_mb": 92.27603368767049,
+              "power_w": 18.855349042115346,
+              "feasible": true
+            },
+            {
+              "scale_value": 1.5,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 11.041823898251593,
+              "activation_mb": 110.3765087038968,
+              "power_w": 22.083647796503186,
+              "feasible": true
+            },
+            {
+              "scale_value": 1.65,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 12.738838864865194,
+              "activation_mb": 129.79089213927404,
+              "power_w": 25.477677729730388,
+              "feasible": true
+            },
+            {
+              "scale_value": 1.8,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 14.514854460172861,
+              "activation_mb": 150.48207502503013,
+              "power_w": 29.029708920345723,
+              "feasible": true
+            },
+            {
+              "scale_value": 1.95,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 16.366501134176477,
+              "activation_mb": 172.4171062192725,
+              "power_w": 32.733002268352955,
+              "feasible": true
+            },
+            {
+              "scale_value": 2.1,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 18.290807117237883,
+              "activation_mb": 195.56643251768045,
+              "power_w": 36.581614234475765,
+              "feasible": true
+            },
+            {
+              "scale_value": 2.25,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 20.285125785289083,
+              "activation_mb": 219.9033235816979,
+              "power_w": 40.570251570578165,
+              "feasible": true
+            },
+            {
+              "scale_value": 2.4,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 22.347080346210774,
+              "activation_mb": 245.40342707495992,
+              "power_w": 44.69416069242155,
+              "feasible": true
+            },
+            {
+              "scale_value": 2.55,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 24.474520871203993,
+              "activation_mb": 272.04441802544176,
+              "power_w": 48.949041742407985,
+              "feasible": true
+            },
+            {
+              "scale_value": 2.7,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 26.66549033863807,
+              "activation_mb": 299.80571795623626,
+              "power_w": 53.33098067727614,
+              "feasible": true
+            },
+            {
+              "scale_value": 2.85,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 28.91819739584402,
+              "activation_mb": 328.66826671216074,
+              "power_w": 57.83639479168804,
+              "feasible": false
+            },
+            {
+              "scale_value": 3.0,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 31.23099422048552,
+              "activation_mb": 358.61433478470025,
+              "power_w": 62.46198844097104,
+              "feasible": false
+            },
+            {
+              "scale_value": 3.15,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 33.602358315674806,
+              "activation_mb": 389.62736724191626,
+              "power_w": 67.20471663134961,
+              "feasible": false
+            },
+            {
+              "scale_value": 3.3,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 36.03087738315568,
+              "activation_mb": 421.69185266135605,
+              "power_w": 72.06175476631137,
+              "feasible": false
+            },
+            {
+              "scale_value": 3.45,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 38.51523663597305,
+              "activation_mb": 454.7932120858312,
+              "power_w": 77.0304732719461,
+              "feasible": false
+            },
+            {
+              "scale_value": 3.6,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 41.05420806689614,
+              "activation_mb": 488.91770419095815,
+              "power_w": 82.10841613379228,
+              "feasible": false
+            },
+            {
+              "scale_value": 3.75,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 43.64664130119292,
+              "activation_mb": 524.0523437098949,
+              "power_w": 87.29328260238584,
+              "feasible": false
+            },
+            {
+              "scale_value": 3.9,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 46.29145574509404,
+              "activation_mb": 560.1848307976467,
+              "power_w": 92.58291149018808,
+              "feasible": false
+            },
+            {
+              "scale_value": 4.05,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 48.9876338030834,
+              "activation_mb": 597.3034894973617,
+              "power_w": 97.9752676061668,
+              "feasible": false
+            },
+            {
+              "scale_value": 4.2,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 51.734214983896294,
+              "activation_mb": 635.3972138373038,
+              "power_w": 103.46842996779259,
+              "feasible": false
+            },
+            {
+              "scale_value": 4.35,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 54.53029075087533,
+              "activation_mb": 674.4554203697944,
+              "power_w": 109.06058150175066,
+              "feasible": false
+            },
+            {
+              "scale_value": 4.5,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 57.375,
+              "activation_mb": 714.4680061837391,
+              "power_w": 114.75,
+              "feasible": false
+            },
+            {
+              "scale_value": 4.65,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 60.26752507051373,
+              "activation_mb": 755.4253115957631,
+              "power_w": 120.53505014102745,
+              "feasible": false
+            },
+            {
+              "scale_value": 4.8,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 63.20708821010504,
+              "activation_mb": 797.3180868626755,
+              "power_w": 126.41417642021008,
+              "feasible": false
+            },
+            {
+              "scale_value": 4.95,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 66.1929484301387,
+              "activation_mb": 840.1374623682225,
+              "power_w": 132.3858968602774,
+              "feasible": false
+            },
+            {
+              "scale_value": 5.1,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 69.22439869728012,
+              "activation_mb": 883.8749218260101,
+              "power_w": 138.44879739456024,
+              "feasible": false
+            },
+            {
+              "scale_value": 5.25,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 72.3007634166127,
+              "activation_mb": 928.5222781127446,
+              "power_w": 144.6015268332254,
+              "feasible": false
+            },
+            {
+              "scale_value": 5.4,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 75.42139616846138,
+              "activation_mb": 974.0716514050183,
+              "power_w": 150.84279233692277,
+              "feasible": false
+            },
+            {
+              "scale_value": 5.55,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 78.58567766695786,
+              "activation_mb": 1020.5154493415201,
+              "power_w": 157.17135533391573,
+              "feasible": false
+            },
+            {
+              "scale_value": 5.7,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 81.79301391316989,
+              "activation_mb": 1067.8463489728117,
+              "power_w": 163.58602782633977,
+              "feasible": false
+            },
+            {
+              "scale_value": 5.85,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 85.04283451958196,
+              "activation_mb": 1116.0572802943218,
+              "power_w": 170.08566903916392,
+              "feasible": false
+            },
+            {
+              "scale_value": 6.0,
+              "architecture_id": "bounded_cnn_detector",
+              "latency_ms": 88.33459118601274,
+              "activation_mb": 1165.1414111862803,
+              "power_w": 176.6691823720255,
+              "feasible": false
+            }
+          ],
+          "hybrid_vit_detector": [
+            {
+              "scale_value": 0.75,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 4.3432761189119,
+              "activation_mb": 64.6875,
+              "power_w": 11.711622832682071,
+              "feasible": true
+            },
+            {
+              "scale_value": 0.9,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 6.141321133655343,
+              "activation_mb": 93.15,
+              "power_w": 15.395328025086053,
+              "feasible": true
+            },
+            {
+              "scale_value": 1.05,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 8.231153633400426,
+              "activation_mb": 126.78750000000001,
+              "power_w": 19.40033061896111,
+              "feasible": true
+            },
+            {
+              "scale_value": 1.2,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 10.608290573821169,
+              "activation_mb": 165.6,
+              "power_w": 23.70265807878939,
+              "feasible": true
+            },
+            {
+              "scale_value": 1.35,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 13.268908513382057,
+              "activation_mb": 209.58750000000003,
+              "power_w": 28.283023563173018,
+              "feasible": true
+            },
+            {
+              "scale_value": 1.5,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 16.20967964119498,
+              "activation_mb": 258.75,
+              "power_w": 33.12547169475478,
+              "feasible": true
+            },
+            {
+              "scale_value": 1.65,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 19.427661754888867,
+              "activation_mb": 313.0875,
+              "power_w": 38.21651659459558,
+              "feasible": true
+            },
+            {
+              "scale_value": 1.8,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 22.92022091729065,
+              "activation_mb": 372.6,
+              "power_w": 43.54456338051858,
+              "feasible": true
+            },
+            {
+              "scale_value": 1.95,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 26.684975055384545,
+              "activation_mb": 437.28749999999997,
+              "power_w": 49.099503402529436,
+              "feasible": true
+            },
+            {
+              "scale_value": 2.1,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 30.71975159348264,
+              "activation_mb": 507.15000000000003,
+              "power_w": 54.87242135171365,
+              "feasible": false
+            },
+            {
+              "scale_value": 2.25,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 35.022554839471226,
+              "activation_mb": 582.1875,
+              "power_w": 60.85537735586725,
+              "feasible": false
+            },
+            {
+              "scale_value": 2.4,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 39.59154035673632,
+              "activation_mb": 662.4,
+              "power_w": 67.04124103863232,
+              "feasible": false
+            },
+            {
+              "scale_value": 2.55,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 44.42499446883145,
+              "activation_mb": 747.7874999999999,
+              "power_w": 73.42356261361198,
+              "feasible": false
+            },
+            {
+              "scale_value": 2.7,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 49.521317618676285,
+              "activation_mb": 838.3500000000001,
+              "power_w": 79.99647101591421,
+              "feasible": false
+            },
+            {
+              "scale_value": 2.85,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 54.879010677648886,
+              "activation_mb": 934.0875000000001,
+              "power_w": 86.75459218753207,
+              "feasible": false
+            },
+            {
+              "scale_value": 3.0,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 60.496663549909734,
+              "activation_mb": 1035.0,
+              "power_w": 93.69298266145657,
+              "feasible": false
+            },
+            {
+              "scale_value": 3.15,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 66.37294558884724,
+              "activation_mb": 1141.0874999999999,
+              "power_w": 100.80707494702443,
+              "feasible": false
+            },
+            {
+              "scale_value": 3.3,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 72.50659746291672,
+              "activation_mb": 1252.35,
+              "power_w": 108.09263214946705,
+              "feasible": false
+            },
+            {
+              "scale_value": 3.45,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 78.89642419430079,
+              "activation_mb": 1368.7875000000001,
+              "power_w": 115.54570990791915,
+              "feasible": false
+            },
+            {
+              "scale_value": 3.6,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 85.5412891565768,
+              "activation_mb": 1490.4,
+              "power_w": 123.16262420068843,
+              "feasible": false
+            },
+            {
+              "scale_value": 3.75,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 92.44010886402077,
+              "activation_mb": 1617.1875,
+              "power_w": 130.93992390357877,
+              "feasible": false
+            },
+            {
+              "scale_value": 3.9,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 99.59184842004208,
+              "activation_mb": 1749.1499999999999,
+              "power_w": 138.8743672352821,
+              "feasible": false
+            },
+            {
+              "scale_value": 4.05,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 106.99551751875985,
+              "activation_mb": 1886.2875,
+              "power_w": 146.9629014092502,
+              "feasible": false
+            },
+            {
+              "scale_value": 4.2,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 114.65016691413885,
+              "activation_mb": 2028.6000000000001,
+              "power_w": 155.20264495168888,
+              "feasible": false
+            },
+            {
+              "scale_value": 4.35,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 122.5548852869797,
+              "activation_mb": 2176.0874999999996,
+              "power_w": 163.59087225262599,
+              "feasible": false
+            },
+            {
+              "scale_value": 4.5,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 130.7087964525349,
+              "activation_mb": 2328.75,
+              "power_w": 172.125,
+              "feasible": false
+            },
+            {
+              "scale_value": 4.65,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 139.11105686141732,
+              "activation_mb": 2486.5875,
+              "power_w": 180.80257521154118,
+              "feasible": false
+            },
+            {
+              "scale_value": 4.8,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 147.76085335438367,
+              "activation_mb": 2649.6,
+              "power_w": 189.62126463031512,
+              "feasible": false
+            },
+            {
+              "scale_value": 4.95,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 156.6574011379576,
+              "activation_mb": 2817.7875000000004,
+              "power_w": 198.57884529041607,
+              "feasible": false
+            },
+            {
+              "scale_value": 5.1,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 165.79994195303973,
+              "activation_mb": 2991.1499999999996,
+              "power_w": 207.67319609184037,
+              "feasible": false
+            },
+            {
+              "scale_value": 5.25,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 175.1877424128948,
+              "activation_mb": 3169.6875,
+              "power_w": 216.9022902498381,
+              "feasible": false
+            },
+            {
+              "scale_value": 5.4,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 184.82009249039174,
+              "activation_mb": 3353.4000000000005,
+              "power_w": 226.26418850538414,
+              "feasible": false
+            },
+            {
+              "scale_value": 5.55,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 194.69630413726742,
+              "activation_mb": 3542.2875,
+              "power_w": 235.7570330008736,
+              "feasible": false
+            },
+            {
+              "scale_value": 5.7,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 204.81571002058854,
+              "activation_mb": 3736.3500000000004,
+              "power_w": 245.37904173950963,
+              "feasible": false
+            },
+            {
+              "scale_value": 5.85,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 215.1776623636034,
+              "activation_mb": 3935.5874999999996,
+              "power_w": 255.12850355874585,
+              "feasible": false
+            },
+            {
+              "scale_value": 6.0,
+              "architecture_id": "hybrid_vit_detector",
+              "latency_ms": 225.78153187987203,
+              "activation_mb": 4140.0,
+              "power_w": 265.00377355803823,
+              "feasible": false
+            }
+          ],
+          "large_multimodal_transformer": [
+            {
+              "scale_value": 0.75,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 10.40625,
+              "activation_mb": 144.4703756411624,
+              "power_w": 18.371173070873837,
+              "feasible": false
+            },
+            {
+              "scale_value": 0.9,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 14.985000000000001,
+              "activation_mb": 215.7632838459684,
+              "power_w": 24.14953415699773,
+              "feasible": false
+            },
+            {
+              "scale_value": 1.05,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 20.396250000000002,
+              "activation_mb": 302.8729450305437,
+              "power_w": 30.431891166997822,
+              "feasible": false
+            },
+            {
+              "scale_value": 1.2,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 26.64,
+              "activation_mb": 406.29620315134537,
+              "power_w": 37.1806401235912,
+              "feasible": false
+            },
+            {
+              "scale_value": 1.35,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 33.71625,
+              "activation_mb": 526.4756788317056,
+              "power_w": 44.365527157918464,
+              "feasible": false
+            },
+            {
+              "scale_value": 1.5,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 41.625,
+              "activation_mb": 663.811531379228,
+              "power_w": 51.96152422706632,
+              "feasible": false
+            },
+            {
+              "scale_value": 1.65,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 50.366249999999994,
+              "activation_mb": 818.6696678002132,
+              "power_w": 59.94747701113033,
+              "feasible": false
+            },
+            {
+              "scale_value": 1.8,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 59.940000000000005,
+              "activation_mb": 991.3877168904891,
+              "power_w": 68.305197459637,
+              "feasible": false
+            },
+            {
+              "scale_value": 1.95,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 70.34625,
+              "activation_mb": 1182.2795225779914,
+              "power_w": 77.01882886671284,
+              "feasible": false
+            },
+            {
+              "scale_value": 2.1,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 81.58500000000001,
+              "activation_mb": 1391.638614918772,
+              "power_w": 86.07438643406063,
+              "feasible": false
+            },
+            {
+              "scale_value": 2.25,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 93.65625,
+              "activation_mb": 1619.7409511466483,
+              "power_w": 95.45941546018392,
+              "feasible": false
+            },
+            {
+              "scale_value": 2.4,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 106.56,
+              "activation_mb": 1866.8471208059664,
+              "power_w": 105.16273104099187,
+              "feasible": false
+            },
+            {
+              "scale_value": 2.55,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 120.29624999999999,
+              "activation_mb": 2133.2041480386447,
+              "power_w": 115.17421586448938,
+              "feasible": false
+            },
+            {
+              "scale_value": 2.7,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 134.865,
+              "activation_mb": 2419.0469848797106,
+              "power_w": 125.48466041712032,
+              "feasible": false
+            },
+            {
+              "scale_value": 2.85,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 150.26625,
+              "activation_mb": 2724.599763367784,
+              "power_w": 136.08563480397186,
+              "feasible": false
+            },
+            {
+              "scale_value": 3.0,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 166.5,
+              "activation_mb": 3050.076856493528,
+              "power_w": 146.9693845669907,
+              "feasible": false
+            },
+            {
+              "scale_value": 3.15,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 183.56625,
+              "activation_mb": 3395.6837855731637,
+              "power_w": 158.12874501494028,
+              "feasible": false
+            },
+            {
+              "scale_value": 3.3,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 201.46499999999997,
+              "activation_mb": 3761.6180027522964,
+              "power_w": 169.5570700383797,
+              "feasible": false
+            },
+            {
+              "scale_value": 3.45,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 220.19625000000002,
+              "activation_mb": 4148.069570881895,
+              "power_w": 181.24817240457904,
+              "feasible": false
+            },
+            {
+              "scale_value": 3.6,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 239.76000000000002,
+              "activation_mb": 4555.221758225484,
+              "power_w": 193.19627325598185,
+              "feasible": false
+            },
+            {
+              "scale_value": 3.75,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 260.15625,
+              "activation_mb": 4983.25156186389,
+              "power_w": 205.3959590644373,
+              "feasible": false
+            },
+            {
+              "scale_value": 3.9,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 281.385,
+              "activation_mb": 5432.330170928075,
+              "power_w": 217.84214468279546,
+              "feasible": false
+            },
+            {
+              "scale_value": 4.05,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 303.44625,
+              "activation_mb": 5902.623378681642,
+              "power_w": 230.53004142627483,
+              "feasible": false
+            },
+            {
+              "scale_value": 4.2,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 326.34000000000003,
+              "activation_mb": 6394.291950830185,
+              "power_w": 243.45512933598258,
+              "feasible": false
+            },
+            {
+              "scale_value": 4.35,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 350.0662499999999,
+              "activation_mb": 6907.491956139421,
+              "power_w": 256.61313294529566,
+              "feasible": false
+            },
+            {
+              "scale_value": 4.5,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 374.625,
+              "activation_mb": 7442.375064413951,
+              "power_w": 270.0,
+              "feasible": false
+            },
+            {
+              "scale_value": 4.65,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 400.01625,
+              "activation_mb": 7999.08881606197,
+              "power_w": 283.6118826847705,
+              "feasible": false
+            },
+            {
+              "scale_value": 4.8,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 426.24,
+              "activation_mb": 8577.77686680306,
+              "power_w": 297.4451209887296,
+              "feasible": false
+            },
+            {
+              "scale_value": 4.95,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 453.29625000000004,
+              "activation_mb": 9178.57921053135,
+              "power_w": 311.496227906535,
+              "feasible": false
+            },
+            {
+              "scale_value": 5.1,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 481.18499999999995,
+              "activation_mb": 9801.632382899372,
+              "power_w": 325.7618762224947,
+              "feasible": false
+            },
+            {
+              "scale_value": 5.25,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 509.90625,
+              "activation_mb": 10447.069647818831,
+              "power_w": 340.23888666641267,
+              "feasible": false
+            },
+            {
+              "scale_value": 5.4,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 539.46,
+              "activation_mb": 11115.021168767445,
+              "power_w": 354.9242172633477,
+              "feasible": false
+            },
+            {
+              "scale_value": 5.55,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 569.8462499999999,
+              "activation_mb": 11805.614166534679,
+              "power_w": 369.81495372686055,
+              "feasible": false
+            },
+            {
+              "scale_value": 5.7,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 601.065,
+              "activation_mb": 12518.973064823538,
+              "power_w": 384.90830076785824,
+              "feasible": false
+            },
+            {
+              "scale_value": 5.85,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 633.1162499999999,
+              "activation_mb": 13255.2196249434,
+              "power_w": 400.2015742097974,
+              "feasible": false
+            },
+            {
+              "scale_value": 6.0,
+              "architecture_id": "large_multimodal_transformer",
+              "latency_ms": 666.0,
+              "activation_mb": 14014.473070674574,
+              "power_w": 415.69219381653056,
+              "feasible": false
+            }
+          ]
+        },
+        "first_failure_by_candidate": {
+          "bounded_cnn_detector": 2.85,
+          "hybrid_vit_detector": 2.1,
+          "large_multimodal_transformer": 0.75
+        }
+      },
+      "topology": {
+        "rows": [
+          {
+            "id": "bounded_cnn_detector",
+            "label": "Bounded CNN detector",
+            "family": "CNN Detector",
+            "topology": "sliding-window convolution",
+            "access": "spatial reuse and tiling",
+            "locality": "high locality",
+            "ops_per_mb": 0.2111111111111111,
+            "memory_pct": 35.15625,
+            "latency_pct": 56.666666666666664,
+            "power_pct": 61.81818181818181,
+            "dominant": "quality guardrail",
+            "feasible": true
+          },
+          {
+            "id": "hybrid_vit_detector",
+            "label": "Hybrid ViT detector",
+            "family": "Hybrid Transformer",
+            "topology": "all-to-all attention",
+            "access": "gather/reduce over tokens",
+            "locality": "low locality",
+            "ops_per_mb": 0.2608695652173913,
+            "memory_pct": 89.84375,
+            "latency_pct": 93.33333333333333,
+            "power_pct": 92.72727272727272,
+            "dominant": "kernel support",
+            "feasible": true
+          },
+          {
+            "id": "large_multimodal_transformer",
+            "label": "Large multimodal transformer",
+            "family": "Multimodal Transformer",
+            "topology": "all-to-all attention",
+            "access": "gather/reduce over tokens",
+            "locality": "low locality",
+            "ops_per_mb": 0.328,
+            "memory_pct": 244.140625,
+            "latency_pct": 246.66666666666669,
+            "power_pct": 145.45454545454547,
+            "dominant": "latency",
+            "feasible": false
+          }
+        ],
+        "actual": "kernel",
+        "best_label": "Hybrid ViT detector",
+        "best_topology": "all-to-all attention",
+        "best_access": "gather/reduce over tokens",
+        "best_locality": "low locality",
+        "best_constraint": "kernel support"
+      },
+      "attention": {
+        "attention_id": "large_multimodal_transformer",
+        "attention_label": "Large multimodal transformer",
+        "dominant_amount": "latency",
+        "actual": "latency",
+        "first_failure": "1 MP",
+        "status": "fail",
+        "message": "Large multimodal transformer is governed by latency: activation memory is 1250.00 MB against 512.00 MB, latency is 74.00 ms against 30.00 ms, and the first infeasible scale is 1 MP. Mitigation: keep the bounded detector, split global context behind fallback, or reduce sensor scale.",
+        "scale_value": 2.0,
+        "memory_pct": 244.140625,
+        "latency_pct": 246.66666666666669,
+        "power_pct": 145.45454545454547
+      },
+      "bias": {
+        "rows": [
+          {
+            "id": "bounded_cnn_detector",
+            "label": "Bounded CNN detector",
+            "family": "CNN Detector",
+            "bias_match": 1.12,
+            "data_need": 89.28571428571428,
+            "quality": 92.5,
+            "deployability": 100.0,
+            "feasible": true,
+            "dominant": "quality guardrail",
+            "score": 110.35714285714286
+          },
+          {
+            "id": "hybrid_vit_detector",
+            "label": "Hybrid ViT detector",
+            "family": "Hybrid Transformer",
+            "bias_match": 0.96,
+            "data_need": 104.16666666666667,
+            "quality": 94.0,
+            "deployability": 99.16666666666667,
+            "feasible": true,
+            "dominant": "kernel support",
+            "score": 110.45833333333334
+          },
+          {
+            "id": "large_multimodal_transformer",
+            "label": "Large multimodal transformer",
+            "family": "Multimodal Transformer",
+            "bias_match": 0.78,
+            "data_need": 128.2051282051282,
+            "quality": 95.0,
+            "deployability": 29.692307692307686,
+            "feasible": false,
+            "dominant": "latency",
+            "score": 17.166666666666657
+          }
+        ],
+        "best": {
+          "id": "hybrid_vit_detector",
+          "label": "Hybrid ViT detector",
+          "family": "Hybrid Transformer",
+          "bias_match": 0.96,
+          "data_need": 104.16666666666667,
+          "quality": 94.0,
+          "deployability": 99.16666666666667,
+          "feasible": true,
+          "dominant": "kernel support",
+          "score": 110.45833333333334
+        },
+        "leaderboard_label": "Large multimodal transformer",
+        "actual": "track_constraint"
+      },
+      "review": {
+        "selected": {
+          "architecture_id": "bounded_cnn_detector",
+          "label": "Bounded CNN detector",
+          "family": "CNN Detector",
+          "scale_value": 2.0,
+          "params_m": 11.0,
+          "ops_gmac": 38.0,
+          "activation_mb": 180.0,
+          "latency_ms": 17.0,
+          "power_w": 34.0,
+          "quality_pct": 92.5,
+          "kernel_support_pct": 95.0,
+          "dominant_constraint": "quality guardrail",
+          "feasible": true,
+          "violations": [],
+          "score": 100.1,
+          "next_failure": "quality guardrail is closest to failure at 0.99x budget",
+          "guardrail": "p99 latency and rare-event replay",
+          "validation_requirement": "p99/p999 replay and rare-hazard recall regression",
+          "residual_risk": "small objects and unusual weather remain data-bound"
+        },
+        "leaderboard": {
+          "architecture_id": "large_multimodal_transformer",
+          "label": "Large multimodal transformer",
+          "family": "Multimodal Transformer",
+          "scale_value": 2.0,
+          "params_m": 220.0,
+          "ops_gmac": 410.0,
+          "activation_mb": 1250.0,
+          "latency_ms": 74.0,
+          "power_w": 80.0,
+          "quality_pct": 95.0,
+          "kernel_support_pct": 78.0,
+          "dominant_constraint": "latency",
+          "feasible": false,
+          "violations": [
+            "activation memory 1250.00 MB > 512.00 MB",
+            "latency 74.00 ms > 30.00 ms",
+            "power 80.000 W > 55.000 W",
+            "kernel support 78.0% < 90.0%"
+          ],
+          "score": -39.41858100233101,
+          "next_failure": "latency already exceeds budget",
+          "guardrail": "safety latency envelope",
+          "validation_requirement": "reject for local loop unless split behind a safety fallback",
+          "residual_risk": "average quality hides unacceptable rare-event latency"
+        },
+        "headroom_pick": {
+          "architecture_id": "bounded_cnn_detector",
+          "label": "Bounded CNN detector",
+          "family": "CNN Detector",
+          "scale_value": 2.0,
+          "params_m": 11.0,
+          "ops_gmac": 38.0,
+          "activation_mb": 180.0,
+          "latency_ms": 17.0,
+          "power_w": 34.0,
+          "quality_pct": 92.5,
+          "kernel_support_pct": 95.0,
+          "dominant_constraint": "quality guardrail",
+          "feasible": true,
+          "violations": [],
+          "score": 100.1,
+          "next_failure": "quality guardrail is closest to failure at 0.99x budget",
+          "guardrail": "p99 latency and rare-event replay",
+          "validation_requirement": "p99/p999 replay and rare-hazard recall regression",
+          "residual_risk": "small objects and unusual weather remain data-bound"
+        },
+        "headroom": 1.6176470588235294,
+        "status": "approve",
+        "kind": "ok",
+        "actual": "headroom",
+        "message": "Approve Bounded CNN detector: it has the strongest track headroom among feasible candidates."
+      }
+    },
+    "cloud_fleet": {
+      "defaults": {
+        "architecture_story": "Cloud makes larger architectures possible, but batch/context scaling still creates memory, latency, and cost walls.",
+        "workload_label": "batched text inference",
+        "scaling_variable": "context length",
+        "scaling_unit": "tokens",
+        "default_scale": 512.0,
+        "scale_min": 128.0,
+        "scale_max": 4096.0,
+        "scale_step": 128.0,
+        "memory_budget_mb": 24000.0,
+        "latency_budget_ms": 120.0,
+        "power_budget_w": 700.0,
+        "quality_floor_pct": 88.0,
+        "kernel_support_floor_pct": 70.0,
+        "candidate_architectures": {
+          "bert_encoder": {
+            "label": "BERT-style encoder",
+            "family": "Transformer Encoder",
+            "summary": "Transformer encoder gives strong quality with mature kernels and controllable context.",
+            "params_m": 110.0,
+            "ops_gmac": 250.0,
+            "activation_mb": 3200.0,
+            "latency_ms": 38.0,
+            "power_w": 420.0,
+            "quality_pct": 89.5,
+            "kernel_support_pct": 92.0,
+            "scaling_law": "attention memory grows with context length squared",
+            "param_exponent": 0.0,
+            "op_exponent": 2.0,
+            "activation_exponent": 2.0,
+            "latency_exponent": 1.6,
+            "guardrail": "p99 SLA and HBM headroom",
+            "validation_requirement": "load/SLA test and kernel profiler",
+            "residual_risk": "long-context traffic can collapse batching efficiency"
+          },
+          "moe_transformer": {
+            "label": "Sparse MoE transformer",
+            "family": "Sparse Transformer",
+            "summary": "Higher capacity and quality, but routing and memory pressure complicate fleet economics.",
+            "params_m": 1800.0,
+            "ops_gmac": 410.0,
+            "activation_mb": 8600.0,
+            "latency_ms": 82.0,
+            "power_w": 640.0,
+            "quality_pct": 91.0,
+            "kernel_support_pct": 78.0,
+            "scaling_law": "context and expert routing pressure HBM and tail latency",
+            "param_exponent": 0.0,
+            "op_exponent": 2.1,
+            "activation_exponent": 2.0,
+            "latency_exponent": 1.8,
+            "guardrail": "routing tail and capacity headroom",
+            "validation_requirement": "expert-routing skew test and cost/request canary",
+            "residual_risk": "fleet skew can strand capacity even when average utilization looks good"
+          },
+          "wide_cnn_classifier": {
+            "label": "Wide CNN text classifier",
+            "family": "CNN",
+            "summary": "Cheap and fast, but its inductive bias underfits the language workload guardrail.",
+            "params_m": 35.0,
+            "ops_gmac": 70.0,
+            "activation_mb": 900.0,
+            "latency_ms": 22.0,
+            "power_w": 230.0,
+            "quality_pct": 84.5,
+            "kernel_support_pct": 95.0,
+            "scaling_law": "mostly linear with context until receptive field saturates",
+            "param_exponent": 0.0,
+            "op_exponent": 1.1,
+            "activation_exponent": 1.0,
+            "latency_exponent": 0.9,
+            "guardrail": "quality floor",
+            "validation_requirement": "quality regression and cohort analysis",
+            "residual_risk": "low cost hides unacceptable language-quality loss"
+          }
+        },
+        "validation_tests": [
+          "load/SLA test",
+          "quality regression",
+          "kernel profiler",
+          "cost/request canary"
+        ]
+      },
+      "signature": [
+        {
+          "architecture_id": "bert_encoder",
+          "label": "BERT-style encoder",
+          "family": "Transformer Encoder",
+          "scale_value": 512.0,
+          "params_m": 110.0,
+          "ops_gmac": 250.0,
+          "activation_mb": 3200.0,
+          "latency_ms": 38.0,
+          "power_w": 420.0,
+          "quality_pct": 89.5,
+          "kernel_support_pct": 92.0,
+          "dominant_constraint": "quality guardrail",
+          "feasible": true,
+          "violations": [],
+          "score": 96.86,
+          "next_failure": "quality guardrail is closest to failure at 0.98x budget",
+          "guardrail": "p99 SLA and HBM headroom",
+          "validation_requirement": "load/SLA test and kernel profiler",
+          "residual_risk": "long-context traffic can collapse batching efficiency"
+        },
+        {
+          "architecture_id": "moe_transformer",
+          "label": "Sparse MoE transformer",
+          "family": "Sparse Transformer",
+          "scale_value": 512.0,
+          "params_m": 1800.0,
+          "ops_gmac": 410.0,
+          "activation_mb": 8600.0,
+          "latency_ms": 82.0,
+          "power_w": 640.0,
+          "quality_pct": 91.0,
+          "kernel_support_pct": 78.0,
+          "dominant_constraint": "quality guardrail",
+          "feasible": true,
+          "violations": [],
+          "score": 97.24,
+          "next_failure": "quality guardrail is closest to failure at 0.97x budget",
+          "guardrail": "routing tail and capacity headroom",
+          "validation_requirement": "expert-routing skew test and cost/request canary",
+          "residual_risk": "fleet skew can strand capacity even when average utilization looks good"
+        },
+        {
+          "architecture_id": "wide_cnn_classifier",
+          "label": "Wide CNN text classifier",
+          "family": "CNN",
+          "scale_value": 512.0,
+          "params_m": 35.0,
+          "ops_gmac": 70.0,
+          "activation_mb": 900.0,
+          "latency_ms": 22.0,
+          "power_w": 230.0,
+          "quality_pct": 84.5,
+          "kernel_support_pct": 95.0,
+          "dominant_constraint": "quality guardrail",
+          "feasible": false,
+          "violations": [
+            "quality 84.5% < 88.0%"
+          ],
+          "score": 90.44319526627218,
+          "next_failure": "quality guardrail already exceeds budget",
+          "guardrail": "quality floor",
+          "validation_requirement": "quality regression and cohort analysis",
+          "residual_risk": "low cost hides unacceptable language-quality loss"
+        }
+      ],
+      "curve": {
+        "scale_values": [
+          128.0,
+          241.37142857142857,
+          354.74285714285713,
+          468.1142857142857,
+          581.4857142857143,
+          694.8571428571429,
+          808.2285714285714,
+          921.6,
+          1034.9714285714285,
+          1148.3428571428572,
+          1261.7142857142858,
+          1375.0857142857142,
+          1488.4571428571428,
+          1601.8285714285714,
+          1715.2,
+          1828.5714285714287,
+          1941.942857142857,
+          2055.3142857142857,
+          2168.6857142857143,
+          2282.057142857143,
+          2395.4285714285716,
+          2508.8,
+          2622.1714285714284,
+          2735.542857142857,
+          2848.9142857142856,
+          2962.285714285714,
+          3075.657142857143,
+          3189.0285714285715,
+          3302.4,
+          3415.7714285714287,
+          3529.1428571428573,
+          3642.5142857142855,
+          3755.885714285714,
+          3869.2571428571428,
+          3982.6285714285714,
+          4096.0
+        ],
+        "points_by_candidate": {
+          "bert_encoder": [
+            {
+              "scale_value": 128.0,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 4.135115175656589,
+              "activation_mb": 200.0,
+              "power_w": 52.5,
+              "feasible": true
+            },
+            {
+              "scale_value": 241.37142857142857,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 11.409038256489596,
+              "activation_mb": 711.1836734693877,
+              "power_w": 135.94809934046785,
+              "feasible": true
+            },
+            {
+              "scale_value": 354.74285714285713,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 21.12581704447623,
+              "activation_mb": 1536.1632653061224,
+              "power_w": 242.22269859425998,
+              "feasible": true
+            },
+            {
+              "scale_value": 468.1142857142857,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 32.924159046762135,
+              "activation_mb": 2674.938775510204,
+              "power_w": 367.17422878752575,
+              "feasible": true
+            },
+            {
+              "scale_value": 581.4857142857143,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 46.58157175904618,
+              "activation_mb": 4127.510204081632,
+              "power_w": 508.3384066881881,
+              "feasible": true
+            },
+            {
+              "scale_value": 694.8571428571429,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 61.9418969082976,
+              "activation_mb": 5893.877551020409,
+              "power_w": 664.0299046622181,
+              "feasible": true
+            },
+            {
+              "scale_value": 808.2285714285714,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 78.88717017753825,
+              "activation_mb": 7974.04081632653,
+              "power_w": 833.0012390661338,
+              "feasible": false
+            },
+            {
+              "scale_value": 921.6,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 97.32392262534296,
+              "activation_mb": 10368.0,
+              "power_w": 1014.2804345939046,
+              "feasible": false
+            },
+            {
+              "scale_value": 1034.9714285714285,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 117.17555962584484,
+              "activation_mb": 13075.755102040815,
+              "power_w": 1207.0823235033663,
+              "feasible": false
+            },
+            {
+              "scale_value": 1148.3428571428572,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 138.377721859685,
+              "activation_mb": 16097.306122448981,
+              "power_w": 1410.7553599807038,
+              "feasible": false
+            },
+            {
+              "scale_value": 1261.7142857142858,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 160.8752710561645,
+              "activation_mb": 19432.65306122449,
+              "power_w": 1624.7475078564407,
+              "feasible": false
+            },
+            {
+              "scale_value": 1375.0857142857142,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 184.62023158993324,
+              "activation_mb": 23081.79591836734,
+              "power_w": 1848.5832103841808,
+              "feasible": false
+            },
+            {
+              "scale_value": 1488.4571428571428,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 209.57032856992947,
+              "activation_mb": 27044.734693877548,
+              "power_w": 2081.8472000331135,
+              "feasible": false
+            },
+            {
+              "scale_value": 1601.8285714285714,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 235.68791602067833,
+              "activation_mb": 31321.469387755104,
+              "power_w": 2324.172737617778,
+              "feasible": false
+            },
+            {
+              "scale_value": 1715.2,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 262.9391701093159,
+              "activation_mb": 35912.0,
+              "power_w": 2575.2328341336442,
+              "feasible": false
+            },
+            {
+              "scale_value": 1828.5714285714287,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 291.29346827127955,
+              "activation_mb": 40816.32653061225,
+              "power_w": 2834.7335475692043,
+              "feasible": false
+            },
+            {
+              "scale_value": 1941.942857142857,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 320.7229022739506,
+              "activation_mb": 46034.448979591834,
+              "power_w": 3102.4087634794814,
+              "feasible": false
+            },
+            {
+              "scale_value": 2055.3142857142857,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 351.2018900301854,
+              "activation_mb": 51566.36734693877,
+              "power_w": 3378.0160618750338,
+              "feasible": false
+            },
+            {
+              "scale_value": 2168.6857142857143,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 382.70686168736415,
+              "activation_mb": 57412.08163265306,
+              "power_w": 3661.3333958701833,
+              "feasible": false
+            },
+            {
+              "scale_value": 2282.057142857143,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 415.2160025693198,
+              "activation_mb": 63571.5918367347,
+              "power_w": 3952.156387883166,
+              "feasible": false
+            },
+            {
+              "scale_value": 2395.4285714285716,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 448.7090403128922,
+              "activation_mb": 70044.89795918368,
+              "power_w": 4250.29610313043,
+              "feasible": false
+            },
+            {
+              "scale_value": 2508.8,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 483.16706683479805,
+              "activation_mb": 76832.00000000001,
+              "power_w": 4555.577197238568,
+              "feasible": false
+            },
+            {
+              "scale_value": 2622.1714285714284,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 518.5723880888204,
+              "activation_mb": 83932.89795918367,
+              "power_w": 4867.8363608192785,
+              "feasible": false
+            },
+            {
+              "scale_value": 2735.542857142857,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 554.9083962436615,
+              "activation_mb": 91347.59183673467,
+              "power_w": 5186.9210024555305,
+              "feasible": false
+            },
+            {
+              "scale_value": 2848.9142857142856,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 592.1594601320306,
+              "activation_mb": 99076.08163265305,
+              "power_w": 5512.688125069812,
+              "feasible": false
+            },
+            {
+              "scale_value": 2962.285714285714,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 630.3108307262933,
+              "activation_mb": 107118.36734693877,
+              "power_w": 5845.003360624721,
+              "feasible": false
+            },
+            {
+              "scale_value": 3075.657142857143,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 669.3485590759485,
+              "activation_mb": 115474.44897959183,
+              "power_w": 6183.740135572137,
+              "feasible": false
+            },
+            {
+              "scale_value": 3189.0285714285715,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 709.2594246595334,
+              "activation_mb": 124144.32653061223,
+              "power_w": 6528.778945123331,
+              "feasible": false
+            },
+            {
+              "scale_value": 3302.4,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 750.0308725016299,
+              "activation_mb": 133128.0,
+              "power_w": 6880.006718746719,
+              "feasible": false
+            },
+            {
+              "scale_value": 3415.7714285714287,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 791.6509577151613,
+              "activation_mb": 142425.46938775512,
+              "power_w": 7237.316262656641,
+              "feasible": false
+            },
+            {
+              "scale_value": 3529.1428571428573,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 834.1082963721273,
+              "activation_mb": 152036.73469387757,
+              "power_w": 7600.605767681567,
+              "feasible": false
+            },
+            {
+              "scale_value": 3642.5142857142855,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 877.3920217983642,
+              "activation_mb": 161961.79591836734,
+              "power_w": 7969.778372971591,
+              "feasible": false
+            },
+            {
+              "scale_value": 3755.885714285714,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 921.4917455415905,
+              "activation_mb": 172200.65306122447,
+              "power_w": 8344.741777653415,
+              "feasible": false
+            },
+            {
+              "scale_value": 3869.2571428571428,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 966.3975223856473,
+              "activation_mb": 182753.30612244896,
+              "power_w": 8725.407893862939,
+              "feasible": false
+            },
+            {
+              "scale_value": 3982.6285714285714,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 1012.099818884094,
+              "activation_mb": 193619.7551020408,
+              "power_w": 9111.69253565361,
+              "feasible": false
+            },
+            {
+              "scale_value": 4096.0,
+              "architecture_id": "bert_encoder",
+              "latency_ms": 1058.5894849680872,
+              "activation_mb": 204800.0,
+              "power_w": 9503.515139147199,
+              "feasible": false
+            }
+          ],
+          "moe_transformer": [
+            {
+              "scale_value": 128.0,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 6.762478042711082,
+              "activation_mb": 537.5,
+              "power_w": 80.0,
+              "feasible": true
+            },
+            {
+              "scale_value": 241.37142857142857,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 21.181780932516723,
+              "activation_mb": 1911.3061224489795,
+              "power_w": 207.15900851880815,
+              "feasible": true
+            },
+            {
+              "scale_value": 354.74285714285713,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 42.36161509645618,
+              "activation_mb": 4128.438775510203,
+              "power_w": 369.1012550007771,
+              "feasible": true
+            },
+            {
+              "scale_value": 468.1142857142857,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 69.7848795974061,
+              "activation_mb": 7188.897959183672,
+              "power_w": 559.5035867238487,
+              "feasible": true
+            },
+            {
+              "scale_value": 581.4857142857143,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 103.10938866613523,
+              "activation_mb": 11092.683673469386,
+              "power_w": 774.61090542962,
+              "feasible": false
+            },
+            {
+              "scale_value": 694.8571428571429,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 142.0822643771988,
+              "activation_mb": 15839.795918367348,
+              "power_w": 1011.855092818618,
+              "feasible": false
+            },
+            {
+              "scale_value": 808.2285714285714,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 186.504571211228,
+              "activation_mb": 21430.234693877548,
+              "power_w": 1269.3352214341087,
+              "feasible": false
+            },
+            {
+              "scale_value": 921.6,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 236.2133079596029,
+              "activation_mb": 27864.000000000004,
+              "power_w": 1545.5701860478548,
+              "feasible": false
+            },
+            {
+              "scale_value": 1034.9714285714285,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 291.07102289545674,
+              "activation_mb": 35141.09183673469,
+              "power_w": 1839.363540576558,
+              "feasible": false
+            },
+            {
+              "scale_value": 1148.3428571428572,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 350.95929960541054,
+              "activation_mb": 43261.510204081635,
+              "power_w": 2149.72245330393,
+              "feasible": false
+            },
+            {
+              "scale_value": 1261.7142857142858,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 415.7744132037476,
+              "activation_mb": 52225.25510204082,
+              "power_w": 2475.8057262574334,
+              "feasible": false
+            },
+            {
+              "scale_value": 1375.0857142857142,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 485.4242955463134,
+              "activation_mb": 62032.326530612234,
+              "power_w": 2816.8887015377995,
+              "feasible": false
+            },
+            {
+              "scale_value": 1488.4571428571428,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 559.8263354491726,
+              "activation_mb": 72682.7244897959,
+              "power_w": 3172.338590526649,
+              "feasible": false
+            },
+            {
+              "scale_value": 1601.8285714285714,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 638.9057358379056,
+              "activation_mb": 84176.44897959185,
+              "power_w": 3541.596552560423,
+              "feasible": false
+            },
+            {
+              "scale_value": 1715.2,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 722.5942561168112,
+              "activation_mb": 96513.5,
+              "power_w": 3924.1643186798387,
+              "feasible": false
+            },
+            {
+              "scale_value": 1828.5714285714287,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 810.8292291773406,
+              "activation_mb": 109693.87755102041,
+              "power_w": 4319.593977248312,
+              "feasible": false
+            },
+            {
+              "scale_value": 1941.942857142857,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 903.5527792868684,
+              "activation_mb": 123717.58163265305,
+              "power_w": 4727.480020540162,
+              "feasible": false
+            },
+            {
+              "scale_value": 2055.3142857142857,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 1000.7111901699004,
+              "activation_mb": 138584.61224489796,
+              "power_w": 5147.453046666718,
+              "feasible": false
+            },
+            {
+              "scale_value": 2168.6857142857143,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 1102.254387542815,
+              "activation_mb": 154294.96938775512,
+              "power_w": 5579.174698468851,
+              "feasible": false
+            },
+            {
+              "scale_value": 2282.057142857143,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 1208.135510334392,
+              "activation_mb": 170848.6530612245,
+              "power_w": 6022.333543441015,
+              "feasible": false
+            },
+            {
+              "scale_value": 2395.4285714285716,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 1318.3105516456033,
+              "activation_mb": 188245.66326530615,
+              "power_w": 6476.641680960655,
+              "feasible": false
+            },
+            {
+              "scale_value": 2508.8,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 1432.7380552735783,
+              "activation_mb": 206486.00000000006,
+              "power_w": 6941.831919601627,
+              "feasible": false
+            },
+            {
+              "scale_value": 2622.1714285714284,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 1551.3788570288777,
+              "activation_mb": 225569.6632653061,
+              "power_w": 7417.655406962711,
+              "feasible": false
+            },
+            {
+              "scale_value": 2735.542857142857,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 1674.1958625473,
+              "activation_mb": 245496.65306122447,
+              "power_w": 7903.87962278938,
+              "feasible": false
+            },
+            {
+              "scale_value": 2848.9142857142856,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 1801.1538551213353,
+              "activation_mb": 266266.9693877551,
+              "power_w": 8400.286666773047,
+              "feasible": false
+            },
+            {
+              "scale_value": 2962.285714285714,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 1932.2193284415707,
+              "activation_mb": 287880.61224489793,
+              "power_w": 8906.671787618623,
+              "feasible": false
+            },
+            {
+              "scale_value": 3075.657142857143,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 2067.360340173576,
+              "activation_mb": 310337.581632653,
+              "power_w": 9422.842111348018,
+              "feasible": false
+            },
+            {
+              "scale_value": 3189.0285714285715,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 2206.5463830902636,
+              "activation_mb": 333637.8775510204,
+              "power_w": 9948.615535426028,
+              "feasible": false
+            },
+            {
+              "scale_value": 3302.4,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 2349.7482710961026,
+              "activation_mb": 357781.5,
+              "power_w": 10483.819761899762,
+              "feasible": false
+            },
+            {
+              "scale_value": 3415.7714285714287,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 2496.9380379626177,
+              "activation_mb": 382768.44897959183,
+              "power_w": 11028.291447857739,
+              "feasible": false
+            },
+            {
+              "scale_value": 3529.1428571428573,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 2648.088846976714,
+              "activation_mb": 408598.724489796,
+              "power_w": 11581.875455514768,
+              "feasible": false
+            },
+            {
+              "scale_value": 3642.5142857142855,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 2803.174910008201,
+              "activation_mb": 435272.3265306122,
+              "power_w": 12144.424187385282,
+              "feasible": false
+            },
+            {
+              "scale_value": 3755.885714285714,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 2962.1714147480784,
+              "activation_mb": 462789.25510204077,
+              "power_w": 12715.796994519489,
+              "feasible": false
+            },
+            {
+              "scale_value": 3869.2571428571428,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 3125.0544590677832,
+              "activation_mb": 491149.5102040816,
+              "power_w": 13295.859647791147,
+              "feasible": false
+            },
+            {
+              "scale_value": 3982.6285714285714,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 3291.800991611667,
+              "activation_mb": 520353.0918367347,
+              "power_w": 13884.48386385312,
+              "feasible": false
+            },
+            {
+              "scale_value": 4096.0,
+              "architecture_id": "moe_transformer",
+              "latency_ms": 3462.388757868075,
+              "activation_mb": 550400.0,
+              "power_w": 14481.546878700494,
+              "feasible": false
+            }
+          ],
+          "wide_cnn_classifier": [
+            {
+              "scale_value": 128.0,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 6.317840952483692,
+              "activation_mb": 225.0,
+              "power_w": 50.05665738952713,
+              "feasible": false
+            },
+            {
+              "scale_value": 241.37142857142857,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 11.181420767602473,
+              "activation_mb": 424.2857142857143,
+              "power_w": 100.57390800745242,
+              "feasible": false
+            },
+            {
+              "scale_value": 354.74285714285713,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 15.812553559799309,
+              "activation_mb": 623.5714285714286,
+              "power_w": 153.6158062060746,
+              "feasible": false
+            },
+            {
+              "scale_value": 468.1142857142857,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 20.29534421112646,
+              "activation_mb": 822.8571428571428,
+              "power_w": 208.4097167692602,
+              "feasible": false
+            },
+            {
+              "scale_value": 581.4857142857143,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 24.669756371801032,
+              "activation_mb": 1022.1428571428571,
+              "power_w": 264.55978777578827,
+              "feasible": false
+            },
+            {
+              "scale_value": 694.8571428571429,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 28.959141940563605,
+              "activation_mb": 1221.4285714285716,
+              "power_w": 321.8221692023531,
+              "feasible": false
+            },
+            {
+              "scale_value": 808.2285714285714,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 33.17878628497916,
+              "activation_mb": 1420.7142857142856,
+              "power_w": 380.03053916787496,
+              "feasible": false
+            },
+            {
+              "scale_value": 921.6,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 37.33945161596607,
+              "activation_mb": 1620.0,
+              "power_w": 439.0637593882038,
+              "feasible": false
+            },
+            {
+              "scale_value": 1034.9714285714285,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 41.44911295078979,
+              "activation_mb": 1819.2857142857142,
+              "power_w": 498.8294388748329,
+              "feasible": false
+            },
+            {
+              "scale_value": 1148.3428571428572,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 45.51390848920407,
+              "activation_mb": 2018.5714285714287,
+              "power_w": 559.2546575550664,
+              "feasible": false
+            },
+            {
+              "scale_value": 1261.7142857142858,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 49.5387032716517,
+              "activation_mb": 2217.857142857143,
+              "power_w": 620.2803186946786,
+              "feasible": false
+            },
+            {
+              "scale_value": 1375.0857142857142,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 53.52744441330731,
+              "activation_mb": 2417.142857142857,
+              "power_w": 681.8575068538986,
+              "feasible": false
+            },
+            {
+              "scale_value": 1488.4571428571428,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 57.483395943842595,
+              "activation_mb": 2616.428571428571,
+              "power_w": 743.9450302565962,
+              "feasible": false
+            },
+            {
+              "scale_value": 1601.8285714285714,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 61.40930017608422,
+              "activation_mb": 2815.714285714286,
+              "power_w": 806.5077004195533,
+              "feasible": false
+            },
+            {
+              "scale_value": 1715.2,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 65.30749218967227,
+              "activation_mb": 3015.0,
+              "power_w": 869.5150907812707,
+              "feasible": false
+            },
+            {
+              "scale_value": 1828.5714285714287,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 69.17998326403813,
+              "activation_mb": 3214.2857142857147,
+              "power_w": 932.9406178113505,
+              "feasible": false
+            },
+            {
+              "scale_value": 1941.942857142857,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 73.02852309241285,
+              "activation_mb": 3413.5714285714284,
+              "power_w": 996.7608458528742,
+              "feasible": false
+            },
+            {
+              "scale_value": 2055.3142857142857,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 76.85464710089317,
+              "activation_mb": 3612.8571428571427,
+              "power_w": 1060.9549512380668,
+              "feasible": false
+            },
+            {
+              "scale_value": 2168.6857142857143,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 80.65971306568156,
+              "activation_mb": 3812.1428571428573,
+              "power_w": 1125.5043023486558,
+              "feasible": false
+            },
+            {
+              "scale_value": 2282.057142857143,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 84.44492988302694,
+              "activation_mb": 4011.4285714285716,
+              "power_w": 1190.3921257449153,
+              "feasible": false
+            },
+            {
+              "scale_value": 2395.4285714285716,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 88.21138048062981,
+              "activation_mb": 4210.714285714286,
+              "power_w": 1255.6032372974878,
+              "feasible": false
+            },
+            {
+              "scale_value": 2508.8,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 91.96004028476582,
+              "activation_mb": 4410.0,
+              "power_w": 1321.1238231713376,
+              "feasible": false
+            },
+            {
+              "scale_value": 2622.1714285714284,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 95.69179226736837,
+              "activation_mb": 4609.285714285714,
+              "power_w": 1386.9412595715103,
+              "feasible": false
+            },
+            {
+              "scale_value": 2735.542857142857,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 99.40743932710402,
+              "activation_mb": 4808.571428571428,
+              "power_w": 1453.0439630030123,
+              "feasible": false
+            },
+            {
+              "scale_value": 2848.9142857142856,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 103.1077145678203,
+              "activation_mb": 5007.857142857142,
+              "power_w": 1519.4212648228672,
+              "feasible": false
+            },
+            {
+              "scale_value": 2962.285714285714,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 106.79328990097943,
+              "activation_mb": 5207.142857142857,
+              "power_w": 1586.0633053293875,
+              "feasible": false
+            },
+            {
+              "scale_value": 3075.657142857143,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 110.46478329910038,
+              "activation_mb": 5406.428571428572,
+              "power_w": 1652.9609437116114,
+              "feasible": false
+            },
+            {
+              "scale_value": 3189.0285714285715,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 114.12276495370729,
+              "activation_mb": 5605.714285714286,
+              "power_w": 1720.1056809844995,
+              "feasible": false
+            },
+            {
+              "scale_value": 3302.4,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 117.76776253632036,
+              "activation_mb": 5805.0,
+              "power_w": 1787.489593640516,
+              "feasible": false
+            },
+            {
+              "scale_value": 3415.7714285714287,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 121.40026571945782,
+              "activation_mb": 6004.285714285715,
+              "power_w": 1855.1052762093875,
+              "feasible": false
+            },
+            {
+              "scale_value": 3529.1428571428573,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 125.02073008284636,
+              "activation_mb": 6203.571428571429,
+              "power_w": 1922.9457912730547,
+              "feasible": false
+            },
+            {
+              "scale_value": 3642.5142857142855,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 128.62958050551208,
+              "activation_mb": 6402.857142857142,
+              "power_w": 1991.004625759032,
+              "feasible": false
+            },
+            {
+              "scale_value": 3755.885714285714,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 132.22721412531655,
+              "activation_mb": 6602.142857142857,
+              "power_w": 2059.275652552128,
+              "feasible": false
+            },
+            {
+              "scale_value": 3869.2571428571428,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 135.8140029324901,
+              "activation_mb": 6801.428571428572,
+              "power_w": 2127.7530966358963,
+              "feasible": false
+            },
+            {
+              "scale_value": 3982.6285714285714,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 139.39029605182424,
+              "activation_mb": 7000.714285714285,
+              "power_w": 2196.4315051119033,
+              "feasible": false
+            },
+            {
+              "scale_value": 4096.0,
+              "architecture_id": "wide_cnn_classifier",
+              "latency_ms": 142.95642175869747,
+              "activation_mb": 7200.0,
+              "power_w": 2265.3057205546465,
+              "feasible": false
+            }
+          ]
+        },
+        "first_failure_by_candidate": {
+          "bert_encoder": 808.2285714285714,
+          "moe_transformer": 581.4857142857143,
+          "wide_cnn_classifier": 128.0
+        }
+      },
+      "topology": {
+        "rows": [
+          {
+            "id": "bert_encoder",
+            "label": "BERT-style encoder",
+            "family": "Transformer Encoder",
+            "topology": "all-to-all attention",
+            "access": "gather/reduce over tokens",
+            "locality": "low locality",
+            "ops_per_mb": 0.078125,
+            "memory_pct": 13.333333333333334,
+            "latency_pct": 31.666666666666664,
+            "power_pct": 60.0,
+            "dominant": "quality guardrail",
+            "feasible": true
+          },
+          {
+            "id": "moe_transformer",
+            "label": "Sparse MoE transformer",
+            "family": "Sparse Transformer",
+            "topology": "all-to-all attention",
+            "access": "gather/reduce over tokens",
+            "locality": "low locality",
+            "ops_per_mb": 0.047674418604651166,
+            "memory_pct": 35.833333333333336,
+            "latency_pct": 68.33333333333333,
+            "power_pct": 91.42857142857143,
+            "dominant": "quality guardrail",
+            "feasible": true
+          },
+          {
+            "id": "wide_cnn_classifier",
+            "label": "Wide CNN text classifier",
+            "family": "CNN",
+            "topology": "sliding-window convolution",
+            "access": "spatial reuse and tiling",
+            "locality": "high locality",
+            "ops_per_mb": 0.07777777777777778,
+            "memory_pct": 3.75,
+            "latency_pct": 18.333333333333332,
+            "power_pct": 32.857142857142854,
+            "dominant": "quality guardrail",
+            "feasible": false
+          }
+        ],
+        "actual": "quality",
+        "best_label": "Sparse MoE transformer",
+        "best_topology": "all-to-all attention",
+        "best_access": "gather/reduce over tokens",
+        "best_locality": "low locality",
+        "best_constraint": "quality guardrail"
+      },
+      "attention": {
+        "attention_id": "bert_encoder",
+        "attention_label": "BERT-style encoder",
+        "dominant_amount": "quality guardrail",
+        "actual": "quality_kernel",
+        "first_failure": "808 tokens",
+        "status": "warn",
+        "message": "BERT-style encoder is governed by quality guardrail: activation memory is 3200.00 MB against 24000.00 MB, latency is 38.00 ms against 120.00 ms, and the first infeasible scale is 808 tokens. Mitigation: cap context, use memory-aware attention, rebatch traffic, or select a smaller serving architecture.",
+        "scale_value": 512.0,
+        "memory_pct": 13.333333333333334,
+        "latency_pct": 31.666666666666664,
+        "power_pct": 60.0
+      },
+      "bias": {
+        "rows": [
+          {
+            "id": "bert_encoder",
+            "label": "BERT-style encoder",
+            "family": "Transformer Encoder",
+            "bias_match": 1.15,
+            "data_need": 86.95652173913044,
+            "quality": 89.5,
+            "deployability": 100.0,
+            "feasible": true,
+            "dominant": "quality guardrail",
+            "score": 107.54347826086956
+          },
+          {
+            "id": "moe_transformer",
+            "label": "Sparse MoE transformer",
+            "family": "Sparse Transformer",
+            "bias_match": 1.15,
+            "data_need": 86.95652173913044,
+            "quality": 91.0,
+            "deployability": 100.0,
+            "feasible": true,
+            "dominant": "quality guardrail",
+            "score": 109.04347826086956
+          },
+          {
+            "id": "wide_cnn_classifier",
+            "label": "Wide CNN text classifier",
+            "family": "CNN",
+            "bias_match": 0.68,
+            "data_need": 147.05882352941177,
+            "quality": 84.5,
+            "deployability": 88.48823529411766,
+            "feasible": false,
+            "dominant": "quality guardrail",
+            "score": 19.857352941176472
+          }
+        ],
+        "best": {
+          "id": "moe_transformer",
+          "label": "Sparse MoE transformer",
+          "family": "Sparse Transformer",
+          "bias_match": 1.15,
+          "data_need": 86.95652173913044,
+          "quality": 91.0,
+          "deployability": 100.0,
+          "feasible": true,
+          "dominant": "quality guardrail",
+          "score": 109.04347826086956
+        },
+        "leaderboard_label": "Sparse MoE transformer",
+        "actual": "leaderboard"
+      },
+      "review": {
+        "selected": {
+          "architecture_id": "bert_encoder",
+          "label": "BERT-style encoder",
+          "family": "Transformer Encoder",
+          "scale_value": 512.0,
+          "params_m": 110.0,
+          "ops_gmac": 250.0,
+          "activation_mb": 3200.0,
+          "latency_ms": 38.0,
+          "power_w": 420.0,
+          "quality_pct": 89.5,
+          "kernel_support_pct": 92.0,
+          "dominant_constraint": "quality guardrail",
+          "feasible": true,
+          "violations": [],
+          "score": 96.86,
+          "next_failure": "quality guardrail is closest to failure at 0.98x budget",
+          "guardrail": "p99 SLA and HBM headroom",
+          "validation_requirement": "load/SLA test and kernel profiler",
+          "residual_risk": "long-context traffic can collapse batching efficiency"
+        },
+        "leaderboard": {
+          "architecture_id": "moe_transformer",
+          "label": "Sparse MoE transformer",
+          "family": "Sparse Transformer",
+          "scale_value": 512.0,
+          "params_m": 1800.0,
+          "ops_gmac": 410.0,
+          "activation_mb": 8600.0,
+          "latency_ms": 82.0,
+          "power_w": 640.0,
+          "quality_pct": 91.0,
+          "kernel_support_pct": 78.0,
+          "dominant_constraint": "quality guardrail",
+          "feasible": true,
+          "violations": [],
+          "score": 97.24,
+          "next_failure": "quality guardrail is closest to failure at 0.97x budget",
+          "guardrail": "routing tail and capacity headroom",
+          "validation_requirement": "expert-routing skew test and cost/request canary",
+          "residual_risk": "fleet skew can strand capacity even when average utilization looks good"
+        },
+        "headroom_pick": {
+          "architecture_id": "bert_encoder",
+          "label": "BERT-style encoder",
+          "family": "Transformer Encoder",
+          "scale_value": 512.0,
+          "params_m": 110.0,
+          "ops_gmac": 250.0,
+          "activation_mb": 3200.0,
+          "latency_ms": 38.0,
+          "power_w": 420.0,
+          "quality_pct": 89.5,
+          "kernel_support_pct": 92.0,
+          "dominant_constraint": "quality guardrail",
+          "feasible": true,
+          "violations": [],
+          "score": 96.86,
+          "next_failure": "quality guardrail is closest to failure at 0.98x budget",
+          "guardrail": "p99 SLA and HBM headroom",
+          "validation_requirement": "load/SLA test and kernel profiler",
+          "residual_risk": "long-context traffic can collapse batching efficiency"
+        },
+        "headroom": 1.6666666666666667,
+        "status": "approve",
+        "kind": "ok",
+        "actual": "headroom",
+        "message": "Approve BERT-style encoder: it has the strongest track headroom among feasible candidates."
+      }
+    }
+  }
+}

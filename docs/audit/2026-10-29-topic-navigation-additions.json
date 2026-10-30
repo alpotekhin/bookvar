@@ -1,0 +1,124 @@
+{
+  "scope": "Reader navigation, index and prerequisite corrections only. Chapter explanations and code unchanged.",
+  "files": [
+    {
+      "source": "00 Учебник/_index.md",
+      "before_sha256": "084840b0f41d9ebfc0fa596d9d6e77cec7acdc2f59a6d7337ab9da06680549aa",
+      "after_sha256": "77c731156c8e87c5183cf3ac34232e60de047d08e222b14c92b9b7345fa76dfb",
+      "changes": [
+        {
+          "old": "Исходные курсы:\n[[05 Источники/Courses/Stanford CS336 Spring 2026/_index|Stanford CS336]],\n[[05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index|Berkeley Advanced LLM Agents]],\n[[05 Источники/Курсы|все лекции и тетради]].",
+          "new": "Оригинальные лекции, книги, слайды и задания собраны в\n[[05 Источники/Курсы|библиотеке курсов]]; ссылки на конкретные материалы\nприведены рядом с соответствующими объяснениями."
+        },
+        {
+          "old": "- [[02 Areas/ML & DL/01 Справочник/_index|Справочник механизмов]]",
+          "new": "- [[02 Areas/ML & DL/01 Справочник/_index|Предметный справочник ML, DL и LLM]]"
+        },
+        {
+          "old": "- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники|Карта post-training и источники]]",
+          "new": "- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники|Карта post-training и источники]]\n- [[00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF|Цели alignment, HHH, Constitutional AI и RLAIF]]"
+        },
+        {
+          "old": "- [[02 Areas/ML & DL/00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment|Edge и federated deployment]]",
+          "new": "- [[02 Areas/ML & DL/00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment|Edge и federated deployment]]\n- [[00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем|Безопасность и приватность ML-систем]]\n- [[00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем|Устойчивость ML-систем]]"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/_index.md",
+      "before_sha256": "f93f7c6724113637dd42500f31248c065275ad7c4f873b3055c243ee5714a3f7",
+      "after_sha256": "5c06b0a02d3de8f2ca0f936328a527bc4111b999531c335baba56ff0f7f1e048",
+      "changes": [
+        {
+          "old": "Original courses: [[05 Источники/Courses/Stanford CS336 Spring 2026/_index|Stanford CS336]], [[05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index|Berkeley Advanced LLM Agents]], and [[05 Источники/Курсы|the full lecture and notebook collection]].",
+          "new": "Original lectures, books, slides, and assignments are collected in the [[05 Источники/Курсы|course library]]. Chapters link to the specific materials used in their explanations."
+        },
+        {
+          "old": "- [[02 Areas/ML & DL/01 Справочник/_index|Mechanism reference]]",
+          "new": "- [[02 Areas/ML & DL/01 Справочник/_index|ML, DL, and LLM topic reference]]"
+        },
+        {
+          "old": "- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники|Post-training map and sources]]",
+          "new": "- [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники|Post-training map and sources]]\n- [[00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF|Alignment goals, HHH, Constitutional AI, and RLAIF]]"
+        },
+        {
+          "old": "- [[02 Areas/ML & DL/00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment|Edge and federated deployment]]",
+          "new": "- [[02 Areas/ML & DL/00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment|Edge and federated deployment]]\n- [[00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем|Security and privacy of ML systems]]\n- [[00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем|Robustness of ML systems]]"
+        },
+        {
+          "old": "canonical_revision: \"084840b0f41d9ebfc0fa596d9d6e77cec7acdc2f59a6d7337ab9da06680549aa\"",
+          "new": "canonical_revision: \"77c731156c8e87c5183cf3ac34232e60de047d08e222b14c92b9b7345fa76dfb\""
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники.md",
+      "before_sha256": "960eccf542d8d3b3a080a86839daccc45e12b476eb8ac3d1a1ddb63e59933880",
+      "after_sha256": "80a3471b7cdc616e09ba13fb458f092920bb1edc9a39664de8ce31480e469f8d",
+      "changes": [
+        {
+          "old": "next: \"[[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/01 SFT и instruction data]]\"",
+          "new": "next: \"[[00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF]]\""
+        },
+        {
+          "old": "## Маршрут по модулю\n\n",
+          "new": "## Маршрут по модулю\n\n1. [[00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF|Цели alignment, HHH, Constitutional AI и RLAIF]] — какие требования предъявляют к помощнику и как принципы превращаются в обучающие данные.\n"
+        },
+        {
+          "old": "1. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/01 SFT и instruction data|SFT и instruction data]] — как демонстрация превращается в response-only loss и как строится обучающая смесь.",
+          "new": "2. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/01 SFT и instruction data|SFT и instruction data]] — как демонстрация превращается в response-only loss и как строится обучающая смесь."
+        },
+        {
+          "old": "2. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/02 Preference data|Preference data]] — откуда берутся chosen/rejected и почему разметка является частью задачи.",
+          "new": "3. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/02 Preference data|Preference data]] — откуда берутся chosen/rejected и почему разметка является частью задачи."
+        },
+        {
+          "old": "3. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/03 Reward modeling|Reward modeling]] — Bradley–Terry, LLM-as-a-Judge и обучение оценщика.",
+          "new": "4. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/03 Reward modeling|Reward modeling]] — Bradley–Terry, LLM-as-a-Judge и обучение оценщика."
+        },
+        {
+          "old": "4. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM|Policy gradient и PPO]] — on-policy rollouts, value function и KL-ограничение.",
+          "new": "5. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM|Policy gradient и PPO]] — on-policy rollouts, value function и KL-ограничение."
+        },
+        {
+          "old": "5. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/05 DPO|DPO]] — offline preference optimization и её итеративные варианты.",
+          "new": "6. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/05 DPO|DPO]] — offline preference optimization и её итеративные варианты."
+        },
+        {
+          "old": "6. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers|RLVR и verifiers]] — программно проверяемая награда как контракт среды.",
+          "new": "7. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers|RLVR и verifiers]] — программно проверяемая награда как контракт среды."
+        },
+        {
+          "old": "7. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1|GRPO и DeepSeek-R1]] — групповая относительная оценка и конкретный reasoning recipe.",
+          "new": "8. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1|GRPO и DeepSeek-R1]] — групповая относительная оценка и конкретный reasoning recipe."
+        },
+        {
+          "old": "8. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/08 Reasoning distillation|Reasoning distillation]] — перенос проверенных траекторий в меньшую модель.",
+          "new": "9. [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/08 Reasoning distillation|Reasoning distillation]] — перенос проверенных траекторий в меньшую модель."
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+      "before_sha256": "8480355a6edc89fcf2ee256df2d2e753ca6986c7dfb6413f4a3bc958e4c2e960",
+      "after_sha256": "226ab215d706e0af02b48c2d5631887e62614ac89a61be12054175a0edda09b7",
+      "changes": [
+        {
+          "old": "prerequisites: \"[[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision]]\"",
+          "new": "prerequisites: \"[[00 Учебник/11 Pre-training и Scaling/42 Next-token prediction|Целевая функция предобучения]]\"\nprevious: \"[[00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF]]\""
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment.md",
+      "before_sha256": "332675caa594f38a7edcab337cda5fcfa7d4bb03422cd3dcee11557e6b398527",
+      "after_sha256": "c5505f93fc2e94051abe3220664683c3c39ffd7d5d2ea7acbf13a9885d8e5c77",
+      "changes": [
+        {
+          "old": "← [[02 MLOps]] · Далее: [[02 Areas/ML & DL/00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация|Несбалансированная классификация]]",
+          "new": "← [[02 MLOps]] · Далее: [[00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем|Безопасность и приватность ML-систем]]"
+        }
+      ]
+    }
+  ]
+}

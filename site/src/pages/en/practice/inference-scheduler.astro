@@ -1,0 +1,18 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import InferenceSchedulerLab from '../../../components/InferenceSchedulerLab.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('docs', 'en/practice/inference-scheduler');
+if (!entry) throw new Error('Missing canonical-language scheduler in the English interface');
+const { Content, headings } = await render(entry);
+const { hero: _hero, editUrl, ...frontmatter } = entry.data;
+const rawEditUrl = editUrl === true ? undefined : editUrl;
+---
+
+<StarlightPage frontmatter={{ ...frontmatter, editUrl: rawEditUrl }} headings={[{ depth: 2, slug: 'scheduler-lab-title', text: 'Интерактивный планировщик' }, ...headings]}>
+  <div lang="ru">
+    <InferenceSchedulerLab />
+    <Content />
+  </div>
+</StarlightPage>

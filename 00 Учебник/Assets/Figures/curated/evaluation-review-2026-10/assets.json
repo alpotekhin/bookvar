@@ -1,0 +1,137 @@
+[
+  {
+    "id": "curated-evaluation-ppl-full-8e4421a0b180",
+    "asset": "00 Учебник/Assets/Figures/curated/evaluation-review-2026-10/ppl_full.gif",
+    "author": "Hugging Face documentation contributors",
+    "source_url": "https://huggingface.co/datasets/huggingface/documentation-images/blob/1bade87e4c4e41d80d5f72ba2d7b38ab3194f044/ppl_full.gif",
+    "source_image_url": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/1bade87e4c4e41d80d5f72ba2d7b38ab3194f044/ppl_full.gif",
+    "commit": "1bade87e4c4e41d80d5f72ba2d7b38ab3194f044",
+    "source_asset": "05 Источники/Originals/evaluation-2026-10-20/ppl_full.gif",
+    "source_asset_sha256": "8e4421a0b180d9a5b5d8edee4705da19775ce52f80d297623cbbd29bdc406c9d",
+    "sha256": "8e4421a0b180d9a5b5d8edee4705da19775ce52f80d297623cbbd29bdc406c9d",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/evaluation-2026-10-20/hf-images-README.md",
+    "license_evidence_sha256": "5e6a73b7ff47813e90e2ed21d14807256b2e89fa55e5075ec69fdf01cde801ce",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "pinned-huggingface-source-asset",
+    "metadata_status": "verified",
+    "modifications": "Original animated GIF copied byte-for-byte. All 12 frames, timings and loop preserved. No redraw, translation, crop or bitmap upscaling.",
+    "used_in": [
+      "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md"
+    ],
+    "last_verified": "2026-10-20"
+  },
+  {
+    "id": "curated-evaluation-ppl-chunked-3d8b260868c2",
+    "asset": "00 Учебник/Assets/Figures/curated/evaluation-review-2026-10/ppl_chunked.gif",
+    "author": "Hugging Face documentation contributors",
+    "source_url": "https://huggingface.co/datasets/huggingface/documentation-images/blob/1bade87e4c4e41d80d5f72ba2d7b38ab3194f044/ppl_chunked.gif",
+    "source_image_url": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/1bade87e4c4e41d80d5f72ba2d7b38ab3194f044/ppl_chunked.gif",
+    "commit": "1bade87e4c4e41d80d5f72ba2d7b38ab3194f044",
+    "source_asset": "05 Источники/Originals/evaluation-2026-10-20/ppl_chunked.gif",
+    "source_asset_sha256": "3d8b260868c278a01e6b291cb0a939065fc5182ba01dbb08bbc1ba4849ce402a",
+    "sha256": "3d8b260868c278a01e6b291cb0a939065fc5182ba01dbb08bbc1ba4849ce402a",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/evaluation-2026-10-20/hf-images-README.md",
+    "license_evidence_sha256": "5e6a73b7ff47813e90e2ed21d14807256b2e89fa55e5075ec69fdf01cde801ce",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "pinned-huggingface-source-asset",
+    "metadata_status": "verified",
+    "modifications": "Original animated GIF copied byte-for-byte. All 12 frames, timings and loop preserved. No redraw, translation, crop or bitmap upscaling.",
+    "used_in": [
+      "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md"
+    ],
+    "last_verified": "2026-10-20"
+  },
+  {
+    "id": "curated-evaluation-ppl-sliding-c85f2334f8f4",
+    "asset": "00 Учебник/Assets/Figures/curated/evaluation-review-2026-10/ppl_sliding.gif",
+    "author": "Hugging Face documentation contributors",
+    "source_url": "https://huggingface.co/datasets/huggingface/documentation-images/blob/1bade87e4c4e41d80d5f72ba2d7b38ab3194f044/ppl_sliding.gif",
+    "source_image_url": "https://huggingface.co/datasets/huggingface/documentation-images/resolve/1bade87e4c4e41d80d5f72ba2d7b38ab3194f044/ppl_sliding.gif",
+    "commit": "1bade87e4c4e41d80d5f72ba2d7b38ab3194f044",
+    "source_asset": "05 Источники/Originals/evaluation-2026-10-20/ppl_sliding.gif",
+    "source_asset_sha256": "c85f2334f8f447a1dc314f697a27074f586a5f305b666472a3e7d9297297df15",
+    "sha256": "c85f2334f8f447a1dc314f697a27074f586a5f305b666472a3e7d9297297df15",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/evaluation-2026-10-20/hf-images-README.md",
+    "license_evidence_sha256": "5e6a73b7ff47813e90e2ed21d14807256b2e89fa55e5075ec69fdf01cde801ce",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "pinned-huggingface-source-asset",
+    "metadata_status": "verified",
+    "modifications": "Original animated GIF copied byte-for-byte. All 12 frames, timings and loop preserved. No redraw, translation, crop or bitmap upscaling.",
+    "used_in": [
+      "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md"
+    ],
+    "last_verified": "2026-10-20"
+  },
+  {
+    "id": "curated-evaluation-oren-full-figure1-fb95d1b9ddd7",
+    "asset": "00 Учебник/Assets/Figures/curated/evaluation-review-2026-10/oren-full-figure1.png",
+    "author": "Yonatan Oren, Nicole Meister, Niladri Chatterji, Faisal Ladhak, Tatsunori B. Hashimoto",
+    "source_url": "https://arxiv.org/pdf/2310.17623v2#page=2",
+    "source_figure_label": "Figure 1, both source panels",
+    "source_asset": "05 Источники/Originals/evaluation-2026-10-20/oren.pdf",
+    "source_asset_sha256": "e2cdde8d5aeadeae140997ecfe7cace02750a465bf860e1f6c0f5efe66cca57c",
+    "sha256": "fb95d1b9ddd78c6a2b29789eec68002aa04a4553b0a58c0e6c786ebc5acc8d27",
+    "source_page": 2,
+    "crop_box_px": [
+      780,
+      550,
+      3880,
+      1370
+    ],
+    "render_page_size_px": [
+      4637,
+      6000
+    ],
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/evaluation-2026-10-20/oren-arxiv.html",
+    "license_evidence_sha256": "e02d99dd30bbca26d3586ae562fb86bf1ae24d05d21e5760a1b8bbc2da5ef857",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "licensed-paper-figure",
+    "metadata_status": "verified",
+    "modifications": "Direct PDF render at maximum page dimension 6000 px; rectangular crop removes only surrounding page material. Complete figure/table, original labels. No redraw, translation or bitmap upscaling.",
+    "used_in": [
+      "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md"
+    ],
+    "last_verified": "2026-10-20"
+  },
+  {
+    "id": "curated-evaluation-ifeval-instructions-table1-8425c374ed26",
+    "asset": "00 Учебник/Assets/Figures/curated/evaluation-review-2026-10/ifeval-instructions-table1.png",
+    "author": "Jeffrey Zhou et al.",
+    "source_url": "https://arxiv.org/pdf/2311.07911v1#page=3",
+    "source_figure_label": "Table 1, all 25 instructions",
+    "source_asset": "05 Источники/Originals/evaluation-2026-10-20/ifeval.pdf",
+    "source_asset_sha256": "5d7cedfd762af6d9ad13d8768de64fa65895b8ebc3f5e454454c5ffbd48124f2",
+    "sha256": "8425c374ed260a32cfa97d53afff4e621a00c9f58526985e5241d7b0ae53e538",
+    "source_page": 3,
+    "crop_box_px": [
+      790,
+      590,
+      3890,
+      4790
+    ],
+    "render_page_size_px": [
+      4637,
+      6000
+    ],
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/evaluation-2026-10-20/ifeval-arxiv.html",
+    "license_evidence_sha256": "c8190b6e67b3c5bbbfce5b1d49904bac35b329a27346bc5173e68444b012ad83",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "licensed-paper-figure",
+    "metadata_status": "verified",
+    "modifications": "Direct PDF render at maximum page dimension 6000 px; rectangular crop removes only surrounding page material. Complete figure/table, original labels. No redraw, translation or bitmap upscaling.",
+    "used_in": [
+      "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md"
+    ],
+    "last_verified": "2026-10-20"
+  }
+]

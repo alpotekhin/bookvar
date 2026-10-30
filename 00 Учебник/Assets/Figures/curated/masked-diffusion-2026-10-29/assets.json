@@ -1,0 +1,128 @@
+[
+  {
+    "id": "curated-masked-diffusion-mdlm-overview-40d0120cb715",
+    "asset": "00 Учебник/Assets/Figures/curated/masked-diffusion-2026-10-29/mdlm-overview.png",
+    "author": "Subham Sekhar Sahoo and coauthors",
+    "source_url": "https://arxiv.org/abs/2406.07524v2",
+    "source_image_url": "https://arxiv.org/html/2406.07524v2/figures/graphical_abstract_updated_3.png",
+    "source_asset": "05 Источники/Originals/masked-diffusion-2026-10-29/mdlm-overview.png",
+    "source_asset_sha256": "40d0120cb7151f73e80890f3a2a0fa8128cc976b92d17aa45c07b63d4a871bda",
+    "sha256": "40d0120cb7151f73e80890f3a2a0fa8128cc976b92d17aa45c07b63d4a871bda",
+    "bytes": 522706,
+    "dimensions_px": [
+      1290,
+      539
+    ],
+    "source_page_snapshot": "05 Источники/Originals/masked-diffusion-2026-10-29/mdlm-v2.html",
+    "source_page_sha256": "f93bcb4038cb2e0489c806e5296412450ebe7b0d2545a77f0406e513707b724f",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/masked-diffusion-2026-10-29/mdlm-v2.html",
+    "license_evidence_sha256": "f93bcb4038cb2e0489c806e5296412450ebe7b0d2545a77f0406e513707b724f",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original figure from versioned arXiv HTML; byte-for-byte copy. No crop, redraw, relabeling, translation or recompression.",
+    "metadata_status": "verified",
+    "rights_status": "source-license-verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA.md"
+    ]
+  },
+  {
+    "id": "curated-masked-diffusion-block-diffusion-overview-01e1c42d288e",
+    "asset": "00 Учебник/Assets/Figures/curated/masked-diffusion-2026-10-29/block-diffusion-overview.svg",
+    "author": "Marianne Arriola and coauthors",
+    "source_url": "https://arxiv.org/abs/2503.09573v3",
+    "source_image_url": "https://arxiv.org/html/2503.09573v3/graphical_abstract.svg",
+    "source_asset": "05 Источники/Originals/masked-diffusion-2026-10-29/block-diffusion-overview.svg",
+    "source_asset_sha256": "01e1c42d288e5f9b9a2b4ee0ca119c989c0d966b1a4ff7a046e7d14c38d6dcf2",
+    "sha256": "01e1c42d288e5f9b9a2b4ee0ca119c989c0d966b1a4ff7a046e7d14c38d6dcf2",
+    "bytes": 197223,
+    "source_viewbox": [
+      0,
+      0,
+      702.95999,
+      273.12
+    ],
+    "source_page_snapshot": "05 Источники/Originals/masked-diffusion-2026-10-29/block-diffusion-v3.html",
+    "source_page_sha256": "97f24d3ed934967bd7eb8bce15e10a943b00c360e8680a23b43afc62f5709e69",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/masked-diffusion-2026-10-29/block-diffusion-v3.html",
+    "license_evidence_sha256": "97f24d3ed934967bd7eb8bce15e10a943b00c360e8680a23b43afc62f5709e69",
+    "derivation": "source-svg-copy",
+    "modifications": "Complete original figure from versioned arXiv HTML; byte-for-byte copy. No crop, redraw, relabeling, translation or recompression.",
+    "metadata_status": "verified",
+    "rights_status": "source-license-verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA.md"
+    ]
+  },
+  {
+    "id": "curated-masked-diffusion-remasking-overview-6d87b746c6be",
+    "asset": "00 Учебник/Assets/Figures/curated/masked-diffusion-2026-10-29/remasking-overview.svg",
+    "author": "Guanghan Wang and coauthors",
+    "source_url": "https://arxiv.org/abs/2503.00307v4",
+    "source_image_url": "https://arxiv.org/html/2503.00307v4/graphical_abstract.svg",
+    "source_asset": "05 Источники/Originals/masked-diffusion-2026-10-29/remasking-overview.svg",
+    "source_asset_sha256": "6d87b746c6be7d004e76e342077a9a8a1a7ce45d765c580cea5cf899b7632b2c",
+    "sha256": "6d87b746c6be7d004e76e342077a9a8a1a7ce45d765c580cea5cf899b7632b2c",
+    "bytes": 178669,
+    "source_viewbox": [
+      0,
+      0,
+      841.92,
+      257.04
+    ],
+    "source_page_snapshot": "05 Источники/Originals/masked-diffusion-2026-10-29/remdm-v4.html",
+    "source_page_sha256": "08c26bff53650c3aa29126660308b01e48cd7f27c3206784ff3aef3476555442",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/masked-diffusion-2026-10-29/remdm-v4.html",
+    "license_evidence_sha256": "08c26bff53650c3aa29126660308b01e48cd7f27c3206784ff3aef3476555442",
+    "derivation": "source-svg-copy",
+    "modifications": "Complete original figure from versioned arXiv HTML; byte-for-byte copy. No crop, redraw, relabeling, translation or recompression.",
+    "metadata_status": "verified",
+    "rights_status": "source-license-verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA.md"
+    ]
+  },
+  {
+    "id": "curated-masked-diffusion-remasking-loop-0ad3f6783bbd",
+    "asset": "00 Учебник/Assets/Figures/curated/masked-diffusion-2026-10-29/remasking-loop.svg",
+    "author": "Guanghan Wang and coauthors",
+    "source_url": "https://arxiv.org/abs/2503.00307v4",
+    "source_image_url": "https://arxiv.org/html/2503.00307v4/ReMDM_loop.svg",
+    "source_asset": "05 Источники/Originals/masked-diffusion-2026-10-29/remasking-loop.svg",
+    "source_asset_sha256": "0ad3f6783bbd55e3bf1f8b0f70c3c50928d4d22b4be042ec77e5334ea0428a6f",
+    "sha256": "0ad3f6783bbd55e3bf1f8b0f70c3c50928d4d22b4be042ec77e5334ea0428a6f",
+    "bytes": 56637,
+    "source_viewbox": [
+      0,
+      0,
+      720,
+      540
+    ],
+    "source_page_snapshot": "05 Источники/Originals/masked-diffusion-2026-10-29/remdm-v4.html",
+    "source_page_sha256": "08c26bff53650c3aa29126660308b01e48cd7f27c3206784ff3aef3476555442",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/masked-diffusion-2026-10-29/remdm-v4.html",
+    "license_evidence_sha256": "08c26bff53650c3aa29126660308b01e48cd7f27c3206784ff3aef3476555442",
+    "derivation": "source-svg-copy",
+    "modifications": "Complete original figure from versioned arXiv HTML; byte-for-byte copy. No crop, redraw, relabeling, translation or recompression.",
+    "metadata_status": "verified",
+    "rights_status": "source-license-verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA.md"
+    ]
+  }
+]

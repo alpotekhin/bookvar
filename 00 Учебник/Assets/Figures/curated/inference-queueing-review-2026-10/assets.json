@@ -1,0 +1,134 @@
+[
+  {
+    "id": "curated-queueing-mit-mg1-waiting-timeline-66e03020a875",
+    "asset": "00 Учебник/Assets/Figures/curated/inference-queueing-review-2026-10/mit-mg1-waiting-timeline.png",
+    "author": "Eytan Modiano; MIT OpenCourseWare",
+    "source_url": "https://ocw.mit.edu/courses/6-263j-data-communication-networks-fall-2002/65d9ab519ec4851af812f4b89ffaeedc_Lectures8_9.pdf#page=5",
+    "source_asset": "05 Источники/Courses/MIT 6.263J/Lectures/2002-lectures8-9.pdf",
+    "source_asset_sha256": "2bbb12e76c4cadb745c3f0dc511531d7f9ec3cf32d878e1ae1c2dc1282be41c9",
+    "source_page": 5,
+    "render_page_size_px": [
+      6000,
+      4637
+    ],
+    "render_scale_to": 6000,
+    "crop_box_px": [
+      1580,
+      1520,
+      4300,
+      2380
+    ],
+    "sha256": "66e03020a87537e1b378f1305d2061ac5fa7e3c0d31648a71b8bab302da0da0c",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/inference-queueing-2026-10-20/mit-lecture-resource.html",
+    "license_evidence_sha256": "3810586855a92cbefc82e2ae2ac150e7807ceec01ae84a1ca786fdf05fb341a0",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "metadata_status": "verified",
+    "modifications": "Only the complete source diagram is cropped from the rendered slide; surrounding prose/formulas omitted. No diagram geometry, arrows, labels, language or values changed. Rendered at 6000 px maximum page dimension; no bitmap upscaling.",
+    "used_in": [
+      "00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning.md"
+    ],
+    "last_verified": "2026-10-20"
+  },
+  {
+    "id": "curated-queueing-mit-mg1-residual-time-5b7483b9cc09",
+    "asset": "00 Учебник/Assets/Figures/curated/inference-queueing-review-2026-10/mit-mg1-residual-time.png",
+    "author": "Eytan Modiano; MIT OpenCourseWare",
+    "source_url": "https://ocw.mit.edu/courses/6-263j-data-communication-networks-fall-2002/65d9ab519ec4851af812f4b89ffaeedc_Lectures8_9.pdf#page=6",
+    "source_asset": "05 Источники/Courses/MIT 6.263J/Lectures/2002-lectures8-9.pdf",
+    "source_asset_sha256": "2bbb12e76c4cadb745c3f0dc511531d7f9ec3cf32d878e1ae1c2dc1282be41c9",
+    "source_page": 6,
+    "render_page_size_px": [
+      6000,
+      4637
+    ],
+    "render_scale_to": 6000,
+    "crop_box_px": [
+      1380,
+      800,
+      3800,
+      1800
+    ],
+    "sha256": "5b7483b9cc097770922085474db07fd354405fe7f83dd21f773d53cb4b45b154",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/inference-queueing-2026-10-20/mit-lecture-resource.html",
+    "license_evidence_sha256": "3810586855a92cbefc82e2ae2ac150e7807ceec01ae84a1ca786fdf05fb341a0",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "metadata_status": "verified",
+    "modifications": "Only the complete source diagram is cropped from the rendered slide; surrounding prose/formulas omitted. No diagram geometry, arrows, labels, language or values changed. Rendered at 6000 px maximum page dimension; no bitmap upscaling.",
+    "used_in": [
+      "00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning.md"
+    ],
+    "last_verified": "2026-10-20"
+  },
+  {
+    "id": "curated-queueing-sre-normal-load-c3ad94ac8b48",
+    "asset": "00 Учебник/Assets/Figures/curated/inference-queueing-review-2026-10/sre-normal-load.webp",
+    "author": "Mike Ulrich; Google",
+    "source_url": "https://sre.google/sre-book/addressing-cascading-failures/#server-overload",
+    "source_image_url": "https://sre.google/img/dynamic/sre-book/d1a1ed1e7168236f34825cb718beafbd.webp",
+    "source_asset": "05 Источники/Originals/inference-queueing-2026-10-20/sre-normal-load.webp",
+    "source_asset_sha256": "c3ad94ac8b487204f982778e34ce6376589020b715c947522bbba46fa2d201ae",
+    "sha256": "c3ad94ac8b487204f982778e34ce6376589020b715c947522bbba46fa2d201ae",
+    "license": "CC BY-NC-ND 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "license_evidence": "05 Источники/Originals/inference-queueing-2026-10-20/sre-cascading-failures.html",
+    "license_evidence_sha256": "d67024d52d72a1254c830d3c29e6d1b2afade88e133ffcff64b94711c2aaa11a",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "official-sre-queueing-asset",
+    "metadata_status": "verified",
+    "modifications": "Original complete WebP copied byte-for-byte. No crop, redraw, translation, resizing or other modification.",
+    "used_in": [
+      "00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning.md"
+    ],
+    "last_verified": "2026-10-20"
+  },
+  {
+    "id": "curated-queueing-sre-failover-load-507b5e48e115",
+    "asset": "00 Учебник/Assets/Figures/curated/inference-queueing-review-2026-10/sre-failover-load.webp",
+    "author": "Mike Ulrich; Google",
+    "source_url": "https://sre.google/sre-book/addressing-cascading-failures/#server-overload",
+    "source_image_url": "https://sre.google/img/dynamic/sre-book/1aa29313a813547ca9536349c8bd6f51.webp",
+    "source_asset": "05 Источники/Originals/inference-queueing-2026-10-20/sre-failover-load.webp",
+    "source_asset_sha256": "507b5e48e1154759fdd90336cef2917bc6c832d69d7e9fd3d9bf972c45157b58",
+    "sha256": "507b5e48e1154759fdd90336cef2917bc6c832d69d7e9fd3d9bf972c45157b58",
+    "license": "CC BY-NC-ND 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "license_evidence": "05 Источники/Originals/inference-queueing-2026-10-20/sre-cascading-failures.html",
+    "license_evidence_sha256": "d67024d52d72a1254c830d3c29e6d1b2afade88e133ffcff64b94711c2aaa11a",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "official-sre-queueing-asset",
+    "metadata_status": "verified",
+    "modifications": "Original complete WebP copied byte-for-byte. No crop, redraw, translation, resizing or other modification.",
+    "used_in": [
+      "00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning.md"
+    ],
+    "last_verified": "2026-10-20"
+  },
+  {
+    "id": "curated-queueing-sre-retry-stack-7ead97259330",
+    "asset": "00 Учебник/Assets/Figures/curated/inference-queueing-review-2026-10/sre-retry-stack.webp",
+    "author": "Alejandro Forero Cuervo; Google",
+    "source_url": "https://sre.google/sre-book/handling-overload/#deciding-to-retry",
+    "source_image_url": "https://sre.google/img/dynamic/sre-book/0c4d69c7d44b3e0a40129c2e6bb021fb.webp",
+    "source_asset": "05 Источники/Originals/inference-queueing-2026-10-20/sre-retry-stack.webp",
+    "source_asset_sha256": "7ead972593304ef1728f43102fb5986fa25bc6c1be52acec2183b2a7475698f8",
+    "sha256": "7ead972593304ef1728f43102fb5986fa25bc6c1be52acec2183b2a7475698f8",
+    "license": "CC BY-NC-ND 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+    "license_evidence": "05 Источники/Originals/inference-queueing-2026-10-20/sre-handling-overload.html",
+    "license_evidence_sha256": "945d15db67ad15a7f5e75833f8c0d014c8dc61d57909f7a3abd48459ad12cc9e",
+    "derivation": "source-raster-copy",
+    "provenance_confirmation": "official-sre-queueing-asset",
+    "metadata_status": "verified",
+    "modifications": "Original complete WebP copied byte-for-byte. No crop, redraw, translation, resizing or other modification.",
+    "used_in": [
+      "00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning.md"
+    ],
+    "last_verified": "2026-10-20"
+  }
+]

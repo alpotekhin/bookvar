@@ -45,6 +45,15 @@ describe('findBrokenBuiltLinks', () => {
       '<img src="/bookvar/assets/present.svg">'
     ].join('\n')), '/bookvar')).resolves.toEqual([]);
   });
+  it('rejects host-root links that would leave the project on GitHub Pages', async () => {
+    const errors = await findBrokenBuiltLinks(fixture('<a href="/target/">target</a><img src="/assets/present.svg">'), '/bookvar');
+    expect(errors).toContain('/ -> outside publication base /bookvar: /target/');
+    expect(errors).toContain('/ -> outside publication base /bookvar: /assets/present.svg');
+  });
+  it('resolves relative and fragment links using the publication base, not the domain root', async () => {
+    const dist = fixture('<a href="target/#existing">target</a><a href="//example.org/elsewhere">external</a>');
+    await expect(findBrokenBuiltLinks(dist, '/bookvar')).resolves.toEqual([]);
+  });
 
   it('ignores href and src examples inside code blocks', async () => {
     await expect(findBrokenBuiltLinks(fixture([

@@ -1,0 +1,15 @@
+{
+  "origin": "recorded-cpu-experiment",
+  "recorded_at": "2026-10-26",
+  "author": "Bookvar contributors",
+  "scope": "54 finite neural CPU runs; not an original EDLS measurement or a GPU/HTTP benchmark",
+  "plot": "Actual decode-heavy phase events, 2 slots, repeat 0; no simulated widths or replaced course figure",
+  "plot_runtime": "Matplotlib 3.10.7",
+  "source_contract": "https://github.com/mryab/efficient-dl-systems/tree/e632aa89ca9e6638d52e1b686095e7442faffbb0/week08_inference_software/homework",
+  "source_license": "MIT; full course notice at site/public/licenses/edls-e632aa89-MIT.txt",
+  "sha256": {
+    "06 Практика/Results/edls-admission-2026-10-26/runs.json": "9f7b5094faefb3503dc0edf8cf1248612e3a281b0e0b8525b3c2994900067103",
+    "06 Практика/Results/edls-admission-2026-10-26/phase-timeline.png": "27f3fb6b15435181efc2e72c7a621b8e33a9493ceb4b5a246ec2ea11f8598663",
+    "publishing/tools/plot_edls_admission.py": "ea1d5555d25aff99455790615e85a8c313b1401993bbeac5e5d208e8466b4c40"
+  }
+}

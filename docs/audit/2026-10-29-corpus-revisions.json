@@ -1,0 +1,2386 @@
+{
+  "date": "2026-10-29",
+  "scope": "Current RU textbook revision lineage. This records which prior substantive reviews remain applicable, not a new full primary-source review of all 149 pages or full course integration.",
+  "limits": [
+    "Prior audits retain their exact source, execution and rights limitations.",
+    "SHA equality verifies revision identity, not pedagogical quality.",
+    "Full rereads in this pass are recorded separately; unchanged accepted chapters are not claimed reread.",
+    "The later one-pass completion reconciles the specified course gaps and all 29 existing EN files; see 2026-10-29-one-pass-completion.md. Translation of all 149 canonical pages and hardware-only experiments remain outside the verified result."
+  ],
+  "pages": [
+    {
+      "route": "textbook/index",
+      "source": "00 Учебник/_index.md",
+      "sha256": "db08c24b15c0ba7919d84e672d302858d66fe91db6b245129accb58822298b4f",
+      "pre_navigation_and_math_sha256": "084840b0f41d9ebfc0fa596d9d6e77cec7acdc2f59a6d7337ab9da06680549aa",
+      "evidence": {
+        "kind": "current-full-read",
+        "lines": 327,
+        "reports": [
+          "docs/audit/2026-10-29-corpus-follow-through.md",
+          "docs/audit/2026-10-29-reader-route.md"
+        ],
+        "consolidation": {
+          "scope": "Recorded consolidation deltas preserve the reviewed preceding revision; new explanations have separate source/example review.",
+          "report": "docs/audit/2026-10-29-publication-consolidation.md"
+        },
+        "masked_diffusion_update": {
+          "report": "docs/audit/2026-10-29-masked-diffusion.md",
+          "scope": "One new module description and chapter link in both contents; no pre-existing English chapter body changed.",
+          "journal": "docs/audit/2026-10-29-masked-diffusion-additions.json"
+        }
+      },
+      "pre_topic_consolidation_sha256": "084840b0f41d9ebfc0fa596d9d6e77cec7acdc2f59a6d7337ab9da06680549aa",
+      "pre_masked_diffusion_sha256": "77c731156c8e87c5183cf3ac34232e60de047d08e222b14c92b9b7345fa76dfb"
+    },
+    {
+      "route": "textbook/how-to-use",
+      "source": "00 Учебник/00 Как пользоваться учебником.md",
+      "sha256": "a2da81f5b96b1869ac354996604b2c61e848785d7ad1664b42c2a04723809990",
+      "pre_navigation_and_math_sha256": "220f2607a063c0aa1580f0ce71272aaf8bdb6f03a3c58415e2923bf5ffe8cb76",
+      "evidence": {
+        "kind": "current-full-read",
+        "lines": 114,
+        "reports": [
+          "docs/audit/2026-10-29-corpus-follow-through.md",
+          "docs/audit/2026-10-29-reader-route.md"
+        ],
+        "consolidation": {
+          "scope": "Reader guide read in full and updated for the unified structure.",
+          "report": "docs/audit/2026-10-29-publication-consolidation.md"
+        }
+      },
+      "pre_topic_consolidation_sha256": "220f2607a063c0aa1580f0ce71272aaf8bdb6f03a3c58415e2923bf5ffe8cb76"
+    },
+    {
+      "route": "textbook/ml-foundations/tensors",
+      "source": "00 Учебник/00 Математические и ML-основания/01 Векторы, матрицы и тензоры.md",
+      "sha256": "7764790a11f7cbf12fbb9e662d62d56bd94ad8d39863a8995423f29161ff6ebb",
+      "pre_navigation_and_math_sha256": "7764790a11f7cbf12fbb9e662d62d56bd94ad8d39863a8995423f29161ff6ebb",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-27-nn-section-map.md",
+          "docs/audit/2026-10-27-frameworks-native-figures.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-27-frameworks-section-map.json",
+          "docs/audit/2026-10-27-nn-section-map.json",
+          "docs/audit/2026-10-28-training-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/ml-foundations/derivatives-gradients",
+      "source": "00 Учебник/00 Математические и ML-основания/02 Производная и градиент.md",
+      "sha256": "6839e2febcb38fb71c8d870c1ab8afb50c47e93e1aef6ad351b7b302579dfb08",
+      "pre_navigation_and_math_sha256": "6839e2febcb38fb71c8d870c1ab8afb50c47e93e1aef6ad351b7b302579dfb08",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-22-transformer-foundations-restart.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/ml-foundations/probability-likelihood-logarithms",
+      "source": "00 Учебник/00 Математические и ML-основания/03 Вероятность, правдоподобие и логарифм.md",
+      "sha256": "f658322dcd6ebd32a9d888aa3f612bfd9821e8adc04bdeffc813b1ebc10c6505",
+      "pre_navigation_and_math_sha256": "f658322dcd6ebd32a9d888aa3f612bfd9821e8adc04bdeffc813b1ebc10c6505",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-22-probability-losses-revisit.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/ml-foundations/loss-functions",
+      "source": "00 Учебник/00 Математические и ML-основания/04 Функции потерь.md",
+      "sha256": "801ed9e1eb605d4ffe25cfbf8347734fea8963c05bc0c044c0d41071ad152531",
+      "pre_navigation_and_math_sha256": "801ed9e1eb605d4ffe25cfbf8347734fea8963c05bc0c044c0d41071ad152531",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-23-losses-source-visuals.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/ml-foundations/train-validation-test",
+      "source": "00 Учебник/00 Математические и ML-основания/05 Train, validation и test.md",
+      "sha256": "f5cf270d3ea334c77c7d09402ef6dd80d4e1ef6def27de5f1d52c0e79b54187c",
+      "pre_navigation_and_math_sha256": "f5cf270d3ea334c77c7d09402ef6dd80d4e1ef6def27de5f1d52c0e79b54187c",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-22-splits-generalization-revisit.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/ml-foundations/generalization-regularization",
+      "source": "00 Учебник/00 Математические и ML-основания/06 Переобучение, регуляризация и оценивание.md",
+      "sha256": "e1efdca476a16e47475fc763bc9a64c5524fdca74add685ba9d5dc8dd335e7c2",
+      "pre_navigation_and_math_sha256": "e1efdca476a16e47475fc763bc9a64c5524fdca74add685ba9d5dc8dd335e7c2",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-22-splits-generalization-revisit.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/classical-ml/index",
+      "source": "00 Учебник/01 Классическое машинное обучение/00 Карта модуля.md",
+      "sha256": "ba973a9b69b13cd5e2080937faa034ef5950266e1eec232867c45b5fb3402433",
+      "pre_navigation_and_math_sha256": "ba973a9b69b13cd5e2080937faa034ef5950266e1eec232867c45b5fb3402433",
+      "evidence": {
+        "kind": "current-full-read",
+        "lines": 58,
+        "reports": [
+          "docs/audit/2026-10-29-corpus-follow-through.md"
+        ]
+      }
+    },
+    {
+      "route": "textbook/classical-ml/predictive-pipeline",
+      "source": "00 Учебник/01 Классическое машинное обучение/01 Задача обучения и predictive pipeline.md",
+      "sha256": "9251873332d9ad4e751c5df2b989794bde0b638f1225f481a2b0ad51fe866075",
+      "pre_navigation_and_math_sha256": "d55bf79cebb3935586a10b0e0c7333b5bd530db02b117939e9d8378fdb98b06a",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-22-predictive-pipeline-revisit.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/classical-ml/linear-models",
+      "source": "00 Учебник/01 Классическое машинное обучение/02 Линейная регрессия и классификация.md",
+      "sha256": "75f92f4704376d7989fcc9be6ac71d53566a4aa8032851798960430a63f4914a",
+      "pre_navigation_and_math_sha256": "75f92f4704376d7989fcc9be6ac71d53566a4aa8032851798960430a63f4914a",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-22-linear-models-revisit.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/classical-ml/decision-trees",
+      "source": "00 Учебник/01 Классическое машинное обучение/03 Деревья решений.md",
+      "sha256": "cd7ead3663bb14c0c95cf325d5c2ddb90adb703c4106557c7f62134f406c1d83",
+      "pre_navigation_and_math_sha256": "cd7ead3663bb14c0c95cf325d5c2ddb90adb703c4106557c7f62134f406c1d83",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-22-decision-trees-revisit.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/classical-ml/ensembles",
+      "source": "00 Учебник/01 Классическое машинное обучение/04 Bagging, random forest и gradient boosting.md",
+      "sha256": "4ed341f212c55bf58c407433d9f12459ae5bfdef3c3aba7a1d784b033fd87ebb",
+      "pre_navigation_and_math_sha256": "4ed341f212c55bf58c407433d9f12459ae5bfdef3c3aba7a1d784b033fd87ebb",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-22-evaluation-revisit.md",
+          "docs/audit/2026-10-22-ensembles-revisit.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/classical-ml/evaluation",
+      "source": "00 Учебник/01 Классическое машинное обучение/05 Оценивание, кросс-валидация и выбор порога.md",
+      "sha256": "c1c725e2074ccde8ecda865accdddf2c94232df190c66ed327e9148406c01a77",
+      "pre_navigation_and_math_sha256": "c1c725e2074ccde8ecda865accdddf2c94232df190c66ed327e9148406c01a77",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-22-evaluation-revisit.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/classical-ml/clustering",
+      "source": "00 Учебник/01 Классическое машинное обучение/06 Кластеризация и её ограничения.md",
+      "sha256": "4a09c7bd9dab975e556ee7eb44ae18a84adbf45061f274e6aedd6bac7ad77455",
+      "pre_navigation_and_math_sha256": "1826fc4c334c652242a1159979a78a675d9dbc88c4e11e05e727653345d64425",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-25-clustering.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/classical-ml/spectral-clustering",
+      "source": "00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian.md",
+      "sha256": "6184d698155c4e8571f256ffbc4f013d91cf1e5451d67db9109ccb5643d27b34",
+      "pre_navigation_and_math_sha256": "6184d698155c4e8571f256ffbc4f013d91cf1e5451d67db9109ccb5643d27b34",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-25-spectral-clustering.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/classical-ml/dimensionality-reduction",
+      "source": "00 Учебник/01 Классическое машинное обучение/07 PCA, t-SNE и UMAP.md",
+      "sha256": "0487fe879457379241a0fa9565ec8cac5eb51280ae820e50a02dc3896a929e5d",
+      "pre_navigation_and_math_sha256": "0487fe879457379241a0fa9565ec8cac5eb51280ae820e50a02dc3896a929e5d",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-25-pca-tsne-umap.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/classical-ml/gmm-em",
+      "source": "00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM.md",
+      "sha256": "c02a1bd7955b8920a1842f89d34827cd126a90400cd65e45b49e8ca933c20a3d",
+      "pre_navigation_and_math_sha256": "c02a1bd7955b8920a1842f89d34827cd126a90400cd65e45b49e8ca933c20a3d",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-25-gmm-em.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/classical-ml/kernels-svm-rff",
+      "source": "00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features.md",
+      "sha256": "99280edf9b5259f46e5f8d797410aad56da0bf726be38c54ac5a404fc375811f",
+      "pre_navigation_and_math_sha256": "4dc53d15cd93d78d0f58bc6a1139bb79ddd6e01f869fe35ccc9852e30213c53a",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-26-navigation.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/neural-networks/mlp",
+      "source": "00 Учебник/01 Основы нейронных сетей/01 Нейрон и MLP.md",
+      "sha256": "17e763a94b26580e6c4d015c6ab092c1d33d57a9f6c77e34a598fdc27379507b",
+      "pre_navigation_and_math_sha256": "17e763a94b26580e6c4d015c6ab092c1d33d57a9f6c77e34a598fdc27379507b",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-27-nn-section-map.md",
+          "docs/audit/2026-10-27-module-hooks.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-27-frameworks-section-map.json",
+          "docs/audit/2026-10-27-nn-section-map.json",
+          "docs/audit/2026-10-28-training-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/neural-networks/activation-functions",
+      "source": "00 Учебник/01 Основы нейронных сетей/02 Функции активации.md",
+      "sha256": "467efffdbfaad2a74bb9e31ff86fed9553cc0478664407efd34d2c678e4b7696",
+      "pre_navigation_and_math_sha256": "467efffdbfaad2a74bb9e31ff86fed9553cc0478664407efd34d2c678e4b7696",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-21-activation-functions.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-28-training-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/neural-networks/backpropagation",
+      "source": "00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md",
+      "sha256": "8795146abe1f9c7a8de8a232c958aae472e3788d963f99aba557b90690fee2c0",
+      "pre_navigation_and_math_sha256": "8795146abe1f9c7a8de8a232c958aae472e3788d963f99aba557b90690fee2c0",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-27-jax-transforms.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-27-frameworks-section-map.json",
+          "docs/audit/2026-10-28-training-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/neural-networks/optimizers-schedules",
+      "source": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+      "sha256": "b9a3d638815bb981cedc989003a9ac0cc6ec3314a849c4bf2c57c0940a5ffa84",
+      "pre_navigation_and_math_sha256": "b9a3d638815bb981cedc989003a9ac0cc6ec3314a849c4bf2c57c0940a5ffa84",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-28-training-reconciliation.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-28-training-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/neural-networks/initialization-normalization-residuals",
+      "source": "00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md",
+      "sha256": "019c8f6a0270bcdb4f282ade039108c289f5d7d391dde779e664fd046fa61435",
+      "pre_navigation_and_math_sha256": "019c8f6a0270bcdb4f282ade039108c289f5d7d391dde779e664fd046fa61435",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-27-shared-blocks.md",
+          "docs/audit/2026-10-27-nn-section-map.md",
+          "docs/audit/2026-10-21-initialization-normalization.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-27-nn-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/neural-networks/dropout-regularization",
+      "source": "00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация.md",
+      "sha256": "e30be3213d51d1f0276b560422ec1ee116ef8b5112339053871636e86d5aa742",
+      "pre_navigation_and_math_sha256": "e30be3213d51d1f0276b560422ec1ee116ef8b5112339053871636e86d5aa742",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-28-data-augmentation.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/neural-networks/data-augmentation",
+      "source": "00 Учебник/01 Основы нейронных сетей/06a Аугментация данных — Mixup, CutMix и политики преобразований.md",
+      "sha256": "d35a256a67948d010ba6a0e3feae9a3d3d2c7856d47be695f9570c8750d3ddd7",
+      "pre_navigation_and_math_sha256": "d35a256a67948d010ba6a0e3feae9a3d3d2c7856d47be695f9570c8750d3ddd7",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-28-data-augmentation.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-28-data-selection-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/neural-networks/cnn-lenet-resnet",
+      "source": "00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md",
+      "sha256": "20589edbe6fc64ed15613741a63640af224a243c73e8df211b9a2b860cbd6d9f",
+      "pre_navigation_and_math_sha256": "136cde481f65d808db9505969c6ef7fb8fee15fda1c760ebaf74b4d4d28b2b7f",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-27-winograd.md",
+          "docs/audit/2026-10-27-nn-section-map.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-27-nn-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/neural-networks/autoencoder-vae",
+      "source": "00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE.md",
+      "sha256": "0fa503dade5bacee4bf88d40a4aa799474328586332fe92fc6a28538dca9b4fd",
+      "pre_navigation_and_math_sha256": "0fa503dade5bacee4bf88d40a4aa799474328586332fe92fc6a28538dca9b4fd",
+      "evidence": {
+        "kind": "exact-navigation-reconstruction",
+        "reviewed_sha256": "e742c3a56ecec3b2f7d768e017db822b54979f66dc273e57b0b0f968f12607f7",
+        "replacements": [
+          [
+            "[[00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор|Следующая глава]]\nразбирает обучение генератора с помощью дискриминатора.",
+            "[[00 Учебник/02 Представление текста и токенизация/01 Представление текста числами|Следующая глава]]\nпереходит от представлений изображений к числовому представлению текста."
+          ]
+        ],
+        "reports": [
+          "docs/audit/2026-10-26-autoencoder.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/neural-networks/gan-dcgan",
+      "source": "00 Учебник/01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор.md",
+      "sha256": "30f6c8d2da4c7fcf3607ef4649eb74e077286b5e1e538c18e7cad6dee3791874",
+      "pre_navigation_and_math_sha256": "a55940b1d05c1544877d2779656b388a769edb0fdd07996f2275865f8aa86c98",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-28-gan-dcgan.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-28-data-selection-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/text-representation/numerical-representation",
+      "source": "00 Учебник/02 Представление текста и токенизация/01 Представление текста числами.md",
+      "sha256": "a61f0506c18437b6e580e01f3d547f477b91c09eefea52b1695e580aca119a1f",
+      "pre_navigation_and_math_sha256": "13a2450b7ade2184d98145e26631b9391a55d4bc7f73e63257ddaf4865fe0c6d",
+      "evidence": {
+        "kind": "exact-navigation-reconstruction",
+        "reviewed_sha256": "8b2de4a9b960721f5ecf8f95aad23f2e3edbb9883b5c7d83bd25003fd387ddb0",
+        "replacements": [
+          [
+            "01 Основы нейронных сетей/09 GAN и DCGAN — генератор и дискриминатор",
+            "01 Основы нейронных сетей/08 Autoencoder и VAE"
+          ],
+          [
+            "|GAN и DCGAN — генератор и дискриминатор]]",
+            "|Autoencoder и VAE]]"
+          ]
+        ],
+        "reports": [
+          "docs/audit/2026-10-22-text-tokenization-revisit.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/language-modeling/ngram",
+      "source": "00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель.md",
+      "sha256": "032dc6d57c8399255ec427be82cf59fd2fe30885f218abe7083a5596901ef8ea",
+      "pre_navigation_and_math_sha256": "032dc6d57c8399255ec427be82cf59fd2fe30885f218abe7083a5596901ef8ea",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-21-ngram.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/language-modeling/next-token-probability",
+      "source": "00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction.md",
+      "sha256": "9e7e0016e68745cfb491d3018beb2d91b81b631a6d1995b36ad3a2e03d2ba695",
+      "pre_navigation_and_math_sha256": "9e7e0016e68745cfb491d3018beb2d91b81b631a6d1995b36ad3a2e03d2ba695",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-21-neural-language-model.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/text-representation/word2vec-glove",
+      "source": "00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md",
+      "sha256": "53dba94646abb1903ae0ca729e6caea54b99b9c6a5a4a9fb63ede9dda7df1bab",
+      "pre_navigation_and_math_sha256": "53dba94646abb1903ae0ca729e6caea54b99b9c6a5a4a9fb63ede9dda7df1bab",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-22-word-embeddings-revisit.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/text-representation/tokenization",
+      "source": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+      "sha256": "fa5261a3994721e92f48c82dae8992e55c0ccc805dc795648ce61b7407d29ebe",
+      "pre_navigation_and_math_sha256": "fa5261a3994721e92f48c82dae8992e55c0ccc805dc795648ce61b7407d29ebe",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-22-text-tokenization-revisit.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/recurrent-networks/rnn-bptt",
+      "source": "00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT.md",
+      "sha256": "9e7990cd4670623c0f8b4cc78fc233d30dfca3696143dee5ad01f87f2fa136b4",
+      "pre_navigation_and_math_sha256": "9e7990cd4670623c0f8b4cc78fc233d30dfca3696143dee5ad01f87f2fa136b4",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-27-nn-section-map.md",
+          "docs/audit/2026-10-26-rnn-execution.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-27-nn-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/recurrent-networks/lstm-gru",
+      "source": "00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md",
+      "sha256": "c0afc59f36af36d3616792c6dc8873cdee8ce419fa8cf0db000698f2393283f4",
+      "pre_navigation_and_math_sha256": "c0afc59f36af36d3616792c6dc8873cdee8ce419fa8cf0db000698f2393283f4",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-21-lstm-gru.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/recurrent-networks/seq2seq-bottleneck",
+      "source": "00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора.md",
+      "sha256": "f8f44caa2a641441cedbc99c9419de2bbb2ce2567585e2ccde65e48c5f02535b",
+      "pre_navigation_and_math_sha256": "f8f44caa2a641441cedbc99c9419de2bbb2ce2567585e2ccde65e48c5f02535b",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-21-seq2seq.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/transformer/from-seq2seq-to-transformer",
+      "source": "00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer.md",
+      "sha256": "b3cf9833d7001011b01a49ab0f310ad9f65e5cfdc82b771510e11bed6ade1b62",
+      "pre_navigation_and_math_sha256": "b3cf9833d7001011b01a49ab0f310ad9f65e5cfdc82b771510e11bed6ade1b62",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-22-attention-translation-revisit.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/transformer/self-attention",
+      "source": "00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md",
+      "sha256": "270146832ba9d5f349939f802663643786563c05fd88bb0271633fcfce0baba7",
+      "pre_navigation_and_math_sha256": "073f6e573481b59e93f2a2bee4bdd2e86c7ab5e1c9091764e9c506bfd18acc3c",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-27-nn-section-map.md",
+          "docs/audit/2026-10-26-attention-transformer.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-27-nn-section-map.json"
+        ],
+        "consolidation": {
+          "scope": "Recorded consolidation deltas preserve the reviewed preceding revision; new explanations have separate source/example review.",
+          "report": "docs/audit/2026-10-29-publication-consolidation.md"
+        }
+      },
+      "pre_topic_consolidation_sha256": "073f6e573481b59e93f2a2bee4bdd2e86c7ab5e1c9091764e9c506bfd18acc3c"
+    },
+    {
+      "route": "textbook/transformer/masking-heads-shapes",
+      "source": "00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md",
+      "sha256": "9306be89c604c905489000ffcebffb32e16161f66e07540005d0f394097c0fd5",
+      "pre_navigation_and_math_sha256": "9306be89c604c905489000ffcebffb32e16161f66e07540005d0f394097c0fd5",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-26-cs336-device-placement.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/transformer/positional-information",
+      "source": "00 Учебник/05 Attention и Transformer/04 Позиционная информация.md",
+      "sha256": "897a19c428e9ef20a6c651e981eb32d905d6f72a616907c2ea2e20fa1842451a",
+      "pre_navigation_and_math_sha256": "897a19c428e9ef20a6c651e981eb32d905d6f72a616907c2ea2e20fa1842451a",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-22-positional-information-revisit.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/transformer/full-transformer",
+      "source": "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md",
+      "sha256": "8bda8af63d82960da7d5849e132be647542b90d4a9a9daca05ff5a0f2e66d356",
+      "pre_navigation_and_math_sha256": "8bda8af63d82960da7d5849e132be647542b90d4a9a9daca05ff5a0f2e66d356",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-27-nn-section-map.md",
+          "docs/audit/2026-10-26-attention-transformer.md",
+          "docs/audit/2026-10-22-full-transformer-revisit.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-27-nn-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/transformer/encoder-decoder-patterns",
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md",
+      "sha256": "a99819704bcdd1ff795c39a2240b8c32331fded5b1372c302f69e381d123d6e8",
+      "pre_navigation_and_math_sha256": "a99819704bcdd1ff795c39a2240b8c32331fded5b1372c302f69e381d123d6e8",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-22-architecture-patterns-revisit.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/models/bert-roberta-deberta",
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md",
+      "sha256": "fa3595eca44cec1269db1425337a04773d132d2dd685432d1b12518a15ae19b4",
+      "pre_navigation_and_math_sha256": "fa3595eca44cec1269db1425337a04773d132d2dd685432d1b12518a15ae19b4",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-27-frameworks-native-figures.md",
+          "docs/audit/2026-10-22-bert-family-revisit.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/models/gpt-1",
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md",
+      "sha256": "318e040db226fabac04ba6576bf629775600e4626a03e2ac7ce0a4ec16967499",
+      "pre_navigation_and_math_sha256": "318e040db226fabac04ba6576bf629775600e4626a03e2ac7ce0a4ec16967499",
+      "evidence": {
+        "kind": "current-full-read",
+        "lines": 707,
+        "reports": [
+          "docs/audit/2026-10-29-corpus-follow-through.md",
+          "docs/audit/2026-10-22-gpt1-revisit.md",
+          "docs/audit/2026-10-29-reader-route.md"
+        ]
+      }
+    },
+    {
+      "route": "textbook/models/gpt-2",
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md",
+      "sha256": "ce717410045dd566b798820440ef49db532c1204d6d0bed6b54cfec1247f6c8d",
+      "pre_navigation_and_math_sha256": "ce717410045dd566b798820440ef49db532c1204d6d0bed6b54cfec1247f6c8d",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-22-gpt2-revisit.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/models/gpt-3",
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md",
+      "sha256": "76ed87ea2ca9e9c2bc82b7926eb95de9313d0b11c8ce14ab95ab13313e19875a",
+      "pre_navigation_and_math_sha256": "76ed87ea2ca9e9c2bc82b7926eb95de9313d0b11c8ce14ab95ab13313e19875a",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-22-gpt3-revisit.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/models/t5",
+      "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md",
+      "sha256": "1bced617c9985be26919d79c4d01a87e4d0a3087d59e65d2e200fd2f84608dfc",
+      "pre_navigation_and_math_sha256": "1bced617c9985be26919d79c4d01a87e4d0a3087d59e65d2e200fd2f84608dfc",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-22-t5-revisit.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/modern-llm/llama-architecture",
+      "source": "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md",
+      "sha256": "76213c88dc1a17d2ea09ca1c5b607f53e5d7e6210cb44dbb9d69f9809bcb9e4e",
+      "pre_navigation_and_math_sha256": "76213c88dc1a17d2ea09ca1c5b607f53e5d7e6210cb44dbb9d69f9809bcb9e4e",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-22-llama-revisit.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/modern-llm/decoder-block",
+      "source": "00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md",
+      "sha256": "fd2e197230ab5e39e1cb7c678415801ea510b1025dbe2a03f60b58021bcea703",
+      "pre_navigation_and_math_sha256": "fd2e197230ab5e39e1cb7c678415801ea510b1025dbe2a03f60b58021bcea703",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-22-decoder-block-revisit.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/modern-llm/norm-gating-residual",
+      "source": "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md",
+      "sha256": "ba4dde89572fa4c17be5addc0bde7ea24bbffb300120d15467c2282fb120ced6",
+      "pre_navigation_and_math_sha256": "ba4dde89572fa4c17be5addc0bde7ea24bbffb300120d15467c2282fb120ced6",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-27-shared-blocks.md",
+          "docs/audit/2026-10-27-nn-section-map.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-27-nn-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/modern-llm/rope",
+      "source": "00 Учебник/07 Анатомия современной LLM/04 RoPE.md",
+      "sha256": "6de4b7919032e51d0ce74e0c4b39ae7ce08982ba3ee9dad4dd0009d440254bde",
+      "pre_navigation_and_math_sha256": "ba35ac3e1747815c726bfa3e50d9484ec9b9aeccf399ca53d34badb426556cdc",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-22-rope.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/modern-llm/transformer-shapes-resources",
+      "source": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+      "sha256": "867688bdeef1319da44e68875af62f33338eb304336829ee1c2990655547b50e",
+      "pre_navigation_and_math_sha256": "d83455cb1573c6506a8c776811759b126440f5472ccdcada294b859f531a2776",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-26-cs336-device-placement.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/modern-llm/mha-mqa-gqa",
+      "source": "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md",
+      "sha256": "c442a81b9e09fe55aedc225cb3e5d3d7fa91b3db13eb80a9fdefed28a5c5c571",
+      "pre_navigation_and_math_sha256": "bfc1a46b5282ae224d05366a4140fe9c0be3d623a8dd8913d530f827c56922a4",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-22-gqa.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/modern-llm/mla-kv-compression",
+      "source": "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md",
+      "sha256": "aa2789b8788eda6efa42c4a31100734867554b63e02d32484996ad9dbb6f5e5f",
+      "pre_navigation_and_math_sha256": "aa2789b8788eda6efa42c4a31100734867554b63e02d32484996ad9dbb6f5e5f",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-22-mla.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/modern-llm/long-context",
+      "source": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+      "sha256": "c15d27a0f6565299948cf7c3aa0005428743735058ff8d9998707bced97c1b85",
+      "pre_navigation_and_math_sha256": "0fcd1b1baf51030bd41c3cfb54a7871b753b25f5da7edda6b6c1a56c32ed013a",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-23-long-context.md"
+        ],
+        "section_maps": [],
+        "consolidation": {
+          "scope": "Recorded consolidation deltas preserve the reviewed preceding revision; new explanations have separate source/example review.",
+          "report": "docs/audit/2026-10-29-publication-consolidation.md"
+        }
+      },
+      "pre_topic_consolidation_sha256": "0e7850191277c2721d260077c3b098279ccecf39ceb37be42525f482826485cc"
+    },
+    {
+      "route": "textbook/modern-llm/dense-ffn",
+      "source": "00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md",
+      "sha256": "50f2528d8a0cba6231692f81353c6817f2626aa54945aa51a0b6e14aeccbffc3",
+      "pre_navigation_and_math_sha256": "861b4a9b9724ef3efb0446f09ae522b8117a71758c693dca64c5258c819a5b6a",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-27-shared-blocks.md",
+          "docs/audit/2026-10-27-nn-section-map.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-27-nn-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/moe/mixture-of-experts",
+      "source": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "sha256": "9df758b69b1d720bbb8942594442f5c6e45071d70b28f740793fb57de2fd746c",
+      "pre_navigation_and_math_sha256": "f6f6110b23ed5defba31c16a5332e5d0bfb5f7190b0ecfc1b0d7cd42e9524042",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-23-moe.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/modern-llm/sequence-model-alternatives",
+      "source": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+      "sha256": "783cab0ddb3b947eecd310c420898a0acf1ff6a7088e45f98ef1176de4ba4aea",
+      "pre_navigation_and_math_sha256": "4f78170b76794b013076afc363b9df813563ac0df59e0465bd0d1c74633bb803",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-23-sequence-alternatives.md"
+        ],
+        "section_maps": [],
+        "consolidation": {
+          "scope": "Recorded consolidation deltas preserve the reviewed preceding revision; new explanations have separate source/example review.",
+          "report": "docs/audit/2026-10-29-publication-consolidation.md"
+        }
+      },
+      "pre_topic_consolidation_sha256": "319d399b9c2d1ce4c929e386dc900800304fd916b4b97695dc99385b6ad32956"
+    },
+    {
+      "route": "textbook/ml-systems/model-as-part-of-system",
+      "source": "00 Учебник/10 ML Systems/01 Модель как часть системы.md",
+      "sha256": "eb51bcc5c98e9e2dc9ce0afed7f14315965a8abcdff0e176e6094d5943d40764",
+      "pre_navigation_and_math_sha256": "c958fbd61b171e67163951269d76375e26376e7a54c69d76b4e3ad24c7b6676d",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-27-nn-section-map.md",
+          "docs/audit/2026-10-26-architecture-selection.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-27-frameworks-section-map.json",
+          "docs/audit/2026-10-27-nn-section-map.json",
+          "docs/audit/2026-10-28-training-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/ml-systems/gpu-cuda-memory-hierarchy",
+      "source": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "sha256": "d700f60713f8d39ff010f0c7f7daeaa2aa3a0c1b3125ef63aad0858e29f9db1c",
+      "pre_navigation_and_math_sha256": "d432d06ee1687fca66fe6151028a1c4a2bb2313a7e23d9d2b7d877b96cb48d81",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-27-tensors-gpu-primitives.md",
+          "docs/audit/2026-10-27-nn-section-map.md",
+          "docs/audit/2026-10-26-cs336-device-placement.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-27-frameworks-section-map.json",
+          "docs/audit/2026-10-27-nn-section-map.json",
+          "docs/audit/2026-10-28-training-section-map.json"
+        ],
+        "previous_current_sha256": "d432d06ee1687fca66fe6151028a1c4a2bb2313a7e23d9d2b7d877b96cb48d81",
+        "completion_review": "docs/audit/2026-10-29-one-pass-completion.md",
+        "completion_preservation": "Exact restoration through beforeReaderRouteNavigation verified before current hash update"
+      }
+    },
+    {
+      "route": "textbook/ml-systems/performance-measurement-roofline",
+      "source": "00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md",
+      "sha256": "ee3b591a0085982c18c2ae691889e38f2f624b505cb2a414520c947c1f57323b",
+      "pre_navigation_and_math_sha256": "ee3b591a0085982c18c2ae691889e38f2f624b505cb2a414520c947c1f57323b",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-27-tensors-gpu-primitives.md",
+          "docs/audit/2026-10-27-nn-section-map.md",
+          "docs/audit/2026-10-26-fleet-measurement-integration.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-27-frameworks-section-map.json",
+          "docs/audit/2026-10-27-nn-section-map.json",
+          "docs/audit/2026-10-28-training-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/ml-systems/transformer-moe-arithmetic",
+      "source": "00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md",
+      "sha256": "2d49342ee5b2998d93980151ff95f2fdbf5a464c1cbb6911f9e7c3c4dce0cafa",
+      "pre_navigation_and_math_sha256": "2d49342ee5b2998d93980151ff95f2fdbf5a464c1cbb6911f9e7c3c4dce0cafa",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-27-nn-section-map.md",
+          "docs/audit/2026-10-23-transformer-arithmetic.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-27-nn-section-map.json",
+          "docs/audit/2026-10-28-training-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/ml-systems/numerical-formats-mixed-precision",
+      "source": "00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md",
+      "sha256": "9a72e3c171518af749c26271e183bf35c55d2f98f76a146cf93c8d8404efa02d",
+      "pre_navigation_and_math_sha256": "9a72e3c171518af749c26271e183bf35c55d2f98f76a146cf93c8d8404efa02d",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-28-training-reconciliation.md",
+          "docs/audit/2026-10-23-numerical-formats.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-28-training-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/ml-systems/data-pipeline-padding-packing",
+      "source": "00 Учебник/10 ML Systems/06 Data pipeline, padding и packing.md",
+      "sha256": "5f2a58816bfc82f2ccb0e43cea2a4bdbae1d22d8aae17d0fb36f82a2baac2917",
+      "pre_navigation_and_math_sha256": "5f2a58816bfc82f2ccb0e43cea2a4bdbae1d22d8aae17d0fb36f82a2baac2917",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-28-tf-data-cache.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-28-data-selection-section-map.json",
+          "docs/audit/2026-10-28-training-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/ml-systems/profiling",
+      "source": "00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md",
+      "sha256": "f6fdc8028d115f4026643fc090bc843f2fdd8ddfc97207332681bca22e672a80",
+      "pre_navigation_and_math_sha256": "f6fdc8028d115f4026643fc090bc843f2fdd8ddfc97207332681bca22e672a80",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-27-training-step.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-27-frameworks-section-map.json",
+          "docs/audit/2026-10-28-training-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/ml-systems/gpu-kernels-triton",
+      "source": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+      "sha256": "4f91303abdcf74c72659509470b5064f28c5cbed2d53a0b7abd60128d4c1f3e1",
+      "pre_navigation_and_math_sha256": "8826db488145077e23c59f37abb23d42e66afe4d57688bd30f109d521817ea08",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-27-jax-runtime.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-27-frameworks-section-map.json",
+          "docs/audit/2026-10-27-nn-section-map.json",
+          "docs/audit/2026-10-28-training-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/pretraining/data-and-pretraining",
+      "source": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+      "sha256": "b76bc6bdfbfcd06494c87accc8bc380eb9b019bd73d1d23c710653d251c8759f",
+      "pre_navigation_and_math_sha256": "894d8164aa820d76f7fd2196753e0aec3e995e6a203516650afc3541e2a38edc",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-26-berkeley-olmo-pretraining.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/pretraining/data-pipeline",
+      "source": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+      "sha256": "016059980cfd4582d7786c3bf09a1c6c513f4ad6c19e39df0202c5fe06b667c7",
+      "pre_navigation_and_math_sha256": "016059980cfd4582d7786c3bf09a1c6c513f4ad6c19e39df0202c5fe06b667c7",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-26-berkeley-olmo-pretraining.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-28-data-selection-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/pretraining/dedup-pii-corpus-quality",
+      "source": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+      "sha256": "b614c77415a2209e0ec017b94fa11ea7a22aca3de0532c9f21d7f76f1609425f",
+      "pre_navigation_and_math_sha256": "bb41bfeacf3a7a33b41af695d3679a1b33d8061fa78a35c2c3b9da369216a2cc",
+      "evidence": {
+        "kind": "bounded-explanation-addition",
+        "reviewed_sha256": "b614c77415a2209e0ec017b94fa11ea7a22aca3de0532c9f21d7f76f1609425f",
+        "reports": [
+          "docs/audit/2026-10-23-corpus-dedup.md",
+          "docs/audit/2026-10-29-selection-gaps.md"
+        ],
+        "preservation_journal": "docs/audit/2026-10-29-selection-gaps-additions.json",
+        "previous_evidence": {
+          "kind": "exact-navigation-reconstruction",
+          "reviewed_sha256": "b85e4a7a85030a9996dcd1bbe7cce2015de5be94b479b6b870c34b420ac929ae",
+          "replacements": [
+            [
+              "41b Отбор обучающих примеров — EL2N, GraNd и forgetting|Отбор обучающих примеров — EL2N, GraNd и forgetting",
+              "42 Next-token prediction|Pre-training и next-token prediction"
+            ]
+          ],
+          "reports": [
+            "docs/audit/2026-10-23-corpus-dedup.md"
+          ],
+          "section_maps": [
+            "docs/audit/2026-10-28-data-selection-section-map.json"
+          ]
+        },
+        "section_maps": [
+          "docs/audit/2026-10-28-data-selection-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/pretraining/data-selection-scores",
+      "source": "00 Учебник/11 Pre-training и Scaling/41b Отбор обучающих примеров — EL2N, GraNd и forgetting.md",
+      "sha256": "18aa3e0c623deceaf7bd475e03f045c7a5e5e8b68ccc7921297e106fa4b04fe4",
+      "pre_navigation_and_math_sha256": "77c2b1dd27626e40bb33f9cfcd204b5744fd72575fc82ac736961047c90f9a6a",
+      "evidence": {
+        "kind": "bounded-explanation-addition",
+        "reviewed_sha256": "18aa3e0c623deceaf7bd475e03f045c7a5e5e8b68ccc7921297e106fa4b04fe4",
+        "reports": [
+          "docs/audit/2026-10-28-data-selection-scores.md",
+          "docs/audit/2026-10-29-confident-learning.md"
+        ],
+        "preservation_journal": "docs/audit/2026-10-29-confident-learning-addition.json",
+        "previous_evidence": {
+          "kind": "exact-navigation-reconstruction",
+          "reviewed_sha256": "e9b361be8d70274f446dd3f2c7607c96e2c26b3cf74862942e5db5d3bc05def2",
+          "replacements": [
+            [
+              "41c Active learning — запрос меток и выбор примеров|Active learning — запрос меток и выбор примеров",
+              "42 Next-token prediction|Целевая функция предобучения"
+            ]
+          ],
+          "reports": [
+            "docs/audit/2026-10-28-data-selection-scores.md"
+          ],
+          "section_maps": [
+            "docs/audit/2026-10-28-data-selection-section-map.json"
+          ]
+        },
+        "section_maps": [
+          "docs/audit/2026-10-28-data-selection-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/pretraining/active-learning",
+      "source": "00 Учебник/11 Pre-training и Scaling/41c Active learning — запрос меток и выбор примеров.md",
+      "sha256": "f74660cc1515d21e0e423e2e2ee232fdb641765a7b8a43cd8aa4424dfc8c19e6",
+      "pre_navigation_and_math_sha256": "f74660cc1515d21e0e423e2e2ee232fdb641765a7b8a43cd8aa4424dfc8c19e6",
+      "evidence": {
+        "kind": "exact-navigation-reconstruction",
+        "reviewed_sha256": "c1970f259e599a045fb49e6f47745a80e7e4d7adca764e4ff500b1bec7862f81",
+        "replacements": [
+          [
+            "41d Геометрический отбор — k-center, coreset и herding|Геометрический отбор — k-center, coreset и herding",
+            "42 Next-token prediction|Целевая функция предобучения"
+          ]
+        ],
+        "reports": [
+          "docs/audit/2026-10-28-active-learning.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-28-data-selection-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/pretraining/geometric-coresets",
+      "source": "00 Учебник/11 Pre-training и Scaling/41d Геометрический отбор — k-center, coreset и herding.md",
+      "sha256": "ed07daa1b7b286ad7e49739e8baa0c3e59223cb195062fe4240dbe4eba70e65a",
+      "pre_navigation_and_math_sha256": "ed07daa1b7b286ad7e49739e8baa0c3e59223cb195062fe4240dbe4eba70e65a",
+      "evidence": {
+        "kind": "exact-navigation-reconstruction",
+        "reviewed_sha256": "db32ea0fad9b98fe920150fda9408c857678c629f6f962df0878e1235f5590c8",
+        "replacements": [
+          [
+            "41e Обучение с частичной разметкой — pseudo-labeling и FixMatch|Обучение с частичной разметкой — pseudo-labeling и FixMatch",
+            "42 Next-token prediction|Целевая функция предобучения"
+          ]
+        ],
+        "reports": [
+          "docs/audit/2026-10-28-geometric-coresets.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-28-data-selection-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/pretraining/semi-supervised-fixmatch",
+      "source": "00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch.md",
+      "sha256": "87493321b47bf9ae7838121bc0e1c8644e045e99371f2951f8a54bc8ebee7f1e",
+      "pre_navigation_and_math_sha256": "48ca69139d0f48425b995970e1113eacc53dd39dcb66c67cbd4390facbbcb1a2",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-28-data-selection-reconciliation.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-28-data-selection-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/pretraining/simclr-representations",
+      "source": "00 Учебник/11 Pre-training и Scaling/41f Контрастивное предобучение — SimCLR и проверка представлений.md",
+      "sha256": "7a606b0fc23dfc68ac35130688f35dd0beea13df3fb2c6d36baffb967e566ac9",
+      "pre_navigation_and_math_sha256": "4b371ae35466962a0c3bf6ed9daad1004a70ee70a9c3217fe2c53ace1dccbfb2",
+      "evidence": {
+        "kind": "exact-navigation-reconstruction",
+        "reviewed_sha256": "b973c7b056664c775eca19f06e448c3572264447bbc04c74f06da82aa89818f2",
+        "replacements": [
+          [
+            "41g Momentum contrast — MoCo, очередь и key encoder|Momentum contrast — MoCo, очередь и key encoder",
+            "42 Next-token prediction|Целевая функция предобучения"
+          ]
+        ],
+        "reports": [
+          "docs/audit/2026-10-28-simclr.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-28-data-selection-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/pretraining/moco-queue-momentum",
+      "source": "00 Учебник/11 Pre-training и Scaling/41g Momentum contrast — MoCo, очередь и key encoder.md",
+      "sha256": "b1436d67484c43e8ab9b4cb93754c6100ce0ead0997da342e9752d318266963d",
+      "pre_navigation_and_math_sha256": "b1436d67484c43e8ab9b4cb93754c6100ce0ead0997da342e9752d318266963d",
+      "evidence": {
+        "kind": "exact-navigation-reconstruction",
+        "reviewed_sha256": "fe649bdd8a8fc010337edbcc942a8c639664694483e854ad5c893426c1aada67",
+        "replacements": [
+          [
+            "41h Masked autoencoders — MAE и восстановление патчей|Masked autoencoders — MAE и восстановление патчей",
+            "42 Next-token prediction|Целевая функция предобучения"
+          ]
+        ],
+        "reports": [
+          "docs/audit/2026-10-28-moco.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-28-data-selection-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/pretraining/mae-masked-autoencoders",
+      "source": "00 Учебник/11 Pre-training и Scaling/41h Masked autoencoders — MAE и восстановление патчей.md",
+      "sha256": "fc3b1decc3a776759290e96c3253d4a0bba8c09f87239651a779313eb69d69a0",
+      "pre_navigation_and_math_sha256": "6cfa1df55e37e02515ce19faefd57f77dcaa9aed2cb4bb913b199b956cc83b64",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-28-selection-engineering.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-28-data-selection-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/pretraining/selection-engineering-evaluation",
+      "source": "00 Учебник/11 Pre-training и Scaling/41i Отбор данных — стоимость, шарды и проверка качества.md",
+      "sha256": "1a5082192c91d9da9d8b69faf39de8beeddb224e7446b6b09b7061bb72619e2c",
+      "pre_navigation_and_math_sha256": "c1f958a0143ee05efa1ec4f6d58e5ebb5d0822cd500edd407cb95cce6ee48175",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-28-data-selection-reconciliation.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-28-data-selection-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/pretraining/next-token-objective",
+      "source": "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md",
+      "sha256": "aca814c431df4b4d489ac98e4f147b85ba6f600eb41463c1b3ae4b6f7d9f3f3f",
+      "pre_navigation_and_math_sha256": "c200aa127c6ce1ebb37cf95b34faa82479ae601d1b43579f591247348f8e6527",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-28-selection-engineering.md",
+          "docs/audit/2026-10-23-ntp.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/pretraining/scaling-laws",
+      "source": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+      "sha256": "472401f6f3bf906cc8b23f29a5ff206cb8c083da3f20ac5654249eaee61aef69",
+      "pre_navigation_and_math_sha256": "a2953c0e6343ee9ee34a7ba82d77f3bb441ef14f560f23acfd2d526d409422fb",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-23-scaling.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-28-data-selection-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/pretraining/distributed-systems",
+      "source": "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md",
+      "sha256": "7fc54afeb6889923cf35893e40f4b9f02964b734b7dc40b5eea0f10b41659e01",
+      "pre_navigation_and_math_sha256": "732257fa15ab9d21f4c28ec94b07c0d9f945a6a975de38960a66cd9afcaa86ac",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-28-frameworks-placement.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-27-frameworks-section-map.json",
+          "docs/audit/2026-10-28-training-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/pretraining/processes-collectives-ddp",
+      "source": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+      "sha256": "e1e9b7999ca10a61e9a48a24484f704b13cb7918cede4d5ba050b06876cbc8db",
+      "pre_navigation_and_math_sha256": "e1e9b7999ca10a61e9a48a24484f704b13cb7918cede4d5ba050b06876cbc8db",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-27-nn-section-map.md",
+          "docs/audit/2026-10-27-collective-destinations.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-27-frameworks-section-map.json",
+          "docs/audit/2026-10-27-nn-section-map.json",
+          "docs/audit/2026-10-28-training-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/pretraining/gradient-checkpointing-offload",
+      "source": "00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload.md",
+      "sha256": "3fe01a82c9a8f60a417d7e3eacce59dac608cd767944af5d85db5ab549be1f5e",
+      "pre_navigation_and_math_sha256": "3fe01a82c9a8f60a417d7e3eacce59dac608cd767944af5d85db5ab549be1f5e",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-28-training-reconciliation.md",
+          "docs/audit/2026-10-23-checkpoint-offload.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-28-training-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/pretraining/tensor-sequence-parallelism",
+      "source": "00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism.md",
+      "sha256": "19a681a8a334905e3c2b65b66757b4dcff58086e7c2e4c48a3717882767da30a",
+      "pre_navigation_and_math_sha256": "19a681a8a334905e3c2b65b66757b4dcff58086e7c2e4c48a3717882767da30a",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-23-tensor-sequence.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/pretraining/pipeline-parallelism",
+      "source": "00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism.md",
+      "sha256": "f622f710aff96bc0bbc4c4ae604e9a66d91db015c3c10428f35bc9c5280b0c33",
+      "pre_navigation_and_math_sha256": "f622f710aff96bc0bbc4c4ae604e9a66d91db015c3c10428f35bc9c5280b0c33",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-23-zero-bubble-source-visuals.md",
+          "docs/audit/2026-10-23-pipeline.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/pretraining/zero-fsdp2-devicemesh-dtensor",
+      "source": "00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md",
+      "sha256": "183de5525e52384c034fc3996acbd74d20dad9a64560f7a65f24406c15da0ac8",
+      "pre_navigation_and_math_sha256": "183de5525e52384c034fc3996acbd74d20dad9a64560f7a65f24406c15da0ac8",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-23-fsdp.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/pretraining/expert-hybrid-parallelism",
+      "source": "00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism.md",
+      "sha256": "ccead0e7d311931c46e98b85b48cf1cf5a4864ead1dafacc5a8042e33128672b",
+      "pre_navigation_and_math_sha256": "ccead0e7d311931c46e98b85b48cf1cf5a4864ead1dafacc5a8042e33128672b",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-23-expert-hybrid.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/pretraining/network-storage-checkpoints",
+      "source": "00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints.md",
+      "sha256": "d1fb604523c2e2b84e124fca81d47aafc06f2939def36a9e07853eef85eb975a",
+      "pre_navigation_and_math_sha256": "d1fb604523c2e2b84e124fca81d47aafc06f2939def36a9e07853eef85eb975a",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-23-network-checkpoints.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/pretraining/fault-tolerance-orchestration",
+      "source": "00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration.md",
+      "sha256": "6476737a39c6ee04ba0e578ab21c60be64c47d8f80d9946c161cea4eaceb812a",
+      "pre_navigation_and_math_sha256": "1d9f922994ef80300a2f796e620f1b66ad9faa80c66c97689731cdf46909900e",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-23-fault-tolerance.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/post-training/module-map",
+      "source": "00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники.md",
+      "sha256": "80a3471b7cdc616e09ba13fb458f092920bb1edc9a39664de8ce31480e469f8d",
+      "pre_navigation_and_math_sha256": "960eccf542d8d3b3a080a86839daccc45e12b476eb8ac3d1a1ddb63e59933880",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-23-post-training-sft.md"
+        ],
+        "section_maps": [],
+        "consolidation": {
+          "scope": "Recorded consolidation deltas preserve the reviewed preceding revision; new explanations have separate source/example review.",
+          "report": "docs/audit/2026-10-29-publication-consolidation.md"
+        }
+      },
+      "pre_topic_consolidation_sha256": "960eccf542d8d3b3a080a86839daccc45e12b476eb8ac3d1a1ddb63e59933880"
+    },
+    {
+      "route": "textbook/post-training/sft-instruction-data",
+      "source": "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+      "sha256": "226ab215d706e0af02b48c2d5631887e62614ac89a61be12054175a0edda09b7",
+      "pre_navigation_and_math_sha256": "8480355a6edc89fcf2ee256df2d2e753ca6986c7dfb6413f4a3bc958e4c2e960",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-23-post-training-sft.md"
+        ],
+        "section_maps": [],
+        "consolidation": {
+          "scope": "Recorded consolidation deltas preserve the reviewed preceding revision; new explanations have separate source/example review.",
+          "report": "docs/audit/2026-10-29-publication-consolidation.md"
+        }
+      },
+      "pre_topic_consolidation_sha256": "8480355a6edc89fcf2ee256df2d2e753ca6986c7dfb6413f4a3bc958e4c2e960"
+    },
+    {
+      "route": "textbook/post-training/preference-data",
+      "source": "00 Учебник/12 Post-training и Alignment/02 Preference data.md",
+      "sha256": "e24409a09129f2b7ba6f01d6a85f45879f1cbab2dec4c099267c5e11d934dffa",
+      "pre_navigation_and_math_sha256": "e24409a09129f2b7ba6f01d6a85f45879f1cbab2dec4c099267c5e11d934dffa",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-23-preference-data.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/post-training/reward-modeling",
+      "source": "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
+      "sha256": "ae8ad7536eb7463667bbe8a5983fc54008e92079e775ea49ca481a12d3bb570e",
+      "pre_navigation_and_math_sha256": "ae8ad7536eb7463667bbe8a5983fc54008e92079e775ea49ca481a12d3bb570e",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-23-reward-modeling.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/post-training/ppo",
+      "source": "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md",
+      "sha256": "29efb9a8c255c1b04abdcedc5c696f659a20ef45010572fe59093429698fcae5",
+      "pre_navigation_and_math_sha256": "29efb9a8c255c1b04abdcedc5c696f659a20ef45010572fe59093429698fcae5",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-24-ppo.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/post-training/dpo",
+      "source": "00 Учебник/12 Post-training и Alignment/05 DPO.md",
+      "sha256": "fd7a08d5813a5427b74a943d8a57f00978877b8edce13ac1027ccc04cf172c06",
+      "pre_navigation_and_math_sha256": "fd7a08d5813a5427b74a943d8a57f00978877b8edce13ac1027ccc04cf172c06",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-24-dpo.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/post-training/rlvr-verifiers",
+      "source": "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
+      "sha256": "7b8b6d68960196ce4dd0c59fe047f974decd60b187f95b3acda55076b73efbba",
+      "pre_navigation_and_math_sha256": "7b8b6d68960196ce4dd0c59fe047f974decd60b187f95b3acda55076b73efbba",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-24-rlvr.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/post-training/grpo-deepseek-r1",
+      "source": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+      "sha256": "7173f3bbdb587d32f8d2f04c5663164c132563b6966ce7543ccc613f4e007e1a",
+      "pre_navigation_and_math_sha256": "7173f3bbdb587d32f8d2f04c5663164c132563b6966ce7543ccc613f4e007e1a",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-25-grpo.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/post-training/reasoning-distillation",
+      "source": "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md",
+      "sha256": "94becb658274ac9476ba8bb06c904b25ec6a71d5fe60e3453cb2884f186ad7b4",
+      "pre_navigation_and_math_sha256": "e7ea39b04663903565f4e9796adc5718ab1f7c3a23dee13d0c768faaba3bba4c",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-28-data-selection-decision-framework.md",
+          "docs/audit/2026-10-25-distillation.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-28-data-selection-section-map.json"
+        ],
+        "consolidation": {
+          "scope": "Recorded consolidation deltas preserve the reviewed preceding revision; new explanations have separate source/example review.",
+          "report": "docs/audit/2026-10-29-publication-consolidation.md"
+        }
+      },
+      "pre_topic_consolidation_sha256": "e7ea39b04663903565f4e9796adc5718ab1f7c3a23dee13d0c768faaba3bba4c"
+    },
+    {
+      "route": "textbook/reasoning/test-time-compute",
+      "source": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
+      "sha256": "c25a11e993cbcd37387d64003c575b2448c4979b828a7819b4f59a8cd4f5b99d",
+      "pre_navigation_and_math_sha256": "55b6041548e938466d2e5ca0e75a4de1280d03625ff8438cdd4fc1da812f4f2c",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-25-test-time-compute.md"
+        ],
+        "section_maps": [],
+        "coconut": {
+          "report": "docs/audit/2026-10-29-final-closure.md",
+          "journal": "docs/audit/2026-10-29-coconut-additions.json",
+          "source_sections": [
+            "Coconut v3 section 3",
+            "coconut.py full",
+            "dataset.py full",
+            "run.py lines 200-329"
+          ],
+          "example": "docs/audit/2026-10-29-final-closure-ttc-examples.json"
+        }
+      },
+      "pre_coconut_sha256": "a5f87fca761675e036bc3368a1cb00e3feca573daa1bc64eb86d557a0ff93bef"
+    },
+    {
+      "route": "textbook/pretraining/synthetic-data-curricula",
+      "source": "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md",
+      "sha256": "2e465a3a4ccb11a00417f80da1f910b2b691d946a90281410d6f61c6d398abd7",
+      "pre_navigation_and_math_sha256": "df616fb7536981209a3fdef659003fb3f5b336c1983132f75f7d126b95fc3dd4",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-28-sim-to-real.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-28-data-selection-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/pretraining/synthetic-images-sim-to-real",
+      "source": "00 Учебник/11 Pre-training и Scaling/53a Синтетические изображения и перенос из симуляции.md",
+      "sha256": "ffcc175ff7dcf3852f6d64ab9458033aa339bd4c30f38f55f3f87611af1cf5fc",
+      "pre_navigation_and_math_sha256": "63368115b8d0dd1f51ba8d16950b572be3fa57b08c491953fdf175ba5c85957a",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-28-sim-to-real.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-28-data-selection-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/inference/decoding",
+      "source": "00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md",
+      "sha256": "cb53484debaf97e673ff30e804afc4d9941b94e6d87eebc8cae78bdda05685a0",
+      "pre_navigation_and_math_sha256": "affadbaec14be05ea9a9dcb7f14195bbac8e8fecdd82975c5ea600eb9441e7b5",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-25-decoding.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/inference/llm-inference-physics",
+      "source": "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+      "sha256": "dcdc7f9712614b5342b15d03cba1beb7f641ea72b27fe6ee04730ad70fd66bdc",
+      "pre_navigation_and_math_sha256": "fd960c1e11d964376d977525988d7753f351fde4443cbe57b294a91d5a4d63f6",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-26-inference-mbu.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/inference/kv-cache-batching-pagedattention",
+      "source": "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+      "sha256": "42438233617da20ba81611806b40ed450beaf6506e90ec181e2d43ac92580832",
+      "pre_navigation_and_math_sha256": "bbd791d15c4b4f2254b81fd575442aa3d16ad45ca395720676ce3a156409038e",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-25-kv-cache.md"
+        ],
+        "section_maps": [],
+        "consolidation": {
+          "scope": "Recorded consolidation deltas preserve the reviewed preceding revision; new explanations have separate source/example review.",
+          "report": "docs/audit/2026-10-29-publication-consolidation.md"
+        }
+      },
+      "pre_topic_consolidation_sha256": "bbd791d15c4b4f2254b81fd575442aa3d16ad45ca395720676ce3a156409038e"
+    },
+    {
+      "route": "textbook/inference/scheduling",
+      "source": "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md",
+      "sha256": "3256c046c7c117b55a8532fdf20a713eb575723327fa9c75839c55b24b582847",
+      "pre_navigation_and_math_sha256": "3256c046c7c117b55a8532fdf20a713eb575723327fa9c75839c55b24b582847",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-25-scheduling.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/inference/serving-engines",
+      "source": "00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md",
+      "sha256": "fee6d97ff4f17a23b48f6b3a73e7311d7699f1da456c414094d4ba934062f255",
+      "pre_navigation_and_math_sha256": "1125281504c3d757d7c5951325b37ce108accf66979d68cded83949d6750e5e8",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-14-serving-originals.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-27-frameworks-section-map.json"
+        ],
+        "previous_current_sha256": "1125281504c3d757d7c5951325b37ce108accf66979d68cded83949d6750e5e8",
+        "completion_review": "docs/audit/2026-10-29-one-pass-completion.md",
+        "completion_preservation": "Exact restoration through beforeReaderRouteNavigation verified before current hash update"
+      }
+    },
+    {
+      "route": "textbook/inference/flashattention",
+      "source": "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+      "sha256": "15ba654d059b1ccd35bd07c6b041e405bef2f99d74ee03f672c205263b7589a1",
+      "pre_navigation_and_math_sha256": "98b6a0fddd6b6d7b7136bf1b3a9eacc32d6334f182f59bd4218b99e1c3652add",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-28-training-reconciliation.md",
+          "docs/audit/2026-10-19-flashattention.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-28-training-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/inference/quantization",
+      "source": "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+      "sha256": "70bd3d2b286af4c5b04150e0a27bf527bd18de4ac6f829d2b7eaeb437f010d17",
+      "pre_navigation_and_math_sha256": "f37fde233004b02c54a0ae0f85f3ac7623ff52455681189d3e2ca8a8a9d48ccb",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-26-cs336-device-placement.md"
+        ],
+        "section_maps": [],
+        "consolidation": {
+          "scope": "Recorded consolidation deltas preserve the reviewed preceding revision; new explanations have separate source/example review.",
+          "report": "docs/audit/2026-10-29-publication-consolidation.md"
+        }
+      },
+      "pre_topic_consolidation_sha256": "d6054dd0ad83840c6328be92241f51454cc2dc9911321140b8705be7920452bd"
+    },
+    {
+      "route": "textbook/inference/kv-cache-compression-offload",
+      "source": "00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md",
+      "sha256": "bfd74b11578aa6caa0782a30e9456000e853e41fcca697f395dddea055eba218",
+      "pre_navigation_and_math_sha256": "bfd74b11578aa6caa0782a30e9456000e853e41fcca697f395dddea055eba218",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-19-kv-compression.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/inference/model-compression-pruning-distillation-low-rank",
+      "source": "00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md",
+      "sha256": "abfc32486bfbccb7475c316da89c0dd235c3628572db0121d7b6165aca4ec886",
+      "pre_navigation_and_math_sha256": "e818fccc317a2025b020f453a2e578e43ea1a2ba39ae893a86c6ee0a89bed5d3",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-28-data-selection-decision-framework.md",
+          "docs/audit/2026-10-19-model-compression.md",
+          "docs/audit/2026-10-29-tensor-factorization.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-28-data-selection-section-map.json"
+        ],
+        "addition_journal": "docs/audit/2026-10-29-tensor-factorization-addition.json",
+        "previous_current_sha256": "9fb33a98e8ece36cfabefe9e589c1ed9a5d7a08f4f686358f4ed2c0769aad4f3",
+        "completion_review": "docs/audit/2026-10-29-one-pass-completion.md",
+        "completion_preservation": "Exact restoration through beforeReaderRouteNavigation verified before current hash update"
+      }
+    },
+    {
+      "route": "textbook/inference/speculative-decoding",
+      "source": "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+      "sha256": "32085af4415e2aa3904eded4a14c42e7ced65c81d4288c42af4a5d099ff597ad",
+      "pre_navigation_and_math_sha256": "4f60e570288e3dd4ec403f160a396f683f7a69e5db95433a73e0a1b4b8c73097",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-19-speculative-decoding.md"
+        ],
+        "section_maps": [],
+        "consolidation": {
+          "scope": "Recorded consolidation deltas preserve the reviewed preceding revision; new explanations have separate source/example review.",
+          "report": "docs/audit/2026-10-29-publication-consolidation.md"
+        }
+      },
+      "pre_topic_consolidation_sha256": "4f60e570288e3dd4ec403f160a396f683f7a69e5db95433a73e0a1b4b8c73097"
+    },
+    {
+      "route": "textbook/inference/distributed-inference",
+      "source": "00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md",
+      "sha256": "7219c5e6fdef1ca9cd3fa92c50097cfe77a6ad664afa3ac43e9e6d8c117d7625",
+      "pre_navigation_and_math_sha256": "7219c5e6fdef1ca9cd3fa92c50097cfe77a6ad664afa3ac43e9e6d8c117d7625",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-20-distributed-inference.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/inference/disaggregated-serving",
+      "source": "00 Учебник/14 Inference и оптимизация/58a2 Раздельное обслуживание prefill и decode.md",
+      "sha256": "7973703ca7ec77248f0fdc77321e7c5f9805164d182508234fb5c49c3e86a13d",
+      "pre_navigation_and_math_sha256": "b7b7f12fe4726130c9d5d75697e7cda4d3314216fbb3a8195a474af77cb5efe4",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "arithmetic_correction": {
+          "report": "docs/audit/2026-10-29-en-distributed-parity.json",
+          "before_sha256": "b7b7f12fe4726130c9d5d75697e7cda4d3314216fbb3a8195a474af77cb5efe4",
+          "after_sha256": "7973703ca7ec77248f0fdc77321e7c5f9805164d182508234fb5c49c3e86a13d",
+          "preservation": "Reversing the single 4096-to-8192 incoming-request correction reconstructs the entire previous file SHA. Canonical example code is unchanged."
+        },
+        "reports": [
+          "docs/audit/2026-10-20-pd-serving.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/inference/benchmarking-slo",
+      "source": "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md",
+      "sha256": "1d453c6e9f77e4aee10c81305bc406fe0bf3a50e69fc4edd22748a555e5a0b9c",
+      "pre_navigation_and_math_sha256": "633f22fd09c7fe64a86d67b05cba487d18f7f48d20e254b89e2c94677b758f53",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-20-inference-benchmarking.md"
+        ],
+        "section_maps": [],
+        "previous_current_sha256": "633f22fd09c7fe64a86d67b05cba487d18f7f48d20e254b89e2c94677b758f53",
+        "completion_review": "docs/audit/2026-10-29-one-pass-completion.md",
+        "completion_preservation": "Exact restoration through beforeReaderRouteNavigation verified before current hash update"
+      }
+    },
+    {
+      "route": "textbook/inference/queueing-capacity-planning",
+      "source": "00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning.md",
+      "sha256": "8a34dd525150ef3b95896e969444ff40456aefd0e897522cbeb5ca446f4a7ea1",
+      "pre_navigation_and_math_sha256": "bbfb1d67720cfe7b264c57c8d754fa0ebb147925cfd25e9ba4e66a63f3603c74",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-20-queueing-capacity.md"
+        ],
+        "section_maps": [],
+        "previous_current_sha256": "fe7405160f9e099363282a671ffa2f6d8ccee7507b9c9654c1939a4d2a99674f",
+        "completion_review": "docs/audit/2026-10-29-one-pass-completion.md",
+        "completion_preservation": "Exact restoration through beforeReaderRouteNavigation verified before current hash update"
+      }
+    },
+    {
+      "route": "textbook/deployment/ml-workflow",
+      "source": "00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow.md",
+      "sha256": "0cf7ea888bc50e50aac7ee6010e1f9cccb9b86b96ceebdc6fdcf5eb646754045",
+      "pre_navigation_and_math_sha256": "82d43f96fb0bfee7d0d7c2efd5a1f669008b87d4b3bad92daf5a59b2d5cad569",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-27-tensorflow-export.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-27-frameworks-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/deployment/mlops",
+      "source": "00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md",
+      "sha256": "e7cfbc4f4fd01784dbb52ee6dc3a3636c389a796a973603fbbea16b0b00e1711",
+      "pre_navigation_and_math_sha256": "cec102f93b2e1314a9aa80cb5d36421b465a49eb7083fd2c92cb08597d9ab007",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-27-tensorflow-export.md",
+          "docs/audit/2026-10-26-ops-scale.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-27-frameworks-section-map.json",
+          "docs/audit/2026-10-28-training-section-map.json"
+        ],
+        "previous_current_sha256": "cec102f93b2e1314a9aa80cb5d36421b465a49eb7083fd2c92cb08597d9ab007",
+        "completion_review": "docs/audit/2026-10-29-one-pass-completion.md",
+        "completion_preservation": "Exact restoration through beforeReaderRouteNavigation verified before current hash update",
+        "consolidation": {
+          "scope": "Recorded consolidation deltas preserve the reviewed preceding revision; new explanations have separate source/example review.",
+          "report": "docs/audit/2026-10-29-publication-consolidation.md"
+        }
+      },
+      "pre_topic_consolidation_sha256": "16e7174177cbe112cc35562f557554368f4d23eb3bc74e5651ac70a6ea4360bb"
+    },
+    {
+      "route": "textbook/deployment/edge-federated",
+      "source": "00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment.md",
+      "sha256": "c5505f93fc2e94051abe3220664683c3c39ffd7d5d2ea7acbf13a9885d8e5c77",
+      "pre_navigation_and_math_sha256": "8f10fda46877de9a593fb29200c2511d6727e4431f75f1e7b5c5283e7010cd8d",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-27-micro-arena.md",
+          "docs/audit/2026-10-27-frameworks-native-figures.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-27-frameworks-section-map.json"
+        ],
+        "consolidation": {
+          "scope": "Recorded consolidation deltas preserve the reviewed preceding revision; new explanations have separate source/example review.",
+          "report": "docs/audit/2026-10-29-publication-consolidation.md"
+        }
+      },
+      "pre_topic_consolidation_sha256": "332675caa594f38a7edcab337cda5fcfa7d4bb03422cd3dcee11557e6b398527"
+    },
+    {
+      "route": "textbook/evaluation/models-contamination",
+      "source": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+      "sha256": "50fc2e140ed82af09da1b935d37c27f90bc48998cf2a0c5628e703eac70a582c",
+      "pre_navigation_and_math_sha256": "1419dfe53d7757c15dd949996f46e62494eb9abcb2275a768c639b7f1ed91ba3",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-20-evaluation-contamination.md"
+        ],
+        "section_maps": [],
+        "previous_current_sha256": "0d8ef23274a1bb810bcda99140d872759cc4bbcfb09eacc4b98ffe4a359f343b",
+        "completion_review": "docs/audit/2026-10-29-one-pass-completion.md",
+        "completion_preservation": "Exact restoration through beforeReaderRouteNavigation verified before current hash update",
+        "consolidation": {
+          "scope": "Recorded consolidation deltas preserve the reviewed preceding revision; new explanations have separate source/example review.",
+          "report": "docs/audit/2026-10-29-publication-consolidation.md"
+        }
+      },
+      "pre_topic_consolidation_sha256": "a00a99d9e049b00cc053117b84e703ad0d5f5f88b06713c31f999e1dbcfa62d5"
+    },
+    {
+      "route": "textbook/evaluation/imbalanced-classification",
+      "source": "00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация.md",
+      "sha256": "ddcb9f7feab72f812c048739963969aa7631ab92779c409a80062805d97f4c42",
+      "pre_navigation_and_math_sha256": "b085573248c2f429ff33e32a0a8f966be654fd1eced56c584b754dde1f54eb24",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-20-imbalanced-classification.md"
+        ],
+        "section_maps": [],
+        "consolidation": {
+          "scope": "Recorded consolidation deltas preserve the reviewed preceding revision; new explanations have separate source/example review.",
+          "report": "docs/audit/2026-10-29-publication-consolidation.md"
+        }
+      },
+      "pre_topic_consolidation_sha256": "c77a62281611a651c965c3cdd4640e5893bb1867ef47340cad336aea2ac84e14"
+    },
+    {
+      "route": "textbook/evaluation/responsible-systems",
+      "source": "00 Учебник/18 Evaluation и методология/59a Responsible systems.md",
+      "sha256": "b0f72ba4a3322be3f20efdb35950fecb65482cd4fdea8e414d5947ab46f72ce5",
+      "pre_navigation_and_math_sha256": "5e70d3ce66b8874cfc6b32928762cdea7d71b9f92b000aa6355d7cacf248cc5c",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-28-training-reconciliation.md",
+          "docs/audit/2026-10-20-responsible-systems.md"
+        ],
+        "section_maps": [
+          "docs/audit/2026-10-28-training-section-map.json"
+        ],
+        "previous_current_sha256": "5e70d3ce66b8874cfc6b32928762cdea7d71b9f92b000aa6355d7cacf248cc5c",
+        "completion_review": "docs/audit/2026-10-29-one-pass-completion.md",
+        "completion_preservation": "Exact restoration through beforeReaderRouteNavigation verified before current hash update",
+        "consolidation": {
+          "scope": "Recorded consolidation deltas preserve the reviewed preceding revision; new explanations have separate source/example review.",
+          "report": "docs/audit/2026-10-29-publication-consolidation.md"
+        }
+      },
+      "pre_topic_consolidation_sha256": "6ba6e205b27037d40ae02ad0b43ca09d3c9e1e9dbcc4979809829ff5ffd7745d"
+    },
+    {
+      "route": "textbook/retrieval/embeddings-metric-learning",
+      "source": "00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning.md",
+      "sha256": "bc9d7e31337190371294760004dbb10b113fedfdb161aeda2a790631d699d1fd",
+      "pre_navigation_and_math_sha256": "ddf06790a50b026ab2480f28b12360453e881ad945895277a86bfe9c71a5caf3",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-20-embeddings-metric-learning.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/retrieval/sparse-dense-hybrid",
+      "source": "00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid.md",
+      "sha256": "c2f49438a49ecdf7aac70a44605763ebdcf3311781fb4b10c4514470ceab25bc",
+      "pre_navigation_and_math_sha256": "c2f49438a49ecdf7aac70a44605763ebdcf3311781fb4b10c4514470ceab25bc",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-20-retrieval.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/retrieval/reranking",
+      "source": "00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction.md",
+      "sha256": "5d7522f493395addabf8cac39a95b6cc4ef0c8c134f5afa13ac488d5059657c6",
+      "pre_navigation_and_math_sha256": "5d7522f493395addabf8cac39a95b6cc4ef0c8c134f5afa13ac488d5059657c6",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-20-reranking.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/rag/full-pipeline",
+      "source": "00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md",
+      "sha256": "b2407b3b34253edcb522a7ab550c506ef5c900c353162ce848b045d44e7a5183",
+      "pre_navigation_and_math_sha256": "baa2a0a300a82cbcf90f389b233bd028f619ec47153c08a1201d9bbf099fddca",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-20-rag.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/multimodal/models",
+      "source": "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md",
+      "sha256": "26464f4cb33c2b281c72e63e1870157e0a41a23807c4eca7c2b79f542000608d",
+      "pre_navigation_and_math_sha256": "ce73d11a3e9031a4e0df882b56dd5cf9695de3550d1e736027eac23bd375730c",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-20-vision-encoders.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/multimodal/connectors-fusion",
+      "source": "00 Учебник/16 Multimodal Models/64a Connectors и fusion.md",
+      "sha256": "5df467640b95eb59a8e5fdc45d7e72fecd15e703ca52011481ae8c480f43f341",
+      "pre_navigation_and_math_sha256": "5df467640b95eb59a8e5fdc45d7e72fecd15e703ca52011481ae8c480f43f341",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-20-connectors.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/multimodal/visual-tokenization-resolution",
+      "source": "00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md",
+      "sha256": "aa23f1104f3a83d91bc759f207ab809ebf018b9946f44a022c761fc3e9e81258",
+      "pre_navigation_and_math_sha256": "aa23f1104f3a83d91bc759f207ab809ebf018b9946f44a022c761fc3e9e81258",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-20-resolution-positions.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/multimodal/training-data",
+      "source": "00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md",
+      "sha256": "12e614a8be23e31ed608433c64be1f4b049c39af27cb9d4092080576a902921d",
+      "pre_navigation_and_math_sha256": "12e614a8be23e31ed608433c64be1f4b049c39af27cb9d4092080576a902921d",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-20-vlm-training.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/multimodal/documents-ocr-grounding",
+      "source": "00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md",
+      "sha256": "b2e3e923347babfafb3344252e55952c999287fe9fc51a19ad11965d4933f259",
+      "pre_navigation_and_math_sha256": "b2e3e923347babfafb3344252e55952c999287fe9fc51a19ad11965d4933f259",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-20-documents-ocr-grounding.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/multimodal/video-audio-omni",
+      "source": "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md",
+      "sha256": "cb9d70037a4ead20d49d9883ec0182e7eed038bd4bc1a579f2599cc71bd8bf42",
+      "pre_navigation_and_math_sha256": "cb9d70037a4ead20d49d9883ec0182e7eed038bd4bc1a579f2599cc71bd8bf42",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-20-video-audio-omni.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/multimodal/evaluation-serving",
+      "source": "00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md",
+      "sha256": "7158736c550f13fbe8deca537fc369ef87c94a38586dae167fbdc78d215e625a",
+      "pre_navigation_and_math_sha256": "7158736c550f13fbe8deca537fc369ef87c94a38586dae167fbdc78d215e625a",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-20-vlm-evaluation-serving.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/multimodal/diffusion-flow-images",
+      "source": "00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений.md",
+      "sha256": "d91e82d6d90ea7ee513416230b0decdc09590652246d4af2d09f280f33e62912",
+      "pre_navigation_and_math_sha256": "d91e82d6d90ea7ee513416230b0decdc09590652246d4af2d09f280f33e62912",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-20-diffusion-flow.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/multimodal/unified-sequence-chameleon",
+      "source": "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md",
+      "sha256": "f477e17e2449b1abcc3890c585ced5c012c0c9efe6ac143943d8f769ddf9a1e6",
+      "pre_navigation_and_math_sha256": "f477e17e2449b1abcc3890c585ced5c012c0c9efe6ac143943d8f769ddf9a1e6",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-20-chameleon.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/agents/module-map",
+      "source": "00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля.md",
+      "sha256": "34c04e8466c39d903039c20e7e19c882392641ba3b216979d9cc604ab1f24925",
+      "pre_navigation_and_math_sha256": "34c04e8466c39d903039c20e7e19c882392641ba3b216979d9cc604ab1f24925",
+      "evidence": {
+        "kind": "current-full-read",
+        "lines": 72,
+        "reports": [
+          "docs/audit/2026-10-29-corpus-follow-through.md"
+        ]
+      }
+    },
+    {
+      "route": "textbook/agents/tool-use",
+      "source": "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md",
+      "sha256": "11f04eb1b91f53a7c3dd57cdec9b405169e46c4a6b471b2e9a7fe42dca963366",
+      "pre_navigation_and_math_sha256": "11f04eb1b91f53a7c3dd57cdec9b405169e46c4a6b471b2e9a7fe42dca963366",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-20-tool-use.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/agents/harness-context-engineering",
+      "source": "00 Учебник/17 Tools и Agents/66 Agent harness и context engineering.md",
+      "sha256": "b1dc2ab03d0cd12acfa3c66ff0060800299b10846cb962767c7ec51f0a1a1e49",
+      "pre_navigation_and_math_sha256": "b1dc2ab03d0cd12acfa3c66ff0060800299b10846cb962767c7ec51f0a1a1e49",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-20-agent-harness.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/agents/memory-planning-orchestration",
+      "source": "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
+      "sha256": "a56e872d7bc7c103d498d71df5f640c64b484acbd817f0ce0a217dc691aec2c4",
+      "pre_navigation_and_math_sha256": "a56e872d7bc7c103d498d71df5f640c64b484acbd817f0ce0a217dc691aec2c4",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-26-berkeley-planseqlearn.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/agents/evaluation",
+      "source": "00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md",
+      "sha256": "ce59940e3047ddfe46c48be6e87bfcc021bfe84812accabc8aaf7ae1871e0b1a",
+      "pre_navigation_and_math_sha256": "ce59940e3047ddfe46c48be6e87bfcc021bfe84812accabc8aaf7ae1871e0b1a",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-20-agent-evaluation.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/agents/coding-web-computer-use",
+      "source": "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
+      "sha256": "76fa7ccbe709235d43b1efd523317a9922df77e81191811b659716c0071d689c",
+      "pre_navigation_and_math_sha256": "76fa7ccbe709235d43b1efd523317a9922df77e81191811b659716c0071d689c",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-21-coding-web-computer-use.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/agents/formal-math",
+      "source": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
+      "sha256": "a81cede17e8726c611b8455d35bc296a917d4d3012632a73214ea00b6a6841fe",
+      "pre_navigation_and_math_sha256": "a81cede17e8726c611b8455d35bc296a917d4d3012632a73214ea00b6a6841fe",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-26-berkeley-finite-products.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/agents/scientific-discovery",
+      "source": "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md",
+      "sha256": "39e6d762bb108263ad69b74c16ca29627e5f1a68818f18c136a5b5b12ac111c8",
+      "pre_navigation_and_math_sha256": "39e6d762bb108263ad69b74c16ca29627e5f1a68818f18c136a5b5b12ac111c8",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-21-scientific-discovery.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/agents/security",
+      "source": "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md",
+      "sha256": "4e02810a117d85f34c408737e0a9cdfed1fe356015b02277163f80cda9470b59",
+      "pre_navigation_and_math_sha256": "4e02810a117d85f34c408737e0a9cdfed1fe356015b02277163f80cda9470b59",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-21-agent-security.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/recommender-systems/index",
+      "source": "00 Учебник/02 Рекомендательные системы/00 Карта модуля.md",
+      "sha256": "dcd33730cc0e127d94301bd87f3e3af5c2d8df1aaa44cb5219a1b7e010b41ebc",
+      "pre_navigation_and_math_sha256": "dcd33730cc0e127d94301bd87f3e3af5c2d8df1aaa44cb5219a1b7e010b41ebc",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-25-recommender-data.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/recommender-systems/task-data-pipeline",
+      "source": "00 Учебник/02 Рекомендательные системы/01 Задача рекомендации, данные и pipeline.md",
+      "sha256": "a60abdfb139e2bff0879dbcf0ea7be6db0300d86abbcd77eaa1081fd4bb2286d",
+      "pre_navigation_and_math_sha256": "a60abdfb139e2bff0879dbcf0ea7be6db0300d86abbcd77eaa1081fd4bb2286d",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-25-recommender-data.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/recommender-systems/collaborative-filtering-matrix-factorization",
+      "source": "00 Учебник/02 Рекомендательные системы/02 Collaborative filtering и matrix factorization.md",
+      "sha256": "992403d10e0fd4bba8e1fb36ecce40414f6bcae1e89d1548c4f38cdc203874dd",
+      "pre_navigation_and_math_sha256": "992403d10e0fd4bba8e1fb36ecce40414f6bcae1e89d1548c4f38cdc203874dd",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-25-recommender-mf.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/recommender-systems/ranking-neural-models",
+      "source": "00 Учебник/02 Рекомендательные системы/03 Ranking и нейронные рекомендательные модели.md",
+      "sha256": "50a59283ee0867710665f414954291080304333961a107b6418e360e3f759bf1",
+      "pre_navigation_and_math_sha256": "86e293dab73545f32be8b908ab0b8a663e9b247f454223c93f44427e50e1f1cb",
+      "evidence": {
+        "kind": "bounded-explanation-addition",
+        "reviewed_sha256": "50a59283ee0867710665f414954291080304333961a107b6418e360e3f759bf1",
+        "reports": [
+          "docs/audit/2026-10-27-nn-section-map.md",
+          "docs/audit/2026-10-27-dlrm.md",
+          "docs/audit/2026-10-29-selection-gaps.md"
+        ],
+        "preservation_journal": "docs/audit/2026-10-29-selection-gaps-additions.json",
+        "previous_evidence": {
+          "kind": "existing-reviewed-revision",
+          "reports": [
+            "docs/audit/2026-10-27-nn-section-map.md",
+            "docs/audit/2026-10-27-dlrm.md"
+          ],
+          "section_maps": [
+            "docs/audit/2026-10-27-nn-section-map.json",
+            "docs/audit/2026-10-28-data-selection-section-map.json"
+          ]
+        },
+        "section_maps": [
+          "docs/audit/2026-10-27-nn-section-map.json",
+          "docs/audit/2026-10-28-data-selection-section-map.json"
+        ]
+      }
+    },
+    {
+      "route": "textbook/recommender-systems/sequential-feature-aware",
+      "source": "00 Учебник/02 Рекомендательные системы/04 Последовательные рекомендации и признаки.md",
+      "sha256": "13ce0edd316d5a868933dc4e44723d2b7e5bee7b709b5a25754289bbc23ea9dd",
+      "pre_navigation_and_math_sha256": "13ce0edd316d5a868933dc4e44723d2b7e5bee7b709b5a25754289bbc23ea9dd",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-25-recommender-sequential.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "route": "textbook/recommender-systems/evaluation-operations",
+      "source": "00 Учебник/02 Рекомендательные системы/05 Оценивание и эксплуатация.md",
+      "sha256": "4e62789f0cfbd8a2e6482c4d523ba0c653a7d3533d2ad0d28c2cec1a8bef3b87",
+      "pre_navigation_and_math_sha256": "4e62789f0cfbd8a2e6482c4d523ba0c653a7d3533d2ad0d28c2cec1a8bef3b87",
+      "evidence": {
+        "kind": "existing-reviewed-revision",
+        "reports": [
+          "docs/audit/2026-10-26-recommender-evaluation.md"
+        ],
+        "section_maps": []
+      }
+    },
+    {
+      "source": "00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md",
+      "route": "textbook/post-training/alignment-goals",
+      "sha256": "dea0e616abf368f5a008701d203ac7cbb70d5346dd7b57e1b97c5e50416fe1c1",
+      "evidence": {
+        "kind": "consolidated-full-chapter",
+        "reports": [
+          "docs/audit/2026-10-29-publication-consolidation.md"
+        ]
+      }
+    },
+    {
+      "source": "00 Учебник/19 Deployment, Reliability и MLOps/04 Безопасность и приватность ML-систем.md",
+      "route": "textbook/deployment/security-privacy",
+      "sha256": "b9dc519d8a0c8c04c157f4e96a4ad4c0dc1549273588d9b4d0d54cf282603131",
+      "evidence": {
+        "kind": "consolidated-full-chapter",
+        "reports": [
+          "docs/audit/2026-10-29-publication-consolidation.md"
+        ]
+      }
+    },
+    {
+      "source": "00 Учебник/19 Deployment, Reliability и MLOps/05 Устойчивость ML-систем.md",
+      "route": "textbook/deployment/robustness",
+      "sha256": "36dce79e4885a8b9f7bd7a9134e4d1def07e6273652fc5d755d61633f2037209",
+      "evidence": {
+        "kind": "consolidated-full-chapter",
+        "reports": [
+          "docs/audit/2026-10-29-publication-consolidation.md"
+        ]
+      }
+    },
+    {
+      "route": "textbook/pretraining/masked-diffusion-language-models",
+      "source": "00 Учебник/11 Pre-training и Scaling/41j Диффузионные языковые модели — MDLM и LLaDA.md",
+      "sha256": "401aacb0a16c68950e0b68d7ed130b8d8412c750d43d75c679f32f4d9d66f278",
+      "evidence": {
+        "kind": "current-full-read",
+        "source_language": "en",
+        "reports": [
+          "docs/audit/2026-10-29-masked-diffusion.md"
+        ],
+        "examples": "docs/audit/2026-10-29-masked-diffusion-examples.json",
+        "render": "docs/audit/2026-10-29-masked-diffusion-browser.json",
+        "reference_terms": {
+          "report": "docs/audit/2026-10-29-final-closure.md",
+          "journal": "docs/audit/2026-10-29-coconut-additions.json",
+          "examples": "docs/audit/2026-10-29-final-closure-masked-examples.json"
+        }
+      },
+      "pre_reference_terms_sha256": "f8877b751c12f83d4fbe6b8b281f3bc65045125e03244907ceab1e2c14672569"
+    }
+  ],
+  "consolidation": {
+    "pages": 152,
+    "previousPages": 149,
+    "report": "docs/audit/2026-10-29-publication-consolidation.md",
+    "limit": "This is revision lineage, not a new whole-book primary-source or visual acceptance."
+  }
+}

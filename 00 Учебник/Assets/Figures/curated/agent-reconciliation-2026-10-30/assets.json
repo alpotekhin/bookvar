@@ -1,0 +1,82 @@
+[
+  {
+    "id": "curated-agent-reconciliation-react-cot-sampling-23c9dbf17b79",
+    "asset": "00 Учебник/Assets/Figures/curated/agent-reconciliation-2026-10-30/react-cot-sampling.png",
+    "source_asset": "05 Источники/Originals/tool-use-2026-10-20/react.pdf",
+    "source_asset_sha256": "f285b0971ae4a790e402fb93966bed3adde2cf0a04977d08b2b40d6ab0cace69",
+    "source_page": 5,
+    "source_page_snapshot": "05 Источники/Originals/agent-reconciliation-2026-10-30/react-05.png",
+    "source_page_sha256": "5acbff04806c1a38c8f8600793c14ccafd3af808cb1d0eff7485fd54190472e0",
+    "source_url": "https://arxiv.org/abs/2210.03629v3",
+    "source_image_url": "https://arxiv.org/pdf/2210.03629v3#page=5",
+    "render_dpi": 300,
+    "render_page_size_px": [
+      2550,
+      3300
+    ],
+    "crop_box_px": [
+      1160,
+      420,
+      2120,
+      1018
+    ],
+    "label": "Figure 2",
+    "author": "Shunyu Yao et al.",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/tool-use-2026-10-20/react-abstract.html",
+    "license_evidence_sha256": "dc39550159e139ddd3e88224a75bd153ba71d55684dddb4bcf2d74262f93a0a5",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-30",
+    "modifications": "Complete original numbered figure, both panels, axes, legend and English caption. Surrounding paper text excluded; no redraw, translation, retouching or upscale.",
+    "used_in": [
+      "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md"
+    ],
+    "sha256": "23c9dbf17b79eca8bd8f3cfcb34d623bd70ca02fb025c7ab3135df6bae246989",
+    "width": 960,
+    "height": 598
+  },
+  {
+    "id": "curated-agent-reconciliation-react-prompt-vs-finetune-4be61fc97b54",
+    "asset": "00 Учебник/Assets/Figures/curated/agent-reconciliation-2026-10-30/react-prompt-vs-finetune.png",
+    "source_asset": "05 Источники/Originals/tool-use-2026-10-20/react.pdf",
+    "source_asset_sha256": "f285b0971ae4a790e402fb93966bed3adde2cf0a04977d08b2b40d6ab0cace69",
+    "source_page": 7,
+    "source_page_snapshot": "05 Источники/Originals/agent-reconciliation-2026-10-30/react-07.png",
+    "source_page_sha256": "6b4237f5f480994189796be032ce7f1740955efc87b0cf68da65eac2735bb450",
+    "source_url": "https://arxiv.org/abs/2210.03629v3",
+    "source_image_url": "https://arxiv.org/pdf/2210.03629v3#page=7",
+    "render_dpi": 300,
+    "render_page_size_px": [
+      2550,
+      3300
+    ],
+    "crop_box_px": [
+      440,
+      340,
+      2120,
+      940
+    ],
+    "label": "Figure 3",
+    "author": "Shunyu Yao et al.",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/tool-use-2026-10-20/react-abstract.html",
+    "license_evidence_sha256": "dc39550159e139ddd3e88224a75bd153ba71d55684dddb4bcf2d74262f93a0a5",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-30",
+    "modifications": "Complete original numbered figure, both panels, axes, legend and English caption. Surrounding paper text excluded; no redraw, translation, retouching or upscale.",
+    "used_in": [
+      "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md"
+    ],
+    "sha256": "4be61fc97b54ecf9a2bf56ef80fa069bddbe3071c82cce0fa300c642e6791706",
+    "width": 1680,
+    "height": 600
+  }
+]

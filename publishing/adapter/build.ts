@@ -1,4 +1,5 @@
-import { access, copyFile, mkdir, readFile, realpath, rm, writeFile } from 'node:fs/promises';
+import { access, mkdir, readFile, realpath, rm, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { dirname, isAbsolute, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
@@ -7,9 +8,13 @@ import { readPage } from './frontmatter.js';
 import { convertWikiSyntax, wikiHeadingSlug } from './links.js';
 import { loadLinkAllowlist } from './link-policy.js';
 import { loadManifest } from './manifest.js';
+import { readerTitle, readingNeighbours, readingPaths } from './reading-paths.js';
 import type { PublicationSidebarItem } from './manifest.js';
 import { createRouteRegistry } from './routes.js';
 import { mapMarkdownProse } from './markdown-prose.js';
+import { materializeAsset } from './materialize-asset.js';
+import { loadCoursePdfDownloads } from './course-downloads.js';
+import { prefixPublicationLinks, rewritePublicationLinks } from './publication-links.js';
 
 export interface BuildOptions {
   rootDir: string;
@@ -45,8 +50,12 @@ export function publicationHref(route: string, locale?: 'en'): string {
   return `${publicationBasePath()}${path}`;
 }
 
+function canonicalEnglishRoute(route: string): boolean {
+  return route.startsWith('textbook/') || route === 'practice/inference-scheduler';
+}
+
 const REFERENCE_SIDEBAR_GROUPS = [
-  { label: 'Механизмы', labelEn: 'Mechanisms', includes: (route: string) => route.startsWith('reference/') },
+  { label: 'Темы и механизмы', labelEn: 'Topics and mechanisms', includes: (route: string) => route.startsWith('reference/') },
   {
     label: 'Модели и семейства',
     labelEn: 'Models and families',
@@ -221,6 +230,7 @@ const COURSE_PUBLICATIONS = [
 type CoursePublication = (typeof COURSE_PUBLICATIONS)[number];
 interface LinkedCourseArtifact extends Asset {
   course: CoursePublication;
+  externalHref?: string;
 }
 
 const LINKED_SOURCE_ARTIFACT = /\.(?:pdf|py|json|ya?ml|txt|md)$/i;
@@ -281,7 +291,8 @@ function prepareLinkedCourseArtifacts(
   source: string,
   route: string,
   markdown: string,
-  routeBySource: ReadonlyMap<string, string>
+  routeBySource: ReadonlyMap<string, string>,
+  pdfDownloads: ReadonlyMap<string, string>
 ): { markdown: string; artifacts: LinkedCourseArtifact[] } {
   const course = COURSE_PUBLICATIONS.find(({ routeRoot }) =>
     route === `${routeRoot}/index` || route.startsWith(`${routeRoot}/`)
@@ -337,7 +348,18 @@ function prepareLinkedCourseArtifacts(
     }
     const publicPath = join(artifactCourse.routeRoot, sourceOffset).split(sep).join('/');
     contained(rootDir, publicPath, 'Linked source artifact destination');
-    artifacts.push({ source: targetPath, publicPath, course: artifactCourse });
+    const externalHref = /\.pdf$/i.test(sourceOffset) ? pdfDownloads.get(normalizedSource) : undefined;
+    artifacts.push({ source: targetPath, publicPath, course: artifactCourse, externalHref });
+    if (externalHref) {
+      const url = new URL(externalHref);
+      if (suffix.startsWith('#')) url.hash = suffix;
+      else if (suffix) {
+        const [search, fragment] = suffix.split('#', 2);
+        url.search = search;
+        if (fragment !== undefined) url.hash = fragment;
+      }
+      return `[${label}](${url.href})`;
+    }
     const href = publicPath.split('/').map(encodeURIComponent).join('/');
     return `[${label}](${publicationBasePath()}/${href}${suffix})`;
   }));
@@ -363,16 +385,26 @@ function normalizeAsset(rootDir: string, expression: string): Asset {
 
 function prepareAssets(rootDir: string, markdown: string): { markdown: string; assets: Asset[] } {
   const assets: Asset[] = [];
-  const converted = markdown.replace(EMBED, (match, expression: string) => {
-    const target = expression.split('|', 1)[0];
+  const converted = markdown.replace(EMBED, (match, expression: string, offset: number) => {
+    const [target, alias] = expression.split('|', 2);
     if (!IMAGE_EXTENSION.test(target)) return match;
     const asset = normalizeAsset(rootDir, expression);
     assets.push(asset);
     const filename = asset.publicPath.slice(asset.publicPath.lastIndexOf('/') + 1);
-    const alt = filename.replace(IMAGE_EXTENSION, '');
+    const description = alias?.trim();
+    const alt = (description && !/^\d+(?:x\d+)?$/i.test(description)
+      ? description : filename.replace(IMAGE_EXTENSION, '')).replace(/([\\[\]])/g, '\\$1');
     const href = asset.publicPath.split('/').map(encodeURIComponent).join('/');
     const assetHref = `${publicationBasePath()}/assets/${href}`;
-    return `[![${alt}](${assetHref})](${assetHref})`;
+    const image = `[![${alt}](${assetHref})](${assetHref})`;
+    const lineStart = markdown.lastIndexOf('\n', offset - 1) + 1;
+    const precedingText = markdown.slice(lineStart, offset);
+    // Immutable course imports sometimes join a DOI and an image. GFM
+    // consumes the generated image as part of that bare URL unless separated.
+    // Ordinary inline images beside prose or explicit links stay inline.
+    return /(?:^|\s)https?:\/\/[^\s<>\[\]()]+$/i.test(precedingText)
+      ? `\n\n${image}`
+      : image;
   });
   return { markdown: converted, assets };
 }
@@ -399,6 +431,7 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
   if (outputOffset === '') throw new Error('Output directory must be below rootDir');
   const outputDir = contained(rootDir, outputOffset, 'Output');
   const manifest = loadManifest(options.manifestPath);
+  const pdfDownloads = await loadCoursePdfDownloads(rootDir, COURSE_PUBLICATIONS.map(course => course.sourceRoot));
   const allowlist = loadLinkAllowlist(join(dirname(options.manifestPath), 'link-allowlist.json'));
   const entries = manifest.sections.flatMap((section) => section.pages);
   const routeBySource = new Map(entries.map((entry) => [
@@ -408,15 +441,45 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     const sourcePath = contained(rootDir, entry.source, 'Source');
     const raw = await readFile(sourcePath, 'utf8');
     const page = readPublicationPage(entry.source, raw);
+    page.title = readerTitle(entry.source, page.title);
     if (!entry.sourceEn) return { entry, page };
     const sourceEnPath = contained(rootDir, entry.sourceEn, 'Source');
     const rawEn = await readFile(sourceEnPath, 'utf8');
-    return { entry, page, pageEn: readPublicationPage(entry.sourceEn, rawEn) };
+    const pageEn = readPublicationPage(entry.sourceEn, rawEn);
+    pageEn.title = readerTitle(entry.sourceEn, pageEn.title);
+    return { entry, page, pageEn };
   }));
   const titles = new Map(parsed.map(({ entry, page }) => [entry.route, page.title]));
+  // Topic aliases preserve old Obsidian files and URLs, but contain no second
+  // explanation. Resolve only published local targets and reject alias chains.
+  const topicAliases = new Map<string, { route: string; heading?: string }>();
+  for (const { entry, page } of parsed) {
+    if (!page.canonicalTopic) continue;
+    const target = parsed.find(candidate => candidate.entry.source === page.canonicalTopic);
+    if (!target || target.entry.route === entry.route || target.page.status === 'redirect')
+      throw new Error(`Invalid canonical topic for ${entry.source}: ${page.canonicalTopic}`);
+    let heading: string | undefined;
+    if (page.canonicalHeading) {
+      const matches = parseMarkdownHeadings(target.page.body, true).filter(candidate =>
+        candidate.explicitAnchor === page.canonicalHeading
+        || candidate.normalized === normalizeObsidianHeading(page.canonicalHeading!));
+      const fragments = new Set(matches.map(candidate => candidate.explicitAnchor ?? wikiHeadingSlug(candidate.text)));
+      if (fragments.size !== 1) throw new Error(`Missing or ambiguous canonical heading for ${entry.source}: ${page.canonicalHeading}`);
+      heading = [...fragments][0];
+    }
+    topicAliases.set(entry.route, { route: target.entry.route, heading });
+  }
   const titlesEn = new Map(parsed
     .filter(({ pageEn }) => pageEn)
     .map(({ entry, pageEn }) => [entry.route, pageEn!.title]));
+  // A source-language archive has one body. Keep both catalogue addresses,
+  // but do not duplicate complete original courses as English translations.
+  const courseOriginals = parsed.filter(({ entry, page }) =>
+    entry.route.startsWith('sources/courses/') && !entry.route.endsWith('/index')
+    && !entry.sourceEn && !['redirect', 'legacy'].includes(page.status));
+  const courseAliasTargets = new Map(courseOriginals.map(({ entry }) => [
+    publicationHref(entry.route, 'en'), publicationHref(entry.route)
+  ]));
   const statuses = new Map(parsed.map(({ entry, page }) => [entry.route, page.status]));
   const translatedLabel = (labelEn?: string): Pick<SidebarEntry, 'translations'> =>
     labelEn ? { translations: { en: labelEn } } : {};
@@ -500,15 +563,19 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
   });
 
   const assetsByPublicPath = new Map<string, Asset>();
+  const textbookSection = manifest.sections.find(section => section.id === 'textbook');
+  const readerPaths = textbookSection ? readingPaths(textbookSection) : [];
   const linkedArtifactsByPublicPath = new Map<string, LinkedCourseArtifact>();
   const localizedPages = parsed.flatMap(({ entry, page, pageEn }) => [
     { entry, page, source: entry.source, locale: undefined },
     ...(pageEn && entry.sourceEn
       ? [{ entry, page: pageEn, source: entry.sourceEn, locale: 'en' as const }]
-      : [])
+      : page.sourceLanguage === 'en' || canonicalEnglishRoute(entry.route)
+        ? [{ entry, page, source: entry.source, locale: 'en' as const }]
+        : [])
   ]);
   const preparedPages = localizedPages.map(({ entry, page, source, locale }) => {
-    const linked = prepareLinkedCourseArtifacts(rootDir, source, entry.route, page.body, routeBySource);
+    const linked = prepareLinkedCourseArtifacts(rootDir, source, entry.route, page.body, routeBySource, pdfDownloads);
     for (const artifact of linked.artifacts) {
       const existing = linkedArtifactsByPublicPath.get(artifact.publicPath);
       if (existing && existing.source !== artifact.source) {
@@ -543,6 +610,7 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
   }
 
   for (const artifact of linkedArtifactsByPublicPath.values()) {
+    if (artifact.externalHref) continue;
     try {
       await access(artifact.source);
       const [realCourseRoot, realSource] = await Promise.all([
@@ -650,6 +718,36 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     const currentRoute = publicationHref(entry.route, locale);
     const pageRegistry = {
       routeForWikiTarget: registry.routeForWikiTarget,
+      canonicalHrefForWikiTarget(target: string, heading?: string): string | undefined {
+        if (!target) return undefined;
+        const original = registry.routeForWikiTarget(target);
+        const oldEntry = parsed.find(candidate => publicationHref(candidate.entry.route, locale) === original);
+        const alias = oldEntry && topicAliases.get(oldEntry.entry.route);
+        if (!alias) {
+          // A shared source can name a canonical-language heading
+          // that the translated index does not contain. Keep its verified
+          // canonical destination rather than guessing a translated heading.
+          if (locale === 'en' && !entry.sourceEn
+            && heading && oldEntry && !fragmentAnchors.get(original!)?.has(heading)) {
+            const canonical = publicationHref(oldEntry.entry.route);
+            const fragment = fragmentAnchors.get(canonical)?.get(heading);
+            if (fragment) return canonical + '#' + fragment;
+          }
+          return undefined;
+        }
+        const destination = publicationHref(alias.route, locale);
+        const desired = heading ?? alias.heading;
+        if (!desired) return destination;
+        const matches = (headingsByRoute.get(destination) ?? []).filter(candidate =>
+          candidate.explicitAnchor === desired || candidate.explicitAnchor === wikiHeadingSlug(desired)
+          || (!candidate.explicitAnchor && (candidate.normalized === normalizeObsidianHeading(desired)
+            || wikiHeadingSlug(candidate.text) === desired)));
+        const fragments = new Set(matches.map(candidate => candidate.explicitAnchor ?? wikiHeadingSlug(candidate.text)));
+        // Retain the compatibility route for an old fragment that cannot be
+        // mapped exactly; never silently invent a section correspondence.
+        if (fragments.size !== 1) return undefined;
+        return destination + '#' + [...fragments][0];
+      },
       fragmentForWikiTarget(target: string, heading: string): string | undefined {
         const route = target === '' ? currentRoute : registry.routeForWikiTarget(target);
         if (!route) return undefined;
@@ -665,17 +763,79 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
       : [];
     const unresolved = page.status === 'legacy' ? [] : converted.unresolved;
     const allowlisted = [...converted.allowlisted, ...legacyUnresolved];
-    const markdown = renderSourceAttribution(page) + normalizeProtocolRelativeHtmlUrls(
+    let markdown = renderSourceAttribution(page) + normalizeProtocolRelativeHtmlUrls(
       removeLeadingSourceHeading(convertCallouts(converted.markdown))
     );
+    if (locale === 'en') markdown = rewritePublicationLinks(markdown, href => {
+      const url = new URL(href, 'https://bookvar.invalid');
+      const base = publicationBasePath();
+      const local = base && url.pathname.startsWith(base + '/')
+        ? url.pathname.slice(base.length) : url.pathname;
+      if (!local.startsWith('/textbook/')) return href;
+      const target = parsed.find(({ entry }) => publicationHref(entry.route) === base + local);
+      if (!target) return href;
+      const destination = publicationHref(target.entry.route, 'en');
+      if (url.hash) {
+        let fragment: string;
+        try { fragment = decodeURIComponent(url.hash.slice(1)); } catch { return href; }
+        if (!(headingsByRoute.get(destination) ?? []).some(heading =>
+          (heading.explicitAnchor ?? wikiHeadingSlug(heading.text)) === fragment)) return href;
+      }
+      return destination + url.search + url.hash;
+    });
+    markdown = prefixPublicationLinks(markdown, publicationBasePath());
+    markdown = rewritePublicationLinks(markdown, href => {
+      const url = new URL(href, 'https://bookvar.invalid');
+      const original = courseAliasTargets.get(url.pathname);
+      return original ? original + url.search + url.hash : href;
+    });
     const outputRoute = locale ? `${locale}/${entry.route}` : entry.route;
     const target = contained(outputDir, `${outputRoute}.md`, 'Output');
     await mkdir(dirname(target), { recursive: true });
-    const metadata: Record<string, string | boolean | Date> = {
+    const metadata: Record<string, unknown> = {
       title: page.title,
       description: page.title,
       slug: outputRoute
     };
+    if (page.sourceLanguage) metadata.sourceLanguage = page.sourceLanguage;
+    const alias = topicAliases.get(entry.route);
+    if (alias) {
+      // A locale-specific heading may differ. Use the verified canonical
+      // heading only in the canonical locale; the EN body still links to it.
+      const href = publicationHref(alias.route, locale)
+        + (!locale && alias.heading ? `#${alias.heading}` : '');
+      metadata.head = [
+        { tag: 'meta', attrs: { 'http-equiv': 'refresh', content: `0;url=${href}` } },
+        { tag: 'link', attrs: { rel: 'canonical', href } },
+        { tag: 'meta', attrs: { name: 'robots', content: 'noindex' } },
+      ];
+      metadata.prev = false;
+      metadata.next = false;
+    }
+    if (locale === 'en' && canonicalEnglishRoute(entry.route) && (entry.sourceEn || page.sourceLanguage !== 'en')) {
+      const canonicalRaw = await readFile(contained(rootDir, entry.source, 'Canonical source'), 'utf8');
+      const currentHash = createHash('sha256').update(canonicalRaw).digest('hex');
+      metadata.translationStatus = !entry.sourceEn ? 'canonical'
+        : page.translationStatus === 'current'
+          && page.canonicalRevision === currentHash ? 'current' : 'partial';
+      metadata.canonicalHref = publicationHref(entry.route);
+      if (page.translationReviewed) metadata.translationReviewed = page.translationReviewed;
+    }
+    const neighbours = readingNeighbours(readerPaths, entry.route);
+    if (neighbours) {
+      const link = (route: string) => ({
+        link: publicationHref(route, locale),
+        label: (locale ? titlesEn.get(route) : undefined) ?? titles.get(route)!,
+      });
+      const modules = {
+        link: publicationHref('textbook/index', locale)
+          + (locale ? '#specialist-modules' : '#углублённые-модули'),
+        label: locale ? 'Choose a module' : 'Выбрать углублённый модуль',
+      };
+      metadata.prev = neighbours.prev ? link(neighbours.prev)
+        : neighbours.path.id === 'main' ? link('textbook/how-to-use') : modules;
+      metadata.next = neighbours.next ? link(neighbours.next) : modules;
+    }
     if (!searchableInPublication(entry.route) || ['redirect', 'legacy'].includes(page.status)) {
       metadata.pagefind = false;
     }
@@ -692,6 +852,33 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     }
   }
 
+  for (const { entry, page } of courseOriginals) {
+    const href = publicationHref(entry.route);
+    const anchors = [...new Set((headingsByRoute.get(href) ?? []).map(heading =>
+      heading.explicitAnchor ?? wikiHeadingSlug(heading.text)))].filter(Boolean);
+    const target = contained(outputDir, `en/${entry.route}.md`, 'Course alias');
+    await mkdir(dirname(target), { recursive: true });
+    const metadata = {
+      title: page.title,
+      slug: `en/${entry.route}`,
+      template: 'splash', editUrl: false, pagefind: false,
+      prev: false, next: false,
+      head: [
+        { tag: 'meta', attrs: { 'http-equiv': 'refresh', content: `0;url=${href}` } },
+        { tag: 'link', attrs: { rel: 'canonical', href } },
+        { tag: 'meta', attrs: { name: 'robots', content: 'noindex' } }
+      ]
+    };
+    const body = [
+      `[Read the complete course original](${href}). The material retains its source language.`,
+      ...anchors.map(id => `<span id="${escapeHtml(id)}" aria-hidden="true"></span>`),
+      '<script is:inline>',
+      `location.replace(${JSON.stringify(href)} + location.search + location.hash);`,
+      '</script>', ''
+    ].join('\n\n');
+    await writeFile(target, matter.stringify(body, metadata), 'utf8');
+  }
+
   const unexplained = report.pages.flatMap((page) => page.unresolved.map((target) => `${page.source}: ${target}`));
   if (unexplained.length > 0) {
     throw new Error(['Unexplained unresolved wiki links:', ...unexplained.map((item) => `- ${item}`)].join('\n'));
@@ -701,16 +888,17 @@ export async function buildPublication(options: BuildOptions): Promise<void> {
     const destination = contained(assetDir, asset.publicPath, 'Asset');
     await mkdir(dirname(destination), { recursive: true });
     try {
-      await copyFile(asset.source, destination);
+      await materializeAsset(asset.source, destination, process.env.BOOKVAR_LINK_ASSETS === '1');
     } catch (error) {
       throw new Error(`Missing asset: ${relative(rootDir, asset.source)}`, { cause: error });
     }
   }
   for (const artifact of linkedArtifactsByPublicPath.values()) {
+    if (artifact.externalHref) continue;
     const destination = contained(publicDir, artifact.publicPath, 'Linked source artifact');
     await mkdir(dirname(destination), { recursive: true });
     try {
-      await copyFile(artifact.source, destination);
+      await materializeAsset(artifact.source, destination, process.env.BOOKVAR_LINK_ASSETS === '1');
     } catch (error) {
       throw new Error(
         `Missing linked source artifact: ${relative(rootDir, artifact.source)}`,

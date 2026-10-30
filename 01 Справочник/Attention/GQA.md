@@ -2,12 +2,15 @@
 title: Grouped-Query Attention (GQA)
 type: concept
 status: redirect
-last_updated: 2026-07-20
+last_updated: '2026-10-29'
 primary_sources:
-  - https://arxiv.org/abs/2305.13245
+  - 'https://arxiv.org/abs/2305.13245'
+canonical_topic: '00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md'
+canonical_heading: 'GQA: один комплект K/V на группу запросов'
 ---
-
 # Grouped-Query Attention (GQA)
 
-Материал перенесён в общую сравнительную страницу:
-[[02 Areas/ML & DL/01 Справочник/Attention/MHA, MQA и GQA#GQA: несколько групп K/V|GQA — несколько групп K/V]].
+Полное объяснение: [[00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA#GQA: один комплект K/V на группу запросов|MHA, MQA и GQA]].
+
+<!-- Compatibility anchors for existing Obsidian and web links. -->
+<span id="grouped-query-attention-gqa" aria-hidden="true"></span>

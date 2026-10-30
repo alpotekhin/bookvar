@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-30",
+  "scope": "Move only the Plan-Seq-Learn source-transfer preamble into a closed native disclosure after a complete chapter read. Original English quotations, explanatory prose, equations, programs and figures stay in the main flow unchanged; attribution remains beside figures and in the disclosure.",
+  "files": [
+    {
+      "source": "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
+      "before_sha256": "718e68fb6cf58e941e10d76e02acc0761e06a19d8c4bb8496ac6dd3353bcd628",
+      "after_sha256": "63b05db50c38724b585562df56d1389ec1ed0ad1561917dc54ef76e00c0ac2a7",
+      "changes": [
+        {
+          "old": "Ниже сохранены полные английские объяснения из §§3.3–3.5 статьи\n[Murtaza Dalal, Tarun Chiruvolu, Devendra Singh Chaplot, Ruslan Salakhutdinov,\nPlan-Seq-Learn, ICLR 2024](https://arxiv.org/html/2405.01534v1), предваряющий\nабзац §3.2, §D.3.1 об условиях завершения и ограничения §B.3. Это цитаты\nоригинала по CC BY 4.0, без перевода и стилистической правки. Русские связки\nи разбор рисунков отделены от цитат. В Berkeley эта тема находится в лекции 6,\nна страницах 107–116; рисунки взяты из первичной статьи, а не из уменьшенных\nкопий на слайдах.\n\n[[05 Источники/Papers/Plan-Seq-Learn|Карточка статьи и авторские материалы]].",
+          "new": "<details>\n<summary>Source text and attribution</summary>\n\nНиже сохранены полные английские объяснения из §§3.3–3.5 статьи\n[Murtaza Dalal, Tarun Chiruvolu, Devendra Singh Chaplot, Ruslan Salakhutdinov,\nPlan-Seq-Learn, ICLR 2024](https://arxiv.org/html/2405.01534v1), предваряющий\nабзац §3.2, §D.3.1 об условиях завершения и ограничения §B.3. Это цитаты\nоригинала по CC BY 4.0, без перевода и стилистической правки. Русские связки\nи разбор рисунков отделены от цитат. В Berkeley эта тема находится в лекции 6,\nна страницах 107–116; рисунки взяты из первичной статьи, а не из уменьшенных\nкопий на слайдах.\n\n[[05 Источники/Papers/Plan-Seq-Learn|Карточка статьи и авторские материалы]].\n\n</details>"
+        }
+      ]
+    }
+  ]
+}

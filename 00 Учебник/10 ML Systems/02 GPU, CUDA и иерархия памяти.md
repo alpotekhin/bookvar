@@ -2,10 +2,11 @@
 title: GPU, CUDA и иерархия памяти
 type: textbook-chapter
 status: canonical
-last_updated: 2026-09-29
-last_verified: 2026-09-29
-source_language: ru
+last_updated: 2026-10-29
+last_verified: 2026-10-23
+source_language: mixed
 source_unit_id:
+  - lecture-02-tensor-device-placement
   - lecture-05-gpu-anatomy
   - lecture-05-coalescing-failures
   - lecture-06-section-6-hardware
@@ -30,9 +31,7 @@ source_unit_id:
 При этом короткое сложение на GPU может оказаться медленнее, чем на CPU.
 Подготовка запуска и передача массивов иногда стоят дороже самой операции.
 А большая матрица может обрабатываться медленно даже при свободных
-арифметических блоках, если те ждут операнды из памяти. Чтобы понимать
-такие результаты, разберём путь от программы на CUDA до её выполнения
-на устройстве.
+арифметических блоках, если те ждут операнды из памяти.
 
 ## Один запуск, тысяча элементов
 
@@ -139,7 +138,7 @@ Multiprocessors, или SM. В рамках обычного выполнени�
 В частности, обмен через память нельзя считать синхронизированным только
 потому, что участники находятся в одном warp. Для обмена внутри группы
 и внутри блока существуют соответствующие операции синхронизации.
-[CUDA Programming Guide: SIMT kernels](https://docs.nvidia.com/cuda/cuda-programming-guide/02-basics/writing-cuda-kernels.html).
+[CUDA Programming Guide: SIMT Execution Model](https://docs.nvidia.com/cuda/cuda-programming-guide/03-advanced/advanced-kernel-programming.html#simt-execution-model).
 
 ### Occupancy: сколько групп помещается, а не сколько пользы они приносят
 
@@ -171,8 +170,7 @@ Occupancy в этом упрощённом расчёте равна $12/64=18.7
 разместить восемь блоков, то есть 32 warps и получить 50%.
 Но это ещё не доказывает ускорения. Возможно, первый вариант дольше
 хранил полезные промежуточные значения в регистрах, а второй вынужден
-пересчитывать их или обращаться к памяти. Максимизировать occupancy
-как самостоятельную цель не нужно.
+пересчитывать их или обращаться к памяти.
 
 Похожий эффект возникает в конце сетки. Если 16 SM могут держать только
 по одному нашему блоку, а мы запускаем 17 одинаковых блоков, условно
@@ -205,9 +203,9 @@ L1 и shared memory могут использовать общий физиче�
 и distributed shared memory; они требуют соответствующего способа запуска
 и не подразумеваются в нашем примере.
 
-**Local memory** — особенно неудачное для интуиции название. Это память,
-логически принадлежащая одному потоку, а не обязательно быстрая память
-рядом с вычислителем. Если регистров не хватает, часть значений может
+**Local memory** логически принадлежит одному потоку, но физически
+размещается в памяти устройства и обслуживается через систему кэшей.
+Если регистров не хватает, часть значений может
 попасть в local memory; такой перенос называется *register spill*.
 Он создаёт дополнительные чтения и записи через систему памяти.
 Local memory используется и по другим причинам, например для некоторых
@@ -216,9 +214,7 @@ Local memory используется и по другим причинам, н�
 
 Размеры кэшей и задержки нельзя переносить с одной модели GPU на другую
 без проверки. И даже для одного устройства нужно различать ресурс
-одного SM и суммарный ресурс всех SM. Для объяснения механизма важнее
-сначала понять владельца и способ доступа, а затем подставлять
-параметры конкретного ускорителя.
+одного SM и суммарный ресурс всех SM.
 
 ## Coalescing: сколько секторов затронул warp
 
@@ -360,6 +356,47 @@ $$
 поэтому приходится согласовывать оба этапа.
 [NVIDIA: Shared Memory and Memory Banks](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/#shared-memory-and-memory-banks).
 
+### Swizzling: переставить элементы вместо добавления колонки
+
+Дополнительная колонка — один способ изменить распределение по банкам.
+Другой способ сохраняет размер массива, но переставляет элементы внутри
+строк. Такое преобразование размещения называют *swizzling*.
+
+Для квадратного FP32-фрагмента $32\times32$ положим элемент с логическими
+координатами $(r,c)$ в физическую колонку $c\mathbin{\oplus}r$, где
+$\oplus$ — побитовое исключающее ИЛИ. Строка остаётся прежней:
+
+$$
+\begin{aligned}
+\text{offset}(r,c)&=32r+(c\mathbin{\oplus}r),\\
+\text{bank}(r,c)&=c\mathbin{\oplus}r.
+\end{aligned}
+$$
+
+В уменьшенной модели с четырьмя банками номера банков получаются такими:
+
+| $r$ | $c=0$ | $c=1$ | $c=2$ | $c=3$ |
+|---:|---:|---:|---:|---:|
+| 0 | 0 | 1 | 2 | 3 |
+| 1 | 1 | 0 | 3 | 2 |
+| 2 | 2 | 3 | 0 | 1 |
+| 3 | 3 | 2 | 1 | 0 |
+
+При фиксированной строке все колонки попадают в разные банки. При
+фиксированной колонке все строки также попадают в разные банки. Например,
+логическая колонка $c=1$ обращается к банкам 1, 0, 3 и 2 вместо четырёх
+разных слов одного банка. Для 32 строк и банков действует та же перестановка.
+Дополнительная память не нужна, но преобразование должно применяться
+и при записи, и при чтении: иначе программа прочитает другой элемент.
+
+Такое размещение подходит именно для рассмотренных строковых и столбцовых
+обращений. На диагонали $r=c$ все элементы снова попадают в банк 0.
+Для векторных загрузок и матричных инструкций нужно учитывать их собственные
+форматы операндов. Вариант с XOR предложен в
+[CS336 Lecture 6, Bank conflicts](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_06.py#L114-L124);
+таблица разворачивает его на четырёх банках, а не задаёт универсальную
+раскладку для любого Tensor Core.
+
 ## Блочное матричное умножение
 
 Пусть $C=AB$, где $A$ имеет форму $M\times K$, а $B$ — $K\times N$.
@@ -458,13 +495,76 @@ $2b^3=8192$ запросов чисел вместо 512: повторное и�
 16-кратного сокращения реального HBM-трафика: исходный вариант тоже мог
 пользоваться кэшами.
 
-В реализации через shared memory возникает важная зависимость.
 Нельзя начинать использовать фрагмент до завершения его загрузки всеми
 участниками. И нельзя перезаписывать общий буфер следующей порцией,
 пока другие потоки читают предыдущую. Для простого CUDA-ядра это две
 точки синхронизации блока; `__syncthreads()` должны достигать
 все участвующие потоки, а не только потоки с допустимым индексом на краю.
 Недостающие элементы обычно заполняют нулями, сохраняя согласованный барьер.
+
+### Неполная плитка: что именно заполняется нулями
+
+Возьмём матрицу A размера $2\times3$ и B размера $3\times2$:
+
+$$
+A=\begin{bmatrix}1&2&3\\4&5&6\end{bmatrix},\qquad
+B=\begin{bmatrix}7&8\\9&10\\11&12\end{bmatrix}.
+$$
+
+При размере плитки $b=2$ первая фаза использует $k=0,1$ и даёт
+частичную сумму $\begin{bmatrix}25&28\\73&82\end{bmatrix}$.
+Во второй фазе осталось только $k=2$. В памяти A нет четвёртой колонки,
+а в B — четвёртой строки. В общие буферы записываются
+$\begin{bmatrix}3&0\\6&0\end{bmatrix}$ и
+$\begin{bmatrix}11&12\\0&0\end{bmatrix}$.
+Их произведение равно $\begin{bmatrix}33&36\\66&72\end{bmatrix}$,
+поэтому окончательный результат —
+$\begin{bmatrix}58&64\\139&154\end{bmatrix}$.
+
+Нули исключают несуществующие слагаемые, сохраняя одинаковый цикл для всех
+потоков блока. Поток с недопустимым входным индексом записывает ноль в свой
+слот и участвует в барьерах. Если вместо этого часть потоков пропустит
+загрузку, в буфере могут остаться значения предыдущей фазы. Если они пропустят
+и необходимый барьер, обмен между потоками перестанет быть согласованным.
+
+Следующая CPU-модель воспроизводит загрузку двух плиток, накопление и
+обрезку выходного края. Она проверяет алгебру и индексы; её время выполнения
+ничего не говорит о скорости CUDA-ядра.
+
+~~~python
+import numpy as np
+
+def tiled_matmul(A, B, tile=2):
+    M, K = A.shape
+    assert B.shape[0] == K and tile > 0
+    N = B.shape[1]
+    C = np.zeros((M, N), dtype=np.float64)
+    for row in range(0, M, tile):
+        for col in range(0, N, tile):
+            acc = np.zeros((tile, tile), dtype=np.float64)
+            for start in range(0, K, tile):
+                a = np.zeros((tile, tile), dtype=np.float64)
+                b = np.zeros((tile, tile), dtype=np.float64)
+                aa = A[row:row + tile, start:start + tile]
+                bb = B[start:start + tile, col:col + tile]
+                a[:aa.shape[0], :aa.shape[1]] = aa
+                b[:bb.shape[0], :bb.shape[1]] = bb
+                acc += a @ b
+            h, w = min(tile, M - row), min(tile, N - col)
+            C[row:row + h, col:col + w] = acc[:h, :w]
+    return C
+
+A = np.array([[1., 2., 3.], [4., 5., 6.]])
+B = np.array([[7., 8.], [9., 10.], [11., 12.]])
+np.testing.assert_allclose(tiled_matmul(A, B), [[58., 64.], [139., 154.]])
+~~~
+
+В GPU-реализации загрузки, умножения и барьеры распределены между потоками.
+Маски чтения и нулевое значение для недопустимого индекса можно сопоставить
+с `tl.load(..., mask=..., other=0.0)`, а ограничение записи — с маской
+`tl.store` в
+[CS336 Lecture 6, `matmul_relu_kernel`](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_06.py#L635-L675).
+В примере курса дополнительно применяется ReLU; здесь проверяется только AB.
 
 Увеличение фрагмента повышает повторное использование, но требует больше
 регистров для сумм и больше shared memory для входов. Блоков на SM
@@ -515,6 +615,24 @@ Tensor Cores выполняют специализированное матри�
 накопления также различаются: например, произведения низкой точности
 могут накапливаться в FP32. Подробности численных ошибок относятся к
 [[05 Численные форматы и mixed precision|главе о форматах чисел]].
+
+На архитектурах Blackwell `sm_100a`/`sm_100f` есть отдельная
+**Tensor Memory (TMEM)** для матричных инструкций пятого поколения.
+Например, `tcgen05.mma` может хранить результат накопления
+в TMEM, после чего `tcgen05.ld` переносит его в регистры потоков для
+последующей обработки. Поэтому фразу «все частичные суммы лежат в регистрах»
+нельзя переносить со скалярного CUDA-примера на любое поколение Tensor Cores.
+В PTX память TMEM выделяется и освобождается явно. Для указанных архитектур
+она организована в 128 строк; число выделяемых столбцов должно быть
+степенью двойки и не меньше 32.
+При 32-битном элементе минимальная такая группа занимает
+$128\cdot32\cdot4=16384$ байта, то есть 16 KiB. Это отдельный ресурс,
+а не другое название shared memory. Его lanes — строки внутренней матрицы
+памяти, не номера потоков warp. Перед чтением результата асинхронной MMA
+нужно дождаться её завершения по правилам этих инструкций; одного факта
+вызова MMA недостаточно. Формы и ограничения описаны в
+[PTX ISA, Tensor Memory](https://docs.nvidia.com/cuda/parallel-thread-execution/#tensor-memory)
+и [инструкциях загрузки из TMEM](https://docs.nvidia.com/cuda/parallel-thread-execution/#tcgen05-instructions-tcgen05-ld).
 
 Повторное использование повышает арифметическую интенсивность
 $I=F/Q$: на каждый переданный байт приходится больше работы.
@@ -576,6 +694,63 @@ L2 и HBM — разные величины. Именно это различи�
 NVLink поддерживает быстрый обмен в соответствующих конфигурациях,
 но наличие имени интерфейса не задаёт скорость любого пути между
 двумя устройствами: важны поколение, топология и поддержка обмена.
+
+<a id="torch-device-placement"></a>
+
+### Как выбрать устройство тензора
+
+В PyTorch устройство можно проверить через `tensor.device`. Фабрика
+`torch.zeros` без аргумента `device` использует устройство по умолчанию;
+при обычных настройках это CPU. Вызов `x.to(device)` возвращает тензор
+на указанном устройстве, но не меняет переменную `x`. Поэтому результат
+нужно сохранить: `on_device = x.to(device)` или `x = x.to(device)`.
+
+Если устройство и тип уже совпадают с запрошенными, `.to(...)` по умолчанию
+возвращает тот же объект. Если для преобразования нужна копия, исходный
+тензор остаётся на прежнем устройстве. Параметр `copy=True` требует отдельную
+копию даже при совпадающих устройстве и типе. Эти случаи различаются в
+[контракте `Tensor.to`](https://docs.pytorch.org/docs/2.14/generated/torch.Tensor.to.html).
+Из формы массива нельзя узнать, разделяют ли два объекта память.
+
+Новый массив можно сразу создать на устройстве через `device=...`.
+Контекст `with torch.device(device)` задаёт устройство по умолчанию для
+фабричных функций вроде `torch.zeros`; явный аргумент `device="cpu"` имеет
+приоритет. Уже существующие тензоры этот контекст не переносит.
+Такой способ создания показан в
+[CS336, Lecture 2, `tensors_on_gpus`](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_02.py#L184-L199)
+и [документации `torch.device`](https://docs.pytorch.org/docs/2.14/tensor_attributes.html#torch.device).
+
+~~~python
+import torch
+
+source_cpu = torch.arange(6., dtype=torch.float32, device="cpu").reshape(2, 3)
+target_device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+on_device = source_cpu.to(target_device)
+with torch.device(target_device):
+    created = torch.zeros(2, 3)
+    explicit_cpu = torch.zeros(2, 3, device="cpu")
+assert source_cpu.device.type == "cpu"
+assert on_device.device == created.device == target_device
+assert explicit_cpu.device.type == "cpu"
+torch.testing.assert_close(on_device.cpu(), source_cpu)
+
+same_cpu = source_cpu.to("cpu")
+assert same_cpu is source_cpu
+independent_cpu = source_cpu.to("cpu", copy=True)
+assert independent_cpu.data_ptr() != source_cpu.data_ptr()
+independent_cpu[0, 0] = -1.
+assert source_cpu[0, 0].item() == 0.
+print("target device:", target_device)
+print("CUDA transfer executed:", target_device.type == "cuda")
+~~~
+
+При наличии CUDA пример переносит шесть чисел и проверяет их после возврата
+на CPU. Иначе выполняется только CPU-ветка: она проверяет создание и
+копирование объектов, но не передачу через PCIe и не скорость GPU.
+Здесь не запрашивается асинхронное копирование. Его нужно рассматривать
+вместе с очередями операций и временем жизни исходных буферов.
+
+### Очереди CUDA и зависимости
 
 Стандартный способ организовать работу CUDA — **stream**, упорядоченная
 очередь операций. Копирование входа и ядро в одном stream выполнятся
@@ -670,6 +845,291 @@ CPU не задерживает подготовку; один copy engine мо�
 отладочной метрики, можно непреднамеренно убрать перекрытие.
 Этот случай разобран в [рекомендациях PyTorch по производительности](https://docs.pytorch.org/tutorials/recipes/recipes/amp_recipe.html#troubleshooting).
 
+<!-- hardware-source-completion: mapping:start -->
+## Matching an operation to the accelerator
+
+The CUDA examples above use several resources: arithmetic instructions,
+registers, shared memory, caches and copy engines. A neural-network layer
+does not use all of them in the same proportion. Its mathematical definition,
+physical tensor layout and selected kernel determine the work each resource
+receives. Harvard's *Hardware Acceleration* chapter treats these choices as
+hardware mapping.
+
+### Matrix arithmetic does not execute every part of a layer
+
+Consider a row of attention: $s=qK^\top$, then
+$p_j=\exp(s_j-m)/\sum_k\exp(s_k-m)$, then $o=pV$, with
+$m=\max_j s_j$. The two products can use matrix instructions. Finding the
+maximum, evaluating exponentials and reducing their sum require other
+instructions. Index calculation, masking and synchronization also remain.
+A fused kernel keeps these operations together without turning each one
+into a matrix multiplication.
+
+Consequently, the advertised matrix FLOP/s cannot be used as the rate for
+every operation. Exponential and reciprocal approximations have their own
+throughput and accuracy constraints; an exact library operation can require
+several instructions. “One SFU cycle” is not a portable execution time for
+`exp`, `tanh` or `rsqrt`. Likewise, LayerNorm and softmax are not simply
+independent elementwise maps: their reduction results are shared across a
+row. The [softmax kernel](/textbook/ml-systems/gpu-kernels-triton/#разбор-алгоритма-softmax-одной-строки)
+shows how those dependencies determine the implementation.
+
+On a TPU, the distinction appears as matrix, vector and scalar units inside
+a TensorCore. This name describes a TPU core, not NVIDIA's Tensor Cores.
+The [Google architecture guide](https://docs.cloud.google.com/tpu/docs/system-architecture-tpu-vm#tpu_chip)
+lists these units by TPU generation. The systolic example below follows the
+matrix path; it does not account for the complete layer.
+
+### Convolution as a matrix product: the cost of forming patches
+
+A convolution reuses both filter weights and overlapping input pixels.
+One implementation exposes that reuse to GEMM by arranging each input patch
+as a column. This transformation is commonly called *im2col*. For one
+$3\times3$ image, one $2\times2$ filter, stride one and no padding, there
+are four output positions. The first patch contains $(1,2,4,5)$ in row order
+if the image contains the values 1 through 9. The next patch is $(2,3,5,6)$:
+two values have already appeared in the previous patch.
+
+The patch matrix has shape $4\times4$. Flattening the filter to a row of
+length four and multiplying by this matrix produces the four outputs.
+
+<!-- checked-example: hardware-im2col -->
+```python
+import torch
+import torch.nn.functional as F
+
+image = torch.arange(1., 10.).reshape(1, 1, 3, 3)
+weight = torch.tensor([[[[1., 2.], [3., 4.]]]])
+patches = F.unfold(image, kernel_size=(2, 2))
+assert patches.shape == (1, 4, 4)
+torch.testing.assert_close(patches[0, :, 0], torch.tensor([1., 2., 4., 5.]))
+torch.testing.assert_close(patches[0, :, 1], torch.tensor([2., 3., 5., 6.]))
+product = weight.reshape(1, 4) @ patches[0]
+torch.testing.assert_close(product, torch.tensor([[37., 47., 67., 77.]]))
+torch.testing.assert_close(product.reshape(1, 1, 2, 2), F.conv2d(image, weight))
+assert patches.numel() == 16 and image.numel() == 9
+```
+
+Materializing those columns stores 16 values derived from nine input values.
+For $C$ input channels and a $k_h\times k_w$ filter, each column has
+$Ck_hk_w$ entries, and there are $H_{\mathrm{out}}W_{\mathrm{out}}$ columns
+per image. Overlap can make this temporary array much larger than the input.
+An implicit-GEMM kernel instead generates the needed patch addresses while
+loading tiles, avoiding a complete materialized patch matrix. Other
+convolution algorithms make different trade-offs. The CPU example establishes
+the matrix identity and storage count; it does not select the fastest method.
+
+*Based on Harvard, [Matrix operations in neural networks](https://github.com/harvard-edge/cs249r_book/blob/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/hw_acceleration/hw_acceleration.qmd#L1268),
+CC BY-NC-SA 4.0. Bookvar supplies the complete numerical example instead of
+reproducing the source's incomplete convolution pseudocode.*
+
+### Logical dimensions and physical tensor layout
+
+Harvard states the layout problem as follows:
+
+<!-- hardware-excerpt: layout:start -->
+> The preceding dataflow strategies determine which data stays close to compute; tensor layouts determine whether that data can be accessed efficiently once it arrives. A perfectly chosen weight-stationary dataflow still suffers if weights are stored in a format that causes scattered memory accesses. Tensor layout is therefore a kernel contract: the physical arrangement of multidimensional data must match the access pattern expected by the selected hardware path, or the accelerator pays in memory stalls, inefficient cache usage, and increased data movement.
+<!-- hardware-excerpt: layout:end -->
+
+*Vijay Janapa Reddi et al., [Memory-efficient tensor layouts](https://github.com/harvard-edge/cs249r_book/blob/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/hw_acceleration/hw_acceleration.qmd#L4549),
+CC BY-NC-SA 4.0. Original paragraph; index markup removed.*
+
+For a concrete address calculation, take a contiguous tensor with logical
+shape $(N,C,H,W)=(2,3,2,4)$. Its strides in elements are $(24,8,4,1)$:
+moving one position along W advances one element, while changing C advances
+eight. In channels-last storage the logical shape remains NCHW, but the
+strides become $(24,1,12,3)$. Now the three channel values of one pixel are
+adjacent. In either case, the element at $(n,c,h,w)$ is found at
+$n s_N+c s_C+h s_H+w s_W$ from the tensor's starting offset.
+
+| Logical index | NCHW-contiguous offset | Channels-last offset |
+|---|---:|---:|
+| $(0,0,0,0)$ | 0 | 0 |
+| $(0,1,0,0)$ | 8 | 1 |
+| $(0,2,0,0)$ | 16 | 2 |
+| $(0,0,0,1)$ | 1 | 3 |
+| $(1,2,1,3)$ | 47 | 47 |
+
+The values at these logical indices do not change during a memory-format
+conversion. A permutation is different: it changes the order in which the
+axes are presented. This CPU example checks both operations using the
+[PyTorch channels-last API](https://docs.pytorch.org/tutorials/intermediate/memory_format_tutorial.html).
+
+<!-- checked-example: hardware-layout -->
+```python
+import torch
+
+x = torch.arange(48).reshape(2, 3, 2, 4)
+y = x.contiguous(memory_format=torch.channels_last)
+assert x.shape == y.shape == (2, 3, 2, 4)
+assert x.stride() == (24, 8, 4, 1)
+assert y.stride() == (24, 1, 12, 3)
+assert y.is_contiguous(memory_format=torch.channels_last)
+assert not y.is_contiguous()
+assert x.data_ptr() != y.data_ptr()
+torch.testing.assert_close(x, y)
+
+def offset(index, stride):
+    return sum(i*s for i, s in zip(index, stride))
+
+indices = [(0, 0, 0, 0), (0, 1, 0, 0), (0, 2, 0, 0),
+           (0, 0, 0, 1), (1, 2, 1, 3)]
+assert [offset(i, x.stride()) for i in indices] == [0, 8, 16, 1, 47]
+assert [offset(i, y.stride()) for i in indices] == [0, 1, 2, 3, 47]
+
+nhwc_view = x.permute(0, 2, 3, 1)
+assert nhwc_view.shape == (2, 2, 4, 3)
+assert nhwc_view.data_ptr() == x.data_ptr()
+assert nhwc_view.stride() == (24, 4, 1, 8)
+packed_nhwc = nhwc_view.contiguous()
+assert packed_nhwc.stride() == (24, 12, 3, 1)
+torch.testing.assert_close(packed_nhwc, y.permute(0, 2, 3, 1))
+```
+
+Both NCHW and NHWC can be stored contiguously in their declared axis order;
+NHWC is not the definition of row-major storage. Nor is one format universally
+the CPU format and the other the GPU format. Choose a layout for the selected
+operator and backend, including conversion costs between neighboring
+operators. The example checks addresses and values, not convolution speed.
+
+### Placement, buffer lifetime and execution order
+
+Mapping a layer requires three related decisions. Placement chooses the
+execution units; allocation chooses storage; scheduling orders operations
+subject to dependencies. For our tiled product, assigning each output tile
+to a block is placement, reserving shared-memory input tiles is allocation,
+and loading the next K tile only after its readers finish is scheduling.
+Changing tile dimensions can alter all three.
+
+The compiler also has to determine when whole-tensor storage can be reused:
+
+<!-- hardware-excerpt: buffer-reuse:start -->
+> Buffer allocation and reuse complements layout optimization: the compiler minimizes memory footprint by reusing intermediate storage whenever possible. Deep learning workloads generate many temporary tensors, such as activations and gradients, which can quickly overwhelm on-chip memory if not carefully managed. Instead of allocating new memory for each tensor, the compiler analyzes the computation graph to identify opportunities for buffer reuse, ensuring that intermediate values are stored and overwritten efficiently.
+<!-- hardware-excerpt: buffer-reuse:end -->
+
+*Harvard, [Memory planning](https://github.com/harvard-edge/cs249r_book/blob/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/hw_acceleration/hw_acceleration.qmd#L5169),
+CC BY-NC-SA 4.0. Original wording; the bibliography command is omitted.*
+
+The storage in this paragraph can also be device memory, not only on-chip
+SRAM. Reuse is legal after the last reader, not merely after the producer
+finishes. The [tensor-arena example](/textbook/deployment/edge-federated/#lifetimes-determine-which-buffers-can-share-storage)
+reduces 32 KiB of separate buffers to 20 KiB and shows why a later branch
+invalidates that assignment. [Buffer donation](/textbook/ml-systems/gpu-kernels-triton/#donation-changes-buffer-ownership)
+adds a different requirement: the caller relinquishes an input that a compiled
+computation may reuse.
+
+Kernel selection may use rules, a cost model, or measured candidate timings.
+The [Triton autotuning example](/textbook/ml-systems/gpu-kernels-triton/#автоматический-подбор-параметров)
+explains the search cost and state reset. A runtime can then dispatch among
+available variants for the actual input, but it does not automatically invent
+a new precision, retile every kernel under contention, or fuse an arbitrary
+graph at each call. [Dynamo's guards](/textbook/ml-systems/gpu-kernels-triton/#why-a-compiled-function-needs-guards)
+give a concrete example of how a compiled specialization is accepted or
+rejected. These are separate mechanisms, not a promise made by the word
+“compiler.”
+
+### Unified Memory: a common address does not fix data residency
+
+CUDA Unified Memory allows supported host and device accesses to a common
+allocation. It does not turn host RAM into local HBM. Depending on the platform,
+an access can trigger page migration or use a remote mapping; hardware-coherent
+systems and software-managed migration have different costs. Unified Virtual
+Addressing identifies allocations within one virtual address space, but alone
+does not guarantee that every pointer is accessible by every processor.
+[NVIDIA's Unified Memory guide](https://docs.nvidia.com/cuda/cuda-programming-guide/04-special-topics/unified-memory.html)
+separates full and limited support and the allocation types each permits.
+
+Consider a CPU modifying pages that the GPU will next read. If the platform
+migrates those pages to GPU memory on demand, the first device access includes
+fault handling and movement. Alternating CPU and GPU writes can repeatedly
+move the same pages. Prefetch and placement advice may reduce demand faults;
+they do not remove synchronization requirements or make an oversized working
+set fit in HBM. Measure migration and remote traffic separately from kernel
+execution. On a shared-DRAM SoC, there may be no host-to-device copy of that
+kind, but processors still share bandwidth and require correct visibility
+of their writes. “Unified” describes the programming or hardware arrangement,
+not a universal performance guarantee.
+
+### Heterogeneous processors and unsupported operations
+
+Harvard describes a mobile SoC as a set of different execution paths:
+
+<!-- hardware-excerpt: soc:start -->
+> Modern mobile AI engines exemplify heterogeneous computing by coordinating CPU cores, GPU shaders, DSPs, and dedicated NPUs across a shared memory hierarchy. Workload distribution lets computer vision kernels execute on GPU or NPU paths, audio processing use DSP arithmetic units, and matrix-heavy neural-network layers use NPU-optimized engines when the operator set is supported. This coordination requires careful scheduling to meet real-time constraints while managing thermal throttling and battery life.
+<!-- hardware-excerpt: soc:end -->
+
+*Harvard, [Mobile SoC architecture evolution](https://github.com/harvard-edge/cs249r_book/blob/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/hw_acceleration/hw_acceleration.qmd#L5377),
+CC BY-NC-SA 4.0. Original paragraph; index markup and footnote marker removed.*
+
+An unsupported NPU operation can require a CPU or GPU fallback. The cost
+includes the fallback computation, synchronization and any layout conversion
+or transfer at both boundaries. For example, accelerating a convolutional
+backbone does not establish the latency of a detection pipeline that also
+performs variable-length non-maximum suppression and draws an overlay.
+The fastest assignment depends on the implemented operators and the complete
+path; “NMS always runs faster on CPU” would be an unjustified generalization.
+
+Two processors sharing DRAM do not get two independent bandwidth budgets.
+A camera, display and neural-network kernel can compete for the same memory
+controller. A short isolated run therefore does not establish sustained
+performance while the rest of the device is active. Dynamic voltage and
+frequency scaling changes operating points; thermal throttling, reduced frame
+rate or a smaller model can preserve an application's resource limits, with
+different effects on latency and quality. The
+[sustained-energy section](/textbook/inference/benchmarking-slo/#sustained-operation-and-the-workload-matter)
+explains why both idle periods and long runs belong in the measurement.
+
+Safety-critical work adds a deadline and an isolation requirement. A
+bandwidth-heavy background model must not consume the resources reserved
+for a time-critical sensor pipeline. Temporal partitioning, supported fallback
+behavior and coordination of sensor timestamps require a platform-specific
+design. The hardware chapter identifies the interference; it does not certify
+an automotive safety architecture. For ordinary on-device deployment, the
+[operator and update checks](/textbook/deployment/edge-federated/#a-registered-operator-is-not-every-possible-kernel-configuration)
+likewise belong to the actual target build.
+
+### Package, node and fleet boundaries
+
+A chiplet divides a design across dies within a package; a multi-GPU node
+connects independently addressable accelerators; a cluster adds a network
+boundary. Wafer-scale designs instead place more processing and communication
+on one large device. These choices change routing, memory capacity, failure
+handling and thermal constraints. They do not establish equal useful
+throughput per advertised arithmetic unit. The earlier host-copy example and
+the [TP communication calculation](/textbook/pretraining/tensor-sequence-parallelism/#когда-увеличение-tp-перестаёт-сокращать-время)
+show why the bytes and dependencies crossing each boundary must be counted.
+
+Hardware selection also needs an energy boundary. For a fixed set of accepted
+results, operational emissions can be estimated from interval energy:
+
+$$
+C_{\mathrm{operational}}=\sum_t E_t c_t,
+$$
+
+where $E_t$ is kWh within the declared facility or IT boundary and $c_t$ is
+the corresponding electricity carbon intensity in kg CO$_2$e/kWh. If energy
+is measured only at the IT boundary, a separately justified facility overhead
+may be needed. Applying that overhead to a whole-facility meter would count
+it twice. Manufacturing emissions are outside this operational equation.
+An assumed NPU/CPU peak-TFLOP ratio supplies none of the required energy or
+workload measurements. Compare the same quality, latency and accepted-result
+count; [energy per result](/textbook/inference/benchmarking-slo/#energy-per-result-measurement-boundary-and-time-window)
+and [lifecycle cost](/textbook/deployment/mlops/#finops-lifecycle-cost-and-the-cost-of-a-useful-result)
+define these quantities separately.
+
+Vendor-specific kernels add an engineering cost to a later hardware change.
+Harvard gives a practical boundary for that specialization:
+
+<!-- hardware-excerpt: portability:start -->
+> The portability cost becomes hardest to manage when accelerator-specific code is scattered through model code, preprocessing, build scripts, and serving paths. A cleaner design localizes vendor kernels behind capability checks, framework dispatch layers, or narrow operator libraries, so the system can keep a fast path without making every higher-level component vendor-aware. The engineering goal is not to avoid specialization; it is to keep specialization replaceable when the hardware fleet changes.
+<!-- hardware-excerpt: portability:end -->
+
+*Harvard, [Fallacies and Pitfalls](https://github.com/harvard-edge/cs249r_book/blob/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/hw_acceleration/hw_acceleration.qmd#L5785),
+CC BY-NC-SA 4.0. Original paragraph, unchanged. This Harvard-derived section
+and its Bookvar examples use the same license. The CPU address checks are
+not a GPU, TPU or mobile-device benchmark.*
+<!-- hardware-source-completion: mapping:end -->
+
 ## Почему модель GPU нельзя буквально переносить на TPU
 
 GPU и TPU решают похожие задачи линейной алгебры, но описанные warps,
@@ -683,6 +1143,193 @@ TPU использует другой набор вычислителей и с�
 Но число CUDA-потоков не является переносимой характеристикой программы.
 Сравнение ускорителей на этих основаниях дано в
 [Stanford CS336, Lecture 5](https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_05.pdf).
+
+<!-- systems-completion: systolic:start -->
+### A systolic array: keep weights, pass inputs and partial sums
+
+An array of multiply-accumulate units can reuse operands through direct links
+between neighboring units. A value moves across the array instead of being
+fetched independently by every consumer. There are several possible dataflows;
+the example below keeps one weight in each processing element while inputs and
+partial sums move. It is a small **weight-stationary** model, not an emulator
+of a particular TPU generation.
+
+Google's original animation first shows weights being loaded into the matrix
+unit. The colored blocks represent parameters, and the repeated boxes represent
+multiply-accumulators. Loading is a separate part of the operation: stationary
+weights still have to reach the array before they can be reused.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/hardware-completion-2026-10-29/tpu-load-weights.gif]]
+
+*Google Cloud, [TPU architecture — How a TPU works](https://docs.cloud.google.com/tpu/docs/system-architecture-tpu-vm#how_a_tpu_works),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Original animation, unchanged. This is a conceptual illustration of loading
+parameters, not a cycle-accurate trace or a drawing of all memory in a TPU.*
+
+The next animation sends activations through the loaded array and passes
+accumulated results onward. Repeated local use avoids returning to HBM for
+every multiply. HBM still supplies tiles and receives results; local registers,
+buffers and interconnects still consume energy. The animation's simplified
+memory comparison should not be read as “a real GPU fetches every scalar from
+DRAM” or “a TPU performs no memory accesses.”
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/hardware-completion-2026-10-29/tpu-dataflow.gif]]
+
+*Google Cloud, [TPU architecture](https://docs.cloud.google.com/tpu/docs/system-architecture-tpu-vm),
+CC BY 4.0. Original dataflow animation, unchanged. Follow one input across the
+row and a partial sum down a column. The arithmetic below makes these two
+dependencies explicit for a $2\times2$ weight tile.*
+
+Take
+
+$$
+A=\begin{pmatrix}1&2\\3&4\end{pmatrix},\quad
+B=\begin{pmatrix}5&6\\7&8\end{pmatrix},\quad C=AB.
+$$
+
+Place $B_{k,j}$ in processing element $\operatorname{PE}(k,j)$.
+For output row $i$, activation $A_{i,k}$ enters array row $k$ at tick $i+k$.
+It advances one column per tick. The partial sum enters the top of column $j$
+at tick $i+j$, then advances one row per tick. The activation and its partial
+sum therefore meet at $\operatorname{PE}(k,j)$ at the same tick $i+k+j$.
+Each PE adds its local product before passing the sum downward.
+
+| Tick | PE(0,0), weight 5 | PE(0,1), weight 6 | PE(1,0), weight 7 | PE(1,1), weight 8 |
+|---:|---|---|---|---|
+| 0 | $1\cdot5=5$ | Idle | Idle | Idle |
+| 1 | $3\cdot5=15$ | $1\cdot6=6$ | $5+2\cdot7=19$ | Idle |
+| 2 | Idle | $3\cdot6=18$ | $15+4\cdot7=43$ | $6+2\cdot8=22$ |
+| 3 | Idle | Idle | Idle | $18+4\cdot8=50$ |
+
+The four completed results are $C_{00}=19$, $C_{01}=22$, $C_{10}=43$ and
+$C_{11}=50$. At tick 1 the first column is finishing output row 0 while its
+top PE has already started row 1. Delaying input row $k$ by $k$ ticks is what
+keeps the two streams aligned; feeding every row simultaneously would pair an
+activation with the wrong partial sum.
+
+<!-- checked-example: hardware-systolic -->
+```python
+import numpy as np
+
+def weight_stationary(A, B):
+    M, K = A.shape
+    assert B.shape[0] == K
+    N = B.shape[1]
+    assert min(M, K, N) > 0
+    C = np.zeros((M, N), dtype=np.result_type(A, B))
+    partial = {}
+    active_per_tick = []
+    for t in range(M + K + N - 2):
+        active = 0
+        for k in range(K):
+            for j in range(N):
+                i = t-k-j
+                if 0 <= i < M:
+                    previous = 0 if k == 0 else partial[i, k-1, j]
+                    partial[i, k, j] = previous + A[i, k]*B[k, j]
+                    if k == K-1:
+                        C[i, j] = partial[i, k, j]
+                    active += 1
+        active_per_tick.append(active)
+    return C, active_per_tick
+
+A = np.array([[1, 2], [3, 4]])
+B = np.array([[5, 6], [7, 8]])
+C, active = weight_stationary(A, B)
+np.testing.assert_array_equal(C, [[19, 22], [43, 50]])
+assert active == [1, 3, 3, 1]
+assert sum(active) == A.shape[0]*A.shape[1]*B.shape[1] == 8
+```
+
+The simulator records values and dependencies on CPU. It does not model link
+delays, weight loading, a TPU instruction set, clock frequency or stalls.
+Its peak is four MACs per tick, but this tiny operation uses only eight of the
+sixteen available PE-tick slots. Filling and draining the pipeline matters.
+For the same idealized $K\times N$ array and $M$ input rows, execution takes
+$M+K+N-2$ ticks and performs $MKN$ MACs. More rows amortize fill/drain time;
+a single row uses only a diagonal wave. Larger matrices are tiled because the
+physical array and local storage have finite sizes.
+
+Harvard's drawing emphasizes the surrounding buffers and accumulation path:
+
+![[Assets/Sources/Harvard ML Systems/vol1/hw_acceleration/844618e87a09fb654cbccb727a9bef56c88aabea.svg]]
+
+*Vijay Janapa Reddi et al.,
+[Hardware Acceleration, Systolic Array Dataflow](https://mlsysbook.ai/vol1/hw_acceleration/hw_acceleration.html#fig-systolic-array),
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+Complete original SVG. `Data` moves horizontally, `Partial Sums` downward;
+the lower buffers collect outputs. This drawing does not label individual PE
+weights, so their values are specified by the worked example rather than
+inferred from the arrows.*
+
+### Which operand stays local?
+
+The same matrix product permits different schedules. “Stationary” names the
+operand kept near the arithmetic **over a specified tile or loop**, not an
+operand permanently frozen for the entire model. A GPU kernel can keep a
+tile's output accumulators in registers while also reusing weight and input
+tiles in shared memory. The labels describe reuse at particular memory levels;
+they are not exclusive labels for whole model families.
+
+Harvard gives the following description of weight-stationary execution in
+[Data movement patterns](https://github.com/harvard-edge/cs249r_book/blob/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/hw_acceleration/hw_acceleration.qmd#L4467),
+CC BY-NC-SA 4.0. The wording is retained; its indexing command is removed.
+
+<!-- completion-excerpt: weight-stationary:start -->
+> The weight stationary strategy keeps weights fixed in local memory, while input activations and partial sums are streamed through the system. Weight stationary approaches prove particularly beneficial in CNNs and matrix multiplications, where the same set of weights is applied across multiple inputs. By ensuring weights remain stationary, this method reduces redundant memory fetches, which helps alleviate bandwidth bottlenecks and improves energy efficiency.
+<!-- completion-excerpt: weight-stationary:end -->
+
+For $C=AB$ with $A:[M,K]$ and weights $B:[K,N]$, consider three scalar-loop
+schedules. Count reads and writes across the boundary of a small local store,
+ignoring caches outside that store. Each schedule retains one chosen scalar;
+the others are read or updated for each multiply. For partial sums, the first
+contribution initializes the value, so it does not read a previous zero.
+
+| Stationary scalar | Inner work | Reads of A | Reads of B | Reads + writes of C |
+|---|---|---:|---:|---:|
+| Weight $B_{kj}$ | All $i$ for fixed $(k,j)$ | $MKN$ | $KN$ | $MN(2K-1)$ |
+| Output $C_{ij}$ | All $k$ for fixed $(i,j)$ | $MKN$ | $MKN$ | $MN$ |
+| Input $A_{ik}$ | All $j$ for fixed $(i,k)$ | $MK$ | $MKN$ | $MN(2K-1)$ |
+
+For $M=4,K=3,N=2$, these totals are 70, 56 and 76 scalar accesses respectively.
+The output-stationary version writes each answer once. The weight-stationary
+version reads each weight once but repeatedly updates partial sums. These are
+counts for the stated scalar storage model, not measured HBM transactions.
+If partial sums also fit on chip, the cost of keeping weights local changes;
+if the output tile is too large, its accumulators may spill. Tiling lets us
+retain several useful operands while respecting the local capacity.
+
+<!-- checked-example: hardware-stationary-traffic -->
+```python
+M, K, N = 4, 3, 2
+weight_stationary_accesses = M*K*N + K*N + M*N*(2*K-1)
+output_stationary_accesses = 2*M*K*N + M*N
+input_stationary_accesses = M*K + M*K*N + M*N*(2*K-1)
+assert (weight_stationary_accesses, output_stationary_accesses,
+        input_stationary_accesses) == (70, 56, 76)
+# One FP16 tile of each input and one FP32 accumulator tile.
+TM, TN, TK = 32, 64, 16
+local_bytes = 2*(TM*TK + TK*TN) + 4*TM*TN
+assert local_bytes == 11264
+```
+
+The final calculation is an 11 KiB working set for two FP16 input tiles and
+one FP32 output tile. Double buffering, padding, metadata and other live
+values require additional space. Enlarging the tile can increase reuse and
+simultaneously reduce the number of resident blocks or cause spills.
+This is the same capacity trade-off encountered in CUDA occupancy, expressed
+as a choice of retained operands.
+
+A TPU also has vector and scalar units: softmax, activations, addresses and
+control flow are not all performed by the MXU. Google's term *TensorCore*
+names a TPU core containing several types of units; it is not the name of
+NVIDIA's matrix instruction hardware. Exact MXU counts, dimensions and formats
+depend on the TPU version. The
+[current architecture documentation](https://docs.cloud.google.com/tpu/docs/system-architecture-tpu-vm#tpu_chip)
+lists these separately. Neither the $2\times2$ simulator nor a single animation
+establishes the performance of a particular chip.
+
+<!-- systems-completion: systolic:end -->
 
 ## Что проверять в работающем ядре
 
@@ -718,7 +1365,7 @@ TPU использует другой набор вычислителей и с�
   программная модель, синхронизация и асинхронное выполнение.
 - [CUDA Best Practices Guide](https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/):
   объединение обращений, shared memory, регистры и передача данных;
-  документация проверена 28.09.2026.
+  рассмотренные разделы документации повторно проверены 23.10.2026.
 - [Jakub Beránek, Hardware Effects on GPU](https://github.com/Kobzol/hardware-effects-gpu/tree/1b03fa9816002ba835132a2a34581a7481964e61):
   небольшие эксперименты по конфликтам банков, coalescing, occupancy
   и другим аппаратным эффектам.

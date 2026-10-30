@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-30",
+  "scope": "An official external PDF link has no local publication dependency. Local copies remain covered by source-evidence tests.",
+  "files": [
+    {
+      "source": "publishing/adapter/build.ts",
+      "before_sha256": "a32cb1d11981e3dd84868146bbeefa749c8f4b4e962fdb08573cb553347a19e0",
+      "after_sha256": "90e250063f0cf6d7ed275360f93ee4bd06bec6d2fe546a5aa1142feb9717cc26",
+      "changes": [
+        {
+          "old": "  for (const artifact of linkedArtifactsByPublicPath.values()) {\n    try {\n      await access(artifact.source);",
+          "new": "  for (const artifact of linkedArtifactsByPublicPath.values()) {\n    if (artifact.externalHref) continue;\n    try {\n      await access(artifact.source);"
+        }
+      ]
+    }
+  ]
+}

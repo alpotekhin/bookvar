@@ -1,0 +1,114 @@
+{
+  "scope": "unchanged course logic and in-process ASGI/Flask instrumentation; stubbed VGG; no Docker, gRPC, Prometheus server, GPU or load benchmark",
+  "original_pytest": {
+    "exit_code": 1,
+    "expected_failure": "test_seeded_score_matches_expected_value_with_high_precision",
+    "passed": 4,
+    "failed": 1
+  },
+  "seed7_first_score": 6.476655296663248e-05,
+  "health_while_loading": {
+    "status": 200,
+    "body": {
+      "status": "not ready"
+    },
+    "predict_status": 503
+  },
+  "bad_source": {
+    "invalid_json_status": 200,
+    "invalid_json_body": {
+      "is_toxic": false
+    },
+    "neutral_false_positives_in_100_seed7": 46
+  },
+  "source_metrics_deltas": {
+    "predictions_total": 3.0,
+    "api_invocations_total": 4.0
+  },
+  "gauge_after_error": 0.0,
+  "histogram": {
+    "buckets": {
+      "0.1": 1.0,
+      "0.3": 2.0,
+      "1.0": 4.0,
+      "+Inf": 4.0
+    },
+    "count": 4,
+    "sum": 1.45,
+    "slo_300ms_fraction": 0.5
+  },
+  "source_hashes": {
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/00_basics/non-smokers-repo/Dockerfile.good": "f0ba5fe7b6e77de4475bee8e6a1631a0b0905a5299598afffedcdcf3e469488e",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/00_basics/non-smokers-repo/README.md": "e38e38b2367594f5c65bbbcc8466196efadc67728eb04207372f196ca725ba6e",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/00_basics/non-smokers-repo/app/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/00_basics/non-smokers-repo/app/config.py": "5e5e40c9fadb1cfe5ea1366b3c41201e7fb6fdd214d3688ac0b0fb1f79a3d2be",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/00_basics/non-smokers-repo/app/main.py": "f26d488d382a099cb52228229593e7ec3a1f18ed2b7d16e429b2e3131edbeb16",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/00_basics/non-smokers-repo/app/model.py": "8e72b193a47958fa415d2df18d5caa73664a3e5b93f9578f54ba4a515c41f8a1",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/00_basics/non-smokers-repo/docker-compose.yml": "56a0f8af7fa4ec03638724614f64acbbf1fb85556e7d79ec7ca1e34f11bb5de0",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/00_basics/non-smokers-repo/pyproject.toml": "97fce9cfceeb4f844937e5bb6a4be1cbd8ff542bbaa3c7fdfdc7c953045115bb",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/00_basics/non-smokers-repo/pytest.ini": "d902e2f72345a4c81917229c08b68f1ef805a48ad54d2c0c0c7d6a0361fa1b7e",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/00_basics/non-smokers-repo/tests/conftest.py": "7b08e6907c8c970f96a01d6be14c0e7c456c5ff7b1ad5e9b389b3dfc658161dc",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/00_basics/non-smokers-repo/tests/test_health.py": "7e15e9ebe3d6a86ed2f3949fa13c7ba0a62769041d3a60ebab83c8f7d4f5f2ec",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/00_basics/non-smokers-repo/tests/test_model.py": "07eab34450f20d10ed31a27ac5b1651e422911045a26a3bced9906e229afc744",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/00_basics/non-smokers-repo/uv.lock": "709a3108bde9485573d6f904c0c4fff75bed852fe89964951573879634c3fd20",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/00_basics/smokers-repo/Dockerfile.bad": "8ae80726241e1878b5fbc3441182e3474d2a272edf361c6b725b57a8630065f9",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/00_basics/smokers-repo/README.md": "8a138d92e2a87036475ecad3a7ba889ff18dd718a3c30c4bc1a66d875cfa1e86",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/00_basics/smokers-repo/app.py": "9a5541a6635e568b05b1229585e48f62afd46e0e27b74ce090e2164d3de25f9a",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/00_basics/smokers-repo/requirements.txt": "d47adbea36dd7ba3ff2688b55b728e70ee6041ed296ac32f2b41e85542c4a8af",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/00_basics/smokers-repo/tests/test_smoke.py": "aca23efb474daf1e14b9b7fe51cf793458a5f72a394a433e748e95bd551edeb3",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/01_python_server/README.md": "4d400329693ddd416505b6adac208d30b5e1a2caf157fcee0eb3127643595a2e",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/01_python_server/labels.json": "46adaf3117ac141c4c1f9178f97389d7080124e1ffdc36282f73529915a90db1",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/01_python_server/requirements.txt": "cc37f6dcba02bbafab389a1cc286f9c0bc305002d8da5f27f5dc0b5a98380314",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/01_python_server/server.py": "0467c87104dbad64a0d1ab435554e89980825590f1dceadb6b38bba196032d3a",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/02_docker/Dockerfile": "0cd42efbf63f9e4404734e782b1e421b7ce27d647d812ac07f85bcd8c386605a",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/02_docker/README.md": "71a0241690bb810d84de64d1ad2520f86e952b1e9687e496212e4b449ff60c4a",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/02_docker/docker-compose.yaml": "06953634213e3c632a7483a7e93a1ffc84a567bfba61b3012489cc75a0666cd3",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/02_docker/labels.json": "46adaf3117ac141c4c1f9178f97389d7080124e1ffdc36282f73529915a90db1",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/02_docker/requirements.txt": "ec4bda808044a231ae455a12e9937396ed5ae11eb30e2f59e82171b5df05cc89",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/02_docker/server.py": "d0e2ac10c35b02b6777f02bd27fca0d294ad170ffb584e054dab205377aa341f",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/03_metrics/Dockerfile": "0cd42efbf63f9e4404734e782b1e421b7ce27d647d812ac07f85bcd8c386605a",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/03_metrics/README.md": "089ed4bf3e04ec65e679a527f30dcb2f80d40a2ed91512c588023e17088afda4",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/03_metrics/docker-compose.yaml": "5e6889fba037b7dc40be1167d459e04ba87a588f04d8b4be04934c7d64f26785",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/03_metrics/grafana/config.ini": "d70d8e6015f0cfac58c73e9c91bd977159dffdeda7f9066414ddefe61db34495",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/03_metrics/grafana/datasources/all.yml": "36ac70f7acadd128d725c4d875e8355eadaae03034a5485066cdf3c032192349",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/03_metrics/labels.json": "46adaf3117ac141c4c1f9178f97389d7080124e1ffdc36282f73529915a90db1",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/03_metrics/monitor/telegraf.conf": "8d5608d9574fa9eddedf5ceff5616af8817785ba284a39c7de414cef5532bbaa",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/03_metrics/prom/prometheus.yml": "1f06ceeaefc5627ce42cfd8d12481feef65c91a22a0711a2c291746078a7ecb5",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/03_metrics/requirements.txt": "7e5bbfd622022632816f395015a61436a0166d42546446483efaaa6a3658f975",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/03_metrics/server.py": "43600ff84f3c73af4195b6dc2f4e6e39dd969acf9dadeb17c9848e695295dd8f",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/04_microservices/Dockerfile.client_api": "af1cadd60a5b292c16fe9e900b0afb93ba4193ce33a232233853fd3c65ba49c7",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/04_microservices/Dockerfile.inference_api": "10d281cd7d54993a02792342d7c1ca5cd0791f239f2a382fc84f90f78e7330bd",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/04_microservices/client-api.py": "d8962d133b15a732e7e42056fe2a9d9f8741ac14ec06f8cf7617e63281f13180",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/04_microservices/docker-compose.yaml": "55ed5213c6670ffcd329525864a6cfbb466d78255f3e4e72ae1648f07c561384",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/04_microservices/grpc-client.py": "ac214022ca762d2a683f133163ccb0a7bf9d562ee10aa7aacd77129e3d911e46",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/04_microservices/inference-api.py": "37058d38cadbbaa068ae8de526bf6d1a261d4eee58de16f90e38c0d06cdbf548",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/04_microservices/labels.json": "46adaf3117ac141c4c1f9178f97389d7080124e1ffdc36282f73529915a90db1",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/04_microservices/protos/inference.proto": "556eddd365e73b9f820210ec4a45abb45fd56bf06148da39a1c7f923396eb523",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/04_microservices/requirements.txt": "a7e6d30ae68ddc25c73f7554d18adb6ae5d2b92530c1a472228d711fcd1b40ca",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/04_microservices/run_codegen.py": "9f4ccacf415d8fba4a6515fe45fa3d2a382923d045494d2178310b47e6ec8491",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/Effdl26-07.pdf": "2c038c7ce21a9bc5d224b439f0526c9fe35fa68b11ee5c724535f3f0fed463b0",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/README.md": "da6d7f0c06df83ba3e879120ac413b419a88836642f758dc51ef7ddfcbd552e6",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/client-url.py": "5f34248de568cdd859b1e53b042cf8f984dbf6f4c4e1a848537de5506ed741e0",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/client.py": "54a052bd3a7adf115308abd8292cd20f2e87d63c24850bb32157e7ae1a2c6cee",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/requirements.txt": "495c84f90cbecc603fc5435bf6e64081ef96e1c4b827f724d9eede2d9a8a0e12",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/supervisord/Dockerfile": "2ca9aaf4fdccd328086c71eaff101835cdff51564e8d066cd353059783613a6b",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/supervisord/docker-compose.yaml": "1a80e3a77fa41a4a40481f910f486aea994f834e3809a725378bbe78bcb78d77",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/supervisord/labels.json": "46adaf3117ac141c4c1f9178f97389d7080124e1ffdc36282f73529915a90db1",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/supervisord/requirements.txt": "5527601630136b294937326d38fa3855a6daea62e99d70ded1eaa0cd9b13749f",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/supervisord/server.py": "b4f18245a6d2fb0ca3972586656b96bea3f1720c3ac31fa3cdd0292c07ba9d2d",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/supervisord/supervisord.conf": "362b3a1465f36b00716331ee8ebd77f0a6e319329b8bdc929e4bec306c8b12d3",
+    "05 Источники/Originals/edls-deployment-2026-10-26/week07_application_deployment/train_model.py": "b52e97888f48d88b8f7e77f840c2d0ef375ab5923cdf0db5c4a6fec5b8116933"
+  },
+  "checker_sha256": "7f505b0b0e44c9efc42f16e0dd51f2c5fa564d3c11022fa2fdcf9f3df992e057",
+  "versions": {
+    "fastapi": "0.121.3",
+    "starlette": "0.50.0",
+    "httpx": "0.28.1",
+    "Flask": "3.1.0",
+    "prometheus-flask-exporter": "0.23.1",
+    "prometheus-client": "0.21.1",
+    "pytest": "8.3.3",
+    "redis": "5.0.8"
+  },
+  "python": "3.14.3 (main, Mar  3 2026, 15:46:55) [Clang 21.1.4 ]"
+}

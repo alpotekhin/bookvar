@@ -12,7 +12,12 @@ status: active
 
 # Nemotron
 
-Nemotron — несколько связанных линий, а не одна последовательность увеличивающихся Transformer. Nemotron-4 был собственной dense моделью NVIDIA; Llama Nemotron получался из Llama через pruning/NAS и post-training; Nemotron 3 перешёл к открытому hybrid Mamba–Transformer MoE. Сравнивать поколения нужно по происхождению backbone.
+Под названием Nemotron опубликованы модели разного происхождения.
+Nemotron-4 — собственная плотная модель NVIDIA. Llama Nemotron использует
+предобученную Llama, изменяет её размеры поиском архитектуры и удалением
+компонентов, затем проходит дообучение. Nemotron 3 сочетает Mamba,
+внимание и MoE. Эти линии отличаются не только размером, но и устройством
+слоёв и способом получения исходных весов.
 
 ## Хронология
 
@@ -31,17 +36,22 @@ Nemotron — несколько связанных линий, а не одна 
 
 *Рисунок: NVIDIA, [Nemotron 3 Super Technical Report](https://research.nvidia.com/labs/nemotron/files/NVIDIA-Nemotron-3-Super-Technical-Report.pdf), Figure 2; локальная копия. Повторяемый паттерн чередует Mamba-2, LatentMoE и редкие global-attention слои; цифры под группами показывают число повторов.*
 
-Mamba-2 несёт дешёвое состояние на каждом шаге, global attention периодически восстанавливает прямой доступ к прошлому. LatentMoE сначала проецирует token representation в меньшее latent space, маршрутизирует по 512 экспертам и активирует 22; shared expert обрабатывает каждый токен. Это уменьшает стоимость экспертных матриц по сравнению со стандартным MoE при большом числе маршрутов. Два multi-token prediction heads предсказывают будущие токены и могут использоваться для native speculative decoding.
+Mamba-2 обновляет состояние фиксированного размера, а слои полного внимания сохраняют прямой доступ к позициям истории. [[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#LatentMoE: обмен в меньшей размерности|LatentMoE]] сначала проецирует представление токена в пространство меньшей размерности, затем выбирает 22 из 512 экспертов. Общий эксперт обрабатывает каждый токен. Сжатие уменьшает размеры экспертных матриц при большом числе возможных маршрутов. Две дополнительные головы предсказания будущих токенов могут использоваться при спекулятивном декодировании.
 
 ## Данные и post-training
 
-Nemotron 3 раскрывает необычно много компонентов: synthetic pretraining corpus почти 10T токенов для Nano, 25T для Super, weights, recipes и NeMo software. Super предобучался с NVFP4 на части оборудования; это формат вычислений обучения, а не только постфактум quantization. Multi-environment RL через NeMo Gym учит reasoning, tool use и регулируемый thinking budget. Ultra применяет multi-teacher on-policy distillation.
+Для Nemotron 3 описаны синтетические данные предобучения, веса, программы обучения и ПО NeMo. Указанные объёмы предобучения составляют почти 10T токенов для Nano и 25T для Super. Super использует NVFP4 при предобучении на соответствующем оборудовании; низкая точность входит в вычисления обучения, а не только в последующее сжатие весов. RL в нескольких средах NeMo Gym обучает рассуждениям, работе с инструментами и управлению длиной рассуждения. Ultra применяет дистилляцию от нескольких учителей на траекториях обучаемой модели.
 
 ![[00 Учебник/Assets/Figures/curated/topics-53-59-source-first/nemotron-generate-rank-filter.png]]
 
 *Рисунок: NVIDIA, [Leverage Our Latest Open Models for Synthetic Data Generation with NVIDIA Nemotron-4-340B](https://developer.nvidia.com/blog/leverage-our-latest-open-models-for-synthetic-data-generation-with-nvidia-nemotron-4-340b/). Instruct-модель сначала генерирует несколько ответов, Reward-модель присваивает им оценки, после чего фильтр собирает отобранный синтетический набор. Это схема линии Nemotron-4, а не pre-training Nemotron 3; здесь она нужна, чтобы отделить происхождение обучающих примеров от архитектуры Mamba–Transformer. Локальная копия перенесена без визуальных изменений.*
 
-Ранние Llama Nemotron переиспользуют pretrained Llama: их улучшение нельзя приписывать новому pre-training. NAS меняет глубину/ширину выбранного backbone, затем distillation и RL возвращают качество. Это другой путь, чем обучение Nemotron 3 с нуля.
+Llama Nemotron начинает с предобученных весов Llama. Поиск архитектуры меняет глубину и ширину сети, после чего дистилляция и RL восстанавливают качество уменьшенной модели. Nemotron 3, напротив, обучается с нуля.
+
+The original Nemotron-4 prompt, dialogue and preference-generation procedures
+are explained in
+[[00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы#nemotron4-synthetic-alignment|Synthetic data: Nemotron-4 alignment]].
+This is a historical recipe, separate from the Nemotron 3 training recipe.
 
 ## Serving и мультимодальность
 
@@ -51,7 +61,7 @@ MoE требует хранить все веса, хотя active count мен�
 
 ## Опубликовано и неизвестно
 
-NVIDIA публикует technical reports, модельные веса, data recipes и документацию. Некоторые benchmark и throughput claims зависят от Blackwell/NVFP4 и не переносятся на другое оборудование. Полнота лицензируемых исходных данных ограничена теми наборами, которые NVIDIA вправе распространять.
+NVIDIA публикует технические отчёты, веса, описание подготовки данных и документацию. Часть результатов по скорости получена на Blackwell с NVFP4; для другого оборудования требуются отдельные измерения. Публикация описания данных не означает доступность всех исходных документов.
 
 ## Источники
 

@@ -1,0 +1,11 @@
+bash: warning: setlocale: LC_ALL: cannot change locale (C.UTF-8): Bad file descriptor
+$ vitest run
+
+ RUN  v4.1.10 /Users/aleksan.potekhin/Documents/knowledge base/02 Areas/ML & DL/.worktrees/ml-systems-ingestion/site
+
+
+ Test Files  5 passed (5)
+      Tests  70 passed (70)
+   Start at  15:35:47
+   Duration  7.63s (transform 590ms, setup 0ms, import 2.48s, tests 6.37s, environment 0ms)
+

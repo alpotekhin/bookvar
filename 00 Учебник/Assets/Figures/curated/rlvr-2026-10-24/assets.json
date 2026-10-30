@@ -1,0 +1,64 @@
+[
+  {
+    "author": "Nathan Lambert et al.",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/sft-2026-10-23/tulu3-v5.html",
+    "license_evidence_sha256": "0a437403a0fce0cab42931983f67753c1260df36df66dbd34abfe4603e9ef0ef",
+    "last_verified": "2026-10-24",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md"
+    ],
+    "id": "curated-rlvr-tulu-f5480a3783fb",
+    "asset": "00 Учебник/Assets/Figures/curated/rlvr-2026-10-24/tulu-rlvr-full-figure19.png",
+    "sha256": "f5480a3783fbc5c60bc3de15c4490d327184576f7eb848233c510f20f9ba3b4e",
+    "dimensions_px": [
+      2650,
+      2840
+    ],
+    "source_url": "https://arxiv.org/pdf/2411.15124v5#page=33",
+    "source_asset": "05 Источники/Papers/Source PDFs/tulu3-rlvr-arxiv-v5.pdf",
+    "source_asset_sha256": "79bed1ef4ce4bb332f43bdc87d60709e644560f8f3bb6d14913a473cc82c251f",
+    "source_page": 33,
+    "render_dpi": 400,
+    "render_page_size_px": [
+      3400,
+      4400
+    ],
+    "crop_box_px": [
+      380,
+      350,
+      3030,
+      3190
+    ],
+    "derivation": "pdf-page-render-crop",
+    "modifications": "Poppler 400 dpi crop around complete Figure 19: all twelve panels, shared legend and complete English caption. Existing PDF reused; no redraw, translation, relabeling or upsampling."
+  },
+  {
+    "author": "Nathan Lambert et al.",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/sft-2026-10-23/tulu3-v5.html",
+    "license_evidence_sha256": "0a437403a0fce0cab42931983f67753c1260df36df66dbd34abfe4603e9ef0ef",
+    "last_verified": "2026-10-24",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md"
+    ],
+    "id": "curated-rlvr-tulu-468af70e8389",
+    "asset": "00 Учебник/Assets/Figures/curated/rlvr-2026-10-24/tulu-rlvr-reward-mixing.png",
+    "sha256": "468af70e83892da0ae7a3ed33eecb8a79d75533e95e0bd4467781c594d2b2ef8",
+    "dimensions_px": [
+      1886,
+      1320
+    ],
+    "source_url": "https://arxiv.org/abs/2411.15124v5",
+    "source_image_url": "https://arxiv.org/html/2411.15124v5/figures_images/post-training/x32_RLVR_KL1.png",
+    "source_asset_sha256": "468af70e83892da0ae7a3ed33eecb8a79d75533e95e0bd4467781c594d2b2ef8",
+    "derivation": "source-raster-copy",
+    "modifications": "Original full PNG copied byte-for-byte; no crop, redraw, translation or upsampling."
+  }
+]

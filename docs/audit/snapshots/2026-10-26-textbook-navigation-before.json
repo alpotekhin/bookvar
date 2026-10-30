@@ -1,0 +1,1419 @@
+{
+  "date": "2026-10-26",
+  "textbook": {
+    "id": "textbook",
+    "title": "Учебник",
+    "title_en": "Textbook",
+    "pages": [
+      {
+        "source": "00 Учебник/_index.md",
+        "source_en": "en/00 Textbook/_index.md",
+        "route": "textbook/index"
+      },
+      {
+        "source": "00 Учебник/00 Как пользоваться учебником.md",
+        "route": "textbook/how-to-use"
+      },
+      {
+        "source": "00 Учебник/00 Математические и ML-основания/01 Векторы, матрицы и тензоры.md",
+        "route": "textbook/ml-foundations/tensors"
+      },
+      {
+        "source": "00 Учебник/00 Математические и ML-основания/02 Производная и градиент.md",
+        "route": "textbook/ml-foundations/derivatives-gradients"
+      },
+      {
+        "source": "00 Учебник/00 Математические и ML-основания/03 Вероятность, правдоподобие и логарифм.md",
+        "route": "textbook/ml-foundations/probability-likelihood-logarithms"
+      },
+      {
+        "source": "00 Учебник/00 Математические и ML-основания/04 Функции потерь.md",
+        "route": "textbook/ml-foundations/loss-functions"
+      },
+      {
+        "source": "00 Учебник/00 Математические и ML-основания/05 Train, validation и test.md",
+        "route": "textbook/ml-foundations/train-validation-test"
+      },
+      {
+        "source": "00 Учебник/00 Математические и ML-основания/06 Переобучение, регуляризация и оценивание.md",
+        "route": "textbook/ml-foundations/generalization-regularization"
+      },
+      {
+        "source": "00 Учебник/01 Классическое машинное обучение/00 Карта модуля.md",
+        "route": "textbook/classical-ml/index"
+      },
+      {
+        "source": "00 Учебник/01 Классическое машинное обучение/01 Задача обучения и predictive pipeline.md",
+        "route": "textbook/classical-ml/predictive-pipeline"
+      },
+      {
+        "source": "00 Учебник/01 Классическое машинное обучение/02 Линейная регрессия и классификация.md",
+        "route": "textbook/classical-ml/linear-models"
+      },
+      {
+        "source": "00 Учебник/01 Классическое машинное обучение/03 Деревья решений.md",
+        "route": "textbook/classical-ml/decision-trees"
+      },
+      {
+        "source": "00 Учебник/01 Классическое машинное обучение/04 Bagging, random forest и gradient boosting.md",
+        "route": "textbook/classical-ml/ensembles"
+      },
+      {
+        "source": "00 Учебник/01 Классическое машинное обучение/05 Оценивание, кросс-валидация и выбор порога.md",
+        "route": "textbook/classical-ml/evaluation"
+      },
+      {
+        "source": "00 Учебник/01 Классическое машинное обучение/06 Кластеризация и её ограничения.md",
+        "route": "textbook/classical-ml/clustering"
+      },
+      {
+        "source": "00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian.md",
+        "route": "textbook/classical-ml/spectral-clustering"
+      },
+      {
+        "source": "00 Учебник/01 Классическое машинное обучение/07 PCA, t-SNE и UMAP.md",
+        "route": "textbook/classical-ml/dimensionality-reduction"
+      },
+      {
+        "source": "00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM.md",
+        "route": "textbook/classical-ml/gmm-em"
+      },
+      {
+        "source": "00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features.md",
+        "route": "textbook/classical-ml/kernels-svm-rff"
+      },
+      {
+        "source": "00 Учебник/02 Рекомендательные системы/00 Карта модуля.md",
+        "route": "textbook/recommender-systems/index"
+      },
+      {
+        "source": "00 Учебник/02 Рекомендательные системы/01 Задача рекомендации, данные и pipeline.md",
+        "route": "textbook/recommender-systems/task-data-pipeline"
+      },
+      {
+        "source": "00 Учебник/02 Рекомендательные системы/02 Collaborative filtering и matrix factorization.md",
+        "route": "textbook/recommender-systems/collaborative-filtering-matrix-factorization"
+      },
+      {
+        "source": "00 Учебник/02 Рекомендательные системы/03 Ranking и нейронные рекомендательные модели.md",
+        "route": "textbook/recommender-systems/ranking-neural-models"
+      },
+      {
+        "source": "00 Учебник/02 Рекомендательные системы/04 Последовательные рекомендации и признаки.md",
+        "route": "textbook/recommender-systems/sequential-feature-aware"
+      },
+      {
+        "source": "00 Учебник/02 Рекомендательные системы/05 Оценивание и эксплуатация.md",
+        "route": "textbook/recommender-systems/evaluation-operations"
+      },
+      {
+        "source": "00 Учебник/01 Основы нейронных сетей/01 Нейрон и MLP.md",
+        "route": "textbook/neural-networks/mlp"
+      },
+      {
+        "source": "00 Учебник/01 Основы нейронных сетей/02 Функции активации.md",
+        "route": "textbook/neural-networks/activation-functions"
+      },
+      {
+        "source": "00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md",
+        "route": "textbook/neural-networks/backpropagation"
+      },
+      {
+        "source": "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md",
+        "route": "textbook/neural-networks/optimizers-schedules"
+      },
+      {
+        "source": "00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md",
+        "route": "textbook/neural-networks/initialization-normalization-residuals"
+      },
+      {
+        "source": "00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация.md",
+        "route": "textbook/neural-networks/dropout-regularization"
+      },
+      {
+        "source": "00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md",
+        "route": "textbook/neural-networks/cnn-lenet-resnet"
+      },
+      {
+        "source": "00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE.md",
+        "route": "textbook/neural-networks/autoencoder-vae"
+      },
+      {
+        "source": "00 Учебник/02 Представление текста и токенизация/01 Представление текста числами.md",
+        "route": "textbook/text-representation/numerical-representation"
+      },
+      {
+        "source": "00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель.md",
+        "route": "textbook/language-modeling/ngram"
+      },
+      {
+        "source": "00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction.md",
+        "route": "textbook/language-modeling/next-token-probability"
+      },
+      {
+        "source": "00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md",
+        "route": "textbook/text-representation/word2vec-glove"
+      },
+      {
+        "source": "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md",
+        "route": "textbook/text-representation/tokenization"
+      },
+      {
+        "source": "00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT.md",
+        "route": "textbook/recurrent-networks/rnn-bptt"
+      },
+      {
+        "source": "00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md",
+        "route": "textbook/recurrent-networks/lstm-gru"
+      },
+      {
+        "source": "00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора.md",
+        "route": "textbook/recurrent-networks/seq2seq-bottleneck"
+      },
+      {
+        "source": "00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer.md",
+        "route": "textbook/transformer/from-seq2seq-to-transformer"
+      },
+      {
+        "source": "00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md",
+        "source_en": "en/00 Textbook/05 Attention and Transformer/02 Self-Attention — Q, K, V.md",
+        "route": "textbook/transformer/self-attention"
+      },
+      {
+        "source": "00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md",
+        "source_en": "en/00 Textbook/05 Attention and Transformer/03 Masking, multi-head attention, and tensor shapes.md",
+        "route": "textbook/transformer/masking-heads-shapes"
+      },
+      {
+        "source": "00 Учебник/05 Attention и Transformer/04 Позиционная информация.md",
+        "source_en": "en/00 Textbook/05 Attention and Transformer/04 Positional information.md",
+        "route": "textbook/transformer/positional-information"
+      },
+      {
+        "source": "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md",
+        "source_en": "en/00 Textbook/05 Attention and Transformer/05 The complete Transformer.md",
+        "route": "textbook/transformer/full-transformer"
+      },
+      {
+        "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md",
+        "source_en": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/01 Three architectural patterns.md",
+        "route": "textbook/transformer/encoder-decoder-patterns"
+      },
+      {
+        "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md",
+        "source_en": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md",
+        "route": "textbook/models/bert-roberta-deberta"
+      },
+      {
+        "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md",
+        "source_en": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training.md",
+        "route": "textbook/models/gpt-1"
+      },
+      {
+        "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md",
+        "source_en": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language.md",
+        "route": "textbook/models/gpt-2"
+      },
+      {
+        "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md",
+        "source_en": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning.md",
+        "route": "textbook/models/gpt-3"
+      },
+      {
+        "source": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md",
+        "source_en": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md",
+        "route": "textbook/models/t5"
+      },
+      {
+        "source": "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md",
+        "route": "textbook/modern-llm/llama-architecture"
+      },
+      {
+        "source": "00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md",
+        "route": "textbook/modern-llm/decoder-block"
+      },
+      {
+        "source": "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md",
+        "route": "textbook/modern-llm/norm-gating-residual"
+      },
+      {
+        "source": "00 Учебник/07 Анатомия современной LLM/04 RoPE.md",
+        "route": "textbook/modern-llm/rope"
+      },
+      {
+        "source": "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md",
+        "route": "textbook/modern-llm/transformer-shapes-resources"
+      },
+      {
+        "source": "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md",
+        "route": "textbook/modern-llm/mha-mqa-gqa"
+      },
+      {
+        "source": "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md",
+        "route": "textbook/modern-llm/mla-kv-compression"
+      },
+      {
+        "source": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+        "route": "textbook/modern-llm/long-context"
+      },
+      {
+        "source": "00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md",
+        "route": "textbook/modern-llm/dense-ffn"
+      },
+      {
+        "source": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+        "route": "textbook/moe/mixture-of-experts"
+      },
+      {
+        "source": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+        "route": "textbook/modern-llm/sequence-model-alternatives"
+      },
+      {
+        "source": "00 Учебник/10 ML Systems/01 Модель как часть системы.md",
+        "route": "textbook/ml-systems/model-as-part-of-system"
+      },
+      {
+        "source": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+        "route": "textbook/ml-systems/gpu-cuda-memory-hierarchy"
+      },
+      {
+        "source": "00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md",
+        "route": "textbook/ml-systems/performance-measurement-roofline"
+      },
+      {
+        "source": "00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md",
+        "route": "textbook/ml-systems/transformer-moe-arithmetic"
+      },
+      {
+        "source": "00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md",
+        "route": "textbook/ml-systems/numerical-formats-mixed-precision"
+      },
+      {
+        "source": "00 Учебник/10 ML Systems/06 Data pipeline, padding и packing.md",
+        "route": "textbook/ml-systems/data-pipeline-padding-packing"
+      },
+      {
+        "source": "00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md",
+        "route": "textbook/ml-systems/profiling"
+      },
+      {
+        "source": "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md",
+        "route": "textbook/ml-systems/gpu-kernels-triton"
+      },
+      {
+        "source": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+        "route": "textbook/pretraining/data-and-pretraining"
+      },
+      {
+        "source": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+        "route": "textbook/pretraining/data-pipeline"
+      },
+      {
+        "source": "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md",
+        "route": "textbook/pretraining/dedup-pii-corpus-quality"
+      },
+      {
+        "source": "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md",
+        "route": "textbook/pretraining/next-token-objective"
+      },
+      {
+        "source": "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md",
+        "route": "textbook/pretraining/scaling-laws"
+      },
+      {
+        "source": "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md",
+        "route": "textbook/pretraining/distributed-systems"
+      },
+      {
+        "source": "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md",
+        "route": "textbook/pretraining/processes-collectives-ddp"
+      },
+      {
+        "source": "00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload.md",
+        "route": "textbook/pretraining/gradient-checkpointing-offload"
+      },
+      {
+        "source": "00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism.md",
+        "route": "textbook/pretraining/tensor-sequence-parallelism"
+      },
+      {
+        "source": "00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism.md",
+        "route": "textbook/pretraining/pipeline-parallelism"
+      },
+      {
+        "source": "00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md",
+        "route": "textbook/pretraining/zero-fsdp2-devicemesh-dtensor"
+      },
+      {
+        "source": "00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism.md",
+        "route": "textbook/pretraining/expert-hybrid-parallelism"
+      },
+      {
+        "source": "00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints.md",
+        "route": "textbook/pretraining/network-storage-checkpoints"
+      },
+      {
+        "source": "00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration.md",
+        "route": "textbook/pretraining/fault-tolerance-orchestration"
+      },
+      {
+        "source": "00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники.md",
+        "route": "textbook/post-training/module-map"
+      },
+      {
+        "source": "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md",
+        "route": "textbook/post-training/sft-instruction-data"
+      },
+      {
+        "source": "00 Учебник/12 Post-training и Alignment/02 Preference data.md",
+        "route": "textbook/post-training/preference-data"
+      },
+      {
+        "source": "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md",
+        "route": "textbook/post-training/reward-modeling"
+      },
+      {
+        "source": "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md",
+        "route": "textbook/post-training/ppo"
+      },
+      {
+        "source": "00 Учебник/12 Post-training и Alignment/05 DPO.md",
+        "route": "textbook/post-training/dpo"
+      },
+      {
+        "source": "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md",
+        "route": "textbook/post-training/rlvr-verifiers"
+      },
+      {
+        "source": "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md",
+        "route": "textbook/post-training/grpo-deepseek-r1"
+      },
+      {
+        "source": "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md",
+        "route": "textbook/post-training/reasoning-distillation"
+      },
+      {
+        "source": "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md",
+        "route": "textbook/reasoning/test-time-compute"
+      },
+      {
+        "source": "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md",
+        "route": "textbook/pretraining/synthetic-data-curricula"
+      },
+      {
+        "source": "00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md",
+        "source_en": "en/00 Textbook/14 Inference and optimization/54 Decoding and next-token selection.md",
+        "route": "textbook/inference/decoding"
+      },
+      {
+        "source": "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md",
+        "source_en": "en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md",
+        "route": "textbook/inference/llm-inference-physics"
+      },
+      {
+        "source": "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md",
+        "source_en": "en/00 Textbook/14 Inference and optimization/55 KV cache batching and PagedAttention.md",
+        "route": "textbook/inference/kv-cache-batching-pagedattention"
+      },
+      {
+        "source": "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md",
+        "source_en": "en/00 Textbook/14 Inference and optimization/55b Scheduling — continuous batching, chunked prefill, and prefix caching.md",
+        "route": "textbook/inference/scheduling"
+      },
+      {
+        "source": "00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md",
+        "source_en": "en/00 Textbook/14 Inference and optimization/55c Serving engines — vLLM, SGLang, TensorRT-LLM, and FlashInfer.md",
+        "route": "textbook/inference/serving-engines"
+      },
+      {
+        "source": "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md",
+        "source_en": "en/00 Textbook/14 Inference and optimization/56 FlashAttention.md",
+        "route": "textbook/inference/flashattention"
+      },
+      {
+        "source": "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+        "source_en": "en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md",
+        "route": "textbook/inference/quantization"
+      },
+      {
+        "source": "00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md",
+        "route": "textbook/inference/kv-cache-compression-offload"
+      },
+      {
+        "source": "00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md",
+        "route": "textbook/inference/model-compression-pruning-distillation-low-rank"
+      },
+      {
+        "source": "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md",
+        "source_en": "en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md",
+        "route": "textbook/inference/speculative-decoding"
+      },
+      {
+        "source": "00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md",
+        "source_en": "en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md",
+        "route": "textbook/inference/distributed-inference"
+      },
+      {
+        "source": "00 Учебник/14 Inference и оптимизация/58a2 Раздельное обслуживание prefill и decode.md",
+        "source_en": "en/00 Textbook/14 Inference and optimization/58a2 Disaggregated prefill and decode serving.md",
+        "route": "textbook/inference/disaggregated-serving"
+      },
+      {
+        "source": "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md",
+        "source_en": "en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md",
+        "route": "textbook/inference/benchmarking-slo"
+      },
+      {
+        "source": "00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning.md",
+        "route": "textbook/inference/queueing-capacity-planning"
+      },
+      {
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow.md",
+        "route": "textbook/deployment/ml-workflow"
+      },
+      {
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md",
+        "route": "textbook/deployment/mlops"
+      },
+      {
+        "source": "00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment.md",
+        "route": "textbook/deployment/edge-federated"
+      },
+      {
+        "source": "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md",
+        "route": "textbook/evaluation/models-contamination"
+      },
+      {
+        "source": "00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация.md",
+        "route": "textbook/evaluation/imbalanced-classification"
+      },
+      {
+        "source": "00 Учебник/18 Evaluation и методология/59a Responsible systems.md",
+        "route": "textbook/evaluation/responsible-systems"
+      },
+      {
+        "source": "00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning.md",
+        "route": "textbook/retrieval/embeddings-metric-learning"
+      },
+      {
+        "source": "00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid.md",
+        "route": "textbook/retrieval/sparse-dense-hybrid"
+      },
+      {
+        "source": "00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction.md",
+        "route": "textbook/retrieval/reranking"
+      },
+      {
+        "source": "00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md",
+        "route": "textbook/rag/full-pipeline"
+      },
+      {
+        "source": "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md",
+        "source_en": "en/00 Textbook/16 Multimodal Models/64 Multimodal models.md",
+        "route": "textbook/multimodal/models"
+      },
+      {
+        "source": "00 Учебник/16 Multimodal Models/64a Connectors и fusion.md",
+        "source_en": "en/00 Textbook/16 Multimodal Models/64a Connectors and fusion.md",
+        "route": "textbook/multimodal/connectors-fusion"
+      },
+      {
+        "source": "00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md",
+        "source_en": "en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md",
+        "route": "textbook/multimodal/visual-tokenization-resolution"
+      },
+      {
+        "source": "00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md",
+        "source_en": "en/00 Textbook/16 Multimodal Models/64c Training VLMs — alignment, instruction tuning, and data.md",
+        "route": "textbook/multimodal/training-data"
+      },
+      {
+        "source": "00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md",
+        "source_en": "en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding.md",
+        "route": "textbook/multimodal/documents-ocr-grounding"
+      },
+      {
+        "source": "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md",
+        "source_en": "en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md",
+        "route": "textbook/multimodal/video-audio-omni"
+      },
+      {
+        "source": "00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md",
+        "source_en": "en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving.md",
+        "route": "textbook/multimodal/evaluation-serving"
+      },
+      {
+        "source": "00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений.md",
+        "route": "textbook/multimodal/diffusion-flow-images"
+      },
+      {
+        "source": "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md",
+        "route": "textbook/multimodal/unified-sequence-chameleon"
+      },
+      {
+        "source": "00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля.md",
+        "route": "textbook/agents/module-map"
+      },
+      {
+        "source": "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md",
+        "route": "textbook/agents/tool-use"
+      },
+      {
+        "source": "00 Учебник/17 Tools и Agents/66 Agent harness и context engineering.md",
+        "route": "textbook/agents/harness-context-engineering"
+      },
+      {
+        "source": "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
+        "route": "textbook/agents/memory-planning-orchestration"
+      },
+      {
+        "source": "00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md",
+        "route": "textbook/agents/evaluation"
+      },
+      {
+        "source": "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md",
+        "route": "textbook/agents/coding-web-computer-use"
+      },
+      {
+        "source": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
+        "route": "textbook/agents/formal-math"
+      },
+      {
+        "source": "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md",
+        "route": "textbook/agents/scientific-discovery"
+      },
+      {
+        "source": "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md",
+        "route": "textbook/agents/security"
+      }
+    ],
+    "sidebar": [
+      {
+        "label": "Оглавление",
+        "label_en": "Contents",
+        "route": "textbook/index"
+      },
+      {
+        "label": "Как пользоваться учебником",
+        "label_en": "How to use this textbook",
+        "route": "textbook/how-to-use"
+      },
+      {
+        "label": "I. Математические и ML-основания",
+        "label_en": "I. Mathematical and machine-learning foundations",
+        "items": [
+          {
+            "label": "1. Векторы, матрицы и тензоры",
+            "route": "textbook/ml-foundations/tensors"
+          },
+          {
+            "label": "2. Производная и градиент",
+            "route": "textbook/ml-foundations/derivatives-gradients"
+          },
+          {
+            "label": "3. Вероятность, правдоподобие и логарифм",
+            "route": "textbook/ml-foundations/probability-likelihood-logarithms"
+          },
+          {
+            "label": "4. Функции потерь",
+            "route": "textbook/ml-foundations/loss-functions"
+          },
+          {
+            "label": "5. Train, validation и test",
+            "route": "textbook/ml-foundations/train-validation-test"
+          },
+          {
+            "label": "6. Переобучение, регуляризация и оценивание",
+            "route": "textbook/ml-foundations/generalization-regularization"
+          }
+        ]
+      },
+      {
+        "label": "II. Классическое машинное обучение",
+        "label_en": "II. Classical machine learning",
+        "items": [
+          {
+            "label": "Карта модуля и источники",
+            "route": "textbook/classical-ml/index"
+          },
+          {
+            "label": "Задача обучения и predictive pipeline",
+            "route": "textbook/classical-ml/predictive-pipeline"
+          },
+          {
+            "label": "Линейная регрессия и классификация",
+            "route": "textbook/classical-ml/linear-models"
+          },
+          {
+            "label": "Деревья решений",
+            "route": "textbook/classical-ml/decision-trees"
+          },
+          {
+            "label": "Bagging, random forest и gradient boosting",
+            "route": "textbook/classical-ml/ensembles"
+          },
+          {
+            "label": "Оценивание, кросс-валидация и выбор порога",
+            "route": "textbook/classical-ml/evaluation"
+          },
+          {
+            "label": "Кластеризация и её ограничения",
+            "route": "textbook/classical-ml/clustering"
+          },
+          {
+            "label": "Спектральная кластеризация и graph Laplacian",
+            "route": "textbook/classical-ml/spectral-clustering"
+          },
+          {
+            "label": "PCA, t-SNE и UMAP",
+            "route": "textbook/classical-ml/dimensionality-reduction"
+          },
+          {
+            "label": "Gaussian mixture и EM",
+            "route": "textbook/classical-ml/gmm-em"
+          },
+          {
+            "label": "Kernels, SVM и random Fourier features",
+            "route": "textbook/classical-ml/kernels-svm-rff"
+          }
+        ]
+      },
+      {
+        "label": "III. Рекомендательные системы",
+        "label_en": "III. Recommender systems",
+        "items": [
+          {
+            "label": "Карта модуля и полные источники",
+            "route": "textbook/recommender-systems/index"
+          },
+          {
+            "label": "Задача рекомендации, данные и конвейер",
+            "route": "textbook/recommender-systems/task-data-pipeline"
+          },
+          {
+            "label": "Совместная фильтрация и факторизация матрицы",
+            "route": "textbook/recommender-systems/collaborative-filtering-matrix-factorization"
+          },
+          {
+            "label": "Ранжирование и нейронные модели",
+            "route": "textbook/recommender-systems/ranking-neural-models"
+          },
+          {
+            "label": "Последовательные рекомендации и признаки",
+            "route": "textbook/recommender-systems/sequential-feature-aware"
+          },
+          {
+            "label": "Оценивание и эксплуатация",
+            "route": "textbook/recommender-systems/evaluation-operations"
+          }
+        ]
+      },
+      {
+        "label": "IV. Нейронные сети",
+        "label_en": "IV. Neural networks",
+        "items": [
+          {
+            "label": "7. Нейрон и MLP",
+            "route": "textbook/neural-networks/mlp"
+          },
+          {
+            "label": "8. Функции активации",
+            "route": "textbook/neural-networks/activation-functions"
+          },
+          {
+            "label": "9. Вычислительный граф и backpropagation",
+            "route": "textbook/neural-networks/backpropagation"
+          },
+          {
+            "label": "10. SGD, Momentum, Adam и расписания шага",
+            "route": "textbook/neural-networks/optimizers-schedules"
+          },
+          {
+            "label": "11. Инициализация, нормализация и residual connections",
+            "route": "textbook/neural-networks/initialization-normalization-residuals"
+          },
+          {
+            "label": "12. Dropout и регуляризация",
+            "route": "textbook/neural-networks/dropout-regularization"
+          },
+          {
+            "label": "13. CNN — от свёртки до ResNet",
+            "route": "textbook/neural-networks/cnn-lenet-resnet"
+          },
+          {
+            "label": "14. Autoencoder и VAE",
+            "route": "textbook/neural-networks/autoencoder-vae"
+          }
+        ]
+      },
+      {
+        "label": "V. Текст до Transformer",
+        "label_en": "V. Text before the Transformer",
+        "items": [
+          {
+            "label": "15. Представление текста числами",
+            "route": "textbook/text-representation/numerical-representation"
+          },
+          {
+            "label": "16. N-граммная языковая модель",
+            "route": "textbook/language-modeling/ngram"
+          },
+          {
+            "label": "16.1 Вероятность текста и next-token prediction",
+            "route": "textbook/language-modeling/next-token-probability"
+          },
+          {
+            "label": "17. Word2Vec, GloVe и распределительные представления",
+            "route": "textbook/text-representation/word2vec-glove"
+          },
+          {
+            "label": "18. BPE, WordPiece и Unigram",
+            "route": "textbook/text-representation/tokenization"
+          },
+          {
+            "label": "19. RNN и BPTT",
+            "route": "textbook/recurrent-networks/rnn-bptt"
+          },
+          {
+            "label": "20. LSTM и GRU",
+            "route": "textbook/recurrent-networks/lstm-gru"
+          },
+          {
+            "label": "21. Seq2Seq и bottleneck фиксированного вектора",
+            "route": "textbook/recurrent-networks/seq2seq-bottleneck"
+          },
+          {
+            "label": "22. Attention для перевода",
+            "route": "textbook/transformer/from-seq2seq-to-transformer"
+          }
+        ]
+      },
+      {
+        "label": "VI. Transformer, BERT и GPT",
+        "label_en": "VI. Transformer, BERT, and GPT",
+        "items": [
+          {
+            "label": "23. Self-Attention — Q, K, V",
+            "route": "textbook/transformer/self-attention"
+          },
+          {
+            "label": "24. Маскирование, головы и формы тензоров",
+            "route": "textbook/transformer/masking-heads-shapes"
+          },
+          {
+            "label": "25. Позиционная информация",
+            "route": "textbook/transformer/positional-information"
+          },
+          {
+            "label": "26. Полный encoder-decoder Transformer",
+            "route": "textbook/transformer/full-transformer"
+          },
+          {
+            "label": "Вводная. Три архитектурных паттерна",
+            "route": "textbook/transformer/encoder-decoder-patterns"
+          },
+          {
+            "label": "27. BERT, RoBERTa и DeBERTa",
+            "route": "textbook/models/bert-roberta-deberta"
+          },
+          {
+            "label": "28. GPT-1 — генеративное предобучение",
+            "route": "textbook/models/gpt-1"
+          },
+          {
+            "label": "29. GPT-2 — zero-shot через язык",
+            "route": "textbook/models/gpt-2"
+          },
+          {
+            "label": "30. GPT-3 — in-context learning",
+            "route": "textbook/models/gpt-3"
+          },
+          {
+            "label": "31. T5 — text-to-text Transformer",
+            "route": "textbook/models/t5"
+          }
+        ]
+      },
+      {
+        "label": "VII. Анатомия современной LLM",
+        "label_en": "VII. Anatomy of a modern LLM",
+        "items": [
+          {
+            "label": "Вводная. LLaMA как базовая архитектура",
+            "route": "textbook/modern-llm/llama-architecture"
+          },
+          {
+            "label": "32. Современный decoder block",
+            "route": "textbook/modern-llm/decoder-block"
+          },
+          {
+            "label": "33. Pre-norm, RMSNorm, SwiGLU и residual",
+            "route": "textbook/modern-llm/norm-gating-residual"
+          },
+          {
+            "label": "34. RoPE",
+            "route": "textbook/modern-llm/rope"
+          },
+          {
+            "label": "34.1 Transformer с нуля — формы, параметры и стоимость",
+            "route": "textbook/modern-llm/transformer-shapes-resources"
+          },
+          {
+            "label": "35. MHA, MQA и GQA",
+            "route": "textbook/modern-llm/mha-mqa-gqa"
+          },
+          {
+            "label": "36. MLA и сжатие KV-cache",
+            "route": "textbook/modern-llm/mla-kv-compression"
+          },
+          {
+            "label": "37. Длинный контекст — расширение, разреженность и оценивание",
+            "route": "textbook/modern-llm/long-context"
+          },
+          {
+            "label": "38. Dense FFN — расширение размерности и SwiGLU",
+            "route": "textbook/modern-llm/dense-ffn"
+          },
+          {
+            "label": "39. Mixture of Experts — routing, capacity и serving",
+            "route": "textbook/moe/mixture-of-experts"
+          },
+          {
+            "label": "40. Mamba, RWKV, RetNet и гибридные архитектуры",
+            "route": "textbook/modern-llm/sequence-model-alternatives"
+          }
+        ]
+      },
+      {
+        "label": "VIII. Вычислительные основы ML-систем",
+        "label_en": "VIII. Computational foundations of ML systems",
+        "items": [
+          {
+            "label": "S1. Модель как часть системы",
+            "route": "textbook/ml-systems/model-as-part-of-system"
+          },
+          {
+            "label": "S2. GPU, CUDA и иерархия памяти",
+            "route": "textbook/ml-systems/gpu-cuda-memory-hierarchy"
+          },
+          {
+            "label": "S3. Измерение производительности и roofline",
+            "route": "textbook/ml-systems/performance-measurement-roofline"
+          },
+          {
+            "label": "S4. Арифметика Transformer и MoE",
+            "route": "textbook/ml-systems/transformer-moe-arithmetic"
+          },
+          {
+            "label": "S5. Численные форматы и mixed precision",
+            "route": "textbook/ml-systems/numerical-formats-mixed-precision"
+          },
+          {
+            "label": "S6. Data pipeline, padding и packing",
+            "route": "textbook/ml-systems/data-pipeline-padding-packing"
+          },
+          {
+            "label": "S7. Profiling ML-нагрузки",
+            "route": "textbook/ml-systems/profiling"
+          },
+          {
+            "label": "S8. GPU kernels и Triton — от программы к измерению",
+            "route": "textbook/ml-systems/gpu-kernels-triton"
+          }
+        ]
+      },
+      {
+        "label": "IX. Обучение LLM",
+        "label_en": "IX. Training language models",
+        "items": [
+          {
+            "label": "Введение. Данные и предобучение",
+            "route": "textbook/pretraining/data-and-pretraining"
+          },
+          {
+            "label": "41. Сбор, очистка и смеси данных",
+            "route": "textbook/pretraining/data-pipeline"
+          },
+          {
+            "label": "41.1 Дедупликация, PII и контроль качества корпуса",
+            "route": "textbook/pretraining/dedup-pii-corpus-quality"
+          },
+          {
+            "label": "42. Next-token prediction",
+            "route": "textbook/pretraining/next-token-objective"
+          },
+          {
+            "label": "43. Scaling laws",
+            "route": "textbook/pretraining/scaling-laws"
+          },
+          {
+            "label": "44. Distributed training и mixed precision",
+            "route": "textbook/pretraining/distributed-systems"
+          },
+          {
+            "label": "44.1 Processes, collectives и DDP",
+            "route": "textbook/pretraining/processes-collectives-ddp"
+          },
+          {
+            "label": "44.2 Gradient checkpointing и offload",
+            "route": "textbook/pretraining/gradient-checkpointing-offload"
+          },
+          {
+            "label": "44.3 Tensor и sequence parallelism",
+            "route": "textbook/pretraining/tensor-sequence-parallelism"
+          },
+          {
+            "label": "44.4 Pipeline parallelism",
+            "route": "textbook/pretraining/pipeline-parallelism"
+          },
+          {
+            "label": "44.5 ZeRO, FSDP2, DeviceMesh и DTensor",
+            "route": "textbook/pretraining/zero-fsdp2-devicemesh-dtensor"
+          },
+          {
+            "label": "44.6 Expert и hybrid parallelism",
+            "route": "textbook/pretraining/expert-hybrid-parallelism"
+          },
+          {
+            "label": "44.7 Сеть, хранилище и распределённые checkpoints",
+            "route": "textbook/pretraining/network-storage-checkpoints"
+          },
+          {
+            "label": "44.8 Отказоустойчивость и управление кластером",
+            "route": "textbook/pretraining/fault-tolerance-orchestration"
+          },
+          {
+            "label": "Карта post-training и источники",
+            "route": "textbook/post-training/module-map"
+          },
+          {
+            "label": "45. SFT и instruction data",
+            "route": "textbook/post-training/sft-instruction-data"
+          },
+          {
+            "label": "46. Preference data",
+            "route": "textbook/post-training/preference-data"
+          },
+          {
+            "label": "47. Reward modeling",
+            "route": "textbook/post-training/reward-modeling"
+          },
+          {
+            "label": "48. Policy gradient и PPO для LLM",
+            "route": "textbook/post-training/ppo"
+          },
+          {
+            "label": "49. DPO",
+            "route": "textbook/post-training/dpo"
+          },
+          {
+            "label": "50. RLVR и verifiers",
+            "route": "textbook/post-training/rlvr-verifiers"
+          },
+          {
+            "label": "51. GRPO и DeepSeek-R1",
+            "route": "textbook/post-training/grpo-deepseek-r1"
+          },
+          {
+            "label": "52. Reasoning distillation",
+            "route": "textbook/post-training/reasoning-distillation"
+          },
+          {
+            "label": "Углубление. Test-time compute",
+            "route": "textbook/reasoning/test-time-compute"
+          },
+          {
+            "label": "53. Синтетические данные и учебные программы",
+            "route": "textbook/pretraining/synthetic-data-curricula"
+          }
+        ]
+      },
+      {
+        "label": "X. Инференс и serving",
+        "label_en": "X. Inference and serving",
+        "items": [
+          {
+            "label": "54. Декодирование и выбор следующего токена",
+            "label_en": "54. Decoding and selecting the next token",
+            "route": "textbook/inference/decoding"
+          },
+          {
+            "label": "55. Физика LLM inference — prefill, decode и roofline",
+            "label_en": "55. The physics of LLM inference — prefill, decode, and roofline",
+            "route": "textbook/inference/llm-inference-physics"
+          },
+          {
+            "label": "55.1 KV-cache, пакетирование и PagedAttention",
+            "label_en": "55.1 KV cache, batching, and PagedAttention",
+            "route": "textbook/inference/kv-cache-batching-pagedattention"
+          },
+          {
+            "label": "55.2 Scheduling — continuous batching, chunked prefill и prefix caching",
+            "label_en": "55.2 Scheduling — continuous batching, chunked prefill, and prefix caching",
+            "route": "textbook/inference/scheduling"
+          },
+          {
+            "label": "55.3 Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer",
+            "label_en": "55.3 Serving engines — vLLM, SGLang, TensorRT-LLM, and FlashInfer",
+            "route": "textbook/inference/serving-engines"
+          },
+          {
+            "label": "56. FlashAttention",
+            "label_en": "56. FlashAttention",
+            "route": "textbook/inference/flashattention"
+          },
+          {
+            "label": "57. Квантизация языковых моделей",
+            "label_en": "57. Quantizing language models",
+            "route": "textbook/inference/quantization"
+          },
+          {
+            "label": "57.1 KV-cache compression и offload",
+            "route": "textbook/inference/kv-cache-compression-offload"
+          },
+          {
+            "label": "57.2 Pruning, distillation и low-rank compression",
+            "route": "textbook/inference/model-compression-pruning-distillation-low-rank"
+          },
+          {
+            "label": "58. Спекулятивное декодирование",
+            "label_en": "58. Speculative decoding",
+            "route": "textbook/inference/speculative-decoding"
+          },
+          {
+            "label": "58.1 Параллелизм и коллективные операции",
+            "label_en": "58.1 Parallelism and collective operations",
+            "route": "textbook/inference/distributed-inference"
+          },
+          {
+            "label": "58.2 Раздельное обслуживание prefill и decode",
+            "label_en": "58.2 Disaggregated prefill and decode serving",
+            "route": "textbook/inference/disaggregated-serving"
+          },
+          {
+            "label": "58.3 Benchmarking, SLO и эксплуатация inference",
+            "label_en": "58.3 Benchmarking, SLOs, and inference operations",
+            "route": "textbook/inference/benchmarking-slo"
+          },
+          {
+            "label": "58.4 Queueing и capacity planning",
+            "route": "textbook/inference/queueing-capacity-planning"
+          }
+        ]
+      },
+      {
+        "label": "XI. Эксплуатация и оценивание",
+        "label_en": "XI. Operations and evaluation",
+        "items": [
+          {
+            "label": "58.5 ML workflow",
+            "route": "textbook/deployment/ml-workflow"
+          },
+          {
+            "label": "58.6 MLOps — от артефакта до наблюдаемого сервиса",
+            "route": "textbook/deployment/mlops"
+          },
+          {
+            "label": "58.7 Edge и federated deployment",
+            "route": "textbook/deployment/edge-federated"
+          },
+          {
+            "label": "59. Оценивание моделей и контаминация",
+            "route": "textbook/evaluation/models-contamination"
+          },
+          {
+            "label": "59.1 Несбалансированная классификация",
+            "label_en": "59.1 Imbalanced classification",
+            "route": "textbook/evaluation/imbalanced-classification"
+          },
+          {
+            "label": "59.2 Ответственные ML-системы",
+            "route": "textbook/evaluation/responsible-systems"
+          }
+        ]
+      },
+      {
+        "label": "XII. Retrieval и RAG",
+        "label_en": "XII. Retrieval and RAG",
+        "items": [
+          {
+            "label": "60. Embeddings и metric learning",
+            "route": "textbook/retrieval/embeddings-metric-learning"
+          },
+          {
+            "label": "61. Retrieval — от BM25 до dense и hybrid",
+            "route": "textbook/retrieval/sparse-dense-hybrid"
+          },
+          {
+            "label": "62. Reranking — cross-encoder и late interaction",
+            "route": "textbook/retrieval/reranking"
+          },
+          {
+            "label": "63. RAG — полный конвейер",
+            "route": "textbook/rag/full-pipeline"
+          }
+        ]
+      },
+      {
+        "label": "XIII. Мультимодальные модели",
+        "label_en": "XIII. Multimodal models",
+        "items": [
+          {
+            "label": "64. Мультимодальные модели",
+            "label_en": "64. Multimodal models",
+            "route": "textbook/multimodal/models"
+          },
+          {
+            "label": "64.1 Connectors и fusion",
+            "label_en": "64.1 Connectors and fusion",
+            "route": "textbook/multimodal/connectors-fusion"
+          },
+          {
+            "label": "64.2 Разрешение, tiling и пространственные позиции",
+            "label_en": "64.2 Resolution, tiling, and spatial positions",
+            "route": "textbook/multimodal/visual-tokenization-resolution"
+          },
+          {
+            "label": "64.3 Обучение VLM — alignment, instruction tuning и данные",
+            "label_en": "64.3 Training VLMs — alignment, instruction tuning, and data",
+            "route": "textbook/multimodal/training-data"
+          },
+          {
+            "label": "64.4 Документы, OCR и visual grounding",
+            "label_en": "64.4 Documents, OCR, and visual grounding",
+            "route": "textbook/multimodal/documents-ocr-grounding"
+          },
+          {
+            "label": "64.5 Видео, аудио и omni-модели",
+            "label_en": "64.5 Video, audio, and omni models",
+            "route": "textbook/multimodal/video-audio-omni"
+          },
+          {
+            "label": "64.6 Оценивание, отказы и serving VLM",
+            "label_en": "64.6 Evaluation, failure modes, and VLM serving",
+            "route": "textbook/multimodal/evaluation-serving"
+          },
+          {
+            "label": "64.7 Diffusion, latent diffusion и flow matching",
+            "route": "textbook/multimodal/diffusion-flow-images"
+          },
+          {
+            "label": "64.8 Единая мультимодальная последовательность и Chameleon",
+            "route": "textbook/multimodal/unified-sequence-chameleon"
+          }
+        ]
+      },
+      {
+        "label": "XIV. Инструменты и агенты",
+        "label_en": "XIV. Tools and agents",
+        "items": [
+          {
+            "label": "Карта модуля и источники",
+            "route": "textbook/agents/module-map"
+          },
+          {
+            "label": "65. Tool use — от вызова функции к действию",
+            "route": "textbook/agents/tool-use"
+          },
+          {
+            "label": "66. Agent harness и context engineering",
+            "route": "textbook/agents/harness-context-engineering"
+          },
+          {
+            "label": "67. Память, планирование и оркестрация агентов",
+            "route": "textbook/agents/memory-planning-orchestration"
+          },
+          {
+            "label": "68. Оценивание агентных систем",
+            "route": "textbook/agents/evaluation"
+          },
+          {
+            "label": "69. Coding, web и computer-use agents",
+            "route": "textbook/agents/coding-web-computer-use"
+          },
+          {
+            "label": "70. Формальные доказательства и математические агенты",
+            "route": "textbook/agents/formal-math"
+          },
+          {
+            "label": "71. Агенты научного поиска и discovery",
+            "route": "textbook/agents/scientific-discovery"
+          },
+          {
+            "label": "72. Безопасность агентных систем",
+            "route": "textbook/agents/security"
+          }
+        ]
+      }
+    ]
+  },
+  "source_sha256": {
+    "00 Учебник/_index.md": "cfad4e0a3b0d38d7db5a0bd46350e80f74efb2039f5c512ddf817565cff7bffd",
+    "en/00 Textbook/_index.md": "3fa441ae1ad34de324a288845e57094aad85122b0082ae4d7e78ba3cadf7895e",
+    "00 Учебник/00 Как пользоваться учебником.md": "13b5aa40e01de70b5b5f26bc008abdfd7520dbfc5eb9d7a9a2dd35ecd2674a8d",
+    "00 Учебник/00 Математические и ML-основания/01 Векторы, матрицы и тензоры.md": "06ffb472ba85aa805651996971e02a7774895c85787762560e134301228753a8",
+    "00 Учебник/00 Математические и ML-основания/02 Производная и градиент.md": "6839e2febcb38fb71c8d870c1ab8afb50c47e93e1aef6ad351b7b302579dfb08",
+    "00 Учебник/00 Математические и ML-основания/03 Вероятность, правдоподобие и логарифм.md": "f658322dcd6ebd32a9d888aa3f612bfd9821e8adc04bdeffc813b1ebc10c6505",
+    "00 Учебник/00 Математические и ML-основания/04 Функции потерь.md": "519e5e705073fd1de0801c1b7c8fe75fafecc65eee24a9e07b591a0b929a21bd",
+    "00 Учебник/00 Математические и ML-основания/05 Train, validation и test.md": "f5cf270d3ea334c77c7d09402ef6dd80d4e1ef6def27de5f1d52c0e79b54187c",
+    "00 Учебник/00 Математические и ML-основания/06 Переобучение, регуляризация и оценивание.md": "e1efdca476a16e47475fc763bc9a64c5524fdca74add685ba9d5dc8dd335e7c2",
+    "00 Учебник/01 Классическое машинное обучение/00 Карта модуля.md": "0a1a10c3b8f8ca61322f8bb4322a68a907170a3f5c70633660bfbe3af842fca6",
+    "00 Учебник/01 Классическое машинное обучение/01 Задача обучения и predictive pipeline.md": "d55bf79cebb3935586a10b0e0c7333b5bd530db02b117939e9d8378fdb98b06a",
+    "00 Учебник/01 Классическое машинное обучение/02 Линейная регрессия и классификация.md": "75f92f4704376d7989fcc9be6ac71d53566a4aa8032851798960430a63f4914a",
+    "00 Учебник/01 Классическое машинное обучение/03 Деревья решений.md": "cd7ead3663bb14c0c95cf325d5c2ddb90adb703c4106557c7f62134f406c1d83",
+    "00 Учебник/01 Классическое машинное обучение/04 Bagging, random forest и gradient boosting.md": "4ed341f212c55bf58c407433d9f12459ae5bfdef3c3aba7a1d784b033fd87ebb",
+    "00 Учебник/01 Классическое машинное обучение/05 Оценивание, кросс-валидация и выбор порога.md": "c1c725e2074ccde8ecda865accdddf2c94232df190c66ed327e9148406c01a77",
+    "00 Учебник/01 Классическое машинное обучение/06 Кластеризация и её ограничения.md": "1826fc4c334c652242a1159979a78a675d9dbc88c4e11e05e727653345d64425",
+    "00 Учебник/01 Классическое машинное обучение/06a Спектральная кластеризация и графовый Laplacian.md": "6184d698155c4e8571f256ffbc4f013d91cf1e5451d67db9109ccb5643d27b34",
+    "00 Учебник/01 Классическое машинное обучение/07 PCA, t-SNE и UMAP.md": "0487fe879457379241a0fa9565ec8cac5eb51280ae820e50a02dc3896a929e5d",
+    "00 Учебник/01 Классическое машинное обучение/08 Gaussian mixture и EM.md": "c02a1bd7955b8920a1842f89d34827cd126a90400cd65e45b49e8ca933c20a3d",
+    "00 Учебник/01 Классическое машинное обучение/09 Kernels, SVM и random Fourier features.md": "5a41542383680670b3659b1b5dbb2e1822c08082750f720883020e20cb90794c",
+    "00 Учебник/02 Рекомендательные системы/00 Карта модуля.md": "dcd33730cc0e127d94301bd87f3e3af5c2d8df1aaa44cb5219a1b7e010b41ebc",
+    "00 Учебник/02 Рекомендательные системы/01 Задача рекомендации, данные и pipeline.md": "a60abdfb139e2bff0879dbcf0ea7be6db0300d86abbcd77eaa1081fd4bb2286d",
+    "00 Учебник/02 Рекомендательные системы/02 Collaborative filtering и matrix factorization.md": "992403d10e0fd4bba8e1fb36ecce40414f6bcae1e89d1548c4f38cdc203874dd",
+    "00 Учебник/02 Рекомендательные системы/03 Ranking и нейронные рекомендательные модели.md": "ecec78266fddd5dcfa2463d9c448f013ae63e7101e8f50052fe4e3895c092f25",
+    "00 Учебник/02 Рекомендательные системы/04 Последовательные рекомендации и признаки.md": "13ce0edd316d5a868933dc4e44723d2b7e5bee7b709b5a25754289bbc23ea9dd",
+    "00 Учебник/02 Рекомендательные системы/05 Оценивание и эксплуатация.md": "4e62789f0cfbd8a2e6482c4d523ba0c653a7d3533d2ad0d28c2cec1a8bef3b87",
+    "00 Учебник/01 Основы нейронных сетей/01 Нейрон и MLP.md": "2fd8e90374a5802bd2c3997d36ee2d945e9aa706dc2e2810c023b39a4a695e05",
+    "00 Учебник/01 Основы нейронных сетей/02 Функции активации.md": "467efffdbfaad2a74bb9e31ff86fed9553cc0478664407efd34d2c678e4b7696",
+    "00 Учебник/01 Основы нейронных сетей/01 Нейрон, градиент и backpropagation.md": "d329325d295f0fc50ddbf013412c96e0f24f8a31bd6733754e08ae23a5baa198",
+    "00 Учебник/01 Основы нейронных сетей/02 Оптимизация и стабильность обучения.md": "ffd865468db1e8ea07c64ec84f74a31cd065935f4b8aeb09a0f1f5b65670e43b",
+    "00 Учебник/01 Основы нейронных сетей/05 Инициализация, нормализация и residual connections.md": "019c8f6a0270bcdb4f282ade039108c289f5d7d391dde779e664fd046fa61435",
+    "00 Учебник/01 Основы нейронных сетей/06 Dropout и регуляризация.md": "ca5d07f0d27f27f8143f53882014a629e0f50c936e448ed8658be64acde7863c",
+    "00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md": "c6cceb20910882ae1408dc7013c286ce77c3e00b0ab32070505e7df6b6bf5355",
+    "00 Учебник/01 Основы нейронных сетей/08 Autoencoder и VAE.md": "e742c3a56ecec3b2f7d768e017db822b54979f66dc273e57b0b0f968f12607f7",
+    "00 Учебник/02 Представление текста и токенизация/01 Представление текста числами.md": "8b2de4a9b960721f5ecf8f95aad23f2e3edbb9883b5c7d83bd25003fd387ddb0",
+    "00 Учебник/03 Языковое моделирование/00 N-граммная языковая модель.md": "032dc6d57c8399255ec427be82cf59fd2fe30885f218abe7083a5596901ef8ea",
+    "00 Учебник/03 Языковое моделирование/01 Вероятность текста и next-token prediction.md": "9e7e0016e68745cfb491d3018beb2d91b81b631a6d1995b36ad3a2e03d2ba695",
+    "00 Учебник/02 Представление текста и токенизация/01 От слов к embeddings.md": "53dba94646abb1903ae0ca729e6caea54b99b9c6a5a4a9fb63ede9dda7df1bab",
+    "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md": "fa5261a3994721e92f48c82dae8992e55c0ccc805dc795648ce61b7407d29ebe",
+    "00 Учебник/04 RNN, LSTM и Seq2Seq/01 RNN и BPTT.md": "d9cb27f7d76de93f41fe3f252ce1da1bcf53897197decbabaf257dbddfabaa25",
+    "00 Учебник/04 RNN, LSTM и Seq2Seq/02 LSTM и GRU.md": "c0afc59f36af36d3616792c6dc8873cdee8ce419fa8cf0db000698f2393283f4",
+    "00 Учебник/04 RNN, LSTM и Seq2Seq/03 Seq2Seq и bottleneck фиксированного вектора.md": "f8f44caa2a641441cedbc99c9419de2bbb2ce2567585e2ccde65e48c5f02535b",
+    "00 Учебник/05 Attention и Transformer/01 От Seq2Seq к Transformer.md": "b3cf9833d7001011b01a49ab0f310ad9f65e5cfdc82b771510e11bed6ade1b62",
+    "00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md": "d402a9a6810e8076173faf2e0b0e9043dbffa3673d7edb794e16e9c29f7ffd60",
+    "en/00 Textbook/05 Attention and Transformer/02 Self-Attention — Q, K, V.md": "0abb7aad9c2d76b10cb0894cc69c4f3c321eadaf7045d790e07a7c94b52d1b8a",
+    "00 Учебник/05 Attention и Transformer/Masking, multi-head и формы тензоров.md": "66367edeb915ca76d3fe70478b7a46448c4b93bd140d2a714e78829e3da95a06",
+    "en/00 Textbook/05 Attention and Transformer/03 Masking, multi-head attention, and tensor shapes.md": "f3828a4a6b0f43c517f3b3e7c73a8bbc75d56a57a536747cf90786aa43c89a27",
+    "00 Учебник/05 Attention и Transformer/04 Позиционная информация.md": "897a19c428e9ef20a6c651e981eb32d905d6f72a616907c2ea2e20fa1842451a",
+    "en/00 Textbook/05 Attention and Transformer/04 Positional information.md": "10de5dfa9cea752b88dfacf9775602a7b1ef7aec5deafac02ce8dfaaed6e2a17",
+    "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md": "8bda8af63d82960da7d5849e132be647542b90d4a9a9daca05ff5a0f2e66d356",
+    "en/00 Textbook/05 Attention and Transformer/05 The complete Transformer.md": "dbb6f8470d6ad92af518013a8ecbbdaacdcc49fdd10655a50309154e727e0223",
+    "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md": "a99819704bcdd1ff795c39a2240b8c32331fded5b1372c302f69e381d123d6e8",
+    "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/01 Three architectural patterns.md": "a7a5dc42bb01dd54c1ee9835fe1883d3ece57883fdcad22adafae05aa908267a",
+    "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md": "fa3595eca44cec1269db1425337a04773d132d2dd685432d1b12518a15ae19b4",
+    "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md": "3103bdee9ad3082b82895151ac86e5d915ba867df9359f0aa64cb6d45a73ed34",
+    "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение.md": "2d8421977c980b54a64296218aac94353abdef7eaaf8228eb7b2a919b5e31c95",
+    "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/04 GPT-1 — generative pre-training.md": "41e5825e5e28d91e836314306623fd2b6abc80774ca3b1b99b9d90849521b204",
+    "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык.md": "ce717410045dd566b798820440ef49db532c1204d6d0bed6b54cfec1247f6c8d",
+    "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/05 GPT-2 — zero-shot through language.md": "1eafd960b14038c8b001c3f1baf6374a96ffcbcec97be7f2522e20c545571c56",
+    "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md": "76ed87ea2ca9e9c2bc82b7926eb95de9313d0b11c8ce14ab95ab13313e19875a",
+    "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning.md": "6b2634e62bd0c53a293e541aa1b48f4fd814e39ac7841c10f6fbefc2842ec533",
+    "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md": "1bced617c9985be26919d79c4d01a87e4d0a3087d59e65d2e200fd2f84608dfc",
+    "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/07 T5 — text-to-text Transformer.md": "a1a59d9354dcbed22da3b83a8dfd70c953629a87793f5e1e6404ef3c615a9bb1",
+    "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md": "76213c88dc1a17d2ea09ca1c5b607f53e5d7e6210cb44dbb9d69f9809bcb9e4e",
+    "00 Учебник/07 Анатомия современной LLM/02 Современный decoder block.md": "fd2e197230ab5e39e1cb7c678415801ea510b1025dbe2a03f60b58021bcea703",
+    "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md": "79047e85222742283c60fbbb415226cd71b816565aaaf075b6e446d6ad800677",
+    "00 Учебник/07 Анатомия современной LLM/04 RoPE.md": "ba35ac3e1747815c726bfa3e50d9484ec9b9aeccf399ca53d34badb426556cdc",
+    "00 Учебник/07 Анатомия современной LLM/05 Transformer с нуля — формы, параметры и стоимость.md": "a2a1eede49e6fb9c2a024e1ec7541410d9e218541f322e9648b7bcce23c1446f",
+    "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md": "bfc1a46b5282ae224d05366a4140fe9c0be3d623a8dd8913d530f827c56922a4",
+    "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md": "aa2789b8788eda6efa42c4a31100734867554b63e02d32484996ad9dbb6f5e5f",
+    "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md": "0fcd1b1baf51030bd41c3cfb54a7871b753b25f5da7edda6b6c1a56c32ed013a",
+    "00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md": "cf6e628795c428a7e96332194639f3f37e6f91699829528d5a1e49d8826e5b11",
+    "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md": "f6f6110b23ed5defba31c16a5332e5d0bfb5f7190b0ecfc1b0d7cd42e9524042",
+    "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md": "4f78170b76794b013076afc363b9df813563ac0df59e0465bd0d1c74633bb803",
+    "00 Учебник/10 ML Systems/01 Модель как часть системы.md": "3d256f7a2bc96f9fc641151ce64909ca3e1ab192711e5ed6c36a33682eb99051",
+    "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md": "852d8b5b43eaa4fd60af7a3b1b5404da1ed5ce359fb0104981317e5d2069fe49",
+    "00 Учебник/10 ML Systems/03 Измерение производительности и roofline.md": "1ae6298b758d8d9ec1b970930abc9ac3750f15a77c2c32d309351a4889f2154a",
+    "00 Учебник/10 ML Systems/04 Арифметика Transformer и MoE.md": "2d49342ee5b2998d93980151ff95f2fdbf5a464c1cbb6911f9e7c3c4dce0cafa",
+    "00 Учебник/10 ML Systems/05 Численные форматы и mixed precision.md": "9a72e3c171518af749c26271e183bf35c55d2f98f76a146cf93c8d8404efa02d",
+    "00 Учебник/10 ML Systems/06 Data pipeline, padding и packing.md": "4ec7b2a6d0665e0c0c6a43337e508f4d7cb41c30009d1b850850c6559d1a25aa",
+    "00 Учебник/10 ML Systems/07 Profiling ML-нагрузки.md": "e930009037625adff0485b39cac3d91b30340abfe665a16049f439df785deac8",
+    "00 Учебник/10 ML Systems/08 GPU kernels и Triton — от программы к измерению.md": "e8d7a99ec414e09e491cddd5cb09a0b364b66ebaa9155b64ca0c9309996f2fb5",
+    "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md": "01c2164280d1f9b7c31a2db26e32b60f184dc1b8947fa5c62b64a80004810df0",
+    "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md": "aa947518e59dfddd31b1c1c58bfdeaf364708108965b04272cad62f4951e2397",
+    "00 Учебник/11 Pre-training и Scaling/41a Дедупликация, PII и контроль качества корпуса.md": "b85e4a7a85030a9996dcd1bbe7cce2015de5be94b479b6b870c34b420ac929ae",
+    "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md": "aca814c431df4b4d489ac98e4f147b85ba6f600eb41463c1b3ae4b6f7d9f3f3f",
+    "00 Учебник/11 Pre-training и Scaling/43 Scaling laws.md": "a2953c0e6343ee9ee34a7ba82d77f3bb441ef14f560f23acfd2d526d409422fb",
+    "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md": "fe1a7b12bc09cabd25750a0f14ca805217c05f72359549d3cbd611e3906a02a9",
+    "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md": "631003b2e908f1dff7e083b99cea2d96ac15bc75dc4383612825ed1865f948a1",
+    "00 Учебник/11 Pre-training и Scaling/44b Gradient checkpointing и offload.md": "3fe01a82c9a8f60a417d7e3eacce59dac608cd767944af5d85db5ab549be1f5e",
+    "00 Учебник/11 Pre-training и Scaling/44c Tensor и sequence parallelism.md": "19a681a8a334905e3c2b65b66757b4dcff58086e7c2e4c48a3717882767da30a",
+    "00 Учебник/11 Pre-training и Scaling/44d Pipeline parallelism.md": "f622f710aff96bc0bbc4c4ae604e9a66d91db015c3c10428f35bc9c5280b0c33",
+    "00 Учебник/11 Pre-training и Scaling/44e ZeRO, FSDP2, DeviceMesh и DTensor.md": "183de5525e52384c034fc3996acbd74d20dad9a64560f7a65f24406c15da0ac8",
+    "00 Учебник/11 Pre-training и Scaling/44f Expert и hybrid parallelism.md": "ccead0e7d311931c46e98b85b48cf1cf5a4864ead1dafacc5a8042e33128672b",
+    "00 Учебник/11 Pre-training и Scaling/44g Network, storage и distributed checkpoints.md": "d1fb604523c2e2b84e124fca81d47aafc06f2939def36a9e07853eef85eb975a",
+    "00 Учебник/11 Pre-training и Scaling/44h Fault tolerance и fleet orchestration.md": "1d9f922994ef80300a2f796e620f1b66ad9faa80c66c97689731cdf46909900e",
+    "00 Учебник/12 Post-training и Alignment/00 Карта модуля и источники.md": "960eccf542d8d3b3a080a86839daccc45e12b476eb8ac3d1a1ddb63e59933880",
+    "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md": "8480355a6edc89fcf2ee256df2d2e753ca6986c7dfb6413f4a3bc958e4c2e960",
+    "00 Учебник/12 Post-training и Alignment/02 Preference data.md": "e24409a09129f2b7ba6f01d6a85f45879f1cbab2dec4c099267c5e11d934dffa",
+    "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md": "ae8ad7536eb7463667bbe8a5983fc54008e92079e775ea49ca481a12d3bb570e",
+    "00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM.md": "29efb9a8c255c1b04abdcedc5c696f659a20ef45010572fe59093429698fcae5",
+    "00 Учебник/12 Post-training и Alignment/05 DPO.md": "fd7a08d5813a5427b74a943d8a57f00978877b8edce13ac1027ccc04cf172c06",
+    "00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers.md": "7b8b6d68960196ce4dd0c59fe047f974decd60b187f95b3acda55076b73efbba",
+    "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md": "7173f3bbdb587d32f8d2f04c5663164c132563b6966ce7543ccc613f4e007e1a",
+    "00 Учебник/12 Post-training и Alignment/08 Reasoning distillation.md": "e7ea39b04663903565f4e9796adc5718ab1f7c3a23dee13d0c768faaba3bba4c",
+    "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md": "55b6041548e938466d2e5ca0e75a4de1280d03625ff8438cdd4fc1da812f4f2c",
+    "00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы.md": "8b162e5380772ff0066fc7241061f4d6af8aa7e536d1b0172a753211bf6e855e",
+    "00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена.md": "affadbaec14be05ea9a9dcb7f14195bbac8e8fecdd82975c5ea600eb9441e7b5",
+    "en/00 Textbook/14 Inference and optimization/54 Decoding and next-token selection.md": "85cb6167d5d6e68b701782a199b6f05cc26657ac97238d7108bc7c9d2587259b",
+    "00 Учебник/14 Inference и оптимизация/55a Физика LLM inference — prefill, decode и roofline.md": "6c459a9f5153b9eaaa35e437411bb14f4301b2e49d251c6abbe278c0c4257fd5",
+    "en/00 Textbook/14 Inference and optimization/55a The physics of LLM inference — prefill, decode, and roofline.md": "fb18a0eada8a1b658ea585191a996aaa97b551f4f784b3b9984ea6aba664e19b",
+    "00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention.md": "bbd791d15c4b4f2254b81fd575442aa3d16ad45ca395720676ce3a156409038e",
+    "en/00 Textbook/14 Inference and optimization/55 KV cache batching and PagedAttention.md": "d1c7af406487c83a02c3b58fea6f0be1d1a2aea82bca568b299ec9998c6646bd",
+    "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md": "3256c046c7c117b55a8532fdf20a713eb575723327fa9c75839c55b24b582847",
+    "en/00 Textbook/14 Inference and optimization/55b Scheduling — continuous batching, chunked prefill, and prefix caching.md": "dd0bb009641e9fe7b157abe7dd3cf8aefb1a601a912a1c3372c1bbf631a254d7",
+    "00 Учебник/14 Inference и оптимизация/55c Serving engines — vLLM, SGLang, TensorRT-LLM и FlashInfer.md": "1125281504c3d757d7c5951325b37ce108accf66979d68cded83949d6750e5e8",
+    "en/00 Textbook/14 Inference and optimization/55c Serving engines — vLLM, SGLang, TensorRT-LLM, and FlashInfer.md": "dbd632059a82a23a0a9b8bd03a6042f0edbc77529f0cd64b70ecf2d2344322fa",
+    "00 Учебник/14 Inference и оптимизация/56 FlashAttention.md": "98b6a0fddd6b6d7b7136bf1b3a9eacc32d6334f182f59bd4218b99e1c3652add",
+    "en/00 Textbook/14 Inference and optimization/56 FlashAttention.md": "ce76b03c3956dc44a1b3159327c4338514479ece221045f2451c216d2b9a16a3",
+    "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md": "f2c064d969185fa073dcc0573997a654fdae2b23c798fdf890fef12dfab2d6b4",
+    "en/00 Textbook/14 Inference and optimization/57 Quantizing language models.md": "048baec70fca25bea4f92043f12a818feafb3b8053f7165afa05c59ecbd5485e",
+    "00 Учебник/14 Inference и оптимизация/57a KV-cache compression и offload.md": "bfd74b11578aa6caa0782a30e9456000e853e41fcca697f395dddea055eba218",
+    "00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md": "e818fccc317a2025b020f453a2e578e43ea1a2ba39ae893a86c6ee0a89bed5d3",
+    "00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование.md": "4f60e570288e3dd4ec403f160a396f683f7a69e5db95433a73e0a1b4b8c73097",
+    "en/00 Textbook/14 Inference and optimization/58 Speculative decoding.md": "bdfa41bea90eef726f6f0aa1840c13410c38bce8f7561852c2d3f8998cd4cc27",
+    "00 Учебник/14 Inference и оптимизация/58a Распределённый inference и disaggregated serving.md": "7219c5e6fdef1ca9cd3fa92c50097cfe77a6ad664afa3ac43e9e6d8c117d7625",
+    "en/00 Textbook/14 Inference and optimization/58a Distributed inference and disaggregated serving.md": "d9ed1d9ca06a883850a644914fa3f667def410713ff7e4ea233696e5c198e1f6",
+    "00 Учебник/14 Inference и оптимизация/58a2 Раздельное обслуживание prefill и decode.md": "b7b7f12fe4726130c9d5d75697e7cda4d3314216fbb3a8195a474af77cb5efe4",
+    "en/00 Textbook/14 Inference and optimization/58a2 Disaggregated prefill and decode serving.md": "123c92d25eea4fb943fda9e9a2bf4d5de499696e76ecea691d9f72c732ae4959",
+    "00 Учебник/14 Inference и оптимизация/58b Benchmarking, SLO и эксплуатация inference.md": "633f22fd09c7fe64a86d67b05cba487d18f7f48d20e254b89e2c94677b758f53",
+    "en/00 Textbook/14 Inference and optimization/58b Benchmarking SLOs and inference operations.md": "6bb8469a3a97193e018af15f712d538a6c8aedf8c86f2fc0998f3605fc0be538",
+    "00 Учебник/14 Inference и оптимизация/58c Queueing и capacity planning.md": "bbfb1d67720cfe7b264c57c8d754fa0ebb147925cfd25e9ba4e66a63f3603c74",
+    "00 Учебник/19 Deployment, Reliability и MLOps/01 ML workflow.md": "498a80237b35db4bf8376d2bc0dade25d6065f955a71958ce53d4ec9c515115e",
+    "00 Учебник/19 Deployment, Reliability и MLOps/02 MLOps.md": "0e63a2dde76d8eae9630036aac9542f63c48cf0f15cb98a659ca2dd5fa76f454",
+    "00 Учебник/19 Deployment, Reliability и MLOps/03 Edge и federated deployment.md": "80cebdaee98f4a89c709e6aaf50d15af64e2b5045b5aadc516adf1065fbb3f42",
+    "00 Учебник/18 Evaluation и методология/59 Оценивание моделей и контаминация.md": "1419dfe53d7757c15dd949996f46e62494eb9abcb2275a768c639b7f1ed91ba3",
+    "00 Учебник/18 Evaluation и методология/59a Несбалансированная классификация.md": "b085573248c2f429ff33e32a0a8f966be654fd1eced56c584b754dde1f54eb24",
+    "00 Учебник/18 Evaluation и методология/59a Responsible systems.md": "5e70d3ce66b8874cfc6b32928762cdea7d71b9f92b000aa6355d7cacf248cc5c",
+    "00 Учебник/15 Embeddings, Retrieval и RAG/60 Embeddings и metric learning.md": "ddf06790a50b026ab2480f28b12360453e881ad945895277a86bfe9c71a5caf3",
+    "00 Учебник/15 Embeddings, Retrieval и RAG/61 Retrieval — от BM25 до dense и hybrid.md": "c2f49438a49ecdf7aac70a44605763ebdcf3311781fb4b10c4514470ceab25bc",
+    "00 Учебник/15 Embeddings, Retrieval и RAG/62 Reranking — cross-encoder и late interaction.md": "5d7522f493395addabf8cac39a95b6cc4ef0c8c134f5afa13ac488d5059657c6",
+    "00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер.md": "baa2a0a300a82cbcf90f389b233bd028f619ec47153c08a1201d9bbf099fddca",
+    "00 Учебник/16 Multimodal Models/64 Мультимодальные модели.md": "ce73d11a3e9031a4e0df882b56dd5cf9695de3550d1e736027eac23bd375730c",
+    "en/00 Textbook/16 Multimodal Models/64 Multimodal models.md": "69ad3615bf15b78ae670ae8affd11ebb861b61bdcd4f11714d8e33b3a91e80a8",
+    "00 Учебник/16 Multimodal Models/64a Connectors и fusion.md": "5df467640b95eb59a8e5fdc45d7e72fecd15e703ca52011481ae8c480f43f341",
+    "en/00 Textbook/16 Multimodal Models/64a Connectors and fusion.md": "abe04969c82c3cb2d543b555de62edb894f293c98c06a04477179758c1616d08",
+    "00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md": "aa23f1104f3a83d91bc759f207ab809ebf018b9946f44a022c761fc3e9e81258",
+    "en/00 Textbook/16 Multimodal Models/64b Resolution, tiling, and spatial positions.md": "e37d8e4edab6fbbe016d79e9243e237004e553391aebbd830072e92f3edc204d",
+    "00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные.md": "12e614a8be23e31ed608433c64be1f4b049c39af27cb9d4092080576a902921d",
+    "en/00 Textbook/16 Multimodal Models/64c Training VLMs — alignment, instruction tuning, and data.md": "249f975d27f7001d8de8d2da3446f962cfb6675f019455a2e20f08b11a6a110d",
+    "00 Учебник/16 Multimodal Models/64d Документы, OCR и visual grounding.md": "b2e3e923347babfafb3344252e55952c999287fe9fc51a19ad11965d4933f259",
+    "en/00 Textbook/16 Multimodal Models/64d Documents, OCR, and visual grounding.md": "7d431ffba62baefc6fcb8cab08d80255ff47f42e072a6b7cdb611c799a542c02",
+    "00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели.md": "cb9d70037a4ead20d49d9883ec0182e7eed038bd4bc1a579f2599cc71bd8bf42",
+    "en/00 Textbook/16 Multimodal Models/64e Video, audio, and omni models.md": "1975c1ee74a813104c013d89b9f40b53eb83772cb4ae4ffb2f59d6ed3272411d",
+    "00 Учебник/16 Multimodal Models/64f Оценивание, отказы и serving VLM.md": "7158736c550f13fbe8deca537fc369ef87c94a38586dae167fbdc78d215e625a",
+    "en/00 Textbook/16 Multimodal Models/64f Evaluation, failure modes, and VLM serving.md": "5e67947a261984fed23ba7ed0011e489c2b8204ce57338c46c702623aa733b22",
+    "00 Учебник/16 Multimodal Models/64g Диффузионные и flow-модели изображений.md": "d91e82d6d90ea7ee513416230b0decdc09590652246d4af2d09f280f33e62912",
+    "00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon.md": "f477e17e2449b1abcc3890c585ced5c012c0c9efe6ac143943d8f769ddf9a1e6",
+    "00 Учебник/17 Tools и Agents/00 Agent Harness и Context Engineering — карта модуля.md": "f90f708b7f2d81bd0a98639f9d4fa9c0a25c63ce7999e9a205b59f18f1afeb81",
+    "00 Учебник/17 Tools и Agents/65 Tool use — от вызова функции к действию.md": "11f04eb1b91f53a7c3dd57cdec9b405169e46c4a6b471b2e9a7fe42dca963366",
+    "00 Учебник/17 Tools и Agents/66 Agent harness и context engineering.md": "b1dc2ab03d0cd12acfa3c66ff0060800299b10846cb962767c7ec51f0a1a1e49",
+    "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md": "15a26693fe0f017f3d59be94319205afe7b510051a81b63d362d504acec17562",
+    "00 Учебник/17 Tools и Agents/68 Оценивание агентных систем.md": "ce59940e3047ddfe46c48be6e87bfcc021bfe84812accabc8aaf7ae1871e0b1a",
+    "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md": "76fa7ccbe709235d43b1efd523317a9922df77e81191811b659716c0071d689c",
+    "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md": "6a6912ffa8cf76d54452572734970180a3b2bb1e472055fd87d28da573e6bf50",
+    "00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery.md": "39e6d762bb108263ad69b74c16ca29627e5f1a68818f18c136a5b5b12ac111c8",
+    "00 Учебник/17 Tools и Agents/72 Безопасность агентных систем.md": "4e02810a117d85f34c408737e0a9cdfed1fe356015b02277163f80cda9470b59"
+  }
+}

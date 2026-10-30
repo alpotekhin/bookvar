@@ -1,6 +1,7 @@
 import { existsSync, mkdtempSync, mkdirSync, readFileSync, symlinkSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
+import { createHash } from 'node:crypto';
 import matter from 'gray-matter';
 import { describe, expect, it } from 'vitest';
 import {
@@ -9,6 +10,7 @@ import {
   parseMarkdownHeadings,
   publicationHref
 } from '../adapter/build.js';
+import { prefixPublicationLinks } from '../adapter/publication-links.js';
 
 const configuredBase = process.env.PUBLICATION_BASE_PATH?.replace(/^\/+|\/+$/g, '') ?? '';
 const publicationBase = configuredBase === '' ? '' : `/${configuredBase}`;
@@ -75,6 +77,149 @@ function fixture(
 }
 
 describe('buildPublication', () => {
+  it('prefixes real local publication URLs without changing examples or external URLs', () => {
+    const input = [
+      '[License](/licenses/original.txt)', '![Image](/assets/image.png)',
+      '<a href="/examples/code.py">Code</a>', '[Already](/bookvar/target/)',
+      '[reference]: /downloads/example.zip', '[Paper](https://example.org/paper)',
+      '`[Example](/do-not-change/)`', '```html', '<a href="/still-code/">Example</a>', '```',
+      '<pre><code><a href="/raw-code/">Example</a></code></pre>'
+    ].join('\n');
+    const output = prefixPublicationLinks(input, '/bookvar');
+    for (const path of ['/licenses/original.txt', '/assets/image.png', '/examples/code.py', '/downloads/example.zip'])
+      expect(output).toContain('/bookvar' + path);
+    expect(output).toContain('[Already](/bookvar/target/)');
+    for (const literal of ['`[Example](/do-not-change/)`', '<a href="/still-code/">', '<a href="/raw-code/">'])
+      expect(output).toContain(literal);
+    expect(output).toContain('https://example.org/paper');
+    expect(prefixPublicationLinks(output, '/bookvar')).toBe(output);
+    expect(prefixPublicationLinks(input, '')).toBe(input);
+  });
+  it('publishes a source-native English chapter once per locale without requiring a duplicate translation file', async () => {
+    const options = fixture('Original English body. See [[Page B#Section]].', '## Section\n\nCanonical target');
+    const original = readFileSync(options.sourcePath, 'utf8').replace('status: stable', 'status: stable\nsource_language: en');
+    write(options.sourcePath, original);
+    write(options.manifestPath, [
+      'site_title: Fixture', 'sections:', '  - id: textbook', '    title: Book', '    pages:',
+      '      - source: Notes/Page A.md', '        route: textbook/page-a',
+      '      - source: Notes/Page B.md', '        route: textbook/page-b'
+    ].join('\n'));
+    await buildPublication(options);
+    for (const locale of ['', 'en/']) {
+      const page = matter(readFileSync(join(options.outputDir, `${locale}textbook/page-a.md`), 'utf8'));
+      expect(page.data.sourceLanguage).toBe('en');
+      expect(page.data.translationStatus).toBeUndefined();
+      expect(page.content).toContain('Original English body.');
+      expect(page.content).toContain(`${publicationBase}/${locale}textbook/page-b/#section`);
+    }
+    expect(readFileSync(options.sourcePath, 'utf8')).toBe(original);
+    const fallback = matter(readFileSync(join(options.outputDir, 'en/textbook/page-b.md'), 'utf8'));
+    expect(fallback.data.translationStatus).toBe('canonical');
+    expect(fallback.data.canonicalHref).toBe(publicationBase + '/textbook/page-b/');
+    expect(fallback.content).toContain('Canonical target');
+  });
+  it.each(['ru', 'mixed', undefined] as const)(
+    'keeps %s canonical-language textbook links inside EN without claiming a translation', async (language) => {
+      const body = 'Канонический текст. [[Page B#Section|Подробнее]].\n\n## Local\n\n[[#Local|Здесь]]'
+        + '\n\n[Direct](/textbook/page-b/?view=full#section)'
+        + '\n\n<a href="/textbook/page-b/#section">HTML link</a>'
+        + '\n\n[License](/licenses/source.txt)'
+        + '\n\n```text\n[[Page B#Section]]\n[Literal](/textbook/page-b/#section)\n```';
+      const options = fixture(body, '## Section\n\nCanonical target');
+      const original = readFileSync(options.sourcePath, 'utf8').replace('status: stable',
+        'status: stable' + (language ? '\nsource_language: ' + language : ''));
+      write(options.sourcePath, original);
+      write(options.manifestPath, [
+        'site_title: Fixture', 'sections:', '  - id: textbook', '    title: Book', '    pages:',
+        '      - source: Notes/Page A.md', '        route: textbook/page-a',
+        '      - source: Notes/Page B.md', '        route: textbook/page-b'
+      ].join('\n'));
+      await buildPublication(options);
+      const canonical = matter(readFileSync(join(options.outputDir, 'textbook/page-a.md'), 'utf8'));
+      const english = matter(readFileSync(join(options.outputDir, 'en/textbook/page-a.md'), 'utf8'));
+      expect(english.data.translationStatus).toBe('canonical');
+      expect(english.data.canonicalHref).toBe(publicationBase + '/textbook/page-a/');
+      expect(english.data.translationReviewed).toBeUndefined();
+      expect(english.content).toContain('Канонический текст.');
+      expect(english.content).toContain(`[Подробнее](${publicationBase}/en/textbook/page-b/#section)`);
+      expect(english.content).toContain('[Здесь](#local)');
+      expect(english.content).toContain(`[Direct](${publicationBase}/en/textbook/page-b/?view=full#section)`);
+      expect(english.content).toContain(`href="${publicationBase}/en/textbook/page-b/#section"`);
+      expect(english.content).toContain(`[License](${publicationBase}/licenses/source.txt)`);
+      expect(english.content).toContain('```text\n[[Page B#Section]]\n[Literal](/textbook/page-b/#section)\n```');
+      expect(canonical.content).toContain(`[Подробнее](${publicationBase}/textbook/page-b/#section)`);
+      expect(canonical.data.translationStatus).toBeUndefined();
+      expect(readFileSync(options.sourcePath, 'utf8')).toBe(original);
+      expect(existsSync(join(options.rootDir, 'en/Notes/Page A.md'))).toBe(false);
+    });
+  it.each(['ru', 'mixed'] as const)('keeps the explicit untranslated fallback for %s source material', async (language) => {
+    const options = fixture();
+    write(options.sourcePath, readFileSync(options.sourcePath, 'utf8').replace('status: stable', `status: stable\nsource_language: ${language}`));
+    await buildPublication(options);
+    expect(existsSync(join(options.outputDir, 'en/nested/page-a.md'))).toBe(false);
+  });
+  it.each(['en', 'ru', 'mixed'] as const)('retains a verified canonical heading from %s when its translation has a different title', async (language) => {
+    const options = fixture('Native English. [[Page B#Раздел|Module]].', '## Раздел\n\nCanonical section');
+    write(options.sourcePath, readFileSync(options.sourcePath, 'utf8').replace('status: stable', 'status: stable\nsource_language: ' + language));
+    write(join(options.rootDir, 'English', 'B.md'), '---\ntitle: B English\ntype: concept\nstatus: stable\n---\n## Section\n\nEnglish section');
+    write(options.manifestPath, [
+      'site_title: Fixture', 'sections:', '  - id: textbook', '    title: Book', '    pages:',
+      '      - source: Notes/Page A.md', '        route: textbook/page-a',
+      '      - source: Notes/Page B.md', '        source_en: English/B.md', '        route: textbook/page-b'
+    ].join('\n'));
+    await buildPublication(options);
+    const page = readFileSync(join(options.outputDir, 'en/textbook/page-a.md'), 'utf8');
+    expect(page).toContain(`[Module](${publicationBase}/textbook/page-b/#раздел)`);
+    expect(page).not.toContain('/en/textbook/page-b/#раздел');
+  });
+  it('still rejects a nonexistent heading in a shared English source', async () => {
+    const options = fixture('[[Page B#Absent]]', '## Present');
+    write(options.sourcePath, readFileSync(options.sourcePath, 'utf8').replace('status: stable', 'status: stable\nsource_language: en'));
+    await expect(buildPublication(options)).rejects.toThrow('Page B#Absent');
+  });
+  it.each(['current', 'partial', 'stale'] as const)('marks an English edition %s against its actual canonical revision', async (state) => {
+    const options = fixture('Canonical body', 'Other body');
+    const currentHash = createHash('sha256').update(readFileSync(options.sourcePath)).digest('hex');
+    write(join(options.rootDir, 'English', 'Page A.md'), [
+      '---', 'title: English A', 'type: textbook-chapter', 'status: stable', 'source_language: en',
+      'translation_status: ' + (state === 'partial' ? 'partial' : 'current'),
+      'canonical_revision: "' + (state === 'stale' ? '0'.repeat(64) : currentHash) + '"',
+      "translation_reviewed: '2026-10-29'", '---', 'English body'
+    ].join('\n'));
+    write(options.manifestPath, [
+      'site_title: Fixture', 'sections:', '  - id: textbook', '    title: Book',
+      '    pages:', '      - source: Notes/Page A.md',
+      '        source_en: English/Page A.md', '        route: textbook/page-a',
+      '      - source: Notes/Page B.md', '        route: textbook/page-b'
+    ].join('\n'));
+    await buildPublication(options);
+    const en = matter(readFileSync(join(options.outputDir, 'en/textbook/page-a.md'), 'utf8')).data;
+    const canonical = matter(readFileSync(join(options.outputDir, 'textbook/page-a.md'), 'utf8')).data;
+    expect(en.translationStatus).toBe(state === 'current' ? 'current' : 'partial');
+    expect(en.canonicalHref).toBe(publicationBase + '/textbook/page-a/');
+    expect(en.translationReviewed).toBe('2026-10-29');
+    expect(canonical.translationStatus).toBeUndefined();
+  });
+  it('separates an imported image from an adjacent bare DOI without changing its source', async () => {
+    const body = 'Clark et al. https://doi.org/10.18653/v1/w19-4828.![[Assets/Figures/chart.svg]]';
+    const options = fixture(body);
+    const source = readFileSync(options.sourcePath, 'utf8');
+    await buildPublication(options);
+    const output = readFileSync(join(options.outputDir, 'nested/page-a.md'), 'utf8');
+    const image = `[![chart](${publicationBase}/assets/Figures/chart.svg)](${publicationBase}/assets/Figures/chart.svg)`;
+    expect(output).toContain('https://doi.org/10.18653/v1/w19-4828.\n\n' + image);
+    expect(readFileSync(options.sourcePath, 'utf8')).toBe(source);
+  });
+
+  it('keeps ordinary inline images beside text, explicit links and autolinks', async () => {
+    const prefixes = ['Text:', '[paper](https://example.org/paper)', '<https://example.org/paper>'];
+    const options = fixture(prefixes.map((prefix) => prefix + '![[Assets/Figures/chart.svg]]').join('\n\n'));
+    await buildPublication(options);
+    const output = readFileSync(join(options.outputDir, 'nested/page-a.md'), 'utf8');
+    const image = `[![chart](${publicationBase}/assets/Figures/chart.svg)](${publicationBase}/assets/Figures/chart.svg)`;
+    for (const prefix of prefixes) expect(output).toContain(prefix + image);
+  });
+
   it.each([
     (link: string) => `\`\`\`md\n${link}\n\`\`\``,
     (link: string) => `\`\`${link}\`\``,
@@ -161,6 +306,45 @@ describe('buildPublication', () => {
       'utf8'
     ));
     expect(generated.data.pagefind).toBe(false);
+  });
+  it('redirects a consolidated topic to a verified local chapter and section', async () => {
+    const options = fixture('See [[Page B#A mechanism]].', '## A mechanism\n\nFull explanation. Back: [[Page A]].');
+    write(options.sourcePath, readFileSync(options.sourcePath, 'utf8')
+      .replace('status: stable', 'status: redirect\ncanonical_topic: Notes/Page B.md\ncanonical_heading: A mechanism'));
+    await buildPublication(options);
+    const generated = matter(readFileSync(join(options.outputDir, 'nested/page-a.md'), 'utf8'));
+    expect(generated.data.pagefind).toBe(false);
+    expect(generated.data.head).toContainEqual({
+      tag: 'meta', attrs: { 'http-equiv': 'refresh', content: `0;url=${publicationBase}/page-b/#a-mechanism` }
+    });
+    expect(generated.data.head).toContainEqual({
+      tag: 'link', attrs: { rel: 'canonical', href: `${publicationBase}/page-b/#a-mechanism` }
+    });
+    expect(generated.data.head).toContainEqual({ tag: 'meta', attrs: { name: 'robots', content: 'noindex' } });
+    expect(generated.content).toContain(`${publicationBase}/page-b/#a-mechanism`);
+    expect(generated.content).not.toContain('Full explanation.');
+    const primary = matter(readFileSync(join(options.outputDir, 'page-b.md'), 'utf8'));
+    expect(primary.content).toContain(`Back: [Page A](${publicationBase}/page-b/#a-mechanism)`);
+    expect(primary.content).not.toContain('/nested/page-a/');
+  });
+  it.each([
+    ['Notes/Missing.md', undefined, /Invalid canonical topic/],
+    ['https://example.org/', undefined, /Invalid canonical topic/],
+    ['Notes/Page A.md', undefined, /Invalid canonical topic/],
+    ['Notes/Page B.md', 'Missing heading', /Missing or ambiguous canonical heading/],
+  ])('rejects invalid consolidated topic targets: %s / %s', async (target, heading, error) => {
+    const options = fixture('Compatibility page.', '## A mechanism\n\nFull explanation.');
+    write(options.sourcePath, readFileSync(options.sourcePath, 'utf8').replace('status: stable',
+      `status: redirect\ncanonical_topic: ${target}${heading ? '\ncanonical_heading: ' + heading : ''}`));
+    await expect(buildPublication(options)).rejects.toThrow(error);
+  });
+  it('rejects a topic alias pointing to another alias', async () => {
+    const options = fixture('Compatibility page.', 'Other compatibility page.');
+    write(options.sourcePath, readFileSync(options.sourcePath, 'utf8').replace('status: stable',
+      'status: redirect\ncanonical_topic: Notes/Page B.md'));
+    const other = join(options.rootDir, 'Notes/Page B.md');
+    write(other, readFileSync(other, 'utf8').replace('status: stable', 'status: redirect'));
+    await expect(buildPublication(options)).rejects.toThrow('Invalid canonical topic');
   });
   it('rejects incomplete source fragment attribution metadata', async () => {
     const options = fixture('Original excerpt.');
@@ -397,6 +581,18 @@ describe('buildPublication', () => {
     expect(generated).toContain(`[![chart one](${assetHref})](${assetHref})`);
   });
 
+  it.each([
+    ['PSL: план, движение и управление', 'PSL: план, движение и управление'],
+    ['320', 'chart'], ['320x180', 'chart'], ['', 'chart']
+  ])('preserves descriptive image alias but not size syntax: %s', async (alias, expectedAlt) => {
+    const options = fixture(`![[Assets/Figures/chart.svg|${alias}]]`);
+    write(join(options.rootDir, 'Assets', 'Figures', 'chart.svg'), '<svg/>');
+    await buildPublication(options);
+    const generated = readFileSync(join(options.outputDir, 'nested', 'page-a.md'), 'utf8');
+    const href = `${publicationBase}/assets/Figures/chart.svg`;
+    expect(generated).toContain(`[![${expectedAlt}](${href})](${href})`);
+  });
+
   it('preserves manifest-defined nested textbook groups, labels, and slugs', async () => {
     const options = fixture('Body');
     const pages = [
@@ -585,7 +781,7 @@ describe('buildPublication', () => {
       {
         label: 'Справочник',
         items: [
-          { label: 'Механизмы', translations: { en: 'Mechanisms' }, items: [{ label: 'Reference', slug: 'reference/index' }] },
+          { label: 'Темы и механизмы', translations: { en: 'Topics and mechanisms' }, items: [{ label: 'Reference', slug: 'reference/index' }] },
           { label: 'Модели и семейства', translations: { en: 'Models and families' }, items: [{ label: 'Models', slug: 'models/index' }] },
           { label: 'Обзоры направлений', translations: { en: 'Research overviews' }, items: [{ label: 'Overview', slug: 'research/index' }] },
           { label: 'Хронология', translations: { en: 'Timeline' }, items: [{ label: 'Timeline', slug: 'models/timeline' }] }

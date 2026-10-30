@@ -5,7 +5,11 @@
 /tmp/
 raw/
 node_modules/
-.cache/mlsysbook/
+.cache/
+# Local verification snapshots; not part of the public textbook checkout.
+05 Источники/Originals/
+# The retained deck explicitly says NVIDIA CONFIDENTIAL / DO NOT DISTRIBUTE.
+05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/Lectures/meeting-06-slides.pdf
 __pycache__/
 .astro/
 site/dist/

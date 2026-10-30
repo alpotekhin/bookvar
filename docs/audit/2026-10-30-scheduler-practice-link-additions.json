@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-30",
+  "scope": "Connect the existing interactive scheduler to both fully read scheduling editions. Only a practice-list entry and editorial revision metadata change; code, mathematics, source excerpts, figures and reading order are preserved.",
+  "files": [
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/55b Scheduling — continuous batching, chunked prefill и prefix caching.md",
+      "before_sha256": "3256c046c7c117b55a8532fdf20a713eb575723327fa9c75839c55b24b582847",
+      "after_sha256": "53a8c18595f4e2f2205a0d43c009e443e948720dc199e50f966449a838e8e0ec",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-25",
+          "new": "last_updated: 2026-10-30"
+        },
+        {
+          "old": "## Практика и первоисточники\n\n",
+          "new": "## Практика и первоисточники\n\n- [[02 Areas/ML & DL/06 Практика/14b Планировщик запросов и KV-память|Interactive scheduler and KV-memory lab]]: edit arrival times, input/output lengths, token budget and KV pool, then step through the allocations. The simulator does not run a neural network or predict GPU latency.\n\n"
+        }
+      ]
+    },
+    {
+      "source": "en/00 Textbook/14 Inference and optimization/55b Scheduling — continuous batching, chunked prefill, and prefix caching.md",
+      "before_sha256": "aa4debaa5cc7f8c5f99a3cac50073270d8e1613a8a75a4178e60f881f04aab96",
+      "after_sha256": "055803b8783e0c643f02a6928e375ea9a007a41f3076479f59473e5e96c13206",
+      "changes": [
+        {
+          "old": "last_updated: 2026-10-25",
+          "new": "last_updated: 2026-10-30"
+        },
+        {
+          "old": "canonical_revision: \"3256c046c7c117b55a8532fdf20a713eb575723327fa9c75839c55b24b582847\"",
+          "new": "canonical_revision: \"53a8c18595f4e2f2205a0d43c009e443e948720dc199e50f966449a838e8e0ec\""
+        },
+        {
+          "old": "translation_reviewed: \"2026-10-29\"",
+          "new": "translation_reviewed: \"2026-10-30\""
+        },
+        {
+          "old": "## Practice and primary sources\n\n",
+          "new": "## Practice and primary sources\n\n- [[02 Areas/ML & DL/06 Практика/14b Планировщик запросов и KV-память|Interactive scheduler and KV-memory lab]]: edit arrival times, input/output lengths, token budget and KV pool, then step through the allocations. The simulator does not run a neural network or predict GPU latency.\n\n"
+        }
+      ]
+    }
+  ]
+}

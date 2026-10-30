@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-30",
+  "scope": "Exact delivery and presentation changes only; historical expected hashes retained.",
+  "files": [
+    {
+      "source": "publishing/adapter/build.ts",
+      "changes": [
+        {
+          "old": "import { materializeAsset } from './materialize-asset.js';",
+          "new": "import { materializeAsset } from './materialize-asset.js';\nimport { loadCoursePdfDownloads } from './course-downloads.js';"
+        },
+        {
+          "old": "interface LinkedCourseArtifact extends Asset {\n  course: CoursePublication;",
+          "new": "interface LinkedCourseArtifact extends Asset {\n  course: CoursePublication;\n  externalHref?: string;"
+        },
+        {
+          "old": "  routeBySource: ReadonlyMap<string, string>\n): { markdown: string; artifacts: LinkedCourseArtifact[] }",
+          "new": "  routeBySource: ReadonlyMap<string, string>,\n  pdfDownloads: ReadonlyMap<string, string>\n): { markdown: string; artifacts: LinkedCourseArtifact[] }"
+        },
+        {
+          "old": "    artifacts.push({ source: targetPath, publicPath, course: artifactCourse });",
+          "new": "    const externalHref = /\\.pdf$/i.test(sourceOffset) ? pdfDownloads.get(normalizedSource) : undefined;\n    artifacts.push({ source: targetPath, publicPath, course: artifactCourse, externalHref });\n    if (externalHref) {\n      const url = new URL(externalHref);\n      if (suffix.startsWith('#')) url.hash = suffix;\n      else if (suffix) {\n        const [search, fragment] = suffix.split('#', 2);\n        url.search = search;\n        if (fragment !== undefined) url.hash = fragment;\n      }\n      return `[${label}](${url.href})`;\n    }"
+        },
+        {
+          "old": "  const manifest = loadManifest(options.manifestPath);",
+          "new": "  const manifest = loadManifest(options.manifestPath);\n  const pdfDownloads = await loadCoursePdfDownloads(rootDir, COURSE_PUBLICATIONS.map(course => course.sourceRoot));"
+        },
+        {
+          "old": "    const linked = prepareLinkedCourseArtifacts(rootDir, source, entry.route, page.body, routeBySource);",
+          "new": "    const linked = prepareLinkedCourseArtifacts(rootDir, source, entry.route, page.body, routeBySource, pdfDownloads);"
+        },
+        {
+          "old": "  for (const artifact of linkedArtifactsByPublicPath.values()) {\n    const destination = contained(publicDir, artifact.publicPath, 'Linked source artifact');",
+          "new": "  for (const artifact of linkedArtifactsByPublicPath.values()) {\n    if (artifact.externalHref) continue;\n    const destination = contained(publicDir, artifact.publicPath, 'Linked source artifact');"
+        },
+        {
+          "old": "  const titlesEn = new Map(parsed\n    .filter(({ pageEn }) => pageEn)\n    .map(({ entry, pageEn }) => [entry.route, pageEn!.title]));",
+          "new": "  const titlesEn = new Map(parsed\n    .filter(({ pageEn }) => pageEn)\n    .map(({ entry, pageEn }) => [entry.route, pageEn!.title]));\n  // A source-language archive has one body. Keep both catalogue addresses,\n  // but do not duplicate complete original courses as English translations.\n  const courseOriginals = parsed.filter(({ entry, page }) =>\n    entry.route.startsWith('sources/courses/') && !entry.route.endsWith('/index')\n    && !entry.sourceEn && !['redirect', 'legacy'].includes(page.status));\n  const courseAliasTargets = new Map(courseOriginals.map(({ entry }) => [\n    publicationHref(entry.route, 'en'), publicationHref(entry.route)\n  ]));"
+        },
+        {
+          "old": "    markdown = prefixPublicationLinks(markdown, publicationBasePath());",
+          "new": "    markdown = prefixPublicationLinks(markdown, publicationBasePath());\n    markdown = rewritePublicationLinks(markdown, href => {\n      const url = new URL(href, 'https://bookvar.invalid');\n      const original = courseAliasTargets.get(url.pathname);\n      return original ? original + url.search + url.hash : href;\n    });"
+        },
+        {
+          "old": "  const unexplained = report.pages.flatMap((page) => page.unresolved.map((target) => `${page.source}: ${target}`));",
+          "new": "  for (const { entry, page } of courseOriginals) {\n    const href = publicationHref(entry.route);\n    const anchors = [...new Set((headingsByRoute.get(href) ?? []).map(heading =>\n      heading.explicitAnchor ?? wikiHeadingSlug(heading.text)))].filter(Boolean);\n    const target = contained(outputDir, `en/${entry.route}.md`, 'Course alias');\n    await mkdir(dirname(target), { recursive: true });\n    const metadata = {\n      title: page.title,\n      slug: `en/${entry.route}`,\n      template: 'splash', editUrl: false, pagefind: false,\n      prev: false, next: false,\n      head: [\n        { tag: 'meta', attrs: { 'http-equiv': 'refresh', content: `0;url=${href}` } },\n        { tag: 'link', attrs: { rel: 'canonical', href } },\n        { tag: 'meta', attrs: { name: 'robots', content: 'noindex' } }\n      ]\n    };\n    const body = [\n      `[Read the complete course original](${href}). The material retains its source language.`,\n      ...anchors.map(id => `<span id=\"${escapeHtml(id)}\" aria-hidden=\"true\"></span>`),\n      '<script is:inline>',\n      `location.replace(${JSON.stringify(href)} + location.search + location.hash);`,\n      '</script>', ''\n    ].join('\\n\\n');\n    await writeFile(target, matter.stringify(body, metadata), 'utf8');\n  }\n\n  const unexplained = report.pages.flatMap((page) => page.unresolved.map((target) => `${page.source}: ${target}`));"
+        }
+      ],
+      "before_sha256": "55d4f4b70c78b2ea6c0108c8c7c96c34ed396a170903189a3feb0b088d6f3d58",
+      "after_sha256": "a32cb1d11981e3dd84868146bbeefa749c8f4b4e962fdb08573cb553347a19e0"
+    },
+    {
+      "source": "site/astro.config.mjs",
+      "changes": [
+        {
+          "old": "import { readFileSync } from 'node:fs';",
+          "new": "import { readFileSync } from 'node:fs';\nimport { rehypeMathSearch, archiveCodeDisplay } from './src/lib/markdown-publication.ts';"
+        },
+        {
+          "old": "  rehypePlugins: [rehypeKatex]",
+          "new": "  rehypePlugins: [rehypeKatex, rehypeMathSearch]"
+        },
+        {
+          "old": "  bookvarMathSourceSha256: createHash('sha256')\n    .update(readFileSync(new URL('../publishing/adapter/math.ts', import.meta.url)))\n    .digest('hex')",
+          "new": "  bookvarMathSourceSha256: createHash('sha256')\n    .update(readFileSync(new URL('../publishing/adapter/math.ts', import.meta.url)))\n    .digest('hex'),\n  bookvarPublicationPresentationSha256: createHash('sha256')\n    .update(readFileSync(new URL('./src/lib/markdown-publication.ts', import.meta.url)))\n    .digest('hex')"
+        },
+        {
+          "old": "      customCss: ['./src/styles/custom.css'],",
+          "new": "      customCss: ['./src/styles/custom.css'],\n      expressiveCode: { plugins: [archiveCodeDisplay] },"
+        }
+      ],
+      "before_sha256": "a6db8b84bea5b68f2359485b827f4121830d50518fc10f5b05bf98797d80ef02",
+      "after_sha256": "9ab0fe89bb2d8d8da928d4501343b4d585390bf0eeabbf6c859684710c5678c9"
+    }
+  ]
+}

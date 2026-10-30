@@ -1,0 +1,33 @@
+OLMo 2 training recipe and Berkeley schedule slide
+
+Text and numerical tables:
+OLMo Team et al., 2 OLMo 2 Furious, arXiv:2501.00656v1.
+https://arxiv.org/html/2501.00656v1
+License: Creative Commons Attribution 4.0 International.
+https://creativecommons.org/licenses/by/4.0/
+The versioned article HTML explicitly declares this license.
+Three complete paragraphs from section 2.3 retain the original English.
+Only markup, paragraph wrapping and absolute reference links change.
+All Table 9 scores and row order are retained, split into two Markdown
+tables for the development and held-out columns. Surrounding explanations,
+illustrative arithmetic and limitations are editorial additions.
+The linked source card additionally retains all Table 1 and Table 2 rows
+and all 88 inventory quantities. Source annotations are unwrapped into
+one cell; the two Table 2 groups are displayed separately.
+
+Image:
+Hanna Hajishirzi, Open Training Recipes for Reasoning in Language Models.
+Berkeley Advanced LLM Agents, Spring 2025; 24 February 2025.
+https://rdi.berkeley.edu/adv-llm-agents/slides/OLMo-Tulu-Reasoning-Hanna.pdf#page=147
+Physical PDF page 147, rendered in full by Poppler at 2400 x 1350 pixels.
+No crop, redraw, recoloring, translation, relabeling or upsampling.
+Source PDF SHA-256:
+6a4df80ff062cc6014b3c86d2d08d4256e059b5a9bf12a4926eda89327d37bf7
+Rendered PNG SHA-256:
+1e163ed74938d53b88c80e7170c44fd64451b79e2fc93bf3db93d9952802f37b
+Rights status: User permission record (not a license).
+The course manifest records the user's confirmation of educational reuse
+on 2026-09-04. This is not independent verification of a named license.
+No CC BY license is asserted for the course slide. Page-specific
+restrictions remain controlling; the selected page has no confidentiality
+notice. The adjacent caption distinguishes schematic and report values.

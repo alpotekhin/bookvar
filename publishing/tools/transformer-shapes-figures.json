@@ -1,0 +1,158 @@
+[
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/a1-figures1-2-model-block.png",
+    "sha256": "e76f4539f68dd365073ee3578dd5fcf5e3a4f108f8f9fd47d5091ce48529d1aa",
+    "source_asset": "05 Источники/Courses/Stanford CS336 Spring 2026/Assignments/assignment1-basics/cs336_assignment1_basics.pdf",
+    "source_asset_sha256": "cf402d1c6d3c66da035bdf33b3e2c1bbc4bb92a78b006ee36577e925a265e328",
+    "source_page": 13,
+    "render_dpi": 300,
+    "render_page_size_px": [
+      2550,
+      3300
+    ],
+    "crop_box_px": [
+      290,
+      1700,
+      2260,
+      2910
+    ]
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/compute-memory.png",
+    "sha256": "3292cbab86dd8504d7dec4e37b6cb08e79e8426216e71b233da0f1e8ddceeb4d",
+    "source_asset": "05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/images/compute-memory.png",
+    "source_asset_sha256": "3292cbab86dd8504d7dec4e37b6cb08e79e8426216e71b233da0f1e8ddceeb4d"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/stanford-cs336-2026/foundations/jax-scaling-roofline.webp",
+    "sha256": "2c9018ab614d888baec0a3cc15c41e67d195988df0f0224985968c8d36e064ce",
+    "source_asset": "05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/var/files/image-42d32b9c87939fe9a4b0a268d6d02ea7-https_jax-ml_github_io_scaling-book_assets_img_roofline-improved-1400_webp",
+    "source_asset_sha256": "2c9018ab614d888baec0a3cc15c41e67d195988df0f0224985968c8d36e064ce"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/jax-roofline-batch.png",
+    "sha256": "f5d0962eb67508045c55b369f023cc958a47297ae6516386a30165a66180038a",
+    "source_asset": "05 Источники/Originals/transformer-shapes-2026-10-22/jax-roofline-batch.png",
+    "source_asset_sha256": "f5d0962eb67508045c55b369f023cc958a47297ae6516386a30165a66180038a"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-18.png",
+    "source_asset": "05 Источники/Courses/Stanford CS336 Spring 2026/Assignments/assignment1-basics/cs336_assignment1_basics.pdf",
+    "source_asset_sha256": "cf402d1c6d3c66da035bdf33b3e2c1bbc4bb92a78b006ee36577e925a265e328",
+    "source_page": 18,
+    "render_dpi": 180,
+    "render_page_size_px": [
+      1530,
+      1980
+    ],
+    "sha256": "4d19b0734a093cbc823fefa3addd7da88576028c96c380e1fdbffd3acaf5b478"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-19.png",
+    "source_asset": "05 Источники/Courses/Stanford CS336 Spring 2026/Assignments/assignment1-basics/cs336_assignment1_basics.pdf",
+    "source_asset_sha256": "cf402d1c6d3c66da035bdf33b3e2c1bbc4bb92a78b006ee36577e925a265e328",
+    "source_page": 19,
+    "render_dpi": 180,
+    "render_page_size_px": [
+      1530,
+      1980
+    ],
+    "sha256": "7c5990beec2c46c911f47c28555f9c4298cdb9057e3e452904ffe2364a933d83"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-20.png",
+    "source_asset": "05 Источники/Courses/Stanford CS336 Spring 2026/Assignments/assignment1-basics/cs336_assignment1_basics.pdf",
+    "source_asset_sha256": "cf402d1c6d3c66da035bdf33b3e2c1bbc4bb92a78b006ee36577e925a265e328",
+    "source_page": 20,
+    "render_dpi": 180,
+    "render_page_size_px": [
+      1530,
+      1980
+    ],
+    "sha256": "10b6efdd09aa8dce57b1adf821ce41a18769949a6be1026e36d47eef463c9d26"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-21.png",
+    "source_asset": "05 Источники/Courses/Stanford CS336 Spring 2026/Assignments/assignment1-basics/cs336_assignment1_basics.pdf",
+    "source_asset_sha256": "cf402d1c6d3c66da035bdf33b3e2c1bbc4bb92a78b006ee36577e925a265e328",
+    "source_page": 21,
+    "render_dpi": 180,
+    "render_page_size_px": [
+      1530,
+      1980
+    ],
+    "sha256": "5ebb7a3d409531488fc83521e806f4d761ef14d453bba1ceda9205f4b52d655f"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-22.png",
+    "source_asset": "05 Источники/Courses/Stanford CS336 Spring 2026/Assignments/assignment1-basics/cs336_assignment1_basics.pdf",
+    "source_asset_sha256": "cf402d1c6d3c66da035bdf33b3e2c1bbc4bb92a78b006ee36577e925a265e328",
+    "source_page": 22,
+    "render_dpi": 180,
+    "render_page_size_px": [
+      1530,
+      1980
+    ],
+    "sha256": "98e01b86f9ed672b713716bab13f9958182b5eefa0d5111666eb56610177061e"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-23.png",
+    "source_asset": "05 Источники/Courses/Stanford CS336 Spring 2026/Assignments/assignment1-basics/cs336_assignment1_basics.pdf",
+    "source_asset_sha256": "cf402d1c6d3c66da035bdf33b3e2c1bbc4bb92a78b006ee36577e925a265e328",
+    "source_page": 23,
+    "render_dpi": 180,
+    "render_page_size_px": [
+      1530,
+      1980
+    ],
+    "sha256": "37a348c615fb44bead0f4d7e69d48e7ad3f42ccc51115b5e76f3c676f0c493b5"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-24.png",
+    "source_asset": "05 Источники/Courses/Stanford CS336 Spring 2026/Assignments/assignment1-basics/cs336_assignment1_basics.pdf",
+    "source_asset_sha256": "cf402d1c6d3c66da035bdf33b3e2c1bbc4bb92a78b006ee36577e925a265e328",
+    "source_page": 24,
+    "render_dpi": 180,
+    "render_page_size_px": [
+      1530,
+      1980
+    ],
+    "sha256": "8ef8c01290e18dc6c27ba26f133785292bcb54ce080e2fc88242c44dc2f6c503"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-25.png",
+    "source_asset": "05 Источники/Courses/Stanford CS336 Spring 2026/Assignments/assignment1-basics/cs336_assignment1_basics.pdf",
+    "source_asset_sha256": "cf402d1c6d3c66da035bdf33b3e2c1bbc4bb92a78b006ee36577e925a265e328",
+    "source_page": 25,
+    "render_dpi": 180,
+    "render_page_size_px": [
+      1530,
+      1980
+    ],
+    "sha256": "a13cba611a89fa649dc060680c1c2ac4145f37d64752660e5ed6b24ab2353598"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-26.png",
+    "source_asset": "05 Источники/Courses/Stanford CS336 Spring 2026/Assignments/assignment1-basics/cs336_assignment1_basics.pdf",
+    "source_asset_sha256": "cf402d1c6d3c66da035bdf33b3e2c1bbc4bb92a78b006ee36577e925a265e328",
+    "source_page": 26,
+    "render_dpi": 180,
+    "render_page_size_px": [
+      1530,
+      1980
+    ],
+    "sha256": "5c5fbac1fa0673d0bed457f9ec95444e6d53a1796a5da4c0b44b7d1a555ef7fb"
+  },
+  {
+    "asset": "00 Учебник/Assets/Figures/curated/transformer-shapes-2026-10-22/a1-page-27.png",
+    "source_asset": "05 Источники/Courses/Stanford CS336 Spring 2026/Assignments/assignment1-basics/cs336_assignment1_basics.pdf",
+    "source_asset_sha256": "cf402d1c6d3c66da035bdf33b3e2c1bbc4bb92a78b006ee36577e925a265e328",
+    "source_page": 27,
+    "render_dpi": 180,
+    "render_page_size_px": [
+      1530,
+      1980
+    ],
+    "sha256": "5ee25dcff4c2c12069464b5119bae88b17e66cf94ee0597058dc51fe2d4d543e"
+  }
+]

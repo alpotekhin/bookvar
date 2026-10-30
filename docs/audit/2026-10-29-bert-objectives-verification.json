@@ -1,0 +1,350 @@
+{
+  "date": "2026-10-29",
+  "status": "verified-locally-not-published",
+  "scope": "Whole-word masking, SpanBERT/SBO and ALBERT SOP integrated into the existing BERT chapter in both locale routes; full comparison of the archived MLM/NSP notes with the BERT and T5 owners. This is not acceptance of the entire textbook, every encoder variant or all 31 source notes.",
+  "canonicalMarkdown": "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md",
+  "englishMarkdown": "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md",
+  "routes": [
+    "/textbook/models/bert-roberta-deberta/",
+    "/en/textbook/models/bert-roberta-deberta/"
+  ],
+  "journal": "docs/audit/2026-10-29-bert-objectives-additions.json",
+  "sha256": {
+    "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md": "0cce42e115bc2a8c453047ce060f7a67dac104a9eae45ed1b899a49f4d921741",
+    "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md": "b7a4f3f2d0755a7b495e98fe29a85132bb3285dd9aae43bc6ba3ac85831fe7f1",
+    "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer.md": "1bced617c9985be26919d79c4d01a87e4d0a3087d59e65d2e200fd2f84608dfc",
+    "publishing/tools/check_bert_family_examples.py": "b4eb6ad2f99f8e5ac819b5dcf9cceae9d9edc49b0c7a4b1c0272fd7f02552284",
+    "publishing/tests/bert-family.test.ts": "046e6362a065249994f871d661a9354ee93337313b413dbf6516e51cd4294bc7",
+    "publishing/tests/bert-objectives.test.ts": "d719439ad6d61e82ee60e11232168e9c4b1529f9e27f3b4ff122c8a5d0476056",
+    "publishing/tests/asset-registry.test.ts": "fed208d7cfc8592278bd57a502749d908b8aa70ab99b47e714d16395be538049",
+    "publishing/tests/site-output.test.ts": "fb3d9bdbd22fd080024a97111f00c8debd113e4cad45d8c5cd15a41797fb4243",
+    "publishing/tests/small-data-finetuning.test.ts": "ab07db9064d55f7db11adb168defa77fba170af90420e724c11a3b3862afe5ca",
+    "publishing/tests/en-transformer-models-parity.test.ts": "19701237212458a0a4355ec1115ae370a3b487142a946c2e4dd63363960ea592",
+    "publishing/tests/english-reconciliation.test.ts": "a8efa5e023566b15316ce94940b8ae4984510e648f115d16d68a2d3933ce3098",
+    "publishing/tools/topic-consolidation-baseline.mjs": "337e29ee6a778d43ad877ff65c63624ba56fb2feb69d494d7c74cf07c172e1f7",
+    "publishing/tools/topic_consolidation_baseline.py": "803c18987941c9b4c22427a4d129da37ea2ca5031415535616183b0e2a09f9af",
+    "docs/audit/2026-10-29-bert-objectives-additions.json": "3b5e064211e7ec9a371534b20449508ec15daba834f79dfaa92bf48d45a5749a",
+    "05 Источники/asset-registry.yml": "25d02c52bd38da1384ce4ebab66b7d7a5c06827badc37d77fc190559a8fbb8d6",
+    "01 Справочник/_index.md": "ec6d44e2e640a1fb495067d10cb179533aff15eaa2d2b1aff64da3db80d68766",
+    "en/01 Reference/_index.md": "8f57b76daab9e5377fe6b494b93503f9972ebd343ed91caa4cdadb5f2b2f46a0",
+    "00 Учебник/Assets/Figures/curated/bert-objectives-2026-10-29/assets.json": "fd282ea4b1222270599949280040a8b8db870b390190c2ad5a8f870a512edf3e",
+    "site/dist/textbook/models/bert-roberta-deberta/index.html": "dc0c0d107df43425bcbd455273896707184812a420718633e5caf6f9c668fd2c",
+    "site/dist/en/textbook/models/bert-roberta-deberta/index.html": "661558a49a06d2bffb5cfd0d76cb23634fcd89f22343cbbe00dd287484185494",
+    "/var/tmp/bookvar-bert-objectives-pages-20261029/textbook/models/bert-roberta-deberta/index.html": "2267949fc26f5e7e50e438b73a085d8a6bd0059ab98c21ec7fe74e3a93098c12",
+    "/var/tmp/bookvar-bert-objectives-pages-20261029/en/textbook/models/bert-roberta-deberta/index.html": "5db20331288b717ad79978a639633e9f071238e2dd79a627786dc9c6c8212f17",
+    "05 Источники/Originals/bert-objectives-2026-10-29/albert-LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "05 Источники/Originals/bert-objectives-2026-10-29/albert-create_pretraining_data.py": "4948a9ba32ecc52b09fec4a71fcacf7c6b0e1ba284d6c10021de687e6a388ee0",
+    "05 Источники/Originals/bert-objectives-2026-10-29/bert-LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "05 Источники/Originals/bert-objectives-2026-10-29/bert-README.md": "43b560935cfaef7427ae15d5c2c089b46d857e9e51fce5f20c93a9a74f99b756",
+    "05 Источники/Originals/bert-objectives-2026-10-29/bert-create_pretraining_data.py": "7c3df7749e6327f85fdd00adaf6ed55d6399ee58d3d844d2281db60b36129b21",
+    "05 Источники/Originals/bert-objectives-2026-10-29/spanbert-author.pdf": "86bad382bd3ba3bb1cae16636da6867a5846e10f7d881516af0e1ccd67a5925b",
+    "05 Источники/Originals/bert-objectives-2026-10-29/spanbert-code-LICENSE": "336255dc30193e8e15d689d9481bb05673d89055718f3a96923a7ffb99adbbaf",
+    "05 Источники/Originals/bert-objectives-2026-10-29/spanbert-masking.py": "43442d64e91d4a7a05984c205e1d2383635071ceb04d82e1b876061c7fb4faee",
+    "docs/audit/evidence/2026-10-29-bert-objectives/observations.json": "5f59313bf0e1fba8bb8518de7689a5df50de2d266356a81f30074854ab317ed8"
+  },
+  "explanationReview": {
+    "fullCanonicalAndEnglishBodiesRead": true,
+    "readingScope": "Both complete pre-edit BERT locale chapters were read. The complete integrated canonical text was reread in four ranges; two final stylistic phrases were then corrected identically without changing the mechanism, source excerpts or executable blocks. The entire current English chapter was reread at b7a4f3f2; the new English sections are byte-identical between locales, and the exact journal restores the unchanged prior bodies. The complete 827-line T5 owner was also read; it was not edited.",
+    "sourceLanguage": "The new sections, source excerpts and original captions remain English in both locale routes. Existing translated prose was preserved; no new translation was created.",
+    "sourceComparisons": [
+      {
+        "mechanism": "Whole-word target grouping versus corruption",
+        "source": "Official BERT README WWM release (lines 74–118) and create_masked_lm_predictions (lines 341–415) at eedf5716ce1268e56f0a50264a88cafad334ac61",
+        "url": "https://github.com/google-research/bert/blob/eedf5716ce1268e56f0a50264a88cafad334ac61/README.md#L74-L118",
+        "preserved": "WordPiece vocabulary/head unchanged; all pieces grouped for target selection; oversized candidate groups skipped; replacement remains per piece; the original English motivation is quoted under Apache-2.0.",
+        "example": "play/##ing has target rows 4 and 5 under budget two, while budget one skips that group. Executing the actual original function confirms one selected piece may remain unchanged while both original labels are retained."
+      },
+      {
+        "mechanism": "Span boundary objective",
+        "source": "Joshi et al., SpanBERT section 3.2 and Figure 1",
+        "url": "https://aclanthology.org/2020.tacl-1.5/",
+        "preserved": "External boundary states plus relative target offset, two dense/GELU/LayerNorm transforms, tied vocabulary output, MLM plus SBO and non-autoregressive predictions. Contextual vector notation is changed explicitly from source bold x to h.",
+        "example": "Figure's football at x7 uses h4,h9,p3. Supplied probabilities .5/.25 give log(8). The small module verifies direct final-output gradients reach boundary rows 3/8, while combined MLM/SBO also trains the internal target states; no claim of zero gradients through the full encoder."
+      },
+      {
+        "mechanism": "Span sampling and controlled comparisons",
+        "source": "SpanBERT sections 3.1/3.3, 4.2–4.3 and 6, Figures 1–2, Tables 6–7; released masking.py at 0670d8b6a38f6714b85ea7a033f16bd8cc162676",
+        "url": "https://github.com/facebookresearch/SpanBERT/blob/0670d8b6a38f6714b85ea7a033f16bd8cc162676/pretraining/fairseq/data/masking.py",
+        "preserved": "Finite normalized length distribution, word versus subword budget, possible final-word clipping in the released loop, span-level corruption, merging and external-boundary constraints. Single-segment/NSP changes are separated from adding SBO.",
+        "example": "Normalized geometric on 1–10 has mean 3.797097503983286; clamping an unbounded draw gives 4.463129088, a different distribution. Table 7's 1.2M-step development ablation is not the final 2.4M-step test result."
+      },
+      {
+        "mechanism": "Sentence-order prediction",
+        "source": "Lan et al., ALBERT v6 sections 3.1 and 4.6/Table 5; complete relevant pair-construction/label branch of pinned create_pretraining_data.py at b772393d3dae115b493258ce8e37c17b2cc62100",
+        "url": "https://arxiv.org/abs/1909.11942v6",
+        "preserved": "Same consecutive pair reversed for the negative, original swap operators, pooled binary classification plus MLM, ordered=0/swapped=1, legacy next_sentence_labels feature, one-segment random-document fallback and truncation caveat. Exact source-version measurements replace the archival unmatched table.",
+        "example": "Door/entry pair has the same combined token multiset but different order/types. Supplied two-class logits assign .75 to each correct label, mean loss .28768207245178085 and gradients [-.125,.125]/[.125,-.125]. This is not ALBERT training."
+      },
+      {
+        "mechanism": "T5 span corruption connection",
+        "source": "Complete unchanged canonical T5 chapter at its recorded hash, including source/target conversion, baseline/final mask distinction, training step and objective comparisons",
+        "url": "https://jmlr.org/papers/v21/20-074.html",
+        "preserved": "Sentinels and a separate causal decoder are linked to the existing full explanation instead of duplicated as another short topic. SpanBERT preserves positions and encoder-head predictions, unlike T5's target sequence.",
+        "example": "Existing [2,3,4,5,6,7,8] example reconstructs deleted 3,4 and 7 from sentinel-delimited source/target. Target-length and 15-percent/mean-three qualifications remain in that chapter."
+      }
+    ],
+    "facts": "Original snippets/README checked against pinned source bytes; source Tables 5/6/7 compared at their actual versions. Toy calculations and reported experiments are labelled separately.",
+    "style": "No-ai-slop review plus local academic-writing qualifications applied to the whole text. Original quotations/operators preserved, decorative emphasis removed, and intermediate reasoning/examples/caveats retained.",
+    "remainingWithinAddedMechanisms": [],
+    "notClaimed": "No new translation, full-model pretraining, GLUE/SQuAD benchmark reproduction, universal objective ranking, complete XLNet/ELECTRA/ALBERT architecture catalogue or full-book completion."
+  },
+  "cpu": {
+    "chapter_sha256": "0cce42e115bc2a8c453047ce060f7a67dac104a9eae45ed1b899a49f4d921741",
+    "torch": "2.14.1",
+    "published_standalone_python_blocks": 8,
+    "original_wwm_target_positions": [
+      4,
+      5
+    ],
+    "selected_unchanged_piece": "##ing",
+    "sbo_direct_boundary_rows": [
+      3,
+      8
+    ],
+    "sbo_final_internal_state_gradient_nonzero": false,
+    "combined_mlm_sbo_internal_gradient_nonzero": true,
+    "truncated_geometric_mean": 3.797097503983286,
+    "clamped_geometric_mean": 4.4631290880000005,
+    "sop_mean_loss": 0.28768207245178085,
+    "negative_controls": [
+      "partial word selected despite group budget",
+      "all selected pieces assumed literal MASK",
+      "SBO head reads internal final states",
+      "same boundary input without relative offset",
+      "clamped versus truncated geometric",
+      "topic-only bag features distinguish swapped pair"
+    ],
+    "scope": "CPU computation and original preprocessing function, not BERT/SpanBERT/ALBERT pretraining"
+  },
+  "checks": {
+    "publisher": {
+      "files": 127,
+      "tests": 823,
+      "passed": true,
+      "log": "/var/tmp/bookvar-bert-objectives-unit-verified-20261029.log"
+    },
+    "site": {
+      "files": 6,
+      "tests": 89,
+      "passed": true,
+      "log": "/var/tmp/bookvar-bert-objectives-site-20261029.log"
+    },
+    "output": {
+      "tests": 172,
+      "passed": true,
+      "log": "/var/tmp/bookvar-bert-objectives-output-verified-20261029.log"
+    },
+    "root": {
+      "pages": 2006,
+      "brokenLinks": 0,
+      "buildLog": "/var/tmp/bookvar-bert-objectives-root-final-20261029.log",
+      "linkLog": "/var/tmp/bookvar-bert-objectives-links-20261029.log"
+    },
+    "pages": {
+      "base": "/bookvar",
+      "pages": 2006,
+      "brokenLinks": 0,
+      "buildLog": "/var/tmp/bookvar-bert-objectives-pages-build-20261029.log",
+      "linkLog": "/var/tmp/bookvar-bert-objectives-pages-links-verified-20261029.log",
+      "liveDeployment": false
+    },
+    "servedLicenses": [
+      {
+        "url": "http://127.0.0.1:62839/bookvar/licenses/google-bert-eedf5716-Apache-2.0.txt",
+        "status": 200,
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+        "equalsArchive": true
+      },
+      {
+        "url": "http://127.0.0.1:62839/bookvar/licenses/google-albert-b772393d-Apache-2.0.txt",
+        "status": 200,
+        "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+        "equalsArchive": true
+      }
+    ],
+    "historicalEvidence": "Older English parity/reflow and PEFT receipts were not edited or rebaselined. Their tests restore only the new hash-pinned reversible delta. New current-source parity/examples/figures are tested independently.",
+    "validationRepairs": [
+      "Historical English tests initially compared the expanded chapter with an older exact receipt. They now restore only the separately recorded delta rather than replacing the old acceptance hashes.",
+      "One whole-output scan exceeded its existing five-second timeout while builds and other I/O-heavy tests ran concurrently. The unchanged assertions passed in the isolated 172-test rerun; no timeout or assertion was weakened.",
+      "The first Pages checker invocation used CJS eval with a top-level-await module. The ESM node/tsx invocation completed with zero broken links."
+    ],
+    "scopedDiffCheck": "Passed for the changed chapters, publication helpers/tests, registry, reference indexes and current plan/ledger. Existing source-authored whitespace elsewhere in the inherited dirty worktree was not normalized.",
+    "typecheck": "No fresh Astro typecheck in this content-only increment; compilation/output/UI are current evidence, not a substitute typecheck claim.",
+    "warnings": "Retained Harvard original PDFs emit existing Poppler path diagnostics in the asset suite; source-archive locale warnings, unknown promql/toc highlighting warnings and display-newline warnings elsewhere remain visible in logs. Current BERT routes have zero observed KaTeX errors."
+  },
+  "provenance": {
+    "newFigures": [
+      {
+        "id": "curated-bert-objectives-1add71c0a3c2",
+        "asset": "00 Учебник/Assets/Figures/curated/bert-objectives-2026-10-29/spanbert-boundary-objective.png",
+        "author": "Mandar Joshi, Danqi Chen, Yinhan Liu, Daniel S. Weld, Luke Zettlemoyer, Omer Levy",
+        "title": "SpanBERT span-boundary objective, original Figure 1",
+        "source_url": "https://aclanthology.org/2020.tacl-1.5/",
+        "source_image_url": "https://www.cs.princeton.edu/~danqic/papers/tacl2020.pdf#page=2",
+        "source_asset": "05 Источники/Originals/bert-objectives-2026-10-29/spanbert-author.pdf",
+        "source_asset_sha256": "86bad382bd3ba3bb1cae16636da6867a5846e10f7d881516af0e1ccd67a5925b",
+        "source_page": 2,
+        "source_printed_page": 65,
+        "source_page_snapshot": "05 Источники/Originals/bert-objectives-2026-10-29/spanbert-author.pdf",
+        "source_page_sha256": "86bad382bd3ba3bb1cae16636da6867a5846e10f7d881516af0e1ccd67a5925b",
+        "license": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "license_evidence": "05 Источники/Originals/bert-objectives-2026-10-29/spanbert-author.pdf",
+        "license_evidence_sha256": "86bad382bd3ba3bb1cae16636da6867a5846e10f7d881516af0e1ccd67a5925b",
+        "copyright": "Copyright 2020 Association for Computational Linguistics",
+        "derivation": "pdf-page-render-crop",
+        "render_dpi": 288,
+        "render_page_size_px": [
+          2380,
+          3368
+        ],
+        "crop_box_px": [
+          280,
+          180,
+          2120,
+          1150
+        ],
+        "dimensions_px": [
+          1840,
+          970
+        ],
+        "width": 1840,
+        "height": 970,
+        "bytes": 157464,
+        "sha256": "1add71c0a3c2291faae8e87466905d82e129c89a3fe874b9a22b7536bb2b95e9",
+        "modifications": "Unchanged PDF raster crop of the complete original figure and English caption. Only surrounding page material removed; no redraw, translation, relabeling or rescaling.",
+        "metadata_status": "verified",
+        "provenance_confirmation": "source-license-verified",
+        "last_verified": "2026-10-29",
+        "used_in": [
+          "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md",
+          "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md"
+        ]
+      },
+      {
+        "id": "curated-bert-objectives-be2494e1a024",
+        "asset": "00 Учебник/Assets/Figures/curated/bert-objectives-2026-10-29/spanbert-span-lengths.png",
+        "author": "Mandar Joshi, Danqi Chen, Yinhan Liu, Daniel S. Weld, Luke Zettlemoyer, Omer Levy",
+        "title": "SpanBERT sampled span-length distribution, original Figure 2",
+        "source_url": "https://aclanthology.org/2020.tacl-1.5/",
+        "source_image_url": "https://www.cs.princeton.edu/~danqic/papers/tacl2020.pdf#page=3",
+        "source_asset": "05 Источники/Originals/bert-objectives-2026-10-29/spanbert-author.pdf",
+        "source_asset_sha256": "86bad382bd3ba3bb1cae16636da6867a5846e10f7d881516af0e1ccd67a5925b",
+        "source_page": 3,
+        "source_printed_page": 66,
+        "source_page_snapshot": "05 Источники/Originals/bert-objectives-2026-10-29/spanbert-author.pdf",
+        "source_page_sha256": "86bad382bd3ba3bb1cae16636da6867a5846e10f7d881516af0e1ccd67a5925b",
+        "license": "CC BY 4.0",
+        "license_url": "https://creativecommons.org/licenses/by/4.0/",
+        "license_evidence": "05 Источники/Originals/bert-objectives-2026-10-29/spanbert-author.pdf",
+        "license_evidence_sha256": "86bad382bd3ba3bb1cae16636da6867a5846e10f7d881516af0e1ccd67a5925b",
+        "copyright": "Copyright 2020 Association for Computational Linguistics",
+        "derivation": "pdf-page-render-crop",
+        "render_dpi": 288,
+        "render_page_size_px": [
+          2380,
+          3368
+        ],
+        "crop_box_px": [
+          1210,
+          205,
+          2120,
+          1090
+        ],
+        "dimensions_px": [
+          910,
+          885
+        ],
+        "width": 910,
+        "height": 885,
+        "bytes": 58782,
+        "sha256": "be2494e1a024c6e7de135f0de896e1a2f2fc3108776a3fa51292e20f2410c7ac",
+        "modifications": "Unchanged PDF raster crop of the complete original figure and English caption. Only surrounding page material removed; no redraw, translation, relabeling or rescaling.",
+        "metadata_status": "verified",
+        "provenance_confirmation": "source-license-verified",
+        "last_verified": "2026-10-29",
+        "used_in": [
+          "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa.md",
+          "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/03 BERT, RoBERTa, and DeBERTa.md"
+        ]
+      }
+    ],
+    "figuresInChapter": 9,
+    "originalFigures": "Seven existing originals retain their exact bytes. Two new complete SpanBERT figure/caption crops were personally compared with the full original PDF pages and inspected in the actual viewer. Test rerendering reproduces both PNGs byte-for-byte.",
+    "rights": "The published TACL paper itself states CC-BY 4.0 on its first page. That paper license is distinct from the SpanBERT code repository's CC BY-NC 4.0 license. Original BERT/ALBERT snippets retain Apache-2.0 attribution and served full license copies.",
+    "privatePaper": {
+      "path": "raw/papers/bert-objectives-2026-10-29/albert-1909.11942v6.pdf",
+      "sha256": "d631c30f3f41684862e854ad1cb379e9dbf9b1c1fa1510ab618f45b8dfc07e2c",
+      "bytes": 419105,
+      "policy": "Git-ignored under raw. arXiv's nonexclusive distribution license was not treated as permission to mirror the full ALBERT paper or its figures. SOP uses attributed factual measurements, an Apache-licensed source excerpt and a labelled added example."
+    },
+    "downloadCleanup": "The stalled 16384-byte incomplete ACL transfer was stopped and removed only after a complete licensed author-hosted copy was obtained and verified as a 14-page PDF. The original source and both crops are retained."
+  },
+  "browser": {
+    "observations": "docs/audit/evidence/2026-10-29-bert-objectives/observations.json",
+    "viewports": [
+      "1280x900 desktop, client 1265",
+      "360x800 mobile, client 345"
+    ],
+    "observed": "Root and Pages routes load nine figures and eleven pre blocks, with no KaTeX errors or document-level horizontal overflow. The two new originals were inspected in the desktop viewer; the boundary figure is readable after mobile zoom with scrolling inside the viewer. Wide tables scroll internally. Both locale routes retain the same new source-native English explanation.",
+    "viewerQualification": "The full original caption is part of each raster. Additional attribution remains in the viewer footer and may require its own scroll on a narrow/short viewport; no source pixels or caption lines were removed.",
+    "screenshots": [
+      {
+        "path": "docs/audit/evidence/2026-10-29-bert-objectives/desktop-length-distribution.png",
+        "sha256": "162f2fa3e55cd3ca9e0e761acdc39a301736d5b7ee7968bbddd6a366da3b68b5"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-bert-objectives/desktop-source-viewer.png",
+        "sha256": "a4ea0b55580c4e1a90e381b9204aa9d784b2d2b065413c8b82c41e8c324dc0fc"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-bert-objectives/desktop-spanbert.png",
+        "sha256": "e3486ddf172fe9c621993cd99ff80961e8df79a6cfa1d9647708bfbab68ad023"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-bert-objectives/mobile-sop.png",
+        "sha256": "c43513194f4a750dc3e5ece2029010a7fecc66ccdaeac44567eceb7d597b908f"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-bert-objectives/mobile-source-zoom.png",
+        "sha256": "3053bf4c1e69cc24fd121dbb7c181e05423a731be5bfad1afa6458c056aa1a50"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-bert-objectives/pages-desktop-spanbert.png",
+        "sha256": "e3486ddf172fe9c621993cd99ff80961e8df79a6cfa1d9647708bfbab68ad023"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-bert-objectives/pages-mobile-wwm.png",
+        "sha256": "c5967408dfdfc7e6e813f900def447762c248bd7c16bf095822f4481337f8f46"
+      }
+    ]
+  },
+  "legacyReconciliation": {
+    "total": 31,
+    "sourceFullRead": 15,
+    "reconciled": 7,
+    "readInProgress": 8,
+    "unread": 16,
+    "canonicalWholeReads": 8,
+    "note": "These are archived-note comparison counts, not a whole-book completion percentage."
+  },
+  "publication": "Local only. No commit, push or deployment in this increment. Global route review, remaining 24 archival-note comparisons and dev/Pages release remain required.",
+  "temporaryBuildCleanup": "Both recorded Pages chapter hashes matched immediately before cleanup. The dedicated preview processes on port 62839 were verified by their command lines and stopped; only /var/tmp/bookvar-bert-objectives-pages-20261029 was removed. Four own intermediate PDF text/page-render files were removed. Normal root preview, canonical chapters, original paper/code packets, curated figures and screenshots remain. The two removed Pages HTML hashes are historical build evidence, not current filesystem paths.",
+  "completionAudit": {
+  "passed": true,
+  "counts": {
+    "total": 31,
+    "sourceFullRead": 15,
+    "reconciled": 7,
+    "readInProgress": 8,
+    "unread": 16,
+    "canonicalWholeReads": 8
+  },
+  "originalSourceHashesChecked": 31,
+  "canonicalReadHashesChecked": 8,
+  "receiptHashesChecked": 31,
+  "screenshotsChecked": 7,
+  "exactReversibleFiles": 5,
+  "errors": []
+}
+}

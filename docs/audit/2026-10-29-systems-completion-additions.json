@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-29",
+  "review": "docs/audit/2026-10-29-systems-completion.md",
+  "files": [
+    {
+      "source": "00 Учебник/10 ML Systems/02 GPU, CUDA и иерархия памяти.md",
+      "before_sha256": "d432d06ee1687fca66fe6151028a1c4a2bb2313a7e23d9d2b7d877b96cb48d81",
+      "after_sha256": "578b2b687fedcc234e8925071ce9071aabffa9c950eb01445cfb86fb9b2db7f1",
+      "blocks": [
+        {
+          "id": "systolic",
+          "sha256": "2ad582f6b8876e4bb06600c349b3054cb051e73214183356be7756d2fe4f45ad"
+        }
+      ],
+      "frontmatter_changes": [
+        {
+          "old": "last_updated: 2026-10-26",
+          "new": "last_updated: 2026-10-29"
+        },
+        {
+          "old": "source_language: ru",
+          "new": "source_language: mixed"
+        }
+      ]
+    },
+    {
+      "source": "00 Учебник/14 Inference и оптимизация/57b Сжатие моделей — pruning, distillation и low-rank.md",
+      "before_sha256": "9fb33a98e8ece36cfabefe9e589c1ed9a5d7a08f4f686358f4ed2c0769aad4f3",
+      "after_sha256": "abfc32486bfbccb7475c316da89c0dd235c3628572db0121d7b6165aca4ec886",
+      "blocks": [
+        {
+          "id": "pruning",
+          "sha256": "30764dc33d8cfa01daddff0e1345483ef9d755457850e799e1e5bfb45069fe88"
+        },
+        {
+          "id": "nas-exits",
+          "sha256": "e210ee3292ab2f9077958bbe10c995f31ccdbce232380ad40e2818079f54917a"
+        },
+        {
+          "id": "architecture-details",
+          "sha256": "37258b1008b0d78ebf5d718fc9c3b19285356709e7be49d0afeceaccc2c76946"
+        }
+      ],
+      "frontmatter_changes": []
+    }
+  ]
+}

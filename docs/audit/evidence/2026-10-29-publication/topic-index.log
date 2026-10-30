@@ -1,0 +1,3 @@
+bash: warning: setlocale: LC_ALL: cannot change locale (C.UTF-8): Bad file descriptor
+$ tsx tools/sync-topic-index.ts --check
+{"mode":"check","topics":150,"indexes":["01 Справочник/_index.md","en/01 Reference/_index.md"]}

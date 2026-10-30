@@ -1,0 +1,92 @@
+[
+  {
+    "id": "curated-group-equivariance-feature-fields-2f6dea2bbf0c",
+    "asset": "00 Учебник/Assets/Figures/curated/group-equivariance-2026-10-26/escnn-feature-fields.png",
+    "author": "Gabriele Cesa, Leon Lang, Maurice Weiler and escnn contributors; Qualcomm Innovation Center, Inc.",
+    "source_url": "https://github.com/QUVA-Lab/escnn/blob/9ad44cc37d694d9c805c4fef4d16722a254b3bf2/README.md",
+    "source_image_url": "https://raw.githubusercontent.com/QUVA-Lab/escnn/9ad44cc37d694d9c805c4fef4d16722a254b3bf2/visualizations/feature_fields.png",
+    "commit": "9ad44cc37d694d9c805c4fef4d16722a254b3bf2",
+    "source_asset": "05 Источники/Originals/group-equivariance-2026-10-26/escnn-feature-fields.png",
+    "source_asset_sha256": "2f6dea2bbf0cb3cb3982e248b2f3adada87a362435f944d34ab8c614cb617dee",
+    "sha256": "2f6dea2bbf0cb3cb3982e248b2f3adada87a362435f944d34ab8c614cb617dee",
+    "dimensions_px": [
+      2082,
+      547
+    ],
+    "source_page_snapshot": "05 Источники/Originals/group-equivariance-2026-10-26/escnn-README.md",
+    "source_page_sha256": "946ac8fb2cd6d40e734f20cb27f7d9706626403c6a35f79f5e3503b6ed58e6cb",
+    "license": "BSD-3-Clause-Clear",
+    "license_url": "https://github.com/QUVA-Lab/escnn/blob/9ad44cc37d694d9c805c4fef4d16722a254b3bf2/LICENSE",
+    "license_evidence": "05 Источники/Originals/group-equivariance-2026-10-26/escnn-LICENSE",
+    "license_evidence_sha256": "674eba3c3cb92c873a029600e26a3c74e12e5fab694f873c02c67910cdc44974",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original copied byte-for-byte. No crop, redraw, relabeling, translation, recompression or frame removal. Author-recorded demo is not a local model execution.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-26",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md"
+    ]
+  },
+  {
+    "id": "curated-group-equivariance-vectorfield-c05794ecb738",
+    "asset": "00 Учебник/Assets/Figures/curated/group-equivariance-2026-10-26/escnn-vectorfield.gif",
+    "author": "Gabriele Cesa, Leon Lang, Maurice Weiler and escnn contributors; Qualcomm Innovation Center, Inc.",
+    "source_url": "https://github.com/QUVA-Lab/escnn/blob/9ad44cc37d694d9c805c4fef4d16722a254b3bf2/README.md",
+    "source_image_url": "https://raw.githubusercontent.com/QUVA-Lab/escnn/9ad44cc37d694d9c805c4fef4d16722a254b3bf2/visualizations/vectorfield.gif",
+    "commit": "9ad44cc37d694d9c805c4fef4d16722a254b3bf2",
+    "source_asset": "05 Источники/Originals/group-equivariance-2026-10-26/escnn-vectorfield.gif",
+    "source_asset_sha256": "c05794ecb738ec55a0f45bfea4491030273fe36d73bb344ece7e826c157441cb",
+    "sha256": "c05794ecb738ec55a0f45bfea4491030273fe36d73bb344ece7e826c157441cb",
+    "dimensions_px": [
+      1024,
+      366
+    ],
+    "source_page_snapshot": "05 Источники/Originals/group-equivariance-2026-10-26/escnn-README.md",
+    "source_page_sha256": "946ac8fb2cd6d40e734f20cb27f7d9706626403c6a35f79f5e3503b6ed58e6cb",
+    "license": "BSD-3-Clause-Clear",
+    "license_url": "https://github.com/QUVA-Lab/escnn/blob/9ad44cc37d694d9c805c4fef4d16722a254b3bf2/LICENSE",
+    "license_evidence": "05 Источники/Originals/group-equivariance-2026-10-26/escnn-LICENSE",
+    "license_evidence_sha256": "674eba3c3cb92c873a029600e26a3c74e12e5fab694f873c02c67910cdc44974",
+    "derivation": "source-gif-copy",
+    "modifications": "Complete original copied byte-for-byte. No crop, redraw, relabeling, translation, recompression or frame removal. Author-recorded demo is not a local model execution.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-26",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md"
+    ]
+  },
+  {
+    "id": "curated-group-equivariance-conventional-cnn-2cf065c8179a",
+    "asset": "00 Учебник/Assets/Figures/curated/group-equivariance-2026-10-26/escnn-conventional-cnn.gif",
+    "author": "Gabriele Cesa, Leon Lang, Maurice Weiler and escnn contributors; Qualcomm Innovation Center, Inc.",
+    "source_url": "https://github.com/QUVA-Lab/escnn/blob/9ad44cc37d694d9c805c4fef4d16722a254b3bf2/README.md",
+    "source_image_url": "https://raw.githubusercontent.com/QUVA-Lab/escnn/9ad44cc37d694d9c805c4fef4d16722a254b3bf2/visualizations/conventional_cnn.gif",
+    "commit": "9ad44cc37d694d9c805c4fef4d16722a254b3bf2",
+    "source_asset": "05 Источники/Originals/group-equivariance-2026-10-26/escnn-conventional-cnn.gif",
+    "source_asset_sha256": "2cf065c8179acea1156edd19af44f9cbff2e895e799ede040fc075ab722b5d27",
+    "sha256": "2cf065c8179acea1156edd19af44f9cbff2e895e799ede040fc075ab722b5d27",
+    "dimensions_px": [
+      1024,
+      366
+    ],
+    "source_page_snapshot": "05 Источники/Originals/group-equivariance-2026-10-26/escnn-README.md",
+    "source_page_sha256": "946ac8fb2cd6d40e734f20cb27f7d9706626403c6a35f79f5e3503b6ed58e6cb",
+    "license": "BSD-3-Clause-Clear",
+    "license_url": "https://github.com/QUVA-Lab/escnn/blob/9ad44cc37d694d9c805c4fef4d16722a254b3bf2/LICENSE",
+    "license_evidence": "05 Источники/Originals/group-equivariance-2026-10-26/escnn-LICENSE",
+    "license_evidence_sha256": "674eba3c3cb92c873a029600e26a3c74e12e5fab694f873c02c67910cdc44974",
+    "derivation": "source-gif-copy",
+    "modifications": "Complete original copied byte-for-byte. No crop, redraw, relabeling, translation, recompression or frame removal. Author-recorded demo is not a local model execution.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-26",
+    "used_in": [
+      "00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md"
+    ]
+  }
+]

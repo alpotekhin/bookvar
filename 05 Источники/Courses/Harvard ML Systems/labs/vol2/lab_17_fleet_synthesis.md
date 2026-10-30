@@ -9,38 +9,22 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol2/lab_17_fleet_synthesis.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol2/lab_17_fleet_synthesis.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL2 Lab — Fleet Synthesis
 
 ## Readable lab narrative
-
-### Reading Map
-
-The conclusion chapter frames the fleet as one coupled system. This capstone
-uses that frame to connect the six principles to a review board decision:
-
-| Module | Reading anchor | Output |
-|---|---|---|
-| Part A | Six principles and complete production system | Fleet architecture ledger and binding amount |
-| Part B | Closing diagnostic and production constraints | Multi-constraint guardrail review |
-| Part C | Fallacies and pitfalls | Explicit trade-off revision |
-| Part D | Competencies mastered | Deployment board decision |
-| Synthesis | Systems that scale, endure, and serve | Final {v2_17_packet['report_artifact']} |
-
----
-
-## Part A - Assemble The Fleet Architecture Ledger
-
-**Scenario.** {v2_17_packet['stakeholder']} is preparing a deployment review
-for **{v2_17_packet['label']}**. The board asks for one architecture ledger
-rather than disconnected prior-lab answers.
-
-**Track architecture goal:** {v2_17_packet['lens']['architecture_goal']}
-
----
 
 Binding score is a teaching model:
 
@@ -58,17 +42,6 @@ stack term, then name the layer that owns the intervention.
 The board now stresses the candidate architecture. The launch rule is conjunctive:
 capacity, communication, reliability, security/privacy, robustness, carbon, and
 governance must all remain inside their guardrails.
-
----
-
-Launch feasibility is not a weighted average:
-
-`capacity_ok and communication_ok and reliability_ok and security_ok and robustness_ok and carbon_ok and governance_ok`.
-
-The current binding guardrail is `{v2_17_review['binding_guardrail']}` at
-`{v2_17_review['binding_ratio']:.2f}x` its limit. This mirrors the chapter's
-fleet-law logic: compute, communication, and coordination terms interact with
-serving and governance obligations.
 
 ---
 
@@ -105,25 +78,162 @@ The packet is incomplete if the rejected alternative is the same as the selected
 plan, the validation package misses the active guardrail, or residual risk is
 unnamed.
 
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+### Reading Map
+
+The conclusion chapter frames the fleet as one coupled system. This capstone
+uses that frame to connect the six principles to a review board decision:
+
+| Module | Reading anchor | Output |
+|---|---|---|
+| Part A | Six principles and complete production system | Fleet architecture ledger and binding amount |
+| Part B | Closing diagnostic and production constraints | Multi-constraint guardrail review |
+| Part C | Fallacies and pitfalls | Explicit trade-off revision |
+| Part D | Competencies mastered | Deployment board decision |
+| Synthesis | Systems that scale, endure, and serve | Final ⟨value 1⟩ |
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_17_packet['report_artifact']}" `
+
+---
+
+**Prediction needed:** choose a Part ⟨value 1⟩ prediction before using this as final evidence.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{label}' `
+
+---
+
+**Evidence-debt boundary:** matching ledger coverage is ⟨value 1⟩% against your ⟨value 2⟩% floor. The report must label lower-confidence presets.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_17_ledger_result['coverage_pct']:.0f}" `
+- value_2: ` f'{v2_17_partA_evidence_floor.value:.0f}' `
+
+---
+
+**Ledger coverage passes the selected floor.** Presets may still appear, but they are not the binding evidence debt.
+
+---
+
+## Part A - Assemble The Fleet Architecture Ledger
+
+**Scenario.** ⟨value 1⟩ is preparing a deployment review
+for **⟨value 2⟩**. The board asks for one architecture ledger
+rather than disconnected prior-lab answers.
+
+**Track architecture goal:** ⟨value 3⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_17_packet['stakeholder']}" `
+- value_2: ` f"{v2_17_packet['label']}" `
+- value_3: ` f"{v2_17_packet['lens']['architecture_goal']}" `
+
+---
+
+**Binding amount:** `⟨value 1⟩` with score `⟨value 2⟩%`.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{binding['amount']}" `
+- value_2: ` f"{binding['score_pct']:.1f}" `
+
+---
+
+**Launch failure:** `⟨value 1⟩` is at `⟨value 2⟩x` its guardrail. Revise the plan, scope, or controls.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_17_review['binding_guardrail']}" `
+- value_2: ` f"{v2_17_review['binding_ratio']:.2f}" `
+
+---
+
+**All guardrails pass under the current stress settings.** Keep the validation evidence in the final memo.
+
+---
+
+Launch feasibility is not a weighted average:
+
+`capacity_ok and communication_ok and reliability_ok and security_ok and robustness_ok and carbon_ok and governance_ok`.
+
+The current binding guardrail is `⟨value 1⟩` at
+`⟨value 2⟩x` its limit. This mirrors the chapter's
+fleet-law logic: compute, communication, and coordination terms interact with
+serving and governance obligations.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_17_review['binding_guardrail']}" `
+- value_2: ` f"{v2_17_review['binding_ratio']:.2f}" `
+
+---
+
+**Revision status:** `⟨value 1⟩`. Target guardrail is `⟨value 2⟩`; residual risk is `⟨value 3⟩%`. ⟨value 4⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_17_revision['status']}" `
+- value_2: ` f"{v2_17_revision['target_guardrail']}" `
+- value_3: ` f"{v2_17_revision['residual_risk_pct']:.0f}" `
+- value_4: ` f"{v2_17_revision['note']}" `
+
+---
+
+**Board outcome:** `⟨value 1⟩` - ⟨value 2⟩ Completeness is `⟨value 3⟩%`.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_17_board['outcome']}" `
+- value_2: ` f"{v2_17_board['outcome_label']}" `
+- value_3: ` f"{v2_17_board['completeness_pct']:.0f}" `
+
 ---
 
 ## Synthesis - Final Volume II Fleet Memo
 
-**Report frame:** {v2_17_packet['lens']['report_frame']}
+**Report frame:** ⟨value 1⟩
 
-**Selected plan:** ``…``
+**Selected plan:** `⟨value 2⟩`
 
-**Rejected alternative:** ``…``
+**Rejected alternative:** `⟨value 3⟩`
 
-**Binding fleet amount:** `{v2_17_ledger_result['binding']['amount']}`
+**Binding fleet amount:** `⟨value 4⟩`
 
-**Binding guardrail:** `{v2_17_review['binding_guardrail']}`
+**Binding guardrail:** `⟨value 5⟩`
 
-**Validation package:** `{v2_17_board['validation_label']}`
+**Validation package:** `⟨value 6⟩`
 
-**Residual risk:** {v2_17_board['residual_risk']}
+**Residual risk:** ⟨value 7⟩
 
-**Track closure:** {v2_17_packet['lens']['close']}
+**Track closure:** ⟨value 8⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{v2_17_packet['lens']['report_frame']}" `
+- value_2: ` f'{selected_label}' `
+- value_3: ` f'{rejected_label}' `
+- value_4: ` f"{v2_17_ledger_result['binding']['amount']}" `
+- value_5: ` f"{v2_17_review['binding_guardrail']}" `
+- value_6: ` f"{v2_17_board['validation_label']}" `
+- value_7: ` f"{v2_17_board['residual_risk']}" `
+- value_8: ` f"{v2_17_packet['lens']['close']}" `
+
+---
+
+**Report status:** ⟨value 1⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{status_text}' `
+
+</details>
 
 ## Complete original Marimo source
 

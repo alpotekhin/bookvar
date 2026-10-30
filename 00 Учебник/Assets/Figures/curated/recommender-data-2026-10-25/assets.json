@@ -1,0 +1,143 @@
+[
+  {
+    "id": "curated-recommender-feast-features-303f80696e6e",
+    "asset": "00 Учебник/Assets/Figures/curated/recommender-data-2026-10-25/feast-features.png",
+    "author": "Feast contributors",
+    "source_url": "https://github.com/feast-dev/feast/blob/1e5e90ca01b0a6b1877a6c809436f0d8d574aad6/docs/getting-started/concepts/point-in-time-joins.md",
+    "source_image_url": "https://raw.githubusercontent.com/feast-dev/feast/1e5e90ca01b0a6b1877a6c809436f0d8d574aad6/docs/.gitbook/assets/image%20%2836%29.png",
+    "source_asset": "05 Источники/Originals/recommender-data-2026-10-25/feast-36.png",
+    "source_asset_sha256": "303f80696e6e664998393d3696384879b202824e3e6d69930bf5355cf44b9ab1",
+    "sha256": "303f80696e6e664998393d3696384879b202824e3e6d69930bf5355cf44b9ab1",
+    "dimensions_px": [
+      643,
+      202
+    ],
+    "source_page_snapshot": "05 Источники/Originals/recommender-data-2026-10-25/feast-point-in-time.md",
+    "source_page_sha256": "ce3d3a52023509f3a985e2900689835550537303b6e7a72bdcc0cda5c06507a8",
+    "commit": "1e5e90ca01b0a6b1877a6c809436f0d8d574aad6",
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/feast-dev/feast/blob/1e5e90ca01b0a6b1877a6c809436f0d8d574aad6/LICENSE",
+    "license_evidence": "05 Источники/Originals/recommender-data-2026-10-25/feast-LICENSE.txt",
+    "license_evidence_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "derivation": "source-raster-copy",
+    "modifications": "Unmodified upstream PNG; no crop, relabeling or resampling.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/02 Рекомендательные системы/01 Задача рекомендации, данные и pipeline.md"
+    ]
+  },
+  {
+    "id": "curated-recommender-feast-decisions-4898b3c2620d",
+    "asset": "00 Учебник/Assets/Figures/curated/recommender-data-2026-10-25/feast-decisions.png",
+    "author": "Feast contributors",
+    "source_url": "https://github.com/feast-dev/feast/blob/1e5e90ca01b0a6b1877a6c809436f0d8d574aad6/docs/getting-started/concepts/point-in-time-joins.md",
+    "source_image_url": "https://raw.githubusercontent.com/feast-dev/feast/1e5e90ca01b0a6b1877a6c809436f0d8d574aad6/docs/.gitbook/assets/image%20%2823%29.png",
+    "source_asset": "05 Источники/Originals/recommender-data-2026-10-25/feast-23.png",
+    "source_asset_sha256": "4898b3c2620dc0d7bb4f5f995c14f1d0a00efe57ee01c4c7a9908087cffdec52",
+    "sha256": "4898b3c2620dc0d7bb4f5f995c14f1d0a00efe57ee01c4c7a9908087cffdec52",
+    "dimensions_px": [
+      702,
+      171
+    ],
+    "source_page_snapshot": "05 Источники/Originals/recommender-data-2026-10-25/feast-point-in-time.md",
+    "source_page_sha256": "ce3d3a52023509f3a985e2900689835550537303b6e7a72bdcc0cda5c06507a8",
+    "commit": "1e5e90ca01b0a6b1877a6c809436f0d8d574aad6",
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/feast-dev/feast/blob/1e5e90ca01b0a6b1877a6c809436f0d8d574aad6/LICENSE",
+    "license_evidence": "05 Источники/Originals/recommender-data-2026-10-25/feast-LICENSE.txt",
+    "license_evidence_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "derivation": "source-raster-copy",
+    "modifications": "Unmodified upstream PNG; no crop, relabeling or resampling.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/02 Рекомендательные системы/01 Задача рекомендации, данные и pipeline.md"
+    ]
+  },
+  {
+    "id": "curated-recommender-feast-asof-662c258ed5bd",
+    "asset": "00 Учебник/Assets/Figures/curated/recommender-data-2026-10-25/feast-asof.png",
+    "author": "Feast contributors",
+    "source_url": "https://github.com/feast-dev/feast/blob/1e5e90ca01b0a6b1877a6c809436f0d8d574aad6/docs/getting-started/concepts/point-in-time-joins.md",
+    "source_image_url": "https://raw.githubusercontent.com/feast-dev/feast/1e5e90ca01b0a6b1877a6c809436f0d8d574aad6/docs/.gitbook/assets/image%20%2831%29.png",
+    "source_asset": "05 Источники/Originals/recommender-data-2026-10-25/feast-31.png",
+    "source_asset_sha256": "662c258ed5bd3d815ab3ad9426e9b10a0e161660a9bc04f85aa4492f29a37771",
+    "sha256": "662c258ed5bd3d815ab3ad9426e9b10a0e161660a9bc04f85aa4492f29a37771",
+    "dimensions_px": [
+      1260,
+      588
+    ],
+    "source_page_snapshot": "05 Источники/Originals/recommender-data-2026-10-25/feast-point-in-time.md",
+    "source_page_sha256": "ce3d3a52023509f3a985e2900689835550537303b6e7a72bdcc0cda5c06507a8",
+    "commit": "1e5e90ca01b0a6b1877a6c809436f0d8d574aad6",
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/feast-dev/feast/blob/1e5e90ca01b0a6b1877a6c809436f0d8d574aad6/LICENSE",
+    "license_evidence": "05 Источники/Originals/recommender-data-2026-10-25/feast-LICENSE.txt",
+    "license_evidence_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "derivation": "source-raster-copy",
+    "modifications": "Unmodified upstream PNG; no crop, relabeling or resampling.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/02 Рекомендательные системы/01 Задача рекомендации, данные и pipeline.md"
+    ]
+  },
+  {
+    "id": "curated-recommender-feast-joined-10d9dbdcd218",
+    "asset": "00 Учебник/Assets/Figures/curated/recommender-data-2026-10-25/feast-joined.png",
+    "author": "Feast contributors",
+    "source_url": "https://github.com/feast-dev/feast/blob/1e5e90ca01b0a6b1877a6c809436f0d8d574aad6/docs/getting-started/concepts/point-in-time-joins.md",
+    "source_image_url": "https://raw.githubusercontent.com/feast-dev/feast/1e5e90ca01b0a6b1877a6c809436f0d8d574aad6/docs/.gitbook/assets/image%20%2829%29.png",
+    "source_asset": "05 Источники/Originals/recommender-data-2026-10-25/feast-29.png",
+    "source_asset_sha256": "10d9dbdcd218a0b40aa8938e0c35744c906d91c092e530e56a733baedcfe1ef8",
+    "sha256": "10d9dbdcd218a0b40aa8938e0c35744c906d91c092e530e56a733baedcfe1ef8",
+    "dimensions_px": [
+      1101,
+      254
+    ],
+    "source_page_snapshot": "05 Источники/Originals/recommender-data-2026-10-25/feast-point-in-time.md",
+    "source_page_sha256": "ce3d3a52023509f3a985e2900689835550537303b6e7a72bdcc0cda5c06507a8",
+    "commit": "1e5e90ca01b0a6b1877a6c809436f0d8d574aad6",
+    "license": "Apache-2.0",
+    "license_url": "https://github.com/feast-dev/feast/blob/1e5e90ca01b0a6b1877a6c809436f0d8d574aad6/LICENSE",
+    "license_evidence": "05 Источники/Originals/recommender-data-2026-10-25/feast-LICENSE.txt",
+    "license_evidence_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "derivation": "source-raster-copy",
+    "modifications": "Unmodified upstream PNG; no crop, relabeling or resampling.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/02 Рекомендательные системы/01 Задача рекомендации, данные и pipeline.md"
+    ]
+  },
+  {
+    "id": "curated-recommender-google-process-c4bd0ec086f9",
+    "asset": "00 Учебник/Assets/Figures/curated/recommender-data-2026-10-25/google-process.svg",
+    "author": "Google",
+    "source_url": "https://developers.google.com/machine-learning/recommendation/overview/types",
+    "source_image_url": "https://developers.google.com/machine-learning/recommendation/images/Process.svg",
+    "source_asset": "05 Источники/Originals/recommender-data-2026-10-25/google-process.svg",
+    "source_asset_sha256": "c4bd0ec086f9b60816dca78e4344077529db1f41dba474df58973716c71e97ab",
+    "sha256": "c4bd0ec086f9b60816dca78e4344077529db1f41dba474df58973716c71e97ab",
+    "source_page_snapshot": "05 Источники/Originals/recommender-data-2026-10-25/google-overview.html",
+    "source_page_sha256": "035f5beef49f2d199bc1864dcb1444d4a9a4d0529c034e1c491488a3fd82c32d",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/recommender-data-2026-10-25/google-overview.html",
+    "license_evidence_sha256": "035f5beef49f2d199bc1864dcb1444d4a9a4d0529c034e1c491488a3fd82c32d",
+    "derivation": "source-svg-copy",
+    "modifications": "Unmodified hosted SVG with all original paths and embedded data; no independent license exception noted on the source page.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-25",
+    "used_in": [
+      "00 Учебник/02 Рекомендательные системы/00 Карта модуля.md",
+      "00 Учебник/02 Рекомендательные системы/01 Задача рекомендации, данные и pipeline.md"
+    ]
+  }
+]

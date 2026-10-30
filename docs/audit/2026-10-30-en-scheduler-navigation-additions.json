@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-30",
+  "scope": "Replace the observed EN scheduler redirect with a canonical-language exercise rendered in the English interface. Reuse the original Markdown and interactive component; do not create a translation. Preserve all other custom practice redirects.",
+  "files": [
+    {
+      "source": "site/astro.config.mjs",
+      "changes": [
+        {
+          "old": "const causalSelfAttentionHref = `${publicationBase.replace(/\\/+$/, '')}/practice/causal-self-attention`;\nconst inferenceSchedulerHref = `${publicationBase.replace(/\\/+$/, '')}/practice/inference-scheduler`;\n",
+          "new": "const causalSelfAttentionHref = `${publicationBase.replace(/\\/+$/, '')}/practice/causal-self-attention`;\n"
+        },
+        {
+          "old": "    '/en/practice/causal-self-attention-notes': causalSelfAttentionHref,\n    '/en/practice/inference-scheduler': inferenceSchedulerHref",
+          "new": "    '/en/practice/causal-self-attention-notes': causalSelfAttentionHref"
+        }
+      ],
+      "before_sha256": "0bceb3e60797b83d84e486e2d3db7e7dc08ecb6f60f1c9c870bb827c3d2f9cc1",
+      "after_sha256": "a6db8b84bea5b68f2359485b827f4121830d50518fc10f5b05bf98797d80ef02"
+    },
+    {
+      "source": "publishing/adapter/build.ts",
+      "changes": [
+        {
+          "old": "const REFERENCE_SIDEBAR_GROUPS = [",
+          "new": "function canonicalEnglishRoute(route: string): boolean {\n  return route.startsWith('textbook/') || route === 'practice/inference-scheduler';\n}\n\nconst REFERENCE_SIDEBAR_GROUPS = ["
+        },
+        {
+          "old": ": page.sourceLanguage === 'en' || entry.route.startsWith('textbook/')",
+          "new": ": page.sourceLanguage === 'en' || canonicalEnglishRoute(entry.route)"
+        },
+        {
+          "old": "if (locale === 'en' && entry.route.startsWith('textbook/') && (entry.sourceEn || page.sourceLanguage !== 'en')) {",
+          "new": "if (locale === 'en' && canonicalEnglishRoute(entry.route) && (entry.sourceEn || page.sourceLanguage !== 'en')) {"
+        }
+      ],
+      "before_sha256": "fe761acc6eab6561512089fd51c1925e6738a670ea440bd41395f7dd4659c822",
+      "after_sha256": "55d4f4b70c78b2ea6c0108c8c7c96c34ed396a170903189a3feb0b088d6f3d58"
+    },
+    {
+      "source": "site/src/components/BookPageTitle.astro",
+      "changes": [
+        {
+          "old": "const english = path.startsWith('/en/textbook/');\nconst data = Astro.locals.starlightRoute.entry.data;\nconst status = data.translationStatus;",
+          "new": "const data = Astro.locals.starlightRoute.entry.data;\nconst status = data.translationStatus;\nconst english = path.startsWith('/en/') && (path.startsWith('/en/textbook/') || status !== undefined);\nconst practice = path.startsWith('/en/practice/');"
+        },
+        {
+          "old": "<p><strong>Canonical-language chapter.</strong> This page has no separate English edition yet. Original course excerpts retain their source language.</p>",
+          "new": "<p><strong>{practice ? 'Canonical-language exercise.' : 'Canonical-language chapter.'}</strong> This page has no separate English edition yet. Original course excerpts retain their source language.</p>"
+        },
+        {
+          "old": "<a href={canonical}>Read the canonical chapter</a>",
+          "new": "<a href={canonical}>{practice ? 'Read the canonical exercise' : 'Read the canonical chapter'}</a>"
+        }
+      ],
+      "before_sha256": "b422edf0eb68019c1846d812c48a0ef4d3fd1265f6de982510e53d55ebb5c567",
+      "after_sha256": "0981b5a8925b03f8f523ace0dd7656bacfe3022cb2c2de32a2d80c909789878c"
+    },
+    {
+      "source": "site/src/pages/en/practice/inference-scheduler.astro",
+      "created": true,
+      "before_sha256": null,
+      "after_sha256": "24d47a3e454141fd482a79bc17a973914be0a1854af22acaaf4e506a98779806"
+    }
+  ]
+}

@@ -7,6 +7,12 @@ export interface ParsedPage {
   lastUpdated?: string;
   body: string;
   sourceFragments: SourceFragment[];
+  sourceLanguage?: 'en' | 'ru' | 'mixed';
+  translationStatus?: 'current' | 'partial';
+  canonicalRevision?: string;
+  translationReviewed?: string;
+  canonicalTopic?: string;
+  canonicalHeading?: string;
 }
 
 export interface SourceFragment {
@@ -102,6 +108,25 @@ export function readPage(sourcePath: string, raw: string): ParsedPage {
   const lastVerified = dateString(metadata.last_verified);
   const lastUpdated = dateString(metadata.last_updated);
   const fragments = sourceFragments(metadata.source_fragment, errors);
+  if (metadata.source_language !== undefined && !['en', 'ru', 'mixed'].includes(String(metadata.source_language)))
+    errors.push('source_language must be en, ru or mixed');
+  if (metadata.canonical_topic !== undefined) {
+    if (metadata.status !== 'redirect') errors.push('canonical_topic requires status: redirect');
+    if (typeof metadata.canonical_topic !== 'string' || !metadata.canonical_topic.trim())
+      errors.push('canonical_topic must be a non-empty source path');
+  }
+  if (metadata.canonical_heading !== undefined
+    && (typeof metadata.canonical_heading !== 'string' || !metadata.canonical_heading.trim()
+      || metadata.canonical_topic === undefined))
+    errors.push('canonical_heading requires canonical_topic and a non-empty heading');
+  if (metadata.translation_status !== undefined) {
+    if (!['current', 'partial'].includes(String(metadata.translation_status)))
+      errors.push('translation_status must be current or partial');
+    if (!/^[a-f0-9]{64}$/.test(String(metadata.canonical_revision)))
+      errors.push('canonical_revision must be a SHA-256');
+    if (!dateString(metadata.translation_reviewed))
+      errors.push('translation_reviewed is required with translation_status');
+  }
 
   if (type && !PUBLICATION_PAGE_TYPES.has(type)) {
     errors.push(`unsupported type "${type}"`);
@@ -122,8 +147,20 @@ export function readPage(sourcePath: string, raw: string): ParsedPage {
     title: metadata.title as string,
     type,
     status: metadata.status as string,
-    lastUpdated: lastVerified ?? lastUpdated,
+    lastUpdated: lastUpdated ?? lastVerified,
     body: parsed.content,
-    sourceFragments: fragments
+    sourceFragments: fragments,
+    ...(metadata.source_language !== undefined ? {
+      sourceLanguage: metadata.source_language as 'en' | 'ru' | 'mixed'
+    } : {}),
+    ...(metadata.canonical_topic !== undefined ? {
+      canonicalTopic: metadata.canonical_topic as string,
+      canonicalHeading: metadata.canonical_heading as string | undefined,
+    } : {}),
+    ...(metadata.translation_status !== undefined ? {
+      translationStatus: metadata.translation_status as 'current' | 'partial',
+      canonicalRevision: metadata.canonical_revision as string,
+      translationReviewed: dateString(metadata.translation_reviewed)
+    } : {})
   };
 }

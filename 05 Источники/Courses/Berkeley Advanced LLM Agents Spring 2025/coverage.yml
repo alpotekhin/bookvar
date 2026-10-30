@@ -1108,11 +1108,9 @@
       "primary_sources": [
         "meeting-04-slides"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
-      "destination_anchor": "meeting-04",
-      "reason": "Stanford and the pre-training route own this topic; the OLMo material remains discoverable here.",
-      "evidence": "Lectures/meeting-04-slides.pages.txt#physical-pages=143-152"
+      "disposition": "integrated",
+      "destination": "00 Учебник/11 Pre-training и Scaling/01 Данные и pre-training.md",
+      "destination_anchor": "olmo-two-stage-recipe"
     },
     {
       "id": "coverage-meeting-04-slides-open-recipe-synthesis",
@@ -1511,11 +1509,10 @@
       "primary_sources": [
         "meeting-06-slides"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
-      "destination_anchor": "meeting-06",
-      "reason": "Robotics is outside the current canonical route.",
-      "evidence": "Lectures/meeting-06-slides.pages.txt#physical-pages=107-116"
+      "disposition": "integrated",
+      "destination": "00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов.md",
+      "destination_anchor": "plan-seq-learn",
+      "evidence": "Lectures/meeting-06-slides.pages.txt#physical-pages=107-116; complete original paper prose in sections 3.3-3.5, D.3.1, B.3 and the overview paragraph of 3.2. Source v1 is CC BY 4.0; quotations are preserved in English."
     },
     {
       "id": "coverage-meeting-06-slides-nvidia-confidential-page",
@@ -2019,11 +2016,9 @@
       "primary_sources": [
         "meeting-08-slides"
       ],
-      "disposition": "source-only",
-      "destination": "05 Источники/Courses/Berkeley Advanced LLM Agents Spring 2025/_index.md",
-      "destination_anchor": "meeting-08",
-      "reason": "The long lecture demonstration is linked by exact pages rather than reproduced as a brittle sequence.",
-      "evidence": "Lectures/meeting-08-slides.pages.txt#physical-pages=94-107"
+      "disposition": "integrated",
+      "destination": "00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты.md",
+      "destination_anchor": "finite-products-and-missing-assumptions"
     },
     {
       "id": "coverage-meeting-08-slides-formal-reasoning-future",
@@ -3161,5 +3156,5 @@
       "evidence": "https://github.com/Precioux/Advanced-Large-Language-Model-Agents/tree/16f7b26346ec4b8978199e6d35bcee96b128bd0a#discovery-only; A student-maintained third-party mirror cannot substantiate an official Berkeley lab contract."
     }
   ],
-  "editorial_overlay_sha256": "d746b461180a9a3d2a955eed0c8668becb32bc8441ffdd1d4c0133de79a7547f"
+  "editorial_overlay_sha256": "89dddff5fda630727b0dec644b2c7d59d03e086620604af801ee794c4c5f3712"
 }

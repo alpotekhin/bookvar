@@ -1,0 +1,108 @@
+<dialog class="figure-viewer" data-figure-viewer aria-labelledby="figure-viewer-title" data-pagefind-ignore>
+  <div class="figure-viewer-toolbar">
+    <h2 id="figure-viewer-title" data-viewer-label="title">Иллюстрация</h2>
+    <div class="figure-viewer-controls">
+      <button type="button" data-viewer-minus aria-label="Уменьшить">−</button>
+      <output data-viewer-scale aria-live="polite">1×</output>
+      <button type="button" data-viewer-plus aria-label="Увеличить">+</button>
+      <button type="button" data-viewer-fit data-viewer-label="fit">Целиком</button>
+      <a data-viewer-original target="_blank" rel="noopener" data-viewer-label="file">Файл</a>
+      <button type="button" data-viewer-close data-viewer-label="close" autofocus>Закрыть</button>
+    </div>
+  </div>
+  <div class="figure-viewer-viewport" data-viewer-viewport tabindex="0" aria-label="Область изображения">
+    <img data-viewer-image alt="" draggable="false" />
+    <p data-viewer-error hidden>Не удалось загрузить изображение. Откройте исходный файл.</p>
+  </div>
+  <p class="figure-viewer-caption" data-viewer-caption></p>
+</dialog>
+
+<script>
+  import { initializeFigureViewer } from './figure-viewer';
+  initializeFigureViewer();
+  document.addEventListener('astro:page-load', () => initializeFigureViewer());
+</script>
+
+<style>
+  .figure-viewer {
+    width: min(96vw, 96rem);
+    height: 94dvh;
+    max-width: none;
+    max-height: none;
+    margin: auto;
+    padding: 0;
+    border: 1px solid var(--sl-color-gray-4);
+    border-radius: .6rem;
+    background: var(--sl-color-bg);
+    color: var(--sl-color-text);
+    box-shadow: 0 1rem 4rem #0006;
+  }
+  .figure-viewer[open] {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+  }
+  .figure-viewer::backdrop { background: #111b; }
+  .figure-viewer-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .5rem 1rem;
+    padding: .7rem 1rem;
+    border-bottom: 1px solid var(--sl-color-gray-5);
+  }
+  .figure-viewer-toolbar h2 { margin: 0; font-size: 1rem; }
+  .figure-viewer-controls { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
+  .figure-viewer-controls button, .figure-viewer-controls a {
+    min-height: 2.5rem;
+    min-width: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: .3rem .6rem;
+    border: 1px solid var(--sl-color-gray-4);
+    border-radius: .3rem;
+    background: var(--sl-color-bg);
+    color: var(--sl-color-text);
+    font: inherit;
+    font-size: .9rem;
+    cursor: pointer;
+  }
+  .figure-viewer-controls output { min-width: 2.5rem; text-align: center; font-variant-numeric: tabular-nums; }
+  .figure-viewer-controls button:disabled { opacity: .4; cursor: default; }
+  .figure-viewer button:focus-visible, .figure-viewer a:focus-visible,
+  .figure-viewer-viewport:focus-visible { outline: 2px solid var(--sl-color-accent); outline-offset: 2px; }
+  .figure-viewer-viewport {
+    overflow: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+    padding: 1rem;
+    background: #e9ecef;
+  }
+  .figure-viewer-viewport img {
+    display: block;
+    max-width: none;
+    height: auto;
+    margin-inline: auto;
+    background: #fff;
+  }
+  .figure-viewer-caption {
+    max-height: 7rem;
+    overflow: auto;
+    margin: 0;
+    padding: .6rem 1rem;
+    font-size: .85rem;
+    line-height: 1.45;
+    border-top: 1px solid var(--sl-color-gray-5);
+  }
+  .figure-viewer-caption:empty { display: none; }
+  :global(.sl-markdown-content a:has(> img)) { cursor: zoom-in; }
+  @media (max-width: 40rem) {
+    .figure-viewer { width: 100vw; height: 100dvh; border-radius: 0; border: 0; }
+    .figure-viewer-toolbar { padding: .5rem; }
+    .figure-viewer-controls { gap: .25rem; }
+    .figure-viewer-controls button, .figure-viewer-controls a { padding-inline: .4rem; }
+    .figure-viewer-caption { max-height: 6rem; font-size: .8rem; }
+    .figure-viewer-viewport { padding: .5rem; }
+  }
+</style>

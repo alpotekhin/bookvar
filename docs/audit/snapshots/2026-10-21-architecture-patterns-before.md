@@ -1,0 +1,495 @@
+---
+title: Три архитектурных паттерна Transformer
+type: textbook-chapter
+status: canonical
+last_updated: 2026-10-21
+previous: "[[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/03 Полный Transformer]]"
+next: "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa]]"
+primary_sources:
+  - https://arxiv.org/abs/1810.04805
+  - https://arxiv.org/abs/1910.10683
+  - https://arxiv.org/abs/1905.03197
+---
+
+# Encoder-only, Decoder-only и Encoder–Decoder
+
+Названия «энкодер» и «декодер» часто объясняют через слишком грубую формулу:
+первый якобы «понимает» текст, второй — «генерирует». Такое описание скрывает
+реальное устройство модели. Декодер тоже строит содержательные представления, а
+энкодер можно использовать для восстановления пропусков. Различие определяется
+тем, какие позиции соединены вниманием, какую цель оптимизировали при обучении и
+какие данные доступны во время применения модели.
+
+Три основных семейства можно получить из одного вычислительного аппарата.
+Энкодер разрешает каждой позиции учитывать весь известный вход. Причинный
+декодер закрывает будущие позиции и учится продолжать префикс. Архитектура
+энкодер–декодер сначала целиком читает исходную последовательность, а затем
+генерирует новую, обращаясь к сохранённым представлениям через cross-attention.
+Различия удобно проследить на одном предложении: тогда маска, целевая функция и
+режим инференса остаются частями одного объяснения.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/gpt-30/gpt-2-transformer-xl-bert-3.png]]
+
+*Схема из [The Illustrated GPT-2](https://jalammar.github.io/illustrated-gpt2/):
+BERT строит представление уже известного текста, GPT продолжает префикс. Это
+хорошая первая карта; точное различие определяется маской внимания и целью
+обучения.*
+
+## Один пример на всю главу
+
+Пусть есть предложение:
+
+```text
+Кошка не стала есть корм, потому что он был испорчен.
+```
+
+И три задачи:
+
+1. определить тональность или найти, к чему относится «он»;
+2. продолжить текст после «Кошка не стала»;
+3. перевести предложение на английский.
+
+Все задачи работают с одним текстом, однако требуют разного доступа к
+контексту.
+
+- Для классификации слово «корм» может сразу смотреть и влево, и вправо.
+- Для генерации следующего токена нельзя подсмотреть ещё не сгенерированное
+  продолжение.
+- Для перевода исходное предложение уже известно целиком, а перевод появляется
+  слева направо.
+
+Отсюда и возникают три паттерна.
+
+## Главный переключатель: матрица видимости
+
+До softmax модель считает оценки между всеми парами позиций:
+
+$$
+S=\frac{QK^\top}{\sqrt{d_k}}.
+$$
+
+Маска $M$ прибавляется к этим оценкам:
+
+$$
+A=\operatorname{softmax}(S+M).
+$$
+
+Если связь разрешена, $M_{ij}=0$. Если токену $i$ нельзя читать токен $j$,
+$M_{ij}=-\infty$. После softmax запрещённая связь получает вероятность ноль.
+
+Для четырёх токенов три режима выглядят так:
+
+```text
+FULL / BIDIRECTIONAL        CAUSAL                 CROSS-ATTENTION
+
+      K1 K2 K3 K4              K1 K2 K3 K4              source K1 K2 K3
+ Q1   ✓  ✓  ✓  ✓          Q1   ✓  ·  ·  ·          target Q1  ✓  ✓  ✓
+ Q2   ✓  ✓  ✓  ✓          Q2   ✓  ✓  ·  ·                 Q2  ✓  ✓  ✓
+ Q3   ✓  ✓  ✓  ✓          Q3   ✓  ✓  ✓  ·                 Q3  ✓  ✓  ✓
+ Q4   ✓  ✓  ✓  ✓          Q4   ✓  ✓  ✓  ✓
+```
+
+Это не иллюстративная метафора, а фактическое ограничение внутри attention.
+Архитектурное семейство можно в первом приближении распознать по такой матрице.
+
+## Encoder-only: построить контекстное представление
+
+Encoder получает весь вход сразу. Каждая позиция может читать все остальные:
+
+$$
+M_{ij}=0 \quad \forall i,j.
+$$
+
+Поэтому representation слова зависит от обоих направлений. В нашем примере
+вектор «он» может учитывать и «корм», и «испорчен» уже на первом проходе через
+модель.
+
+### Как BERT учится без готовой разметки
+
+BERT скрывает часть входных токенов и просит восстановить их:
+
+```text
+Кошка не стала есть [MASK], потому что он был испорчен.
+                       ↓
+                     «корм»
+```
+
+Loss считается только на выбранном множестве позиций $\mathcal M$:
+
+$$
+\mathcal L_{\text{MLM}}
+=-\sum_{i\in \mathcal M}\log p_\theta(x_i\mid \tilde x).
+$$
+
+Здесь $\tilde x$ — испорченный вход, а не последовательность с удалёнными $\mathcal M$. BERT выбирает 15% позиций; из выбранных 80% заменяет на `[MASK]`, 10% — случайным токеном и 10% оставляет неизменёнными. Loss присутствует во всех трёх случаях. Например, если выбраны позиции «есть» и «корм», вход может содержать `[MASK] корм`, но targets остаются «есть» и «корм»; при вероятностях правильных токенов 0.2 и 0.8 сумма loss равна $-\ln0.2-\ln0.8\approx1.8326$. Остальные позиции не добавляют слагаемых.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/BERT-language-modeling-masked-lm.png]]
+
+*Визуализация masked language modeling из
+[The Illustrated BERT](https://jalammar.github.io/illustrated-bert/). Скрытый
+токен восстанавливается по левому и правому контексту.*
+
+Важно: слово «bidirectional» не означает два отдельных прохода, как в
+двунаправленной RNN. Self-attention одного слоя одновременно связывает позицию
+с обеими сторонами.
+
+### Что выходит из encoder
+
+Encoder возвращает вектор для каждой позиции:
+
+$$
+H=(h_1,\ldots,h_n),\qquad H\in\mathbb R^{n\times d}.
+$$
+
+Дальше эти векторы можно использовать по-разному:
+
+- $h_{\text{[CLS]}}$ или pooling всех позиций — для классификации текста;
+- отдельный $h_i$ — для NER и token classification;
+- два pooled vectors — для bi-encoder retrieval;
+- совместные representations query и document — для cross-encoder reranking;
+- start/end heads над позициями — для extractive question answering.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/bert/bert-tasks.png]]
+
+*Оригинальная иллюстрация из Devlin et al.,
+[BERT](https://arxiv.org/abs/1810.04805): одна предобученная модель получает
+небольшие task-specific heads. Архитектурный смысл encoder — не «делать
+классификацию», а выдавать representations известного входа.*
+
+### Почему encoder неудобен для обычной генерации
+
+Во время MLM модель видела `[MASK]` и контекст справа. При свободной генерации
+правого контекста ещё нет, а специальные маски в настоящем тексте не появляются.
+Можно заставить encoder заполнять пропуски итеративно, но это не тот простой
+autoregressive процесс: исходный BERT обучался MLM, а не продолжению префикса слева направо.
+
+> [!warning] Частая ошибка
+> «BERT не умеет генерировать, потому что у него нет decoder» — неточно.
+> Проблема не в названии блока, а в несовпадении objective и inference process.
+
+## Decoder-only: предсказать следующий токен
+
+Decoder-only модель получает префикс и для каждой позиции предсказывает следующий
+токен:
+
+$$
+p(x_{1:T})=\prod_{t=1}^{T}p(x_t\mid x_{<t}).
+$$
+
+Чтобы обучение не превратилось в списывание, используется causal mask:
+
+$$
+M_{ij}=
+\begin{cases}
+0,&j\le i,\\
+-\infty,&j>i.
+\end{cases}
+$$
+
+Для текста
+
+```text
+Кошка | не | стала | есть | корм
+```
+
+модель параллельно решает несколько задач:
+
+```text
+Кошка                 → не
+Кошка не              → стала
+Кошка не стала        → есть
+Кошка не стала есть   → корм
+```
+
+Targets сдвинуты на одну позицию, поэтому один training forward pass обучает все
+предсказания одновременно. Во время inference будущих targets уже нет, и модель
+добавляет по одному токену.
+
+### Почему из next-token prediction получается general-purpose модель
+
+В текст можно сериализовать почти любую задачу:
+
+```text
+Текст: ...
+Тональность: положительная
+
+Вопрос: ...
+Ответ: ...
+
+Переведи на английский:
+...
+```
+
+Next-token objective един для кода, диалогов, документов и размеченных примеров.
+Это одна из причин, почему GPT, LLaMA, Qwen и DeepSeek используют decoder-only
+архитектуру.
+
+Но objective лишь учит моделировать продолжения из training distribution.
+Устойчивая работа с инструкциями, безопасные отказы и предпочтительный стиль ответа обычно формируются дополнительным SFT и preference/reinforcement learning. Отдельные примеры такого поведения возможны и у base LM; causal mask сама по себе его не гарантирует.
+
+### Минимальный causal attention в коде
+
+Ниже не production implementation, а проверяемое соответствие формулам:
+
+```python
+import torch
+import torch.nn.functional as F
+
+def causal_attention(q, k, v):
+    # q, k, v: [batch, heads, tokens, head_dim]
+    scores = q @ k.transpose(-2, -1) / q.size(-1) ** 0.5
+    tokens = q.size(-2)
+    forbidden = torch.triu(
+        torch.ones(tokens, tokens, dtype=torch.bool, device=q.device),
+        diagonal=1,
+    )
+    scores = scores.masked_fill(forbidden, float("-inf"))
+    weights = F.softmax(scores, dim=-1)
+    return weights @ v
+```
+
+В [nanoGPT/model.py](https://github.com/karpathy/nanoGPT/blob/master/model.py)
+та же идея реализована через `scaled_dot_product_attention(...,
+is_causal=True)`. Полезно сопоставить этот флаг с треугольной матрицей выше:
+«decoder-only» в коде прежде всего обнаруживается именно здесь.
+
+## Encoder–Decoder: прочитать один текст, написать другой
+
+В задачах перевода, суммаризации и распознавания речи source известен целиком,
+но output ещё нужно сгенерировать. Encoder–decoder разделяет эти роли.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/t5/encoder-decoder-architecture.png]]
+
+*Архитектура из Raffel et al., [T5](https://arxiv.org/abs/1910.10683): слева
+bidirectional encoder, справа causal decoder. Cross-attention связывает
+генерируемый output с representations исходного текста.*
+
+### Один шаг перевода
+
+Пусть source:
+
+```text
+Кошка не стала есть корм.
+```
+
+Encoder один раз строит:
+
+$$
+H_{\text{src}}=\operatorname{Encoder}(x_{1:n}).
+$$
+
+Decoder уже сгенерировал:
+
+```text
+The cat did
+```
+
+В очередном слое происходят три операции:
+
+1. causal self-attention связывает `did` с `The cat`;
+2. cross-attention использует decoder state как query, а encoder states как
+   keys и values;
+3. FFN преобразует полученное представление.
+
+Для cross-attention:
+
+$$
+Q=H_{\text{dec}}W_Q,\qquad
+K=H_{\text{src}}W_K,\qquad
+V=H_{\text{src}}W_V.
+$$
+
+То есть запрос приходит из строящегося перевода, а память — из исходного
+предложения. Модель может сосредоточиться на «не стала», когда выбирает
+`did not`, и на «есть», когда выбирает `eat`.
+
+### Teacher forcing
+
+На обучении decoder получает правильный output, сдвинутый на одну позицию:
+
+```text
+decoder input:  <BOS> The cat did not
+targets:               The cat did not eat
+```
+
+Loss:
+
+$$
+\mathcal L_{\text{seq2seq}}
+=-\sum_t\log p_\theta(y_t\mid y_{<t},x).
+$$
+
+Как и в decoder-only модели, causal mask не позволяет позиции увидеть свой
+target. Отличие в дополнительной условной памяти $x$.
+
+### T5: все задачи как text-to-text
+
+T5 добавляет к input текстовый префикс задачи:
+
+```text
+translate English to German: That is good.
+summarize: long document...
+```
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/t5/text-to-text-framework.png]]
+
+*Text-to-text framework из Raffel et al.,
+[T5](https://arxiv.org/abs/1910.10683). Label тоже записывается текстом, но
+source и target обрабатываются разными сторонами архитектуры.*
+
+## Почему слово «decoder» сбивает с толку
+
+В оригинальном Transformer decoder layer содержит:
+
+1. causal self-attention;
+2. cross-attention к encoder output;
+3. position-wise FFN.
+
+GPT называют decoder-only, хотя отдельного encoder и cross-attention у него нет.
+Исторически это «генерирующая половина Transformer», из которой убрали связь с
+source encoder.
+
+Поэтому полезнее спрашивать не «есть ли decoder», а:
+
+- self-attention full или causal?
+- есть ли отдельная source memory?
+- есть ли cross-attention?
+- какой objective использовался?
+
+## Три маски можно объединить в одной модели
+
+UniLM показал важную идею: один Transformer stack можно обучать как
+bidirectional, unidirectional и sequence-to-sequence model, меняя attention
+mask. Для seq2seq режима tokens source видят друг друга, а target видит source и
+предыдущие target tokens.
+
+Это хороший мысленный эксперимент: значительная часть различия семейств
+заключена не в классе Python, а в графе разрешённых связей.
+
+## Что выбрать на практике
+
+| Задача | Обычно разумный старт | Почему |
+|---|---|---|
+| классификация, NER | encoder | полный контекст, один проход |
+| dense retrieval | encoder / dual encoder | документы можно закодировать заранее |
+| точный reranking пары | encoder / cross-encoder | все query–document связи доступны |
+| свободный чат, код, continuation | decoder-only | objective совпадает с генерацией |
+| перевод, суммаризация | encoder–decoder или decoder-only | явное разделение source/target либо единый LM interface |
+| speech-to-text | encoder–decoder | audio encoder + text decoder |
+| VLM | часто encoder + decoder | vision encoder даёт visual tokens, LLM генерирует |
+
+Decoder-only победил как универсальный интерфейс, но не отменил остальные
+семейства. Если нужно миллион раз искать по заранее известным документам,
+encoder часто экономичнее: document embeddings считаются один раз. Если output
+жёстко обусловлен большим source, encoder–decoder даёт явную архитектурную
+границу между чтением и генерацией.
+
+## Сравнение без рекламных упрощений
+
+| Свойство | Encoder-only | Decoder-only | Encoder–Decoder |
+|---|---|---|---|
+| self-attention | полный | causal | полный в encoder, causal в decoder |
+| cross-attention | нет | обычно нет | да |
+| типичный objective | MLM / contrastive | next token | conditional next token |
+| output | representations / scores | autoregressive tokens | conditional tokens |
+| prefill source | один проход | часть общего prefix | отдельный encoder pass |
+| естественная сильная сторона | понимание известного входа | универсальная генерация | source → target |
+| примеры | BERT, DeBERTa, E5 | GPT, Llama, Qwen, DeepSeek | T5, BART, Whisper |
+
+## Ошибки, которые стоит научиться замечать
+
+> [!danger] «Encoder понимает, decoder генерирует»
+> Это полезная мнемоника, но не определение. Decoder states тоже являются
+> representations, а encoder можно использовать в iterative generation.
+> Точное различие задают mask, objective и inference procedure.
+
+> [!danger] «Bidirectional model видит ответ»
+> В BERT большинство выбранных токенов заменяется, но 10% остаются неизменёнными намеренно. Правый контекст и эти неизменённые случаи допустимы. Loss ограничен выбранным множеством; это не задача копирования всех токенов входа.
+
+> [!danger] «Decoder-only последовательно обучается»
+> Генерация последовательна, обучение — параллельно по всем позициям благодаря
+> causal mask.
+
+> [!danger] «Любой embedding model — BERT»
+> Encoder может обучаться MLM, contrastive loss, distillation или supervised
+> retrieval objective. Архитектура и способ обучения — разные оси.
+
+## Практика без большого GPU
+
+### 1. Нарисовать маски
+
+Для sequence length 6 создайте:
+
+- full mask;
+- lower-triangular causal mask;
+- UniLM-style mask для 3 source и 3 target tokens.
+
+Проверьте, что каждая строка отвечает на вопрос: «какие keys разрешено читать
+этому query?»
+
+### 2. Сравнить representations
+
+Возьмите готовый BERT encoder и causal LM. Подайте две фразы:
+
+```text
+They reached the bank beside the river.
+They reached the bank beside the office.
+```
+
+Используйте англоязычные модели: здесь одно и то же `bank` и одинаковый левый префикс, а различается только правое продолжение. Сопоставьте одинаковые subword-позиции, отключите dropout. В full-attention encoder вектор `bank` может измениться; в causal LM он должен совпасть с численной погрешностью, потому что правый контекст недоступен. Различие ожидаемо по графу связей и само по себе ещё не доказывает семантическое понимание.
+
+### 3. Прочитать настоящий код
+
+В nanoGPT найдите:
+
+- QKV projection;
+- causal mask или `is_causal=True`;
+- сдвиг logits/targets при вычислении loss.
+
+После этого откройте реализацию T5 и найдите отдельные self-attention и
+encoder–decoder attention. Если различие можно показать строкой кода, оно стало
+операциональным, а не словарным.
+
+## Контроль понимания
+
+После главы нужно уметь без заученных лозунгов объяснить:
+
+- как BERT использует правый контекст и зачем часть выбранных MLM targets остаётся во входе;
+- почему GPT параллельно обучается, но последовательно генерирует;
+- откуда берутся $Q$, $K$, $V$ в cross-attention;
+- почему изменение mask способно изменить режим работы того же stack;
+- почему decoder-only — хороший default для общей LLM, но не универсально
+  оптимальная архитектура.
+
+## Литература и дополнительные материалы
+
+### Основные papers
+
+- [Devlin et al. — BERT](https://arxiv.org/abs/1810.04805) — bidirectional
+  encoder и masked language modeling.
+- [Raffel et al. — T5](https://arxiv.org/abs/1910.10683) — encoder–decoder и
+  единый text-to-text interface.
+- [Dong et al. — UniLM](https://arxiv.org/abs/1905.03197) — объединение режимов
+  через attention masks.
+- [Vaswani et al. — Attention Is All You Need](https://arxiv.org/abs/1706.03762)
+  — исходные encoder и decoder stacks.
+
+### Лучшие объяснения и код
+
+- [Jay Alammar — The Illustrated BERT](https://jalammar.github.io/illustrated-bert/)
+  — визуальный маршрут от contextual embeddings к BERT tasks.
+- [Jay Alammar — The Illustrated GPT-2](https://jalammar.github.io/illustrated-gpt2/)
+  — decoder-only generation по шагам.
+- [Lena Voita — Seq2seq and Attention](https://lena-voita.github.io/nlp_course/seq2seq_and_attention.html)
+  — подробный учебный разбор encoder–decoder, attention и Transformer.
+- [Andrej Karpathy — nanoGPT model.py](https://github.com/karpathy/nanoGPT/blob/master/model.py)
+  — компактный causal Transformer, который можно прочитать целиком.
+
+### Связанные заметки базы
+
+- [[02 Areas/ML & DL/01 Справочник/Архитектурные паттерны/Encoder-only]]
+- [[02 Areas/ML & DL/01 Справочник/Архитектурные паттерны/Decoder-only]]
+- [[02 Areas/ML & DL/01 Справочник/Архитектурные паттерны/Encoder-Decoder]]
+
+**Назад:** [[02 Areas/ML & DL/00 Учебник/05 Attention и Transformer/03 Полный Transformer]] ·
+**Дальше:** [[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa]]

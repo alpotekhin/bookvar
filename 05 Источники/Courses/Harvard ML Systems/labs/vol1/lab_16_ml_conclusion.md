@@ -9,42 +9,25 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol1/lab_16_ml_conclusion.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol1/lab_16_ml_conclusion.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL1 Lab — Ml Conclusion
 
 ## Readable lab narrative
 
 **Recommended Reading** - This is the Volume I capstone. Review your ledger
-    entries from Labs 00-15 and the design memos you downloaded from recent labs.
-
----
-
-## Part A: Diagnose The Binding Amount
-
-**Scenario.** You are the {_lens["persona"]}. Your decision is to
-{_lens["decision"]}. The first question is not "what model do we like?" It is
-"which amount is binding after Volume I evidence is replayed?"
-
----
-
-**Amount Evidence Table**
-
-| Amount | Track realization | Score | Status | Ledger evidence | Preset hits |
-|---|---|---:|---|---|---:|
-`…`
-
----
-
-**Ledger Replay Table**
-
-| Lab | Evidence | Constraint | Source | Decision |
-|---:|---|---|---|---|
-`…`
-
-*Source: `mlsysbook_labs.replay_ledger`; missing entries use typed V1-16 variants.*
+entries from Labs 00-15 and the design memos you downloaded from recent labs.
 
 ---
 
@@ -58,22 +41,6 @@ claims to the track-specific architecture audit.
 
 ---
 
-## Part B: Optimize The Right Lever
-
-**Scenario.** The binding amount from Part A is **{_binding["amount"]}**
-({_binding["track_term"]}). Choose a track-specific lever and intensity, then
-inspect whether the local relief is worth the downstream debt.
-
----
-
-**Lever Audit Table**
-
-| Field | Value |
-|---|---|
-`…`
-
----
-
 The local source model uses:
 
 `net margin = binding relief - downstream debt`
@@ -81,23 +48,6 @@ The local source model uses:
 Relief is discounted when the selected lever does not target the Part A binding
 amount. Debt grows with intervention intensity because complexity is conserved:
 a faster local path can become validation, monitoring, cost, or safety debt.
-
----
-
-## Part C: Deploy Inside The Operating Envelope
-
-**Scenario.** Stress the proposed design for **{v1_16_capstone.label}**.
-The envelope is track-specific: {v1_16_capstone.guardrail_metric}.
-
----
-
-**Sensitivity Table**
-
-| Axis | Value | Limit | Risk | Status | Mitigation |
-|---|---:|---:|---:|---|---|
-`…`
-
-*Source: `mlsysbook_labs.sensitivity_audit`.*
 
 ---
 
@@ -118,30 +68,273 @@ alternative.
 
 ---
 
-**Report Completeness Table**
-
-| Report element | Status | Evidence |
-|---|---|---|
-`…`
-
----
-
-**Validation Tests To Attach**
-
-{chr(10).join(f"- `…`" for test in _memo.validation_tests)}
-
-**Durable Principle**
-
-{_memo.durable_principle}
-
----
-
 The report gate is:
 
 `defensible = decision + rejected alternative + source trace + residual risk + validation evidence`
 
 The memo can accept residual risk, but it cannot hide that risk or pretend a
 rejected alternative was never considered.
+
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+## Part A: Diagnose The Binding Amount
+
+**Scenario.** You are the ⟨value 1⟩. Your decision is to
+⟨value 2⟩. The first question is not "what model do we like?" It is
+"which amount is binding after Volume I evidence is replayed?"
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_lens['persona']}" `
+- value_2: ` f"{_lens['decision']}" `
+
+---
+
+Select a binding-amount prediction to unlock the ledger replay.
+
+---
+
+**Amount Evidence Table**
+
+| Amount | Track realization | Score | Status | Ledger evidence | Preset hits |
+|---|---|---:|---|---|---:|
+⟨value 1⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_amount_rows_md}' `
+
+---
+
+**Ledger Replay Table**
+
+| Lab | Evidence | Constraint | Source | Decision |
+|---:|---|---|---|---|
+⟨value 1⟩
+
+*Source: `mlsysbook_labs.replay_ledger`; missing entries use typed V1-16 variants.*
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_ledger_rows}' `
+
+---
+
+**Evidence boundary:** coverage is ⟨value 1⟩% but your floor is ⟨value 2⟩%. The final report must label preset evidence debt.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_ledger_result.coverage_pct:.0f}' `
+- value_2: ` f'{partA_evidence_floor.value:.0f}' `
+
+---
+
+**Ledger gaps are visible.** Missing chapters: ⟨value 1⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{', '.join((str(ch) for ch in _ledger_result.missing_chapters))}" `
+
+---
+
+**Prediction check:** your predicted binding amount matches the ledger-weighted diagnosis.
+
+---
+
+**Prediction check:** the evidence currently binds on **⟨value 1⟩**, not **⟨value 2⟩**. The point is to let accumulated evidence overrule the easy story.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_binding['amount']}" `
+- value_2: ` f'{partA_pred.value}' `
+
+---
+
+**Checkpoint recorded:** the memo will attack the binding amount first and label evidence gaps.
+
+---
+
+**Checkpoint warning:** a capstone design should not optimize around the binding amount.
+
+---
+
+## Part B: Optimize The Right Lever
+
+**Scenario.** The binding amount from Part A is **⟨value 1⟩**
+(⟨value 2⟩). Choose a track-specific lever and intensity, then
+inspect whether the local relief is worth the downstream debt.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_binding['amount']}" `
+- value_2: ` f"{_binding['track_term']}" `
+
+---
+
+Select your optimization prediction to unlock the lever audit.
+
+---
+
+**Lever Audit Table**
+
+| Field | Value |
+|---|---|
+⟨value 1⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_lever_rows}' `
+
+---
+
+**Optimization boundary:** this lever produces ⟨value 1⟩% downstream debt against a ⟨value 2⟩% boundary, or it misses the binding amount.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_lever['debt_pct']:.1f}" `
+- value_2: ` f"{_lever['debt_boundary_pct']:.1f}" `
+
+---
+
+**Prediction check:** correct rule. A lever is defensible only after the debt check.
+
+---
+
+**Prediction check:** local gains are not enough. The memo must connect the lever to the binding amount and downstream debt.
+
+---
+
+**Checkpoint recorded:** current lever policy is defensible under the debt boundary.
+
+---
+
+**Checkpoint recorded:** the policy is right, but the current lever setting fails the boundary.
+
+---
+
+**Checkpoint warning:** the memo should not accept a lever without a debt boundary.
+
+---
+
+## Part C: Deploy Inside The Operating Envelope
+
+**Scenario.** Stress the proposed design for **⟨value 1⟩**.
+The envelope is track-specific: ⟨value 2⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_16_capstone.label}' `
+- value_2: ` f'{v1_16_capstone.guardrail_metric}' `
+
+---
+
+Select your prediction to unlock the sensitivity audit.
+
+---
+
+**Sensitivity Table**
+
+| Axis | Value | Limit | Risk | Status | Mitigation |
+|---|---:|---:|---:|---|---|
+⟨value 1⟩
+
+*Source: `mlsysbook_labs.sensitivity_audit`.*
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_axis_rows}' `
+
+---
+
+**Correct.** Fragility depends on the selected track and its headroom.
+
+---
+
+**Fragility is not universal.** The same perturbation stresses iPhone, Oura Ring, RoboTaxi, and Cloud Fleet differently.
+
+---
+
+**Checkpoint recorded:** release is tied to envelope status: ⟨value 1⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{('PASS' if _audit.feasible else 'FAIL')}" `
+
+---
+
+**Checkpoint warning:** average risk or monitor-later logic is not an operating envelope.
+
+---
+
+Select your prediction to unlock the final memo builder.
+
+---
+
+**Memo summary:** ⟨value 1⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_memo.memo_summary}' `
+
+---
+
+**Rejected alternative:** ⟨value 1⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{partD_rejected.value}' `
+
+---
+
+**Report Completeness Table**
+
+| Report element | Status | Evidence |
+|---|---|---|
+⟨value 1⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_report_rows}' `
+
+---
+
+**Report boundary:** the memo is not yet defensible. Check rejected alternative, operating envelope, source trace, validation evidence, and residual risk.
+
+---
+
+**Validation Tests To Attach**
+
+⟨value 1⟩
+
+**Durable Principle**
+
+⟨value 2⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{chr(10).join((f'- {test}' for test in _memo.validation_tests))}" `
+- value_2: ` f'{_memo.durable_principle}' `
+
+---
+
+**Prediction check:** correct. The memo must revise, reject, risk-rank, and validate.
+
+---
+
+**A capstone memo is not a victory lap.** It is a defensible revision under residual risk.
+
+---
+
+**Checkpoint recorded:** the report has the required evidence packet.
+
+---
+
+**Checkpoint warning:** the report decision is defensible only after every required element passes.
+
+---
+
+**Checkpoint recorded:** the final memo needs revision before being treated as complete.
 
 ---
 
@@ -151,15 +344,58 @@ The Volume I capstone now has one evidence chain:
 
 | Evidence replay | Result |
 |---|---|
-| Binding amount | {_binding["amount"]} ({_binding["score"]:.1f}%) |
-| Optimization lever | {_lever["lever_label"]} ({_lever["status"]}) |
-| Operating envelope | {'PASS' if _audit.feasible else 'FAIL'}; most fragile axis: {_audit.most_fragile} |
-| Report defense | {_report_audit["status"]}; completeness {_report_audit["completeness_pct"]:.1f}% |
-| Residual risk | {_memo.top_risk} |
+| Binding amount | ⟨value 1⟩ (⟨value 2⟩%) |
+| Optimization lever | ⟨value 3⟩ (⟨value 4⟩) |
+| Operating envelope | ⟨value 5⟩; most fragile axis: ⟨value 6⟩ |
+| Report defense | ⟨value 7⟩; completeness ⟨value 8⟩% |
+| Residual risk | ⟨value 9⟩ |
 
 | Checkpoint | Recorded decision |
 |---|---|
-`…`
+⟨value 10⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f"{_binding['amount']}" `
+- value_2: ` f"{_binding['score']:.1f}" `
+- value_3: ` f"{_lever['lever_label']}" `
+- value_4: ` f"{_lever['status']}" `
+- value_5: ` f"{('PASS' if _audit.feasible else 'FAIL')}" `
+- value_6: ` f'{_audit.most_fragile}' `
+- value_7: ` f"{_report_audit['status']}" `
+- value_8: ` f"{_report_audit['completeness_pct']:.1f}" `
+- value_9: ` f'{_memo.top_risk}' `
+- value_10: ` f'{_checkpoint_rows}' `
+
+---
+
+**1. The selected track controls the envelope.** ⟨value 1⟩ uses the same concept sequence as every track, but with different constraints and evidence.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_16_capstone.label}' `
+
+---
+
+**2. Ledger gaps are evidence gaps.** Presets are useful for teaching, but the final report must label them.
+
+---
+
+**3. Carry-forward question for Volume II:** ⟨value 1⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_16_volume_ii_question(v1_16_capstone.track_id)}' `
+
+---
+
+## Download Report
+
+---
+
+This V1-16 architecture memo is generated locally from the selected track, ledger entries, your inputs, and the computed evidence.
+
+</details>
 
 ## Complete original Marimo source
 

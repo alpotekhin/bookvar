@@ -1,0 +1,30 @@
+[
+  {
+    "id": "curated-nn-window-rows-f98428fc66e8",
+    "asset": "00 Учебник/Assets/Figures/curated/nn-native-2026-10-27/harvard-window-rows.svg",
+    "author": "Vijay Janapa Reddi and Harvard ML Systems contributors",
+    "source_url": "https://github.com/harvard-edge/cs249r_book/blob/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/nn_architectures/nn_architectures.qmd#L4042",
+    "source_image_url": "https://mlsysbook.ai/vol1/nn_architectures/nn_architectures_files/mediabag/730bf5a7c80e664c55f2288a7363a4526a148d2e.svg",
+    "source_image_availability": "Historical published URL returned HTTP 404 on 2026-10-27; the complete locally archived original is retained.",
+    "commit": "2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd",
+    "source_asset": "Assets/Sources/Harvard ML Systems/vol1/nn_architectures/730bf5a7c80e664c55f2288a7363a4526a148d2e.svg",
+    "source_asset_sha256": "f98428fc66e83c2bab62d864e0110d7417fb763d4d848b455ee0f3e58c9df8e2",
+    "sha256": "f98428fc66e83c2bab62d864e0110d7417fb763d4d848b455ee0f3e58c9df8e2",
+    "source_code": "05 Источники/Originals/nn-architectures-2026-10-26/chapter-2bd97c5.qmd",
+    "source_code_sha256": "64ef2c6bab3a09846bdb089a33c0ee355ee32ecbf291447493708c276f18d9a6",
+    "source_page_snapshot": "05 Источники/Courses/Harvard ML Systems/vol1/nn_architectures.md",
+    "source_page_sha256": "52c77d7f6d386e97af65decf4f55523be785930571759fe5a906069ad13fcfac",
+    "license": "CC BY-NC-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+    "license_evidence": "05 Источники/Originals/nn-architectures-2026-10-26/LICENSE-2bd97c5.md",
+    "license_evidence_sha256": "b6f4689d6fccf48d82d0871a3b994a122427fcb0b278971f6ba008be44e2c926",
+    "derivation": "source-svg-copy",
+    "source_viewbox": [0, 0, 631.58264, 270.96799],
+    "modifications": "Complete archived original copied byte-for-byte; no crop, redraw, relabeling, translation or geometry change. Adjacent editorial caption corrects source row/column wording. Source 5-10x speedup is not adopted as a measurement.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "rights_status": "source-license-verified",
+    "last_verified": "2026-10-27",
+    "used_in": ["00 Учебник/01 Основы нейронных сетей/07 CNN — от свёртки до ResNet.md"]
+  }
+]

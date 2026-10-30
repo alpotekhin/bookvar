@@ -9,73 +9,227 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol1/lab_03_ml_workflow.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol1/lab_03_ml_workflow.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL1 Lab — Ml Workflow
 
 ## Readable lab narrative
 
+This lab is primarily executable code; use the complete source below.
+
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+Commit to a prediction to unlock the instrument.
+
+---
+
+⟨value 1⟩ ⟨value 2⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_reveal}' `
+- value_2: ` f'{correct_text}' `
+
+---
+
+⟨value 1⟩ ⟨value 2⟩
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{_reveal}' `
+- value_2: ` f'{miss_text}' `
+
+---
+
+Pick a gate timing before inspecting the stage evidence.
+
+---
+
+**Boundary crossed.** Discovery at **⟨value 1⟩** means the workflow must revisit **⟨value 2⟩** for **⟨value 3⟩**.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_03_tax.discovery_stage_name}' `
+- value_2: ` f"{', '.join(v1_03_tax.artifacts_to_rebuild)}" `
+- value_3: ` f'{v1_03_workflow.constraint_name}' `
+
+---
+
+**Gate is early enough.** ⟨value 1⟩ catches the constraint before late artifacts harden.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_03_tax.discovery_stage_name}' `
+
+---
+
 The chapter's workflow view maps lifecycle stages onto the iron law:
 
 $$
-T = \\frac{{D_{`…`}}}{`…`} + \\frac{`…`}{{R_{`…`} \\cdot \\eta_{`…`}}} + L_{`…`}
+T = \frac{D_{vol}}{BW} + \frac{O}{R_{peak} \cdot \eta_{hw}} + L_{lat}
 $$
 
-For **{v1_03_workflow.label}**, the deployment constraint is **{v1_03_workflow.constraint_name}**.
-If that constraint changes $L_{`…`}$, $R_{`…`}$, or feasible efficiency $\\eta_{`…`}$,
+For **⟨value 1⟩**, the deployment constraint is **⟨value 2⟩**.
+If that constraint changes $L_{lat}$, $R_{peak}$, or feasible efficiency $\eta_{hw}$,
 then data assumptions, model operations, validation evidence, and monitoring thresholds all move.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_03_workflow.label}' `
+- value_2: ` f'{v1_03_workflow.constraint_name}' `
+
+---
+
+Predict the cost shape before opening the rework chart.
+
+---
+
+**Failure state: iteration tax is active.** The current stage creates **⟨value 1⟩ avoidable person-days** and reopens: ⟨value 2⟩.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_03_tax.avoidable_rework_days:.0f}' `
+- value_2: ` f"{', '.join(v1_03_tax.artifacts_to_rebuild)}" `
+
+---
+
+**Recovered.** Moving the gate to the recommended stage removes the avoidable tax.
 
 ---
 
 The notebook uses the chapter's simplified correction model:
 
 $$
-\\text{`…`} = \\text{{base effort}} \\times 2^{{\\text{`…`} - 1}}
+\text{rework} = \text{base effort} \times 2^{\text{stage} - 1}
 $$
 
 For this track:
 
 $$
-{v1_03_workflow.base_rework_days:.1f} \\times 2^{{{v1_03_tax.discovery_stage - 1}}}
-= {v1_03_tax.rework_days:.1f}\\;\\text{{person-days}}
+\mathrm{value}_{1} \times 2^{\mathrm{value}_{2}}
+= \mathrm{value}_{3}\;\text{person-days}
 $$
 
 Stage 5 produces a 16x multiplier and stage 6 produces a 32x multiplier in the chapter framing.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_03_workflow.base_rework_days:.1f}' `
+- value_2: ` f'{v1_03_tax.discovery_stage - 1}' `
+- value_3: ` f'{v1_03_tax.rework_days:.1f}' `
+
+---
+
+Predict the bottleneck before opening the frontier chart.
+
+---
+
+**Fast but blind.** Residual risk is **⟨value 1⟩%**, above the ⟨value 2⟩% budget. Add realism, data scale, or validation depth.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_03_frontier.residual_risk_pct:.1f}' `
+- value_2: ` f'{v1_03_risk_budget_pct:.1f}' `
+
+---
+
+**Confident but slow.** Iteration time is **⟨value 1⟩ days**, above the ⟨value 2⟩-day cycle budget. Add automation or reduce scope.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_03_frontier.iteration_days:.1f}' `
+- value_2: ` f'{v1_03_cycle_budget_days:.1f}' `
+
+---
+
+**Balanced gate.** Current settings stay inside the risk and cycle budgets.
 
 ---
 
 The source model estimates confidence from four gate dimensions:
 
 $$
-\\text{`…`} = 18 + 0.28d + 0.27r + 0.22s + 0.12a
+\text{confidence} = 18 + 0.28d + 0.27r + 0.22s + 0.12a
 $$
 
 Residual risk falls toward a track-specific floor:
 
 $$
-\\text{`…`} = \\max(\\text{`…`}, \\text{{base risk}} - 0.62 \\cdot \\text{`…`})
+\text{risk} = \max(\text{floor}, \text{base risk} - 0.62 \cdot \text{confidence})
 $$
 
-Current values: depth={v1_03_frontier.validation_depth_pct:.0f}%, realism={v1_03_frontier.hardware_realism_pct:.0f}%,
-data scale={v1_03_frontier.data_scale_pct:.0f}%, automation={v1_03_frontier.automation_pct:.0f}%.
+Current values: depth=⟨value 1⟩%, realism=⟨value 2⟩%,
+data scale=⟨value 3⟩%, automation=⟨value 4⟩%.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_03_frontier.validation_depth_pct:.0f}' `
+- value_2: ` f'{v1_03_frontier.hardware_realism_pct:.0f}' `
+- value_3: ` f'{v1_03_frontier.data_scale_pct:.0f}' `
+- value_4: ` f'{v1_03_frontier.automation_pct:.0f}' `
+
+---
+
+Predict the non-negotiable gate before comparing policies.
+
+---
+
+**Policy boundary crossed.** ⟨value 1⟩ is after the recommended gate, so the policy accepts ⟨value 2⟩ days of rework before evidence can block release.
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_03_policy.gate_label}' `
+- value_2: ` f'{v1_03_policy.rework_days_at_gate:.0f}' `
+
+---
+
+**Policy blocks early enough.** Evidence can stop the workflow before release debt compounds.
 
 ---
 
 The policy is a system design tuple, not paperwork:
 
 $$
-\\text{`…`} =
-(\\text{{gate timing}}, \\text{{evidence requirement}}, \\text{`…`}, \\text{`…`}, \\text{{blind spot}})
+\text{policy} =
+(\text{gate timing}, \text{evidence requirement}, \text{rollout}, \text{rollback}, \text{blind spot})
 $$
 
 Current tuple:
 
-- Gate timing: **{v1_03_policy.gate_label}** at **{v1_03_policy.gate_stage_name}**
-- Evidence requirement: **{v1_03_policy.release_policy}**
-- Rollback: **{v1_03_policy.rollback_rule}**
-- Residual blind spot: **{v1_03_policy.blind_spot}**
+- Gate timing: **⟨value 1⟩** at **⟨value 2⟩**
+- Evidence requirement: **⟨value 3⟩**
+- Rollback: **⟨value 4⟩**
+- Residual blind spot: **⟨value 5⟩**
+
+Runtime fields (not evaluated):
+
+- value_1: ` f'{v1_03_policy.gate_label}' `
+- value_2: ` f'{v1_03_policy.gate_stage_name}' `
+- value_3: ` f'{v1_03_policy.release_policy}' `
+- value_4: ` f'{v1_03_policy.rollback_rule}' `
+- value_5: ` f'{v1_03_policy.blind_spot}' `
+
+---
+
+## Download Report
+
+---
+
+This V1-03 workflow memo is generated locally from the selected track, your inputs, and the computed evidence.
+
+</details>
 
 ## Complete original Marimo source
 

@@ -1,0 +1,283 @@
+{
+  "date": "2026-10-29",
+  "status": "verified-locally-not-published",
+  "scope": "Constitutional AI archival comparison and completion of its canonical data-construction explanation. Existing framing and original overview retained; additions remain English in both locale routes.",
+  "chapter": {
+    "source": "00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md",
+    "sha256": "f30129bff3dad6c9888f2be2af5809e58aab0d532deb2675d0d0b6aa3af5cf96",
+    "lines": 266,
+    "wholeTextReadBefore": true,
+    "wholeTextReadAfter": true,
+    "pythonBlocks": 2,
+    "figures": 2,
+    "sourceLanguage": "mixed"
+  },
+  "artifactHashes": {
+    "00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF.md": "f30129bff3dad6c9888f2be2af5809e58aab0d532deb2675d0d0b6aa3af5cf96",
+    "Concepts/Training/Constitutional AI.md": "3b35e33f34fee062c071568abdebd21f157be268a83f7d1c169854d14b293b5c",
+    "publishing/tools/check_constitutional_ai_examples.py": "935bfceb6b55e74e0c59ea6ae357df0777365c96c8bc7b1a2a36297b7d82a279",
+    "publishing/tools/prepare_constitutional_ai_figure.py": "87362b487bf9192a0ee0741e23f7fa828aca8f7289c603a2dc0f8e96b838d756",
+    "publishing/tests/constitutional-ai.test.ts": "68cceb1f31d40f529d91847b39582ef3fb7df560d5a2109d0c63aeec31e6a08c",
+    "docs/audit/2026-10-29-constitutional-ai-additions.json": "c4b57edd63eda9da3a7bf57e645d89cba08d3261733a144b97b0d1d77e53ebf8",
+    "05 Источники/Originals/constitutional-ai-2026-10-29/bai-v1.pdf": "9a456a07ad346e3372f9867d346f69f5b0f68b4c65f060aca0b8a13fa9d98e83",
+    "05 Источники/Originals/constitutional-ai-2026-10-29/manifest.json": "f948ab98516a51ea4547ef554ce03e1d8889dcf0b4d1f63deef67f480788ea6c",
+    "05 Источники/Originals/training-consolidation-2026-10-29/cai-arxiv-v1.html": "2f175dac8902db65a5c0a7cd280109fa91e0d3c1d129e49edb9ab439edc3c97d",
+    "00 Учебник/Assets/Figures/curated/constitutional-ai-2026-10-29/assets.json": "4841560921cd6db1960866c01fed109f9c7fbc16fe266e1624fa25c456bfc593",
+    "00 Учебник/Assets/Figures/curated/consolidation-2026-10-29/constitutional-ai-overview.png": "43db0cfc079e1864f8aa5358962a290090c6980b77701665bebd91f1e4d54ea4",
+    "00 Учебник/Assets/Figures/curated/constitutional-ai-2026-10-29/revisions-tradeoff.png": "a5cd3aae003155f2e5d0fb01cb66ef4080568f010bf8eb22938e69d91327f479",
+    "docs/audit/evidence/2026-10-29-constitutional-ai/pages-desktop-data-example.png": "3326834ece052e9d319fafcc2eb662a3f147ebc1b7695d06619ba2dc3b5888dd",
+    "docs/audit/evidence/2026-10-29-constitutional-ai/pages-desktop-original.png": "bc8eb141d09423117598a6e57b90f297400d4c26eed3360e84b1904aca90e78c",
+    "docs/audit/evidence/2026-10-29-constitutional-ai/pages-mobile-formula-en.png": "28d4c0e2d47d47abc1d74a90a06f1039a039233e4cc04276b70dccbd8d448f5a",
+    "docs/audit/evidence/2026-10-29-constitutional-ai/pages-mobile-original-left-en.png": "68d21e379873a13d49b04b75549b19a427bdadafa13971dc1968d47cfe570440",
+    "docs/audit/evidence/2026-10-29-constitutional-ai/pages-mobile-original-right-en.png": "27b799e5ff995f3a08b5ec40a19b0ecaec4c15860a7a4728b25c51b6e5fef591",
+    "docs/audit/evidence/2026-10-29-constitutional-ai/pages-mobile-soft-label-en.png": "cb30749a8bc56b772ef5657bfeb5fdd2ce28e61d27df9970bbc43a9f263a6ae2",
+    "docs/audit/evidence/2026-10-29-constitutional-ai/root-desktop-original-in-chapter.png": "08743f2842e92897a520829bf6d672b17f807ee895129b7f595ba052309247ee",
+    "docs/audit/evidence/2026-10-29-constitutional-ai/root-mobile-soft-label.png": "c947bae5d0ade64f17df78de72a124758508b4587605ec3c2517323577d546fe"
+  },
+  "sourceComparison": [
+    {
+      "source": "Concepts/Training/Constitutional AI.md",
+      "wholeTextRead": true,
+      "lines": 202,
+      "sha256": "3b35e33f34fee062c071568abdebd21f157be268a83f7d1c169854d14b293b5c"
+    },
+    {
+      "url": "https://arxiv.org/abs/2212.08073v1",
+      "local": "05 Источники/Originals/constitutional-ai-2026-10-29/bai-v1.pdf",
+      "read": "Complete Sections 3.1–3.5 and 4.1–4.4 on PDF pages 7–14; Figure 5 page inspected in full before crop.",
+      "retained": "Helpful response generation, critique/revision roles, pretrained SFT student, all revision passes, human helpfulness mixture, different plain/CoT feedback models and option-probability targets/clamping."
+    }
+  ],
+  "explanationReview": [
+    {
+      "anchor": "constitutional-data-example",
+      "case": "Original-request/initial-response/critique/revision/SFT-record trace, with the paper's fabricated-app example explicitly treated as illustrative. A separate executable saved-trace example constructs two prompt/completion records without putting the critique into the target.",
+      "boundary": "The code calls no model, generates no response and does not establish safety of the two short example strings."
+    },
+    {
+      "anchor": "cai-soft-labels",
+      "case": "Option masses .02/.08 normalize to .2/.8; these are option-string probabilities, not candidate-answer likelihoods or absolute harmlessness. Soft BT loss has gradient .422459 at delta=.5 and isolated optimum -1.386294.",
+      "boundary": "The numerical subsection explicitly points forward to reward-modeling prerequisites; whole-route placement remains part of the pending route audit."
+    },
+    {
+      "anchor": "cai-soft-labels",
+      "case": "Hard 0, raw .01 and clamped .4 targets give gradients .5/.49/.1 at zero and different isolated optima. Shift/swap/extreme-value cases and finite differences are checked.",
+      "boundary": "Clamping changes the learning target; it does not make a mistaken judge correct."
+    },
+    {
+      "figure": "revisions-tradeoff.png",
+      "case": "All three original Figure 5 panels, parameter scale and full English caption retained. Text distinguishes harmlessness/helpfulness/combined PM scores from independent human comparisons.",
+      "boundary": "A rising proxy score does not prove every individual revision correct or every objective improved."
+    }
+  ],
+  "excludedClaims": [
+    "CAI solves all scaling, evasiveness and transparency problems or removes all human supervision. Human helpfulness labels and human-written principles/few-shot examples remain in the original method.",
+    "Each individual critique/revision is correct or necessarily improves every objective; model-scored harmlessness/helpfulness axes are not interchangeable with independent human measurements.",
+    "Only the final revision is used for SL-CAI. The primary method includes revisions from all passes and a helpfulness mixture.",
+    "Plain-feedback and CoT-feedback conditions use identical feedback models; the original CoT setup uses a helpful RLHF feedback model rather than the pretrained feedback model used without CoT.",
+    "Soft labels or CoT are universally calibrated/better than hard labels; conditioning on generated rationales can yield extreme self-conditioned labels.",
+    "Clamping recovers a true probability, guarantees safety or is a universal 40–60 percent recipe for all CAI training.",
+    "Reported non-evasiveness or 52B trends prove universal non-evasiveness, inevitable superiority beyond 52B, or Pareto dominance over every RLHF configuration.",
+    "Rewriting a principle alone updates the deployed model's weights, or transparency of a critique proves the critique is faithful/correct."
+  ],
+  "executedChecks": [
+    {
+      "command": "python3 publishing/tools/check_constitutional_ai_examples.py",
+      "log": "/var/tmp/bookvar-cai-cpu-final-20261029.log",
+      "result": "PASS both published blocks, two saved-revision records, five option shift/swap cases, 45 derivative finite differences, interior optima, symmetry, clamping and invalid-input checks.",
+      "languageModelCalls": 0
+    },
+    {
+      "command": "LC_ALL=C LANG=C pnpm --dir publishing test",
+      "log": "/var/tmp/bookvar-cai-unit-final-20261029.log",
+      "result": "PASS 837 tests in 131 files on the final chapter/test inputs."
+    },
+    {
+      "command": "LC_ALL=C LANG=C pnpm --dir publishing exec vitest run tests/constitutional-ai.test.ts tests/topic-consolidation.test.ts tests/structured-dropout.test.ts",
+      "log": "/var/tmp/bookvar-cai-targeted-final-20261029.log",
+      "result": "PASS 13 tests including exact preservation and rejection of unreviewed deltas."
+    },
+    {
+      "command": "BOOKVAR_LINK_ASSETS=1 pnpm --dir site build",
+      "log": "/var/tmp/bookvar-cai-root-final-20261029.log",
+      "result": "PASS final root build, 2006 pages."
+    },
+    {
+      "command": "pnpm --dir publishing test:output",
+      "log": "/var/tmp/bookvar-cai-output-final-20261029.log",
+      "result": "PASS all 172 rendered-output tests."
+    },
+    {
+      "command": "pnpm --dir publishing check:links",
+      "log": "/var/tmp/bookvar-cai-root-links-final-20261029.log",
+      "result": "PASS 0 broken internal routes, fragments or files."
+    },
+    {
+      "command": "PUBLICATION_BASE_PATH=/bookvar BOOKVAR_LINK_ASSETS=1 pnpm --dir site build --outDir /var/tmp/bookvar-cai-pages-20261029",
+      "log": "/var/tmp/bookvar-cai-pages-final-20261029.log",
+      "result": "PASS final Pages-prefix build, 2006 pages; corresponding prefix-aware complete link scan found 0 broken links.",
+      "linkLog": "/var/tmp/bookvar-cai-pages-links-final-20261029.log"
+    },
+    {
+      "command": "pnpm --dir site test",
+      "log": "/var/tmp/bookvar-cai-site-tests-20261029.log",
+      "result": "PASS 89 tests in 6 files. Site implementation inputs were unchanged by the final source-only role clarifications; latest rendered content was separately inspected."
+    }
+  ],
+  "visualReview": {
+    "rootDesktop": {
+      "viewport": [
+        1280,
+        900
+      ],
+      "clientWidth": 1265,
+      "scrollWidth": 1265,
+      "katexErrors": 0,
+      "imagesLoaded": 2,
+      "finalStudentAndCotRolesObserved": true
+    },
+    "pagesMobileEn": {
+      "viewport": [
+        360,
+        800
+      ],
+      "clientWidth": 345,
+      "scrollWidth": 345,
+      "katexErrors": 0,
+      "tableWidths": [
+        [
+          313,
+          313
+        ],
+        [
+          313,
+          313
+        ],
+        [
+          313,
+          313
+        ]
+      ],
+      "displayMathWidths": [
+        [
+          313,
+          313
+        ],
+        [
+          313,
+          313
+        ]
+      ],
+      "imagesLoaded": 2,
+      "finalStudentAndCotRolesObserved": true,
+      "englishFallbackExplicit": true
+    },
+    "originalViewer": "Complete graph inspected on desktop; mobile EN viewer at 3x panned to the left panel and right panel/parameter colour scale. Full source caption is readable with zoom. Thumbnail readability of every caption character at phone width is not claimed.",
+    "evidence": [
+      {
+        "path": "docs/audit/evidence/2026-10-29-constitutional-ai/pages-desktop-data-example.png",
+        "sha256": "3326834ece052e9d319fafcc2eb662a3f147ebc1b7695d06619ba2dc3b5888dd"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-constitutional-ai/pages-desktop-original.png",
+        "sha256": "bc8eb141d09423117598a6e57b90f297400d4c26eed3360e84b1904aca90e78c"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-constitutional-ai/pages-mobile-formula-en.png",
+        "sha256": "28d4c0e2d47d47abc1d74a90a06f1039a039233e4cc04276b70dccbd8d448f5a"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-constitutional-ai/pages-mobile-original-left-en.png",
+        "sha256": "68d21e379873a13d49b04b75549b19a427bdadafa13971dc1968d47cfe570440"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-constitutional-ai/pages-mobile-original-right-en.png",
+        "sha256": "27b799e5ff995f3a08b5ec40a19b0ecaec4c15860a7a4728b25c51b6e5fef591"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-constitutional-ai/pages-mobile-soft-label-en.png",
+        "sha256": "cb30749a8bc56b772ef5657bfeb5fdd2ce28e61d27df9970bbc43a9f263a6ae2"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-constitutional-ai/root-desktop-original-in-chapter.png",
+        "sha256": "08743f2842e92897a520829bf6d672b17f807ee895129b7f595ba052309247ee"
+      },
+      {
+        "path": "docs/audit/evidence/2026-10-29-constitutional-ai/root-mobile-soft-label.png",
+        "sha256": "c947bae5d0ade64f17df78de72a124758508b4587605ec3c2517323577d546fe"
+      }
+    ],
+    "reset": "Viewer closed, viewport reset and local chapter left open at the live 4330 preview."
+  },
+  "preservation": {
+    "journal": "docs/audit/2026-10-29-constitutional-ai-additions.json",
+    "beforeChapterSha256": "dea0e616abf368f5a008701d203ac7cbb70d5346dd7b57e1b97c5e50416fe1c1",
+    "afterChapterSha256": "f30129bff3dad6c9888f2be2af5809e58aab0d532deb2675d0d0b6aa3af5cf96",
+    "result": "The preceding complete chapter and registry are restored exactly by the new reviewed journal. Existing diagram, surrounding Russian explanation and immutable archive retained."
+  },
+  "supportFileChanges": [
+    {
+      "source": "publishing/tools/topic-consolidation-baseline.mjs",
+      "changes": [
+        {
+          "old": "",
+          "new": "  '2026-10-29-constitutional-ai-additions.json',\n"
+        }
+      ],
+      "before_sha256": "94361fd4c3b29d69b8de625b1cac4d30fc59c17e7549d5850edf7fc4786e9922",
+      "after_sha256": "d9b659209ad887702bd608a35a74593edc19ee999b817dcda228a0ce7d638365"
+    },
+    {
+      "source": "publishing/tools/topic_consolidation_baseline.py",
+      "changes": [
+        {
+          "old": "",
+          "new": "    '2026-10-29-constitutional-ai-additions.json',\n"
+        }
+      ],
+      "before_sha256": "5f10f643164dd4df59abae32c7f25767b2d6e7099acf280395c1c7a48cfe3a54",
+      "after_sha256": "6befc36d60db53c2960eb08b4294ce31d8350159cff36278815c93b5f5691ea4"
+    },
+    {
+      "source": "publishing/tests/structured-dropout.test.ts",
+      "changes": [
+        {
+          "old": "      const current = read(row.source).toString();",
+          "new": "      const live = read(row.source).toString();\n      const current = beforeTopicConsolidation(live,row.source,root,\n        '2026-10-29-structured-dropout-additions.json');"
+        },
+        {
+          "old": "      expect(beforeTopicConsolidation(current,row.source,root,",
+          "new": "      expect(beforeTopicConsolidation(live,row.source,root,"
+        }
+      ],
+      "before_sha256": "cc92b39e57feb2ab5b9c97445e2c2abb0a0d10b8a39d3115eb0ef81515deac30",
+      "after_sha256": "ea7ddaae446b29ddb3448cad58f776c2a45cd18e4dc831562f42cfcfcc078e12"
+    }
+  ],
+  "supportFilePreservation": "The three shared helper/test edits reverse exactly to their hashes in the preceding structured-dropout receipt. Historical receipts were not rebaselined.",
+  "historicalPinReview": {
+    "receipt": "docs/audit/2026-10-29-structured-dropout-verification.json",
+    "total": 29,
+    "unchanged": 25,
+    "restored": 4,
+    "result": "All prior pins verified: registry restored through the new content journal and three shared support files through their recorded exact deltas."
+  },
+  "styleReview": "Current full chapter was reread after edits using no-ai-slop. Removed editorial references to an archive and the unnecessary attack-procedure disclaimer. Preserved full explanation, examples, technical distinctions, citations and the original figure. No new translation.",
+  "warnings": [
+    "Existing unrelated PromQL/toc highlighting fallbacks and third-party PDF/KaTeX warnings remain in broad logs; affected page had 0 KaTeX errors.",
+    "The existing EN fallback's duplicate language notices remain a recorded final route/UI-pass issue."
+  ],
+  "remainingWithinThisNote": [],
+  "publication": {
+    "commit": false,
+    "push": false,
+    "liveDeploy": false,
+    "mainUnchanged": true
+  },
+  "notTested": [
+    "No feedback-LM call, full CAI training run, benchmark-quality result or GPU performance claim.",
+    "No new full English edition; EN route remains an explicit canonical-language fallback.",
+    "Remaining 14 archival comparisons, full conceptual reading-route review and dev/Pages release are still open."
+  ],
+  "cleanup": "Only this pass's temporary Pages preview/build and full-page render were removed. Canonical PDF, final PNG, manifests and screenshots retained; main 4330 preview healthy HTTP 200."
+}

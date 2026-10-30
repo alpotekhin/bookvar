@@ -1,0 +1,271 @@
+{
+  "date": "2026-10-29",
+  "status": "comparison-verified-locally-not-published",
+  "scope": "Complete legacy Pre-training reconciliation. Preserve existing full mechanisms; add corpus-release distinctions and the complete original ROOTS figure in the existing canonical collection chapter. Semi-supervised Learning remains in progress.",
+  "artifactHashes": {
+    "docs/audit/2026-10-29-legacy-notes-review.json": "53b94ae2d7793b414393ebdc07b5850d2af7fad28d3e3d4dd112a956173bd1c1",
+    "docs/audit/2026-10-29-release-completion-plan.md": "3fe85c499f0847102fec18612f5a6a5198651e19a0c1a07c9f3c5b63f167bc5d",
+    "docs/audit/2026-10-29-corpus-releases-additions.json": "96ac6c980fff8d4c135c103706be3179c3482e32fd0cc5a2935b902a7ef997e4",
+    "05 Источники/asset-registry.yml": "79e362b1db03cb68d9f636c61f851e5c14bc4b3fd6116f9283068690b17b192a",
+    "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md": "8b00b47bb39ec6d03b8942ae092e6399cc730e98e903bfdab33b5d8890cf99c2",
+    "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md": "aca814c431df4b4d489ac98e4f147b85ba6f600eb41463c1b3ae4b6f7d9f3f3f",
+    "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md": "7fc54afeb6889923cf35893e40f4b9f02964b734b7dc40b5eea0f10b41659e01",
+    "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md": "76213c88dc1a17d2ea09ca1c5b607f53e5d7e6210cb44dbb9d69f9809bcb9e4e",
+    "00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch.md": "87493321b47bf9ae7838121bc0e1c8644e045e99371f2951f8a54bc8ebee7f1e",
+    "docs/audit/evidence/2026-10-29-corpus-releases/pages-desktop-original.png": "267d2eaf51a85c025965e2e959dffb174a451c930be20d9080884cc3dc4e6135",
+    "docs/audit/evidence/2026-10-29-corpus-releases/pages-mobile-context.png": "d11445ab12560e4e0c1ba8c471666af41e2179e0fb49362fc2bf64453c7ea87c",
+    "docs/audit/evidence/2026-10-29-corpus-releases/pages-mobile-en-components.png": "734a68a4b984f4312545d650c319019ca32d83f21d67acf3b89cbcda2ae7aecb",
+    "docs/audit/evidence/2026-10-29-corpus-releases/pages-mobile-en-redpajama.png": "1cfe14f271cecc84f708d87088ab707090bcff233a44a00fd6ca51fbfbfcc4eb",
+    "docs/audit/evidence/2026-10-29-corpus-releases/pages-mobile-original.png": "55c219345ee015752b6b1c9bcf17bf2391e8e11af657260d2fb7689e83c5bcfe",
+    "docs/audit/evidence/2026-10-29-corpus-releases/root-desktop-context.png": "275921dd3a2bc262ab50830eee2b5fa53db3ac6592db57b4a55231a9e6126516",
+    "docs/audit/evidence/2026-10-29-corpus-releases/root-desktop-original.png": "267d2eaf51a85c025965e2e959dffb174a451c930be20d9080884cc3dc4e6135",
+    "docs/audit/evidence/2026-10-29-corpus-releases/root-mobile-original-left-en.png": "95c695a1421c98c9dfcd5f83caeb688895132a98168b8eeb6854e4ae1f5edc65",
+    "docs/audit/evidence/2026-10-29-corpus-releases/root-mobile-original-right-en.png": "d033ef166b3247e8cfd2f361e2472eb275d72e08fbaba149b7ed3818d3fdacfa",
+    "docs/audit/evidence/2026-10-29-corpus-releases/root-mobile-redpajama.png": "deb96fd0e7e44881b87a7e010b24d20907b4f129c5194fb196a0d39ecbcbbf0e"
+  },
+  "wholeReads": [
+    {
+      "source": "Concepts/Training/Pre-training.md",
+      "lines": 291,
+      "changed": false
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41 Сбор, очистка и смеси данных.md",
+      "lines": 1086,
+      "pythonFences": 2,
+      "figures": 9,
+      "changed": true
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/42 Next-token prediction.md",
+      "lines": 806,
+      "pythonFences": 3,
+      "changed": false
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/44 Distributed training и mixed precision.md",
+      "lines": 1019,
+      "pythonFences": 3,
+      "changed": false
+    },
+    {
+      "source": "00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура.md",
+      "lines": 904,
+      "pythonFences": 3,
+      "changed": false
+    },
+    {
+      "source": "Concepts/Training/Semi-supervised Learning.md",
+      "lines": 203,
+      "changed": false,
+      "accepted": false
+    },
+    {
+      "source": "00 Учебник/11 Pre-training и Scaling/41e Обучение с частичной разметкой — pseudo-labeling и FixMatch.md",
+      "lines": 582,
+      "changed": false,
+      "acceptedComparison": false
+    }
+  ],
+  "primarySources": {
+    "packet": "05 Источники/Originals/corpus-releases-2026-10-29/manifest.json",
+    "readScope": "The manifest records the exact full or selected sections read. V1 README complete; V2 release stages and structure/creation sections, not every long quality-signal row; ROOTS selected complete sections, Figure 3 and Table 1. Existing unchanged owners retain their prior primary-source reviews; no fresh whole-bibliography claim.",
+    "figure": {
+      "published": "00 Учебник/Assets/Figures/curated/corpus-releases-2026-10-29/roots-oscar-filtered.png",
+      "original": "05 Источники/Originals/corpus-releases-2026-10-29/roots-oscar-filtered-original.png",
+      "sha256": "eb44fc2443ccac7e3b57a138ba64f626b82d0330261c4e22da64e99042a2309e",
+      "dimensions": [
+        1552,
+        279
+      ],
+      "license": "CC BY 4.0",
+      "source": "https://arxiv.org/html/2303.03915v1#S3.F3",
+      "byteIdentical": true,
+      "modifications": "None; all five panels and original labels retained."
+    }
+  },
+  "explanationReview": {
+    "retained": "Collection/extraction, quality and language filtering, token/document mixtures and repetitions; shifted next-token targets and scoring; weighted gradients, collectives and placement; full LLaMA mechanisms and historical mixtures remain detailed owners, not new definition summaries.",
+    "addition": "78-line English source-backed corpus-release section: seven-source V1 recipe versus V2 collection, four downloaded component types, raw/annotated/deduplicated stage counts, and ROOTS language-specific selection. Original-language new material is shared by both site locales; no translation produced.",
+    "example": "Chinese per-filter ROOTS rates sum to 47.0%; Table 1 union is 23.1%. The same document can fail multiple filters, so the bars cannot be interpreted as a sequential pipeline or added to estimate a final rejection rate. Byte mixture weights are not token training weights.",
+    "style": "Finished collection chapter reread completely; no generic source-following introduction, grand claims or definition-only replacement. Necessary technical vocabulary, examples, source references and figures retained. no-ai-slop checklist applied separately from fact/example/visual acceptance.",
+    "limits": "This accepts the archival note comparison, not the entirety of all corpus methods, the whole course/library or every figure in unchanged owners."
+  },
+  "supportEdits": [
+    "Corpus checker supports an explicit image alt label and checks new stage counts, original PNG dimensions/hash and license evidence.",
+    "New exact addition journal is reversed before historical baselines; unknown changes still reject.",
+    "Tool-reward and OLMo guards restore recorded additions/navigation before comparing unchanged historical hashes.",
+    "Placement checker now reverses the exact previously recorded reader-navigation delta before its unchanged historical hash and 32-group arithmetic checks.",
+    "New source/asset tests and one output test; no historical expected SHA was rebaselined."
+  ],
+  "executedChecks": [
+    {
+      "check": "Corpus displayed Python fences and release examples",
+      "exitCode": 0,
+      "log": "/var/tmp/bookvar-pretraining-corpus-final-20261029.log"
+    },
+    {
+      "check": "NTP three displayed CPU fences, masked scoring/window regression and small bigram overfit",
+      "exitCode": 0,
+      "log": "/var/tmp/bookvar-pretraining-ntp-20261029.log"
+    },
+    {
+      "check": "Distributed CPU examples, AMP call-order mock, TP and weighted gradients",
+      "exitCode": 0,
+      "log": "/var/tmp/bookvar-pretraining-distributed-20261029.log"
+    },
+    {
+      "check": "Placement displayed fence, all 32 coordinate/group partitions and negative arithmetic cases",
+      "exitCode": 0,
+      "log": "/var/tmp/bookvar-pretraining-placement-final-20261029.log"
+    },
+    {
+      "check": "LLaMA three displayed CPU fences, pinned source bodies and complete scalar gradients",
+      "exitCode": 0,
+      "maxScalarGradientError": 3.3073313282939304e-10,
+      "log": "/var/tmp/bookvar-pretraining-llama-20261029.log"
+    },
+    {
+      "command": "pnpm --dir publishing test",
+      "exitCode": 0,
+      "files": 133,
+      "tests": 843,
+      "log": "/var/tmp/bookvar-corpus-releases-unit-final-20261029.log"
+    },
+    {
+      "command": "BOOKVAR_LINK_ASSETS=1 pnpm --dir site build",
+      "exitCode": 0,
+      "pages": 2006,
+      "log": "/var/tmp/bookvar-corpus-releases-root-final-20261029.log"
+    },
+    {
+      "command": "pnpm --dir publishing test:output",
+      "exitCode": 0,
+      "tests": 173,
+      "log": "/var/tmp/bookvar-corpus-releases-output-20261029.log"
+    },
+    {
+      "command": "pnpm --dir publishing check:links",
+      "exitCode": 0,
+      "broken": 0,
+      "log": "/var/tmp/bookvar-corpus-releases-root-links-20261029.log"
+    },
+    {
+      "command": "PUBLICATION_BASE_PATH=/bookvar BOOKVAR_LINK_ASSETS=1 pnpm --dir site build --outDir /var/tmp/bookvar-corpus-releases-pages-20261029",
+      "exitCode": 0,
+      "pages": 2006,
+      "log": "/var/tmp/bookvar-corpus-releases-pages-build-20261029.log"
+    },
+    {
+      "check": "findBrokenBuiltLinks on Pages output with /bookvar",
+      "exitCode": 0,
+      "broken": 0,
+      "log": "/var/tmp/bookvar-corpus-releases-pages-links-20261029.log"
+    },
+    {
+      "check": "Restore derived root publication after Pages",
+      "exitCode": 0,
+      "log": "/var/tmp/bookvar-corpus-releases-root-content-restore-20261029.log"
+    },
+    {
+      "check": "Scoped git diff --check",
+      "exitCode": 0
+    }
+  ],
+  "recoveredFailures": [
+    "The initial full unit run rejected the older OLMo collection SHA after a recorded addition. Added exact recorded-change restoration; historical expected SHA retained. The final complete unit run passed.",
+    "The separate placement checker initially rejected a prior reader-navigation edit before running arithmetic. Exact navigation reversal now restores the historical chapter SHA; current chapter and old expected hash were not rewritten."
+  ],
+  "visualReview": {
+    "surfaces": [
+      "http://127.0.0.1:4330/textbook/pretraining/data-pipeline/",
+      "http://127.0.0.1:62843/bookvar/textbook/pretraining/data-pipeline/",
+      "http://127.0.0.1:62843/bookvar/en/textbook/pretraining/data-pipeline/"
+    ],
+    "desktop": {
+      "viewport": [
+        1280,
+        900
+      ],
+      "documentClientWidth": 1265,
+      "documentScrollWidth": 1265,
+      "contentImagesLoaded": 9,
+      "katexErrors": 0,
+      "original": "All five ROOTS panels inspected in the viewer at 1x; full labels and axes present."
+    },
+    "mobile": {
+      "viewport": [
+        360,
+        800
+      ],
+      "documentClientWidth": 345,
+      "documentScrollWidth": 345,
+      "contentImagesLoaded": 9,
+      "katexErrors": 0,
+      "displayMath": 9,
+      "formulaOverflow": 0,
+      "tables": 11,
+      "tableLayout": "Each table is a block with overflow-x:auto, client width 313 and a parent that does not overflow. Existing wide tables scroll internally; the new four-component table fits at 313px without horizontal scrolling.",
+      "original": "New ROOTS image inspected at 3x with panning; Chinese labels and 18.1% bar fully visible. Root EN rightmost panel also inspected at 4x.",
+      "newTable": "All four component rows personally inspected in the EN Pages route."
+    },
+    "english": "Explicit canonical-language fallback, not a completed separate English edition. The duplicate framework fallback sentence remains an open UI item.",
+    "restored": "Viewer closed, viewport override reset; own tab left as a deliverable on the current root chapter at #redpajama-releases.",
+    "screenshots": [
+      "docs/audit/evidence/2026-10-29-corpus-releases/pages-desktop-original.png",
+      "docs/audit/evidence/2026-10-29-corpus-releases/pages-mobile-context.png",
+      "docs/audit/evidence/2026-10-29-corpus-releases/pages-mobile-en-components.png",
+      "docs/audit/evidence/2026-10-29-corpus-releases/pages-mobile-en-redpajama.png",
+      "docs/audit/evidence/2026-10-29-corpus-releases/pages-mobile-original.png",
+      "docs/audit/evidence/2026-10-29-corpus-releases/root-desktop-context.png",
+      "docs/audit/evidence/2026-10-29-corpus-releases/root-desktop-original.png",
+      "docs/audit/evidence/2026-10-29-corpus-releases/root-mobile-original-left-en.png",
+      "docs/audit/evidence/2026-10-29-corpus-releases/root-mobile-original-right-en.png",
+      "docs/audit/evidence/2026-10-29-corpus-releases/root-mobile-redpajama.png"
+    ]
+  },
+  "preservation": {
+    "unchangedArchiveNotes": 31,
+    "canonicalReadHashes": "All 30 matched their read revisions directly except SFT's already-recorded PEFT navigation bridge; exact journal reversal restored the prior whole-read hash.",
+    "reviewedDeltaRestored": [
+      "00 Учебник/12 Post-training и Alignment/01 SFT и instruction data.md"
+    ],
+    "additionJournal": "docs/audit/2026-10-29-corpus-releases-additions.json",
+    "historicalReceiptsRewritten": false,
+    "newCourseRoute": false,
+    "newTranslation": false
+  },
+  "counts": {
+    "total": 31,
+    "sourceFullRead": 24,
+    "reconciled": 22,
+    "readInProgress": 2,
+    "unread": 7,
+    "canonicalWholeReads": 30
+  },
+  "remainingNotes": [
+    "Concepts/Training/Adversarial Training.md",
+    "Concepts/Training/Semi-supervised Learning.md",
+    "Concepts/Training/Synthetic Data.md",
+    "Concepts/Training/nanoGPT.md",
+    "Concepts/Reasoning/ReAct.md",
+    "Concepts/Reasoning/Tool Use.md",
+    "Concepts/Reasoning/Toolformer.md",
+    "Concepts/Reasoning/Tree of Thoughts.md",
+    "Concepts/Evaluation/BLEU Score.md"
+  ],
+  "remainingOverall": "Nine archival note comparisons, full conceptual route and final release checks; accepted scheduler is not reopened. Preserve the recorded VAT/UDA gap, distributed previous-chapter wording, duplicated EN notices and original MTP illustration permission gap.",
+  "publication": {
+    "commit": false,
+    "push": false,
+    "deploy": false,
+    "mainChanged": false
+  },
+  "notRun": [
+    "GPU/NCCL/distributed execution or hardware timing",
+    "Model-quality or corpus-filtering benchmark",
+    "Released model weight download or full model training",
+    "Fresh full visual review of unchanged NTP/distributed/LLaMA figures",
+    "Repository-wide release/rights audit, dev push or Pages deployment"
+  ]
+}

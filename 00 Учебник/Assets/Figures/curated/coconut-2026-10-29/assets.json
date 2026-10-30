@@ -1,0 +1,34 @@
+[
+  {
+    "id": "curated-coconut-feedback-0fefe67dec4e",
+    "asset": "00 Учебник/Assets/Figures/curated/coconut-2026-10-29/coconut.png",
+    "author": "Shibo Hao and coauthors; Meta Platforms, Inc. and affiliates",
+    "source_url": "https://github.com/facebookresearch/coconut/blob/27273cb8cca4bb763c041a63b036d0c3b7cbbb48/assets/coconut.png",
+    "source_image_url": "https://raw.githubusercontent.com/facebookresearch/coconut/27273cb8cca4bb763c041a63b036d0c3b7cbbb48/assets/coconut.png",
+    "commit": "27273cb8cca4bb763c041a63b036d0c3b7cbbb48",
+    "source_asset": "05 Источники/Originals/coconut-2026-10-29/coconut.png",
+    "source_asset_sha256": "0fefe67dec4ea48ab5cd4ff3b878f18432440f97cc0d9fa60cf41d9de2023055",
+    "sha256": "0fefe67dec4ea48ab5cd4ff3b878f18432440f97cc0d9fa60cf41d9de2023055",
+    "bytes": 482120,
+    "dimensions_px": [
+      2896,
+      796
+    ],
+    "source_page_snapshot": "05 Источники/Originals/coconut-2026-10-29/README.md",
+    "source_page_sha256": "b519c51f99e63e22effd2cd1c73d4c229c1d777186e8a4ad8892eac9b73b2f72",
+    "license": "MIT",
+    "license_url": "https://github.com/facebookresearch/coconut/blob/27273cb8cca4bb763c041a63b036d0c3b7cbbb48/LICENSE",
+    "license_notice": "site/public/licenses/coconut-27273cb8-MIT.txt",
+    "license_evidence": "05 Источники/Originals/coconut-2026-10-29/LICENSE",
+    "license_evidence_sha256": "cf9b17822d1fcd4ff32ccbe14183386fb3adf6f2ff92dc184130823f7fc28173",
+    "derivation": "source-raster-copy",
+    "modifications": "Complete original repository PNG copied byte-for-byte. No crop, redraw, relabeling, recompression or resizing.",
+    "metadata_status": "verified",
+    "provenance_confirmation": "pinned-upstream-repository",
+    "last_verified": "2026-10-29",
+    "used_in": [
+      "00 Учебник/13 Reasoning и Test-time Compute/01 Test-time compute.md"
+    ]
+  }
+]
+

@@ -2,7 +2,13 @@ import { mkdirSync, mkdtempSync, readFileSync, symlinkSync, writeFileSync } from
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { loadManifest } from '../adapter/manifest.js';
+import { loadManifest, type PublicationSidebarItem } from '../adapter/manifest.js';
+import { wikiHeadingSlug } from '../adapter/links.js';
+import { readingNeighbours, readingPaths } from '../adapter/reading-paths.js';
+
+function readingLeaves(items: PublicationSidebarItem[]): Extract<PublicationSidebarItem, {route:string}>[] {
+  return items.flatMap(item => 'route' in item ? [item] : readingLeaves(item.items));
+}
 
 function fixture(yaml: string, sources: string[] = []): string {
   const root = mkdtempSync(join(tmpdir(), 'publication-manifest-'));
@@ -36,18 +42,40 @@ sections:
 `;
 
 describe('loadManifest', () => {
-  it('keeps the published textbook index on the same 1 through 72 primary route', () => {
+  it('retains every pre-reorganization route and all old contents/guide heading targets', () => {
+    const root=join(import.meta.dirname,'..','..');
+    const baseline=JSON.parse(readFileSync(join(root,'docs/audit/snapshots/2026-10-26-textbook-navigation-before.json'),'utf8'));
+    const book=loadManifest(join(root,'publishing/navigation.yml')).sections.find(s=>s.id==='textbook')!;
+    const routes=new Set(book.pages.map(p=>p.route));
+    for(const page of baseline.textbook.pages)expect(routes.has(page.route),page.route).toBe(true);
+    for(const [snapshot,path] of [['textbook-index','00 Учебник/_index.md'],
+      ['how-to-use','00 Учебник/00 Как пользоваться учебником.md']]) {
+      const old=readFileSync(join(root,`docs/audit/snapshots/2026-10-26-${snapshot}-before.md`),'utf8');
+      const current=readFileSync(join(root,path),'utf8');
+      const headings=new Set([...current.matchAll(/^#{2,3} (.+)$/gm)].map(m=>wikiHeadingSlug(m[1])));
+      for(const match of old.matchAll(/^#{2,3} (.+)$/gm)) {
+        const slug=wikiHeadingSlug(match[1]);
+        expect(headings.has(slug)||current.includes(`<a id="${slug}"></a>`),`${path}#${slug}`).toBe(true);
+      }
+    }
+  });
+  it('lists every current reading page in the same order as the sidebar without inherited chapter numbers', () => {
     const root = join(import.meta.dirname, '..', '..');
     const index = readFileSync(join(root, '00 Учебник', '_index.md'), 'utf8');
-    const primaryNumbers = [...index.matchAll(/^(\d+)\. \[\[/gm)]
-      .map((match) => Number(match[1]));
-    expect(primaryNumbers).toEqual(Array.from({ length: 72 }, (_, index) => index + 1));
-    expect(index).toContain('S1. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/01 Модель как часть системы|Модель как часть системы]]');
-    expect(index).toContain('S7. [[02 Areas/ML & DL/00 Учебник/10 ML Systems/07 Profiling ML-нагрузки|Profiling ML-нагрузки]]');
-    expect(index).toContain('Вводная: [[02 Areas/ML & DL/00 Учебник/07 Анатомия современной LLM/01 LLaMA как базовая архитектура');
+    const book=loadManifest(join(root,'publishing/navigation.yml')).sections.find(s=>s.id==='textbook')!;
+    const reading=index.split('## Основной курс')[1].split('## Справочные разделы')[0];
+    const routesBySource=new Map(book.pages.map(p=>[p.source,p.route]));
+    const targets=[...reading.matchAll(/^- \[\[([^|#\]]+)/gm)].map(m=>
+      m[1].replace(/^02 Areas\/ML & DL\//,'')+'.md');
+    targets.forEach(source=>expect(routesBySource.has(source),source).toBe(true));
+    const routes=targets.map(source=>routesBySource.get(source));
+    expect(routes).toEqual(readingLeaves(book.sidebar!).map(p=>p.route).slice(2));
+    expect(new Set(routes).size).toBe(routes.length);
+    expect(routes.length).toBeGreaterThan(130);
+    expect(reading).not.toMatch(/^\s*(?:-\s*)?(?:S\d+|\d+(?:\.\d+)*)\.\s*\[\[/m);
   });
 
-  it('keeps all 68 curriculum routes in the matrix and publication manifest in the same order', () => {
+  it('preserves the historical 68-route matrix as an ordered subset, not as the complete current curriculum', () => {
     const root = join(import.meta.dirname, '..', '..');
     const matrix = readFileSync(join(root, '00 Учебник', 'Редакционная матрица Bookvar.md'), 'utf8');
     const matrixRows = [...matrix.matchAll(/^\|\s*(\d+)\s*\|\s*`([^`]+)`\s*\|$/gm)]
@@ -187,53 +215,30 @@ describe('loadManifest', () => {
     }]);
   });
 
-  it('defines fourteen readable textbook modules without changing flat routes', () => {
+  it('separates the core course and specialist modules without changing flat routes', () => {
     const root = join(import.meta.dirname, '..', '..');
     const textbook = loadManifest(join(root, 'publishing', 'navigation.yml')).sections
       .find((section) => section.id === 'textbook')!;
     const modules = textbook.sidebar?.filter((item) => 'items' in item) ?? [];
-    expect(modules).toHaveLength(14);
-    expect(modules.map((module) => module.label)).toEqual([
-      'I. Математические и ML-основания',
-      'II. Классическое машинное обучение',
-      'III. Рекомендательные системы',
-      'IV. Нейронные сети',
-      'V. Текст до Transformer',
-      'VI. Transformer, BERT и GPT',
-      'VII. Анатомия современной LLM',
-      'VIII. Вычислительные основы ML-систем',
-      'IX. Обучение LLM',
-      'X. Инференс и serving',
-      'XI. Эксплуатация и оценивание',
-      'XII. Retrieval и RAG',
-      'XIII. Мультимодальные модели',
-      'XIV. Инструменты и агенты'
-    ]);
+    expect(modules.map((module) => module.label)).toEqual(['Основной курс', 'Углублённые модули']);
 
     const flattenSidebar = (items: NonNullable<typeof textbook.sidebar>): typeof items =>
       items.flatMap((item) => 'route' in item ? [item] : flattenSidebar(item.items));
     const moduleItems = flattenSidebar(modules);
-    const primaryNumbers = moduleItems
-      .map((item) => item.label.match(/^(\d+)\. /))
-      .filter((match): match is RegExpMatchArray => match !== null)
-      .map((match) => Number(match[1]));
-    expect(primaryNumbers).toEqual(
-      Array.from({ length: 72 }, (_, index) => index + 1)
-    );
-    expect(moduleItems.filter((item) => /^\d+\.\d+ /.test(item.label)).map((item) => item.label))
-      .toEqual(expect.arrayContaining([
-        expect.stringMatching(/^55\.1 /),
-        expect.stringMatching(/^55\.2 /),
-        expect.stringMatching(/^55\.3 /),
-        expect.stringMatching(/^58\.1 /),
-        expect.stringMatching(/^58\.2 /)
-      ]));
-    const numberedLabels = moduleItems
-      .map((item) => item.label.match(/^(?:S\d+|\d+(?:\.\d+)?)\.?/i)?.[0])
-      .filter((label): label is string => label !== undefined);
-    expect(numberedLabels).toHaveLength(new Set(numberedLabels).size);
+    for(const item of moduleItems) {
+      expect(item.label).not.toMatch(/^(?:S\d+|\d+(?:\.\d+)*)\.?\s/);
+      if(item.labelEn)expect(item.labelEn).not.toMatch(/^(?:S\d+|\d+(?:\.\d+)*)\.?\s/);
+    }
     const sidebarRoutes = flattenSidebar(textbook.sidebar ?? []).map((item) => item.route);
-    expect(sidebarRoutes).toEqual(textbook.pages.map((page) => page.route));
+    expect([...sidebarRoutes].sort()).toEqual(textbook.pages.map((page) => page.route).sort());
+    const paths = readingPaths(textbook);
+    expect(paths.find(path => path.id === 'main')!.routes).toHaveLength(64);
+    expect(paths.filter(path => path.id !== 'main')).toHaveLength(13);
+    expect(readingNeighbours(paths, 'textbook/pretraining/dedup-pii-corpus-quality')?.next)
+      .toBe('textbook/pretraining/next-token-objective');
+    expect(readingNeighbours(paths, 'textbook/classical-ml/kernels-svm-rff')?.next).toBeUndefined();
+    expect(readingNeighbours(paths, 'textbook/pretraining/moco-queue-momentum')?.next)
+      .toBe('textbook/pretraining/mae-masked-autoencoders');
   });
 
   it('rejects sidebar routes absent from the flat page manifest', () => {

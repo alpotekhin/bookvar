@@ -1,0 +1,123 @@
+{
+  "date": "2026-10-30",
+  "status": "verified-local-selected-scope",
+  "scope": "Three published figure/table replacements and the root-versus-Pages workflow correction. This is not whole-book explanation acceptance.",
+  "sourceReview": {
+    "wholeReads": [
+      "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning.md",
+      "en/00 Textbook/06 Encoder Decoder and Encoder-Decoder/06 GPT-3 — in-context learning.md",
+      "00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1.md"
+    ],
+    "changes": "Only the bounded figure/table, caption and date changes in the exact four-file additions journal. Code, formulas and unrelated explanations retained.",
+    "journal": "docs/audit/2026-10-30-figure-replacements-additions.json",
+    "sourcePacket": "05 Источники/Originals/figure-replacements-2026-10-30/manifest.json",
+    "retiredPublishedObjects": [
+      "GPT-3 paper Figure 2.1 raster",
+      "GPT-3 paper Table 2.1 raster",
+      "DeepSeekMath PPO/GRPO comparison raster"
+    ],
+    "replacements": [
+      "Complete Jay Alammar animation frame 171, lossless PNG, CC BY-NC-SA 4.0; prompt reconstruction qualified in caption",
+      "Native eight-row factual configuration table, all numeric cells checked against Table 2.1 in paper v4 for both editions",
+      "Unchanged Nathan Lambert PPO original beside the unchanged GRPO original, with pinned MIT notice"
+    ],
+    "limits": [
+      "Archived copies remain available locally and are not relabeled as licensed.",
+      "The legacy Concepts/Training/GRPO.md is not published and retains its old local image reference.",
+      "Source-linked sequential MTP/Toolformer/EAGLE visuals remain separate editorial gaps."
+    ]
+  },
+  "checks": {
+    "fullUnitBeforeWorkflowCorrection": {
+      "files": 147,
+      "tests": 908,
+      "exit": 0
+    },
+    "workflowRegression": {
+      "beforeFix": "3/3 failed",
+      "afterFix": "3/3 passed",
+      "targetedSuite": "24/24 passed across pages-workflow, check-built-links and publication-policy"
+    },
+    "root": {
+      "astroCheck": "0 errors, 0 warnings, 6 deprecation hints",
+      "builtRoutes": 2007,
+      "outputTests": 184,
+      "brokenInternalLinks": 0,
+      "topics": 152,
+      "sourceCoverage": "passed; structural, not semantic acceptance",
+      "courseIngestion": "Stanford CS336 and Berkeley ledgers passed"
+    },
+    "pages": {
+      "base": "/bookvar",
+      "physicalOutput": "/var/tmp/bookvar-pages-20261030-final",
+      "temporaryOutputRemovedAfterVerification": true,
+      "builtRoutes": 2007,
+      "brokenInternalLinks": 0,
+      "rootOnlyPreviousHref": false,
+      "prefixedPreviousHref": true,
+      "actualSearch": "23 results for GPT-3; clicked The scaling experiment and reached the matching /bookvar/en/ anchor"
+    },
+    "cpu": {
+      "gpt3Programs": 2,
+      "grpoPrograms": 11,
+      "exit": 0,
+      "scope": "CPU examples only; no model-quality or GPU benchmark"
+    },
+    "sourceFigures": {
+      "gpt3LicensedFigures": 5,
+      "allEightTableRowsBothEditions": "all numeric columns matched paper v4",
+      "exactJournalReversal": "passed; historical expected hashes retained"
+    },
+    "diffCheck": "Scoped git diff --check passed."
+  },
+  "visual": {
+    "desktop": {
+      "gpt3": "Five article figures loaded; new complete original opens uncropped. Table has 9 rows including header, 8 columns. Zero KaTeX errors and no document overflow.",
+      "grpo": "Original PPO diagram and caption inspected in viewer; eight article images loaded. Zero KaTeX errors and no document overflow."
+    },
+    "mobile": {
+      "requestedViewport": [
+        360,
+        800
+      ],
+      "gpt3Table": "Internal horizontal scroll reached 353/353 px; final learning-rate column visible. Document clientWidth and scrollWidth both 345 px.",
+      "ppo": "Full-fit original and 2.5x magnification inspected. Document width 360 px with internal viewer pan.",
+      "grpoPagesEN": "Original group-advantage figure inspected full-fit and 2.5x in /bookvar/en/ viewer; caption and native source attribution retained."
+    },
+    "english": {
+      "gpt3": "Existing English edition renders the same five figures and all eight table rows, with prefixed EN previous links.",
+      "grpo": "Explicit canonical-language notice; no new English translation claimed."
+    },
+    "evidenceDirectory": "docs/audit/evidence/2026-10-30-figure-replacements",
+    "newObservedIssue": "Pagefind search excerpts repeat the MathML, TeX annotation and HTML forms of a formula. Search results and navigation work; snippet formatting remains open.",
+    "viewportRestored": true
+  },
+  "release": {
+    "committed": false,
+    "pushed": false,
+    "deployed": false,
+    "next": "Inspect the full scoped working-tree diff and release contents, freeze the revision, then complete authorized dev-only publication and verify live Pages. This local receipt does not establish release."
+  },
+  "pins": [
+    {
+      "file": ".github/workflows/pages.yml",
+      "sha256": "23b07904bd8207c7284b5a94492a957b0a347714ea423627d5a335feaffa2433"
+    },
+    {
+      "file": "docs/PUBLISHING.md",
+      "sha256": "a6ee5cb22819743f1e5b52b4d1b55c18012ceea7203d027c3831881084c9e94c"
+    },
+    {
+      "file": "publishing/tests/pages-workflow.test.ts",
+      "sha256": "bd8da40b2989d39fc85bd2ece3d62959b37fad08f432c6d5884e3d0f43ce4266"
+    },
+    {
+      "file": "docs/audit/2026-10-30-figure-replacements-additions.json",
+      "sha256": "484dffe5ae0e2f452d7db23f22cc3e06b02addfd216267416b23637f04182908"
+    },
+    {
+      "file": "05 Источники/Originals/figure-replacements-2026-10-30/manifest.json",
+      "sha256": "3ece96ffeccf4860f6fbfc5f428bf2fbbe78bf8bbaf0f495a47ef63a5937c26d"
+    }
+  ]
+}

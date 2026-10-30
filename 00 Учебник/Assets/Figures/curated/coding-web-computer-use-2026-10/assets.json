@@ -1,0 +1,39 @@
+[
+  {
+    "id": "curated-coding-web-computer-use-taco-cota-examples-418c7a4cf75f",
+    "asset": "00 Учебник/Assets/Figures/curated/coding-web-computer-use-2026-10/taco-cota-examples.png",
+    "source_asset": "05 Источники/Originals/coding-web-computer-use-2026-10-21/taco.pdf",
+    "source_page": 2,
+    "source_page_snapshot": "05 Источники/Originals/coding-web-computer-use-2026-10-21/taco-page-02.png",
+    "crop_box_px": [
+      285,
+      365,
+      2805,
+      2600
+    ],
+    "render_page_size_px": [
+      3091,
+      4000
+    ],
+    "label": "Figure 1",
+    "author": "Zixian Ma et al.",
+    "source_url": "https://arxiv.org/abs/2412.05479v1",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/coding-web-computer-use-2026-10-21/taco-abstract.html",
+    "derivation": "pdf-page-render-crop",
+    "provenance_confirmation": "source-license-verified",
+    "modifications": "Complete original numbered figure and English caption retained; surrounding prose excluded. No redraw or edits inside the figure.",
+    "metadata_status": "verified",
+    "last_verified": "2026-10-21",
+    "used_in": [
+      "00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents.md"
+    ],
+    "sha256": "418c7a4cf75f0851b1e767cf49f4127c97eacbe08a9a777e8e9e941376e43690",
+    "source_asset_sha256": "e732186434506740dfb75727d487bb861024bdf0a2a7d68e7c4ba093508571b4",
+    "source_page_sha256": "aaaf70c0ff918dc7432092572a2a64ccfd2933647e07c0a013230ff08596299c",
+    "license_evidence_sha256": "1b7db869a5ef19b5828dfdb68dcd0b6b353dc117a6c84f3d4af115d634ac5da8",
+    "width": 2520,
+    "height": 2235
+  }
+]

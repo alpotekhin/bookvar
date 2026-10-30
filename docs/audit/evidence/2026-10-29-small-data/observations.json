@@ -1,0 +1,184 @@
+{
+  "desktop": {
+    "code": 14,
+    "figures": [
+      {
+        "alt": "Original Houlsby adapter architecture and placement",
+        "loaded": true,
+        "natural": [
+          930,
+          680
+        ],
+        "shown": [
+          616.984375,
+          451.1328125
+        ]
+      },
+      {
+        "alt": "Original Hugging Face animation of the frozen projection and LoRA branch",
+        "loaded": true,
+        "natural": [
+          600,
+          439
+        ],
+        "shown": [
+          600,
+          439
+        ]
+      },
+      {
+        "alt": "Original Hugging Face LoRA merging diagram",
+        "loaded": true,
+        "natural": [
+          1247,
+          528
+        ],
+        "shown": [
+          616.984375,
+          261.2421875
+        ]
+      },
+      {
+        "alt": "Original QLoRA comparison of full fine-tuning, LoRA and QLoRA",
+        "loaded": true,
+        "natural": [
+          2000,
+          875
+        ],
+        "shown": [
+          617,
+          269.9375
+        ]
+      },
+      {
+        "alt": "Original model-tuning and prompt-tuning comparison",
+        "loaded": true,
+        "natural": [
+          938,
+          498
+        ],
+        "shown": [
+          616.984375,
+          327.5703125
+        ]
+      },
+      {
+        "alt": "Original prefix-tuning architecture comparison",
+        "loaded": true,
+        "natural": [
+          1188,
+          908
+        ],
+        "shown": [
+          616.9921875,
+          471.578125
+        ]
+      },
+      {
+        "alt": "Original comparison of bias correction, reinitialization and training duration",
+        "loaded": true,
+        "natural": [
+          1394,
+          475
+        ],
+        "shown": [
+          616.9765625,
+          210.234375
+        ]
+      },
+      {
+        "alt": "Original development-score distributions across 25 fine-tuning seeds",
+        "loaded": true,
+        "natural": [
+          1632,
+          616
+        ],
+        "shown": [
+          616.984375,
+          232.8828125
+        ]
+      }
+    ],
+    "h1": 1,
+    "hasSmallData": true,
+    "katexErrors": 0,
+    "scrollWidth": 1265,
+    "url": "http://127.0.0.1:4330/textbook/post-training/fine-tuning-peft/#small-data-fine-tuning",
+    "width": 1265
+  },
+  "mobile": {
+    "code": 14,
+    "figures": 8,
+    "hasFallback": false,
+    "katexErrors": 0,
+    "scrollWidth": 345,
+    "url": "http://127.0.0.1:4330/en/textbook/post-training/fine-tuning-peft/#fine-tuning-update-budget",
+    "width": 345
+  },
+  "mobileZoom": {
+    "scrollWidth": 360,
+    "text": "Cancel Clear  ",
+    "width": 360
+  },
+  "tableMobile": {
+    "katexErrors": 0,
+    "scrollWidth": 345,
+    "tableScrollers": [],
+    "width": 345
+  },
+  "pages": {
+    "code": 14,
+    "figures": [
+      {
+        "loaded": true,
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/peft-2026-10-29/houlsby-adapter.png"
+      },
+      {
+        "loaded": true,
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/peft-2026-10-29/lora-animated.gif"
+      },
+      {
+        "loaded": true,
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/peft-2026-10-29/lora-merge.png"
+      },
+      {
+        "loaded": true,
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/quantization-review-2026-10/qlora-training-original.png"
+      },
+      {
+        "loaded": true,
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/peft-2026-10-29/prompt-tuning.png"
+      },
+      {
+        "loaded": true,
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/peft-2026-10-29/prefix-tuning.png"
+      },
+      {
+        "loaded": true,
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/small-data-finetuning-2026-10-29/asapp-overview.png"
+      },
+      {
+        "loaded": true,
+        "src": "/bookvar/assets/00%20%D0%A3%D1%87%D0%B5%D0%B1%D0%BD%D0%B8%D0%BA/Assets/Figures/curated/small-data-finetuning-2026-10-29/mosbach-stability.png"
+      }
+    ],
+    "h1": 1,
+    "hasFallback": false,
+    "katexErrors": 0,
+    "licenses": [
+      "/bookvar/licenses/asapp-finetuning-0aa4f4e-LICENSE.txt",
+      "/bookvar/licenses/mosbach-finetuning-3cf27e8-Apache-2.0.txt"
+    ],
+    "scrollWidth": 1265,
+    "url": "http://127.0.0.1:62829/bookvar/en/textbook/post-training/fine-tuning-peft/#small-data-fine-tuning",
+    "width": 1265
+  },
+  "pagesMobile": {
+    "code": 14,
+    "figures": 8,
+    "katexErrors": 0,
+    "scrollWidth": 345,
+    "url": "http://127.0.0.1:62829/bookvar/textbook/post-training/fine-tuning-peft/#fine-tuning-bias-correction",
+    "width": 345
+  }
+}

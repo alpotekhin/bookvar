@@ -1,0 +1,39 @@
+[
+  {
+    "id": "curated-hh-calibration-74e8528aedab",
+    "asset": "00 Учебник/Assets/Figures/curated/reward-modeling-2026-10-23/hh-calibration.png",
+    "author": "Yuntao Bai et al.",
+    "source_url": "https://arxiv.org/pdf/2204.05862v1#page=14",
+    "source_asset": "05 Источники/Originals/preference-2026-10-23/bai-v1.pdf",
+    "source_asset_sha256": "26e390d4f76938d2e2591225603637c643cc108e94afb756c65f5d2e0fc9037b",
+    "source_page": 14,
+    "render_dpi": 300,
+    "render_page_size_px": [
+      2550,
+      3300
+    ],
+    "crop_box_px": [
+      350,
+      300,
+      2200,
+      1150
+    ],
+    "sha256": "74e8528aedab2bb961f831beddbb34c7ed8ad34cfecbc7ab8a2d5fb4c2a31d80",
+    "dimensions_px": [
+      1850,
+      850
+    ],
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/preference-2026-10-23/bai-v1.html",
+    "license_evidence_sha256": "9f30f8807321128513e1aeef97a7d52e0daf874802c15d8b7d54feadfef10d02",
+    "modifications": "Poppler 300 dpi render; both complete panels, axes, colorbars, legends and the full English caption retained. Only surrounding page material removed; no redraw or translation.",
+    "derivation": "pdf-page-render-crop",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-23",
+    "used_in": [
+      "00 Учебник/12 Post-training и Alignment/03 Reward modeling.md"
+    ]
+  }
+]

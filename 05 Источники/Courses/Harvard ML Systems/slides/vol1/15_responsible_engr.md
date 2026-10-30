@@ -9,17 +9,41 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`slides/vol1/15_responsible_engr/15_responsible_engr.tex`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static slide archive
+> Text and equations retain the original language. Layout wrappers are simplified;
+> speaker notes are separate, and original SVGs are not redrawn or cropped.
+> Unsupported TeX remains visible and is listed beside the affected slide.
+> This archive is not a checked transcript or a finished Bookvar chapter.
 
 # VOL1 Slides — Responsible Engr
 
 ## Readable slide sequence
 
+## Responsible Engineering
+
+[Original slide 1](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L56)
+
+The Full Cost of Optimization
+
 ## Learning Objectives
 
-{
+[Original slide 2](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L61)
+
+1. Explain how ML systems can **optimize correctly while causing harm** through bias amplification and proxy variables
+2. Apply the **D$\bullet$A$\bullet$M taxonomy** to diagnose responsibility failures along Data, Algorithm, or Machine axes
+3. Compute **fairness metrics** (demographic parity, equal opportunity, equalized odds) from confusion matrices
+4. Design **disaggregated evaluation** that detects hidden disparities across demographic groups
+5. Analyze **total cost of ownership** including carbon as a first-class engineering metric
+6. Identify **governance infrastructure** (model cards, datasheets, audit trails) for compliance
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Learning objectives frame.
 
 % -- LINK: From Ch14's operational correctness to ethical correctness
@@ -45,19 +69,36 @@ Pareto frontiers, and TCO calculations.
 [CORE] Do not skip --- these structure the entire lecture.
 IF AHEAD: Ask students to predict which objective will be hardest.
 IF SHORT: Read objectives without discussion.
-}
+```
 
-{0pt}
-- Explain how ML systems can **optimize correctly while causing harm** through bias amplification and proxy variables
-- Apply the {{} taxonomy} to diagnose responsibility failures along Data, Algorithm, or Machine axes
-- Compute **fairness metrics** (demographic parity, equal opportunity, equalized odds) from confusion matrices
-- Design **disaggregated evaluation** that detects hidden disparities across demographic groups
-- Analyze **total cost of ownership** including carbon as a first-class engineering metric
-- Identify **governance infrastructure** (model cards, datasheets, audit trails) for compliance
+</details>
 
 ## Visual Language
 
-{
+[Original slide 3](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L102)
+
+Throughout this course, colors carry meaning:
+
+**Blue** — Compute / Processing
+
+GPU ops, forward/backward pass, inference
+
+**Green** — Data / Memory
+
+Data flow, caches, healthy paths
+
+**Orange** — Routing / Scheduling
+
+Load balancers, batch windows
+
+**Red** — Error / Cost / Bottleneck
+
+Loss, decode phase, waste
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [0.5 min] Color system orientation.
 
 % -- LINK: From Learning Objectives to the visual language used in this deck
@@ -71,37 +112,38 @@ affect real people.''
 
 % -- FLEX: [OPTIONAL] Returning students already know this
 [OPTIONAL] Spend 30 seconds max. IF SHORT: Skip entirely.
-}
+```
 
-Throughout this course, colors carry meaning:
-
-{0.3cm}
-[T]
-  
-    {mlsyscard}{computestroke}
-    **Blue** --- Compute / Processing\\
-    { GPU ops, forward/backward pass, inference}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{datastroke}
-    **Green** --- Data / Memory\\
-    { Data flow, caches, healthy paths}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{routingstroke}
-    **Orange** --- Routing / Scheduling\\
-    { Load balancers, batch windows}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{errorstroke}
-    **Red** --- Error / Cost / Bottleneck\\
-    { Loss, decode phase, waste}
-    {mlsyscard}
+</details>
 
 ## When Optimization Succeeds But Systems Fail
 
-{
+[Original slide 4](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L154)
+
+**Amazon Recruiting Tool (2014–2017):**
+
+- Trained on 10 years of resumes (mostly male)
+- Penalized “women's” in activities
+- Downgraded all-women's colleges
+- Removing gender labels **failed**—proxies reconstructed gender
+
+**Specification failure:** The system optimized *faithfully* for the wrong objective.
+
+| **Metric** | **Status** |
+| --- | --- |
+| Loss function | Converged |
+| Training acc. | 95%+ |
+| Latency SLA | Met |
+| Gender fairness | **Failed** |
+
+Every technical metric passed.
+
+The system was *working correctly*.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min] Amazon recruiting case study --- anchor for the entire chapter.
 
 % -- LINK: From objectives to the first case study
@@ -112,7 +154,7 @@ recruiting tool is the canonical example.
 ``Amazon trained on 10 years of resumes --- mostly male hires. The system
 penalized 'women's chess club' and all-women's colleges. They removed
 gender labels, but proxies reconstructed gender with high accuracy.''
-Point to the metrics table: ``Loss converged. Accuracy 95%+. Latency met.
+Point to the metrics table: ``Loss converged. Accuracy 95\%+. Latency met.
 Gender fairness: failed. Working correctly for the wrong objective.''
 
 % -- ENGAGE: Identify the specification failure
@@ -122,48 +164,45 @@ on historical hiring --- which encoded the bias.]
 % -- WARN: Students think removing protected attributes fixes bias
 Common error: removing gender/race columns eliminates bias. Correct
 framing: models reconstruct protected attributes from proxies (zip code,
-college name) with 70--90% accuracy.
+college name) with 70--90\% accuracy.
 
 % -- FLEX: [CORE] Amazon is the anchor case for the entire chapter
 [CORE] Recurs in fairness metrics and the D-A-M taxonomy.
 IF AHEAD: ``How would you redesign the objective function?''
 IF SHORT: Tell the story, show the metrics table, skip the question.
-}
+```
 
-[T]
-  
-    **Amazon Recruiting Tool (2014--2017):**
-    {0pt}
-- Trained on 10 years of resumes (mostly male)
-- Penalized ``women's'' in activities
-- Downgraded all-women's colleges
-- Removing gender labels **failed**---proxies reconstructed gender
-    
-
-    {0.1cm}
-    {Specification failure:}{The system optimized *faithfully* for the wrong objective.}
-  
-  
-    {}{1.15}
-    {
-    {tabular}{@{}ll@{}}
-      
-      **Metric** & **Status** \\
-      
-      Loss function    & Converged \\
-      Training acc.    & 95%+ \\
-      Latency SLA      & Met \\
-      Gender fairness  & {errorstroke}{**Failed**} \\
-      
-    {tabular}
-    }
-
-    {0.15cm}
-    {{midgray}{Every technical metric passed.\ system was *working correctly*.}}
+</details>
 
 ## COMPAS: A Different Failure Axis
 
-{
+[Original slide 5](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L220)
+
+**COMPAS Recidivism Score (ProPublica, 2016):**
+
+- Used in US courts for bail/sentencing
+- **Calibrated**: score of 7 = same probability for any group
+- **FP rate**: Black 44.9% vs. White 23.5%
+- **FN rate**: White 47.7% vs. Black 28.0%
+
+**Impossibility:** Calibration + equalized odds cannot both hold when base rates differ.
+
+Original figure reference: ` contemplation-of-justice.jpg `.
+
+*Contemplation of Justice*, US Supreme Court. CC BY 2.0.
+
+| **Case** | **D$\bullet$A$\bullet$M Axis** |
+| --- | --- |
+| Amazon | **Data** |
+| COMPAS | **Algorithm** |
+| Optum | **Data** |
+
+Source on slide: Angwin et al., ProPublica 2016; Chouldechova 2017
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min] COMPAS case study --- impossibility theorem anchor.
 
 % -- LINK: From Amazon (data-axis) to COMPAS (algorithm-axis)
@@ -172,7 +211,7 @@ axis: the math forces an impossible trade-off.
 
 % -- NARRATE: Explain calibration vs error rate disparity
 ``COMPAS was calibrated: score of 7 means same recidivism probability
-for any group. But Black defendants falsely flagged at 44.9% vs 23.5%
+for any group. But Black defendants falsely flagged at 44.9\% vs 23.5\%
 for White --- nearly 2x.'' Point to the impossibility result: ``Chouldechova
 2017 proved that when base rates differ, calibration and equalized odds
 cannot both hold. Mathematical impossibility.''
@@ -191,48 +230,35 @@ when base rates differ. Engineers must choose.
 [CORE] Recurs in fairness metrics and the Pareto frontier.
 IF AHEAD: ``Can you change base rates? What would that require?''
 IF SHORT: State the impossibility result, show FP/FN rates, move on.
-}
+```
 
-[T]
-  
-    **COMPAS Recidivism Score (ProPublica, 2016):**
-    {0pt}
-- Used in US courts for bail/sentencing
-- **Calibrated**: score of 7 = same probability for any group
-- {errorstroke}{**FP rate**}: Black 44.9% vs.\ White 23.5%
-- {errorstroke}{**FN rate**}: White 47.7% vs.\ Black 28.0%
-    
+</details>
 
-    {0.05cm}
-    {Impossibility:}{Calibration + equalized odds cannot both hold when base rates differ.}
-  
-  
-    {0.1cm}
-    {contemplation-of-justice.jpg}
+<details>
+<summary>Projection limits for this slide</summary>
 
-    {0.05cm}
-    {{midgray}{*Contemplation of Justice*, US Supreme Court. CC BY 2.0.}}
+- [contemplation-of-justice.jpg](https://raw.githubusercontent.com/harvard-edge/cs249r_book/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/images/contemplation-of-justice.jpg): raster source link retained; individual provenance not established.
 
-    {0.1cm}
-    {
-    {}{1.1}
-    {tabular}{@{}ll@{}}
-      
-      **Case** & {{} Axis} \\
-      
-      Amazon   & {datastroke}{**Data**} \\
-      COMPAS   & {computestroke}{**Algorithm**} \\
-      Optum    & {datastroke}{**Data**} \\
-      
-    {tabular}
-    }
-  
-
-{Angwin et al., ProPublica 2016; Chouldechova 2017}
+</details>
 
 ## Silent Failure Modes
 
-{
+[Original slide 6](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L291)
+
+| **Failure Type** | **Detection** | **Scope** | **Fix** |
+| --- | --- | --- | --- |
+| Crash | Immediate | Complete | Immediate |
+| Perf. degradation | Minutes | Complete | After fix |
+| Data quality | Hours–days | Partial | Data correction |
+| Distribution shift | Days–weeks | Partial/all | Retraining |
+| **Fairness violation** | **Weeks–months** | **Subpop.** | **Redesign** |
+
+**Key:** Fairness violations are the slowest to detect and hardest to fix. The system operates *normally* while harming specific populations.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Failure taxonomy --- motivates disaggregated evaluation.
 
 % -- LINK: From case studies to a taxonomy of failure detection times
@@ -257,27 +283,34 @@ evaluation --- aggregate metrics hide the problem entirely.
 % -- FLEX: [CORE] The failure taxonomy motivates fairness metrics
 [CORE] The last row sets up the entire next section.
 IF SHORT: Read the table, emphasize the last row, skip the question.
-}
+```
 
-{}{1.05}
-{tabular}{@{}llll@{}}
-  
-  **Failure Type** & **Detection** & **Scope** & **Fix** \\
-  
-  Crash              & Immediate    & Complete      & Immediate \\
-  Perf.\ degradation & Minutes     & Complete      & After fix \\
-  Data quality       & Hours--days  & Partial       & Data correction \\
-  Distribution shift & Days--weeks  & Partial/all   & Retraining \\
-  {errorstroke}{**Fairness violation**} & {errorstroke}{**Weeks--months**} & {errorstroke}{**Subpop.**} & {errorstroke}{**Redesign**} \\
-  
-{tabular}
-
-{0.15cm}
-{Key:}{Fairness violations are the slowest to detect and hardest to fix. The system operates *normally* while harming specific populations.}
+</details>
 
 ## Predict: Where Does the Failure Originate?
 
-{
+[Original slide 7](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L339)
+
+Think–Write–Share
+
+A healthcare algorithm ranks patients by “medical need”
+
+using *healthcare spending* as a proxy.
+
+Black patients at the same sickness level spend *less*
+
+due to systemic access barriers.
+
+Using the D$\bullet$A$\bullet$M taxonomy: is this a
+
+**Data**, **Algorithm**, or **Machine** failure?
+
+(60 seconds — then compare with a neighbor)
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Active learning: D-A-M classification exercise.
 
 % -- LINK: From failure taxonomy to applying the D-A-M framework
@@ -297,27 +330,39 @@ variable (spending) encodes systemic inequality.]
 % -- FLEX: [CORE] Primes the fairness metrics section
 [CORE] Activates the D-A-M taxonomy before formalization.
 IF SHORT: Reduce to 30 seconds, skip neighbor comparison.
-}
+```
 
-{0.3cm}
-{ Think--Write--Share}
-
-{0.2cm}
-{ A healthcare algorithm ranks patients by ``medical need''\\
-using *healthcare spending* as a proxy.\\[0.1cm]
-Black patients at the same sickness level spend *less*\\
-due to systemic access barriers.}
-
-{0.2cm}
-{ Using the {} taxonomy: is this a\\
-{datastroke}{**Data**}, {computestroke}{**Algorithm**}, or {routingstroke}{**Machine**} failure?}
-
-{0.2cm}
-{{midgray}{(60 seconds --- then compare with a neighbor)}}
+</details>
 
 ## Responsible AI Engineering: The Formal Definition
 
-{
+[Original slide 8](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L385)
+
+**Responsible AI Engineering** (Formal Definition):
+
+Operationalizing societal and regulatory requirements as **testable
+constraints** on the D$\bullet$A$\bullet$M axes:
+
+- **Data**: permissible contents, provenance, and composition
+- **Algorithm**: fairness $\varepsilon \leq 5\%$, robustness bounds
+- **Machine**: latency, energy, carbon, audit-log retention
+
+**AI Ethics**
+
+Articulates aspirational values
+
+(“be fair,” “be transparent”)
+
+**Responsible AI Engineering**
+
+Translates values into **Testable Invariants** verified by automated testing
+
+**Key:** “Fairness gap $< 5\%$” is actionable. “Be fair” is not. Violating these bounds is a **system failure**, not a research shortcoming.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min] Formal definition slide --- the chapter's central conceptual anchor.
 
 % -- LINK: From the failure cases to a reusable engineering principle
@@ -327,7 +372,7 @@ to look. This slide answers: ``what does responsible engineering actually mean?'
 % -- NARRATE: Read the definition and unpack the key phrase
 ``Responsible AI Engineering operationalizes societal and regulatory
 requirements as testable constraints on the D-A-M axes. Not ethics-board
-aspirations --- testable constraints.'' Emphasize the $ = 5%$
+aspirations --- testable constraints.'' Emphasize the $\varepsilon = 5\%$
 bound: ``this is the same kind of bound as a latency SLO. Demographic parity
 within 5 percentage points is a system specification, not a guideline.''
 
@@ -339,40 +384,36 @@ the Algorithm axis --- late-stage remediation is structurally impossible.
 % -- FLEX: [CORE] This is the chapter's central design principle
 [CORE] The definition appears nowhere else in the deck --- do not skip.
 IF SHORT: Read the definition box, move directly to Ethics vs. Engineering.
-}
+```
 
-{mlsyscard}{crimson}
-**Responsible AI Engineering** (Formal Definition):\\[0.05cm]
-Operationalizing societal and regulatory requirements as **testable
-constraints** on the {} axes:
-{0pt}
-- **Data**: permissible contents, provenance, and composition
-- **Algorithm**: fairness $  5%$, robustness bounds
-- **Machine**: latency, energy, carbon, audit-log retention
-
-{mlsyscard}
-
-{0.1cm}
-[T]
-  
-    {mlsyscard}{computestroke}
-    **AI Ethics**\\
-    { Articulates aspirational values\\(``be fair,'' ``be transparent'')}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{datastroke}
-    **Responsible AI Engineering**\\
-    { Translates values into **Testable Invariants** verified by automated testing}
-    {mlsyscard}
-  
-
-{0.04cm}
-{Key:}{``Fairness gap $< 5%$'' is actionable. ``Be fair'' is not. Violating these bounds is a **system failure**, not a research shortcoming.}
+</details>
 
 ## The Flaw of Averages
 
-{
+[Original slide 9](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L447)
+
+**Averages hide engineering failures:**
+
+- A bridge “safe on average” collapses under a heavy truck
+- We measure **p99 latency**, not average latency
+- Same principle: measure **disaggregated accuracy**
+
+**Gender Shades (2018):**
+
+- Light-skinned males: 0.8% error
+- Dark-skinned females: 34.7% error
+- **43$\times$ disparity** hidden by aggregate
+
+**Engineering principle:** **p99 latency** $\leftrightarrow$ **worst-group accuracy**. The same rigor applied to tail latency must apply to fairness.
+
+After Gender Shades, Microsoft reduced worst-case error by **20$\times$** in one year.
+
+Source on slide: Buolamwini & Gebru, FAccT 2018
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] p99-to-fairness bridge --- key engineering reframe.
 
 % -- LINK: From silent failures to measurement
@@ -382,12 +423,12 @@ This slide formalizes why.
 % -- NARRATE: Bridge from p99 latency to worst-group accuracy
 ``A bridge safe 'on average' collapses under a heavy truck. We measure
 p99 latency, not average latency. Same principle: measure disaggregated
-accuracy.'' Gender Shades: ``Light-skinned males: 0.8% error. Dark-skinned
-females: 34.7%. A 43x disparity hidden by the aggregate.''
+accuracy.'' Gender Shades: ``Light-skinned males: 0.8\% error. Dark-skinned
+females: 34.7\%. A 43x disparity hidden by the aggregate.''
 
 % -- ENGAGE: Apply the engineering principle
-Ask: ``If you report 95% aggregate accuracy, what could be hiding?''
-[Expected: a subgroup with 60% accuracy.]
+Ask: ``If you report 95\% aggregate accuracy, what could be hiding?''
+[Expected: a subgroup with 60\% accuracy.]
 
 % -- WARN: Students report aggregate metrics without disaggregation
 Common error: students present one accuracy number and assume quality.
@@ -398,38 +439,26 @@ the tail. Worst-group accuracy is the fairness p99.
 [CORE] Reframes fairness as engineering, not a soft concern.
 IF AHEAD: ``What is the p99 equivalent for fairness in your domain?''
 IF SHORT: State the Gender Shades numbers and the engineering principle.
-}
+```
 
-[T]
-  
-    **Averages hide engineering failures:**
-    {0pt}
-- A bridge ``safe on average'' collapses under a heavy truck
-- We measure **p99 latency**, not average latency
-- Same principle: measure **disaggregated accuracy**
-    
-
-    {0.05cm}
-    **Gender Shades (2018):**
-    {0pt}
-- Light-skinned males: 0.8% error
-- Dark-skinned females: 34.7% error
-- {errorstroke}{**43$×$ disparity**} hidden by aggregate
-    
-  
-  
-    {0.2cm}
-    {Engineering principle:}{**p99 latency** $$ **worst-group accuracy**. The same rigor applied to tail latency must apply to fairness.}
-
-    {0.15cm}
-    { After Gender Shades, Microsoft reduced worst-case error by **20$×$** in one year.}
-  
-
-{Buolamwini & Gebru, FAccT 2018}
+</details>
 
 ## Three Fairness Metrics
 
-{
+[Original slide 10](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L506)
+
+| **Metric** | **Requires** | **Domain** |
+| --- | --- | --- |
+| **Demographic Parity** | Equal **approval rates**: $P(\hat{Y}\!=\!1\vert A\!=\!a) = P(\hat{Y}\!=\!1\vert A\!=\!b)$ | Hiring |
+| **Equal Opportunity** | Equal **TPR** for qualified: $\text{TPR}_A = \text{TPR}_B$ | Lending |
+| **Equalized Odds** | Equal TPR **and** FPR across groups | Justice |
+
+**Impossibility Theorem:** When base rates differ, calibration + equal opportunity + equalized odds **cannot all hold**. Engineers must choose (Chouldechova, 2017).
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min] Three fairness metrics with impossibility theorem.
 
 % -- LINK: From disaggregated evaluation to specific metrics
@@ -454,25 +483,24 @@ Correct framing: the impossibility theorem means you must choose.
 [CORE] Students compute these from confusion matrices next.
 IF AHEAD: ``Can you have demographic parity without equal opportunity?''
 IF SHORT: Show the table and impossibility theorem, skip the question.
-}
+```
 
-{}{1.1}
-{tabular}{@{}lp{5.2cm}l@{}}
-  
-  **Metric** & **Requires** & **Domain** \\
-  
-  **Demographic Parity** & Equal **approval rates**: $P({Y}\!=\!1|A\!=\!a) = P({Y}\!=\!1|A\!=\!b)$ & Hiring \\[0.03cm]
-  **Equal Opportunity** & Equal **TPR** for qualified: ${TPR}_A = {TPR}_B$ & Lending \\[0.03cm]
-  **Equalized Odds** & Equal TPR **and** FPR across groups & Justice \\
-  
-{tabular}
-
-{0.1cm}
-{Impossibility Theorem:}{When base rates differ, calibration + equal opportunity + equalized odds **cannot all hold**. Engineers must choose (Chouldechova, 2017).}
+</details>
 
 ## Quick Check
 
-{
+[Original slide 11](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L551)
+
+Quick check — no peeking.
+
+ Can a model be calibrated and still have unfair error rates across groups?
+
+30 seconds — then we continue.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min] Quick retrieval check after impossibility theorem.
 
 % -- LINK: From the impossibility theorem (COMPAS slide) to active recall
@@ -491,59 +519,93 @@ error-rate parity across groups with different base rates.]
 
 % -- FLEX: [CORE] Reinforces the impossibility theorem before computation
 [CORE] Cements the key theoretical result. IF SHORT: 15 seconds.
-}
+```
 
- Quick check --- no peeking.\\[0.5cm]
- Can a model be calibrated and still have unfair error rates across groups?\\[0.3cm]
-{ 30 seconds --- then we continue.}
+</details>
 
 ## Loan Approval: What Aggregate Accuracy Conceals
 
-{
+[Original slide 12](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L581)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/15_responsible_engr/images/confusion-matrix-groups.svg]]
+
+Harvard Edge ML Systems Book contributors, [confusion-matrix-groups.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/images/confusion-matrix-groups.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Hidden:** 85% aggregate accuracy conceals a **30pp** TPR gap — qualified minority applicants face 4$\times$ higher rejection.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Confusion matrix visualization --- sets up the computation exercise.
 
 % -- LINK: From abstract metrics to a concrete worked example
 The three metrics were definitions. This shows them in real matrices.
 
 % -- NARRATE: Walk through both matrices side by side
-``Group A: TPR 90%. Group B: TPR 60%. The 30pp gap means qualified
+``Group A: TPR 90\%. Group B: TPR 60\%. The 30pp gap means qualified
 minority applicants face 4x higher rejection. Aggregate accuracy is
-85% --- looks fine.''
+85\% --- looks fine.''
 
 % -- ENGAGE: Identify the hidden disparity
-Ask: ``If you only saw 85% aggregate, would you flag this model?''
+Ask: ``If you only saw 85\% aggregate, would you flag this model?''
 [Expected: no --- the disparity is invisible without disaggregation.]
 
 % -- WARN: Students trust aggregate accuracy
-Common error: report 85% and ship. Correct framing: 85% aggregate
+Common error: report 85\% and ship. Correct framing: 85\% aggregate
 can conceal a 30pp TPR gap. Disaggregated evaluation is mandatory.
 
 % -- FLEX: [CORE] Sets up the computation exercise
 [CORE] Students compute these exact metrics next.
 IF SHORT: Show the diagram, state the 30pp gap, move to exercise.
-}
+```
 
-% --- Full-width image ---
-
-{confusion-matrix-groups.pdf}
-
-{0.1cm}
-{Hidden:}{85% aggregate accuracy conceals a **30pp** TPR gap --- qualified minority applicants face 4$×$ higher rejection.}
+</details>
 
 ## Your Turn: Compute the Fairness Gap
 
-{
+[Original slide 13](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L616)
+
+Compute the Fairness Metrics
+
+From the confusion matrices:
+
+- Group A: TP=4,500 FN=500 FP=1,000 TN=4,000
+- Group B: TP=600 FN=400 FP=200 TN=800
+
+**Calculate:**
+
+1. Approval Rate for each group
+2. TPR for each group
+3. Which fairness metric is violated?
+
+(90 seconds — then compare)
+
+| **Metric** | **A** | **B** |
+| --- | --- | --- |
+| Approval Rate | 55% | 40% |
+| TPR | 90% | **60%** |
+| FPR | 20% | 20% |
+
+**Equal opportunity violated** (30pp TPR gap)
+
+FPR is equal (partial compliance)
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [4 min] Active learning exercise: compute TPR and approval rate gaps.
 
 % -- LINK: From the visual to hands-on computation
 Students saw the disparity. Now they compute it from raw numbers.
 
 % -- NARRATE: Walk through the solution after the reveal
-``Approval rate A: 55%, B: 40%. 15pp gap. TPR A: 90%, B: 60%.
-30pp gap. FPR both: 20%. Equal opportunity violated.''
+``Approval rate A: 55\%, B: 40\%. 15pp gap. TPR A: 90\%, B: 60\%.
+30pp gap. FPR both: 20\%. Equal opportunity violated.''
 
 % -- ENGAGE: Peer Instruction Protocol
-Present problem (30s). Individual computation (60s). If 30--70% correct:
+Present problem (30s). Individual computation (60s). If 30--70\% correct:
 pair discussion (90s), re-vote. [Expected errors: confusing approval
 rate with TPR, or computing FPR incorrectly]
 
@@ -556,136 +618,109 @@ accuracy for qualified applicants specifically.
 [CORE] The 30pp TPR gap anchors Key Takeaways.
 IF AHEAD: ``How would you reduce the TPR gap without sacrificing FPR?''
 IF SHORT: Show the solution directly, skip peer discussion.
-}
+```
 
-[T]
-  
-    { Compute the Fairness Metrics}
-
-    {0.1cm}
-    From the confusion matrices:
-    {0pt}
-- Group A: TP=4,500 FN=500 FP=1,000 TN=4,000
-- Group B: TP=600 FN=400 FP=200 TN=800
-    
-
-    {0.05cm}
-    **Calculate:**
-    {0pt}
-- Approval Rate for each group
-- TPR for each group
-- Which fairness metric is violated?
-    
-
-    {{midgray}{(90 seconds --- then compare)}}
-  
-  
-    
-
-    {0.2cm}
-    {
-    {}{1.15}
-    {tabular}{@{}lrr@{}}
-      
-      **Metric** & **A** & **B** \\
-      
-      Approval Rate & 55% & 40% \\
-      TPR           & 90% & {errorstroke}{**60%**} \\
-      FPR           & 20% & 20% \\
-      
-    {tabular}
-    }
-
-    {0.1cm}
-    {
-    {errorstroke}{**Equal opportunity violated**} (30pp TPR gap)\\
-    FPR is equal (partial compliance)}
+</details>
 
 ## Your Turn: Disparate Impact Analysis
 
-{
+[Original slide 14](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L692)
+
+Disparate Impact Analysis
+
+A hiring model:
+
+- Overall accuracy: 95%
+- Group A accuracy: 92%, TPR: 94%
+- Group B accuracy: 85%, TPR: 78%
+
+**Calculate:**
+
+1. Disparate impact ratio (accuracy)
+2. Does it pass the 80% rule?
+3. What accuracy trade-off achieves $<$5pp TPR gap?
+
+(90 seconds — compare with a neighbor)
+
+**Solution:**
+
+**DI ratio:** $85/92 = 0.924$
+
+**Passes** 80% rule ($> 0.80$)
+
+**TPR ratio:** $78/94 = 0.830$
+
+Passes, but **barely**
+
+**Equalized odds cost:**
+
+Constraining TPR gap $<$ 5pp:
+
+Accuracy drops 95% $\to$ **$\sim$91%**
+
+4pp accuracy = the cost of fairness
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [4 min] Active learning: disparate impact ratio + legal standard.
 
 % -- LINK: From computing fairness gaps to the legal standard
-Students computed TPR and approval rates. The 80% rule (four-fifths
+Students computed TPR and approval rates. The 80\% rule (four-fifths
 rule) is the legal standard used by the EEOC to evaluate disparate
 impact in employment decisions.
 
 % -- NARRATE: Walk through the solution after the reveal
-``Overall accuracy: 95%. Group A accuracy: 92%. Group B accuracy: 85%.
-Disparate impact ratio = 85/92 = 0.924. This passes the 80% rule
-(0.924 $>$ 0.80). But equal opportunity: TPR_A = 94%, TPR_B = 78%.
-Ratio = 78/94 = 0.830. This also passes 80%, but barely.
+``Overall accuracy: 95\%. Group A accuracy: 92\%. Group B accuracy: 85\%.
+Disparate impact ratio = 85/92 = 0.924. This passes the 80\% rule
+(0.924 $>$ 0.80). But equal opportunity: TPR\_A = 94\%, TPR\_B = 78\%.
+Ratio = 78/94 = 0.830. This also passes 80\%, but barely.
 The question: what accuracy trade-off achieves equalized odds?
-If we constrain TPR gap to $<$5pp, model accuracy drops from 95% to
-approximately 91%. That is the cost of fairness in this scenario.''
+If we constrain TPR gap to $<$5pp, model accuracy drops from 95\% to
+approximately 91\%. That is the cost of fairness in this scenario.''
 
 % -- ENGAGE: Peer Instruction Protocol
-Present problem (30s). Individual calculation (60s). If 30--70%
+Present problem (30s). Individual calculation (60s). If 30--70\%
 correct: pair discussion (90s), re-vote.
 [Expected errors: students compute the ratio backwards (A/B instead
 of min/max), or confuse accuracy ratio with TPR ratio.]
 
 % -- WARN: What students will get wrong on THIS topic
-Common error: students think passing the 80% rule means the system is
-fair. Correct framing: the 80% rule is a legal minimum, not an ethical
+Common error: students think passing the 80\% rule means the system is
+fair. Correct framing: the 80\% rule is a legal minimum, not an ethical
 standard. A ratio of 0.81 technically passes but may still cause harm.
 
 % -- FLEX: [CORE] Connects fairness metrics to legal standards
 [CORE] The disparate impact ratio is exam-relevant and industry-standard.
-IF AHEAD: ``Does the 80% rule apply to all fairness metrics?''
+IF AHEAD: ``Does the 80\% rule apply to all fairness metrics?''
 IF SHORT: Show the solution directly, skip peer discussion.
-}
+```
 
-[T]
-  
-    { Disparate Impact Analysis}
+</details>
 
-    {0.1cm}
-    A hiring model:
-    {0pt}
-- Overall accuracy: 95%
-- Group A accuracy: 92%, TPR: 94%
-- Group B accuracy: 85%, TPR: 78%
-    
+## The Fairness–Accuracy Pareto Frontier
 
-    {0.1cm}
-    **Calculate:**
-    {0pt}
-- Disparate impact ratio (accuracy)
-- Does it pass the 80% rule?
-- What accuracy trade-off achieves $<$5pp TPR gap?
-    
+[Original slide 15](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L770)
 
-    {{midgray}{(90 seconds --- compare with a neighbor)}}
-  
-  
-    
-    {mlsyscard}{datastroke}
-    **Solution:**\\[0.05cm]
-    {
-    **DI ratio:** $85/92 = 0.924$\\
-    {datastroke}{**Passes**} 80% rule ($> 0.80$)\\[0.08cm]
-    **TPR ratio:** $78/94 = 0.830$\\
-    Passes, but {routingstroke}{**barely**}\\[0.08cm]
-    **Equalized odds cost:**\\
-    Constraining TPR gap $<$ 5pp:\\
-    Accuracy drops 95% $$ **$$91%**\\
-    {errorstroke}{4pp accuracy = the cost of fairness}
-    }
-    {mlsyscard}
+![[Assets/Sources/Harvard ML Systems/slides/vol1/15_responsible_engr/images/fairness-accuracy-pareto.svg]]
 
-## The Fairness--Accuracy Pareto Frontier
+Harvard Edge ML Systems Book contributors, [fairness-accuracy-pareto.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/images/fairness-accuracy-pareto.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
 
-{
+**Key insight:** The Pareto frontier makes trade-offs **explicit and quantifiable**. Responsible engineering = finding Point B.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min] Pareto frontier --- makes trade-offs explicit and quantifiable.
 
 % -- LINK: From computing gaps to managing trade-offs
 We can measure the gap. The Pareto frontier shows the trade-off space.
 
 % -- NARRATE: Walk through the three labeled points
-``Point A: unconstrained --- 95% accuracy, 25pp disparity. Point B:
-sweet spot --- 92% accuracy, 5pp gap. Point C: strict equality --- 85%
+``Point A: unconstrained --- 95\% accuracy, 25pp disparity. Point B:
+sweet spot --- 92\% accuracy, 5pp gap. Point C: strict equality --- 85\%
 accuracy, 0 gap. The curve shape is key: the first fairness gains are
 nearly free.''
 
@@ -696,24 +731,30 @@ Ask: ``Where would you deploy for credit decisions?'' [Expected: Point B
 % -- WARN: Students assume fairness always costs accuracy
 Common error: any fairness constraint destroys performance. Correct
 framing: the Pareto curve is concave --- large fairness gains for small
-accuracy loss. The first 80% of improvement costs only 3% accuracy.
+accuracy loss. The first 80\% of improvement costs only 3\% accuracy.
 
 % -- FLEX: [CORE] The Pareto frontier makes trade-offs explicit
 [CORE] Actionable framework for responsible deployment.
 IF AHEAD: ``How does curve shape change with more training data?''
 IF SHORT: Show diagram and explain Points A, B, C without question.
-}
+```
 
-% --- Full-width image ---
-
-{fairness-accuracy-pareto.pdf}
-
-{0.1cm}
-{Key insight:}{The Pareto frontier makes trade-offs **explicit and quantifiable**. Responsible engineering = finding Point B.}
+</details>
 
 ## Explainability Requirements by Domain
 
-{
+[Original slide 16](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L811)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/15_responsible_engr/images/explainability-spectrum.svg]]
+
+Harvard Edge ML Systems Book contributors, [explainability-spectrum.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/images/explainability-spectrum.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Trade-off:** Interpretable $\to$ direct auditability. Black-box $\to$ accuracy but SHAP adds **10–100$\times$** latency.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min] Explainability spectrum --- saliency maps as quality gates.
 
 % -- LINK: From fairness metrics to explainability requirements
@@ -738,19 +779,26 @@ explainability requirements constrain model selection from the start.
 % -- FLEX: [CORE] Connects to regulatory requirements next
 [CORE] The regulatory slide depends on this spectrum.
 IF SHORT: Show the diagram, state the SHAP latency trade-off.
-}
+```
 
-% --- Full-width image ---
-
-{explainability-spectrum.pdf}
-
-{0.1cm}
-
-{Trade-off:}{Interpretable $$ direct auditability. Black-box $$ accuracy but SHAP adds **10--100$×$** latency.}
+</details>
 
 ## The Regulatory Landscape
 
-{
+[Original slide 17](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L849)
+
+| **Regulation** | **Key Requirements** | **Penalty** |
+| --- | --- | --- |
+| **EU AI Act** | Risk classification, transparency, human oversight, audit trails | 35M EUR / 7% |
+| **GDPR Art. 22** | Right to explanation, human review of automated decisions | 20M EUR / 4% |
+| **US (ECOA, HIPAA)** | Adverse action notices, PHI protection, 6-yr audit logs | &#36;50K/violation |
+
+**Engineering implication:** These are **architecture specifications**. Audit trails, explainability, and human oversight must be designed in from inception.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Regulatory landscape --- regulations as architecture specifications.
 
 % -- LINK: From explainability spectrum to legal requirements
@@ -775,25 +823,32 @@ team must build audit trails, explanation pipelines, and HITL systems.
 % -- FLEX: [OPTIONAL] Specific penalties may change; engineering principle endures
 [OPTIONAL] Show the table and the engineering implication alert box.
 IF SHORT: Read the alert box only.
-}
+```
 
-{}{1.05}
-{tabular}{@{}lp{4.8cm}l@{}}
-  
-  **Regulation** & **Key Requirements** & **Penalty** \\
-  
-  **EU AI Act** & Risk classification, transparency, human oversight, audit trails & 35M EUR / 7% \\
-  **GDPR Art.\ 22** & Right to explanation, human review of automated decisions & 20M EUR / 4% \\
-  **US (ECOA, HIPAA)** & Adverse action notices, PHI protection, 6-yr audit logs & \$50K/violation \\
-  
-{tabular}
+</details>
 
-{0.1cm}
-{Engineering implication:}{These are **architecture specifications**. Audit trails, explainability, and human oversight must be designed in from inception.}
+## Efficiency Is Responsibility
+
+[Original slide 18](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L898)
+
+In a production-scale scenario, inference can dominate TCO by **40:1**.
+
+A 20% latency reduction saves **&#36;304K + 8.9 tons CO2**.
 
 ## The Carbon Cost of Compute
 
-{
+[Original slide 19](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L903)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/15_responsible_engr/images/carbon-footprint-tco.svg]]
+
+Harvard Edge ML Systems Book contributors, [carbon-footprint-tco.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/images/carbon-footprint-tco.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Carbon equation:** $\text{Carbon} = \text{Energy} \times \text{Intensity}$. At 0.4 kg/kWh: **0.16 kg CO2 per GPU-hour**.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min] Carbon equation + surprise reveal: inference dominates.
 
 % -- LINK: From fairness (who is harmed) to carbon (what is consumed)
@@ -802,35 +857,47 @@ Responsible engineering includes the environmental cost of compute.
 % -- NARRATE: Walk through the two-panel diagram
 ``Left: carbon equation. Use it to separate one-time training from recurring
 serving. Published GPT-3 estimates land around hundreds of tons CO2 under
-specific accounting assumptions. Right: 3-year TCO. Training 2%, Inference
-73%, Ops 25%.''
+specific accounting assumptions. Right: 3-year TCO. Training 2\%, Inference
+73\%, Ops 25\%.''
 
 % -- ENGAGE: Surprise reveal
 Ask: ``What percentage of 3-year carbon comes from training?''
-[Expected: students guess 50--80%. Reveal: only 2--3%.]
+[Expected: students guess 50--80\%. Reveal: only 2--3\%.]
 
 % -- WARN: Students focus on training efficiency, ignore inference
 Common error: optimize training and declare efficiency. Correct framing:
-inference can dominate lifetime cost in high-traffic services. A 10%
+inference can dominate lifetime cost in high-traffic services. A 10\%
 inference optimization can save more than eliminating a one-time training run.
 
 % -- FLEX: [CORE] The inference-dominates insight reframes priorities
 [CORE] The scenario ratio anchors the TCO slide and Key Takeaways.
 IF AHEAD: ``How does distillation affect the ratio?''
-IF SHORT: Show diagram, state 97% inference, move to TCO.
-}
+IF SHORT: Show diagram, state 97\% inference, move to TCO.
+```
 
-% --- Full-width image ---
-
-{carbon-footprint-tco.pdf}
-
-{0.1cm}
-
-{Carbon equation:}{${Carbon} = {Energy} × {Intensity}$. At 0.4 kg/kWh: **0.16 kg CO2 per GPU-hour**.}
+</details>
 
 ## Putting Carbon in Perspective
 
-{
+[Original slide 20](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L941)
+
+**Published GPT-3 Training Estimate in Context**
+
+| **Activity** | **CO2** | **GPT-3 Equivalent** |
+| --- | --- | --- |
+| NYC $\leftrightarrow$ London flight (round trip) | 1.6 t | 325 flights |
+| US household (1 year) | 8.5 t | 61 household-years |
+| Average US car (1 year) | 4.6 t | 113 car-years |
+| 1 GPU-hour (H100) | 0.34 kg | 1.5M GPU-hours |
+| **GPT-3 training estimate** | **$\sim$500 t** | accounting-dependent |
+| **GPT-3 inference scenario** | **$\sim$20,000 t** | recurring serving dominates |
+
+**The real number:** The accounting boundary matters. At production scale, **recurring inference can dominate one-time training**.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Carbon comparison table --- makes large-model carbon accounting concrete.
 
 % -- LINK: From the carbon equation to tangible comparisons
@@ -858,33 +925,33 @@ become the dominant lifecycle term.
 % -- FLEX: [OPTIONAL] Makes the carbon numbers tangible
 [OPTIONAL] Strengthens the TCO slide that follows.
 IF SHORT: Show the table and state the lifecycle-boundary lesson.
-}
+```
 
-**Published GPT-3 Training Estimate in Context**
-
-{0.1cm}
-
-{}{1.1}
-{tabular}{@{}lrl@{}}
-  
-  **Activity** & **CO2** & **GPT-3 Equivalent** \\
-  
-  NYC $$ London flight (round trip) & 1.6 t & 325 flights \\
-  US household (1 year) & 8.5 t & 61 household-years \\
-  Average US car (1 year) & 4.6 t & 113 car-years \\
-  1 GPU-hour (H100) & 0.34 kg & 1.5M GPU-hours \\
-  
-  **GPT-3 training estimate** & **$$500 t** & accounting-dependent \\
-  **GPT-3 inference scenario** & **$$20,000 t** & recurring serving dominates \\
-  
-{tabular}
-
-{0.1cm}
-{The real number:}{The accounting boundary matters. At production scale, **recurring inference can dominate one-time training**.}
+</details>
 
 ## Total Cost of Ownership
 
-{
+[Original slide 21](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L997)
+
+| **Category** | **3-Year Cost** | **%** | **Carbon** |
+| --- | --- | --- | --- |
+| Training | &#36;38K | 2% | 1.2 t |
+| Inference | &#36;1.52M | 73% | 44.5 t |
+| Operations | &#36;510K | 25% | — |
+| **Total** | **&#36;2.07M** | 100% | **$\sim$46 t** |
+
+**Hidden cost:** In this scenario, inference:training = **40:1**. Per-query optimization has highest ROI.
+
+Original figure reference: ` datacenter-cooling.jpg `.
+
+DOE Peregrine supercomputer cooling. Public domain.
+
+20% latency cut $\to$ &#36;304K + 8.9t CO2 saved over 3 years.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min] TCO breakdown --- scenario-specific inference ratio, optimization ROI.
 
 % -- LINK: From carbon equation to the full economic picture
@@ -892,9 +959,9 @@ Carbon is one cost dimension. TCO includes compute, operations, and
 human maintenance time.
 
 % -- NARRATE: Walk through the TCO table
-``Training: \$38K --- only 2%. Inference: \$1.52M --- 73%. Operations:
-\$510K --- 25%. Inference is the hidden factory.'' Point to photo:
-``20% latency reduction saves \$304K and 8.9 tons CO2 over 3 years.''
+``Training: \$38K --- only 2\%. Inference: \$1.52M --- 73\%. Operations:
+\$510K --- 25\%. Inference is the hidden factory.'' Point to photo:
+``20\% latency reduction saves \$304K and 8.9 tons CO2 over 3 years.''
 
 % -- ENGAGE: Resource allocation decision
 Ask: ``One week of engineering time --- where do you spend it?''
@@ -908,47 +975,55 @@ per-query inference optimization can have much higher ROI in high-traffic servic
 [CORE] Recurs in Key Takeaways and the discussion exercise.
 IF AHEAD: ``How does quantization change this ratio?''
 IF SHORT: Show the table, state the inference-dominance scenario, skip the question.
-}
+```
 
-[T]
-  
-    {}{1.1}
-    {tabular}{@{}lrrr@{}}
-      
-      **Category** & **3-Year Cost** & **%** & **Carbon** \\
-      
-      Training   & \$38K    & 2%  & 1.2 t \\
-      Inference   & \$1.52M  & 73% & 44.5 t \\
-      Operations  & \$510K   & 25% & --- \\
-      
-      **Total**   & **\$2.07M** & 100% & **$$46 t** \\
-      
-    {tabular}
+</details>
 
-    {0.1cm}
-    {Hidden cost:}{In this scenario, inference:training = **40:1**. Per-query optimization has highest ROI.}
-  
-  
-    {0.1cm}
-    {datacenter-cooling.jpg}
+<details>
+<summary>Projection limits for this slide</summary>
 
-    {0.05cm}
-    {{midgray}{DOE Peregrine supercomputer cooling. Public domain.}}
+- [datacenter-cooling.jpg](https://raw.githubusercontent.com/harvard-edge/cs249r_book/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/images/datacenter-cooling.jpg): raster source link retained; individual provenance not established.
 
-    {0.1cm}
-    { 20% latency cut $$ \$304K + 8.9t CO2 saved over 3 years.}
+</details>
 
 ## Discussion: Where Should You Optimize?
 
-{
+[Original slide 22](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L1058)
+
+Turn and Talk (90 seconds)
+
+You have **one week** of engineering time.
+
+Your model serves 10M users daily.
+
+Which investment has the highest ROI?
+
+**A:** Reduce training
+
+time by 50%
+
+**B:** Reduce inference
+
+latency by 10%
+
+**C:** Add fairness
+
+monitoring
+
+Hint: Consider the TCO breakdown you just saw.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min] Active learning: resource allocation decision given TCO + fairness data.
 
 % -- LINK: From TCO numbers to a resource allocation decision
 Students have the data: scenario ratios, fairness gaps, TCO. Now they decide.
 
 % -- NARRATE: Frame the three options
-``A: reduce training 50% --- saves \$19K/year. B: reduce inference latency
-10% --- saves \$152K/year. C: add fairness monitoring --- prevents
+``A: reduce training 50\% --- saves \$19K/year. B: reduce inference latency
+10\% --- saves \$152K/year. C: add fairness monitoring --- prevents
 reputational and regulatory risk. No single right answer.''
 
 % -- ENGAGE: Turn-and-talk with structured debrief
@@ -959,28 +1034,28 @@ rarely right given the scenario's inference dominance.
 % -- FLEX: [CORE] Synthesizes TCO, fairness, and engineering judgment
 [CORE] Forces students to weigh quantitative and qualitative factors.
 IF SHORT: Show-of-hands poll (A/B/C) and brief discussion.
-}
+```
 
-{0.6cm}
-{ Turn and Talk {midgray}{(90 seconds)}}
-
-{0.4cm}
-{ You have **one week** of engineering time.\\
-Your model serves 10M users daily.\\[0.2cm]
-Which investment has the highest ROI?}
-
-{0.3cm}
-[c]
-  {computestroke}{**A:**} Reduce training\ by 50%
-  {datastroke}{**B:**} Reduce inference\ by 10%
-  {errorstroke}{**C:**} Add fairness\
-
-{0.2cm}
-{{midgray}{Hint: Consider the TCO breakdown you just saw.}}
+</details>
 
 ## The Responsible Engineering Checklist
 
-{
+[Original slide 23](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L1105)
+
+| **Phase** | **Priority** | **Key Questions** |
+| --- | --- | --- |
+| **Data** | Critical | Where did data come from? Who is represented? |
+| **Training** | High | What are we optimizing? What might we penalize? |
+| **Evaluation** | Critical | Does performance hold across user groups? |
+| **Deployment** | Critical | Who will this affect? What recourse do users have? |
+| **Monitoring** | High | How will we detect problems? What triggers action? |
+
+**Checklist discipline:** **Critical** = deployment blocker. **High** = proceed with documented risk acceptance. Aviation pre-flight: every item, every time.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min] Aviation-inspired checklist --- deployment blocker vs. documented risk.
 
 % -- LINK: From optimization decisions to systematic governance
@@ -1005,28 +1080,25 @@ framing: Critical items block deployment --- no exceptions.
 [CORE] Students can use this in their own projects.
 IF AHEAD: ``Design a checklist item for the fraud detection model.''
 IF SHORT: Show the table and aviation analogy.
-}
+```
 
-{}{1.0}
-{tabular}{@{}llp{5.8cm}@{}}
-  
-  **Phase** & **Priority** & **Key Questions** \\
-  
-  **Data**       & Critical & Where did data come from? Who is represented? \\
-  **Training**   & High     & What are we optimizing? What might we penalize? \\
-  **Evaluation** & Critical & Does performance hold across user groups? \\
-  **Deployment** & Critical & Who will this affect? What recourse do users have? \\
-  **Monitoring** & High     & How will we detect problems? What triggers action? \\
-  
-{tabular}
-
-{0.1cm}
-{Checklist discipline:}{**Critical** = deployment blocker. **High** = proceed with documented risk acceptance. Aviation pre-flight: every item, every time.}
+</details>
 
 ## Data Governance: Four Pillars
 
-{
-[2 min] Four pillars framework + 40--60% scope creep statistic.
+[Original slide 24](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L1152)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/15_responsible_engr/images/governance-framework.svg]]
+
+Harvard Edge ML Systems Book contributors, [governance-framework.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/images/governance-framework.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Scope creep:** 40–60% of models operate outside documented scope within 18 months.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min] Four pillars framework + 40--60\% scope creep statistic.
 
 % -- LINK: From the checklist (process) to governance infrastructure
 The checklist tells you what to check. Governance infrastructure ensures
@@ -1034,7 +1106,7 @@ checks are enforced continuously.
 
 % -- NARRATE: Walk through the four pillars
 ``Privacy, Security, Compliance, Transparency as keystone. Foundation:
-Model Cards + Datasheets.'' Scope creep stat: ``40--60% of models operate
+Model Cards + Datasheets.'' Scope creep stat: ``40--60\% of models operate
 outside documented scope within 18 months.''
 
 % -- ENGAGE: Scope creep detection
@@ -1047,20 +1119,31 @@ framing: governance is continuous infrastructure, not a document.
 
 % -- FLEX: [CORE] The four pillars structure the governance section
 [CORE] Model Cards and Datasheets are detailed next.
-IF SHORT: Show diagram, state 40--60% scope creep stat, move on.
-}
+IF SHORT: Show diagram, state 40--60\% scope creep stat, move on.
+```
 
-% --- Full-width image ---
-
-{governance-framework.pdf}
-
-{0.1cm}
-
-{Scope creep:}{40--60% of models operate outside documented scope within 18 months.}
+</details>
 
 ## Model Cards and Datasheets
 
-{
+[Original slide 25](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L1188)
+
+| **Section** | **Example (MobileNetV2 for Edge)** |
+| --- | --- |
+| **Model Details** | 3.5M params, INT8 quantized, depthwise separable convolutions |
+| **Intended Use** | Real-time classification on mobile, $<$50 ms latency |
+| **Factors** | Performance varies with lighting, blur, object size |
+| **Metrics** | 71.8% top-1 (quantized); 85% common objects, 45% fine-grained |
+| **Ethics** | ImageNet biases; not validated for medical or security screening |
+
+**Datasheets** (Gebru+, 2018): Provenance, demographics, methodology, known limitations.
+
+**Enforcement gap:** “Not validated for high-stakes decisions” has no effect without technical access controls.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Model cards --- enforcement gap between documentation and controls.
 
 % -- LINK: From governance pillars to specific documentation artifacts
@@ -1069,7 +1152,7 @@ are the industry standard.
 
 % -- NARRATE: Walk through the MobileNetV2 example
 ``Model Details: 3.5M params, INT8. Intended Use: real-time mobile.
-Factors: lighting, blur. Metrics: 71.8% quantized. Ethics: ImageNet
+Factors: lighting, blur. Metrics: 71.8\% quantized. Ethics: ImageNet
 biases, not for medical use.'' Enforcement gap: ``'Not validated for
 high-stakes' has no effect without technical access controls.''
 
@@ -1084,30 +1167,38 @@ documentation without controls is a historical record, not a guardrail.
 % -- FLEX: [OPTIONAL] Format is standard; enforcement gap is the insight
 [OPTIONAL] Students can read Mitchell et al.\ independently.
 IF SHORT: Show the table and enforcement gap alert box.
-}
+```
 
-{}{1.0}
-{tabular}{@{}lp{7.2cm}@{}}
-  
-  **Section** & **Example (MobileNetV2 for Edge)** \\
-  
-  **Model Details**    & 3.5M params, INT8 quantized, depthwise separable convolutions \\
-  **Intended Use**     & Real-time classification on mobile, $<$50 ms latency \\
-  **Factors**          & Performance varies with lighting, blur, object size \\
-  **Metrics**          & 71.8% top-1 (quantized); 85% common objects, 45% fine-grained \\
-  **Ethics**           & ImageNet biases; not validated for medical or security screening \\
-  
-{tabular}
-
-{0.1cm}
-**Datasheets** (Gebru+, 2018): Provenance, demographics, methodology, known limitations.
-
-{0.05cm}
-{Enforcement gap:}{``Not validated for high-stakes decisions'' has no effect without technical access controls.}
+</details>
 
 ## War Story: The Automation Paradox (2018)
 
-{
+[Original slide 26](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L1241)
+
+**Uber ATG, Tempe Arizona (2018):**
+
+- Self-driving car with human safety driver (HITL)
+- System detected pedestrian but mis-classified her path
+- Emergency braking **disabled** during testing phase
+- Driver conditioned by system reliability — distracted, did not intervene
+- Pedestrian killed
+
+**D$\bullet$A$\bullet$M axis:** **Algorithm** (classification failure) + **Machine** (no independent braking path).
+
+**Systems Lesson:**
+
+Adding a human backup to a 99%-reliable AI creates a new system with new failure modes.
+
+The human will eventually trust the AI 100%, making the “backup” useless precisely when needed.
+
+**Engineering implication:** HITL requires **independent decision paths**, not passive standby.
+
+Source on slide: NTSB, 2019
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] War story slide --- grounds the HITL architecture requirement in a real
 production failure before the compliance slide.
 
@@ -1121,9 +1212,9 @@ answers: ``why isn't a human backup sufficient?''
 The system detected the pedestrian but could not correctly classify her path.
 The human safety driver was present --- the HITL safeguard was in place.
 The driver was distracted and did not intervene. The pedestrian was killed.''
-Key insight: ``Adding a human backup to a 99%-reliable system creates a new
+Key insight: ``Adding a human backup to a 99\%-reliable system creates a new
 failure mode. The human is conditioned by the system's reliability to trust
-it 100%, making the backup useless precisely when it is most needed.''
+it 100\%, making the backup useless precisely when it is most needed.''
 
 % -- ENGAGE: Apply the systems lesson to the GDPR/compliance architecture
 Ask: ``If naive HITL fails, what does a robust human-oversight architecture
@@ -1139,39 +1230,29 @@ who monitors a system they trust becomes part of its failure mode.
 [CORE] Connect directly to the regulatory landscape slide.
 IF AHEAD: ``How would you redesign Uber's HITL system to avoid this failure?''
 IF SHORT: State the key numbers and read the Systems Lesson box.
-}
+```
 
-[T]
-  
-    **Uber ATG, Tempe Arizona (2018):**
-    {0pt}
-- Self-driving car with human safety driver (HITL)
-- System detected pedestrian but mis-classified her path
-- Emergency braking **disabled** during testing phase
-- Driver conditioned by system reliability --- distracted, did not intervene
-- Pedestrian killed
-    
-
-    {0.1cm}
-    {{} axis:}{{computestroke}{**Algorithm**} (classification failure) + {routingstroke}{**Machine**} (no independent braking path).}
-  
-  
-    {0.15cm}
-    {mlsyscard}{errorstroke}
-    **Systems Lesson:**\\[0.05cm]
-    { Adding a human backup to a 99%-reliable AI creates a new system with new failure modes.\\[0.05cm]
-    The human will eventually trust the AI 100%, making the ``backup'' useless precisely when needed.}
-    {mlsyscard}
-
-    {0.05cm}
-    {Engineering implication:}{HITL requires **independent decision paths**, not passive standby.}
-  
-
-{NTSB, 2019}
+</details>
 
 ## Compliance Scenario: GDPR Data Deletion
 
-{
+[Original slide 27](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L1307)
+
+**Scenario: EU user invokes GDPR Article 17 (Right to Erasure)**
+
+| **Option** | **Approach** | **Cost** | **Risk** |
+| --- | --- | --- | --- |
+| **Full retrain** | Remove data, retrain from scratch | &#36;50K, 2 weeks | Low |
+| **Machine unlearning** | Approximate removal | Hours | Accuracy unknown |
+| **DP guarantee** | Prove model does not memorize | Pre-planned | Requires DP training |
+| **Infeasibility claim** | Document derived work | Legal fees | Regulatory risk |
+
+**Engineering lesson:** If you did not plan for deletion at training time, compliance costs **orders of magnitude** more at serving time. Design for erasure from inception.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min] GDPR Article 17 scenario --- compliance costs orders of magnitude more without planning.
 
 % -- LINK: From governance documentation to a concrete compliance challenge
@@ -1202,30 +1283,30 @@ deletion from storage does not delete from the model's parameters.
 [CORE] This scenario is increasingly common and has no easy answer.
 IF AHEAD: ``How does differential privacy change this analysis?''
 IF SHORT: State the scenario, show the four options without deep discussion.
-}
+```
 
-**Scenario: EU user invokes GDPR Article 17 (Right to Erasure)**
-
-{0.1cm}
-
-{}{1.05}
-{tabular}{@{}lp{3.8cm}ll@{}}
-  
-  **Option** & **Approach** & **Cost** & **Risk** \\
-  
-  **Full retrain** & Remove data, retrain from scratch & \$50K, 2 weeks & Low \\
-  **Machine unlearning** & Approximate removal & Hours & Accuracy unknown \\
-  **DP guarantee** & Prove model does not memorize & Pre-planned & Requires DP training \\
-  **Infeasibility claim** & Document derived work & Legal fees & Regulatory risk \\
-  
-{tabular}
-
-{0.15cm}
-{Engineering lesson:}{If you did not plan for deletion at training time, compliance costs **orders of magnitude** more at serving time. Design for erasure from inception.}
+</details>
 
 ## Incident Response for ML Systems
 
-{
+[Original slide 28](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L1363)
+
+**Zillow (2021):** Lost &#36;304M — model errors went undetected until losses accumulated.
+
+| **Component** | **Requirements** |
+| --- | --- |
+| **Detection** | Anomaly monitoring, fairness alerts, on-call rotation |
+| **Assessment** | Severity classification, impact assessment templates |
+| **Mitigation** | Rollback $<$1 min, fallback systems, kill switches |
+| **Communication** | Stakeholder notification, approval chains |
+| **Remediation** | Root cause analysis, change management |
+
+**D$\bullet$A$\bullet$M diagnosis:** **D** (pandemic volatility) + **A** (no confidence estimation) + **M** (no circuit breaker). Cross-axis failure.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min] Zillow \$304M case + five-component incident response framework.
 
 % -- LINK: From documentation to what happens when things go wrong
@@ -1249,30 +1330,30 @@ the five components must be in place before first production deployment.
 % -- FLEX: [CORE] Connects Ch14 and Ch15 themes
 [CORE] Five components and D-A-M diagnosis are exam-relevant.
 IF SHORT: Show the Zillow number, read the table, skip D-A-M question.
-}
+```
 
-**Zillow (2021):** Lost \$304M --- model errors went undetected until losses accumulated.
-
-{0.05cm}
-{}{1.0}
-{tabular}{@{}lp{7.8cm}@{}}
-  
-  **Component** & **Requirements** \\
-  
-  **Detection**     & Anomaly monitoring, fairness alerts, on-call rotation \\
-  **Assessment**    & Severity classification, impact assessment templates \\
-  **Mitigation**    & Rollback $<$1 min, fallback systems, kill switches \\
-  **Communication** & Stakeholder notification, approval chains \\
-  **Remediation**   & Root cause analysis, change management \\
-  
-{tabular}
-
-{0.05cm}
-{{} diagnosis:}{{datastroke}{**D**} (pandemic volatility) + {computestroke}{**A**} (no confidence estimation) + {routingstroke}{**M**} (no circuit breaker). Cross-axis failure.}
+</details>
 
 ## Fallacies
 
-{
+[Original slide 29](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L1416)
+
+**Fallacy:** *Responsibility can be addressed after technical objectives are met.*
+
+Integrating fairness at inception costs **weeks**; retrofitting costs **quarters**. Amazon scrapped the project after years of failed remediation.
+
+**Fallacy:** *Removing sensitive attributes eliminates bias.*
+
+Models reconstruct protected attributes from proxies with **70–90%** accuracy. Amazon's system learned gender from college names despite explicit removal.
+
+**Fallacy:** *Responsible AI is primarily a legal compliance issue.*
+
+Architecture choices constrain fairness more than late-stage review. Adding demographic tracking after 6 months costs **3–4$\times$** the initial implementation.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Three fallacies with quantitative rebuttals.
 
 % -- LINK: From the full lecture to the misconceptions it corrects
@@ -1282,29 +1363,37 @@ Here the corrections are made explicit.
 % -- NARRATE: Read each fallacy with its quantitative rebuttal
 ``Fallacy 1: Address responsibility after technical objectives. Reality:
 inception costs weeks; retrofitting costs quarters. Amazon scrapped it.''
-``Fallacy 2: Removing attributes eliminates bias. Reality: 70--90%
+``Fallacy 2: Removing attributes eliminates bias. Reality: 70--90\%
 proxy reconstruction accuracy.'' ``Fallacy 3: Responsible AI is legal
 compliance. Reality: architecture choices constrain fairness more than
 late-stage review. Adding demographics after 6 months costs 3--4x.''
 
 % -- FLEX: [CORE] Each fallacy maps to a concept from the lecture
 [CORE] IF SHORT: Cover fallacies 1 and 2, skip fallacy 3.
-}
+```
 
-**Fallacy:** *Responsibility can be addressed after technical objectives are met.*\\
-{ Integrating fairness at inception costs **weeks**; retrofitting costs **quarters**. Amazon scrapped the project after years of failed remediation.}
-
-{0.1cm}
-**Fallacy:** *Removing sensitive attributes eliminates bias.*\\
-{ Models reconstruct protected attributes from proxies with **70--90%** accuracy. Amazon's system learned gender from college names despite explicit removal.}
-
-{0.1cm}
-**Fallacy:** *Responsible AI is primarily a legal compliance issue.*\\
-{ Architecture choices constrain fairness more than late-stage review. Adding demographic tracking after 6 months costs **3--4$×$** the initial implementation.}
+</details>
 
 ## Pitfalls
 
-{
+[Original slide 30](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L1450)
+
+**Pitfall:** *Relying on aggregate metrics to assess fairness.*
+
+Gender Shades: 43$\times$ error disparity hidden by aggregate accuracy. Loan model: 30pp TPR gap invisible without disaggregated evaluation.
+
+**Pitfall:** *Treating documentation as sufficient accountability.*
+
+40–60% of models exceed documented scope within 18 months. Model cards without **technical access controls** are historical records.
+
+**Pitfall:** *Measuring environmental impact of training but not inference.*
+
+In this scenario, inference-to-training cost exceeds **40:1**. Training = 2% of 3-year TCO; inference = 73%.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Three pitfalls with quantitative evidence.
 
 % -- LINK: From fallacies to operational mistakes
@@ -1312,27 +1401,31 @@ Fallacies are wrong beliefs. Pitfalls are the consequences of acting on them.
 
 % -- NARRATE: Read each pitfall with quantitative evidence
 ``Pitfall 1: Aggregate metrics. Gender Shades 43x disparity; loan model
-30pp TPR gap.'' ``Pitfall 2: Documentation without enforcement. 40--60%
+30pp TPR gap.'' ``Pitfall 2: Documentation without enforcement. 40--60\%
 scope creep.'' ``Pitfall 3: Training-only carbon accounting. Lifecycle boundary.''
 
 % -- FLEX: [CORE] Each pitfall reinforces a chapter theme
 [CORE] IF SHORT: Cover pitfalls 1 and 3, skip pitfall 2.
-}
+```
 
-**Pitfall:** *Relying on aggregate metrics to assess fairness.*\\
-{ Gender Shades: 43$×$ error disparity hidden by aggregate accuracy. Loan model: 30pp TPR gap invisible without disaggregated evaluation.}
-
-{0.1cm}
-**Pitfall:** *Treating documentation as sufficient accountability.*\\
-{ 40--60% of models exceed documented scope within 18 months. Model cards without **technical access controls** are historical records.}
-
-{0.1cm}
-**Pitfall:** *Measuring environmental impact of training but not inference.*\\
-{ In this scenario, inference-to-training cost exceeds **40:1**. Training = 2% of 3-year TCO; inference = 73%.}
+</details>
 
 ## Muddiest Point
 
-{
+[Original slide 31](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L1481)
+
+One-minute paper
+
+ Write down the **muddiest point** from today's lecture.
+
+What concept was most confusing or unclear?
+
+(Hand in on your way out — or submit digitally)
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min] One-minute paper closing device.
 
 % -- LINK: From the end of lecture content to metacognitive reflection
@@ -1348,16 +1441,24 @@ this creates continuity and signals that the exercise has real consequences.
 % -- FLEX: [CORE] Drives next lecture's opening clarification
 [CORE] Collect responses. Open Ch16 with top 2--3 points.
 IF SHORT: 30 seconds instead of 60.
-}
+```
 
- One-minute paper\\[0.5cm]
- Write down the **muddiest point** from today's lecture.\\[0.2cm]
-{ What concept was most confusing or unclear?}\\[0.5cm]
-{{midgray}{(Hand in on your way out --- or submit digitally)}}
+</details>
 
 ## What Were the Key Ideas?
 
-{
+[Original slide 32](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L1508)
+
+Close your notes.
+
+Write down the **4 most important concepts** from today.
+
+90 seconds — no peeking.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Retrieval practice --- highest-impact learning activity.
 
 % -- LINK: From the end of lecture to active recall
@@ -1375,20 +1476,26 @@ lifecycle cost boundary, governance from inception.]
 
 % -- FLEX: [CORE] Highest-impact learning activity
 [CORE] Forces active recall before the reveal. IF SHORT: 60 seconds.
-}
+```
 
-{1.5cm}
-{ Close your notes.}
-
-{0.8cm}
-{ Write down the **4 most important concepts** from today.}
-
-{0.8cm}
-{{midgray}{90 seconds --- no peeking.}}
+</details>
 
 ## Key Takeaways
 
-{
+[Original slide 33](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L1541)
+
+- **Correctness is insufficient**: 95% accuracy can conceal 43$\times$ error disparity across groups.
+- **Tractable responsibility**: “Fairness gap $<$5%” is actionable; “be fair” is not. The **Pareto frontier** makes trade-offs explicit.
+- **Efficiency = responsibility**: 4$\times$ more efficient $\to$ 4$\times$ less energy. Inference can dominate lifecycle cost at production scale.
+- **Impossibility theorem**: Calibration + equalized odds cannot both hold when base rates differ.
+- **Checklist discipline**: Aviation-inspired pre-deployment assessment turns abstract concerns into phase-gated questions.
+- **Governance as infrastructure**: Data lineage, audit trails, access controls must be built from inception.
+- **Documentation + enforcement**: Model cards pair with technical controls; documentation alone allows 40–60% scope creep.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Canonical summary --- students compare with their retrieval.
 
 % -- LINK: From retrieval to the official summary
@@ -1396,26 +1503,38 @@ Students wrote their own summaries. Now compare with the canonical list.
 
 % -- NARRATE: Walk through with quantitative anchors
 ``43x disparity. 30pp TPR gap. Lifecycle cost boundary. Impossibility
-theorem. Checklist discipline. Governance from inception. 40--60% scope
+theorem. Checklist discipline. Governance from inception. 40--60\% scope
 creep without enforcement.''
 
 % -- FLEX: [CORE] Exam-relevant summary
 [CORE] Students photograph this slide. Read each bullet clearly.
 IF SHORT: Read without elaboration.
-}
+```
 
-{0pt}
-- **Correctness is insufficient**: 95% accuracy can conceal 43$×$ error disparity across groups.
-- **Tractable responsibility**: ``Fairness gap $<$5%'' is actionable; ``be fair'' is not. The **Pareto frontier** makes trade-offs explicit.
-- **Efficiency = responsibility**: 4$×$ more efficient $$ 4$×$ less energy. Inference can dominate lifecycle cost at production scale.
-- **Impossibility theorem**: Calibration + equalized odds cannot both hold when base rates differ.
-- **Checklist discipline**: Aviation-inspired pre-deployment assessment turns abstract concerns into phase-gated questions.
-- **Governance as infrastructure**: Data lineage, audit trails, access controls must be built from inception.
-- **Documentation + enforcement**: Model cards pair with technical controls; documentation alone allows 40--60% scope creep.
+</details>
 
 ## References
 
-{
+[Original slide 34](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L1571)
+
+**Buolamwini+18** J. Buolamwini & T. Gebru. “Gender Shades.” FAccT 2018.
+
+**Angwin+16** J. Angwin et al. “Machine Bias.” ProPublica 2016.
+
+**Mitchell+19** M. Mitchell et al. “Model Cards for Model Reporting.” FAccT 2019.
+
+**Gebru+18** T. Gebru et al. “Datasheets for Datasets.” 2018.
+
+**Obermeyer+19** Z. Obermeyer et al. “Dissecting Racial Bias.” Science 2019.
+
+**Strubell+19** E. Strubell et al. “Energy and Policy Considerations.” ACL 2019.
+
+**Sculley+15** D. Sculley et al. “Hidden Technical Debt in ML.” NeurIPS 2015.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [1 min] References slide --- optional, for student self-study.
 
 % -- NARRATE: Highlight the three must-read papers
@@ -1424,19 +1543,40 @@ IF SHORT: Read without elaboration.
 
 % -- FLEX: [OPTIONAL] For student self-study
 [OPTIONAL] Name three key papers and move to Next Lecture.
-}
+```
 
-{Buolamwini+18}{J. Buolamwini & T. Gebru. ``Gender Shades.'' FAccT 2018.}
-{Angwin+16}{J. Angwin et al. ``Machine Bias.'' ProPublica 2016.}
-{Mitchell+19}{M. Mitchell et al. ``Model Cards for Model Reporting.'' FAccT 2019.}
-{Gebru+18}{T. Gebru et al. ``Datasheets for Datasets.'' 2018.}
-{Obermeyer+19}{Z. Obermeyer et al. ``Dissecting Racial Bias.'' Science 2019.}
-{Strubell+19}{E. Strubell et al. ``Energy and Policy Considerations.'' ACL 2019.}
-{Sculley+15}{D. Sculley et al. ``Hidden Technical Debt in ML.'' NeurIPS 2015.}
+</details>
 
 ## Next Lecture: Conclusion
 
-{
+[Original slide 35](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L1594)
+
+From Technique to Philosophy
+
+Every optimization in this course serves **two masters**:
+
+**Performance**
+
+Throughput, latency, accuracy
+
+**Responsibility**
+
+Fairness, carbon, transparency
+
+The techniques are identical; only the lens changes.
+
+$T_{\text{total}} = D_{\text{vol}}/\text{BW} + O/(R_{\text{peak}} \cdot \eta) + L_{\text{lat}}$:
+every term has a responsibility dimension.
+$D_{\text{vol}}$ encodes *who is represented*;
+$O/(R_{\text{peak}} \cdot \eta)$ determines *who can afford deployment*;
+$L_{\text{lat}}$ decides *who gets real-time access*.
+
+**Ch16: Conclusion** — What does it mean to build ML systems *well*?
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Closing forward hook.
 
 % -- LINK: From responsible engineering to the capstone synthesis
@@ -1448,7 +1588,7 @@ conclusion asks ``what does it mean to build ML systems well?''
 responsibility. The techniques are identical; only the lens changes.''
 Then read the Iron Law callback at the bottom: ``Every term of the Iron Law
 has a responsibility dimension. $D_{vol}$ encodes who is represented in the
-data. $O/(R_{peak}  )$ determines who can afford deployment.
+data. $O/(R_{peak} \cdot \eta)$ determines who can afford deployment.
 $L_{lat}$ decides who gets real-time access. This is not an add-on --- it is
 the same equation you've been using all semester.''
 
@@ -1459,45 +1599,28 @@ Ask: ``Which chapter changed how you think about ML systems the most?''
 % -- FLEX: [CORE] Creates anticipation for the capstone
 [CORE] End with the Iron Law callback framing. Do not rush.
 IF SHORT: Read the slide text and the Iron Law line; skip the question.
-}
+```
 
-{0.3cm}
-{ From Technique to Philosophy}
-
-{0.2cm}
-{ Every optimization in this course serves **two masters**:}
-
-{0.2cm}
-[c]
-  
-    
-    {{computestroke}{**Performance**}}\\[0.1cm]
-    { Throughput, latency, accuracy}
-  
-  
-    
-    {{errorstroke}{**Responsibility**}}\\[0.1cm]
-    { Fairness, carbon, transparency}
-  
-
-{0.2cm}
-{ The techniques are identical; only the lens changes.}
-
-{0.15cm}
-{{midgray}{%
-$T_{{total}} = D_{{vol}}/{BW} + O/(R_{{peak}}  ) + L_{{lat}}$:
-every term has a responsibility dimension.
-$D_{{vol}}$ encodes *who is represented*;
-$O/(R_{{peak}}  )$ determines *who can afford deployment*;
-$L_{{lat}}$ decides *who gets real-time access*.%
-}}
-
-{0.1cm}
-{**Ch16: Conclusion** --- What does it mean to build ML systems *well*?}
+</details>
 
 ## Backup: Impossibility Theorem Explained
 
-{
+[Original slide 36](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L1664)
+
+Use if students want a deeper explanation of the fairness impossibility result.
+
+When base rates differ ($P(Y=1|A=a) \neq P(Y=1|A=b)$), you **cannot** simultaneously achieve:
+
+1. Calibration (same score = same probability for any group)
+2. Equal FPR across groups
+3. Equal FNR across groups
+
+Engineers must choose which constraint to prioritize for their domain.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Backup: deeper explanation of the fairness impossibility result.
 
 % -- NARRATE: Step-by-step impossibility result
@@ -1506,21 +1629,28 @@ equal FPR, and equal FNR. Engineers must choose based on domain values.
 
 % -- FLEX: [OPTIONAL] Pull if students struggled with the theorem
 [OPTIONAL] Use if the COMPAS slide generated many questions.
-}
+```
 
-Use if students want a deeper explanation of the fairness impossibility result.
-
-When base rates differ ($P(Y=1|A=a)  P(Y=1|A=b)$), you **cannot** simultaneously achieve:
-{0pt}
-- Calibration (same score = same probability for any group)
-- Equal FPR across groups
-- Equal FNR across groups
-
-Engineers must choose which constraint to prioritize for their domain.
+</details>
 
 ## Backup: Carbon Footprint Calculation
 
-{
+[Original slide 37](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L1688)
+
+Use if students want to estimate their own project's carbon cost.
+
+$\text{CO}_2 = \text{GPU-hours} \times \text{TDP (kW)} \times \text{PUE} \times \text{Grid Intensity}$
+
+H100: 0.7 kW $\times$ 1.2 PUE $\times$ 0.4 kg/kWh = 0.34 kg CO$_2$/GPU-hr.
+
+100 GPU-hours of training = 34 kg CO$_2$ $\approx$ driving 140 km.
+
+GPT-3 training estimates depend on hardware, utilization, data-center efficiency, and grid intensity.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Backup: worked carbon calculation for student estimation exercises.
 
 % -- NARRATE: Concrete carbon calculation example
@@ -1529,45 +1659,62 @@ H100: 0.7 kW times 1.2 PUE times 0.4 kg/kWh = 0.34 kg CO2/GPU-hr.
 
 % -- FLEX: [OPTIONAL] For hands-on carbon estimation
 [OPTIONAL] Pull for estimation exercises.
-}
+```
 
-Use if students want to estimate their own project's carbon cost.
-
-${CO}_2 = {GPU-hours} × {TDP (kW)} × {PUE} × {Grid Intensity}$
-
-H100: 0.7 kW $×$ 1.2 PUE $×$ 0.4 kg/kWh = 0.34 kg CO$_2$/GPU-hr.
-
-100 GPU-hours of training = 34 kg CO$_2$ $$ driving 140 km.
-
-GPT-3 training estimates depend on hardware, utilization, data-center efficiency, and grid intensity.
+</details>
 
 ## Backup: Disparate Impact Worked Example
 
-{
+[Original slide 38](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L1712)
+
+**Credit Scoring: Disparate Impact Analysis**
+
+Group A (majority): 1,000 applicants, 600 approved (60%).
+
+Group B (minority): 500 applicants, 200 approved (40%).
+
+**Disparate impact ratio:** $200/500 \div 600/1000 = 0.40/0.60 = 0.667$
+
+**Fails** the 80% rule ($0.667 < 0.80$).
+
+**Business necessity defense:** Must prove the selection criteria are job-related and consistent with business necessity.
+
+**Engineering response:** Audit feature importance. Remove or re-weight proxies for protected attributes. Re-evaluate on disaggregated metrics.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [3 min] Backup: worked disparate impact calculation for additional practice.
 
 % -- NARRATE: Step-by-step disparate impact calculation
 Walk through a credit scoring example with real numbers to reinforce
-the 80% rule and show when it passes but equal opportunity fails.
+the 80\% rule and show when it passes but equal opportunity fails.
 
 % -- FLEX: [OPTIONAL] Pull if students struggled with the exercise
 [OPTIONAL] Additional practice for the disparate impact calculation.
-}
+```
 
-**Credit Scoring: Disparate Impact Analysis**
-
-{0.1cm}
-
-Group A (majority): 1,000 applicants, 600 approved (60%).\\
-Group B (minority): 500 applicants, 200 approved (40%).\\[0.1cm]
-**Disparate impact ratio:** $200/500  600/1000 = 0.40/0.60 = 0.667$\\
-{errorstroke}{**Fails**} the 80% rule ($0.667 < 0.80$).\\[0.1cm]
-**Business necessity defense:** Must prove the selection criteria are job-related and consistent with business necessity.\\[0.1cm]
-**Engineering response:** Audit feature importance. Remove or re-weight proxies for protected attributes. Re-evaluate on disaggregated metrics.
+</details>
 
 ## Backup: Machine Unlearning Overview
 
-{
+[Original slide 39](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/15_responsible_engr/15_responsible_engr.tex#L1736)
+
+**Machine Unlearning: Approaches for Data Deletion**
+
+| **Approach** | **Method** | **Guarantee** | **Cost** |
+| --- | --- | --- | --- |
+| **Exact** | Retrain without deleted data | Perfect | Full training cost |
+| **Approximate** | Gradient ascent on forgotten data | Statistical | Minutes–hours |
+| **SISA** | Sharded training, retrain affected shard | Perfect per shard | 1/$k$ training cost |
+
+**Key:** SISA (Sharded, Isolated, Sliced, Aggregated) pre-partitions training data so deletion requires retraining only one shard — planning for erasure at training time.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
 [2 min] Backup: machine unlearning taxonomy for compliance engineering frontier.
 
 % -- NARRATE: Overview of machine unlearning approaches
@@ -1577,25 +1724,9 @@ This is an active research area with no production-ready solution.
 
 % -- FLEX: [OPTIONAL] Pull if GDPR scenario generated strong interest
 [OPTIONAL] For students interested in the compliance engineering frontier.
-}
+```
 
-**Machine Unlearning: Approaches for Data Deletion**
-
-{0.1cm}
-
-{}{1.1}
-{tabular}{@{}lp{3.5cm}ll@{}}
-  
-  **Approach** & **Method** & **Guarantee** & **Cost** \\
-  
-  **Exact** & Retrain without deleted data & Perfect & Full training cost \\
-  **Approximate** & Gradient ascent on forgotten data & Statistical & Minutes--hours \\
-  **SISA** & Sharded training, retrain affected shard & Perfect per shard & 1/$k$ training cost \\
-  
-{tabular}
-
-{0.1cm}
-{Key:}{SISA (Sharded, Isolated, Sliced, Aggregated) pre-partitions training data so deletion requires retraining only one shard --- planning for erasure at training time.}
+</details>
 
 ## Complete original Beamer source
 

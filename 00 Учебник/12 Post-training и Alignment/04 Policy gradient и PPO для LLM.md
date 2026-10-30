@@ -2,11 +2,12 @@
 title: Градиент стратегии и PPO для языковых моделей
 type: textbook-chapter
 status: canonical
-last_updated: 2026-09-21
+last_updated: 2026-10-30
+last_verified: 2026-10-24
 prerequisites:
   - "[[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/03 Reward modeling]]"
 next:
-  - "[[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/05 DPO]]"
+  - "[[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/00a Цели alignment — HHH, Constitutional AI и RLAIF]]"
 primary_sources:
   - https://arxiv.org/abs/1707.06347
   - https://arxiv.org/abs/2009.01325
@@ -70,16 +71,17 @@ $$
 J(\theta)=\sum_y \pi_\theta(y\mid x)R(x,y).
 $$
 
-Считаем награду внешней по отношению к параметрам стратегии:
+Считаем награду внешней по отношению к параметрам стратегии.
+Для краткости обозначим $p_\theta(y)=\pi_\theta(y\mid x)$:
 
 $$
 \begin{aligned}
 \nabla_\theta J
-&=\sum_y R(x,y)\nabla_\theta\pi_\theta(y\mid x)\\
-&=\sum_y R(x,y)\pi_\theta(y\mid x)
-  \nabla_\theta\log\pi_\theta(y\mid x)\\
+&=\sum_y R(x,y)\nabla_\theta p_\theta(y)\\
+&=\sum_y R(x,y)p_\theta(y)
+  \nabla_\theta\log p_\theta(y)\\
 &=\mathbb E_{y\sim\pi_\theta}
-  [R(x,y)\nabla_\theta\log\pi_\theta(y\mid x)].
+  [R(x,y)\nabla_\theta\log p_\theta(y)].
 \end{aligned}
 $$
 
@@ -91,12 +93,13 @@ $$
 =\sum_{t=1}^{T}\log\pi_\theta(y_t\mid x,y_{<t}),
 $$
 
-поэтому одна награда за весь ответ создаёт градиент для всех выбранных токенов:
+Обозначим префикс перед выбором токена как $s_t=(x,y_{<t})$.
+Одна награда за весь ответ создаёт градиент для всех выбранных токенов:
 
 $$
 \nabla J
 =\mathbb E\left[
-R(x,y)\sum_t\nabla\log\pi_\theta(y_t\mid x,y_{<t})
+R(x,y)\sum_t\nabla\log\pi_\theta(y_t\mid s_t)
 \right].
 $$
 
@@ -150,9 +153,11 @@ $$
 Это следует из нормировки распределения:
 
 $$
-\sum_y\pi_\theta(y\mid x)b(x)\nabla_\theta\log\pi_\theta(y\mid x)
-=b(x)\nabla_\theta\sum_y\pi_\theta(y\mid x)
-=b(x)\nabla_\theta 1=0.
+\begin{aligned}
+&\sum_y\pi_\theta(y\mid x)b(x)\nabla_\theta\log\pi_\theta(y\mid x)\\
+&\quad=b(x)\nabla_\theta\sum_y\pi_\theta(y\mid x)\\
+&\quad=b(x)\nabla_\theta 1=0.
+\end{aligned}
 $$
 
 Здесь существенно, что $b(x)$ одинаков для всех ответов на данный запрос.
@@ -167,11 +172,38 @@ $(1-0.6)(1-0.6)=0.16$, а для `B` — $(0-0.6)(-0.6)=0.36$.
 случайного разброса. Произвольный базовый уровень не гарантирует уменьшения
 дисперсии, а средняя награда не всегда является её оптимальным минимумом.
 
+Для этой двухисходной задачи можно выбрать $b=0.4$: тогда оба возможных
+вклада равны 0.24, и дисперсия становится нулевой. Это частное свойство
+маленького примера, не обещание устранить шум произвольного обучения.
+Следующий расчёт перебирает оба исхода и проверяет среднее и дисперсию,
+а не оценивает их по случайным прогонам:
+
+```python
+import math
+import torch
+
+p = torch.tensor(0.6, dtype=torch.float64)
+outcome_probability = torch.stack([p, 1 - p])
+outcome_reward = torch.tensor([1.0, 0.0], dtype=torch.float64)
+score_gradient = torch.stack([1 - p, -p])
+baseline_results = {}
+for baseline in (0.0, 0.6, 0.4):
+    contributions = (outcome_reward - baseline) * score_gradient
+    mean_gradient = (outcome_probability * contributions).sum()
+    variance = (outcome_probability * (contributions - mean_gradient)**2).sum()
+    baseline_results[baseline] = (mean_gradient.item(), variance.item())
+    print(f"b={baseline:.1f}: mean={mean_gradient.item():.6f}, "
+          f"variance={variance.item():.6f}")
+# mean=0.240000 во всех строках; variance=0.038400, 0.009600, 0.000000.
+```
+
 Функция ценности оценивает ожидаемую будущую сумму наград:
 
 $$
-G_t=\sum_{k=t}^{T}\gamma^{k-t}r_k,\qquad
-V^\pi(s_t)=\mathbb E_\pi[G_t\mid s_t].
+\begin{aligned}
+G_t&=\sum_{k=t}^{T}\gamma^{k-t}r_k,\\
+V^\pi(s_t)&=\mathbb E_\pi[G_t\mid s_t].
+\end{aligned}
 $$
 
 $G_t$ — сумма будущих наград, а $\gamma$ — коэффициент дисконтирования.
@@ -191,7 +223,7 @@ $Q^\pi(s_t,a_t)$ — ожидаемая сумма наград, если пер
 Для данного запроса модель обычно получает награду около $0.7$. Рассмотрим две
 генерации:
 
-| ответ | $R$ | базовый уровень $V$ | оценка преимущества |
+| Ответ | $R$ | $V$ | $\hat A$ |
 |---|---:|---:|---:|
 | с высокой оценкой | 1.0 | 0.7 | +0.3 |
 | с низкой оценкой | 0.2 | 0.7 | −0.5 |
@@ -206,9 +238,10 @@ Estimation*, GAE). Сначала для каждого шага вычисля�
 прогноза, затем суммируют эти ошибки назад по ответу:
 
 $$
-\delta_t=r_t+\gamma V(s_{t+1})-V(s_t),
-\qquad
-\hat A_t=\sum_{l=0}^{T-t}(\gamma\lambda)^l\delta_{t+l}.
+\begin{aligned}
+\delta_t&=r_t+\gamma V(s_{t+1})-V(s_t),\\
+\hat A_t&=\sum_{l=0}^{T-t}(\gamma\lambda)^l\delta_{t+l}.
+\end{aligned}
 $$
 
 При естественном завершении эпизода $V(s_{T+1})=0$. При $\lambda=0$ остаётся
@@ -235,18 +268,49 @@ $\lambda<1$ цели различаются, как в расчёте ниже. 
 оценкой $1$ за ответ за вычетом штрафа $0.03$.
 При $\gamma=1$ и $\lambda=0.95$ получаем:
 
-| шаг | $r_t$ | $V(s_t)$ | $\delta_t=r_t+V(s_{t+1})-V(s_t)$ | $\hat A_t$ | цель критика $\hat G_t=\hat A_t+V(s_t)$ |
-|---|---:|---:|---:|---:|---:|
-| 1 | −0.02 | 0.4 | 0.08 | 0.499425 | 0.899425 |
-| 2 | −0.01 | 0.5 | 0.09 | 0.4415 | 0.9415 |
-| 3 | 0.97 | 0.6 | 0.37 | 0.37 | 0.97 |
+| Шаг | $r_t$ | $V(s_t)$ | $\delta_t$ |
+|---|---:|---:|---:|
+| 1 | −0.02 | 0.4 | 0.08 |
+| 2 | −0.01 | 0.5 | 0.09 |
+| 3 | 0.97 | 0.6 | 0.37 |
 
 Вычисление начинается с конца: $\hat A_3=0.37$, затем
 $\hat A_2=0.09+0.95\cdot0.37=0.4415$ и
 $\hat A_1=0.08+0.95\cdot0.4415=0.499425$.
+
+Цель критика равна $\hat G_t=\hat A_t+V(s_t)$:
+
+| Шаг | $\hat A_t$ | $\hat G_t$ |
+|---|---:|---:|
+| 1 | 0.499425 | 0.899425 |
+| 2 | 0.4415 | 0.9415 |
+| 3 | 0.37 | 0.97 |
+
 При $\lambda=1$ цели критика были бы равны обычным суммам будущих наград:
 $0.94$, $0.96$, $0.97$. Даже в этом случае одна итоговая оценка не означает,
 что преимущества всех токенов одинаковы: прогноз критика зависит от префикса.
+
+У суммы TD-ошибок есть другая интерпретация. Для первого токена можно
+составить одношаговую, двухшаговую и полную оценки преимущества:
+0.08, $0.08+0.09=0.17$ и $0.08+0.09+0.37=0.54$.
+В короткой оценке остаётся прогноз критика на ближайшем будущем состоянии;
+в полной используются все наблюдавшиеся награды, а промежуточные прогнозы
+сокращаются. Для этого законченного трёхшагового эпизода GAE смешивает их
+с весами $(1-\lambda)$, $(1-\lambda)\lambda$ и $\lambda^2$:
+
+$$
+\begin{aligned}
+\hat A_1&=0.05\cdot0.08+0.0475\cdot0.17\\
+&\quad+0.9025\cdot0.54=0.499425.
+\end{aligned}
+$$
+
+Вес последней оценки здесь $\lambda^2$, а не $(1-\lambda)\lambda^2$:
+после конца эпизода более длинные оценки совпадают с полной, и оставшийся
+геометрический хвост суммируется в этот коэффициент. Все три веса дают 1.
+Так GAE связывает ближайший прогноз с полным наблюдавшимся возвратом;
+подробный вывод приведён в
+[статье GAE, §3, уравнения 11–18](https://arxiv.org/html/1506.02438v6#S3).
 
 Ограничение длины требует отдельного решения. Если обрезанный ответ считают
 завершённой попыткой, ему задают итоговую оценку и нулевую ценность после конца.
@@ -254,11 +318,19 @@ $0.94$, $0.96$, $0.97$. Даже в этом случае одна итогов�
 прогноз следующего состояния и использовать его при расчёте возврата
 (*bootstrapping*). Эти два случая нельзя различить по одному padding-токену.
 
+Например, непосредственно перед прерыванием награда равна −0.03,
+$V(s_t)=0.6$, а прогноз следующего состояния равен 0.8. При $\gamma=1$
+технический разрыв даёт $\delta_t=-0.03+0.8-0.6=0.17$.
+Если тот же шаг объявить концом попытки без дополнительной итоговой награды,
+получится $\delta_t=-0.03-0.6=-0.63$. Меняется даже знак преимущества.
+Поэтому обработка лимита длины должна следовать определению задачи,
+а не определяться тем, какой токен оказался последним в тензоре.
+
 ## 4. Генерация текста как эпизод обучения с подкреплением
 
 Для генерации текста удобно сопоставление:
 
-| обучение с подкреплением | языковая модель |
+| Понятие | Генерация текста |
 |---|---|
 | начальное состояние | запрос $x$ |
 | состояние $s_t$ | запрос и уже написанная часть ответа $y_{<t}$ |
@@ -273,19 +345,22 @@ $0.94$, $0.96$, $0.97$. Даже в этом случае одна итогов�
 добавляют регуляризацию относительно исходной, **опорной модели**:
 
 $$
-J_\beta(\theta)=\mathbb E_{y\sim\pi_\theta}[r_\phi(x,y)]
+\begin{gathered}
+J_\beta(\theta)=\mathbb E_{y\sim\pi_\theta}[r_\phi(x,y)]\\
 -\beta D_{\mathrm{KL}}\!\left(
 \pi_\theta(\cdot\mid x)\,\|\,\pi_{\mathrm{ref}}(\cdot\mid x)
 \right).
+\end{gathered}
 $$
 
 Поскольку логарифм вероятности ответа складывается из логарифмов вероятностей
 его токенов, выборочный вклад в KL можно распределить по шагам:
 
 $$
-r_t^{\mathrm{KL}}=-\beta
-\left(\log\pi_\theta(y_t\mid s_t)
--\log\pi_{\mathrm{ref}}(y_t\mid s_t)\right),
+\begin{aligned}
+r_t^{\mathrm{KL}}&=-\beta\bigl(\log\pi_\theta(y_t\mid s_t)\\
+&\qquad-\log\pi_{\mathrm{ref}}(y_t\mid s_t)\bigr).
+\end{aligned}
 $$
 
 На последнем шаге добавляется $r_\phi(x,y)$. Опорная модель при этом
@@ -320,13 +395,13 @@ $0.0201>0$. Поэтому «штраф» за конкретный токен �
 Figure 1. Оригинал без изменений; MIT,
 [лицензия рисунков и кода](https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/LICENSE-CODE).*
 
-| роль | обучается? | назначение |
-|---|---|---|
-| текущая стратегия $\pi_\theta$ | да | модель, параметры которой обновляются |
-| сохранённая стратегия $\pi_{\mathrm{old}}$ | заморожена для текущего пакета | породила обучающие ответы и задаёт знаменатель отношения вероятностей |
-| опорная модель $\pi_{\mathrm{ref}}$ | обычно заморожена надолго | удерживает поведение вблизи исходной модели |
-| модель награды $r_\phi$ | нет во время PPO | оценивает пару из запроса и полного ответа |
-| модель ценности $V_\psi$ | да | предсказывает будущую награду и уменьшает дисперсию градиента |
+| Роль | Обновление и назначение |
+|---|---|
+| Текущая стратегия $\pi_\theta$ | Обучается: её параметры нужно обновить по награде. |
+| Сохранённая стратегия $\pi_{\mathrm{old}}$ | Зафиксирована для текущего пакета. Породила ответы и задаёт знаменатель отношения вероятностей. |
+| Опорная модель $\pi_{\mathrm{ref}}$ | Обычно заморожена надолго. Задаёт исходное распределение для KL-штрафа. |
+| Модель награды $r_\phi$ | Во время PPO не обучается. Оценивает запрос с полным ответом. |
+| Модель ценности $V_\psi$ | Обучается прогнозировать будущую награду; используется при оценке преимущества. |
 
 В самом начале сохранённая и опорная модели могут иметь одинаковые параметры,
 но их назначения всё равно различны. После шага оптимизатора текущая стратегия
@@ -406,8 +481,10 @@ $$
 $$
 
 $$
-\rho A=3.0,\qquad
-\operatorname{clip}(1.5,0.8,1.2)A=2.4.
+\begin{aligned}
+\rho A&=3.0,\\
+\operatorname{clip}(1.5,0.8,1.2)A&=2.4.
+\end{aligned}
 $$
 
 Берём минимум: $2.4$. Дальнейшее увеличение вероятности не улучшает целевую
@@ -416,7 +493,11 @@ $$
 **Плохое действие:** $A=-2$, прежняя вероятность $0.20$, текущая $0.10$.
 
 $$
-\rho=0.5,\qquad \rho A=-1.0,\qquad 0.8A=-1.6.
+\begin{aligned}
+\rho&=0.5,\\
+\rho A&=-1.0,\\
+0.8A&=-1.6.
+\end{aligned}
 $$
 
 Минимум равен $-1.6$: целевая функция не поощряет чрезмерное уменьшение
@@ -425,10 +506,10 @@ $$
 
 ### Как ограничение зависит от знака преимущества
 
-| преимущество | полезное направление | где улучшение прекращается |
-|---|---|---|
-| $A>0$ | повышать вероятность | $\rho>1+\epsilon$ |
-| $A<0$ | понижать вероятность | $\rho<1-\epsilon$ |
+| Знак $A$ | Где прекращается поощрение изменения |
+|---|---|
+| $A>0$ | Повышать вероятность полезно до $\rho=1+\epsilon$; выше границы вклад становится плоским. |
+| $A<0$ | Понижать вероятность полезно до $\rho=1-\epsilon$; ниже границы вклад становится плоским. |
 
 Если хорошее действие стало реже, например $A=2$, $\rho=0.5$, минимум равен
 $1$, а не $1.6$: градиент продолжает увеличивать вероятность. Аналогично при
@@ -479,12 +560,15 @@ $$
 предобучения:
 
 $$
-J_{\mathrm{PPO\text{-}ptx}}
-=\mathbb E[r_\phi-\beta\log(\pi_\theta/\pi_{\mathrm{SFT}})]
-+\alpha_{\mathrm{ptx}}\mathbb E_{z\sim D_{\mathrm{pretrain}}}\log\pi_\theta(z).
+\begin{aligned}
+J_{\mathrm{PPO\text{-}ptx}}&=J_\beta(\theta)\\
+&\quad+\alpha_{\mathrm{ptx}}\mathbb E_{z\sim D_{\mathrm{pretrain}}}
+\log\pi_\theta(z).
+\end{aligned}
 $$
 
 Коэффициент $\alpha_{\mathrm{ptx}}$ здесь не связан с дисконтированием $\gamma$.
+В этой записи опорной моделью в $J_\beta$ служит SFT-модель.
 Так авторы боролись с ухудшением исходных способностей модели. В экспериментах
 с исключением отдельных компонентов одно лишь усиление штрафа по KL не
 восстанавливало полностью качество на открытых задачах обработки языка
@@ -495,16 +579,16 @@ $$
 Пусть пакет содержит $B$ запросов, максимальная длина ответа равна $T$, а размер
 словаря — $V$.
 
-| тензор | форма | что содержит и когда вычисляется |
-|---|---|---|
-| `response` | `[B, T]` | выбранные токены ответа, затем правый padding |
-| `mask` | `[B, T]` | истинна только для токенов ответа, включая EOS |
-| `old_logp` | `[B, T]` | логарифмы вероятностей этих токенов у версии, собравшей ответы |
-| `ref_logp` | `[B, T]` | вероятности тех же токенов у опорной модели, с теми же префиксами |
-| `scores` | `[B]` | одна итоговая оценка на ответ |
-| `old_value` | `[B, T]` | прогнозы критика **до выбора** соответствующего токена |
-| `rewards`, `advantages`, `returns` | `[B, T]` | фиксированные результаты расчёта наград и GAE |
-| `new_logp`, `new_value` | `[B, T]` | заново вычисляются на каждом шаге оптимизатора |
+| Тензор | Содержание |
+|---|---|
+| `response` | `[B, T]`: выбранные токены ответа, затем правый padding. |
+| `mask` | `[B, T]`: истинна только для токенов ответа, включая EOS. |
+| `old_logp` | `[B, T]`: логарифмы вероятностей токенов у версии, собравшей ответы. |
+| `ref_logp` | `[B, T]`: логарифмы вероятностей тех же токенов у опорной модели, с теми же префиксами. |
+| `scores` | `[B]`: одна итоговая оценка на ответ. |
+| `old_value` | `[B, T]`: прогнозы критика до выбора соответствующего токена. |
+| `rewards`, `advantages`, `returns` | `[B, T]`: фиксированные результаты расчёта наград и GAE. |
+| `new_logp`, `new_value` | `[B, T]`: заново вычисляются на каждом шаге оптимизатора. |
 
 Логиты размера `[B,T,V]` обычно не хранят одновременно для всех моделей. Из них
 сразу выбирают логарифмы вероятностей фактически полученных токенов. Позиции
@@ -534,6 +618,17 @@ $$
 обратное распространение. После нескольких проходов старую партию откладывают
 и генерируют следующую уже обновлённой стратегией.
 
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/ppo-2026-10-24/ppo-framework.png]]
+
+*PPO с обучаемым критиком: оценка ответа и KL-штраф образуют награду,
+GAE использует её вместе с прогнозами ценности. Пунктир показывает
+обновление стратегии и критика; опорная модель и модель награды заморожены.
+Это схема блоков цикла: при токеновом расчёте значение критика относится
+к префиксу до действия, как в выравнивании ниже, а не к уже выбранному токену.
+Nathan Lambert, [RLHF Book, Figure 4](https://rlhfbook.com/c/06-policy-gradients#proximal-policy-optimization-ppo).
+Полный исходный PNG без изменений; MIT,
+[лицензия](https://github.com/natolambert/rlhf-book/blob/3f573487c58548c16a548cd5fb8979a0189384c7/LICENSE-CODE).*
+
 Ниже — исполняемый расчёт наград и GAE, а не полный тренер. Он принимает
 **только позиции ответов**, с правым padding; каждый ответ непустой и считается
 завершённым эпизодом. Прогноз после его конца равен нулю. Токен EOS, если он
@@ -541,6 +636,7 @@ $$
 зависят от выбранной библиотеки и здесь не скрыты за фиктивными API.
 
 ```python
+import math
 import torch
 
 
@@ -548,6 +644,9 @@ import torch
 def ppo_targets(old_logp, ref_logp, scores, old_value, mask,
                 beta=0.1, gamma=1.0, lam=0.95):
     # old_logp, ref_logp, old_value, mask: [B, T]; scores: [B]
+    if not (0 <= gamma <= 1 and 0 <= lam <= 1 and
+            math.isfinite(beta) and beta >= 0):
+        raise ValueError("invalid gamma, lambda or KL coefficient")
     if mask.ndim != 2 or mask.dtype != torch.bool:
         raise ValueError("mask must be a boolean [B, T] tensor")
     B, T = mask.shape
@@ -580,6 +679,8 @@ def ppo_targets(old_logp, ref_logp, scores, old_value, mask,
 
 
 def ppo_clip_loss(new_logp, old_logp, advantages, mask, eps=0.2):
+    if not 0 <= eps < 1:
+        raise ValueError("eps must be in [0, 1)")
     if mask.dtype != torch.bool or not torch.any(mask):
         raise ValueError("mask must select at least one response token")
     if any(x.shape != mask.shape for x in (new_logp, old_logp, advantages)):
@@ -609,9 +710,166 @@ def ppo_clip_loss(new_logp, old_logp, advantages, mask, eps=0.2):
 `((new_value[mask] - returns[mask]) ** 2).mean()`.
 Если стратегия и критик разделяют параметры, их функции потерь складывают
 до `backward`; если это независимые сети, возможны разные оптимизаторы.
-Этот пример намеренно не реализует распределённую генерацию, ограничение
-градиента, адаптацию коэффициента KL и досрочную остановку. Без этих решений
-он объясняет арифметику обновления, но не заменяет промышленный тренер.
+Эти две функции не задают цикл генерации, адаптацию коэффициента KL
+или досрочную остановку. Ниже они сначала проверяются на числах, затем
+используются в одном полном CPU-шаге. Распределённое обучение здесь
+не реализовано.
+
+### Воспроизведение расчёта GAE
+
+Первая строка ниже повторяет трёхшаговый пример. Во второй ответ короче:
+две позиции текста и одна позиция заполнения. Большие фиктивные числа
+в заполнении не должны влиять ни на награду, ни на возврат.
+
+```python
+old_lp = torch.tensor([[-1.0, -0.8, -0.6], [-0.7, -0.9, 999.0]],
+                      dtype=torch.float64)
+ref_lp = torch.tensor([[-1.2, -0.9, -0.9], [-0.8, -1.0, -999.0]],
+                      dtype=torch.float64)
+old_v = torch.tensor([[0.4, 0.5, 0.6], [0.1, 0.2, 1e6]],
+                     dtype=torch.float64)
+outcome_scores = torch.tensor([1.0, 0.5], dtype=torch.float64)
+response_mask = torch.tensor([[True, True, True], [True, True, False]])
+toy_rewards, toy_advantages, toy_returns = ppo_targets(
+    old_lp, ref_lp, outcome_scores, old_v, response_mask
+)
+torch.testing.assert_close(toy_advantages[0],
+    torch.tensor([0.499425, 0.4415, 0.37], dtype=torch.float64))
+torch.testing.assert_close(toy_returns[0],
+    torch.tensor([0.899425, 0.9415, 0.97], dtype=torch.float64))
+assert toy_rewards[1, 2] == toy_advantages[1, 2] == toy_returns[1, 2] == 0
+print(toy_rewards.tolist())
+```
+
+Итоговый балл прибавляется в первой строке к третьему токену, во второй
+ко второму. Поэтому две строки получают разные последние награды:
+0.97 и 0.49. Проверка только общего размера тензора не обнаружила бы
+ошибочного добавления обоих баллов ко всем перечисленным столбцам.
+
+### Градиент в шести областях PPO-Clip
+
+Возьмём три отношения вероятностей: 0.5, 1 и 1.5. Для каждого проверим оба
+знака преимущества. Функция возвращает потерю со знаком минус и усредняет
+шесть элементов; поэтому градиенты по новым логарифмам вероятностей равны
+$(-1,-2,0,0,2,3)/6$. Нули возникают только в двух областях, где дальнейшее
+изменение уже не поощряется.
+
+```python
+clip_advantages = torch.tensor([[2., 2., 2., -2., -2., -2.]],
+                               dtype=torch.float64)
+clip_old_logp = torch.full((1, 6), -2.0, dtype=torch.float64)
+ratios_to_check = torch.tensor([[0.5, 1., 1.5, 0.5, 1., 1.5]],
+                               dtype=torch.float64)
+clip_new_logp = (clip_old_logp + ratios_to_check.log()).requires_grad_()
+clip_mask = torch.ones((1, 6), dtype=torch.bool)
+clip_loss = ppo_clip_loss(clip_new_logp, clip_old_logp,
+                          clip_advantages, clip_mask)
+clip_loss.backward()
+expected_gradient = torch.tensor([[-1., -2., 0., 0., 2., 3.]],
+                                 dtype=torch.float64) / 6
+torch.testing.assert_close(clip_new_logp.grad, expected_gradient)
+print(clip_new_logp.grad.tolist())
+```
+
+### Один шаг с настоящим трансформером на CPU
+
+В следующем примере веса случайные, словарь состоит из 32 условных токенов,
+а каждый эпизод по определению задачи длится ровно три действия. EOS и PAD
+не используются. Это законченное действие среды, а не обрезанный фрагмент
+продолжающегося диалога. Награда равна среднему номеру выбранного токена,
+делённому на 31. Такой искусственный критерий нужен только для проверки
+потока данных: он не измеряет полезность или правильность текста.
+
+Стратегия имеет языковую голову, критик — отдельную линейную голову над тем
+же трансформером. Опорная модель является замороженной исходной копией.
+Предобученные веса, токенизатор и данные из сети не требуются.
+
+```python
+import copy
+from transformers import LlamaConfig, LlamaForCausalLM
+
+torch.manual_seed(17)
+torch.set_num_threads(1)
+lm_config = LlamaConfig(
+    vocab_size=32, hidden_size=16, intermediate_size=32,
+    num_hidden_layers=1, num_attention_heads=2, num_key_value_heads=2,
+    max_position_embeddings=32, attention_dropout=0.0,
+    bos_token_id=None, eos_token_id=None, pad_token_id=None,
+)
+lm_config._attn_implementation = "eager"
+policy = LlamaForCausalLM(lm_config)
+critic = torch.nn.Linear(lm_config.hidden_size, 1)
+reference = copy.deepcopy(policy).eval().requires_grad_(False)
+ppo_optimizer = torch.optim.AdamW(
+    [*policy.parameters(), *critic.parameters()], lr=1e-4
+)
+
+def response_forward(model, ids, prompt_length):
+    out = model(input_ids=ids, output_hidden_states=True, use_cache=False)
+    # Состояние и логит перед каждым выбранным действием, не после него.
+    before_action = out.hidden_states[-1][:, prompt_length - 1:-1]
+    logits = out.logits[:, prompt_length - 1:-1]
+    actions = ids[:, prompt_length:]
+    logp = logits.log_softmax(-1).gather(-1, actions[..., None]).squeeze(-1)
+    return logp, before_action
+```
+
+Во время генерации сохраняются вероятности фактически выбранных токенов.
+После этого тот же ответ можно обработать одним причинным прямым проходом:
+его вероятности должны совпасть с сохранёнными. Здесь нет температуры,
+top-p, dropout или другой причины изменить распределение между проходами.
+
+```python
+prompts = torch.tensor([[3, 4, 5], [6, 7, 8]])
+prompt_length = prompts.size(1)
+ids = prompts.clone()
+sampled_logp = []
+with torch.no_grad():
+    for _ in range(3):
+        next_logits = policy(input_ids=ids, use_cache=False).logits[:, -1]
+        chosen = torch.multinomial(next_logits.softmax(-1), num_samples=1)
+        sampled_logp.append(next_logits.log_softmax(-1)
+                            .gather(-1, chosen).squeeze(-1))
+        ids = torch.cat([ids, chosen], dim=1)
+    old_logp, old_hidden = response_forward(policy, ids, prompt_length)
+    old_value = critic(old_hidden).squeeze(-1)
+    ref_logp, _ = response_forward(reference, ids, prompt_length)
+    torch.testing.assert_close(old_logp, torch.stack(sampled_logp, dim=1))
+    response = ids[:, prompt_length:]
+    scores = response.float().mean(-1) / (lm_config.vocab_size - 1)
+    mask = torch.ones_like(response, dtype=torch.bool)
+    rewards, advantages, returns = ppo_targets(
+        old_logp, ref_logp, scores, old_value, mask
+    )
+
+new_logp, new_hidden = response_forward(policy, ids, prompt_length)
+new_value = critic(new_hidden).squeeze(-1)
+actor_loss = ppo_clip_loss(new_logp, old_logp, advantages, mask)
+value_loss = ((new_value[mask] - returns[mask]) ** 2).mean()
+total_loss = actor_loss + 0.5 * value_loss
+ppo_optimizer.zero_grad(set_to_none=True)
+total_loss.backward()
+torch.nn.utils.clip_grad_norm_([*policy.parameters(), *critic.parameters()], 1.0)
+ppo_optimizer.step()
+print("response:", response.tolist())
+print(f"actor_loss={actor_loss.item():.6f}, value_loss={value_loss.item():.6f}")
+```
+
+Перед этим первым шагом текущая и сохранённая стратегии совпадают, так что
+отношения вероятностей равны 1. После `step` сохранённые `old_logp`,
+преимущества и цели критика не меняются. Повторный проход уже обновлённой
+стратегии даст новые вероятности для того же текста; следующий цикл должен
+снова генерировать ответы. Опорная копия всё это время остаётся прежней.
+
+В этом пакете исходная стратегия совпадает и с опорной, поэтому KL-штраф
+нулевой. Это не дополнительное свойство PPO: после обновлений он перестанет
+быть нулевым. Ненулевой случай отдельно воспроизведён в численном примере GAE.
+Коэффициент энтропии здесь равен нулю, преимущества не нормируются;
+общая сеть получает и градиент стратегии, и градиент критика.
+
+Все Python-блоки главы выполняются последовательно. Проверенная CPU-среда:
+PyTorch 2.14.1, Transformers 4.57.1. Один шаг подтверждает выравнивание
+тензоров и прохождение градиента, но не улучшение качества языковой модели.
 
 ## 10. Основные причины неудачного обучения
 
@@ -699,15 +957,15 @@ $[1-\epsilon,1+\epsilon]$. Это не всегда доля токенов с �
 #### Объяснения и реализации
 
 - OpenAI, [Spinning Up: Proximal Policy Optimization](https://spinningup.openai.com/en/latest/algorithms/ppo.html) — последовательный разбор ограниченной целевой функции.
-- Nathan Lambert, [RLHF Book, Reinforcement Learning](https://rlhfbook.com/c/06-policy-gradients) — развёрнутый разбор градиента стратегии, GAE, PPO и нормировки потерь; оттуда взяты три иллюстрации этой главы.
+- Nathan Lambert, [RLHF Book, Reinforcement Learning](https://rlhfbook.com/c/06-policy-gradients) — развёрнутый разбор градиента стратегии, GAE, PPO и нормировки потерь; оттуда взяты четыре иллюстрации этой главы.
 - Stanford CS336, [[02 Areas/ML & DL/05 Источники/Courses/Stanford CS336 Spring 2026/_index|материалы курса]] — лекции 15–16 связывают обучение на предпочтениях с реализацией RL для языковых моделей.
 - Nathan Lambert, [Stanford CS224N: Life after DPO](https://web.stanford.edu/class/cs224n/slides/cs224n-spr2024-lecture15-life-after-dpo-lambert.pdf) — сравнение семейств методов и оценки моделей награды.
 - Huang et al., [The 37 Implementation Details of Proximal Policy Optimization](https://iclr-blog-track.github.io/2022/03/25/ppo-implementation-details/) — воспроизводимые реализации и различия, которые теряются в коротком псевдокоде; примеры посвящены общим задачам RL, не только тексту.
 
-В PPO модель награды сначала учится на человеческих сравнениях, а затем
+В классическом RLHF модель награды сначала учится на человеческих сравнениях, а затем
 оценивает новые ответы, которые порождает изменяющаяся стратегия. Это позволяет
 выходить за пределы исходного набора пар, но требует генерации, критика и
-контроля всего цикла. В [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/05 DPO|следующей главе]]
+контроля всего цикла. В [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/05 DPO|главе о DPO]]
 разбирается DPO: при определённых предположениях обучение на предпочтениях
 можно записать сразу через вероятности двух готовых ответов, без отдельного
 шага PPO.

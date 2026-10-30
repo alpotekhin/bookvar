@@ -1,0 +1,869 @@
+{
+  "auditDate": "2026-10-29",
+  "scope": "23 RU model-family pages, 3 comparisons and Timeline; _index and EN pages excluded by ownership.",
+  "status": "audited-with-targeted-corrections",
+  "acceptanceBoundary": "This is a content-role/link-coherence audit, not acceptance of the entire textbook, a complete fresh model-catalog verification, a model-runtime test, or visual browser QA.",
+  "coverage": {
+    "familyPagesRead": 23,
+    "comparisonPagesRead": 3,
+    "timelinePagesRead": 1,
+    "readInFull": [
+      "02 Атлас моделей/Семейства/BERT.md",
+      "02 Атлас моделей/Семейства/Baichuan.md",
+      "02 Атлас моделей/Семейства/Command R.md",
+      "02 Атлас моделей/Семейства/DBRX.md",
+      "02 Атлас моделей/Семейства/DeepSeek.md",
+      "02 Атлас моделей/Семейства/Falcon.md",
+      "02 Атлас моделей/Семейства/GLM.md",
+      "02 Атлас моделей/Семейства/GPT.md",
+      "02 Атлас моделей/Семейства/Gemma.md",
+      "02 Атлас моделей/Семейства/InternLM.md",
+      "02 Атлас моделей/Семейства/Jamba.md",
+      "02 Атлас моделей/Семейства/Kimi.md",
+      "02 Атлас моделей/Семейства/Llama.md",
+      "02 Атлас моделей/Семейства/Mamba.md",
+      "02 Атлас моделей/Семейства/Mistral и Mixtral.md",
+      "02 Атлас моделей/Семейства/Nemotron.md",
+      "02 Атлас моделей/Семейства/Phi.md",
+      "02 Атлас моделей/Семейства/Qwen.md",
+      "02 Атлас моделей/Семейства/RWKV.md",
+      "02 Атлас моделей/Семейства/RetNet.md",
+      "02 Атлас моделей/Семейства/T5.md",
+      "02 Атлас моделей/Семейства/Yi.md",
+      "02 Атлас моделей/Семейства/Мультимодальные семейства.md",
+      "02 Атлас моделей/Сравнения/Карта архитектурных линий.md",
+      "02 Атлас моделей/Сравнения/Перенос vision encoder между VLM.md",
+      "02 Атлас моделей/Сравнения/Сравнение семейств.md",
+      "02 Атлас моделей/Timeline.md"
+    ],
+    "unreadInScope": [],
+    "excluded": [
+      "02 Атлас моделей/_index.md",
+      "EN atlas counterparts",
+      "fresh verification of every pre-existing release or benchmark claim"
+    ]
+  },
+  "changesSummary": [
+    "22 existing atlas pages changed; 5 kept without edits.",
+    "No source images added, replaced or removed: all 39 original embeds retained.",
+    "68 direct links to full textbook explanations checked for target file and heading or retained explicit anchor.",
+    "No atlas wikilinks point into the retired 01 Справочник aliases.",
+    "Existing latest_verified_release and last_verified values preserved; this audit did not promote model freshness.",
+    "Only 3 existing last_updated fields advanced for edited concept/comparison/timeline pages."
+  ],
+  "verification": {
+    "internalLinksAndFigures": {
+      "result": "pass",
+      "problems": [],
+      "mainExplanationLinks": 68,
+      "originalImageEmbeds": 39,
+      "preservedImageEmbeds": 39
+    },
+    "diffWhitespace": {
+      "command": "git diff --check -- '02 Атлас моделей/Семейства' '02 Атлас моделей/Сравнения' '02 Атлас моделей/Timeline.md'",
+      "result": "pass"
+    },
+    "visualAssetInspection": [
+      "deepseek-r1-figure1-hq.png: combined R1-Zero accuracy/response-length figure matches its current caption; not changed.",
+      "modern-37-40-moe/mixtral-smoe-layer.png: inspected original top-2 Mixtral illustration; attribution corrected.",
+      "atlas-remainder-official/retnet-dual-form.png and retnet-figure3-hq.png: both visibly contain Figure 3, not Figure 2; atlas caption corrected."
+    ],
+    "notExecuted": [
+      "browser rendering for the combined revision",
+      "model inference or benchmark",
+      "new numerical-example test suite; examples were preserved, not newly implemented",
+      "EN parity verification"
+    ]
+  },
+  "primarySourcesActuallyChecked": [
+    {
+      "url": "https://github.com/google-research/bert#pre-training-data",
+      "sections": [
+        "Pre-training with BERT",
+        "Pre-training data"
+      ],
+      "evidence": "README states preprocessed paper datasets are not released, original BooksCorpus download is unavailable; release code is not the original C++ implementation."
+    },
+    {
+      "url": "https://huggingface.co/google-bert/bert-base-uncased/raw/main/config.json",
+      "sections": [
+        "entire config"
+      ],
+      "evidence": "vocab_size=30522 for the named uncased checkpoint."
+    },
+    {
+      "url": "https://arxiv.org/html/2412.19437v2#S2.SS1.SSS2",
+      "sections": [
+        "Auxiliary-Loss-Free Load Balancing",
+        "Complementary Sequence-Wise Auxiliary Loss"
+      ],
+      "evidence": "Routing biases coexist with small sequence-wise balancing loss."
+    },
+    {
+      "url": "https://huggingface.co/Qwen/Qwen3.5-9B/blob/main/config.json",
+      "sections": [
+        "text_config"
+      ],
+      "evidence": "qwen3_5_text with intermediate_size, hybrid linear/full layer types; dense FFN configuration."
+    },
+    {
+      "url": "https://huggingface.co/Qwen/Qwen3.5-397B-A17B/blob/main/config.json",
+      "sections": [
+        "text_config"
+      ],
+      "evidence": "qwen3_5_moe_text, num_experts=512 and num_experts_per_tok=10; separate from dense 9B."
+    },
+    {
+      "url": "https://www.databricks.com/blog/introducing-dbrx-new-state-art-open-llm",
+      "sections": [
+        "What is DBRX",
+        "Inference Efficiency",
+        "How We Built DBRX"
+      ],
+      "evidence": "MegaBlocks belongs to the training libraries, not the TensorRT-LLM serving comparison."
+    },
+    {
+      "url": "https://arxiv.org/html/2401.04088v1#S2.F1",
+      "sections": [
+        "Figure 1",
+        "section 2",
+        "section 5"
+      ],
+      "evidence": "Original Mixtral top-2 illustration, primary attribution/CC BY 4.0 checked in preceding research-consolidation pass."
+    },
+    {
+      "url": "https://arxiv.org/html/2307.08621v1#S2",
+      "sections": [
+        "2.1 Retention",
+        "Figure 3"
+      ],
+      "evidence": "Parallel/recurrent illustration is Figure 3; conjugate position form and chunkwise representation are primary mechanisms."
+    }
+  ],
+  "contextReadForMainExplanationComparison": {
+    "fullCanonicalChaptersInPrecedingArchitecturePass": [
+      "00 Учебник/05 Attention и Transformer/02 Self-Attention — Q, K, V.md",
+      "00 Учебник/05 Attention и Transformer/03 Полный Transformer.md",
+      "00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна.md",
+      "00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual.md",
+      "00 Учебник/07 Анатомия современной LLM/04 RoPE.md",
+      "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md",
+      "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md",
+      "00 Учебник/09 Dense FFN и Mixture of Experts/01 Dense FFN — token-wise вычисление, expansion и gating.md",
+      "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+      "00 Учебник/02 Представление текста и токенизация/02 BPE, WordPiece и Unigram.md"
+    ],
+    "additionalSectionsRead": [
+      {
+        "file": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+        "sections": [
+          "RWKV: взвешенное чтение рекуррентной памяти",
+          "RetNet: три эквивалентных формы retention",
+          "Зачем гибридным моделям слои внимания through Qwen3-Next and hybrid comparison",
+          "Как сервер хранит и восстанавливает состояние / Prefix caching и ветвление"
+        ]
+      },
+      {
+        "file": "00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving.md",
+        "sections": [
+          "LatentMoE: обмен в меньшей размерности"
+        ]
+      }
+    ],
+    "caution": "All 68 links were checked structurally. This does not claim that every linked chapter was freshly reread in full during this atlas pass."
+  },
+  "remainingRisks": [
+    "Some cards intentionally retain short mechanism summaries to interpret release configurations; removal by keyword would lose the relationship between a release and its parameters.",
+    "DeepSeek-V4 CSA/HCA and the complex RetNet/chunk formula are explicit integration candidates, recorded per page; do not alias these pages until those portions are retained elsewhere.",
+    "Mistral front-matter verification date and dated body note are inconsistent; existing release dates were preserved instead of silently claiming a fresh catalog review.",
+    "Existing image permissions and crop quality were not all freshly re-audited. This pass preserved the 39 assets and corrected two observed attribution/figure-number issues.",
+    "EN counterparts and site-derived content need parent integration/validation; this worker did not touch their ownership.",
+    "No model sizes, latest model generations or benchmark rankings were added merely because a current catalog contained them."
+  ],
+  "entries": [
+    {
+      "page": "02 Атлас моделей/Семейства/BERT.md",
+      "sha256": "086f4557ce4896c8545713fd0558fcf81a38a8eea268a135a7a4375fbc45dc0a",
+      "lines": 67,
+      "images": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/bert-input-output.png]]"
+      ],
+      "verifiedMainExplanationLinks": [
+        "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/03 BERT, RoBERTa и DeBERTa|главе о BERT, RoBERTa и DeBERTa]]",
+        "[[02 Areas/ML & DL/00 Учебник/06 Encoder, Decoder и Encoder-Decoder/01 Три архитектурных паттерна|трёх архитектурных паттернах]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "Хронология encoder-семейства и различий BERT/RoBERTa/ALBERT/DeBERTa.",
+      "specific": "Размеры Base/Large, задачи MLM/NSP, отличия потомков и границы опубликованных данных.",
+      "overlap": "Краткое MLM-объяснение дублирует основную главу как справочная сводка; полный разбор уже связан.",
+      "changes": [
+        "Убрано неверное утверждение о публикации обработанных корпусов BERT.",
+        "30,522 привязано к английскому uncased checkpoint, а не всем BERT."
+      ],
+      "sha256BeforeAudit": "3c53320e77f4287e2057aa90db04e0ed80c39b6a678247ff130a7bd8c750f6b5",
+      "changed": true,
+      "imagesPreserved": true
+    },
+    {
+      "page": "02 Атлас моделей/Семейства/Baichuan.md",
+      "sha256": "99af86120004adbef9736b25cf8b6bb581a355affbe9a281d7656069fe2e5ad8",
+      "lines": 60,
+      "images": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/baichuan2-data-and-config.png]]"
+      ],
+      "verifiedMainExplanationLinks": [
+        "[[00 Учебник/07 Анатомия современной LLM/03 Pre-norm, RMSNorm, SwiGLU и residual|SwiGLU]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "Различия общего Baichuan 1/2 и медицинской линии M1–M3.",
+      "specific": "RoPE/ALiBi по размерам, clinical-inquiry post-training M3, происхождение от Qwen3 MoE.",
+      "overlap": "Общие SwiGLU и pre-norm теперь связаны с основной главой.",
+      "changes": [
+        "Добавлен прямой переход к разбору нормировки и SwiGLU."
+      ],
+      "sha256BeforeAudit": "c1c184737eca4a8c7c5f5cd6fa29cb31e5f4e1617478f25c004649acd3f7c6f3",
+      "changed": true,
+      "imagesPreserved": true
+    },
+    {
+      "page": "02 Атлас моделей/Семейства/Command R.md",
+      "sha256": "123c11470430ad02d5a3d630514e9874fbeeec73512aebfb0b2b32fc4d343af1",
+      "lines": 63,
+      "images": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/command-a-architecture.png]]"
+      ],
+      "verifiedMainExplanationLinks": [
+        "[[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving|главе о маршрутизации экспертов]]",
+        "[[00 Учебник/15 Embeddings, Retrieval и RAG/63 RAG — полный конвейер|RAG-конвейере]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "Релизы Cohere с отдельными архитектурными и прикладными контрактами.",
+      "specific": "Command A local/full 3:1, NoPE, A+ 218B/25B и явно сохранённое расхождение 24B/25B между источниками.",
+      "overlap": "Краткое описание RAG/цитат не заменяет RAG-конвейер.",
+      "changes": [
+        "Добавлен прямой переход к полному RAG-конвейеру."
+      ],
+      "sha256BeforeAudit": "e963b3040c0a538829c98045ec0d18b13ba5543e2a47f9c535fe24491b95f68c",
+      "changed": true,
+      "imagesPreserved": true
+    },
+    {
+      "page": "02 Атлас моделей/Семейства/DBRX.md",
+      "sha256": "4cd03c25e2a63992d5d231d71bdd462f68a42227fbdaf0b088408eeb6fc7c391",
+      "lines": 60,
+      "images": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/dbrx-comparison.png]]"
+      ],
+      "verifiedMainExplanationLinks": [
+        "[[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#Балансировка: статистическая и системная задачи|балансировка нагрузки]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "Конфигурация и рецепт одной MoE-линии, а не второе введение в MoE.",
+      "specific": "16/top-4, сравнение 1820 и 28 наборов, реконструкция shared/expert count по округлённым размерам, 12T и стек обучения.",
+      "overlap": "Общая балансировка теперь ведёт к канонической главе; численный пример оставлен как специфичный для DBRX.",
+      "changes": [
+        "Добавлен переход к разделу балансировки MoE."
+      ],
+      "sha256BeforeAudit": "3cfcc8012019fd2398ef6de662c8966f449f012da0b799cdae9054a53783ccbf",
+      "changed": true,
+      "imagesPreserved": true
+    },
+    {
+      "page": "02 Атлас моделей/Семейства/DeepSeek.md",
+      "sha256": "a90e01407a465aa43b8ceb8af17cd2f739197cc33aaad9dc53aaf804233f051f",
+      "lines": 300,
+      "images": [
+        "![[00 Учебник/Assets/Figures/curated/cs336-residuals-2026-10-29/deepseek-v4-csa.png]]",
+        "![[00 Учебник/Assets/Figures/curated/cs336-residuals-2026-10-29/deepseek-v4-hca.png]]",
+        "![[00 Учебник/Assets/Figures/deepseek-r1-figure1-hq.png]]",
+        "![[00 Учебник/Assets/Figures/curated/atlas-courses-official/deepseek-v2-mla-moe.png]]"
+      ],
+      "verifiedMainExplanationLinks": [
+        "[[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache#Что именно лежит в кэше MHA, GQA и MLA|MLA: содержимое кэша]]",
+        "[[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving|MoE: routing, capacity и serving]]",
+        "[[02 Areas/ML & DL/00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание#dsa-content-adaptive-selection|DSA: отбор позиций индексатором]]",
+        "[[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/58 Спекулятивное декодирование|speculative decoding]]",
+        "[[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/06 RLVR и verifiers|RLVR и verifiers]]",
+        "[[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/07 GRPO и DeepSeek-R1|GRPO и DeepSeek-R1]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "История архитектурных и обучающих изменений V2–V4/R1.",
+      "specific": "Поколения MLA/DSA/CSA/HCA, MoE и post-training; лицензированные английские фрагменты V4 сохранены.",
+      "overlap": "MLA/MoE/DSA/RLVR/GRPO/MTP уже имеют прямые ссылки; подробный CSA/HCA остаётся release-specific механизмом здесь.",
+      "changes": [
+        "Требование специализированных MLA-ядер ограничено эффективностью, а не математической корректностью."
+      ],
+      "integrationCandidates": [
+        "Разбор CSA/HCA и сжатых pool V4 — содержательный механизм; при дальнейшем объединении его следует перенести или включить в основную главу длинного контекста, оставив в карточке параметры V4 и различия релизов. Не удалять английские source excerpts и две исходные схемы. Текущее полное покрытие этого фрагмента основной главой не установлено."
+      ],
+      "sha256BeforeAudit": "38e826d52ccdd0211258915018b19f32d9d2a2b1abd5fe9dabeb0c462a8e459c",
+      "changed": true,
+      "imagesPreserved": true
+    },
+    {
+      "page": "02 Атлас моделей/Семейства/Falcon.md",
+      "sha256": "4558710667de04eb5d12a963e6d507774be92ba46c285ddf3611be39151a1128",
+      "lines": 55,
+      "images": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/falcon-h1-architecture.png]]"
+      ],
+      "verifiedMainExplanationLinks": [
+        "[[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры|главе о рекуррентных и гибридных архитектурах]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "Сравнение раннего Falcon Transformer и параллельного гибрида H1.",
+      "specific": "71Q/1KV vs 128Q/8KV, байты кэша и отличие H1 от последовательного чередования Jamba.",
+      "overlap": "Общий stateful-механизм уже связан с главой о гибридах.",
+      "changes": [],
+      "sha256BeforeAudit": "4558710667de04eb5d12a963e6d507774be92ba46c285ddf3611be39151a1128",
+      "changed": false,
+      "imagesPreserved": true
+    },
+    {
+      "page": "02 Атлас моделей/Семейства/GLM.md",
+      "sha256": "4ca018ae5dea8caf5bbb5e45de151cc88593d693049663b665839a9e9583ca30",
+      "lines": 102,
+      "images": [
+        "![[00 Учебник/Assets/Figures/curated/atlas-courses-official/glm-family-timeline.png]]"
+      ],
+      "verifiedMainExplanationLinks": [
+        "[[00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание#dsa-content-adaptive-selection|DeepSeek Sparse Attention]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "Переход от blank infilling/двумерных позиций к современной causal MoE.",
+      "specific": "GLM-4.5 GQA 96/8, различия GLM-5/5.1 и ограниченный охват карточки, а не latest-каталог.",
+      "overlap": "DSA теперь связан непосредственно с полным объяснением отбора позиций.",
+      "changes": [
+        "Добавлена ссылка к разбору DSA; параметры и даты не обновлялись."
+      ],
+      "sha256BeforeAudit": "c448f92cf70a722a122b035e3d1c129641b29c17d87ae2b03dafac384c6c9cfe",
+      "changed": true,
+      "imagesPreserved": true
+    },
+    {
+      "page": "02 Атлас моделей/Семейства/GPT.md",
+      "sha256": "c8d4bf29c6e5178eec5330010554e531263d08b1f8f1d9e1fcc62e3be7e8211e",
+      "lines": 72,
+      "images": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/gpt-decoder-block.png]]"
+      ],
+      "verifiedMainExplanationLinks": [
+        "[[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/04 GPT-1 — генеративное предобучение|GPT-1: предобучение и дообучение на задаче]]",
+        "[[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/05 GPT-2 — zero-shot через язык|GPT-2: zero-shot через продолжение текста]]",
+        "[[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/06 GPT-3 — in-context learning|GPT-3: примеры внутри контекста]]",
+        "[[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/01 SFT и instruction data|SFT и instruction data]]",
+        "[[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/03 Reward modeling|reward modeling]]",
+        "[[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/04 Policy gradient и PPO для LLM|PPO для LLM]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "История GPT-1/2/3 с явно ограниченным знанием о поздних закрытых моделях.",
+      "specific": "Переход fine-tuning → zero-shot → ICL, GPT-1 post-norm/GPT-2 pre-norm, разная открытость весов и корпусов.",
+      "overlap": "Общие объяснения теперь ведут в три отдельные главы, а не остаются короткими абзацами только в атласе.",
+      "changes": [
+        "Добавлены прямые ссылки на главы GPT-1, GPT-2 и GPT-3."
+      ],
+      "sha256BeforeAudit": "0da72ec958607b4bf8318ce8cbc9001655a7a15ec6b8dc6dd9ef5fe1938e1eeb",
+      "changed": true,
+      "imagesPreserved": true
+    },
+    {
+      "page": "02 Атлас моделей/Семейства/Gemma.md",
+      "sha256": "d34c185e00448f4c1a1a5d671226c8f4543b293f2c0637d539c3def02745af1b",
+      "lines": 77,
+      "images": [
+        "![[00 Учебник/Assets/Figures/curated/atlas-courses-official/gemma-capability-comparison.png]]"
+      ],
+      "verifiedMainExplanationLinks": [
+        "[[00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание|локальные слои читают ограниченное окно]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "Сравнение механизмов и обучения Gemma 1/2/3, без приписывания свойств Gemini.",
+      "specific": "MQA/MHA в Gemma 1, дистиллированные размеры Gemma 2, local/global 5:1 и зрительные размеры Gemma 3.",
+      "overlap": "Локальное внимание связано с полной главой контекста.",
+      "changes": [
+        "Добавлен прямой переход к объяснению локального внимания."
+      ],
+      "sha256BeforeAudit": "6838dc8dfcde2d53186754551ab9bd3cbf8e0d231690900fbcdc24595125f411",
+      "changed": true,
+      "imagesPreserved": true
+    },
+    {
+      "page": "02 Атлас моделей/Семейства/InternLM.md",
+      "sha256": "a8cb615eee8afa6ebb4bc5884ab64cd87dbcf4c0276b096a534ffb5971a6a862",
+      "lines": 59,
+      "images": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/internlm-data-pipeline.png]]"
+      ],
+      "verifiedMainExplanationLinks": [
+        "[[00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA|GQA]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "Конфигурации, упаковка QKV и программная экосистема InternLM.",
+      "specific": "Пример [B,T,6144]→[B,T,8,6,128] и TP-дружественный порядок QKV.",
+      "overlap": "Общая GQA теперь связана с основной главой; форма checkpoint оставлена как особенность семейства.",
+      "changes": [
+        "Добавлена ссылка к GQA."
+      ],
+      "sha256BeforeAudit": "ca848ea21c14cf463618be77731358bbaa8339c363f38d8747c6a3f889771b4f",
+      "changed": true,
+      "imagesPreserved": true
+    },
+    {
+      "page": "02 Атлас моделей/Семейства/Jamba.md",
+      "sha256": "07b7e26d28d8079ec03a0f27d3f469923716b53a9058269f62cd03db5cd6b734",
+      "lines": 54,
+      "images": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/course-follow-through/jamba-architecture.svg]]"
+      ],
+      "verifiedMainExplanationLinks": [
+        "[[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры|главе о гибридных архитектурах]]",
+        "[[02 Areas/ML & DL/00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving|главе о MoE]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "Конкретная схема 7 Mamba : 1 attention и развитие Jamba/Jamba2.",
+      "specific": "MoE в каждом втором слое, 52B/12B и 398B/94B, state-passing и стадии Jamba2.",
+      "overlap": "Механизмы гибрида и MoE уже имеют прямые маршруты.",
+      "changes": [
+        "EP перестал быть безусловным требованием для любого запуска; обмен нужен при распределении экспертов.",
+        "Убрано неподтверждённое ранжирование зрелости экосистемы относительно Llama."
+      ],
+      "sha256BeforeAudit": "26ba768152a94987208b53eeb06e1e01a4d6c0edfe54e88dc0cee01af44b4ac3",
+      "changed": true,
+      "imagesPreserved": true
+    },
+    {
+      "page": "02 Атлас моделей/Семейства/Kimi.md",
+      "sha256": "31c59fab9bc2bcf51f75aa3e9dc7c66fe0ad0b8b426dacb3ec95ca0fd0aab807",
+      "lines": 112,
+      "images": [
+        "![[00 Учебник/Assets/Figures/curated/kimi-linear/arch.jpg]]",
+        "![[00 Учебник/Assets/Figures/curated/atlas-courses-official/kimi-k15-rl-system.png]]"
+      ],
+      "verifiedMainExplanationLinks": [
+        "[[00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache|MLA сокращает KV-кэш]]",
+        "[[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#Gated DeltaNet: забыть старое и стереть конфликтующее|delta-правиле и рекуррентной памяти]]",
+        "[[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#Зачем гибридным моделям слои внимания|гибридных слоях]]",
+        "[[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving|маршрутизации MoE]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "Отдельные линии Moonlight, Kimi Linear и K2/K2.5.",
+      "specific": "MuonClip, K2 384/top-8+shared, K2.5 visual input; схема k1.5 явно не выдана за архитектуру K2.",
+      "overlap": "Delta-rule и MoE уже связаны; теперь добавлена и MLA.",
+      "changes": [
+        "Уточнён статус MLA-ядер как условия скорости.",
+        "Переход к гибридным слоям приведён к текущему заголовку основной главы."
+      ],
+      "sha256BeforeAudit": "879122f28efb1195d116a7803669a145197cd99da1178673f03ebd7288d0addd",
+      "changed": true,
+      "imagesPreserved": true
+    },
+    {
+      "page": "02 Атлас моделей/Семейства/Llama.md",
+      "sha256": "0a44e132213ba0ff7c9dde6e4515a3abbfdb43aa0fc562cc293bdba3d7916802",
+      "lines": 88,
+      "images": [
+        "![[00 Учебник/Assets/Figures/curated/atlas-courses-official/llama3-architecture.png]]"
+      ],
+      "verifiedMainExplanationLinks": [
+        "[[00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA|главе о MHA, MQA и GQA]]",
+        "[[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving|главе о MoE]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "Различия токенизаторов, attention, мультимодального интерфейса и FFN по поколениям.",
+      "specific": "Llama 1/2/3/4 и различие adapter-based Vision 3.2 и early-fusion Llama 4.",
+      "overlap": "GQA/MoE имеют прямые ссылки, без нового вывода общих формул в карточке.",
+      "changes": [
+        "Active parameters больше не объявлены единственным определителем FLOPs на токен.",
+        "Добавлены ссылки к GQA и MoE."
+      ],
+      "sha256BeforeAudit": "acd40be4c8b39949149d996a6c1e41283e1f9dc3fbaa549df8e9cdeafaa7f80d",
+      "changed": true,
+      "imagesPreserved": true
+    },
+    {
+      "page": "02 Атлас моделей/Семейства/Mamba.md",
+      "sha256": "04048691661f1e749cd20e39dee3fa3348c9bf19f04b208f6b7e2b5d7d3d1828",
+      "lines": 56,
+      "images": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/mamba-block.png]]"
+      ],
+      "verifiedMainExplanationLinks": [
+        "[[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#Prefix caching и ветвление|сохранение префикса и независимые продолжения]]",
+        "[[00 Учебник/14 Inference и оптимизация/55 KV-cache, пакетирование и PagedAttention|блочное хранение KV-кэша]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "Поколения selective SSM и ограничения stateful-инференса.",
+      "specific": "Mamba-1/2/3, фиксированное состояние, снимки для ветвления и отличие от позиционного KV-кэша.",
+      "overlap": "Механизм состояния и snapshot-пример даны кратко; полный serving-контракт связан непосредственно.",
+      "changes": [
+        "Ссылка о сохранении префикса теперь ведёт к Prefix caching и ветвлению, а не к прежнему заголовку точности состояния.",
+        "Улучшения Mamba-3 ограничены экспериментами статьи, не любыми данными и масштабом."
+      ],
+      "sha256BeforeAudit": "d34a328da0e2be6629db1cb955e5341300d0c8845cc1af920db0737426fac9d2",
+      "changed": true,
+      "imagesPreserved": true
+    },
+    {
+      "page": "02 Атлас моделей/Семейства/Mistral и Mixtral.md",
+      "sha256": "2bac58066e1784bcdb23fbeffdb42e100ad462fd352f085c62f1701c61c044f6",
+      "lines": 82,
+      "images": [
+        "![[00 Учебник/Assets/Figures/curated/mixtral-of-experts/smoe-layer.png]]",
+        "![[00 Учебник/Assets/Figures/curated/atlas-courses-official/mistral-sliding-window-attention.png]]"
+      ],
+      "verifiedMainExplanationLinks": [
+        "[[00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA|GQA уменьшает KV-кэш]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "Раздельные dense, MoE, vision, code и audio линии Mistral.",
+      "specific": "SWA у исходного Mistral 7B не перенесено на всё Mixtral; различия лицензий NeMo/Ministral/Medium сохранены.",
+      "overlap": "Общая GQA связана напрямую; схема top-2 оставлена как конфигурация Mixtral.",
+      "changes": [
+        "Добавлена ссылка к GQA."
+      ],
+      "risks": [
+        "Front matter last_verified=2026-08-06 при существующем абзаце о проверке Medium 3.5 от 2026-09-15. Даты не повышались автоматически; нужна отдельная согласованная политика metadata проверки релизов."
+      ],
+      "sha256BeforeAudit": "5f9c8f7c0c9d6926bf7602a5fdc53d93272a24aab6214ad77d50da052b103c42",
+      "changed": true,
+      "imagesPreserved": true
+    },
+    {
+      "page": "02 Атлас моделей/Семейства/Nemotron.md",
+      "sha256": "fa8be6b0486bb2778fb0c2af872ebdb7c65c518af1fa6f7f88bdb96c5ee76888",
+      "lines": 66,
+      "images": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/nemotron3-layer-pattern.png]]",
+        "![[00 Учебник/Assets/Figures/curated/topics-53-59-source-first/nemotron-generate-rank-filter.png]]"
+      ],
+      "verifiedMainExplanationLinks": [
+        "[[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving#LatentMoE: обмен в меньшей размерности|LatentMoE]]",
+        "[[00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей|главе о квантизации]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "Различия собственных dense моделей, Llama derivatives и hybrid LatentMoE.",
+      "specific": "Nemotron 3 Super, LatentMoE 512/top-22+shared, NVFP4 обучения vs хранения и отдельные Omni frontends.",
+      "overlap": "LatentMoE теперь ведёт к разделу полной MoE-главы; арифметика 120B BF16/FP4 остаётся примером семейства.",
+      "changes": [
+        "Добавлена точная ссылка к LatentMoE."
+      ],
+      "sha256BeforeAudit": "4cfce5e2e7d1415bce7e4f52a434d7a6b50766a76d3f2c1d8da6a908d4909a23",
+      "changed": true,
+      "imagesPreserved": true
+    },
+    {
+      "page": "02 Атлас моделей/Семейства/Phi.md",
+      "sha256": "6fa68bf8655ac51edb124bc80779df107534b0425c863f37c1552e7c571adf28",
+      "lines": 73,
+      "images": [
+        "![[00 Учебник/Assets/Figures/curated/atlas-courses-official/phi-data-optimal-scaling.png]]"
+      ],
+      "verifiedMainExplanationLinks": [
+        "[[00 Учебник/12 Post-training и Alignment/05 DPO|вывод DPO]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "Данные, малые масштабы и семейно-специфичный Pivotal Token Search.",
+      "specific": "Различия Phi-1–4, PTS token-level preference pairs и оговорки о scaling-графике.",
+      "overlap": "Общий DPO уже связан, PTS оставлен как конкретный рецепт Phi-4.",
+      "changes": [],
+      "sha256BeforeAudit": "6fa68bf8655ac51edb124bc80779df107534b0425c863f37c1552e7c571adf28",
+      "changed": false,
+      "imagesPreserved": true
+    },
+    {
+      "page": "02 Атлас моделей/Семейства/Qwen.md",
+      "sha256": "d69f26dc7cf69300ff7310e69e958a9954326b7cae834eef739615e3a02d4c84",
+      "lines": 162,
+      "images": [
+        "![[00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/qwen-next-block-original.jpg]]",
+        "![[00 Учебник/Assets/Figures/curated/stanford-cs336-2026/architectures/qwen-next-hybrid-architecture.jpg]]",
+        "![[00 Учебник/Assets/Figures/qwen25-figure1-hq.png]]",
+        "![[00 Учебник/Assets/Figures/curated/atlas-courses-official/qwen3-post-training-pipeline.png]]"
+      ],
+      "verifiedMainExplanationLinks": [
+        "[[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#Gated DeltaNet: забыть старое и стереть конфликтующее|главе о delta-правиле]]",
+        "[[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#Qwen3-Next: большинство слоёв — Gated DeltaNet|расположении слоёв Qwen3-Next]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "Отличия dense/MoE/hybrid и режимов post-training по поколениям.",
+      "specific": "Qwen3-Next 12×(3 GDN+1 attention), отдельные dense/MoE версии Qwen3.5 и схемы исходного курса.",
+      "overlap": "Обновление delta-памяти и расположение слоёв связаны с точными разделами основной главы.",
+      "changes": [
+        "Исправлено противоречие с таблицей сравнения: Qwen3.5 не только MoE; подтверждено официальными config 9B и 397B-A17B.",
+        "Обновлена ссылка с старого сравнения MiniMax/Nemotron на точный раздел Qwen3-Next.",
+        "Уточнено, что экспертные вычисления относятся к MoE-вариантам."
+      ],
+      "sha256BeforeAudit": "778e833fa721071f46af5ae4734112d62d481f6c4a59d1373e5444773ea257bf",
+      "changed": true,
+      "imagesPreserved": true
+    },
+    {
+      "page": "02 Атлас моделей/Семейства/RWKV.md",
+      "sha256": "79ed28daea561a203296fd2f19e7c9d6e80008e3d62b8079c52d4b0936966dbe",
+      "lines": 63,
+      "images": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/rwkv-architecture.png]]"
+      ],
+      "verifiedMainExplanationLinks": [
+        "[[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#RWKV: взвешенное чтение рекуррентной памяти|локальный вывод RWKV-4]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "Поколения RWKV и отличие Goose от прежнего диагонального затухания.",
+      "specific": "v5/v6 vs v7, обобщённая rank-1 коррекция и G1 как серия checkpoints.",
+      "overlap": "Полная основная глава уже содержит WKV-4 и конкретное Goose-правило с численным примером; в атласе сохранена связь с поколениями.",
+      "changes": [
+        "Ссылка RWKV-4 приведена к текущему заголовку.",
+        "Убрано неподтверждённое сравнительное утверждение о широте Transformer-экосистемы."
+      ],
+      "sha256BeforeAudit": "d1a64bd5641c184a01ecaa12cf3f7dd55f496519e16d19f90ff30e9fa3c958b6",
+      "changed": true,
+      "imagesPreserved": true
+    },
+    {
+      "page": "02 Атлас моделей/Семейства/RetNet.md",
+      "sha256": "4d62cc4b8ada6e8c7b5f6cad54734a9caa082c04beb253a534a87d5ede73e87e",
+      "lines": 54,
+      "images": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/retnet-dual-form.png]]"
+      ],
+      "verifiedMainExplanationLinks": [
+        "[[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#RetNet: три эквивалентных формы retention|главе о retention]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "Историческая карточка одной исследовательской архитектуры.",
+      "specific": "Область исходной работы и границы её публичных релизов; семейство не объявлено непрерывным каталогом чат-моделей.",
+      "overlap": "Большая часть страницы — повтор retention-механизма. Основная глава уже содержит recurrence, пример 2/5/10.5 и тот же Figure 3. Безусловный alias пока не предлагается: комплексная запись и точное chunk-перенесение в карточке изложены подробнее.",
+      "changes": [
+        "Исправлен номер исходной схемы Figure 2→Figure 3 после просмотра обеих локальных копий и primary HTML.",
+        "Убрано неподтверждённое ранжирование числа оптимизаций; условия сравнения скорости сформулированы явно."
+      ],
+      "integrationCandidates": [
+        "Если RetNet объединять с основной главой, сначала сохранить комплексную формулу с сопряжением и раскрытие γ^b на границе блока. Историческую карточку затем можно сократить до описания исходной работы и прямой ссылки, не теряя схему: обе копии показывают одну Figure 3."
+      ],
+      "sha256BeforeAudit": "2f7e17d735fc28ef937b725e26340994173c48834302bb35ad5fb331929acf76",
+      "changed": true,
+      "imagesPreserved": true
+    },
+    {
+      "page": "02 Атлас моделей/Семейства/T5.md",
+      "sha256": "b580dc9d2110c6f542b44b868332b243a3db8ce05752e7c59ecddf6035507378",
+      "lines": 72,
+      "images": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/t5-text-to-text.png]]"
+      ],
+      "verifiedMainExplanationLinks": [
+        "[[00 Учебник/06 Encoder, Decoder и Encoder-Decoder/07 T5 — text-to-text Transformer|формирование обучающей пары T5]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "Семейство text-to-text и различия потомков.",
+      "specific": "Sentinel span corruption, T5/mT5/ByT5/FLAN-T5/UL2 и token/interface differences.",
+      "overlap": "Полный разбор T5 уже связан непосредственно.",
+      "changes": [],
+      "sha256BeforeAudit": "b580dc9d2110c6f542b44b868332b243a3db8ce05752e7c59ecddf6035507378",
+      "changed": false,
+      "imagesPreserved": true
+    },
+    {
+      "page": "02 Атлас моделей/Семейства/Yi.md",
+      "sha256": "5e2932bc6e485aeabe0e9c46a7ffd9af99305a54f96fe50fa7b623737dad3a3e",
+      "lines": 51,
+      "images": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/yi-data-pipeline.png]]"
+      ],
+      "verifiedMainExplanationLinks": [
+        "[[00 Учебник/07 Анатомия современной LLM/04 RoPE|RoPE масштабируют]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "Двуязычная dense-линия, long-context checkpoints и отдельные VL/Coder ветви.",
+      "specific": "Продолжение обучения 200K, исходные 3T и отдельно описанные serving-решения.",
+      "overlap": "RoPE теперь ведёт к полному объяснению, а не остаётся только упоминанием.",
+      "changes": [
+        "Добавлена ссылка к RoPE."
+      ],
+      "sha256BeforeAudit": "caa2a2df7f4437905e4728fe87e701258faeb5e3e99351e698959f57fadd5a8f",
+      "changed": true,
+      "imagesPreserved": true
+    },
+    {
+      "page": "02 Атлас моделей/Семейства/Мультимодальные семейства.md",
+      "sha256": "58c0ad07918bef4e5d00ccbd7b3a93962585cde3b2f62ddf91f1b96b98f2086e",
+      "lines": 123,
+      "images": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/atlas-remainder-official/flamingo-architecture.png]]",
+        "![[00 Учебник/Assets/Figures/curated/vlm-2026/qwen25omni-figure2-thinker-talker.png]]",
+        "![[00 Учебник/Assets/Figures/curated/vlm-2026/internvl25-figure2-dynamic-tiles.png]]",
+        "![[00 Учебник/Assets/Figures/curated/vlm-2026/molmo-figure5-image-tokenization.png]]"
+      ],
+      "verifiedMainExplanationLinks": [
+        "[[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64a Connectors и fusion#От LLaVA к LLaVA-OneVision: что изменилось кроме projector|connector и DeepStack]]",
+        "[[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции#Qwen2-VL: native resolution, merger и MRoPE|dynamic resolution и MRoPE]]",
+        "[[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64c Обучение VLM — alignment, instruction tuning и данные#Qwen-VL: почему меняются и данные, и замороженные модули|стадии обучения]]",
+        "[[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64e Видео, аудио и omni-модели#Timestamp token и temporal position — разные сигналы|временные сигналы]]",
+        "[[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64h Единая мультимодальная последовательность и Chameleon|главу о Chameleon]]",
+        "[[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64 Мультимодальные модели|модуле мультимодальных моделей]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "Сравнение разных visual-interface и training-contract решений по семействам.",
+      "specific": "Flamingo, BLIP-2, LLaVA, Qwen-VL поколения, InternVL vs Molmo boundary processing, Thinker/Talker.",
+      "overlap": "Уже есть точные ссылки к connector, resolution, training, timestamps и Chameleon. Схемы и сопоставительные таблицы сохранены.",
+      "changes": [],
+      "sha256BeforeAudit": "58c0ad07918bef4e5d00ccbd7b3a93962585cde3b2f62ddf91f1b96b98f2086e",
+      "changed": false,
+      "imagesPreserved": true
+    },
+    {
+      "page": "02 Атлас моделей/Сравнения/Карта архитектурных линий.md",
+      "sha256": "df0a7a22b4329129d19bae0f01b2c317d1a95dbc307db8e79f5bb1fca50430d7",
+      "lines": 73,
+      "images": [
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/source-first-35-36/cs336-mha-gqa-mqa-mla.png]]",
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/modern-37-40-moe/mixtral-smoe-layer.png]]",
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/modern-37-40-alternatives/mamba-selective-ssm.png]]",
+        "![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/modern-37-40-alternatives/jamba-hybrid.png]]"
+      ],
+      "verifiedMainExplanationLinks": [
+        "[[00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA|Совместное использование K/V]]",
+        "[[00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache|MLA]]",
+        "[[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving|MoE: маршрутизация, ёмкость и обслуживание]]",
+        "[[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#Mamba: избирательная модель пространства состояний|Избирательность Mamba]]",
+        "[[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры#Зачем гибридным моделям слои внимания|Зачем гибридным моделям слои внимания]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "Механизм → семейство → основная глава, без ложной родословной весов.",
+      "specific": "Независимые оси token mixer, FFN и post-training; четыре исходные иллюстрации.",
+      "overlap": "Каждая строка уже ведёт к основному объяснению.",
+      "changes": [
+        "Источник top-2 схемы исправлен с общего HF blog на Mixtral Figure 1, CC BY 4.0.",
+        "Ссылка на гибриды приведена к текущему заголовку."
+      ],
+      "sha256BeforeAudit": "4017955fe3ddcff8febc21efbab1a214d7649f57b0d5bfb4fb58b3bdd9a507b4",
+      "changed": true,
+      "imagesPreserved": true
+    },
+    {
+      "page": "02 Атлас моделей/Сравнения/Перенос vision encoder между VLM.md",
+      "sha256": "0e1bacdc9a5c466e73b5396db928f5e006fa3db60a3ae002bb840ec87d6e4f33",
+      "lines": 42,
+      "images": [],
+      "verifiedMainExplanationLinks": [
+        "[[02 Areas/ML & DL/00 Учебник/16 Multimodal Models/64a Connectors и fusion|projector, resampler и fusion]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "Проектный эксперимент: перенос encoder и проверка интерфейсного контракта.",
+      "specific": "Почему одинаковая размерность не делает projector совместимым; controlled baseline и программа сравнения.",
+      "overlap": "Механизм connector уже связан с основной главой; самостоятельный экспериментальный вопрос не превращён в дубликат введения в VLM.",
+      "changes": [],
+      "sha256BeforeAudit": "0e1bacdc9a5c466e73b5396db928f5e006fa3db60a3ae002bb840ec87d6e4f33",
+      "changed": false,
+      "imagesPreserved": true
+    },
+    {
+      "page": "02 Атлас моделей/Сравнения/Сравнение семейств.md",
+      "sha256": "49bb690cfd70b1a7883ee9f80d47005a316a608ac380562a0bb3c0f0af1eaebd",
+      "lines": 57,
+      "images": [],
+      "verifiedMainExplanationLinks": [
+        "[[00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA|головах внимания и KV-кэше]]",
+        "[[00 Учебник/09 Dense FFN и Mixture of Experts/02 Mixture of Experts — routing, capacity и serving|маршрутизации MoE]]",
+        "[[00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры|рекуррентной памяти и гибридных слоях]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "Компактная сравнительная матрица по явно указанным поколениям.",
+      "specific": "GQA vs MLA, parallel vs sequential hybrids и отделение properties семейства от свойства конкретного релиза.",
+      "overlap": "Теперь есть прямые маршруты к полным механизмам, не только к другим карточкам.",
+      "changes": [
+        "Добавлены ссылки к GQA, MoE и stateful/hybrid главе."
+      ],
+      "sha256BeforeAudit": "12b98bbc8aa4248db540b8eaa78ba70da2689b23da50cc99fa250468ebfe3482",
+      "changed": true,
+      "imagesPreserved": true
+    },
+    {
+      "page": "02 Атлас моделей/Timeline.md",
+      "sha256": "5a8daa46227b3599523b721bf4e17dd7e2f12ff052eb25bef3f1b2e71054fd15",
+      "lines": 167,
+      "images": [],
+      "verifiedMainExplanationLinks": [
+        "[[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты#Нейросетевой prover: от поиска посылок до проверки ядром|разбор]]",
+        "[[00 Учебник/17 Tools и Agents/70 Формальные доказательства и математические агенты#COPRA: поиск с состоянием, возвратом и формальной обратной связью|разбор]]",
+        "[[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents#OSWorld: восстанавливаемая VM, исполняемые действия и проверка результата|разбор]]",
+        "[[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем#AgentPoison: как запись оказывается в нужном контексте|разбор]]",
+        "[[00 Учебник/17 Tools и Agents/71 Агенты научного поиска и discovery#LaSR: совместная эволюция формул и библиотеки понятий|разбор]]",
+        "[[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents#AgentTrek: от руководств к траекториям через управляемое воспроизведение|разбор]]",
+        "[[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents#TACO: совместное обучение токенов рассуждения и действий|разбор]]",
+        "[[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents#Aguvis: единое визуальное пространство наблюдений и действий|разбор]]",
+        "[[00 Учебник/17 Tools и Agents/69 Coding, web и computer-use agents#InSTA: синтетические задачи из работающего web|разбор]]",
+        "[[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем#Progent: проверка вызова вне модели|разбор]]",
+        "[[00 Учебник/17 Tools и Agents/72 Безопасность агентных систем#DataSentinel: детектор, который должен поддаваться инъекции|разбор]]"
+      ],
+      "legacyReferenceLinks": [],
+      "read": "full",
+      "decision": "keep",
+      "role": "Датированная хронология разных типов событий, не линейная родословная технологий.",
+      "specific": "Отдельные календари моделей, агентных систем и inference/serving; различение paper date и weight release.",
+      "overlap": "Содержательные agent entries ведут к соответствующим главам, а не создают отдельные определения.",
+      "changes": [
+        "DeepSeek-V3 auxiliary-loss-free уточнено: sequence-wise auxiliary loss сохраняется.",
+        "Falcon MQA ограничено 7B; 40B использует групповые K/V.",
+        "DBRX MegaBlocks отнесён к стеку обучения, не назван dropless serving stack.",
+        "Qwen3.5 dense/MoE согласовано с семейством и сравнением.",
+        "Четыре agent anchors приведены к актуальным более точным разделам."
+      ],
+      "sha256BeforeAudit": "486e1d79c182c2679109774d4a7e8cbce38c33e776b8e725b426fc973babbed0",
+      "changed": true,
+      "imagesPreserved": true
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+[
+  {
+    "id": "curated-resolution-pixtral-vision-packing-078136d174cf",
+    "asset": "00 Учебник/Assets/Figures/curated/resolution-review-2026-10/pixtral-vision-packing.png",
+    "author": "Pravesh Agrawal et al.",
+    "source_url": "https://arxiv.org/abs/2410.07073v1",
+    "source_asset": "05 Источники/Originals/resolution-2026-10-20/pixtral.pdf",
+    "source_asset_sha256": "c3396fb26605d41cd15588974cd0197d22a2325042f9812a77ee6caf3e88b797",
+    "source_page": 3,
+    "source_page_snapshot": "05 Источники/Originals/resolution-2026-10-20/pixtral-page3.png",
+    "source_page_sha256": "b21b800b33679f1ac9a215c79c5fcc0e800877a57775ad76611afe67ac59f194",
+    "render_page_size_px": [
+      2473,
+      3200
+    ],
+    "crop_box_px": [
+      430,
+      280,
+      2040,
+      954
+    ],
+    "sha256": "078136d174cf4edd143c2a640973210232686d372a8310c7fdd06ea3acb21370",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "license_evidence": "05 Источники/Originals/resolution-2026-10-20/pixtral-abstract.html",
+    "license_evidence_sha256": "e5755f3d503602adbeed93675591d92c493b7e39643ef3be71adcc4c32610341",
+    "modifications": "Original Figure 2 rendered with Poppler at 3200 pixels on the longest page side and cropped; no redraw, translation, recoloring or label changes",
+    "used_in": [
+      "00 Учебник/16 Multimodal Models/64b Разрешение, tiling и пространственные позиции.md"
+    ],
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "derivation": "pdf-page-render-crop"
+  }
+]

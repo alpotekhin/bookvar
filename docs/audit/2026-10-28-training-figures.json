@@ -1,0 +1,637 @@
+{
+  "reviewed_at": "2026-10-28",
+  "status": "individual-object-review-complete-with-findings",
+  "scope": "Pinned native image directory and separately archived rendered chapter images; not labs, decks, the whole course or all textbook figures.",
+  "native_inventory": "05 Источники/Originals/training-2026-10-28/native-directory.json",
+  "rendered_manifest": "05 Источники/Courses/Harvard ML Systems/import-manifest.json",
+  "rendered_snapshot_sha256": "28fa6c89be85b6d91f8d5baeb6636994c2e16c8cff5ef8df9e947dd71d432eec",
+  "counts": {
+    "native_paths": 33,
+    "native_distinct_objects": 32,
+    "rendered_paths": 27,
+    "rendered_distinct_objects": 27,
+    "union_distinct_objects": 50
+  },
+  "notes": [
+    "Native files are pinned by Git blob and byte count; every download was independently hashed. Rendered media hashes are verified against the existing import manifest, but their generated mediabag paths are not asserted to be native Git files or exact renders of the new QMD pin.",
+    "Gallery screenshots are contact-sheet inspection, not evidence that tiny inline labels are reader-ready. No archived Harvard image is newly published by this pass. The distinct primary GaLoRE SVG has its own reader desktop/mobile/viewer acceptance and source-license metadata.",
+    "Existing accepted chapter revisions and primary figures are not rewritten just to increase figure counts. The energy-to-emissions comparison is resolved by full reading and numerical recheck of the existing Responsible systems chapter, as recorded in the separate section map."
+  ],
+  "native": [
+    {
+      "path": "book/quarto/contents/vol1/training/images/jpeg/_activation-functions3.jpg",
+      "relative": "jpeg/_activation-functions3.jpg",
+      "git_blob_sha1": "ded460b3deecd75858930f572d92e7f7e67a2a54",
+      "bytes": 32847,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/jpeg/_activation-functions3.jpg",
+      "sha256": "a0b3f59fcbc70e6b93b18bf6be9001d4e8d751fe0019fb197e06b53bebbebeb0",
+      "status": "source-duplicate",
+      "decision": "Identical bytes to the following hyphen/underscore variant. Four scalar activation curves are already explained more precisely, including softmax coupling, in the accepted activation chapter.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-01-06.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/jpeg/_activation_functions3.jpg",
+      "relative": "jpeg/_activation_functions3.jpg",
+      "git_blob_sha1": "ded460b3deecd75858930f572d92e7f7e67a2a54",
+      "bytes": 32847,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/jpeg/_activation_functions3.jpg",
+      "sha256": "a0b3f59fcbc70e6b93b18bf6be9001d4e8d751fe0019fb197e06b53bebbebeb0",
+      "status": "reference-only",
+      "decision": "Same Git blob as _activation-functions3.jpg. Do not add a duplicate scalar-curve montage or infer independent scalar softmax.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-01-06.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/jpeg/_galore_memory_breakdown.jpg",
+      "relative": "jpeg/_galore_memory_breakdown.jpg",
+      "git_blob_sha1": "352c414ac7f702405786940cf58c7bdd6f623b7d",
+      "bytes": 33128,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/jpeg/_galore_memory_breakdown.jpg",
+      "sha256": "cbb4905bafe74824aa1c19404d8a02eaf4d24adfdfe5cf3afac1005a75540c35",
+      "status": "prefer-primary",
+      "decision": "The native four-bar JPEG differs from the six-bar primary Figure 1. It suppresses the retaining-gradient controls and its final bar extends beyond the drawn 24-GB marker. The unchanged primary SVG is now published with its actual caption and assumptions.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-01-06.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/png/_acc_fpgas.png",
+      "relative": "png/_acc_fpgas.png",
+      "git_blob_sha1": "b6b6ab79b0f7c793db41700d6f73732a795fc60b",
+      "bytes": 185978,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/png/_acc_fpgas.png",
+      "sha256": "6ad14baa128f4f39f6d01495c2af081c946f04667f3e2b784d2ecfa96dba4f85",
+      "status": "reference-only-rights-unverified",
+      "decision": "Microsoft FPGA history collage; not a training-memory mechanism. Third-party image redistribution is not independently cleared by the Harvard license.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-01-06.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/png/_acc_gpus.png",
+      "relative": "png/_acc_gpus.png",
+      "git_blob_sha1": "4b5790a36384a8d6926ca674c55b2b967359393c",
+      "bytes": 436830,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/png/_acc_gpus.png",
+      "sha256": "42e9e3ca6e25f2689cd4d593087ee32b4f7ecb6dfd4882046fa67ad419cab6ba",
+      "status": "reference-only-rights-unverified",
+      "decision": "Vendor GPU marketing slide with historical throughput ratios, not a compatible kernel benchmark. Current GPU chapter explains hardware with explicit generation/dtype boundaries.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-01-06.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/png/_acc_tpus.png",
+      "relative": "png/_acc_tpus.png",
+      "git_blob_sha1": "ff1719751269deda852c0f6d81b8eecc625591fd",
+      "bytes": 459068,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/png/_acc_tpus.png",
+      "sha256": "b7990a1042d771b87c26855706ceaa14557e7068b514a8f618232d7364ee04b4",
+      "status": "reference-only-rights-unverified",
+      "decision": "Google TPU generation timeline; not a current specification or reproducible comparison. Third-party origin needs its own permission check before new reproduction.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-01-06.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/png/_acc_wse.png",
+      "relative": "png/_acc_wse.png",
+      "git_blob_sha1": "6928927433ebc78df39e3b2173056f72a1b9337a",
+      "bytes": 861743,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/png/_acc_wse.png",
+      "sha256": "0f790a90dc7da3b23695891756194534617fdc990af1b2d4eb340639ec6e3a0b",
+      "status": "reference-only-rights-unverified",
+      "decision": "Cerebras WSE-2 marketing photograph/specification; no new dataflow mechanism for Training. Do not treat area/transistor counts as measured model speed.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-07-12.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/png/_act_funcs.png",
+      "relative": "png/_act_funcs.png",
+      "git_blob_sha1": "8aa08e76c5b674e8e1fd36afa83ce05f2ed9078a",
+      "bytes": 207482,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/png/_act_funcs.png",
+      "sha256": "963612ed30d6efcb9d75b5a00f4af25f7ae0cfc920adc9270c5a348daa28a586",
+      "status": "reference-only-source-finding",
+      "decision": "Scalar sigmoid/tanh/ReLU curves plus a sampled softmax panel. Softmax depends jointly on a vector; the accepted activation chapter derives that dependence and its Jacobian.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-07-12.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/png/_act_perf.png",
+      "relative": "png/_act_perf.png",
+      "git_blob_sha1": "faac140ba74c81e110e3aaffd900ce88f672e929",
+      "bytes": 155068,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/png/_act_perf.png",
+      "sha256": "41644ef643f41b31b017b8584d183cbeadb87e4b2f8fa1091953e281d291beb4",
+      "status": "reference-only-source-finding",
+      "decision": "Assigned activation timing bars have no reproducible workload/version and a truncated vertical scale. They do not prove an optimizer or activation speed ranking.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-07-12.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/png/_aitrainingfit.png",
+      "relative": "png/_aitrainingfit.png",
+      "git_blob_sha1": "e21b4d18d2ea331a37d42f713cda243e3f659e4d",
+      "bytes": 5683,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/png/_aitrainingfit.png",
+      "sha256": "25ae9d53aeb72a19eb59fad2bb8e403ad62e785105aaaa77c558059d5bdf47d5",
+      "status": "reference-only",
+      "decision": "Schematic train/validation iteration curves. Current regularization/evaluation explanations distinguish expected overfitting illustrations from a measured or inevitable U-shaped trajectory.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-07-12.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/png/_aitrainingnn.png",
+      "relative": "png/_aitrainingnn.png",
+      "git_blob_sha1": "38b859b5b8f8bc2d50fb7267331e1348ff336eba",
+      "bytes": 16333,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/png/_aitrainingnn.png",
+      "sha256": "8a2642d7cdc653d16dda8d7562dbfc3b813c62403bb26e87459c9618cbdfb4df",
+      "status": "reference-only-rights-unverified",
+      "decision": "Third-party multilayer network drawing. Existing MLP includes a directly attributed primary diagram and a complete numerical forward/backward example; no new unverified copy.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-07-12.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/png/_aitrainingpara.png",
+      "relative": "png/_aitrainingpara.png",
+      "git_blob_sha1": "b8fd50057c1ac4175112042ca3000bf7dd0a12c2",
+      "bytes": 41583,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/png/_aitrainingpara.png",
+      "sha256": "c10d1e0d3f52f55540abf5f197d2e1a6e34c25def0c55f162c7965e3ded1e166",
+      "status": "reference-only-rights-unverified",
+      "decision": "Older model-versus-data parallelism sketch. Current distributed chapter contains a full attributed 3D placement figure, ownership, group coordinates and worked batch accounting.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-07-12.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/png/_aitrainingroof.png",
+      "relative": "png/_aitrainingroof.png",
+      "git_blob_sha1": "6bdecb644cd10d273490d141ac735a53724f3808",
+      "bytes": 42693,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/png/_aitrainingroof.png",
+      "sha256": "506dc784bb5eb34a5728684991c6e7c5e6bac0f50305a817534b9b4027400884",
+      "status": "reference-only-rights-unverified",
+      "decision": "Generic roofline with fixed application dots. Existing roofline chapter has an explicit byte/FLOP model and separately distinguishes observations from bounds; third-party reproduction not cleared.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-13-18.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/png/_aitrainingsgd.png",
+      "relative": "png/_aitrainingsgd.png",
+      "git_blob_sha1": "1ca815ac7d1ffcdd24d2bbe9be836cfd19ae4ec0",
+      "bytes": 17391,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/png/_aitrainingsgd.png",
+      "sha256": "f77b2add882d6d7818097585fd4a3e993c55e6430a8aaca18680db5abab30402",
+      "status": "reference-only-rights-unverified",
+      "decision": "One-dimensional quadratic descent sketch. Existing optimizer chapter retains primary D2L trajectories, stability derivation and executed step examples.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-13-18.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/png/_fits.png",
+      "relative": "png/_fits.png",
+      "git_blob_sha1": "d741d78b1fddd1da0944681bf31f40f30a7c6659",
+      "bytes": 31655,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/png/_fits.png",
+      "sha256": "df720507302e67286113de282adf148bc940f6c5fbe301eef473846996ea12f5",
+      "status": "reference-only-rights-unverified",
+      "decision": "Three schematic fitted decision boundaries. Existing evaluation/regularization material covers the mechanism; source attribution and permission are not assumed from this filename.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-13-18.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/png/_graph.png",
+      "relative": "png/_graph.png",
+      "git_blob_sha1": "e004e9083cc854cb46d1aa12d10ce294e45425c5",
+      "bytes": 13062,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/png/_graph.png",
+      "sha256": "1c9328c83daf571e516de835609f5f0603c238f865d6ce287ae5c9d42da565a4",
+      "status": "reference-only-rights-unverified",
+      "decision": "Simple computation graph with MatMul/Add/ReLU. Current backpropagation/MLP chapters have primary graphs and independently checked derivatives; no new unaudited third-party copy.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-13-18.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/png/_training_parallelism_choices.png",
+      "relative": "png/_training_parallelism_choices.png",
+      "git_blob_sha1": "b1ec372d5342cc972934be2c4a0ab848b7a97929",
+      "bytes": 373672,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/png/_training_parallelism_choices.png",
+      "sha256": "8e7f538ec9509a0ff2f1d8c74c27be96009bb5d6eb23f8616e04900c7d68f0c7",
+      "status": "reference-only-source-finding",
+      "decision": "Full 3840x3134 flowchart separately inspected. Dataset residence on one device is not a requirement for streamed training; one branch selects DP even after the model fails a single-device fit. Current memory/placement/streaming explanations are preferred.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-13-18.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/png/cover_ai_training.png",
+      "relative": "png/cover_ai_training.png",
+      "git_blob_sha1": "6aaf85e7d43685f11ecba7b42c4ed7faeb97402a",
+      "bytes": 1245249,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/png/cover_ai_training.png",
+      "sha256": "5a1ea9b76f81049265bbfc01b91315eb5d53428f02673f4d76bfefac23c37676",
+      "status": "decorative",
+      "decision": "Decorative cover, not a mechanism diagram. Retained only in the immutable source archive.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-13-18.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/png/cover_training_blueprint.png",
+      "relative": "png/cover_training_blueprint.png",
+      "git_blob_sha1": "686683ce7c82d6707dfd03d2c36bbad6884c91e9",
+      "bytes": 650233,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/png/cover_training_blueprint.png",
+      "sha256": "8381c6001f625187a25b5a19d1fb686606e9c24a51873fbb39069ae3b4c90ebf",
+      "status": "decorative",
+      "decision": "Unlabeled blueprint cover variant. Not substituted for source-faithful forward/backward or memory-lifetime diagrams.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-19-24.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/png/cover_training_blueprint_labeled_print.png",
+      "relative": "png/cover_training_blueprint_labeled_print.png",
+      "git_blob_sha1": "083620309c2e395834b0450abc2f20e1d8f6ac07",
+      "bytes": 2354095,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/png/cover_training_blueprint_labeled_print.png",
+      "sha256": "0cb526b990a68f09618a171289959b2044bdd66a91a1709ce1b9d2fe9c33dda0",
+      "status": "decorative",
+      "decision": "Print cover with broad forward/backward/activation/bottleneck/optimizer labels; no tensor or time model. Archive only.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-19-24.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/png/cover_training_blueprint_print.png",
+      "relative": "png/cover_training_blueprint_print.png",
+      "git_blob_sha1": "e162a86e18aa9abe8dc1569cf8574691ebb621d2",
+      "bytes": 2338461,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/png/cover_training_blueprint_print.png",
+      "sha256": "6e837e60d02eea729fca42be7c79b72d06c34933a06c66356d5a68ba9ceef71b",
+      "status": "decorative",
+      "decision": "Unlabeled print blueprint variant. Archive only.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-19-24.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/png/tf_profiler.png",
+      "relative": "png/tf_profiler.png",
+      "git_blob_sha1": "e47c41afb7d5305a998c00afab9ba78bec9b24c4",
+      "bytes": 279837,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/png/tf_profiler.png",
+      "sha256": "52a0e3b8cd63ccafd13617785b391b39fddab47a6b834c9f56bfee2b4ca0f661",
+      "status": "reference-only-rights-unverified",
+      "decision": "Legacy TensorFlow trace is also in the imported rendered snapshot. Blank space alone does not prove a data-loader stall. Current profiling chapter supplies the causal readout procedure and executable CPU step; no new screenshot reproduction.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-19-24.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/png/training_cost_asymmetry.png",
+      "relative": "png/training_cost_asymmetry.png",
+      "git_blob_sha1": "9fac12dc6f05604bd22c98d612aa87fe5400440a",
+      "bytes": 5026,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/png/training_cost_asymmetry.png",
+      "sha256": "419a883a62e8213a899a5f67c38d32a8ec1df6923398a8bd2ee71aa73c9d479f",
+      "status": "reference-only",
+      "decision": "Raster form of the cost-asymmetry decoration. No units, measurements or specified scaling law; do not add it as a quantitative plot.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-19-24.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/png/training_iron_law_bars.png",
+      "relative": "png/training_iron_law_bars.png",
+      "git_blob_sha1": "ecb1f981b819b718c3c5c8eb50cd4419941eff2d",
+      "bytes": 1730,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/png/training_iron_law_bars.png",
+      "sha256": "16ce5ad1f3796e2120bbd070ab8df6fbb3b3b3be10b80e2b40518e5d84d65438",
+      "status": "reference-only",
+      "decision": "Raster D/C/L bar repeats a qualitative ordering, not a universal dominant stage. Existing staged/roofline examples state their assumptions.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-19-24.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/svg/training_cost_asymmetry.svg",
+      "relative": "svg/training_cost_asymmetry.svg",
+      "git_blob_sha1": "f4ffabcec630d655d42a14e11d49033d187d3427",
+      "bytes": 3235,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/svg/training_cost_asymmetry.svg",
+      "sha256": "220ab6f5ec473b95c86dc7b25047a5fc60c6f2c0af0e96e4793d19d391bd1bd7",
+      "status": "reference-only",
+      "decision": "Vector form of the cost-asymmetry decoration; no supported quantitative inference.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-25-30.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/svg/training_iron_law_bars.svg",
+      "relative": "svg/training_iron_law_bars.svg",
+      "git_blob_sha1": "6e94d75e3d1341504b9c17cb6d30f9f202d5231b",
+      "bytes": 3433,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/svg/training_iron_law_bars.svg",
+      "sha256": "c0ed269c1d0029d49d4d6ce38b670b21ec14f65fe80a2d625832d1a895c1379e",
+      "status": "reference-only",
+      "decision": "D/C/L widths are assigned, not measured; current source-aware pipeline and profiling explanations already distinguish overlap and serial sums.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-25-30.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/svg/training_optimizer_memory.svg",
+      "relative": "svg/training_optimizer_memory.svg",
+      "git_blob_sha1": "e31e15e1c20c7c4f3b998fa88c756503851f86fa",
+      "bytes": 5611,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/svg/training_optimizer_memory.svg",
+      "sha256": "585cbabc2fedafe80abc87ea7da39ef32bc985d01003fedf07eee7f458a2fb4d",
+      "status": "reference-only",
+      "decision": "P/G/Adam 1:1:2 bar is meaningful only for matching FP32 arrays and excludes activations. Current optimizer and precision ledgers give the full dtype/object boundary and worked counts.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-25-30.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/svg/vol1_training_margin_001.svg",
+      "relative": "svg/vol1_training_margin_001.svg",
+      "git_blob_sha1": "f223895f51ea24d457476f2cb0f1c84f1e74f0f9",
+      "bytes": 17226,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/svg/vol1_training_margin_001.svg",
+      "sha256": "55ff89a3376f7afbcb8235013bd7d2f990f2ab2b858db76fd4b568c3d114f63e",
+      "status": "reference-only-source-finding",
+      "decision": "GPT-2 activation/V100/MNIST logarithmic comparison mixes GB/GiB and requires a complete recipe for the activation estimate. Current arithmetic/checkpoint examples state those assumptions.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-25-30.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/svg/vol1_training_margin_002.svg",
+      "relative": "svg/vol1_training_margin_002.svg",
+      "git_blob_sha1": "8d5373aaf681b53d3c48f6535de7c7a971f2e1dd",
+      "bytes": 17952,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/svg/vol1_training_margin_002.svg",
+      "sha256": "7ff41b63e6454f49caa45a60490bb6f97b8a9ae355dadae60d9e9e354a31ccfc",
+      "status": "reference-only",
+      "decision": "Nominal storage/DRAM/HBM bandwidth comparison is hardware-specific, not an observed training throughput or current universal ratio.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-25-30.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/svg/vol1_training_margin_003.svg",
+      "relative": "svg/vol1_training_margin_003.svg",
+      "git_blob_sha1": "846330d50b8ae5e618d7afaa1775a52497c7ccee",
+      "bytes": 12822,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/svg/vol1_training_margin_003.svg",
+      "sha256": "49e772e51f5cc93c90c320a477a91c08348c23867a9ba608228785a1ca379091",
+      "status": "reference-only",
+      "decision": "Full-versus-tile score storage compares a 4096x4096 FP32 matrix with a 128x128 tile, not total attention peak memory. Current FlashAttention chapter accounts for Q/K/V/O, statistics and temporaries.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-25-30.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/svg/vol1_training_margin_004.svg",
+      "relative": "svg/vol1_training_margin_004.svg",
+      "git_blob_sha1": "a7aa88119bf6b4ae9efaf066d4b470bda1e98963",
+      "bytes": 7085,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/svg/vol1_training_margin_004.svg",
+      "sha256": "6b7c82d91693b333284a8ff89a549be6d0ef86f7a8304a9eea4503238b664a3a",
+      "status": "reference-only",
+      "decision": "Decorative capacity-knee curve without a quantitative workload/hardware model.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-31-33.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/webp/cover_training_blueprint.webp",
+      "relative": "webp/cover_training_blueprint.webp",
+      "git_blob_sha1": "fa6a4732295053ebe824c09790a6b94c3b5b48a5",
+      "bytes": 88398,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/webp/cover_training_blueprint.webp",
+      "sha256": "1ef7ec61f58189083ca8e8566d2e06cf6586c44b8ed5e4018c5152f335b1498d",
+      "status": "decorative",
+      "decision": "WebP blueprint cover variant; not an explanatory figure.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-31-33.png"
+    },
+    {
+      "path": "book/quarto/contents/vol1/training/images/webp/cover_training_blueprint_labeled.webp",
+      "relative": "webp/cover_training_blueprint_labeled.webp",
+      "git_blob_sha1": "c4e40cef0355038277eddf7b1bead09e0aae1449",
+      "bytes": 109822,
+      "source_url": "https://raw.githubusercontent.com/harvard-edge/cs249r_book/2bd97c509923dc8d7cb0b3e2f489a7282fee5fbd/book/quarto/contents/vol1/training/images/webp/cover_training_blueprint_labeled.webp",
+      "sha256": "1527f2e02b0704666aa1306d2378982ada68d5d84d737b92e4db5b8fba77b3e8",
+      "status": "decorative",
+      "decision": "Labeled WebP cover variant; same source-only disposition.",
+      "visual_evidence": "docs/audit/screenshots/2026-10-28-training-pinned-31-33.png"
+    }
+  ],
+  "rendered": [
+    {
+      "file": "0a4ca194d7f8e588a7c4b15d4765d012e268b7e1.svg",
+      "sha256": "1230a1256cd7f6819459de71e7ac07b2ac6eb9b63ae755f49070c5a5cab5a2a5",
+      "bytes": 121411,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/0a4ca194d7f8e588a7c4b15d4765d012e268b7e1.svg",
+      "source_url": "https://mlsysbook.ai/vol1/training/training_files/mediabag/0a4ca194d7f8e588a7c4b15d4765d012e268b7e1.svg",
+      "status": "reference-only-source-finding",
+      "decision": "Utilization below 70% does not uniquely identify a data bottleneck. Use the current profiling dependency examples instead."
+    },
+    {
+      "file": "3aef3dbadd2b46cb781dd1e2df6d17c63c33148e.svg",
+      "sha256": "7abb781a03f957c3083944e90aa31d4296eb5f0ea7b440f627ed6128369a9a0a",
+      "bytes": 79033,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/3aef3dbadd2b46cb781dd1e2df6d17c63c33148e.svg",
+      "source_url": "https://mlsysbook.ai/vol1/training/training_files/mediabag/3aef3dbadd2b46cb781dd1e2df6d17c63c33148e.svg",
+      "status": "reference-only",
+      "decision": "Accumulated gradients diagram omits normalization policy. The accepted precision/DDP chapters already work through weighted means, synchronization and update boundaries."
+    },
+    {
+      "file": "51065c9852c4d1774d37a518fdab4b656cd85250.svg",
+      "sha256": "774f3dda1055c089369311f81533038dd1e6caf6a355a390631f72fd0ef70045",
+      "bytes": 54794,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/51065c9852c4d1774d37a518fdab4b656cd85250.svg",
+      "source_url": "https://mlsysbook.ai/vol1/training/training_files/mediabag/51065c9852c4d1774d37a518fdab4b656cd85250.svg",
+      "status": "reference-only-source-finding",
+      "decision": "Assigned activation timings do not establish benchmark rankings; plotted vertical truncation further obscures the comparison."
+    },
+    {
+      "file": "56effd448d7ab0d3adb23ad8e0dd6957664ec614.svg",
+      "sha256": "76ad996a3a11121a660daca7f47f885dab1de05b869ff2de0b16037418fa8c72",
+      "bytes": 110167,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/56effd448d7ab0d3adb23ad8e0dd6957664ec614.svg",
+      "source_url": "https://mlsysbook.ai/vol1/training/training_files/mediabag/56effd448d7ab0d3adb23ad8e0dd6957664ec614.svg",
+      "status": "reference-only",
+      "decision": "Historical infrastructure overview, not an extra training mechanism or current hardware inventory."
+    },
+    {
+      "file": "7025716a401ac28ce2a6e566df01cd42cf69b58c.svg",
+      "sha256": "97cb293c9667497574619d22ee518bea0c9362a2070dd8fab767f5c88d5c1748",
+      "bytes": 72782,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/7025716a401ac28ce2a6e566df01cd42cf69b58c.svg",
+      "source_url": "https://mlsysbook.ai/vol1/training/training_files/mediabag/7025716a401ac28ce2a6e566df01cd42cf69b58c.svg",
+      "status": "reference-only",
+      "decision": "Illustrative sequential-fetch schedule. Accepted data chapter already includes the original TensorFlow pipeline figures with cache/prefetch examples."
+    },
+    {
+      "file": "79a87b6fa868339a256e66e01d93f2babc1a5705.svg",
+      "sha256": "6edf3323897bc237a91f089cdb72cf724a16e8a6a8e6f7aed12452c9de800eb6",
+      "bytes": 90391,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/79a87b6fa868339a256e66e01d93f2babc1a5705.svg",
+      "source_url": "https://mlsysbook.ai/vol1/training/training_files/mediabag/79a87b6fa868339a256e66e01d93f2babc1a5705.svg",
+      "status": "reference-only",
+      "decision": "Explicit FP16/master-weight/scaled-loss cycle is one recipe, not native autocast semantics. Current precision chapter distinguishes both paths with original NVIDIA figures."
+    },
+    {
+      "file": "7aa45cd6b8bd8ea1dc3a3148372fc402e486faa8.svg",
+      "sha256": "47dbe30c5d8d55ed404fe5d06c56df3a1194389726cdca81ebc78bbe98b8208e",
+      "bytes": 98914,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/7aa45cd6b8bd8ea1dc3a3148372fc402e486faa8.svg",
+      "source_url": "https://mlsysbook.ai/vol1/training/training_files/mediabag/7aa45cd6b8bd8ea1dc3a3148372fc402e486faa8.svg",
+      "status": "reference-only",
+      "decision": "CPU-to-multiple-GPU pipeline sketch. Current data/DDP explanations include preparation, pinned transfers, ownership and observed waiting boundaries."
+    },
+    {
+      "file": "8efcce198ad51f41fce23f8c5bdaa6bef79317f9.svg",
+      "sha256": "a981524bbf9ac99025196f378c156e2415cda7eb602dba66d10c960f427cb3f0",
+      "bytes": 74582,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/8efcce198ad51f41fce23f8c5bdaa6bef79317f9.svg",
+      "source_url": "https://mlsysbook.ai/vol1/training/training_files/mediabag/8efcce198ad51f41fce23f8c5bdaa6bef79317f9.svg",
+      "status": "prefer-primary",
+      "decision": "Simplified four-bar GaLoRE redraw. Publish the paper's complete six-bar SVG, caption and per-layer-update controls, not this conflated comparison."
+    },
+    {
+      "file": "a45f932ae6468721a3e4794f680479675831e22f.svg",
+      "sha256": "b09ff40fee5528b2419ceb0a3f3c798fa29e1e113dd4ac0e1a4217891827a264",
+      "bytes": 102592,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/a45f932ae6468721a3e4794f680479675831e22f.svg",
+      "source_url": "https://mlsysbook.ai/vol1/training/training_files/mediabag/a45f932ae6468721a3e4794f680479675831e22f.svg",
+      "status": "reference-only",
+      "decision": "Generic dataset/train/evaluate feedback overview. Already covered by worked model/system and workflow chapters."
+    },
+    {
+      "file": "a8aa9bd6be9924c0700d1145c024dc0f254cd0be.svg",
+      "sha256": "142be03cdfb911eece999fd1c1441cb29e4e3bb8f7b47a202b23faacd4d05ebf",
+      "bytes": 62297,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/a8aa9bd6be9924c0700d1145c024dc0f254cd0be.svg",
+      "source_url": "https://mlsysbook.ai/vol1/training/training_files/mediabag/a8aa9bd6be9924c0700d1145c024dc0f254cd0be.svg",
+      "status": "reference-only",
+      "decision": "Illustrative overlapped-fetch schedule. Prefetch does not remove all stalls; current data chapter explains sustained stage rates and queue limits."
+    },
+    {
+      "file": "ac18fb58ba0561d8d23c9b4324313a5acd8aa14a.svg",
+      "sha256": "f33b50abba22e0415b1cded528533e51470a2d6992412700545a3fd4becd0a21",
+      "bytes": 105988,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/ac18fb58ba0561d8d23c9b4324313a5acd8aa14a.svg",
+      "source_url": "https://mlsysbook.ai/vol1/training/training_files/mediabag/ac18fb58ba0561d8d23c9b4324313a5acd8aa14a.svg",
+      "status": "reference-only",
+      "decision": "Layer placement sketch without a pipeline schedule or memory ledger. The accepted original 3D placement and PP examples give those boundaries."
+    },
+    {
+      "file": "ca263d44bb6f3f0698eeb25f18f0ca9e4532433d.svg",
+      "sha256": "d9296cb069cf8c9f69a9240aac550c4afad0de34b15af8055eb8d1edf446263b",
+      "bytes": 126424,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/ca263d44bb6f3f0698eeb25f18f0ca9e4532433d.svg",
+      "source_url": "https://mlsysbook.ai/vol1/training/training_files/mediabag/ca263d44bb6f3f0698eeb25f18f0ca9e4532433d.svg",
+      "status": "reference-only",
+      "decision": "Generic forward/loss/backward/update loop. Current training-step chapter includes the full original code, numerical gradients and CPU profiler events."
+    },
+    {
+      "file": "cell-15-output-1.png",
+      "sha256": "766736b7a11c94e52b93e7350cbadefcd880a9e81243e03225d86d089cfa1bce",
+      "bytes": 339082,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/cell-15-output-1.png",
+      "source_url": "https://mlsysbook.ai/vol1/training/training_files/figure-html/cell-15-output-1.png",
+      "status": "reference-only-source-finding",
+      "decision": "Assigned roofline dots are not a measured GPU profile. Current roofline chapter separates model bounds, logical bytes and observed counters."
+    },
+    {
+      "file": "cell-26-output-1.png",
+      "sha256": "8d4212d1c5cc64eeffc5041d3114077ef232d4eef990425ba01931b6756bc290",
+      "bytes": 320927,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/cell-26-output-1.png",
+      "source_url": "https://mlsysbook.ai/vol1/training/training_files/figure-html/cell-26-output-1.png",
+      "status": "reference-only-source-finding",
+      "decision": "Generated exponential batch-loss curves are illustrative, not evidence of convergence speed or a universal linear learning-rate rule."
+    },
+    {
+      "file": "cell-48-output-1.png",
+      "sha256": "8811d7ae946d5175cdc95833be6edc06559367c90d853843b9b3a37ce5c2171e",
+      "bytes": 367729,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/cell-48-output-1.png",
+      "source_url": "https://mlsysbook.ai/vol1/training/training_files/figure-html/cell-48-output-1.png",
+      "status": "reference-only-source-finding",
+      "decision": "Amdahl-style curves assign model/interconnect labels to hypothetical serial fractions. The systems chapter derives the fixed-fraction law with an attributed MIT slide; collective overlap is handled separately."
+    },
+    {
+      "file": "cover_training_blueprint_labeled.webp",
+      "sha256": "1527f2e02b0704666aa1306d2378982ada68d5d84d737b92e4db5b8fba77b3e8",
+      "bytes": 109822,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/cover_training_blueprint_labeled.webp",
+      "source_url": "https://mlsysbook.ai/vol1/training/images/webp/cover_training_blueprint_labeled.webp",
+      "status": "decorative",
+      "decision": "Cover image, not a teaching diagram. Do not replace actual tensor/timeline figures with it."
+    },
+    {
+      "file": "d09692c638d29c60f963c4a885a5257ac3947c17.svg",
+      "sha256": "cf0a3159a6387b2dfd87092176a70530284693717cb1008d1098e115e892dbb5",
+      "bytes": 111519,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/d09692c638d29c60f963c4a885a5257ac3947c17.svg",
+      "source_url": "https://mlsysbook.ai/vol1/training/training_files/mediabag/d09692c638d29c60f963c4a885a5257ac3947c17.svg",
+      "status": "reference-only",
+      "decision": "Three-device layer split; no scheduling, activation or state budget. Current distributed/PP chapter has explicit stage/microbatch explanations."
+    },
+    {
+      "file": "f38166dd27f28c2e7f8d3894f7fa023809444e05.svg",
+      "sha256": "0b9f61b7acdb0ea73ca478dccb9ead1f167ef43a8549f88115919c828257cf75",
+      "bytes": 38052,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/f38166dd27f28c2e7f8d3894f7fa023809444e05.svg",
+      "source_url": "https://mlsysbook.ai/vol1/training/training_files/mediabag/f38166dd27f28c2e7f8d3894f7fa023809444e05.svg",
+      "status": "reference-only",
+      "decision": "Stored-versus-recomputed five-node sketch. Current checkpoint chapter includes original selective/segment/offload figures and validated memory ledgers."
+    },
+    {
+      "file": "f9dab833639fa3cb5b3e48a1f2b8da613aa84c07.svg",
+      "sha256": "709de0a774b781236b37735517b6bd3882865d9ed9d776b6c7d357dc9f4919b7",
+      "bytes": 136865,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/f9dab833639fa3cb5b3e48a1f2b8da613aa84c07.svg",
+      "source_url": "https://mlsysbook.ai/vol1/training/training_files/mediabag/f9dab833639fa3cb5b3e48a1f2b8da613aa84c07.svg",
+      "status": "reference-only",
+      "decision": "DP replica/update sketch. Existing DDP chapter explains normalization, bucketing, overlap and collective matching in more detail."
+    },
+    {
+      "file": "tf_profiler.png",
+      "sha256": "52a0e3b8cd63ccafd13617785b391b39fddab47a6b834c9f56bfee2b4ca0f661",
+      "bytes": 279837,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/tf_profiler.png",
+      "source_url": "https://mlsysbook.ai/vol1/training/images/png/tf_profiler.png",
+      "status": "reference-only-rights-unverified",
+      "decision": "Legacy TensorFlow trace; blank regions do not independently prove data stalls. Primary redistribution permission is not inferred from the course."
+    },
+    {
+      "file": "training_cost_asymmetry.svg",
+      "sha256": "220ab6f5ec473b95c86dc7b25047a5fc60c6f2c0af0e96e4793d19d391bd1bd7",
+      "bytes": 3235,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/training_cost_asymmetry.svg",
+      "source_url": "https://mlsysbook.ai/vol1/training/images/svg/training_cost_asymmetry.svg",
+      "status": "reference-only",
+      "decision": "Decorative cost-asymmetry curve with no units or supplied data."
+    },
+    {
+      "file": "training_iron_law_bars.svg",
+      "sha256": "c0ed269c1d0029d49d4d6ce38b670b21ec14f65fe80a2d625832d1a895c1379e",
+      "bytes": 3433,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/training_iron_law_bars.svg",
+      "source_url": "https://mlsysbook.ai/vol1/training/images/svg/training_iron_law_bars.svg",
+      "status": "reference-only",
+      "decision": "Assigned D/C/L segment widths are not a universal critical-path diagnosis."
+    },
+    {
+      "file": "training_optimizer_memory.svg",
+      "sha256": "585cbabc2fedafe80abc87ea7da39ef32bc985d01003fedf07eee7f458a2fb4d",
+      "bytes": 5611,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/training_optimizer_memory.svg",
+      "source_url": "https://mlsysbook.ai/vol1/training/images/svg/training_optimizer_memory.svg",
+      "status": "reference-only",
+      "decision": "FP32 parameter/gradient/two-moment ratio; current ledgers explain dtypes and excluded objects explicitly."
+    },
+    {
+      "file": "vol1_training_margin_001.svg",
+      "sha256": "55ff89a3376f7afbcb8235013bd7d2f990f2ab2b858db76fd4b568c3d114f63e",
+      "bytes": 17226,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/vol1_training_margin_001.svg",
+      "source_url": "https://mlsysbook.ai/vol1/training/images/svg/vol1_training_margin_001.svg",
+      "status": "reference-only-source-finding",
+      "decision": "Activation-memory scale illustration requires the actual batch/sequence/layer/precision recipe and consistent GB/GiB units."
+    },
+    {
+      "file": "vol1_training_margin_002.svg",
+      "sha256": "7ff41b63e6454f49caa45a60490bb6f97b8a9ae355dadae60d9e9e354a31ccfc",
+      "bytes": 17952,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/vol1_training_margin_002.svg",
+      "source_url": "https://mlsysbook.ai/vol1/training/images/svg/vol1_training_margin_002.svg",
+      "status": "reference-only",
+      "decision": "Hardware-specific nominal bandwidths; no generic speed or fixed-ratio claim imported."
+    },
+    {
+      "file": "vol1_training_margin_003.svg",
+      "sha256": "49e772e51f5cc93c90c320a477a91c08348c23867a9ba608228785a1ca379091",
+      "bytes": 12822,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/vol1_training_margin_003.svg",
+      "source_url": "https://mlsysbook.ai/vol1/training/images/svg/vol1_training_margin_003.svg",
+      "status": "reference-only",
+      "decision": "Score-matrix-versus-tile storage is not total attention peak memory; current FlashAttention chapter has the complete accounted boundary."
+    },
+    {
+      "file": "vol1_training_margin_004.svg",
+      "sha256": "6b7c82d91693b333284a8ff89a549be6d0ef86f7a8304a9eea4503238b664a3a",
+      "bytes": 7085,
+      "path": "Assets/Sources/Harvard ML Systems/vol1/training/vol1_training_margin_004.svg",
+      "source_url": "https://mlsysbook.ai/vol1/training/images/svg/vol1_training_margin_004.svg",
+      "status": "reference-only",
+      "decision": "Decorative capacity-knee sketch, no extra physical law or observation."
+    }
+  ],
+  "primary_replacement": {
+    "asset": "00 Учебник/Assets/Figures/curated/galore-2026-10-28/memory_breakdown.svg",
+    "sha256": "3c395fe582f012f4f47780105693631a864aadf309a79b6a4ea6ed866d7f974f",
+    "source_url": "https://arxiv.org/html/2403.03507v2#S1.F1",
+    "license": "CC-BY-4.0",
+    "review": "docs/audit/2026-10-28-training-reconciliation.md"
+  }
+}

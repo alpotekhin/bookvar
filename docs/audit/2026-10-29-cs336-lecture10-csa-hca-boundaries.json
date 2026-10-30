@@ -1,0 +1,207 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-29",
+  "scope": "Evidence-only boundary audit of CS336 Lecture10 trace steps274–310; no coverage.yml or source-unit disposition edited.",
+  "unit": "lecture-10-section-274-deepseek-v4-attention",
+  "existingCoverage": {
+    "path": "05 Источники/Courses/Stanford CS336 Spring 2026/coverage.yml",
+    "range": "274–310",
+    "disposition": "source-only"
+  },
+  "readMethod": {
+    "trace": "All step objects274–310 read, including stack code, renderings and environment values. Neighbor steps273 and311–312 read to establish boundaries. Step numbers are one-based; array index=step-1.",
+    "python": "lecture_10.py lines425–478 read; actual DeepSeek block is435–440. Quantization starts at449.",
+    "visual": "Step276 CSA diagram was already inspected in the main-chapter work; it is byte-identical to the pinned course image. Step296 third-party quantization screenshot was not visually reassessed in this audit."
+  },
+  "sourceFiles": [
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/lecture_10.py",
+      "sha256": "e79acd9115d75f0b8bf4902d97dc41c1f6b5016778321f19c2dc241a90cfe9b9",
+      "bytes": 31289
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/var/traces/lecture_10.json",
+      "sha256": "b9229447c3042f34bd6e307c2f2c34ba294d10708f208e8d1237be080d683cb6",
+      "bytes": 374981
+    },
+    {
+      "source": "05 Источники/Courses/Stanford CS336 Spring 2026/Lectures/repository/images/deepseek-v4-attention.png",
+      "sha256": "ac355c5907c7cc2710b4a8d980fe88d58d13e5a273404cbb4bc9cf9a71bdd8bd",
+      "bytes": 135518
+    }
+  ],
+  "upstream": {
+    "commit": "8b59b50730766695c2ffedd1a79c50cd09b9eb91",
+    "python": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/lecture_10.py#L435-L478",
+    "trace": "https://github.com/stanford-cs336/lectures/blob/8b59b50730766695c2ffedd1a79c50cd09b9eb91/var/traces/lecture_10.json",
+    "primaryReport": "https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro/blob/89d501aed998d33fa4f4702102ec1bb2331e10f6/DeepSeek_V4.pdf#page=9"
+  },
+  "segments": [
+    {
+      "steps": "274–279",
+      "pythonLines": "435–440",
+      "topic": "DeepSeek-V4: 1M context, original CSA diagram, m-to-1 compression, DSA top-k, heavier HCA compression",
+      "sourceRead": true,
+      "coverage": "confirmed",
+      "destinations": [
+        {
+          "source": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+          "anchor": "compressed-sparse-attention-csa-hca",
+          "role": "single full mechanism explanation, original figures and executable example"
+        },
+        {
+          "source": "02 Атлас моделей/Семейства/DeepSeek.md",
+          "anchor": "deepseek-v4-csa-hca",
+          "role": "release-specific capacity, compression rates and model/layer configuration"
+        }
+      ],
+      "evidence": [
+        "Architecture integration ledger records all moved excerpts, figures and explanations.",
+        "Original course image and curated CSA PNG share SHA-256 ac355c5907c7cc2710b4a8d980fe88d58d13e5a273404cbb4bc9cf9a71bdd8bd.",
+        "V4 primary PDF pp9–13 §§2.3.1–2.3.3 read, not inferred from lecture heading.",
+        "New numerical example and independent pooling/causality checks passed."
+      ]
+    },
+    {
+      "steps": "280–284",
+      "pythonLines": "442–446",
+      "topic": "Summary: KV memory, GQA/MLA/CLA, local/global stacks, linear attention/SSM and mention of diffusion",
+      "sourceRead": true,
+      "coverage": "mixed; the named KV/state mechanisms are confirmed, diffusion mention needs separate mapping",
+      "confirmedDestinations": [
+        {
+          "source": "00 Учебник/08 Эффективный Attention и длинный контекст/01 MHA, MQA и GQA.md",
+          "role": "GQA full chapter read in preceding architecture pass"
+        },
+        {
+          "source": "00 Учебник/08 Эффективный Attention и длинный контекст/02 MLA и сжатие KV-cache.md",
+          "role": "MLA full chapter read in preceding architecture pass"
+        },
+        {
+          "source": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+          "anchor": "cross-layer-kv-sharing",
+          "role": "CLA and local/global explanations read in full canonical chapter"
+        },
+        {
+          "source": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+          "role": "Mamba2/GatedDeltaNet full chapter read"
+        }
+      ],
+      "requiresCrossCheck": [
+        "Source only names diffusion models without explaining them. The image diffusion chapter exists, but its relevance to this sequence-inference summary was not established here; do not infer text-diffusion coverage from its title."
+      ]
+    },
+    {
+      "steps": "285–287",
+      "pythonLines": "end reduce_kv_cache_size / main29 / quantization449",
+      "topic": "Structural function transition",
+      "sourceRead": true,
+      "coverage": "not applicable",
+      "evidence": "Step286 enters quantization(); step287 is its definition. The enclosing ###-based source-unit range crosses this function boundary."
+    },
+    {
+      "steps": "288–290",
+      "pythonLines": "450–452",
+      "topic": "Quantization goal, memory/latency/throughput and accuracy caveat",
+      "sourceRead": true,
+      "coverage": "requires canonical-section cross-check",
+      "candidateDestination": "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md",
+      "note": "The source phrase 'higher latency/throughput' must not be copied as an unconditional consequence. This audit did not review the corresponding quantization chapter in full."
+    },
+    {
+      "steps": "291–295",
+      "pythonLines": "455–459",
+      "topic": "Affine quantize/dequantize toy: x5.2342, scale0.1, zero_point4, integer56, reconstructed5.2",
+      "sourceRead": true,
+      "coverage": "requires canonical-section cross-check",
+      "candidateDestination": "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md#Кодирование и восстановление",
+      "sourceArithmetic": "round(5.2342/0.1)+4=56; (56-4)*0.1=5.2",
+      "note": "Target heading located structurally only; no claim of a full pedagogical verification or verbatim import of this particular toy."
+    },
+    {
+      "steps": "296",
+      "pythonLines": "461",
+      "topic": "Third-party FP8 social-media screenshot and external Baseten article",
+      "sourceRead": true,
+      "visualRead": false,
+      "coverage": "existing figure disposition excluded; not changed",
+      "existingFigureUnit": "lecture-10-figure-step-296-rendering-1",
+      "existingReason": "Social-media screenshot is volatile and adds no stable mechanism or reproducible evidence.",
+      "note": "Reading the enclosing trace does not newly validate image permissions or the linked article."
+    },
+    {
+      "steps": "297–301",
+      "pythonLines": "462–466",
+      "topic": "FP32/BF16/FP8/INT8/INT4 format and training/inference summary",
+      "sourceRead": true,
+      "coverage": "requires canonical-section and primary-format cross-check",
+      "candidateDestination": "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md#FP8: восемь бит не задают один диапазон",
+      "note": "The course's E4M3 range and categorical training/inference labels are simplified, format-specific statements. The current target has a detailed FP8 section; its full coverage was not accepted on the basis of grep/heading matches."
+    },
+    {
+      "steps": "302",
+      "pythonLines": "468",
+      "topic": "External overview link",
+      "sourceRead": true,
+      "coverage": "external link not followed in this audit",
+      "note": "An outbound link is not evidence that all its contents have been integrated."
+    },
+    {
+      "steps": "303–306",
+      "pythonLines": "470–473",
+      "topic": "QAT: quantize/dequantize in forward, adaptation and training cost",
+      "sourceRead": true,
+      "coverage": "requires canonical-section cross-check",
+      "candidateDestination": "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md#QAT: модель видит ошибку во время обучения"
+    },
+    {
+      "steps": "307–310",
+      "pythonLines": "475–478",
+      "topic": "PTQ calibration and GPTQ approximate-Hessian compensation",
+      "sourceRead": true,
+      "coverage": "requires canonical-section cross-check",
+      "candidateDestinations": [
+        "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md#PTQ: квантизация уже обученной модели",
+        "00 Учебник/14 Inference и оптимизация/57 Квантизация языковых моделей.md#GPTQ"
+      ]
+    }
+  ],
+  "recommendation": {
+    "action": "Split or explicitly represent the heterogeneous source range before changing disposition.",
+    "confirmedCoreRange": "274–279",
+    "summaryRange": "280–284",
+    "structuralBoundary": "285–287",
+    "followOnQuantizationRange": "288–310",
+    "doNotClaim": "Do not mark the full current274–310 unit integrated solely because the CSA/HCA explanation is complete. Do not label either newly integrated main chapter incomplete merely because unrelated quantization steps share the source-unit heading."
+  },
+  "frozenSourceRevision": {
+    "ledger": "docs/audit/2026-10-29-architecture-integration-additions.json",
+    "files": [
+      {
+        "source": "00 Учебник/09 Dense FFN и Mixture of Experts/03 Mamba, RWKV, RetNet и гибридные архитектуры.md",
+        "sha256": "783cab0ddb3b947eecd310c420898a0acf1ff6a7088e45f98ef1176de4ba4aea"
+      },
+      {
+        "source": "00 Учебник/08 Эффективный Attention и длинный контекст/03 Длинный контекст — расширение, разреженность и оценивание.md",
+        "sha256": "c15d27a0f6565299948cf7c3aa0005428743735058ff8d9998707bced97c1b85"
+      },
+      {
+        "source": "02 Атлас моделей/Семейства/DeepSeek.md",
+        "sha256": "ec05306c5d3d3aa5e61b59b2fc31e52863c6a169fbc57a5eb1998ef5d1886b92"
+      },
+      {
+        "source": "02 Атлас моделей/Семейства/RetNet.md",
+        "sha256": "80b91e5e9feb38b27cefb98038be2188c44d3fa0bdb7a5cba16510d5ca2e54fb"
+      },
+      {
+        "source": "publishing/tools/check_sequence_examples.py",
+        "sha256": "d8bf56a72284ce69cbbd7372147fb09c2a2ba013d79c54b0c00db139d58042e1"
+      },
+      {
+        "source": "publishing/tools/check_long_context_examples.py",
+        "sha256": "58e4078955f1ef0bb782013bb678b7ea437d36a8321125b297a74abe5239fa19"
+      }
+    ],
+    "note": "Six source files frozen; further changes require a new exact delta. This evidence file does not mutate any of them."
+  }
+}

@@ -1,0 +1,31 @@
+[
+  {
+    "id": "curated-ddp-edls-error-feedback-bf4bb0c300d6",
+    "asset": "00 Учебник/Assets/Figures/curated/ddp-2026-10-23/edls-error-feedback.png",
+    "author": "Efficient DL Systems course authors; HSE University and Yandex School of Data Analysis",
+    "source_url": "https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/week03_data_parallel/lecture.pdf#page=58",
+    "commit": "e632aa89ca9e6638d52e1b686095e7442faffbb0",
+    "source_asset": "05 Источники/Originals/ddp-2026-10-23/edls-week03.pdf",
+    "source_asset_sha256": "d81b47f8eb116db698a9d9262c7c86ed9dbf4f8bf602fe958a6eaec104c6ef01",
+    "source_page": 58,
+    "render_page_size_px": [
+      1920,
+      1081
+    ],
+    "sha256": "bf4bb0c300d6914b171aca02e39a3753c225f154fbfaed63da07e3aed580c911",
+    "source_page_snapshot": "05 Источники/Originals/ddp-2026-10-23/edls-README.md",
+    "source_page_sha256": "1dcbadac70a8f331f48f2be88191013f64ef874b57223852cfa66359b657aebe",
+    "license": "MIT",
+    "license_url": "https://github.com/mryab/efficient-dl-systems/blob/e632aa89ca9e6638d52e1b686095e7442faffbb0/LICENSE",
+    "license_evidence": "05 Источники/Originals/ddp-2026-10-23/edls-MIT.txt",
+    "license_evidence_sha256": "01908feead9275d5043e082e9fa37e415a2972dca45fd62b8489e1fd2a058a13",
+    "modifications": "Complete original slide 58 rendered with pdftoppm -f 58 -l 58 -scale-to 1920 -png; no crop, redraw, translation, recoloring, or label changes. The short C(g) label on the right denotes compression of the shown g+e input; this notation is explained in the adjacent caption.",
+    "derivation": "pdf-page-render",
+    "metadata_status": "verified",
+    "provenance_confirmation": "source-license-verified",
+    "last_verified": "2026-10-23",
+    "used_in": [
+      "00 Учебник/11 Pre-training и Scaling/44a Processes, collectives и DDP.md"
+    ]
+  }
+]

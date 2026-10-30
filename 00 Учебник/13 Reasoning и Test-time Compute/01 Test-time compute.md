@@ -2,23 +2,33 @@
 title: Вычисления во время ответа
 type: textbook-chapter
 status: canonical
-last_updated: 2026-09-21
-last_verified: 2026-09-21
+last_updated: 2026-10-30
+last_verified: 2026-10-29
+source_language: mixed
+reference_terms:
+  - label: Tree of Thoughts — поиск по промежуточным решениям
+    label_en: Tree of Thoughts — search over partial solutions
+    anchor: tree-of-thoughts
+  - label: Coconut — непрерывные скрытые состояния
+    label_en: Coconut — continuous hidden-state feedback
+    anchor: coconut-continuous-thought
 aliases:
   - Test-time compute
   - Inference-time scaling
 prerequisites:
   - "[[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/08 Reasoning distillation]]"
-next:
-  - "[[02 Areas/ML & DL/00 Учебник/11 Pre-training и Scaling/53 Синтетические данные и учебные программы]]"
+next: "[[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена|Декодирование и выбор следующего токена]]"
 primary_sources:
   - https://arxiv.org/abs/2203.11171
+  - https://arxiv.org/abs/2311.17311v1
   - https://arxiv.org/abs/2305.10601
   - https://arxiv.org/abs/2408.03314
   - https://arxiv.org/abs/2110.14168
   - https://arxiv.org/abs/2309.03409
   - https://arxiv.org/abs/2309.11495
   - https://arxiv.org/abs/2405.15071
+  - https://arxiv.org/html/2412.06769v3
+  - https://github.com/facebookresearch/coconut/tree/27273cb8cca4bb763c041a63b036d0c3b7cbbb48
 source_unit_id:
   - meeting-01-slides-reasoning-model-context
   - meeting-01-slides-prompting-for-reasoning
@@ -45,11 +55,10 @@ source_unit_id:
 веса модели остаются прежними. Меняется процедура решения: какие тексты модель
 получает на вход, сколько ответов создаёт и как система выбирает результат.
 
-Именно эти решения определяют, поможет ли дополнительное время. Десять попыток
+Десять попыток
 могут содержать правильную программу, но бесполезны, если система отдаёт
 пользователю другую. Один длинный ответ может включать полезную проверку —
-или повторять прежнюю ошибку. Поэтому далее отдельно рассматриваются
-генерация кандидатов, их проверка и стоимость всей процедуры.
+или повторять прежнюю ошибку.
 
 ## 1. Что именно масштабируется после обучения
 
@@ -99,8 +108,8 @@ $$
 проверку вариант. Здесь есть и параллельные попытки, и последовательные
 исправления. Для поиска по дереву нужно дополнительно сохранять разные
 промежуточные состояния и выбирать, какие из них расширять дальше.
-Именно от одной цепочки к выбору и исправлению движется
-[первая лекция Berkeley Advanced LLM Agents](https://rdi.berkeley.edu/adv-llm-agents/sp25).
+Варианты с выбором и исправлениями разобраны в
+[первой лекции Berkeley Advanced LLM Agents](https://rdi.berkeley.edu/adv-llm-agents/sp25).
 Ни один из этих приёмов сам по себе не требует нового блока Transformer.
 
 ## 2. Две части любого метода: предложить и выбрать
@@ -128,7 +137,7 @@ $$
 продолжения, которые могут не войти в итоговый ответ. Преимущество поиска
 поэтому зависит от того, окупает ли ранний отбор эти дополнительные затраты.
 
-Полезно сразу различать две причины неудачи. Если правильного решения нет
+Система может не решить задачу по двум разным причинам. Если правильного решения нет
 среди кандидатов, изменить только окончательный выбор недостаточно.
 Если оно есть, но оценщик предпочёл ошибку, проблема уже в отборе.
 Далее это различие появится в паре метрик: оракульном pass@$k$ и точности
@@ -265,7 +274,7 @@ CC BY 4.0.*
 Стоимость подготовки структуры относится ко всему классу задач, а стоимость
 заполнения — к каждому примеру. Такое разделение важно при сравнении с
 self-consistency, которая заново генерирует несколько решений на каждый запрос.
-Есть важное исключение: в опыте на MATH авторы строили отдельную структуру
+В опыте на MATH авторы строили отдельную структуру
 для каждого примера с one-shot демонстрацией. В таком режиме подготовку
 уже нельзя считать однократной для всего набора: она оплачивается
 на каждом вопросе. Условие явно указано в
@@ -375,6 +384,15 @@ CC BY 4.0. Исходная схема без перерисовки.*
 частота появления уже зависит от распределения модели. Взвешенное голосование
 по независимому оценщику — другой метод, разобранный ниже.
 
+При этом распределение выборки задаётся всей процедурой декодирования.
+Если применены температура и top-$p$, частоты приближают распределение ответов
+этого самплера, а не обязательно маргинальное распределение исходной модели
+при температуре 1. Повторное умножение каждого голоса на вероятность текста
+меняет оцениваемую величину. В исходной статье отдельно сравниваются обычные
+голоса, суммы вероятностных весов и их средние; это разные правила отбора,
+а не способы записать одну формулу.
+[Wang et al., §2 и Table 1](https://arxiv.org/html/2203.11171v4#S2).
+
 ### Нормализация и ничьи
 
 Ответы `1/2` и `0.5` должны попадать в одну группу, если задача требует точного
@@ -477,6 +495,59 @@ def select_mode(answers):
 `select_mode(['A', 'A', 'B', 'B'])` — отсутствие единственного победителя.
 Это расчёт процедуры отбора, не запуск модели и не измерение её качества.
 
+```python
+assert math.isclose(pass_at_k(10, 3, 4), 5 / 6)
+assert math.isclose(strict_majority_probability(0.6, 5), 0.68256)
+assert math.isclose(strict_majority_probability(0.3, 5), 0.16308)
+assert select_mode([4, 4, 4, 8, 8, 5, 5]) == 4
+assert select_mode(['A', 'A', 'B', 'B']) is None
+print('pass@4:', pass_at_k(10, 3, 4))
+```
+
+Ошибку извлечения ответа нельзя незаметно убрать из отчёта о качестве.
+Например, из восьми генераций могут успешно разбираться только три.
+Можно определить отбор среди этих трёх, но долю неразобранных генераций
+и случаи без единственного победителя нужно учитывать отдельно. В функции
+выше `None` зарезервирован для результата отбора, а не для ошибочного ответа.
+
+### Когда финальный ответ нельзя свести к одному числу
+
+Два хороших кратких пересказа документа могут не иметь ни одной одинаковой
+фразы. Ответы со списками стран могут частично пересекаться, но не совпадать
+целиком. Обычное равенство строк в таких случаях даёт по одному голосу
+каждому кандидату и ничего не выбирает.
+
+Universal Self-Consistency (USC) передаёт сравнение самой языковой модели.
+Сначала получают несколько ответов, затем помещают их вместе с исходным
+вопросом в один запрос и просят выбрать наиболее согласующийся с остальными.
+На выходе нужен идентификатор одного из уже полученных кандидатов.
+В отличие от нового раунда исправления, этот вызов не должен подменять
+отбор генерацией ещё одного, не входившего в набор ответа.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/test-time-compute-2026-10-25/usc-workflow.png]]
+
+*Одна и та же LLM сначала создаёт ответы, затем сравнивает их в общем
+контексте. Выход последнего вызова указывает выбранный ответ; схема
+не содержит внешнего проверяющего оракула. Xinyun Chen et al.,
+[Universal Self-Consistency, Figure 1, §3](https://arxiv.org/html/2311.17311v1#S3),
+CC BY 4.0. Полный исходный PNG без перерисовки и перевода.*
+
+В примере статьи три ответа содержат списки сущностей. Два списка не
+совпадают полностью, однако некоторые сущности повторяются чаще других.
+Модель выбирает кандидат, лучше представляющий это пересечение.
+Это семантическая эвристика согласованности, а не точный подсчёт
+единственного правильного множества. Если все кандидаты повторяют один
+ложный факт, их согласие его не опровергнет.
+
+В основном сравнении авторы использовали восемь кандидатов и сохраняли
+один набор для разных методов отбора. На GSM8K увеличение до 16 уже
+не помогло: более длинный контекст и неточное сравнение могут испортить
+выбор. Поэтому стоимость USC включает чтение всех кандидатов последним
+вызовом; это не бесплатная замена `Counter`. Если нужны формальная
+эквивалентность программ или проверка фактов по документам, способность
+модели замечать согласованность их не заменяет.
+[Chen et al., §4.1, §4.3–4.4](https://arxiv.org/html/2311.17311v1#S4).
+
 ## 5. Best-of-N: генератор и проверяющая модель
 
 В best-of-$N$ модель порождает $N$ законченных ответов, после чего оценщик
@@ -532,6 +603,49 @@ PRM, а при окончательном выборе баллы суммиру
 [Раздел 5.1 и приложение E](https://arxiv.org/html/2408.03314v1#S5.SS1).
 Подменить это обычным максимумом или минимумом оценок шагов означало бы
 воспроизвести другой метод.
+
+Для тех же четырёх кандидатов можно исполнить именно суммирование по
+ответам. Здесь баллы лежат в $[0,1]$, как оценки вероятности от PRM;
+для произвольных reward logits сначала потребовалось бы отдельно определить
+их смысл и шкалу. Десятичные числа переводятся в рациональные, чтобы ничья
+в учебном примере не зависела от округления двоичного `float`.
+
+```python
+from collections import defaultdict
+from fractions import Fraction
+
+
+def weighted_vote(candidates):
+    totals = defaultdict(Fraction)
+    for answer, score in candidates:
+        if answer is None:
+            raise ValueError('None is reserved for no unique winner')
+        if isinstance(score, bool) or not isinstance(score, (int, float, Fraction)):
+            raise ValueError('score must be a real probability')
+        if not 0 <= score <= 1:
+            raise ValueError('score must be in [0, 1]')
+        totals[answer] += Fraction(str(score))
+    if not totals:
+        return None, {}
+    largest = max(totals.values())
+    winners = [answer for answer, score in totals.items() if score == largest]
+    return (winners[0] if len(winners) == 1 else None), dict(totals)
+
+
+candidates = [(4, 0.70), (8, 0.90), (4, 0.75), (5, 0.20)]
+winner, totals = weighted_vote(candidates)
+assert max(candidates, key=lambda item: item[1])[0] == 8
+assert winner == 4 and totals[4] == Fraction(145, 100)
+assert weighted_vote([(4, 0.3), (8, 0.1), (8, 0.2)])[0] is None
+print('weighted vote:', winner, totals)
+```
+
+Средний балл группы дал бы другой результат: для 4 это $1.45/2=0.725$,
+для 8 — $0.90$. Усреднение убрало бы преимущество двух разных решений,
+поддерживающих один ответ. Как и обычное голосование, сумма зависит от
+частот генератора. Копирование одного сохранённого ответа несколько раз
+искусственно увеличит его вес; дубликаты строк, действительно полученные
+независимой выборкой, напротив, являются частью наблюдаемой частоты.
 
 ### Когда ответ можно исполнить или проверить
 
@@ -602,6 +716,22 @@ Snell et al. изучали исправления на специально д�
 попытки. Поэтому результаты этой части работы нельзя приписывать одной
 инструкции «проверь себя». Обучение подготовило модель к такому контексту,
 а дополнительные вызовы позволили использовать эту способность.
+
+Для построения данных авторы сначала получали 64 независимых ответа.
+К правильному решению подбирали до четырёх неверных, предпочитая похожие
+по расстоянию редактирования: модель должна учиться исправлять связанный
+с ними текст, а не игнорировать случайные посторонние ответы. Число неверных
+примеров в контексте выбиралось от нуля до четырёх. При применении длинную
+историю обрезали до последних четырёх версий.
+
+Обучающий контекст содержал ошибки, но во время применения в историю
+попадают и правильные ответы. Возникает сдвиг распределения: очередное
+«исправление» может испортить уже полученный результат. Авторы наблюдали
+такое превращение примерно для 38% правильных ответов при наивном
+применении своей revision-модели и поэтому выбирали ответ из истории.
+Это доля переходов из правильных ответов, а не падение общей точности
+на 38 процентных пунктов.
+[Snell et al., §6.1](https://arxiv.org/html/2408.03314v1#S6.SS1).
 
 ### Почему самопроверка может испортить ответ
 
@@ -765,6 +895,7 @@ budget forcing, нужно сравнить разные бюджеты и сп�
 включая неиспользованный вывод; параметр `max_tokens` сам по себе
 не гарантирует такого общего учёта.
 
+<span id="tree-of-thoughts"></span>
 <span id="поиск-по-промежуточным-состояниям"></span>
 ## 7. Поиск по промежуточным состояниям
 
@@ -819,7 +950,7 @@ CC BY 4.0.*
 1. Для каждого сохранённого состояния модель перечисляет возможные
    следующие операции. Она получает инструкцию соблюдать правила,
    но текстовое предложение само по себе ещё не доказывает их соблюдение.
-2. Каждое предложенное состояние оценивается тремя вызовами модели.
+2. Каждое предложенное состояние оценивается по трём ответам модели.
    В [коде задачи](https://github.com/princeton-nlp/tree-of-thought-llm/blob/8050e67d0e3a0fddc424d7fa5801538722a4c4cc/src/tot/tasks/game24.py)
    ответы `impossible`, `likely` и `sure` превращаются в баллы
    $0.001$, $1$ и $20$, которые суммируются.
@@ -830,13 +961,291 @@ CC BY 4.0.*
    полное выражение. Финальная программная проверка сверяет использованные
    числа и значение выражения.
 
+В `get_value` три оценки запрашиваются параметром `n=3` одного вызова
+обёртки; это не обязательно три отдельных сетевых запроса. В режиме
+`propose` один ответ модели разбивается на строки операций, поэтому
+`n_generate_sample` не ограничивает число предложений так же, как
+в режиме независимой выборки. При объединении уровня оцениваются
+продолжения всех родителей, затем применяется один общий предел ширины.
+
+В той же ревизии есть два кеша. Повтор одного и того же запроса к оценщику
+может получить уже сохранённый балл; точный повтор целого текста траектории
+в одном уровне получает ноль. При нехватке других кандидатов ноль сам по
+себе не запрещает его выбор. Это не
+полное объединение математически эквивалентных состояний: две истории
+с одинаковыми оставшимися числами могут оставаться разными кандидатами.
+
+Наконец, `test_output` сопоставляет группы цифр регулярным выражением
+и значение через SymPy. Он не реализует отдельный строгий разбор только
+четырёх разрешённых операций. Поэтому его нельзя представлять как
+проверку всех правил Game of 24 или как безопасную песочницу для
+произвольного недоверенного ввода.
+
 Баллы здесь — эвристика. Значение `sure` не означает доказательство
 достижимости цели, а сумма трёх баллов не является вероятностью.
+Например, ответы `sure`, `likely`, `impossible` дают $20+1+0.001=21.001$.
 Если оценщик ошибочно отвергнет полезное состояние, эта конфигурация
 поиска его уже не продолжит. И наоборот, высокий балл не исправит
 недопустимую арифметическую операцию. При самостоятельной реализации
 правила переходов лучше проверять программно; запуск произвольного
 сгенерированного кода требует изоляции.
+
+### Как общий предел ширины меняет следующий уровень
+
+Пусть после первого шага оставлены состояния A и B. Модель предлагает
+из A два продолжения с оценками 0.95 и 0.90, из B — с оценками 0.80 и 0.10.
+При ширине 2 следующий уровень содержит оба продолжения A. Правило
+«сохранить по одному от каждого родителя» оставило бы 0.95 и 0.80
+и уже задавало бы другой поиск.
+
+Следующий код выделяет операцию расширения и общего отбора из
+[Algorithm 1 ToT](https://arxiv.org/html/2305.10601v2#S3).
+`propose` возвращает полные тексты новых траекторий, `score` — конечный
+эвристический балл. Модельные вызовы здесь заменены явными таблицами,
+чтобы можно было проверить порядок и число оценённых кандидатов.
+
+```python
+def expand_frontier(frontier, propose, score, width):
+    if type(width) is not int or width < 1:
+        raise ValueError('width must be a positive integer')
+    expanded = [child for parent in frontier for child in propose(parent)]
+    values = [score(child) for child in expanded]
+    if any(isinstance(v, bool) or not isinstance(v, (int, float))
+           or not math.isfinite(v) for v in values):
+        raise ValueError('scores must be finite real numbers')
+    order = sorted(range(len(expanded)), key=lambda i: values[i], reverse=True)
+    selected = [expanded[i] for i in order[:width]]
+    return selected, list(zip(expanded, values))
+
+
+branches = {'': ['A', 'B'], 'A\n': ['A1', 'A2'], 'B\n': ['B1', 'B2']}
+branch_scores = {'A\n': 0.7, 'B\n': 0.6,
+                 'A\nA1\n': 0.95, 'A\nA2\n': 0.90,
+                 'B\nB1\n': 0.80, 'B\nB2\n': 0.10}
+
+
+def table_propose(parent):
+    return [parent + suffix + '\n' for suffix in branches.get(parent, [])]
+
+
+frontier, first_level = expand_frontier([''], table_propose, branch_scores.__getitem__, 2)
+frontier, second_level = expand_frontier(frontier, table_propose, branch_scores.__getitem__, 2)
+assert frontier == ['A\nA1\n', 'A\nA2\n']
+assert len(first_level) + len(second_level) == 6
+print('frontier:', frontier)
+```
+
+Числа здесь заданы заранее и не являются результатом работы LLM.
+Код не воспроизводит кеширование и обработку дубликатов исходной реализации;
+он показывает общий отбор при разных родителях. При равных баллах сохраняется
+порядок поступления, как в ветке `greedy` закреплённого `bfs.py`.
+Ветвь, не попавшая в сохранённую пару, больше не расширяется.
+
+<span id="tot-creative-writing"></span>
+### Creative writing: select a plan, then a passage
+
+The creative-writing task supplies four unrelated sentences. The output must
+contain four paragraphs, with each paragraph ending in its assigned sentence.
+Meeting those four local constraints does not ensure that the paragraphs form
+a coherent passage. In the example below, Plan 1 moves from a handstand to
+an astronaut, then to a conversation in a bar and finally to personal identity.
+Plan 2 connects the same material through an unusual self-help book.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tot-reconciliation-2026-10-30/tot-creative-search.png]]
+
+*Shunyu Yao et al., [Tree of Thoughts, Figure 4, p. 7](https://arxiv.org/pdf/2305.10601v2#page=7),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Complete original
+figure and English caption, cropped from the PDF without redrawing.
+Plan 2 receives three of the five votes; the other plans are discarded.*
+
+In [§4.2](https://arxiv.org/html/2305.10601v2#S4.SS2), the authors use two
+generation-and-selection stages. First, they independently sample five plans
+from the planning prompt. A comparison prompt presents all five candidates
+together; five sampled responses each select a candidate after comparing
+the alternatives. The plan with the most votes survives. Next, the model
+samples five complete passages conditioned on that plan, and another five
+comparison responses select the final passage.
+
+The search has depth two and retains one state after each selection:
+five plans → one plan → five passages → one passage. It has one intermediate
+thought, the plan. It does not search separately over the four paragraphs,
+and it does not generate passages from all five plans. If the selected plan
+turns out to be unhelpful, this configuration does not revisit a rejected plan.
+
+This evaluator differs from the Game of 24 value prompt. A value prompt
+judges one partial solution against the task; the writing vote prompt
+compares a set of alternatives. Three votes for Plan 2 are a count of sampled
+preferences, not a calibrated probability that the plan will produce good
+writing. A candidate can win a plurality without receiving more than half
+the votes. All candidates and all judges still come from the same model.
+
+The pinned [TextTask](https://github.com/princeton-nlp/tree-of-thought-llm/blob/8050e67d0e3a0fddc424d7fa5801538722a4c4cc/src/tot/tasks/text.py)
+sets two stages, stopping the first at the passage delimiter.
+Its vote parser counts valid candidate indices; an unparseable vote contributes
+nothing. The shared greedy BFS selection keeps the first candidate on a tie.
+These parser and tie rules belong to that implementation, rather than to
+the general definition of ToT.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tot-reconciliation-2026-10-30/tot-creative-results.png]]
+
+*Shunyu Yao et al., [Figure 5, p. 7](https://arxiv.org/pdf/2305.10601v2#page=7),
+CC BY 4.0. Both original panels, all axis labels and the full caption.
+The right panel separates a ToT preference, a tie and a CoT preference.*
+
+Selection and final evaluation use different prompts. For the reported
+automatic evaluation, GPT-4 assigns each completed passage five scores
+from 1 to 10; the mean is the reported score. Across 100 inputs, the paper
+reports means of 6.19 for direct prompting, 6.93 for CoT and 7.56 for ToT.
+These are judgments of coherency, not percentages of correctly solved tasks.
+The human comparison, performed by a subset of the authors with passage
+order randomized and method identity hidden, preferred ToT in 41 pairs,
+CoT in 21 and found 38 similarly coherent. It was not an independent
+large-scale reader study.
+
+The same figure also reports iterative refinement. Refining a direct output
+raised its mean score to 7.67, while refining a ToT output raised it to 7.91.
+Thus these experiments do not establish that this tree search outperforms
+every other use of an additional inference budget.
+
+<span id="tot-crossword-dfs"></span>
+### Mini Crosswords: constraints, pruning and backtracking
+
+A 5×5 crossword has ten clues: five horizontal and five vertical. A proposed
+word changes five cells, which also constrain five crossing words.
+After filling h1 with TASKS and h2 with MOTOR, the first vertical word
+has the pattern TM___. Adding SALON at h4 changes that pattern to TM_S_.
+The evaluator must decide whether a word matching both the pattern and
+the clue “To heap” remains plausible.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/tot-reconciliation-2026-10-30/tot-crossword-dfs.png]]
+
+*Shunyu Yao et al., [Tree of Thoughts, Figure 6, p. 8](https://arxiv.org/pdf/2305.10601v2#page=8),
+CC BY 4.0. Complete original figure and English caption. The proposal queue
+orders candidate actions; the state evaluator rejects the SALON branch,
+and DFS returns to the parent before trying GRAND.*
+
+The generator proposes an action containing both a location and a word, such
+as h4. salon. It can propose different clues and several answers to one clue.
+The original proposal format also asks for a confidence label. Repeated
+proposals are combined by adding the weights of those labels; this produces
+the order in which DFS tries actions. In the pinned
+[notebook](https://github.com/princeton-nlp/tree-of-thought-llm/blob/8050e67d0e3a0fddc424d7fa5801538722a4c4cc/scripts/crosswords/search_crosswords-dfs.ipynb),
+the weights are certain = 1, high = 0.5, medium = 0.2 and low = 0.1.
+They are hand-chosen priorities, not probabilities.
+
+For example, SALON proposed once as certain, once as medium and once as low
+gets 1.3. GRAND proposed twice as high gets 1.0. SALON is therefore tried
+first. The following calculation uses explicit responses, not a model call.
+
+```python
+import math
+
+def crossword_priorities(proposals):
+    weights = {'certain': 1.0, 'high': 0.5, 'medium': 0.2, 'low': 0.1}
+    scores = {}
+    for action, label in proposals:
+        scores[action] = scores.get(action, 0.0) + weights[label]
+    return sorted(scores.items(), key=lambda item: item[1], reverse=True)
+
+def column_pattern(rows, column):
+    return ''.join(row[column] for row in rows)
+
+proposals = [
+    ('h4. salon', 'certain'), ('h3. grand', 'high'),
+    ('h4. salon', 'medium'), ('h3. grand', 'high'),
+    ('h4. salon', 'low'),
+]
+ordered = crossword_priorities(proposals)
+assert ordered[0][0] == 'h4. salon'
+assert math.isclose(ordered[0][1], 1.3)
+assert ordered[1] == ('h3. grand', 1.0)
+
+parent = ['TASKS', 'MOTOR', '_____', '_____', '_____']
+child = parent.copy()
+child[3] = 'SALON'
+assert column_pattern(parent, 0) == 'TM___'
+assert column_pattern(child, 0) == 'TM_S_'
+assert parent[3] == '_____'  # The saved parent is unchanged.
+print(ordered, column_pattern(child, 0))
+```
+
+The second evaluator asks whether each constrained clue can still be filled.
+If it labels even one checked clue impossible, the search prunes that child's
+subtree. In Figure 6, TM_S_ receives that label. DFS then restores the board
+with TASKS and MOTOR, removes SALON from the action history, and tries the
+next action, h3. grand. GRAND is an alternative to explore, not a certified
+solution. Restoring only the text of the action history while keeping
+SALON's letters on the board would explore a different state.
+
+The released environment and the search controller have separate roles.
+[MiniCrosswordsEnv.step](https://github.com/princeton-nlp/tree-of-thought-llm/blob/8050e67d0e3a0fddc424d7fa5801538722a4c4cc/src/tot/tasks/crosswords.py)
+writes a proposed word and marks overwritten nonblank letters as changed.
+The DFS controller rejects a child with such a change and restores its saved
+board, status flags and step counter after exploring a candidate.
+The environment alone does not enforce the no-overwrite rule.
+There is also a boundary case in this notebook: when the child cap is
+exceeded, the loop breaks before its reset statement. At that exit, the
+current environment can retain the newly tried child's board. The caller
+normally restores its own saved state, but the root has no such caller.
+The visited-state log, rather than this leftover board, defines the paper's
+output selection. A new implementation should restore state even on an
+early exit, for example with a finally block.
+Its prompt-status routine skips patterns with fewer than two known letters;
+it can also evaluate filled words. It is not an exhaustive dictionary solver.
+
+There are reproducibility differences between the paper and the released
+notebook. Section 4.3 describes five proposal samples per state and at most
+ten intermediate steps. The pinned notebook requests eight proposal samples,
+continues only while the environment step is less than ten, and explores
+at most three admitted children per state. Its 100-step limit counts entries
+added to the search log, not network requests or generated tokens.
+Rejected candidates and the separate proposal/evaluation completions do not
+have a one-to-one relationship with that counter. The notebook restores
+state between siblings, so this budget is also different from the depth
+of a single path.
+
+The paper outputs the deepest visited state, choosing the first one on a tie.
+That is a usable rule when ground-truth answers are unavailable, but the
+deepest state need not contain the most correct letters. On 20 selected
+crosswords, the reported ToT output has 78% correct letters, 60% correct words
+and 20% completely solved games, which is four games. Choosing the best
+visited state with ground-truth access instead gives seven solved games.
+That oracle result diagnoses the output-selection rule; a deployed solver
+cannot select it without knowing the answers.
+
+Pruning can also discard a solution. The authors report that the evaluator
+sometimes rejects valid rare or obsolete words. Without pruning, the search
+visited correct solutions for four games, but its output rule returned only
+one of them; three of those visited solutions were not found by the pruned
+search within its budget. Backtracking, proposal quality, pruning and final
+selection therefore fail in different ways. The example above checks the
+priority and crossing-letter calculations; it does not reproduce GPT-4's
+crossword results.
+[Yao et al., §4.3 and Table 3](https://arxiv.org/html/2305.10601v2#S4.SS3).
+
+### What the original comparisons measure
+
+The Game of 24 results use 100 games, indices 901–1,000 in the source's
+difficulty ordering. ToT with width one solves 45%, while width five solves
+74%. The best-of-100 CoT oracle solves 49%, not less than the width-one
+result. This oracle selects a valid answer using correctness information;
+CoT self-consistency instead votes over the 100 answers and scores 9%.
+A method that generates a correct candidate and one that reliably selects
+it have different success rates.
+
+The published token costs also depend on the task. Appendix B.3 reports
+approximately 5.5k generated tokens per Game of 24 case for ToT, versus
+6.7k for 100 CoT samples. Creative writing uses about 4k generated tokens
+for ToT versus 0.9k for one CoT response. The comparison is neither a
+universal “100 calls” rule nor a present-day latency measurement.
+The model, prompts, candidate lengths, evaluator, caching and stopping
+conditions determine the cost.
+[Yao et al., Table 2 and Appendix B.3](https://arxiv.org/pdf/2305.10601v2#page=14).
+
+For search that includes actions and observations from an external
+environment, continue with [[02 Areas/ML & DL/00 Учебник/17 Tools и Agents/67 Память, планирование и оркестрация агентов#LATS: дерево с наблюдениями среды|LATS and agent planning]].
+A copied crossword board can be restored locally; an external action
+requires its own rollback or simulation semantics.
 
 ### Ширина поиска, пробные продолжения и цена оценки
 
@@ -858,6 +1267,17 @@ $f$ продолжений. Оценить нужно до $bf$ новых со�
 при выборе исходной ветви. Такой способ может заметить последствия
 ошибки, неочевидные по одному шагу, но каждый пробный путь стоит вычислений.
 При нулевой глубине lookahead получается обычный вариант их beam search.
+
+У Snell параметры записаны иначе, чем ширина $b$ выше. На каждом уровне
+получают $N$ кандидатов, оставляют $N/M$ лучших и из каждого снова получают
+$M$ продолжений. Например, $N=16$, $M=4$ означает 16 оценок на уровне,
+четыре сохранённых префикса и четыре новых продолжения от каждого.
+Лимит в опыте составлял 40 расширений. Для lookahead авторы учитывают
+приближённую цену как $N(k+1)$ генераций: при $k=3$ конфигурация с $N=16$
+сравнивается с бюджетом 64, а не 16. Это нормированная цена их протокола,
+не замер времени сервера; разные длины шагов и вызовы PRM отдельно
+ограничивают точность такого приближения.
+[Snell et al., §5.2–5.3](https://arxiv.org/html/2408.03314v1#S5.SS2).
 
 Не всякий поиск с пробными продолжениями — MCTS. В MCTS существенны
 повторные посещения узлов, перенос полученных оценок вверх по дереву
@@ -885,6 +1305,232 @@ $f$ продолжений. Оценить нужно до $bf$ новых со�
 цепочку в контексте. Он не доказывает, что любая большая модель
 надёжно выполняет такие операции без проверки.
 
+<a id="coconut-continuous-thought"></a>
+### Coconut: feeding a hidden state back instead of choosing a word
+
+In a text chain of thought, the model produces a hidden state, maps it
+to vocabulary logits, selects a token, and looks up that token's embedding
+for the next position. Coconut changes the connection between successive
+positions: during a latent interval, the previous last-layer hidden state
+itself becomes the next input embedding. The next position still requires
+a model pass. It does not require choosing a vocabulary item.
+
+![[00 Учебник/Assets/Figures/curated/coconut-2026-10-29/coconut.png|Coconut: token embedding feedback compared with continuous hidden-state feedback]]
+
+*Shibo Hao et al., [Coconut, original repository diagram](https://github.com/facebookresearch/coconut/blob/27273cb8cca4bb763c041a63b036d0c3b7cbbb48/assets/coconut.png).
+The left panel feeds a selected word back through the embedding table.
+The right panel feeds a last-layer state directly into the next position
+between the two boundary markers. Complete original PNG; repository
+[MIT notice](/licenses/coconut-27273cb8-MIT.txt).*
+
+The paper uses `<bot>` and `<eot>` to mark the beginning and end of
+the latent interval. The released code names them `<|start-latent|>` and
+`<|end-latent|>`. Its `<|latent|>` token identifies a position whose
+ordinary embedding must be replaced. Feeding the unchanged embedding
+of that placeholder would instead implement repeated discrete pause tokens.
+
+Suppose the question and beginning marker produce the state $h_0$.
+The first latent position receives $u_1=h_0$. The Transformer processes
+this new position with causal attention to the existing prefix and
+produces $h_1$. The second latent position receives $u_2=h_1$.
+After the chosen number of latent positions, the end marker receives
+its ordinary token embedding and language generation resumes.
+
+Writing $F_\theta$ for the last-position output of the causal Transformer,
+the recurrence is
+
+$$
+\begin{aligned}
+u_1&=h_0,\\
+u_{j+1}&=F_\theta(Q,\mathrm{bot},u_1,\ldots,u_j).
+\end{aligned}
+$$
+
+Here $Q$ denotes the question embeddings. Every latent vector has the same
+width as an input embedding; in the paper the returned hidden states
+have passed the model's final normalization. Positions and causal attention
+are still needed. A latent step is an extra sequence position, not an
+extra Transformer layer and not a modification of the prompt alone.
+
+The released [`Coconut.forward`](https://github.com/facebookresearch/coconut/blob/27273cb8cca4bb763c041a63b036d0c3b7cbbb48/coconut.py#L38-L185)
+replaces the embedding at each latent position with the preceding
+last-layer hidden state. It keeps an offset when earlier positions
+have already been processed through a KV cache. An off-by-one error
+would feed a different position's state into the recurrence.
+
+#### Learning the latent interval
+
+A normal pretrained model has not necessarily learned to use its final
+hidden states as future input embeddings. The original Coconut recipe
+therefore starts from examples with written reasoning and gradually removes
+early reasoning steps while adding latent positions. Weights change during
+this training. After training, inference can vary the latent budget
+without changing those weights.
+
+For three annotated reasoning steps $r_1,r_2,r_3$ and two latent positions
+per removed step, the schedule has the following form. Boundary markers
+are omitted from the table but remain in the actual input.
+
+| Training stage | Visible reasoning after the question | Latent positions before that text |
+|---|---|---|
+| 0 | $r_1,r_2,r_3$, answer | 0 |
+| 1 | $r_2,r_3$, answer | 2 |
+| 2 | $r_3$, answer | 4 |
+| 3 | answer | 6 |
+
+A reasoning step is an annotated piece of text and can contain several
+tokens. Replacing one step with two vectors is not the same as replacing
+two tokens with two vectors. The parameter $c$ specifies latent positions
+per removed step; the remaining text still uses the model's tokenizer.
+
+In [`get_cot_latent_dataset`](https://github.com/facebookresearch/coconut/blob/27273cb8cca4bb763c041a63b036d0c3b7cbbb48/dataset.py#L232-L325),
+the question, latent positions and both boundary markers receive label
+`-100`. The surviving reasoning suffix, answer and EOS retain their
+token targets. The causal LM loss compares each target with the logits
+at the preceding position. Ignoring a target does not remove that position
+from the context.
+
+For example, after stage 1 the input contains the question, the start
+marker, two latent positions, the end marker, $r_2$, $r_3$ and the answer.
+The model is supervised on $r_2$, $r_3$ and the answer, including EOS.
+It is not given a target vector for either latent position and is not
+required to reconstruct the removed sentence $r_1$. Later token losses
+train the hidden-state recurrence through back-propagation.
+
+The paper resets optimizer state between curriculum stages. The pinned
+`run.py` reconstructs AdamW at **every epoch** when `reset_optimizer`
+is enabled, even if several epochs share one stage. Reproducing this
+revision requires keeping that distinction; the prose schedule alone
+does not specify the complete training run.
+
+#### A worked feedback calculation
+
+The following small calculation isolates the feedback connection.
+It is a two-dimensional linear recurrence, not a Transformer and not a
+trained reasoning model. Let the initial state be $(0.75,0.25)$ and let
+
+$$
+A(a)=
+\begin{pmatrix}
+a&1\\
+1&-a
+\end{pmatrix}.
+$$
+
+At $a=1$, direct state feedback gives $(1,0.5)$ after the first update
+and $(1.5,0.5)$ after the second. Now introduce two discrete tokens with
+embeddings $(1,0)$ and $(0,1)$ and choose the larger state coordinate
+as the next token. That discrete path selects the first token, processes
+$(1,0)$ and obtains $(1,1)$. With a fixed first-token tie break it obtains
+$(1,1)$ again. The continuous and discrete paths already differ before
+any claim about task quality.
+
+A toy two-class readout of the final coordinates gives probability
+$\operatorname{sigmoid}(1)\approx0.7311$ to the first class on the latent
+path and 0.5 on the discrete path. Neither probability is an accuracy.
+They show how selecting a vocabulary item changes the state passed onward.
+
+The code also checks the training gradient. For two continuous updates,
+the logit difference is $(a^2+1)/2$. The derivative of the first-class
+negative log-likelihood at $a=1$ is therefore
+$\operatorname{sigmoid}(1)-1$. Freezing the first state while differentiating
+the second update gives a different derivative. This models the error
+introduced by detaching a latent state during training.
+
+```python
+import math
+
+
+def coconut_linear_step(state, a):
+    x, y = state
+    return (a * x + y, x - a * y)
+
+
+def coconut_toy_loss(a, freeze_first=False):
+    h0 = (0.75, 0.25)
+    h1 = coconut_linear_step(h0, 1.0 if freeze_first else a)
+    h2 = coconut_linear_step(h1, a)
+    return math.log1p(math.exp(h2[1] - h2[0]))
+
+
+def coconut_stage(question, steps, answer, stage, thoughts_per_step=2):
+    if type(stage) is not int or not 0 <= stage <= len(steps):
+        raise ValueError("stage must select a prefix of reasoning steps")
+    if type(thoughts_per_step) is not int or thoughts_per_step < 1:
+        raise ValueError("thoughts_per_step must be a positive integer")
+    prefix = (list(question) + ["<bot>"]
+              + ["<latent>"] * (stage * thoughts_per_step) + ["<eot>"])
+    suffix = [token for step in steps[stage:] for token in step]
+    suffix += list(answer) + ["<eos>"]
+    return prefix + suffix, [-100] * len(prefix) + suffix
+
+
+h0 = (0.75, 0.25)
+h1 = coconut_linear_step(h0, 1.0)
+h2 = coconut_linear_step(h1, 1.0)
+assert h1 == (1.0, 0.5) and h2 == (1.5, 0.5)
+hard_state = h0
+for _ in range(2):
+    embedding = (1.0, 0.0) if hard_state[0] >= hard_state[1] else (0.0, 1.0)
+    hard_state = coconut_linear_step(embedding, 1.0)
+assert hard_state == (1.0, 1.0)
+
+eps = 1e-6
+gradient = (coconut_toy_loss(1 + eps) - coconut_toy_loss(1 - eps)) / (2 * eps)
+detached = (coconut_toy_loss(1 + eps, True)
+            - coconut_toy_loss(1 - eps, True)) / (2 * eps)
+expected = 1 / (1 + math.exp(-1)) - 1
+assert math.isclose(gradient, expected, abs_tol=1e-9)
+assert math.isclose(detached, 1.5 * expected, abs_tol=1e-9)
+
+tokens, labels = coconut_stage(["Q"], [["r1a", "r1b"], ["r2"], ["r3"]],
+                              ["A"], stage=1)
+assert tokens == ["Q", "<bot>", "<latent>", "<latent>", "<eot>", "r2", "r3", "A", "<eos>"]
+assert labels == [-100] * 5 + ["r2", "r3", "A", "<eos>"]
+```
+
+The packing function demonstrates the stated curriculum and label boundary.
+It deliberately leaves out the source implementation's stage randomization,
+maximum-stage padding and distributed batching. It is not a replacement
+for the released training data pipeline.
+
+#### Latent steps still cost computation
+
+With $n$ latent positions, the released forward method makes $n+1$
+backbone calls: one call for the prefix, sequential calls needed to form
+the latent inputs, and a final call for the surviving language suffix.
+KV caching can avoid recomputing an unchanged prefix; it does not make
+the dependent latent updates parallel. The reference backbone also computes
+vocabulary logits at intermediate positions even when they are not used
+to select tokens.
+
+The pinned `generate` supports batch size 1. After its initial latent
+forward pass, the text-generation loop passes the complete accumulated
+embedding sequence to the backbone again, rather than maintaining a
+serving engine's incremental text KV cache. Timing that implementation
+against optimized autoregressive serving would conflate the reasoning
+method with implementation choices.
+
+The original study uses a fixed latent length for most reported inference,
+rather than interpreting every hidden state as an automatically chosen
+stopping decision. More latent positions can be tested on the same trained
+weights, but a budget outside the training distribution is not guaranteed
+to improve the answer.
+
+The paper's tree-search interpretation comes from probing possible next
+concepts on ProsQA. The released forward loop contains no explicit BFS
+queue, exhaustive branch expansion or completeness guarantee. A state can
+support several alternative continuations without being a list of
+independently verified paths. This differs from the explicit frontier
+maintained by Tree of Thoughts above.
+
+Results also depend on the task. In [Table 1 of the pinned paper](https://arxiv.org/html/2412.06769v3#S5),
+Coconut improves on text CoT on ProsQA but is below it on GSM8K;
+a pause-token curriculum is a strong control on ProsQA. Those experiments
+do not establish that hidden-state feedback is universally more accurate,
+or that printing fewer words always uses fewer FLOPs.
+
+
 ## 8. Как распределять FLOP-бюджет между размером модели и числом попыток
 
 Лучший способ потратить дополнительные вычисления зависит от того,
@@ -911,6 +1557,32 @@ CC BY 4.0.*
 шаги или преждевременное завершение, если они получают высокие оценки.
 График характеризует PaLM2-S*, конкретный проверяющий механизм и MATH,
 а не все языковые модели и все виды поиска.
+
+### Сколько независимых начал оставить для исправления
+
+При бюджете 64 полных ответа можно получить 64 независимых начала,
+одну последовательность из 64 версий или восемь независимых начал
+с восемью версиями каждого. В последнем случае длина цепочки включает
+первую попытку: получается 64 ответа, а не восемь первых плюс 64 исправления.
+Выбор между такими режимами меняет число исследованных подходов и глубину
+доработки каждого из них.
+
+![[02 Areas/ML & DL/00 Учебник/Assets/Figures/curated/test-time-compute-2026-10-25/snell-sequential-parallel-ratio.png]]
+
+*Слева каждая линия сохраняет общий бюджет, но меняет отношение числа
+последовательных версий к числу независимых цепочек. Справа общий бюджет
+равен 128; цветом обозначено это отношение, а пять групп идут от простых
+вопросов к трудным. Это отдельные столбики, не накопленные суммы.
+Charlie Snell et al., [Figure 7, §6.2](https://arxiv.org/html/2408.03314v1#S6.SS2),
+CC BY 4.0. Полный исходный PNG с обеими панелями, осями и шкалами.*
+
+На лёгких вопросах этого опыта длинные цепочки исправлений чаще помогали:
+исходный ответ уже мог содержать подходящий ход. На более трудных
+сохранение нескольких независимых начал позволяло не зависеть от первого
+выбранного подхода. Максимально последовательный режим не был лучшим
+при каждом бюджете и в каждой группе. Эти результаты относятся к специально
+обученной revision-модели и выбору ответов оценщиком; они не задают
+универсальную пропорцию вроде «всегда восемь на восемь».
 
 ### Откуда системе знать сложность нового вопроса
 
@@ -959,14 +1631,58 @@ C_{\text{train}}\approx 6PD_{\text{train}},\qquad
 C_{\text{infer}}\approx 2PD_{\text{infer}},
 $$
 
-где $D_{\text{infer}}$ — суммарное число обрабатываемых при использовании
-токенов, а не длина одного ответа. Увеличение размера модели повышает
+где $D_{\text{infer}}$ в упрощении статьи — суммарное число генерируемых
+токенов за время использования, а не длина одного ответа. Входные токены,
+повторный prefill и проверяющую модель для реального сервиса считают
+дополнительно. Увеличение размера модели повышает
 расходы обоих этапов. Дополнительные попытки повышают расходы применения.
 При небольшом числе будущих запросов выгоднее может оказаться
 дешёвое обучение и дорогой ответ; при огромном числе запросов цена
 каждой попытки многократно повторяется. Поэтому вывод «вычисления
 во время ответа эффективнее увеличения модели» зависит и от задач,
 и от срока использования системы.
+
+Это соотношение можно вывести явно. Обозначим стоимость обучения малой
+модели через $X=6PD_{\text{train}}$, обычного применения — через
+$Y=2PD_{\text{infer}}$. Большая модель с $MP$ параметрами при том же
+числе обучающих токенов стоит $M(X+Y)$. Если у малой модели увеличить
+только расходы применения в $m$ раз, равенство полных бюджетов даёт
+
+$$
+\begin{aligned}
+X+mY&=M(X+Y),\\
+m&=M+\frac{3(M-1)}{R},\\
+R&=\frac{D_{\text{infer}}}{D_{\text{train}}}.
+\end{aligned}
+$$
+
+Для $M=4$ и $R=0.1$ получается $m=94$: сэкономленное обучение позволяет
+существенно увеличить редкое применение. При $R=10$ остаётся $m=4.9$,
+потому что каждый дополнительный ответ теперь оплачивается много раз.
+Это равенство расходов, а не доказательство равного качества.
+В исходном сравнении также зафиксировано число обучающих токенов;
+оно не охватывает все способы одновременно масштабировать данные и параметры.
+[Snell et al., §7](https://arxiv.org/html/2408.03314v1#S7).
+
+```python
+def inference_multiplier(model_ratio, inference_to_training_tokens):
+    if isinstance(model_ratio, bool) or not isinstance(model_ratio, (int, Fraction)):
+        raise ValueError('model_ratio must be an exact number >= 1')
+    if isinstance(inference_to_training_tokens, bool) or not isinstance(
+            inference_to_training_tokens, (int, Fraction)):
+        raise ValueError('token ratio must be an exact positive number')
+    m = Fraction(model_ratio)
+    r = Fraction(inference_to_training_tokens)
+    if m < 1 or r <= 0:
+        raise ValueError('require model ratio >= 1 and token ratio > 0')
+    return m + 3 * (m - 1) / r
+
+
+assert inference_multiplier(4, Fraction(1, 10)) == 94
+assert inference_multiplier(4, 10) == Fraction(49, 10)
+print('budget multipliers:', inference_multiplier(4, Fraction(1, 10)),
+      inference_multiplier(4, 10))
+```
 
 ## 9. Как сравнивать методы
 
@@ -1123,14 +1839,12 @@ $$
 | Подбор инструкции | [Yang et al., OPRO](https://arxiv.org/html/2309.03409v3): история пар «решение — оценка», раздел 2 и Figure 2 |
 | Структура задачи | [Zhou et al., Least-to-Most](https://arxiv.org/abs/2205.10625): последовательные подзадачи; [Zhou et al., Self-Discover](https://arxiv.org/html/2402.03620v1): SELECT, ADAPT, IMPLEMENT |
 | Голосование | [Wang et al., Self-Consistency](https://arxiv.org/abs/2203.11171v4): извлечение и агрегация финальных ответов |
+| Свободные ответы | [Chen et al., Universal Self-Consistency](https://arxiv.org/abs/2311.17311v1): сравнение кандидатов одной LLM без точного равенства строк, §3–4 |
 | Проверяющая модель | [Cobbe et al.](https://arxiv.org/abs/2110.14168): отбор математических решений; [Lightman et al.](https://arxiv.org/abs/2305.20050): разметка промежуточных шагов |
 | Много попыток | [Brown et al., Large Language Monkeys](https://arxiv.org/abs/2407.21787): рост покрытия задач при repeated sampling |
 | Поиск | [Yao et al., Tree of Thoughts](https://arxiv.org/abs/2305.10601v2): состояние, предложение шага, оценка и поиск, разделы 3–4 |
 | Распределение бюджета | [Snell et al.](https://arxiv.org/abs/2408.03314v1): PRM-поиск, цепочки исправлений, оценка сложности и стоимость, разделы 4–7 |
 | Управление длиной | [Muennighoff et al., s1](https://arxiv.org/abs/2501.19393): budget forcing, раздел 3.1; [Qwen3](https://arxiv.org/abs/2505.09388v1): гибридный режим и бюджет, раздел 4.3 |
 
-Дополнительное время приносит пользу, когда оно меняет ход решения:
-позволяет найти ещё один кандидат, проверить сомнительный шаг
-или исправить найденную ошибку. Но пользу определяют по качеству
-возвращённого ответа и полной стоимости, а не по длине рассуждения
-или числу вызовов модели.
+Предыдущая глава: [[02 Areas/ML & DL/00 Учебник/12 Post-training и Alignment/08 Reasoning distillation|Дистилляция рассуждений]].
+Следующая глава: [[02 Areas/ML & DL/00 Учебник/14 Inference и оптимизация/54 Декодирование и выбор следующего токена|Декодирование и выбор следующего токена]].

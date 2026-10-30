@@ -9,9 +9,18 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`labs/vol1/lab_10_model_compress.py`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/labs/vol1/lab_10_model_compress.py) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static text, not a running lab
+> Python string literals are decoded without executing the lab.
+> Literal underscores in display-math text labels are escaped for KaTeX.
+> Runtime fields are named below each excerpt; they are not measured results.
+> The explanation shows literal multiline Markdown; other UI text and
+> unevaluated templates are collapsed separately. Conditional branches
+> can appear together there. Runtime-only
+> messages, HTML interfaces and plots remain in the complete source.
 
 # VOL1 Lab — Model Compress
 
@@ -27,14 +36,14 @@ track, preserve quality, meet the speedup requirement, and run on a supported fa
 Compression ratio:
 
 $$
-\\text`…` = \\frac{\\text{original size}}{\\text{compressed size}}
+\text{ratio} = \frac{\text{original size}}{\text{compressed size}}
 $$
 
 Solver release condition:
 
 $$
-\\text`…` =
-\\text`…` \\land \\text`…` \\land \\text`…` \\land \\text`…`
+\text{feasible} =
+\text{size\_ok} \land \text{quality\_ok} \land \text{speed\_ok} \land \text{hardware\_supported}
 $$
 
 Source model: `CompressionModel.sweep()` evaluates all listed candidates against the
@@ -53,18 +62,18 @@ the hardware supports the exact sparse-kernel shape.
 Theoretical pruning ratio:
 
 $$
-\\text`…` = \\frac{1}{1 - s}
+\text{pruning\_ratio} = \frac{1}{1 - s}
 $$
 
 Runtime branch:
 
 $$
-\\text`…` =
-\\begin`…`
-1.0, & \\text{unstructured on dense kernels} \\\\
-\\frac{1}{1-s}, & \\text{structured pruning} \\\\
-2.0, & \\text{supported 2:4 N:M near 50 percent sparsity}
-\\end`…`
+\text{speedup} =
+\begin{cases}
+1.0, & \text{unstructured on dense kernels} \\
+\frac{1}{1-s}, & \text{structured pruning} \\
+2.0, & \text{supported 2:4 N:M near 50 percent sparsity}
+\end{cases}
 $$
 
 Source model: `CompressionModel.candidate()` normalizes the sparsity type, checks
@@ -84,14 +93,14 @@ quality guardrail.
 Dense-student compression:
 
 $$
-\\text{student compression ratio} = \\frac{1}{\\text{student scale}}
+\text{student compression ratio} = \frac{1}{\text{student scale}}
 $$
 
 Local risk model:
 
 $$
-\\Delta \\text`…` =
-\\text{teacher penalty} + \\max(0, 0.40 - \\text{student scale}) \\cdot 0.05
+\Delta \text{quality} =
+\text{teacher penalty} + \max(0, 0.40 - \text{student scale}) \cdot 0.05
 $$
 
 Source model: `CompressionModel` has no trained-student physics, so this
@@ -104,15 +113,15 @@ track validation test selected for Part D.
 Release condition:
 
 $$
-\\text`…` =
-\\text`…` \\land \\text`…` \\land \\text`…`
-\\land \\text`…` \\land \\text`…`
+\text{ship} =
+\text{size\_ok} \land \text{quality\_ok} \land \text{speed\_ok}
+\land \text{hardware\_supported} \land \text{validation\_selected}
 $$
 
 Dominance condition:
 
 $$
-a \\prec b \\quad \\text{if candidate a is no worse in size, speed, and quality, and better in at least one.}
+a \prec b \quad \text{if candidate a is no worse in size, speed, and quality, and better in at least one.}
 $$
 
 Source model: `CompressionModel.sweep()` marks dominated and frontier candidates.
@@ -125,6 +134,29 @@ quantization or pruning anchor and adds calibration and validation checks.
 2. Why does unstructured sparsity usually save storage but not latency?
 3. What teacher or student constraint can make distillation unsafe?
 4. What validation evidence would you demand before release?
+
+<details>
+<summary>UI text and runtime templates (not executed)</summary>
+
+Select a method prediction to reveal the solver-backed candidate table.
+
+---
+
+**Distillation note.** `CompressionModel` does not invent dense-student physics. Use distillation as a recommendation when solver-backed shrink-in-place candidates fail hardware, quality, or speed guardrails.
+
+---
+
+Select a sparsity speedup prediction to unlock the pruning evidence.
+
+---
+
+Select a distillation-risk prediction to unlock the dense-student evidence.
+
+---
+
+Select the release-gate prediction to unlock the recipe frontier.
+
+</details>
 
 ## Complete original Marimo source
 

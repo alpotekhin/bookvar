@@ -9,17 +9,44 @@ source_commit: 45ecc8d82fcae70c149cdce550d3b3d3411df913
 
 > [!note] Complete original Harvard source
 > Source: [`slides/vol1/12_benchmarking/12_benchmarking.tex`](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex) at commit `45ecc8d82fcae70c149cdce550d3b3d3411df913`.
-> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE).
+> License: [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md).
 > The readable layer below is mechanically extracted from the original;
 > the complete unmodified source follows on the same page.
+
+> [!note] Static slide archive
+> Text and equations retain the original language. Layout wrappers are simplified;
+> speaker notes are separate, and original SVGs are not redrawn or cropped.
+> Unsupported TeX remains visible and is listed beside the affected slide.
+> This archive is not a checked transcript or a finished Bookvar chapter.
 
 # VOL1 Slides — Benchmarking
 
 ## Readable slide sequence
 
+## Benchmarking
+
+[Original slide 1](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L62)
+
+Measuring What Matters
+
 ## Learning Objectives
 
-{[2 min]
+[Original slide 2](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L67)
+
+1. Explain the **three-dimensional benchmarking framework** (system, model, data)
+2. Compare **training** and **inference** benchmarking through their distinct metrics
+3. Select appropriate **granularity levels** (micro, macro, end-to-end)
+4. Apply **MLPerf** standards across training, inference, and power
+5. Design benchmark protocols with **statistical rigor** (CI, warm-up, environment control)
+6. Evaluate **model compression trade-offs** using multi-dimensional metrics (accuracy, calibration, edge-case robustness) beyond top-line accuracy
+7. Distinguish **laboratory results** from production requirements
+8. Critique benchmark limitations including **Goodhart's Law** and **gaming**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: Ch10 compressed, Ch11 accelerated; this chapter validates the gains
 Students optimized models and hardware for three chapters. This slide frames
 the validation question: did those optimizations actually work?
@@ -40,66 +67,84 @@ and multi-dimensional evaluation.
 [CORE] This slide frames every subsequent concept.
 IF AHEAD: ``Which objective surprises you?''
 IF SHORT: Read objectives quickly.
-}
+```
 
-{0pt}
-- Explain the **three-dimensional benchmarking framework** (system, model, data)
-- Compare **training** and **inference** benchmarking through their distinct metrics
-- Select appropriate **granularity levels** (micro, macro, end-to-end)
-- Apply **MLPerf** standards across training, inference, and power
-- Design benchmark protocols with **statistical rigor** (CI, warm-up, environment control)
-- Evaluate **model compression trade-offs** using multi-dimensional metrics (accuracy, calibration, edge-case robustness) beyond top-line accuracy
-- Distinguish **laboratory results** from production requirements
-- Critique benchmark limitations including **Goodhart's Law** and **gaming**
+</details>
 
 ## Visual Language
 
-{[0.5 min]
+[Original slide 3](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L105)
+
+Throughout this course, colors carry meaning:
+
+**Blue** — Compute / Processing
+
+GPU ops, forward/backward pass, inference
+
+**Green** — Data / Memory
+
+Data flow, caches, healthy paths
+
+**Orange** — Routing / Scheduling
+
+Load balancers, batch windows
+
+**Red** — Error / Cost / Bottleneck
+
+Loss, decode phase, waste
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[0.5 min]
 % -- NARRATE: Brief color code orientation
 In this chapter, red highlights the benchmark-production gap, blue highlights
 measurement methodology, green highlights validated results.
 
 % -- FLEX: [OPTIONAL] Skip if students know the color system
 [OPTIONAL] Say ``same legend'' and advance.
-}
+```
 
-Throughout this course, colors carry meaning:
+</details>
 
-{0.3cm}
-[T]
-  
-    {mlsyscard}{computestroke}
-    **Blue** --- Compute / Processing\\
-    { GPU ops, forward/backward pass, inference}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{datastroke}
-    **Green** --- Data / Memory\\
-    { Data flow, caches, healthy paths}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{routingstroke}
-    **Orange** --- Routing / Scheduling\\
-    { Load balancers, batch windows}
-    {mlsyscard}
-    {0.15cm}
-    {mlsyscard}{errorstroke}
-    **Red** --- Error / Cost / Bottleneck\\
-    { Loss, decode phase, waste}
-    {mlsyscard}
+## The Benchmark–Production Gap
 
-## The Benchmark--Production Gap
+[Original slide 4](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L150)
 
-{[2 min]
+Preceding chapters promised improvements:
+
+- **Data selection**: more efficient training
+- **Model compression**: smaller, faster models
+- **Hardware acceleration**: higher throughput
+
+**The reality**: The gap is routinely **2$\times$–10$\times$**.
+
+A quantized model may benchmark 2$\times$ faster but show *no improvement* under real traffic.
+
+**Core question:** Did optimizations deliver under *realistic* conditions?
+
+| **Claim** | **Lab** | **Prod.** |
+| --- | --- | --- |
+| Latency | 15 ms | 150–200 ms |
+| Accuracy | 92% | 78–82% |
+| Throughput | 800 QPS | 400–500 QPS |
+
+**Why?** Concurrent load, data drift, preprocessing overhead, thermal throttling.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: Learning objectives promised validation; this shows why it is needed
 The objectives stated benchmarking converts claims to knowledge. This slide
 reveals the motivating problem: a 2--10x gap between lab and production.
 
 % -- NARRATE: Walk through the two-column layout
 Left: ``Data selection, compression, hardware --- all promised improvements.''
-Red card: ``The gap is routinely 2--10x.'' Right table: ``Lab: 15 ms, 92%,
-800 QPS. Production: 150--200 ms, 78--82%, 400--500 QPS.'' Why: ``Concurrent
+Red card: ``The gap is routinely 2--10x.'' Right table: ``Lab: 15 ms, 92\%,
+800 QPS. Production: 150--200 ms, 78--82\%, 400--500 QPS.'' Why: ``Concurrent
 load, data drift, preprocessing overhead, thermal throttling.''
 
 % -- ENGAGE: Surface personal experience with the gap
@@ -114,44 +159,33 @@ benchmarks systematically omit production realities.
 [CORE] Essential --- every technique addresses this gap.
 IF AHEAD: ``What is the biggest source of the gap?''
 IF SHORT: Show the table, state the 2--10x number.
-}
+```
 
-[T]
-  
-    Preceding chapters promised improvements:
-    {0pt}
-- **Data selection**: more efficient training
-- **Model compression**: smaller, faster models
-- **Hardware acceleration**: higher throughput
-    
-
-    {0.1cm}
-    {mlsyscard}{errorstroke}
-    **The reality**: The gap is routinely **2$×$--10$×$**.\\[0.05cm]
-    A quantized model may benchmark 2$×$ faster but show *no improvement* under real traffic.
-    {mlsyscard}
-
-    {0.05cm}
-    {Core question:}{Did optimizations deliver under *realistic* conditions?}
-  
-  
-    {}{1.15}
-    {tabular}{@{}lll@{}}
-      
-      **Claim** & **Lab** & **Prod.** \\
-      
-      Latency & 15 ms & 150--200 ms \\
-      Accuracy & 92% & 78--82% \\
-      Throughput & 800 QPS & 400--500 QPS \\
-      
-    {tabular}
-
-    {0.15cm}
-    {errorstroke}{**Why?**} Concurrent load, data drift, preprocessing overhead, thermal throttling.
+</details>
 
 ## Three Principles of Rigorous Benchmarking
 
-{[2 min]
+[Original slide 5](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L214)
+
+**1. Benchmarks are proxies, not truth.**
+
+A system achieving 10,000 samples/s in Offline mode might achieve only 200 QPS with latency constraints. The question is always what the benchmark does *not* measure.
+
+**2. Goodhart's Law applies everywhere.**
+
+“When a measure becomes a target, it ceases to be a good measure.” Teams optimizing for benchmark rankings produce systems that excel in evaluation but fail in production.
+
+**3. End-to-end beats component metrics.**
+
+Vendors report 5–10 ms model inference. Production latency is 50–100 ms total. A 3$\times$ inference speedup yields only 1.3$\times$ end-to-end improvement.
+
+**Benchmarking** converts theoretical claims into verified engineering knowledge.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: The gap showed the problem; these principles show how to avoid it
 The 2--10x gap was the problem. These three principles separate rigorous
 engineering from guesswork.
@@ -174,27 +208,25 @@ Correct framing: the benchmark is a proxy. Always validate end-to-end.
 [CORE] Students apply these when critiquing benchmarks later.
 IF AHEAD: ``How does MLPerf resist Goodhart's Law?''
 IF SHORT: State all three principles without elaboration.
-}
+```
 
-**1.\ Benchmarks are proxies, not truth.**\\
-A system achieving 10,000 samples/s in Offline mode might achieve only 200 QPS with latency constraints. The question is always what the benchmark does *not* measure.
-
-{0.1cm}
-**2.\ Goodhart's Law applies everywhere.**\\
-``When a measure becomes a target, it ceases to be a good measure.'' Teams optimizing for benchmark rankings produce systems that excel in evaluation but fail in production.
-
-{0.1cm}
-**3.\ End-to-end beats component metrics.**\\
-Vendors report 5--10 ms model inference. Production latency is 50--100 ms total. A 3$×$ inference speedup yields only 1.3$×$ end-to-end improvement.
-
-{0.1cm}
-{mlsyscard}{crimson}
-**Benchmarking** converts theoretical claims into verified engineering knowledge.
-{mlsyscard}
+</details>
 
 ## From Whetstone to MLPerf
 
-{[2 min]
+[Original slide 6](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L263)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/12_benchmarking/images/benchmark-evolution-timeline.svg]]
+
+Harvard Edge ML Systems Book contributors, [benchmark-evolution-timeline.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/images/benchmark-evolution-timeline.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Pattern:** Each generation of benchmarks solved the gaming problem of its predecessor.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: Principles were abstract; history shows them in action
 The three principles were theoretical. This timeline shows how each
 generation of benchmarks learned from the gaming of its predecessor.
@@ -213,29 +245,62 @@ evolves with benchmarks. MLPerf addresses known patterns but new ones emerge.
 [OPTIONAL] The three cumulative lessons are the key takeaway.
 IF AHEAD: ``What gaming patterns does MLPerf still not address?''
 IF SHORT: Focus on the three cumulative lessons at the bottom.
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
-
-{benchmark-evolution-timeline.pdf}
-
-{0.1cm}
-{Pattern:}{Each generation of benchmarks solved the gaming problem of its predecessor.}
+</details>
 
 ## How SPEC Prevented Gaming
 
-{[2 min]
+[Original slide 7](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L294)
+
+**The problem:** Vendors optimized compilers for synthetic loops.
+
+**SPEC's three defenses:**
+
+1. **Real applications** (gcc, perl, bzip2)
+   
+   Cannot hand-tune for every real workload
+2. **Base + Peak reporting**
+   
+   Base = standard flags. Peak = vendor-tuned.
+   
+   The gap reveals genuine vs. gamed gains.
+3. **Independent run rules**
+   
+   Verified by SPEC organization.
+   
+   Violators disqualified publicly.
+
+**MLPerf inherits all three:**
+
+$\bullet$ Real models (BERT, ResNet, GPT)
+
+$\bullet$ Open + Closed divisions
+
+$\bullet$ Peer-reviewed run rules
+
+Plus: accuracy targets prevent
+
+precision gaming (must meet threshold).
+
+**Lesson:** Every anti-gaming rule creates new edges. The arms race never ends.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: The timeline showed each generation solved its predecessor's gaming; SPEC shows how
 The evolution timeline mentioned SPEC (1988) solved the synthetic-benchmark
 gaming problem. This slide shows the specific mechanisms.
 
 % -- NARRATE: Walk through the three anti-gaming mechanisms
 ``Problem: vendors hand-tuned compilers for Whetstone/Dhrystone loops.
-Solution 1: SPEC uses *real applications* --- gcc, perl, bzip2 ---
+Solution 1: SPEC uses \emph{real applications} --- gcc, perl, bzip2 ---
 not synthetic loops. You cannot optimize a compiler for every real program.
-Solution 2: SPEC requires *base and peak* results. Base = standard
+Solution 2: SPEC requires \emph{base and peak} results. Base = standard
 compiler flags. Peak = vendor-tuned. The gap reveals how much is real vs.
-gaming. Solution 3: Independent *run rules* verified by SPEC org.''
+gaming. Solution 3: Independent \emph{run rules} verified by SPEC org.''
 
 % -- ENGAGE: What gaming pattern does MLPerf still face?
 Ask: ``What gaming pattern could MLPerf still be vulnerable to?'' Give 20 sec.
@@ -250,42 +315,31 @@ creates new edges to exploit. The arms race continues.
 [OPTIONAL] The three mechanisms are the key takeaway.
 IF AHEAD: ``How do run rules evolve as new gaming patterns emerge?''
 IF SHORT: State the three mechanisms in one sentence each.
-}
+```
 
-[T]
-  
-    **The problem:** Vendors optimized compilers for synthetic loops.
-
-    {0.1cm}
-    **SPEC's three defenses:**
-    {1pt}
-- **Real applications** (gcc, perl, bzip2)\\
-            { Cannot hand-tune for every real workload}
-- **Base + Peak reporting**\\
-            { Base = standard flags. Peak = vendor-tuned.\\
-            The gap reveals genuine vs.\ gamed gains.}
-- **Independent run rules**\\
-            { Verified by SPEC organization.\\
-            Violators disqualified publicly.}
-    
-  
-  
-    {0.2cm}
-    {mlsyscard}{datastroke}
-    { **MLPerf inherits all three:**\\[0.05cm]
-    $$ Real models (BERT, ResNet, GPT)\\
-    $$ Open + Closed divisions\\
-    $$ Peer-reviewed run rules\\[0.05cm]
-    Plus: accuracy targets prevent\\
-    precision gaming (must meet threshold).}
-    {mlsyscard}
-
-    {0.1cm}
-    {Lesson:}{Every anti-gaming rule creates new edges. The arms race never ends.}
+</details>
 
 ## Predict: What Can Go Wrong?
 
-{[3 min]
+[Original slide 8](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L360)
+
+Think–Write–Share
+
+A team reports their compressed model is “2$\times$ faster
+
+with no accuracy loss” on their benchmark.
+
+**List 3 things that could still go wrong in production.**
+
+Write down 3 failure modes. (60 seconds)
+
+Turn to a neighbor and compare your answers.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min]
 % -- LINK: History showed benchmarks get gamed; now students identify failure modes
 The timeline showed benchmarks are imperfect. This prediction exercise asks
 students to identify production failure modes before seeing the framework.
@@ -306,25 +360,25 @@ system failures (latency, throughput under load) are equally common.
 % -- FLEX: [CORE] Active learning moment 1 of 3
 [CORE] Creates need-to-know for the three-dimensional framework.
 IF SHORT: Reduce to 30 seconds, share with neighbor.
-}
+```
 
-{0.5cm}
-{ Think--Write--Share}
-
-{0.4cm}
-{ A team reports their compressed model is ``2$×$ faster\\
-with no accuracy loss'' on their benchmark.\\[0.2cm]
-**List 3 things that could still go wrong in production.**}
-
-{0.3cm}
-{ Write down 3 failure modes. {midgray}{(60 seconds)}}
-
-{0.2cm}
-{{lightgray}{Turn to a neighbor and compare your answers.}}
+</details>
 
 ## The Three-Dimensional Framework
 
-{[2 min]
+[Original slide 9](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L405)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/12_benchmarking/images/three-dimensional-framework.svg]]
+
+Harvard Edge ML Systems Book contributors, [three-dimensional-framework.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/images/three-dimensional-framework.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Key:** Each dimension reveals failures invisible to the others. Passing all three provides deployment confidence.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: Students predicted failures; now categorize them into three dimensions
 The prediction exercise surfaced failure modes. This framework organizes them:
 system, model, and data are orthogonal dimensions.
@@ -347,18 +401,44 @@ compression damage. Model-only misses hardware bottlenecks.
 [CORE] Every subsequent section maps to one or more dimensions.
 IF AHEAD: ``Which dimension is hardest to benchmark?''
 IF SHORT: Show diagram, state the blind spots.
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
-
-{three-dimensional-framework.pdf}
-
-{0.1cm}
-{Key:}{Each dimension reveals failures invisible to the others. Passing all three provides deployment confidence.}
+</details>
 
 ## Lighthouse: MobileNet Three-Dimensional Validation
 
-{[2 min]
+[Original slide 10](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L441)
+
+**MobileNetV2 on EdgeTPU — three dimensions:**
+
+| **Dimension** | **What to benchmark** |
+| --- | --- |
+| System | EdgeTPU: **2 ms** vs. CPU: **15 ms** — but does end-to-end match? Preprocessing overhead? |
+| Model | INT8 compression: **14 MB $\to$ 3.5 MB** (4$\times$). Top-1 accuracy preserved *but* calibration and edge-case robustness must be tested. |
+| Data | Training images $\neq$ deployment images. Benchmark must match the field distribution. |
+
+**System dimension question:**
+
+Does EdgeTPU achieve 2 ms end-to-end, or does
+preprocessing + data transfer add 10 ms overhead?
+
+**Model dimension question:**
+
+Did INT8 preserve calibration? Does the model
+fail on edge cases absent from the benchmark?
+
+**Data dimension question:**
+
+Does the benchmark distribution match the
+deployment distribution?
+
+**Thread:** MobileNet threads through the chapter as the lighthouse example.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: The three-dimensional framework was just introduced abstractly.
 % This slide grounds all three dimensions in the chapter's running lighthouse
 % example: MobileNetV2 on edge hardware. It threads through the entire chapter.
@@ -372,7 +452,7 @@ a 7.5x speedup. But the system benchmark must ask: does the end-to-end
 pipeline also run in 2 ms, or does preprocessing and data transfer add 10 ms
 of overhead?
 
-Model: INT8 quantization reduces MobileNetV2 from $$14 MB to $$3.5 MB
+Model: INT8 quantization reduces MobileNetV2 from $\sim$14 MB to $\sim$3.5 MB
 (4x compression). Top-line accuracy is largely preserved. But does calibration
 hold? Does the model degrade on edge cases with unusual lighting?
 
@@ -387,7 +467,7 @@ data distribution?'' Give 20 seconds. Expected: system --- if the 2 ms
 figure does not hold end-to-end, model and data validation is wasted effort.
 
 % -- WARN: Students think accuracy-only evaluation is sufficient
-Common error: ``I quantized to INT8, accuracy is 71%, deployment is ready.''
+Common error: ``I quantized to INT8, accuracy is 71\%, deployment is ready.''
 Correct framing: top-line accuracy is one dimension. INT8 can preserve
 top-1 accuracy while degrading calibration (prediction confidence becomes
 unreliable), increasing edge-case error, and shifting failure modes.
@@ -398,50 +478,35 @@ unreliable), increasing edge-case error, and shifting failure modes.
 Students should recognize this example when it reappears in subsequent sections.
 IF AHEAD: ``What calibration dataset would you use to validate INT8 MobileNet?''
 IF SHORT: State the three numbers (2 ms, 15 ms, 4x compression) and advance.
-}
+```
 
-[T]
-  
-    **MobileNetV2 on EdgeTPU --- three dimensions:**
-
-    {0.05cm}
-    {}{1.0}
-    {
-    {tabular}{@{}lp{4.2cm}@{}}
-      
-      **Dimension** & **What to benchmark** \\
-      
-      System & EdgeTPU: **2 ms** vs.\ CPU: **15 ms** --- but does
-               end-to-end match? Preprocessing overhead? \\[0.04cm]
-      Model  & INT8 compression: **14 MB $$ 3.5 MB** (4$×$).
-               Top-1 accuracy preserved *but* calibration
-               and edge-case robustness must be tested. \\[0.04cm]
-      Data   & Training images $$ deployment images. Benchmark
-               must match the field distribution. \\
-      
-    {tabular}
-    }
-  
-  
-    {0.05cm}
-    {mlsyscard}{datastroke}
-    { **System dimension question:**\\
-    Does EdgeTPU achieve 2 ms end-to-end, or does
-    preprocessing + data transfer add 10 ms overhead?\\[0.03cm]
-    **Model dimension question:**\\
-    Did INT8 preserve calibration? Does the model
-    fail on edge cases absent from the benchmark?\\[0.03cm]
-    **Data dimension question:**\\
-    Does the benchmark distribution match the
-    deployment distribution?}
-    {mlsyscard}
-
-    {0.02cm}
-    {Thread:}{MobileNet threads through the chapter as the lighthouse example.}
+</details>
 
 ## Concrete Example: MLPerf BERT Submission
 
-{[2 min]
+[Original slide 11](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L528)
+
+| **Dimension** | **What** | **MLPerf BERT Submission (H100)** |
+| --- | --- | --- |
+| System | Hardware + SW | 8$\times$ H100 SXM, TensorRT 9.0, INT8 quantization |
+| Model | Accuracy target | BERT-Large 340M, F1 $\geq$ 90.874 on SQuAD |
+| Data | Eval dataset | SQuAD v1.1 (10,833 questions, fixed distribution) |
+
+**Result:** 99,000 QPS (Server scenario)
+
+p99 latency $<$ 10 ms
+
+F1 = 90.9 ($\geq$ 90.874 target ✓)
+
+All three dimensions validated simultaneously.
+
+**Caution:** Compare only within same scenario, accuracy target, and division (Open vs. Closed).
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: Three dimensions were abstract; this slide shows a real submission across all three
 The framework introduced system, model, and data dimensions. This slide
 shows how a real MLPerf submission evaluates all three simultaneously.
@@ -449,7 +514,7 @@ shows how a real MLPerf submission evaluates all three simultaneously.
 % -- NARRATE: Walk through the NVIDIA H100 BERT submission
 ``NVIDIA's MLPerf Inference v3.1 BERT submission: Server scenario. System
 dimension: 8x H100 GPUs, TensorRT 9.0, INT8 quantization. Model dimension:
-BERT-Large, 340M params, must achieve F1 $$ 90.874 on SQuAD. Data
+BERT-Large, 340M params, must achieve F1 $\geq$ 90.874 on SQuAD. Data
 dimension: SQuAD v1.1, 10,833 questions.'' Then the results: ``99,000 QPS
 at p99 < 10ms. All three dimensions validated simultaneously.''
 
@@ -467,36 +532,25 @@ within the same scenario, accuracy target, and division.
 [OPTIONAL] The key message is ``all three dimensions in one submission.''
 IF AHEAD: ``How does the Open division differ from Closed?''
 IF SHORT: State the three-dimension mapping and the QPS result.
-}
+```
 
-{}{1.05}
-{tabular}{@{}llp{6.5cm}@{}}
-  
-  **Dimension** & **What** & **MLPerf BERT Submission (H100)** \\
-  
-  System & Hardware + SW & 8$×$ H100 SXM, TensorRT 9.0, INT8 quantization \\
-  Model  & Accuracy target & BERT-Large 340M, F1 $$ 90.874 on SQuAD \\
-  Data   & Eval dataset & SQuAD v1.1 (10,833 questions, fixed distribution) \\
-  
-{tabular}
-
-{0.1cm}
-
-[T]
-  
-    {mlsyscard}{datastroke}
-    { **Result:** 99,000 QPS (Server scenario)\\
-    p99 latency $<$ 10 ms\\
-    F1 = 90.9 ($$ 90.874 target )\\[0.05cm]
-    All three dimensions validated simultaneously.}
-    {mlsyscard}
-  
-  
-    {Caution:}{Compare only within same scenario, accuracy target, and division (Open vs.\ Closed).}
+</details>
 
 ## Anatomy of a Benchmark
 
-{[1.5 min]
+[Original slide 12](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L587)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/12_benchmarking/images/benchmark-anatomy-pipeline.svg]]
+
+Harvard Edge ML Systems Book contributors, [benchmark-anatomy-pipeline.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/images/benchmark-anatomy-pipeline.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Four layers**: Workload $\to$ Metrics $\to$ Methodology $\to$ Reporting. A flaw at *any* layer invalidates the results.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[1.5 min]
 % -- LINK: Three dimensions showed what to measure; anatomy shows how benchmarks work
 The framework showed what to test. This slide shows the four layers that make
 up any benchmark, like a protocol stack.
@@ -514,18 +568,25 @@ Correct framing: always check: what workload? what metric? what methodology?
 [OPTIONAL] The ``weakest layer'' insight is the takeaway.
 IF AHEAD: ``Which layer is most commonly flawed?''
 IF SHORT: State the four layers and the weakness callout.
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
-
-{benchmark-anatomy-pipeline.pdf}
-
-{0.05cm}
-{**Four layers**: Workload $$ Metrics $$ Methodology $$ Reporting. A flaw at *any* layer invalidates the results.}
+</details>
 
 ## Benchmarking Granularity
 
-{[2 min]
+[Original slide 13](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L621)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/12_benchmarking/images/benchmark-granularity.svg]]
+
+Harvard Edge ML Systems Book contributors, [benchmark-granularity.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/images/benchmark-granularity.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Design rule:** Match validation granularity to optimization granularity. Kernel fusion $\to$ micro. Pruning $\to$ macro. Data curation $\to$ end-to-end.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: Anatomy showed benchmark layers; granularity shows scope choices
 Benchmark anatomy was about structure. Granularity is about scope: how much
 of the system do you measure?
@@ -548,25 +609,32 @@ Correct framing: if you optimized the model, validate end-to-end.
 [CORE] Mismatched granularity is the most common benchmarking error.
 IF AHEAD: ``When should you use all three levels?''
 IF SHORT: State the three levels and the design rule.
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
-
-{benchmark-granularity.pdf}
-
-{0.1cm}
-{Design rule:}{Match validation granularity to optimization granularity. Kernel fusion $$ micro. Pruning $$ macro. Data curation $$ end-to-end.}
+</details>
 
 ## The Latency Breakdown
 
-{[2 min]
+[Original slide 14](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L656)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/12_benchmarking/images/latency-breakdown-waterfall.svg]]
+
+Harvard Edge ML Systems Book contributors, [latency-breakdown-waterfall.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/images/latency-breakdown-waterfall.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Amdahl's Law:** 2.5$\times$ model speedup $\to$ only 1.3$\times$ system speedup when preprocessing dominates.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: Granularity showed levels; this waterfall chart shows why end-to-end matters
 Granularity was abstract. This concrete example shows what happens when you
 optimize one component without measuring end-to-end.
 
 % -- NARRATE: Walk through two waterfall scenarios
-``Before: model inference is 60% of total latency. After TensorRT: 2.5x model
-speedup. But preprocessing is now 43% of total. System speedup: only 1.3x.''
+``Before: model inference is 60\% of total latency. After TensorRT: 2.5x model
+speedup. But preprocessing is now 43\% of total. System speedup: only 1.3x.''
 Then: ``This is Amdahl's Law from Ch11 in action.''
 
 % -- ENGAGE: Where should the team invest next?
@@ -581,30 +649,37 @@ got only 1.3x. The bottleneck shifted to preprocessing.
 [CORE] This is the most impactful slide for changing benchmarking behavior.
 IF AHEAD: ``How do you optimize preprocessing?''
 IF SHORT: State the 2.5x to 1.3x contrast.
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
-
-{latency-breakdown-waterfall.pdf}
-
-{0.1cm}
-{Amdahl's Law:}{2.5$×$ model speedup $$ only 1.3$×$ system speedup when preprocessing dominates.}
+</details>
 
 ## Percentiles, Not Averages
 
-{[2 min]
+[Original slide 15](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L694)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/12_benchmarking/images/latency-distribution-percentiles.svg]]
+
+Harvard Edge ML Systems Book contributors, [latency-distribution-percentiles.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/images/latency-distribution-percentiles.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Production rule:** Report p95 and p99, not the mean. At scale, the tail determines the user experience.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: Latency breakdown showed total latency; this shows its distribution matters
 The waterfall showed mean latency components. This slide reveals that the
 mean hides catastrophic tail behavior.
 
 % -- NARRATE: Walk through the distribution diagram
 ``Mean: 12 ms. But p99: 72 ms --- 6x the mean! At 10,000 QPS, 100 requests
-per second hit the tail. With fan-out across 100 services, 63% of page loads
+per second hit the tail. With fan-out across 100 services, 63\% of page loads
 hit at least one tail event.'' Production SLOs: defined at p95/p99, never mean.
 
 % -- ENGAGE: Why does fan-out make tails worse?
-Ask: ``If one service has 1% chance of tail latency, what happens with 100
-services in a fan-out?'' Expected: 1-(0.99)^100 = 63% chance of at least one.
+Ask: ``If one service has 1\% chance of tail latency, what happens with 100
+services in a fan-out?'' Expected: 1-(0.99)^100 = 63\% chance of at least one.
 
 % -- WARN: Students report mean latency and think they are done
 Common error: ``Average latency is 12 ms, meets our SLO.'' Correct framing:
@@ -614,18 +689,51 @@ the p99 at 72 ms violates any reasonable SLO. The mean is misleading.
 [CORE] This changes how students report benchmarks permanently.
 IF AHEAD: ``How do you reduce tail latency?''
 IF SHORT: State the 12 ms mean vs 72 ms p99 contrast.
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
-
-{latency-distribution-percentiles.pdf}
-
-{0.1cm}
-{Production rule:}{Report p95 and p99, not the mean. At scale, the tail determines the user experience.}
+</details>
 
 ## War Story: The Tail Latency Death (Discord, 2019)
 
-{[2 min]
+[Original slide 16](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L729)
+
+**Context:** Discord Read States (Go) — every connection,
+
+every message, every read event. Tens of millions of
+
+entries, hundreds of thousands of updates per second.
+
+**Failure:** Latency spikes every **2 minutes** — exactly
+
+Go's forced minimum GC interval. Stop-the-world GC
+
+scanned an enormous heap. Tuning GC settings: no effect.
+
+**Consequence:** Discord rewrote Read States in **Rust** (2019).
+
+Rust has no garbage collector.
+
+**Lesson:** GC sets a tail-latency floor no model optimization can lower. Tail latency is user experience.
+
+| **Metric** | **Go** | **Rust** |
+| --- | --- | --- |
+| Avg. response | ms range | $\mu$s range |
+| Periodic spikes | every 2 min | eliminated |
+| GC pauses | structural | none |
+
+**ML Inference Parallel:**
+
+Python/Java runtimes impose the same GC floor.
+p99 SLO violations often trace to runtime pauses,
+not model computation.
+
+Source on slide: Discord Engineering Blog, 2020
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: The percentile slide showed the gap between mean and tail abstractly.
 % This slide is the chapter's named war story proving that tail latency is not
 % a theoretical concern --- it destroyed a real production service.
@@ -639,7 +747,7 @@ The LRU cache held tens of millions of Read States with hundreds of thousands
 of updates per second --- every stop-the-world GC scan had to touch an enormous heap.
 Tuning GC Percent, partitioning the cache: no help. The spikes were structural.''
 Point to the before/after table: ``In 2019, Discord rewrote Read States in Rust.
-No garbage collector. Average response: milliseconds to *microseconds*.
+No garbage collector. Average response: milliseconds to \emph{microseconds}.
 Periodic spikes: gone.''
 
 % -- ENGAGE: What is the systems lesson for ML inference?
@@ -659,53 +767,25 @@ Redundancy and language-runtime choice set the floor.
 percentile slide established. Average latency was fine; tail latency was fatal.
 IF AHEAD: ``What would hedged requests cost Discord in infrastructure?''
 IF SHORT: State the before/after numbers and the GC-pause cause in 30 seconds.
-}
+```
 
-[T]
-  
-    {mlsyscard}{errorstroke}
-    { **Context:** Discord Read States (Go) --- every connection,\\
-    every message, every read event. Tens of millions of\\
-    entries, hundreds of thousands of updates per second.\\[0.03cm]
-    **Failure:** Latency spikes every **2 minutes** --- exactly\\
-    Go's forced minimum GC interval. Stop-the-world GC\\
-    scanned an enormous heap. Tuning GC settings: no effect.\\[0.03cm]
-    **Consequence:** Discord rewrote Read States in **Rust** (2019).\\
-    Rust has no garbage collector.}
-    {mlsyscard}
-
-    {0.04cm}
-    {Lesson:}{GC sets a tail-latency floor no model optimization can lower. Tail latency is user experience.}
-  
-  
-    {0.04cm}
-    {}{1.05}
-    {
-    {tabular}{@{}lll@{}}
-      
-      **Metric** & **Go** & **Rust** \\
-      
-      Avg.\ response   & ms range   & $$s range \\
-      Periodic spikes  & every 2 min & eliminated \\
-      GC pauses        & structural & none \\
-      
-    {tabular}
-    }
-
-    {0.08cm}
-    {mlsyscard}{datastroke}
-    { **ML Inference Parallel:**\\
-    Python/Java runtimes impose the same GC floor.
-    p99 SLO violations often trace to runtime pauses,
-    not model computation.}
-    {mlsyscard}
-  
-
-{Discord Engineering Blog, 2020}
+</details>
 
 ## Quick Check
 
-{[1 min]
+[Original slide 17](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L812)
+
+Quick check — no peeking.
+
+ Why should you report p95 and p99 latency instead of the mean?
+
+30 seconds — then we continue.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[1 min]
 % -- NARRATE: Pause for retrieval before measurement methodology
 ``Close notes. Why report p95/p99 instead of the mean?'' Wait 30 seconds.
 Expected: mean hides tail; at scale, tails determine user experience;
@@ -718,15 +798,25 @@ average latency have told you? What would p99 have told you?''
 % -- FLEX: [CORE] Distributed retrieval between sections
 [CORE] 30-second pause cements percentile thinking.
 IF SHORT: Reduce to 15 seconds.
-}
+```
 
- Quick check --- no peeking.\\[0.5cm]
- Why should you report p95 and p99 latency instead of the mean?\\[0.3cm]
-{ 30 seconds --- then we continue.}
+</details>
 
 ## Measurement Methodology
 
-{[2 min]
+[Original slide 18](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L836)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/12_benchmarking/images/measurement-methodology.svg]]
+
+Harvard Edge ML Systems Book contributors, [measurement-methodology.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/images/measurement-methodology.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+**Never measure first 10–50 iterations.** Report median with 95% CI from $\geq$5 independent runs.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: Percentiles showed what to report; methodology shows how to measure
 Percentiles defined the right metric. This slide defines the right protocol
 for collecting those measurements.
@@ -741,83 +831,102 @@ marketing, not benchmarking.''
 % -- WARN: Students skip warm-up and report best-of-3
 Common error: the first iteration is 10x slower due to JIT compilation.
 Including it skews the mean. Best-of-3 hides variance.
-Correct framing: discard warm-up, report median with 95% CI from >=5 runs.
+Correct framing: discard warm-up, report median with 95\% CI from >=5 runs.
 
 % -- FLEX: [CORE] Measurement methodology separates engineering from guesswork
 [CORE] Students must follow this protocol in their own benchmarks.
-IF AHEAD: ``How many runs are needed for 95% CI on p99?''
+IF AHEAD: ``How many runs are needed for 95\% CI on p99?''
 IF SHORT: State warm-up rule and the cherry-picking anti-pattern.
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
-
-{measurement-methodology.pdf}
-
-{0.05cm}
-{**Never measure first 10--50 iterations.** Report median with 95% CI from $$5 independent runs.}
+</details>
 
 ## Your Turn: The Statistical Confidence Trap
 
-{[4 min]
+[Original slide 19](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L870)
+
+Can You Detect the Regression?
+
+An image classifier has **95% accuracy**. A compressed version scores **94%** on a **1,000-image** test set.
+
+**Calculate:**
+
+- Expected errors at 95%: $1000 \times 0.05 = ?$
+- Std dev: $\sqrt{N \cdot p \cdot (1-p)} = ?$
+- 95% CI: $50 \pm 1.96 \times \sigma = ?$
+
+Is 60 errors (94%) outside the CI?
+
+(90 seconds — compare with a neighbor)
+
+**Solution:**
+
+Expected: 50 errors
+
+$\sigma = \sqrt{1000 \times 0.05 \times 0.95} \approx \mathbf{6.9}$
+
+95% CI: $[36, 64]$
+
+Both 50 and 60 fall inside!
+
+**1,000 samples cannot detect 1% drop.**
+
+Need $\approx$**10,000** samples.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[4 min]
 % -- LINK: Methodology showed CI is required; this exercise shows why sample size matters
-The measurement slide required 95% confidence intervals. This exercise
+The measurement slide required 95\% confidence intervals. This exercise
 demonstrates that small test sets cannot detect small accuracy drops.
 
 % -- NARRATE: Present problem, then reveal after pause
-``95% accuracy model, compressed to 94%, tested on 1,000 images. Can you
+``95\% accuracy model, compressed to 94\%, tested on 1,000 images. Can you
 detect the regression?'' Wait 90 seconds. Solution: ``sigma = 6.9. CI = [36,
-64]. Both 50 and 60 errors fall inside. 1,000 samples cannot detect 1%.
+64]. Both 50 and 60 errors fall inside. 1,000 samples cannot detect 1\%.
 Need approximately 10,000 samples.''
 
 % -- ENGAGE: Peer instruction protocol
-Present (30s). Individual work (60s). If 30--70% correct: pair discussion
+Present (30s). Individual work (60s). If 30--70\% correct: pair discussion
 (90s), re-vote. The key: sample size determines detection power.
 
 % -- WARN: Students trust small test sets for precision claims
-Common error: ``94% on 1,000 images proves the model is worse.'' Correct
-framing: both 94% and 95% fall within the same confidence interval at N=1000.
+Common error: ``94\% on 1,000 images proves the model is worse.'' Correct
+framing: both 94\% and 95\% fall within the same confidence interval at N=1000.
 
 % -- FLEX: [CORE] Active learning moment 2 of 3
 [CORE] This calculation permanently changes how students evaluate accuracy.
-IF AHEAD: ``What if the drop is 5% instead of 1%?''
+IF AHEAD: ``What if the drop is 5\% instead of 1\%?''
 IF SHORT: Show solution immediately.
-}
+```
 
-[T]
-  
-    { Can You Detect the Regression?}
+</details>
 
-    {0.1cm}
-    An image classifier has **95% accuracy**. A compressed version scores **94%** on a **1,000-image** test set.
+## MLPerf
 
-    {0.1cm}
-    **Calculate:**
-    {0pt}
-- Expected errors at 95%: $1000 × 0.05 = ?$
-- Std dev: ${N  p  (1-p)} = ?$
-- 95% CI: $50  1.96 ×  = ?$
-    
+[Original slide 20](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L937)
 
-    {0.05cm}
-    Is 60 errors (94%) outside the CI?
+The industry standard for ML benchmarking:
 
-    {{midgray}{(90 seconds --- compare with a neighbor)}}
-  
-  
-    
-    {mlsyscard}{errorstroke}
-    **Solution:**\\[0.05cm]
-    Expected: 50 errors\\
-    $ = {1000 × 0.05 × 0.95}  {6.9}$\\
-    95% CI: $[36, 64]$\\[0.05cm]
-    Both 50 and 60 fall inside!\\[0.05cm]
-    {errorstroke}{**1,000 samples cannot detect 1% drop.**}\\
-    Need $$**10,000** samples.
-    {mlsyscard}
+Representative workloads $+$ Multi-objective metrics $+$ Integrated system measurement
 
 ## MLPerf Inference Scenarios
 
-{[2 min]
+[Original slide 21](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L940)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/12_benchmarking/images/mlperf-scenarios-quadrant.svg]]
+
+Harvard Edge ML Systems Book contributors, [mlperf-scenarios-quadrant.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/images/mlperf-scenarios-quadrant.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+The **scenario** determines the metric: latency for SingleStream, QPS for Server, throughput for Offline.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: Statistical rigor showed how to measure; MLPerf shows the industry standard
 Students learned measurement methodology. MLPerf applies it at industry
 scale with standardized workloads and scenarios.
@@ -839,18 +948,32 @@ Correct framing: the scenario must match the deployment pattern.
 [CORE] Students will encounter MLPerf in every hardware evaluation.
 IF AHEAD: ``Why four scenarios and not just two?''
 IF SHORT: Name the four scenarios and their metrics.
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
+</details>
 
-{mlperf-scenarios-quadrant.pdf}
+## MLPerf Training vs. Inference
 
-{0.05cm}
-{ The **scenario** determines the metric: latency for SingleStream, QPS for Server, throughput for Offline.}
+[Original slide 22](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L974)
 
-## MLPerf Training vs.\ Inference
+|  | **MLPerf Training** | **MLPerf Inference** |
+| --- | --- | --- |
+| **Primary metric** | Time-to-quality | QPS under latency SLO |
+| **Goal** | Reach target accuracy fast | Serve queries within SLA |
+| **Optimization** | Max hardware utilization | SLO compliance |
+| **Batch size** | Large (throughput) | Small–medium (latency) |
+| **Precision** | Mixed (FP16/BF16 + FP32) | INT8, FP16, even INT4 |
+| **Key bottleneck** | Gradient sync, data loading | Tail latency, preprocessing |
 
-{[2 min]
+**Training**: $T = O/(R_{\text{peak}} \cdot \eta)$ — compute-dominated
+
+**Inference**: $L = L_{\text{pre}} + L_{\text{model}} + L_{\text{post}}$ — pipeline-dominated
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: Scenarios showed inference modes; now contrast training vs inference
 MLPerf Inference scenarios were just introduced. This slide contrasts training
 and inference benchmarking --- fundamentally different optimizations.
@@ -869,37 +992,30 @@ Correct framing: training optimizes total time; inference optimizes per-query la
 [CORE] Students must know which benchmark applies to their use case.
 IF AHEAD: ``Can the same hardware be optimal for both?''
 IF SHORT: Cover primary metric and key bottleneck rows only.
-}
+```
 
-{}{1.05}
-{tabular}{@{}lll@{}}
-  
-  & **MLPerf Training** & **MLPerf Inference** \\
-  
-  **Primary metric**  & Time-to-quality             & QPS under latency SLO \\
-  **Goal**             & Reach target accuracy fast  & Serve queries within SLA \\
-  **Optimization**     & Max hardware utilization    & SLO compliance \\
-  **Batch size**       & Large (throughput)          & Small--medium (latency) \\
-  **Precision**        & Mixed (FP16/BF16 + FP32)   & INT8, FP16, even INT4 \\
-  **Key bottleneck**   & Gradient sync, data loading & Tail latency, preprocessing \\
-  
-{tabular}
-
-{0.1cm}
-[T]
-  
-    {mlsyscard}{computestroke}
-    { **Training**: $T = O/(R_{{peak}}  )$ --- compute-dominated}
-    {mlsyscard}
-  
-  
-    {mlsyscard}{datastroke}
-    { **Inference**: $L = L_{{pre}} + L_{{model}} + L_{{post}}$ --- pipeline-dominated}
-    {mlsyscard}
+</details>
 
 ## MLPerf Suite Variants
 
-{[1.5 min]
+[Original slide 23](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L1027)
+
+| **Variant** | **Domain** | **Constraints** | **Metrics** |
+| --- | --- | --- | --- |
+| **Training** | Datacenter | Multi-node, high BW | Time-to-quality, samples/s |
+| **Inference** | Server/Edge | Latency SLAs, throughput | QPS, latency percentiles |
+| **Tiny** | MCU / IoT | $<$1 mW, $<$1 MB memory | Latency, energy/inference |
+| **Power** | Cross-cutting | Energy budgets, thermal | Performance/Watt |
+
+**MLPerf design principles**: Representative workloads, full-system measurement, open submission. Vendors must report end-to-end system performance on standardized tasks.
+
+Source on slide: Reddi et al., MLPerf Inference, 2020; Mattson et al., MLPerf Training, 2020
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[1.5 min]
 % -- LINK: Training vs inference showed two modes; variants cover all deployments
 Training and inference are two of four MLPerf variants, each targeting a
 different deployment context.
@@ -917,43 +1033,48 @@ Correct framing: each variant measures what matters for its deployment target.
 [OPTIONAL] The design principles are the key takeaway.
 IF AHEAD: ``How often does MLPerf update its benchmark suite?''
 IF SHORT: Name the four variants, skip the details.
-}
+```
 
-{}{1.1}
-{tabular}{@{}lllp{3.5cm}@{}}
-  
-  **Variant** & **Domain** & **Constraints** & **Metrics** \\
-  
-  **Training**  & Datacenter   & Multi-node, high BW       & Time-to-quality, samples/s \\
-  **Inference**  & Server/Edge  & Latency SLAs, throughput  & QPS, latency percentiles \\
-  **Tiny**       & MCU / IoT    & $<$1 mW, $<$1 MB memory  & Latency, energy/inference \\
-  **Power**      & Cross-cutting & Energy budgets, thermal  & Performance/Watt \\
-  
-{tabular}
-
-{0.15cm}
-
-{mlsyscard}{crimson}
-**MLPerf design principles**: Representative workloads, full-system measurement, open submission. Vendors must report end-to-end system performance on standardized tasks.
-{mlsyscard}
-
-{Reddi et al., MLPerf Inference, 2020; Mattson et al., MLPerf Training, 2020}
+</details>
 
 ## Model Benchmarking: Beyond Top-Line Accuracy
 
-{[2 min]
+[Original slide 24](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L1072)
+
+**Three metrics for model compression evaluation:**
+
+| **Metric** | **What it reveals** |
+| --- | --- |
+| Top-1 accuracy | Average-case performance; often preserved by INT8. |
+| Calibration | Is confidence score trustworthy? INT8 can produce unreliable softmax outputs at the tails. |
+| Edge-case robustness | Failure rate on rare / OOD inputs. Benchmark coverage determines this. |
+
+**Key insight (chapter):**
+
+INT8 quantization may *preserve top-line accuracy*
+while *degrading calibration*. Prediction confidence
+scores become unreliable for downstream decision-making.
+Always benchmark all three dimensions.
+
+**LO6:** Evaluate compression trade-offs using accuracy *and* calibration *and* edge-case robustness — not top-line accuracy alone.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: MLPerf showed system benchmarks. The model dimension requires its own
 % methodology. This slide covers LO6: evaluating compression trade-offs with
 % multi-dimensional metrics --- not just top-1 accuracy.
 
 % -- NARRATE: Walk through the three-metric framework
-``INT8 quantization on MobileNetV2: top-1 accuracy is preserved at 71%.
+``INT8 quantization on MobileNetV2: top-1 accuracy is preserved at 71\%.
 So deployment is ready, right? Not necessarily. Three metrics reveal what
 top-1 accuracy hides:
 
 First, calibration. Prediction confidence scores become unreliable when
-the model is over-aggressive quantization. A model that says `80% confident'
-on a wrong prediction is worse than a model that says `55% confident' and
+the model is over-aggressive quantization. A model that says `80\% confident'
+on a wrong prediction is worse than a model that says `55\% confident' and
 is also wrong --- because downstream decision logic trusts the high score.
 
 Second, edge-case robustness. The benchmark uses clean, controlled images.
@@ -962,7 +1083,7 @@ INT8 models calibrated on the original dataset can fail disproportionately
 on exactly these underrepresented cases.
 
 Third, calibration data dependency. INT8 accuracy preservation (typically
-95--99% of FP32) depends on the calibration dataset being similar to the
+95--99\% of FP32) depends on the calibration dataset being similar to the
 deployment distribution. An INT8 benchmark without specifying the calibration
 dataset is not reproducible.''
 
@@ -974,7 +1095,7 @@ tails are disproportionately affected; the test set does not sample these
 tails at high frequency, so top-1 accuracy appears unchanged.
 
 % -- WARN: Students treat top-1 accuracy as the only model metric
-Common error: ``Accuracy is preserved at 71%, INT8 deployment is fine.''
+Common error: ``Accuracy is preserved at 71\%, INT8 deployment is fine.''
 Correct framing: accuracy is one dimension. Calibration and edge-case
 robustness are independent dimensions that can fail silently.
 A team that climbs the leaderboard while degrading calibration has won
@@ -986,96 +1107,87 @@ the benchmark and destroyed the product.
 IF AHEAD: ``What calibration test would you run before deploying INT8?''
 IF SHORT: State the three-metric framework (accuracy / calibration /
 edge-case robustness) and the calibration data dependency in 30 seconds.
-}
+```
 
-[T]
-  
-    **Three metrics for model compression evaluation:**
-
-    {0.08cm}
-    {
-    {tabular}{@{}lp{3.8cm}@{}}
-      
-      **Metric** & **What it reveals** \\
-      
-      Top-1 accuracy     & Average-case performance;
-                           often preserved by INT8. \\[0.04cm]
-      Calibration        & Is confidence score trustworthy?
-                           INT8 can produce unreliable
-                           softmax outputs at the tails. \\[0.04cm]
-      Edge-case robustness & Failure rate on rare / OOD inputs.
-                             Benchmark coverage determines this. \\
-      
-    {tabular}
-    }
-  
-  
-    {0.05cm}
-    {mlsyscard}{errorstroke}
-    { **Key insight (chapter):**\\
-    INT8 quantization may *preserve top-line accuracy*
-    while *degrading calibration*. Prediction confidence
-    scores become unreliable for downstream decision-making.
-    Always benchmark all three dimensions.}
-    {mlsyscard}
-
-    {0.05cm}
-    {LO6:}{Evaluate compression trade-offs using accuracy *and* calibration *and* edge-case robustness --- not top-line accuracy alone.}
+</details>
 
 ## Model Benchmarking: INT8 Calibration (2/2)
 
-{[1 min]
+[Original slide 25](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L1159)
+
+**INT8 calibration dependency:**
+
+Accuracy preservation (95–99% of FP32) depends on
+the calibration dataset matching the deployment
+distribution. An INT8 benchmark without specifying the
+calibration dataset is not reproducible.
+
+| **Configuration** | **Top-1 Accuracy** | **Calibration** |
+| --- | --- | --- |
+| MobileNetV2 FP32 | 71.8% | Reliable softmax |
+| MobileNetV2 INT8 | $\sim$71% | Degrades on edge cases |
+
+**Risk:** Same top-1 accuracy, different calibration quality. The leaderboard looks identical; the production product is not.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[1 min]
 % -- LINK: Previous slide introduced the three metrics; this slide details the
 % calibration dependency that makes INT8 benchmarks non-reproducible without
 % specifying the calibration dataset.
 
 % -- NARRATE: Walk through the calibration dependency
-``INT8 accuracy preservation (95--99% of FP32) depends critically on the
+``INT8 accuracy preservation (95--99\% of FP32) depends critically on the
 calibration dataset matching the deployment distribution. An INT8 benchmark
 that does not specify the calibration dataset cannot be reproduced.
-The MobileNetV2 example: FP32 achieves 71.8% top-1 with reliable softmax.
-INT8 achieves  71% top-1 --- nearly identical. But softmax confidence
+The MobileNetV2 example: FP32 achieves 71.8\% top-1 with reliable softmax.
+INT8 achieves ~71\% top-1 --- nearly identical. But softmax confidence
 scores can degrade on edge cases. The leaderboard number looks the same;
 the production product is not.''
 
 % -- WARN: Students treat INT8 benchmark accuracy as definitive
-Common error: ``INT8 accuracy is 71%, same as FP32, deployment is ready.''
+Common error: ``INT8 accuracy is 71\%, same as FP32, deployment is ready.''
 Correct framing: top-1 accuracy on the test set is not the same as
 calibration quality on deployment-distribution edge cases.
 
 % -- FLEX: [CORE] Closes LO6 --- do not skip.
 [CORE] This is the second half of the model-dimension slide.
 IF SHORT: State the calibration dataset dependency and the MobileNetV2 numbers.
-}
+```
 
-{mlsyscard}{routingstroke}
-{ **INT8 calibration dependency:**}\\[0.1cm]
-{
-Accuracy preservation (95--99% of FP32) depends on
-the calibration dataset matching the deployment
-distribution. An INT8 benchmark without specifying the
-calibration dataset is not reproducible.}
-{mlsyscard}
-
-{0.2cm}
-{
-{}{1.15}
-{tabular}{@{}lll@{}}
-  
-  **Configuration** & **Top-1 Accuracy** & **Calibration** \\
-  
-  MobileNetV2 FP32 & 71.8% & Reliable softmax \\
-  MobileNetV2 INT8 & $$71%  & Degrades on edge cases \\
-  
-{tabular}
-}
-
-{0.2cm}
-{Risk:}{Same top-1 accuracy, different calibration quality. The leaderboard looks identical; the production product is not.}
+</details>
 
 ## The Fallacy of Peak Performance
 
-{[2 min]
+[Original slide 26](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L1216)
+
+**Patterson:** “Peak performance is the performance the manufacturer *guarantees* you will not exceed.”
+
+| **Workload** | **Peak** | **Achieved** |
+| --- | --- | --- |
+| A100 FP16 (Tensor) | 312 TF | 90–155 TF |
+| ResNet-50 (batch 256) | — | 85–90% util. |
+| BERT (batch 1) | — | $\sim$33% util. |
+| DLRM (rec.) | — | $\sim$40% util. |
+
+The gap is 2–3$\times$ even in optimally tuned systems.
+
+**Why the gap?**
+
+- Memory stalls: data starves the ALU
+- Pipeline bubbles: sequential deps
+- Kernel launch: dispatch overhead
+- Thermal throttling: sustained load
+
+**Diagnostic:** Use the **Roofline Model** to identify compute-bound vs. memory-bound.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: MLPerf uses real workloads; this shows why peak specs are misleading
 MLPerf requires real workload measurement. This slide quantifies why:
 peak performance systematically overpredicts real performance.
@@ -1083,12 +1195,12 @@ peak performance systematically overpredicts real performance.
 % -- NARRATE: Walk through Patterson quote and utilization table
 ``Peak performance is the performance the manufacturer guarantees you will not
 exceed.'' Table: ``A100 FP16: 312 TF peak, 90--155 TF achieved. BERT batch=1:
-33% utilization. DLRM: 40%.'' Why: ``Memory stalls, pipeline bubbles,
+33\% utilization. DLRM: 40\%.'' Why: ``Memory stalls, pipeline bubbles,
 kernel launch overhead, thermal throttling.'' Diagnostic: use the Roofline.
 
 % -- ENGAGE: Calculate the gap for a specific workload
-Ask: ``If A100 achieves 33% utilization on BERT batch=1, what is the actual
-TFLOPS?'' Expected: 312 x 0.33 =  103 TFLOPS.
+Ask: ``If A100 achieves 33\% utilization on BERT batch=1, what is the actual
+TFLOPS?'' Expected: 312 x 0.33 = ~103 TFLOPS.
 
 % -- WARN: Students trust vendor spec sheets
 Common error: comparing GPUs by peak TFLOPS in vendor materials.
@@ -1097,55 +1209,40 @@ Correct framing: utilization varies 2--30x depending on workload AI.
 % -- FLEX: [CORE] Peak vs achieved is the chapter's central quantitative lesson
 [CORE] Students must always ask ``at what utilization?''
 IF AHEAD: ``How do vendors game peak numbers?''
-IF SHORT: State the Patterson quote and the 33% BERT number.
-}
+IF SHORT: State the Patterson quote and the 33\% BERT number.
+```
 
-[T]
-  
-    {mlsyscard}{errorstroke}
-    **Patterson:** ``Peak performance is the performance the manufacturer *guarantees* you will not exceed.''
-    {mlsyscard}
+</details>
 
-    {0.1cm}
-    {}{1.05}
-    {tabular}{@{}lrr@{}}
-      
-      **Workload** & **Peak** & **Achieved** \\
-      
-      A100 FP16 (Tensor)    & 312 TF   & 90--155 TF \\
-      ResNet-50 (batch 256) & ---      & 85--90% util. \\
-      BERT (batch 1)        & ---      & $$33% util. \\
-      DLRM (rec.)           & ---      & $$40% util. \\
-      
-    {tabular}
+## Roofline: ResNet vs. BERT
 
-    {0.05cm}
-    The gap is 2--3$×$ even in optimally tuned systems.
-  
-  
-    **Why the gap?**
-    {0pt}
-- {datastroke}{Memory stalls}: data starves the ALU
-- {computestroke}{Pipeline bubbles}: sequential deps
-- {routingstroke}{Kernel launch}: dispatch overhead
-- {errorstroke}{Thermal throttling}: sustained load
-    
+[Original slide 27](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L1281)
 
-    {0.05cm}
-    {Diagnostic:}{Use the **Roofline Model** to identify compute-bound vs.\ memory-bound.}
+**A100 GPU**: 312 TFLOPS FP16, 2.0 TB/s bandwidth, Ridge $\approx$ 153 FLOPs/byte
 
-## Roofline: ResNet vs.\ BERT
+| **Workload** | **AI (FLOPs/B)** | **Regime** | **Util.** | **Diagnosis** |
+| --- | --- | --- | --- | --- |
+| ResNet-50 (batch 256) | $\sim$300 | Compute-bound | 85–90% | $\checkmark$ Efficient |
+| BERT-Base (batch 1) | $\sim$50 | Memory-bound | $\sim$33% | $\times$ Underutilized |
+| BERT-Base (batch 32) | $\sim$1600 | Compute-bound | $\sim$85% | $\checkmark$ Batching helps |
 
-{[2.5 min]
+**Batching transforms the regime**: BERT at batch 1 is memory-bound (33% util.). At batch 32, same weights serve 32$\times$ more compute $\to$ 85% utilization.
+**Tradeoff**: Higher throughput but higher latency (must accumulate requests).
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2.5 min]
 % -- LINK: Peak performance showed the gap exists; Roofline diagnoses it
 The fallacy slide showed utilization varies wildly. The Roofline from Ch11
 explains why: arithmetic intensity determines the ceiling.
 
 % -- NARRATE: Walk through the table, then the batching insight
-``ResNet batch=256: AI=300, compute-bound, 85--90% util. BERT batch=1:
-AI=50, memory-bound, 33% util.'' Then the key insight: ``Batching transforms
+``ResNet batch=256: AI=300, compute-bound, 85--90\% util. BERT batch=1:
+AI=50, memory-bound, 33\% util.'' Then the key insight: ``Batching transforms
 BERT from memory-bound to compute-bound: batch=32 pushes AI to 1600,
-crossing the ridge. 85% utilization.'' Tradeoff: higher throughput but higher
+crossing the ridge. 85\% utilization.'' Tradeoff: higher throughput but higher
 latency (must accumulate requests).
 
 % -- ENGAGE: Connect to MLPerf scenarios
@@ -1160,31 +1257,29 @@ on batch size. Batch=1 is deeply memory-bound; batch=32 is compute-bound.
 [CORE] The bridge between theory (Roofline) and practice (MLPerf).
 IF AHEAD: ``What is the optimal batch size for latency vs throughput?''
 IF SHORT: State the batch=1 vs batch=32 contrast.
-}
+```
 
-**A100 GPU**: 312 TFLOPS FP16, 2.0 TB/s bandwidth, Ridge $$ 153 FLOPs/byte
-
-{0.05cm}
-{}{1.05}
-{tabular}{@{}lrrrl@{}}
-  
-  **Workload** & **AI (FLOPs/B)** & **Regime** & **Util.** & **Diagnosis** \\
-  
-  ResNet-50 (batch 256) & $$300 & Compute-bound & 85--90% & $$ Efficient \\
-  BERT-Base (batch 1)   & $$50  & Memory-bound  & $$33% & $×$ Underutilized \\
-  BERT-Base (batch 32)  & $$1600 & Compute-bound & $$85% & $$ Batching helps \\
-  
-{tabular}
-
-{0.1cm}
-{mlsyscard}{datastroke}
-**Batching transforms the regime**: BERT at batch 1 is memory-bound (33% util.). At batch 32, same weights serve 32$×$ more compute $$ 85% utilization.
-**Tradeoff**: Higher throughput but higher latency (must accumulate requests).
-{mlsyscard}
+</details>
 
 ## Decoding Vendor Claims
 
-{[2 min]
+[Original slide 28](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L1331)
+
+| **Vendor Claim** | **What It Often Means** |
+| --- | --- |
+| “Up to 10,000 images/sec” | Peak throughput at max batch, INT8, no preprocessing |
+| “Sub-millisecond latency” | Accelerator compute only, excluding data transfer |
+| “5$\times$ more efficient” | Per-operation efficiency, not total system efficiency |
+| “1000 TOPS” | At what precision? INT4 TOPS are 4$\times$ INT8 on same HW |
+| “2$\times$ faster” | On which workload? What batch size? What precision? |
+
+**Always ask:** What is measured? (Model-only or end-to-end?) What is excluded? (Memory transfer, throttling?) What conditions? (Batch size, precision, thermal state?)
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: Roofline diagnosed real performance; this slide decodes marketing language
 The Roofline showed what performance is achievable. This translation guide
 helps students decode what vendors actually mean.
@@ -1203,34 +1298,45 @@ Correct framing: every claim has hidden assumptions. Decode them.
 [OPTIONAL] The ``always ask'' checklist is the key takeaway.
 IF AHEAD: ``How would you independently verify a vendor claim?''
 IF SHORT: Read the ``always ask'' checklist.
-}
+```
 
-{}{1.1}
-{tabular}{@{}lp{6.5cm}@{}}
-  
-  **Vendor Claim** & **What It Often Means** \\
-  
-  ``Up to 10,000 images/sec'' & Peak throughput at max batch, INT8, no preprocessing \\
-  ``Sub-millisecond latency'' & Accelerator compute only, excluding data transfer \\
-  ``5$×$ more efficient'' & Per-operation efficiency, not total system efficiency \\
-  ``1000 TOPS'' & At what precision? INT4 TOPS are 4$×$ INT8 on same HW \\
-  ``2$×$ faster'' & On which workload? What batch size? What precision? \\
-  
-{tabular}
-
-{0.1cm}
-
-**Always ask:** What is measured? (Model-only or end-to-end?) What is excluded? (Memory transfer, throttling?) What conditions? (Batch size, precision, thermal state?)
+</details>
 
 ## Discussion: Diagnose This Benchmark
 
-{[3 min]
+[Original slide 29](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L1374)
+
+Turn and Talk (90 seconds)
+
+A team benchmarks BERT inference on an H100.
+
+They achieve only **20% GPU utilization**.
+
+**Using the Roofline Model (Ch 11):**
+
+Is it compute-bound
+
+or memory-bound?
+
+What should they
+
+optimize first?
+
+Will buying a
+
+faster GPU help?
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[3 min]
 % -- LINK: Students learned the Roofline and vendor decoding; now apply both
 Students know the Roofline (Ch11), peak vs achieved, and vendor decoding.
 This exercise integrates all three.
 
 % -- NARRATE: Frame the problem, then facilitate discussion
-``BERT inference on H100, 20% utilization. Is it compute-bound or memory-bound?
+``BERT inference on H100, 20\% utilization. Is it compute-bound or memory-bound?
 What to optimize? Will a faster GPU help?'' 90 seconds pair discussion.
 Cold-call 2--3 pairs. Answer: memory-bound (AI < ridge). More TFLOPS won't
 help. Increase batch size or quantize to reduce memory traffic.
@@ -1240,32 +1346,50 @@ Students must use AI and ridge point to justify their answer. Vague answers
 (``it's slow'') are insufficient.
 
 % -- WARN: Students default to ``buy faster hardware''
-Common error: ``20% util means we need a bigger GPU.'' Correct framing:
-20% util means the GPU is starved for data. More compute makes it worse.
+Common error: ``20\% util means we need a bigger GPU.'' Correct framing:
+20\% util means the GPU is starved for data. More compute makes it worse.
 
 % -- FLEX: [CORE] Active learning moment 3 of 3 --- synthesis
 [CORE] Integrates Roofline, benchmarking, and optimization.
-IF AHEAD: ``What batch size would push utilization to 80%?''
+IF AHEAD: ``What batch size would push utilization to 80\%?''
 IF SHORT: Reduce to 60 seconds, cold-call one pair.
-}
+```
 
-{0.6cm}
-{ Turn and Talk {midgray}{(90 seconds)}}
-
-{0.5cm}
-{ A team benchmarks BERT inference on an H100.\\
-They achieve only **20% GPU utilization**.\\[0.3cm]
-**Using the Roofline Model (Ch 11):**}
-
-{0.4cm}
-[c]
-   Is it compute-bound\ memory-bound?
-   What should they\ first?
-   Will buying a\ GPU help?
+</details>
 
 ## Power Measurement Techniques
 
-{[2 min]
+[Original slide 30](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L1422)
+
+**Why energy matters:**
+
+- Cloud: energy cost rivals hardware cost
+- Edge: 15–40 W thermal envelope
+- Mobile: 3–5 W battery constraint
+- TinyML: 100 mW coin-cell budget
+
+**INT8 as energy lever**
+
+4$\times$ memory reduction but 10–20$\times$ energy reduction: DRAM access ($\sim$20 pJ/bit) $\to$ SRAM + INT8 ALU ($\sim$1 pJ/bit).
+
+**System boundary matters:**
+
+| **Boundary** | **Includes** |
+| --- | --- |
+| Chip only | Accelerator die |
+| Board | + memory, VRM |
+| Server | + CPU, fans, PSU |
+| Rack | + networking, cooling |
+
+MLPerf Power measures at server boundary across 11 load levels (0%–100% in 10% steps).
+
+Idle power matters: real utilization is 20–50%.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: System benchmarks covered throughput/latency; energy is the third dimension
 Throughput and latency were covered. This adds energy as a first-class
 benchmark dimension --- critical for edge and mobile deployment.
@@ -1289,51 +1413,49 @@ production energy includes everything in the rack.
 [CORE] Students deploying to edge must measure energy, not just latency.
 IF AHEAD: ``How does idle power affect total cost of ownership?''
 IF SHORT: Cover INT8 energy lever and system boundary table.
-}
+```
 
-[T]
-  
-    **Why energy matters:**
-    {0pt}
-- { Cloud: energy cost rivals hardware cost}
-- { Edge: 15--40 W thermal envelope}
-- { Mobile: 3--5 W battery constraint}
-- { TinyML: 100 mW coin-cell budget}
-    
+</details>
 
-    {0.05cm}
-    {mlsyscard}{datastroke}
-    **INT8 as energy lever**\\
-    { 4$×$ memory reduction but 10--20$×$ energy reduction: DRAM access ($$20 pJ/bit) $$ SRAM + INT8 ALU ($$1 pJ/bit).}
-    {mlsyscard}
-  
-  
-    **System boundary matters:**
+## Benchmark vs. Production: The Reality Gap
 
-    {0.05cm}
-    {
-    {}{1.15}
-    {tabular}{@{}ll@{}}
-      
-      **Boundary** & **Includes** \\
-      
-      Chip only   & Accelerator die \\
-      Board       & + memory, VRM \\
-      Server      & + CPU, fans, PSU \\
-      Rack        & + networking, cooling \\
-      
-    {tabular}
-    }
+[Original slide 31](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L1498)
 
-    {0.1cm}
-    { MLPerf Power measures at server boundary across 11 load levels (0%--100% in 10% steps).}
+| **Metric** | **Lab** | **Production** | **Gap** |
+| --- | --- | --- | --- |
+| Latency (p50) | 5 ms | 15 ms | 3$\times$ |
+| Latency (p99) | 12 ms | 45 ms | 3.8$\times$ |
+| Accuracy | 92% | 84% | 8 pts |
+| Throughput | 1200 QPS | 600 QPS | 2$\times$ |
 
-    {0.05cm}
-    {{midgray}{Idle power matters: real utilization is 20--50%.}}
+**Sources of the gap:**
 
-## Benchmark vs.\ Production: The Reality Gap
+- Concurrent load (resource contention)
+- Data drift (user data $\neq$ test data)
+- Preprocessing pipeline overhead
+- Thermal throttling under sustained load
 
-{[2 min]
+**The Derating Rule:**
+
+Benchmark says 2$\times$ faster?
+
+Budget for **1.3$\times$** in production.
+
+Benchmark says 92% accuracy?
+
+Expect **84–88%** on real traffic.
+
+Benchmark says 1200 QPS?
+
+Plan for **600–800 QPS** under SLO.
+
+**Rule:** Always validate under production-like conditions before committing to SLAs.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: Power measurement showed system-level concerns; production adds even more
 Students measured power at the system boundary. Production adds traffic
 patterns, data drift, preprocessing, and concurrent users --- none of which
@@ -1343,8 +1465,8 @@ appear in controlled benchmarks.
 ``Lab: isolated model, clean data, warm cache, no competition for resources.
 Production: concurrent users, cold caches, data drift, preprocessing pipeline.''
 Point to each row: ``Latency: 5 ms lab to 45 ms production (9x). Accuracy:
-92% on benchmark to 84% on user-generated text. Throughput: 1200 QPS solo
-to 600 QPS under 80% load.'' Then the key question: ``If your benchmark
+92\% on benchmark to 84\% on user-generated text. Throughput: 1200 QPS solo
+to 600 QPS under 80\% load.'' Then the key question: ``If your benchmark
 says 2x faster, budget for 1.3x in production.''
 
 % -- ENGAGE: What causes the biggest gap?
@@ -1354,58 +1476,60 @@ can be 10--20x the isolated measurement.
 
 % -- WARN: Students trust benchmark numbers for capacity planning
 Common error: sizing infrastructure based on benchmark throughput.
-Correct framing: production throughput is 40--60% of isolated benchmark
+Correct framing: production throughput is 40--60\% of isolated benchmark
 due to SLO constraints, shared resources, and safety margins.
 
 % -- FLEX: [CORE] This slide changes how students plan deployments
 [CORE] The derating factors are essential for real-world planning.
 IF AHEAD: ``How do you budget for the gap in capacity planning?''
 IF SHORT: State the 3 rows and the 1.3x rule of thumb.
-}
+```
 
-[T]
-  
-    {}{1.1}
-    {
-    {tabular}{@{}llll@{}}
-      
-      **Metric** & **Lab** & **Production** & **Gap** \\
-      
-      Latency (p50)  & 5 ms    & 15 ms    & 3$×$ \\
-      Latency (p99)  & 12 ms   & 45 ms    & 3.8$×$ \\
-      Accuracy       & 92%    & 84%     & 8 pts \\
-      Throughput     & 1200 QPS & 600 QPS & 2$×$ \\
-      
-    {tabular}
-    }
-
-    {0.1cm}
-    **Sources of the gap:**
-    {0pt}
-- { Concurrent load (resource contention)}
-- { Data drift (user data $$ test data)}
-- { Preprocessing pipeline overhead}
-- { Thermal throttling under sustained load}
-    
-  
-  
-    {0.1cm}
-    {mlsyscard}{errorstroke}
-    { **The Derating Rule:**\\[0.05cm]
-    Benchmark says 2$×$ faster?\\
-    Budget for **1.3$×$** in production.\\[0.05cm]
-    Benchmark says 92% accuracy?\\
-    Expect **84--88%** on real traffic.\\[0.05cm]
-    Benchmark says 1200 QPS?\\
-    Plan for **600--800 QPS** under SLO.}
-    {mlsyscard}
-
-    {0.1cm}
-    {Rule:}{Always validate under production-like conditions before committing to SLAs.}
+</details>
 
 ## Your Turn: SLO Compliance Under Tail Latency
 
-{[4 min]
+[Original slide 32](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L1574)
+
+Meet the Tail-Latency SLO
+
+You measure inference latency 1,000 times:
+
+- Mean: **5 ms**
+- p99: **23 ms**
+- SLO: p99 $<$ **20 ms**
+
+With $N$ replicas + least-loaded routing:
+
+effective p99 $\approx$ p99 / $\sqrt{N}$
+
+**How many replicas to meet the SLO?**
+
+(90 seconds — compare with a neighbor)
+
+**Solution:**
+
+$23 / \sqrt{N} < 20$
+
+$\sqrt{N} > 1.15$
+
+$N > 1.32$ $\to$ **N = 2** (minimum)
+
+**With 50% safety margin:**
+
+$N = 3$ replicas recommended.
+
+Cost: 3$\times$ compute budget.
+
+Alternative: hedged requests
+
+(send to 2, take first response).
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[4 min]
 % -- LINK: Production gap showed degradation; now calculate how to meet SLOs
 Students saw the benchmark-production gap. This exercise forces them to
 calculate how many replicas are needed to meet a tail-latency SLO.
@@ -1414,12 +1538,12 @@ calculate how many replicas are needed to meet a tail-latency SLO.
 ``You measure inference latency 1000 times. Mean=5ms, p99=23ms. Your SLO
 is p99<20ms. How many additional replicas with load balancing do you need?''
 Wait 90 seconds. Solution: ``With N replicas and least-loaded routing,
-effective p99 $$ p99/${N}$. Need p99 < 20ms. 23/${N}$ < 20.
-${N}$ > 1.15. N > 1.32. Need at least 2 replicas (round up).
-But this is optimistic --- in practice, add a 50% safety margin: 3 replicas.''
+effective p99 $\approx$ p99/$\sqrt{N}$. Need p99 < 20ms. 23/$\sqrt{N}$ < 20.
+$\sqrt{N}$ > 1.15. N > 1.32. Need at least 2 replicas (round up).
+But this is optimistic --- in practice, add a 50\% safety margin: 3 replicas.''
 
 % -- ENGAGE: Peer instruction protocol
-Present (30s). Individual work (60s). If 30--70% correct: pair discussion.
+Present (30s). Individual work (60s). If 30--70\% correct: pair discussion.
 Key insight: you cannot fix tail latency by making the model faster --- you
 need redundancy.
 
@@ -1432,47 +1556,25 @@ not model computation. Redundancy is the standard solution.
 [CORE] This calculation directly applies to deployment planning.
 IF AHEAD: ``What is the cost of 3 replicas vs.\ 1 optimized replica?''
 IF SHORT: Show solution immediately, emphasize the safety margin.
-}
+```
 
-[T]
-  
-    { Meet the Tail-Latency SLO}
-
-    {0.1cm}
-    You measure inference latency 1,000 times:
-    {0pt}
-- Mean: **5 ms**
-- p99: **23 ms**
-- SLO: p99 $<$ **20 ms**
-    
-
-    {0.1cm}
-    With $N$ replicas + least-loaded routing:\\
-    effective p99 $$ p99 / ${N}$
-
-    {0.1cm}
-    **How many replicas to meet the SLO?**
-
-    {{midgray}{(90 seconds --- compare with a neighbor)}}
-  
-  
-    
-    {mlsyscard}{computestroke}
-    { **Solution:**\\[0.05cm]
-    $23 / {N} < 20$\\
-    ${N} > 1.15$\\
-    $N > 1.32$ $$ **N = 2** (minimum)\\[0.05cm]
-    **With 50% safety margin:**\\
-    $N = 3$ replicas recommended.\\[0.05cm]
-    Cost: 3$×$ compute budget.\\
-    Alternative: hedged requests\\
-    (send to 2, take first response).
-    }
-    {mlsyscard}
+</details>
 
 ## Benchmark Gaming: Anti-Patterns
 
-{[2 min]
+[Original slide 33](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L1649)
+
+![[Assets/Sources/Harvard ML Systems/slides/vol1/12_benchmarking/images/benchmark-gaming-antipatterns.svg]]
+
+Harvard Edge ML Systems Book contributors, [benchmark-gaming-antipatterns.svg](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/images/benchmark-gaming-antipatterns.svg), [CC BY-NC-SA 4.0](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/LICENSE.md). Original SVG, copied without redrawing or cropping.
+
+MLPerf resists gaming by requiring **diverse suites**, **percentile reporting**, and **open submission rules**.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: Measurement rigor was defensive; gaming is the offensive threat
 
 % -- LINK (add): Students have just seen the benchmark-production gap --- gaming is
@@ -1496,26 +1598,39 @@ The median of multiple runs represents typical performance.
 [CORE] Students must recognize these patterns in vendor benchmarks.
 IF AHEAD: ``What new gaming patterns could emerge for LLM benchmarks?''
 IF SHORT: Name four anti-patterns, state how MLPerf resists them.
-}
+```
 
-% --- Layout: FULL-WIDTH IMAGE ---
-
-{benchmark-gaming-antipatterns.pdf}
-
-{0.05cm}
-{ MLPerf resists gaming by requiring **diverse suites**, **percentile reporting**, and **open submission rules**.}
+</details>
 
 ## Fallacies
 
-{[2 min]
+[Original slide 34](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L1685)
+
+**Fallacy:** *Benchmark performance directly translates to production.*
+
+Language model: 92% benchmark accuracy $\to$ 78–82% on user-generated text. Inference: 15 ms mean $\to$ 150–200 ms p99 under load (10$\times$ degradation).
+
+**Fallacy:** *Single-metric evaluation suffices.*
+
+Rec. model: 94% accuracy but 180 ms p99 latency. SLO requires p99 $<$ 100 ms. Accurate but *unusable*. Throughput-optimized system: 1,200 QPS at 420 W vs. 1,000 QPS at 180 W. For edge: 17% throughput loss enables 2.3$\times$ longer battery life.
+
+**Fallacy:** *Peak performance predicts deployment.*
+
+A100: 312 TFLOPS peak, 90–155 TFLOPS sustained (30–50% MFU). The gap exists even in optimally tuned systems.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: Gaming was about manipulation; fallacies are about honest misconceptions
 Gaming was deliberate. These fallacies are honest mistakes that even
 well-intentioned engineers make.
 
 % -- NARRATE: Walk through three fallacies with numbers
-First (most important): ``92% benchmark accuracy drops to 78--82% in
+First (most important): ``92\% benchmark accuracy drops to 78--82\% in
 production. 15 ms mean becomes 150--200 ms p99 under load.'' Second:
-``94% accuracy but 180 ms p99. SLO requires p99 < 100 ms. Accurate but
+``94\% accuracy but 180 ms p99. SLO requires p99 < 100 ms. Accurate but
 unusable.'' Third: ``312 TFLOPS peak, 90--155 sustained. Even optimally tuned.''
 
 % -- WARN: The benchmark-to-production fallacy is the most common
@@ -1526,32 +1641,41 @@ Correct framing: production includes data drift, load, preprocessing.
 [CORE] Each fallacy references a specific concept from the lecture.
 IF AHEAD: ``How do you budget for the benchmark-production gap?''
 IF SHORT: Cover the first fallacy only.
-}
+```
 
-**Fallacy:** *Benchmark performance directly translates to production.*\\
-{ Language model: 92% benchmark accuracy $$ 78--82% on user-generated text. Inference: 15 ms mean $$ 150--200 ms p99 under load (10$×$ degradation).}
-
-{0.15cm}
-**Fallacy:** *Single-metric evaluation suffices.*\\
-{ Rec.\ model: 94% accuracy but 180 ms p99 latency. SLO requires p99 $<$ 100 ms. Accurate but *unusable*. Throughput-optimized system: 1,200 QPS at 420 W vs.\ 1,000 QPS at 180 W. For edge: 17% throughput loss enables 2.3$×$ longer battery life.}
-
-{0.15cm}
-**Fallacy:** *Peak performance predicts deployment.*\\
-{ A100: 312 TFLOPS peak, 90--155 TFLOPS sustained (30--50% MFU). The gap exists even in optimally tuned systems.}
+</details>
 
 ## Pitfalls
 
-{[2 min]
+[Original slide 35](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L1721)
+
+**Pitfall:** *Using outdated benchmarks that no longer discriminate.*
+
+ImageNet: 28.2% error (2010) $\to$ 3.57% (2015). Competition ended 2017 when 29/38 teams exceeded 95%. MNIST: 99.8% with simple models. **Retire saturated benchmarks.**
+
+**Pitfall:** *Optimizing exclusively for benchmark metrics.*
+
+A team reduces latency from 12 ms to 8 ms via aggressive quantization, climbing 15 positions on MLPerf—while degrading calibration and increasing energy by 40%. “Won the leaderboard but destroyed the product.”
+
+**Pitfall:** *Applying research benchmarks to evaluate production systems.*
+
+Research: 800 QPS isolated. Production: 400–500 QPS under 90% utilization (38% degradation). Research reports model inference (5–10 ms); production end-to-end is 50–100 ms. Production requires 99.9% availability—research benchmarks ignore this.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- LINK: Fallacies were misconceptions; pitfalls are operational mistakes
 Fallacies were wrong beliefs. Pitfalls are wrong practices --- things teams
 actually do that waste time and money.
 
 % -- NARRATE: Walk through three pitfalls
-First: ``ImageNet saturated at 95% by 2017. MNIST at 99.8%. Retire
+First: ``ImageNet saturated at 95\% by 2017. MNIST at 99.8\%. Retire
 saturated benchmarks.'' Second: ``Latency 12 ms to 8 ms, climbed 15 positions
-on MLPerf --- while degrading calibration and increasing energy 40%. Won
+on MLPerf --- while degrading calibration and increasing energy 40\%. Won
 the leaderboard, destroyed the product.'' Third: ``800 QPS isolated, 400--500
-under 90% utilization. Research ignores availability requirements.''
+under 90\% utilization. Research ignores availability requirements.''
 
 % -- WARN: Goodhart's Law in action
 Common error: optimizing for the leaderboard instead of the product.
@@ -1562,22 +1686,27 @@ it stops being useful.
 [CORE] These are real-world errors from industry experience.
 IF AHEAD: ``How do you know when a benchmark is saturated?''
 IF SHORT: Cover the first two pitfalls.
-}
+```
 
-**Pitfall:** *Using outdated benchmarks that no longer discriminate.*\\
-ImageNet: 28.2% error (2010) $$ 3.57% (2015). Competition ended 2017 when 29/38 teams exceeded 95%. MNIST: 99.8% with simple models. **Retire saturated benchmarks.**
-
-{0.1cm}
-**Pitfall:** *Optimizing exclusively for benchmark metrics.*\\
-A team reduces latency from 12 ms to 8 ms via aggressive quantization, climbing 15 positions on MLPerf---while degrading calibration and increasing energy by 40%. ``Won the leaderboard but destroyed the product.''
-
-{0.1cm}
-**Pitfall:** *Applying research benchmarks to evaluate production systems.*\\
-Research: 800 QPS isolated. Production: 400--500 QPS under 90% utilization (38% degradation). Research reports model inference (5--10 ms); production end-to-end is 50--100 ms. Production requires 99.9% availability---research benchmarks ignore this.
+</details>
 
 ## Muddiest Point
 
-{[1 min]
+[Original slide 36](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L1760)
+
+One-minute paper
+
+ Write down the **muddiest point** from today's lecture.
+
+What concept was most confusing or unclear?
+
+(Hand in on your way out — or submit digitally)
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[1 min]
 % -- NARRATE: Collect muddiest points
 ``Write the single most confusing concept. One sentence.'' Use to open
 the next lecture (Model Serving) with targeted clarification.
@@ -1585,16 +1714,25 @@ the next lecture (Model Serving) with targeted clarification.
 % -- FLEX: [CORE] Do not skip
 [CORE] 60 seconds, irreplaceable feedback.
 IF SHORT: Reduce to 30 seconds.
-}
+```
 
- One-minute paper\\[0.5cm]
- Write down the **muddiest point** from today's lecture.\\[0.2cm]
-{ What concept was most confusing or unclear?}\\[0.5cm]
-{{midgray}{(Hand in on your way out --- or submit digitally)}}
+</details>
 
 ## What Were the Key Ideas?
 
-{[2 min]
+[Original slide 37](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L1779)
+
+Close your notes.
+
+Write down the **4 most important concepts** from today.
+
+90 seconds — no peeking.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- NARRATE: Retrieval practice before takeaways
 ``Close notes. Write 4 most important concepts. 90 seconds.'' Walk around.
 Do NOT show Key Takeaways until time is up.
@@ -1602,42 +1740,60 @@ Do NOT show Key Takeaways until time is up.
 % -- FLEX: [CORE] Highest-impact learning activity
 [CORE] Even 60 seconds doubles retention.
 IF SHORT: Reduce to 60 seconds.
-}
+```
 
-{1.5cm}
-{ Close your notes.}
-
-{0.8cm}
-{ Write down the **4 most important concepts** from today.}
-
-{0.8cm}
-{{midgray}{90 seconds --- no peeking.}}
+</details>
 
 ## Key Takeaways
 
-{[2 min]
+[Original slide 38](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L1802)
+
+- **Three-dimensional framework**: System, model, and data benchmarks each test different failure modes. Full validation requires all three.
+- **Benchmarks are proxies**: Production depends on data distribution, load patterns, and SLA constraints absent from controlled evaluation.
+- **Granularity determines diagnostic power**: Micro pinpoints bottlenecks; macro reveals subsystem issues; end-to-end validates deployment.
+- **The tail determines user experience**: p99 can be 6$\times$ the mean. Report percentiles, not averages. (Discord: GC pauses defined the tail; rewrite in Rust eliminated it.)
+- **Amdahl's Law sets the ceiling**: 2.5$\times$ model speedup $\to$ 1.3$\times$ system speedup when preprocessing dominates.
+- **Statistical rigor**: 1,000 samples cannot detect a 1% accuracy drop. Warm-up, CI, and multiple runs are mandatory.
+- **INT8 is an energy lever**: 4$\times$ memory reduction but 10–20$\times$ energy reduction (DRAM $\to$ SRAM + INT8).
+- **Compression trade-offs are multi-dimensional**: INT8 may preserve top-1 accuracy while degrading calibration and edge-case robustness. Always benchmark all three.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- NARRATE: Reveal after retrieval, anchor with numbers
-``2--10x gap. 1% detection needs 10K samples. p99 = 6x mean. 2.5x model =
+``2--10x gap. 1\% detection needs 10K samples. p99 = 6x mean. 2.5x model =
 1.3x system. 10--20x energy from INT8. Three dimensions. Goodhart's Law.''
 
 % -- FLEX: [CORE] Definitive summary
 [CORE] Students compare retrieval answers against these bullets.
 IF SHORT: Read bold terms only.
-}
+```
 
-{0pt}
-- **Three-dimensional framework**: System, model, and data benchmarks each test different failure modes. Full validation requires all three.
-- **Benchmarks are proxies**: Production depends on data distribution, load patterns, and SLA constraints absent from controlled evaluation.
-- **Granularity determines diagnostic power**: Micro pinpoints bottlenecks; macro reveals subsystem issues; end-to-end validates deployment.
-- **The tail determines user experience**: p99 can be 6$×$ the mean. Report percentiles, not averages. (Discord: GC pauses defined the tail; rewrite in Rust eliminated it.)
-- **Amdahl's Law sets the ceiling**: 2.5$×$ model speedup $$ 1.3$×$ system speedup when preprocessing dominates.
-- **Statistical rigor**: 1,000 samples cannot detect a 1% accuracy drop. Warm-up, CI, and multiple runs are mandatory.
-- **INT8 is an energy lever**: 4$×$ memory reduction but 10--20$×$ energy reduction (DRAM $$ SRAM + INT8).
-- **Compression trade-offs are multi-dimensional**: INT8 may preserve top-1 accuracy while degrading calibration and edge-case robustness. Always benchmark all three.
+</details>
 
 ## References
 
-{[1 min]
+[Original slide 39](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L1827)
+
+**Reddi+20** V. J. Reddi et al. “MLPerf Inference Benchmark.” ISCA, 2020.
+
+**Mattson+20** P. Mattson et al. “MLPerf Training Benchmark.” MLSys, 2020.
+
+**Coleman+17** C. Coleman et al. “DAWNBench: End-to-End Deep Learning Benchmark.” 2017.
+
+**Williams+09** S. Williams et al. “Roofline: An Insightful Visual Performance Model.” Comm. ACM, 2009.
+
+**Henderson+18** P. Henderson et al. “Deep Reinforcement Learning that Matters.” AAAI, 2018.
+
+**Sculley+15** D. Sculley et al. “Hidden Technical Debt in ML Systems.” NeurIPS, 2015.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[1 min]
 % -- NARRATE: Point to canonical papers
 
 % -- NARRATE (add): Coleman+17 (DAWNBench) introduced end-to-end cost-inclusive
@@ -1651,18 +1807,35 @@ Roofline, Henderson for reproducibility, Sculley for technical debt.''
 % -- FLEX: [OPTIONAL] Reference slide
 [OPTIONAL] Not a teaching moment.
 IF SHORT: Say ``references on this slide'' and advance.
-}
+```
 
-{Reddi+20}{V.\ J.\ Reddi et al. ``MLPerf Inference Benchmark.'' ISCA, 2020.}
-{Mattson+20}{P.\ Mattson et al. ``MLPerf Training Benchmark.'' MLSys, 2020.}
-{Coleman+17}{C.\ Coleman et al. ``DAWNBench: End-to-End Deep Learning Benchmark.'' 2017.}
-{Williams+09}{S.\ Williams et al. ``Roofline: An Insightful Visual Performance Model.'' Comm.\ ACM, 2009.}
-{Henderson+18}{P.\ Henderson et al. ``Deep Reinforcement Learning that Matters.'' AAAI, 2018.}
-{Sculley+15}{D.\ Sculley et al. ``Hidden Technical Debt in ML Systems.'' NeurIPS, 2015.}
+</details>
 
 ## Next Lecture: Model Serving
 
-{[1 min]
+[Original slide 40](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L1854)
+
+Batching
+
+Dynamic batching trades latency for throughput
+
+Load Balancing
+
+Route requests to minimize tail latency
+
+SLA Compliance
+
+Where benchmarks become contracts
+
+From lab to live: where benchmark numbers become SLAs.
+
+**Production reality includes traffic bursts, data drift, and cascading failures no static benchmark captures.**
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[1 min]
 % -- LINK: This chapter validated in the lab; next meets real traffic
 We validated optimizations under controlled conditions. Model serving is
 where benchmarks become SLAs and laboratory numbers meet production chaos.
@@ -1676,98 +1849,128 @@ become contracts.''
 % -- FLEX: [CORE] Forward hook motivates next attendance
 [CORE] End on: ``From lab to live.''
 IF SHORT: State the forward hook and dismiss.
-}
+```
 
-[T]
-  
-    
-    {mlsyscard}{computestroke}
-    { Batching}\\[0.05cm]
-    { Dynamic batching trades latency for throughput}
-    {mlsyscard}
-  
-  
-    
-    {mlsyscard}{routingstroke}
-    { Load Balancing}\\[0.05cm]
-    { Route requests to minimize tail latency}
-    {mlsyscard}
-  
-  
-    
-    {mlsyscard}{errorstroke}
-    { SLA Compliance}\\[0.05cm]
-    { Where benchmarks become contracts}
-    {mlsyscard}
-  
-
-{0.2cm}
-
-{ From lab to live: where benchmark numbers become SLAs.}\\[0.05cm]
-{**Production reality includes traffic bursts, data drift, and cascading failures no static benchmark captures.**}
+</details>
 
 ## Backup: Confidence Interval Calculation
 
-{[2 min]
+[Original slide 41](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L1909)
+
+Use if students need more practice with statistical rigor.
+
+small For accuracy $p = 0.95$ on $N = 1{,}000$ samples:
+
+ $\sigma = \sqrt{N \cdot p \cdot (1-p)} = \sqrt{47.5} \approx 6.9$ errors.
+
+ 95% CI: $50 \pm 1.96 \times 6.9 = [36, 64]$ errors.
+
+ Cannot distinguish 95% from 94% (both inside CI).
+
+ Need $N \approx 10{,}000$ to detect 1% differences.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- NARRATE: Extended CI calculation for additional practice
-For p=0.95 on N=1,000: sigma = sqrt(47.5) = 6.9 errors. 95% CI: [36, 64].
-Cannot distinguish 95% from 94%. Need N = 10,000 for 1% precision.
+For p=0.95 on N=1,000: sigma = sqrt(47.5) = 6.9 errors. 95\% CI: [36, 64].
+Cannot distinguish 95\% from 94\%. Need N = 10,000 for 1\% precision.
 
 % -- FLEX: [OPTIONAL] Deploy during Q&A or review
 [OPTIONAL] Backup slide.
-}
+```
 
-Use if students need more practice with statistical rigor.\ For accuracy $p = 0.95$ on $N = 1{,}000$ samples:\\ $ = {N  p  (1-p)} = {47.5}  6.9$ errors.\\ 95% CI: $50  1.96 × 6.9 = [36, 64]$ errors.\\ Cannot distinguish 95% from 94% (both inside CI).\\ Need $N  10{,}000$ to detect 1% differences.
+</details>
 
 ## Backup: Production Derating Factors
 
-{[2 min]
+[Original slide 42](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L1922)
+
+Use if students ask how to convert benchmark to production numbers.
+
+**Latency:** Derate 2–4$\times$ (add preprocessing, network, serialization).
+
+**Throughput:** Derate 40–60% (SLO headroom, concurrent load, GC pauses).
+
+**Accuracy:** Derate 5–10 pts (data drift, edge cases, adversarial inputs).
+
+**Energy:** Derate 1.5–2$\times$ (cooling, idle power, PSU losses).
+
+**Rule of thumb:** If benchmark says $X$, plan for $0.5X$ to $0.7X$ in production. This is not pessimism — it is engineering.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- NARRATE: Detailed derating factors for capacity planning
 When converting benchmark results to production capacity: latency derate 2--4x
-(add preprocessing, network, serialization). Throughput derate 40--60%
+(add preprocessing, network, serialization). Throughput derate 40--60\%
 (SLO headroom, concurrent load, GC pauses). Accuracy derate 5--10 pts
 (data drift, edge cases, adversarial inputs). Energy derate 1.5--2x
 (cooling overhead, idle power, power supply losses).
 
 % -- FLEX: [OPTIONAL] Deploy during capacity planning discussions
 [OPTIONAL] Backup for production planning questions.
-}
+```
 
-Use if students ask how to convert benchmark to production numbers.\\[0.1cm]
-{
-**Latency:** Derate 2--4$×$ (add preprocessing, network, serialization).\\
-**Throughput:** Derate 40--60% (SLO headroom, concurrent load, GC pauses).\\
-**Accuracy:** Derate 5--10 pts (data drift, edge cases, adversarial inputs).\\
-**Energy:** Derate 1.5--2$×$ (cooling, idle power, PSU losses).\\[0.05cm]
-**Rule of thumb:** If benchmark says $X$, plan for $0.5X$ to $0.7X$ in production. This is not pessimism --- it is engineering.
-}
+</details>
 
 ## Backup: Tail Latency at Scale (Dean & Barroso)
 
-{[2 min]
+[Original slide 43](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L1945)
+
+Use if students ask why tail latency matters at scale.
+
+**1 server:** 1% chance of $>$100 ms response.
+
+**100 servers (fan-out):** $1 - 0.99^{100} = \textbf{63\%}$ chance at least one is slow.
+
+**1,000 servers:** 99.996% of requests hit at least one tail event.
+
+**Mitigations:** Hedged requests (send to 2, take first). Tied requests (cancel redundant). Micro-partitioning (smaller shards, less variance).
+
+*Dean & Barroso, “The Tail at Scale,” CACM 2013.*
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[2 min]
 % -- NARRATE: The Tail at Scale paper's key insight
-One server: 1% chance of slow response. Fan-out to 100 servers:
-$1 - 0.99^{100} = 63%$ chance at least one is slow. The user sees the
-slowest server's response. At 1000 servers: 99.996% of requests hit
+One server: 1\% chance of slow response. Fan-out to 100 servers:
+$1 - 0.99^{100} = 63\%$ chance at least one is slow. The user sees the
+slowest server's response. At 1000 servers: 99.996\% of requests hit
 at least one tail event. Mitigation: hedged requests (send to 2 replicas,
 take whichever responds first), tied requests, micro-partitioning.
 
 % -- FLEX: [OPTIONAL] Deploy during tail latency discussion
 [OPTIONAL] Backup for the ``Tail at Scale'' argument.
-}
+```
 
-Use if students ask why tail latency matters at scale.\\[0.1cm]
-{
-**1 server:** 1% chance of $>$100 ms response.\\
-**100 servers (fan-out):** $1 - 0.99^{100} = **63%**$ chance at least one is slow.\\
-**1,000 servers:** 99.996% of requests hit at least one tail event.\\[0.05cm]
-**Mitigations:** Hedged requests (send to 2, take first). Tied requests (cancel redundant). Micro-partitioning (smaller shards, less variance).\\[0.05cm]
-*Dean & Barroso, ``The Tail at Scale,'' CACM 2013.*
-}
+</details>
 
 ## Backup: MLPerf Scenario Selection Guide
 
-{[1 min]
+[Original slide 44](https://github.com/harvard-edge/cs249r_book/blob/45ecc8d82fcae70c149cdce550d3b3d3411df913/slides/vol1/12_benchmarking/12_benchmarking.tex#L1968)
+
+Use if students ask which MLPerf scenario applies to their project.
+
+small **SingleStream**: One request at a time (mobile, edge). Metric: latency.
+
+ **Server**: Poisson arrivals (cloud API). Metric: QPS under latency SLO.
+
+ **MultiStream**: Synchronized sensors (AV). Metric: streams at latency.
+
+ **Offline**: All data available (batch). Metric: samples/second.
+
+<details>
+<summary>Original speaker notes (TeX)</summary>
+
+```tex
+[1 min]
 % -- NARRATE: Quick-reference for scenario selection
 SingleStream: mobile, metric = latency. Server: cloud API, metric = QPS.
 MultiStream: AV sensors, metric = streams at latency. Offline: batch,
@@ -1775,9 +1978,9 @@ metric = samples/second.
 
 % -- FLEX: [OPTIONAL] Deploy when students ask which scenario applies
 [OPTIONAL] Backup reference.
-}
+```
 
-Use if students ask which MLPerf scenario applies to their project.\ **SingleStream**: One request at a time (mobile, edge). Metric: latency.\\ **Server**: Poisson arrivals (cloud API). Metric: QPS under latency SLO.\\ **MultiStream**: Synchronized sensors (AV). Metric: streams at latency.\\ **Offline**: All data available (batch). Metric: samples/second.
+</details>
 
 ## Complete original Beamer source
 
