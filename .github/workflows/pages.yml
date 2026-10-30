@@ -29,6 +29,10 @@ jobs:
           node-version-file: .nvmrc
           cache: pnpm
       - uses: actions/configure-pages@v5
+      - name: Install PDF verification tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends poppler-utils
       - run: pnpm install --frozen-lockfile
       - run: pnpm --dir publishing check:topics
       - run: pnpm --dir publishing test:publication

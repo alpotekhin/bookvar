@@ -32,7 +32,8 @@ describe('EDLS neural admission experiment', () => {
   it('binds recorded runs to the actual core, scheduler, experiment and receipt calculation', async () => {
     const bytes = await readFile(join(root, results, 'runs.json'));
     expect(sha(bytes)).toBe('9f7b5094faefb3503dc0edf8cf1248612e3a281b0e0b8525b3c2994900067103');
-    expect(await readFile(join(root, 'site/public/examples/edls-admission-cpu-2026-10-26.json'))).toEqual(bytes);
+    const publishedBytes = await readFile(join(root, 'site/public/examples/edls-admission-cpu-2026-10-26.json'));
+    expect(publishedBytes.equals(bytes)).toBe(true);
     const data = JSON.parse(bytes.toString('utf8'));
     for (const [name, hash] of Object.entries(data.source_hashes)) {
       const path = name.startsWith('check_') ? 'publishing/tools/'+name : '06 Практика/Code/'+name;

@@ -109,6 +109,26 @@
     "mainMutation": false,
     "commitPushAndLiveCi": "Pending when this local receipt was written. Verify separately against the resulting commit SHA."
   },
+  "subsequentCiBoundary": {
+    "failedRun": "https://github.com/alpotekhin/bookvar/actions/runs/41056024589",
+    "commit": "3fd9c5a1e204450fd5e09bddabf9f66bc65b2137",
+    "observedFailures": [
+      "Ubuntu runner lacked pdfimages; exact original-JPEG extraction failed with ENOENT.",
+      "Vitest deep equality of the large Buffer exceeded its unchanged 5000ms timeout: 7323ms on the runner."
+    ],
+    "corrections": [
+      "Both workflows explicitly install poppler-utils before the publication suite.",
+      "The recorded-data test uses Buffer.equals for the same exact byte comparison; fixture hashes, assertions and the timeout remain unchanged."
+    ],
+    "regression": "New workflow dependency assertion failed before the YAML fix; the 57-file publication suite passed all 445 tests afterward.",
+    "focusedChecks": {
+      "tests": 6,
+      "passed": 6,
+      "largeBufferTestMs": 5,
+      "originalPdfJpegTestMs": 87
+    },
+    "buildEvidenceReuse": "Only workflow, test and this receipt changed. Renderer, publication adapter, chapter, asset and source inputs are unchanged from the checked tree above; those local build and UI observations remain applicable. Linux CI and live deployment still require separate success on the correction commit."
+  },
   "remaining": {
     "wholeBook": "The route journal records 34 whole canonical-owner reads plus 14 earlier whole-owner reads reused at pinned revisions or reviewed deltas, out of 152 owners. This is not whole-book explanation/source/visual acceptance.",
     "courses": "The source library preserves original courses; topic explanations remain on canonical textbook routes. Full source-to-topic completeness remains an editorial task, not a CI conclusion.",

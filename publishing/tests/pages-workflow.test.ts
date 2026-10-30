@@ -10,6 +10,17 @@ const build = workflow.jobs.build as { env?: Record<string, string>; steps: Step
 const baseFor = (step: Step) => step.env?.PUBLICATION_BASE_PATH ?? build.env?.PUBLICATION_BASE_PATH ?? '';
 
 describe('GitHub Pages release checks', () => {
+  it('installs PDF verification tools before the public suite in both workflows', () => {
+    for (const file of ['pages.yml', 'verify.yml']) {
+      const config = YAML.parse(readFileSync(resolve(root, '.github/workflows', file), 'utf8'));
+      const steps = (config.jobs.build ?? config.jobs.test).steps as Step[];
+      const install = steps.findIndex(step => step.run?.includes('apt-get install') && step.run.includes('poppler-utils'));
+      const suite = steps.findIndex(step => step.run === 'pnpm --dir publishing test:publication');
+      expect(install, file).toBeGreaterThanOrEqual(0);
+      expect(suite, file).toBeGreaterThan(install);
+    }
+  });
+
   it('runs root-only semantic output assertions on a real root build', () => {
     const output = build.steps.findIndex(step => step.run === 'pnpm --dir publishing test:output');
     const rootBuild = build.steps.findIndex(step => step.run === 'pnpm --dir site build' && baseFor(step) === '');
